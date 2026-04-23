@@ -13,7 +13,7 @@ public class GameSessionEntity
     public string professorId { get; set; }
 
     [NotNull]
-    public string status { get; set; }
+    public GameSessionStatus status { get; set; }
 
     public int currentRound { get; set; }
 

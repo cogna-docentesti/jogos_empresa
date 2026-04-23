@@ -6,4 +6,14 @@ public class GameManager : MonoBehaviour
     {
         GameSessionState.LoadActiveSession("local_user_01");
     }
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+            GameSessionState.Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        GameSessionState.Save();
+    }
 }

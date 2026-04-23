@@ -14,6 +14,6 @@ public class GameSessionRepository : BaseRepository<GameSessionEntity>
     public GameSessionEntity GetActiveSessionByUserId(string userId)
     {
         return db.Table<GameSessionEntity>()
-            .FirstOrDefault(x => x.userId == userId && x.status == "IN_PROGRESS");
+            .FirstOrDefault(x => x.userId == userId && x.status == GameSessionStatus.IN_PROGRESS);
     }
 }

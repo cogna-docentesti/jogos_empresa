@@ -26,3 +26,25 @@ public enum EquipmentCategory
     BASIC,
     SPECIFIC
 }
+
+public enum GameSessionStatus
+{
+    IN_PROGRESS,
+    COMPLETED,
+    BANKRUPT
+}
+
+public enum RoleType
+{
+    // Operacional
+    ATENDENTE,
+    GARCOM,
+
+    // Produção
+    CHAPEIRO,
+    CHEF,
+    SUSHIMAN,
+
+    // Gestão
+    GERENTE
+}

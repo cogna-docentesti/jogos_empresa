@@ -7,6 +7,23 @@ public static class GameSessionState
 
     public static bool HasSession => Current != null;
 
+    public static bool HasActiveSession =>
+        Current != null && Current.status == GameSessionStatus.IN_PROGRESS;
+
+    private static GameSessionRepository Repository
+    {
+        get
+        {
+            var db = DatabaseInitializer.DatabaseService.Connection;
+            return new GameSessionRepository(db);
+        }
+    }
+
+    public static void Initialize(string userId)
+    {
+        LoadActiveSession(userId);
+    }
+
     public static void Set(GameSessionEntity session)
     {
         Current = session;
@@ -19,10 +36,7 @@ public static class GameSessionState
 
     public static void LoadActiveSession(string userId)
     {
-        var db = DatabaseInitializer.DatabaseService.Connection;
-        var repo = new GameSessionRepository(db);
-
-        Current = repo.GetActiveSessionByUserId(userId);
+        Current = Repository.GetActiveSessionByUserId(userId);
     }
 
     public static void Save()
@@ -30,10 +44,7 @@ public static class GameSessionState
         if (Current == null)
             return;
 
-        var db = DatabaseInitializer.DatabaseService.Connection;
-        var repo = new GameSessionRepository(db);
-
-        repo.Update(Current);
+        Repository.Update(Current);
     }
 
     public static void ConfigureBusiness(
@@ -41,7 +52,8 @@ public static class GameSessionState
         RestaurantType restaurantType,
         LocationZone locationZone,
         Segment targetSegment,
-        string coherenceRating
+        string coherenceRating,
+        bool save = true
     )
     {
         if (Current == null)
@@ -58,66 +70,79 @@ public static class GameSessionState
         Current.locationZone = locationZone;
         Current.targetSegment = targetSegment;
         Current.coherenceRating = coherenceRating;
+
+        if (save)
+            Save();
     }
 
-    public static void SetCash(float value)
+    public static void SetCash(float value, bool save = true)
     {
         if (Current == null)
             return;
 
         Current.currentCash = value;
+
+        if (save)
+            Save();
     }
 
-    public static void AddCash(float value)
+    public static void AddCash(float value, bool save = true)
     {
         if (Current == null)
             return;
 
         Current.currentCash += value;
+
+        if (save)
+            Save();
     }
 
-    public static void SetLoan(string creditLineId, float loanBalance)
+    public static void SetLoan(string creditLineId, float loanBalance, bool save = false)
     {
         if (Current == null)
             return;
 
         Current.creditLineId = creditLineId;
         Current.loanBalance = loanBalance;
+
+        if (save)
+            Save();
     }
 
-    public static void SetReputation(int value)
+    public static void SetReputation(int value, bool save = false)
     {
         if (Current == null)
             return;
 
         Current.reputationScore = Mathf.Clamp(value, 0, 100);
+
+        if (save)
+            Save();
     }
 
-    public static void SetTeamJson(string json)
+    public static void SetTeamJson(string json, bool save = true)
     {
         if (Current == null)
             return;
 
         Current.teamJson = json;
+
+        if (save)
+            Save();
     }
 
-    public static void SetEquipmentJson(string json)
+    public static void SetEquipmentJson(string json, bool save = true)
     {
         if (Current == null)
             return;
 
         Current.equipmentJson = json;
+
+        if (save)
+            Save();
     }
 
-    public static void AdvanceRound()
-    {
-        if (Current == null)
-            return;
-
-        Current.currentRound += 1;
-    }
-
-    public static void RegisterNegativeRound(bool isNegative)
+    public static void RegisterNegativeRound(bool isNegative, bool save = false)
     {
         if (Current == null)
             return;
@@ -126,6 +151,18 @@ public static class GameSessionState
             Current.consecutiveNegativeRounds += 1;
         else
             Current.consecutiveNegativeRounds = 0;
+
+        if (save)
+            Save();
+    }
+
+    public static void AdvanceRoundAndSave()
+    {
+        if (Current == null)
+            return;
+
+        Current.currentRound += 1;
+        Save();
     }
 
     public static void CompleteSession()
@@ -133,8 +170,9 @@ public static class GameSessionState
         if (Current == null)
             return;
 
-        Current.status = "COMPLETED";
+        Current.status = GameSessionStatus.COMPLETED;
         Current.completedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        Save();
     }
 
     public static void BankruptSession()
@@ -142,7 +180,8 @@ public static class GameSessionState
         if (Current == null)
             return;
 
-        Current.status = "BANKRUPT";
+        Current.status = GameSessionStatus.BANKRUPT;
         Current.completedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        Save();
     }
 }
