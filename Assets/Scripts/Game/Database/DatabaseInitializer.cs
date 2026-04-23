@@ -15,7 +15,7 @@ public class DatabaseInitializer : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        DatabaseService = new DatabaseService();
+        DatabaseService = GetComponent<DatabaseService>();
         DatabaseService.Initialize();
 
         var db = DatabaseService.Connection;

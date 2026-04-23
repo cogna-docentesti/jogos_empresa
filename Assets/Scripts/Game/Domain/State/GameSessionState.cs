@@ -47,33 +47,83 @@ public static class GameSessionState
         Repository.Update(Current);
     }
 
-    public static void ConfigureBusiness(
-        string cityId,
-        RestaurantType restaurantType,
-        LocationZone locationZone,
-        Segment targetSegment,
-        string coherenceRating,
-        bool save = true
-    )
+    // =============================
+    // CONFIGURAÇÃO INICIAL
+    // =============================
+
+    public static void SetCity(string cityId)
     {
         if (Current == null)
             return;
 
         if (Current.currentRound > 1)
         {
-            Debug.LogWarning("Não é possível alterar a configuração inicial após o início da campanha.");
+            Debug.LogWarning("Não é possível alterar a cidade após o início da campanha.");
             return;
         }
 
         Current.cityId = cityId;
-        Current.restaurantType = restaurantType;
-        Current.locationZone = locationZone;
-        Current.targetSegment = targetSegment;
-        Current.coherenceRating = coherenceRating;
-
-        if (save)
-            Save();
     }
+
+    public static void SetRestaurant(RestaurantType restaurantType)
+    {
+        if (Current == null)
+            return;
+
+        if (Current.currentRound > 1)
+        {
+            Debug.LogWarning("Não é possível alterar o tipo de restaurante após o início da campanha.");
+            return;
+        }
+
+        Current.restaurantType = restaurantType;
+    }
+
+    public static void SetLocation(LocationZone locationZone)
+    {
+        if (Current == null)
+            return;
+
+        if (Current.currentRound > 1)
+        {
+            Debug.LogWarning("Não é possível alterar a localização após o início da campanha.");
+            return;
+        }
+
+        Current.locationZone = locationZone;
+    }
+
+    public static void SetTargetSegment(Segment targetSegment)
+    {
+        if (Current == null)
+            return;
+
+        if (Current.currentRound > 1)
+        {
+            Debug.LogWarning("Não é possível alterar o segmento após o início da campanha.");
+            return;
+        }
+
+        Current.targetSegment = targetSegment;
+    }
+
+    public static void SetCoherence(string coherenceRating)
+    {
+        if (Current == null)
+            return;
+
+        if (Current.currentRound > 1)
+        {
+            Debug.LogWarning("Não é possível alterar a coerência após o início da campanha.");
+            return;
+        }
+
+        Current.coherenceRating = coherenceRating;
+    }
+
+    // =============================
+    // DADOS DINÂMICOS 
+    // =============================
 
     public static void SetCash(float value, bool save = true)
     {
@@ -97,7 +147,7 @@ public static class GameSessionState
             Save();
     }
 
-    public static void SetLoan(string creditLineId, float loanBalance, bool save = false)
+    public static void SetLoan(string creditLineId, float loanBalance, bool save = true)
     {
         if (Current == null)
             return;
@@ -109,7 +159,7 @@ public static class GameSessionState
             Save();
     }
 
-    public static void SetReputation(int value, bool save = false)
+    public static void SetReputation(int value, bool save = true)
     {
         if (Current == null)
             return;
@@ -142,7 +192,7 @@ public static class GameSessionState
             Save();
     }
 
-    public static void RegisterNegativeRound(bool isNegative, bool save = false)
+    public static void RegisterNegativeRound(bool isNegative, bool save = true)
     {
         if (Current == null)
             return;
@@ -156,14 +206,20 @@ public static class GameSessionState
             Save();
     }
 
-    public static void AdvanceRoundAndSave()
+    public static void AdvanceRound(bool save = true)
     {
         if (Current == null)
             return;
 
         Current.currentRound += 1;
-        Save();
+
+        if (save)
+            Save();
     }
+
+    // =============================
+    // ENCERRAMENTO DE UMA SESSÃO (1 ANO)
+    // =============================
 
     public static void CompleteSession()
     {
