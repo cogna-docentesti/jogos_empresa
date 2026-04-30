@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Game.Domain.Entities;
 
-namespace Game.Domain.Ports.Out
+namespace Game.Application.Ports.Out
 {
     public interface ILocationRepository
     {

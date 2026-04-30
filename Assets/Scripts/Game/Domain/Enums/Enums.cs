@@ -16,9 +16,11 @@ public enum Segment
 
 public enum LocationZone
 {
-    INDUSTRIAL,
-    COMMERCIAL,
-    NOBLE
+    Financas,
+    Educacao,
+    Comercio,
+    Residencial,
+    Servicos
 }
 
 public enum EquipmentCategory
@@ -40,11 +42,11 @@ public enum RoleType
     ATENDENTE,
     GARCOM,
 
-    // Produção
+    // Produï¿½ï¿½o
     CHAPEIRO,
     CHEF,
     SUSHIMAN,
 
-    // Gestão
+    // Gestï¿½o
     GERENTE
 }

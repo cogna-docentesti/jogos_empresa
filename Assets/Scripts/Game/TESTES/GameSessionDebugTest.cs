@@ -19,7 +19,7 @@ public class GameSessionDebugTest : MonoBehaviour
 
         service.CreateNewSession();
 
-        Debug.Log("Sessão criada: " + GameSessionState.HasSession);
+        Debug.Log("Sessao criada: " + GameSessionState.HasSession);
 
         TestConfiguration();
         TestEquipment();
@@ -30,12 +30,12 @@ public class GameSessionDebugTest : MonoBehaviour
     {
         service.SetCity("cidade_debug");
         service.SetRestaurant(RestaurantType.JAPONES, Segment.MEDIUM);
-        service.SetLocation(LocationZone.COMMERCIAL);
+        service.SetLocation(LocationZone.Comercio);
         service.SetCoherence("IDEAL");
 
         service.ConfirmConfiguration();
 
-        Debug.Log("Configuração salva");
+        Debug.Log("Configuracao salva");
     }
 
     void TestEquipment()

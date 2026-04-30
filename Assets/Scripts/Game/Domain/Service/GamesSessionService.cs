@@ -22,7 +22,7 @@ public class GameSessionService
     public GameSessionEntity CreateNewSession()
     {
         if (GameSessionState.HasActiveSession)
-            throw new Exception("Já existe uma sessão ativa.");
+            throw new Exception("Jï¿½ existe uma sessï¿½o ativa.");
 
         var session = new GameSessionEntity
         {
@@ -56,7 +56,7 @@ public class GameSessionService
     }
 
     // =============================
-    // CONFIGURAÇÃO (USADO PELAS TELAS)
+    // CONFIGURACAO (USADO PELAS TELAS)
     // =============================
 
     public void SetCity(string cityId)
@@ -100,7 +100,7 @@ public class GameSessionService
     }
 
     // =============================
-    // FINALIZA CONFIGURAÇÃO DAS DECISÕES INICIAIS
+    // FINALIZA CONFIGURAï¿½ï¿½O DAS DECISï¿½ES INICIAIS
     // =============================
 
     public void ConfirmConfiguration()
