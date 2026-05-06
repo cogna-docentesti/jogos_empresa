@@ -39,10 +39,10 @@ namespace Game.Adapter.In.Controllers
         private void InitializeAreaVisuals()
         {
             InitArea("bank",        view.InitializeBankArea);
-            //InitArea("store",       view.InitializeStoreArea);
-            //InitArea("marketing",   view.InitializeMarketingArea);
+            InitArea("store",       view.InitializeStoreArea);
+            InitArea("marketing",   view.InitializeMarketingArea);
             InitArea("university",  view.InitializeUniversityArea);
-            //InitArea("condominium", view.InitializeCondominiumArea);
+            InitArea("condominium", view.InitializeCondominiumArea);
         }
 
         private void InitArea(
@@ -73,10 +73,10 @@ namespace Game.Adapter.In.Controllers
 
             view.SetBankVisible(IsAvailable("bank"));
             view.SetUniversityVisible(IsAvailable("university"));
-            //view.SetStoreVisible(IsAvailable("store"));
-            //view.SetMarketingVisible(IsAvailable("marketing"));
+            view.SetStoreVisible(IsAvailable("store"));
+            view.SetMarketingVisible(IsAvailable("marketing"));
             
-            //view.SetCondominiumVisible(IsAvailable("condominium"));
+            view.SetCondominiumVisible(IsAvailable("condominium"));
         }
 
         private bool IsAvailable(string id) =>
@@ -93,12 +93,12 @@ namespace Game.Adapter.In.Controllers
 
              view.BindUniversityAction(()  => OnLocationSelected("university"));
 
-            /**
-            view.BindStoreAction(()       => OnLocationSelected("store"));
-            view.BindMarketingAction(()   => OnLocationSelected("marketing"));
-           
+             view.BindMarketingAction(()   => OnLocationSelected("marketing"));
+
+             view.BindStoreAction(()       => OnLocationSelected("store"));
+
             view.BindCondominiumAction(() => OnLocationSelected("condominium"));
-            **/
+
             view.BindConfirmAction(OnConfirm);
             view.BindBackAction(OnBack);
         }

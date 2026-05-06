@@ -14,10 +14,10 @@ namespace Game.Adapter.In.UI
         // ── Botoes de estabelecimento ───────────────────────
         [Header("Establishment Buttons")]
         [SerializeField] private Button bankButton;
-        //[SerializeField] private Button storeButton;
-        //[SerializeField] private Button marketingButton;
+        [SerializeField] private Button storeButton;
+        [SerializeField] private Button marketingButton;
         [SerializeField] private Button universityButton;
-        //[SerializeField] private Button condominiumButton;
+        [SerializeField] private Button condominiumButton;
 
         // ── Painel lateral — estado vazio ───────────────────
         [Header("Side Panel — Empty State")]
@@ -46,22 +46,22 @@ namespace Game.Adapter.In.UI
 
         // ── Visibilidade dos botoes ─────────────────────────
         public void SetBankVisible(bool v)        => bankButton.gameObject.SetActive(v);
-        //public void SetStoreVisible(bool v)       => storeButton.gameObject.SetActive(v);
-        //public void SetMarketingVisible(bool v)   => marketingButton.gameObject.SetActive(v);
+        public void SetStoreVisible(bool v)       => storeButton.gameObject.SetActive(v);
+        public void SetMarketingVisible(bool v)   => marketingButton.gameObject.SetActive(v);
         public void SetUniversityVisible(bool v)  => universityButton.gameObject.SetActive(v);
-        //public void SetCondominiumVisible(bool v) => condominiumButton.gameObject.SetActive(v);
+        public void SetCondominiumVisible(bool v) => condominiumButton.gameObject.SetActive(v);
 
         // ── Bind de acoes dos botoes do mapa ───────────────
-        //public void BindBankAction(UnityEngine.Events.UnityAction a)        => bankButton.onClick.AddListener(a);
         public void BindBankAction(UnityEngine.Events.UnityAction a)
         {
             Debug.Log($"[View] BindBankAction — bankButton é null? {bankButton == null}");
             bankButton.onClick.AddListener(a);
         }
-        //public void BindStoreAction(UnityEngine.Events.UnityAction a)       => storeButton.onClick.AddListener(a);
-        //public void BindMarketingAction(UnityEngine.Events.UnityAction a)   => marketingButton.onClick.AddListener(a);
         public void BindUniversityAction(UnityEngine.Events.UnityAction a)  => universityButton.onClick.AddListener(a);
-        //public void BindCondominiumAction(UnityEngine.Events.UnityAction a) => condominiumButton.onClick.AddListener(a);
+        
+        public void BindMarketingAction(UnityEngine.Events.UnityAction a)   => marketingButton.onClick.AddListener(a);
+        public void BindStoreAction(UnityEngine.Events.UnityAction a)       => storeButton.onClick.AddListener(a);
+        public void BindCondominiumAction(UnityEngine.Events.UnityAction a) => condominiumButton.onClick.AddListener(a);
 
         // ── Painel lateral ──────────────────────────────────
         public void ShowEmptyState()
@@ -75,10 +75,10 @@ namespace Game.Adapter.In.UI
         // UI ─────────────────────
         [Header("Area Visual Components")]
         [SerializeField] private LocationAreaComponent bankArea;
-        //[SerializeField] private LocationAreaComponent storeArea;
-        //[SerializeField] private LocationAreaComponent marketingArea;
+        [SerializeField] private LocationAreaComponent storeArea;
+        [SerializeField] private LocationAreaComponent marketingArea;
         [SerializeField] private LocationAreaComponent universityArea;
-        //[SerializeField] private LocationAreaComponent condominiumArea;
+        [SerializeField] private LocationAreaComponent condominiumArea;
 
         // ── Inicializacao visual das areas (chamado pelo Controller no Start) ─
         public void InitializeBankArea(string name, string subtitle, string colorHex, Sprite icon)
@@ -87,33 +87,30 @@ namespace Game.Adapter.In.UI
         public void InitializeUniversityArea(string name, string subtitle, string colorHex, Sprite icon)
             => universityArea?.Initialize(name, subtitle, colorHex, icon);
             
-        /**
+        public void InitializeMarketingArea(string name, string subtitle, string colorHex, Sprite icon)
+            => marketingArea?.Initialize(name, subtitle, colorHex, icon);
+        
         public void InitializeStoreArea(string name, string subtitle, string colorHex, Sprite icon)
             => storeArea?.Initialize(name, subtitle, colorHex, icon);
 
-        public void InitializeMarketingArea(string name, string subtitle, string colorHex, Sprite icon)
-            => marketingArea?.Initialize(name, subtitle, colorHex, icon);
-
-
         public void InitializeCondominiumArea(string name, string subtitle, string colorHex, Sprite icon)
-            => condominiumArea?.Initialize(name, subtitle, colorHex, icon);**/
+            => condominiumArea?.Initialize(name, subtitle, colorHex, icon);
 
         // ── Selecao visual (chamado pelo Controller ao clicar em uma area) ────
         public void SelectArea(string id)
         {
             // Desseleciona todas antes de selecionar a nova
             DeselectAllAreas();
-            Debug.Log("AQUI ENTREI");
             GetAreaComponent(id)?.Select();
         }
 
         public void DeselectAllAreas()
         {
             bankArea?.Deselect();
-            //storeArea?.Deselect();
-            //marketingArea?.Deselect();
+            storeArea?.Deselect();
+            marketingArea?.Deselect();
             universityArea?.Deselect();
-            //condominiumArea?.Deselect();
+            condominiumArea?.Deselect();
         }
 
        
@@ -125,10 +122,9 @@ namespace Game.Adapter.In.UI
         {
             "bank"        => bankArea,
             "university"  => universityArea,
-            /**
-            "store"       => storeArea,
             "marketing"   => marketingArea,
-            "condominium" => condominiumArea,**/
+            "store"       => storeArea,
+            "condominium" => condominiumArea,
             _             => null
         };
 
