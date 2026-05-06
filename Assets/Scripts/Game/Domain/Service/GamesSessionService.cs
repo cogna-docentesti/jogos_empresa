@@ -12,11 +12,10 @@ public class GameSessionService
     {
         _userId = userId;
         _professorId = professorId;
-
     }
 
     // =============================
-    // CREATE SESSION/ LOAD SESSION
+    // CREATE SESSION / LOAD SESSION
     // =============================
 
     public GameSessionEntity CreateNewSession()
@@ -56,60 +55,76 @@ public class GameSessionService
     }
 
     // =============================
-    // CONFIGURAÇÃO (USADO PELAS TELAS)
+    // CONFIGURAÇÃO E STATE MACHINE
     // =============================
 
-    public void SetCity(string cityId)
+    public void ConfirmLocation(LocationZone locationZone)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.cityId = cityId;
-        GameSessionState.Save();
+        GameSessionState.SetLocation(locationZone);
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_Restaurant);
     }
 
-    public void SetRestaurant(RestaurantType type, Segment targetSegment)
+    public void ConfirmRestaurant(RestaurantType type)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.restaurantType = type;
-        GameSessionState.Current.targetSegment = targetSegment;
+        GameSessionState.SetRestaurant(type);
 
-        GameSessionState.Save();
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_TargetSegment);
     }
 
-    public void SetLocation(LocationZone locationZone)
+    public void ConfirmTargetSegment(Segment targetSegment)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.locationZone = locationZone;
+        GameSessionState.SetTargetSegment(targetSegment);
 
-        GameSessionState.Save();
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_Review);
     }
 
-    public void SetCoherence(string coherenceRating)
+    public void ConfirmStructuralConfiguration(string coherenceRating)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.coherenceRating = coherenceRating;
-
+        GameSessionState.SetCoherence(coherenceRating);
         GameSessionState.Save();
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Initial_Equipment);
     }
 
-    // =============================
-    // FINALIZA CONFIGURAÇÃO DAS DECISÕES INICIAIS
-    // =============================
-
-    public void ConfirmConfiguration()
+    public void ConfirmInitialEquipment(List<EquipmentData> equipments)
     {
-        if (!GameSessionState.HasSession)
-            return;
+        AddEquipments(equipments);
 
-       
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Initial_Team);
+    }
+
+    public void ConfirmInitialTeam()
+    {
         GameSessionState.Save();
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Initial_Capital);
+    }
+
+    public void ConfirmInitialCapital()
+    {
+        GameSessionState.Save();
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Management_Hub);
     }
 
     // =============================
@@ -118,8 +133,6 @@ public class GameSessionService
 
     public void AddEquipments(List<EquipmentData> newEquipments)
     {
-        Debug.Log("Qtd equipamentos: " + (newEquipments?.Count ?? -1));
-        Debug.Log(GameSessionState.HasSession);
         if (!GameSessionState.HasSession || newEquipments == null || newEquipments.Count == 0)
             return;
 
@@ -132,7 +145,6 @@ public class GameSessionService
         EquipmentSelectionHelper.AddUniqueIds(currentData, newIds);
 
         string updatedJson = EquipmentSelectionHelper.ToJson(currentData);
-        Debug.Log("JSON Equip atualizado: " + updatedJson);
         GameSessionState.SetEquipmentJson(updatedJson);
     }
 
@@ -177,7 +189,6 @@ public class GameSessionService
 
     public void AddTeamMember(RoleData role, int quantity = 1)
     {
-
         if (!GameSessionState.HasSession || role == null || string.IsNullOrWhiteSpace(role.id) || quantity <= 0)
             return;
 
@@ -186,7 +197,6 @@ public class GameSessionService
         TeamSelectionHelper.AddMember(currentData, role.id, quantity);
 
         string updatedJson = TeamSelectionHelper.ToJson(currentData);
-        Debug.Log("JSON team atualizado: " + updatedJson);
         GameSessionState.SetTeamJson(updatedJson);
     }
 
