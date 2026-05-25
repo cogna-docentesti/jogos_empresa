@@ -21,7 +21,8 @@ public class DatabaseInitializer : MonoBehaviour
         var db = DatabaseService.Connection;
 
         db.CreateTable<GameSessionEntity>();
-        // outras tabelas aqui
+        db.CreateTable<RoundResultEntity>();
+       
     }
 
     private void OnApplicationQuit()

@@ -248,4 +248,74 @@ public class GameSessionService
         var currentData = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);
         return TeamSelectionHelper.GetMembers(currentData);
     }
+
+    // =============================
+    // ROUND FLOW
+    // =============================
+
+    public void StartRound()
+    {
+        if (!GameSessionState.HasSession)
+            return;
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Round_Start);
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Round_Sales);
+    }
+
+    public RoundResultEntity ProcessCurrentRound()
+    {
+        if (!GameSessionState.HasSession)
+            return null;
+
+        var sm = GameManager.Instance.StateMachine;
+
+        if (sm.CurrentState != GameState.Round_Sales)
+        {
+            Debug.LogWarning("A rodada não está no estado correto.");
+            return null;
+        }
+
+        sm.TryChangeState(GameState.Round_Costs);
+        sm.TryChangeState(GameState.Round_Event);
+
+        var roundService = new RoundService();
+
+        RoundResultEntity result = roundService.ProcessRound();
+
+        sm.TryChangeState(GameState.Round_Summary);
+
+        EvaluateRoundEnd(result);
+
+        return result;
+    }
+
+    private void EvaluateRoundEnd(RoundResultEntity result)
+    {
+        var session = GameSessionState.Current;
+
+        if (session == null)
+            return;
+
+        if (session.status == GameSessionStatus.BANKRUPT)
+        {
+            GameManager.Instance.StateMachine
+                .TryChangeState(GameState.GameOver_Bankruptcy);
+
+            return;
+        }
+
+        if (session.status == GameSessionStatus.COMPLETED)
+        {
+            GameManager.Instance.StateMachine
+                .TryChangeState(GameState.FinalReport);
+
+            return;
+        }
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Management_Hub);
+    }
 }
