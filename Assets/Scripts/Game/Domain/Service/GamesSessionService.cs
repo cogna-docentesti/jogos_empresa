@@ -12,11 +12,10 @@ public class GameSessionService
     {
         _userId = userId;
         _professorId = professorId;
-
     }
 
     // =============================
-    // CREATE SESSION/ LOAD SESSION
+    // CREATE SESSION / LOAD SESSION
     // =============================
 
     public GameSessionEntity CreateNewSession()
@@ -56,60 +55,76 @@ public class GameSessionService
     }
 
     // =============================
-    // CONFIGURACAO (USADO PELAS TELAS)
+    // CONFIGURA��O E STATE MACHINE
     // =============================
 
-    public void SetCity(string cityId)
+    public void ConfirmLocation(LocationZone locationZone)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.cityId = cityId;
-        GameSessionState.Save();
+        GameSessionState.SetLocation(locationZone);
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_Restaurant);
     }
 
-    public void SetRestaurant(RestaurantType type, Segment targetSegment)
+    public void ConfirmRestaurant(RestaurantType type)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.restaurantType = type;
-        GameSessionState.Current.targetSegment = targetSegment;
+        GameSessionState.SetRestaurant(type);
 
-        GameSessionState.Save();
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_TargetSegment);
     }
 
-    public void SetLocation(LocationZone locationZone)
+    public void ConfirmTargetSegment(Segment targetSegment)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.locationZone = locationZone;
+        GameSessionState.SetTargetSegment(targetSegment);
 
-        GameSessionState.Save();
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_Review);
     }
 
-    public void SetCoherence(string coherenceRating)
+    public void ConfirmStructuralConfiguration(string coherenceRating)
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.Current.coherenceRating = coherenceRating;
-
+        GameSessionState.SetCoherence(coherenceRating);
         GameSessionState.Save();
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Initial_Equipment);
     }
 
-    // =============================
-    // FINALIZA CONFIGURA��O DAS DECIS�ES INICIAIS
-    // =============================
-
-    public void ConfirmConfiguration()
+    public void ConfirmInitialEquipment(List<EquipmentData> equipments)
     {
-        if (!GameSessionState.HasSession)
-            return;
+        AddEquipments(equipments);
 
-       
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Initial_Team);
+    }
+
+    public void ConfirmInitialTeam()
+    {
         GameSessionState.Save();
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Initial_Capital);
+    }
+
+    public void ConfirmInitialCapital()
+    {
+        GameSessionState.Save();
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Management_Hub);
     }
 
     // =============================
@@ -118,8 +133,6 @@ public class GameSessionService
 
     public void AddEquipments(List<EquipmentData> newEquipments)
     {
-        Debug.Log("Qtd equipamentos: " + (newEquipments?.Count ?? -1));
-        Debug.Log(GameSessionState.HasSession);
         if (!GameSessionState.HasSession || newEquipments == null || newEquipments.Count == 0)
             return;
 
@@ -132,7 +145,6 @@ public class GameSessionService
         EquipmentSelectionHelper.AddUniqueIds(currentData, newIds);
 
         string updatedJson = EquipmentSelectionHelper.ToJson(currentData);
-        Debug.Log("JSON Equip atualizado: " + updatedJson);
         GameSessionState.SetEquipmentJson(updatedJson);
     }
 
@@ -177,7 +189,6 @@ public class GameSessionService
 
     public void AddTeamMember(RoleData role, int quantity = 1)
     {
-
         if (!GameSessionState.HasSession || role == null || string.IsNullOrWhiteSpace(role.id) || quantity <= 0)
             return;
 
@@ -186,7 +197,6 @@ public class GameSessionService
         TeamSelectionHelper.AddMember(currentData, role.id, quantity);
 
         string updatedJson = TeamSelectionHelper.ToJson(currentData);
-        Debug.Log("JSON team atualizado: " + updatedJson);
         GameSessionState.SetTeamJson(updatedJson);
     }
 
@@ -237,5 +247,75 @@ public class GameSessionService
 
         var currentData = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);
         return TeamSelectionHelper.GetMembers(currentData);
+    }
+
+    // =============================
+    // ROUND FLOW
+    // =============================
+
+    public void StartRound()
+    {
+        if (!GameSessionState.HasSession)
+            return;
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Round_Start);
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Round_Sales);
+    }
+
+    public RoundResultEntity ProcessCurrentRound()
+    {
+        if (!GameSessionState.HasSession)
+            return null;
+
+        var sm = GameManager.Instance.StateMachine;
+
+        if (sm.CurrentState != GameState.Round_Sales)
+        {
+            Debug.LogWarning("A rodada n�o est� no estado correto.");
+            return null;
+        }
+
+        sm.TryChangeState(GameState.Round_Costs);
+        sm.TryChangeState(GameState.Round_Event);
+
+        var roundService = new RoundService();
+
+        RoundResultEntity result = roundService.ProcessRound();
+
+        sm.TryChangeState(GameState.Round_Summary);
+
+        EvaluateRoundEnd(result);
+
+        return result;
+    }
+
+    private void EvaluateRoundEnd(RoundResultEntity result)
+    {
+        var session = GameSessionState.Current;
+
+        if (session == null)
+            return;
+
+        if (session.status == GameSessionStatus.BANKRUPT)
+        {
+            GameManager.Instance.StateMachine
+                .TryChangeState(GameState.GameOver_Bankruptcy);
+
+            return;
+        }
+
+        if (session.status == GameSessionStatus.COMPLETED)
+        {
+            GameManager.Instance.StateMachine
+                .TryChangeState(GameState.FinalReport);
+
+            return;
+        }
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Management_Hub);
     }
 }
