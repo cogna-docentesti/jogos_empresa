@@ -31,6 +31,12 @@ public class GameSessionEntity
     [NotNull]
     public string coherenceRating { get; set; }
 
+    public int alignmentScore { get; set; }
+
+    public string alignmentClassification { get; set; }
+
+    public float alignmentFactor { get; set; }
+
     public float initialCapital { get; set; }
 
     public float currentCash { get; set; }
@@ -40,6 +46,7 @@ public class GameSessionEntity
     public string creditLineId { get; set; }
 
     public int reputationScore { get; set; }
+
 
     [NotNull]
     public string teamJson { get; set; }

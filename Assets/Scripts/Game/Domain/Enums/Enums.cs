@@ -44,13 +44,18 @@ public enum RoleType
 {
     // Operacional
     ATENDENTE,
-    GARCOM,
 
     // Produção
-    CHAPEIRO,
-    CHEF,
-    SUSHIMAN,
+    ESPECIALISTA,
 
     // Gestão
     GERENTE
+}
+
+public enum AlignmentClassification
+{
+    HIGH,
+    ADEQUATE,
+    FRAGILE,
+    CRITICAL
 }

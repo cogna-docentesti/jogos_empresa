@@ -92,16 +92,15 @@ public class GameSessionService
             .TryChangeState(GameState.Config_Review);
     }
 
-    public void ConfirmStructuralConfiguration(string coherenceRating)
+    public void ConfirmStructuralConfiguration()
     {
         if (!GameSessionState.HasSession)
             return;
 
-        GameSessionState.SetCoherence(coherenceRating);
         GameSessionState.Save();
 
         GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Initial_Equipment);
+            .TryChangeState(GameState.Initial_Capital);
     }
 
     public void ConfirmInitialEquipment(List<EquipmentData> equipments)
@@ -112,12 +111,30 @@ public class GameSessionService
             .TryChangeState(GameState.Initial_Team);
     }
 
-    public void ConfirmInitialTeam()
+    public void ConfirmInitialTeam(List<RoleData> availableRoles)
     {
+        if (!GameSessionState.HasSession)
+            return;
+
+        GameSessionState.Save();
+
+        var session = GameSessionState.Current;
+        var teamData = TeamSelectionHelper.FromJson(session.teamJson);
+
+        AlignmentResult alignment = AlignmentEngine.Calculate(
+            session.restaurantType,
+            session.targetSegment,
+            session.locationZone,
+            session.priceStrategy,
+            teamData,
+            availableRoles
+        );
+
+        GameSessionState.SetAlignment(alignment);
         GameSessionState.Save();
 
         GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Initial_Capital);
+            .TryChangeState(GameState.Management_Hub);
     }
 
     public void ConfirmInitialCapital()
@@ -125,7 +142,7 @@ public class GameSessionService
         GameSessionState.Save();
 
         GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Management_Hub);
+            .TryChangeState(GameState.Initial_Equipment);
     }
 
     // =============================

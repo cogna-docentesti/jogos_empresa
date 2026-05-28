@@ -214,6 +214,17 @@ public static class GameSessionState
             Save();
     }
 
+    public static void SetAlignment(AlignmentResult result)
+    {
+        if (Current == null || result == null)
+            return;
+
+        Current.alignmentScore = result.totalScore;
+        Current.alignmentClassification = result.classification.ToString();
+        Current.alignmentFactor = result.alignmentFactor;
+        Current.coherenceRating = result.classification.ToString();
+    }
+
     public static void AdvanceRound(bool save = true)
     {
         if (Current == null)

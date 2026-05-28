@@ -71,7 +71,7 @@ public class RoundService
             eventChoice = -1,
 
             reputationDelta = 0,
-            coherenceFactor = coherenceFactor,
+            coherenceFactor = session.alignmentFactor,
 
             createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
         };

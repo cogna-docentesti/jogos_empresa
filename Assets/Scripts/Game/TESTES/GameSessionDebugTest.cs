@@ -35,40 +35,28 @@ public class GameSessionDebugTest : MonoBehaviour
     {
         var sm = GameManager.Instance.StateMachine;
 
-        Debug.Log("Estado inicial do teste: " + sm.CurrentState);
+        sm.ForceState(GameState.Config_Location);
 
-        if (sm.CurrentState == GameState.MainMenu)
-            sm.TryChangeState(GameState.Config_Location);
-
-        Debug.Log("Antes ConfirmLocation");
         service.ConfirmLocation(LocationZone.COMMERCIAL);
-        Debug.Log("Depois ConfirmLocation: " + sm.CurrentState);
-
         service.ConfirmRestaurant(RestaurantType.JAPONES);
-        Debug.Log("Depois ConfirmRestaurant: " + sm.CurrentState);
-
         service.ConfirmTargetSegmentAndPrice(Segment.MEDIUM, PriceStrategy.VALUE_ADDED);
-        Debug.Log("Depois ConfirmTargetSegment: " + sm.CurrentState);
 
-        service.ConfirmStructuralConfiguration("IDEAL");
-        Debug.Log("Depois ConfirmStructuralConfiguration: " + sm.CurrentState);
-
-        service.ConfirmInitialEquipment(testEquipments);
-        Debug.Log("Depois ConfirmInitialEquipment: " + sm.CurrentState);
-
-        foreach (var eq in testEquipments)
-            Debug.Log($"Equipamento {eq.id}: {service.HasEquipment(eq)}");
-
-        foreach (var role in testRoles)
-            service.AddTeamMember(role, 1);
-
-        service.ConfirmInitialTeam();
-        Debug.Log("Depois ConfirmInitialTeam: " + sm.CurrentState);
-
-        foreach (var role in testRoles)
-            Debug.Log($"Funcionário {role.id}: {service.GetTeamMemberQuantity(role)}");
+        service.ConfirmStructuralConfiguration();
 
         service.ConfirmInitialCapital();
+
+        service.ConfirmInitialEquipment(testEquipments);
+
+        foreach (var role in testRoles)
+        {
+            service.AddTeamMember(role, 1);
+        }
+
+        service.ConfirmInitialTeam(testRoles);
+
         Debug.Log("Estado final: " + sm.CurrentState);
+        Debug.Log("Alignment Score: " + GameSessionState.Current.alignmentScore);
+        Debug.Log("Alignment Class: " + GameSessionState.Current.alignmentClassification);
+        Debug.Log("Alignment Factor: " + GameSessionState.Current.alignmentFactor);
     }
 }
