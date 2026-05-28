@@ -107,6 +107,14 @@ public static class GameSessionState
         Current.targetSegment = targetSegment;
     }
 
+    public static void SetPriceStrategy(PriceStrategy priceStrategy)
+    {
+        if (Current == null)
+            return;
+
+        Current.priceStrategy = priceStrategy;
+    }
+
     public static void SetCoherence(string coherenceRating)
     {
         if (Current == null)

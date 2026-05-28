@@ -26,13 +26,13 @@ public class GameStateMachine
             },
 
             { GameState.Config_Location, new List<GameState> { GameState.Config_Restaurant } },
-            { GameState.Config_Restaurant, new List<GameState> { GameState.Config_TargetSegment } },
+            { GameState.Config_Restaurant, new List<GameState> {  GameState.Config_TargetSegment } },
             { GameState.Config_TargetSegment, new List<GameState> { GameState.Config_Review } },
 
-            { GameState.Config_Review, new List<GameState> { GameState.Initial_Equipment } },
+            { GameState.Config_Review, new List<GameState> { GameState.Initial_Capital } },
+            { GameState.Initial_Capital, new List<GameState> { GameState.Initial_Equipment } },
             { GameState.Initial_Equipment, new List<GameState> { GameState.Initial_Team } },
-            { GameState.Initial_Team, new List<GameState> { GameState.Initial_Capital } },
-            { GameState.Initial_Capital, new List<GameState> { GameState.Management_Hub } },
+            { GameState.Initial_Team, new List<GameState> { GameState.Management_Hub } },
 
             { GameState.Management_Hub, new List<GameState>
                 {

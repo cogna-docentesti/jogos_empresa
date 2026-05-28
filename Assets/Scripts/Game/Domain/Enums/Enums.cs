@@ -14,6 +14,12 @@ public enum Segment
     HIGH
 }
 
+public enum PriceStrategy
+{
+    COMPETITIVE,
+    VALUE_ADDED
+}
+
 public enum LocationZone
 {
     INDUSTRIAL,

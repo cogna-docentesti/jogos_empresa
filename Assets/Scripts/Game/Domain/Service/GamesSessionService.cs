@@ -80,12 +80,13 @@ public class GameSessionService
             .TryChangeState(GameState.Config_TargetSegment);
     }
 
-    public void ConfirmTargetSegment(Segment targetSegment)
+    public void ConfirmTargetSegmentAndPrice(Segment targetSegment,PriceStrategy priceStrategy)
     {
         if (!GameSessionState.HasSession)
             return;
 
         GameSessionState.SetTargetSegment(targetSegment);
+        GameSessionState.SetPriceStrategy(priceStrategy);
 
         GameManager.Instance.StateMachine
             .TryChangeState(GameState.Config_Review);
