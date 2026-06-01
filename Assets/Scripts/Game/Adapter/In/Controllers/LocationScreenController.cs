@@ -124,34 +124,11 @@ namespace Game.Adapter.In.Controllers
         }
 
 
-        private void OnConfirm()
+       private void OnConfirm()
         {
             if (_selectedEstablishment == null) return;
 
-            // 1. Salva em memória para acesso rápido entre cenas
-            PlayerSession.SaveSelectedEstablishment(
-                _selectedEstablishment.Id,
-                _selectedEstablishment.Name);
-
-            // 2. Persiste a zona no SQLite via GameSessionService
-            //    Descomente quando GameContext estiver disponível:
-            // var zone = ParseZone(_selectedEstablishment.Id);
-            // GameContext.Instance?.SessionService.SetLocation(zone);
-
-            SceneManager.LoadScene(nextSceneName);
-        }
-
-
-/**
-        private void OnConfirm()
-        {
-            if (_selectedEstablishment == null) return;
-
-            PlayerSession.SaveSelectedEstablishment(
-                _selectedEstablishment.Id,
-                _selectedEstablishment.Name);
-
-            // Ative quando GameContext estiver pronto:
+            // Salva a escolha na sessão em MEMÓRIA (não no SQLite ainda)
             LocationZone zone = _selectedEstablishment.Id switch
             {
                 "bank"        => LocationZone.Financas,
@@ -161,19 +138,20 @@ namespace Game.Adapter.In.Controllers
                 "marketing"   => LocationZone.Servicos,
                 _             => LocationZone.Financas
             };
-            GameContext.Instance?.SessionService.SetLocation(zone);
-
-            SceneManager.LoadScene(nextSceneName);
+            
+            // SetLocation com save: false → só memória, NÃO banco
+            GameSessionState.SetLocation(zone);
+            
+            // Pede ao GameManager para avançar o estado
+            GameManager.Instance.StateMachine
+                .TryChangeState(GameState.Config_Restaurant);
         }
 
-**/
+        private void OnBack()
+        {
+            // Nenhum estado anterior — volta para o MainMenu
+            GameManager.Instance.StateMachine.TryChangeState(GameState.MainMenu);
+        }
 
-
-        private void OnBack() =>
-            SceneManager.LoadScene(previousSceneName);
-
-
-        private static string Capitalize(string s) =>
-            string.IsNullOrEmpty(s) ? s : char.ToUpper(s[0]) + s[1..];
     }
 }

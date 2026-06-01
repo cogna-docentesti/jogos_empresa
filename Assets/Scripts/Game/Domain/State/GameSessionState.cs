@@ -48,7 +48,7 @@ public static class GameSessionState
     }
 
     // =============================
-    // CONFIGURAÇÃO INICIAL
+    // CONFIGURACA INICIAL
     // =============================
 
     public static void SetCity(string cityId)
@@ -58,7 +58,7 @@ public static class GameSessionState
 
         if (Current.currentRound > 1)
         {
-            Debug.LogWarning("Não é possível alterar a cidade após o início da campanha.");
+            Debug.LogWarning("Nï¿½o ï¿½ possï¿½vel alterar a cidade apï¿½s o inï¿½cio da campanha.");
             return;
         }
 
@@ -72,7 +72,7 @@ public static class GameSessionState
 
         if (Current.currentRound > 1)
         {
-            Debug.LogWarning("Não é possível alterar o tipo de restaurante após o início da campanha.");
+            Debug.LogWarning("Nï¿½o ï¿½ possï¿½vel alterar o tipo de restaurante apï¿½s o inï¿½cio da campanha.");
             return;
         }
 
@@ -86,7 +86,7 @@ public static class GameSessionState
 
         if (Current.currentRound > 1)
         {
-            Debug.LogWarning("Não é possível alterar a localização após o início da campanha.");
+            Debug.LogWarning("Nao e possivel alterar a localizacao apos o inicio da campanha.");
             return;
         }
 
@@ -100,7 +100,7 @@ public static class GameSessionState
 
         if (Current.currentRound > 1)
         {
-            Debug.LogWarning("Não é possível alterar o segmento após o início da campanha.");
+            Debug.LogWarning("Nï¿½o ï¿½ possï¿½vel alterar o segmento apï¿½s o inï¿½cio da campanha.");
             return;
         }
 
@@ -114,7 +114,7 @@ public static class GameSessionState
 
         if (Current.currentRound > 1)
         {
-            Debug.LogWarning("Não é possível alterar a coerência após o início da campanha.");
+            Debug.LogWarning("Nï¿½o ï¿½ possï¿½vel alterar a coerï¿½ncia apï¿½s o inï¿½cio da campanha.");
             return;
         }
 
@@ -122,7 +122,7 @@ public static class GameSessionState
     }
 
     // =============================
-    // DADOS DINÂMICOS 
+    // DADOS DINï¿½MICOS 
     // =============================
 
     public static void SetCash(float value, bool save = true)
@@ -218,7 +218,7 @@ public static class GameSessionState
     }
 
     // =============================
-    // ENCERRAMENTO DE UMA SESSÃO (1 ANO)
+    // ENCERRAMENTO DE UMA SESSï¿½O (1 ANO)
     // =============================
 
     public static void CompleteSession()

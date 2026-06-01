@@ -17,13 +17,13 @@ public class GameSessionDebugTest : MonoBehaviour
 
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager n�o encontrado.");
+            Debug.LogError("GameManager não encontrado.");
             yield break;
         }
 
         if (!GameSessionState.HasSession)
         {
-            Debug.LogError("Nenhuma sess�o carregada/criada.");
+            Debug.LogError("Nenhuma sessão carregada/criada.");
             yield break;
         }
 
@@ -40,9 +40,9 @@ public class GameSessionDebugTest : MonoBehaviour
         if (sm.CurrentState == GameState.MainMenu)
             sm.TryChangeState(GameState.Config_Location);
 
-        Debug.Log("Antes ConfirmLocation");
-        service.ConfirmLocation(LocationZone.COMMERCIAL);
-        Debug.Log("Depois ConfirmLocation: " + sm.CurrentState);
+        // Debug.Log("Antes ConfirmLocation");
+        //service.ConfirmLocation(LocationZone.COMMERCIAL);
+        //Debug.Log("Depois ConfirmLocation: " + sm.CurrentState);
 
         service.ConfirmRestaurant(RestaurantType.JAPONES);
         Debug.Log("Depois ConfirmRestaurant: " + sm.CurrentState);
@@ -66,7 +66,7 @@ public class GameSessionDebugTest : MonoBehaviour
         Debug.Log("Depois ConfirmInitialTeam: " + sm.CurrentState);
 
         foreach (var role in testRoles)
-            Debug.Log($"Funcion�rio {role.id}: {service.GetTeamMemberQuantity(role)}");
+            Debug.Log($"Funcionário {role.id}: {service.GetTeamMemberQuantity(role)}");
 
         service.ConfirmInitialCapital();
         Debug.Log("Estado final: " + sm.CurrentState);

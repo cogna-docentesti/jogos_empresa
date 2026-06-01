@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class GameManager : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
 
         if (!GameSessionState.HasSession)
         {
-            Debug.Log("Nenhuma sessão encontrada, criando nova sessão");
+            Debug.Log("Nenhuma sessao encontrada, criando nova sessao");
 
             service.CreateNewSession();
 
@@ -43,10 +44,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Sessão carregada com sucesso");
+            Debug.Log("Sessao carregada com sucesso");
 
             StateMachine.TryChangeState(GameState.Management_Hub);
         }
+
+        SceneManager.LoadScene("GameScene");
     }
 
     private void OnApplicationPause(bool pauseStatus)
