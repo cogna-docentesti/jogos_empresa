@@ -26,6 +26,8 @@ public class GameSessionEntity
 
     public Segment targetSegment { get; set; }
 
+    public PriceStrategy priceStrategy { get; set; }
+
     [NotNull]
     public string coherenceRating { get; set; }
 

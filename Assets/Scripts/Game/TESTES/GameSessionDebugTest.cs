@@ -47,7 +47,7 @@ public class GameSessionDebugTest : MonoBehaviour
         service.ConfirmRestaurant(RestaurantType.JAPONES);
         Debug.Log("Depois ConfirmRestaurant: " + sm.CurrentState);
 
-        service.ConfirmTargetSegment(Segment.MEDIUM);
+        service.ConfirmTargetSegmentAndPrice(Segment.MEDIUM, PriceStrategy.VALUE_ADDED);
         Debug.Log("Depois ConfirmTargetSegment: " + sm.CurrentState);
 
         service.ConfirmStructuralConfiguration("IDEAL");
