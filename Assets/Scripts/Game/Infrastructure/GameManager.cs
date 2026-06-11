@@ -60,6 +60,10 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        // 1. Salva antes de fechar qualquer coisa
         GameSessionState.Save();
+
+        // 2. Agora é seguro fechar o banco
+        DatabaseInitializer.DatabaseService?.Close();
     }
 }

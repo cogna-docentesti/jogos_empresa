@@ -50,7 +50,7 @@ namespace Game.Adapter.In.Controllers
             System.Action<string, string, string, Sprite> initMethod)
         {
 
-            var raw = Resources.Load<LocationData>($"Locations/LOC_{Capitalize(id)}");
+            var raw = Resources.Load<LocationData>($"Locations/LOC_{id}");
 
             if (raw == null)
             {

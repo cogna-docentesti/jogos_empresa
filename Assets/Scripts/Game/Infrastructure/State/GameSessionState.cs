@@ -9,13 +9,35 @@ public static class GameSessionState
 
     public static bool HasActiveSession =>
         Current != null && Current.status == GameSessionStatus.IN_PROGRESS;
-
+/*
     private static GameSessionRepository Repository
     {
         get
         {
             var db = DatabaseInitializer.DatabaseService.Connection;
             return new GameSessionRepository(db);
+        }
+    }
+*/
+    private static GameSessionRepository Repository
+    {
+        get
+        {
+            var svc  = DatabaseInitializer.DatabaseService;
+            if (svc == null)
+            {
+                Debug.LogError("[GameSessionState] DatabaseService não encontrado.");
+                return null;
+            }
+
+            var conn = svc.Connection;
+            if (conn == null)
+            {
+                Debug.LogError("[GameSessionState] Conexão com o banco está fechada.");
+                return null;
+            }
+
+            return new GameSessionRepository(conn);
         }
     }
 

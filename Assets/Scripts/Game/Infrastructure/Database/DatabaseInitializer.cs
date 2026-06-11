@@ -24,9 +24,10 @@ public class DatabaseInitializer : MonoBehaviour
         db.CreateTable<RoundResultEntity>();
        
     }
-
+/*
     private void OnApplicationQuit()
     {
         DatabaseService?.Close();
     }
+*/
 }
