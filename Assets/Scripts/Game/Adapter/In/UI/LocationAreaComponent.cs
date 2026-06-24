@@ -21,8 +21,8 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI labelSubtitle;
 
         [Header("Parâmetros")]
-        [Range(0f, 1f)] [SerializeField] private float glowAlphaSelected = 0.75f;
-        [Range(0f, 1f)] [SerializeField] private float glowAlphaHover    = 0.30f;
+        [Range(0f, 1f)] [SerializeField] private float glowAlphaSelected = 0.3f;
+        [Range(0f, 1f)] [SerializeField] private float glowAlphaHover    = 0.25f;
         [SerializeField] private float animDuration = 0.22f;
 
         // ── Estado interno ────────────────────────────────────────────────

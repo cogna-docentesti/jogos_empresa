@@ -9,6 +9,7 @@ namespace Game.Adapter.In.Controllers
         [SerializeField] private RestaurantScreenView view;
 
         private readonly Dictionary<RestaurantType, RestaurantData> _restaurantsByType = new();
+        private readonly Dictionary<LocationZone, Segment> _locationSegmentsByZone = new();
         private RestaurantType? _selectedRestaurant;
         private Segment? _selectedSegment;
 
@@ -37,6 +38,7 @@ namespace Game.Adapter.In.Controllers
         private void LoadRestaurants()
         {
             _restaurantsByType.Clear();
+            _locationSegmentsByZone.Clear();
 
             foreach (var restaurant in Resources.LoadAll<RestaurantData>("Restaurants"))
             {
@@ -48,6 +50,14 @@ namespace Game.Adapter.In.Controllers
 
             if (_restaurantsByType.Count == 0)
                 Debug.LogError("Nenhum RestaurantData encontrado em Resources/Restaurants.");
+
+            foreach (var location in Resources.LoadAll<LocationData>("Locations"))
+            {
+                if (location == null)
+                    continue;
+
+                _locationSegmentsByZone[location.zone] = location.primarySegment;
+            }
         }
 
         private void PopulateView()
@@ -58,9 +68,9 @@ namespace Game.Adapter.In.Controllers
                 view.SetRestaurantCardData(restaurant.type, restaurant.displayName, restaurant.description);
             }
 
-            view.SetSegmentButtonData(Segment.LOW, "Baixo");
-            view.SetSegmentButtonData(Segment.MEDIUM, "Medio");
-            view.SetSegmentButtonData(Segment.HIGH, "Alto");
+            view.SetSegmentButtonData(Segment.LOW, "Classe baixa");
+            view.SetSegmentButtonData(Segment.MEDIUM, "Classe media");
+            view.SetSegmentButtonData(Segment.HIGH, "Classe alta");
         }
 
         private void BindActions()
@@ -109,7 +119,7 @@ namespace Game.Adapter.In.Controllers
         {
             if (!_selectedRestaurant.HasValue || !IsSegmentAllowed(_selectedRestaurant.Value, segment))
             {
-                view.SetHint("Este publico-alvo nao esta disponivel para o restaurante selecionado.");
+                view.SetHint("Esta classe social nao esta disponivel para o restaurante selecionado.");
                 return;
             }
 
@@ -124,7 +134,7 @@ namespace Game.Adapter.In.Controllers
         {
             if (!_selectedRestaurant.HasValue && !_selectedSegment.HasValue)
             {
-                view.SetHint("Selecione o tipo de restaurante e o publico-alvo.");
+                view.SetHint("Selecione o tipo de restaurante e a classe social.");
                 return;
             }
 
@@ -176,8 +186,11 @@ namespace Game.Adapter.In.Controllers
                 ? GameSessionState.Current.locationZone
                 : LocationZone.Financas;
 
-            float coh1 = CalcRestaurantLocationCoherence(_selectedRestaurant.Value, zone);
-            string tip1 = GetCoherenceTip1(_selectedRestaurant.Value, zone);
+            Segment restaurantSegment = GetRestaurantNaturalSegment(_selectedRestaurant.Value);
+            Segment locationSegment = GetLocationSegment(zone);
+
+            float coh1 = CalcRestaurantLocationCoherence(restaurantSegment, locationSegment);
+            string tip1 = GetCoherenceTip1(_selectedRestaurant.Value, restaurantSegment, zone, locationSegment);
 
             float coh2 = _selectedSegment.HasValue
                 ? CalcRestaurantSegmentCoherence(_selectedRestaurant.Value, _selectedSegment.Value)
@@ -231,31 +244,38 @@ namespace Game.Adapter.In.Controllers
 
         private static string GetSegmentName(Segment segment) => segment switch
         {
-            Segment.LOW => "Publico Baixo",
-            Segment.MEDIUM => "Publico Medio",
-            Segment.HIGH => "Publico Alto",
+            Segment.LOW => "Classe baixa",
+            Segment.MEDIUM => "Classe media",
+            Segment.HIGH => "Classe alta",
             _ => segment.ToString()
         };
 
-        private static float CalcRestaurantLocationCoherence(RestaurantType r, LocationZone z) => (r, z) switch
+        private Segment GetLocationSegment(LocationZone zone)
         {
-            (RestaurantType.PODRAO, LocationZone.Comercio) => 0.9f,
-            (RestaurantType.PODRAO, LocationZone.Educacao) => 0.8f,
-            (RestaurantType.PODRAO, LocationZone.Financas) => 0.6f,
-            (RestaurantType.PODRAO, LocationZone.Residencial) => 0.5f,
-            (RestaurantType.PODRAO, LocationZone.Servicos) => 0.7f,
-            (RestaurantType.JAPONES, LocationZone.Financas) => 0.85f,
-            (RestaurantType.JAPONES, LocationZone.Educacao) => 0.75f,
-            (RestaurantType.JAPONES, LocationZone.Comercio) => 0.7f,
-            (RestaurantType.JAPONES, LocationZone.Residencial) => 0.6f,
-            (RestaurantType.JAPONES, LocationZone.Servicos) => 0.65f,
-            (RestaurantType.FRANCES, LocationZone.Financas) => 0.95f,
-            (RestaurantType.FRANCES, LocationZone.Residencial) => 0.8f,
-            (RestaurantType.FRANCES, LocationZone.Comercio) => 0.65f,
-            (RestaurantType.FRANCES, LocationZone.Educacao) => 0.55f,
-            (RestaurantType.FRANCES, LocationZone.Servicos) => 0.7f,
-            _ => 0.5f
+            return _locationSegmentsByZone.TryGetValue(zone, out var segment)
+                ? segment
+                : Segment.MEDIUM;
+        }
+
+        private static Segment GetRestaurantNaturalSegment(RestaurantType restaurant) => restaurant switch
+        {
+            RestaurantType.PODRAO => Segment.LOW,
+            RestaurantType.JAPONES => Segment.MEDIUM,
+            RestaurantType.FRANCES => Segment.HIGH,
+            _ => Segment.MEDIUM
         };
+
+        private static float CalcRestaurantLocationCoherence(Segment restaurantSegment, Segment locationSegment)
+        {
+            int distance = Mathf.Abs((int)restaurantSegment - (int)locationSegment);
+
+            return distance switch
+            {
+                0 => 0.95f,
+                1 => 0.6f,
+                _ => 0.25f
+            };
+        }
 
         private static float CalcRestaurantSegmentCoherence(RestaurantType r, Segment s) => (r, s) switch
         {
@@ -267,22 +287,61 @@ namespace Game.Adapter.In.Controllers
             _ => 0.1f
         };
 
-        private static string GetCoherenceTip1(RestaurantType r, LocationZone z) => (r, z) switch
+        private static string GetCoherenceTip1(
+            RestaurantType restaurant,
+            Segment restaurantSegment,
+            LocationZone locationZone,
+            Segment locationSegment)
         {
-            (RestaurantType.FRANCES, LocationZone.Financas) => "Otimo! Frances se destaca no centro financeiro.",
-            (RestaurantType.PODRAO, LocationZone.Comercio) => "Otimo! Lanches funcionam bem no comercio popular.",
-            (RestaurantType.JAPONES, LocationZone.Financas) => "Bom! Executivos apreciam culinaria japonesa.",
-            _ => "Combinacao viavel. Avalie o segmento de publico."
-        };
+            string restaurantName = GetRestaurantDisplayName(restaurant);
+            string restaurantClass = GetSegmentName(restaurantSegment);
+            string locationClass = GetSegmentName(locationSegment);
+            string locationName = GetLocationName(locationZone);
+
+            if (restaurantSegment == locationSegment)
+                return $"{restaurantName} combina com {locationName}: ambos estao associados a {restaurantClass}.";
+
+            int distance = Mathf.Abs((int)restaurantSegment - (int)locationSegment);
+
+            if (distance == 1)
+                return $"{restaurantName} tem foco em {restaurantClass}, enquanto {locationName} indica {locationClass}. A combinacao e viavel, mas exige ajuste de proposta.";
+
+            return $"{restaurantName} tem foco em {restaurantClass}, enquanto {locationName} indica {locationClass}. A combinacao e pouco coerente para a proposta inicial.";
+        }
 
         private static string GetCoherenceTip2(RestaurantType r, Segment s) => (r, s) switch
         {
-            (RestaurantType.PODRAO, Segment.LOW) => "Boa escolha. Lanches combinam com preco acessivel e volume.",
-            (RestaurantType.PODRAO, Segment.MEDIUM) => "Boa escolha. Publico medio tambem pode buscar conveniencia.",
-            (RestaurantType.JAPONES, Segment.MEDIUM) => "Boa escolha. Japones atrai bem o publico medio.",
-            (RestaurantType.JAPONES, Segment.HIGH) => "Boa escolha. O ticket comporta uma proposta premium.",
-            (RestaurantType.FRANCES, Segment.HIGH) => "Boa escolha. Frances exige publico de alta renda.",
-            _ => "Este publico nao esta liberado para o restaurante escolhido."
+            (RestaurantType.PODRAO, Segment.LOW) or
+            (RestaurantType.PODRAO, Segment.MEDIUM) => 
+                "Restaurantes de lanches trabalham com preço acessível e maior volume de pedidos. Para essa opção, estão disponíveis as classes baixa e média.",
+
+            (RestaurantType.JAPONES, Segment.MEDIUM) or
+            (RestaurantType.JAPONES, Segment.HIGH) =>
+                "Restaurantes japoneses possuem maior custo de insumos e preparo técnico. Para essa opção, estão disponíveis as classes média e alta.",
+
+            (RestaurantType.FRANCES, Segment.HIGH) =>
+                "Restaurantes franceses possuem proposta premium, ticket elevado e maior exigência de experiência. Para essa opção, está disponível a classe alta.",
+
+            _ =>
+                "Este público-alvo não está disponível para o restaurante selecionado, pois nao e coerente com sua proposta de valor e estrutura de custos."
+        };
+
+        private static string GetRestaurantDisplayName(RestaurantType restaurant) => restaurant switch
+        {
+            RestaurantType.PODRAO => "Lanches",
+            RestaurantType.JAPONES => "Japonês",
+            RestaurantType.FRANCES => "Francês",
+            _ => restaurant.ToString()
+        };
+
+        private static string GetLocationName(LocationZone locationZone) => locationZone switch
+        {
+            LocationZone.Financas => "Área financeira",
+            LocationZone.Educacao => "Área educacional",
+            LocationZone.Comercio => "Área comercial",
+            LocationZone.Residencial => "Área residencial",
+            LocationZone.Servicos => "Área de servicos",
+            _ => locationZone.ToString()
         };
 
         private void OnConfirm()

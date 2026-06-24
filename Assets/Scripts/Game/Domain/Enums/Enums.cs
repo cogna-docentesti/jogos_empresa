@@ -14,6 +14,13 @@ public enum Segment
     HIGH
 }
 
+public enum CompetitionLevel
+{
+    LOW,
+    MEDIUM,
+    HIGH
+}
+
 public enum LocationZone
 {
     Financas,

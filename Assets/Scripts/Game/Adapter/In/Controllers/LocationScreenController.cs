@@ -118,7 +118,9 @@ namespace Game.Adapter.In.Controllers
                     e.Segment,
                     e.Description,  
                     e.RentCost,
-                    e.TicketCompat,
+                    e.InitialPhysicalCapacity,
+                    e.BaseDailyDemand,
+                    e.ReferencePriceFactor,
                     e.CompetitionLevel,
                     e.Channels);
         }

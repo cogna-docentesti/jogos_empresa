@@ -28,9 +28,9 @@ namespace Game.Adapter.In.UI
         [SerializeField] private GameObject detailsPanel;
         [SerializeField] private TextMeshProUGUI detailSegmentText;
         [SerializeField] private TextMeshProUGUI detailRentText;
-        [SerializeField] private TextMeshProUGUI detailTicketText;
-        [SerializeField] private TextMeshProUGUI detailCompetitionText;
-        [SerializeField] private TextMeshProUGUI detailChannelsText;
+        [SerializeField] private TextMeshProUGUI detailCapacidadeText;
+        [SerializeField] private TextMeshProUGUI detailDemandaText;
+        [SerializeField] private TextMeshProUGUI detailConcorrenciaText;
         [SerializeField] private TextMeshProUGUI detailZoneNameText;      
         [SerializeField] private TextMeshProUGUI detailZoneSegmentText;   
         [SerializeField] private TextMeshProUGUI detailZoneDescriptionText; 
@@ -131,7 +131,8 @@ namespace Game.Adapter.In.UI
 
         public void ShowLocationDetails(
             string name, string segment, string description,
-            int rent, int ticket, int competition, string channels)
+            int rent, int initialPhysicalCapacity, int baseDailyDemand,
+            float referencePriceFactor, string competition, string channels)
         {
             emptyStatePanel.SetActive(false);
             detailsPanel.SetActive(true);
@@ -143,9 +144,9 @@ namespace Game.Adapter.In.UI
 
             detailSegmentText.text     = segment;
             detailRentText.text        = $"R$ {rent:N0}";
-            detailTicketText.text      = $"{ticket}/100";
-            detailCompetitionText.text = $"{competition}/100";
-            detailChannelsText.text    = channels;
+            detailCapacidadeText.text      = $"{initialPhysicalCapacity} clientes/dia";
+            detailDemandaText.text = $"{baseDailyDemand} pedidos/dia";
+            detailConcorrenciaText.text    = competition;
         }
 
         // â”€â”€ Bind de Confirmar / Voltar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

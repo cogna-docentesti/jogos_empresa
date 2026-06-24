@@ -22,7 +22,6 @@ namespace Game.Adapter.In.UI
         [Header("Coherence Panel")]
         [SerializeField] private Image coh1BarFill;
         [SerializeField] private TextMeshProUGUI coh1Tip;
-        [SerializeField] private Image coh2BarFill;
         [SerializeField] private TextMeshProUGUI coh2Tip;
 
         [Header("Action Buttons")]
@@ -90,12 +89,10 @@ namespace Game.Adapter.In.UI
         public void UpdateCoherence(float coh1, string tip1, float coh2, string tip2)
         {
             if (coh1BarFill != null) coh1BarFill.fillAmount = coh1;
-            if (coh1Tip != null) coh1Tip.text = FormatCoherenceMessage("Localizacao", coh1, tip1);
-            if (coh2BarFill != null) coh2BarFill.fillAmount = coh2;
-            if (coh2Tip != null) coh2Tip.text = FormatCoherenceMessage("Publico-alvo", coh2, tip2);
+            if (coh1Tip != null) coh1Tip.text =  tip1;
+            if (coh2Tip != null) coh2Tip.text = tip2;
 
             if (coh1BarFill != null) coh1BarFill.color = CoherenceColor(coh1);
-            if (coh2BarFill != null) coh2BarFill.color = CoherenceColor(coh2);
         }
 
         private static void Bind(Button button, UnityEngine.Events.UnityAction action)

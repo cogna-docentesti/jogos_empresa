@@ -16,6 +16,9 @@ public class LocationData : ScriptableObject
     [Header("Perfil de Publico")]
     public Segment primarySegment;
 
+    [Header("Concorrencia")]
+    public CompetitionLevel competitionLevel;
+
     [Header("Canais de Venda")]
     public string[] channels;
 
@@ -23,13 +26,13 @@ public class LocationData : ScriptableObject
     [Range(1, 3)]
     public int coherenceLevel;
 
-    [Header("Demanda")]
+    [Header("Preco")]
     [Range(0f, 2f)]
-    public float demandModifier = 1f;
+    public float referencePriceFactor = 1f;
 
-    [Header("Compatibilidade de Ticket")]
-    public int ticketCompatibleMin;
-    public int ticketCompatibleMax;
+    [Header("Operacao")]
+    public int initialPhysicalCapacity;
+    public int baseDailyDemand;
 
     [Header("Visual (UI)")]
     public string colorHex = "#FFFFFF";   
@@ -38,4 +41,14 @@ public class LocationData : ScriptableObject
     [TextArea(2, 4)]
     public string description;           
 
+    private void OnValidate()
+    {
+        coherenceLevel = primarySegment switch
+        {
+            Segment.LOW => 1,
+            Segment.MEDIUM => 2,
+            Segment.HIGH => 3,
+            _ => coherenceLevel
+        };
+    }
 }
