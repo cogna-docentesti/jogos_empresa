@@ -26,7 +26,9 @@ public class GameSessionEntity
 
     public Segment targetSegment { get; set; }
 
-    public PriceStrategy priceStrategy { get; set; }
+    public float selectedPrice { get; set; }
+
+    public string menuPricingJson { get; set; }
 
     [NotNull]
     public string coherenceRating { get; set; }

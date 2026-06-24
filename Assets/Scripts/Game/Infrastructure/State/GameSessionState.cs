@@ -129,12 +129,25 @@ public static class GameSessionState
         Current.targetSegment = targetSegment;
     }
 
-    public static void SetPriceStrategy(PriceStrategy priceStrategy)
+    public static void SetSelectedPrice(float selectedPrice)
     {
         if (Current == null)
             return;
 
-        Current.priceStrategy = priceStrategy;
+        Current.selectedPrice = Mathf.Max(0f, selectedPrice);
+    }
+
+    public static void SetMenuPricingJson(string json, bool save = false)
+    {
+        if (Current == null)
+            return;
+
+        Current.menuPricingJson = string.IsNullOrWhiteSpace(json)
+            ? MenuPricingHelper.ToJson(new MenuPricingData())
+            : json;
+
+        if (save)
+            Save();
     }
 
     public static void SetCoherence(string coherenceRating)

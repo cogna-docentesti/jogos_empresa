@@ -69,6 +69,7 @@ namespace Game.Adapter.In.UI
             emptyStatePanel.SetActive(true);
             detailsPanel.SetActive(false);
             confirmButton.interactable = false;
+            DeselectAllAreas();
         }
 
 

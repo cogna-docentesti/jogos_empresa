@@ -37,6 +37,7 @@ public class GameSessionService
             reputationScore = 50,
             teamJson = TeamSelectionHelper.ToJson(new TeamSelectionData()),
             equipmentJson = EquipmentSelectionHelper.ToJson(new EquipmentSelectionData()),
+            menuPricingJson = MenuPricingHelper.ToJson(new MenuPricingData()),
             consecutiveNegativeRounds = 0,
             startedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
             completedAt = null,
@@ -80,13 +81,25 @@ public class GameSessionService
             .TryChangeState(GameState.Config_TargetSegment);
     }
 
-    public void ConfirmTargetSegmentAndPrice(Segment targetSegment,PriceStrategy priceStrategy)
+    public void ConfirmTargetSegmentAndPrice(Segment targetSegment, float selectedPrice)
     {
         if (!GameSessionState.HasSession)
             return;
 
         GameSessionState.SetTargetSegment(targetSegment);
-        GameSessionState.SetPriceStrategy(priceStrategy);
+        GameSessionState.SetSelectedPrice(selectedPrice);
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_Review);
+    }
+
+    public void ConfirmMenuPricing(MenuPricingData menuPricing)
+    {
+        if (!GameSessionState.HasSession)
+            return;
+
+        GameSessionState.SetMenuPricingJson(MenuPricingHelper.ToJson(menuPricing));
+        GameSessionState.Save();
 
         GameManager.Instance.StateMachine
             .TryChangeState(GameState.Config_Review);
