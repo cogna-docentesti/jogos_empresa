@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,13 +17,13 @@ public class GameSessionDebugTest : MonoBehaviour
 
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager n„o encontrado.");
+            Debug.LogError("GameManager n√£o encontrado.");
             yield break;
         }
 
         if (!GameSessionState.HasSession)
         {
-            Debug.LogError("Nenhuma sess„o carregada/criada.");
+            Debug.LogError("Nenhuma sess√£o carregada/criada.");
             yield break;
         }
 
@@ -37,9 +37,9 @@ public class GameSessionDebugTest : MonoBehaviour
 
         sm.ForceState(GameState.Config_Location);
 
-        service.ConfirmLocation(LocationZone.COMMERCIAL);
+        service.ConfirmLocation(LocationZone.Comercio);
         service.ConfirmRestaurant(RestaurantType.JAPONES);
-        service.ConfirmTargetSegmentAndPrice(Segment.MEDIUM, PriceStrategy.VALUE_ADDED);
+        service.ConfirmTargetSegmentAndPrice(Segment.MEDIUM, 90f);
 
         service.ConfirmStructuralConfiguration();
 

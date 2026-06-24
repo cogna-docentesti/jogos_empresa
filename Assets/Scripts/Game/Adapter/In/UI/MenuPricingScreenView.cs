@@ -18,12 +18,18 @@ namespace Game.Adapter.In.UI
         [SerializeField] private float productItemHeight = 400f;
         [SerializeField] private float productItemSpacing = 32f;
 
+        [Header("Coherence Panel")]
+        [SerializeField] private Image priceCoherenceBarFill;
+        [SerializeField] private TextMeshProUGUI priceCoherenceText;
+
         [Header("Actions")]
         [SerializeField] private Button confirmButton;
         [SerializeField] private Button backButton;
 
         public bool HasRequiredReferences()
         {
+            ResolveOptionalReferences();
+
             if (productItemsContainer == null)
             {
                 Debug.LogError("[MenuPricingScreenView] Product Items Container nao foi configurado.");
@@ -74,6 +80,21 @@ namespace Game.Adapter.In.UI
         {
             if (confirmButton != null)
                 confirmButton.interactable = enabled;
+        }
+
+        public void UpdatePriceCoherence(float value, string message)
+        {
+            if (priceCoherenceBarFill != null)
+            {
+                priceCoherenceBarFill.fillAmount = value;
+                priceCoherenceBarFill.color = CoherenceColor(value);
+            }
+
+            if (priceCoherenceText != null)
+            {
+                priceCoherenceText.gameObject.SetActive(true);
+                priceCoherenceText.text = FormatCoherenceMessage("Preco", value, message);
+            }
         }
 
         public void BindConfirm(UnityEngine.Events.UnityAction action)
@@ -163,5 +184,43 @@ namespace Game.Adapter.In.UI
             layoutElement.flexibleHeight = 0f;
             layoutElement.flexibleWidth = 1f;
         }
+
+        private void ResolveOptionalReferences()
+        {
+            if (priceCoherenceText == null)
+                priceCoherenceText = FindTextByName("CoherenceText");
+        }
+
+        private TextMeshProUGUI FindTextByName(string objectName)
+        {
+            foreach (var text in GetComponentsInChildren<TextMeshProUGUI>(true))
+            {
+                if (text.name == objectName)
+                    return text;
+            }
+
+            return null;
+        }
+
+        private static string FormatCoherenceMessage(string label, float value, string tip)
+        {
+            string status = value switch
+            {
+                >= 0.7f => "Alta",
+                >= 0.4f => "Media",
+                > 0f => "Baixa",
+                _ => "-"
+            };
+
+            return $"{label}: {status} ({Mathf.RoundToInt(value * 100f)}%)\n{tip}";
+        }
+
+        private static Color CoherenceColor(float value)
+        {
+            if (value >= 0.7f) return new Color(0.086f, 0.639f, 0.29f);
+            if (value >= 0.4f) return new Color(0.851f, 0.604f, 0.043f);
+            return new Color(0.882f, 0.114f, 0.282f);
+        }
     }
 }
+

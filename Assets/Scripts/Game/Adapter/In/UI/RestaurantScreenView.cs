@@ -80,7 +80,6 @@ namespace Game.Adapter.In.UI
         {
             Button button = GetSegmentButton(segment);
             button.interactable = available;
-
             var txt = button.GetComponentInChildren<TextMeshProUGUI>();
             if (txt != null && !available)
                 txt.color = SegTextDisabled;
@@ -91,9 +90,9 @@ namespace Game.Adapter.In.UI
         public void UpdateCoherence(float coh1, string tip1, float coh2, string tip2)
         {
             if (coh1BarFill != null) coh1BarFill.fillAmount = coh1;
-            if (coh1Tip != null) coh1Tip.text = tip1;
+            if (coh1Tip != null) coh1Tip.text = FormatCoherenceMessage("Localizacao", coh1, tip1);
             if (coh2BarFill != null) coh2BarFill.fillAmount = coh2;
-            if (coh2Tip != null) coh2Tip.text = tip2;
+            if (coh2Tip != null) coh2Tip.text = FormatCoherenceMessage("Publico-alvo", coh2, tip2);
 
             if (coh1BarFill != null) coh1BarFill.color = CoherenceColor(coh1);
             if (coh2BarFill != null) coh2BarFill.color = CoherenceColor(coh2);
@@ -189,5 +188,19 @@ namespace Game.Adapter.In.UI
             if (value >= 0.4f) return new Color(0.851f, 0.604f, 0.043f);
             return new Color(0.882f, 0.114f, 0.282f);
         }
+
+        private static string FormatCoherenceMessage(string label, float value, string tip)
+        {
+            string status = value switch
+            {
+                >= 0.7f => "Alta",
+                >= 0.4f => "Media",
+                > 0f => "Baixa",
+                _ => "-"
+            };
+
+            return $"{label}: {status} ({Mathf.RoundToInt(value * 100f)}%)\n{tip}";
+        }
     }
 }
+

@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +6,12 @@ namespace Game.Adapter.In.UI
 {
     public sealed class LocationScreenView : MonoBehaviour
     {
-        // ── Cabecalho ──────────────────────────────────────
+        // â”€â”€ Cabecalho â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [Header("Header")]
         [SerializeField] private TextMeshProUGUI regionText;
         [SerializeField] private TextMeshProUGUI hintText;
 
-        // ── Botoes de estabelecimento ───────────────────────
+        // â”€â”€ Botoes de estabelecimento â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [Header("Establishment Buttons")]
         [SerializeField] private Button bankButton;
         [SerializeField] private Button storeButton;
@@ -19,12 +19,12 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Button universityButton;
         [SerializeField] private Button condominiumButton;
 
-        // ── Painel lateral — estado vazio ───────────────────
-        [Header("Side Panel — Empty State")]
+        // â”€â”€ Painel lateral â€” estado vazio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        [Header("Side Panel â€” Empty State")]
         [SerializeField] private GameObject emptyStatePanel;
 
-        // ── Painel lateral — detalhes ───────────────────────
-        [Header("Side Panel — Details")]
+        // â”€â”€ Painel lateral â€” detalhes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        [Header("Side Panel â€” Details")]
         [SerializeField] private GameObject detailsPanel;
         [SerializeField] private TextMeshProUGUI detailSegmentText;
         [SerializeField] private TextMeshProUGUI detailRentText;
@@ -35,26 +35,26 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI detailZoneSegmentText;   
         [SerializeField] private TextMeshProUGUI detailZoneDescriptionText; 
 
-        // ── Botces de acao ──────────────────────────────────
+        // â”€â”€ Botces de acao â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [Header("Action Buttons")]
         [SerializeField] private Button confirmButton;
         [SerializeField] private Button backButton;
 
-        // ── Textos publicos (header) ────────────────────────
+        // â”€â”€ Textos publicos (header) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public void SetRegionName(string v) => regionText.text = v;
         public void SetHint(string v)       => hintText.text = v;
 
-        // ── Visibilidade dos botoes ─────────────────────────
+        // â”€â”€ Visibilidade dos botoes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public void SetBankVisible(bool v)        => bankButton.gameObject.SetActive(v);
         public void SetStoreVisible(bool v)       => storeButton.gameObject.SetActive(v);
         public void SetMarketingVisible(bool v)   => marketingButton.gameObject.SetActive(v);
         public void SetUniversityVisible(bool v)  => universityButton.gameObject.SetActive(v);
         public void SetCondominiumVisible(bool v) => condominiumButton.gameObject.SetActive(v);
 
-        // ── Bind de acoes dos botoes do mapa ───────────────
+        // â”€â”€ Bind de acoes dos botoes do mapa â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public void BindBankAction(UnityEngine.Events.UnityAction a)
         {
-            Debug.Log($"[View] BindBankAction — bankButton é null? {bankButton == null}");
+            Debug.Log($"[View] BindBankAction â€” bankButton Ã© null? {bankButton == null}");
             bankButton.onClick.AddListener(a);
         }
         public void BindUniversityAction(UnityEngine.Events.UnityAction a)  => universityButton.onClick.AddListener(a);
@@ -63,7 +63,7 @@ namespace Game.Adapter.In.UI
         public void BindStoreAction(UnityEngine.Events.UnityAction a)       => storeButton.onClick.AddListener(a);
         public void BindCondominiumAction(UnityEngine.Events.UnityAction a) => condominiumButton.onClick.AddListener(a);
 
-        // ── Painel lateral ──────────────────────────────────
+        // â”€â”€ Painel lateral â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public void ShowEmptyState()
         {
             emptyStatePanel.SetActive(true);
@@ -73,7 +73,7 @@ namespace Game.Adapter.In.UI
         }
 
 
-        // UI ─────────────────────
+        // UI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [Header("Area Visual Components")]
         [SerializeField] private LocationAreaComponent bankArea;
         [SerializeField] private LocationAreaComponent storeArea;
@@ -81,7 +81,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private LocationAreaComponent universityArea;
         [SerializeField] private LocationAreaComponent condominiumArea;
 
-        // ── Inicializacao visual das areas (chamado pelo Controller no Start) ─
+        // â”€â”€ Inicializacao visual das areas (chamado pelo Controller no Start) â”€
         public void InitializeBankArea(string name, string subtitle, string colorHex, Sprite icon)
             => bankArea?.Initialize(name, subtitle, colorHex, icon); 
             
@@ -97,7 +97,7 @@ namespace Game.Adapter.In.UI
         public void InitializeCondominiumArea(string name, string subtitle, string colorHex, Sprite icon)
             => condominiumArea?.Initialize(name, subtitle, colorHex, icon);
 
-        // ── Selecao visual (chamado pelo Controller ao clicar em uma area) ────
+        // â”€â”€ Selecao visual (chamado pelo Controller ao clicar em uma area) â”€â”€â”€â”€
         public void SelectArea(string id)
         {
             // Desseleciona todas antes de selecionar a nova
@@ -118,7 +118,7 @@ namespace Game.Adapter.In.UI
         public void HoverEnterArea(string id) => GetAreaComponent(id)?.OnHoverEnter();
         public void HoverExitArea(string id)  => GetAreaComponent(id)?.OnHoverExit();
 
-        // ── Auxiliar ──────────────────────────────────────────────────────────
+        // â”€â”€ Auxiliar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private LocationAreaComponent GetAreaComponent(string id) => id switch
         {
             "bank"        => bankArea,
@@ -148,8 +148,10 @@ namespace Game.Adapter.In.UI
             detailChannelsText.text    = channels;
         }
 
-        // ── Bind de Confirmar / Voltar ──────────────────────
+        // â”€â”€ Bind de Confirmar / Voltar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         public void BindConfirmAction(UnityEngine.Events.UnityAction a) => confirmButton.onClick.AddListener(a);
         public void BindBackAction(UnityEngine.Events.UnityAction a)    => backButton.onClick.AddListener(a);
+
     }
 }
+

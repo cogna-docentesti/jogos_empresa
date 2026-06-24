@@ -89,8 +89,7 @@ public class GameSessionService
         GameSessionState.SetTargetSegment(targetSegment);
         GameSessionState.SetSelectedPrice(selectedPrice);
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Config_Review);
+        CompleteConfigurationReview();
     }
 
     public void ConfirmMenuPricing(MenuPricingData menuPricing)
@@ -101,8 +100,7 @@ public class GameSessionService
         GameSessionState.SetMenuPricingJson(MenuPricingHelper.ToJson(menuPricing));
         GameSessionState.Save();
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Config_Review);
+        CompleteConfigurationReview();
     }
 
     public void ConfirmStructuralConfiguration()
@@ -114,6 +112,18 @@ public class GameSessionService
 
         GameManager.Instance.StateMachine
             .TryChangeState(GameState.Initial_Capital);
+    }
+
+    private void CompleteConfigurationReview()
+    {
+        GameSessionState.Save();
+
+        var stateMachine = GameManager.Instance.StateMachine;
+
+        if (stateMachine.CurrentState != GameState.Config_Review)
+            stateMachine.TryChangeState(GameState.Config_Review);
+
+        ConfirmStructuralConfiguration();
     }
 
     public void ConfirmInitialEquipment(List<EquipmentData> equipments)
@@ -133,12 +143,15 @@ public class GameSessionService
 
         var session = GameSessionState.Current;
         var teamData = TeamSelectionHelper.FromJson(session.teamJson);
+        var restaurantData = GetRestaurantData(session.restaurantType);
+        var menuPricing = MenuPricingHelper.FromJson(session.menuPricingJson);
 
         AlignmentResult alignment = AlignmentEngine.Calculate(
             session.restaurantType,
             session.targetSegment,
             session.locationZone,
-            session.priceStrategy,
+            restaurantData,
+            menuPricing,
             teamData,
             availableRoles
         );
@@ -156,6 +169,12 @@ public class GameSessionService
 
         GameManager.Instance.StateMachine
             .TryChangeState(GameState.Initial_Equipment);
+    }
+
+    private RestaurantData GetRestaurantData(RestaurantType restaurantType)
+    {
+        return Resources.LoadAll<RestaurantData>("Restaurants")
+            .FirstOrDefault(restaurant => restaurant != null && restaurant.type == restaurantType);
     }
 
     // =============================

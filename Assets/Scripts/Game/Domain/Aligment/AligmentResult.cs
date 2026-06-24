@@ -1,3 +1,11 @@
+﻿public enum AlignmentClassification
+{
+    HIGH,
+    ADEQUATE,
+    FRAGILE,
+    CRITICAL
+}
+
 public class AlignmentResult
 {
     public int restaurantTargetScore;

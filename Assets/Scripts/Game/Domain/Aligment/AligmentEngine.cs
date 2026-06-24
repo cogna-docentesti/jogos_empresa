@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.U2D.Aseprite;
+using UnityEngine;
 
 public static class AlignmentEngine
 {
@@ -8,15 +8,16 @@ public static class AlignmentEngine
         RestaurantType restaurantType,
         Segment targetSegment,
         LocationZone locationZone,
-        PriceStrategy priceStrategy,
+        RestaurantData restaurantData,
+        MenuPricingData menuPricing,
         TeamSelectionData teamData,
         List<RoleData> availableRoles
     )
     {
         int restaurantTargetScore = GetRestaurantTargetScore(restaurantType, targetSegment);
         int restaurantLocationScore = GetRestaurantLocationScore(restaurantType, locationZone);
-        int restaurantPriceScore = GetRestaurantPriceScore(restaurantType, priceStrategy);
-        int restaurantTeamScore = GetTeamScore(teamData, availableRoles);
+        int restaurantPriceScore = GetRestaurantPriceScore(restaurantType, restaurantData, menuPricing);
+        int restaurantTeamScore = GetTeamScore(restaurantType, restaurantData, teamData, availableRoles);
 
         int totalScore =
             restaurantTargetScore +
@@ -78,25 +79,31 @@ public static class AlignmentEngine
         {
             RestaurantType.PODRAO => location switch
             {
-                LocationZone.INDUSTRIAL => 20,
-                LocationZone.COMMERCIAL => 12,
-                LocationZone.NOBLE => 0,
+                LocationZone.Comercio => 20,
+                LocationZone.Educacao => 18,
+                LocationZone.Servicos => 14,
+                LocationZone.Financas => 10,
+                LocationZone.Residencial => 8,
                 _ => 0
             },
 
             RestaurantType.JAPONES => location switch
             {
-                LocationZone.INDUSTRIAL => 5,
-                LocationZone.COMMERCIAL => 20,
-                LocationZone.NOBLE => 15,
+                LocationZone.Financas => 20,
+                LocationZone.Educacao => 15,
+                LocationZone.Comercio => 14,
+                LocationZone.Servicos => 12,
+                LocationZone.Residencial => 10,
                 _ => 0
             },
 
             RestaurantType.FRANCES => location switch
             {
-                LocationZone.INDUSTRIAL => 0,
-                LocationZone.COMMERCIAL => 8,
-                LocationZone.NOBLE => 20,
+                LocationZone.Financas => 20,
+                LocationZone.Residencial => 16,
+                LocationZone.Servicos => 12,
+                LocationZone.Comercio => 10,
+                LocationZone.Educacao => 6,
                 _ => 0
             },
 
@@ -104,29 +111,66 @@ public static class AlignmentEngine
         };
     }
 
-    private static int GetRestaurantPriceScore(RestaurantType restaurant, PriceStrategy price)
+    private static int GetRestaurantPriceScore(
+        RestaurantType restaurant,
+        RestaurantData restaurantData,
+        MenuPricingData pricing
+    )
     {
+        if (restaurantData?.products == null || restaurantData.products.Length == 0)
+            return 10;
+
+        float total = 0f;
+        int count = 0;
+
+        foreach (var product in restaurantData.products)
+        {
+            if (product == null)
+                continue;
+
+            float selectedPrice = product.price;
+            if (MenuPricingHelper.TryGetPrice(pricing, product.id, out float savedPrice))
+                selectedPrice = savedPrice;
+
+            total += GetProductPriceScore(restaurant, product, selectedPrice);
+            count++;
+        }
+
+        return count > 0 ? Mathf.RoundToInt(total / count) : 10;
+    }
+
+    private static int GetProductPriceScore(RestaurantType restaurant, ProductData product, float selectedPrice)
+    {
+        if (product.maxPrice <= product.minPrice)
+            return 10;
+
+        float normalizedPrice = Mathf.InverseLerp(
+            product.minPrice,
+            product.maxPrice,
+            product.ClampPrice(selectedPrice)
+        );
+
         return restaurant switch
         {
-            RestaurantType.PODRAO => price switch
+            RestaurantType.PODRAO => normalizedPrice switch
             {
-                PriceStrategy.COMPETITIVE => 20,
-                PriceStrategy.VALUE_ADDED => 12,
-                _ => 0
+                <= 0.35f => 20,
+                <= 0.60f => 14,
+                _ => 8
             },
 
-            RestaurantType.JAPONES => price switch
+            RestaurantType.JAPONES => normalizedPrice switch
             {
-                PriceStrategy.COMPETITIVE => 18,
-                PriceStrategy.VALUE_ADDED => 20,
-                _ => 0
+                >= 0.20f and <= 0.75f => 20,
+                > 0.75f => 16,
+                _ => 14
             },
 
-            RestaurantType.FRANCES => price switch
+            RestaurantType.FRANCES => normalizedPrice switch
             {
-                PriceStrategy.COMPETITIVE => 16,
-                PriceStrategy.VALUE_ADDED => 20,
-                _ => 0
+                >= 0.55f => 20,
+                >= 0.35f => 14,
+                _ => 8
             },
 
             _ => 0
@@ -134,10 +178,13 @@ public static class AlignmentEngine
     }
 
     private static bool HasRoleType(
-     TeamSelectionData teamData,
-     List<RoleData> allRoles,
-     RoleType roleType)
+        TeamSelectionData teamData,
+        List<RoleData> allRoles,
+        RoleType roleType)
     {
+        if (teamData?.members == null || allRoles == null)
+            return false;
+
         foreach (var member in teamData.members)
         {
             var role = allRoles.FirstOrDefault(r => r.id == member.roleId);
@@ -153,26 +200,55 @@ public static class AlignmentEngine
         return false;
     }
 
-    private static int GetTeamScore(TeamSelectionData teamData,List<RoleData> allRoles)
+    private static bool HasRoleId(TeamSelectionData teamData, string roleId)
     {
-        bool hasSpecialist = HasRoleType(
-            teamData,
-            allRoles,
-            RoleType.ESPECIALISTA
-        );
+        if (teamData?.members == null || string.IsNullOrWhiteSpace(roleId))
+            return false;
 
-        return hasSpecialist ? 20 : 5;
+        return teamData.members.Any(member =>
+            member.roleId == roleId &&
+            member.quantity > 0
+        );
+    }
+
+    private static int GetTeamScore(
+        RestaurantType restaurant,
+        RestaurantData restaurantData,
+        TeamSelectionData teamData,
+        List<RoleData> allRoles
+    )
+    {
+        if (restaurantData?.requiredRoles != null && restaurantData.requiredRoles.Length > 0)
+        {
+            bool hasRequiredRoles = restaurantData.requiredRoles.All(requirement =>
+                requirement == null ||
+                requirement.quantity <= 0 ||
+                HasRoleId(teamData, requirement.roleId)
+            );
+
+            return hasRequiredRoles ? 20 : 5;
+        }
+
+        RoleType specialistRole = restaurant switch
+        {
+            RestaurantType.PODRAO => RoleType.CHAPEIRO,
+            RestaurantType.JAPONES => RoleType.SUSHIMAN,
+            RestaurantType.FRANCES => RoleType.CHEF,
+            _ => RoleType.ATENDENTE
+        };
+
+        return HasRoleType(teamData, allRoles, specialistRole) ? 20 : 5;
     }
 
     private static AlignmentClassification GetClassification(int totalScore)
     {
-        if (totalScore >= 85)
+        if (totalScore >= 70)
             return AlignmentClassification.HIGH;
 
-        if (totalScore >= 70)
+        if (totalScore >= 55)
             return AlignmentClassification.ADEQUATE;
 
-        if (totalScore >= 50)
+        if (totalScore >= 35)
             return AlignmentClassification.FRAGILE;
 
         return AlignmentClassification.CRITICAL;
@@ -195,16 +271,16 @@ public static class AlignmentEngine
         return classification switch
         {
             AlignmentClassification.HIGH =>
-                "Modelo coerente. A combinação tende a aumentar demanda, satisfação e reputação.",
+                "Modelo coerente. A combinacao tende a aumentar demanda, satisfacao e reputacao.",
 
             AlignmentClassification.ADEQUATE =>
-                "Modelo viável. A combinação apresenta bom funcionamento, mas pode ter limitações.",
+                "Modelo viavel. A combinacao apresenta bom funcionamento, mas pode ter limitacoes.",
 
             AlignmentClassification.FRAGILE =>
-                "Modelo frágil. A combinação apresenta riscos e pode reduzir a demanda.",
+                "Modelo fragil. A combinacao apresenta riscos e pode reduzir a demanda.",
 
             AlignmentClassification.CRITICAL =>
-                "Modelo crítico. A combinação tende a gerar baixa demanda e dificuldade financeira.",
+                "Modelo critico. A combinacao tende a gerar baixa demanda e dificuldade financeira.",
 
             _ => ""
         };
