@@ -21,7 +21,7 @@ public class GameSessionService
     public GameSessionEntity CreateNewSession()
     {
         if (GameSessionState.HasActiveSession)
-            throw new Exception("Já existe uma sessão ativa.");
+            throw new Exception("Jï¿½ existe uma sessï¿½o ativa.");
 
         var session = new GameSessionEntity
         {
@@ -37,6 +37,7 @@ public class GameSessionService
             reputationScore = 50,
             teamJson = TeamSelectionHelper.ToJson(new TeamSelectionData()),
             equipmentJson = EquipmentSelectionHelper.ToJson(new EquipmentSelectionData()),
+            menuPricingJson = MenuPricingHelper.ToJson(new MenuPricingData()),
             consecutiveNegativeRounds = 0,
             startedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
             completedAt = null,
@@ -55,7 +56,7 @@ public class GameSessionService
     }
 
     // =============================
-    // CONFIGURAÇÃO E STATE MACHINE
+    // CONFIGURAï¿½ï¿½O E STATE MACHINE
     // =============================
 
     public void ConfirmLocation(LocationZone locationZone)
@@ -80,13 +81,25 @@ public class GameSessionService
             .TryChangeState(GameState.Config_TargetSegment);
     }
 
-    public void ConfirmTargetSegmentAndPrice(Segment targetSegment,PriceStrategy priceStrategy)
+    public void ConfirmTargetSegmentAndPrice(Segment targetSegment, float selectedPrice)
     {
         if (!GameSessionState.HasSession)
             return;
 
         GameSessionState.SetTargetSegment(targetSegment);
-        GameSessionState.SetPriceStrategy(priceStrategy);
+        GameSessionState.SetSelectedPrice(selectedPrice);
+
+        GameManager.Instance.StateMachine
+            .TryChangeState(GameState.Config_Review);
+    }
+
+    public void ConfirmMenuPricing(MenuPricingData menuPricing)
+    {
+        if (!GameSessionState.HasSession)
+            return;
+
+        GameSessionState.SetMenuPricingJson(MenuPricingHelper.ToJson(menuPricing));
+        GameSessionState.Save();
 
         GameManager.Instance.StateMachine
             .TryChangeState(GameState.Config_Review);
@@ -292,7 +305,7 @@ public class GameSessionService
 
         if (sm.CurrentState != GameState.Round_Sales)
         {
-            Debug.LogWarning("A rodada não está no estado correto.");
+            Debug.LogWarning("A rodada nï¿½o estï¿½ no estado correto.");
             return null;
         }
 

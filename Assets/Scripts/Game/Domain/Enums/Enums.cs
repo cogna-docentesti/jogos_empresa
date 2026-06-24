@@ -14,17 +14,13 @@ public enum Segment
     HIGH
 }
 
-public enum PriceStrategy
-{
-    COMPETITIVE,
-    VALUE_ADDED
-}
-
 public enum LocationZone
 {
-    INDUSTRIAL,
-    COMMERCIAL,
-    NOBLE
+    Financas,
+    Educacao,
+    Comercio,
+    Residencial,
+    Servicos
 }
 
 public enum EquipmentCategory
@@ -44,18 +40,13 @@ public enum RoleType
 {
     // Operacional
     ATENDENTE,
+    GARCOM,
 
-    // Produção
-    ESPECIALISTA,
+    // Produï¿½ï¿½o
+    CHAPEIRO,
+    CHEF,
+    SUSHIMAN,
 
-    // Gestão
+    // Gestï¿½o
     GERENTE
-}
-
-public enum AlignmentClassification
-{
-    HIGH,
-    ADEQUATE,
-    FRAGILE,
-    CRITICAL
 }
