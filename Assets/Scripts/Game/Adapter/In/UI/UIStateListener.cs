@@ -7,7 +7,6 @@ public class UIStateListener : MonoBehaviour
     [SerializeField] private GameObject configLocationPanel;
     [SerializeField] private GameObject configRestaurantPanel;
     [SerializeField] private GameObject configTargetSegmentPanel;
-    [SerializeField] private GameObject configReviewPanel;
 
     [Header("Configuração operacional inicial")]
     [SerializeField] private GameObject initialEquipmentPanel;
@@ -67,9 +66,6 @@ public class UIStateListener : MonoBehaviour
                 Show(configTargetSegmentPanel);
                 break;
 
-            case GameState.Config_Review:
-                Show(configReviewPanel);
-                break;
 
             case GameState.Initial_Equipment:
                 Show(initialEquipmentPanel);
@@ -122,7 +118,6 @@ public class UIStateListener : MonoBehaviour
         SetActive(configLocationPanel, false);
         SetActive(configRestaurantPanel, false);
         SetActive(configTargetSegmentPanel, false);
-        SetActive(configReviewPanel, false);
 
         SetActive(initialEquipmentPanel, false);
         SetActive(initialTeamPanel, false);

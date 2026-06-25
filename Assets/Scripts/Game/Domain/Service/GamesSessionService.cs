@@ -98,7 +98,6 @@ public class GameSessionService
             return;
 
         GameSessionState.SetMenuPricingJson(MenuPricingHelper.ToJson(menuPricing));
-        GameSessionState.Save();
 
         CompleteConfigurationReview();
     }
@@ -116,8 +115,6 @@ public class GameSessionService
 
     private void CompleteConfigurationReview()
     {
-        GameSessionState.Save();
-
         var stateMachine = GameManager.Instance.StateMachine;
 
         if (stateMachine.CurrentState != GameState.Config_Review)
