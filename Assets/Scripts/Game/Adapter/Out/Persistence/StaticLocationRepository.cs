@@ -30,7 +30,7 @@ namespace Game.Adapter.Out.Persistence
                 .Select(MapToEstablishment)
                 .ToList();
 
-            _cache = new LocationScreenData("Selecione uma Localizacao", establishments);
+            _cache = new LocationScreenData("Localização", establishments);
 
             Debug.Log($"[StaticLocationRepository] {establishments.Count} localizacoes carregadas.");
             return _cache;

@@ -22,6 +22,7 @@ namespace Game.Adapter.In.UI
         // â”€â”€ Painel lateral â€” estado vazio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [Header("Side Panel â€” Empty State")]
         [SerializeField] private GameObject emptyStatePanel;
+        [SerializeField] private GameObject infoPanel;
 
         // â”€â”€ Painel lateral â€” detalhes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [Header("Side Panel â€” Details")]
@@ -134,6 +135,7 @@ namespace Game.Adapter.In.UI
             int rent, int initialPhysicalCapacity, int baseDailyDemand,
             float referencePriceFactor, string competition, string channels)
         {
+            infoPanel.SetActive(false);
             emptyStatePanel.SetActive(false);
             detailsPanel.SetActive(true);
             confirmButton.interactable = true;

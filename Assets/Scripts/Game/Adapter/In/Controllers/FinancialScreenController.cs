@@ -68,28 +68,38 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
 
-            foreach (var creditLine in creditLines)
-            {
-                var card = view.CreateBankCard();
-                card.Setup(creditLine);
-                card.Selected += OnCardSelected;
-                _cards.Add(card);
-            }
+           foreach (var creditLine in creditLines)
+           {
+               var card = view.CreateBankCard();
+
+               int coinCount = GetCoinCountByRisk(creditLine, creditLines);
+
+               card.Setup(creditLine, coinCount);
+               card.Selected += OnCardSelected;
+
+               _cards.Add(card);
+           }
         }
 
-        private void OnCardSelected(BankCardView card)
-        {
-            _selectedCreditLine = card != null ? card.CreditLine : null;
+     private void OnCardSelected(BankCardView selectedCard)
+     {
+         foreach (var card in _cards)
+         {
+             if (card != null)
+                 card.SetSelected(card == selectedCard);
+         }
 
-            if (_selectedCreditLine == null)
-            {
-                view.SetConfirmEnabled(false);
-                return;
-            }
+         _selectedCreditLine = selectedCard != null ? selectedCard.CreditLine : null;
 
-            view.SetHint($"Selecionado: {_selectedCreditLine.displayName}");
-            view.SetConfirmEnabled(true);
-        }
+         if (_selectedCreditLine == null)
+         {
+             view.SetConfirmEnabled(false);
+             return;
+         }
+
+         view.SetHint($"Selecionado: {_selectedCreditLine.displayName}");
+         view.SetConfirmEnabled(true);
+     }
 
         private void OnConfirm()
         {
@@ -118,6 +128,61 @@ namespace Game.Adapter.In.Controllers
 
             if (view != null)
                 view.ClearBankCards();
+        }
+
+
+        private static int GetCoinCountByRisk(
+            CreditLineData currentCreditLine,
+            IReadOnlyList<CreditLineData> allCreditLines
+        )
+        {
+            if (currentCreditLine == null || allCreditLines == null || allCreditLines.Count == 0)
+                return 1;
+
+            var orderedRates = allCreditLines
+                .Where(line => line != null)
+                .Select(line => line.monthlyInterestRate)
+                .Distinct()
+                .OrderBy(rate => rate)
+                .ToList();
+
+            if (orderedRates.Count == 0)
+                return 1;
+
+            if (orderedRates.Count == 1)
+                return 1;
+
+            float currentRate = currentCreditLine.monthlyInterestRate;
+
+            int rateIndex = orderedRates.FindIndex(rate =>
+                Mathf.Approximately(rate, currentRate)
+            );
+
+            if (rateIndex < 0)
+                rateIndex = orderedRates.Count(rate => rate < currentRate);
+
+            if (orderedRates.Count == 2)
+            {
+                return rateIndex == 0 ? 1 : 3;
+            }
+
+            if (orderedRates.Count == 3)
+            {
+                return rateIndex switch
+                {
+                    0 => 1, // menor risco
+                    1 => 2, // risco médio
+                    _ => 3  // maior risco
+                };
+            }
+
+            float normalizedPosition = rateIndex / (float)(orderedRates.Count - 1);
+
+            return Mathf.Clamp(
+                Mathf.RoundToInt(Mathf.Lerp(1f, 3f, normalizedPosition)),
+                1,
+                3
+            );
         }
     }
 }
