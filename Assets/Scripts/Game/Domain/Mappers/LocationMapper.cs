@@ -44,9 +44,9 @@ public static class LocationMapper
 
     private static string FormatSegment(Segment segment) => segment switch
     {
-        Segment.LOW => "Classe baixa",
-        Segment.MEDIUM => "Classe media",
-        Segment.HIGH => "Classe alta",
+        Segment.LOW => "Classe C",
+        Segment.MEDIUM => "Classe B",
+        Segment.HIGH => "Classe A",
         _ => segment.ToString()
     };
 
