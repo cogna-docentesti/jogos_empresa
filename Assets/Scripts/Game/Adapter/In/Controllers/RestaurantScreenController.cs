@@ -68,9 +68,9 @@ namespace Game.Adapter.In.Controllers
                 view.SetRestaurantCardData(restaurant.type, restaurant.displayName, restaurant.description);
             }
 
-            view.SetSegmentButtonData(Segment.LOW, "Classe baixa");
-            view.SetSegmentButtonData(Segment.MEDIUM, "Classe media");
-            view.SetSegmentButtonData(Segment.HIGH, "Classe alta");
+            view.SetSegmentButtonData(Segment.LOW, "Classe C");
+            view.SetSegmentButtonData(Segment.MEDIUM, "Classe B");
+            view.SetSegmentButtonData(Segment.HIGH, "Classe A");
         }
 
         private void BindActions()
@@ -244,9 +244,9 @@ namespace Game.Adapter.In.Controllers
 
         private static string GetSegmentName(Segment segment) => segment switch
         {
-            Segment.LOW => "Classe baixa",
-            Segment.MEDIUM => "Classe media",
-            Segment.HIGH => "Classe alta",
+            Segment.LOW => "Classe C",
+            Segment.MEDIUM => "Classe B",
+            Segment.HIGH => "Classe A",
             _ => segment.ToString()
         };
 
@@ -313,14 +313,14 @@ namespace Game.Adapter.In.Controllers
         {
             (RestaurantType.PODRAO, Segment.LOW) or
             (RestaurantType.PODRAO, Segment.MEDIUM) => 
-                "Restaurantes de lanches trabalham com preço acessível e maior volume de pedidos. Para essa opção, estão disponíveis as classes baixa e média.",
+                "Restaurantes de lanches trabalham com preço acessível e maior volume de pedidos. Para essa opção, estão disponíveis as classes C e B.",
 
             (RestaurantType.JAPONES, Segment.MEDIUM) or
             (RestaurantType.JAPONES, Segment.HIGH) =>
-                "Restaurantes japoneses possuem maior custo de insumos e preparo técnico. Para essa opção, estão disponíveis as classes média e alta.",
+                "Restaurantes japoneses possuem maior custo de insumos e preparo técnico. Para essa opção, estão disponíveis as classes B e A.",
 
             (RestaurantType.FRANCES, Segment.HIGH) =>
-                "Restaurantes franceses possuem proposta premium, ticket elevado e maior exigência de experiência. Para essa opção, está disponível a classe alta.",
+                "Restaurantes franceses possuem proposta premium, ticket elevado e maior exigência de experiência. Para essa opção, está disponível a classe A.",
 
             _ =>
                 "Este público-alvo não está disponível para o restaurante selecionado, pois nao e coerente com sua proposta de valor e estrutura de custos."
