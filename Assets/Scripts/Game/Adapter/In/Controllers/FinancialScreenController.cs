@@ -59,7 +59,8 @@ namespace Game.Adapter.In.Controllers
             var creditLines = Resources
                 .LoadAll<CreditLineData>("CreditLines")
                 .Where(line => line != null)
-                .OrderBy(line => line.maxAmount)
+                .OrderBy(line => line.maxAmount <= 0f ? 1 : 0)
+                .ThenBy(line => line.maxAmount)
                 .ToArray();
 
             if (creditLines.Length == 0)
@@ -106,7 +107,13 @@ namespace Game.Adapter.In.Controllers
             if (_selectedCreditLine == null || !GameSessionState.HasSession)
                 return;
 
-            GameSessionState.SetLoan(_selectedCreditLine.id, GameSessionState.Current.loanBalance);
+            float loanBalance = _selectedCreditLine.maxAmount <= 0f
+                ? 0f
+                : GameSessionState.Current.loanBalance;
+
+            GameSessionState.SetLoan(_selectedCreditLine.id, loanBalance);
+
+            PresentationMenuOverlay.Show();
         }
 
         private void OnBack()

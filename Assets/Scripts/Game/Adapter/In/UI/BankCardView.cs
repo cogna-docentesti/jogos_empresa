@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +10,7 @@ namespace Game.Adapter.In.UI
     {
         [Header("Texts")]
         [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI maxAmountText;
         [SerializeField] private TextMeshProUGUI interestRateText;
         [SerializeField] private TextMeshProUGUI termText;
@@ -19,6 +20,10 @@ namespace Game.Adapter.In.UI
 
         [Header("Visual")]
         [SerializeField] private Image cardBackground;
+
+        [SerializeField] private Color selectedBackgroundColor = new Color32(0xE6, 0xC8, 0x57, 0xFF);
+
+        [SerializeField] private Image creditLineIcon;
 
         [SerializeField] private GameObject selectionBorder;
 
@@ -41,11 +46,7 @@ namespace Game.Adapter.In.UI
         private bool isSelected;
         private bool hasOriginalCoinPosition;
         private Vector2 originalCoinAnchoredPosition;
-
-        private static readonly Color CardNormal = HexColor(0x00, 0x68, 0xA4);       // #0068A4
-        private static readonly Color CardSelected = HexColor(0xE6, 0xC8, 0x57);     // verde selecionado
-        private static readonly Color CardHighlighted = HexColor(0xE6, 0xC8, 0x57);  // verde selecionado
-        private static readonly Color CardPressed = HexColor(0x00, 0x3F, 0x70);
+        private Color normalBackgroundColor = Color.white;
 
         private static readonly Color BorderSelected = HexColor(0x25, 0x63, 0xEB);   // azulzinho
         private static readonly Color BorderNormal = Color.white;
@@ -57,6 +58,9 @@ namespace Game.Adapter.In.UI
 
             if (selectButton == null)
                 selectButton = GetComponent<Button>();
+
+            if (cardBackground != null)
+                normalBackgroundColor = cardBackground.color;
 
             CacheOriginalCoinPosition();
             ConfigureSelectionBorder(false);
@@ -87,8 +91,20 @@ namespace Game.Adapter.In.UI
         {
             CreditLine = creditLine;
 
+            ConfigureCreditLineIcon(creditLine.icon);
+
             if (nameText != null)
                 nameText.text = creditLine.displayName;
+
+            if (descriptionText == null)
+            {
+                Transform descriptionTransform = transform.Find("creditLineDescription");
+                if (descriptionTransform != null)
+                    descriptionText = descriptionTransform.GetComponent<TextMeshProUGUI>();
+            }
+
+            if (descriptionText != null)
+                descriptionText.text = creditLine.cardDescription;
 
             if (maxAmountText != null)
                 maxAmountText.text = FormatCurrency(creditLine.maxAmount);
@@ -129,15 +145,45 @@ namespace Game.Adapter.In.UI
            Selected?.Invoke(this);
        }
 
+        private void ConfigureCreditLineIcon(Sprite icon)
+        {
+            if (creditLineIcon == null)
+            {
+                var existing = transform.Find("CreditLineIcon");
+                if (existing != null)
+                    creditLineIcon = existing.GetComponent<Image>();
+            }
+
+            if (creditLineIcon == null)
+            {
+                var iconObject = new GameObject("CreditLineIcon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                iconObject.transform.SetParent(transform, false);
+                creditLineIcon = iconObject.GetComponent<Image>();
+
+                RectTransform iconRect = creditLineIcon.rectTransform;
+                iconRect.anchorMin = new Vector2(0f, 1f);
+                iconRect.anchorMax = new Vector2(0f, 1f);
+                iconRect.pivot = new Vector2(0f, 1f);
+                iconRect.anchoredPosition = new Vector2(24f, -24f);
+                iconRect.sizeDelta = new Vector2(96f, 96f);
+            }
+
+            creditLineIcon.sprite = icon;
+            creditLineIcon.preserveAspect = true;
+            creditLineIcon.raycastTarget = false;
+            creditLineIcon.gameObject.SetActive(icon != null);
+            creditLineIcon.transform.SetAsLastSibling();
+        }
+
         private void ApplyVisualState()
         {
-            Color baseColor = isSelected ? CardSelected : CardNormal;
+            Color baseColor = isSelected ? selectedBackgroundColor : normalBackgroundColor;
 
             if (cardBackground != null)
                 cardBackground.color = baseColor;
 
             if (selectButton != null)
-                selectButton.colors = BuildButtonColors(baseColor);
+                selectButton.colors = BuildButtonColors();
 
             ConfigureSelectionBorder(isSelected);
             ConfigureOutline(isSelected);
@@ -235,15 +281,15 @@ namespace Game.Adapter.In.UI
             hasOriginalCoinPosition = true;
         }
 
-        private static ColorBlock BuildButtonColors(Color baseColor)
+        private static ColorBlock BuildButtonColors()
         {
             return new ColorBlock
             {
-                normalColor = baseColor,
-                highlightedColor = CardHighlighted,
-                pressedColor = CardPressed,
-                selectedColor = baseColor,
-                disabledColor = new Color(0.35f, 0.35f, 0.35f, 0.85f),
+                normalColor = Color.white,
+                highlightedColor = new Color(0.92f, 0.92f, 0.92f, 1f),
+                pressedColor = new Color(0.75f, 0.75f, 0.75f, 1f),
+                selectedColor = Color.white,
+                disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.85f),
                 colorMultiplier = 1f,
                 fadeDuration = 0.08f
             };
