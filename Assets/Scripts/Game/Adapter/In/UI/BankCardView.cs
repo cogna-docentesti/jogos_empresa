@@ -34,7 +34,7 @@ namespace Game.Adapter.In.UI
 
         [SerializeField] private float coinSpacing = 26f;
 
-        [SerializeField, Range(1, 3)]
+        [SerializeField, Min(0)]
         private int defaultCoinCount = 1;
 
         public CreditLineData CreditLine { get; private set; }
@@ -46,6 +46,7 @@ namespace Game.Adapter.In.UI
         private bool isSelected;
         private bool hasOriginalCoinPosition;
         private Vector2 originalCoinAnchoredPosition;
+        private float originalCoinAlpha = 1f;
         private Color normalBackgroundColor = Color.white;
 
         private static readonly Color BorderSelected = HexColor(0x25, 0x63, 0xEB);   // azulzinho
@@ -134,9 +135,9 @@ namespace Game.Adapter.In.UI
 
         public void SetCoinCount(int count)
         {
-            defaultCoinCount = Mathf.Clamp(count, 1, 3);
+            defaultCoinCount = Mathf.Max(0, count);
 
-            EnsureCoinInstances();
+            EnsureCoinInstances(defaultCoinCount);
             ApplyCoinCount(defaultCoinCount);
         }
 
@@ -217,7 +218,7 @@ namespace Game.Adapter.In.UI
             outline.effectDistance = new Vector2(3f, -3f);
         }
 
-        private void EnsureCoinInstances()
+        private void EnsureCoinInstances(int requiredCount)
         {
             if (coinPrefab == null)
                 return;
@@ -230,7 +231,7 @@ namespace Game.Adapter.In.UI
             if (!coinInstances.Contains(coinPrefab))
                 coinInstances.Insert(0, coinPrefab);
 
-            while (coinInstances.Count < 3)
+            while (coinInstances.Count < requiredCount)
             {
                 Image clone = Instantiate(coinPrefab, coinContainer);
                 clone.name = $"CoinIcon_{coinInstances.Count + 1}";
@@ -242,13 +243,15 @@ namespace Game.Adapter.In.UI
 
         private void ApplyCoinCount(int count)
         {
+            int visibleCount = Mathf.Max(0, count);
+            bool representsZeroCoins = visibleCount == 0;
+            int displayedCoinCount = representsZeroCoins ? 1 : visibleCount;
+
             if (coinPrefab == null)
                 return;
 
-            EnsureCoinInstances();
-
-            int visibleCount = Mathf.Clamp(count, 1, 3);
-            float totalWidth = (visibleCount - 1) * coinSpacing;
+            EnsureCoinInstances(displayedCoinCount);
+            float totalWidth = (displayedCoinCount - 1) * coinSpacing;
 
             for (int i = 0; i < coinInstances.Count; i++)
             {
@@ -257,11 +260,15 @@ namespace Game.Adapter.In.UI
                 if (coin == null)
                     continue;
 
-                bool visible = i < visibleCount;
+                bool visible = i < displayedCoinCount;
                 coin.gameObject.SetActive(visible);
 
                 if (!visible)
                     continue;
+
+                Color coinColor = coin.color;
+                coinColor.a = representsZeroCoins ? 0.4f : originalCoinAlpha;
+                coin.color = coinColor;
 
                 RectTransform rt = coin.rectTransform;
 
@@ -278,6 +285,7 @@ namespace Game.Adapter.In.UI
                 return;
 
             originalCoinAnchoredPosition = coinPrefab.rectTransform.anchoredPosition;
+            originalCoinAlpha = coinPrefab.color.a;
             hasOriginalCoinPosition = true;
         }
 
