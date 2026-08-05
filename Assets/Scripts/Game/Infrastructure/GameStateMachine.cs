@@ -31,7 +31,12 @@ public class GameStateMachine
 
             { GameState.Config_Review, new List<GameState> { GameState.Initial_Capital } },
             { GameState.Initial_Capital, new List<GameState> { GameState.Initial_Equipment } },
-            { GameState.Initial_Equipment, new List<GameState> { GameState.Initial_Team } },
+            { GameState.Initial_Equipment, new List<GameState>
+                {
+                    GameState.Initial_Capital,
+                    GameState.Initial_Team
+                }
+            },
             { GameState.Initial_Team, new List<GameState> { GameState.Management_Hub } },
 
             { GameState.Management_Hub, new List<GameState>
@@ -76,7 +81,7 @@ public class GameStateMachine
     {
         if (!CanTransitionTo(nextState))
         {
-            Debug.LogWarning($"Transição inválida: {CurrentState} -> {nextState}");
+            Debug.LogWarning($"TransiÃ§Ã£o invÃ¡lida: {CurrentState} -> {nextState}");
             return false;
         }
 
@@ -93,7 +98,7 @@ public class GameStateMachine
     {
         CurrentState = state;
 
-        Debug.Log($"Estado forçado: {CurrentState}");
+        Debug.Log($"Estado forÃ§ado: {CurrentState}");
 
         OnStateChanged?.Invoke(CurrentState);
     }

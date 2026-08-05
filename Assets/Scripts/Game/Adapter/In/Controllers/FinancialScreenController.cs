@@ -113,7 +113,8 @@ namespace Game.Adapter.In.Controllers
 
             GameSessionState.SetLoan(_selectedCreditLine.id, loanBalance);
 
-            PresentationMenuOverlay.Show();
+            if (GameManager.Instance != null)
+                GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);
         }
 
         private void OnBack()

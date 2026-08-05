@@ -31,7 +31,8 @@ namespace Game.Adapter.In.UI
             new("Panel_Location", "Localizacao"),
             new("Panel_Restaurant", "Restaurante"),
             new("Panel_MenuPricing", "Cardapio e precos"),
-            new("Panel_Financial", "Linha de credito")
+            new("Panel_Financial", "Linha de credito"),
+            new("Panel_Equipment", "Equipamentos")
         };
 
         private static PresentationMenuOverlay _instance;

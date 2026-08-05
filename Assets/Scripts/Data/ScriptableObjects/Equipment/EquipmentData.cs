@@ -3,20 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EquipmentData", menuName = "Game Data/EquipmentData")]
 public class EquipmentData : ScriptableObject
 {
-    [Header("Identificação")]
+    [Header("IdentificaÃ§Ã£o")]
     public string id;
     public string displayName;
+    public Sprite icon;
 
     [Header("Financeiro")]
     public int cost;
 
-    [Header("Classificação")]
+    [Header("ClassificaÃ§Ã£o")]
     public EquipmentCategory category;
 
     [Header("Compatibilidade")]
     public RestaurantType[] applicableTypes;
 
-    [Header("Benefícios")]
+    [Header("BenefÃ­cios")]
     [Range(0f, 1f)]
     public float qualityBonus;
 
