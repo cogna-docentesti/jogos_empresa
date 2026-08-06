@@ -179,17 +179,11 @@ namespace Game.Adapter.In.Controllers
             }
 
             view.SetAvailableCash(AvailableCash);
-            view.SetConfirmEnabled(ownsAllBasics);
+            view.SetConfirmEnabled(true);
         }
 
         private void OnContinue()
         {
-            if (!OwnsAllBasicEquipments())
-            {
-                view.SetHint("Compre todos os equipamentos básicos para continuar.");
-                return;
-            }
-
             PresentationMenuOverlay.Show();
         }
 
