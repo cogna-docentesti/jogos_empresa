@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game Data/Credit Line")]
 public class CreditLineData : ScriptableObject
@@ -6,6 +6,14 @@ public class CreditLineData : ScriptableObject
     [Header("Identificação")]
     public string id;
     public string displayName;
+
+    [TextArea(2, 4)]
+    [Tooltip("Texto explicativo exibido no card da linha de credito.")]
+    public string cardDescription;
+
+    [Header("Visual")]
+    [Tooltip("Icone exibido no card desta linha de credito.")]
+    public Sprite icon;
 
     [Header("Financeiro")]
     public float maxAmount;

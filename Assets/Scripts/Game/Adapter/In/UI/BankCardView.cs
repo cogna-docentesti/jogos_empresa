@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +10,7 @@ namespace Game.Adapter.In.UI
     {
         [Header("Texts")]
         [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI maxAmountText;
         [SerializeField] private TextMeshProUGUI interestRateText;
         [SerializeField] private TextMeshProUGUI termText;
@@ -21,6 +21,10 @@ namespace Game.Adapter.In.UI
         [Header("Visual")]
         [SerializeField] private Image cardBackground;
 
+        [SerializeField] private Color selectedBackgroundColor = new Color32(0xE6, 0xC8, 0x57, 0xFF);
+
+        [SerializeField] private Image creditLineIcon;
+
         [SerializeField] private GameObject selectionBorder;
 
         [Header("Coins")]
@@ -30,7 +34,7 @@ namespace Game.Adapter.In.UI
 
         [SerializeField] private float coinSpacing = 26f;
 
-        [SerializeField, Range(1, 3)]
+        [SerializeField, Min(0)]
         private int defaultCoinCount = 1;
 
         public CreditLineData CreditLine { get; private set; }
@@ -42,11 +46,8 @@ namespace Game.Adapter.In.UI
         private bool isSelected;
         private bool hasOriginalCoinPosition;
         private Vector2 originalCoinAnchoredPosition;
-
-        private static readonly Color CardNormal = HexColor(0x00, 0x68, 0xA4);       // #0068A4
-        private static readonly Color CardSelected = HexColor(0xE6, 0xC8, 0x57);     // verde selecionado
-        private static readonly Color CardHighlighted = HexColor(0xE6, 0xC8, 0x57);  // verde selecionado
-        private static readonly Color CardPressed = HexColor(0x00, 0x3F, 0x70);
+        private float originalCoinAlpha = 1f;
+        private Color normalBackgroundColor = Color.white;
 
         private static readonly Color BorderSelected = HexColor(0x25, 0x63, 0xEB);   // azulzinho
         private static readonly Color BorderNormal = Color.white;
@@ -58,6 +59,9 @@ namespace Game.Adapter.In.UI
 
             if (selectButton == null)
                 selectButton = GetComponent<Button>();
+
+            if (cardBackground != null)
+                normalBackgroundColor = cardBackground.color;
 
             CacheOriginalCoinPosition();
             ConfigureSelectionBorder(false);
@@ -88,8 +92,20 @@ namespace Game.Adapter.In.UI
         {
             CreditLine = creditLine;
 
+            ConfigureCreditLineIcon(creditLine.icon);
+
             if (nameText != null)
                 nameText.text = creditLine.displayName;
+
+            if (descriptionText == null)
+            {
+                Transform descriptionTransform = transform.Find("creditLineDescription");
+                if (descriptionTransform != null)
+                    descriptionText = descriptionTransform.GetComponent<TextMeshProUGUI>();
+            }
+
+            if (descriptionText != null)
+                descriptionText.text = creditLine.cardDescription;
 
             if (maxAmountText != null)
                 maxAmountText.text = FormatCurrency(creditLine.maxAmount);
@@ -119,9 +135,9 @@ namespace Game.Adapter.In.UI
 
         public void SetCoinCount(int count)
         {
-            defaultCoinCount = Mathf.Clamp(count, 1, 3);
+            defaultCoinCount = Mathf.Max(0, count);
 
-            EnsureCoinInstances();
+            EnsureCoinInstances(defaultCoinCount);
             ApplyCoinCount(defaultCoinCount);
         }
 
@@ -130,15 +146,45 @@ namespace Game.Adapter.In.UI
            Selected?.Invoke(this);
        }
 
+        private void ConfigureCreditLineIcon(Sprite icon)
+        {
+            if (creditLineIcon == null)
+            {
+                var existing = transform.Find("CreditLineIcon");
+                if (existing != null)
+                    creditLineIcon = existing.GetComponent<Image>();
+            }
+
+            if (creditLineIcon == null)
+            {
+                var iconObject = new GameObject("CreditLineIcon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                iconObject.transform.SetParent(transform, false);
+                creditLineIcon = iconObject.GetComponent<Image>();
+
+                RectTransform iconRect = creditLineIcon.rectTransform;
+                iconRect.anchorMin = new Vector2(0f, 1f);
+                iconRect.anchorMax = new Vector2(0f, 1f);
+                iconRect.pivot = new Vector2(0f, 1f);
+                iconRect.anchoredPosition = new Vector2(24f, -24f);
+                iconRect.sizeDelta = new Vector2(96f, 96f);
+            }
+
+            creditLineIcon.sprite = icon;
+            creditLineIcon.preserveAspect = true;
+            creditLineIcon.raycastTarget = false;
+            creditLineIcon.gameObject.SetActive(icon != null);
+            creditLineIcon.transform.SetAsLastSibling();
+        }
+
         private void ApplyVisualState()
         {
-            Color baseColor = isSelected ? CardSelected : CardNormal;
+            Color baseColor = isSelected ? selectedBackgroundColor : normalBackgroundColor;
 
             if (cardBackground != null)
                 cardBackground.color = baseColor;
 
             if (selectButton != null)
-                selectButton.colors = BuildButtonColors(baseColor);
+                selectButton.colors = BuildButtonColors();
 
             ConfigureSelectionBorder(isSelected);
             ConfigureOutline(isSelected);
@@ -172,7 +218,7 @@ namespace Game.Adapter.In.UI
             outline.effectDistance = new Vector2(3f, -3f);
         }
 
-        private void EnsureCoinInstances()
+        private void EnsureCoinInstances(int requiredCount)
         {
             if (coinPrefab == null)
                 return;
@@ -185,7 +231,7 @@ namespace Game.Adapter.In.UI
             if (!coinInstances.Contains(coinPrefab))
                 coinInstances.Insert(0, coinPrefab);
 
-            while (coinInstances.Count < 3)
+            while (coinInstances.Count < requiredCount)
             {
                 Image clone = Instantiate(coinPrefab, coinContainer);
                 clone.name = $"CoinIcon_{coinInstances.Count + 1}";
@@ -197,13 +243,15 @@ namespace Game.Adapter.In.UI
 
         private void ApplyCoinCount(int count)
         {
+            int visibleCount = Mathf.Max(0, count);
+            bool representsZeroCoins = visibleCount == 0;
+            int displayedCoinCount = representsZeroCoins ? 1 : visibleCount;
+
             if (coinPrefab == null)
                 return;
 
-            EnsureCoinInstances();
-
-            int visibleCount = Mathf.Clamp(count, 1, 3);
-            float totalWidth = (visibleCount - 1) * coinSpacing;
+            EnsureCoinInstances(displayedCoinCount);
+            float totalWidth = (displayedCoinCount - 1) * coinSpacing;
 
             for (int i = 0; i < coinInstances.Count; i++)
             {
@@ -212,11 +260,15 @@ namespace Game.Adapter.In.UI
                 if (coin == null)
                     continue;
 
-                bool visible = i < visibleCount;
+                bool visible = i < displayedCoinCount;
                 coin.gameObject.SetActive(visible);
 
                 if (!visible)
                     continue;
+
+                Color coinColor = coin.color;
+                coinColor.a = representsZeroCoins ? 0.4f : originalCoinAlpha;
+                coin.color = coinColor;
 
                 RectTransform rt = coin.rectTransform;
 
@@ -233,18 +285,19 @@ namespace Game.Adapter.In.UI
                 return;
 
             originalCoinAnchoredPosition = coinPrefab.rectTransform.anchoredPosition;
+            originalCoinAlpha = coinPrefab.color.a;
             hasOriginalCoinPosition = true;
         }
 
-        private static ColorBlock BuildButtonColors(Color baseColor)
+        private static ColorBlock BuildButtonColors()
         {
             return new ColorBlock
             {
-                normalColor = baseColor,
-                highlightedColor = CardHighlighted,
-                pressedColor = CardPressed,
-                selectedColor = baseColor,
-                disabledColor = GamePalette.Parse(GamePalette.HexDisabledBank, GamePalette.DisabledAlpha),
+                normalColor = Color.white,
+                highlightedColor = new Color(0.92f, 0.92f, 0.92f, 1f),
+                pressedColor = new Color(0.75f, 0.75f, 0.75f, 1f),
+                selectedColor = Color.white,
+                disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.85f),
                 colorMultiplier = 1f,
                 fadeDuration = 0.08f
             };
