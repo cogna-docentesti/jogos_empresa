@@ -13,7 +13,7 @@ namespace Game.Adapter.In.UI
     {
         [Header("Visual")]
         [SerializeField] private Image glowOverlay;
-        [SerializeField] private string colorHex = "#2563EB";
+        [SerializeField] private string colorHex = Theme.GamePalette.HexPrimary;
 
         [Header("Animação")]
         [Range(0f,1f)] [SerializeField] private float hoverAlpha = 0.45f;

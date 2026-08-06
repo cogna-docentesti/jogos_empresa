@@ -1,4 +1,5 @@
 ﻿using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -217,9 +218,8 @@ namespace Game.Adapter.In.UI
 
         private static Color CoherenceColor(float value)
         {
-            if (value >= 0.7f) return new Color(0.086f, 0.639f, 0.29f);
-            if (value >= 0.4f) return new Color(0.851f, 0.604f, 0.043f);
-            return new Color(0.882f, 0.114f, 0.282f);
+            // Mesmas faixas de sempre, agora vindas do GamePalette.
+            return GamePalette.ScoreColor(value);
         }
     }
 }

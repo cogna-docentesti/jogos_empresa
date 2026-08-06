@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -243,7 +244,7 @@ namespace Game.Adapter.In.UI
                 highlightedColor = CardHighlighted,
                 pressedColor = CardPressed,
                 selectedColor = baseColor,
-                disabledColor = new Color(0.35f, 0.35f, 0.35f, 0.85f),
+                disabledColor = GamePalette.Parse(GamePalette.HexDisabledBank, GamePalette.DisabledAlpha),
                 colorMultiplier = 1f,
                 fadeDuration = 0.08f
             };
