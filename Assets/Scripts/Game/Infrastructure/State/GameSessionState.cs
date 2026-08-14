@@ -58,7 +58,20 @@ public static class GameSessionState
 
     public static void LoadActiveSession(string userId)
     {
-        Current = Repository.GetActiveSessionByUserId(userId);
+        var repository = Repository;
+
+        // O getter acima ja avisa no Console quando o banco esta fora, mas
+        // devolve null. Sem esta guarda o null virava NullReferenceException
+        // aqui dentro, subia ate o GameManager.Start() e impedia o
+        // SceneManager.LoadScene("GameScene") de rodar - o jogo travava na
+        // Bootstrap com a tela vazia.
+        if (repository == null)
+        {
+            Current = null;
+            return;
+        }
+
+        Current = repository.GetActiveSessionByUserId(userId);
     }
 
     public static void Save()
@@ -66,7 +79,25 @@ public static class GameSessionState
         if (Current == null)
             return;
 
-        Repository.Update(Current);
+        var repository = Repository;
+
+        // Mesma historia do LoadActiveSession: sem banco, nao ha o que gravar.
+        // A partida segue em memoria.
+        if (repository == null)
+            return;
+
+        // InsertOrReplace, nao Update.
+        //
+        // O Update do SQLite so mexe numa linha que JA existe. Como a sessao
+        // nova nascia direto em CreateNewSession -> Set -> Save, sem nenhum
+        // Insert antes, o Update casava com zero linhas e ia embora em silencio:
+        // o jogo nunca gravou uma sessao sequer, em nenhuma plataforma. Dava
+        // para ver reabrindo o app - voltava sempre em "Nenhuma sessao
+        // encontrada", com o game.db parado no tamanho do schema vazio.
+        //
+        // sessionId e [PrimaryKey], entao InsertOrReplace resolve os dois casos
+        // (primeira gravacao e atualizacoes seguintes) e continua idempotente.
+        repository.InsertOrReplace(Current);
     }
 
     // =============================
