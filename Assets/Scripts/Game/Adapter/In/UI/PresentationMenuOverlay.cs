@@ -103,7 +103,7 @@ namespace Game.Adapter.In.UI
             var openRect = _openButton.GetComponent<RectTransform>();
             openRect.anchorMin = openRect.anchorMax = new Vector2(1f, 1f);
             openRect.pivot = new Vector2(1f, 1f);
-            openRect.anchoredPosition = new Vector2(-28f, -28f);
+            openRect.anchoredPosition = new Vector2(-1980f, -800f);
             openRect.sizeDelta = new Vector2(180f, 64f);
             _openButton.SetActive(false);
         }
