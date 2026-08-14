@@ -21,6 +21,7 @@ namespace Game.Adapter.In.UI
 
         public EquipmentData Equipment { get; private set; }
         public bool IsOwned { get; private set; }
+        public bool IsInCart { get; private set; }
         public event Action<EquipmentCardView> SelectionRequested;
 
         private void OnEnable()
@@ -57,18 +58,28 @@ namespace Game.Adapter.In.UI
             }
 
             SetOwned(owned);
+            SetInCart(false);
         }
 
         public void SetOwned(bool owned)
         {
             IsOwned = owned;
-            if (selectionBorder != null) selectionBorder.SetActive(owned);
+            if (selectionBorder != null) selectionBorder.SetActive(IsInCart);
             if (buyButton != null) buyButton.gameObject.SetActive(!owned);
             if (ownedIndicator != null) ownedIndicator.SetActive(owned);
-            if (buyButtonText != null) buyButtonText.text = "Comprar";
+            if (buyButtonText != null && owned) buyButtonText.text = "Adquirido";
         }
 
-        public void SetPurchaseAvailable(bool available)
+        public void SetInCart(bool inCart)
+        {
+            IsInCart = !IsOwned && inCart;
+            if (selectionBorder != null) selectionBorder.SetActive(IsInCart);
+            if (buyButton != null && !IsOwned) buyButton.interactable = true;
+            if (buyButtonText != null && !IsOwned)
+                buyButtonText.text = IsInCart ? "Remover" : "Adicionar";
+        }
+
+        public void SetCartAvailable(bool available)
         {
             if (buyButton != null && !IsOwned)
                 buyButton.interactable = available;
