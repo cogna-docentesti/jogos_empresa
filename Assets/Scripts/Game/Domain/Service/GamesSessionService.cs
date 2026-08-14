@@ -30,6 +30,20 @@ public class GameSessionService
             professorId = _professorId,
             status = GameSessionStatus.IN_PROGRESS,
             currentRound = 1,
+
+            // Estes dois sao [NotNull] na tabela, mas so recebem valor bem mais
+            // adiante no fluxo: cityId em SetCity e coherenceRating em
+            // SetAlignment. Sem inicializar, o INSERT morria com
+            // "NOT NULL constraint failed: GameSessionEntity.cityId".
+            //
+            // Isso ficou escondido enquanto o Save usava Update: o Update
+            // casava com zero linhas e nunca chegava a tentar escrever.
+            //
+            // String vazia e o "ainda nao definido" honesto - satisfaz a coluna
+            // sem inventar um valor que o jogo depois trataria como real.
+            cityId = string.Empty,
+            coherenceRating = string.Empty,
+
             initialCapital = 150000f,
             currentCash = 150000f,
             loanBalance = 0f,

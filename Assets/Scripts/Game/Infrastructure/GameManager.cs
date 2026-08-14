@@ -30,23 +30,39 @@ public class GameManager : MonoBehaviour
     {
         service = new GameSessionService(UserId, ProfessorId);
 
-        GameSessionState.LoadActiveSession(UserId);
-
-        StateMachine.TryChangeState(GameState.MainMenu);
-
-        if (!GameSessionState.HasSession)
+        // Todo o preparo da sessao vai dentro do try. O LoadScene fica FORA e
+        // depois dele: seja qual for a falha - banco indisponivel, sessao
+        // corrompida, entidade que nao desserializa - o jogador precisa sair da
+        // Bootstrap. Antes, uma excecao aqui abortava o Start() antes da ultima
+        // linha e o app ficava parado numa tela vazia, sem aviso nenhum.
+        try
         {
-            Debug.Log("Nenhuma sessao encontrada, criando nova sessao");
+            GameSessionState.LoadActiveSession(UserId);
 
-            service.CreateNewSession();
+            StateMachine.TryChangeState(GameState.MainMenu);
 
-            StateMachine.TryChangeState(GameState.Config_Location);
+            if (!GameSessionState.HasSession)
+            {
+                Debug.Log("Nenhuma sessao encontrada, criando nova sessao");
+
+                service.CreateNewSession();
+
+                StateMachine.TryChangeState(GameState.Config_Location);
+            }
+            else
+            {
+                Debug.Log("Sessao carregada com sucesso");
+
+                StateMachine.TryChangeState(GameState.Management_Hub);
+            }
         }
-        else
+        catch (System.Exception e)
         {
-            Debug.Log("Sessao carregada com sucesso");
+            Debug.LogError("[GameManager] Falha ao preparar a sessao: " + e.Message + "\n" + e);
 
-            StateMachine.TryChangeState(GameState.Management_Hub);
+            // Sem sessao valida, o unico ponto de entrada coerente e o comeco
+            // da configuracao.
+            StateMachine.TryChangeState(GameState.Config_Location);
         }
 
         SceneManager.LoadScene("GameScene");
