@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366a557c1c6071143b7dcf3feaa48c21, type: 3}
+  m_Name: LocationSkinV2
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.UI.Theme.LocationSkinV2
+  zones:
+  - id: bank
+    accent: {r: 0.23137255, g: 0.50980395, b: 0.9647059, a: 1}
+    accentSoft: {r: 0.5411765, g: 0.7137255, b: 1, a: 1}
+    panelBackground: {fileID: 21300000, guid: 6af12e0c269f6fd4a82cc70cad8ed23e, type: 3}
+    highlightBox: {fileID: 21300000, guid: d1f9f683107477b43bb2e6c9b61235ff, type: 3}
+    panelIcon: {fileID: 21300000, guid: 6e4c0d524a2ec2243b75ac86d1897529, type: 3}
+    pinIdle: {fileID: 21300000, guid: 91dd8b9699a96954c9ddd1a00fa1528a, type: 3}
+    pinActive: {fileID: 21300000, guid: 3b9aa823b5924ad42800fc477db295d5, type: 3}
+    glowIdle: {fileID: 21300000, guid: 2074eef2ab7860c48a0305d8047f4078, type: 3}
+    glowActive: {fileID: 21300000, guid: d97ca68b4ca3aa34db1b2a7817dceec0, type: 3}
+    icon: {fileID: 0}
+  - id: university
+    accent: {r: 0.65882355, g: 0.33333334, b: 0.96862745, a: 1}
+    accentSoft: {r: 0.8039216, g: 0.60784316, b: 1, a: 1}
+    panelBackground: {fileID: 21300000, guid: 450139bacc555e9488e485175a335c56, type: 3}
+    highlightBox: {fileID: 21300000, guid: 504e9a22993039c4ea0a75ec9a7a2890, type: 3}
+    panelIcon: {fileID: 21300000, guid: e1641b4c7f84e2c42a572e62aa05173b, type: 3}
+    pinIdle: {fileID: 21300000, guid: de24b068564086444a73356af0150e47, type: 3}
+    pinActive: {fileID: 21300000, guid: 5f08b4a52447763499fbd3306def11a3, type: 3}
+    glowIdle: {fileID: 21300000, guid: ab257aaea9f41214a8b68b7dd4925770, type: 3}
+    glowActive: {fileID: 21300000, guid: cd5eeb04047750a40bb4178401637b49, type: 3}
+    icon: {fileID: 0}
+  - id: store
+    accent: {r: 0.9372549, g: 0.6039216, b: 0.17254902, a: 1}
+    accentSoft: {r: 1, g: 0.7607843, b: 0.44705883, a: 1}
+    panelBackground: {fileID: 21300000, guid: d6ec45d23d01863428316442c95eb3a7, type: 3}
+    highlightBox: {fileID: 21300000, guid: 03488f80c0e3506499a064d1659ab212, type: 3}
+    panelIcon: {fileID: 21300000, guid: daddf9729a8a03a4db0094a3d392b033, type: 3}
+    pinIdle: {fileID: 21300000, guid: f5beb9063d2ba804da09ebee089005ec, type: 3}
+    pinActive: {fileID: 21300000, guid: f0200288008fea44bacacdf128e2db66, type: 3}
+    glowIdle: {fileID: 21300000, guid: e88f319925da7c944b51f53e90f4c533, type: 3}
+    glowActive: {fileID: 21300000, guid: f6efd19014a70004da19fbd75d21df3d, type: 3}
+    icon: {fileID: 0}
+  - id: condominium
+    accent: {r: 0.13333334, g: 0.77254903, b: 0.36862746, a: 1}
+    accentSoft: {r: 0.49411765, g: 0.9019608, b: 0.6431373, a: 1}
+    panelBackground: {fileID: 21300000, guid: 57baaa3abb5b5674e801e1242cb3117c, type: 3}
+    highlightBox: {fileID: 21300000, guid: f88eeeba1e352b84497f3d87b97c17db, type: 3}
+    panelIcon: {fileID: 21300000, guid: ae723328f84ab7f4da3db5f6ae68c77b, type: 3}
+    pinIdle: {fileID: 21300000, guid: 8ccab07b397911942bd3d8d3a0bac203, type: 3}
+    pinActive: {fileID: 21300000, guid: 9c67e089f05cf1740ad62d7f2f6dae7b, type: 3}
+    glowIdle: {fileID: 21300000, guid: c9d250bf7123da4458f366c7ff1a9bd8, type: 3}
+    glowActive: {fileID: 21300000, guid: c9fe3eb4f96db0149853f620d3162a63, type: 3}
+    icon: {fileID: 0}
+  - id: marketing
+    accent: {r: 0.13333334, g: 0.827451, b: 0.93333334, a: 1}
+    accentSoft: {r: 0.5254902, g: 0.9137255, b: 0.972549, a: 1}
+    panelBackground: {fileID: 21300000, guid: e5901a48969f48341ab4881744b1569c, type: 3}
+    highlightBox: {fileID: 21300000, guid: 902bb2ac44da4bd49bb886cdf2543f82, type: 3}
+    panelIcon: {fileID: 21300000, guid: e45e5cf7f83d0c547b641a9bbc573c17, type: 3}
+    pinIdle: {fileID: 21300000, guid: 86ac34fe92053854697ff0dd09b541e9, type: 3}
+    pinActive: {fileID: 21300000, guid: 26272aaad13e77442be72ce962293671, type: 3}
+    glowIdle: {fileID: 21300000, guid: 4b85e7a1b3fe9e442853fc089304c2c8, type: 3}
+    glowActive: {fileID: 21300000, guid: 73c7322878e469d45a6919be17178b49, type: 3}
+    icon: {fileID: 0}
+  panelBackgroundNeutral: {fileID: 21300000, guid: c1a65e24a3ecf8f4185efa7992a3ec8a, type: 3}
+  statRowBackground: {fileID: 21300000, guid: 67628c73391bb684b9eb3404a21ceea6, type: 3}
+  statTileInvestment: {fileID: 21300000, guid: 4a5afe7a931357243afcc4f0d698ef56, type: 3}
+  statTileTraffic: {fileID: 21300000, guid: a491ceaae166ee94e9b195bd5cd02a14, type: 3}
+  statTileCompetition: {fileID: 21300000, guid: 354cd3baf7f963b449a1d0de1bd1bd02, type: 3}
+  starIcon: {fileID: 21300000, guid: 614047ba570c5a240969ff7bafd5dedd, type: 3}
+  continueNormal: {fileID: 21300000, guid: 2e1a07c0da3d9324f89217cfcc7a8ca0, type: 3}
+  continueHover: {fileID: 21300000, guid: b091fbe86e94e08498c026d0782f642f, type: 3}
+  continuePressed: {fileID: 21300000, guid: 7b6ebca4647cd5d4cb36ec328366f541, type: 3}
+  menuNormal: {fileID: 21300000, guid: 1a38bed0c6786e247b8810b42546ce7f, type: 3}
+  menuHover: {fileID: 21300000, guid: 58f6d4d2febaedd429b1d9cfdcc863d9, type: 3}
+  menuDropdown: {fileID: 21300000, guid: cb5ef65ea709da34aa0120310c7a7f06, type: 3}
+  menuItemHover: {fileID: 21300000, guid: 704b38a7b1db94040ad05ea688112a7a, type: 3}
+  brandBadge: {fileID: 21300000, guid: afe846ac6b58bc34d8e0342ab031fe8e, type: 3}
+  ornamentLeft: {fileID: 21300000, guid: 65183cb6221d7f24d997893f22b2a939, type: 3}
+  ornamentRight: {fileID: 21300000, guid: f32972a5fe4507049b9fe4168a94cd1d, type: 3}
+  topbarBackground: {fileID: 21300000, guid: f81431a2846a1834ebbb01f03b0699b9, type: 3}
+  mapBase: {fileID: 21300000, guid: ad105301ccfd6f843807b99b75d5ca25, type: 3}
+  mapVignette: {fileID: 21300000, guid: 1c7f41b7071d5144c8be29014e360d25, type: 3}
+  labelPill: {fileID: 21300000, guid: 6d5337d528c4d61498515ff989596be4, type: 3}
+  toastBackground: {fileID: 21300000, guid: 862f220ade0cb29409006eed82593db1, type: 3}
+  panelTitleColor: {r: 0.91, g: 0.714, b: 0.298, a: 1}
+  valueGood: {r: 0.29, g: 0.871, b: 0.502, a: 1}
+  valueWarn: {r: 0.941, g: 0.749, b: 0.31, a: 1}
+  valueBad: {r: 0.973, g: 0.443, b: 0.443, a: 1}

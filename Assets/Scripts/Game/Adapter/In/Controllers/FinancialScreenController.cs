@@ -59,7 +59,8 @@ namespace Game.Adapter.In.Controllers
             var creditLines = Resources
                 .LoadAll<CreditLineData>("CreditLines")
                 .Where(line => line != null)
-                .OrderBy(line => line.maxAmount)
+                .OrderBy(line => line.maxAmount <= 0f ? 1 : 0)
+                .ThenBy(line => line.maxAmount)
                 .ToArray();
 
             if (creditLines.Length == 0)
@@ -72,7 +73,7 @@ namespace Game.Adapter.In.Controllers
            {
                var card = view.CreateBankCard();
 
-               int coinCount = GetCoinCountByRisk(creditLine, creditLines);
+               int coinCount = GetCoinCountByCreditLimit(creditLine, creditLines);
 
                card.Setup(creditLine, coinCount);
                card.Selected += OnCardSelected;
@@ -106,7 +107,14 @@ namespace Game.Adapter.In.Controllers
             if (_selectedCreditLine == null || !GameSessionState.HasSession)
                 return;
 
-            GameSessionState.SetLoan(_selectedCreditLine.id, GameSessionState.Current.loanBalance);
+            float loanBalance = _selectedCreditLine.maxAmount <= 0f
+                ? 0f
+                : GameSessionState.Current.loanBalance;
+
+            GameSessionState.SetLoan(_selectedCreditLine.id, loanBalance);
+
+            if (GameManager.Instance != null)
+                GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);
         }
 
         private void OnBack()
@@ -131,58 +139,30 @@ namespace Game.Adapter.In.Controllers
         }
 
 
-        private static int GetCoinCountByRisk(
+        private static int GetCoinCountByCreditLimit(
             CreditLineData currentCreditLine,
             IReadOnlyList<CreditLineData> allCreditLines
         )
         {
             if (currentCreditLine == null || allCreditLines == null || allCreditLines.Count == 0)
-                return 1;
+                return 0;
 
-            var orderedRates = allCreditLines
+            if (currentCreditLine.maxAmount <= 0f)
+                return 0;
+
+            var orderedCreditLimits = allCreditLines
                 .Where(line => line != null)
-                .Select(line => line.monthlyInterestRate)
+                .Select(line => line.maxAmount)
+                .Where(maxAmount => maxAmount > 0f)
                 .Distinct()
-                .OrderBy(rate => rate)
+                .OrderBy(maxAmount => maxAmount)
                 .ToList();
 
-            if (orderedRates.Count == 0)
-                return 1;
-
-            if (orderedRates.Count == 1)
-                return 1;
-
-            float currentRate = currentCreditLine.monthlyInterestRate;
-
-            int rateIndex = orderedRates.FindIndex(rate =>
-                Mathf.Approximately(rate, currentRate)
+            int limitIndex = orderedCreditLimits.FindIndex(maxAmount =>
+                Mathf.Approximately(maxAmount, currentCreditLine.maxAmount)
             );
 
-            if (rateIndex < 0)
-                rateIndex = orderedRates.Count(rate => rate < currentRate);
-
-            if (orderedRates.Count == 2)
-            {
-                return rateIndex == 0 ? 1 : 3;
-            }
-
-            if (orderedRates.Count == 3)
-            {
-                return rateIndex switch
-                {
-                    0 => 1, // menor risco
-                    1 => 2, // risco médio
-                    _ => 3  // maior risco
-                };
-            }
-
-            float normalizedPosition = rateIndex / (float)(orderedRates.Count - 1);
-
-            return Mathf.Clamp(
-                Mathf.RoundToInt(Mathf.Lerp(1f, 3f, normalizedPosition)),
-                1,
-                3
-            );
+            return limitIndex >= 0 ? limitIndex + 1 : 0;
         }
     }
 }
