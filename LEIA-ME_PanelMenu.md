@@ -1,5 +1,211 @@
 # Panel Menu — o que foi feito e como rodar
 
+## 0-J. Tela "Abertura do Restaurante" (Panel_Location_V2)
+
+**Rode:** `Tools > Jogo > Localizacao V2 > 1 - Construir tela` → depois o **3** para ver só ela → `Ctrl+S`.
+
+Constrói um painel **novo**, ao lado do `Panel_Location` atual, que fica intacto. Dá para alternar e comparar antes de decidir qual fica.
+
+### Seja honesto sobre o "exatamente"
+
+Um script alcança estrutura, layout, tipografia, cores e fiação. **Não alcança arte.** Duas coisas do mockup são ilustração, não código:
+
+1. **O contorno luminoso que traça o formato de cada quarteirão.** Você escolheu aproximar com os `glow_my-*.png` que já existem — eles são manchas suaves, não contornos traçados. Fica no espírito, não idêntico. Para ficar igual, é substituir a sprite do filho `Glow` de cada marcador por um contorno traçado sobre o mapa.
+2. **O mapa em si.** Estamos usando o `background-map.png` do projeto, então as posições dos 5 marcadores foram ancoradas por cima dele — não pela arte do mockup.
+
+O gradiente do botão CONTINUAR é aproximado com duas camadas (base `#D9A63C` + faixa clara `#F2C75C` a 85% na metade de cima), o que dá o degradê mantendo os cantos arredondados corretos.
+
+### Paleta: voltou para navy + dourado
+
+O mockup é navy + dourado, e você confirmou que ele manda. O roxo Cogna saiu.
+
+| Papel | Cor |
+|---|---|
+| Fundo | `#080D1A` |
+| Barra / rodapé | `#0B1224` |
+| Painel / card | `#0E1526` |
+| Chip / indicador | `#131C33` |
+| Hairline | `#1E2B4A` |
+| **Dourado (ação)** | **`#F2C75C`** |
+| Dourado profundo | `#D9A63C` |
+| Texto | `#FFFFFF` |
+| Apoio | `#97A3B8` |
+
+**Zonas:** Financeira `#2F80F5` · Educacional `#A855F7` · Comercial `#F0912E` · Residencial `#4ADE80` · Corporativa `#22D3EE`
+
+O dourado é usado com parcimônia — só onde o jogador deve agir. É isso que o transforma em guia do olho.
+
+### Campos novos no LocationData
+
+A tela pede dois textos que não existiam. Foram adicionados com fallback, então **nada quebra se ficarem vazios**:
+
+- `subtitle` — a linha sob o nome ("Instituição financeira"). Vazio: cai no rótulo do segmento.
+- `highlight` — a caixa com estrela ("Maior circulação em dias úteis"). Vazio: a caixa não aparece.
+
+Os três indicadores são **derivados do que já existia**, sem campo novo:
+
+| Indicador | Vem de |
+|---|---|
+| Investimento | `rent` (≥10000 Alto, ≥6000 Médio) |
+| Movimento | `baseDailyDemand` (≥90 Alto, ≥55 Médio) |
+| Concorrência | `competitionLevel` direto |
+
+A cor do valor sabe o que é bom: **Movimento Alto fica verde, Concorrência Alta fica dourada** — alto nem sempre é bom, e a tela reflete isso.
+
+### Arquivos
+
+| Arquivo | Papel |
+|---|---|
+| `Adapter/In/UI/LocationMarkerV2.cs` | Marcador do mapa. Glow com estado próprio — pulsa em repouso, trava quando selecionado. **Não depende de hover**, então funciona no Android. |
+| `Adapter/In/UI/LocationScreenV2View.cs` | Camada burra. Só escreve na UI. |
+| `Adapter/In/Controllers/LocationScreenV2Controller.cs` | Carrega os `LocationData`, trata seleção e, no CONTINUAR, grava `GameSessionState.SetLocation` e avança para `Config_Restaurant` — igual ao controller original. |
+| `Editor/UI/LocationScreenV2Builder.cs` | Monta a tela. |
+
+> O `LocationScreenController` original **não foi tocado**. Os dois convivem.
+
+> **Nota:** o mockup diz "ETAPA 1 DE 4", mas o fluxo tem 6 decisões (D1–D6). Deixei configurável no Inspector (`stepIndex` / `stepTotal`) — ajuste para 6 se for o caso.
+
+---
+
+## 0-I. Repintor das telas antigas
+
+`Assets/Editor/UI/LegacyScreenRestyler.cs`
+
+**Não é um builder, e isso é de propósito.** `Panel_Location`, `Panel_Restaurant`, `Panel_MenuPricing` e `Panel_Financial` foram montadas à mão, têm centenas de objetos e funcionam. Reconstruí-las por código seria destruir trabalho que já está certo para depois tentar reproduzi-lo — risco alto, ganho zero.
+
+O repintor **não cria, não apaga e não move nada**. Percorre a hierarquia existente e troca só a cor.
+
+### Três regras de segurança
+
+1. **Lista branca.** Cor que não está na tabela não é tocada. Isso protege sombras de texto (`#000000`), sprites tintados de branco e qualquer cor autoral sua.
+2. **O alpha original é sempre preservado.** Vários painéis usam a mesma cor com transparências diferentes — `Panel_Financial` tem `#071630` a 39%, por exemplo.
+3. **Os painéis do builder ficam de fora.** `Panel_Menu`, `Panel_Establishment`, `Panel_Team`, `Panel_EquipmentStore` e `MenuAccess` são repintados pelo `MenuPanelBuilder`. Deixar as duas ferramentas mexerem no mesmo objeto geraria resultado dependente da ordem de execução.
+
+### O que vai acontecer (simulado contra a cena real)
+
+**38 trocas** nas 5 telas, e **82 cores ficam intactas**:
+
+| Cor atual | Ocorrências | Vira |
+|---|---|---|
+| `#7A9CC0` | 6 | texto secundário → `#B9AFC7` |
+| `#0D1B2A` | 5 | fundo → `#150A20` |
+| `#13557B` | 4 | header → **`#5F1890`** |
+| `#2E7D5B` | 4 | confirmar → `#2E8B63` |
+| `#F0F6FF` | 4 | texto → `#FFFFFF` |
+| `#0D1B2D` | 3 | fundo → `#150A20` |
+| `#0D1525` | 3 | rodapé → `#1B0D2A` |
+| `#4A90D9` | 2 | azul de apoio → `#4C6FE7` |
+| `#1E3A5F` | 2 | borda → `#43265E` |
+| outros 5 tons | 1 cada | — |
+
+Intactas, corretamente: `#FFFFFF` ×64 (tints de sprite e texto branco) e `#000000` ×4 (as sombras de texto).
+
+### Como usar
+
+| Menu | O que faz |
+|---|---|
+| **Telas antigas > 1 - Simular repintura** | Lista no Console cada troca com caminho completo do objeto e `de -> para`. **Não altera nada.** |
+| **Telas antigas > 2 - Repintar com a paleta roxa** | Aplica. `Ctrl+Z` desfaz. |
+| **Telas antigas > 3 - Simular aumento de fonte** | Lista o que mudaria de tamanho. |
+| **Telas antigas > 4 - Aumentar fonte em +25%** | Aplica, com aviso antes. |
+
+Rode sempre o **1** primeiro e leia a lista.
+
+> **Sobre as fontes:** essas telas têm 55 textos, variando de **14 a 70**. As caixas foram dimensionadas à mão para o tamanho atual, então aumentar 25% pode fazer algo estourar ou quebrar linha onde antes cabia. Por isso é um passo separado, com simulação própria. E fica o alerta: **um texto de 14 é pequeno demais para celular** mesmo depois do +25% (vira 18) — esses merecem atenção manual.
+
+---
+
+## 0-H. Paleta roxo Cogna
+
+Tudo deriva de `GamePalette.HexBrand = "#5F1890"`. As superfícies são o próprio roxo descendo em luminosidade, na **mesma matiz (~276°)** — por isso o fundo nunca briga com a marca.
+
+| Papel | Cor |
+|---|---|
+| Marca / primária | **#5F1890** |
+| Hover / pressed | #7A26B3 / #4A1170 |
+| Fundo | #150A20 |
+| Barra e header | #24103A |
+| Card | #2E1547 |
+| Trilho / chip | #251139 |
+| Hairline / borda forte | #43265E / #6B448C |
+| Texto | #FFFFFF |
+| Secundário | #B9AFC7 |
+| Cinza neutro | #8E8A99 |
+| Caixa / positivo | #3DD68C |
+| Atenção | #F5A623 |
+| Negativo | #EF5350 |
+| **Score** | **#F2C230 (dourado)** |
+
+**Nodes do mapa** — o roxo puro fica reservado ao Meu Estabelecimento; se todos fossem roxo o mapa viraria um bloco só:
+
+| Node | Cor |
+|---|---|
+| Meu Estabelecimento | **#5F1890** (marca) |
+| Banco | #4C6FE7 |
+| Loja de Equipamentos | #C9761B |
+| RH | #A345C4 |
+| Cardápio | #1F8F86 |
+
+Três decisões que valem explicação:
+
+1. **O Score virou dourado.** Era roxo — mas agora o roxo é a marca, e um número roxo sumiria no meio do chrome.
+2. **Verde, âmbar e vermelho continuam existindo.** São dado, não decoração: num jogo de dinheiro, resultado negativo precisa ler como negativo.
+3. **O véu do mapa virou roxo escuro** (#150A20 a 45%), mantendo a lógica de escurecer e não lavar.
+
+> **Limite importante:** estes tokens só alcançam o que é pintado **por código**. As cores gravadas direto nos objetos da cena — o azul `#13557B` dos headers de `Panel_Financial`, `Panel_MenuPricing` e `Panel_Restaurant` — continuam azuis até serem repintadas na Unity. O builder não constrói essas telas, então não tem como migrá-las. Se quiser, eu escrevo um builder para elas também.
+
+---
+
+## 0-G. Merge da branch: pacotes, Android e fonte
+
+### Pacotes inválidos
+
+`com.unity.modules.adaptiveperformance` e `com.unity.modules.vectorgraphics` **não existem** como módulos embutidos da Unity. Os nomes reais das versões em pacote são `com.unity.adaptiveperformance` e `com.unity.vectorgraphics` — sem o `.modules.`. Vieram no merge e travavam a resolução inteira.
+
+Removidos do `Packages/manifest.json` **e** do `Packages/packages-lock.json` (o lock guardava as entradas órfãs e mantinha o erro vivo mesmo depois de limpar o manifest).
+
+### Android: glow que nunca acendia
+
+`MapMenuNode` acendia o brilho **só** em `OnPointerEnter` e apagava em `OnPointerExit` — ou seja, dependia inteiramente de **hover**. No Editor funciona porque existe mouse. No celular não existe hover: o dedo entra e sai no mesmo toque. O glow nunca aparecia.
+
+Agora o brilho tem três estados, e o de repouso é o que resolve o mobile:
+
+- **Repouso** — pulsa devagar o tempo todo (`idleAlphaMin` 0.14 → `idleAlphaMax` 0.30, ciclo de 2,6s). O jogador enxerga que aquilo é clicável sem precisar encostar.
+- **Destaque** — `OnPointerEnter`/`Exit` para o desktop, **e** `OnPointerDown`/`Up` para o toque.
+- **Travado** — propriedade `IsSelected`, para marcar o node escolhido.
+
+Usa `Time.unscaledTime`, então a pulsação continua mesmo com o jogo pausado.
+
+`LocationAreaComponent` já tinha estado `_isSelected` com `glowAlphaSelected` — nele só o hover é inerte no celular, o que é esperado. Não mexi.
+
+### Android: toque que não respondia
+
+Mesma causa da seção 0-D: os `Card` estavam sem raycast target. O `HitArea` já está aplicado nos 5 nodes na cena. **Só rebuildar o APK.**
+
+Descartei as outras hipóteses verificando: o mapa UI do `InputSystem_Actions` tem bindings de `Touchscreen` para `Point` e `Click`; o `EventSystem` usa `InputSystemUIInputModule` com o actions asset ligado; não há `InputSettings` restringindo `supportedDevices`; e os 4 Canvas extras da cena são aninhados, então herdam a escala do root.
+
+### Fonte +25%
+
+Toda a escala de `GameTypography` subiu 25%, mantendo a proporção entre os níveis:
+
+| | Antes | Agora |
+|---|---|---|
+| Título de tela | 70 | **88** |
+| Hint do cabeçalho | 32 | **40** |
+| Título de seção | 42 | **52** |
+| Valor de destaque | 50 | **62** |
+| Corpo / botão | 30 | **38** |
+| Secundário / Voltar | 28 | **35** |
+| Barra do menu | 32 / 28 | **40 / 35** |
+| Pill | 23 / 27 | **29 / 34** |
+| Node | 28 / 21 | **35 / 26** |
+
+As caixas que seguram esses textos cresceram junto — header 170→208, faixa de KPI 236→280, pills 300×64→350×78 — senão o texto estouraria o retângulo.
+
+> Os nodes que você ajustou na mão **não** vão mudar sozinhos: o builder está em modo preservação. Para aplicar a fonte nova neles, rode `Tools > Jogo > 4`.
+
+---
+
 ## 0-D. O bug dos nodes que não clicam
 
 **Causa:** ao reestilizar os nodes na mão, o `Image` do `Card` foi apagado. O `Card` ficou com `Button` + `MapMenuNode` + `PanelNavButton` e **nenhum `Graphic` com `raycastTarget`** — nem nele, nem em nenhum filho (todos ficaram em `raycast=0`).

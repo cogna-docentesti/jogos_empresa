@@ -16,6 +16,10 @@ namespace Game.Adapter.In.UI
         [SerializeField] private float cardsSpacing = 16f;
         [SerializeField] private float scrollViewportHeight = 520f;
 
+        [Tooltip("Largura usada so quando o container da cena e o pai dele estao " +
+                 "com largura invalida (<= 1). Ver ApplySaneSize.")]
+        [SerializeField] private float fallbackViewportWidth = 900f;
+
         [Header("Actions")]
         [SerializeField] private Button confirmButton;
         [SerializeField] private Button backButton;
@@ -132,12 +136,16 @@ namespace Game.Adapter.In.UI
 
             RectTransform scrollTransform = scrollObject.GetComponent<RectTransform>();
             CopyRectTransform(original, scrollTransform);
-            scrollTransform.sizeDelta = new Vector2(
-                scrollTransform.sizeDelta.x,
-                Mathf.Max(scrollTransform.sizeDelta.y, scrollViewportHeight)
-            );
+            ApplySaneSize(original, scrollTransform);
             scrollObject.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.001f);
 
+            // RectMask2D e o que faz o card SUMIR ao sair da area visivel.
+            // O ScrollRect so move o conteudo; sem a mascara os cards rolam
+            // para cima e continuam desenhados por cima do resto da tela.
+            //
+            // Ela foi removida um tempo porque "escondia tudo" - mas a culpa
+            // era do rect de largura negativa vindo da cena, tratado agora em
+            // ApplySaneSize. Com o rect valido, a mascara recorta certo.
             var viewportObject = new GameObject("Viewport", typeof(RectTransform),
                 typeof(CanvasRenderer), typeof(Image), typeof(RectMask2D));
             viewportObject.layer = original.gameObject.layer;
@@ -231,7 +239,11 @@ namespace Game.Adapter.In.UI
             scrollbarRect.anchorMin = new Vector2(1f, 0f);
             scrollbarRect.anchorMax = new Vector2(1f, 1f);
             scrollbarRect.pivot = new Vector2(1f, 0.5f);
-            scrollbarRect.anchoredPosition = new Vector2(-4f, 0f);
+
+            // Era 1880 aqui: empurrava a barra para fora para "aparecer" apesar
+            // do rect invertido do container. Com o rect corrigido em
+            // ApplySaneSize, a barra encosta na borda direita normalmente.
+            scrollbarRect.anchoredPosition = Vector2.zero;
             scrollbarRect.sizeDelta = new Vector2(18f, -8f);
 
             Image track = scrollbarObject.GetComponent<Image>();
@@ -259,6 +271,65 @@ namespace Game.Adapter.In.UI
             scrollbar.direction = Scrollbar.Direction.BottomToTop;
             return scrollbar;
         }
+        /// <summary>
+        /// Garante que a ScrollView nasca com um rect VALIDO.
+        ///
+        /// Por que isto e necessario: o container montado na cena esta com
+        /// ancoras de canto (min == max) e sizeDelta.x negativo (-1881,5) -
+        /// residuo de quando as ancoras eram stretch, onde esse numero
+        /// significava "recuar 940 de cada lado". Com ancora de canto, o
+        /// sizeDelta E o tamanho, entao a largura fica negativa.
+        ///
+        /// Copiar isso para a ScrollView faz o Viewport herdar largura
+        /// negativa. O RectMask2D monta o retangulo de corte pelos cantos e,
+        /// invertido, ele nao cobre nada - o conteudo some por inteiro.
+        /// (Sem a mascara aparece, porque ai nada recorta.)
+        ///
+        /// Regra: largura invalida cai para a largura do pai; altura invalida
+        /// cai para scrollViewportHeight.
+        /// </summary>
+        private void ApplySaneSize(RectTransform source, RectTransform target)
+        {
+            Rect sourceRect = source.rect;
+
+            float width  = sourceRect.width;
+            float height = Mathf.Max(sourceRect.height, scrollViewportHeight);
+
+            if (width <= 1f)
+            {
+                float parentWidth = source.parent is RectTransform parentRect
+                    ? parentRect.rect.width
+                    : 0f;
+
+                Debug.LogWarning(
+                    $"[FinancialScreenView] '{source.name}' esta com largura {width:0.#} " +
+                    $"(sizeDelta {source.sizeDelta}, ancoras {source.anchorMin}/{source.anchorMax}). " +
+                    "Usando a largura do pai. Vale corrigir o rect na cena: com ancora de canto, " +
+                    "o sizeDelta e o tamanho e nao pode ser negativo.");
+
+                width = parentWidth > 1f ? parentWidth : fallbackViewportWidth;
+            }
+
+            SetSize(target, new Vector2(width, height));
+        }
+
+        /// <summary>
+        /// Define o tamanho final do rect respeitando as ancoras que ele tem.
+        /// Com ancora esticada, sizeDelta e offset do pai - por isso a subtracao.
+        /// </summary>
+        private static void SetSize(RectTransform rect, Vector2 size)
+        {
+            Vector2 parentSize = rect.parent is RectTransform parentRect
+                ? parentRect.rect.size
+                : Vector2.zero;
+
+            Vector2 anchorSpan = rect.anchorMax - rect.anchorMin;
+
+            rect.sizeDelta = new Vector2(
+                size.x - anchorSpan.x * parentSize.x,
+                size.y - anchorSpan.y * parentSize.y);
+        }
+
         private static void CopyRectTransform(RectTransform source, RectTransform target)
         {
             target.anchorMin = source.anchorMin;

@@ -49,9 +49,6 @@ namespace Game.Adapter.In.UI
         private float originalCoinAlpha = 1f;
         private Color normalBackgroundColor = Color.white;
 
-        private static readonly Color BorderSelected = HexColor(0x25, 0x63, 0xEB);   // azulzinho
-        private static readonly Color BorderNormal = Color.white;
-
         private void Awake()
         {
             if (cardBackground == null)
@@ -176,18 +173,21 @@ namespace Game.Adapter.In.UI
             creditLineIcon.transform.SetAsLastSibling();
         }
 
+        /// <summary>
+        /// Escolhido nao e estado nativo do Button, entao continua no codigo -
+        /// mas so troca entre DUAS cores que vem do Inspector (a de selecao no
+        /// campo serializado, a normal lida do proprio Image no Awake) e liga o
+        /// objeto de borda que ja existe na hierarquia.
+        ///
+        /// Saiu daqui: o ColorBlock montado em codigo (sobrescrevia o do
+        /// Inspector) e o Outline criado em runtime com cor fixa.
+        /// </summary>
         private void ApplyVisualState()
         {
-            Color baseColor = isSelected ? selectedBackgroundColor : normalBackgroundColor;
-
             if (cardBackground != null)
-                cardBackground.color = baseColor;
-
-            if (selectButton != null)
-                selectButton.colors = BuildButtonColors();
+                cardBackground.color = isSelected ? selectedBackgroundColor : normalBackgroundColor;
 
             ConfigureSelectionBorder(isSelected);
-            ConfigureOutline(isSelected);
         }
 
         private void ConfigureSelectionBorder(bool visible)
@@ -196,26 +196,6 @@ namespace Game.Adapter.In.UI
                 return;
 
             selectionBorder.SetActive(visible);
-
-            var borderImage = selectionBorder.GetComponent<Image>();
-
-            if (borderImage != null)
-            {
-                borderImage.color = BorderSelected;
-                borderImage.raycastTarget = false;
-            }
-        }
-
-        private void ConfigureOutline(bool visible)
-        {
-            var outline = GetComponent<Outline>();
-
-            if (outline == null)
-                outline = gameObject.AddComponent<Outline>();
-
-            outline.enabled = visible;
-            outline.effectColor = visible ? BorderSelected : BorderNormal;
-            outline.effectDistance = new Vector2(3f, -3f);
         }
 
         private void EnsureCoinInstances(int requiredCount)
@@ -289,20 +269,6 @@ namespace Game.Adapter.In.UI
             hasOriginalCoinPosition = true;
         }
 
-        private static ColorBlock BuildButtonColors()
-        {
-            return new ColorBlock
-            {
-                normalColor = Color.white,
-                highlightedColor = new Color(0.92f, 0.92f, 0.92f, 1f),
-                pressedColor = new Color(0.75f, 0.75f, 0.75f, 1f),
-                selectedColor = Color.white,
-                disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.85f),
-                colorMultiplier = 1f,
-                fadeDuration = 0.08f
-            };
-        }
-
         private static string FormatCurrency(float value)
         {
             return $"R$ {value:0,0.00}";
@@ -311,11 +277,6 @@ namespace Game.Adapter.In.UI
         private static string FormatInterestRate(float value)
         {
             return $"{value * 100f:0.##}% ao mes";
-        }
-
-        private static Color HexColor(byte r, byte g, byte b, byte a = 255)
-        {
-            return new Color32(r, g, b, a);
         }
     }
 }

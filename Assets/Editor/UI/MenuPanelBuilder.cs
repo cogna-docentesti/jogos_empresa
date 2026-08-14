@@ -373,7 +373,7 @@ namespace Game.EditorTools
         {
             var topBar = UiFactory.EnsureChild(mapLayer, "TopBar");
             topBar.SetAsFirstSibling();
-            UiFactory.TopBand(topBar, 112f);
+            UiFactory.TopBand(topBar, 136f);
             UiFactory.Solid(topBar, GamePalette.Chrome, raycast: true);
 
             var hairline = UiFactory.EnsureChild(topBar, "Hairline");
@@ -396,7 +396,7 @@ namespace Game.EditorTools
 
             // ---- marca a esquerda ----
             var mark = UiFactory.EnsureChild(safeRow, "Mark");
-            UiFactory.AnchorCorner(mark, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 52, 52, 28, 0);
+            UiFactory.AnchorCorner(mark, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 64, 64, 32, 0);
             UiFactory.Panel(mark, GamePalette.Primary, GamePalette.PpuButton, raycast: false);
 
             var markIcon = UiFactory.EnsureChild(mark, "Icon");
@@ -404,23 +404,23 @@ namespace Game.EditorTools
             UiFactory.Picture(markIcon, UiFactory.Icon("Map"), GamePalette.OnPrimary);
 
             var title = UiFactory.EnsureChild(safeRow, "MenuTitle");
-            UiFactory.AnchorCorner(title, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 520, 40, 100, 14);
+            UiFactory.AnchorCorner(title, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 620, 50, 116, 18);
             UiFactory.Text(title, "Menu do Jogo", GameTypography.MapBarTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
 
             var subtitle = UiFactory.EnsureChild(safeRow, "MenuSubtitle");
-            UiFactory.AnchorCorner(subtitle, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 520, 30, 100, -18);
+            UiFactory.AnchorCorner(subtitle, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 620, 42, 116, -24);
             UiFactory.Text(subtitle, "Areas revisitaveis do seu negocio", GameTypography.MapBarSubtitle, FontStyles.Normal,
                            GamePalette.InkCaption, TextAlignmentOptions.MidlineLeft);
 
             // ---- pills a direita ----
             BuildPill(safeRow, "CashPill", "Caixa", "R$ 0", GamePalette.HexMoney, "Money",
-                      -28f, "CashP", out var cashValue);
+                      -32f, "CashP", out var cashValue);
 
             BuildPill(safeRow, "ScorePill", "Score", "0", GamePalette.HexXp, "Star",
-                      -344f, "ScoreP", out var scoreValue);
+                      -398f, "ScoreP", out var scoreValue);
 
             BuildPill(safeRow, "RoundPill", "", "Rodada 1", GamePalette.HexInkBody, "Calendar",
-                      -660f, "RoundP", out var roundValue);
+                      -764f, "RoundP", out var roundValue);
 
             var hud = UiFactory.Ensure<MenuHudView>(topBar.gameObject);
             UiFactory.SetPrivate(hud, "scoreValue", scoreValue);
@@ -433,7 +433,7 @@ namespace Game.EditorTools
                                                out TextMeshProUGUI valueLabel)
         {
             var pill = UiFactory.EnsureChildByPrefix(parent, name, legacyPrefix);
-            UiFactory.AnchorCorner(pill, new Vector2(1, 0.5f), new Vector2(1, 0.5f), 300, 64, x, 0);
+            UiFactory.AnchorCorner(pill, new Vector2(1, 0.5f), new Vector2(1, 0.5f), 350, 78, x, 0);
             UiFactory.Panel(pill, GamePalette.Surface, GamePalette.PpuPill, raycast: false);
 
             var border = UiFactory.EnsureChild(pill, "Border");
@@ -442,16 +442,16 @@ namespace Game.EditorTools
             borderImage.fillCenter = false;
 
             var icon = UiFactory.EnsureChild(pill, "Icon");
-            UiFactory.AnchorCorner(icon, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 30, 30, 22, 0);
+            UiFactory.AnchorCorner(icon, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 36, 36, 26, 0);
             UiFactory.Picture(icon, UiFactory.Icon(iconName), GamePalette.Parse(accentHex));
 
             var captionLabel = UiFactory.EnsureChild(pill, "Caption");
-            UiFactory.AnchorCorner(captionLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 120, 32, 62, 0);
+            UiFactory.AnchorCorner(captionLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 150, 40, 72, 0);
             UiFactory.Text(captionLabel, caption, GameTypography.PillCaption, FontStyles.Normal, GamePalette.InkBody,
                            TextAlignmentOptions.MidlineLeft);
 
             var valueRt = UiFactory.EnsureChild(pill, "Value");
-            UiFactory.AnchorCorner(valueRt, new Vector2(1, 0.5f), new Vector2(1, 0.5f), 200, 34, -22, 0);
+            UiFactory.AnchorCorner(valueRt, new Vector2(1, 0.5f), new Vector2(1, 0.5f), 240, 42, -26, 0);
             valueLabel = UiFactory.Text(valueRt, value, GameTypography.PillValue, FontStyles.Bold, GamePalette.Parse(accentHex),
                                         TextAlignmentOptions.MidlineRight);
 
@@ -530,10 +530,10 @@ namespace Game.EditorTools
         // =====================================================
 
         // Medidas do layout mobile. Concentradas aqui para ajuste rapido.
-        private const float HeaderHeight  = 170f;  // mesma altura do header do Panel_Financial
+        private const float HeaderHeight  = 208f;  // mesma altura do header do Panel_Financial
         private const float FrameMaxWidth = 1800f; // trava a largura no landscape ultrawide
         private const float FrameMargin   = 56f;
-        private const float KpiHeight     = 236f;
+        private const float KpiHeight     = 280f;
         private const float GridGap       = 22f;
         private const int   ChipColumns   = 4;
 
@@ -588,7 +588,7 @@ namespace Game.EditorTools
             BuildCardTitle(summaryCard, "Resumo da empresa", "List", GamePalette.HexPrimary, GamePalette.HexPrimarySoft);
 
             var chips = UiFactory.EnsureChild(summaryCard, "Chips");
-            UiFactory.Stretch(chips, 30, 118, 30, 110);
+            UiFactory.Stretch(chips, 30, 138, 30, 122);
 
             var vLocation   = BuildChip(chips, "Chip_Location",   "Localizacao",  "Pendente", "Map",        GamePalette.HexPrimary,  0);
             var vRestaurant = BuildChip(chips, "Chip_Restaurant", "Restaurante",  "Pendente", "Shop",       GamePalette.HexWarn,     1);
@@ -600,7 +600,7 @@ namespace Game.EditorTools
             var vCoherence  = BuildChip(chips, "Chip_Coherence",  "Coerencia",    "A calcular", "Piechart", GamePalette.HexInkBody,  7);
 
             var noticeRt = UiFactory.EnsureChild(summaryCard, "Notice");
-            UiFactory.BottomBand(noticeRt, 74f, 30, 30, 22);
+            UiFactory.BottomBand(noticeRt, 88f, 30, 30, 22);
             var vNotice = UiFactory.Text(noticeRt, "Projecao para o mes corrente com base nas escolhas atuais.",
                                          GameTypography.Caption, FontStyles.Normal, GamePalette.Muted,
                                          TextAlignmentOptions.MidlineLeft, wrap: true);
@@ -656,13 +656,13 @@ namespace Game.EditorTools
             UiFactory.Panel(stripe, GamePalette.Parse(accentHex), GamePalette.PpuPill, raycast: false);
 
             var captionRt = UiFactory.EnsureChild(tile, "Caption");
-            UiFactory.AnchorCorner(captionRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 380, 34, 34, 48);
+            UiFactory.AnchorCorner(captionRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 400, 42, 38, 58);
             var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Caption, FontStyles.Bold,
                                               GamePalette.InkCaption, TextAlignmentOptions.MidlineLeft);
             captionLabel.characterSpacing = 3f;
 
             var valueRt = UiFactory.EnsureChild(tile, "Value");
-            UiFactory.AnchorCorner(valueRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 380, 64, 34, -10);
+            UiFactory.AnchorCorner(valueRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 400, 78, 38, -14);
             var label = UiFactory.Text(valueRt, value, GameTypography.DisplayValue, FontStyles.Bold, GamePalette.Parse(accentHex),
                                        TextAlignmentOptions.MidlineLeft);
 
@@ -702,7 +702,7 @@ namespace Game.EditorTools
             var accent = GamePalette.Parse(accentHex);
 
             var badge = UiFactory.EnsureChild(chip, "IconBadge");
-            UiFactory.AnchorCorner(badge, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 68, 68, 26, 0);
+            UiFactory.AnchorCorner(badge, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 80, 80, 28, 0);
             UiFactory.Panel(badge, new Color(accent.r, accent.g, accent.b, 0.20f), GamePalette.PpuButton, raycast: false);
 
             var icon = UiFactory.EnsureChild(badge, "Icon");
@@ -710,13 +710,13 @@ namespace Game.EditorTools
             UiFactory.Picture(icon, UiFactory.Icon(iconName), accent);
 
             var captionRt = UiFactory.EnsureChild(chip, "Caption");
-            UiFactory.AnchorCorner(captionRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 320, 34, 104, 30);
+            UiFactory.AnchorCorner(captionRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 340, 42, 122, 36);
             var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Caption, FontStyles.Bold,
                                               GamePalette.InkCaption, TextAlignmentOptions.MidlineLeft);
             captionLabel.characterSpacing = 3f;
 
             var valueRt = UiFactory.EnsureChild(chip, "Value");
-            UiFactory.AnchorCorner(valueRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 340, 54, 104, -20);
+            UiFactory.AnchorCorner(valueRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 360, 66, 122, -26);
             return UiFactory.Text(valueRt, value, GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink,
                                   TextAlignmentOptions.MidlineLeft);
         }
@@ -760,10 +760,10 @@ namespace Game.EditorTools
                                            string accentHex, string softHex)
         {
             var header = UiFactory.EnsureChild(card, "CardTitle");
-            UiFactory.TopBand(header, 76f, 30, 30, -24);
+            UiFactory.TopBand(header, 92f, 30, 30, -26);
 
             var badge = UiFactory.EnsureChild(header, "Badge");
-            UiFactory.AnchorCorner(badge, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 56, 56, 0, 0);
+            UiFactory.AnchorCorner(badge, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 66, 66, 0, 0);
             UiFactory.Panel(badge, GamePalette.Parse(softHex), GamePalette.PpuButton, raycast: false);
 
             var icon = UiFactory.EnsureChild(badge, "Icon");
@@ -771,7 +771,7 @@ namespace Game.EditorTools
             UiFactory.Picture(icon, UiFactory.Icon(iconName), GamePalette.Parse(accentHex));
 
             var label = UiFactory.EnsureChild(header, "Label");
-            UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 640, 52, 72, 0);
+            UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 700, 64, 84, 0);
             UiFactory.Text(label, text, GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
         }
 
@@ -855,16 +855,16 @@ namespace Game.EditorTools
 
             // ---- botao voltar ----
             var back = UiFactory.EnsureChild(header, "BackButton");
-            UiFactory.AnchorCorner(back, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 200, 72, 32, 0);
+            UiFactory.AnchorCorner(back, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 240, 86, 32, 0);
             UiFactory.Panel(back, GamePalette.SurfaceAlt, GamePalette.PpuButton, raycast: true);
             UiFactory.EnsureHitArea(back);
 
             var backIcon = UiFactory.EnsureChild(back, "Icon");
-            UiFactory.AnchorCorner(backIcon, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 26, 26, 22, 0);
+            UiFactory.AnchorCorner(backIcon, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 32, 32, 26, 0);
             UiFactory.Picture(backIcon, UiFactory.Icon("Arrow_Prev"), GamePalette.Muted);
 
             var backLabel = UiFactory.EnsureChild(back, "Label");
-            UiFactory.AnchorCorner(backLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 130, 36, 62, 0);
+            UiFactory.AnchorCorner(backLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 160, 44, 70, 0);
             UiFactory.Text(backLabel, "Voltar", GameTypography.Body, FontStyles.Bold, GamePalette.Muted,
                            TextAlignmentOptions.MidlineLeft);
 
@@ -876,7 +876,7 @@ namespace Game.EditorTools
 
             // ---- identidade da tela ----
             var badge = UiFactory.EnsureChild(header, "Badge");
-            UiFactory.AnchorCorner(badge, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 72, 72, 252, 0);
+            UiFactory.AnchorCorner(badge, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 84, 84, 300, 0);
             UiFactory.Panel(badge, GamePalette.Parse(softHex), GamePalette.PpuButton, raycast: false);
 
             var badgeIcon = UiFactory.EnsureChild(badge, "Icon");
@@ -884,11 +884,11 @@ namespace Game.EditorTools
             UiFactory.Picture(badgeIcon, UiFactory.Icon(iconName), GamePalette.Parse(accentHex));
 
             var titleRt = UiFactory.EnsureChild(header, "Title");
-            UiFactory.AnchorCorner(titleRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 900, 78, 344, 22);
+            UiFactory.AnchorCorner(titleRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 1000, 96, 402, 26);
             UiFactory.Text(titleRt, title, GameTypography.ScreenTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
 
             var subtitleRt = UiFactory.EnsureChild(header, "Subtitle");
-            UiFactory.AnchorCorner(subtitleRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 900, 40, 344, -34);
+            UiFactory.AnchorCorner(subtitleRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 1000, 48, 402, -42);
             var subtitleLabel = UiFactory.Text(subtitleRt, subtitle, GameTypography.ScreenHint, FontStyles.Normal, GamePalette.InkCaption,
                                                TextAlignmentOptions.MidlineLeft);
 
@@ -912,16 +912,16 @@ namespace Game.EditorTools
             EditorUtility.SetDirty(safe);
 
             var button = UiFactory.EnsureChild(access, "Button");
-            UiFactory.AnchorCorner(button, new Vector2(1, 1), new Vector2(1, 1), 300, 72, -32, -28);
+            UiFactory.AnchorCorner(button, new Vector2(1, 1), new Vector2(1, 1), 360, 86, -32, -28);
             UiFactory.Panel(button, GamePalette.Warn, GamePalette.PpuButton, raycast: true);
             UiFactory.EnsureHitArea(button);
 
             var icon = UiFactory.EnsureChild(button, "Icon");
-            UiFactory.AnchorCorner(icon, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 28, 28, 24, 0);
+            UiFactory.AnchorCorner(icon, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 34, 34, 28, 0);
             UiFactory.Picture(icon, UiFactory.Icon("Map"), GamePalette.Parse(GamePalette.HexOnWarn));
 
             var label = UiFactory.EnsureChild(button, "Label");
-            UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 230, 38, 66, 0);
+            UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 280, 46, 76, 0);
             UiFactory.Text(label, "Menu do Jogo", GameTypography.Body, FontStyles.Bold, GamePalette.Parse(GamePalette.HexOnWarn),
                            TextAlignmentOptions.MidlineLeft);
 

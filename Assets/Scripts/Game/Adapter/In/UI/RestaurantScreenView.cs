@@ -1,4 +1,3 @@
-﻿using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,22 +34,19 @@ namespace Game.Adapter.In.UI
         private const string SegmentTextChildName = "Text (TMP)";
         private const string SelectedIconChildName = "selectedIcon";
 
-        // Todas as cores desta tela vivem no GamePalette. Os tons sao
-        // exatamente os mesmos de antes - a mudanca e so de lugar, para que
-        // exista um unico ponto de ajuste do visual do jogo.
-        private static readonly Color CardNormal = GamePalette.Parse(GamePalette.HexCardNormal);
-        private static readonly Color CardSelected = GamePalette.Parse(GamePalette.HexCardSelected, GamePalette.CardSelectedAlpha);
+        private static readonly Color CardNormal = HexColor(0x3C, 0x0D, 0x5B);
+        private static readonly Color CardSelected = new Color(0.45f, 1.00f, 0.10f, 0.18f);
 
-        private static readonly Color BorderNormal = GamePalette.Parse(GamePalette.HexBorderNormal);
-        private static readonly Color BorderSelected = GamePalette.Parse(GamePalette.HexBorderSelected);
+        private static readonly Color BorderNormal = new Color(0.235f, 0.051f, 0.357f, 0.18f);
+        private static readonly Color BorderSelected = new Color(0.70f, 1.00f, 0.00f, 1f);
 
         // Segmento clicável
         private static readonly Color SegBtnNormal = HexColor(0x00, 0x68, 0xA4);      // #0068A4
         private static readonly Color SegBorderNormal = Color.white;                 // #FFFFFF
 
         // Segmento selecionado
-        private static readonly Color SegBtnSelected = GamePalette.Parse(GamePalette.HexSegmentSelected);
-        private static readonly Color SegBorderSelected = GamePalette.Parse(GamePalette.HexBorderSelected);
+        private static readonly Color SegBtnSelected = new Color(0.18f, 0.62f, 0.18f, 1f);
+        private static readonly Color SegBorderSelected = new Color(0.70f, 1.00f, 0.00f, 1f);
 
         // Segmento desabilitado
         private static readonly Color SegBtnDisabled = HexColor(0xAE, 0xAB, 0xAB);    // #AEABAB
@@ -347,9 +343,13 @@ namespace Game.Adapter.In.UI
 
         private static Color CoherenceColor(float value)
         {
-            // Mesmas faixas de sempre, agora vindas do GamePalette para que
-            // esta tela e a de precificacao nunca mais divirjam.
-            return GamePalette.ScoreColor(value);
+            if (value >= 0.7f)
+                return new Color(0.086f, 0.639f, 0.29f, 1f);
+
+            if (value >= 0.4f)
+                return new Color(0.851f, 0.604f, 0.043f, 1f);
+
+            return new Color(0.882f, 0.114f, 0.282f, 1f);
         }
 
         private static string FormatCoherenceMessage(string label, float value, string tip)

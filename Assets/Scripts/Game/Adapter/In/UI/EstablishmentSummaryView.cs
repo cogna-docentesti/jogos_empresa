@@ -113,13 +113,14 @@ namespace Game.Adapter.In.UI
                 label.text = value;
         }
 
-        private static void Set(TextMeshProUGUI label, string value, Color color)
+        /// <summary>
+        /// A cor foi removida de proposito: a aparencia de cada label vem do
+        /// TMP montado na hierarquia. A sobrecarga continua existindo so para
+        /// nao mexer nas ~10 chamadas, mas o parametro e ignorado.
+        /// </summary>
+        private static void Set(TextMeshProUGUI label, string value, Color _)
         {
-            if (label == null)
-                return;
-
-            label.text  = value;
-            label.color = color;
+            Set(label, value);
         }
     }
 }

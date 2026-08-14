@@ -67,15 +67,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Comprar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -347,14 +347,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1960784, g: 0.8039216, b: 0.1960784, a: 1}
+  m_Color: {r: 0.248496, g: 1, b: 0.07075471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: f88eeeba1e352b84497f3d87b97c17db, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -416,6 +416,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 406203890792541934, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
+      propertyPath: m_Color.b
+      value: 0.35686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 406203890792541934, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
+      propertyPath: m_Color.g
+      value: 0.050980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 406203890792541934, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
+      propertyPath: m_Color.r
+      value: 0.23529412
+      objectReference: {fileID: 0}
     - target: {fileID: 496066944821924350, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
       propertyPath: m_SizeDelta.x
       value: 250
@@ -538,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6427575245776205293, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
       propertyPath: m_fontSize
-      value: 35.95
+      value: 34.8
       objectReference: {fileID: 0}
     - target: {fileID: 6427575245776205293, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
       propertyPath: m_margin.w
@@ -584,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquipmentName
       objectReference: {fileID: 0}
+    - target: {fileID: 9075478312248079512, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 7519646034890712699}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -658,6 +674,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4287601830008087536, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
   m_PrefabInstance: {fileID: 7924090635404429461}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7519646034890712699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 406203890792541934, guid: a2c906592b57d7d4482df3b165af9299, type: 3}
+  m_PrefabInstance: {fileID: 7924090635404429461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2188078377148063910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8575184901005373981 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1943632306466994824, guid: a2c906592b57d7d4482df3b165af9299, type: 3}

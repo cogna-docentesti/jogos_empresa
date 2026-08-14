@@ -85,11 +85,9 @@ namespace Game.Adapter.In.UI
 
         public void UpdatePriceCoherence(float value, string message)
         {
+            // So o preenchimento, que e dado. A cor da barra e a do Image na cena.
             if (priceCoherenceBarFill != null)
-            {
                 priceCoherenceBarFill.fillAmount = value;
-                priceCoherenceBarFill.color = CoherenceColor(value);
-            }
 
             if (priceCoherenceText != null)
             {
@@ -214,12 +212,6 @@ namespace Game.Adapter.In.UI
             };
 
             return $"{label}: {status} ({Mathf.RoundToInt(value * 100f)}%)\n{tip}";
-        }
-
-        private static Color CoherenceColor(float value)
-        {
-            // Mesmas faixas de sempre, agora vindas do GamePalette.
-            return GamePalette.ScoreColor(value);
         }
     }
 }
