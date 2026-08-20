@@ -1,5 +1,7 @@
 using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Navigation;
 using Game.Domain.Service;
+using Game.Infrastructure.Session;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
@@ -23,7 +25,48 @@ namespace Game.Adapter.In.Controllers
 
         private void OnEnable()
         {
+            view?.BindReset(ResetGame);
             Refresh();
+        }
+
+        private void ResetGame()
+        {
+            GameSessionEntity session = GameSessionState.Current;
+            var databaseService = DatabaseInitializer.DatabaseService;
+
+            if (session == null || databaseService == null || databaseService.Connection == null)
+            {
+                Debug.LogError("[EstablishmentSummaryController] Nao foi possivel resetar: sessao ou banco indisponivel.");
+                return;
+            }
+
+            try
+            {
+                var roundRepository = new RoundResultRepository(databaseService.Connection);
+                var sessionRepository = new GameSessionRepository(databaseService.Connection);
+
+                roundRepository.DeleteBySessionId(session.sessionId);
+                sessionRepository.Delete(session);
+
+                string userId = session.userId;
+                string professorId = session.professorId;
+
+                GameSessionState.Clear();
+                PlayerSession.Clear();
+                MenuNavigator.Instance?.CloseAll();
+
+                var sessionService = new GameSessionService(userId, professorId);
+                sessionService.CreateNewSession();
+
+                view.HideResetWarning();
+
+                if (GameManager.Instance != null)
+                    GameManager.Instance.StateMachine.ForceState(GameState.Config_Location);
+            }
+            catch (System.Exception exception)
+            {
+                Debug.LogError("[EstablishmentSummaryController] Falha ao resetar o jogo: " + exception);
+            }
         }
 
         public void Refresh()

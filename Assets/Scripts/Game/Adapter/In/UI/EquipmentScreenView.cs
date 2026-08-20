@@ -22,7 +22,6 @@ namespace Game.Adapter.In.UI
 
         [Header("Actions")]
         [SerializeField] private Button confirmButton;
-        [SerializeField] private Button backButton;
         [SerializeField] private Button cartButton;
 
         private readonly List<EquipmentCardView> cards = new();
@@ -35,7 +34,7 @@ namespace Game.Adapter.In.UI
         private UnityAction checkoutAction;
 
         private void Awake()
-        {
+        { 
             EnsureCartUi();
         }
 
@@ -86,7 +85,7 @@ namespace Game.Adapter.In.UI
 
         public void SetFooterVisible(bool visible)
         {
-            SetActionFooterVisible(confirmButton, backButton, visible);
+            SetActionFooterVisible(confirmButton, null, visible);
         }
 
         public void SetCartButtonCount(int itemCount)
@@ -150,8 +149,6 @@ namespace Game.Adapter.In.UI
         }
 
         public void BindConfirm(UnityAction action) => Bind(confirmButton, action);
-        public void BindBack(UnityAction action) => Bind(backButton, action);
-
         private void EnsureCartUi()
         {
             if (cartModal != null)

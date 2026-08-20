@@ -2,6 +2,7 @@ using Game.Adapter.In.UI.Theme;
 using Game.Domain.Service;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Adapter.In.UI
@@ -33,6 +34,45 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI coherenceValue;
         [SerializeField] private TextMeshProUGUI roundValue;
         [SerializeField] private TextMeshProUGUI noticeText;
+
+        [Header("Reset do jogo")]
+        [SerializeField] private Button resetButton;
+        [SerializeField] private GameObject resetWarning;
+        [SerializeField] private Button cancelResetButton;
+        [SerializeField] private Button confirmResetButton;
+
+        private void Awake()
+        {
+            HideResetWarning();
+        }
+
+        public void BindReset(UnityAction onConfirmed)
+        {
+            if (resetButton != null)
+            {
+                resetButton.onClick.RemoveAllListeners();
+                resetButton.onClick.AddListener(ShowResetWarning);
+            }
+
+            if (cancelResetButton != null)
+            {
+                cancelResetButton.onClick.RemoveAllListeners();
+                cancelResetButton.onClick.AddListener(HideResetWarning);
+            }
+
+            if (confirmResetButton != null)
+            {
+                confirmResetButton.onClick.RemoveAllListeners();
+                if (onConfirmed != null)
+                    confirmResetButton.onClick.AddListener(onConfirmed);
+            }
+        }
+
+        public void HideResetWarning()
+        {
+            if (resetWarning != null)
+                resetWarning.SetActive(false);
+        }
 
         public void Bind(EstablishmentSummary summary)
         {
@@ -121,6 +161,15 @@ namespace Game.Adapter.In.UI
         private static void Set(TextMeshProUGUI label, string value, Color _)
         {
             Set(label, value);
+        }
+
+        private void ShowResetWarning()
+        {
+            if (resetWarning == null)
+                return;
+
+            resetWarning.SetActive(true);
+            resetWarning.transform.SetAsLastSibling();
         }
     }
 }

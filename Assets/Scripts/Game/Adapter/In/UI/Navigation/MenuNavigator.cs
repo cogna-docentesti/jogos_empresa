@@ -133,6 +133,24 @@ namespace Game.Adapter.In.UI.Navigation
             _history.Clear();
         }
 
+        /// <summary>
+        /// Encerra a navegacao do hub e esconde seus paineis. Usado quando o
+        /// fluxo volta a ser controlado pela state machine.
+        /// </summary>
+        public void CloseAll()
+        {
+            _history.Clear();
+
+            var previous = Current;
+            Current = PanelId.None;
+
+            if (registry != null)
+                registry.HideAll();
+
+            if (previous != PanelId.None)
+                OnPanelChanged?.Invoke(previous, Current);
+        }
+
         // =====================================================
         //  INTERNO
         // =====================================================

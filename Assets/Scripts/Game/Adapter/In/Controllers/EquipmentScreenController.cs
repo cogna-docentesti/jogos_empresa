@@ -43,7 +43,6 @@ namespace Game.Adapter.In.Controllers
             if (view != null)
             {
                 view.BindConfirm(null);
-                view.BindBack(null);
                 view.BindCart(null);
                 view.HideCart();
             }
@@ -121,7 +120,6 @@ namespace Game.Adapter.In.Controllers
                 return;
 
             view.BindConfirm(OnContinue);
-            view.BindBack(OnBack);
             view.BindCart(OpenCart);
         }
 
@@ -249,12 +247,6 @@ namespace Game.Adapter.In.Controllers
             }
 
             MenuNavigator.Instance.OpenRoot();
-        }
-
-        private void OnBack()
-        {
-            if (GameManager.Instance != null)
-                GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Capital);
         }
 
         private bool Owns(EquipmentData equipment)
