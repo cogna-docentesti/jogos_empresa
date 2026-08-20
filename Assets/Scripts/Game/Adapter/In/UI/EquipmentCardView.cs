@@ -64,7 +64,7 @@ namespace Game.Adapter.In.UI
         public void SetOwned(bool owned)
         {
             IsOwned = owned;
-            if (selectionBorder != null) selectionBorder.SetActive(IsInCart);
+            if (selectionBorder != null) selectionBorder.SetActive(false);
             if (buyButton != null) buyButton.gameObject.SetActive(!owned);
             if (ownedIndicator != null) ownedIndicator.SetActive(owned);
             if (buyButtonText != null && owned) buyButtonText.text = "Adquirido";
@@ -73,7 +73,7 @@ namespace Game.Adapter.In.UI
         public void SetInCart(bool inCart)
         {
             IsInCart = !IsOwned && inCart;
-            if (selectionBorder != null) selectionBorder.SetActive(IsInCart);
+            if (selectionBorder != null) selectionBorder.SetActive(false);
             if (buyButton != null && !IsOwned) buyButton.interactable = true;
             if (buyButtonText != null && !IsOwned)
                 buyButtonText.text = IsInCart ? "Remover" : "Adicionar";

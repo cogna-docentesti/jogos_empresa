@@ -155,11 +155,11 @@ namespace Game.Adapter.In.UI.Navigation
                 return;
             }
 
-            registry.HideAll();
-            target.SetActive(true);
-
             var previous = Current;
             Current = id;
+
+            registry.HideAll();
+            target.SetActive(true);
 
             OnPanelChanged?.Invoke(previous, Current);
         }

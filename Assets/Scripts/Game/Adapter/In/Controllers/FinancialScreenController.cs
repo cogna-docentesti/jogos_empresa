@@ -1,24 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Navigation;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
 {
     public sealed class FinancialScreenController : MonoBehaviour
     {
+        private const string NoLoanCreditLineId = "sem_emprestimo";
+
         [SerializeField] private FinancialScreenView view;
 
         private readonly List<BankCardView> _cards = new();
         private CreditLineData _selectedCreditLine;
+        private bool _selectionLocked;
 
         private void OnEnable()
         {
             if (view == null)
                 view = GetComponent<FinancialScreenView>();
 
+            view?.SetFooterVisible(!WasOpenedFromMenu());
             BindActions();
             PopulateCreditLines();
+        }
+
+        private static bool WasOpenedFromMenu()
+        {
+            return MenuNavigator.Instance != null
+                && MenuNavigator.Instance.Current == PanelId.Financial;
         }
 
         private void OnDisable()
@@ -80,10 +91,48 @@ namespace Game.Adapter.In.Controllers
 
                _cards.Add(card);
            }
+
+           RestoreSavedSelection();
+        }
+
+        private void RestoreSavedSelection()
+        {
+            if (!GameSessionState.HasSession
+                || string.IsNullOrWhiteSpace(GameSessionState.Current.creditLineId))
+                return;
+
+            string savedCreditLineId = GameSessionState.Current.creditLineId;
+            BankCardView savedCard = _cards.FirstOrDefault(card =>
+                card != null
+                && card.CreditLine != null
+                && card.CreditLine.id == savedCreditLineId
+            );
+
+            if (savedCard == null)
+            {
+                Debug.LogWarning($"[FinancialScreenController] Linha de credito salva nao encontrada: {savedCreditLineId}");
+                return;
+            }
+
+            foreach (BankCardView card in _cards)
+                card?.SetSelected(card == savedCard);
+
+            _selectedCreditLine = savedCard.CreditLine;
+            _selectionLocked = savedCreditLineId != NoLoanCreditLineId;
+            view.SetHint(_selectionLocked
+                ? $"Linha de credito contratada: {_selectedCreditLine.displayName}. Esta escolha nao pode ser alterada."
+                : $"Selecionado: {_selectedCreditLine.displayName}");
+            view.SetConfirmEnabled(true);
         }
 
      private void OnCardSelected(BankCardView selectedCard)
      {
+         if (_selectionLocked)
+         {
+             view.SetHint($"Linha de credito contratada: {_selectedCreditLine.displayName}. Esta escolha nao pode ser alterada.");
+             return;
+         }
+
          foreach (var card in _cards)
          {
              if (card != null)
@@ -133,6 +182,7 @@ namespace Game.Adapter.In.Controllers
 
             _cards.Clear();
             _selectedCreditLine = null;
+            _selectionLocked = false;
 
             if (view != null)
                 view.ClearBankCards();

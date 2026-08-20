@@ -19,10 +19,6 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Button selectButton;
 
         [Header("Visual")]
-        [SerializeField] private Image cardBackground;
-
-        [SerializeField] private Color selectedBackgroundColor = new Color32(0xE6, 0xC8, 0x57, 0xFF);
-
         [SerializeField] private Image creditLineIcon;
 
         [SerializeField] private GameObject selectionBorder;
@@ -47,24 +43,13 @@ namespace Game.Adapter.In.UI
         private bool hasOriginalCoinPosition;
         private Vector2 originalCoinAnchoredPosition;
         private float originalCoinAlpha = 1f;
-        private Color normalBackgroundColor = Color.white;
-
-        private static readonly Color BorderSelected = HexColor(0x25, 0x63, 0xEB);   // azulzinho
-        private static readonly Color BorderNormal = Color.white;
 
         private void Awake()
         {
-            if (cardBackground == null)
-                cardBackground = GetComponent<Image>();
-
             if (selectButton == null)
                 selectButton = GetComponent<Button>();
 
-            if (cardBackground != null)
-                normalBackgroundColor = cardBackground.color;
-
             CacheOriginalCoinPosition();
-            ConfigureSelectionBorder(false);
             ApplyVisualState();
         }
 
@@ -178,44 +163,10 @@ namespace Game.Adapter.In.UI
 
         private void ApplyVisualState()
         {
-            Color baseColor = isSelected ? selectedBackgroundColor : normalBackgroundColor;
-
-            if (cardBackground != null)
-                cardBackground.color = baseColor;
-
-            if (selectButton != null)
-                selectButton.colors = BuildButtonColors();
-
-            ConfigureSelectionBorder(isSelected);
-            ConfigureOutline(isSelected);
-        }
-
-        private void ConfigureSelectionBorder(bool visible)
-        {
             if (selectionBorder == null)
                 return;
 
-            selectionBorder.SetActive(visible);
-
-            var borderImage = selectionBorder.GetComponent<Image>();
-
-            if (borderImage != null)
-            {
-                borderImage.color = BorderSelected;
-                borderImage.raycastTarget = false;
-            }
-        }
-
-        private void ConfigureOutline(bool visible)
-        {
-            var outline = GetComponent<Outline>();
-
-            if (outline == null)
-                outline = gameObject.AddComponent<Outline>();
-
-            outline.enabled = visible;
-            outline.effectColor = visible ? BorderSelected : BorderNormal;
-            outline.effectDistance = new Vector2(3f, -3f);
+            selectionBorder.SetActive(isSelected);
         }
 
         private void EnsureCoinInstances(int requiredCount)
@@ -289,20 +240,6 @@ namespace Game.Adapter.In.UI
             hasOriginalCoinPosition = true;
         }
 
-        private static ColorBlock BuildButtonColors()
-        {
-            return new ColorBlock
-            {
-                normalColor = Color.white,
-                highlightedColor = new Color(0.92f, 0.92f, 0.92f, 1f),
-                pressedColor = new Color(0.75f, 0.75f, 0.75f, 1f),
-                selectedColor = Color.white,
-                disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.85f),
-                colorMultiplier = 1f,
-                fadeDuration = 0.08f
-            };
-        }
-
         private static string FormatCurrency(float value)
         {
             return $"R$ {value:0,0.00}";
@@ -313,9 +250,5 @@ namespace Game.Adapter.In.UI
             return $"{value * 100f:0.##}% ao mes";
         }
 
-        private static Color HexColor(byte r, byte g, byte b, byte a = 255)
-        {
-            return new Color32(r, g, b, a);
-        }
     }
 }

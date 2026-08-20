@@ -84,6 +84,11 @@ namespace Game.Adapter.In.UI
             if (confirmButton != null) confirmButton.interactable = enabled;
         }
 
+        public void SetFooterVisible(bool visible)
+        {
+            SetActionFooterVisible(confirmButton, backButton, visible);
+        }
+
         public void SetCartButtonCount(int itemCount)
         {
             EnsureCartUi();
@@ -288,6 +293,23 @@ namespace Game.Adapter.In.UI
             if (button == null) return;
             button.onClick.RemoveAllListeners();
             if (action != null) button.onClick.AddListener(action);
+        }
+
+        private static void SetActionFooterVisible(Button primary, Button secondary, bool visible)
+        {
+            Transform current = primary != null ? primary.transform : secondary != null ? secondary.transform : null;
+
+            while (current != null && current.name != "Footer")
+                current = current.parent;
+
+            if (current != null)
+            {
+                current.gameObject.SetActive(visible);
+                return;
+            }
+
+            if (primary != null) primary.gameObject.SetActive(visible);
+            if (secondary != null) secondary.gameObject.SetActive(visible);
         }
     }
 }

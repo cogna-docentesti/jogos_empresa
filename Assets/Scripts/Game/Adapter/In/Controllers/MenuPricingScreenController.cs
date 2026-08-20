@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Navigation;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
@@ -16,8 +17,15 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 view = GetComponent<MenuPricingScreenView>();
 
+            view?.SetFooterVisible(!WasOpenedFromMenu());
             BindActions();
             PopulateProducts();
+        }
+
+        private static bool WasOpenedFromMenu()
+        {
+            return MenuNavigator.Instance != null
+                && MenuNavigator.Instance.Current == PanelId.MenuPricing;
         }
 
         private void OnDisable()

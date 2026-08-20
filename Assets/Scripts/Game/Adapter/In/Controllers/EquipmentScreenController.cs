@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Navigation;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
@@ -23,11 +24,18 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 view = GetComponent<EquipmentScreenView>();
 
+            view?.SetFooterVisible(!WasOpenedFromMenu());
             LoadOwnedEquipmentIds();
             cartEquipmentIds.Clear();
             PopulateEquipments();
             BindActions();
             RefreshScreen();
+        }
+
+        private static bool WasOpenedFromMenu()
+        {
+            return MenuNavigator.Instance != null
+                && MenuNavigator.Instance.Current == PanelId.EquipmentStore;
         }
 
         private void OnDisable()
@@ -186,7 +194,7 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
 
-            PresentationMenuOverlay.Show();
+            OpenMenu();
         }
 
         private void OpenCart()
@@ -229,6 +237,18 @@ namespace Game.Adapter.In.Controllers
             view.HideCart();
             view.SetHint($"Compra concluída: {purchasedCount} item(ns) adquirido(s).");
             RefreshScreen();
+            OpenMenu();
+        }
+
+        private static void OpenMenu()
+        {
+            if (MenuNavigator.Instance == null)
+            {
+                Debug.LogWarning("[EquipmentScreenController] MenuNavigator nao esta ativo na cena.");
+                return;
+            }
+
+            MenuNavigator.Instance.OpenRoot();
         }
 
         private void OnBack()
