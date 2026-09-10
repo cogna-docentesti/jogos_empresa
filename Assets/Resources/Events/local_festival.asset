@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: local_festival
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: local_festival
+  title: "Festival na regi\xE3o"
+  description: 
+  educationalConcept: 
+  polarity: 0
+  triggerType: 0
+  baseWeight: 0.7
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: normal_operation
+    title: "Manter opera\xE7\xE3o normal"
+    description: Atender o movimento adicional com a estrutura atual.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.3
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: reinforce_team
+    title: "Refor\xE7ar a equipe"
+    description: "Contratar apoio tempor\xE1rio para aproveitar o festival."
+    effects:
+      cashDelta: -800
+      demandMultiplier: 1.3
+      capacityMultiplier: 1.2
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: festival_combo
+    title: Criar combo especial
+    description: "Oferecer uma promo\xE7\xE3o tem\xE1tica para aumentar o volume
+      de vendas."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.35
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 0.95
+      reputationDelta: 0
+      duration: 1

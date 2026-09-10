@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: payment_system_failure
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: payment_system_failure
+  title: Falha no sistema de pagamento
+  description: 
+  educationalConcept: 
+  polarity: 1
+  triggerType: 0
+  baseWeight: 0.8
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: emergency_support
+    title: Acionar suporte emergencial
+    description: "Pagar por atendimento t\xE9cnico imediato."
+    effects:
+      cashDelta: -500
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: alternative_payments
+    title: Aceitar pagamentos alternativos
+    description: Operar temporariamente com meios de pagamento limitados.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 0.92
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: wait_normalization
+    title: "Aguardar normaliza\xE7\xE3o"
+    description: "Aguardar o retorno do sistema sem realizar interven\xE7\xE3o."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 0.85
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1

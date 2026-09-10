@@ -45,6 +45,7 @@ public class DatabaseInitializer : MonoBehaviour
 
             db.CreateTable<GameSessionEntity>();
             db.CreateTable<RoundResultEntity>();
+            db.CreateTable<SessionEventHistoryEntity>();
 
             IsReady = true;
         }

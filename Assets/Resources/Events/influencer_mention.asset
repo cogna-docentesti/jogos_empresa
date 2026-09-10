@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: influencer_mention
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: influencer_mention
+  title: "Men\xE7\xE3o de influenciador local"
+  description: 
+  educationalConcept: 
+  polarity: 0
+  triggerType: 0
+  baseWeight: 0.6
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: organic_reach
+    title: "Aproveitar o alcance org\xE2nico"
+    description: "Deixar a divulga\xE7\xE3o ocorrer naturalmente."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.15
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 3
+      duration: 1
+  - id: boost_mention
+    title: "Impulsionar a men\xE7\xE3o"
+    description: "Investir em divulga\xE7\xE3o para ampliar o alcance."
+    effects:
+      cashDelta: -400
+      demandMultiplier: 1.25
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 4
+      duration: 1
+  - id: new_customer_offer
+    title: Criar oferta para novos clientes
+    description: "Criar uma promo\xE7\xE3o para converter o aumento de visibilidade
+      em visitas."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.3
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 0.9
+      reputationDelta: 3
+      duration: 1

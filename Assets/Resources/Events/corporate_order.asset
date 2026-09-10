@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: corporate_order
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: corporate_order
+  title: Pedido corporativo
+  description: 
+  educationalConcept: 
+  polarity: 0
+  triggerType: 0
+  baseWeight: 0.7
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: accept_current_capacity
+    title: Aceitar com a capacidade atual
+    description: Aceitar o pedido utilizando a estrutura existente.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.2
+      capacityMultiplier: 0.9
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: temporary_support
+    title: "Contratar apoio tempor\xE1rio"
+    description: Investir em suporte adicional para atender o pedido.
+    effects:
+      cashDelta: -600
+      demandMultiplier: 1.2
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: corporate_discount
+    title: Oferecer desconto corporativo
+    description: Conceder desconto para ampliar o volume do pedido.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.3
+      capacityMultiplier: 0.9
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 0.92
+      reputationDelta: 0
+      duration: 1

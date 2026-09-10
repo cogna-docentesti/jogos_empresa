@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: ingredient_price_increase
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: ingredient_price_increase
+  title: "Aumento no pre\xE7o dos ingredientes"
+  description: 
+  educationalConcept: 
+  polarity: 1
+  triggerType: 0
+  baseWeight: 1
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: absorb_increase
+    title: Absorver o aumento
+    description: "Manter os pre\xE7os atuais e assumir o aumento do custo."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1.08
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 2
+  - id: partial_price_pass
+    title: Repassar parte do aumento
+    description: "Aumentar parcialmente os pre\xE7os para compensar os custos."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 0.97
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1.08
+      averageTicketMultiplier: 1.05
+      reputationDelta: 0
+      duration: 2
+  - id: replace_ingredients
+    title: Substituir ingredientes
+    description: "Utilizar alternativas mais econ\xF4micas."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1.03
+      averageTicketMultiplier: 1
+      reputationDelta: -2
+      duration: 2
