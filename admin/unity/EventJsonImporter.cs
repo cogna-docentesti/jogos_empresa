@@ -24,7 +24,7 @@ namespace Game.EditorTools
         private const string DefaultJsonRelativePath = "admin-data/events.json";
         private const string LogPrefix = "[EventJsonImporter]";
 
-        private static string ProjectRoot => Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
+        private static string ProjectRoot => Path.GetFullPath(Path.Combine(UnityEngine.Application.dataPath, ".."));
         private static string DefaultJsonPath => Path.Combine(ProjectRoot, DefaultJsonRelativePath);
 
         // ------------------------------------------------------------------
