@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: competitor_temporary_closure
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: competitor_temporary_closure
+  title: "Fechamento tempor\xE1rio de concorrente"
+  description: 
+  educationalConcept: 
+  polarity: 0
+  triggerType: 0
+  baseWeight: 0.6
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: serve_extra_demand
+    title: "Atender \xE0 demanda adicional"
+    description: Operar normalmente aproveitando o aumento do movimento.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.15
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: increase_stock
+    title: "Refor\xE7ar o estoque"
+    description: Preparar mais produtos para atender o aumento esperado.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.15
+      capacityMultiplier: 1
+      stockMultiplier: 1.1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: local_advertising
+    title: "Fazer divulga\xE7\xE3o local"
+    description: Investir para atrair parte dos clientes do concorrente.
+    effects:
+      cashDelta: -400
+      demandMultiplier: 1.2
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1

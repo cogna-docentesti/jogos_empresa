@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: health_inspection
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: health_inspection
+  title: "Fiscaliza\xE7\xE3o sanit\xE1ria"
+  description: 
+  educationalConcept: 
+  polarity: 1
+  triggerType: 1
+  baseWeight: 0.8
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions:
+  - type: 2
+    comparison: 3
+    value: 0.7
+  options:
+  - id: full_compliance
+    title: "Fazer todas as adequa\xE7\xF5es imediatamente"
+    description: Corrigir integralmente os problemas identificados.
+    effects:
+      cashDelta: -1500
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 2
+      duration: 0
+  - id: minimum_compliance
+    title: "Corrigir apenas pontos obrigat\xF3rios"
+    description: "Realizar somente as adequa\xE7\xF5es m\xEDnimas exigidas."
+    effects:
+      cashDelta: -600
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 0
+  - id: ignore_requirements
+    title: "N\xE3o realizar adequa\xE7\xF5es"
+    description: "Ignorar as exig\xEAncias da fiscaliza\xE7\xE3o."
+    effects:
+      cashDelta: -2000
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: -5
+      duration: 0

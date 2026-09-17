@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: insufficient_team
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: insufficient_team
+  title: "Funcion\xE1rio ausente"
+  description: 
+  educationalConcept: 
+  polarity: 1
+  triggerType: 1
+  baseWeight: 1
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions:
+  - type: 1
+    comparison: 5
+    value: 1
+  options:
+  - id: hire_temporary
+    title: "Contratar substituto tempor\xE1rio"
+    description: "Contratar apoio tempor\xE1rio para manter a capacidade operacional."
+    effects:
+      cashDelta: -350
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: redistribute_team
+    title: "Redistribuir as fun\xE7\xF5es"
+    description: "Redistribuir as tarefas entre os funcion\xE1rios dispon\xEDveis."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1
+      capacityMultiplier: 0.9
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: operate_reduced
+    title: Trabalhar com equipe reduzida
+    description: "Manter a opera\xE7\xE3o com menos funcion\xE1rios."
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1
+      capacityMultiplier: 0.75
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: -2
+      duration: 1

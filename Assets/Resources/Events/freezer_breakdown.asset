@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: freezer_breakdown
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: freezer_breakdown
+  title: Quebra do freezer
+  description: 
+  educationalConcept: 
+  polarity: 1
+  triggerType: 1
+  baseWeight: 1
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions:
+  - type: 0
+    comparison: 5
+    value: 1
+  options:
+  - id: repair_now
+    title: Consertar imediatamente
+    description: Realizar o conserto completo do freezer.
+    effects:
+      cashDelta: -3500
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 0
+  - id: temporary_repair
+    title: Fazer um reparo emergencial
+    description: "Realizar um reparo tempor\xE1rio para manter a opera\xE7\xE3o."
+    effects:
+      cashDelta: -1500
+      demandMultiplier: 1
+      capacityMultiplier: 0.9
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: postpone_repair
+    title: Adiar o reparo
+    description: Adiar o conserto e assumir o risco de perda de estoque.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1
+      capacityMultiplier: 1
+      stockMultiplier: 0.85
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 0

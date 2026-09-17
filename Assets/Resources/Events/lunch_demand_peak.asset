@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91deb77512376fc40b91c5bfd3df5743, type: 3}
+  m_Name: lunch_demand_peak
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  id: lunch_demand_peak
+  title: "Pico de demanda no hor\xE1rio de almo\xE7o"
+  description: 
+  educationalConcept: 
+  polarity: 0
+  triggerType: 0
+  baseWeight: 1.1
+  canRepeat: 0
+  applicableRestaurantTypes: 
+  minRound: 1
+  maxRound: 3
+  conditions: []
+  options:
+  - id: current_capacity
+    title: Atender com a capacidade atual
+    description: Utilizar a estrutura atual para atender o aumento de clientes.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.25
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: temporary_reinforcement
+    title: "Refor\xE7ar temporariamente a equipe"
+    description: Investir em apoio para ampliar o atendimento.
+    effects:
+      cashDelta: -400
+      demandMultiplier: 1.25
+      capacityMultiplier: 1.15
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1
+      reputationDelta: 0
+      duration: 1
+  - id: high_margin_items
+    title: Destacar itens de maior margem
+    description: Direcionar a demanda para produtos de maior valor.
+    effects:
+      cashDelta: 0
+      demandMultiplier: 1.15
+      capacityMultiplier: 1
+      stockMultiplier: 1
+      ingredientCostMultiplier: 1
+      averageTicketMultiplier: 1.08
+      reputationDelta: 0
+      duration: 1
