@@ -1,0 +1,1257 @@
+{
+  "schemaVersion": 1,
+  "collection": "events",
+  "updatedAt": "2026-09-16T00:00:00.000Z",
+  "items": [
+    {
+      "id": "freezer_breakdown",
+      "title": "Quebra do freezer",
+      "description": "O freezer apresenta uma falha e parte dos ingredientes armazenados fica em risco.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "CONDITIONAL",
+      "baseWeight": 1,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [
+        {
+          "type": "EQUIPMENT_QUALITY_SCORE",
+          "comparison": "LESS_OR_EQUAL",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "id": "repair_now",
+          "title": "Consertar imediatamente",
+          "description": "Realizar o conserto completo do freezer.",
+          "effects": {
+            "cashDelta": -3500,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "temporary_repair",
+          "title": "Fazer um reparo emergencial",
+          "description": "Realizar um reparo temporário para manter a operação.",
+          "effects": {
+            "cashDelta": -1500,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 0.9,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "postpone_repair",
+          "title": "Adiar o reparo",
+          "description": "Adiar o conserto e assumir o risco de perda de estoque.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 0.85,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "insufficient_team",
+      "title": "Funcionário ausente",
+      "description": "Um funcionário fica ausente e o restaurante precisa decidir como manter o atendimento.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "CONDITIONAL",
+      "baseWeight": 1,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [
+        {
+          "type": "TEAM_COVERAGE_RATIO",
+          "comparison": "LESS_OR_EQUAL",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "id": "hire_temporary",
+          "title": "Contratar substituto temporário",
+          "description": "Contratar apoio temporário para manter a capacidade operacional.",
+          "effects": {
+            "cashDelta": -350,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "redistribute_team",
+          "title": "Redistribuir as funções",
+          "description": "Redistribuir as tarefas entre os funcionários disponíveis.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 0.9,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "operate_reduced",
+          "title": "Trabalhar com equipe reduzida",
+          "description": "Manter a operação com menos funcionários.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 0.75,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": -2,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "health_inspection",
+      "title": "Fiscalização sanitária",
+      "description": "O restaurante recebe uma fiscalização sanitária e são identificados pontos que exigem adequação.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "CONDITIONAL",
+      "baseWeight": 0.8,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [
+        {
+          "type": "SANITARY_RISK_SCORE",
+          "comparison": "GREATER_OR_EQUAL",
+          "value": 0.7
+        }
+      ],
+      "options": [
+        {
+          "id": "full_compliance",
+          "title": "Fazer todas as adequações imediatamente",
+          "description": "Corrigir integralmente os problemas identificados.",
+          "effects": {
+            "cashDelta": -1500,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 2,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "minimum_compliance",
+          "title": "Corrigir apenas pontos obrigatórios",
+          "description": "Realizar somente as adequações mínimas exigidas.",
+          "effects": {
+            "cashDelta": -600,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "ignore_requirements",
+          "title": "Não realizar adequações",
+          "description": "Ignorar as exigências da fiscalização.",
+          "effects": {
+            "cashDelta": -2000,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": -5,
+            "duration": "IMMEDIATE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "negative_review",
+      "title": "Avaliação negativa nas redes",
+      "description": "Um cliente publica uma avaliação negativa nas redes sociais, afetando a percepção do público.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "CONDITIONAL",
+      "baseWeight": 0.9,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [
+        {
+          "type": "REPUTATION_SCORE",
+          "comparison": "LESS_OR_EQUAL",
+          "value": 50
+        }
+      ],
+      "options": [
+        {
+          "id": "compensate_customer",
+          "title": "Compensar o cliente",
+          "description": "Oferecer uma compensação ao cliente e responder publicamente.",
+          "effects": {
+            "cashDelta": -300,
+            "demandMultiplier": 0.97,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 3,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "reply_only",
+          "title": "Apenas responder",
+          "description": "Responder à avaliação sem oferecer compensação.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.94,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 1,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "ignore_review",
+          "title": "Ignorar a avaliação",
+          "description": "Não responder à crítica publicada.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.9,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": -4,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "excessive_food_waste",
+      "title": "Desperdício acima do esperado",
+      "description": "O restaurante identifica excesso de alimentos em estoque e risco de perdas por desperdício.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "CONDITIONAL",
+      "baseWeight": 0.9,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [
+        {
+          "type": "STOCK_COVERAGE_RATIO",
+          "comparison": "GREATER_OR_EQUAL",
+          "value": 1.3
+        }
+      ],
+      "options": [
+        {
+          "id": "adjust_planning",
+          "title": "Ajustar o planejamento",
+          "description": "Reduzir as compras futuras para adequar o estoque.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 0.95,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "create_promotion",
+          "title": "Criar uma promoção",
+          "description": "Criar uma promoção para aumentar a saída dos produtos em estoque.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 0.98,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.9,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "keep_planning",
+          "title": "Manter o planejamento atual",
+          "description": "Não alterar o planejamento de compras.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 0.85,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ingredient_price_increase",
+      "title": "Aumento no preço dos ingredientes",
+      "description": "Os fornecedores reajustam os preços dos ingredientes, elevando os custos do restaurante durante o mês.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 1,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "absorb_increase",
+          "title": "Absorver o aumento",
+          "description": "Manter os preços atuais e assumir o aumento do custo.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1.08,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_MONTH"
+          }
+        },
+        {
+          "id": "partial_price_pass",
+          "title": "Repassar parte do aumento",
+          "description": "Aumentar parcialmente os preços para compensar os custos.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.97,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1.08,
+            "averageTicketMultiplier": 1.05,
+            "reputationDelta": 0,
+            "duration": "CURRENT_MONTH"
+          }
+        },
+        {
+          "id": "replace_ingredients",
+          "title": "Substituir ingredientes",
+          "description": "Utilizar alternativas mais econômicas.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1.03,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": -2,
+            "duration": "CURRENT_MONTH"
+          }
+        }
+      ]
+    },
+    {
+      "id": "heavy_rain",
+      "title": "Chuva forte",
+      "description": "Uma chuva intensa reduz o movimento presencial esperado no restaurante.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 1.1,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "normal_operation",
+          "title": "Manter operação normal",
+          "description": "Não realizar nenhuma alteração específica.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.85,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "external_orders",
+          "title": "Incentivar pedidos externos",
+          "description": "Investir em pedidos para entrega e retirada.",
+          "effects": {
+            "cashDelta": -300,
+            "demandMultiplier": 0.95,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "rain_promotion",
+          "title": "Criar promoção para o dia",
+          "description": "Reduzir preços para compensar a queda de movimento.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.9,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "payment_system_failure",
+      "title": "Falha no sistema de pagamento",
+      "description": "O sistema de pagamento apresenta instabilidade e pode dificultar as vendas.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.8,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "emergency_support",
+          "title": "Acionar suporte emergencial",
+          "description": "Pagar por atendimento técnico imediato.",
+          "effects": {
+            "cashDelta": -500,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "alternative_payments",
+          "title": "Aceitar pagamentos alternativos",
+          "description": "Operar temporariamente com meios de pagamento limitados.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.92,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "wait_normalization",
+          "title": "Aguardar normalização",
+          "description": "Aguardar o retorno do sistema sem realizar intervenção.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.85,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supplier_delay",
+      "title": "Atraso do fornecedor",
+      "description": "Uma entrega de insumos atrasa e compromete parte da operação planejada.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.9,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "emergency_supplier",
+          "title": "Comprar de fornecedor emergencial",
+          "description": "Comprar os itens necessários de outro fornecedor por um preço maior.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1.15,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "reduce_menu",
+          "title": "Reduzir temporariamente o cardápio",
+          "description": "Suspender alguns itens até a normalização do abastecimento.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.9,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "use_available_stock",
+          "title": "Trabalhar com o estoque disponível",
+          "description": "Manter a operação limitada aos insumos já disponíveis.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 0.85,
+            "stockMultiplier": 0.9,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "new_competitor",
+      "title": "Novo concorrente na região",
+      "description": "Um novo restaurante concorrente inicia as atividades na mesma região.",
+      "educationalConcept": "",
+      "polarity": "NEGATIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.7,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "keep_strategy",
+          "title": "Manter a estratégia atual",
+          "description": "Não alterar a operação diante do novo concorrente.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 0.9,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_MONTH"
+          }
+        },
+        {
+          "id": "marketing_campaign",
+          "title": "Investir em divulgação",
+          "description": "Realizar uma campanha para preservar o movimento.",
+          "effects": {
+            "cashDelta": -700,
+            "demandMultiplier": 0.97,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_MONTH"
+          }
+        },
+        {
+          "id": "promotional_prices",
+          "title": "Adotar preços promocionais",
+          "description": "Reduzir temporariamente os preços para competir pelo público.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.9,
+            "reputationDelta": 0,
+            "duration": "CURRENT_MONTH"
+          }
+        }
+      ]
+    },
+    {
+      "id": "extra_local_demand",
+      "title": "Aumento inesperado da demanda local",
+      "description": "Um aumento inesperado do fluxo de pessoas na região eleva a procura pelo restaurante.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 1,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "normal_operation",
+          "title": "Manter operação normal",
+          "description": "Atender ao aumento de movimento com a estrutura atual.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.2,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "reinforce_operation",
+          "title": "Reforçar a operação",
+          "description": "Investir em apoio temporário para aumentar a capacidade.",
+          "effects": {
+            "cashDelta": -500,
+            "demandMultiplier": 1.2,
+            "capacityMultiplier": 1.15,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "special_promotion",
+          "title": "Criar promoção especial",
+          "description": "Aproveitar o movimento para atrair ainda mais clientes.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.3,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.95,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "positive_online_review",
+      "title": "Avaliação positiva nas redes",
+      "description": "Uma avaliação positiva ganha visibilidade nas redes sociais e aumenta o interesse pelo restaurante.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.9,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "organic_exposure",
+          "title": "Aproveitar o alcance orgânico",
+          "description": "Deixar a avaliação gerar divulgação naturalmente.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 3,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "boost_post",
+          "title": "Impulsionar a publicação",
+          "description": "Investir para ampliar o alcance da avaliação.",
+          "effects": {
+            "cashDelta": -250,
+            "demandMultiplier": 1.15,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 4,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "review_promotion",
+          "title": "Criar promoção vinculada à avaliação",
+          "description": "Usar a repercussão positiva para promover uma oferta.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.2,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.92,
+            "reputationDelta": 3,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "supplier_discount",
+      "title": "Desconto do fornecedor",
+      "description": "Um fornecedor oferece condições especiais de preço para uma compra.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.9,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "normal_purchase",
+          "title": "Fazer a compra normal",
+          "description": "Aproveitar o desconto apenas na compra já planejada.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 0.95,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "larger_purchase",
+          "title": "Fazer uma compra maior",
+          "description": "Aproveitar o desconto para ampliar o estoque.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1.15,
+            "ingredientCostMultiplier": 0.9,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "decline_offer",
+          "title": "Não aproveitar a oferta",
+          "description": "Manter o planejamento atual sem compra adicional.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lunch_demand_peak",
+      "title": "Pico de demanda no horário de almoço",
+      "description": "O restaurante recebe um volume de clientes acima do esperado durante o horário de almoço.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 1.1,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "current_capacity",
+          "title": "Atender com a capacidade atual",
+          "description": "Utilizar a estrutura atual para atender o aumento de clientes.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.25,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "temporary_reinforcement",
+          "title": "Reforçar temporariamente a equipe",
+          "description": "Investir em apoio para ampliar o atendimento.",
+          "effects": {
+            "cashDelta": -400,
+            "demandMultiplier": 1.25,
+            "capacityMultiplier": 1.15,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "high_margin_items",
+          "title": "Destacar itens de maior margem",
+          "description": "Direcionar a demanda para produtos de maior valor.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.15,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1.08,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "local_festival",
+      "title": "Festival na região",
+      "description": "Um festival próximo ao restaurante aumenta significativamente o fluxo de pessoas na região.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.7,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "normal_operation",
+          "title": "Manter operação normal",
+          "description": "Atender o movimento adicional com a estrutura atual.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.3,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "reinforce_team",
+          "title": "Reforçar a equipe",
+          "description": "Contratar apoio temporário para aproveitar o festival.",
+          "effects": {
+            "cashDelta": -800,
+            "demandMultiplier": 1.3,
+            "capacityMultiplier": 1.2,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "festival_combo",
+          "title": "Criar combo especial",
+          "description": "Oferecer uma promoção temática para aumentar o volume de vendas.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.35,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.95,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "competitor_temporary_closure",
+      "title": "Fechamento temporário de concorrente",
+      "description": "Um concorrente próximo fecha temporariamente, aumentando a demanda potencial para o restaurante.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.6,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "serve_extra_demand",
+          "title": "Atender à demanda adicional",
+          "description": "Operar normalmente aproveitando o aumento do movimento.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.15,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "increase_stock",
+          "title": "Reforçar o estoque",
+          "description": "Preparar mais produtos para atender o aumento esperado.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.15,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1.1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "local_advertising",
+          "title": "Fazer divulgação local",
+          "description": "Investir para atrair parte dos clientes do concorrente.",
+          "effects": {
+            "cashDelta": -400,
+            "demandMultiplier": 1.2,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "team_productivity_boost",
+      "title": "Aumento de produtividade da equipe",
+      "description": "A equipe apresenta um desempenho acima do esperado, permitindo melhorar o ritmo de atendimento.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.8,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "maintain_pace",
+          "title": "Manter o ritmo",
+          "description": "Aproveitar naturalmente o ganho de produtividade.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1.1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "team_bonus",
+          "title": "Oferecer bônus à equipe",
+          "description": "Recompensar os funcionários pelo desempenho.",
+          "effects": {
+            "cashDelta": -500,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1.1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 3,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "increase_service_volume",
+          "title": "Aumentar o volume de atendimento",
+          "description": "Aproveitar o desempenho da equipe para atender mais clientes.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1.15,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": -1,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bulk_purchase_opportunity",
+      "title": "Oportunidade de compra em volume",
+      "description": "Surge uma oportunidade de adquirir ingredientes em maior quantidade com desconto.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.8,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "small_batch",
+          "title": "Comprar um pequeno lote",
+          "description": "Aproveitar parcialmente a oportunidade.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1.05,
+            "ingredientCostMultiplier": 0.95,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "large_batch",
+          "title": "Comprar um lote grande",
+          "description": "Aproveitar ao máximo o desconto e ampliar significativamente o estoque.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1.25,
+            "ingredientCostMultiplier": 0.88,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        },
+        {
+          "id": "decline_purchase",
+          "title": "Não realizar a compra",
+          "description": "Manter o estoque e planejamento atuais.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "IMMEDIATE"
+          }
+        }
+      ]
+    },
+    {
+      "id": "influencer_mention",
+      "title": "Menção de influenciador local",
+      "description": "Um influenciador local menciona espontaneamente o restaurante e amplia sua visibilidade.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.6,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "organic_reach",
+          "title": "Aproveitar o alcance orgânico",
+          "description": "Deixar a divulgação ocorrer naturalmente.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.15,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 3,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "boost_mention",
+          "title": "Impulsionar a menção",
+          "description": "Investir em divulgação para ampliar o alcance.",
+          "effects": {
+            "cashDelta": -400,
+            "demandMultiplier": 1.25,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 4,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "new_customer_offer",
+          "title": "Criar oferta para novos clientes",
+          "description": "Criar uma promoção para converter o aumento de visibilidade em visitas.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.3,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.9,
+            "reputationDelta": 3,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "corporate_order",
+      "title": "Pedido corporativo",
+      "description": "Uma empresa procura o restaurante para realizar um pedido de grande volume.",
+      "educationalConcept": "",
+      "polarity": "POSITIVE",
+      "triggerType": "RANDOM",
+      "baseWeight": 0.7,
+      "canRepeat": false,
+      "applicableRestaurantTypes": [],
+      "minRound": 1,
+      "maxRound": 3,
+      "conditions": [],
+      "options": [
+        {
+          "id": "accept_current_capacity",
+          "title": "Aceitar com a capacidade atual",
+          "description": "Aceitar o pedido utilizando a estrutura existente.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.2,
+            "capacityMultiplier": 0.9,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "temporary_support",
+          "title": "Contratar apoio temporário",
+          "description": "Investir em suporte adicional para atender o pedido.",
+          "effects": {
+            "cashDelta": -600,
+            "demandMultiplier": 1.2,
+            "capacityMultiplier": 1,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 1,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        },
+        {
+          "id": "corporate_discount",
+          "title": "Oferecer desconto corporativo",
+          "description": "Conceder desconto para ampliar o volume do pedido.",
+          "effects": {
+            "cashDelta": 0,
+            "demandMultiplier": 1.3,
+            "capacityMultiplier": 0.9,
+            "stockMultiplier": 1,
+            "ingredientCostMultiplier": 1,
+            "averageTicketMultiplier": 0.92,
+            "reputationDelta": 0,
+            "duration": "CURRENT_DAY"
+          }
+        }
+      ]
+    }
+  ]
+}
