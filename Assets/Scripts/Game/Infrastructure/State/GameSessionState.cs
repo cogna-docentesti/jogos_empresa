@@ -5,6 +5,9 @@ public static class GameSessionState
 {
     public static GameSessionEntity Current { get; private set; }
 
+    public static GameSessionEntity IncompatibleSession { get; private set; }
+    public static bool HasIncompatibleSave => IncompatibleSession != null;
+
     public static bool HasSession => Current != null;
 
     public static bool HasActiveSession =>
@@ -49,11 +52,13 @@ public static class GameSessionState
     public static void Set(GameSessionEntity session)
     {
         Current = session;
+        IncompatibleSession = null;
     }
 
     public static void Clear()
     {
         Current = null;
+        IncompatibleSession = null;
     }
 
     public static void LoadActiveSession(string userId)
@@ -67,11 +72,24 @@ public static class GameSessionState
         // Bootstrap com a tela vazia.
         if (repository == null)
         {
-            Current = null;
+            Clear();
             return;
         }
 
-        Current = repository.GetActiveSessionByUserId(userId);
+        var session = repository.GetActiveSessionByUserId(userId);
+        Set(session);
+        if (session == null)
+            return;
+
+        var db = DatabaseInitializer.DatabaseService.Connection;
+        var results = new RoundResultRepository(db).GetBySessionId(session.sessionId);
+        var history = new SessionEventHistoryRepository(db).GetBySession(session.sessionId);
+        if (session.currentRound > 3 || results.Exists(result => result.round > 3)
+            || history.Exists(item => item.round > 3))
+        {
+            IncompatibleSession = session;
+            Current = null;
+        }
     }
 
     public static void Save()
@@ -293,7 +311,10 @@ public static class GameSessionState
 
     public static void AdvanceRound(bool save = true)
     {
-        if (Current == null)
+        if (!HasActiveSession)
+            return;
+
+        if (Current.currentRound < 1 || Current.currentRound >= 3)
             return;
 
         Current.currentRound += 1;
@@ -303,7 +324,7 @@ public static class GameSessionState
     }
 
     // =============================
-    // ENCERRAMENTO DE UMA SESSï¿½O (1 ANO)
+    // ENCERRAMENTO DE UMA SESSÃO — 1 TRIMESTRE / 3 MESES
     // =============================
 
     public static void CompleteSession()

@@ -8,7 +8,7 @@
  *   Assets/Scripts/Data/ScriptableObjects/Event/EventConditionData.cs
  *
  * As regras de erro reproduzem a validacao do Assets/Editor/Events/EventAssetGenerator.cs.
- * As regras de distribuicao do catalogo (20 eventos, 10/10, 15/5) viram AVISOS aqui,
+ * As regras de distribuicao do catalogo (20 eventos, 10/10, 17/3) viram AVISOS aqui,
  * para que seja possivel criar eventos novos sem travar o cadastro.
  */
 import { SNAKE_CASE } from '../validation.js';
@@ -111,6 +111,10 @@ export default {
           help: 'Aleatório: sorteado sem condições. Condicional: só ocorre se as condições forem atendidas.',
         },
         {
+          key: 'exclusionGroup', label: 'Grupo de exclusividade', type: 'enum', enum: 'EventExclusionGroup', default: 'NONE', required: true, width: 'full',
+          help: 'No máximo um evento do mesmo grupo por mês. Sem exclusividade permite vários eventos.',
+        },
+        {
           key: 'baseWeight', label: 'Peso no sorteio', type: 'number', default: 1, exclusiveMin: 0, step: 0.1, width: 'third',
           help: 'Peso relativo. 2 tem o dobro de chance de 1.',
         },
@@ -127,12 +131,12 @@ export default {
       title: 'Rodadas',
       fields: [
         {
-          key: 'minRound', label: 'Rodada mínima', type: 'integer', default: 1, min: 1, step: 1, width: 'half',
-          help: 'Cada rodada corresponde a um mês do ciclo.',
+          key: 'minRound', label: 'Rodada mínima', type: 'integer', default: 1, min: 1, max: CURRENT_CYCLE_ROUNDS, step: 1, width: 'half',
+          help: 'Cada rodada corresponde a um mês do trimestre. Informe um valor de 1 a 3.',
         },
         {
-          key: 'maxRound', label: 'Rodada máxima', type: 'integer', default: CURRENT_CYCLE_ROUNDS, min: 1, step: 1, width: 'half',
-          help: `O ciclo atual tem ${CURRENT_CYCLE_ROUNDS} rodadas.`,
+          key: 'maxRound', label: 'Rodada máxima', type: 'integer', default: CURRENT_CYCLE_ROUNDS, min: 1, max: CURRENT_CYCLE_ROUNDS, step: 1, width: 'half',
+          help: `O trimestre tem ${CURRENT_CYCLE_ROUNDS} meses. A rodada máxima deve estar entre a mínima e ${CURRENT_CYCLE_ROUNDS}.`,
         },
       ],
     },
@@ -204,8 +208,14 @@ export default {
       issues.push({ level: 'error', path: 'maxRound', message: `Intervalo de rodadas inválido (${item.minRound}–${item.maxRound}).` });
     }
     if (Number.isInteger(item.maxRound) && item.maxRound > CURRENT_CYCLE_ROUNDS) {
-      issues.push({ level: 'warning', path: 'maxRound', message: `O ciclo atual do jogo tem ${CURRENT_CYCLE_ROUNDS} rodadas (meses). Rodadas acima disso nunca ocorrem.` });
+      issues.push({ level: 'error', path: 'maxRound', message: `O trimestre tem ${CURRENT_CYCLE_ROUNDS} meses. Não é permitido salvar eventos com rodada máxima acima de ${CURRENT_CYCLE_ROUNDS}.` });
     }
+
+    (item.conditions ?? []).forEach((condition, index) => {
+      if (['SANITARY_RISK_SCORE', 'STOCK_COVERAGE_RATIO'].includes(condition.type)) {
+        issues.push({ level: 'error', path: `conditions.${index}.type`, message: 'Indicador descontinuado. Use qualidade dos equipamentos, cobertura da equipe ou reputação.' });
+      }
+    });
 
     const conditionCount = item.conditions?.length ?? 0;
     if (item.triggerType === 'CONDITIONAL' && conditionCount === 0) {
@@ -241,8 +251,8 @@ export default {
       { label: 'Total', value: items.length, expected: 20 },
       { label: 'Positivos', value: count((e) => e.polarity === 'POSITIVE'), expected: 10 },
       { label: 'Negativos', value: count((e) => e.polarity === 'NEGATIVE'), expected: 10 },
-      { label: 'Aleatórios', value: count((e) => e.triggerType === 'RANDOM'), expected: 15 },
-      { label: 'Condicionais', value: count((e) => e.triggerType === 'CONDITIONAL'), expected: 5 },
+      { label: 'Aleatórios', value: count((e) => e.triggerType === 'RANDOM'), expected: 17 },
+      { label: 'Condicionais', value: count((e) => e.triggerType === 'CONDITIONAL'), expected: 3 },
     ];
   },
 

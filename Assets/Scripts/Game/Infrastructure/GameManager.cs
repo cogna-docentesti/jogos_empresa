@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        service = new GameSessionService(UserId, ProfessorId);
-
         // Todo o preparo da sessao vai dentro do try. O LoadScene fica FORA e
         // depois dele: seja qual for a falha - banco indisponivel, sessao
         // corrompida, entidade que nao desserializa - o jogador precisa sair da
@@ -37,24 +35,7 @@ public class GameManager : MonoBehaviour
         // linha e o app ficava parado numa tela vazia, sem aviso nenhum.
         try
         {
-            GameSessionState.LoadActiveSession(UserId);
-
-            StateMachine.TryChangeState(GameState.MainMenu);
-
-            if (!GameSessionState.HasSession)
-            {
-                Debug.Log("Nenhuma sessao encontrada, criando nova sessao");
-
-                service.CreateNewSession();
-
-                StateMachine.TryChangeState(GameState.Config_Location);
-            }
-            else
-            {
-                Debug.Log("Sessao carregada com sucesso");
-
-                StateMachine.TryChangeState(GameState.Management_Hub);
-            }
+            PrepareSession(UserId, ProfessorId);
         }
         catch (System.Exception e)
         {
@@ -66,6 +47,26 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene("GameScene");
+    }
+
+    internal void PrepareSession(string userId, string professorId)
+    {
+        service = new GameSessionService(userId, professorId);
+        service.LoadActiveSession();
+        StateMachine.TryChangeState(GameState.MainMenu);
+
+        if (GameSessionState.HasIncompatibleSave)
+            return;
+
+        if (!GameSessionState.HasSession)
+        {
+            service.CreateNewSession();
+            StateMachine.TryChangeState(GameState.Config_Location);
+        }
+        else
+        {
+            StateMachine.TryChangeState(GameState.Management_Hub);
+        }
     }
 
     private void OnApplicationPause(bool pauseStatus)

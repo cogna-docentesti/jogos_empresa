@@ -16,6 +16,7 @@ public class EventData : ScriptableObject
     [Header("Classificação")]
     public EventPolarity polarity;
     public EventTriggerType triggerType;
+    public EventExclusionGroup exclusionGroup = EventExclusionGroup.NONE;
 
     [Header("Probabilidade")]
     public float baseWeight = 1f;
@@ -28,7 +29,7 @@ public class EventData : ScriptableObject
 
     [Header("Rodadas")]
     public int minRound = 1;
-    public int maxRound = 12;
+    public int maxRound = 3;
 
     [Header("Condições")]
     public EventConditionData[] conditions;

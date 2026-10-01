@@ -1,7 +1,6 @@
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
 using Game.Domain.Service;
-using Game.Infrastructure.Session;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
@@ -29,9 +28,9 @@ namespace Game.Adapter.In.Controllers
             Refresh();
         }
 
-        private void ResetGame()
+        public void ResetGame()
         {
-            GameSessionEntity session = GameSessionState.Current;
+            GameSessionEntity session = GameSessionState.Current ?? GameSessionState.IncompatibleSession;
             var databaseService = DatabaseInitializer.DatabaseService;
 
             if (session == null || databaseService == null || databaseService.Connection == null)
@@ -42,21 +41,9 @@ namespace Game.Adapter.In.Controllers
 
             try
             {
-                var roundRepository = new RoundResultRepository(databaseService.Connection);
-                var sessionRepository = new GameSessionRepository(databaseService.Connection);
-
-                roundRepository.DeleteBySessionId(session.sessionId);
-                sessionRepository.Delete(session);
-
-                string userId = session.userId;
-                string professorId = session.professorId;
-
-                GameSessionState.Clear();
-                PlayerSession.Clear();
+                var sessionService = new GameSessionService(session.userId, session.professorId);
+                sessionService.RestartSession();
                 MenuNavigator.Instance?.CloseAll();
-
-                var sessionService = new GameSessionService(userId, professorId);
-                sessionService.CreateNewSession();
 
                 view.HideResetWarning();
 

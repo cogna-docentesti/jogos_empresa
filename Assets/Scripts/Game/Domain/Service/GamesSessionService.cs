@@ -20,7 +20,7 @@ public class GameSessionService
 
     public GameSessionEntity CreateNewSession()
     {
-        if (GameSessionState.HasActiveSession)
+        if (GameSessionState.HasActiveSession || GameSessionState.HasIncompatibleSave)
             throw new Exception("J� existe uma sess�o ativa.");
 
         var session = new GameSessionEntity
@@ -62,6 +62,36 @@ public class GameSessionService
         GameSessionState.Save();
 
         return session;
+    }
+
+    public GameSessionEntity RestartSession()
+    {
+        var session = GameSessionState.Current ?? GameSessionState.IncompatibleSession;
+        var db = DatabaseInitializer.DatabaseService?.Connection;
+        if (session == null || db == null)
+            throw new InvalidOperationException("Sessao ou banco indisponivel para reiniciar.");
+
+        GameSessionEntity replacement = null;
+        try
+        {
+            db.RunInTransaction(() =>
+            {
+                new RoundResultRepository(db).DeleteBySessionId(session.sessionId);
+                var historyRepository = new SessionEventHistoryRepository(db);
+                foreach (var item in historyRepository.GetBySession(session.sessionId))
+                    historyRepository.Delete(item);
+                new GameSessionRepository(db).Delete(session);
+                GameSessionState.Clear();
+                replacement = new GameSessionService(session.userId, session.professorId).CreateNewSession();
+            });
+        }
+        catch
+        {
+            GameSessionState.LoadActiveSession(session.userId);
+            throw;
+        }
+        Game.Infrastructure.Session.PlayerSession.Clear();
+        return replacement;
     }
 
     public void LoadActiveSession()
@@ -316,7 +346,11 @@ public class GameSessionService
 
     public void StartRound()
     {
-        if (!GameSessionState.HasSession)
+        if (!GameSessionState.HasActiveSession)
+            return;
+
+        var session = GameSessionState.Current;
+        if (session.currentRound < 1 || session.currentRound > 3)
             return;
 
         GameManager.Instance.StateMachine
@@ -345,6 +379,9 @@ public class GameSessionService
         var roundService = new RoundService();
 
         RoundResultEntity result = roundService.ProcessRound();
+
+        if (result == null)
+            return null;
 
         sm.TryChangeState(GameState.Round_Summary);
 
