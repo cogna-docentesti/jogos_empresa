@@ -147,7 +147,19 @@ public static class GameSessionState
             return;
         }
 
+        float initialCapital = restaurantType switch
+        {
+            RestaurantType.PODRAO => 65000f,
+            RestaurantType.JAPONES => 69000f,
+            RestaurantType.FRANCES => 72000f,
+            _ => throw new ArgumentOutOfRangeException(nameof(restaurantType), restaurantType, null)
+        };
+
+        // Replace the initial contribution without duplicating it or erasing expenses.
+        Current.currentCash += initialCapital - Current.initialCapital;
+        Current.initialCapital = initialCapital;
         Current.restaurantType = restaurantType;
+        Save();
     }
 
     public static void SetLocation(LocationZone locationZone)

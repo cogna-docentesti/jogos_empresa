@@ -44,8 +44,8 @@ public class GameSessionService
             cityId = string.Empty,
             coherenceRating = string.Empty,
 
-            initialCapital = 150000f,
-            currentCash = 150000f,
+            initialCapital = 0f,
+            currentCash = 0f,
             loanBalance = 0f,
             creditLineId = null,
             reputationScore = 50,
