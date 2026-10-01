@@ -1,5 +1,7 @@
+using Game.Infrastructure;
+using Game.Infrastructure.Session;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,15 +45,34 @@ public class GameManager : MonoBehaviour
 
             if (!GameSessionState.HasSession)
             {
-                Debug.Log("Nenhuma sessao encontrada, criando nova sessao");
+                // Sessao nova: nasce so em memoria. A linha no banco so aparece
+                // no confirm da D3.
+                Debug.Log("Nenhuma sessao encontrada, criando nova sessao (so em memoria)");
 
+                PlayerSession.ClearDecisions();
                 service.CreateNewSession();
 
-                StateMachine.TryChangeState(GameState.Config_Location);
+                StateMachine.TryChangeState(InitialDecisionFlow.Location);
+            }
+            else if (!HasCommittedInitialDecisions(GameSessionState.Current))
+            {
+                // Linha antiga, criada pelo codigo anterior assim que o jogo
+                // abria (antes de qualquer escolha). Ela existe no banco mas nao
+                // tem cardapio. Em vez de mandar o jogador para o hub com uma
+                // empresa vazia, refaz as decisoes iniciais. O confirm da D3
+                // sobrescreve esta mesma linha (mesmo sessionId).
+                Debug.Log("Sessao encontrada sem decisoes iniciais, voltando para a D1");
+
+                PlayerSession.ClearDecisions();
+                StateMachine.TryChangeState(InitialDecisionFlow.Location);
             }
             else
             {
                 Debug.Log("Sessao carregada com sucesso");
+
+                // Copia as decisoes gravadas para o rascunho, para que as telas
+                // que leem dele (ex.: Cardapio aberto pelo hub) mostrem o que esta no banco.
+                PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
 
                 StateMachine.TryChangeState(GameState.Management_Hub);
             }
@@ -65,7 +86,19 @@ public class GameManager : MonoBehaviour
             StateMachine.TryChangeState(GameState.Config_Location);
         }
 
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(SceneNames.Game);
+    }
+
+    /// <summary>
+    /// Uma sessao so e considerada "configurada" se o confirm da D3 ja
+    /// aconteceu, e o sinal disso e ter cardapio gravado.
+    /// </summary>
+    private static bool HasCommittedInitialDecisions(GameSessionEntity session)
+    {
+        if (session == null)
+            return false;
+
+        return MenuPricingHelper.FromJson(session.menuPricingJson).items.Count > 0;
     }
 
     private void OnApplicationPause(bool pauseStatus)
@@ -76,7 +109,10 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        // 1. Salva antes de fechar qualquer coisa
+        // 1. Salva antes de fechar qualquer coisa.
+        //    Antes do confirm da D3 este Save() nao faz nada (GameSessionState.IsPersisted
+        //    ainda e false), entao fechar o jogo no meio das decisoes nao cria linha.
+        //    A pergunta "deseja salvar?" e a E-05.
         GameSessionState.Save();
 
         // 2. Agora é seguro fechar o banco

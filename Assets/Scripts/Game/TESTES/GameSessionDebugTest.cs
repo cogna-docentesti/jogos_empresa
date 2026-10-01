@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Game.Infrastructure.Session;
 using UnityEngine;
 
 public class GameSessionDebugTest : MonoBehaviour
@@ -37,11 +39,21 @@ public class GameSessionDebugTest : MonoBehaviour
 
         sm.ForceState(GameState.Config_Location);
 
-        service.ConfirmLocation(LocationZone.Comercio);
-        service.ConfirmRestaurant(RestaurantType.JAPONES);
-        service.ConfirmTargetSegmentAndPrice(Segment.MEDIUM, 90f);
+        // D1, D2 e D3 vao para o rascunho em memoria; o banco so e tocado no
+        // ConfirmInitialDecisions (mesmo caminho do botao Confirmar da D3).
+        PlayerSession.SaveLocation("store", "Área Comercial", LocationZone.Comercio);
+        PlayerSession.SaveRestaurant(RestaurantType.JAPONES, Segment.MEDIUM);
+        sm.ForceState(InitialDecisionFlow.Menu);
 
-        service.ConfirmStructuralConfiguration();
+        var restaurant = Resources.LoadAll<RestaurantData>("Restaurants")
+            .FirstOrDefault(r => r != null && r.type == RestaurantType.JAPONES);
+        PlayerSession.SetMenu(RestaurantType.JAPONES, MenuPricingHelper.FromProducts(restaurant?.products));
+
+        if (!service.ConfirmInitialDecisions())
+        {
+            Debug.LogError("ConfirmInitialDecisions falhou. Veja o aviso logo acima no Console.");
+            return;
+        }
 
         service.ConfirmInitialCapital();
 

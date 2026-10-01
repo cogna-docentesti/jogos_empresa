@@ -49,6 +49,11 @@ namespace Game.Adapter.In.UI
 
         private void Start()
         {
+            // Quando o jogador aperta Voltar na D1, ele quer corrigir o cadastro.
+            // Nesse caso a tela mostra os dados preenchidos e espera o clique,
+            // em vez de pular sozinha para o jogo.
+            bool editRequested = PlayerSession.ConsumeIdentificationEditRequest();
+
             if (!PlayerSession.TryLoadIdentification())
                 return;
 
@@ -57,7 +62,7 @@ namespace Game.Adapter.In.UI
             restaurantNameInput.SetTextWithoutNotify(PlayerSession.RestaurantName);
             OnInputChanged(string.Empty);
 
-            if (ValidateForm())
+            if (!editRequested && ValidateForm())
                 OpenGameScene();
         }
 
@@ -125,7 +130,7 @@ namespace Game.Adapter.In.UI
             buttonRegister.interactable = false;
             validationText.text = string.Empty;
 
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene(Game.Infrastructure.SceneNames.Game);
         }
 
         private bool ValidateForm()

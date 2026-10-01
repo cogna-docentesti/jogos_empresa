@@ -28,4 +28,11 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
         return db.Table<SessionEventHistoryEntity>()
             .FirstOrDefault(x => x.sessionId == sessionId && x.eventId == eventId) != null;
     }
+
+    /// <summary>Apaga os eventos de uma sessao. Usado pelo botao Resetar.</summary>
+    public void DeleteBySessionId(string sessionId)
+    {
+        foreach (var item in GetBySession(sessionId))
+            db.Delete(item);
+    }
 }

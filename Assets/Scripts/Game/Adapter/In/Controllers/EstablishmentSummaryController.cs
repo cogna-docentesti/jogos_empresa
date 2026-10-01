@@ -43,25 +43,39 @@ namespace Game.Adapter.In.Controllers
             try
             {
                 var roundRepository = new RoundResultRepository(databaseService.Connection);
+                var eventRepository = new SessionEventHistoryRepository(databaseService.Connection);
                 var sessionRepository = new GameSessionRepository(databaseService.Connection);
 
+                // Apaga tudo o que pertence a esta partida: meses, eventos e a sessao.
                 roundRepository.DeleteBySessionId(session.sessionId);
+                eventRepository.DeleteBySessionId(session.sessionId);
                 sessionRepository.Delete(session);
+                Debug.Log($"[Banco] RESET: sessao {session.sessionId} apagada (meses, eventos e sessao).");
 
                 string userId = session.userId;
                 string professorId = session.professorId;
 
                 GameSessionState.Clear();
                 PlayerSession.Clear();
+
+                // Reset = jogo do comeco. Sem isto, o cadastro salvo em PlayerPrefs
+                // fazia a identificacao reaparecer preenchida (ou ser pulada).
+                PlayerSession.ClearSavedIdentification();
+
                 MenuNavigator.Instance?.CloseAll();
 
+                // Nova sessao SO em memoria. Ela so vai para o banco no confirm da D3.
                 var sessionService = new GameSessionService(userId, professorId);
                 sessionService.CreateNewSession();
 
                 view.HideResetWarning();
 
                 if (GameManager.Instance != null)
-                    GameManager.Instance.StateMachine.ForceState(GameState.Config_Location);
+                    GameManager.Instance.StateMachine.ForceState(InitialDecisionFlow.Location);
+
+                // Volta para a primeira cena, com o cadastro vazio. Ao clicar em
+                // Cadastrar, a GameScene abre na D1 (o GameManager guarda o estado).
+                UnityEngine.SceneManagement.SceneManager.LoadScene(Game.Infrastructure.SceneNames.Identification);
             }
             catch (System.Exception exception)
             {

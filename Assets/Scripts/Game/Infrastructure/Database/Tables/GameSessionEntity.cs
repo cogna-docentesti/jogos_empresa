@@ -20,6 +20,23 @@ public class GameSessionEntity
     [NotNull]
     public string cityId { get; set; }
 
+    // ── Identificacao do aluno (cena 0_Identification, tela do Renan R-02) ──
+    // Sem [NotNull] de proposito: bancos que ja existem tem linhas sem esses
+    // valores. Uma coluna nova NOT NULL sem default faz o SQLite recusar o
+    // ALTER TABLE e o jogo quebraria na abertura para quem ja tinha partida.
+    // Preenchidas no confirm da D3 (GameSessionService.CommitInitialDecisions).
+
+    public string studentName { get; set; }
+
+    public string studentRA { get; set; }
+
+    /// <summary>Nome do restaurante digitado na identificacao (PlayerSession.RestaurantName).</summary>
+    public string companyName { get; set; }
+
+    // ── Decisoes obrigatorias ──
+    // D1 = locationZone, D2 = restaurantType + targetSegment,
+    // D3 = menuPricingJson (pratos e preco escolhido de cada um, formato MenuPricingData).
+
     public RestaurantType restaurantType { get; set; }
 
     public LocationZone locationZone { get; set; }

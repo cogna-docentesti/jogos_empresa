@@ -1,10 +1,22 @@
 using System.Collections.Generic;
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
+using Game.Infrastructure.Session;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
 {
+    /// <summary>
+    /// D3 Cardapio. Ultima decisao obrigatoria.
+    ///
+    /// Le o restaurante e os precos do rascunho (PlayerSession). No confirm,
+    /// chama GameSessionService.ConfirmInitialDecisions(), que grava tudo no
+    /// banco de uma vez.
+    ///
+    /// Esta tela tambem abre pelo hub (Menu do Jogo) depois que a partida ja
+    /// comecou. Nesse caso o rodape (Confirmar/Voltar) fica escondido e ela so
+    /// mostra o cardapio salvo, que o GameManager colocou no rascunho ao carregar.
+    /// </summary>
     public sealed class MenuPricingScreenController : MonoBehaviour
     {
         [SerializeField] private MenuPricingScreenView view;
@@ -56,15 +68,18 @@ namespace Game.Adapter.In.Controllers
             if (view == null || !view.HasRequiredReferences())
                 return;
 
-            var session = GameSessionState.Current;
-            if (session == null)
+            // O restaurante vem do rascunho da D2, nao da GameSessionEntity:
+            // antes do confirm da D3 a entidade ainda nao recebeu nada.
+            if (!PlayerSession.SelectedRestaurantType.HasValue)
             {
-                view.SetHint("Nenhuma sessao ativa.");
+                view.SetHint("Escolha o restaurante na etapa anterior.");
                 view.SetConfirmEnabled(false);
                 return;
             }
 
-            var restaurant = FindRestaurant(session.restaurantType);
+            RestaurantType restaurantType = PlayerSession.SelectedRestaurantType.Value;
+
+            var restaurant = FindRestaurant(restaurantType);
             if (restaurant == null)
             {
                 view.SetHint("Restaurante selecionado nao encontrado.");
@@ -75,7 +90,11 @@ namespace Game.Adapter.In.Controllers
             _currentRestaurant = restaurant;
             view.SetTitle($"Cardapio - {restaurant.displayName}");
 
-            var savedPricing = MenuPricingHelper.FromJson(session.menuPricingJson);
+            // Reidratacao: se o jogador ja montou este cardapio (e voltou para a
+            // D2 sem trocar de restaurante), os precos dele voltam aqui.
+            var savedPricing = PlayerSession.MenuRestaurantType == restaurantType
+                ? PlayerSession.GetMenu()
+                : new MenuPricingData();
 
             foreach (var product in restaurant.products)
             {
@@ -200,17 +219,71 @@ namespace Game.Adapter.In.Controllers
             };
         }
 
+        /// <summary>
+        /// Confirm da D3: o UNICO ponto do fluxo inicial que grava no SQLite.
+        /// Primeiro o cardapio vai para o rascunho; depois o service copia o
+        /// rascunho inteiro (D1, D2, D3 e identificacao) para a sessao e grava
+        /// uma vez so.
+        /// </summary>
         private void OnConfirm()
+        {
+            if (_currentRestaurant == null)
+                return;
+
+            var pricing = BuildPricing(requireValidPrices: true);
+            if (pricing == null)
+            {
+                ValidatePrices();
+                return;
+            }
+
+            PlayerSession.SetMenu(_currentRestaurant.type, pricing);
+
+            var session = GameSessionState.Current;
+            if (session == null)
+            {
+                view.SetHint("Nenhuma sessao ativa. Reinicie o jogo.");
+                return;
+            }
+
+            var service = new GameSessionService(session.userId, session.professorId);
+
+            if (!service.ConfirmInitialDecisions())
+            {
+                view.SetHint("Nao foi possivel salvar. Confira suas escolhas e tente de novo.");
+                return;
+            }
+        }
+
+        private void OnBack()
+        {
+            // Guarda os precos que estao na tela: se o jogador voltar para a D2
+            // e avancar sem trocar de restaurante, encontra o cardapio como deixou.
+            if (_currentRestaurant != null)
+            {
+                var pricing = BuildPricing(requireValidPrices: false);
+                if (pricing != null)
+                    PlayerSession.SetMenu(_currentRestaurant.type, pricing);
+            }
+
+            InitialDecisionFlow.GoTo(InitialDecisionFlow.Restaurant);
+        }
+
+        /// <summary>
+        /// Monta o MenuPricingData com o que esta nos sliders.
+        /// Devolve null se requireValidPrices e algum preco estiver fora da faixa.
+        /// </summary>
+        private MenuPricingData BuildPricing(bool requireValidPrices)
         {
             var pricing = new MenuPricingData();
 
             foreach (var item in _items)
             {
-                if (item.Product == null || !item.Product.IsPriceInRange(item.SelectedPrice))
-                {
-                    ValidatePrices();
-                    return;
-                }
+                if (item == null || item.Product == null || string.IsNullOrWhiteSpace(item.Product.id))
+                    continue;
+
+                if (requireValidPrices && !item.Product.IsPriceInRange(item.SelectedPrice))
+                    return null;
 
                 pricing.items.Add(new MenuPricingItem
                 {
@@ -219,17 +292,7 @@ namespace Game.Adapter.In.Controllers
                 });
             }
 
-            var session = GameSessionState.Current;
-            if (session == null)
-                return;
-
-            var service = new GameSessionService(session.userId, session.professorId);
-            service.ConfirmMenuPricing(pricing);
-        }
-
-        private void OnBack()
-        {
-            GameManager.Instance.StateMachine.ForceState(GameState.Config_Restaurant);
+            return pricing;
         }
 
         private void ClearItems()
