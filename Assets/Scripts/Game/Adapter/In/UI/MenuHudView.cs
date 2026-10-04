@@ -52,7 +52,7 @@ namespace Game.Adapter.In.UI
             }
 
             if (roundValue != null)
-                roundValue.text = $"Rodada {summary.Round}";
+                roundValue.text = $"Mês {summary.Round} de 3";
         }
     }
 }

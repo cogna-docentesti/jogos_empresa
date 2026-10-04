@@ -51,6 +51,24 @@ public class UIStateListener : MonoBehaviour
     private void HandleStateChanged(GameState state)
     {
         HideAllPanels();
+        var views = FindObjectsByType<Game.Adapter.In.UI.EstablishmentSummaryView>(
+            FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        if (GameSessionState.HasIncompatibleSave)
+        {
+            Game.Adapter.In.UI.Navigation.MenuNavigator.Instance?.CloseAll();
+            if (views.Length > 0)
+            {
+                var view = views[0];
+                var controller = view.GetComponent<Game.Adapter.In.Controllers.EstablishmentSummaryController>();
+                if (controller != null)
+                    view.ShowIncompatibleSave(controller.ResetGame);
+            }
+            return;
+        }
+
+        foreach (var view in views)
+            view.HideIncompatibleSave();
 
         switch (state)
         {

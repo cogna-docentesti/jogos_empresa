@@ -419,7 +419,7 @@ namespace Game.EditorTools
             BuildPill(safeRow, "ScorePill", "Score", "0", GamePalette.HexXp, "Star",
                       -398f, "ScoreP", out var scoreValue);
 
-            BuildPill(safeRow, "RoundPill", "", "Rodada 1", GamePalette.HexInkBody, "Calendar",
+            BuildPill(safeRow, "RoundPill", "", "Mês 1 de 3", GamePalette.HexInkBody, "Calendar",
                       -764f, "RoundP", out var roundValue);
 
             var hud = UiFactory.Ensure<MenuHudView>(topBar.gameObject);
@@ -543,7 +543,7 @@ namespace Game.EditorTools
             UiFactory.Stretch(panel);
             UiFactory.Solid(panel, GamePalette.Background, raycast: true);
 
-            var subtitleLabel = BuildHeader(panel, "Meu Estabelecimento", "Rodada 1",
+            var subtitleLabel = BuildHeader(panel, "Meu Estabelecimento", "Mês 1 de 3",
                                             GamePalette.HexNodeHome, GamePalette.HexSoftHome, "Home");
 
             // Estrutura antiga (duas colunas de linhas full-width) foi aposentada.

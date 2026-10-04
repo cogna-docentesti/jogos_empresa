@@ -37,8 +37,21 @@ namespace Game.Adapter.In.Controllers
 
         private void Awake()
         {
-            // Composicao manual. Trocar por SqliteLocationRepository na E-06.
-            _repository = new StaticLocationRepository();
+            // E-06: as localizacoes vem do SQLite. O controller so conhece a
+            // interface ILocationRepository, entao trocar a origem e esta linha.
+            // Se o banco nao abriu (ex.: biblioteca nativa faltando no aparelho),
+            // cai no repositorio estatico, que le os assets direto: a D1
+            // continua funcionando, so que sem banco.
+            var database = DatabaseInitializer.DatabaseService;
+            if (DatabaseInitializer.IsReady && database != null && database.Connection != null)
+            {
+                _repository = new SqliteLocationRepository(database.Connection);
+            }
+            else
+            {
+                Debug.LogWarning("[LocationScreenController] Banco indisponivel. Usando StaticLocationRepository (assets).");
+                _repository = new StaticLocationRepository();
+            }
         }
 
         private void Start()

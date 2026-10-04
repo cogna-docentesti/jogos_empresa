@@ -99,7 +99,15 @@ namespace Game.Adapter.In.UI
                 interestRateText.text = FormatInterestRate(creditLine.monthlyInterestRate);
 
             if (termText != null)
-                termText.text = $"{creditLine.termRounds} rodadas";
+            {
+                int term = GameSessionState.HasActiveSession
+                    ? LoanService.ContractTerm(GameSessionState.Current.currentRound) : 0;
+                termText.text = creditLine.maxAmount <= 0f ? "Sem parcelas"
+                    : term > 0 ? $"{term} meses" : "Novas contratações indisponíveis";
+            }
+
+            if (selectButton != null)
+                selectButton.interactable = creditLine.maxAmount <= 0f || LoanService.CanContract;
 
             SetCoinCount(coinCount);
 

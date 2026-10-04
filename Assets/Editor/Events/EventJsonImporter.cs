@@ -205,6 +205,7 @@ namespace Game.EditorTools
 
             EventPolarity polarity = ParseEnum<EventPolarity>(dto.polarity, $"{label}.polarity", errors, ref ok);
             EventTriggerType trigger = ParseEnum<EventTriggerType>(dto.triggerType, $"{label}.triggerType", errors, ref ok);
+            EventExclusionGroup exclusionGroup = ParseEnum<EventExclusionGroup>(dto.exclusionGroup, $"{label}.exclusionGroup", errors, ref ok);
 
             var restaurantTypes = (dto.applicableRestaurantTypes ?? Array.Empty<string>())
                 .Select((value, i) => ParseEnum<RestaurantType>(value, $"{label}.applicableRestaurantTypes[{i}]", errors, ref ok))
@@ -254,6 +255,7 @@ namespace Game.EditorTools
                 educationalConcept = dto.educationalConcept ?? string.Empty,
                 polarity = polarity,
                 triggerType = trigger,
+                exclusionGroup = exclusionGroup,
                 baseWeight = dto.baseWeight,
                 canRepeat = dto.canRepeat,
                 applicableRestaurantTypes = restaurantTypes,
@@ -272,6 +274,13 @@ namespace Game.EditorTools
                 Enum.IsDefined(typeof(TEnum), parsed) &&
                 !int.TryParse(value, out _))
             {
+                if (typeof(TEnum) == typeof(EventConditionType) &&
+                    (value == "SANITARY_RISK_SCORE" || value == "STOCK_COVERAGE_RATIO"))
+                {
+                    errors.Add($"{where}: indicador descontinuado, nao permitido em novos conteudos.");
+                    ok = false;
+                    return default(TEnum);
+                }
                 return parsed;
             }
 
@@ -313,8 +322,8 @@ namespace Game.EditorTools
                 if (e.baseWeight <= 0f)
                     errors.Add($"O evento '{e.id}' deve possuir baseWeight positivo.");
 
-                if (e.minRound < 1 || e.maxRound < e.minRound)
-                    errors.Add($"O evento '{e.id}' possui intervalo de rodadas inválido ({e.minRound}-{e.maxRound}).");
+                if (e.minRound < 1 || e.maxRound > 3 || e.minRound > e.maxRound)
+                    errors.Add($"O evento '{e.id}' possui intervalo de rodadas inválido ({e.minRound}-{e.maxRound}). Use 1 <= minRound <= maxRound <= 3.");
 
                 int conditionCount = e.conditions?.Length ?? 0;
                 if (e.triggerType == EventTriggerType.CONDITIONAL && conditionCount == 0)
@@ -376,6 +385,7 @@ namespace Game.EditorTools
                 json.Property("educationalConcept", e.educationalConcept);
                 json.Property("polarity", e.polarity.ToString());
                 json.Property("triggerType", e.triggerType.ToString());
+                json.Property("exclusionGroup", e.exclusionGroup.ToString());
                 json.Property("baseWeight", e.baseWeight);
                 json.Property("canRepeat", e.canRepeat);
                 json.StringArray("applicableRestaurantTypes", (e.applicableRestaurantTypes ?? Array.Empty<RestaurantType>()).Select(x => x.ToString()));
@@ -513,6 +523,7 @@ namespace Game.EditorTools
             public string educationalConcept;
             public EventPolarity polarity;
             public EventTriggerType triggerType;
+            public EventExclusionGroup exclusionGroup;
             public float baseWeight;
             public bool canRepeat;
             public RestaurantType[] applicableRestaurantTypes;
@@ -529,6 +540,7 @@ namespace Game.EditorTools
                 asset.educationalConcept = educationalConcept;
                 asset.polarity = polarity;
                 asset.triggerType = triggerType;
+                asset.exclusionGroup = exclusionGroup;
                 asset.baseWeight = baseWeight;
                 asset.canRepeat = canRepeat;
                 asset.applicableRestaurantTypes = applicableRestaurantTypes;
@@ -563,6 +575,7 @@ namespace Game.EditorTools
             public string educationalConcept;
             public string polarity;
             public string triggerType;
+            public string exclusionGroup = "NONE";
             public float baseWeight = 1f;
             public bool canRepeat;
             public string[] applicableRestaurantTypes;

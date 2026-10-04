@@ -165,6 +165,20 @@ namespace Game.Infrastructure.Session
             SelectedZone = zone;
         }
 
+        /// <summary>
+        /// Versao antiga do SaveLocation, mantida porque o RoundFlowDebugTest
+        /// (Thaysla) a usa para restaurar o rascunho no fim dos testes.
+        /// A zona e deduzida do id; id nulo limpa a localizacao.
+        /// </summary>
+        public static void SaveSelectedEstablishment(string establishmentId, string establishmentName)
+        {
+            SelectedEstablishmentId = establishmentId;
+            SelectedEstablishmentName = establishmentName;
+            SelectedZone = LocationZoneMap.IsKnownId(establishmentId)
+                ? LocationZoneMap.ToZone(establishmentId)
+                : (LocationZone?)null;
+        }
+
         // =============================================================
         //  D2 RESTAURANTE (tipo + classe social atendida)
         // =============================================================

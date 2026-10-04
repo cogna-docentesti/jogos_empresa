@@ -128,11 +128,14 @@ namespace Game.EditorTools
                         errors.Add($"O evento '{definition.id}' possui uma opção sem ID.");
                 }
 
+                if (!Enum.IsDefined(typeof(EventExclusionGroup), definition.exclusionGroup))
+                    errors.Add($"O evento '{definition.id}' possui grupo de exclusividade invalido.");
+
                 if (definition.baseWeight <= 0f)
                     errors.Add($"O evento '{definition.id}' deve possuir baseWeight positivo.");
 
-                if (definition.minRound < 1 || definition.maxRound < definition.minRound)
-                    errors.Add($"O evento '{definition.id}' possui intervalo de rodadas inválido ({definition.minRound}-{definition.maxRound}).");
+                if (definition.minRound < 1 || definition.maxRound > 3 || definition.minRound > definition.maxRound)
+                    errors.Add($"O evento '{definition.id}' possui intervalo de rodadas inválido ({definition.minRound}-{definition.maxRound}). Use 1 <= minRound <= maxRound <= 3.");
 
                 int conditionCount = definition.conditions?.Length ?? 0;
                 if (definition.triggerType == EventTriggerType.CONDITIONAL && conditionCount == 0)
@@ -156,12 +159,12 @@ namespace Game.EditorTools
                 errors.Add($"Esperados 10 eventos POSITIVE, mas foram encontrados {positiveCount}.");
             if (negativeCount != 10)
                 errors.Add($"Esperados 10 eventos NEGATIVE, mas foram encontrados {negativeCount}.");
-            if (randomCount != 15)
-                errors.Add($"Esperados 15 eventos RANDOM, mas foram encontrados {randomCount}.");
-            if (conditionalCount != 5)
-                errors.Add($"Esperados 5 eventos CONDITIONAL, mas foram encontrados {conditionalCount}.");
-            if (conditionalNegativeCount != 5)
-                errors.Add($"Todos os 5 eventos CONDITIONAL devem ser NEGATIVE; encontrados {conditionalNegativeCount}.");
+            if (randomCount != 17)
+                errors.Add($"Esperados 17 eventos RANDOM, mas foram encontrados {randomCount}.");
+            if (conditionalCount != 3)
+                errors.Add($"Esperados 3 eventos CONDITIONAL, mas foram encontrados {conditionalCount}.");
+            if (conditionalNegativeCount != 3)
+                errors.Add($"Todos os 3 eventos CONDITIONAL devem ser NEGATIVE; encontrados {conditionalNegativeCount}.");
 
             return errors.Count == 0;
         }
@@ -230,6 +233,7 @@ namespace Game.EditorTools
             asset.educationalConcept = string.Empty;
             asset.polarity = definition.polarity;
             asset.triggerType = definition.triggerType;
+            asset.exclusionGroup = definition.exclusionGroup;
             asset.baseWeight = definition.baseWeight;
             asset.canRepeat = false;
             asset.applicableRestaurantTypes = Array.Empty<RestaurantType>();
@@ -283,6 +287,34 @@ namespace Game.EditorTools
             Debug.LogError($"[EventAssetGenerator] {heading}:\n- {string.Join("\n- ", errors)}");
         }
 
+        private static EventExclusionGroup ExclusionGroupFor(string id)
+        {
+            switch (id)
+            {
+                case "negative_review":
+                case "positive_online_review":
+                case "influencer_mention": return EventExclusionGroup.SOCIAL_REPUTATION;
+                case "ingredient_price_increase":
+                case "supplier_delay":
+                case "supplier_discount":
+                case "bulk_purchase_opportunity": return EventExclusionGroup.SUPPLIER;
+                case "new_competitor":
+                case "competitor_temporary_closure": return EventExclusionGroup.COMPETITION;
+                case "extra_local_demand":
+                case "lunch_demand_peak":
+                case "local_festival":
+                case "corporate_order": return EventExclusionGroup.DEMAND_SPIKE;
+                case "freezer_breakdown":
+                case "insufficient_team":
+                case "health_inspection":
+                case "excessive_food_waste":
+                case "heavy_rain":
+                case "payment_system_failure":
+                case "team_productivity_boost": return EventExclusionGroup.NONE;
+                default: throw new InvalidOperationException("Evento sem grupo de exclusividade definido: " + id);
+            }
+        }
+
         private static EventDefinition Event(
             string id,
             string title,
@@ -299,6 +331,7 @@ namespace Game.EditorTools
                 description = Descriptions[id],
                 polarity = polarity,
                 triggerType = triggerType,
+                exclusionGroup = ExclusionGroupFor(id),
                 baseWeight = baseWeight,
                 canRepeat = false,
                 minRound = 1,
@@ -355,13 +388,13 @@ namespace Game.EditorTools
                     Option("postpone_repair", "Adiar o reparo", "Adiar o conserto e assumir o risco de perda de estoque.", Effects(stockMultiplier: 0.85f))),
 
                 Event("insufficient_team", "Funcionário ausente", EventPolarity.NEGATIVE, EventTriggerType.CONDITIONAL, 1f,
-                    new[] { Condition(EventConditionType.TEAM_COVERAGE_RATIO, EventConditionOperator.LESS_OR_EQUAL, 1f) },
+                    new[] { Condition(EventConditionType.TEAM_COVERAGE_RATIO, EventConditionOperator.LESS_THAN, 1f) },
                     Option("hire_temporary", "Contratar substituto temporário", "Contratar apoio temporário para manter a capacidade operacional.", Effects(cashDelta: -350f, duration: EventEffectDuration.CURRENT_DAY)),
                     Option("redistribute_team", "Redistribuir as funções", "Redistribuir as tarefas entre os funcionários disponíveis.", Effects(capacityMultiplier: 0.90f, duration: EventEffectDuration.CURRENT_DAY)),
                     Option("operate_reduced", "Trabalhar com equipe reduzida", "Manter a operação com menos funcionários.", Effects(capacityMultiplier: 0.75f, reputationDelta: -2, duration: EventEffectDuration.CURRENT_DAY))),
 
-                Event("health_inspection", "Fiscalização sanitária", EventPolarity.NEGATIVE, EventTriggerType.CONDITIONAL, 0.8f,
-                    new[] { Condition(EventConditionType.SANITARY_RISK_SCORE, EventConditionOperator.GREATER_OR_EQUAL, 0.70f) },
+                Event("health_inspection", "Fiscalização sanitária", EventPolarity.NEGATIVE, EventTriggerType.RANDOM, 0.8f,
+                    Array.Empty<EventConditionData>(),
                     Option("full_compliance", "Fazer todas as adequações imediatamente", "Corrigir integralmente os problemas identificados.", Effects(cashDelta: -1500f, reputationDelta: 2)),
                     Option("minimum_compliance", "Corrigir apenas pontos obrigatórios", "Realizar somente as adequações mínimas exigidas.", Effects(cashDelta: -600f)),
                     Option("ignore_requirements", "Não realizar adequações", "Ignorar as exigências da fiscalização.", Effects(cashDelta: -2000f, reputationDelta: -5))),
@@ -372,8 +405,8 @@ namespace Game.EditorTools
                     Option("reply_only", "Apenas responder", "Responder à avaliação sem oferecer compensação.", Effects(demandMultiplier: 0.94f, reputationDelta: 1, duration: EventEffectDuration.CURRENT_DAY)),
                     Option("ignore_review", "Ignorar a avaliação", "Não responder à crítica publicada.", Effects(demandMultiplier: 0.90f, reputationDelta: -4, duration: EventEffectDuration.CURRENT_DAY))),
 
-                Event("excessive_food_waste", "Desperdício acima do esperado", EventPolarity.NEGATIVE, EventTriggerType.CONDITIONAL, 0.9f,
-                    new[] { Condition(EventConditionType.STOCK_COVERAGE_RATIO, EventConditionOperator.GREATER_OR_EQUAL, 1.30f) },
+                Event("excessive_food_waste", "Desperdício acima do esperado", EventPolarity.NEGATIVE, EventTriggerType.RANDOM, 0.9f,
+                    Array.Empty<EventConditionData>(),
                     Option("adjust_planning", "Ajustar o planejamento", "Reduzir as compras futuras para adequar o estoque.", Effects(stockMultiplier: 0.95f)),
                     Option("create_promotion", "Criar uma promoção", "Criar uma promoção para aumentar a saída dos produtos em estoque.", Effects(demandMultiplier: 1.10f, stockMultiplier: 0.98f, averageTicketMultiplier: 0.90f, duration: EventEffectDuration.CURRENT_DAY)),
                     Option("keep_planning", "Manter o planejamento atual", "Não alterar o planejamento de compras.", Effects(stockMultiplier: 0.85f))),
@@ -462,6 +495,7 @@ namespace Game.EditorTools
             public string description;
             public EventPolarity polarity;
             public EventTriggerType triggerType;
+            public EventExclusionGroup exclusionGroup;
             public float baseWeight;
             public bool canRepeat;
             public int minRound;

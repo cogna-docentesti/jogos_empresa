@@ -23,14 +23,22 @@ export const ENUMS = {
       { value: 'CONDITIONAL', label: 'Condicional' },
     ],
   },
+  EventExclusionGroup: {
+    csharp: 'Assets/Scripts/Game/Domain/Enums/EventExclusionGroup.cs',
+    values: [
+      { value: 'NONE', label: 'Sem exclusividade' },
+      { value: 'SOCIAL_REPUTATION', label: 'Reputação social' },
+      { value: 'SUPPLIER', label: 'Fornecedores' },
+      { value: 'COMPETITION', label: 'Concorrência' },
+      { value: 'DEMAND_SPIKE', label: 'Pico de demanda' },
+    ],
+  },
   EventConditionType: {
     csharp: 'Assets/Scripts/Game/Domain/Enums/EventConditionType.cs',
     values: [
       { value: 'EQUIPMENT_QUALITY_SCORE', label: 'Qualidade dos equipamentos' },
       { value: 'TEAM_COVERAGE_RATIO', label: 'Cobertura da equipe' },
-      { value: 'SANITARY_RISK_SCORE', label: 'Risco sanitário' },
       { value: 'REPUTATION_SCORE', label: 'Reputação' },
-      { value: 'STOCK_COVERAGE_RATIO', label: 'Cobertura de estoque' },
     ],
   },
   EventConditionOperator: {

@@ -21,6 +21,18 @@ public class RoundService
 
         var session = GameSessionState.Current;
 
+        if (!GameSessionState.HasActiveSession)
+        {
+            Debug.LogWarning("A sessao ja esta encerrada. Nenhuma rodada sera processada.");
+            return null;
+        }
+
+        if (session.currentRound < 1 || session.currentRound > 3)
+        {
+            Debug.LogWarning("Rodada fora do intervalo trimestral de 1 a 3. Nenhuma rodada sera processada.");
+            return null;
+        }
+
         float openingCash = session.currentCash;
 
         // Valores temporários/simulados.
@@ -30,8 +42,9 @@ public class RoundService
         float rent = 9000f;
         float salaries = 8000f;
         float utilities = 1500f;
-        float loanPayment = 0f;
-        float thirteenthSalary = session.currentRound == 12 ? salaries : 0f;
+        var creditLine = LoanService.FindLine(session.creditLineId);
+        float loanPayment = LoanService.Installment(session.loanBalance, creditLine, session.currentRound);
+        float thirteenthSalary = 0f;
         float eventCashImpact = 0f;
         float coherenceFactor = GetCoherenceFactor(session.coherenceRating);
 
@@ -73,28 +86,43 @@ public class RoundService
             reputationDelta = 0,
             coherenceFactor = session.alignmentFactor,
 
+            // E-04: reputacao ao fechar o mes, para o resumo mensal (Renan).
+            // customers fica 0 ate o motor financeiro calcular clientes (T-06).
+            reputationAtEnd = session.reputationScore,
+
             createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
         };
 
         _roundRepository.Insert(result);
 
+        if (creditLine != null && session.loanBalance > 0f)
+            GameSessionState.SetLoan(session.creditLineId,
+                Mathf.Max(0f, session.loanBalance - LoanService.PrincipalPayment(session.loanBalance, session.currentRound)), false);
+
         GameSessionState.SetCash(closingCash, false);
         GameSessionState.RegisterNegativeRound(netResult < 0, false);
 
-        if (session.currentRound >= 12)
-        {
-            GameSessionState.CompleteSession();
-        }
-        else if (session.consecutiveNegativeRounds >= 3)
+        EvaluateSessionEnd();
+
+        return result;
+    }
+
+    internal static void EvaluateSessionEnd()
+    {
+        var session = GameSessionState.Current;
+
+        if (session.consecutiveNegativeRounds >= 3)
         {
             GameSessionState.BankruptSession();
+        }
+        else if (session.currentRound == 3)
+        {
+            GameSessionState.CompleteSession();
         }
         else
         {
             GameSessionState.AdvanceRound(true);
         }
-
-        return result;
     }
 
     private float GetCoherenceFactor(string coherenceRating)

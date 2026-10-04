@@ -19,6 +19,9 @@ public static class GameSessionState
 {
     public static GameSessionEntity Current { get; private set; }
 
+    public static GameSessionEntity IncompatibleSession { get; private set; }
+    public static bool HasIncompatibleSave => IncompatibleSession != null;
+
     public static bool HasSession => Current != null;
 
     public static bool HasActiveSession =>
@@ -29,6 +32,14 @@ public static class GameSessionState
     /// LoadActiveSession ou ja passou pelo Persist() do confirm da D3.
     /// </summary>
     public static bool IsPersisted { get; private set; }
+
+    /// <summary>
+    /// True quando algo mudou na sessao em memoria e ainda nao foi gravado.
+    /// Usado pelo dialogo Sair (E-05) para decidir se pergunta "salvar antes de sair?".
+    /// </summary>
+    public static bool HasUnsavedChanges { get; private set; }
+
+    private static void MarkDirty() => HasUnsavedChanges = true;
 
     private static GameSessionRepository Repository
     {
@@ -65,13 +76,17 @@ public static class GameSessionState
     public static void Set(GameSessionEntity session)
     {
         Current = session;
+        IncompatibleSession = null;
         IsPersisted = false;
+        HasUnsavedChanges = session != null;
     }
 
     public static void Clear()
     {
         Current = null;
         IsPersisted = false;
+        HasUnsavedChanges = false;
+        IncompatibleSession = null;
     }
 
     public static void LoadActiveSession(string userId)
@@ -85,13 +100,34 @@ public static class GameSessionState
         // Bootstrap com a tela vazia.
         if (repository == null)
         {
-            Current = null;
-            IsPersisted = false;
+            Clear();
             return;
         }
 
-        Current = repository.GetActiveSessionByUserId(userId);
-        IsPersisted = Current != null;
+        // Comeca do zero: sem sessao, sem save incompativel, nada gravado.
+        Clear();
+
+        var session = repository.GetActiveSessionByUserId(userId);
+        if (session == null)
+            return;
+
+        // Save do ciclo antigo de 12 meses (Thaysla): a partida existe no banco
+        // mas nao pode ser jogada no ciclo de 3 meses. Fica separada em
+        // IncompatibleSession ate o jogador confirmar o reinicio.
+        var db = DatabaseInitializer.DatabaseService.Connection;
+        var results = new RoundResultRepository(db).GetBySessionId(session.sessionId);
+        var history = new SessionEventHistoryRepository(db).GetBySession(session.sessionId);
+        if (session.currentRound > 3 || results.Exists(result => result.round > 3)
+            || history.Exists(item => item.round > 3))
+        {
+            IncompatibleSession = session;
+            return;
+        }
+
+        // Veio do banco, entao ja esta gravada: os Save() seguintes valem.
+        Current = session;
+        IsPersisted = true;
+        HasUnsavedChanges = false;
     }
 
     /// <summary>
@@ -120,6 +156,7 @@ public static class GameSessionState
             // continua deixando UMA linha so.
             repository.InsertOrReplace(Current);
             IsPersisted = true;
+            HasUnsavedChanges = false;
             Debug.Log($"[Banco] PRIMEIRA GRAVACAO da sessao {Current.sessionId} (confirm da D3). "
                     + $"Linhas na tabela GameSessionEntity: {repository.Table().Count()}.");
             return true;
@@ -163,6 +200,7 @@ public static class GameSessionState
         // sessionId e [PrimaryKey], entao InsertOrReplace resolve os dois casos
         // e continua idempotente.
         repository.InsertOrReplace(Current);
+        HasUnsavedChanges = false;
         Debug.Log($"[Banco] Sessao {Current.sessionId} atualizada (rodada {Current.currentRound}, caixa {Current.currentCash:N0}).");
     }
 
@@ -188,6 +226,7 @@ public static class GameSessionState
             return;
 
         Current.cityId = cityId;
+        MarkDirty();
     }
 
     public static void SetRestaurant(RestaurantType restaurantType)
@@ -195,7 +234,20 @@ public static class GameSessionState
         if (Current == null || IsLockedForSetup("o tipo de restaurante"))
             return;
 
+        float initialCapital = restaurantType switch
+        {
+            RestaurantType.PODRAO => 65000f,
+            RestaurantType.JAPONES => 69000f,
+            RestaurantType.FRANCES => 72000f,
+            _ => throw new ArgumentOutOfRangeException(nameof(restaurantType), restaurantType, null)
+        };
+
+        // Replace the initial contribution without duplicating it or erasing expenses.
+        Current.currentCash += initialCapital - Current.initialCapital;
+        Current.initialCapital = initialCapital;
         Current.restaurantType = restaurantType;
+        MarkDirty();
+        Save();
     }
 
     public static void SetLocation(LocationZone locationZone)
@@ -204,6 +256,7 @@ public static class GameSessionState
             return;
 
         Current.locationZone = locationZone;
+        MarkDirty();
     }
 
     public static void SetTargetSegment(Segment targetSegment)
@@ -212,6 +265,7 @@ public static class GameSessionState
             return;
 
         Current.targetSegment = targetSegment;
+        MarkDirty();
     }
 
     /// <summary>Dados da cena 0_Identification (tela do Renan, R-02).</summary>
@@ -223,6 +277,7 @@ public static class GameSessionState
         Current.studentName = studentName;
         Current.studentRA = studentRA;
         Current.companyName = companyName;
+        MarkDirty();
     }
 
     public static void SetSelectedPrice(float selectedPrice)
@@ -231,6 +286,7 @@ public static class GameSessionState
             return;
 
         Current.selectedPrice = Mathf.Max(0f, selectedPrice);
+        MarkDirty();
     }
 
     public static void SetMenuPricingJson(string json, bool save = false)
@@ -242,6 +298,8 @@ public static class GameSessionState
             ? MenuPricingHelper.ToJson(new MenuPricingData())
             : json;
 
+        MarkDirty();
+
         if (save)
             Save();
     }
@@ -252,6 +310,7 @@ public static class GameSessionState
             return;
 
         Current.coherenceRating = coherenceRating;
+        MarkDirty();
     }
 
     // =============================
@@ -268,6 +327,8 @@ public static class GameSessionState
 
         Current.currentCash = value;
 
+        MarkDirty();
+
         if (save)
             Save();
     }
@@ -278,6 +339,8 @@ public static class GameSessionState
             return;
 
         Current.currentCash += value;
+
+        MarkDirty();
 
         if (save)
             Save();
@@ -291,6 +354,8 @@ public static class GameSessionState
         Current.creditLineId = creditLineId;
         Current.loanBalance = loanBalance;
 
+        MarkDirty();
+
         if (save)
             Save();
     }
@@ -301,6 +366,8 @@ public static class GameSessionState
             return;
 
         Current.reputationScore = Mathf.Clamp(value, 0, 100);
+
+        MarkDirty();
 
         if (save)
             Save();
@@ -313,6 +380,8 @@ public static class GameSessionState
 
         Current.teamJson = json;
 
+        MarkDirty();
+
         if (save)
             Save();
     }
@@ -323,6 +392,8 @@ public static class GameSessionState
             return;
 
         Current.equipmentJson = json;
+
+        MarkDirty();
 
         if (save)
             Save();
@@ -338,6 +409,8 @@ public static class GameSessionState
         else
             Current.consecutiveNegativeRounds = 0;
 
+        MarkDirty();
+
         if (save)
             Save();
     }
@@ -351,14 +424,20 @@ public static class GameSessionState
         Current.alignmentClassification = result.classification.ToString();
         Current.alignmentFactor = result.alignmentFactor;
         Current.coherenceRating = result.classification.ToString();
+        MarkDirty();
     }
 
     public static void AdvanceRound(bool save = true)
     {
-        if (Current == null)
+        if (!HasActiveSession)
+            return;
+
+        if (Current.currentRound < 1 || Current.currentRound >= 3)
             return;
 
         Current.currentRound += 1;
+
+        MarkDirty();
 
         if (save)
             Save();
@@ -374,6 +453,7 @@ public static class GameSessionState
             return;
 
         Current.status = GameSessionStatus.COMPLETED;
+        MarkDirty();
         Current.completedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         Save();
     }
@@ -384,6 +464,7 @@ public static class GameSessionState
             return;
 
         Current.status = GameSessionStatus.BANKRUPT;
+        MarkDirty();
         Current.completedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         Save();
     }

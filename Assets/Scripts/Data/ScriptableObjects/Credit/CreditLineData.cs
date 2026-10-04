@@ -22,7 +22,7 @@ public class CreditLineData : ScriptableObject
     [Range(0f, 1f)]
     public float monthlyInterestRate;
 
-    [Tooltip("Quantidade de rodadas (meses) para pagar")]
+    [Tooltip("Legado: preservado para compatibilidade dos assets. Nao e usado; o prazo depende dos meses restantes no trimestre.")]
     public int termRounds;
 
     [Header("Parcelas")]

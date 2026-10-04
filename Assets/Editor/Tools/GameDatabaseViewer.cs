@@ -71,7 +71,7 @@ public sealed class GameDatabaseViewer : EditorWindow
         {
             using (var db = new SQLiteConnection(DbPath, SQLiteOpenFlags.ReadOnly))
             {
-                foreach (var table in new[] { "GameSessionEntity", "RoundResultEntity", "SessionEventHistoryEntity" })
+                foreach (var table in new[] { "GameSessionEntity", "RoundResultEntity", "SessionEventHistoryEntity", "LocationEntity" })
                     _counts[table] = TableExists(db, table)
                         ? db.ExecuteScalar<int>($"select count(*) from \"{table}\"")
                         : -1;
@@ -164,9 +164,22 @@ public sealed class GameDatabaseViewer : EditorWindow
 
         EditorGUILayout.LabelField("Jogo", "rodando · estado " + state);
         EditorGUILayout.LabelField("Sessao em memoria",
-            !GameSessionState.HasSession ? "nenhuma"
+            GameSessionState.HasIncompatibleSave ? "save de versao anterior (aguardando reinicio)"
+            : !GameSessionState.HasSession ? "nenhuma"
             : GameSessionState.IsPersisted ? "ja gravada no banco"
             : "so em memoria (ainda nao gravada)");
+        if (GameSessionState.HasSession && GameSessionState.IsPersisted)
+        {
+            EditorGUILayout.LabelField("Alteracoes pendentes",
+                GameSessionState.HasUnsavedChanges ? "sim (o dialogo Sair vai perguntar)" : "nao");
+
+            // Hoje todas as telas gravam logo depois de mudar algo, entao jogando
+            // normalmente o dialogo Sair nunca fica no modo "alteracoes pendentes".
+            // Este botao existe so para testar esse modo a mao: regrava o mesmo
+            // caixa SEM salvar. Nenhum valor muda; so a marca "pendente" liga.
+            if (GUILayout.Button("Teste E-05: marcar alteracao pendente (nao muda valores)"))
+                GameSessionState.SetCash(GameSessionState.Current.currentCash, false);
+        }
     }
 
     private static void DrawSession(GameSessionEntity row)
@@ -184,6 +197,7 @@ public sealed class GameDatabaseViewer : EditorWindow
             Field("Rodada / status", $"{row.currentRound} · {row.status}");
             Field("Caixa", row.currentCash.ToString("N0"));
             Field("Linha de credito", row.creditLineId);
+            Field("Equipamentos", EquipmentText(row.equipmentJson));
             Field("Coerencia", string.IsNullOrEmpty(row.coherenceRating) ? "(calculada depois da equipe)" : row.coherenceRating);
             Field("Criada em", DateTimeOffset.FromUnixTimeSeconds(row.startedAt).ToLocalTime().ToString("dd/MM HH:mm:ss"));
         }
@@ -199,6 +213,39 @@ public sealed class GameDatabaseViewer : EditorWindow
         Segment.HIGH => "Classe A",
         _ => segment.ToString()
     };
+
+    private static string EquipmentText(string json)
+    {
+        var ids = EquipmentSelectionHelper.GetIds(EquipmentSelectionHelper.FromJson(json));
+        return ids.Count == 0 ? null : string.Join(", ", ids);
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  E-06: levar mudancas dos assets LOC_* para um banco que ja existe
+    // ─────────────────────────────────────────────────────────────
+
+    [MenuItem("Tools/Jogos de Empresa/Recarregar localizacoes no banco (E-06)")]
+    public static void ReloadLocations()
+    {
+        if (EditorApplication.isPlaying)
+        {
+            Debug.LogError("[Banco] Saia do Play Mode antes de recarregar as localizacoes.");
+            return;
+        }
+
+        if (!File.Exists(DbPath))
+        {
+            Debug.Log("[Banco] game.db ainda nao existe. As localizacoes serao copiadas na primeira vez que o jogo abrir.");
+            return;
+        }
+
+        using (var db = new SQLiteConnection(DbPath, SQLiteOpenFlags.ReadWrite))
+        {
+            db.CreateTable<LocationEntity>();
+            int count = Game.Adapter.Out.Persistence.SqliteLocationRepository.CopyAssetsToDatabase(db);
+            Debug.Log($"[Banco] {count} localizacoes copiadas dos assets (Resources/Locations) para o game.db.");
+        }
+    }
 
     private static string MenuText(string json)
     {
