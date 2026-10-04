@@ -1,5 +1,7 @@
-using Unity.VisualScripting;
 using UnityEngine;
+
+// E-05: este componente so ABRE o banco. Quem fecha e o GameManager.Shutdown
+// (dono unico do desligamento): salvar primeiro, fechar depois.
 
 public class DatabaseInitializer : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class DatabaseInitializer : MonoBehaviour
             db.CreateTable<GameSessionEntity>();
             db.CreateTable<RoundResultEntity>();
             db.CreateTable<SessionEventHistoryEntity>();
+            db.CreateTable<LocationEntity>();          // E-06: localizacoes da D1
 
             IsReady = true;
         }

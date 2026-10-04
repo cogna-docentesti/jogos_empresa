@@ -41,6 +41,10 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Button cancelResetButton;
         [SerializeField] private Button confirmResetButton;
 
+        private Transform warningOriginalParent;
+        private readonly System.Collections.Generic.Dictionary<TextMeshProUGUI, string> warningOriginalTexts
+            = new System.Collections.Generic.Dictionary<TextMeshProUGUI, string>();
+
         private void Awake()
         {
             HideResetWarning();
@@ -71,7 +75,55 @@ namespace Game.Adapter.In.UI
         public void HideResetWarning()
         {
             if (resetWarning != null)
+            {
                 resetWarning.SetActive(false);
+                if (warningOriginalParent != null)
+                {
+                    resetWarning.transform.SetParent(warningOriginalParent, false);
+                    warningOriginalParent = null;
+                    foreach (var item in warningOriginalTexts)
+                        item.Key.text = item.Value;
+                    warningOriginalTexts.Clear();
+                    cancelResetButton?.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        public void ShowIncompatibleSave(UnityAction onConfirmed)
+        {
+            if (warningOriginalParent != null)
+                return;
+            if (resetWarning == null || confirmResetButton == null)
+            {
+                Debug.LogError("Modal de reinicio nao configurado.");
+                return;
+            }
+            // Reutiliza o modal existente sem abrir o hub ou o resumo da empresa.
+            var canvas = GetComponentInParent<Canvas>(true);
+            if (canvas == null)
+                return;
+            warningOriginalParent = resetWarning.transform.parent;
+            foreach (var label in resetWarning.GetComponentsInChildren<TextMeshProUGUI>(true))
+            {
+                warningOriginalTexts[label] = label.text;
+                if (label.GetComponentInParent<Button>() == null)
+                    label.text = label.text.Length > 100
+                        ? "Esta sessão foi criada em uma versão anterior do jogo e não é compatível com o novo ciclo trimestral de 3 meses. Para continuar, será necessário iniciar uma nova sessão.\n\nAo confirmar, a sessão anterior e seus dados serão apagados."
+                        : "Sessão incompatível";
+            }
+            BindReset(onConfirmed);
+            var confirmLabel = confirmResetButton.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (confirmLabel != null)
+                confirmLabel.text = "Iniciar nova sessão";
+            cancelResetButton?.gameObject.SetActive(false);
+            resetWarning.transform.SetParent(canvas.transform, false);
+            ShowResetWarning();
+        }
+
+        public void HideIncompatibleSave()
+        {
+            if (warningOriginalParent != null)
+                HideResetWarning();
         }
 
         public void Bind(EstablishmentSummary summary)
@@ -104,7 +156,7 @@ namespace Game.Adapter.In.UI
                 scoreBarFill.fillAmount = Mathf.Clamp01(summary.ScoreProgress);
 
             Set(coherenceValue, summary.CoherenceLabel);
-            Set(roundValue, $"Rodada {summary.Round}");
+            Set(roundValue, $"Mês {summary.Round} de 3");
 
             Set(noticeText, BuildNotice(summary), GamePalette.InkCaption);
         }
@@ -143,7 +195,7 @@ namespace Game.Adapter.In.UI
                 scoreBarFill.fillAmount = 0f;
 
             Set(coherenceValue, "A calcular");
-            Set(roundValue, "Rodada 1");
+            Set(roundValue, "Mês 1 de 3");
             Set(noticeText, "Nenhuma sessao ativa foi carregada.", GamePalette.Warn);
         }
 

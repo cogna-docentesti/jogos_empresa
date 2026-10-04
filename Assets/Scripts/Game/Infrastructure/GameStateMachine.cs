@@ -25,9 +25,24 @@ public class GameStateMachine
                 }
             },
 
+            // Decisoes obrigatorias (ver InitialDecisionFlow):
+            // D1 Config_Location -> D2 Config_Restaurant -> D3 Config_TargetSegment (Cardapio).
+            // Cada uma aceita avancar e voltar para a anterior. Nada aqui grava no
+            // banco; o unico Save do fluxo acontece no confirm da D3.
+            // O Voltar da D1 nao e um estado: ele troca de cena para a identificacao.
             { GameState.Config_Location, new List<GameState> { GameState.Config_Restaurant } },
-            { GameState.Config_Restaurant, new List<GameState> {  GameState.Config_TargetSegment } },
-            { GameState.Config_TargetSegment, new List<GameState> { GameState.Config_Review } },
+            { GameState.Config_Restaurant, new List<GameState>
+                {
+                    GameState.Config_TargetSegment,
+                    GameState.Config_Location        // Voltar da D2 para a D1
+                }
+            },
+            { GameState.Config_TargetSegment, new List<GameState>
+                {
+                    GameState.Config_Review,
+                    GameState.Config_Restaurant      // Voltar da D3 para a D2
+                }
+            },
 
             { GameState.Config_Review, new List<GameState> { GameState.Initial_Capital } },
             { GameState.Initial_Capital, new List<GameState> { GameState.Initial_Equipment } },

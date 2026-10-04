@@ -10,6 +10,9 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI hintText;
 
+        [Tooltip("Valor ao lado de CAPITAL INICIAL DISPONIVEL (CapitalCard/CapitalValue).")]
+        [SerializeField] private TextMeshProUGUI capitalValueText;
+
         [Header("Credit Cards")]
         [SerializeField] private Transform bankCardsContainer;
         [SerializeField] private BankCardView bankCardPrefab;
@@ -25,6 +28,17 @@ namespace Game.Adapter.In.UI
         private void Awake()
         {
             EnsureVerticalScrollView();
+        }
+
+        /// <summary>
+        /// Mostra o capital inicial da partida. Antes era um texto fixo na cena
+        /// (R$ 150.000); desde a branch da Thaysla o capital depende do
+        /// restaurante escolhido (65, 69 ou 72 mil).
+        /// </summary>
+        public void SetInitialCapital(float value)
+        {
+            if (capitalValueText != null)
+                capitalValueText.text = $"R$ {value:N0}";
         }
 
         public bool HasRequiredReferences()

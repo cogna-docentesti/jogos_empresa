@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Infrastructure.Session;
 using UnityEngine;
 
 public class GameSessionService
@@ -18,10 +19,17 @@ public class GameSessionService
     // CREATE SESSION / LOAD SESSION
     // =============================
 
+    /// <summary>
+    /// Cria uma sessao nova SO em memoria. Nao grava nada no banco: a primeira
+    /// gravacao acontece no confirm da D3, em CommitInitialDecisions().
+    /// Se o jogador fechar o jogo antes disso, nenhuma linha fica para tras.
+    /// </summary>
     public GameSessionEntity CreateNewSession()
     {
-        if (GameSessionState.HasActiveSession)
-            throw new Exception("J� existe uma sess�o ativa.");
+        // Save incompativel (Thaysla): so vira sessao nova pelo RestartSession,
+        // depois que o jogador confirma no aviso. Evita apagar o save sem querer.
+        if (GameSessionState.HasActiveSession || GameSessionState.HasIncompatibleSave)
+            throw new Exception("Já existe uma sessão ativa.");
 
         var session = new GameSessionEntity
         {
@@ -36,16 +44,13 @@ public class GameSessionService
             // SetAlignment. Sem inicializar, o INSERT morria com
             // "NOT NULL constraint failed: GameSessionEntity.cityId".
             //
-            // Isso ficou escondido enquanto o Save usava Update: o Update
-            // casava com zero linhas e nunca chegava a tentar escrever.
-            //
             // String vazia e o "ainda nao definido" honesto - satisfaz a coluna
             // sem inventar um valor que o jogo depois trataria como real.
             cityId = string.Empty,
             coherenceRating = string.Empty,
 
-            initialCapital = 150000f,
-            currentCash = 150000f,
+            initialCapital = 0f,
+            currentCash = 0f,
             loanBalance = 0f,
             creditLineId = null,
             reputationScore = 50,
@@ -58,10 +63,41 @@ public class GameSessionService
             syncedAt = 0
         };
 
+        // So memoria. Antes havia um GameSessionState.Save() aqui, que criava a
+        // linha no banco no instante em que o jogo abria, antes de qualquer escolha.
         GameSessionState.Set(session);
-        GameSessionState.Save();
 
         return session;
+    }
+
+    public GameSessionEntity RestartSession()
+    {
+        var session = GameSessionState.Current ?? GameSessionState.IncompatibleSession;
+        var db = DatabaseInitializer.DatabaseService?.Connection;
+        if (session == null || db == null)
+            throw new InvalidOperationException("Sessao ou banco indisponivel para reiniciar.");
+
+        GameSessionEntity replacement = null;
+        try
+        {
+            db.RunInTransaction(() =>
+            {
+                new RoundResultRepository(db).DeleteBySessionId(session.sessionId);
+                var historyRepository = new SessionEventHistoryRepository(db);
+                foreach (var item in historyRepository.GetBySession(session.sessionId))
+                    historyRepository.Delete(item);
+                new GameSessionRepository(db).Delete(session);
+                GameSessionState.Clear();
+                replacement = new GameSessionService(session.userId, session.professorId).CreateNewSession();
+            });
+        }
+        catch
+        {
+            GameSessionState.LoadActiveSession(session.userId);
+            throw;
+        }
+        Game.Infrastructure.Session.PlayerSession.Clear();
+        return replacement;
     }
 
     public void LoadActiveSession()
@@ -70,71 +106,100 @@ public class GameSessionService
     }
 
     // =============================
-    // CONFIGURA��O E STATE MACHINE
+    // DECISOES INICIAIS (D1, D2, D3)
     // =============================
+    // As telas D1, D2 e D3 escrevem so no rascunho PlayerSession.
+    // Os metodos abaixo sao o unico caminho do rascunho para o banco.
 
-    public void ConfirmLocation(LocationZone locationZone)
+    /// <summary>
+    /// Unico ponto do fluxo inicial que escreve no SQLite.
+    /// Le o rascunho (PlayerSession), copia tudo para a sessao em memoria e
+    /// grava uma vez so. Nao troca de tela: quem decide a navegacao e o
+    /// ConfirmInitialDecisions(), logo abaixo.
+    /// </summary>
+    public bool CommitInitialDecisions()
     {
         if (!GameSessionState.HasSession)
-            return;
+        {
+            Debug.LogError("[GameSessionService] Não há sessão ativa para gravar.");
+            return false;
+        }
 
-        GameSessionState.SetLocation(locationZone);
+        if (!PlayerSession.IsComplete)
+        {
+            Debug.LogWarning(
+                "[GameSessionService] Decisões incompletas: " +
+                $"localização: {PlayerSession.HasLocation}, " +
+                $"restaurante: {PlayerSession.HasRestaurant}, " +
+                $"cardápio: {PlayerSession.HasMenu}, " +
+                $"cardápio do restaurante certo: {PlayerSession.MenuRestaurantType == PlayerSession.SelectedRestaurantType}");
+            return false;
+        }
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Config_Restaurant);
+        if (GameSessionState.Current.currentRound > 1)
+        {
+            Debug.LogWarning("[GameSessionService] A campanha já começou. As decisões iniciais não podem mais ser alteradas.");
+            return false;
+        }
+
+        // A identificacao fica em PlayerPrefs. Se a memoria foi limpa (por
+        // exemplo pelo botao Resetar), recarrega de la antes de copiar.
+        if (!PlayerSession.HasIdentification && !PlayerSession.TryLoadIdentification())
+        {
+            // So acontece quando o jogo e aberto direto pela GameScene no editor,
+            // sem passar pela cena 0_Identification. Na build a identificacao e
+            // sempre a primeira cena. A sessao e gravada mesmo assim, com os
+            // tres campos nulos.
+            Debug.LogWarning("[GameSessionService] Identificação do aluno não encontrada. " +
+                             "studentName, studentRA e companyName serão gravados vazios.");
+        }
+
+        // Os setters do GameSessionState respeitam a trava currentRound > 1.
+        GameSessionState.SetIdentification(
+            PlayerSession.StudentName,
+            PlayerSession.StudentRA,
+            PlayerSession.RestaurantName);
+
+        GameSessionState.SetLocation(PlayerSession.SelectedZone.Value);
+        GameSessionState.SetRestaurant(PlayerSession.SelectedRestaurantType.Value);
+        GameSessionState.SetTargetSegment(PlayerSession.SelectedTargetSegment.Value);
+        GameSessionState.SetMenuPricingJson(MenuPricingHelper.ToJson(PlayerSession.GetMenu()));
+
+        // coherenceRating continua vazio aqui. Ele e calculado pelo
+        // AlignmentEngine no ConfirmInitialTeam, quando a equipe ja existe, e
+        // depende da matriz que a Thaysla esta recalibrando (T-06).
+
+        bool saved = GameSessionState.Persist();
+
+        if (saved)
+            Debug.Log($"[GameSessionService] Decisões iniciais gravadas. Sessão {GameSessionState.Current.sessionId}.");
+
+        return saved;
     }
 
-    public void ConfirmRestaurant(RestaurantType type)
+    /// <summary>
+    /// Confirm da D3: grava e, se deu certo, sai das decisoes obrigatorias
+    /// para o primeiro tutorial (InitialDecisionFlow.AfterCommit).
+    /// Devolve false se nao conseguiu gravar; nesse caso o jogador continua na D3.
+    /// </summary>
+    public bool ConfirmInitialDecisions()
     {
-        if (!GameSessionState.HasSession)
-            return;
+        if (!CommitInitialDecisions())
+            return false;
 
-        GameSessionState.SetRestaurant(type);
+        var stateMachine = GameManager.Instance != null ? GameManager.Instance.StateMachine : null;
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Config_TargetSegment);
-    }
+        if (stateMachine == null)
+        {
+            Debug.LogError("[GameSessionService] GameManager não encontrado. A sessão foi gravada, mas a tela não avançou.");
+            return true;
+        }
 
-    public void ConfirmTargetSegmentAndPrice(Segment targetSegment, float selectedPrice)
-    {
-        if (!GameSessionState.HasSession)
-            return;
+        if (stateMachine.CurrentState != InitialDecisionFlow.Review)
+            stateMachine.TryChangeState(InitialDecisionFlow.Review);
 
-        GameSessionState.SetTargetSegment(targetSegment);
-        GameSessionState.SetSelectedPrice(selectedPrice);
-
-        CompleteConfigurationReview();
-    }
-
-    public void ConfirmMenuPricing(MenuPricingData menuPricing)
-    {
-        if (!GameSessionState.HasSession)
-            return;
-
-        GameSessionState.SetMenuPricingJson(MenuPricingHelper.ToJson(menuPricing));
-
-        CompleteConfigurationReview();
-    }
-
-    public void ConfirmStructuralConfiguration()
-    {
-        if (!GameSessionState.HasSession)
-            return;
-
-        GameSessionState.Save();
-
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Initial_Capital);
-    }
-
-    private void CompleteConfigurationReview()
-    {
-        var stateMachine = GameManager.Instance.StateMachine;
-
-        if (stateMachine.CurrentState != GameState.Config_Review)
-            stateMachine.TryChangeState(GameState.Config_Review);
-
-        ConfirmStructuralConfiguration();
+        stateMachine.TryChangeState(InitialDecisionFlow.AfterCommit);
+        return true;
     }
 
     public void ConfirmInitialEquipment(List<EquipmentData> equipments)
@@ -316,7 +381,11 @@ public class GameSessionService
 
     public void StartRound()
     {
-        if (!GameSessionState.HasSession)
+        if (!GameSessionState.HasActiveSession)
+            return;
+
+        var session = GameSessionState.Current;
+        if (session.currentRound < 1 || session.currentRound > 3)
             return;
 
         GameManager.Instance.StateMachine
@@ -335,7 +404,7 @@ public class GameSessionService
 
         if (sm.CurrentState != GameState.Round_Sales)
         {
-            Debug.LogWarning("A rodada n�o est� no estado correto.");
+            Debug.LogWarning("A rodada não está no estado correto.");
             return null;
         }
 
@@ -345,6 +414,9 @@ public class GameSessionService
         var roundService = new RoundService();
 
         RoundResultEntity result = roundService.ProcessRound();
+
+        if (result == null)
+            return null;
 
         sm.TryChangeState(GameState.Round_Summary);
 

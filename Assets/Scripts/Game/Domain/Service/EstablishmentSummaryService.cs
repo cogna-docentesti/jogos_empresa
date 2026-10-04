@@ -135,7 +135,7 @@ namespace Game.Domain.Service
             summary.SupplyCost      = summary.EstimatedRevenue * inputCostRatio;
             summary.SalariesCost    = TeamSalaries(team, roleCatalog);
             summary.FixedCost       = restaurant != null ? restaurant.baseMonthlyCost : 0f;
-            summary.LoanInstallment = LoanInstallment(session.creditLineId, session.loanBalance);
+            summary.LoanInstallment = LoanInstallment(session.creditLineId, session.loanBalance, session.currentRound);
 
             summary.MonthlyResult =
                 summary.EstimatedRevenue
@@ -238,18 +238,14 @@ namespace Game.Domain.Service
             return total;
         }
 
-        private static float LoanInstallment(string creditLineId, float loanBalance)
+        private static float LoanInstallment(string creditLineId, float loanBalance, int currentRound)
         {
             if (loanBalance <= 0f)
                 return 0f;
 
             var line = FindCreditLine(creditLineId);
 
-            if (line == null || line.termRounds <= 0)
-                return 0f;
-
-            // Parcela = principal dividido pelo prazo + juros do mes sobre o saldo.
-            return (loanBalance / line.termRounds) + (loanBalance * line.monthlyInterestRate);
+            return LoanService.Installment(loanBalance, line, currentRound);
         }
 
         // =====================================================

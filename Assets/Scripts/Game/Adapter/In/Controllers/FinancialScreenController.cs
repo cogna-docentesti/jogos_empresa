@@ -8,8 +8,6 @@ namespace Game.Adapter.In.Controllers
 {
     public sealed class FinancialScreenController : MonoBehaviour
     {
-        private const string NoLoanCreditLineId = "sem_emprestimo";
-
         [SerializeField] private FinancialScreenView view;
 
         private readonly List<BankCardView> _cards = new();
@@ -64,6 +62,9 @@ namespace Game.Adapter.In.Controllers
                 return;
 
             view.SetTitle("Banco CogCred");
+
+            if (GameSessionState.Current != null)
+                view.SetInitialCapital(GameSessionState.Current.initialCapital);
             view.SetHint("Selecione uma linha de credito para visualizar limite, juros e prazo.");
             view.SetConfirmEnabled(false);
 
@@ -93,6 +94,12 @@ namespace Game.Adapter.In.Controllers
            }
 
            RestoreSavedSelection();
+           if (GameSessionState.HasSession && GameSessionState.Current.currentRound == 3)
+           {
+               view.SetHint(LoanService.LastMonthMessage);
+               if (!_selectionLocked && _selectedCreditLine?.maxAmount > 0f)
+                   view.SetConfirmEnabled(false);
+           }
         }
 
         private void RestoreSavedSelection()
@@ -118,7 +125,7 @@ namespace Game.Adapter.In.Controllers
                 card?.SetSelected(card == savedCard);
 
             _selectedCreditLine = savedCard.CreditLine;
-            _selectionLocked = savedCreditLineId != NoLoanCreditLineId;
+            _selectionLocked = savedCard.CreditLine.maxAmount > 0f;
             view.SetHint(_selectionLocked
                 ? $"Linha de credito contratada: {_selectedCreditLine.displayName}. Esta escolha nao pode ser alterada."
                 : $"Selecionado: {_selectedCreditLine.displayName}");
@@ -127,6 +134,13 @@ namespace Game.Adapter.In.Controllers
 
      private void OnCardSelected(BankCardView selectedCard)
      {
+         if (selectedCard?.CreditLine?.maxAmount > 0f && !LoanService.CanContract && !_selectionLocked)
+         {
+             view.SetHint(GameSessionState.HasSession && GameSessionState.Current.currentRound == 3
+                 ? LoanService.LastMonthMessage : "Não é possível contratar um novo empréstimo nesta sessão.");
+             view.SetConfirmEnabled(false);
+             return;
+         }
          if (_selectionLocked)
          {
              view.SetHint($"Linha de credito contratada: {_selectedCreditLine.displayName}. Esta escolha nao pode ser alterada.");
@@ -147,7 +161,8 @@ namespace Game.Adapter.In.Controllers
              return;
          }
 
-         view.SetHint($"Selecionado: {_selectedCreditLine.displayName}");
+         view.SetHint(GameSessionState.Current?.currentRound == 3
+             ? LoanService.LastMonthMessage : $"Selecionado: {_selectedCreditLine.displayName}");
          view.SetConfirmEnabled(true);
      }
 
@@ -156,11 +171,33 @@ namespace Game.Adapter.In.Controllers
             if (_selectedCreditLine == null || !GameSessionState.HasSession)
                 return;
 
-            float loanBalance = _selectedCreditLine.maxAmount <= 0f
-                ? 0f
-                : GameSessionState.Current.loanBalance;
+            if (!GameSessionState.HasActiveSession)
+                return;
 
-            GameSessionState.SetLoan(_selectedCreditLine.id, loanBalance);
+            if (!_selectionLocked)
+            {
+                if (_selectedCreditLine.maxAmount > 0f)
+                {
+                    if (!LoanService.TryContract(_selectedCreditLine))
+                    {
+                        view.SetHint(GameSessionState.Current.currentRound == 3
+                            ? LoanService.LastMonthMessage : "Não é possível contratar um novo empréstimo nesta sessão.");
+                        view.SetConfirmEnabled(false);
+                        return;
+                    }
+                    _selectionLocked = true;
+                }
+                else if (!LoanService.HasLoan(GameSessionState.Current))
+                {
+                    GameSessionState.SetLoan(_selectedCreditLine.id, 0f);
+                }
+            }
+
+            if (WasOpenedFromMenu())
+            {
+                MenuNavigator.Instance.OpenRoot();
+                return;
+            }
 
             if (GameManager.Instance != null)
                 GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);
