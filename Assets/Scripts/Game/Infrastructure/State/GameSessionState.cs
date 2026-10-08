@@ -89,6 +89,26 @@ public static class GameSessionState
         IncompatibleSession = null;
     }
 
+    /// <summary>Publishes a successfully committed monthly snapshot.</summary>
+    internal static void AcceptMonthlySettlement(GameSessionEntity settled)
+    {
+        if (Current == null || settled == null || Current.sessionId != settled.sessionId)
+            throw new InvalidOperationException("The committed monthly session is no longer current.");
+        Current.currentRound = settled.currentRound;
+        Current.status = settled.status;
+        Current.currentCash = settled.currentCash;
+        Current.reputationScore = settled.reputationScore;
+        Current.loanBalance = settled.loanBalance;
+        Current.consecutiveNegativeRounds = settled.consecutiveNegativeRounds;
+        Current.completedAt = settled.completedAt;
+        Current.alignmentScore = settled.alignmentScore;
+        Current.alignmentClassification = settled.alignmentClassification;
+        Current.alignmentFactor = settled.alignmentFactor;
+        Current.coherenceRating = settled.coherenceRating;
+        IsPersisted = true;
+        HasUnsavedChanges = false;
+    }
+
     public static void LoadActiveSession(string userId)
     {
         var repository = Repository;

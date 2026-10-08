@@ -126,6 +126,8 @@ public class PersistenceAndLocationTests
     public void E04_registro_de_evento_grava_os_tres_impactos()
     {
         var session = NewSavedSession("eventos");
+        session.currentRound = 2;
+        GameSessionState.Save();
         var eventData = ScriptableObject.CreateInstance<EventData>();
         eventData.id = "heavy_rain";
         eventData.title = "Chuva forte";

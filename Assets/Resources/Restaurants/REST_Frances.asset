@@ -27,7 +27,11 @@ MonoBehaviour:
   ticketMin: 84
   ticketMax: 260
   estimatedMonthlyCustomers: 0
-  requiredRoles: []
+  requiredRoles:
+  - roleId: attendant
+    quantity: 2
+  - roleId: head_chef
+    quantity: 1
   requiredEquipmentIds: []
   coherenceLevel: 3
-  baseMonthlyCost: 0
+  baseMonthlyCost: 2000

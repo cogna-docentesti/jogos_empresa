@@ -397,27 +397,31 @@ public class GameSessionService
 
     public RoundResultEntity ProcessCurrentRound()
     {
-        if (!GameSessionState.HasSession)
+        if (!GameSessionState.HasActiveSession || GameManager.Instance?.StateMachine == null)
             return null;
 
         var sm = GameManager.Instance.StateMachine;
 
         if (sm.CurrentState != GameState.Round_Sales)
         {
-            Debug.LogWarning("A rodada não está no estado correto.");
+            Debug.LogWarning("[GameSessionService] The month is not in the sales state.");
+            return null;
+        }
+
+        RoundResultEntity result;
+        try
+        {
+            result = new RoundService().ProcessRound();
+            if (result == null) return null;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("[GameSessionService] Monthly settlement failed: " + exception.Message);
             return null;
         }
 
         sm.TryChangeState(GameState.Round_Costs);
         sm.TryChangeState(GameState.Round_Event);
-
-        var roundService = new RoundService();
-
-        RoundResultEntity result = roundService.ProcessRound();
-
-        if (result == null)
-            return null;
-
         sm.TryChangeState(GameState.Round_Summary);
 
         EvaluateRoundEnd(result);

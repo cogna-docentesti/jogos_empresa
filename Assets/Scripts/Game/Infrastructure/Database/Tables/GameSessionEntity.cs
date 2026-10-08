@@ -80,4 +80,7 @@ public class GameSessionEntity
     public long? completedAt { get; set; }
 
     public long syncedAt { get; set; }
+
+    /// <summary>Creates a detached copy for transactional settlement.</summary>
+    public GameSessionEntity Copy() => (GameSessionEntity)MemberwiseClone();
 }

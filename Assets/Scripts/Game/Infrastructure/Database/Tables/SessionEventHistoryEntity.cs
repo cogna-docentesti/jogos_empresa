@@ -57,4 +57,7 @@ public class SessionEventHistoryEntity
 
     /// <summary>Clientes a mais (positivo) ou a menos (negativo) no mes.</summary>
     public int clientsChange { get; set; }
+
+    // Immutable effect snapshot. Null means a legacy record with direct deltas only.
+    public string effectsJson { get; set; }
 }

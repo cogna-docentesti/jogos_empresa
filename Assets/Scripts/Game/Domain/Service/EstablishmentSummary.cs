@@ -37,6 +37,10 @@ namespace Game.Domain.Service
         public float FixedCost;       // custo fixo mensal do restaurante
         public float LoanInstallment; // parcela do emprestimo
 
+        // The forecast uses the same calculator as monthly settlement.
+        public bool HasMonthlyEstimate;
+        public string EstimateFailureReason;
+
         /// <summary>
         /// Falso quando os ScriptableObjects de RoleData nao estao em Resources/Roles.
         /// Nesse caso a folha salarial entra como zero e a tela avisa o jogador,

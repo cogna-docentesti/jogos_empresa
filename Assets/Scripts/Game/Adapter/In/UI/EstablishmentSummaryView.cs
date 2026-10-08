@@ -148,8 +148,8 @@ namespace Game.Adapter.In.UI
             Set(scoreValue, $"{summary.Score} pts", GamePalette.Xp);
             Set(cashValue,  EstablishmentSummaryService.Brl(summary.Cash),
                 summary.Cash >= 0f ? GamePalette.Money : GamePalette.Danger);
-            Set(revenueValue, EstablishmentSummaryService.Brl(summary.EstimatedRevenue), GamePalette.Ink);
-            Set(monthlyResultValue, EstablishmentSummaryService.Brl(summary.MonthlyResult),
+            Set(revenueValue, summary.HasMonthlyEstimate ? EstablishmentSummaryService.Brl(summary.EstimatedRevenue) : "Unavailable", GamePalette.Ink);
+            Set(monthlyResultValue, summary.HasMonthlyEstimate ? EstablishmentSummaryService.Brl(summary.MonthlyResult) : "Unavailable",
                 GamePalette.ResultColor(summary.MonthlyResult));
 
             if (scoreBarFill != null)
@@ -163,6 +163,9 @@ namespace Game.Adapter.In.UI
 
         private static string BuildNotice(EstablishmentSummary summary)
         {
+            if (!summary.HasMonthlyEstimate && !string.IsNullOrWhiteSpace(summary.EstimateFailureReason))
+                return "Monthly estimate unavailable: " + summary.EstimateFailureReason;
+
             if (!summary.HasTeamCatalog && !summary.HasEquipmentCatalog)
                 return "Folha salarial e capacidade nao entram no calculo: os catalogos "
                      + "RoleData e EquipmentData ainda nao estao em Resources/Roles e Resources/Equipment.";

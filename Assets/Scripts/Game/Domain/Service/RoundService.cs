@@ -1,139 +1,97 @@
 using System;
+using System.Collections.Generic;
+using SQLite4Unity3d;
 using UnityEngine;
 
+/// <summary>Atomically settles a month and publishes state only after SQLite commits.</summary>
 public class RoundService
 {
-    private readonly RoundResultRepository _roundRepository;
+    private readonly SQLiteConnection _db;
+    private readonly Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> _contextFactory;
+    private bool _processing;
 
-    public RoundService()
+    public RoundService() : this(DatabaseInitializer.DatabaseService?.Connection, MonthlySimulationCatalog.Load) { }
+
+    public RoundService(SQLiteConnection connection,
+        Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> contextFactory)
     {
-        var db = DatabaseInitializer.DatabaseService.Connection;
-        _roundRepository = new RoundResultRepository(db);
+        _db = connection;
+        _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
     }
 
     public RoundResultEntity ProcessRound()
     {
-        if (!GameSessionState.HasSession)
-        {
-            Debug.LogWarning("Não há sessão ativa para processar rodada.");
-            return null;
-        }
-
-        var session = GameSessionState.Current;
-
-        if (!GameSessionState.HasActiveSession)
-        {
-            Debug.LogWarning("A sessao ja esta encerrada. Nenhuma rodada sera processada.");
-            return null;
-        }
-
-        if (session.currentRound < 1 || session.currentRound > 3)
-        {
-            Debug.LogWarning("Rodada fora do intervalo trimestral de 1 a 3. Nenhuma rodada sera processada.");
-            return null;
-        }
-
-        float openingCash = session.currentCash;
-
-        // Valores temporários/simulados.
-        // Depois podemos substituir pelo FinancialEngine.
-        float grossRevenue = 30000f;
-        float supplyCost = grossRevenue * 0.30f;
-        float rent = 9000f;
-        float salaries = 8000f;
-        float utilities = 1500f;
-        var creditLine = LoanService.FindLine(session.creditLineId);
-        float loanPayment = LoanService.Installment(session.loanBalance, creditLine, session.currentRound);
-        float thirteenthSalary = 0f;
-        float eventCashImpact = 0f;
-        float coherenceFactor = GetCoherenceFactor(session.coherenceRating);
-
-        float totalCosts =
-            supplyCost +
-            rent +
-            salaries +
-            utilities +
-            loanPayment +
-            thirteenthSalary +
-            eventCashImpact;
-
-        float netResult = grossRevenue - totalCosts;
-        float closingCash = openingCash + netResult;
-
-        var result = new RoundResultEntity
-        {
-            roundResultId = Guid.NewGuid().ToString(),
-            sessionId = session.sessionId,
-            round = session.currentRound,
-
-            grossRevenue = grossRevenue,
-            supplyCost = supplyCost,
-            rent = rent,
-            salaries = salaries,
-            utilities = utilities,
-            loanPayment = loanPayment,
-            thirteenthSalary = thirteenthSalary,
-            eventCashImpact = eventCashImpact,
-
-            netResult = netResult,
-
-            openingCash = openingCash,
-            closingCash = closingCash,
-
-            eventId = null,
-            eventChoice = -1,
-
-            reputationDelta = 0,
-            coherenceFactor = session.alignmentFactor,
-
-            // E-04: reputacao ao fechar o mes, para o resumo mensal (Renan).
-            // customers fica 0 ate o motor financeiro calcular clientes (T-06).
-            reputationAtEnd = session.reputationScore,
-
-            createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        _roundRepository.Insert(result);
-
-        if (creditLine != null && session.loanBalance > 0f)
-            GameSessionState.SetLoan(session.creditLineId,
-                Mathf.Max(0f, session.loanBalance - LoanService.PrincipalPayment(session.loanBalance, session.currentRound)), false);
-
-        GameSessionState.SetCash(closingCash, false);
-        GameSessionState.RegisterNegativeRound(netResult < 0, false);
-
-        EvaluateSessionEnd();
-
-        return result;
+        return GameSessionState.HasActiveSession ? ProcessRound(GameSessionState.Current.currentRound) : null;
     }
 
+    /// <summary>Use an explicit month for safe retries: a settled month returns its original result.</summary>
+    public RoundResultEntity ProcessRound(int expectedMonth)
+    {
+        var session = GameSessionState.Current;
+        if (session == null || _db == null || !GameSessionState.IsPersisted || _processing)
+            return null;
+        if (expectedMonth < 1 || expectedMonth > MonthlySimulationEngine.CycleMonths)
+            return null;
+
+        var results = new RoundResultRepository(_db);
+        var existing = results.GetBySessionAndRound(session.sessionId, expectedMonth);
+        if (existing != null) return existing;
+        if (!GameSessionState.HasActiveSession || session.currentRound != expectedMonth)
+            return null;
+        if (_db.IsInTransaction)
+        {
+            Debug.LogWarning("[RoundService] Settlement requires its own database transaction.");
+            return null;
+        }
+
+        _processing = true;
+        try
+        {
+            RoundResultEntity result = null;
+            GameSessionEntity next = null;
+            _db.RunInTransaction(() =>
+            {
+                var sessions = new GameSessionRepository(_db);
+                var stored = sessions.GetById(session.sessionId);
+                if (stored == null || stored.status != GameSessionStatus.IN_PROGRESS || stored.currentRound != expectedMonth)
+                    throw new InvalidOperationException("The persisted session is missing or has already advanced.");
+                if (results.GetBySessionAndRound(session.sessionId, expectedMonth) != null)
+                    throw new InvalidOperationException("The month has already been settled.");
+
+                var previous = results.GetBySessionId(session.sessionId);
+                if (previous.Count != expectedMonth - 1)
+                    throw new InvalidOperationException("The monthly history is incomplete or duplicated.");
+                for (int index = 0; index < previous.Count; index++)
+                    if (previous[index].round != index + 1)
+                        throw new InvalidOperationException("Monthly results must be consecutive.");
+
+                var history = new SessionEventHistoryRepository(_db).GetBySessionAndRound(session.sessionId, expectedMonth);
+                result = MonthlySimulationEngine.Calculate(_contextFactory(session.Copy(), history));
+                result.roundResultId = Guid.NewGuid().ToString();
+                result.createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                next = MonthlySessionSettlement.Apply(session, result, result.createdAt);
+                results.Insert(result);
+                if (_db.Update(next) != 1)
+                    throw new InvalidOperationException("The monthly session update was not persisted.");
+            });
+
+            GameSessionState.AcceptMonthlySettlement(next);
+            Debug.Log($"[RoundService] Month {result.round} settled: customers={result.customers}, revenue={result.grossRevenue:F2}, cash={result.closingCash:F2}, reputation={result.reputationAtEnd}.");
+            return result;
+        }
+        finally
+        {
+            _processing = false;
+        }
+    }
+
+    // Retained for existing quarter-flow fixtures. Production uses the transaction above.
     internal static void EvaluateSessionEnd()
     {
-        var session = GameSessionState.Current;
-
-        if (session.consecutiveNegativeRounds >= 3)
-        {
-            GameSessionState.BankruptSession();
-        }
-        else if (session.currentRound == 3)
-        {
-            GameSessionState.CompleteSession();
-        }
-        else
-        {
-            GameSessionState.AdvanceRound(true);
-        }
-    }
-
-    private float GetCoherenceFactor(string coherenceRating)
-    {
-        return coherenceRating switch
-        {
-            "IDEAL" => 1.0f,
-            "REGULAR" => 0.7f,
-            "INCOHERENT" => 0.35f,
-            "BANKRUPT" => 0.0f,
-            _ => 1.0f
-        };
+        if (!GameSessionState.HasActiveSession) return;
+        var next = GameSessionState.Current.Copy();
+        MonthlySessionSettlement.Advance(next, DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+        GameSessionState.AcceptMonthlySettlement(next);
+        GameSessionState.Save();
     }
 }

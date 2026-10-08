@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motor de apuração mensal | Guia de implementação e uso</title>
+  <style>
+    :root{--ink:#172637;--muted:#526477;--line:#dce4ed;--accent:#006c68;--tint:#e8f5f2;--paper:#fff;--bg:#f4f7fa;--nav:#122637}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--accent)}
+    aside{position:fixed;inset:0 auto 0 0;width:248px;background:var(--nav);color:#dce6ee;padding:36px 24px;overflow-y:auto}aside strong{display:block;color:white;font-size:22px;line-height:1.3;margin:10px 0}aside small{color:#90b3c0}nav{margin-top:30px}nav a{display:block;color:#c6dae3;text-decoration:none;padding:8px 0;font-size:14px}nav a:hover{color:white}main{max-width:1248px;margin-left:248px;padding:48px 52px 70px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}h1{font-size:42px;line-height:1.15;letter-spacing:-.035em;margin:12px 0 20px;max-width:720px}h2{font-size:27px;line-height:1.3;letter-spacing:-.02em;margin:0 0 18px}h3{font-size:18px;margin:26px 0 10px}p{margin:10px 0 16px}.lead{font-size:19px;color:var(--muted);max-width:790px}.badges{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}.badge{background:var(--tint);border:1px solid #c4e7dc;color:#07534f;font-size:13px;padding:5px 12px;border-radius:100px}section{margin-top:36px;padding:32px;background:var(--paper);border:1px solid var(--line);border-radius:12px}section>p:first-of-type{max-width:840px}.note{border-left:4px solid var(--accent);background:var(--tint);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0}.note p{margin:0}.warn{border-left-color:#b87916;background:#fff5df}ol,ul{padding-left:24px}li{padding-left:3px;margin:8px 0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.step{border:1px solid var(--line);border-radius:8px;padding:16px}.step span{font-size:12px;font-weight:750;color:var(--accent)}.step strong{display:block;margin:4px 0}.step p{font-size:14px;color:var(--muted);margin:0}code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef2f5;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{overflow:auto;white-space:pre;background:#142a3a;color:#e4edf4;padding:20px;border-radius:8px;font:13px/1.65 Consolas,monospace}pre code{background:transparent;padding:0;color:inherit;overflow-wrap:normal;font-size:inherit}.table-wrap{overflow-x:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:14px}th{text-align:left;background:#eff5f7;color:#203d4c;font-weight:700}th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}tbody tr:last-child td{border-bottom:0}.formula{border:1px solid #c9e1dd;background:#f3faf7;padding:14px 18px;border-radius:7px;margin:12px 0;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.subtle{color:var(--muted);font-size:14px}.file-list td:first-child{width:43%}.checklist li::marker{color:var(--accent)}footer{margin:32px 0;color:var(--muted);font-size:13px}.top-link{display:block;margin-top:24px;text-align:right;font-size:13px}
+    @media(max-width:1000px){main{padding:36px 28px;margin-left:210px}aside{width:210px;padding:28px 20px}h1{font-size:34px}.steps{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+    @media(max-width:700px){aside{position:static;width:auto;padding:24px}nav{display:flex;gap:16px;overflow-x:auto;margin-top:16px}nav a{white-space:nowrap}main{margin:0;padding:28px 16px}section{padding:22px 18px}h1{font-size:32px}h2{font-size:24px}}
+    @media print{aside{display:none}main{margin:0;padding:0;max-width:none}body{background:white;font-size:11pt}section{border:0;padding:12px 0;margin-top:20px;break-inside:auto}pre,.note,.steps,table{break-inside:avoid}h1{font-size:28pt}h2{break-after:avoid;font-size:19pt}nav,.top-link{display:none}a{color:inherit}pre{white-space:pre-wrap;background:#eef2f5;color:#172637}}
+  </style>
+</head>
+<body>
+  <aside>
+    <small>JOGOS PARA EMPRESAS · COGNA</small>
+    <strong>Apuração mensal</strong>
+    <small>Guia de implementação e uso<br>8 de outubro de 2026</small>
+    <nav aria-label="Seções do guia">
+      <a href="#overview">1. O que foi entregue</a><a href="#quickstart">2. Como usar no Unity</a>
+      <a href="#rules">3. Como o cálculo funciona</a><a href="#events">4. Eventos e efeitos</a>
+      <a href="#configuration">5. Como ajustar os parâmetros</a><a href="#integration">6. Integração em código</a>
+      <a href="#storage">7. Persistência e falhas</a><a href="#files">8. Arquivos alterados</a>
+      <a href="#validation">9. Testes e validação</a><a href="#limits">10. Premissas e limites</a>
+    </nav>
+  </aside>
+  <main id="top">
+    <div class="eyebrow">Implementação no projeto Unity</div>
+    <h1>Motor de apuração mensal para um ciclo de três meses</h1>
+    <p class="lead">Demanda, clientes atendidos, receita, custos, folha, empréstimo, caixa e reputação passam a ser calculados pelas escolhas do jogador. Este guia explica o que mudou, como executar o fechamento e onde ajustar as regras.</p>
+    <div class="badges"><span class="badge">3 meses por partida</span><span class="badge">Cálculo determinístico</span><span class="badge">SQLite local</span><span class="badge">Código e logs novos em inglês</span></div>
+
+    <section id="overview">
+      <h2>1. O que foi entregue</h2>
+      <p>A receita fixa de R$ 30.000 e os custos fixos de teste foram substituídos por um cálculo mensal baseado no local, no cardápio, nos preços, na equipe, nos equipamentos compatíveis, na reputação inicial e nas escolhas de eventos registradas.</p>
+      <div class="steps"><div class="step"><span>01 · CALCULAR</span><strong>Previsão do mês</strong><p>O motor recebe os dados e produz um resultado sem alterar a partida.</p></div><div class="step"><span>02 · GRAVAR</span><strong>Fechamento atômico</strong><p>Resultado e sessão são gravados juntos. Uma falha desfaz as duas gravações.</p></div><div class="step"><span>03 · AVANÇAR</span><strong>Próximo mês ou fim</strong><p>O caixa e a reputação atualizados passam ao próximo mês. O terceiro encerra o ciclo.</p></div></div>
+      <ul>
+        <li>O resumo de <strong>Meu Estabelecimento</strong> usa o mesmo motor para sua previsão e passa a incluir o aluguel.</li>
+        <li>Foi corrigido o caminho do catálogo de equipamentos para <code>Resources/Equipments</code>.</li>
+        <li>Foram acrescentados cinco cargos e valores iniciais de custos operacionais, que estavam ausentes ou zerados.</li>
+        <li>O alinhamento passa a verificar a quantidade mínima de funcionários de cada cargo.</li>
+        <li>Uma janela de ferramentas permite prever, fechar e consultar os resultados mensais no editor.</li>
+        <li>Um componente opcional permite conectar o fechamento a um botão da interface.</li>
+      </ul>
+      <div class="note"><p><strong>Escopo adotado:</strong> prevalece sua decisão de reduzir a partida a três meses. Os documentos antigos foram usados como referência de domínio; suas recomendações de distribuição, orçamento, serviços externos e ciclo anual não foram tratadas como ordens de execução.</p></div>
+    </section>
+
+    <section id="quickstart">
+      <h2>2. Como usar no Unity</h2>
+      <h3>Prever e fechar pelo editor</h3>
+      <ol>
+        <li>Abra o projeto com <strong>Unity 6000.3.20f1</strong> e aguarde a importação dos scripts e assets.</li>
+        <li>Entre em <strong>Play Mode</strong> pelo fluxo normal da partida. Confirme as decisões iniciais na D3, para que a sessão exista no SQLite.</li>
+        <li>Conclua o fluxo inicial ou acesse o hub de gerenciamento. A equipe usa os IDs dos cargos listados na seção 5.</li>
+        <li>Abra <strong>Game &gt; Monthly Simulation</strong>.</li>
+        <li>Clique em <strong>Preview Current Month</strong>. Isso calcula e exibe os números sem gravar nem avançar a partida.</li>
+        <li>Clique em <strong>Settle Current Month</strong> para gravar o mês e avançar. Esse botão altera a sessão ativa do jogador.</li>
+        <li>Consulte os blocos <strong>Saved Month 1</strong>, <strong>Saved Month 2</strong> e <strong>Saved Month 3</strong>. Após o terceiro mês, a partida fica concluída ou falida, conforme o resultado.</li>
+      </ol>
+      <p>A janela mostra demanda, capacidade, clientes, ticket, receita, insumos, aluguel, serviços, folha, parcela, impacto dos eventos, resultado, caixa inicial/final e reputação. Ela exibe um erro quando os dados estão incompletos ou o fechamento não está disponível.</p>
+      <h3>Conectar um botão da interface</h3>
+      <ol>
+        <li>Adicione <code>MonthlySettlementController</code> a um GameObject da cena de jogo.</li>
+        <li>No <code>On Click()</code> de um botão, arraste esse GameObject e selecione <code>MonthlySettlementController.CloseMonth()</code>.</li>
+        <li>Use <code>onMonthSettled</code> para atualizar a interface e <code>onSettlementFailed</code> para exibir uma falha. Em C#, o evento <code>MonthSettled</code> entrega o resultado e <code>LastResult</code> guarda o último retorno.</li>
+        <li>Disponibilize o botão no hub. O componente aceita os estados <code>Management_Hub</code> e <code>Round_Sales</code> e exige Play Mode, sessão ativa e decisões iniciais persistidas.</li>
+      </ol>
+      <div class="note warn"><p><strong>Integração da tela:</strong> o componente está disponível para ligação no Inspector. Não foi criado um botão novo nas cenas nem uma nova tela de resultado. Cada chamada sem um mês explícito solicita o fechamento do mês ativo; na interface, bloqueie cliques repetidos enquanto apresentar o resultado.</p></div>
+    </section>
+
+    <section id="rules">
+      <h2>3. Como o cálculo funciona</h2>
+      <h3>Demanda e receita</h3>
+      <p>O mês tem 30 dias operacionais por padrão. A demanda diária e a capacidade física vêm do local. A capacidade dos cargos e os bônus dos equipamentos são mensais.</p>
+      <div class="formula"><strong>Demanda base</strong> = demanda diária do local × dias operacionais</div>
+      <p>Se <code>estimatedMonthlyCustomers</code> do restaurante for maior que zero, ele limita a demanda base. Com zero, o motor utiliza o fluxo do local. Os três restaurantes existentes permanecem com esse campo zerado para usar os dados atuais dos locais.</p>
+      <div class="formula"><strong>Demanda potencial</strong> = demanda base × alinhamento × fator de preço × fator de reputação</div>
+      <p>O alinhamento é recalculado a cada mês pelo <code>AlignmentEngine</code>, considerando restaurante, público, local, preços e equipe. Os fatores existentes são HIGH = 1,2; ADEQUATE = 1,0; FRAGILE = 0,75; CRITICAL = 0,45.</p>
+      <p>O ticket é a média dos preços de todos os produtos salvos para o restaurante. O modelo supõe um produto por cliente e participação igual de cada prato nas vendas. O preço de referência é a média de <code>ProductData.price</code>, ajustada por <code>LocationData.referencePriceFactor</code>.</p>
+      <div class="formula"><strong>Fator de preço</strong> = (ticket de referência ÷ ticket escolhido)<sup>elasticidade</sup>, limitado por padrão a 0,5–1,5</div>
+      <p>A reputação no começo do mês, de 0 a 100, corresponde linearmente a um fator de demanda de 0,5 a 1,5. Em 50 pontos, o fator é 1. A mudança de reputação deste fechamento afeta a demanda do próximo mês.</p>
+      <h3>Capacidade e atendimento</h3>
+      <p>O limite físico mensal é a capacidade diária do local multiplicada pelos dias, acrescida dos bônus de equipamentos. O limite da equipe é a soma de <code>maxClientsSupported × quantity</code>, também acrescida dos bônus compatíveis. A operação usa o menor desses dois limites.</p>
+      <p>A cobertura dos cargos obrigatórios é a menor fração entre quantidade contratada e exigida. Essa fração reduz a capacidade: um especialista obrigatório ausente produz cobertura zero. A falta de equipamento obrigatório também zera a operação. Equipe vazia não atende clientes, mesmo com equipamentos comprados.</p>
+      <p>Os efeitos de eventos são aplicados dia a dia. O motor soma os clientes atendidos e arredonda o total mensal para baixo, produzindo um número inteiro. Receita e insumos são ajustados ao total de clientes inteiros, preservando a distribuição dos efeitos ao longo dos dias.</p>
+      <h3>Custos, folha e caixa</h3>
+      <div class="table-wrap"><table><thead><tr><th>Item</th><th>Origem e regra</th></tr></thead><tbody>
+        <tr><td>Receita</td><td>Clientes atendidos × ticket, com os efeitos diários de ticket.</td></tr>
+        <tr><td>Insumos</td><td>Clientes × média de (preço escolhido do prato × <code>inputCostRatio</code>), com os efeitos de custo de ingredientes.</td></tr>
+        <tr><td>Aluguel</td><td><code>LocationData.rent</code> do local escolhido.</td></tr>
+        <tr><td>Serviços</td><td><code>RestaurantData.baseMonthlyCost</code>: água, luz e demais serviços simplificados.</td></tr>
+        <tr><td>Folha</td><td>Soma de <code>RoleData.salary × quantity</code>. Os salários já representam encargos no modelo pedagógico.</td></tr>
+        <tr><td>Empréstimo</td><td>Principal restante ÷ meses restantes do trimestre + juros sobre o saldo inicial. No mês 3, todo o principal restante é quitado.</td></tr>
+        <tr><td>13º salário</td><td>Zero nos três meses. Não foi acrescentado pagamento anual nem provisão proporcional.</td></tr>
+        <tr><td>Equipamentos</td><td>Preço de compra não é cobrado novamente no fechamento; entram os bônus operacionais compatíveis.</td></tr>
+        <tr><td>Eventos</td><td>Impacto com sinal: negativo é saída de caixa; positivo é entrada.</td></tr>
+      </tbody></table></div>
+      <div class="formula"><strong>Resultado mensal</strong> = receita − insumos − aluguel − serviços − folha − parcela + impacto de caixa dos eventos</div>
+      <div class="formula"><strong>Caixa final</strong> = caixa inicial + resultado mensal</div>
+      <p>Os valores são arredondados em centavos e permanecem nas colunas <code>float</code> existentes. O resultado do jogo inclui a amortização do empréstimo como saída; portanto, é um resultado de caixa simplificado, não uma DRE contábil que separa principal e despesa financeira.</p>
+      <h3>Reputação e fim do trimestre</h3>
+      <p>Atender ao menos 90% da demanda gera +2 pontos, mais um bônus de qualidade de até +5 pontos. A qualidade soma as contribuições da equipe e dos equipamentos e é limitada a 1 antes da conversão em pontos. Atendimento abaixo do limite gera −5 pontos. Os eventos acrescentam sua variação, e a reputação final fica entre 0 e 100.</p>
+      <p>Foi mantida a regra existente: três meses consecutivos com <code>netResult &lt; 0</code> encerram a sessão como <code>BANKRUPT</code>. Um resultado zero ou positivo reinicia esse contador. Se essa condição não ocorrer, o terceiro mês encerra como <code>COMPLETED</code>. Caixa negativo, isoladamente, não causa encerramento imediato.</p>
+      <h3>Exemplo numérico de verificação</h3>
+      <p class="subtle">Cenário controlado dos testes, com dois pratos de R$ 20 e R$ 40 e custos relativos de 30% e 50%. Serve para conferir a fórmula; não representa um preset comercial do catálogo.</p>
+      <div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Resultado esperado</th><th>Como conferir</th></tr></thead><tbody>
+        <tr><td>Demanda / clientes</td><td>360</td><td>10 clientes/dia × 30 dias × alinhamento 1,2.</td></tr>
+        <tr><td>Receita</td><td>R$ 10.800</td><td>360 × ticket médio de R$ 30.</td></tr>
+        <tr><td>Insumos</td><td>R$ 4.680</td><td>360 × média de R$ 6 e R$ 20.</td></tr>
+        <tr><td>Folha</td><td>R$ 4.000</td><td>2 atendentes de R$ 1.000 + 1 cozinheiro de R$ 2.000.</td></tr>
+        <tr><td>Custos fixos</td><td>R$ 600</td><td>Aluguel R$ 500 + serviços R$ 100.</td></tr>
+        <tr><td>Resultado</td><td>R$ 1.520</td><td>10.800 − 4.680 − 4.000 − 600.</td></tr>
+        <tr><td>Caixa final</td><td>R$ 11.520</td><td>Caixa inicial de R$ 10.000 + R$ 1.520.</td></tr>
+        <tr><td>Reputação final</td><td>52 pontos</td><td>50 iniciais + 2 por atender toda a demanda.</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="events">
+      <h2>4. Eventos e efeitos</h2>
+      <p>O motor consome as escolhas já registradas em <code>SessionEventHistoryEntity</code>. Ao registrar uma opção, o repositório guarda uma cópia JSON dos efeitos em <code>effectsJson</code>. Alterações futuras no asset do evento não mudam a escolha salva.</p>
+      <pre><code>var repository = new SessionEventHistoryRepository(db);
+repository.RecordFromOption(
+    session.sessionId, session.currentRound, 16,
+    eventData, chosenOption);</code></pre>
+      <div class="table-wrap"><table><thead><tr><th>Campo</th><th>Quando é aplicado</th></tr></thead><tbody>
+        <tr><td><code>cashChange</code></td><td>Uma vez no fechamento, com seu sinal.</td></tr>
+        <tr><td><code>reputationChange</code></td><td>Uma vez no fechamento, junto da variação operacional.</td></tr>
+        <tr><td><code>clientsChange</code></td><td>Acrescenta ou remove demanda no dia registrado.</td></tr>
+        <tr><td><code>demandMultiplier</code></td><td>Multiplica a demanda nos dias de vigência.</td></tr>
+        <tr><td><code>capacityMultiplier</code> e <code>stockMultiplier</code></td><td>Multiplicam a capacidade disponível para atender clientes.</td></tr>
+        <tr><td><code>ingredientCostMultiplier</code></td><td>Multiplica o custo de insumos nos dias de vigência.</td></tr>
+        <tr><td><code>averageTicketMultiplier</code></td><td>Multiplica o ticket de venda nos dias de vigência, independentemente do multiplicador de insumos.</td></tr>
+      </tbody></table></div>
+      <p><code>IMMEDIATE</code> e <code>CURRENT_DAY</code> aplicam os multiplicadores operacionais apenas no dia da ocorrência. <code>CURRENT_MONTH</code> aplica do dia registrado até o fim do mês: uma opção escolhida no dia 16 atua nos dias 16–30. Efeitos simultâneos se multiplicam. Não há propagação para o mês seguinte.</p>
+      <div class="note warn"><p><strong>Evitar cobrança duplicada:</strong> registrar o evento enfileira seu efeito para o fechamento. Não chame também <code>AddCash</code> ou <code>SetReputation</code> para a mesma escolha. Não represente a mesma mudança de demanda simultaneamente em <code>clientsChange</code> e <code>demandMultiplier</code>.</p></div>
+      <p>Linhas antigas sem <code>effectsJson</code> usam apenas seus deltas diretos. Depois de fechar o mês, o repositório impede novos registros de evento para esse mês. Para múltiplos eventos, consulte o histórico completo: o campo único <code>eventId</code> do resultado só é preenchido quando existe uma ocorrência, e <code>eventChoice</code> permanece −1 porque as opções atuais usam IDs de texto.</p>
+    </section>
+
+    <section id="configuration">
+      <h2>5. Como ajustar os parâmetros</h2>
+      <p>Selecione <code>Assets/Resources/MonthlySimulation/DefaultSettings.asset</code> no Project e edite seus campos no Inspector. O carregador espera esse caminho. O menu <strong>Create &gt; Game Data &gt; Monthly Simulation Settings</strong> permite criar outros assets para testes ou cálculos com contexto próprio.</p>
+      <div class="table-wrap"><table><thead><tr><th>Campo</th><th>Padrão</th><th>Uso</th></tr></thead><tbody>
+        <tr><td><code>operatingDays</code></td><td>30</td><td>Dias operacionais, de 1 a 31.</td></tr>
+        <tr><td><code>priceElasticity</code></td><td>1</td><td>Sensibilidade da demanda ao preço. Zero elimina esse fator de resposta.</td></tr>
+        <tr><td><code>minimumPriceDemandFactor</code><br><code>maximumPriceDemandFactor</code></td><td>0,5 / 1,5</td><td>Limites do fator de preço.</td></tr>
+        <tr><td><code>minimumReputationDemandFactor</code><br><code>maximumReputationDemandFactor</code></td><td>0,5 / 1,5</td><td>Fatores de demanda em reputação 0 e 100.</td></tr>
+        <tr><td><code>satisfactoryServiceRatio</code></td><td>0,9</td><td>Parcela mínima da demanda atendida para ganhar reputação.</td></tr>
+        <tr><td><code>satisfactoryServiceReputationGain</code></td><td>2</td><td>Ganho operacional por serviço satisfatório.</td></tr>
+        <tr><td><code>poorServiceReputationPenalty</code></td><td>−5</td><td>Variação operacional quando o atendimento é insuficiente.</td></tr>
+        <tr><td><code>qualityReputationScale</code></td><td>5</td><td>Converte qualidade acumulada, limitada a 1, em bônus de reputação.</td></tr>
+      </tbody></table></div>
+      <h3>Cargos acrescentados</h3>
+      <p>Os assets ficam em <code>Assets/Resources/Roles</code>. Use exatamente os IDs abaixo ao preencher <code>teamJson</code> ou configurar a tela de RH.</p>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Cargo</th><th>Salário mensal</th><th>Capacidade mensal</th><th>Qualidade por pessoa</th></tr></thead><tbody>
+        <tr><td><code>attendant</code></td><td>Atendente</td><td>R$ 2.200</td><td>900</td><td>0,02</td></tr>
+        <tr><td><code>grill_cook</code></td><td>Chapeiro</td><td>R$ 2.500</td><td>750</td><td>0,05</td></tr>
+        <tr><td><code>sushi_chef</code></td><td>Sushiman</td><td>R$ 4.500</td><td>600</td><td>0,10</td></tr>
+        <tr><td><code>head_chef</code></td><td>Chef</td><td>R$ 8.000</td><td>450</td><td>0,15</td></tr>
+        <tr><td><code>manager</code></td><td>Gerente</td><td>R$ 5.000</td><td>0</td><td>0,10</td></tr>
+      </tbody></table></div>
+      <p>As equipes obrigatórias são dois atendentes e um chapeiro para Lanches; dois atendentes e um sushiman para Japonês; dois atendentes e um chef para Francês. O gerente é opcional e contribui com qualidade, sem aumentar diretamente a capacidade deste motor.</p>
+      <p>Os custos de serviços são R$ 1.500 para Lanches e Japonês e R$ 2.000 para Francês. Salários seguem a referência pedagógica; capacidades, qualidade e regras de reputação são valores iniciais de balanceamento. Ajuste-os após jogar cenários completos.</p>
+      <p>Para ajustar demanda e capacidade física, edite os assets de <code>Resources/Locations</code>. Para insumos e preços, edite <code>Resources/Products</code>. Para equipe mínima e serviços, edite <code>Resources/Restaurants</code>. Os equipamentos existentes continuam com seus bônus atuais; bônus zerados não geram benefício adicional.</p>
+    </section>
+
+    <section id="integration">
+      <h2>6. Integração em código</h2>
+      <h3>Previsão sem gravar</h3>
+      <pre><code>var session = GameSessionState.Current;
+var db = DatabaseInitializer.DatabaseService.Connection;
+var events = new SessionEventHistoryRepository(db)
+    .GetBySessionAndRound(session.sessionId, session.currentRound);
+
+var context = MonthlySimulationCatalog.Load(session, events);
+RoundResultEntity forecast = MonthlySimulationEngine.Calculate(context);</code></pre>
+      <p><code>MonthlySimulationContext</code> também aceita catálogos e settings fornecidos pelo chamador. Isso permite cenários controlados sem depender de <code>Resources</code>. O cálculo não atribui ID nem horário ao resultado; o serviço faz isso ao fechar.</p>
+      <h3>Fechamento com repetição segura</h3>
+      <pre><code>int expectedMonth = GameSessionState.Current.currentRound;
+var service = new RoundService();
+RoundResultEntity result = service.ProcessRound(expectedMonth);
+
+// A retry keeps the same month token.
+RoundResultEntity retry = service.ProcessRound(expectedMonth);</code></pre>
+      <p>A segunda chamada devolve o resultado salvo, sem pagar custos novamente nem avançar outro mês. O método sem argumento fecha o mês atualmente ativo. A chamada direta de <code>RoundService</code> não navega a interface; para o fluxo visual, use <code>MonthlySettlementController</code> ou <code>GameSessionService.StartRound()</code> seguido de <code>ProcessCurrentRound()</code>.</p>
+      <h3>Consultar o trimestre</h3>
+      <pre><code>var results = new RoundResultRepository(db)
+    .GetBySessionId(session.sessionId);
+
+foreach (var month in results)
+{
+    Debug.Log($"Month {month.round}: revenue={month.grossRevenue:F2}, " +
+              $"net={month.netResult:F2}, cash={month.closingCash:F2}");
+}</code></pre>
+      <p>Os atalhos <code>VariableCosts</code>, <code>FixedCosts</code> e <code>Payroll</code> continuam disponíveis. <code>TotalCosts</code> soma os custos e a parcela, sem incorporar o impacto de caixa dos eventos. Para reconciliar o resultado, use <code>grossRevenue − TotalCosts + eventCashImpact</code>.</p>
+    </section>
+
+    <section id="storage">
+      <h2>7. Persistência e falhas</h2>
+      <p>O fechamento consulta a sessão persistida e exige histórico consecutivo: para fechar o mês 2, precisa existir exatamente o resultado do mês 1; para o mês 3, os meses 1 e 2. A sessão deve estar ativa e no mês esperado.</p>
+      <p>Dentro da mesma transação SQLite, o serviço insere o resultado e atualiza caixa, reputação, principal do empréstimo, alinhamento, contador de prejuízos, mês/status e horário de encerramento. A memória recebe os novos dados apenas depois do commit.</p>
+      <ul>
+        <li>Falha de cálculo ou gravação: nenhuma linha de resultado ou alteração de sessão é confirmada.</li>
+        <li>Dados ausentes, preços fora da faixa, IDs desconhecidos, valores não finitos ou dia de evento inválido: o motor retorna uma exceção descritiva.</li>
+        <li>O serviço do fluxo registra o erro em inglês e permanece em <code>Round_Sales</code>, permitindo uma nova tentativa após corrigir o problema.</li>
+        <li>Sem confirmação inicial da D3 ou sem conexão SQLite, não há fechamento.</li>
+        <li>O serviço exige sua própria transação; não deve ser chamado dentro de uma transação externa.</li>
+      </ul>
+      <h3>Campos adicionados ao banco</h3>
+      <div class="table-wrap"><table><thead><tr><th>Tabela</th><th>Novos campos</th></tr></thead><tbody>
+        <tr><td><code>RoundResultEntity</code></td><td><code>baseDemand</code>, <code>potentialDemand</code>, <code>serviceCapacity</code>, <code>averageTicket</code>, <code>loanPrincipalPayment</code>, <code>reputationAtStart</code>, <code>alignmentScore</code>, <code>alignmentClassification</code>.</td></tr>
+        <tr><td><code>SessionEventHistoryEntity</code></td><td><code>effectsJson</code>, contendo o retrato dos efeitos da opção registrada.</td></tr>
+      </tbody></table></div>
+      <p>A chamada existente de <code>CreateTable</code> acrescenta as colunas sem remover registros. Os atalhos calculados continuam marcados com <code>[Ignore]</code> e não criam colunas. Resultados antigos do motor simulado são preservados e não são recalculados. Saves com rodadas além de 3 continuam sujeitos ao fluxo de incompatibilidade já existente.</p>
+    </section>
+
+    <section id="files">
+      <h2>8. Arquivos criados e alterados</h2>
+      <p>Os caminhos abaixo são relativos à raiz <code>D:\Cogna\jogos_empresa</code>. Foram acrescentados os respectivos arquivos <code>.meta</code> para os novos scripts, pastas e assets do Unity.</p>
+      <div class="table-wrap"><table class="file-list"><thead><tr><th>Arquivo ou grupo</th><th>Responsabilidade e uso</th></tr></thead><tbody>
+        <tr><td><code>Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs</code></td><td>Motor sem efeitos externos. Chame <code>Calculate(context)</code> para produzir uma previsão.</td></tr>
+        <tr><td><code>…/MonthlySimulationContext.cs</code></td><td>Entradas: sessão, restaurante, local, cargos, equipamentos, crédito, settings e histórico de eventos.</td></tr>
+        <tr><td><code>…/MonthlySimulationCatalog.cs</code></td><td>Constrói o contexto a partir dos catálogos em Resources.</td></tr>
+        <tr><td><code>…/MonthlySessionSettlement.cs</code></td><td>Produz uma cópia da próxima sessão, aplicando o resultado e a regra de encerramento.</td></tr>
+        <tr><td><code>…/RoundService.cs</code></td><td>Substitui os números fixos por fechamento transacional, histórico consecutivo e repetição segura por mês explícito.</td></tr>
+        <tr><td><code>…/GamesSessionService.cs</code></td><td>Mantém o fluxo de navegação, avançando apenas depois de um fechamento bem-sucedido.</td></tr>
+        <tr><td><code>…/EstablishmentSummaryService.cs</code><br><code>…/EstablishmentSummary.cs</code></td><td>Previsão e diagnóstico de disponibilidade do cálculo. Inclui aluguel e corrige a pasta Equipments. O score exibido acompanha o alinhamento recalculado.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/Adapter/In/UI/EstablishmentSummaryView.cs</code></td><td>Exibe Unavailable e a causa quando a previsão não pode ser calculada, evitando apresentar uma estimativa zerada sem explicação.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs</code></td><td>Verifica as quantidades mínimas de equipe. Os nomes legados das pastas e arquivos foram preservados.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/Infrastructure/State/GameSessionState.cs</code></td><td>Publica o retrato do mês confirmado sem alterar a sessão antes do commit.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/Infrastructure/Database/Tables/GameSessionEntity.cs</code></td><td>Acrescenta <code>Copy()</code> para trabalhar com uma cópia separada durante a transação.</td></tr>
+        <tr><td><code>…/RoundResultEntity.cs</code><br><code>…/SessionEventHistoryEntity.cs</code></td><td>Novos campos de diagnóstico mensal e snapshot de efeitos.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/Adapter/Out/Persistence/SessionEventHistoryRepository.cs</code></td><td>Guarda o snapshot da opção e impede novos eventos em meses já fechados.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs</code></td><td>Componente opcional para ligar <code>CloseMonth()</code> a um botão do jogo.</td></tr>
+        <tr><td><code>Assets/Editor/Tools/MonthlySimulationWindow.cs</code></td><td>Janela Game &gt; Monthly Simulation para previsão, fechamento e histórico.</td></tr>
+        <tr><td><code>Assets/Scripts/Data/ScriptableObjects/MonthlySimulationSettings.cs</code></td><td>Tipo de asset com os parâmetros editáveis do motor.</td></tr>
+        <tr><td><code>Assets/Resources/MonthlySimulation/DefaultSettings.asset</code></td><td>Configuração padrão carregada durante a execução.</td></tr>
+        <tr><td><code>Assets/Resources/Roles/ROLE_*.asset</code></td><td>Cinco novos cargos: Attendant, GrillCook, SushiChef, HeadChef e Manager.</td></tr>
+        <tr><td><code>Assets/Resources/Restaurants/REST_Lanches.asset</code><br><code>REST_Japones.asset</code><br><code>REST_Frances.asset</code></td><td>Equipes mínimas e custos de serviços iniciais.</td></tr>
+        <tr><td><code>Assets/Editor/Tests/MonthlySimulationTests.cs</code></td><td>Testes Edit Mode com SQLite em memória e assets temporários.</td></tr>
+        <tr><td><code>Assets/Scripts/Game/TESTES/RoundFlowDebugTest.cs</code><br><code>Assets/Editor/Tests/PersistenceAndLocationTests.cs</code></td><td>Fixtures anteriores adaptadas ao catálogo real, à ordem dos meses e ao fechamento que controla sua própria transação.</td></tr>
+        <tr><td><code>docs/monthly-simulation.md</code></td><td>Referência técnica em inglês, com APIs, fórmulas, contrato de eventos e testes.</td></tr>
+        <tr><td><code>output/monthly-simulation-guide.html</code></td><td>Este guia em português, autocontido e com estilo para impressão.</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="validation">
+      <h2>9. Testes e validação</h2>
+      <p id="test-status"><strong>Validação concluída em 8 de outubro de 2026: 58 testes Edit Mode passaram, sem falhas.</strong> São 25 testes do novo motor e 33 testes anteriores do projeto. A execução usou Unity 6000.3.20f1 em uma cópia isolada, com código de saída 0. O HTML também foi verificado em larguras de desktop e celular, sem transbordamento horizontal nem links internos quebrados.</p>
+      <p>Para repetir a suíte no editor, abra <strong>Window &gt; General &gt; Test Runner</strong>, selecione <strong>EditMode</strong> e clique em <strong>Run All</strong>. A classe <code>MonthlySimulationTests</code> utiliza SQLite em memória e não altera saves de jogadores.</p>
+      <ul class="checklist">
+        <li>Conferência de uma apuração com valores conhecidos e cálculo determinístico.</li>
+        <li>Preços, reputação, capacidade física, equipe vazia, especialistas e quantidades mínimas.</li>
+        <li>Equipamentos duplicados, bônus de capacidade e ausência de nova cobrança de compra.</li>
+        <li>Impacto de caixa com sinal, reputação limitada a 0–100 e duração dos efeitos de eventos.</li>
+        <li>Snapshot das opções, falta de estoque e arredondamento para clientes inteiros.</li>
+        <li>Repetição segura, falha SQLite com rollback, carregamento da sessão e migração de schema.</li>
+        <li>Quitação de empréstimos contratados nos meses 1 e 2, conclusão do trimestre e falência.</li>
+        <li>Integração do fluxo de estados e igualdade entre previsão do resumo e motor mensal.</li>
+      </ul>
+      <p>Os resultados de execução ficam em <code>Logs/monthly-simulation-tests.xml</code> e o log em <code>Logs/monthly-simulation-tests.log</code>. A cópia de validação fica em <code>.utmp/MonthlySimulationValidation</code>, fora do versionamento.</p>
+    </section>
+
+    <section id="limits">
+      <h2>10. Premissas e limites desta entrega</h2>
+      <p>As regras de elasticidade, atendimento, qualidade e reputação são parâmetros de jogo implementados para dar efeitos mensais às decisões. Elas devem ser calibradas pela equipe pedagógica e de design; não constituem projeções financeiras reais.</p>
+      <p>O motor calcula os efeitos de escolhas de eventos registradas. Ele não sorteia eventos nem fornece uma tela de escolha. Também não cria relatório final, exportação PDF, sincronização Firebase, telemetria ou uma tela de RH completa. Os resultados salvos e as APIs ficam disponíveis para integrar essas tarefas.</p>
+      <p>O ciclo trimestral aproveita as regras de três meses já presentes no repositório. O 13º continua zerado. A regra de falência por três prejuízos consecutivos foi preservada para manter o comportamento atual; caso a intenção pedagógica passe a usar caixa negativo, essa regra deverá ser alterada explicitamente.</p>
+      <p>O documento técnico do repositório e os scripts novos estão em inglês. Este HTML é a exceção em português que você solicitou para a entrega final.</p>
+      <a class="top-link" href="#top">Voltar ao início ↑</a>
+    </section>
+    <footer>Guia local e autocontido. Pode ser aberto no navegador ou impresso como PDF. Projeto em D:\Cogna\jogos_empresa.</footer>
+  </main>
+</body>
+</html>

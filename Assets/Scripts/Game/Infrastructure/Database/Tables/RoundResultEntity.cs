@@ -63,6 +63,18 @@ public class RoundResultEntity
     /// <summary>Reputacao (0 a 100) ao fechar o mes.</summary>
     public int reputationAtEnd { get; set; }
 
+    // Monthly simulation diagnostics. Existing databases add these nullable columns.
+    public int baseDemand { get; set; }
+    public int potentialDemand { get; set; }
+    public int serviceCapacity { get; set; }
+    public float averageTicket { get; set; }
+    public float loanPrincipalPayment { get; set; }
+    public int reputationAtStart { get; set; }
+    public int alignmentScore { get; set; }
+    public string alignmentClassification { get; set; }
+
+    [Ignore] public float TotalCosts => supplyCost + rent + salaries + utilities + loanPayment + thirteenthSalary;
+
     // ── Atalhos so de leitura para a DRE. [Ignore]: nao viram coluna. ──
 
     [Ignore] public int   Month         => round;

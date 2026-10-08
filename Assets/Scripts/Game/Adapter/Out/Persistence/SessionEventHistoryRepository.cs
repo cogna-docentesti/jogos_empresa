@@ -42,6 +42,13 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
         EventData eventData, EventOption option,
         float cashChange, int reputationChange, int clientsChange)
     {
+        // Settled statements must keep their original event inputs.
+        if (new RoundResultRepository(db).GetBySessionAndRound(sessionId, round) != null)
+            throw new System.InvalidOperationException("Events cannot be recorded for a settled month.");
+        var session = new GameSessionRepository(db).GetById(sessionId);
+        if (session != null && (session.status != GameSessionStatus.IN_PROGRESS || session.currentRound != round))
+            throw new System.InvalidOperationException("Events must belong to the active session month.");
+
         var item = new SessionEventHistoryEntity
         {
             historyId = System.Guid.NewGuid().ToString(),
@@ -57,6 +64,7 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
             cashChange = cashChange,
             reputationChange = reputationChange,
             clientsChange = clientsChange,
+            effectsJson = option?.effects != null ? UnityEngine.JsonUtility.ToJson(option.effects) : null,
             occurredAt = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds()
         };
 

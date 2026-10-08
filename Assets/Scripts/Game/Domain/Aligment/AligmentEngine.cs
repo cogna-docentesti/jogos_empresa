@@ -223,7 +223,9 @@ public static class AlignmentEngine
             bool hasRequiredRoles = restaurantData.requiredRoles.All(requirement =>
                 requirement == null ||
                 requirement.quantity <= 0 ||
-                HasRoleId(teamData, requirement.roleId)
+                teamData?.members != null && teamData.members
+                    .Where(member => member != null && member.roleId == requirement.roleId)
+                    .Sum(member => Mathf.Max(0, member.quantity)) >= requirement.quantity
             );
 
             return hasRequiredRoles ? 20 : 5;
