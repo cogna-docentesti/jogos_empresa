@@ -27,7 +27,11 @@ MonoBehaviour:
   ticketMin: 35
   ticketMax: 95
   estimatedMonthlyCustomers: 0
-  requiredRoles: []
+  requiredRoles:
+  - roleId: attendant
+    quantity: 2
+  - roleId: grill_cook
+    quantity: 1
   requiredEquipmentIds: []
   coherenceLevel: 1
-  baseMonthlyCost: 0
+  baseMonthlyCost: 1500

@@ -22,12 +22,23 @@ public class RoundFlowDebugTest : MonoBehaviour
         if (GameManager.Instance == null || DatabaseInitializer.DatabaseService?.Connection == null)
             throw new InvalidOperationException("Os testes exigem GameManager e banco inicializados.");
 
-        var db = DatabaseInitializer.DatabaseService.Connection;
-        if (db.IsInTransaction)
+        var databaseService = DatabaseInitializer.DatabaseService;
+        var previousConnection = databaseService.Connection;
+        if (previousConnection.IsInTransaction)
             throw new InvalidOperationException("Execute os testes fora de uma transacao existente.");
+
+        // Production settlement owns its transaction. Isolate this fixture in memory.
+        var db = new SQLite4Unity3d.SQLiteConnection(":memory:");
+        db.CreateTable<GameSessionEntity>();
+        db.CreateTable<RoundResultEntity>();
+        db.CreateTable<SessionEventHistoryEntity>();
+        db.CreateTable<LocationEntity>();
+        typeof(DatabaseService).GetProperty("Connection").SetValue(databaseService, db);
 
         var previousSession = GameSessionState.Current;
         var previousIncompatibleSession = GameSessionState.IncompatibleSession;
+        bool previousIsPersisted = GameSessionState.IsPersisted;
+        bool previousHasUnsavedChanges = GameSessionState.HasUnsavedChanges;
         var previousEstablishmentId = Game.Infrastructure.Session.PlayerSession.SelectedEstablishmentId;
         var previousEstablishmentName = Game.Infrastructure.Session.PlayerSession.SelectedEstablishmentName;
         var sm = GameManager.Instance.StateMachine;
@@ -43,11 +54,10 @@ public class RoundFlowDebugTest : MonoBehaviour
             Debug.Log("[Trimestre] PASSOU: " + name);
         };
 
-        db.BeginTransaction();
         try
         {
             GameSessionState.Clear();
-            var session = service.CreateNewSession();
+            var session = NewSavedSession(service);
             check(session.currentRound == 1 && session.status == GameSessionStatus.IN_PROGRESS,
                 "Nova sessao ativa comeca na rodada 1");
 
@@ -85,7 +95,7 @@ public class RoundFlowDebugTest : MonoBehaviour
                 check(sm.CurrentState == GameState.Management_Hub, label + ": StartRound bloqueado");
                 check(new RoundService().ProcessRound() == null, label + ": ProcessRound retorna null");
                 sm.ForceState(GameState.Round_Sales);
-                check(service.ProcessCurrentRound() == null && sm.CurrentState == GameState.Round_Event,
+                check(service.ProcessCurrentRound() == null && sm.CurrentState == GameState.Round_Sales,
                     label + ": fluxo externo nao chega ao resumo");
                 GameSessionState.AdvanceRound(false);
                 check(session.currentRound == originalRound && session.status == originalStatus
@@ -112,7 +122,7 @@ public class RoundFlowDebugTest : MonoBehaviour
             check(repository.GetBySessionAndRound(session.sessionId, 4) == null, "Rodada 4 continua sem resultado");
 
             GameSessionState.Clear();
-            session = service.CreateNewSession();
+            session = NewSavedSession(service);
             // Os valores financeiros atuais produzem lucro fixo. Simula perdas
             // apenas no fixture e usa o mesmo encerramento chamado por ProcessRound.
             for (int month = 1; month <= 3; month++)
@@ -164,15 +174,38 @@ public class RoundFlowDebugTest : MonoBehaviour
         }
         finally
         {
-            db.Rollback();
-            if (previousIncompatibleSession != null)
-                GameSessionState.LoadActiveSession(previousIncompatibleSession.userId);
-            else
-                GameSessionState.Set(previousSession);
+            db.Close();
+            typeof(DatabaseService).GetProperty("Connection").SetValue(databaseService, previousConnection);
+            typeof(GameSessionState).GetProperty("Current").SetValue(null, previousSession);
+            typeof(GameSessionState).GetProperty("IncompatibleSession").SetValue(null, previousIncompatibleSession);
+            typeof(GameSessionState).GetProperty("IsPersisted").SetValue(null, previousIsPersisted);
+            typeof(GameSessionState).GetProperty("HasUnsavedChanges").SetValue(null, previousHasUnsavedChanges);
             Game.Infrastructure.Session.PlayerSession.SaveSelectedEstablishment(
                 previousEstablishmentId, previousEstablishmentName);
             sm.ForceState(previousState);
         }
+    }
+
+    /// <summary>
+    /// Sessao de teste no estado "depois do confirm da D3": tem cardapio e ja
+    /// existe no banco. Desde a E-03 uma sessao nova nasce so em memoria e o
+    /// Save() e ignorado ate o primeiro Persist(); estes testes verificam o que
+    /// acontece com partidas ja gravadas, entao gravam explicitamente aqui.
+    /// </summary>
+    private static GameSessionEntity NewSavedSession(GameSessionService service)
+    {
+        var session = service.CreateNewSession();
+        // Use a real committed menu and team now that settlement validates catalog IDs.
+        var restaurant = Resources.LoadAll<RestaurantData>("Restaurants")
+            .Single(item => item.type == RestaurantType.PODRAO);
+        session.restaurantType = RestaurantType.PODRAO;
+        session.locationZone = LocationZone.Comercio;
+        session.targetSegment = Segment.LOW;
+        session.menuPricingJson = MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(restaurant.products));
+        session.teamJson = "{\"members\":[{\"roleId\":\"attendant\",\"quantity\":2},{\"roleId\":\"grill_cook\",\"quantity\":1}]}";
+        if (!GameSessionState.Persist())
+            throw new InvalidOperationException("[Trimestre] Nao foi possivel gravar a sessao de teste.");
+        return session;
     }
 
     private static void RunCreditTests(Action<bool, string> check)
@@ -196,7 +229,9 @@ public class RoundFlowDebugTest : MonoBehaviour
             {
                 GameSessionState.Clear();
                 var service = new GameSessionService("credit_test_" + Guid.NewGuid(), "test_professor");
-                var session = service.CreateNewSession();
+                var session = NewSavedSession(service);
+                if (startMonth == 2)
+                    check(new RoundService().ProcessRound(1) != null, "Credit fixture: settle month one before a month-two loan");
                 session.currentRound = startMonth;
                 float originalCash = session.currentCash;
                 check(LoanService.ContractTerm(startMonth) == 4 - startMonth,
@@ -225,7 +260,7 @@ public class RoundFlowDebugTest : MonoBehaviour
                 check(session.currentRound == 3 && session.loanBalance == 0f && !GameSessionState.HasActiveSession,
                     line.id + ": emprestimo quitado dentro do trimestre");
                 check(repository.GetBySessionId(session.sessionId).Select(item => item.round)
-                    .SequenceEqual(Enumerable.Range(startMonth, 4 - startMonth))
+                    .SequenceEqual(Enumerable.Range(1, 3))
                     && repository.GetBySessionAndRound(session.sessionId, 4) == null
                     && LoanService.RemainingPaymentMonths(4) == 0
                     && LoanService.Installment(session.loanBalance, line, 4) == 0f,
@@ -233,7 +268,7 @@ public class RoundFlowDebugTest : MonoBehaviour
             }
             GameSessionState.Clear();
             var lastMonthService = new GameSessionService("credit_block_test_" + Guid.NewGuid(), "test_professor");
-            var lastMonthSession = lastMonthService.CreateNewSession();
+            var lastMonthSession = NewSavedSession(lastMonthService);
             lastMonthSession.currentRound = 3;
             float lastMonthCash = lastMonthSession.currentCash;
             check(LoanService.ContractTerm(3) == 0 && !LoanService.TryContract(line)
@@ -263,7 +298,7 @@ public class RoundFlowDebugTest : MonoBehaviour
             GameSessionState.Clear();
             var user = "save_test_" + Guid.NewGuid();
             var service = new GameSessionService(user, "test_professor");
-            var session = service.CreateNewSession();
+            var session = NewSavedSession(service);
             session.currentRound = sample[0];
             GameSessionState.Save();
             for (int round = 1; round <= sample[1]; round++)
@@ -306,8 +341,8 @@ public class RoundFlowDebugTest : MonoBehaviour
                     label + ": reinicio remove todos os dados relacionados");
                 check(replacement.sessionId != session.sessionId && replacement.currentRound == 1
                     && replacement.status == GameSessionStatus.IN_PROGRESS && !GameSessionState.HasIncompatibleSave
-                    && sessions.GetById(replacement.sessionId) != null,
-                    label + ": nova sessao ativa persistida");
+                    && sessions.GetById(replacement.sessionId) == null && !GameSessionState.IsPersisted,
+                    label + ": nova sessao ativa so em memoria (grava no confirm da D3)");
             }
         }
 #if UNITY_EDITOR
@@ -366,7 +401,7 @@ public class RoundFlowDebugTest : MonoBehaviour
         {
             GameSessionState.Clear();
             var service = new GameSessionService("ui_save_test_" + Guid.NewGuid(), "test_professor");
-            var old = service.CreateNewSession();
+            var old = NewSavedSession(service);
             old.currentRound = 4;
             GameSessionState.Save();
             GameManager.Instance.StateMachine.ForceState(GameState.Bootstrap);

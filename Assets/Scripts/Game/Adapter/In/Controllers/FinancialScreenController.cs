@@ -62,6 +62,9 @@ namespace Game.Adapter.In.Controllers
                 return;
 
             view.SetTitle("Banco CogCred");
+
+            if (GameSessionState.Current != null)
+                view.SetInitialCapital(GameSessionState.Current.initialCapital);
             view.SetHint("Selecione uma linha de credito para visualizar limite, juros e prazo.");
             view.SetConfirmEnabled(false);
 

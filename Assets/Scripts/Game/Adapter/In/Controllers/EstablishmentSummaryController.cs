@@ -1,6 +1,8 @@
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
 using Game.Domain.Service;
+using Game.Infrastructure;
+using Game.Infrastructure.Session;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
@@ -28,6 +30,14 @@ namespace Game.Adapter.In.Controllers
             Refresh();
         }
 
+        /// <summary>
+        /// Botao Resetar e botao "Iniciar nova sessao" do aviso de save
+        /// incompativel (UIStateListener). Jogo do comeco:
+        ///  1. RestartSession (Thaysla) apaga meses, eventos e a sessao numa
+        ///     transacao so e cria uma sessao nova SO em memoria.
+        ///  2. Apaga o cadastro salvo, para a identificacao abrir vazia.
+        ///  3. Volta para a cena de identificacao.
+        /// </summary>
         public void ResetGame()
         {
             GameSessionEntity session = GameSessionState.Current ?? GameSessionState.IncompatibleSession;
@@ -41,14 +51,22 @@ namespace Game.Adapter.In.Controllers
 
             try
             {
+                string oldSessionId = session.sessionId;
+
                 var sessionService = new GameSessionService(session.userId, session.professorId);
                 sessionService.RestartSession();
-                MenuNavigator.Instance?.CloseAll();
+                Debug.Log($"[Banco] RESET: sessao {oldSessionId} apagada (meses, eventos e sessao). Nova sessao so em memoria.");
 
+                PlayerSession.ClearSavedIdentification();
+                MenuNavigator.Instance?.CloseAll();
                 view.HideResetWarning();
 
                 if (GameManager.Instance != null)
-                    GameManager.Instance.StateMachine.ForceState(GameState.Config_Location);
+                    GameManager.Instance.StateMachine.ForceState(InitialDecisionFlow.Location);
+
+                // Fora do Play Mode (testes de editor) nao existe troca de cena.
+                if (UnityEngine.Application.isPlaying)
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Identification);
             }
             catch (System.Exception exception)
             {

@@ -18,7 +18,7 @@ namespace Game.Domain.Service
     {
         private const string RestaurantsFolder = "Restaurants";
         private const string RolesFolder       = "Roles";
-        private const string EquipmentFolder   = "Equipment";
+        private const string EquipmentFolder   = "Equipments";
         private const string CreditLinesFolder = "CreditLines";
 
         public static EstablishmentSummary Build()
@@ -115,34 +115,43 @@ namespace Game.Domain.Service
 
             summary.PriceLabel = averageTicket > 0f ? Brl(averageTicket) : "Pendente";
 
-            // ---------- DEMANDA ----------
-            // Base = publico estimado do restaurante, ajustado pelo fator de
-            // alinhamento que o AlignmentEngine ja calcula, e limitado pela
-            // capacidade real de atendimento (equipe + bonus de equipamento).
-            float baseDemand = restaurant != null ? restaurant.estimatedMonthlyCustomers : 0f;
-            float factor     = session.alignmentFactor > 0f ? session.alignmentFactor : 1f;
-
-            float potentialDemand = baseDemand * factor;
-            float capacity        = TeamCapacity(team, roleCatalog) + EquipmentCapacity(equipment, equipmentCatalog);
-
-            float demand = capacity > 0f
-                ? Mathf.Min(potentialDemand, capacity)
-                : potentialDemand;
-
-            // ---------- RECEITA E RESULTADO ----------
-            summary.EstimatedRevenue = averageTicket * demand;
-
-            summary.SupplyCost      = summary.EstimatedRevenue * inputCostRatio;
-            summary.SalariesCost    = TeamSalaries(team, roleCatalog);
-            summary.FixedCost       = restaurant != null ? restaurant.baseMonthlyCost : 0f;
+            // Forecast and settlement share the same rules and event snapshots.
+            summary.SalariesCost = TeamSalaries(team, roleCatalog);
+            summary.FixedCost = (restaurant != null ? restaurant.baseMonthlyCost : 0f)
+                + (Resources.LoadAll<LocationData>("Locations")
+                    .FirstOrDefault(item => item.zone == session.locationZone)?.rent ?? 0f);
             summary.LoanInstallment = LoanInstallment(session.creditLineId, session.loanBalance, session.currentRound);
-
-            summary.MonthlyResult =
-                summary.EstimatedRevenue
-                - summary.SupplyCost
-                - summary.SalariesCost
-                - summary.FixedCost
-                - summary.LoanInstallment;
+            try
+            {
+                var db = DatabaseInitializer.DatabaseService?.Connection;
+                RoundResultEntity estimate;
+                if (!GameSessionState.HasActiveSession && db != null)
+                    estimate = new RoundResultRepository(db).GetLastRoundBySessionId(session.sessionId);
+                else
+                {
+                    var history = db != null && GameSessionState.IsPersisted
+                        ? new SessionEventHistoryRepository(db).GetBySessionAndRound(session.sessionId, session.currentRound)
+                        : new List<SessionEventHistoryEntity>();
+                    estimate = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(session, history));
+                }
+                if (estimate != null)
+                {
+                    summary.HasMonthlyEstimate = true;
+                    summary.Score = estimate.alignmentScore;
+                    summary.CoherenceLabel = CoherenceLabel(estimate.alignmentClassification, session.coherenceRating);
+                    summary.PriceLabel = Brl(estimate.averageTicket);
+                    summary.EstimatedRevenue = estimate.grossRevenue;
+                    summary.SupplyCost = estimate.supplyCost;
+                    summary.SalariesCost = estimate.Payroll;
+                    summary.FixedCost = estimate.FixedCosts;
+                    summary.LoanInstallment = estimate.loanPayment;
+                    summary.MonthlyResult = estimate.netResult;
+                }
+            }
+            catch (System.Exception exception)
+            {
+                summary.EstimateFailureReason = exception.Message;
+            }
 
             return summary;
         }
@@ -197,42 +206,6 @@ namespace Game.Domain.Service
 
                 if (role != null)
                     total += role.salary * Mathf.Max(0, member.quantity);
-            }
-
-            return total;
-        }
-
-        private static float TeamCapacity(TeamSelectionData team, IReadOnlyList<RoleData> catalog)
-        {
-            if (catalog == null || catalog.Count == 0)
-                return 0f;
-
-            float total = 0f;
-
-            foreach (var member in TeamSelectionHelper.GetMembers(team))
-            {
-                var role = catalog.FirstOrDefault(r => r != null && r.id == member.roleId);
-
-                if (role != null)
-                    total += role.maxClientsSupported * Mathf.Max(0, member.quantity);
-            }
-
-            return total;
-        }
-
-        private static float EquipmentCapacity(EquipmentSelectionData equipment, IReadOnlyList<EquipmentData> catalog)
-        {
-            if (catalog == null || catalog.Count == 0)
-                return 0f;
-
-            float total = 0f;
-
-            foreach (var id in EquipmentSelectionHelper.GetIds(equipment))
-            {
-                var item = catalog.FirstOrDefault(e => e != null && e.id == id);
-
-                if (item != null)
-                    total += item.capacityBonus;
             }
 
             return total;

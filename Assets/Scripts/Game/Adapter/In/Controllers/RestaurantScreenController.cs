@@ -1,11 +1,22 @@
 ﻿using System.Collections.Generic;
 using Game.Adapter.In.UI;
+using Game.Infrastructure.Session;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
 {
+    /// <summary>
+    /// D2 Restaurante (tipo de restaurante + classe social atendida).
+    ///
+    /// Le e grava SO no rascunho em memoria (PlayerSession). Como este
+    /// componente fica dentro do Panel_Restaurant, o OnEnable roda toda vez
+    /// que a tela aparece, vindo da D1 (avancando) ou da D3 (voltando).
+    /// </summary>
     public sealed class RestaurantScreenController : MonoBehaviour
     {
+        private const GameState PreviousState = InitialDecisionFlow.Location;
+        private const GameState NextState     = InitialDecisionFlow.Menu;
+
         [SerializeField] private RestaurantScreenView view;
 
         private readonly Dictionary<RestaurantType, RestaurantData> _restaurantsByType = new();
@@ -85,12 +96,29 @@ namespace Game.Adapter.In.Controllers
             view.BindBack(OnBack);
         }
 
+        /// <summary>
+        /// Reidrata a tela a partir do rascunho. Se o jogador ja passou por
+        /// aqui, volta a escolha dele; se e a primeira vez, mantem o
+        /// comportamento de antes (primeiro restaurante e primeira classe
+        /// permitida pre-selecionados).
+        /// </summary>
         private void ResetFromSession()
         {
-            _selectedRestaurant = GetInitialRestaurant();
-            _selectedSegment = _selectedRestaurant.HasValue
-                ? GetFirstAllowedSegment(_selectedRestaurant.Value)
-                : null;
+            if (PlayerSession.HasRestaurant
+                && _restaurantsByType.ContainsKey(PlayerSession.SelectedRestaurantType.Value))
+            {
+                _selectedRestaurant = PlayerSession.SelectedRestaurantType.Value;
+                _selectedSegment = IsSegmentAllowed(_selectedRestaurant.Value, PlayerSession.SelectedTargetSegment.Value)
+                    ? PlayerSession.SelectedTargetSegment.Value
+                    : GetFirstAllowedSegment(_selectedRestaurant.Value);
+            }
+            else
+            {
+                _selectedRestaurant = GetInitialRestaurant();
+                _selectedSegment = _selectedRestaurant.HasValue
+                    ? GetFirstAllowedSegment(_selectedRestaurant.Value)
+                    : null;
+            }
 
             view.SelectRestaurantCard(_selectedRestaurant);
             view.SelectSegmentButton(_selectedSegment);
@@ -182,9 +210,9 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
 
-            LocationZone zone = GameSessionState.HasSession
-                ? GameSessionState.Current.locationZone
-                : LocationZone.Financas;
+            // A zona vem do rascunho da D1. Assim, se o jogador voltar, trocar a
+            // localizacao e avancar de novo, este painel ja calcula com a nova.
+            LocationZone zone = PlayerSession.SelectedZone ?? LocationZone.Financas;
 
             Segment restaurantSegment = GetRestaurantNaturalSegment(_selectedRestaurant.Value);
             Segment locationSegment = GetLocationSegment(zone);
@@ -346,23 +374,32 @@ namespace Game.Adapter.In.Controllers
 
         private void OnConfirm()
         {
-            if (!_selectedRestaurant.HasValue || !_selectedSegment.HasValue)
+            if (!TrySaveDraft())
                 return;
 
-            GameSessionState.SetRestaurant(_selectedRestaurant.Value);
-            GameSessionState.SetTargetSegment(_selectedSegment.Value);
-
-            GameManager.Instance.StateMachine
-                .TryChangeState(GameState.Config_TargetSegment);
+            // Nada de banco aqui. O Save acontece so no confirm da D3.
+            InitialDecisionFlow.GoTo(NextState);
         }
 
         private void OnBack()
         {
-            _selectedRestaurant = null;
-            _selectedSegment = null;
+            // Voltar nao apaga a escolha: o jogador esta voltando para trocar a
+            // localizacao, nao para desistir. O que esta na tela vai para o
+            // rascunho e sera reaplicado quando ele avancar de novo.
+            TrySaveDraft();
 
-            GameManager.Instance.StateMachine
-                .TryChangeState(GameState.Config_Location);
+            InitialDecisionFlow.GoTo(PreviousState);
+        }
+
+        private bool TrySaveDraft()
+        {
+            if (!_selectedRestaurant.HasValue
+                || !_selectedSegment.HasValue
+                || !IsSegmentAllowed(_selectedRestaurant.Value, _selectedSegment.Value))
+                return false;
+
+            PlayerSession.SaveRestaurant(_selectedRestaurant.Value, _selectedSegment.Value);
+            return true;
         }
     }
 }
