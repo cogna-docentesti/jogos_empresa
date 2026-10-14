@@ -1,48 +1,43 @@
-ART-12 — Restaurantes centrais e camada frontal do mapa
-Escopo: nucleo
+ART-12 — Restaurantes centrais e camada frontal do mapa (PNG compacto)
+Escopo: núcleo
 Pré-requisitos: ART-10, ART-11
 
-
+Três variantes de restaurante central com mesma implantação e porta, mais foreground; quatro PNGs compactos transparentes, coordenadas em map-restaurants-compact.json.
+A especificação full-frame foi substituída por recortes e coordenadas, conforme pedido do usuário. Master, câmera, zonas, porta e hit-areas permanecem os mesmos.
 
 COMANDO PARA O CODEX
-Use $cogna-artista para executar somente ART-12 — Restaurantes centrais e camada frontal do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-12.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.
+Use $cogna-artista para executar somente ART-12, seguindo manifesto e concepts aprovados. Produzir os três restaurantes centrais e o foreground com alfa real, PNGs compactos separados, mesma porta/implantação/escala e coordenadas registradas. Não integrar cenas.
 
 LEITURAS
-docs/art/manifest.json, tokens.json, characters.json e sources.json
-Referências em art-source/references/concepts; masters canônicos em Assets/Art/new/characters/CHxx após ART-01/02.
+docs/art/manifest.json, tokens.json, characters.json, sources.json
+docs/art/layouts/map-layout.json
+docs/art/layouts/map-restaurants-compact.json
+art-source/references/concepts/01-hub.png e 02-abertura.png
 
 ENTREGÁVEIS
-Caminhos dos PNGs relativos a Assets/Art/new. Referências, fontes editáveis e contratos relativos à raiz do projeto, conforme o manifesto.
+MAP_REST_LANCHES | location/restaurants/map_rest_lanches.png
+Export 320x259 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1036, 418] | escala 1
+
 MAP_REST_FRANCES | location/restaurants/map_rest_frances.png
-Export 1920x1080 px | display 1280x848 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0, 1]
-Restaurante central Frances, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. Full-frame transparente fora da construção.
-Fonte: Assets/Resources/Restaurants/REST_Frances.asset
-Personagens: nenhum
+Export 316x247 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1040, 418] | escala 1
 
 MAP_REST_JAPONES | location/restaurants/map_rest_japones.png
-Export 1920x1080 px | display 1280x848 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0, 1]
-Restaurante central Japones, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. Full-frame transparente fora da construção.
-Fonte: Assets/Resources/Restaurants/REST_Japones.asset
-Personagens: nenhum
-
-MAP_REST_LANCHES | location/restaurants/map_rest_lanches.png
-Export 1920x1080 px | display 1280x848 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0, 1]
-Restaurante central Lanches, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. Full-frame transparente fora da construção.
-Fonte: Assets/Resources/Restaurants/REST_Lanches.asset
-Personagens: nenhum
+Export 314x271 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1042, 418] | escala 1
 
 MAP_FOREGROUND | location/map/map_foreground.png
-Export 1920x1080 px | display 1280x848 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0, 1]
-Vegetação e pequenos props de primeiro plano que ocluem construções. Sem pessoas reconhecíveis; camada alfa alinhada à origem do mapa.
-Fonte: concept aprovado / especificação de produção
-Personagens: nenhum
+Export 135x95 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1088, 588] | escala 1
 
-CRITÉRIOS DE ENTREGA
-Cada PNG separado e no caminho do manifesto; nada permanece apenas em pasta de geração.
-Alfa real nos recortes e dimensões exatas verificadas; não fingir export correto quando divergir.
-Nomes e IDs preservados; sem texto, UI ou gráfico incorporado às ilustrações.
-Validar tecnicamente com o helper do agente e inspecionar visualmente estilo/identidade.
-Atualizar status somente após arquivos reais e QA. Registrar prompts em docs/art/prompts/ART-12.json e preview de QA em art-source/previews.
-Não mudar o jogo; não produzir outros lotes automaticamente.
-display_size_px é caixa de layout: preserveAspect/contain nos recortes, sem esticar. Componentes 9-slice usam bordas preservadas. Fontes SVG/código editáveis precisam existir no source_editable especificado quando production_method=vector_or_code.
-Validador: python tools/art/validate_assets.py --task ART-12
+ENCAIXE
+Master 1920x1080, origem top_left_y_down. Restaurantes mutuamente exclusivos na ordem 70; foreground na ordem 90. Porta comum [1280,642], referência de chão [1172,657].
+Transformação de exibição compartilhada: escala 2/3, offset absoluto de canvas [24,176], viewport [24,112,1280,848]. Não esticar cada sprite para a viewport.
+Conservar câmera, silhueta estrutural, porta e footprint entre variantes; diferenças de decoração/interior. Sem texto, nomes, logos, pessoas ou UI incorporada.
+
+CRITÉRIOS
+Cada PNG no manifesto, RGBA sRGB com alfa real, dimensões e SHA256 reais. Revisão sobre fundos marfim/ameixa e montagem de cada variante com ART-10/ART-11 e foreground.
+Preservar alfa gerado. Recorte técnico inclui todo pixel com alfa não zero mais margem de 2 px. Registrar fontes e prompt exato. Nada de outros lotes ou integração.
+python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-12
+python art-source/editable/qa/ART-12-preview.py

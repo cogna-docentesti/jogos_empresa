@@ -286,7 +286,7 @@
     "title": "Geografia e contrato de coordenadas do mapa",
     "dependencies": [],
     "scope": "nucleo",
-    "status": "planejado",
+    "status": "validado",
     "note": "Definir no map-layout.json posições/polígonos das cinco zonas e da implantação central. Base sem prédios interativos, nomes, pinos, brilhos ou HUD. Composição aprovada difere da cena atual; registrar remapeamento necessário, sem modificar a cena.",
     "asset_ids": [
       "MAP_BASE"
@@ -307,7 +307,8 @@
         ]
       }
     ],
-    "request_prompt": "Use $cogna-artista para executar somente ART-10 — Geografia e contrato de coordenadas do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-10.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-10 — Geografia e contrato de coordenadas do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-10.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-10.json"
   },
   {
     "id": "ART-11",
@@ -316,8 +317,8 @@
       "ART-10"
     ],
     "scope": "nucleo",
-    "status": "planejado",
-    "note": "Cinco PNGs full-frame com a origem do master. Pixels fora da construção/bairro transparentes. Não recompor uma nova cidade a cada chamada.",
+    "status": "validado",
+    "note": "Cinco construções/bairros em PNGs compactos transparentes; posições exatas no master pelo map-layout.json e map-landmarks-compact.json. Originais full-frame preservados como variantes.",
     "asset_ids": [
       "MAP_BANK",
       "MAP_CONDOMINIUM",
@@ -326,7 +327,9 @@
       "MAP_UNIVERSITY"
     ],
     "auxiliary_deliverables": [],
-    "request_prompt": "Use $cogna-artista para executar somente ART-11 — Construções e bairros do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-11.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-11 — Construções e bairros do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-11.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-11-compact.json",
+    "delivery_record": "docs/art/ART-11-entregas.md"
   },
   {
     "id": "ART-12",
@@ -336,8 +339,8 @@
       "ART-11"
     ],
     "scope": "nucleo",
-    "status": "planejado",
-    "note": "",
+    "status": "validado",
+    "note": "Três variantes de restaurante central com mesma implantação e porta, mais foreground; quatro PNGs compactos transparentes, coordenadas em map-restaurants-compact.json.",
     "asset_ids": [
       "MAP_REST_FRANCES",
       "MAP_REST_JAPONES",
@@ -345,7 +348,9 @@
       "MAP_FOREGROUND"
     ],
     "auxiliary_deliverables": [],
-    "request_prompt": "Use $cogna-artista para executar somente ART-12 — Restaurantes centrais e camada frontal do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-12.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-12 — Restaurantes centrais e camada frontal do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-12.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-12.json",
+    "delivery_record": "docs/art/ART-12-entregas.md"
   },
   {
     "id": "ART-13",
@@ -356,8 +361,8 @@
       "ART-06"
     ],
     "scope": "nucleo",
-    "status": "planejado",
-    "note": "",
+    "status": "validado",
+    "note": "Seis realces compactos dos polígonos e sete componentes de pino/rótulo em SVG e PNG; estados com geometria comum, sem conteúdo ou sombras embutidos.",
     "asset_ids": [
       "OVERLAY_BANK",
       "OVERLAY_CONDOMINIUM",
@@ -374,7 +379,9 @@
       "OVERLAY_CENTER"
     ],
     "auxiliary_deliverables": [],
-    "request_prompt": "Use $cogna-artista para executar somente ART-13 — Marcadores, realces e rótulos vazios do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-13.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-13 — Marcadores, realces e rótulos vazios do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-13.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-13.json",
+    "delivery_record": "docs/art/ART-13-entregas.md"
   },
   {
     "id": "ART-14",
@@ -386,7 +393,7 @@
       "ART-05"
     ],
     "scope": "nucleo",
-    "status": "planejado",
+    "status": "validado",
     "note": "Somente cenário, ornamentos e pessoa separados; título, Nome, RA, erro e Cadastrar são TMP. Identificação não deve mostrar caixa/score/mês antes da sessão.",
     "asset_ids": [
       "ID_ENVIRONMENT",
@@ -395,7 +402,9 @@
       "CH01_WELCOME"
     ],
     "auxiliary_deliverables": [],
-    "request_prompt": "Use $cogna-artista para executar somente ART-14 — Arte da identificação. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-14.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-14 — Arte da identificação. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-14.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-14.json",
+    "delivery_record": "docs/art/ART-14-entregas.md"
   },
   {
     "id": "ART-15",

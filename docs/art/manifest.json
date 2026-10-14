@@ -3,7 +3,7 @@
   "project": "Jogos de Empresa Cogna",
   "date": "2026-10-14",
   "asset_root": "Assets/Art/new",
-  "phase": "produção por lotes; ART-01, ART-02, ART-03, ART-04, ART-05, ART-06, ART-07, ART-08 e ART-09 validados",
+  "phase": "produção por lotes; ART-01 a ART-11 validados",
   "reference_copies": [
     "01-hub.png",
     "02-abertura.png",
@@ -10800,7 +10800,7 @@
       "path": "location/map/map_base.png",
       "name": "Geografia urbana isométrica editorial: terreno, ruas, rio, pontes e vegetação baixa, com espaços livres para universidade, banco, comércio, residencial, corporativo e restaurante central",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1920,
@@ -10825,38 +10825,53 @@
       "padding_percent": 0,
       "character_ids": [],
       "catalog_id": null,
-      "source": null,
+      "source": "Ilustração original gerada pela ferramenta integrada ImageGen com referência ao concept aprovado do hub; revisão de vegetação baixa pela mesma ferramenta.",
       "references": [
         "art-source/references/concepts/01-hub.png"
       ],
       "brief": "Geografia urbana isométrica editorial: terreno, ruas, rio, pontes e vegetação baixa, com espaços livres para universidade, banco, comércio, residencial, corporativo e restaurante central. Mesmo enquadramento de todas as camadas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "9d0df1c72c2ba94620a8bfa7ad4179755e59b10ae54a11f8c9fc329a0accc71a",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "generation_prompt": "Use case: precise-object-edit.\nEdit target: esta camada MAP_BASE isolada, não um concept de interface.\nFaça um único ajuste de produção: substitua TODAS as árvores de copa alta por vegetação BAIXA, pequenos arbustos arredondados e canteiros desenhados com volume baixo, no mesmo estilo cartoon editorial 2D adulto. Nenhuma árvore alta deve permanecer em margens, ruas, bordas ou lotes. Os arbustos devem ficar ao lado de calçadas e limites, nunca no interior livre dos seis lotes.\nPreserve rigidamente a geometria do mapa: curso e margens do rio, posição das duas pontes, ruas, cruzamentos, calçadas e polígonos dos seis terrenos. Não mover nem redesenhar essa implantação. Preserve a mesma câmera, luz quente superior esquerda, paleta, textura desenhada e contornos ameixa limpos; preserve as estruturas das pontes. Mantenha as cinco regiões superior esquerda, superior central, superior direita, inferior esquerda residencial subdividida e inferior direita, e o lote do restaurante no centro. Não adicionar ou desenhar construções.\nPNG RGBA com transparência REAL já existente fora da geografia; manter terreno/água/pavimento opacos. Canvas desejado EXATAMENTE 1920x1080, 16:9, com escala uniforme da composição caso necessário, sem esticar e sem cortar novos elementos. Preservar alfa, sem halos, fundo sólido, checkerboard ou sombra externa. Não incorporar texto, rótulos, números, UI, HUD, prédios, pinos, ícones, pessoas, veículos ou realces. Um único arquivo, sem sprite sheet.",
       "source_editable": null,
-      "display_fit": "cover/crop somente na montagem: todas as camadas recebem a mesma transformação",
+      "display_fit": "contain: todas as camadas do mapa compartilham a transformação uniforme de map-layout.json",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Cenário sem personagens.",
+        "record": "docs/art/qa/ART-10.json",
+        "preview": "art-source/previews/ART-10/ART-10-contact-sheet.png",
+        "details": "art-source/previews/ART-10/map-layout-annotated.png",
+        "notes": "Geografia nova e contrato de implantação revisados; transparência externa real e seis espaços vazios."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-10.json",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "alpha_note": "Alfa original preservado: os interiores dos seis lotes ficam entre 250 e 254 (98 a 99,6% de opacidade). Não foram artificialmente fixados em 255."
     },
     {
       "id": "MAP_BANK",
       "task_id": "ART-11",
-      "path": "location/landmarks/map_bank.png",
+      "path": "location/landmarks/compact/map_bank.png",
       "name": "Landmark isolado: Área Financeira",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        250,
+        235
       ],
       "display_size_px": [
-        1280,
-        848
+        166.66666666666666,
+        156.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -10875,36 +10890,86 @@
       "catalog_id": "bank",
       "source": "Assets/Resources/Locations/LOC_Bank.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "Assets/Art/new/location/map/map_base.png",
+        "docs/art/layouts/map-layout.json",
+        "art-source/references/generations/ART-11/map_bank-source-01.png",
+        "Assets/Art/new/location/landmarks/map_bank.png"
       ],
-      "brief": "Landmark isolado: Área Financeira. Câmera, luz e implantação definidos no ART-10; sem texto ou ícone. Full-frame alinhado ao mapa.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Construção/bairro isolado com transparência. Recorte técnico sem reescala; posicionar pelo contrato de coordenadas do mapa.",
+      "sha256": "d63f2a9bc644c66f83a285f4c7a944380b33921910db7c95486bb03788da95ce",
+      "actual_size_px": [
+        250,
+        235
+      ],
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: uma única construção isolada para uma camada do mapa do jogo Jogos de Empresa Cogna, ART-11.\nInput images: imagem 1, concept aprovado 01-hub, é referência de desenho e arquitetura da construção indicada no MAPA À ESQUERDA. Ignore os painéis e toda a UI. Imagem 2, MAP_BASE do ART-10, é referência EXATA da câmera oblíqua, luz e direções do chão; não desenhar esse mapa na saída.\nStyle/medium: cartoon editorial adulto 2D, contornos ameixa/grafite limpos e orgânicos, volumes com cel shading suave e texturas desenhadas discretas. Acabamento igual às construções do concept. Não fazer render 3D, maquete de brinquedo, chibi, voxel, ícone genérico ou formas provisórias.\nCamera: vista elevada oblíqua/isométrica do sudeste olhando para o noroeste; duas faces e o topo visíveis, verticais para cima, duas direções do chão aproximadamente 30 graus para baixo à esquerda/direita. Preserve o ângulo do chão e das ruas do MAP_BASE. Luz quente suave do alto à esquerda, sombras locais de volume para baixo/direita.\nOutput: UMA ilustração isolada em PNG RGBA com transparência REAL, como fonte de alta resolução para export/encaixe técnico. Canvas desejado 1024x1024, construção grande no centro, completa com margem transparente em todos os lados. A fonte será escalada UNIFORMEMENTE e posicionada tecnicamente em um master final 1920x1080; não criar uma interface nem uma cidade para recortar.\nTransparency: alfa zero fora da silhueta, entre partes desconectadas e em todo espaço vazio. Não desenhar fundo branco/colorido, piso externo retangular, gramado, terreno, tile, pedestal, ruas, rio, vegetação, céu, árvores, carros, pessoas, poste, moldura, sombra oval, halo ou checkerboard. Fachadas, topo, entrada, escadas e base física da própria construção são parte do asset.\nConstraints: nenhum texto, palavra, letra, numeral, preço, nome, placa, letreiro, sinal, símbolo, ícone, logo, UI, HUD, pino, label, marca-d'água ou realce de seleção. Campos de placa e faixas de fachada ficam lisos e vazios; não substituir letras por rabiscos. Um asset distinto, sem sprite sheet, sem múltiplos ângulos/variantes.\nSubject: o banco do concept, agora isolado e SEM a palavra BANCO. Edificação institucional compacta de três pavimentos, elegante, paredes marfim e bege quente, fachada frontal ampla com grandes vidraças azul-petróleo separadas por pilares claros, porta dupla central, discreta escadaria de acesso integrante da construção, cobertura cinza plana com platibanda e pequeno volume recuado em cima. Fachada principal visível voltada para baixo/esquerda e parede lateral direita visível, coerente com a arquitetura original. Faixa superior lisa, sem letras, moeda, cofre ou símbolo. Proporções sólidas e adultas, legibilidade no tamanho de mapa. A construção vai ocupar a pequena implantação superior central do MAP_BASE; manter altura moderada e footprint compacto.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Recorte técnico de construção validada, sem personagens.",
+        "record": "docs/art/qa/ART-11-compact.json",
+        "preview": "art-source/previews/ART-11/compact/ART-11-compact-contact-sheet.png",
+        "details": "art-source/previews/ART-11/compact/MAP_BANK-compact-detail.png",
+        "rgba_pixels_reconstructed_equal": true,
+        "notes": "Recorte lossless; posição, pivot e reconstrução exata verificados."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-11-compact.json",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-landmarks-compact.json",
+      "alpha_note": "Alfa real zero externo; preservar alfa original da fonte, sem clamping ou remoção de fundo por código.",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        986,
+        151
+      ],
+      "master_crop_rect_px": [
+        986,
+        151,
+        250,
+        235
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "export_tool": "sharp PNG lossless crop",
+      "export_source": "art-source/editable/ART-11/crop-compact.cjs",
+      "fullframe_variant": {
+        "path": "location/landmarks/map_bank.png",
+        "export_size_px": [
+          1920,
+          1080
+        ],
+        "sha256": "b795ac072f99eb8f692176ec05eb9a955ebc7c77f4931a462aaff890abaff813",
+        "status": "validado",
+        "production_record": "docs/art/prompts/ART-11.json",
+        "qa_record": "docs/art/qa/ART-11.json",
+        "coordinate_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json"
+      }
     },
     {
       "id": "MAP_CONDOMINIUM",
       "task_id": "ART-11",
-      "path": "location/landmarks/map_condominium.png",
+      "path": "location/landmarks/compact/map_condominium.png",
       "name": "Landmark isolado: Área Residencial",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        391,
+        313
       ],
       "display_size_px": [
-        1280,
-        848
+        260.66666666666663,
+        208.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -10923,36 +10988,86 @@
       "catalog_id": "condominium",
       "source": "Assets/Resources/Locations/LOC_Condominium.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "Assets/Art/new/location/map/map_base.png",
+        "docs/art/layouts/map-layout.json",
+        "art-source/references/generations/ART-11/map_condominium-source-02.png",
+        "Assets/Art/new/location/landmarks/map_condominium.png"
       ],
-      "brief": "Landmark isolado: Área Residencial. Câmera, luz e implantação definidos no ART-10; sem texto ou ícone. Full-frame alinhado ao mapa.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Construção/bairro isolado com transparência. Recorte técnico sem reescala; posicionar pelo contrato de coordenadas do mapa.",
+      "sha256": "dc20b4a6f5be465fcde3c72fbb770fb101d7a12068a84f46217677d4fcf7fb81",
+      "actual_size_px": [
+        391,
+        313
+      ],
+      "generation_prompt": "Use case: precise-object-edit.\nInput image 1 is the edit target: a transparent neighborhood asset with SIX complete houses. Input image 2 is ONLY a ground placement guide, not an asset to copy.\nChange ONLY the spatial arrangement and uniform size of the existing six houses so their GROUND FOOTPRINT CENTERS match the six red crosses in the guide. Preserve each house design, the warm ivory walls, terracotta roof, dark blue windows, adult editorial 2D linework, oblique camera and upper-left lighting. Do not replace the houses or create new identities.\nKeep a 1254x1254 square canvas. Make each individual house uniformly about 80% of its current size; all houses keep the same scale. The red crosses are the center of the physical base/foundation, NOT the center of the roof or the whole illustration. Place H1 (original upper house) at ground center (796,481); H2 (original right house) at (1090,689); H3 (original middle-left house) at (513,646); H4 (original middle-right house) at (787,875); H5 (original lower-left house with a small side extension) at (216,840); H6 (original front/bottom house) at (479,1075). Feet centered within the six purple diamonds. The diamonds indicate the footprint room, not a colored floor to draw.\nThe houses may project their roofs upward from the ground positions. Keep every house whole and inside the canvas. Maintain natural isometric neighborhood spacing, not a frontal card grid. Deliver ONLY these same SIX houses together as one neighborhood layer. Absolutely no street, paths, ground, opaque plot, grass, garden, tree, fence, extra building, person, vehicle, guide, diamond, cross, text, label, number, symbol or UI. All areas between/outside the houses must have genuine alpha zero. Preserve a clean transparent RGBA cutout with no background, checkerboard, glow or outside shadow. Do not copy any markings from the guide.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Recorte técnico de construção validada, sem personagens.",
+        "record": "docs/art/qa/ART-11-compact.json",
+        "preview": "art-source/previews/ART-11/compact/ART-11-compact-contact-sheet.png",
+        "details": "art-source/previews/ART-11/compact/MAP_CONDOMINIUM-compact-detail.png",
+        "rgba_pixels_reconstructed_equal": true,
+        "notes": "Recorte lossless; posição, pivot e reconstrução exata verificados."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-11-compact.json",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-landmarks-compact.json",
+      "alpha_note": "Alfa real zero externo; preservar alfa original da fonte, sem clamping ou remoção de fundo por código.",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        393,
+        631
+      ],
+      "master_crop_rect_px": [
+        393,
+        631,
+        391,
+        313
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "export_tool": "sharp PNG lossless crop",
+      "export_source": "art-source/editable/ART-11/crop-compact.cjs",
+      "fullframe_variant": {
+        "path": "location/landmarks/map_condominium.png",
+        "export_size_px": [
+          1920,
+          1080
+        ],
+        "sha256": "3b507d79e6b63d240e3e308f6424f145456aa5b8e6ee39f4f0221012d1f4acc6",
+        "status": "validado",
+        "production_record": "docs/art/prompts/ART-11.json",
+        "qa_record": "docs/art/qa/ART-11.json",
+        "coordinate_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json"
+      }
     },
     {
       "id": "MAP_MARKETING",
       "task_id": "ART-11",
-      "path": "location/landmarks/map_marketing.png",
+      "path": "location/landmarks/compact/map_marketing.png",
       "name": "Landmark isolado: Área Corporativa",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        364,
+        364
       ],
       "display_size_px": [
-        1280,
-        848
+        242.66666666666666,
+        242.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -10971,36 +11086,86 @@
       "catalog_id": "marketing",
       "source": "Assets/Resources/Locations/LOC_Marketing.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "Assets/Art/new/location/map/map_base.png",
+        "docs/art/layouts/map-layout.json",
+        "art-source/references/generations/ART-11/map_marketing-source-01.png",
+        "Assets/Art/new/location/landmarks/map_marketing.png"
       ],
-      "brief": "Landmark isolado: Área Corporativa. Câmera, luz e implantação definidos no ART-10; sem texto ou ícone. Full-frame alinhado ao mapa.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Construção/bairro isolado com transparência. Recorte técnico sem reescala; posicionar pelo contrato de coordenadas do mapa.",
+      "sha256": "e904c3f2db8a302bd91ef7126aa5636d5dbb251c0ec3acc766e5e1e0d0fa684d",
+      "actual_size_px": [
+        364,
+        364
+      ],
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: uma única construção isolada para uma camada do mapa do jogo Jogos de Empresa Cogna, ART-11.\nInput images: imagem 1, concept aprovado 01-hub, é referência de desenho e arquitetura da construção indicada no MAPA À ESQUERDA. Ignore os painéis e toda a UI. Imagem 2, MAP_BASE do ART-10, é referência EXATA da câmera oblíqua, luz e direções do chão; não desenhar esse mapa na saída.\nStyle/medium: cartoon editorial adulto 2D, contornos ameixa/grafite limpos e orgânicos, volumes com cel shading suave e texturas desenhadas discretas. Acabamento igual às construções do concept. Não fazer render 3D, maquete de brinquedo, chibi, voxel, ícone genérico ou formas provisórias.\nCamera: vista elevada oblíqua/isométrica do sudeste olhando para o noroeste; duas faces e o topo visíveis, verticais para cima, duas direções do chão aproximadamente 30 graus para baixo à esquerda/direita. Preserve o ângulo do chão e das ruas do MAP_BASE. Luz quente suave do alto à esquerda, sombras locais de volume para baixo/direita.\nOutput: UMA ilustração isolada em PNG RGBA com transparência REAL, como fonte de alta resolução para export/encaixe técnico. Canvas desejado 1024x1024, construção grande no centro, completa com margem transparente em todos os lados. A fonte será escalada UNIFORMEMENTE e posicionada tecnicamente em um master final 1920x1080; não criar uma interface nem uma cidade para recortar.\nTransparency: alfa zero fora da silhueta, entre partes desconectadas e em todo espaço vazio. Não desenhar fundo branco/colorido, piso externo retangular, gramado, terreno, tile, pedestal, ruas, rio, vegetação, céu, árvores, carros, pessoas, poste, moldura, sombra oval, halo ou checkerboard. Fachadas, topo, entrada, escadas e base física da própria construção são parte do asset.\nConstraints: nenhum texto, palavra, letra, numeral, preço, nome, placa, letreiro, sinal, símbolo, ícone, logo, UI, HUD, pino, label, marca-d'água ou realce de seleção. Campos de placa e faixas de fachada ficam lisos e vazios; não substituir letras por rabiscos. Um asset distinto, sem sprite sheet, sem múltiplos ângulos/variantes.\nSubject: um único conjunto corporativo, como o bairro de escritórios no canto inferior direito do mapa do concept, isolado e SEM texto. Três edifícios corporativos próximos mas com silhuetas distintas, de aproximadamente quatro, seis e oito pavimentos, alturas escalonadas, paredes marfim/bege, faixas verticais de vidro azul-petróleo, caixilhos escuros discretos, telhados cinza planos com platibandas. Volume alto ao fundo e dois volumes mais baixos à frente, mantendo uma pequena entrada livre entre eles. Fachadas frontais voltadas para baixo/esquerda e laterais direitas visíveis. As bases dos três edifícios formam um conjunto compacto em um único plano isométrico, sem sobreposição impossível. Não adicionar praça, chão opaco, ruas, estacionamentos, jardins, pessoas, árvores, carros, placas, letreiros ou símbolos. Apenas construções e bases físicas imediatas. O conjunto vai ocupar o lote corporativo inferior direito de MAP_BASE, com margem em relação à rua; preservar câmera e luz do banco/comércio do concept.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Recorte técnico de construção validada, sem personagens.",
+        "record": "docs/art/qa/ART-11-compact.json",
+        "preview": "art-source/previews/ART-11/compact/ART-11-compact-contact-sheet.png",
+        "details": "art-source/previews/ART-11/compact/MAP_MARKETING-compact-detail.png",
+        "rgba_pixels_reconstructed_equal": true,
+        "notes": "Recorte lossless; posição, pivot e reconstrução exata verificados."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-11-compact.json",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-landmarks-compact.json",
+      "alpha_note": "Alfa real zero externo; preservar alfa original da fonte, sem clamping ou remoção de fundo por código.",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1372,
+        575
+      ],
+      "master_crop_rect_px": [
+        1372,
+        575,
+        364,
+        364
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "export_tool": "sharp PNG lossless crop",
+      "export_source": "art-source/editable/ART-11/crop-compact.cjs",
+      "fullframe_variant": {
+        "path": "location/landmarks/map_marketing.png",
+        "export_size_px": [
+          1920,
+          1080
+        ],
+        "sha256": "a23855b223b529492491956ef1e2b8bb458bfafb90e9c330378a805ded06d93a",
+        "status": "validado",
+        "production_record": "docs/art/prompts/ART-11.json",
+        "qa_record": "docs/art/qa/ART-11.json",
+        "coordinate_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json"
+      }
     },
     {
       "id": "MAP_STORE",
       "task_id": "ART-11",
-      "path": "location/landmarks/map_store.png",
+      "path": "location/landmarks/compact/map_store.png",
       "name": "Landmark isolado: Área Comercial",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        317,
+        274
       ],
       "display_size_px": [
-        1280,
-        848
+        211.33333333333331,
+        182.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11019,36 +11184,86 @@
       "catalog_id": "store",
       "source": "Assets/Resources/Locations/LOC_Store.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "Assets/Art/new/location/map/map_base.png",
+        "docs/art/layouts/map-layout.json",
+        "art-source/references/generations/ART-11/map_store-source-01.png",
+        "Assets/Art/new/location/landmarks/map_store.png"
       ],
-      "brief": "Landmark isolado: Área Comercial. Câmera, luz e implantação definidos no ART-10; sem texto ou ícone. Full-frame alinhado ao mapa.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Construção/bairro isolado com transparência. Recorte técnico sem reescala; posicionar pelo contrato de coordenadas do mapa.",
+      "sha256": "2bafb4bc33de10ca342159fd7941e19506d395843c1dda4187d1881a86c95fa4",
+      "actual_size_px": [
+        317,
+        274
+      ],
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: uma única construção isolada para uma camada do mapa do jogo Jogos de Empresa Cogna, ART-11.\nInput images: imagem 1, concept aprovado 01-hub, é referência de desenho e arquitetura da construção indicada no MAPA À ESQUERDA. Ignore os painéis e toda a UI. Imagem 2, MAP_BASE do ART-10, é referência EXATA da câmera oblíqua, luz e direções do chão; não desenhar esse mapa na saída.\nStyle/medium: cartoon editorial adulto 2D, contornos ameixa/grafite limpos e orgânicos, volumes com cel shading suave e texturas desenhadas discretas. Acabamento igual às construções do concept. Não fazer render 3D, maquete de brinquedo, chibi, voxel, ícone genérico ou formas provisórias.\nCamera: vista elevada oblíqua/isométrica do sudeste olhando para o noroeste; duas faces e o topo visíveis, verticais para cima, duas direções do chão aproximadamente 30 graus para baixo à esquerda/direita. Preserve o ângulo do chão e das ruas do MAP_BASE. Luz quente suave do alto à esquerda, sombras locais de volume para baixo/direita.\nOutput: UMA ilustração isolada em PNG RGBA com transparência REAL, como fonte de alta resolução para export/encaixe técnico. Canvas desejado 1024x1024, construção grande no centro, completa com margem transparente em todos os lados. A fonte será escalada UNIFORMEMENTE e posicionada tecnicamente em um master final 1920x1080; não criar uma interface nem uma cidade para recortar.\nTransparency: alfa zero fora da silhueta, entre partes desconectadas e em todo espaço vazio. Não desenhar fundo branco/colorido, piso externo retangular, gramado, terreno, tile, pedestal, ruas, rio, vegetação, céu, árvores, carros, pessoas, poste, moldura, sombra oval, halo ou checkerboard. Fachadas, topo, entrada, escadas e base física da própria construção são parte do asset.\nConstraints: nenhum texto, palavra, letra, numeral, preço, nome, placa, letreiro, sinal, símbolo, ícone, logo, UI, HUD, pino, label, marca-d'água ou realce de seleção. Campos de placa e faixas de fachada ficam lisos e vazios; não substituir letras por rabiscos. Um asset distinto, sem sprite sheet, sem múltiplos ângulos/variantes.\nSubject: a construção comercial de equipamentos do concept, isolada e SEM quaisquer palavras. Uma loja urbana larga de dois pavimentos com telhado plano cinza e platibanda marfim, pavimento superior bege com janelas azuis discretas, térreo coral/terracota com ampla vitrine azul-petróleo e porta dupla. Cobertura com pequeno recuo semelhante à loja original, volumes claros e contornos limpos. Faixa superior de fachada lisa e sem letras, ícones ou logo. Fachada principal voltada para baixo/esquerda, lateral direita visível. Não colocar mercadorias externas, equipamentos, placas, pessoas ou props de outra tarefa. Footprint retangular largo, altura moderada. Vai ocupar o lote comercial superior direito do MAP_BASE.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Recorte técnico de construção validada, sem personagens.",
+        "record": "docs/art/qa/ART-11-compact.json",
+        "preview": "art-source/previews/ART-11/compact/ART-11-compact-contact-sheet.png",
+        "details": "art-source/previews/ART-11/compact/MAP_STORE-compact-detail.png",
+        "rgba_pixels_reconstructed_equal": true,
+        "notes": "Recorte lossless; posição, pivot e reconstrução exata verificados."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-11-compact.json",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-landmarks-compact.json",
+      "alpha_note": "Alfa real zero externo; preservar alfa original da fonte, sem clamping ou remoção de fundo por código.",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1475,
+        175
+      ],
+      "master_crop_rect_px": [
+        1475,
+        175,
+        317,
+        274
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "export_tool": "sharp PNG lossless crop",
+      "export_source": "art-source/editable/ART-11/crop-compact.cjs",
+      "fullframe_variant": {
+        "path": "location/landmarks/map_store.png",
+        "export_size_px": [
+          1920,
+          1080
+        ],
+        "sha256": "5a59a8052457aacf82926dfe6230c64a282eb262f72efb7c311c3e3103fb439f",
+        "status": "validado",
+        "production_record": "docs/art/prompts/ART-11.json",
+        "qa_record": "docs/art/qa/ART-11.json",
+        "coordinate_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json"
+      }
     },
     {
       "id": "MAP_UNIVERSITY",
       "task_id": "ART-11",
-      "path": "location/landmarks/map_university.png",
+      "path": "location/landmarks/compact/map_university.png",
       "name": "Landmark isolado: Área Educacional",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        309,
+        277
       ],
       "display_size_px": [
-        1280,
-        848
+        206,
+        184.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11067,20 +11282,70 @@
       "catalog_id": "university",
       "source": "Assets/Resources/Locations/LOC_University.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "Assets/Art/new/location/map/map_base.png",
+        "docs/art/layouts/map-layout.json",
+        "art-source/references/generations/ART-11/map_university-source-01.png",
+        "Assets/Art/new/location/landmarks/map_university.png"
       ],
-      "brief": "Landmark isolado: Área Educacional. Câmera, luz e implantação definidos no ART-10; sem texto ou ícone. Full-frame alinhado ao mapa.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Construção/bairro isolado com transparência. Recorte técnico sem reescala; posicionar pelo contrato de coordenadas do mapa.",
+      "sha256": "ef67d0bc70b94341d4819993bf0be8aac543619fa650a81deb373aa9a51aff79",
+      "actual_size_px": [
+        309,
+        277
+      ],
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: uma única construção isolada para uma camada do mapa do jogo Jogos de Empresa Cogna, ART-11.\nInput images: imagem 1, concept aprovado 01-hub, é referência de desenho e arquitetura da construção indicada no MAPA À ESQUERDA. Ignore os painéis e toda a UI. Imagem 2, MAP_BASE do ART-10, é referência EXATA da câmera oblíqua, luz e direções do chão; não desenhar esse mapa na saída.\nStyle/medium: cartoon editorial adulto 2D, contornos ameixa/grafite limpos e orgânicos, volumes com cel shading suave e texturas desenhadas discretas. Acabamento igual às construções do concept. Não fazer render 3D, maquete de brinquedo, chibi, voxel, ícone genérico ou formas provisórias.\nCamera: vista elevada oblíqua/isométrica do sudeste olhando para o noroeste; duas faces e o topo visíveis, verticais para cima, duas direções do chão aproximadamente 30 graus para baixo à esquerda/direita. Preserve o ângulo do chão e das ruas do MAP_BASE. Luz quente suave do alto à esquerda, sombras locais de volume para baixo/direita.\nOutput: UMA ilustração isolada em PNG RGBA com transparência REAL, como fonte de alta resolução para export/encaixe técnico. Canvas desejado 1024x1024, construção grande no centro, completa com margem transparente em todos os lados. A fonte será escalada UNIFORMEMENTE e posicionada tecnicamente em um master final 1920x1080; não criar uma interface nem uma cidade para recortar.\nTransparency: alfa zero fora da silhueta, entre partes desconectadas e em todo espaço vazio. Não desenhar fundo branco/colorido, piso externo retangular, gramado, terreno, tile, pedestal, ruas, rio, vegetação, céu, árvores, carros, pessoas, poste, moldura, sombra oval, halo ou checkerboard. Fachadas, topo, entrada, escadas e base física da própria construção são parte do asset.\nConstraints: nenhum texto, palavra, letra, numeral, preço, nome, placa, letreiro, sinal, símbolo, ícone, logo, UI, HUD, pino, label, marca-d'água ou realce de seleção. Campos de placa e faixas de fachada ficam lisos e vazios; não substituir letras por rabiscos. Um asset distinto, sem sprite sheet, sem múltiplos ângulos/variantes.\nSubject: a universidade neoclássica do concept, isolada e SEM a palavra UNIVERSIDADE. Um único conjunto arquitetônico institucional completo: bloco central com cúpula ampla azul-índigo e lanternim discreto, pórtico com colunas marfim, frontão/faixa lisa, escadaria larga integrante do edifício, duas alas laterais baixas com janelas escuras e telhados terracota. Fachada principal voltada para baixo/esquerda, com uma lateral direita visível como no concept. Paleta marfim/bege, sombras lavanda suaves, cúpula índigo/grafite, detalhes em terracota. Campus adulto, refinado e reconhecível; portas, colunas e perspectiva coerentes. As alas são conectadas ao bloco central, sem outras construções ao redor. Não adicionar jardins, ruas, pessoas ou chão externo. O conjunto vai encaixar no lote superior esquerdo do MAP_BASE.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Recorte técnico de construção validada, sem personagens.",
+        "record": "docs/art/qa/ART-11-compact.json",
+        "preview": "art-source/previews/ART-11/compact/ART-11-compact-contact-sheet.png",
+        "details": "art-source/previews/ART-11/compact/MAP_UNIVERSITY-compact-detail.png",
+        "rgba_pixels_reconstructed_equal": true,
+        "notes": "Recorte lossless; posição, pivot e reconstrução exata verificados."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-11-compact.json",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-landmarks-compact.json",
+      "alpha_note": "Alfa real zero externo; preservar alfa original da fonte, sem clamping ou remoção de fundo por código.",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        218,
+        51
+      ],
+      "master_crop_rect_px": [
+        218,
+        51,
+        309,
+        277
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "export_tool": "sharp PNG lossless crop",
+      "export_source": "art-source/editable/ART-11/crop-compact.cjs",
+      "fullframe_variant": {
+        "path": "location/landmarks/map_university.png",
+        "export_size_px": [
+          1920,
+          1080
+        ],
+        "sha256": "811eb9d5ec634f4822bdb816b52a6b088a5f3da5cc0f7c8d66603410715e1a44",
+        "status": "validado",
+        "production_record": "docs/art/prompts/ART-11.json",
+        "qa_record": "docs/art/qa/ART-11.json",
+        "coordinate_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json"
+      }
     },
     {
       "id": "MAP_REST_FRANCES",
@@ -11088,15 +11353,15 @@
       "path": "location/restaurants/map_rest_frances.png",
       "name": "Restaurante central Frances, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        316,
+        247
       ],
       "display_size_px": [
-        1280,
-        848
+        210.66666666666666,
+        164.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11115,20 +11380,58 @@
       "catalog_id": "REST_FRANCES",
       "source": "Assets/Resources/Restaurants/REST_Frances.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/generations/ART-12/map_rest_frances-source.png"
       ],
-      "brief": "Restaurante central Frances, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. Full-frame transparente fora da construção.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Restaurante central Frances, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. PNG compacto transparente; posição de encaixe registrada no contrato.",
+      "sha256": "85d2035ed23e7007d90aa33a9960c4bf64fa8961aa4bff58860062555e742839",
+      "actual_size_px": [
+        316,
+        247
+      ],
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: one transparent RGBA restaurant map sprite.\nImage 1 is the EDIT TARGET, the canonical building for this lot. Image 2 is only the approved restaurant-type concept.\nKEEP the edit target's square canvas, exact camera, framing, pixel placement, roof perimeter, rooftop unit, wall height, foundation diamond, all outer contours, plain purple fascia, purple awnings, window frames, entrance door and threshold, and exterior light fixture precisely unchanged. Do not enlarge, shrink, move, rotate, warp or redraw the exterior building. The purpose is a swappable same-building skin: roof and door must coincide when images are overlaid. Preserve existing genuine alpha and transparent background. No terrace, no ground tile or surrounding scene.\nChange only the visible interior furnishings seen THROUGH existing glass, plus the surface color/finish INSIDE the existing masonry boundaries. Do not cover or move glazing or doorway.\nStyle: same polished adult editorial cartoon, warm upper-left illumination, plum linework. No people, no readable text, no logos, letters, numbers, food illustration symbols, cultural caricature, signage, UI, border, checkerboard or background. One sprite only.\nRequested variant: French premium restaurant. Warm refined cream stone surface in the existing wall planes, subtle muted brass accents confined to existing frame shapes. Replace casual counter and stools visible behind LEFT windows with elegant small dining tables with white linens and dark wood chairs, refined warm pendant lighting in the existing lamp positions. In the right window, a small elegant dining table; keep entrance visually identical and fully clear. This is the SAME contemporary low flat-roof building, not a Parisian historic building. Retain all-purple fascia and all-purple awnings, no blue change.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Não há personagens neste lote.",
+        "record": "docs/art/qa/ART-12.json",
+        "preview": "art-source/previews/ART-12/MAP_REST_FRANCES-native-light-dark.png",
+        "notes": "Câmera, alfa, estilo, posição de porta, implantação e montagem com ART-10/ART-11 revisados. PNG compacto com margens transparentes de 2 px."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_source": "art-source/references/generations/ART-12/map_rest_frances-source.png",
+      "export_tool": "sharp 0.35.5 — uniform resize and lossless crop",
+      "export_source": "art-source/editable/ART-12/export-compact.cjs",
+      "production_record": "docs/art/prompts/ART-12.json",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1040,
+        418
+      ],
+      "master_crop_rect_px": [
+        1040,
+        418,
+        316,
+        247
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-restaurants-compact.json",
+      "map_door_anchor_px": [
+        1280,
+        642
+      ]
     },
     {
       "id": "MAP_REST_JAPONES",
@@ -11136,15 +11439,15 @@
       "path": "location/restaurants/map_rest_japones.png",
       "name": "Restaurante central Japones, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        314,
+        271
       ],
       "display_size_px": [
-        1280,
-        848
+        209.33333333333331,
+        180.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11163,20 +11466,58 @@
       "catalog_id": "REST_JAPONES",
       "source": "Assets/Resources/Restaurants/REST_Japones.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/generations/ART-12/map_rest_japones-source.png"
       ],
-      "brief": "Restaurante central Japones, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. Full-frame transparente fora da construção.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Restaurante central Japones, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. PNG compacto transparente; posição de encaixe registrada no contrato.",
+      "sha256": "21fef8885e515aa4a4ea11fe4a87e80a92e40714fbb37b8ab245308a38cf210e",
+      "actual_size_px": [
+        314,
+        271
+      ],
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: one transparent RGBA restaurant map sprite.\nImage 1 is the EDIT TARGET, the canonical building for this lot. Image 2 is only the approved restaurant-type concept.\nKEEP the edit target's square canvas, exact camera, framing, pixel placement, roof perimeter, rooftop unit, wall height, foundation diamond, all outer contours, plain purple fascia, purple awnings, window frames, entrance door and threshold, and exterior light fixture precisely unchanged. Do not enlarge, shrink, move, rotate, warp or redraw the exterior building. The purpose is a swappable same-building skin: roof and door must coincide when images are overlaid. Preserve existing genuine alpha and transparent background. No terrace, no ground tile or surrounding scene.\nChange only the visible interior furnishings seen THROUGH existing glass, plus the surface color/finish INSIDE the existing masonry boundaries. Do not cover or move glazing or doorway.\nStyle: same polished adult editorial cartoon, warm upper-left illumination, plum linework. No people, no readable text, no logos, letters, numbers, food illustration symbols, cultural caricature, signage, UI, border, checkerboard or background. One sprite only.\nRequested variant: Japanese restaurant, intermediate to premium. Inside LEFT windows replace casual snack counter with a neatly organized dark walnut sushi counter, compact dark wooden seating and understated amber interior illumination. Existing cream wall planes may receive subtle dark walnut vertical slat texture bounded within those planes. Keep every window opening and frame, plain violet fascia and violet awnings exactly unchanged. Keep right-window table and the entrance fully clear. No pagoda, torii, lantern outside, ideograms, flags, food props outside or stereotypes.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Não há personagens neste lote.",
+        "record": "docs/art/qa/ART-12.json",
+        "preview": "art-source/previews/ART-12/MAP_REST_JAPONES-native-light-dark.png",
+        "notes": "Câmera, alfa, estilo, posição de porta, implantação e montagem com ART-10/ART-11 revisados. PNG compacto com margens transparentes de 2 px."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_source": "art-source/references/generations/ART-12/map_rest_japones-source.png",
+      "export_tool": "sharp 0.35.5 — uniform resize and lossless crop",
+      "export_source": "art-source/editable/ART-12/export-compact.cjs",
+      "production_record": "docs/art/prompts/ART-12.json",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1042,
+        418
+      ],
+      "master_crop_rect_px": [
+        1042,
+        418,
+        314,
+        271
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-restaurants-compact.json",
+      "map_door_anchor_px": [
+        1280,
+        642
+      ]
     },
     {
       "id": "MAP_REST_LANCHES",
@@ -11184,15 +11525,15 @@
       "path": "location/restaurants/map_rest_lanches.png",
       "name": "Restaurante central Lanches, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        320,
+        259
       ],
       "display_size_px": [
-        1280,
-        848
+        213.33333333333331,
+        172.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11211,20 +11552,58 @@
       "catalog_id": "REST_LANCHES",
       "source": "Assets/Resources/Restaurants/REST_Lanches.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/previews/ART-11/compact/compact-assembly-light.png",
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png"
       ],
-      "brief": "Restaurante central Lanches, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. Full-frame transparente fora da construção.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Restaurante central Lanches, mesmo lote, porta/escala/pivot entre três variantes; toldo roxo sem nome. PNG compacto transparente; posição de encaixe registrada no contrato.",
+      "sha256": "6a6b3231f6b7fe7b503a2dc85219526c35449ca79210630f539ef7f1d44dd474",
+      "actual_size_px": [
+        320,
+        259
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated game-map restaurant sprite, MAP_REST_LANCHES, on genuine transparent RGBA.\nInput images: Image 1 is the approved Cogna hub concept, style and small central restaurant architecture reference only. Image 2 is the approved opening concept, casual restaurant fitout reference only. Image 3 is the current empty central plot in the approved map assembly, camera/palette reference only. Never reproduce those scenes or their UI.\nSubject: ONE compact, single-story contemporary neighborhood restaurant, rectangular flat roof, ivory walls, plain broad violet #6D28D9 fascia and matching purple fabric awning, warm amber glass storefront, dark plum slim window frames. Casual practical interior with a small counter visible through the windows. Absolutely no writing or symbols on the fascia. Entry is a narrow glazed door on the RIGHT facing facade, close to the rightmost corner, clearly visible threshold. The other front face has two large windows. No people.\nComposition: full isolated building centered on a square canvas, transparent around it, comfortable small margin, about 78% canvas width. Elevated orthographic oblique editorial city-map view from southeast. Roof diamond back corner upper-middle, right corner to the right, foreground corner lower-middle, left corner to the left. Both ground axes diagonal approximately 27 degrees to horizontal; vertical walls straight up. Right-facing facade goes from rightmost corner down-left to foreground corner, doorway at roughly one third of that face from rightmost corner. Building has a thin foundation directly under the walls, no surrounding paving tile, no landscape or pedestal. Low roof parapet, no roof sign structure, modest roof air-conditioning unit. The exact structure will be reused for two facade variants, so a simple stable silhouette is essential.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the provided map. Precise dark muted plum outlines, controlled soft painted color, cream masonry, rich purple, warm glazing. Readable at 230 pixels wide. Warm upper-left lighting, local shadows only.\nConstraints: restaurant only, architecture entire and uncropped; alpha zero outside. No terrace furniture, plants, outdoor pots, people, vehicles, ground patch, roads, other buildings, food props, letters, logos, labels, icons, menus, border, checkerboard, colored backdrop, ambient ground shadow outside the building. Preserve compact low building proportions. Output one sprite, never a sheet.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Não há personagens neste lote.",
+        "record": "docs/art/qa/ART-12.json",
+        "preview": "art-source/previews/ART-12/MAP_REST_LANCHES-native-light-dark.png",
+        "notes": "Câmera, alfa, estilo, posição de porta, implantação e montagem com ART-10/ART-11 revisados. PNG compacto com margens transparentes de 2 px."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_source": "art-source/references/generations/ART-12/map_rest_lanches-source.png",
+      "export_tool": "sharp 0.35.5 — uniform resize and lossless crop",
+      "export_source": "art-source/editable/ART-12/export-compact.cjs",
+      "production_record": "docs/art/prompts/ART-12.json",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1036,
+        418
+      ],
+      "master_crop_rect_px": [
+        1036,
+        418,
+        320,
+        259
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-restaurants-compact.json",
+      "map_door_anchor_px": [
+        1280,
+        642
+      ]
     },
     {
       "id": "MAP_FOREGROUND",
@@ -11232,15 +11611,15 @@
       "path": "location/map/map_foreground.png",
       "name": "Vegetação e pequenos props de primeiro plano que ocluem construções",
       "kind": "camada_mapa",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        135,
+        95
       ],
       "display_size_px": [
-        1280,
-        848
+        90.0,
+        63.33333333333333
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11259,20 +11638,54 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/generations/ART-12/map_foreground-source.png"
       ],
-      "brief": "Vegetação e pequenos props de primeiro plano que ocluem construções. Sem pessoas reconhecíveis; camada alfa alinhada à origem do mapa.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "brief": "Vegetação e pequenos props de primeiro plano que ocluem construções. Sem pessoas reconhecíveis; PNG compacto com posição de encaixe no master.",
+      "sha256": "9ba3d9e5a5b6c0d89bb1dad2c0dd1d670ae818d8b3d1926937eaa9e13e9a96ec",
+      "actual_size_px": [
+        135,
+        95
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE separate small foreground vegetation/props sprite for an editorial city map, transparent RGBA.\nInput image 1 is a camera/color style reference only, never reproduce its restaurant. Input image 2 is approved art style reference only.\nSubject: a compact continuous grouping of TWO low rectangular warm ivory stone planters with lush low rounded teal/olive shrubs, beside a small dark walnut outdoor bench with plum metal legs. Group arranged along one ground diagonal from upper-left toward lower-right (about 25 degrees), the front-facing rim clearly visible. Planters are short (roughly knee height), shrub clusters round and stylized, bench sized proportionally. Simple foliage rather than photoreal detail. Small upper-left warm highlights and local self-shadow inside the props.\nComposition: elevated orthographic oblique editorial city-map camera matching image1, vertically upright props, compact width about twice the height. Entire group isolated centered on transparent square canvas, modest empty margin. This group will be reduced to about 110x65 pixels and placed across the lower-left/front base of the restaurant on the existing terrain. It should softly occlude only a little of the base; not the entrance. Do not generate a construction or a ground tile. No tall tree, no outdoor lights, no street/pavement slab or pedestal, no surrounding landscape. No ground shadow outside group.\nStyle: polished hand-drawn adult editorial cartoon, muted plum outline, controlled painted greens, ivory planter material, warm upper-left lighting. No text, symbols, labels, logos, frames, UI, people, buildings, vehicles, checkerboard or backdrop. True alpha zero outside. ONE foreground cluster, not separate panels or a spritesheet.",
       "source_editable": null,
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Não há personagens neste lote.",
+        "record": "docs/art/qa/ART-12.json",
+        "preview": "art-source/previews/ART-12/MAP_FOREGROUND-native-light-dark.png",
+        "notes": "Câmera, alfa, estilo, posição de porta, implantação e montagem com ART-10/ART-11 revisados. PNG compacto com margens transparentes de 2 px."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_source": "art-source/references/generations/ART-12/map_foreground-source.png",
+      "export_tool": "sharp 0.35.5 — uniform resize and lossless crop",
+      "export_source": "art-source/editable/ART-12/export-compact.cjs",
+      "production_record": "docs/art/prompts/ART-12.json",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1088,
+        588
+      ],
+      "master_crop_rect_px": [
+        1088,
+        588,
+        135,
+        95
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-restaurants-compact.json"
     },
     {
       "id": "OVERLAY_BANK",
@@ -11280,15 +11693,15 @@
       "path": "location/overlays/selection_bank.png",
       "name": "Máscara/realce suave da região Área Financeira derivada do polígono do map-layout",
       "kind": "overlay",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        293,
+        149
       ],
       "display_size_px": [
-        1280,
-        848
+        195.33333333333334,
+        99.33333333333333
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11307,20 +11720,52 @@
       "catalog_id": "bank",
       "source": "Assets/Resources/Locations/LOC_Bank.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "Máscara/realce suave da região Área Financeira derivada do polígono do map-layout.json. Nenhum prédio, pino, texto ou bloom. Alinhada ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "d084000dac91c065de0037e88dcef0733476d5cdf66c6f3923c20176c8154310",
+      "actual_size_px": [
+        293,
+        149
+      ],
+      "generation_prompt": "Produzir somente OVERLAY_BANK, Máscara/realce suave da região Área Financeira derivada do polígono do map-layout.\nPolígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\nGeometria e cores exatas: {\"family\":\"overlay\",\"polygon_master_px\":[[1062,242],[1236,315],[1121,387],[947,315]],\"fill\":\"#6D28D9\",\"fill_opacity\":0.12,\"stroke_opacity\":0.64,\"stroke_px\":8,\"visible_inner_border_px\":4,\"clip\":\"Exact authoritative polygon; anti-aliased pixel coverage only at boundary.\",\"transparent_padding_px\":2,\"origin\":\"Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\"}.\nSVG editável e PNG RGBA sRGB 293x149 px, pivot [0,1], bordas [0,0,0,0].\nPosição top-left [945,240] no master 1920x1080; sem reescala do polígono; preservar transformação do mapa.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
+      "source_editable": "art-source/editable/location/overlays/selection_bank.svg",
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-map-selections.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        945,
+        240
+      ],
+      "master_crop_rect_px": [
+        945,
+        240,
+        293,
+        149
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "OVERLAY_CONDOMINIUM",
@@ -11328,15 +11773,15 @@
       "path": "location/overlays/selection_condominium.png",
       "name": "Máscara/realce suave da região Área Residencial derivada do polígono do map-layout",
       "kind": "overlay",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        619,
+        364
       ],
       "display_size_px": [
-        1280,
-        848
+        412.6666666666667,
+        242.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11355,20 +11800,52 @@
       "catalog_id": "condominium",
       "source": "Assets/Resources/Locations/LOC_Condominium.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "Máscara/realce suave da região Área Residencial derivada do polígono do map-layout.json. Nenhum prédio, pino, texto ou bloom. Alinhada ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "c4da8075d63a54358ae0014da76ead1cdc6bd14dd6153010bec240b7d7da172b",
+      "actual_size_px": [
+        619,
+        364
+      ],
+      "generation_prompt": "Produzir somente OVERLAY_CONDOMINIUM, Máscara/realce suave da região Área Residencial derivada do polígono do map-layout.\nPolígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\nGeometria e cores exatas: {\"family\":\"overlay\",\"polygon_master_px\":[[652,647],[922,855],[742,979],[549,1007],[307,853]],\"fill\":\"#6D28D9\",\"fill_opacity\":0.12,\"stroke_opacity\":0.64,\"stroke_px\":8,\"visible_inner_border_px\":4,\"clip\":\"Exact authoritative polygon; anti-aliased pixel coverage only at boundary.\",\"transparent_padding_px\":2,\"origin\":\"Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\"}.\nSVG editável e PNG RGBA sRGB 619x364 px, pivot [0,1], bordas [0,0,0,0].\nPosição top-left [305,645] no master 1920x1080; sem reescala do polígono; preservar transformação do mapa.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
+      "source_editable": "art-source/editable/location/overlays/selection_condominium.svg",
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-map-selections.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        305,
+        645
+      ],
+      "master_crop_rect_px": [
+        305,
+        645,
+        619,
+        364
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "OVERLAY_MARKETING",
@@ -11376,15 +11853,15 @@
       "path": "location/overlays/selection_marketing.png",
       "name": "Máscara/realce suave da região Área Corporativa derivada do polígono do map-layout",
       "kind": "overlay",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        507,
+        322
       ],
       "display_size_px": [
-        1280,
-        848
+        338,
+        214.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11403,20 +11880,52 @@
       "catalog_id": "marketing",
       "source": "Assets/Resources/Locations/LOC_Marketing.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "Máscara/realce suave da região Área Corporativa derivada do polígono do map-layout.json. Nenhum prédio, pino, texto ou bloom. Alinhada ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "b5e7a00372064422c24801b9d7c44f24398fff0685a3c681f4a3a8976b5628cd",
+      "actual_size_px": [
+        507,
+        322
+      ],
+      "generation_prompt": "Produzir somente OVERLAY_MARKETING, Máscara/realce suave da região Área Corporativa derivada do polígono do map-layout.\nPolígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\nGeometria e cores exatas: {\"family\":\"overlay\",\"polygon_master_px\":[[1607,675],[1835,799],[1599,993],[1332,844]],\"fill\":\"#6D28D9\",\"fill_opacity\":0.12,\"stroke_opacity\":0.64,\"stroke_px\":8,\"visible_inner_border_px\":4,\"clip\":\"Exact authoritative polygon; anti-aliased pixel coverage only at boundary.\",\"transparent_padding_px\":2,\"origin\":\"Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\"}.\nSVG editável e PNG RGBA sRGB 507x322 px, pivot [0,1], bordas [0,0,0,0].\nPosição top-left [1330,673] no master 1920x1080; sem reescala do polígono; preservar transformação do mapa.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
+      "source_editable": "art-source/editable/location/overlays/selection_marketing.svg",
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-map-selections.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1330,
+        673
+      ],
+      "master_crop_rect_px": [
+        1330,
+        673,
+        507,
+        322
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "OVERLAY_STORE",
@@ -11424,15 +11933,15 @@
       "path": "location/overlays/selection_store.png",
       "name": "Máscara/realce suave da região Área Comercial derivada do polígono do map-layout",
       "kind": "overlay",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        472,
+        248
       ],
       "display_size_px": [
-        1280,
-        848
+        314.6666666666667,
+        165.33333333333334
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11451,20 +11960,52 @@
       "catalog_id": "store",
       "source": "Assets/Resources/Locations/LOC_Store.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "Máscara/realce suave da região Área Comercial derivada do polígono do map-layout.json. Nenhum prédio, pino, texto ou bloom. Alinhada ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "42b7d1249dec3a584f6801a7ec0eaa8df56e76f85687430bbb01348dde45d678",
+      "actual_size_px": [
+        472,
+        248
+      ],
+      "generation_prompt": "Produzir somente OVERLAY_STORE, Máscara/realce suave da região Área Comercial derivada do polígono do map-layout.\nPolígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\nGeometria e cores exatas: {\"family\":\"overlay\",\"polygon_master_px\":[[1575,249],[1838,344],[1670,493],[1370,382]],\"fill\":\"#6D28D9\",\"fill_opacity\":0.12,\"stroke_opacity\":0.64,\"stroke_px\":8,\"visible_inner_border_px\":4,\"clip\":\"Exact authoritative polygon; anti-aliased pixel coverage only at boundary.\",\"transparent_padding_px\":2,\"origin\":\"Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\"}.\nSVG editável e PNG RGBA sRGB 472x248 px, pivot [0,1], bordas [0,0,0,0].\nPosição top-left [1368,247] no master 1920x1080; sem reescala do polígono; preservar transformação do mapa.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
+      "source_editable": "art-source/editable/location/overlays/selection_store.svg",
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-map-selections.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        1368,
+        247
+      ],
+      "master_crop_rect_px": [
+        1368,
+        247,
+        472,
+        248
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "OVERLAY_UNIVERSITY",
@@ -11472,15 +12013,15 @@
       "path": "location/overlays/selection_university.png",
       "name": "Máscara/realce suave da região Área Educacional derivada do polígono do map-layout",
       "kind": "overlay",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        529,
+        265
       ],
       "display_size_px": [
-        1280,
-        848
+        352.6666666666667,
+        176.66666666666666
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11499,20 +12040,52 @@
       "catalog_id": "university",
       "source": "Assets/Resources/Locations/LOC_University.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "Máscara/realce suave da região Área Educacional derivada do polígono do map-layout.json. Nenhum prédio, pino, texto ou bloom. Alinhada ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "dd5169f0f8ab167da645764098397b87def69fdd2e6e39f6f8e47b72c768bc50",
+      "actual_size_px": [
+        529,
+        265
+      ],
+      "generation_prompt": "Produzir somente OVERLAY_UNIVERSITY, Máscara/realce suave da região Área Educacional derivada do polígono do map-layout.\nPolígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\nGeometria e cores exatas: {\"family\":\"overlay\",\"polygon_master_px\":[[125,282],[449,127],[650,240],[297,388]],\"fill\":\"#6D28D9\",\"fill_opacity\":0.12,\"stroke_opacity\":0.64,\"stroke_px\":8,\"visible_inner_border_px\":4,\"clip\":\"Exact authoritative polygon; anti-aliased pixel coverage only at boundary.\",\"transparent_padding_px\":2,\"origin\":\"Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\"}.\nSVG editável e PNG RGBA sRGB 529x265 px, pivot [0,1], bordas [0,0,0,0].\nPosição top-left [123,125] no master 1920x1080; sem reescala do polígono; preservar transformação do mapa.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
+      "source_editable": "art-source/editable/location/overlays/selection_university.svg",
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-map-selections.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        123,
+        125
+      ],
+      "master_crop_rect_px": [
+        123,
+        125,
+        529,
+        265
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_PIN_NORMAL",
@@ -11520,7 +12093,7 @@
       "path": "location/markers/pin_normal.png",
       "name": "pin_normal: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -11547,20 +12120,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "pin_normal: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "1b1b902bf529327dd9a77bdb0c9a27834e0260d96871867d5c117d9638abe0ac",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "generation_prompt": "Produzir somente UI_PIN_NORMAL, pin_normal: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nPino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.\nGeometria e cores exatas: {\"family\":\"pin\",\"state\":\"normal\",\"fill\":\"#F5F0E8\",\"stroke\":\"#6D28D9\",\"inner_border_px\":8,\"tip_local_px\":[128,238],\"icon_slot_px\":[80,58,96,96],\"icon_tint\":\"#24113D\",\"origin\":\"Pino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.\"}.\nSVG editável e PNG RGBA sRGB 256x256 px, pivot [0.5,0.5], bordas [0,0,0,0].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 80x80 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/pin_normal.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_MAP_LABEL_NORMAL",
@@ -11568,7 +12156,7 @@
       "path": "location/markers/map_label_normal.png",
       "name": "map_label_normal: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -11595,20 +12183,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "map_label_normal: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "d8aaeda27ec11213ea79d18bf84c45e54e2c9e20546ca10127d60122df8113a9",
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "generation_prompt": "Produzir somente UI_MAP_LABEL_NORMAL, map_label_normal: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nRótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.\nGeometria e cores exatas: {\"family\":\"label\",\"state\":\"normal\",\"fill\":\"#F5F0E8\",\"stroke\":\"#856aac\",\"inner_border_px\":4,\"radius_px\":20,\"transparent_inset_px\":4,\"safe_content_rect_px\":[24,24,208,80],\"display_safe_content_rect_px\":[24,24,212,28],\"text_icon_tint\":\"#24113D\",\"origin\":\"Rótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.\"}.\nSVG editável e PNG RGBA sRGB 256x128 px, pivot [0.5,0.5], bordas [24,24,24,24].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 260x76 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/map_label_normal.svg",
       "display_fit": "sliced",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_PIN_SELECTED",
@@ -11616,7 +12219,7 @@
       "path": "location/markers/pin_selected.png",
       "name": "pin_selected: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -11643,20 +12246,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "pin_selected: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "2ee2e64e59e25fd867013791d950712a25dfece408b8ae0527c873d5b19ccaad",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "generation_prompt": "Produzir somente UI_PIN_SELECTED, pin_selected: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nPino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.\nGeometria e cores exatas: {\"family\":\"pin\",\"state\":\"selected\",\"fill\":\"#6D28D9\",\"stroke\":\"#F5F0E8\",\"inner_border_px\":8,\"tip_local_px\":[128,238],\"icon_slot_px\":[80,58,96,96],\"icon_tint\":\"#FFFFFF\",\"origin\":\"Pino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.\"}.\nSVG editável e PNG RGBA sRGB 256x256 px, pivot [0.5,0.5], bordas [0,0,0,0].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 80x80 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/pin_selected.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_MAP_LABEL_SELECTED",
@@ -11664,7 +12282,7 @@
       "path": "location/markers/map_label_selected.png",
       "name": "map_label_selected: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -11691,20 +12309,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "map_label_selected: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "87f92811016aee0d3356e49e9eeb7721ac757396c3571d93e88cd95b8c951d70",
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "generation_prompt": "Produzir somente UI_MAP_LABEL_SELECTED, map_label_selected: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nRótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.\nGeometria e cores exatas: {\"family\":\"label\",\"state\":\"selected\",\"fill\":\"#6D28D9\",\"stroke\":\"#8f5be0\",\"inner_border_px\":4,\"radius_px\":20,\"transparent_inset_px\":4,\"safe_content_rect_px\":[24,24,208,80],\"display_safe_content_rect_px\":[24,24,212,28],\"text_icon_tint\":\"#FFFFFF\",\"origin\":\"Rótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.\"}.\nSVG editável e PNG RGBA sRGB 256x128 px, pivot [0.5,0.5], bordas [24,24,24,24].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 260x76 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/map_label_selected.svg",
       "display_fit": "sliced",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_PIN_DISABLED",
@@ -11712,7 +12345,7 @@
       "path": "location/markers/pin_disabled.png",
       "name": "pin_disabled: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -11739,20 +12372,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "pin_disabled: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "83c50e1336353e0711a4a25ede523f0b39a69f33e15fa514ccaf0ca98f1faa35",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "generation_prompt": "Produzir somente UI_PIN_DISABLED, pin_disabled: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nPino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.\nGeometria e cores exatas: {\"family\":\"pin\",\"state\":\"disabled\",\"fill\":\"#e7e2dc\",\"stroke\":\"#c4bdbd\",\"inner_border_px\":8,\"tip_local_px\":[128,238],\"icon_slot_px\":[80,58,96,96],\"icon_tint\":\"#a69ea3\",\"origin\":\"Pino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.\"}.\nSVG editável e PNG RGBA sRGB 256x256 px, pivot [0.5,0.5], bordas [0,0,0,0].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 80x80 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/pin_disabled.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_MAP_LABEL_DISABLED",
@@ -11760,7 +12408,7 @@
       "path": "location/markers/map_label_disabled.png",
       "name": "map_label_disabled: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -11787,20 +12435,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "map_label_disabled: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "4aea49ea801f08b77dedf4ac2f75cb6919808333c816b6c6ffab6ae6afd28e30",
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "generation_prompt": "Produzir somente UI_MAP_LABEL_DISABLED, map_label_disabled: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nRótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.\nGeometria e cores exatas: {\"family\":\"label\",\"state\":\"disabled\",\"fill\":\"#e7e2dc\",\"stroke\":\"#dbd5d2\",\"inner_border_px\":4,\"radius_px\":20,\"transparent_inset_px\":4,\"safe_content_rect_px\":[24,24,208,80],\"display_safe_content_rect_px\":[24,24,212,28],\"text_icon_tint\":\"#a69ea3\",\"origin\":\"Rótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.\"}.\nSVG editável e PNG RGBA sRGB 256x128 px, pivot [0.5,0.5], bordas [24,24,24,24].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 260x76 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/map_label_disabled.svg",
       "display_fit": "sliced",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "UI_MAP_LABEL_TIP",
@@ -11808,7 +12471,7 @@
       "path": "location/markers/map_label_tip.png",
       "name": "map_label_tip: apenas fundo/contorno, sem ícone, label ou sombra incorporada",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         64,
@@ -11835,20 +12498,35 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "map_label_tip: apenas fundo/contorno, sem ícone, label ou sombra incorporada.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "cc6f244c246bf216124544a6925f2701f056f981ad7cfc93b1fbcd6a99fcc87b",
+      "actual_size_px": [
+        64,
+        64
+      ],
+      "generation_prompt": "Produzir somente UI_MAP_LABEL_TIP, map_label_tip: apenas fundo/contorno, sem ícone, label ou sombra incorporada.\nPonteira separada branca tintável, sem contorno para encaixar sob a base e assumir a cor de cada estado.\nGeometria e cores exatas: {\"family\":\"label_tip\",\"fill\":\"#FFFFFF\",\"tintable\":true,\"tip_local_px\":[32,54],\"state_tints\":{\"normal\":\"#F5F0E8\",\"selected\":\"#6D28D9\",\"disabled\":\"#e7e2dc\"},\"origin\":\"Ponteira separada branca tintável, sem contorno para encaixar sob a base e assumir a cor de cada estado.\"}.\nSVG editável e PNG RGBA sRGB 64x64 px, pivot [0.5,0.5], bordas [0,0,0,0].\nEstados da mesma família preservam bounds, pivot, máscara alfa e escala; display nominal 20x20 px.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
       "source_editable": "art-source/editable/location/markers/map_label_tip.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-components-display.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "component_contract": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "OVERLAY_CENTER",
@@ -11856,15 +12534,15 @@
       "path": "location/overlays/selection_center.png",
       "name": "Realce central discreto do restaurante, sem construção embutida",
       "kind": "overlay",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
-        1920,
-        1080
+        412,
+        219
       ],
       "display_size_px": [
-        1280,
-        848
+        274.6666666666667,
+        146
       ],
       "alpha_policy": "recorte",
       "format": "PNG RGBA 8-bit sRGB",
@@ -11883,20 +12561,52 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json",
+        "docs/art/layouts/archive/map-layout-before-art13.json",
+        "Assets/Art/new/shared/components/controls/tab_selected.png",
+        "Assets/Art/new/shared/icons/icon_bank.png"
       ],
       "brief": "Realce central discreto do restaurante, sem construção embutida. Mesma origem do mapa; não usar halo neon.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "f0302aafb529aa75a87e512aaba1bf6dbbfe3e38b7591aca14a2e92cef1e920f",
+      "actual_size_px": [
+        412,
+        219
+      ],
+      "generation_prompt": "Produzir somente OVERLAY_CENTER, Realce central discreto do restaurante, sem construção embutida.\nPolígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\nGeometria e cores exatas: {\"family\":\"overlay\",\"polygon_master_px\":[[1154,496],[1371,592],[1171,711],[963,596]],\"fill\":\"#6D28D9\",\"fill_opacity\":0.09,\"stroke_opacity\":0.5,\"stroke_px\":6,\"visible_inner_border_px\":3,\"clip\":\"Exact authoritative polygon; anti-aliased pixel coverage only at boundary.\",\"transparent_padding_px\":2,\"origin\":\"Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.\"}.\nSVG editável e PNG RGBA sRGB 412x219 px, pivot [0,1], bordas [0,0,0,0].\nPosição top-left [961,494] no master 1920x1080; sem reescala do polígono; preservar transformação do mapa.\nSem texto, labels, números, logos, ícones incorporados, construção, pessoas, sombra, bloom, halo neon ou checkerboard. Ícones e conteúdo são camadas independentes.\nDerivar paleta dos tokens e dos concepts aprovados; normal marfim, selecionado violeta, desabilitado neutro. Nenhuma implementação de UI ou alteração de cena.",
+      "source_editable": "art-source/editable/location/overlays/selection_center.svg",
       "display_fit": "uniform_map_transform",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_note": "Lote geométrico, sem personagens.",
+        "record": "docs/art/qa/ART-13.json",
+        "preview": "art-source/previews/ART-13/ART-13-map-selections.png",
+        "notes": "Alfa real, contornos, cores, estados, 9-slice e montagem no mapa revisados. Geometria canônica preservada."
       },
-      "coordinate_space": "map1920x1080"
+      "coordinate_space": "map1920x1080",
+      "production_method": "vector_or_code",
+      "production_record": "docs/art/prompts/ART-13.json",
+      "export_source": "art-source/editable/ART-13/build-art13.cjs",
+      "texture_storage": "cropped",
+      "map_position_px": [
+        961,
+        494
+      ],
+      "master_crop_rect_px": [
+        961,
+        494,
+        412,
+        219
+      ],
+      "map_master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "placement_record": "docs/art/layouts/map-selection-compact.json"
     },
     {
       "id": "ID_ENVIRONMENT",
@@ -11904,7 +12614,7 @@
       "path": "identification/backgrounds/street_restaurant.png",
       "name": "Fachada/bairro acolhedor brasileiro contemporâneo com área livre à direita para formulário",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1920,
@@ -11931,19 +12641,33 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/generations/ART-14/street_restaurant-source.png"
       ],
       "brief": "Fachada/bairro acolhedor brasileiro contemporâneo com área livre à direita para formulário. Sem personagem, placa escrita ou UI.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "b2302d34778b2e43c3a23140864c0b401c410ad1eadbae3fb9375ff2a28b9d70",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "generation_prompt": "Use case: precise-object-edit\nEdit target: this ONE restaurant-street environment illustration, which is for a game identification screen. Keep the exact composition, camera, facade, blank purple sign, awning shape, windows, furniture placements, planting, sky, and the spacious empty ivory wall on the right. No added person or UI.\nMake a production pass toward clean adult editorial CEL SHADING: simplify the existing surface rendering into large smooth nearly-flat color regions with crisp soft-edged shadow shapes and two or three tones per material. Remove the tiny mottled/grainy painted surface variation, photographic texture, complex pavement leaf-shadow speckle and continuous noisy gradients. Preserve well-drawn architectural contours and foreground line detail so this remains the same approved cartoon scene, not a wireframe or primitive placeholder.\nPurple sign and awnings: flat coherent purple planes with simple lavender highlight and plum shadow; sign completely blank. Right ivory wall and sidewalk: broad flat warm ivory base with only a few simple subdued shadow shapes, visually calm for a form overlay; no speckled leaf-shadow noise. Sky: very pale blue simple broad color with two simple softly outlined white clouds. Leaves: clean grouped olive/teal cel-shaded shapes, no fine stipple. Do not add blur, posterization artifact, jagged contours or photographic materials.\nGoal: the final full-size PNG should compress efficiently with fewer small color fluctuations, while retaining the welcoming Brazilian contemporary restaurant exterior and palette. This is a polished 2D game background, not a photo.\nDesired output 1920x1080 landscape, fully opaque, entire scene uncropped. No text, words, numbers, logo, icons, lettering, labels, menu signs, foreground character, forms, buttons, panels, purple ornamental arcs, HUD, border or checkerboard. One environment image only.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "record": "docs/art/qa/ART-14.json",
+        "preview": "art-source/previews/ART-14/ART-14-identification-composed.png",
+        "notes": "Dimensões, sRGB/alfa, contornos, área do formulário e composição revisados."
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "production_record": "docs/art/prompts/ART-14.json",
+      "export_source": "art-source/editable/ART-14/export-art14.cjs",
+      "component_contract": "docs/art/layouts/identification-layout.json",
+      "generation_source": "art-source/references/generations/ART-14/street_restaurant-source-02-flat.png"
     },
     {
       "id": "ID_ORNAMENT_LEFT",
@@ -11951,7 +12675,7 @@
       "path": "identification/ornaments/arc_left.png",
       "name": "Arcos e círculos discretos da identificação roxa, ornamento left isolado sem fundo",
       "kind": "ornamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -11978,19 +12702,33 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json"
       ],
       "brief": "Arcos e círculos discretos da identificação roxa, ornamento left isolado sem fundo.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "41981d2b61aa6e742e31027d518ff49fd26d339805758c831dd86c5bae10213d",
+      "actual_size_px": [
+        512,
+        1024
+      ],
+      "generation_prompt": "Produzir somente ID_ORNAMENT_LEFT: arcos largos lavanda #B99AE8 a 24%, arco fino violeta #6D28D9 a 18% e três círculos discretos a 14–24%, fundo alfa zero, sem efeito/sombra/texto/ícone. Export SVG editável e PNG RGBA sRGB 512x1024; display contain na caixa 320x860, sem esticar. Ornamento esquerdo. Linguagem dos arcos roxos do concept de identificação aprovado.",
+      "source_editable": "art-source/editable/identification/ornaments/arc_left.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "record": "docs/art/qa/ART-14.json",
+        "preview": "art-source/previews/ART-14/ART-14-identification-composed.png",
+        "notes": "Dimensões, sRGB/alfa, contornos, área do formulário e composição revisados."
+      },
+      "production_method": "vector_or_code",
+      "generation_tool": "SVG editable geometry + sharp/libvips",
+      "generation_model": null,
+      "production_record": "docs/art/prompts/ART-14.json",
+      "export_source": "art-source/editable/ART-14/export-art14.cjs",
+      "component_contract": "docs/art/layouts/identification-layout.json"
     },
     {
       "id": "ID_ORNAMENT_RIGHT",
@@ -11998,7 +12736,7 @@
       "path": "identification/ornaments/arc_right.png",
       "name": "Arcos e círculos discretos da identificação roxa, ornamento right isolado sem fundo",
       "kind": "ornamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -12025,19 +12763,33 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/02-abertura.png",
+        "docs/art/tokens.json"
       ],
       "brief": "Arcos e círculos discretos da identificação roxa, ornamento right isolado sem fundo.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
-      "source_editable": null,
+      "sha256": "603e902e8155875477aff2d789b0ce342d0f9c855e94bb8cfc72d1478beaba20",
+      "actual_size_px": [
+        512,
+        1024
+      ],
+      "generation_prompt": "Produzir somente ID_ORNAMENT_RIGHT: arcos largos lavanda #B99AE8 a 24%, arco fino violeta #6D28D9 a 18% e três círculos discretos a 14–24%, fundo alfa zero, sem efeito/sombra/texto/ícone. Export SVG editável e PNG RGBA sRGB 512x1024; display contain na caixa 320x860, sem esticar. Ornamento direito, espelhado horizontalmente do desenho geométrico esquerdo. Linguagem dos arcos roxos do concept de identificação aprovado.",
+      "source_editable": "art-source/editable/identification/ornaments/arc_right.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "record": "docs/art/qa/ART-14.json",
+        "preview": "art-source/previews/ART-14/ART-14-identification-composed.png",
+        "notes": "Dimensões, sRGB/alfa, contornos, área do formulário e composição revisados."
+      },
+      "production_method": "vector_or_code",
+      "generation_tool": "SVG editable geometry + sharp/libvips",
+      "generation_model": null,
+      "production_record": "docs/art/prompts/ART-14.json",
+      "export_source": "art-source/editable/ART-14/export-art14.cjs",
+      "component_contract": "docs/art/layouts/identification-layout.json"
     },
     {
       "id": "CH01_WELCOME",
@@ -12045,7 +12797,7 @@
       "path": "characters/CH01/ch01_welcome.png",
       "name": "CH01 em pé com prancheta, expressão de boas-vindas natural",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1024,
@@ -12075,19 +12827,43 @@
       "source": null,
       "references": [
         "art-source/references/concepts/02-abertura.png",
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/characters/CH01/ch01_canonical.png"
       ],
       "brief": "CH01 em pé com prancheta, expressão de boas-vindas natural. Mesma pessoa do master; sem cenário ou formulário.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "69fd8be6730b94aa28abfb9907bccbf81e4eda966307959a1c998b087b9b6af2",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE isolated full-body welcoming pose of CH01 for the identification screen, transparent RGBA.\nInput image 1 is the canonical CH01 EDIT TARGET and sole identity authority. Input image 2 is only the approved welcoming clipboard pose/context reference. Do not copy the scene or a different face from the concept.\nPreserve the exact canonical woman: adult medium warm brown skin, brown eyes and eye shape, same eyebrows, nose, lips and oval face, dark brown short wavy side-parted bob above shoulders, gold hoop earrings, lilac collared buttoned shirt with rolled sleeves, charcoal high-waisted trousers, same black belt with square buckle and charcoal low-heel shoes. Same adult physique, proportions, linework and upper-left light. No change in age, ethnicity, hair length, outfit or accessories. Keep the same natural friendly closed-mouth smile and direct welcoming gaze.\nChange only pose and the authorized prop: stand comfortably in three-quarter view facing viewer, shoulders relaxed; hold a plain charcoal clipboard with blank paper gently against the lower chest with one hand; other hand makes a modest natural open-palmed welcoming gesture at waist level toward viewer's right. Five anatomically clear fingers, not an exaggerated wave. Entire head, both hands, both feet and shoes are complete.\nComposition: vertical 2:3 canvas, desired 1024x1536. Figure centered and large, roughly 80% of canvas height with at least 10% transparent space above hair and below shoes. No crops or perspective distortion. Her body is an individual sprite; no second person.\nTransparency: true alpha zero around the figure and between limbs. Remove any diffuse color aura/background haze visible around the reference; clean transparent cutout. No ground shadow, glow or outside silhouette shadow, no black/white/colored background or checkerboard.\nConstraints: no scenery, form, UI, purple ornament, furniture, logos, words, letters, numbers, written clipboard content or extra prop. Blank clipboard only. ONE full-body sprite, not a sheet.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "record": "docs/art/qa/ART-14.json",
+        "preview": "art-source/previews/ART-14/ART-14-identification-composed.png",
+        "notes": "Dimensões, sRGB/alfa, fundos claros/escuros e composição revisados; CH01 mantém rosto, pele, cabelo, roupa e acessórios do master."
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "production_record": "docs/art/prompts/ART-14.json",
+      "export_source": "art-source/editable/ART-14/export-art14.cjs",
+      "component_contract": "docs/art/layouts/identification-layout.json",
+      "generation_source": "art-source/references/generations/ART-14/ch01_welcome-source-01.png",
+      "canonical_reference": {
+        "path": "Assets/Art/new/characters/CH01/ch01_canonical.png",
+        "sha256": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+      },
+      "visible_content_rect_px": [
+        289,
+        183,
+        566,
+        1189
+      ]
     },
     {
       "id": "FACADE_REST_FRANCES",
@@ -16858,7 +17634,7 @@
       "title": "Geografia e contrato de coordenadas do mapa",
       "dependencies": [],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Definir no map-layout.json posições/polígonos das cinco zonas e da implantação central. Base sem prédios interativos, nomes, pinos, brilhos ou HUD. Composição aprovada difere da cena atual; registrar remapeamento necessário, sem modificar a cena.",
       "asset_ids": [
         "MAP_BASE"
@@ -16879,7 +17655,8 @@
           ]
         }
       ],
-      "request_prompt": "Use $cogna-artista para executar somente ART-10 — Geografia e contrato de coordenadas do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-10.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-10 — Geografia e contrato de coordenadas do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-10.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-10.json"
     },
     {
       "id": "ART-11",
@@ -16888,8 +17665,8 @@
         "ART-10"
       ],
       "scope": "nucleo",
-      "status": "planejado",
-      "note": "Cinco PNGs full-frame com a origem do master. Pixels fora da construção/bairro transparentes. Não recompor uma nova cidade a cada chamada.",
+      "status": "validado",
+      "note": "Cinco construções/bairros em PNGs compactos transparentes; posições exatas no master pelo map-layout.json e map-landmarks-compact.json. Originais full-frame preservados como variantes.",
       "asset_ids": [
         "MAP_BANK",
         "MAP_CONDOMINIUM",
@@ -16898,7 +17675,9 @@
         "MAP_UNIVERSITY"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-11 — Construções e bairros do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-11.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-11 — Construções e bairros do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-11.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-11-compact.json",
+      "delivery_record": "docs/art/ART-11-entregas.md"
     },
     {
       "id": "ART-12",
@@ -16908,8 +17687,8 @@
         "ART-11"
       ],
       "scope": "nucleo",
-      "status": "planejado",
-      "note": "",
+      "status": "validado",
+      "note": "Três variantes de restaurante central com mesma implantação e porta, mais foreground; quatro PNGs compactos transparentes, coordenadas em map-restaurants-compact.json.",
       "asset_ids": [
         "MAP_REST_FRANCES",
         "MAP_REST_JAPONES",
@@ -16917,7 +17696,9 @@
         "MAP_FOREGROUND"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-12 — Restaurantes centrais e camada frontal do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-12.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-12 — Restaurantes centrais e camada frontal do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-12.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-12.json",
+      "delivery_record": "docs/art/ART-12-entregas.md"
     },
     {
       "id": "ART-13",
@@ -16928,8 +17709,8 @@
         "ART-06"
       ],
       "scope": "nucleo",
-      "status": "planejado",
-      "note": "",
+      "status": "validado",
+      "note": "Seis realces compactos dos polígonos e sete componentes de pino/rótulo em SVG e PNG; estados com geometria comum, sem conteúdo ou sombras embutidos.",
       "asset_ids": [
         "OVERLAY_BANK",
         "OVERLAY_CONDOMINIUM",
@@ -16946,7 +17727,9 @@
         "OVERLAY_CENTER"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-13 — Marcadores, realces e rótulos vazios do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-13.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-13 — Marcadores, realces e rótulos vazios do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-13.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-13.json",
+      "delivery_record": "docs/art/ART-13-entregas.md"
     },
     {
       "id": "ART-14",
@@ -16958,7 +17741,7 @@
         "ART-05"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Somente cenário, ornamentos e pessoa separados; título, Nome, RA, erro e Cadastrar são TMP. Identificação não deve mostrar caixa/score/mês antes da sessão.",
       "asset_ids": [
         "ID_ENVIRONMENT",
@@ -16967,7 +17750,9 @@
         "CH01_WELCOME"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-14 — Arte da identificação. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-14.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-14 — Arte da identificação. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-14.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-14.json",
+      "delivery_record": "docs/art/ART-14-entregas.md"
     },
     {
       "id": "ART-15",

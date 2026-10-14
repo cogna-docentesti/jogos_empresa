@@ -1,0 +1,204 @@
+{
+  "task_id": "ART-14",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "technical": {
+    "passed": true,
+    "asset_count": 4,
+    "report": "docs/art/qa/ART-14-technical.json",
+    "plan_report": "docs/art/qa/ART-14-plan-validation.json"
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "previews": [
+      "art-source/previews/ART-14/ID_ORNAMENT_LEFT-native-light-dark.png",
+      "art-source/previews/ART-14/ID_ORNAMENT_LEFT-display-light-dark.png",
+      "art-source/previews/ART-14/ID_ORNAMENT_RIGHT-native-light-dark.png",
+      "art-source/previews/ART-14/ID_ORNAMENT_RIGHT-display-light-dark.png",
+      "art-source/previews/ART-14/CH01_WELCOME-native-light-dark.png",
+      "art-source/previews/ART-14/CH01_WELCOME-display-light-dark.png",
+      "art-source/previews/ART-14/CH01-identity-comparison.png",
+      "art-source/previews/ART-14/CH01-welcome-hands-clipboard.png",
+      "art-source/previews/ART-14/ART-14-art-layers.png",
+      "art-source/previews/ART-14/ART-14-identification-composed.png",
+      "art-source/previews/ART-14/ART-14-identification-display.png",
+      "art-source/previews/ART-14/environment-detail.png",
+      "art-source/previews/ART-14/environment-form-space.png"
+    ],
+    "checks": [
+      "Fachada contemporânea brasileira acolhedora, faixa e toldo roxos sem letras; espaço livre de objetos à direita para formulário separado.",
+      "Cenário completo e opaco conforme manifesto; personagem e dois ornamentos com alfa verdadeiro fora das silhuetas.",
+      "CH01 preserva face, olhos castanhos, pele morena, bob curto ondulado, argolas douradas, camisa lilás, calça/cinto/sapatos grafite e proporções adultas do master.",
+      "Prancheta vazia, mão de apoio e gesto de acolhimento legíveis; cabeça, duas mãos e dois pés completos. Sem aura aparente sobre fundos claro/escuro.",
+      "Margens verticais visíveis da personagem maiores que 10%; tamanho exportado exato, sem esticar e sem limpeza de alfa por código.",
+      "Ornamentos discretos em lavanda/violeta com SVGs separados e geometria espelhada; contornos antialias revisados sobre dois fundos.",
+      "Montagem separa cenário, pessoa, ornamentos e componentes reutilizados ART-03/04/05. Textos aparecem somente na prova; não estão nos quatro PNGs finais.",
+      "Identificação sem caixa, score ou mês antes da sessão. Nenhuma interface ou cena Unity implementada.",
+      "Acabamento do cenário foi ajustado via ImageGen; recompressão PNG posterior comprovou igualdade de todos os bytes RGBA."
+    ]
+  },
+  "identity": {
+    "passed": true,
+    "character_id": "CH01",
+    "canonical_path": "Assets/Art/new/characters/CH01/ch01_canonical.png",
+    "canonical_sha256": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45",
+    "comparison": "art-source/previews/ART-14/CH01-identity-comparison.png"
+  },
+  "assets": [
+    {
+      "id": "ID_ENVIRONMENT",
+      "path": "Assets/Art/new/identification/backgrounds/street_restaurant.png",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "bytes": 2340257,
+      "sha256": "b2302d34778b2e43c3a23140864c0b401c410ad1eadbae3fb9375ff2a28b9d70",
+      "rgba": true,
+      "srgb_profile": "sRGB",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "alpha_bbox_nonzero_px": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "exact_manifest_dimensions": true,
+      "real_zero_alpha": false,
+      "hash_matches_production": true,
+      "fully_opaque": true,
+      "passed": true
+    },
+    {
+      "id": "ID_ORNAMENT_LEFT",
+      "path": "Assets/Art/new/identification/ornaments/arc_left.png",
+      "actual_size_px": [
+        512,
+        1024
+      ],
+      "bytes": 25302,
+      "sha256": "41981d2b61aa6e742e31027d518ff49fd26d339805758c831dd86c5bae10213d",
+      "rgba": true,
+      "srgb_profile": "sRGB",
+      "alpha_extrema": [
+        0,
+        61
+      ],
+      "alpha_bbox_nonzero_px": [
+        77,
+        66,
+        460,
+        958
+      ],
+      "exact_manifest_dimensions": true,
+      "real_zero_alpha": true,
+      "hash_matches_production": true,
+      "transparent_edges": true,
+      "no_embedded_text_image_or_effect": true,
+      "native_preview": "art-source/previews/ART-14/ID_ORNAMENT_LEFT-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-14/ID_ORNAMENT_LEFT-display-light-dark.png",
+      "whole_texture_contain_size_px": [
+        320,
+        640
+      ],
+      "passed": true
+    },
+    {
+      "id": "ID_ORNAMENT_RIGHT",
+      "path": "Assets/Art/new/identification/ornaments/arc_right.png",
+      "actual_size_px": [
+        512,
+        1024
+      ],
+      "bytes": 25521,
+      "sha256": "603e902e8155875477aff2d789b0ce342d0f9c855e94bb8cfc72d1478beaba20",
+      "rgba": true,
+      "srgb_profile": "sRGB",
+      "alpha_extrema": [
+        0,
+        61
+      ],
+      "alpha_bbox_nonzero_px": [
+        52,
+        66,
+        435,
+        958
+      ],
+      "exact_manifest_dimensions": true,
+      "real_zero_alpha": true,
+      "hash_matches_production": true,
+      "transparent_edges": true,
+      "no_embedded_text_image_or_effect": true,
+      "native_preview": "art-source/previews/ART-14/ID_ORNAMENT_RIGHT-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-14/ID_ORNAMENT_RIGHT-display-light-dark.png",
+      "whole_texture_contain_size_px": [
+        320,
+        640
+      ],
+      "passed": true
+    },
+    {
+      "id": "CH01_WELCOME",
+      "path": "Assets/Art/new/characters/CH01/ch01_welcome.png",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "bytes": 474758,
+      "sha256": "69fd8be6730b94aa28abfb9907bccbf81e4eda966307959a1c998b087b9b6af2",
+      "rgba": true,
+      "srgb_profile": "sRGB",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox_nonzero_px": [
+        110,
+        158,
+        948,
+        1409
+      ],
+      "exact_manifest_dimensions": true,
+      "real_zero_alpha": true,
+      "hash_matches_production": true,
+      "transparent_edges": true,
+      "vertical_visible_margins_fraction": [
+        0.119140625,
+        0.10677083333333333
+      ],
+      "visible_vertical_padding_at_least_10percent": true,
+      "canonical_master_hash_preserved": true,
+      "native_preview": "art-source/previews/ART-14/CH01_WELCOME-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-14/CH01_WELCOME-display-light-dark.png",
+      "whole_texture_contain_size_px": [
+        420,
+        630
+      ],
+      "passed": true
+    }
+  ],
+  "summary": {
+    "png_count": 4,
+    "svg_count": 2,
+    "png_bytes": 2865838,
+    "rgba8_capacity_bytes": 18780160,
+    "environment_bytes": 2340257,
+    "cutouts_bytes": 525581,
+    "environment_initial_draft_export_bytes": 2784175,
+    "environment_reduction_percent": 15.944328212127468,
+    "memory_note": "Capacidade RGBA8 sem compressão/mipmaps; tamanho de build e memória real dependem de import/plataforma/atlas."
+  },
+  "layout_record": "docs/art/layouts/identification-layout.json",
+  "measurements": "docs/art/qa/ART-14-measurements.json",
+  "scope_audit": "docs/art/qa/ART-14-scope-audit.json",
+  "pending": [],
+  "integration_performed": false
+}

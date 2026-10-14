@@ -1,0 +1,704 @@
+{
+  "schema_version": 1,
+  "task_id": "ART-12",
+  "date": "2026-10-14",
+  "master_size_px": [
+    1920,
+    1080
+  ],
+  "coordinate_origin": "top_left_y_down",
+  "position_semantics": "Canto superior esquerdo do PNG no master; X à direita e Y para baixo. Margem transparente incluída.",
+  "active_contract": "docs/art/layouts/map-layout.json",
+  "common_door_anchor_px": [
+    1280,
+    642
+  ],
+  "common_ground_anchor_px": [
+    1172,
+    657
+  ],
+  "selection_group": "restaurant_variant",
+  "restaurant_rule": "Mostrar exatamente uma variante na ordem 70; foreground na ordem 90. Mesma câmera, implantação e porta. Recortes podem ter dimensões distintas; usar as posições individuais.",
+  "unity_placement": "Parent master 1920x1080, âncoras top-left, pivot [0,1], anchoredPosition [x,-y], sizeDelta igual ao PNG. Aplicar a transformação uniforme do contrato ao parent.",
+  "display_transform": {
+    "uniform_scale": 0.6666666666666666,
+    "offset_px": [
+      24,
+      176
+    ],
+    "target_viewport_px": [
+      24,
+      112,
+      1280,
+      848
+    ],
+    "fit_mode": "contain",
+    "offset_semantics": "Offset absoluto no canvas 1920x1080. x_canvas = 24 + x_master * 2/3; y_canvas = 176 + y_master * 2/3.",
+    "rendered_bounds_px": [
+      24,
+      176,
+      1280,
+      720
+    ],
+    "viewport_local_offset_px": [
+      0,
+      64
+    ],
+    "native_unity_top_left_conversion": "Para RectTransform com âncora/pivot top-left, anchoredPosition = [x_canvas, -y_canvas] relativo ao canvas. Não reutilizar coordenadas legadas.",
+    "rule": "Aplicar exatamente a mesma escala uniforme e offset a todas as camadas, polígonos, hit-areas e âncoras. Não esticar para 1280x848 nem recortar o master."
+  },
+  "assets": [
+    {
+      "id": "MAP_REST_LANCHES",
+      "source_path": "art-source/references/generations/ART-12/map_rest_lanches-source.png",
+      "source_sha256": "f0f523b7daa50dadfbbae0f10941b881bd247f3fc81dd46826cb0115f9e43bd8",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "output_path": "Assets/Art/new/location/restaurants/map_rest_lanches.png",
+      "path": "location/restaurants/map_rest_lanches.png",
+      "sha256": "6a6b3231f6b7fe7b503a2dc85219526c35449ca79210630f539ef7f1d44dd474",
+      "actual_size_px": [
+        320,
+        259
+      ],
+      "output_bytes": 111466,
+      "nominal_uniform_scale": 0.27910685805422647,
+      "raster_size_px": [
+        350,
+        350
+      ],
+      "raster_origin_px": [
+        1024,
+        357
+      ],
+      "raster_path": "art-source/previews/ART-12/rasters/MAP_REST_LANCHES.png",
+      "raster_sha256": "734ae302442ba4cee2f56195391b188335e7c145b0afa44600a2c1732907c952",
+      "raster_crop_rect_px": [
+        14,
+        63,
+        316,
+        255
+      ],
+      "crop_rect_px": [
+        1036,
+        418,
+        320,
+        259
+      ],
+      "position_px": [
+        1036,
+        418
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "transparent_padding_px": 2,
+      "visible_bbox_master_px": [
+        1047,
+        423,
+        304,
+        237
+      ],
+      "registration_anchor_role": "door threshold center",
+      "source_anchor_px": [
+        918,
+        1020
+      ],
+      "target_anchor_px": [
+        1280,
+        642
+      ],
+      "raster_anchor_px": [
+        1280.22009569378,
+        641.688995215311
+      ],
+      "anchor_rounding_error_px": [
+        0.2200956937799674,
+        -0.31100478468897563
+      ],
+      "footprint_master_px": [
+        [
+          1153.5055821371611,
+          536.1866028708134
+        ],
+        [
+          1341.902711323764,
+          605.4051036682615
+        ],
+        [
+          1247.2854864433812,
+          658.993620414673
+        ],
+        [
+          1059.4465709728868,
+          591.4497607655503
+        ]
+      ],
+      "common_ground_anchor_master_px": [
+        1172,
+        657
+      ],
+      "local_ground_anchor_px": [
+        136,
+        239
+      ],
+      "local_registration_anchor_px": [
+        244,
+        224
+      ],
+      "layer_order": 70,
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "alpha": "Original ImageGen alpha preserved; no masking or threshold cleanup. Crop includes every nonzero alpha pixel.",
+      "operation": "One uniform resample of complete source canvas; integer placement; lossless tight crop and 2px transparent padding. No paint, warp, alpha removal or independent axis stretch.",
+      "versions": {
+        "aom": "3.15.1",
+        "archive": "3.8.9",
+        "cairo": "1.18.6",
+        "cgif": "0.5.4",
+        "exif": "0.6.26",
+        "expat": "2.8.5",
+        "ffi": "3.8.0",
+        "fontconfig": "2.18.3",
+        "freetype": "2.14.3",
+        "fribidi": "1.0.17",
+        "glib": "2.90.0",
+        "harfbuzz": "14.5.0",
+        "heif": "1.23.5",
+        "highway": "1.4.0",
+        "imagequant": "2.4.1",
+        "lcms": "2.19.1",
+        "mozjpeg": "0826579",
+        "pango": "1.58.2",
+        "pixman": "0.46.4",
+        "png": "1.6.58",
+        "proxy-libintl": "0.5",
+        "rsvg": "2.63.2",
+        "tiff": "4.7.2",
+        "uhdr": "2.0.2",
+        "vips": "8.18.7",
+        "webp": "1.6.0",
+        "xml2": "2.15.4",
+        "zlib-ng": "2.3.3",
+        "sharp": "0.35.5"
+      },
+      "status": "validado",
+      "catalog_id": "REST_LANCHES",
+      "unity_top_left_anchored_position_px": [
+        1036,
+        -418
+      ],
+      "unity_center_pivot_anchored_position_px": [
+        1196.0,
+        -547.5
+      ],
+      "canvas_top_left_px": [
+        714.6666666666666,
+        454.66666666666663
+      ],
+      "viewport_local_top_left_px": [
+        690.6666666666666,
+        342.66666666666663
+      ],
+      "display_size_px": [
+        213.33333333333331,
+        172.66666666666666
+      ]
+    },
+    {
+      "id": "MAP_REST_FRANCES",
+      "source_path": "art-source/references/generations/ART-12/map_rest_frances-source.png",
+      "source_sha256": "813ca4fd787da73c6154b75e4998d46a90e09e94a60b2e01f81117d5b381ff1e",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "output_path": "Assets/Art/new/location/restaurants/map_rest_frances.png",
+      "path": "location/restaurants/map_rest_frances.png",
+      "sha256": "85d2035ed23e7007d90aa33a9960c4bf64fa8961aa4bff58860062555e742839",
+      "actual_size_px": [
+        316,
+        247
+      ],
+      "output_bytes": 114531,
+      "nominal_uniform_scale": 0.27910685805422647,
+      "raster_size_px": [
+        350,
+        350
+      ],
+      "raster_origin_px": [
+        1024,
+        357
+      ],
+      "raster_path": "art-source/previews/ART-12/rasters/MAP_REST_FRANCES.png",
+      "raster_sha256": "8ba78765a35e282df122de3c0be1c223fd694e6ce041c30f229140b37271ec9d",
+      "raster_crop_rect_px": [
+        18,
+        63,
+        312,
+        243
+      ],
+      "crop_rect_px": [
+        1040,
+        418,
+        316,
+        247
+      ],
+      "position_px": [
+        1040,
+        418
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "transparent_padding_px": 2,
+      "visible_bbox_master_px": [
+        1047,
+        422,
+        305,
+        238
+      ],
+      "registration_anchor_role": "door threshold center",
+      "source_anchor_px": [
+        918,
+        1020
+      ],
+      "target_anchor_px": [
+        1280,
+        642
+      ],
+      "raster_anchor_px": [
+        1280.22009569378,
+        641.688995215311
+      ],
+      "anchor_rounding_error_px": [
+        0.2200956937799674,
+        -0.31100478468897563
+      ],
+      "footprint_master_px": [
+        [
+          1153.5055821371611,
+          536.1866028708134
+        ],
+        [
+          1341.902711323764,
+          605.4051036682615
+        ],
+        [
+          1247.2854864433812,
+          658.993620414673
+        ],
+        [
+          1059.4465709728868,
+          591.4497607655503
+        ]
+      ],
+      "common_ground_anchor_master_px": [
+        1172,
+        657
+      ],
+      "local_ground_anchor_px": [
+        132,
+        239
+      ],
+      "local_registration_anchor_px": [
+        240,
+        224
+      ],
+      "layer_order": 70,
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "alpha": "Original ImageGen alpha preserved; no masking or threshold cleanup. Crop includes every nonzero alpha pixel.",
+      "operation": "One uniform resample of complete source canvas; integer placement; lossless tight crop and 2px transparent padding. No paint, warp, alpha removal or independent axis stretch.",
+      "versions": {
+        "aom": "3.15.1",
+        "archive": "3.8.9",
+        "cairo": "1.18.6",
+        "cgif": "0.5.4",
+        "exif": "0.6.26",
+        "expat": "2.8.5",
+        "ffi": "3.8.0",
+        "fontconfig": "2.18.3",
+        "freetype": "2.14.3",
+        "fribidi": "1.0.17",
+        "glib": "2.90.0",
+        "harfbuzz": "14.5.0",
+        "heif": "1.23.5",
+        "highway": "1.4.0",
+        "imagequant": "2.4.1",
+        "lcms": "2.19.1",
+        "mozjpeg": "0826579",
+        "pango": "1.58.2",
+        "pixman": "0.46.4",
+        "png": "1.6.58",
+        "proxy-libintl": "0.5",
+        "rsvg": "2.63.2",
+        "tiff": "4.7.2",
+        "uhdr": "2.0.2",
+        "vips": "8.18.7",
+        "webp": "1.6.0",
+        "xml2": "2.15.4",
+        "zlib-ng": "2.3.3",
+        "sharp": "0.35.5"
+      },
+      "status": "validado",
+      "catalog_id": "REST_FRANCES",
+      "unity_top_left_anchored_position_px": [
+        1040,
+        -418
+      ],
+      "unity_center_pivot_anchored_position_px": [
+        1198.0,
+        -541.5
+      ],
+      "canvas_top_left_px": [
+        717.3333333333333,
+        454.66666666666663
+      ],
+      "viewport_local_top_left_px": [
+        693.3333333333333,
+        342.66666666666663
+      ],
+      "display_size_px": [
+        210.66666666666666,
+        164.66666666666666
+      ]
+    },
+    {
+      "id": "MAP_REST_JAPONES",
+      "source_path": "art-source/references/generations/ART-12/map_rest_japones-source.png",
+      "source_sha256": "8ffbfd78d132621cd7434dd4c7784a62c14bc2314a43c3ac42af5c04e0e12c6b",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "output_path": "Assets/Art/new/location/restaurants/map_rest_japones.png",
+      "path": "location/restaurants/map_rest_japones.png",
+      "sha256": "21fef8885e515aa4a4ea11fe4a87e80a92e40714fbb37b8ab245308a38cf210e",
+      "actual_size_px": [
+        314,
+        271
+      ],
+      "output_bytes": 113726,
+      "nominal_uniform_scale": 0.27910685805422647,
+      "raster_size_px": [
+        350,
+        350
+      ],
+      "raster_origin_px": [
+        1024,
+        357
+      ],
+      "raster_path": "art-source/previews/ART-12/rasters/MAP_REST_JAPONES.png",
+      "raster_sha256": "35616bb146189159e3c0dccb0990f2772db0340e0c2dcb73978357c8293ec7db",
+      "raster_crop_rect_px": [
+        20,
+        63,
+        310,
+        267
+      ],
+      "crop_rect_px": [
+        1042,
+        418,
+        314,
+        271
+      ],
+      "position_px": [
+        1042,
+        418
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "transparent_padding_px": 2,
+      "visible_bbox_master_px": [
+        1047,
+        423,
+        304,
+        237
+      ],
+      "registration_anchor_role": "door threshold center",
+      "source_anchor_px": [
+        918,
+        1020
+      ],
+      "target_anchor_px": [
+        1280,
+        642
+      ],
+      "raster_anchor_px": [
+        1280.22009569378,
+        641.688995215311
+      ],
+      "anchor_rounding_error_px": [
+        0.2200956937799674,
+        -0.31100478468897563
+      ],
+      "footprint_master_px": [
+        [
+          1153.5055821371611,
+          536.1866028708134
+        ],
+        [
+          1341.902711323764,
+          605.4051036682615
+        ],
+        [
+          1247.2854864433812,
+          658.993620414673
+        ],
+        [
+          1059.4465709728868,
+          591.4497607655503
+        ]
+      ],
+      "common_ground_anchor_master_px": [
+        1172,
+        657
+      ],
+      "local_ground_anchor_px": [
+        130,
+        239
+      ],
+      "local_registration_anchor_px": [
+        238,
+        224
+      ],
+      "layer_order": 70,
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "alpha": "Original ImageGen alpha preserved; no masking or threshold cleanup. Crop includes every nonzero alpha pixel.",
+      "operation": "One uniform resample of complete source canvas; integer placement; lossless tight crop and 2px transparent padding. No paint, warp, alpha removal or independent axis stretch.",
+      "versions": {
+        "aom": "3.15.1",
+        "archive": "3.8.9",
+        "cairo": "1.18.6",
+        "cgif": "0.5.4",
+        "exif": "0.6.26",
+        "expat": "2.8.5",
+        "ffi": "3.8.0",
+        "fontconfig": "2.18.3",
+        "freetype": "2.14.3",
+        "fribidi": "1.0.17",
+        "glib": "2.90.0",
+        "harfbuzz": "14.5.0",
+        "heif": "1.23.5",
+        "highway": "1.4.0",
+        "imagequant": "2.4.1",
+        "lcms": "2.19.1",
+        "mozjpeg": "0826579",
+        "pango": "1.58.2",
+        "pixman": "0.46.4",
+        "png": "1.6.58",
+        "proxy-libintl": "0.5",
+        "rsvg": "2.63.2",
+        "tiff": "4.7.2",
+        "uhdr": "2.0.2",
+        "vips": "8.18.7",
+        "webp": "1.6.0",
+        "xml2": "2.15.4",
+        "zlib-ng": "2.3.3",
+        "sharp": "0.35.5"
+      },
+      "status": "validado",
+      "catalog_id": "REST_JAPONES",
+      "unity_top_left_anchored_position_px": [
+        1042,
+        -418
+      ],
+      "unity_center_pivot_anchored_position_px": [
+        1199.0,
+        -553.5
+      ],
+      "canvas_top_left_px": [
+        718.6666666666666,
+        454.66666666666663
+      ],
+      "viewport_local_top_left_px": [
+        694.6666666666666,
+        342.66666666666663
+      ],
+      "display_size_px": [
+        209.33333333333331,
+        180.66666666666666
+      ]
+    },
+    {
+      "id": "MAP_FOREGROUND",
+      "source_path": "art-source/references/generations/ART-12/map_foreground-source.png",
+      "source_sha256": "f3e6aa78990d2c18ace4247cd7c12aac2fee712fe89458fcb3a2849f7a6a53ea",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "output_path": "Assets/Art/new/location/map/map_foreground.png",
+      "path": "location/map/map_foreground.png",
+      "sha256": "9ba3d9e5a5b6c0d89bb1dad2c0dd1d670ae818d8b3d1926937eaa9e13e9a96ec",
+      "actual_size_px": [
+        135,
+        95
+      ],
+      "output_bytes": 15563,
+      "nominal_uniform_scale": 0.11004784688995216,
+      "raster_size_px": [
+        138,
+        138
+      ],
+      "raster_origin_px": [
+        1086,
+        558
+      ],
+      "raster_path": "art-source/previews/ART-12/rasters/MAP_FOREGROUND.png",
+      "raster_sha256": "076f7e3afde0e0c96408208ed7543007deb7af6cab26f12af00f5389f6d16bda",
+      "raster_crop_rect_px": [
+        4,
+        32,
+        131,
+        91
+      ],
+      "crop_rect_px": [
+        1088,
+        588,
+        135,
+        95
+      ],
+      "position_px": [
+        1088,
+        588
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "transparent_padding_px": 2,
+      "visible_bbox_master_px": [
+        1093,
+        593,
+        125,
+        82
+      ],
+      "registration_anchor_role": "bench ground reference",
+      "source_anchor_px": [
+        738,
+        863
+      ],
+      "target_anchor_px": [
+        1167,
+        653
+      ],
+      "raster_anchor_px": [
+        1167.2153110047848,
+        652.9712918660287
+      ],
+      "anchor_rounding_error_px": [
+        0.21531100478478038,
+        -0.028708133971349525
+      ],
+      "footprint_master_px": [
+        [
+          1092.7129186602872,
+          621.7177033492823
+        ],
+        [
+          1126.3875598086124,
+          638.9952153110048
+        ],
+        [
+          1196.267942583732,
+          675.200956937799
+        ],
+        [
+          1218.2775119617224,
+          663.755980861244
+        ],
+        [
+          1186.0334928229665,
+          645.4880382775119
+        ],
+        [
+          1144.2153110047848,
+          629.200956937799
+        ],
+        [
+          1107.8995215311004,
+          612.2535885167464
+        ]
+      ],
+      "common_ground_anchor_master_px": null,
+      "local_ground_anchor_px": null,
+      "local_registration_anchor_px": [
+        79,
+        65
+      ],
+      "layer_order": 90,
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "alpha": "Original ImageGen alpha preserved; no masking or threshold cleanup. Crop includes every nonzero alpha pixel.",
+      "operation": "One uniform resample of complete source canvas; integer placement; lossless tight crop and 2px transparent padding. No paint, warp, alpha removal or independent axis stretch.",
+      "versions": {
+        "aom": "3.15.1",
+        "archive": "3.8.9",
+        "cairo": "1.18.6",
+        "cgif": "0.5.4",
+        "exif": "0.6.26",
+        "expat": "2.8.5",
+        "ffi": "3.8.0",
+        "fontconfig": "2.18.3",
+        "freetype": "2.14.3",
+        "fribidi": "1.0.17",
+        "glib": "2.90.0",
+        "harfbuzz": "14.5.0",
+        "heif": "1.23.5",
+        "highway": "1.4.0",
+        "imagequant": "2.4.1",
+        "lcms": "2.19.1",
+        "mozjpeg": "0826579",
+        "pango": "1.58.2",
+        "pixman": "0.46.4",
+        "png": "1.6.58",
+        "proxy-libintl": "0.5",
+        "rsvg": "2.63.2",
+        "tiff": "4.7.2",
+        "uhdr": "2.0.2",
+        "vips": "8.18.7",
+        "webp": "1.6.0",
+        "xml2": "2.15.4",
+        "zlib-ng": "2.3.3",
+        "sharp": "0.35.5"
+      },
+      "status": "validado",
+      "catalog_id": null,
+      "unity_top_left_anchored_position_px": [
+        1088,
+        -588
+      ],
+      "unity_center_pivot_anchored_position_px": [
+        1155.5,
+        -635.5
+      ],
+      "canvas_top_left_px": [
+        749.3333333333333,
+        568.0
+      ],
+      "viewport_local_top_left_px": [
+        725.3333333333333,
+        456.0
+      ],
+      "display_size_px": [
+        90.0,
+        63.33333333333333
+      ]
+    }
+  ],
+  "integration_performed": false,
+  "active_contract_sha256": "ab53f127ca79d9fac3b89d9f2b4cf60b129c5f2dbc640c9c23c663663295c901"
+}
