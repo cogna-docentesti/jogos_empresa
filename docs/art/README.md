@@ -11,7 +11,7 @@ Abra [PLANO-DE-ARTE.html](PLANO-DE-ARTE.html) para consultar o inventário e os 
 | `art-source/previews/` | Provas de montagem e revisão visual |
 | `tools/art/` | Validador e ferramentas de produção |
 
-O inventário continua com 272 assets planejados. A reorganização não produz artes nem altera o jogo.
+O inventário contém 272 assets. ART-01 e ART-02 entregaram seis masters canônicos CH01–CH06, validados em 1024×1536 com alfa real; os outros 266 assets continuam planejados. Consulte as revisões [ART-01](qa/ART-01.json) e [ART-02](qa/ART-02.json), com prompts registrados em [ART-01](prompts/ART-01.json) e [ART-02](prompts/ART-02.json).
 
 ## Caminhos do manifesto v2
 
