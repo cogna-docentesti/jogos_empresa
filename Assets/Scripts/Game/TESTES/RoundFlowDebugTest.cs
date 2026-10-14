@@ -319,7 +319,10 @@ public class RoundFlowDebugTest : MonoBehaviour
             bool incompatible = sample[3] == 1;
             string label = "Save rodada " + sample[0] + ", resultado max " + sample[1] + ", historico " + sample[2];
             check(GameSessionState.HasIncompatibleSave == incompatible, label + ": classificacao correta");
-            check(GameManager.Instance.StateMachine.CurrentState == (incompatible ? GameState.MainMenu : GameState.Management_Hub),
+            // This fixture commits D3, but has not chosen financing or bought the basic kit.
+            var expectedState = incompatible ? GameState.MainMenu
+                : sample[0] == 1 ? GameState.Initial_Capital : GameState.Management_Hub;
+            check(GameManager.Instance.StateMachine.CurrentState == expectedState,
                 label + ": encaminhamento correto");
             GameSessionState.Save();
             check(sessions.GetById(session.sessionId)?.currentRound == sample[0]

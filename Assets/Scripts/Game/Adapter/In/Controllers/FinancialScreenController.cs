@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
@@ -19,9 +19,10 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 view = GetComponent<FinancialScreenView>();
 
-            view?.SetFooterVisible(!WasOpenedFromMenu());
+            view?.SetFooterVisible(true);
             BindActions();
             PopulateCreditLines();
+            InitialTutorialView.Configure(transform, InitialTutorialView.IsInitial(GameState.Initial_Capital));
         }
 
         private static bool WasOpenedFromMenu()
@@ -205,8 +206,8 @@ namespace Game.Adapter.In.Controllers
 
         private void OnBack()
         {
-            if (GameManager.Instance != null)
-                GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub);
+            if (WasOpenedFromMenu()) MenuNavigator.Instance.Back();
+            else view.SetHint("Escolha uma linha ou a opção sem financiamento e confirme para continuar.");
         }
 
         private void ClearCards()

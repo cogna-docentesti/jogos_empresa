@@ -65,6 +65,9 @@ namespace Game.Adapter.In.UI.Navigation
                 case GameState.MainMenu:
                 case GameState.FinalReport:
                 case GameState.GameOver_Bankruptcy:
+                case GameState.Initial_Capital:
+                case GameState.Initial_Equipment:
+                case GameState.Initial_Team:
                     return false;
 
                 case GameState.Config_Location:

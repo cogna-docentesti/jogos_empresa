@@ -14,6 +14,8 @@ namespace Game.Adapter.In.Controllers
         private readonly HashSet<string> ownedEquipmentIds = new();
         private readonly HashSet<string> cartEquipmentIds = new();
         private EquipmentData[] basicEquipments = System.Array.Empty<EquipmentData>();
+        private EquipmentData tutorialKit;
+        private bool IsInitial => InitialTutorialView.IsInitial(GameState.Initial_Equipment);
 
         private float AvailableCash => GameSessionState.HasSession
             ? GameSessionState.Current.currentCash
@@ -30,6 +32,7 @@ namespace Game.Adapter.In.Controllers
             PopulateEquipments();
             BindActions();
             RefreshScreen();
+            InitialTutorialView.Configure(transform, IsInitial);
         }
 
         private static bool WasOpenedFromMenu()
@@ -48,6 +51,11 @@ namespace Game.Adapter.In.Controllers
             }
 
             UnbindCards();
+        }
+
+        private void OnDestroy()
+        {
+            if (tutorialKit != null) Destroy(tutorialKit);
         }
 
         private void LoadOwnedEquipmentIds()
@@ -100,6 +108,22 @@ namespace Game.Adapter.In.Controllers
                 .ThenBy(equipment => equipment.cost)
                 .ThenBy(equipment => equipment.displayName)
                 .ToArray();
+
+            if (tutorialKit != null) Destroy(tutorialKit);
+            tutorialKit = null;
+            if (IsInitial && basicEquipments.Length > 0)
+            {
+                tutorialKit = ScriptableObject.CreateInstance<EquipmentData>();
+                tutorialKit.id = "__tutorial_basic_kit";
+                tutorialKit.displayName = "Kit básico (" + basicEquipments.Length + " equipamentos)";
+                tutorialKit.category = EquipmentCategory.BASIC;
+                tutorialKit.cost = basicEquipments.Where(e => !Owns(e)).Sum(e => Mathf.Max(0, e.cost));
+                tutorialKit.capacityBonus = basicEquipments.Sum(e => e.capacityBonus);
+                tutorialKit.qualityBonus = basicEquipments.Sum(e => e.qualityBonus);
+                tutorialKit.icon = basicEquipments.FirstOrDefault(e => e.icon != null)?.icon;
+                visibleEquipments = new[] { tutorialKit }.Concat(visibleEquipments
+                    .Where(e => e.category == EquipmentCategory.SPECIFIC).Take(2)).ToArray();
+            }
 
             foreach (EquipmentData equipment in visibleEquipments)
             {
@@ -178,7 +202,7 @@ namespace Game.Adapter.In.Controllers
             float cartTotal = GetCartTotal();
             view.SetCartSummary(AvailableCash, cartTotal);
             view.SetCartButtonCount(cartEquipmentIds.Count);
-            view.SetConfirmEnabled(true);
+            view.SetConfirmEnabled(!IsInitial || OwnsAllBasicEquipments() || HasAllBasicEquipmentsSelected());
 
             if (cartTotal > AvailableCash)
                 view.SetHint("Saldo insuficiente para concluir a compra do carrinho.");
@@ -192,7 +216,16 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
 
-            OpenMenu();
+            if (IsInitial)
+            {
+                if (!OwnsAllBasicEquipments())
+                {
+                    view.SetHint("Compre o kit básico no carrinho antes de continuar.");
+                    return;
+                }
+                GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team);
+            }
+            else OpenMenu();
         }
 
         private void OpenCart()
@@ -207,6 +240,8 @@ namespace Game.Adapter.In.Controllers
                 .Select(card => card.Equipment)
                 .ToList();
 
+            if (tutorialKit != null && cartItems.Remove(tutorialKit))
+                cartItems.AddRange(basicEquipments.Where(e => !Owns(e)));
             view.ShowCart(cartItems, AvailableCash, CompleteCartPurchase);
         }
 
@@ -221,7 +256,11 @@ namespace Game.Adapter.In.Controllers
 
             int purchasedCount = cartEquipmentIds.Count;
             foreach (string equipmentId in cartEquipmentIds)
-                ownedEquipmentIds.Add(equipmentId);
+            {
+                if (tutorialKit != null && equipmentId == tutorialKit.id)
+                    foreach (var basic in basicEquipments) ownedEquipmentIds.Add(basic.id);
+                else ownedEquipmentIds.Add(equipmentId);
+            }
 
             var data = new EquipmentSelectionData
             {
@@ -235,7 +274,8 @@ namespace Game.Adapter.In.Controllers
             view.HideCart();
             view.SetHint($"Compra concluída: {purchasedCount} item(ns) adquirido(s).");
             RefreshScreen();
-            OpenMenu();
+            if (IsInitial) OnContinue();
+            else OpenMenu();
         }
 
         private static void OpenMenu()
@@ -251,6 +291,7 @@ namespace Game.Adapter.In.Controllers
 
         private bool Owns(EquipmentData equipment)
         {
+            if (tutorialKit != null && equipment == tutorialKit) return OwnsAllBasicEquipments();
             return equipment != null
                 && !string.IsNullOrWhiteSpace(equipment.id)
                 && ownedEquipmentIds.Contains(equipment.id);
@@ -264,7 +305,8 @@ namespace Game.Adapter.In.Controllers
         private bool HasAllBasicEquipmentsSelected()
         {
             return basicEquipments.Length > 0 && basicEquipments.All(equipment =>
-                Owns(equipment) || cartEquipmentIds.Contains(equipment.id));
+                Owns(equipment) || cartEquipmentIds.Contains(equipment.id)
+                || (tutorialKit != null && cartEquipmentIds.Contains(tutorialKit.id)));
         }
 
         private float GetCartTotal()

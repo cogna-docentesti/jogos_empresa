@@ -25,17 +25,21 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Button cartButton;
 
         private readonly List<EquipmentCardView> cards = new();
-        private TextMeshProUGUI cartButtonText;
-        private GameObject cartModal;
-        private TextMeshProUGUI cartItemsText;
-        private TextMeshProUGUI cartTotalText;
-        private TextMeshProUGUI cartStatusText;
-        private Button checkoutButton;
+        [SerializeField] private EquipmentCardView[] preparedCards;
+        private int nextCard;
+        [SerializeField] private TextMeshProUGUI cartButtonText;
+        [SerializeField] private GameObject cartModal;
+        [SerializeField] private TextMeshProUGUI cartItemsText;
+        [SerializeField] private TextMeshProUGUI cartTotalText;
+        [SerializeField] private TextMeshProUGUI cartStatusText;
+        [SerializeField] private Button checkoutButton;
+        [SerializeField] private Button closeButton;
         private UnityAction checkoutAction;
 
         private void Awake()
         { 
             EnsureCartUi();
+            Bind(closeButton, HideCart);
         }
 
         private void OnDestroy()
@@ -44,11 +48,13 @@ namespace Game.Adapter.In.UI
                 checkoutButton.onClick.RemoveAllListeners();
         }
 
-        public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && confirmButton != null;
+        public bool HasRequiredReferences() => preparedCards != null && preparedCards.Length > 0 && confirmButton != null;
 
         public EquipmentCardView CreateCard()
         {
-            EquipmentCardView card = Instantiate(cardPrefab, cardContainer);
+            if (nextCard >= preparedCards.Length)
+                throw new InvalidOperationException("Atualize os cartões da loja na cena pelo builder de tutoriais.");
+            EquipmentCardView card = preparedCards[nextCard++];
             card.gameObject.SetActive(true);
             cards.Add(card);
             return card;
@@ -57,8 +63,9 @@ namespace Game.Adapter.In.UI
         public void ClearCards()
         {
             foreach (EquipmentCardView card in cards)
-                if (card != null) Destroy(card.gameObject);
+                if (card != null) card.gameObject.SetActive(false);
             cards.Clear();
+            nextCard = 0;
         }
 
         public void SetCartSummary(float availableCash, float cartTotal)
@@ -108,6 +115,8 @@ namespace Game.Adapter.In.UI
         {
             EnsureCartUi();
             checkoutAction = onCheckout;
+            Bind(checkoutButton, onCheckout);
+            Bind(closeButton, HideCart);
 
             EquipmentData[] items = equipments?.Where(item => item != null).ToArray()
                 ?? Array.Empty<EquipmentData>();
@@ -157,9 +166,12 @@ namespace Game.Adapter.In.UI
             if (cartButton != null)
                 cartButtonText = cartButton.GetComponentInChildren<TextMeshProUGUI>(true);
 
-            CreateCartModal();
+#if UNITY_EDITOR
+            if (!UnityEngine.Application.isPlaying) CreateCartModal();
+#endif
         }
 
+#if UNITY_EDITOR
         private void CreateCartModal()
         {
             if (cartModal != null)
@@ -220,7 +232,7 @@ namespace Game.Adapter.In.UI
                 new Vector2(0.5f, 0f), new Vector2(230f, 70f), new Vector2(135f, 35f));
             checkoutButton.onClick.AddListener(() => checkoutAction?.Invoke());
 
-            Button closeButton = CreateButton("CloseButton", panel.transform, "Fechar",
+            closeButton = CreateButton("CloseButton", panel.transform, "Fechar",
                 new Vector2(0.5f, 0f), new Vector2(180f, 70f), new Vector2(-105f, 35f));
             closeButton.onClick.AddListener(HideCart);
 
@@ -284,6 +296,7 @@ namespace Game.Adapter.In.UI
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
         }
+#endif
 
         private static void Bind(Button button, UnityAction action)
         {

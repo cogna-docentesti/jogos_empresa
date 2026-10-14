@@ -30,6 +30,7 @@ namespace Game.Adapter.In.UI.Navigation
         [SerializeField] private PanelId target = PanelId.None;
 
         private Button _button;
+        public PanelId Target => target;
 
         private void Awake()
         {

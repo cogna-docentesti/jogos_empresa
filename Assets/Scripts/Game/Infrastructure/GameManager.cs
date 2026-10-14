@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("[GameManager] Sessao carregada com sucesso.");
             PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
-            StateMachine.TryChangeState(GameState.Management_Hub);
+            StateMachine.ForceState(ResumeOperationalSetup(GameSessionState.Current));
         }
     }
 
@@ -112,6 +112,20 @@ public class GameManager : MonoBehaviour
             return false;
 
         return MenuPricingHelper.FromJson(session.menuPricingJson).items.Count > 0;
+    }
+
+    public static GameState ResumeOperationalSetup(GameSessionEntity session)
+    {
+        if (session.currentRound > 1 || session.status != GameSessionStatus.IN_PROGRESS)
+            return GameState.Management_Hub;
+        if (string.IsNullOrWhiteSpace(session.creditLineId)) return GameState.Initial_Capital;
+        var owned = EquipmentSelectionHelper.GetIds(EquipmentSelectionHelper.FromJson(session.equipmentJson));
+        var basic = System.Linq.Enumerable.Where(Resources.LoadAll<EquipmentData>("Equipments"), e => e.category == EquipmentCategory.BASIC);
+        if (System.Linq.Enumerable.Any(basic, e => !owned.Contains(e.id))) return GameState.Initial_Equipment;
+        var restaurant = System.Linq.Enumerable.FirstOrDefault(Resources.LoadAll<RestaurantData>("Restaurants"), r => r.type == session.restaurantType);
+        return Game.Adapter.In.Controllers.TeamScreenController.HasMinimum(restaurant,
+            TeamSelectionHelper.FromJson(session.teamJson), Resources.LoadAll<RoleData>("Roles"))
+            ? GameState.Management_Hub : GameState.Initial_Team;
     }
 
     // =============================
