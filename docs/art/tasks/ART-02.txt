@@ -1,0 +1,36 @@
+ART-02 — Fixar chef e profissional de sushi
+Escopo: nucleo
+Pré-requisitos: ART-01
+
+São as duas funções confirmadas ainda sem pessoa definida nos concepts; aparência inicial registrada no manifesto após QA.
+
+COMANDO PARA O CODEX
+Use $cogna-artista para executar somente ART-02 — Fixar chef e profissional de sushi. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-02.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.
+
+LEITURAS
+docs/art/manifest.json, tokens.json, characters.json e sources.json
+Referências em art-source/references/concepts; masters canônicos em Assets/Art/new/characters/CHxx após ART-01/02.
+
+ENTREGÁVEIS
+Caminhos dos PNGs relativos a Assets/Art/new. Referências, fontes editáveis e contratos relativos à raiz do projeto, conforme o manifesto.
+CH05_CANONICAL | characters/CH05/ch05_canonical.png
+Export 1024x1536 px | display 420x760 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Proposta inicial: mulher adulta de cerca de 40 anos, pele negra, cabelo crespo preso, dólmã clara e avental ameixa. Registrar aparência final a partir do primeiro master; não regenerar identidade em outras tarefas. Corpo inteiro em pose neutra profissional.
+Fonte: concept aprovado / especificação de produção
+Personagens: CH05
+
+CH06_CANONICAL | characters/CH06/ch06_canonical.png
+Export 1024x1536 px | display 420x760 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Proposta inicial: homem adulto de cerca de 40 anos, cabelo preto curto, rosto distinto de CH02/CH04, jaqueta de cozinha clara e avental grafite com detalhe lilás. Sem caricatura. Registrar aparência final a partir do primeiro master. Corpo inteiro em pose neutra profissional.
+Fonte: concept aprovado / especificação de produção
+Personagens: CH06
+
+CRITÉRIOS DE ENTREGA
+Cada PNG separado e no caminho do manifesto; nada permanece apenas em pasta de geração.
+Alfa real nos recortes e dimensões exatas verificadas; não fingir export correto quando divergir.
+Nomes e IDs preservados; sem texto, UI ou gráfico incorporado às ilustrações.
+Validar tecnicamente com o helper do agente e inspecionar visualmente estilo/identidade.
+Atualizar status somente após arquivos reais e QA. Registrar prompts em docs/art/prompts/ART-02.json e preview de QA em art-source/previews.
+Não mudar o jogo; não produzir outros lotes automaticamente.
+display_size_px é caixa de layout: preserveAspect/contain nos recortes, sem esticar. Componentes 9-slice usam bordas preservadas. Fontes SVG/código editáveis precisam existir no source_editable especificado quando production_method=vector_or_code.
+Validador: python tools/art/validate_assets.py --task ART-02
