@@ -673,11 +673,15 @@
       "ART-26"
     ],
     "scope": "validacao",
-    "status": "planejado",
+    "status": "validado",
     "note": "Não cria sprites duplicados. Produzir preview 1920x1080 em art-source/previews reutilizando fachada, KPIs, checklist, ícones e personagens. Não alterar cena/prefab. Registrar quais arquivos cada tela consome.",
     "asset_ids": [],
     "auxiliary_deliverables": [],
-    "request_prompt": "Use $cogna-artista para executar somente ART-27 — Prova de montagem do estabelecimento e revisão. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-27.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-27 — Prova de montagem do estabelecimento e revisão. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-27.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-27.json",
+    "preview_record": "art-source/previews/ART-27/ART-27-overview.png",
+    "consumption_record": "docs/art/qa/ART-27-consumption.json",
+    "layout_record": "docs/art/layouts/establishment-review-layout.json"
   },
   {
     "id": "ART-28",
