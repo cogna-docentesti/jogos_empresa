@@ -13354,7 +13354,7 @@
       "path": "menu_pricing/products/lan/lan_combo_completo.png",
       "name": "Produto Combo completo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13381,19 +13381,36 @@
       "catalog_id": "LAN_COMBO_COMPLETO",
       "source": "Assets/Resources/Products/PROD_LAN_ComboCompleto.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/podrao_img_3.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/generations/ART-17/lan_combo_simples-source-01.png"
       ],
       "brief": "Produto Combo completo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "861bf43d1829a4363a0a3951dc3b83a6bd693b65cd8aeab2ece5ba850faf4377",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated food product illustration for the approved Cogna business game, PRODUCT_LAN_COMBO_COMPLETO.\nInput images: Image 1 is the current catalog sprite, CONTENT and relative meal-composition reference only. Image 2 is the approved opening concept, adult editorial cartoon style and food finish reference only. Image 3, when supplied, is the completed simple product from this batch, shared burger design and rendering reference. Never copy background, UI, text, rings or checkerboard from any reference.\nPrimary request: ONE full meal group on one tray: the same burger on the left, a modest silver wire basket of golden thick-cut fries at the back right, one clear tall straight-sided glass of dark cola and two ice cubes near the back center with a plain unbranded light paper straw, one small square chocolate brownie in a shallow plain ivory dessert bowl at the front right, and one tiny blank ivory ramekin of red ketchup near the basket. Keep all elements readable without hiding the burger, no separate cutlery. Match the completed simple product in Image 3 for burger design, tray material, perspective, light, linework and finish. This is the fullest combination exactly as the catalog sprite composition, not a change to the game data. All containers and straw blank with no writing or logos.\nComposition/camera: one compact meal group, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and front ingredients, viewed slightly from above, coherent shallow perspective. Center the complete group, occupying about 80 percent of width and height, at least 10 percent genuinely transparent margin on every side. No cropped tray, handle, bun, fries or drink. Designed for final export 512x512 and contain display 250x250, clear at small size. The meal rests on ONE shallow muted coral-red rectangular serving tray with short rounded corners and a thin front rim, lined with plain warm ivory paper, no pattern. No plate under the tray, no raised pedestal. Tray proportions and food scale should feel plausible for a real adult meal.\nFood language: golden sesame bun, one substantial grilled beef patty, melted golden cheese, one fried egg, two folded bacon strips, a restrained layer of thin shoestring potato sticks, crisp green lettuce, tomato and pale-green cucumber slices; discreet red and creamy sauces tucked between layers. A cohesive appetizing Brazilian snack-bar burger; layered ingredients neatly overlap, no detached floating food and no excessive dripping or exploded assembly. Clearly visible front silhouette and readable ingredient layers.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its menu illustrations. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions, subtle restrained highlights, crisp edges, warm appetizing natural food colors. Avoid heavy black comic outlines, overstuffed childish proportions, photographic texture, painterly grain, plastic 3D gloss or noise. Warm upper-left light, gentle shadows only where ingredients meet or on the tray. Warm amber #E7B65A, ivory #F5F0E8, ink #30243C, coral-red tray, teal/olive greens. Purple is a restrained shadow accent; food keeps natural colors.\nTransparency: genuine RGBA cutout with alpha zero outside the complete meal and tray, clean antialiased edges. Opaque food and tray interiors. No backdrop, floor, ground plane, outside cast shadow, wide drop shadow, halo, glow or haze. No fake transparency checkerboard. No shadow beyond tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, quantity badges, logos, watermarks, interface, icons, frame or border. Paper liner and sauce containers entirely blank. Do not copy the reference sprite background, outer black ring, checkerboard, labels or excessive ingredient height. No decorative props or scattered crumbs.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; conteúdo comparado com os sprites atuais de cada produto e desenho do hambúrguer consistente entre os três.",
+        "record": "docs/art/qa/ART-17.json",
+        "preview": "art-source/previews/ART-17/PRODUCT_LAN_COMBO_COMPLETO-display-light-dark.png",
+        "details": "art-source/previews/ART-17/PRODUCT_LAN_COMBO_COMPLETO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-17/lan_combo_completo-source-01.png",
+      "source_image_sha256": "620664666b34a1cec41789767bb5a64e686531366f6f6fde0bdc879f818de535",
+      "visual_composition_proposal": "Mesmo hambúrguer, cesta de fritas, copo de refrigerante escuro com gelo e canudo liso, brownie em tigela rasa e ramequim de molho, em uma única bandeja. Composição do sprite atual simplificada para leitura a 250×250; sem talheres.",
+      "production_record": "docs/art/prompts/ART-17.json"
     },
     {
       "id": "PRODUCT_LAN_COMBO_ESPECIAL",
@@ -13401,7 +13418,7 @@
       "path": "menu_pricing/products/lan/lan_combo_especial.png",
       "name": "Produto Combo especial; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13428,19 +13445,36 @@
       "catalog_id": "LAN_COMBO_ESPECIAL",
       "source": "Assets/Resources/Products/PROD_LAN_ComboEspecial.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/podrao_img_2.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/generations/ART-17/lan_combo_simples-source-01.png"
       ],
       "brief": "Produto Combo especial; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "d1fbb8c8994a39bf4815cdfb9d15850c04ba1c9f72fddf592510e350cac58b3a",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated food product illustration for the approved Cogna business game, PRODUCT_LAN_COMBO_ESPECIAL.\nInput images: Image 1 is the current catalog sprite, CONTENT and relative meal-composition reference only. Image 2 is the approved opening concept, adult editorial cartoon style and food finish reference only. Image 3, when supplied, is the completed simple product from this batch, shared burger design and rendering reference. Never copy background, UI, text, rings or checkerboard from any reference.\nPrimary request: ONE burger on the left and ONE modest silver wire basket of golden thick-cut fries on the right, together on the same tray. The fry basket has one simple short handle receding to the upper right; realistic clean basket structure with few legible wires. Match the completed simple product in Image 3 for burger design, ingredient stack, serving-tray material, perspective, light, linework and finish; adapt tray width just enough for the fries. No drink, dessert, sauce cup or utensils.\nComposition/camera: one compact meal group, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and front ingredients, viewed slightly from above, coherent shallow perspective. Center the complete group, occupying about 80 percent of width and height, at least 10 percent genuinely transparent margin on every side. No cropped tray, handle, bun, fries or drink. Designed for final export 512x512 and contain display 250x250, clear at small size. The meal rests on ONE shallow muted coral-red rectangular serving tray with short rounded corners and a thin front rim, lined with plain warm ivory paper, no pattern. No plate under the tray, no raised pedestal. Tray proportions and food scale should feel plausible for a real adult meal.\nFood language: golden sesame bun, one substantial grilled beef patty, melted golden cheese, one fried egg, two folded bacon strips, a restrained layer of thin shoestring potato sticks, crisp green lettuce, tomato and pale-green cucumber slices; discreet red and creamy sauces tucked between layers. A cohesive appetizing Brazilian snack-bar burger; layered ingredients neatly overlap, no detached floating food and no excessive dripping or exploded assembly. Clearly visible front silhouette and readable ingredient layers.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its menu illustrations. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions, subtle restrained highlights, crisp edges, warm appetizing natural food colors. Avoid heavy black comic outlines, overstuffed childish proportions, photographic texture, painterly grain, plastic 3D gloss or noise. Warm upper-left light, gentle shadows only where ingredients meet or on the tray. Warm amber #E7B65A, ivory #F5F0E8, ink #30243C, coral-red tray, teal/olive greens. Purple is a restrained shadow accent; food keeps natural colors.\nTransparency: genuine RGBA cutout with alpha zero outside the complete meal and tray, clean antialiased edges. Opaque food and tray interiors. No backdrop, floor, ground plane, outside cast shadow, wide drop shadow, halo, glow or haze. No fake transparency checkerboard. No shadow beyond tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, quantity badges, logos, watermarks, interface, icons, frame or border. Paper liner and sauce containers entirely blank. Do not copy the reference sprite background, outer black ring, checkerboard, labels or excessive ingredient height. No decorative props or scattered crumbs.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; conteúdo comparado com os sprites atuais de cada produto e desenho do hambúrguer consistente entre os três.",
+        "record": "docs/art/qa/ART-17.json",
+        "preview": "art-source/previews/ART-17/PRODUCT_LAN_COMBO_ESPECIAL-display-light-dark.png",
+        "details": "art-source/previews/ART-17/PRODUCT_LAN_COMBO_ESPECIAL-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-17/lan_combo_especial-source-01.png",
+      "source_image_sha256": "29e717a1fea9f4fab112a330bb9b3893c36eae71058ce6abf4651a8bb6b60c31",
+      "visual_composition_proposal": "Mesmo hambúrguer do simples, acompanhado por uma cesta metálica de batatas fritas à direita, na mesma bandeja. Sem bebida ou sobremesa.",
+      "production_record": "docs/art/prompts/ART-17.json"
     },
     {
       "id": "PRODUCT_LAN_COMBO_SIMPLES",
@@ -13448,7 +13482,7 @@
       "path": "menu_pricing/products/lan/lan_combo_simples.png",
       "name": "Produto Combo simples; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13475,19 +13509,35 @@
       "catalog_id": "LAN_COMBO_SIMPLES",
       "source": "Assets/Resources/Products/PROD_LAN_ComboSimples.asset",
       "references": [
+        "Assets/Art/Sprites/RestaurantScene/podrao_img_1.png",
         "art-source/references/concepts/02-abertura.png"
       ],
       "brief": "Produto Combo simples; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "d8303290e75a528befe33ff53a8f8adac4475676f69d8aec79b233d0a0ab7ed2",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated food product illustration for the approved Cogna business game, PRODUCT_LAN_COMBO_SIMPLES.\nInput images: Image 1 is the current catalog sprite, CONTENT and relative meal-composition reference only. Image 2 is the approved opening concept, adult editorial cartoon style and food finish reference only. Never copy background, UI, text, rings or checkerboard from any reference.\nPrimary request: ONE burger alone on its modest tray, with no separate side order, no drink, no dessert, no sauce cup and no utensils. Keep this the simplest composition. The burger is the clear sole food subject.\nComposition/camera: one compact meal group, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and front ingredients, viewed slightly from above, coherent shallow perspective. Center the complete group, occupying about 80 percent of width and height, at least 10 percent genuinely transparent margin on every side. No cropped tray, handle, bun, fries or drink. Designed for final export 512x512 and contain display 250x250, clear at small size. The meal rests on ONE shallow muted coral-red rectangular serving tray with short rounded corners and a thin front rim, lined with plain warm ivory paper, no pattern. No plate under the tray, no raised pedestal. Tray proportions and food scale should feel plausible for a real adult meal.\nFood language: golden sesame bun, one substantial grilled beef patty, melted golden cheese, one fried egg, two folded bacon strips, a restrained layer of thin shoestring potato sticks, crisp green lettuce, tomato and pale-green cucumber slices; discreet red and creamy sauces tucked between layers. A cohesive appetizing Brazilian snack-bar burger; layered ingredients neatly overlap, no detached floating food and no excessive dripping or exploded assembly. Clearly visible front silhouette and readable ingredient layers.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its menu illustrations. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions, subtle restrained highlights, crisp edges, warm appetizing natural food colors. Avoid heavy black comic outlines, overstuffed childish proportions, photographic texture, painterly grain, plastic 3D gloss or noise. Warm upper-left light, gentle shadows only where ingredients meet or on the tray. Warm amber #E7B65A, ivory #F5F0E8, ink #30243C, coral-red tray, teal/olive greens. Purple is a restrained shadow accent; food keeps natural colors.\nTransparency: genuine RGBA cutout with alpha zero outside the complete meal and tray, clean antialiased edges. Opaque food and tray interiors. No backdrop, floor, ground plane, outside cast shadow, wide drop shadow, halo, glow or haze. No fake transparency checkerboard. No shadow beyond tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, quantity badges, logos, watermarks, interface, icons, frame or border. Paper liner and sauce containers entirely blank. Do not copy the reference sprite background, outer black ring, checkerboard, labels or excessive ingredient height. No decorative props or scattered crumbs.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; conteúdo comparado com os sprites atuais de cada produto e desenho do hambúrguer consistente entre os três.",
+        "record": "docs/art/qa/ART-17.json",
+        "preview": "art-source/previews/ART-17/PRODUCT_LAN_COMBO_SIMPLES-display-light-dark.png",
+        "details": "art-source/previews/ART-17/PRODUCT_LAN_COMBO_SIMPLES-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-17/lan_combo_simples-source-01.png",
+      "source_image_sha256": "895f35392352ac72a3379987a7aa2f7de9ff8014b493ab6554e498024b2b2f5a",
+      "visual_composition_proposal": "Hambúrguer único com pão de gergelim, carne, queijo, ovo, bacon, batata palha, alface, tomate e pepino, em bandeja coral com papel marfim liso. Sem acompanhamento separado.",
+      "production_record": "docs/art/prompts/ART-17.json"
     },
     {
       "id": "PRODUCT_JAP_COMBINADO_MEDIO",
@@ -13495,7 +13545,7 @@
       "path": "menu_pricing/products/jap/jap_combinado_medio.png",
       "name": "Produto Combinado medio; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13522,19 +13572,36 @@
       "catalog_id": "JAP_COMBINADO_MEDIO",
       "source": "Assets/Resources/Products/PROD_JAP_CombinadoMedio.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/japa_img_1.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/lan/lan_combo_simples.png"
       ],
       "brief": "Produto Combinado medio; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "0c0479424bd267f0b547b1cefe0da1bc61d1c11f89a9d25d67d9c570f6cc8b9e",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated Japanese food product illustration for the approved Cogna business game, PRODUCT_JAP_COMBINADO_MEDIO.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and Japanese-food presentation reference only. Image 3 is an approved finished food sprite from ART-17, shared rendering quality and light reference only: do not copy its burger, fries, red tray or ingredients. Never copy backgrounds, UI, text, outer rings or checkerboard from references.\nPrimary request: ONE generous salmon nigiri on ONE small shallow oval dark blue-teal ceramic plate with a thin warm ivory rim. This product uses the current catalog motif of a single salmon nigiri even though its generic catalog name is Combinado medio: preserve that motif. A compact elongated mound of white rice supports a thick curved fresh salmon slice with several ivory fat bands; one broad dark-green nori band wraps across its center. A tiny green wasabi dab rests on the salmon at the left; a small shiso leaf, two short chive blades and a few orange roe pearls sit near the far upper edge of the nori band. Keep garnish compact and ingredient scale realistic, not an exaggerated huge rice block. No other sushi, sashimi, soy bowl or additional dish. Keep the oval plate low and elegant, not a stack of plates.\nComposition/camera: one compact plated Japanese food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and readable front cross sections, viewed slightly from above. Center the complete food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, wooden tray, sushi or garnish. Designed for final export 512x512 and contain display 250x250, with a simple clean silhouette at small size. Plausible adult food proportions and coherent perspective. Local shadows only where food meets its plate or tray.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved Cogna opening concept, especially its Japanese restaurant sushi illustration. Use Image 3 only for shared polished food rendering, upper-left light, edge clarity and restrained warm highlights. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with limited highlights. Natural appetizing salmon coral-orange with clear ivory fat bands, warm ivory rice, dark charcoal-green nori, olive/teal greens and warm wood or dark blue-teal ceramic. Fine rice detail should form grouped readable shapes rather than photographic grain. Purple only a subtle shadow accent. No plastic 3D gloss, heavy black comic outlines, painterly grain, blur, excessive shiny wet surfaces or noisy microtexture.\nTransparency: genuine RGBA cutout with alpha zero outside the complete food-and-serving-surface silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow or haze. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage, multiple views or UI card. No people, hands, labels, lettering, Japanese characters, words, numbers, prices, badges, logos, watermarks, interface, icons, frame, border, outer ring or scattered decorative props. No background checkerboard or checkered paper. No beverages, utensils or detached reusable accessories. Food and any small garnish stay on the single serving surface. Do not copy source background, black outer circle, checkerboard, UI or text. Preserve the primary catalog food motif assigned to this ID rather than interpreting the product name as a literal recipe or changing any game data.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; motivos de comida comparados com os sprites atuais e acabamento consistente entre os três produtos.",
+        "record": "docs/art/qa/ART-18.json",
+        "preview": "art-source/previews/ART-18/PRODUCT_JAP_COMBINADO_MEDIO-display-light-dark.png",
+        "details": "art-source/previews/ART-18/PRODUCT_JAP_COMBINADO_MEDIO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-18/jap_combinado_medio-source-01.png",
+      "source_image_sha256": "a2736005ba011a4f15837478005c7f249a4fbc3a91f6ef766889789a479251a3",
+      "visual_composition_proposal": "Um nigiri de salmão com faixa de nori, arroz, pequeno toque de wasabi, folha de shiso, cebolinha e ovas, sobre prato oval azul-petróleo com filete marfim. Preserva o motivo do sprite japa_img_1; o nome genérico não foi usado para inventar uma quantidade de combinado.",
+      "production_record": "docs/art/prompts/ART-18.json"
     },
     {
       "id": "PRODUCT_JAP_COMBINADO_PREMIUM",
@@ -13542,7 +13609,7 @@
       "path": "menu_pricing/products/jap/jap_combinado_premium.png",
       "name": "Produto Combinado premium; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13569,19 +13636,37 @@
       "catalog_id": "JAP_COMBINADO_PREMIUM",
       "source": "Assets/Resources/Products/PROD_JAP_CombinadoPremium.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/japa_img_2.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/lan/lan_combo_simples.png",
+        "art-source/references/generations/ART-18/jap_combinado_medio-source-01.png"
       ],
       "brief": "Produto Combinado premium; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "fbc60c5eceb649e5547ce3b667efdb8ff26249fce70bb7f194815a5222abc302",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated Japanese food product illustration for the approved Cogna business game, PRODUCT_JAP_COMBINADO_PREMIUM.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and Japanese-food presentation reference only. Image 3 is an approved finished food sprite from ART-17, shared rendering quality and light reference only: do not copy its burger, fries, red tray or ingredients. Never copy backgrounds, UI, text, outer rings or checkerboard from references.\nImage 4 is the completed Japanese nigiri from this batch: use only its ceramic plate material, salmon/rice rendering, clean contour and light, never copy the nigiri into the temaki product.\nPrimary request: ONE generous salmon-and-avocado temaki hand roll resting diagonally on ONE low shallow oval dark blue-teal ceramic plate with a thin warm ivory rim. Preserve the primary motif from the catalog source: a crisp charcoal-green nori cone, pointed end receding toward the upper right, open filled mouth facing the lower left and the viewer. White rice at the opening, thick coral salmon strips with ivory bands, curved pale-green avocado slices, one small shiso leaf, a restrained cluster of orange roe and green scallion rings. Keep the filling neatly contained in the cone. The temaki is complete, uncropped and has a clear tapered silhouette. No additional sushi, second temaki, soy bowl, cutlery or drink. Use the same plate materials, warm light and food rendering as the rest of this Japanese batch.\nComposition/camera: one compact plated Japanese food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and readable front cross sections, viewed slightly from above. Center the complete food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, wooden tray, sushi or garnish. Designed for final export 512x512 and contain display 250x250, with a simple clean silhouette at small size. Plausible adult food proportions and coherent perspective. Local shadows only where food meets its plate or tray.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved Cogna opening concept, especially its Japanese restaurant sushi illustration. Use Image 3 only for shared polished food rendering, upper-left light, edge clarity and restrained warm highlights. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with limited highlights. Natural appetizing salmon coral-orange with clear ivory fat bands, warm ivory rice, dark charcoal-green nori, olive/teal greens and warm wood or dark blue-teal ceramic. Fine rice detail should form grouped readable shapes rather than photographic grain. Purple only a subtle shadow accent. No plastic 3D gloss, heavy black comic outlines, painterly grain, blur, excessive shiny wet surfaces or noisy microtexture.\nTransparency: genuine RGBA cutout with alpha zero outside the complete food-and-serving-surface silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow or haze. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage, multiple views or UI card. No people, hands, labels, lettering, Japanese characters, words, numbers, prices, badges, logos, watermarks, interface, icons, frame, border, outer ring or scattered decorative props. No background checkerboard or checkered paper. No beverages, utensils or detached reusable accessories. Food and any small garnish stay on the single serving surface. Do not copy source background, black outer circle, checkerboard, UI or text. Preserve the primary catalog food motif assigned to this ID rather than interpreting the product name as a literal recipe or changing any game data.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; motivos de comida comparados com os sprites atuais e acabamento consistente entre os três produtos.",
+        "record": "docs/art/qa/ART-18.json",
+        "preview": "art-source/previews/ART-18/PRODUCT_JAP_COMBINADO_PREMIUM-display-light-dark.png",
+        "details": "art-source/previews/ART-18/PRODUCT_JAP_COMBINADO_PREMIUM-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-18/jap_combinado_premium-source-01.png",
+      "source_image_sha256": "b7dc1e83c0ff3f5840b69287788f43f5517588870d0a647353d2b1575a80e0b8",
+      "visual_composition_proposal": "Um temaki de salmão e abacate com arroz, shiso, cebolinha e ovas, cone de nori em diagonal sobre prato oval azul-petróleo. Motivo do sprite japa_img_2 preservado; composição de apresentação proposta sem receita ou quantidade novas no catálogo.",
+      "production_record": "docs/art/prompts/ART-18.json"
     },
     {
       "id": "PRODUCT_JAP_SUSHI_EXECUTIVO",
@@ -13589,7 +13674,7 @@
       "path": "menu_pricing/products/jap/jap_sushi_executivo.png",
       "name": "Produto Sushi executivo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13616,19 +13701,36 @@
       "catalog_id": "JAP_SUSHI_EXECUTIVO",
       "source": "Assets/Resources/Products/PROD_JAP_SushiExecutivo.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/japa_img_3.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/lan/lan_combo_simples.png"
       ],
       "brief": "Produto Sushi executivo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "dda7e44fbd4eca5f6341ccd0510cc295b3ee4bc24cf6f6e6c613afcc09c0c846",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated Japanese food product illustration for the approved Cogna business game, PRODUCT_JAP_SUSHI_EXECUTIVO.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and Japanese-food presentation reference only. Image 3 is an approved finished food sprite from ART-17, shared rendering quality and light reference only: do not copy its burger, fries, red tray or ingredients. Never copy backgrounds, UI, text, outer rings or checkerboard from references.\nPrimary request: ONE compact varied sushi assortment on ONE shallow round warm bamboo serving tray seen as a clear three-quarter ellipse. Preserve the catalog motif of a mixed sushi tray: several neatly separated salmon and tuna nigiri, one yellow tamago nigiri with a slim nori strip, dark nori maki with cucumber/salmon cross sections, two rice-outside uramaki rolls with salmon/avocado centers, and one small orange-roe-topped rice roll. Arrange in orderly loose rows with enough negative space that every piece reads at 250x250; about ten clearly distinct sushi pieces rather than a crowded heap. Include one small folded pale-pink pickled-ginger rosette and a tiny green wasabi dab at opposite inner edges, both sitting directly on the tray. The tray has a restrained thin bamboo rim and a plain warm wood surface with a few broad wood lines. No checkered liner, outer black circle, spoon, chopsticks, soy-sauce dish, second plate or drink. This is one ready-to-serve product illustration, not separate sushi stickers.\nComposition/camera: one compact plated Japanese food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and readable front cross sections, viewed slightly from above. Center the complete food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, wooden tray, sushi or garnish. Designed for final export 512x512 and contain display 250x250, with a simple clean silhouette at small size. Plausible adult food proportions and coherent perspective. Local shadows only where food meets its plate or tray.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved Cogna opening concept, especially its Japanese restaurant sushi illustration. Use Image 3 only for shared polished food rendering, upper-left light, edge clarity and restrained warm highlights. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with limited highlights. Natural appetizing salmon coral-orange with clear ivory fat bands, warm ivory rice, dark charcoal-green nori, olive/teal greens and warm wood or dark blue-teal ceramic. Fine rice detail should form grouped readable shapes rather than photographic grain. Purple only a subtle shadow accent. No plastic 3D gloss, heavy black comic outlines, painterly grain, blur, excessive shiny wet surfaces or noisy microtexture.\nTransparency: genuine RGBA cutout with alpha zero outside the complete food-and-serving-surface silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow or haze. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage, multiple views or UI card. No people, hands, labels, lettering, Japanese characters, words, numbers, prices, badges, logos, watermarks, interface, icons, frame, border, outer ring or scattered decorative props. No background checkerboard or checkered paper. No beverages, utensils or detached reusable accessories. Food and any small garnish stay on the single serving surface. Do not copy source background, black outer circle, checkerboard, UI or text. Preserve the primary catalog food motif assigned to this ID rather than interpreting the product name as a literal recipe or changing any game data.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; motivos de comida comparados com os sprites atuais e acabamento consistente entre os três produtos.",
+        "record": "docs/art/qa/ART-18.json",
+        "preview": "art-source/previews/ART-18/PRODUCT_JAP_SUSHI_EXECUTIVO-display-light-dark.png",
+        "details": "art-source/previews/ART-18/PRODUCT_JAP_SUSHI_EXECUTIVO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-18/jap_sushi_executivo-source-01.png",
+      "source_image_sha256": "b2b8dabd2cbd61c5b2c76f4b30e466a08e85d1494695ee0b79eb35859b817ebb",
+      "visual_composition_proposal": "Seleção compacta de nigiris de salmão/atum/tamago, makis e uramakis em bandeja redonda de bambu, com gengibre e pequeno toque de wasabi. Composição simplificada do sprite japa_img_3 para leitura a 250×250, sem papel quadriculado, hashis, colher ou tigela de shoyu; quantidades visuais não alteram dados do jogo.",
+      "production_record": "docs/art/prompts/ART-18.json"
     },
     {
       "id": "PRODUCT_FRA_MENU_CLASSICO",
@@ -13636,7 +13738,7 @@
       "path": "menu_pricing/products/fra/fra_menu_classico.png",
       "name": "Produto Menu classico; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13663,19 +13765,36 @@
       "catalog_id": "FRA_MENU_CLASSICO",
       "source": "Assets/Resources/Products/PROD_FRA_MenuClassico.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/french_img_1.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png"
       ],
       "brief": "Produto Menu classico; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "ef18da68b99bef93a7cd3670afb909b5f3b2bf57cd83cac57547de4859ea572e",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated French food product illustration for the approved Cogna business game, PRODUCT_FRA_MENU_CLASSICO.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT and dish motif reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and French-food finish reference only. Image 3 is the finished Japanese nigiri from ART-18, shared food rendering, light and ceramic plate material reference only: never copy its sushi, seaweed, rice or fish into the French dishes. Never copy source backgrounds, outer rings, UI, text, checkerboard, emblems or cutlery.\nPrimary request: ONE cooked escargot in its large warm cream-and-tan spiral shell, resting on ONE shallow oval dark blue-teal ceramic plate with a thin warm ivory rim. Preserve the current catalog motif, not multiple new portions. The whole spiral shell is visible, curved tip receding toward the upper right; the shell opening faces the lower left and viewer. Inside the opening show a small cooked snail portion in golden melted garlic-herb butter flecked with finely grouped green parsley. The spiral has restrained light tan bands and soft warm highlights, not photographic stripes. A small parsley sprig and one modest lemon wedge sit naturally on the plate at the left of the shell. No live snail body, head, eyes, antennae or animal face: this is a cooked served French dish. No fork, escargot tongs, second snail, bread, bowl or other course. Keep the plate low and elegant, one plate only.\nComposition/camera: one compact plated French food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and a readable front edge, viewed slightly from above; not a flat overhead diagram. Center the entire food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, shell, tray, vegetable fan, handle or garnish. Designed for final export 512x512 and contain display 250x250 with clearly separated broad ingredient shapes. Plausible adult food proportions and coherent shallow perspective. Local shadows only where food touches its serving surface.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its French restaurant plate illustration. Use Image 3 only for the established finished food rendering, edge clarity, upper-left light and elegant dark blue-teal ceramic material, never its sushi content. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with restrained warm highlights. Food has natural appetizing color: golden ivory butter, warm beige shell, browned cooked food, tomato coral, olive green zucchini, aubergine plum, warm cream ceramic or honey-colored wood. Avoid heavy black comic outlines, exaggerated childish portions, plastic 3D gloss, photographic texture, painterly grain, blurry edges, wet overgloss and noisy microtexture. Purple only as natural aubergine color and subtle shadow accent. Soft warm upper-left light with small contact shadows confined to the plate/tray.\nTransparency: genuine RGBA cutout with alpha zero outside the entire plated meal silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, table, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow, mist or steam. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage of separated stickers, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, badges, logos, heraldic emblems, watermarks, interface, icons, frame, border, outer black ring or checkered fabric/paper. No utensils, wine glasses, beverages, napkin, decorative props, floating ingredients or scattered crumbs outside the serving surface. Food and garnish remain on one connected plate or serving tray. Do not copy source backgrounds, checkerboard, text, cutlery or symbols. Preserve the primary catalog food motif assigned to this ID rather than changing game data or interpreting generic product names as complete recipes.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; motivos de comida comparados com os sprites atuais, acabamento e louças consistentes entre os produtos.",
+        "record": "docs/art/qa/ART-19.json",
+        "preview": "art-source/previews/ART-19/PRODUCT_FRA_MENU_CLASSICO-display-light-dark.png",
+        "details": "art-source/previews/ART-19/PRODUCT_FRA_MENU_CLASSICO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-19/fra_menu_classico-source-01.png",
+      "source_image_sha256": "4b8f258f45cad7f39639c8abe38ba00aca74efa457629271f634a4ade4cdcf05",
+      "visual_composition_proposal": "Escargot cozido em concha espiral bege com manteiga de ervas, ramo de salsa e pequeno gomo de limão, sobre prato oval azul-petróleo com filete marfim. Motivo do sprite french_img_1 preservado; garfo excluído da proposta visual.",
+      "production_record": "docs/art/prompts/ART-19.json"
     },
     {
       "id": "PRODUCT_FRA_MENU_PREMIUM",
@@ -13683,7 +13802,7 @@
       "path": "menu_pricing/products/fra/fra_menu_premium.png",
       "name": "Produto Menu premium; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13710,19 +13829,37 @@
       "catalog_id": "FRA_MENU_PREMIUM",
       "source": "Assets/Resources/Products/PROD_FRA_MenuPremium.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/french_img_2.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png",
+        "art-source/references/generations/ART-19/fra_menu_classico-source-01.png"
       ],
       "brief": "Produto Menu premium; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "0b1aaec29c1732a89975e3e02f752f4bb35d330dbd34451c3693199fc41a1754",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated French food product illustration for the approved Cogna business game, PRODUCT_FRA_MENU_PREMIUM.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT and dish motif reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and French-food finish reference only. Image 3 is the finished Japanese nigiri from ART-18, shared food rendering, light and ceramic plate material reference only: never copy its sushi, seaweed, rice or fish into the French dishes. Never copy source backgrounds, outer rings, UI, text, checkerboard, emblems or cutlery.\nImage 4 is the completed classic French product from this batch: use only its ceramic plate material, contour and light, never copy its escargot, shell, parsley or lemon into the ratatouille.\nPrimary request: ONE neatly plated ratatouille vegetable arrangement on ONE shallow oval dark blue-teal ceramic plate with a thin warm ivory rim. Preserve the primary motif of the current catalog sprite: a low tidy circular overlapping fan/spiral of alternating tomato slices, pale-green zucchini rounds and aubergine slices with natural dark plum skins, gathered around a modest central herb sprig. Vegetables look softly roasted, with golden olive-oil sheen and a few finely grouped green herb flecks. Small garlic slices near the center, and one tiny golden herb-butter accent near the upper center. Use adult plausible portions with clean individual slices readable at 250x250, no excessively tall tower, no scattered raw ingredients, no exaggerated mound. A restrained warm sauce under the vegetables stays within the plate. No meat, fish, escargot, fork, extra bowl or additional course. Use the same elegant plate material and rendering as the classic French product.\nComposition/camera: one compact plated French food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and a readable front edge, viewed slightly from above; not a flat overhead diagram. Center the entire food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, shell, tray, vegetable fan, handle or garnish. Designed for final export 512x512 and contain display 250x250 with clearly separated broad ingredient shapes. Plausible adult food proportions and coherent shallow perspective. Local shadows only where food touches its serving surface.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its French restaurant plate illustration. Use Image 3 only for the established finished food rendering, edge clarity, upper-left light and elegant dark blue-teal ceramic material, never its sushi content. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with restrained warm highlights. Food has natural appetizing color: golden ivory butter, warm beige shell, browned cooked food, tomato coral, olive green zucchini, aubergine plum, warm cream ceramic or honey-colored wood. Avoid heavy black comic outlines, exaggerated childish portions, plastic 3D gloss, photographic texture, painterly grain, blurry edges, wet overgloss and noisy microtexture. Purple only as natural aubergine color and subtle shadow accent. Soft warm upper-left light with small contact shadows confined to the plate/tray.\nTransparency: genuine RGBA cutout with alpha zero outside the entire plated meal silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, table, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow, mist or steam. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage of separated stickers, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, badges, logos, heraldic emblems, watermarks, interface, icons, frame, border, outer black ring or checkered fabric/paper. No utensils, wine glasses, beverages, napkin, decorative props, floating ingredients or scattered crumbs outside the serving surface. Food and garnish remain on one connected plate or serving tray. Do not copy source backgrounds, checkerboard, text, cutlery or symbols. Preserve the primary catalog food motif assigned to this ID rather than changing game data or interpreting generic product names as complete recipes.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; motivos de comida comparados com os sprites atuais, acabamento e louças consistentes entre os produtos.",
+        "record": "docs/art/qa/ART-19.json",
+        "preview": "art-source/previews/ART-19/PRODUCT_FRA_MENU_PREMIUM-display-light-dark.png",
+        "details": "art-source/previews/ART-19/PRODUCT_FRA_MENU_PREMIUM-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-19/fra_menu_premium-source-01.png",
+      "source_image_sha256": "0d284e99f631442e0864ef7373bc6c0c236aa9b645bcf0cc49f9e3b6247da0bb",
+      "visual_composition_proposal": "Ratatouille em leque circular de tomate, abobrinha e berinjela, com ervas, pequenas lâminas de alho e toque dourado de manteiga/molho, em prato oval azul-petróleo. Motivo do sprite french_img_2 preservado; talher excluído da proposta visual.",
+      "production_record": "docs/art/prompts/ART-19.json"
     },
     {
       "id": "PRODUCT_FRA_PRATO_EXECUTIVO",
@@ -13730,7 +13867,7 @@
       "path": "menu_pricing/products/fra/fra_prato_executivo.png",
       "name": "Produto Prato executivo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga",
       "kind": "produto",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13757,19 +13894,36 @@
       "catalog_id": "FRA_PRATO_EXECUTIVO",
       "source": "Assets/Resources/Products/PROD_FRA_PratoExecutivo.asset",
       "references": [
-        "art-source/references/concepts/02-abertura.png"
+        "Assets/Art/Sprites/RestaurantScene/french_img_3.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png"
       ],
       "brief": "Produto Prato executivo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "2751ee4d31d0e306e60e33c1ecf202d01b6e4b03db92041db735bf15ad7e4856",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated French food product illustration for the approved Cogna business game, PRODUCT_FRA_PRATO_EXECUTIVO.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT and dish motif reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and French-food finish reference only. Image 3 is the finished Japanese nigiri from ART-18, shared food rendering, light and ceramic plate material reference only: never copy its sushi, seaweed, rice or fish into the French dishes. Never copy source backgrounds, outer rings, UI, text, checkerboard, emblems or cutlery.\nPrimary request: ONE coherent French tasting-meal arrangement on ONE shallow round honey-colored wooden serving tray with a restrained low rim, viewed as a three-quarter ellipse. This ID uses the current catalog motif of a varied French food selection, even though its generic name is Prato executivo. Simplify the busy catalog image into SIX compact dishes all resting on the same tray: back left, an ivory ramekin of golden-white beans with one browned duck/chicken leg; back right, an ivory bowl of rich brown beef stew with a few clear mushroom slices; center, an ivory shallow bowl of orange seafood stew with a pink shrimp, two dark mussels and a golden fish portion; front left, a small low oval plate of tomato/zucchini/aubergine ratatouille fan; front right, one small round golden quiche tart with a plain crimped pastry rim and tiny herb garnish; front center, a small ivory handled ramekin of onion soup with a golden melted-cheese toast. Arrange dishes in loose tidy staggered rows with coherent perspective and clear spacing; each dish remains completely readable and its container is fully on the tray. Keep the complete tray a single connected meal-group silhouette. Do not add a bread basket, butter disc, truffles, wine, utensils, napkin, logos, decorative emblems or lettering from the reference. No free-floating plates and no separate dish stickers. Broad warm food shapes should remain legible at 250x250, with less tiny detail than in the source.\nComposition/camera: one compact plated French food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and a readable front edge, viewed slightly from above; not a flat overhead diagram. Center the entire food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, shell, tray, vegetable fan, handle or garnish. Designed for final export 512x512 and contain display 250x250 with clearly separated broad ingredient shapes. Plausible adult food proportions and coherent shallow perspective. Local shadows only where food touches its serving surface.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its French restaurant plate illustration. Use Image 3 only for the established finished food rendering, edge clarity, upper-left light and elegant dark blue-teal ceramic material, never its sushi content. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with restrained warm highlights. Food has natural appetizing color: golden ivory butter, warm beige shell, browned cooked food, tomato coral, olive green zucchini, aubergine plum, warm cream ceramic or honey-colored wood. Avoid heavy black comic outlines, exaggerated childish portions, plastic 3D gloss, photographic texture, painterly grain, blurry edges, wet overgloss and noisy microtexture. Purple only as natural aubergine color and subtle shadow accent. Soft warm upper-left light with small contact shadows confined to the plate/tray.\nTransparency: genuine RGBA cutout with alpha zero outside the entire plated meal silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, table, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow, mist or steam. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage of separated stickers, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, badges, logos, heraldic emblems, watermarks, interface, icons, frame, border, outer black ring or checkered fabric/paper. No utensils, wine glasses, beverages, napkin, decorative props, floating ingredients or scattered crumbs outside the serving surface. Food and garnish remain on one connected plate or serving tray. Do not copy source backgrounds, checkerboard, text, cutlery or symbols. Preserve the primary catalog food motif assigned to this ID rather than changing game data or interpreting generic product names as complete recipes.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; motivos de comida comparados com os sprites atuais, acabamento e louças consistentes entre os produtos.",
+        "record": "docs/art/qa/ART-19.json",
+        "preview": "art-source/previews/ART-19/PRODUCT_FRA_PRATO_EXECUTIVO-display-light-dark.png",
+        "details": "art-source/previews/ART-19/PRODUCT_FRA_PRATO_EXECUTIVO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-19/fra_prato_executivo-source-01.png",
+      "source_image_sha256": "3c8766b4a48e287d51ba2f348e8315cc8a56eabe44a4579c77c3aa8a792b4fd2",
+      "visual_composition_proposal": "Seleção de seis pratos franceses em bandeja redonda de madeira: cassoulet com coxa, ensopado de carne e cogumelos, caldo de frutos do mar, ratatouille, quiche e sopa de cebola gratinada. Proposta simplificada do sprite french_img_3, sem bebida, cesta de pães, manteiga com símbolo, trufas, toalha ou talheres; quantidades visuais não alteram dados do jogo.",
+      "production_record": "docs/art/prompts/ART-19.json"
     },
     {
       "id": "EQUIPMENT_BANCADA_INOX_PREPARO",
@@ -13777,7 +13931,7 @@
       "path": "equipment/basic/bancada_inox_preparo.png",
       "name": "Bancada de Inox para preparo",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13804,19 +13958,35 @@
       "catalog_id": "bancada_inox_preparo",
       "source": "Assets/Resources/Equipments/EQUIP_BancadaInoxPreparo.asset",
       "references": [
+        "Assets/Art/Sprites/UI/bancada_inox.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Bancada de Inox para preparo. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "b4f69e30c4c307450ddf520fef16ba287d2b3a7403458904b6f5eb4269c4c9ec",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_BANCADA_INOX_PREPARO.\nInput images: Image 1 is the current equipment catalog sprite, object topology/content reference ONLY; discard its photo-real treatment, enclosing metallic card, frame, opaque backdrop and cast ground shadow. Image 2 is the approved Cogna management concept, equipment cartoon style, materials, camera and lighting reference ONLY; never copy its interface, text, labels, people, purchase badges or other appliances.\nPrimary request: ONE empty commercial stainless-steel preparation workbench: a wide rectangular matte steel top with small rounded corners, short raised backsplash along the back edge, a thin strong front apron, FOUR cylindrical steel legs with simple dark adjustable feet, and ONE empty rectangular lower steel shelf connected between the legs. The lower shelf is close to the bottom, leaving a practical open storage area between it and the worktop. Preserve the source object's essential topology but show it from the required front-right three-quarter camera. The worktop is completely empty. No drawers, doors, sink, appliance, food, pans, cutting board, utensils or objects added on the shelves.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-20.json",
+        "preview": "art-source/previews/ART-20/EQUIPMENT_BANCADA_INOX_PREPARO-display-light-dark.png",
+        "details": "art-source/previews/ART-20/EQUIPMENT_BANCADA_INOX_PREPARO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png",
+      "source_image_sha256": "3e561e6c70ac40790af8045f4b797d1e6ce712064859a54fa1b52f17c5053678",
+      "visual_composition_proposal": "Bancada vazia com tampo retangular, espelho traseiro baixo, quatro pernas tubulares, pés reguláveis e prateleira inferior, em vista frontal de três quartos com lado direito visível.",
+      "production_record": "docs/art/prompts/ART-20.json"
     },
     {
       "id": "EQUIPMENT_CONJUNTO_PANELAS_INDUSTRIAIS",
@@ -13824,7 +13994,7 @@
       "path": "equipment/basic/conjunto_panelas_industriais.png",
       "name": "Conjunto de Panelas Industriais",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13851,19 +14021,36 @@
       "catalog_id": "conjunto_panelas_industriais",
       "source": "Assets/Resources/Equipments/EQUIP_ConjuntoPanelasIndustriais.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/panelas.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Conjunto de Panelas Industriais. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "db509b7d38a787c1333fb316d01dd9dc6f5fa02b85d59acf624b0ab2e4e9423f",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_CONJUNTO_PANELAS_INDUSTRIAIS.\nInput images: Image 1 is the current equipment catalog sprite, object topology/content reference ONLY; discard its photo-real treatment, enclosing metallic card, frame, opaque backdrop and cast ground shadow. Image 2 is the approved Cogna management concept, equipment cartoon style, materials, camera and lighting reference ONLY; never copy its interface, text, labels, people, purchase badges or other appliances.\nImage 3 is the completed ART-20 workbench: shared steel palette, clean contour, front-right camera and upper-left lighting reference only. Never copy the workbench into the requested object.\nPrimary request: ONE coherent industrial cookware set arranged as a compact group of SIX stainless-steel vessels, matching the catalog motif: one tall large lidded stockpot at the back, two medium lidded stockpots in the middle row, one shallow lidded casserole at the front left, one small lidded saucepan with one long handle at the front middle, and one open shallow frying pan at the front right with its long handle receding diagonally to the right. All vessels have plausible circular rims, elliptical tops in the shared front-right view, clean attached handles, and lids resting directly on their own pots. Stockpots and casserole have two short loop side handles; five lids each have a simple short centered loop handle. Arrange in loose staggered rows so every pot is legible without floating, clipping, confused handles or duplicated lids. No extra vessel, food, burner, platform, table, ground slab or stove.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-20.json",
+        "preview": "art-source/previews/ART-20/EQUIPMENT_CONJUNTO_PANELAS_INDUSTRIAIS-display-light-dark.png",
+        "details": "art-source/previews/ART-20/EQUIPMENT_CONJUNTO_PANELAS_INDUSTRIAIS-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-20/conjunto_panelas_industriais-source-01.png",
+      "source_image_sha256": "9a84a69f03f4bc4a237c3e9c9b521cc05a9bfd2606280cf2d0f7d2ff8dfaef2c",
+      "visual_composition_proposal": "Conjunto compacto de seis peças: caldeirão alto, dois caldeirões médios, caçarola baixa, panela com cabo e frigideira aberta. Cinco tampas apoiadas nas respectivas panelas, sem conteúdo ou plataforma.",
+      "production_record": "docs/art/prompts/ART-20.json"
     },
     {
       "id": "EQUIPMENT_FOGAO_INDUSTRIAL_6_BOCAS",
@@ -13871,7 +14058,7 @@
       "path": "equipment/basic/fogao_industrial_6_bocas.png",
       "name": "Fogão Industrial 6 bocas",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13898,19 +14085,36 @@
       "catalog_id": "fogao_industrial_6_bocas",
       "source": "Assets/Resources/Equipments/EQUIP_FogaoIndustrial6Bocas.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/fogao6bocas.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Fogão Industrial 6 bocas. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "28b5265db46f71945020af3ca7e6e26b9ab5ea7ba7a1735f794b5c366db1122a",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_FOGAO_INDUSTRIAL_6_BOCAS.\nInput images: Image 1 is the current equipment catalog sprite, object topology/content reference ONLY; discard its photo-real treatment, enclosing metallic card, frame, opaque backdrop and cast ground shadow. Image 2 is the approved Cogna management concept, equipment cartoon style, materials, camera and lighting reference ONLY; never copy its interface, text, labels, people, purchase badges or other appliances.\nImage 3 is the completed ART-20 workbench: shared steel palette, clean contour, front-right camera and upper-left lighting reference only. Never copy the workbench into the requested object.\nPrimary request: ONE freestanding industrial gas stove with EXACTLY SIX clearly separated burners laid out in TWO rows and THREE columns, all six visible from the front-right three-quarter camera. Each burner has a dark charcoal cast-iron square grate and a centered circular burner head. EXACTLY SIX plain dark round control knobs run across the front fascia, one for each burner; no numbers, markings, letters or icons. Matte steel body with a short low rear vented backsplash, thick front apron, FOUR strong short legs with dark adjustable feet and ONE open empty lower steel shelf. Keep a broad commercial rectangular footprint, no oven door or cabinet because the catalog model is open below. No seventh burner, flame, pan, food, gas tank, hose, cooking activity, floor or separate appliance.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-20.json",
+        "preview": "art-source/previews/ART-20/EQUIPMENT_FOGAO_INDUSTRIAL_6_BOCAS-display-light-dark.png",
+        "details": "art-source/previews/ART-20/EQUIPMENT_FOGAO_INDUSTRIAL_6_BOCAS-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-20/fogao_industrial_6_bocas-source-01.png",
+      "source_image_sha256": "423c65fb6c6694fcd2f3362f59f4c1bef7dc9a2e36fc8bfd7a88925bab85e685",
+      "visual_composition_proposal": "Fogão industrial aberto com seis bocas em duas fileiras de três, seis manípulos frontais lisos, espelho traseiro ventilado, quatro pés e prateleira inferior vazia.",
+      "production_record": "docs/art/prompts/ART-20.json"
     },
     {
       "id": "EQUIPMENT_PIA_INDUSTRIAL_INOX",
@@ -13918,7 +14122,7 @@
       "path": "equipment/basic/pia_industrial_inox.png",
       "name": "Pia Industrial de Inox",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13945,19 +14149,36 @@
       "catalog_id": "pia_industrial_inox",
       "source": "Assets/Resources/Equipments/EQUIP_PiaIndustrialInox.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/pia_inox.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Pia Industrial de Inox. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "f7d0293393ee9b29b73aebe2d4ac8a8e384c759aa82bfaa097f73f38e41f286d",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_PIA_INDUSTRIAL_INOX.\nInput images: Image 1 is the current equipment catalog sprite, object topology/content reference ONLY; discard its photo-real treatment, enclosing metallic card, frame, opaque backdrop and cast ground shadow. Image 2 is the approved Cogna management concept, equipment cartoon style, materials, camera and lighting reference ONLY; never copy its interface, text, labels, people, purchase badges or other appliances.\nImage 3 is the completed ART-20 workbench: shared steel palette, clean contour, front-right camera and upper-left lighting reference only. Never copy the workbench into the requested object.\nPrimary request: ONE freestanding commercial stainless-steel sink built in the same structural family as the workbench: rectangular metal top with ONE deep rectangular basin, short raised backsplash, ONE tall smooth gooseneck faucet at the rear center above the basin with TWO small simple side lever taps, a visible basin underside, FOUR cylindrical legs with dark adjustable feet and ONE empty rectangular lower steel shelf. The large basin is empty and dry with a small unobtrusive round drain, its front and right interior walls visible in coherent perspective. Faucet spout bends downward toward the basin, with a clean recognizable silhouette. No second basin, dish, pot, hose, food, water stream, soap bottle, drawers, cabinet or added accessory.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-20.json",
+        "preview": "art-source/previews/ART-20/EQUIPMENT_PIA_INDUSTRIAL_INOX-display-light-dark.png",
+        "details": "art-source/previews/ART-20/EQUIPMENT_PIA_INDUSTRIAL_INOX-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-20/pia_industrial_inox-source-01.png",
+      "source_image_sha256": "1ae2de6ba3ec0038abd0db02d46270bdd8377e8b9919e0f39049ac5f33a117b7",
+      "visual_composition_proposal": "Pia de uma cuba retangular funda, torneira de pescoço curvo com dois comandos, espelho traseiro baixo, quatro pernas tubulares e prateleira inferior, vazia e seca.",
+      "production_record": "docs/art/prompts/ART-20.json"
     },
     {
       "id": "EQUIPMENT_FREEZER_HORIZONTAL",
@@ -13965,7 +14186,7 @@
       "path": "equipment/basic/freezer_horizontal.png",
       "name": "Freezer Horizontal",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -13992,19 +14213,36 @@
       "catalog_id": "freezer_horizontal",
       "source": "Assets/Resources/Equipments/EQUIP_FreezerHorizontal.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/freezerhor.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Freezer Horizontal. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "eddb22e1b324174a64e5d46e6d753420000b5c54565c5d63c67a4b565d8a97ee",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_FREEZER_HORIZONTAL.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing metallic card, frame, opaque background and photographic finish. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and light reference ONLY; never copy its UI, labels, people, status badges or prices. Image 3 is the completed ART-20 workbench, shared clean contour, slate-gray materials, front-right camera and upper-left lighting reference ONLY; never add a workbench to the requested asset. Furniture keeps its natural wood and dark frame; the PDV kit keeps its dark plastic and slate hardware.\nPrimary request: ONE commercial horizontal chest freezer with a broad low rectangular body, ONE closed solid top-hinged lid, a simple horizontal front handle and tiny mechanical key cylinder beneath it, a neat dark gasket line around the lid, a small low ventilation grille on its visible RIGHT side and four short dark feet. Preserve the content of the current catalog source, changing its left-side camera to the family front-right camera. Matte light gray steel body, medium slate right side, restrained pale lid highlight. The lid is fully shut; freezer is empty from view. No glass lid, transparent door, open lid, food, frost, ice, cable, display text, power labels, stickers or branding.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-21.json",
+        "preview": "art-source/previews/ART-21/EQUIPMENT_FREEZER_HORIZONTAL-display-light-dark.png",
+        "details": "art-source/previews/ART-21/EQUIPMENT_FREEZER_HORIZONTAL-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-21/freezer_horizontal-source-01.png",
+      "source_image_sha256": "20bf61429881370914ea9145b68ef42381d2ac2f836c26d1b9f91f7ed8fdb038",
+      "visual_composition_proposal": "Freezer horizontal de tampa única fechada, puxador frontal, pequeno cilindro mecânico, grelha de ventilação lateral e pés curtos, adaptado à câmera frontal de três quartos com lado direito visível.",
+      "production_record": "docs/art/prompts/ART-21.json"
     },
     {
       "id": "EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA",
@@ -14012,7 +14250,7 @@
       "path": "equipment/basic/geladeira_comercial_dupla.png",
       "name": "Geladeira Comercial Dupla",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14039,19 +14277,36 @@
       "catalog_id": "geladeira_comercial_dupla",
       "source": "Assets/Resources/Equipments/EQUIP_GeladeiraComercialDupla.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/geladeira.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Geladeira Comercial Dupla. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "b7ae52c5b7ae7d4ef4a2697487863d75795772e4082ded8f1454f8ff46d1b0b8",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing metallic card, frame, opaque background and photographic finish. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and light reference ONLY; never copy its UI, labels, people, status badges or prices. Image 3 is the completed ART-20 workbench, shared clean contour, slate-gray materials, front-right camera and upper-left lighting reference ONLY; never add a workbench to the requested asset. Furniture keeps its natural wood and dark frame; the PDV kit keeps its dark plastic and slate hardware.\nPrimary request: ONE tall freestanding double-door commercial refrigerator: TWO solid closed side-by-side stainless doors with a clear central seam, TWO long vertical handles beside that seam, a broad top compressor/ventilation housing with a few clean dark horizontal grille slots, two small blank dark hardware rectangles at its upper right, and four short adjustable dark feet. The front doors occupy most of the height. Show broad front and a narrower RIGHT side with a shallow top plane; preserve upright adult commercial proportions, not a squat mini-fridge. Matte gray metal matching the family reference. No transparent doors, visible contents, interior shelves, food, brand, label, number, temperature display or acquired badge.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-21.json",
+        "preview": "art-source/previews/ART-21/EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA-display-light-dark.png",
+        "details": "art-source/previews/ART-21/EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-21/geladeira_comercial_dupla-source-01.png",
+      "source_image_sha256": "b166a9cc1c718735ef4ff3e6aded6b9b69034565506d69c2e95daf38f176ab9b",
+      "visual_composition_proposal": "Geladeira comercial alta com duas portas sólidas fechadas, dois puxadores verticais centrais, compartimento superior ventilado e pés reguláveis; sem conteúdo, marca ou dígitos.",
+      "production_record": "docs/art/prompts/ART-21.json"
     },
     {
       "id": "EQUIPMENT_MOBILIARIO_BASICO",
@@ -14059,7 +14314,7 @@
       "path": "equipment/basic/mobiliario_basico.png",
       "name": "Mobiliário Básico (10 mesas/40 cadeiras)",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14086,19 +14341,36 @@
       "catalog_id": "mobiliario_basico",
       "source": "Assets/Resources/Equipments/EQUIP_MobiliarioBasico.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/mobilia.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Mobiliário Básico (10 mesas/40 cadeiras). Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família. Representar conjunto legível com uma mesa e algumas cadeiras; quantidade contratada permanece em texto, não desenhar 40 miniaturas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "65c606c2060f7f217b682e75bb6e722ceb81680b45cda40f65cef0d853d86374",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_MOBILIARIO_BASICO.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing metallic card, frame, opaque background and photographic finish. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and light reference ONLY; never copy its UI, labels, people, status badges or prices. Image 3 is the completed ART-20 workbench, shared clean contour, slate-gray materials, front-right camera and upper-left lighting reference ONLY; never add a workbench to the requested asset. Furniture keeps its natural wood and dark frame; the PDV kit keeps its dark plastic and slate hardware.\nPrimary request: ONE compact representative restaurant furniture setting, not a whole dining room: exactly ONE square warm walnut-brown wooden tabletop on a dark charcoal square central pedestal with a simple low cross/flat base, and FOUR matching dining chairs arranged naturally around it. Chairs have straight dark charcoal/plum metal frames, warm wood seats and simple two-slat wood/dark backrests. Two chairs can be at the rear and two at the left/front-right, with clear spacing so the tabletop and recognizable seat/back silhouettes remain visible. Preserve realistic chair-to-table size, clean leg geometry and a coherent shared floor level, with no floor drawn. Use the family front-right three-quarter camera and upper-left light; preserve warm natural wood for the tabletop and seats, matte slate/charcoal metal for frames. This icon represents a contracted furniture set, so never draw the literal ten tables or forty chairs and never rasterize any count. No tablecloth, crockery, food, vase, napkin, people, room or platform.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-21.json",
+        "preview": "art-source/previews/ART-21/EQUIPMENT_MOBILIARIO_BASICO-display-light-dark.png",
+        "details": "art-source/previews/ART-21/EQUIPMENT_MOBILIARIO_BASICO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-21/mobiliario_basico-source-01.png",
+      "source_image_sha256": "759c23da873f5ea6c8cdf1aa04f701a3ae338f8a26bce74cf68df739f65eeaf1",
+      "visual_composition_proposal": "Conjunto representativo com uma mesa quadrada de madeira, pedestal escuro e quatro cadeiras com assentos de madeira e estrutura grafite. Quantidade contratada permanece apenas no catálogo, sem números no bitmap.",
+      "production_record": "docs/art/prompts/ART-21.json"
     },
     {
       "id": "EQUIPMENT_SISTEMA_PDV_COMPUTADOR",
@@ -14106,7 +14378,7 @@
       "path": "equipment/basic/sistema_pdv_computador.png",
       "name": "Sistema PDV + Computador",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14133,19 +14405,36 @@
       "catalog_id": "sistema_pdv_computador",
       "source": "Assets/Resources/Equipments/EQUIP_SistemaPdvComputador.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/pdvcomputador.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Sistema PDV + Computador. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família. Conjunto de terminal/computador, monitor e impressora de recibo; acessórios coerentes com o sprite atual.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "334591c3cb1f540550ae7a0adacf4a15dea8d80183c05d2e24f2495c537c3900",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial equipment illustration for the approved Cogna business game, EQUIPMENT_SISTEMA_PDV_COMPUTADOR.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing metallic card, frame, opaque background and photographic finish. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and light reference ONLY; never copy its UI, labels, people, status badges or prices. Image 3 is the completed ART-20 workbench, shared clean contour, slate-gray materials, front-right camera and upper-left lighting reference ONLY; never add a workbench to the requested asset. Furniture keeps its natural wood and dark frame; the PDV kit keeps its dark plastic and slate hardware.\nPrimary request: ONE coherent compact commercial point-of-sale and computer equipment kit, matching the catalog components: a wide low dark charcoal cash drawer at the front with a plain drawer seam and small real keyhole, a tilted touchscreen terminal on a short stand centered over the drawer, a separate larger desktop monitor behind at the left with a slim pedestal, one plain keyboard at front left and small mouse beside it, a compact thermal receipt printer at the left corner of the drawer with ONE short entirely blank ivory receipt strip, and ONE handheld barcode scanner in a simple cradle at the right. Arrange in a tidy connected desktop-equipment group with every key component legible and physically supported, no collision or floating devices. TWO screens only, each switched off with plain muted blue-lavender glass and a single broad diagonal reflected highlight; absolutely no interface grid, buttons, text, icons, chart, number or receipt marks. Keyboard keys blank. Hardware in matte charcoal/plum and slate gray, restrained light edges matching the equipment concept. Simple short cable may connect the scanner to its base, but no loose sprawling wires. No actual desk, table, floor, money, customer card, food or user.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-21.json",
+        "preview": "art-source/previews/ART-21/EQUIPMENT_SISTEMA_PDV_COMPUTADOR-display-light-dark.png",
+        "details": "art-source/previews/ART-21/EQUIPMENT_SISTEMA_PDV_COMPUTADOR-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-21/sistema_pdv_computador-source-01.png",
+      "source_image_sha256": "af7f8f0e7e3be6fd71cc5d478c1e2d403e28d331650d5a401a8a32125106636d",
+      "visual_composition_proposal": "Kit PDV e computador com gaveta de caixa, terminal touchscreen, monitor separado, teclado, mouse, impressora de recibo com papel liso e leitor em suporte. Duas telas sem interface ou texto, componentes grafite/cinza-ardósia.",
+      "production_record": "docs/art/prompts/ART-21.json"
     },
     {
       "id": "EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO",
@@ -14153,7 +14442,7 @@
       "path": "equipment/lanches/chapa_profissional_podrao.png",
       "name": "Chapa Profissional",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14180,19 +14469,36 @@
       "catalog_id": "chapa_profissional_podrao",
       "source": "Assets/Resources/Equipments/EQUIP_ChapaProfissionalPodrao.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/chapa podrao.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Chapa Profissional. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "41f215e8c649a931d361c3dd36f0d191cfeb5c20908ce15622614315af755fc0",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial snack-kitchen equipment illustration for the approved Cogna business game, EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing GOLD metallic card, cream background, status framing and photographic finish. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and light reference ONLY; never copy its UI, labels, people, purchase overlays or prices. Image 3 is the completed ART-20 workbench, shared steel palette, clean plum contour, front-right camera and upper-left lighting reference ONLY; never copy its bench structure or create a stand under the appliance.\nPrimary request: ONE commercial countertop flat-top griddle, preserving the current catalog equipment topology: a broad completely empty flat rectangular steel cooking plate, low raised rear backsplash with two short side splash guards, thin thickened front lip, a low matte stainless body with EXACTLY FOUR plain dark circular control knobs arranged across the front and one small rectangular removable grease-collection drawer with a simple handle at the front right. FOUR short sturdy steel legs with dark adjustable feet support the compact countertop-height appliance. Show the broad front face, narrower RIGHT side and top cooking surface from the shared front-right three-quarter camera. All surface edges, drawer and feet uncropped. The surface is flat and smooth, not ribbed, with no burner grates. No stand, tall preparation table, lower storage shelf, oven door, grill grate, food, hamburger, cooking utensils, oil splatter, smoke, steam, flame, cable, gas tank, marking, number or text. Tiny real hardware details only; no indicator or icon that looks like a purchase overlay.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-22.json",
+        "preview": "art-source/previews/ART-22/EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO-display-light-dark.png",
+        "details": "art-source/previews/ART-22/EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-22/chapa_profissional_podrao-source-01.png",
+      "source_image_sha256": "eb48187eae769e8550ba967beb970da01a5473216dc4199a57139aeaf9b1d80b",
+      "visual_composition_proposal": "Chapa de bancada com superfície lisa vazia, espelhos traseiro e laterais baixos, quatro manípulos frontais, coletor de gordura com puxador à direita e quatro pés curtos. Frente e lado direito visíveis.",
+      "production_record": "docs/art/prompts/ART-22.json"
     },
     {
       "id": "EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO",
@@ -14200,7 +14506,7 @@
       "path": "equipment/lanches/fritadeira_eletrica_dupla_podrao.png",
       "name": "Fritadeira Elétrica Dupla",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14227,19 +14533,36 @@
       "catalog_id": "fritadeira_eletrica_dupla_podrao",
       "source": "Assets/Resources/Equipments/EQUIP_FritadeiraEletricaDuplaPodrao.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/fritadeiradupla podrao.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Fritadeira Elétrica Dupla. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "4417e0b01ba7848a66b27429769c81f4a96c6b391263efc3c5b92f78547ed7b0",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated commercial snack-kitchen equipment illustration for the approved Cogna business game, EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing GOLD metallic card, cream background, status framing and photographic finish. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and light reference ONLY; never copy its UI, labels, people, purchase overlays or prices. Image 3 is the completed ART-20 workbench, shared steel palette, clean plum contour, front-right camera and upper-left lighting reference ONLY; never copy its bench structure or create a stand under the appliance.\nPrimary request: ONE compact commercial DOUBLE electric deep fryer with EXACTLY TWO side-by-side rectangular wells and EXACTLY TWO separate empty metal wire baskets, one basket seated correctly in each well. TWO long front-projecting basket handles with plain dark insulated grips, one attached to each basket. TWO separate raised rear electrical control heads, each with ONE plain dark round thermostat knob and two tiny physical round indicator lenses, one muted green and one coral, with no text or temperature digits. Matte stainless double body, a clear central partition between wells, neat front apron and FOUR short dark feet. Use the shared front-right three-quarter camera so the front and narrower RIGHT side are visible and both well openings/baskets can be counted clearly. Basket wire grids use a few clear thin lines, not a moire texture or dense tiny photographic mesh. The wells and baskets are empty and dry; no fries, oil, liquid, foam, steam, food, extra basket, third well, floating handle, open lid, disconnected heater, power cable, label, brand, number or marking around the dials. Do not add a table, stand, floor or frame. Both rear control heads, both handles, all feet and full body must fit inside the transparent frame.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-22.json",
+        "preview": "art-source/previews/ART-22/EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO-display-light-dark.png",
+        "details": "art-source/previews/ART-22/EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-22/fritadeira_eletrica_dupla_podrao-source-01.png",
+      "source_image_sha256": "7b55aa22f2bbe8f261c3a0a4973b22beda44a8693d70ef2a9afe1b1a9893efe8",
+      "visual_composition_proposal": "Fritadeira dupla de bancada com duas cubas, duas cestas vazias, dois cabos frontais isolados e dois módulos traseiros, cada qual com um termostato liso e pequenos indicadores físicos sem dígitos.",
+      "production_record": "docs/art/prompts/ART-22.json"
     },
     {
       "id": "EQUIPMENT_BALCAO_REFRIGERADO_SUSHI",
@@ -14247,7 +14570,7 @@
       "path": "equipment/japones/balcao_refrigerado_sushi.png",
       "name": "Balcão Refrigerado p/ Sushi",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14274,19 +14597,36 @@
       "catalog_id": "balcao_refrigerado_sushi",
       "source": "Assets/Resources/Equipments/EQUIP_BalcaoRefrigeradoSushi.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/refrigeradosushi japa.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Balcão Refrigerado p/ Sushi. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "91aa55e83cbabad8544015ccdd54d3c02f34381441effdc65de4ca3aa6ca7710",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated Japanese commercial-kitchen equipment illustration for the approved Cogna business game, EQUIPMENT_BALCAO_REFRIGERADO_SUSHI.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing GOLD metallic card, opaque cream backdrop, photographic finish, labels and any food. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and upper-left light reference ONLY; never copy its interface, people, text, price or purchase overlays. Image 3 is the finished ART-20 workbench, shared steel/slate palette, clean plum contour and lighting reference ONLY; never copy its bench shape or put the requested item on a workbench.\nPrimary request: ONE long low refrigerated sushi display counter, matching the current catalog appliance: a wide matte stainless rectangular base with short dark feet, a low curved-front clear glass display canopy with a slim slate/plum frame, a simple top rail, and a compact rounded-top compressor housing at the RIGHT end with a small front/right ventilation grille. The display section occupies about four fifths of the width and the compressor end about one fifth. Inside the display, a single orderly row of SEVEN shallow rectangular stainless ingredient pans is visible, ALL EMPTY. Render glass using restrained pale-blue reflections and simple transparent-looking planes that reveal the pans and steel interior, no room or scene reflected in it. Retain the low countertop-appliance silhouette, not a tall shop counter or upright refrigerator. Use front-right three-quarter camera with broad front, RIGHT end and shallow top visible. Complete canopy, compressor body, all pans and feet uncropped. No fish, sushi, rice, greens, garnish, food, packaging, utensil, condensation, frost, internal price labels, sign, digital digits, branding, table or stand. The fixed empty ingredient pans belong inside the appliance and are not separate props.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-23.json",
+        "preview": "art-source/previews/ART-23/EQUIPMENT_BALCAO_REFRIGERADO_SUSHI-display-light-dark.png",
+        "details": "art-source/previews/ART-23/EQUIPMENT_BALCAO_REFRIGERADO_SUSHI-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-23/balcao_refrigerado_sushi-source-01.png",
+      "source_image_sha256": "4586b05c43fc0938a17405cae84621c6cbec8cde2ac5f611934b6fe0581c8cb6",
+      "visual_composition_proposal": "Vitrine refrigerada baixa com canopy de vidro curvo, base de inox, sete cubas internas vazias e compartimento compressor à direita com grelha. Tipologia do sprite atual preservada, sem alimentos.",
+      "production_record": "docs/art/prompts/ART-23.json"
     },
     {
       "id": "EQUIPMENT_FACAS_ESPECIAIS_JAPONES",
@@ -14294,7 +14634,7 @@
       "path": "equipment/japones/facas_especiais_japones.png",
       "name": "Facas Especiais",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14321,19 +14661,36 @@
       "catalog_id": "facas_especiais_japones",
       "source": "Assets/Resources/Equipments/EQUIP_FacasEspeciaisJapones.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/fac japa.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Facas Especiais. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "1065b11f855c2a49eaa42af07ea81353e82b7f46840e25814d2d99081ec8da09",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated Japanese commercial-kitchen equipment illustration for the approved Cogna business game, EQUIPMENT_FACAS_ESPECIAIS_JAPONES.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing GOLD metallic card, opaque cream backdrop, photographic finish, labels and any food. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and upper-left light reference ONLY; never copy its interface, people, text, price or purchase overlays. Image 3 is the finished ART-20 workbench, shared steel/slate palette, clean plum contour and lighting reference ONLY; never copy its bench shape or put the requested item on a workbench.\nPrimary request: ONE coherent catalog set of exactly THREE Japanese kitchen knives, preserving the three distinct profiles in the source: one long narrow pointed slicing knife, one medium broad chef/deba-style blade, and one short narrow utility knife. Each has ONE clean steel blade, a silver bolster/collar and ONE plain dark charcoal cylindrical/octagonal handle with a small silver butt ring. Arrange the THREE complete knives side by side in a compact parallel diagonal fan, blade tips pointing toward the upper left and handles toward the lower right, with comfortable clear spacing and no overlap that hides a cutting edge. Use a slightly elevated front-right three-quarter view so thin blade bevels and right-side handle facets are visible, consistent with the family's light; not a flat technical diagram. Show each entire tip and handle end, distinct long/medium/short sizes, adult realistic blade-to-handle proportions. Steel is matte light/slate gray with a single restrained clean edge highlight; no noisy hammered pattern or microscopic Damascus texture. Handles stay dark and plain, no engraving. No extra knife, sword, sheath, blade block, stand, cutting board, sharpening stone, food, fish, hand, person, blood, scene or platform. These three tools form ONE equipment asset, not a sprite sheet of isolated export cells.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-23.json",
+        "preview": "art-source/previews/ART-23/EQUIPMENT_FACAS_ESPECIAIS_JAPONES-display-light-dark.png",
+        "details": "art-source/previews/ART-23/EQUIPMENT_FACAS_ESPECIAIS_JAPONES-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-23/facas_especiais_japones-source-01.png",
+      "source_image_sha256": "1f19dbf7f3b71d667903feeeafebb4efe921210e877ce1dddaf32eab12ad57dd",
+      "visual_composition_proposal": "Três facas culinárias com perfis longo de corte, médio largo e curto utilitário, cabos escuros e colares de metal. Dispostas em paralelo diagonal, com lâminas e pontas completas, sem suporte ou inscrições.",
+      "production_record": "docs/art/prompts/ART-23.json"
     },
     {
       "id": "EQUIPMENT_PANELA_ELETRICA_ARROZ",
@@ -14341,7 +14698,7 @@
       "path": "equipment/japones/panela_eletrica_arroz.png",
       "name": "Panela Elétrica de Arroz",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14368,19 +14725,36 @@
       "catalog_id": "panela_eletrica_arroz",
       "source": "Assets/Resources/Equipments/EQUIP_PanelaEletricaArroz.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/panela eletrica japa.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Panela Elétrica de Arroz. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "2cfefbdff05ed3649810796cd890e5ba6b9f78ce112ffb6c30b3fd0a03c39c88",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated Japanese commercial-kitchen equipment illustration for the approved Cogna business game, EQUIPMENT_PANELA_ELETRICA_ARROZ.\nInput images: Image 1 is the current catalog sprite, equipment content/topology reference ONLY; remove its enclosing GOLD metallic card, opaque cream backdrop, photographic finish, labels and any food. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and upper-left light reference ONLY; never copy its interface, people, text, price or purchase overlays. Image 3 is the finished ART-20 workbench, shared steel/slate palette, clean plum contour and lighting reference ONLY; never copy its bench shape or put the requested item on a workbench.\nPrimary request: ONE closed commercial electric rice cooker matching the catalog model: a squat rounded cylindrical matte stainless body, fitted shallow domed metal lid with a few tiny clean steam-vent slots, TWO plain dark insulated arched side grips/clamps attached near the upper sides, a dark lower base ring and short dark feet. On the broad FRONT, ONE small dark rounded rectangular control housing contains ONE blank unlit rectangular screen, a plain simple mechanical switch/lever beneath it and two tiny real indicator lenses, one muted coral and one amber, with no text, digits, letters, labels or icons. Use the family's front-right three-quarter camera, showing the front controls, narrower right side and elliptical top. Keep realistic rounded proportions, clean attached lid and grips, and the entire appliance uncropped. No open lid, separate bowl, rice, ladle, spoon, measuring cup, food, water, steam, power cord, brand, temperature readout, fake interface or decorative prop. It is ONE rice-cooking appliance, not an ordinary stockpot or pressure cooker.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-23.json",
+        "preview": "art-source/previews/ART-23/EQUIPMENT_PANELA_ELETRICA_ARROZ-display-light-dark.png",
+        "details": "art-source/previews/ART-23/EQUIPMENT_PANELA_ELETRICA_ARROZ-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-23/panela_eletrica_arroz-source-01.png",
+      "source_image_sha256": "dbc67abf05fd5f3d4921ae9511016798328f98a4b67c88623dabf27fea8935ff",
+      "visual_composition_proposal": "Panela de arroz cilíndrica fechada com tampa baixa, dois pegadores isolados, base e pés escuros e painel frontal com tela lisa, acionador e pequenos indicadores físicos sem texto.",
+      "production_record": "docs/art/prompts/ART-23.json"
     },
     {
       "id": "EQUIPMENT_ADEGA_CLIMATIZADA",
@@ -14388,7 +14762,7 @@
       "path": "equipment/frances/adega_climatizada.png",
       "name": "Adega Climatizada",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14415,19 +14789,36 @@
       "catalog_id": "adega_climatizada",
       "source": "Assets/Resources/Equipments/EQUIP_AdegaClimatizada.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/adega frances.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Adega Climatizada. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "3226d01983a7792125031584704a01739af12f4757c4a6309bf1b14ecd0479d9",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated French commercial-restaurant equipment illustration for the approved Cogna business game, EQUIPMENT_ADEGA_CLIMATIZADA.\nInput images: Image 1 is the current catalog sprite, equipment topology and intended material reference ONLY; remove its GOLD enclosing card, cream backdrop, photographic finish, labels, food and all detached serving accessories. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and upper-left light reference ONLY; never copy interface, people, text, price or purchase overlays. Image 3 is the completed ART-20 workbench, shared clean plum contour, matte steel/slate palette and controlled lighting reference ONLY; never copy its workbench structure. Furniture retains the catalog's walnut wood, ivory upholstery and small brass trim rather than steel faces.\nPrimary request: ONE freestanding temperature-controlled wine cabinet matching the current catalog topology: a tall compact charcoal/slate rectangular cabinet, ONE closed clear glass front door framed in matte steel, ONE simple long vertical silver handle on the LEFT edge of that door, and a low dark vented base with short feet. Inside, FIVE evenly spaced horizontal warm wood wine-bottle cradle shelves are visible through the glass, ALL EMPTY. Bottle cradles may have simple broad scalloped support profiles, but no bottles or labels. The door glass uses one restrained pale-blue diagonal reflection, with the dark clean cabinet interior and empty shelves legible. Use the family's front-right three-quarter camera: broad front and narrower RIGHT side visible, adapting the left-side source view. Keep upright wine-cabinet proportions, a complete uncropped door, shelves, handle, top and feet. No wine, bottle, cork, glassware, food, temperature digits, screen text, branding, logo, sign, room reflection, open door, cast floor shadow or platform.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-24.json",
+        "preview": "art-source/previews/ART-24/EQUIPMENT_ADEGA_CLIMATIZADA-display-light-dark.png",
+        "details": "art-source/previews/ART-24/EQUIPMENT_ADEGA_CLIMATIZADA-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-24/adega_climatizada-source-01.png",
+      "source_image_sha256": "3e1936d5f018c7b39e9d8567753cb6f5c50a98e4fa97fd4d742eff818abae973",
+      "visual_composition_proposal": "Adega de uma porta de vidro fechada, moldura inox, puxador vertical, cinco prateleiras de madeira vazias e base ventilada. Sem garrafas, rótulos, dígitos ou marca.",
+      "production_record": "docs/art/prompts/ART-24.json"
     },
     {
       "id": "EQUIPMENT_FORNO_COMBINADO_INTELIGENTE",
@@ -14435,7 +14826,7 @@
       "path": "equipment/frances/forno_combinado_inteligente.png",
       "name": "Forno Combinado Inteligente",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14462,19 +14853,36 @@
       "catalog_id": "forno_combinado_inteligente",
       "source": "Assets/Resources/Equipments/EQUIP_FornoCombinadoInteligente.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/forno inteligente frances.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Forno Combinado Inteligente. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "8a6ba2a6e4b72ca8b1e4f4e0d73654f6f67f70ee4a2ec695b39999adc715eabd",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated French commercial-restaurant equipment illustration for the approved Cogna business game, EQUIPMENT_FORNO_COMBINADO_INTELIGENTE.\nInput images: Image 1 is the current catalog sprite, equipment topology and intended material reference ONLY; remove its GOLD enclosing card, cream backdrop, photographic finish, labels, food and all detached serving accessories. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and upper-left light reference ONLY; never copy interface, people, text, price or purchase overlays. Image 3 is the completed ART-20 workbench, shared clean plum contour, matte steel/slate palette and controlled lighting reference ONLY; never copy its workbench structure. Furniture retains the catalog's walnut wood, ivory upholstery and small brass trim rather than steel faces.\nPrimary request: ONE commercial combination convection/steam oven, preserving the current catalog appliance structure: a boxy upright matte stainless body on FOUR short steel feet, a large closed glass cooking-chamber door across the right three quarters of the FRONT, one thick plain dark vertical door handle beside the door's LEFT edge near the center seam, and a narrow dark vertical control column on the FRONT LEFT. That control column has ONE entirely blank unlit rectangular touchscreen and ONE simple plain round dial beneath it, no GUI, icons, grid, words, numbers, settings or markings. Through the lightly blue-reflective closed glass, show a clean dark steel cooking chamber with ONE simple round rear convection fan grille, parallel side rack rails and THREE shallow empty metal trays spaced vertically. Chamber and trays empty; no food, liquid, steam, flame or smoke. Family front-right three-quarter camera with right side and shallow top visible, upright commercial proportions. Whole appliance, handle, top and feet uncropped. No added stand, preparation workbench, cable, hose, external tank, display text, brand or logo.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-24.json",
+        "preview": "art-source/previews/ART-24/EQUIPMENT_FORNO_COMBINADO_INTELIGENTE-display-light-dark.png",
+        "details": "art-source/previews/ART-24/EQUIPMENT_FORNO_COMBINADO_INTELIGENTE-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-24/forno_combinado_inteligente-source-01.png",
+      "source_image_sha256": "d0000f906053224a3947bbd8ed8e8c36b4348c7e14394388e539d0561757304c",
+      "visual_composition_proposal": "Forno combinado fechado em inox com câmara envidraçada, ventilador traseiro, trilhos, três bandejas vazias, puxador vertical e coluna de controle com tela lisa e seletor sem marcações.",
+      "production_record": "docs/art/prompts/ART-24.json"
     },
     {
       "id": "EQUIPMENT_MOBILIARIO_LUXO",
@@ -14482,7 +14890,7 @@
       "path": "equipment/frances/mobiliario_luxo.png",
       "name": "Mobiliário de Luxo",
       "kind": "equipamento",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -14509,19 +14917,36 @@
       "catalog_id": "mobiliario_luxo",
       "source": "Assets/Resources/Equipments/EQUIP_MobiliarioLuxo.asset",
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "Assets/Art/Sprites/UI/mobilia frances.png",
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-20/bancada_inox_preparo-source-01.png"
       ],
       "brief": "Mobiliário de Luxo. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família. Representar conjunto legível com uma mesa e algumas cadeiras; quantidade contratada permanece em texto, não desenhar 40 miniaturas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "31513a52147e9d7133c5d9bf562f6bbafa78de8c66fa025b52c817ec44524fd1",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated French commercial-restaurant equipment illustration for the approved Cogna business game, EQUIPMENT_MOBILIARIO_LUXO.\nInput images: Image 1 is the current catalog sprite, equipment topology and intended material reference ONLY; remove its GOLD enclosing card, cream backdrop, photographic finish, labels, food and all detached serving accessories. Image 2 is the approved Cogna management concept, adult equipment cartoon style, camera and upper-left light reference ONLY; never copy interface, people, text, price or purchase overlays. Image 3 is the completed ART-20 workbench, shared clean plum contour, matte steel/slate palette and controlled lighting reference ONLY; never copy its workbench structure. Furniture retains the catalog's walnut wood, ivory upholstery and small brass trim rather than steel faces.\nPrimary request: ONE compact representative French fine-dining furniture setting, preserving the catalog motif: exactly ONE round dark walnut wooden table on an elegant curved central pedestal with three or four low curved feet, and exactly TWO matching upholstered dining chairs behind it at the left and right, with visible seats, oval button-tufted backs, warm ivory fabric, dark wood frames and graceful curved legs. Each chair has a restrained thin warm brass trim line and modest natural wood curves; no heraldic crest, fleur-de-lis, monogram, royal crown or emblem. Table top completely EMPTY with a simple thin warm brass/amber edge detail, no place settings. Maintain coherent slightly elevated front-right three-quarter perspective, clear supports, realistic table/chair proportions and comfortable spacing so both chair backs and seats remain readable at 250x250. Preserve natural walnut wood, ivory upholstery and restrained brass as the catalog materials; apply the same plum contour, controlled broad-tone cartoon finish and upper-left light as the equipment family, never turn the furniture entirely gray metal. No additional table, third chair, flowers, vase, wine glass, dishes, cutlery, napkin, tablecloth, food, person, room, floor or platform. This representative set does not depict contracted quantity, and has no numbers or premium badges.\nComposition/camera: SQUARE 1:1 source, desired 1024x1024, final export 512x512, display 250x250 contain. One complete object or one equipment set centered, occupying about 80 percent of the source width and height with at least 10 percent genuinely transparent margin on every side. Full silhouette uncropped, including every foot, rim, handle and backsplash. Shared front-right three-quarter camera: broad FRONT face and narrower RIGHT side visible, top surfaces visible, verticals upright, viewer slightly above worktop height. No mirrored left-side camera, flat front view, top-down diagram, extreme wide-angle lens or toy-like distortion. Stable frame and comparable visual scale for the family, preserving realistic industrial proportions.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the equipment illustrations in the approved Cogna management concept. Confident muted dark-plum #30243C/#24113D contours, clean controlled cel shading, matte stainless/slate gray in TWO or THREE broad tonal regions per part, dark charcoal hardware. The main steel faces are light neutral-cool gray, right sides medium slate gray, small recesses dark slate. Soft upper-left lighting; restrained broad pale highlights only on upper-left edges. No photoreal brushed grain, mirror chrome, noisy textures, painterly mottling, plastic 3D rendering, heavy black comic outlines or tiny illegible mechanical details. Purple is a restrained gray-shadow undertone, not a saturated body color. Clear readable silhouette and internal structure at 250x250.\nTransparency: genuine RGBA cutout, alpha zero everywhere outside the equipment silhouette and inside open gaps between legs or handles. Solid visually opaque equipment interior, clean antialiased outline. No backdrop, wall, floor, plinth, pedestal, connected ground patch, outside cast shadow, wide drop shadow, colored halo, glow or haze. No fake transparency checkerboard.\nConstraints: exactly ONE catalog equipment asset per image, never a sprite sheet, complete UI card or multi-view collage. No people, hands, labels, letters, words, numbers, prices, purchase status, premium badges, locks, ticks, cart icons, logos, invented branding, frame, border, rounded square backplate, cream field or UI overlay. Never copy the source's enclosing metallic frame, opaque background or photographic finish. No detached prop, scene or object not specified. No crop or shadow outside the silhouette.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; tipologia e componentes do equipamento comparados ao sprite atual do catálogo e concept de gestão.",
+        "record": "docs/art/qa/ART-24.json",
+        "preview": "art-source/previews/ART-24/EQUIPMENT_MOBILIARIO_LUXO-display-light-dark.png",
+        "details": "art-source/previews/ART-24/EQUIPMENT_MOBILIARIO_LUXO-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-24/mobiliario_luxo-source-01.png",
+      "source_image_sha256": "567bc1cbf14a2267ee65d7d5386c65b20e9efae23a472d301f752c119a308210",
+      "visual_composition_proposal": "Conjunto representativo com uma mesa redonda de nogueira e duas cadeiras estofadas em marfim, encostos ovais capitonados, pernas curvas e detalhes discretos em latão. Mesa vazia, sem louças, flores ou símbolos.",
+      "production_record": "docs/art/prompts/ART-24.json"
     },
     {
       "id": "BANK_ENVIRONMENT",
@@ -17907,7 +18332,7 @@
         "ART-15"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.",
       "asset_ids": [
         "PRODUCT_LAN_COMBO_COMPLETO",
@@ -17915,7 +18340,10 @@
         "PRODUCT_LAN_COMBO_SIMPLES"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-17 — Produtos de lanches. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-17.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-17 — Produtos de lanches. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-17.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-17.json",
+      "delivery_preview": "art-source/previews/ART-17/ART-17-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-17.json"
     },
     {
       "id": "ART-18",
@@ -17924,7 +18352,7 @@
         "ART-15"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.",
       "asset_ids": [
         "PRODUCT_JAP_COMBINADO_MEDIO",
@@ -17932,7 +18360,10 @@
         "PRODUCT_JAP_SUSHI_EXECUTIVO"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-18 — Produtos japoneses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-18.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-18 — Produtos japoneses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-18.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-18.json",
+      "delivery_preview": "art-source/previews/ART-18/ART-18-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-18.json"
     },
     {
       "id": "ART-19",
@@ -17941,7 +18372,7 @@
         "ART-15"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.",
       "asset_ids": [
         "PRODUCT_FRA_MENU_CLASSICO",
@@ -17949,7 +18380,10 @@
         "PRODUCT_FRA_PRATO_EXECUTIVO"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-19 — Produtos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-19.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-19 — Produtos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-19.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-19.json",
+      "delivery_preview": "art-source/previews/ART-19/ART-19-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-19.json"
     },
     {
       "id": "ART-20",
@@ -17958,7 +18392,7 @@
         "ART-03"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
       "asset_ids": [
         "EQUIPMENT_BANCADA_INOX_PREPARO",
@@ -17967,7 +18401,10 @@
         "EQUIPMENT_PIA_INDUSTRIAL_INOX"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-20 — Equipamentos básicos de cozinha. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-20.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-20 — Equipamentos básicos de cozinha. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-20.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-20.json",
+      "delivery_preview": "art-source/previews/ART-20/ART-20-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-20.json"
     },
     {
       "id": "ART-21",
@@ -17976,7 +18413,7 @@
         "ART-03"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
       "asset_ids": [
         "EQUIPMENT_FREEZER_HORIZONTAL",
@@ -17985,7 +18422,10 @@
         "EQUIPMENT_SISTEMA_PDV_COMPUTADOR"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-21 — Equipamentos básicos de estrutura. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-21.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-21 — Equipamentos básicos de estrutura. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-21.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-21.json",
+      "delivery_preview": "art-source/previews/ART-21/ART-21-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-21.json"
     },
     {
       "id": "ART-22",
@@ -17994,14 +18434,17 @@
         "ART-03"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
       "asset_ids": [
         "EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO",
         "EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-22 — Equipamentos de lanches. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-22.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-22 — Equipamentos de lanches. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-22.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-22.json",
+      "delivery_preview": "art-source/previews/ART-22/ART-22-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-22.json"
     },
     {
       "id": "ART-23",
@@ -18010,7 +18453,7 @@
         "ART-03"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
       "asset_ids": [
         "EQUIPMENT_BALCAO_REFRIGERADO_SUSHI",
@@ -18018,7 +18461,10 @@
         "EQUIPMENT_PANELA_ELETRICA_ARROZ"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-23 — Equipamentos japoneses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-23.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-23 — Equipamentos japoneses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-23.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-23.json",
+      "delivery_preview": "art-source/previews/ART-23/ART-23-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-23.json"
     },
     {
       "id": "ART-24",
@@ -18027,7 +18473,7 @@
         "ART-03"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
       "asset_ids": [
         "EQUIPMENT_ADEGA_CLIMATIZADA",
@@ -18035,7 +18481,10 @@
         "EQUIPMENT_MOBILIARIO_LUXO"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-24 — Equipamentos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-24.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-24 — Equipamentos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-24.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-24.json",
+      "delivery_preview": "art-source/previews/ART-24/ART-24-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-24.json"
     },
     {
       "id": "ART-25",
