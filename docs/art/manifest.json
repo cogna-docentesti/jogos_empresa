@@ -15311,7 +15311,7 @@
       "path": "team/portraits/attendant.png",
       "name": "Retrato de meio corpo da identidade CH01 para função attendant",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15340,19 +15340,32 @@
       "catalog_id": "attendant",
       "source": "Assets/Resources/Roles/ROLE_Attendant.asset",
       "references": [
+        "Assets/Art/new/characters/CH01/ch01_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Retrato de meio corpo da identidade CH01 para função attendant. Sem fundo, nome, salário ou ferramentas que cortem mãos; aparência igual ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "cc4a72d183dc9b9f7f4ad289e71b0ecbb071c32c879089266b351c9a2af016de",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE separate transparent half-body team portrait sprite for the approved Cogna business game, ART-26.\nInput image 1 is the CANONICAL IDENTITY MASTER; preserve that exact person, facial structure, skin, eyes, hair, clothing and accessories. Input image 2 is the approved management concept, used ONLY for the adult editorial cartoon style and the lower-left team portraits, never its text or UI.\nSubject: CH01, the exact warm medium-brown adult woman with dark-brown eyes, short side-parted wavy dark-brown bob ABOVE the shoulders, gold hoop earrings, lilac button-up shirt with sleeves rolled to forearms, graphite waistband/belt from the master. Preserve her slim adult build and facial proportions. Pose: shoulders relaxed, both forearms gently bent with hands lightly resting together at the lower waist, fingers natural and fully visible. Pleasant small closed-mouth smile.\nFraming: SQUARE 1:1, desired 1024x1024. A complete isolated waist-up / half-body portrait with crown, hair, BOTH shoulders, elbows and both hands entirely visible. Centered upper torso, natural adult proportions, friendly professional gaze toward viewer, gentle three-quarter turn. End cleanly across the lower torso BELOW the hands, with a straight intentional portrait cutoff, not a fade. Keep approximately 10 percent clear transparent breathing room on all four sides, including under the bottom torso cutoff. Make the head/face large enough to read at 240x240. No legs. No clipboard, tools or other props.\nStyle: the same clean dark-plum contours and broad restrained cel-shaded planes as the canonical master; natural adult face, subtle warm upper-left light. NO style reinterpretation, no chibi, no photorealism.\nBackdrop: TRUE RGBA TRANSPARENCY, alpha zero everywhere outside the silhouette and in gaps. The colored glow visible around the reference is NOT part of the character; do not reproduce it. No halo, cloud, ground shadow, vignette, checkerboard, colored backdrop, frame, round badge, card, UI, labels, salary, name, text, letter, number, logo or watermark. One person only, one asset only.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": true,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/attendant-source-01.png",
+      "source_image_sha256": "d2a60c258a899fb1e5578d4e88ebbe0ac9b1d858621a7530dbea82bc87c1562b",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "CH01 preservada: rosto, olhos castanhos, pele morena quente, bob curto ondulado com risca lateral, argolas douradas, camisa lilás de mangas dobradas, cinto grafite. Meio corpo com mãos reunidas na cintura, dedos e cotovelos completos. Sem prancheta nem fundo. Corte inferior deliberado abaixo das mãos, com padding transparente."
     },
     {
       "id": "PORTRAIT_GRILL_COOK",
@@ -15360,7 +15373,7 @@
       "path": "team/portraits/grill_cook.png",
       "name": "Retrato de meio corpo da identidade CH02 para função grill_cook",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15389,19 +15402,32 @@
       "catalog_id": "grill_cook",
       "source": "Assets/Resources/Roles/ROLE_GrillCook.asset",
       "references": [
+        "Assets/Art/new/characters/CH02/ch02_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Retrato de meio corpo da identidade CH02 para função grill_cook. Sem fundo, nome, salário ou ferramentas que cortem mãos; aparência igual ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "4a21f2db70d73a60ff5aa7257ec0796a7de024f99dd0d576856a6157df8e7c75",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE separate transparent half-body team portrait sprite for the approved Cogna business game, ART-26.\nInput image 1 is the CANONICAL IDENTITY MASTER; preserve that exact person, facial structure, skin, eyes, hair, clothing and accessories. Input image 2 is the approved management concept, used ONLY for the adult editorial cartoon style and the lower-left team portraits, never its text or UI.\nSubject: CH02, the exact warm brown adult man with dark eyes, short neatly shaped full beard, dark hair under the backwards graphite cap, white short-sleeve T-shirt and plain graphite bib apron with rectangular pocket. Keep his canonical medium athletic build, smile, beard and cap. Pose: arms comfortably crossed at mid-torso as in the approved team concept; complete elbows and visible hands with natural fingers, no tool.\nFraming: SQUARE 1:1, desired 1024x1024. A complete isolated waist-up / half-body portrait with crown, hair, BOTH shoulders, elbows and both hands entirely visible. Centered upper torso, natural adult proportions, friendly professional gaze toward viewer, gentle three-quarter turn. End cleanly across the lower torso BELOW the hands, with a straight intentional portrait cutoff, not a fade. Keep approximately 10 percent clear transparent breathing room on all four sides, including under the bottom torso cutoff. Make the head/face large enough to read at 240x240. No legs. No clipboard, tools or other props.\nStyle: the same clean dark-plum contours and broad restrained cel-shaded planes as the canonical master; natural adult face, subtle warm upper-left light. NO style reinterpretation, no chibi, no photorealism.\nBackdrop: TRUE RGBA TRANSPARENCY, alpha zero everywhere outside the silhouette and in gaps. The colored glow visible around the reference is NOT part of the character; do not reproduce it. No halo, cloud, ground shadow, vignette, checkerboard, colored backdrop, frame, round badge, card, UI, labels, salary, name, text, letter, number, logo or watermark. One person only, one asset only.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": true,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/grill_cook-source-01.png",
+      "source_image_sha256": "aa0f941a0c603d1db26f92c99d12b807f859fdee31216bd905f108a05b4ede0d",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "CH02 preservado: pele morena, olhos escuros, barba curta contornada, boné grafite para trás, camiseta branca e avental grafite com bolso liso. Meio corpo de braços cruzados conforme concept de equipe, mão visível natural e cotovelos completos. Sem ferramenta ou fundo."
     },
     {
       "id": "PORTRAIT_HEAD_CHEF",
@@ -15409,7 +15435,7 @@
       "path": "team/portraits/head_chef.png",
       "name": "Retrato de meio corpo da identidade CH05 para função head_chef",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15438,19 +15464,32 @@
       "catalog_id": "head_chef",
       "source": "Assets/Resources/Roles/ROLE_HeadChef.asset",
       "references": [
+        "Assets/Art/new/characters/CH05/ch05_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Retrato de meio corpo da identidade CH05 para função head_chef. Sem fundo, nome, salário ou ferramentas que cortem mãos; aparência igual ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "ee888f344c375261cb45cd456a6047aa75d7869fbccedbef02aaf0aab80309b6",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE separate transparent half-body team portrait sprite for the approved Cogna business game, ART-26.\nInput image 1 is the CANONICAL IDENTITY MASTER; preserve that exact person, facial structure, skin, eyes, hair, clothing and accessories. Input image 2 is the approved management concept, used ONLY for the adult editorial cartoon style and the lower-left team portraits, never its text or UI.\nSubject: CH05, the exact adult Black woman around 40, dark warm-brown skin, dark-brown eyes, broad oval face, naturally curly black hair in a compact high bun, medium robust adult build. Ivory double-breasted short-collar chef jacket with pale buttons and rolled forearm sleeves, plum bib apron with plain rectangular pocket. No hat, glasses or jewelry. Pose: elbows gently bent, both hands resting together low at the waist, all fingers naturally formed and visible; warm confident small smile. Preserve the high bun and neckline exactly.\nFraming: SQUARE 1:1, desired 1024x1024. A complete isolated waist-up / half-body portrait with crown, hair, BOTH shoulders, elbows and both hands entirely visible. Centered upper torso, natural adult proportions, friendly professional gaze toward viewer, gentle three-quarter turn. End cleanly across the lower torso BELOW the hands, with a straight intentional portrait cutoff, not a fade. Keep approximately 10 percent clear transparent breathing room on all four sides, including under the bottom torso cutoff. Make the head/face large enough to read at 240x240. No legs. No clipboard, tools or other props.\nStyle: the same clean dark-plum contours and broad restrained cel-shaded planes as the canonical master; natural adult face, subtle warm upper-left light. NO style reinterpretation, no chibi, no photorealism.\nBackdrop: TRUE RGBA TRANSPARENCY, alpha zero everywhere outside the silhouette and in gaps. The colored glow visible around the reference is NOT part of the character; do not reproduce it. No halo, cloud, ground shadow, vignette, checkerboard, colored backdrop, frame, round badge, card, UI, labels, salary, name, text, letter, number, logo or watermark. One person only, one asset only.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": true,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/head_chef-source-01.png",
+      "source_image_sha256": "2bbc4ba10063d9a09c2fed0da4e70a3de82139403e6f641f722cc316c757eec1",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "CH05 preservada: mulher negra adulta de compleição média robusta, rosto oval largo, cabelo crespo em coque alto compacto, dólmã marfim com botões claros, mangas dobradas e avental ameixa. Sem joias/chapéu. Mãos reunidas, dedos completos; rosto e silhueta compatíveis com o master."
     },
     {
       "id": "PORTRAIT_MANAGER",
@@ -15458,7 +15497,7 @@
       "path": "team/portraits/manager.png",
       "name": "Retrato de meio corpo da identidade CH03 para função manager",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15487,19 +15526,32 @@
       "catalog_id": "manager",
       "source": "Assets/Resources/Roles/ROLE_Manager.asset",
       "references": [
+        "Assets/Art/new/characters/CH03/ch03_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Retrato de meio corpo da identidade CH03 para função manager. Sem fundo, nome, salário ou ferramentas que cortem mãos; aparência igual ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "7f10a4ea0746527d849e0a1cbbecf5bdd210d49791a2011d0bbe45e5fbe2d242",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE separate transparent half-body team portrait sprite for the approved Cogna business game, ART-26.\nInput image 1 is the CANONICAL IDENTITY MASTER; preserve that exact person, facial structure, skin, eyes, hair, clothing and accessories. Input image 2 is the approved management concept, used ONLY for the adult editorial cartoon style and the lower-left team portraits, never its text or UI.\nSubject: CH03, the exact warm medium-brown adult woman with dark-brown eyes, LONG side-parted wavy dark-brown hair below shoulders, gold hoop earrings, plum tailored blazer over an ivory blouse and plum waistband. Preserve her distinctive face, long hair silhouette and adult build; she must remain distinct from CH01. Pose: relaxed shoulders, forearms bent inward and hands lightly clasped at the lower waist, fingers naturally visible. Confident friendly closed-mouth smile. No clipboard.\nFraming: SQUARE 1:1, desired 1024x1024. A complete isolated waist-up / half-body portrait with crown, hair, BOTH shoulders, elbows and both hands entirely visible. Centered upper torso, natural adult proportions, friendly professional gaze toward viewer, gentle three-quarter turn. End cleanly across the lower torso BELOW the hands, with a straight intentional portrait cutoff, not a fade. Keep approximately 10 percent clear transparent breathing room on all four sides, including under the bottom torso cutoff. Make the head/face large enough to read at 240x240. No legs. No clipboard, tools or other props.\nStyle: the same clean dark-plum contours and broad restrained cel-shaded planes as the canonical master; natural adult face, subtle warm upper-left light. NO style reinterpretation, no chibi, no photorealism.\nBackdrop: TRUE RGBA TRANSPARENCY, alpha zero everywhere outside the silhouette and in gaps. The colored glow visible around the reference is NOT part of the character; do not reproduce it. No halo, cloud, ground shadow, vignette, checkerboard, colored backdrop, frame, round badge, card, UI, labels, salary, name, text, letter, number, logo or watermark. One person only, one asset only.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": true,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/manager-source-01.png",
+      "source_image_sha256": "fa4b128324b6cc0a2aa0de616869071c45fdb9100cccc9ee8ad5252eb81c2dce",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "CH03 preservada e distinta de CH01: rosto, olhos castanhos, pele morena, cabelo LONGO ondulado, argolas douradas, blazer e cintura ameixa sobre blusa marfim. Meio corpo com mãos reunidas na cintura, sem prancheta. Cabelo, mãos, punhos e cotovelos completos."
     },
     {
       "id": "PORTRAIT_SUSHI_CHEF",
@@ -15507,7 +15559,7 @@
       "path": "team/portraits/sushi_chef.png",
       "name": "Retrato de meio corpo da identidade CH06 para função sushi_chef",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15536,19 +15588,32 @@
       "catalog_id": "sushi_chef",
       "source": "Assets/Resources/Roles/ROLE_SushiChef.asset",
       "references": [
+        "Assets/Art/new/characters/CH06/ch06_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Retrato de meio corpo da identidade CH06 para função sushi_chef. Sem fundo, nome, salário ou ferramentas que cortem mãos; aparência igual ao master.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "47dd39841d52dd6d7e499e10f399a4e8a577a5ce4b4c9b85ec73a9135fc4789f",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE separate transparent half-body team portrait sprite for the approved Cogna business game, ART-26.\nInput image 1 is the CANONICAL IDENTITY MASTER; preserve that exact person, facial structure, skin, eyes, hair, clothing and accessories. Input image 2 is the approved management concept, used ONLY for the adult editorial cartoon style and the lower-left team portraits, never its text or UI.\nSubject: CH06, the exact adult man around 40 with light warm-brown skin, dark-brown eyes, rounded rectangular oval face, clean shaven, short black hair swept to one side with modest front volume. Medium adult build. Ivory short-collar wrap chef jacket with graphite buttons and rolled forearm sleeves; plain graphite bib apron whose rectangular pocket has a thin lilac upper trim. No hat, glasses, beard or jewelry. Pose: both elbows gently bent, hands loosely together at lower waist and fully visible, relaxed professional smile. Preserve his canonical eye spacing, hairline and face, distinct from CH02/CH04.\nFraming: SQUARE 1:1, desired 1024x1024. A complete isolated waist-up / half-body portrait with crown, hair, BOTH shoulders, elbows and both hands entirely visible. Centered upper torso, natural adult proportions, friendly professional gaze toward viewer, gentle three-quarter turn. End cleanly across the lower torso BELOW the hands, with a straight intentional portrait cutoff, not a fade. Keep approximately 10 percent clear transparent breathing room on all four sides, including under the bottom torso cutoff. Make the head/face large enough to read at 240x240. No legs. No clipboard, tools or other props.\nStyle: the same clean dark-plum contours and broad restrained cel-shaded planes as the canonical master; natural adult face, subtle warm upper-left light. NO style reinterpretation, no chibi, no photorealism.\nBackdrop: TRUE RGBA TRANSPARENCY, alpha zero everywhere outside the silhouette and in gaps. The colored glow visible around the reference is NOT part of the character; do not reproduce it. No halo, cloud, ground shadow, vignette, checkerboard, colored backdrop, frame, round badge, card, UI, labels, salary, name, text, letter, number, logo or watermark. One person only, one asset only.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": true,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/sushi_chef-source-01.png",
+      "source_image_sha256": "d9f4e6e2aea725cdcd05a60d5cb511d8af0f41cfa51fb9e9d4520d46802b6cfc",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "CH06 preservado: rosto oval retangular de queixo arredondado, pele morena clara, cabelo preto curto de risca lateral, olhos castanhos escuros, sem barba/óculos/chapéu. Jaqueta marfim transpassada com botões grafite e mangas dobradas; avental grafite com faixa lilás no bolso. Mãos reunidas e completas, identidade distinta de CH02."
     },
     {
       "id": "TEAM_ENV_SERVICE_COUNTER",
@@ -15556,7 +15621,7 @@
       "path": "team/backgrounds/service_counter.png",
       "name": "Ambiente de trabalho service_counter, sem pessoas ou texto",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -15586,16 +15651,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Ambiente de trabalho service_counter, sem pessoas ou texto. Mesma arquitetura, materiais e perspectiva editorial do restaurante.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "ba948de654519faae8de08529f934b9fbfb0ea82ada942f9a05309858d4187be",
+      "actual_size_px": [
+        960,
+        720
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE separate EMPTY workplace environment background for the approved Cogna business game, ART-26.\nInput image 1: approved management concept, ONLY the architectural interiors behind the three team portraits in the LOWER LEFT quadrant define materials, perspective and illustration style. Never copy a person, text, equipment card or any interface.\nPrimary request: a quiet restaurant service-counter interior matching the room behind the attendant in the team concept. Tall dark-framed daylight window at left, warm cream walls, narrow lavender architectural trim, a low horizontal built-in warm-wood reception/service counter across the lower quarter with an empty clear top. Soft green foliage visible through the window, no indoor potted foreground prop. Simple cream vertical wall panels to the right, a modest rear pass-through recess. Inviting and tidy; no register, monitor, signage or clipboard.\nComposition: LANDSCAPE 4:3, desired 1536x1152, for final 960x720 and display 320x240. Full bleed opaque rectangle all the way to all four edges. Eye-level architectural interior, vertical lines upright, modest natural perspective, warm daylight from upper left, organized believable workspace. Reserve a visually quiet central region for a separately composited half-body worker. Keep readable architectural features toward sides and rear, no foreground object blocking the center.\nStyle/medium: adult editorial cartoon matching the approved concept; clean dark-plum contours, broad cel-shaded planes, warm ivory #F5F0E8, graphite/slate, muted lavender #B99AE8 and subtle violet #6D28D9 details, natural wood. Polished, welcoming and restrained. Consistent material treatment and contour weight across the team kit.\nConstraints: ENVIRONMENT ONLY, no people, body parts, silhouettes, reflections of people, portraits, food plates, loose reusable foreground props, labels, salary, name, poster, framed sign, menus, words, letters, numbers, logos, charts, watermark, UI, border, rounded corners, card or vignette. No readable marks on any surface. Integrated fixed furniture/equipment is part of this background; do not add detached product illustrations.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/service_counter-source-01.png",
+      "source_image_sha256": "e557ba0c15d0d416424012ad8421e1b07246ac70de07070b79bcecf319dd8291",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "Ambiente de atendimento vazio: balcão fixo de madeira com tampo limpo, janela alta à esquerda, paredes marfim e detalhes lavanda, passagem ao fundo para cozinha. Perspectiva frontal e luz superior esquerda coerentes. Sem pessoa, texto, logo ou UI; decoração/utensílios posteriores pertencem ao cenário."
     },
     {
       "id": "TEAM_ENV_GRILL_KITCHEN",
@@ -15603,7 +15680,7 @@
       "path": "team/backgrounds/grill_kitchen.png",
       "name": "Ambiente de trabalho grill_kitchen, sem pessoas ou texto",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -15633,16 +15710,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Ambiente de trabalho grill_kitchen, sem pessoas ou texto. Mesma arquitetura, materiais e perspectiva editorial do restaurante.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "0fcf6bd306d1a5005967b95bbce8eddf6ed1d6d28bd3a6fcd06efc33e80b19c3",
+      "actual_size_px": [
+        960,
+        720
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE separate EMPTY workplace environment background for the approved Cogna business game, ART-26.\nInput image 1: approved management concept, ONLY the architectural interiors behind the three team portraits in the LOWER LEFT quadrant define materials, perspective and illustration style. Never copy a person, text, equipment card or any interface.\nPrimary request: a professional compact grill kitchen matching the kitchen behind the grill cook in the team concept. Cream rectangular tile backsplash, graphite ventilation hood occupying upper right, stainless preparation worktop and built-in flat-top griddle with simple blank black knobs along the back and right side, no flame or food. A few clean metal pans integrated on a rear wall rail near the far right, orderly stainless lower cabinetry. A narrow side daylight window at left. Keep foreground center uncluttered for a separate worker, clear architectural counter line low in frame.\nComposition: LANDSCAPE 4:3, desired 1536x1152, for final 960x720 and display 320x240. Full bleed opaque rectangle all the way to all four edges. Eye-level architectural interior, vertical lines upright, modest natural perspective, warm daylight from upper left, organized believable workspace. Reserve a visually quiet central region for a separately composited half-body worker. Keep readable architectural features toward sides and rear, no foreground object blocking the center.\nStyle/medium: adult editorial cartoon matching the approved concept; clean dark-plum contours, broad cel-shaded planes, warm ivory #F5F0E8, graphite/slate, muted lavender #B99AE8 and subtle violet #6D28D9 details, natural wood. Polished, welcoming and restrained. Consistent material treatment and contour weight across the team kit.\nConstraints: ENVIRONMENT ONLY, no people, body parts, silhouettes, reflections of people, portraits, food plates, loose reusable foreground props, labels, salary, name, poster, framed sign, menus, words, letters, numbers, logos, charts, watermark, UI, border, rounded corners, card or vignette. No readable marks on any surface. Integrated fixed furniture/equipment is part of this background; do not add detached product illustrations.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/grill_kitchen-source-01.png",
+      "source_image_sha256": "1c3411e2f52e73bf74de58fcf8db92a0eb59bdc28901a9019c5f0fdd7778f045",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "Cozinha de chapa vazia: coifa grafite, chapa lisa de inox sem comida/chama, azulejos claros, prateleiras e trilho de panelas posteriores, bancada frontal integrada vazia. Perspectiva e luz coerentes. Sem pessoas, marcações ou UI. Equipamento arquitetônico integrado é cenário, não duplicata dos sprites de catálogo."
     },
     {
       "id": "TEAM_ENV_MANAGEMENT_OFFICE",
@@ -15650,7 +15739,7 @@
       "path": "team/backgrounds/management_office.png",
       "name": "Ambiente de trabalho management_office, sem pessoas ou texto",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -15677,19 +15766,32 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-26/management_office-source-01.png"
       ],
       "brief": "Ambiente de trabalho management_office, sem pessoas ou texto. Mesma arquitetura, materiais e perspectiva editorial do restaurante.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "9525bfbf9c14f0e490fd7c56189a7d5dfec61c5e7462c079c3cf232f79aae0c1",
+      "actual_size_px": [
+        960,
+        720
+      ],
+      "generation_prompt": "Use case: precise-object-edit\nAsset: TEAM_ENV_MANAGEMENT_OFFICE, ART-26, standalone EMPTY background for a half-body manager portrait.\nInput image is the edit target. Preserve its exact 4:3 room composition, cream wall panels, warm oak and lavender built-in furniture, window architecture, outside trees, daylight direction, cel-shaded adult editorial cartoon style, contour weight and palette.\nChange only these objects: REMOVE the large freestanding potted plant that enters from the LOWER LEFT foreground completely, restoring the matching cream wall, baseboard and wooden floor behind it. REMOVE the black office chair on the RIGHT completely, restoring the fixed lavender cabinet/desk and shelving behind it. Do not replace them with any object. Keep the built-in cabinetry, fixed desk and small plants on the rear shelving/window ledge as environmental set dressing. Keep the CENTER and foreground clear. No detached foreground props.\nMaintain full-bleed opaque rectangular background, desired same size/aspect as source, no transparent margins, people, text, letters, numbers, signage, charts, icons, logo, watermarks, card or UI. One corrected environment only.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/management_office-source-02.png",
+      "source_image_sha256": "4ebf3590d069e7039f14fa2f05a8209d5029bc763cf0d40599b35358e27ceccd",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "Escritório vazio: janela esquerda, paredes marfim, marcenaria de madeira/lavanda e plantas pequenas de ambientação em prateleiras e peitoril. Versão 02 remove planta solta do primeiro plano e cadeira; piso e região central livres. Sem pessoa, tela, papel, texto, poster, logo ou UI."
     },
     {
       "id": "TEAM_ENV_FRENCH_KITCHEN",
@@ -15697,7 +15799,7 @@
       "path": "team/backgrounds/french_kitchen.png",
       "name": "Ambiente de trabalho french_kitchen, sem pessoas ou texto",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -15724,19 +15826,32 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/concepts/02-abertura.png"
       ],
       "brief": "Ambiente de trabalho french_kitchen, sem pessoas ou texto. Mesma arquitetura, materiais e perspectiva editorial do restaurante.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "5ac74e66d4b067cdbe6f8030d82e471c225718b5ceb87352a3b40503c4d820e7",
+      "actual_size_px": [
+        960,
+        720
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE separate EMPTY workplace environment background for the approved Cogna business game, ART-26.\nInput image 1: approved management concept, ONLY the architectural interiors behind the three team portraits in the LOWER LEFT quadrant define materials, perspective and illustration style. Never copy a person, text, equipment card or any interface.\nPrimary request: the professional kitchen of the French restaurant approved in image 2 (architecture/material cue only, do not draw its facade or food). Warm cream tile and lightly textured stone walls, brushed stainless built-in range beneath a compact graphite extraction hood at rear right; a few plain copper pans neatly hanging on a wall rail near the right edge, warm oak lower drawers, muted dark-plum trim, a tall daylight window with subtle arched upper shape at left as a restrained French architectural cue. No chef hat, food, plating, text, signs or detached foreground cooking tools. Compose as an efficient sober workplace, with a quiet central zone.\nComposition: LANDSCAPE 4:3, desired 1536x1152, for final 960x720 and display 320x240. Full bleed opaque rectangle all the way to all four edges. Eye-level architectural interior, vertical lines upright, modest natural perspective, warm daylight from upper left, organized believable workspace. Reserve a visually quiet central region for a separately composited half-body worker. Keep readable architectural features toward sides and rear, no foreground object blocking the center.\nStyle/medium: adult editorial cartoon matching the approved concept; clean dark-plum contours, broad cel-shaded planes, warm ivory #F5F0E8, graphite/slate, muted lavender #B99AE8 and subtle violet #6D28D9 details, natural wood. Polished, welcoming and restrained. Consistent material treatment and contour weight across the team kit.\nConstraints: ENVIRONMENT ONLY, no people, body parts, silhouettes, reflections of people, portraits, food plates, loose reusable foreground props, labels, salary, name, poster, framed sign, menus, words, letters, numbers, logos, charts, watermark, UI, border, rounded corners, card or vignette. No readable marks on any surface. Integrated fixed furniture/equipment is part of this background; do not add detached product illustrations.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/french_kitchen-source-01.png",
+      "source_image_sha256": "ce58b9a5c797be8f208e40dfd938bad3dd40a0d1d1f534e6c6b7d768dd8058c6",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "Cozinha francesa vazia: janela alta em arco, pedra/azulejos marfim, fogão e coifa integrados, inox, marcenaria de madeira e panelas de cobre no trilho posterior. A extensão para ambiente de trabalho preserva a linguagem do restaurante francês aprovado. Sem pessoa, prato pronto, texto ou UI."
     },
     {
       "id": "TEAM_ENV_SUSHI_COUNTER",
@@ -15744,7 +15859,7 @@
       "path": "team/backgrounds/sushi_counter.png",
       "name": "Ambiente de trabalho sushi_counter, sem pessoas ou texto",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -15771,19 +15886,32 @@
       "catalog_id": null,
       "source": null,
       "references": [
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/concepts/02-abertura.png"
       ],
       "brief": "Ambiente de trabalho sushi_counter, sem pessoas ou texto. Mesma arquitetura, materiais e perspectiva editorial do restaurante.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "ceb5e778c024815b18a60adbdb98681b9210e8ad8f3a27ff112137a80f284ceb",
+      "actual_size_px": [
+        960,
+        720
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE separate EMPTY workplace environment background for the approved Cogna business game, ART-26.\nInput image 1: approved management concept, ONLY the architectural interiors behind the three team portraits in the LOWER LEFT quadrant define materials, perspective and illustration style. Never copy a person, text, equipment card or any interface.\nPrimary request: the work interior of the Japanese restaurant approved in image 2 (architecture/material cue only, do not draw its facade or food). A pale natural-wood sushi preparation counter with empty clean top across the lower quarter; horizontal dark-wood wall slats and a quiet warm ivory wall at rear, a shoji-inspired daylight window on the left using a simple dark grid and pale translucent panes, built-in wood cabinets with a subtle lavender inset toward the right. Balanced and understated modern restaurant joinery, no ornamental caricature, lantern writing, fish, sushi, utensils, loose reusable props, knives, menus or text.\nComposition: LANDSCAPE 4:3, desired 1536x1152, for final 960x720 and display 320x240. Full bleed opaque rectangle all the way to all four edges. Eye-level architectural interior, vertical lines upright, modest natural perspective, warm daylight from upper left, organized believable workspace. Reserve a visually quiet central region for a separately composited half-body worker. Keep readable architectural features toward sides and rear, no foreground object blocking the center.\nStyle/medium: adult editorial cartoon matching the approved concept; clean dark-plum contours, broad cel-shaded planes, warm ivory #F5F0E8, graphite/slate, muted lavender #B99AE8 and subtle violet #6D28D9 details, natural wood. Polished, welcoming and restrained. Consistent material treatment and contour weight across the team kit.\nConstraints: ENVIRONMENT ONLY, no people, body parts, silhouettes, reflections of people, portraits, food plates, loose reusable foreground props, labels, salary, name, poster, framed sign, menus, words, letters, numbers, logos, charts, watermark, UI, border, rounded corners, card or vignette. No readable marks on any surface. Integrated fixed furniture/equipment is part of this background; do not add detached product illustrations.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-26.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-26/sushi_counter-source-01.png",
+      "source_image_sha256": "68ad502b904f5a3eadd1d88e0106221067143f17c60cbb3d4e9e76acbe608d1f",
+      "production_record": "docs/art/prompts/ART-26.json",
+      "visual_composition_proposal": "Balcão de sushi vazio: madeira clara/escura, painéis e armários lavanda, janela quadriculada inspirada em shoji à esquerda, superfície frontal limpa e vitrine posterior vazia. Extensão ambiental do restaurante japonês aprovado, sem caricatura, comida, pessoa, palavra, logo ou UI."
     },
     {
       "id": "DRE_ENVIRONMENT",
@@ -18593,7 +18721,7 @@
         "ART-02"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Cinco funções do catálogo. Retrato e fundo são arquivos distintos. Usar master canônico, não criar um novo rosto para cada função ou tela.",
       "asset_ids": [
         "PORTRAIT_ATTENDANT",
@@ -18608,7 +18736,8 @@
         "TEAM_ENV_SUSHI_COUNTER"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-26 — Retratos de equipe e ambientes de trabalho. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-26.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-26 — Retratos de equipe e ambientes de trabalho. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-26.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-26.json"
     },
     {
       "id": "ART-27",
