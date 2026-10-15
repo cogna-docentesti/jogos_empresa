@@ -14954,7 +14954,7 @@
       "path": "financial/backgrounds/bank_office.png",
       "name": "Ambiente de banco/escritório em quadro vertical, profissional e sóbrio",
       "kind": "cenario",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1024,
@@ -14984,16 +14984,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Ambiente de banco/escritório em quadro vertical, profissional e sóbrio. Sem pessoa, marca, placa escrita ou cards.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "9887505dc2fb59c91ea31f2475a281820ae52d76f65380756d2e6c8a65f738de",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE separate bank-office environment layer for the approved Cogna business game, BANK_ENVIRONMENT.\nInput image 1: approved management concept, ONLY the bank-office interior behind the woman in the UPPER LEFT financial panel supplies architecture, palette and illustration language. Do not copy the woman, interface, lettering, signage or credit objects.\nPrimary request: a quiet professional bank office, portrait 2:3, desired 1024x1536. An empty warm ivory office with a tall daylight window on the LEFT looking toward a simplified low-rise city and modest greenery, dark slate window mullions, simple cream architectural wall panels toward the RIGHT with narrow lavender/plum accent seams. A low warm-wood built-in bank reception counter runs horizontally in the LOWER FIFTH; its surface is clear and empty. Keep the central two thirds visually quiet and unobstructed for a separately composited full-body advisor. Place subtle greenery outside the window, not as freestanding props inside. No chair or furniture in the foreground. The upper wall is continuous clean architectural paneling, with NO sign, poster, blank signboard, logo plate or framed rectangle.\nStyle/medium: adult editorial cartoon exactly compatible with the supplied approved concept: clean dark-plum contours, broad cel-shaded planes, warm ivory, muted slate and lavender, natural warm wood; restrained soft upper-left daylight, sober and welcoming. Architectural perspective remains consistent, straight verticals and a gentle view from standing eye level.\nFraming: FULL BLEED opaque scene to all four edges; no rounded card, border, vignette, transparent padding or cast-shadow outline. Compose for a centered cover crop from the 1024x1536 source to a 480x840 viewport, so key architectural features remain within the central 85 percent width. This layer may sit BEHIND a separate person.\nConstraints: environment ONLY. NO person, face, body, human silhouette, money, credit icons, briefcase, clipboard, loose papers, computer, plant pot, reusable detached foreground prop, UI/card/button, chart, banner, words, letters, numbers, brand, watermark or symbols. Never reproduce the BANCO word or the advice placard from the concept.",
       "source_editable": null,
       "display_fit": "cover",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-25.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-25/bank_environment-source-01.png",
+      "source_image_sha256": "e174a5db78f38b9617272ec60cec31a86ef9e872a22a8207027b63ab6aefa2b3",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "visual_composition_proposal": "Escritório vertical com janela à esquerda, cidade e vegetação externas, painéis marfim e balcão fixo de madeira vazio. Sem pessoa, placa, marca, poster, texto, ícone, card ou prop solto. Cena opaca full bleed, luz superior esquerda e perspectiva coerente; crop central cover conferido."
     },
     {
       "id": "CH01_BANK",
@@ -15001,7 +15013,7 @@
       "path": "characters/CH01/ch01_bank_options.png",
       "name": "CH01 em pose orientando opções com mão aberta e prancheta; manter rosto, cabelo, argolas e figurino do master",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1024,
@@ -15030,19 +15042,32 @@
       "catalog_id": null,
       "source": null,
       "references": [
+        "Assets/Art/new/characters/CH01/ch01_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "CH01 em pose orientando opções com mão aberta e prancheta; manter rosto, cabelo, argolas e figurino do master. Sem cenário/cards.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "c2dc437176cc6ee54cbfc134c1de27ca1ef89c1ecbd684d6d9ad4d6d974f96a3",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE separate full-body CH01 bank-advisor character sprite for the approved Cogna business game, CH01_BANK.\nInput images: Image 1 is the CANONICAL CH01 MASTER, the mandatory identity, facial design, skin, hair, costume, shoes and body-proportion authority. Image 2 is the approved management concept, ONLY the bank advisor in the UPPER LEFT financial panel supplies the open-hand gesture and clipboard pose. Do not copy the interface, bank environment, text or credit objects.\nPrimary request: draw EXACTLY the SAME adult woman as image 1, now welcoming the viewer and explaining financial options: her RIGHT hand, on the viewer's LEFT, holds ONE plain dark slate/plum clipboard close to her waist and lower ribcage; her LEFT forearm, on the viewer's RIGHT, extends gently sideways with a relaxed palm-up open hand to present the options. Natural shoulders, elbows, wrists and five fingers per hand. Quiet confident smile, head and gaze toward the viewer, body turned only slightly in three-quarter view.\nLocked identity: same medium warm-brown skin, same brown almond-shaped eyes, same oval slightly tapered face, eyebrows, nose, mouth and smile; same dark-brown voluminous WAVY BOB just above shoulders with the canonical side part and swept forelock. Same two gold hoop earrings. Same lavender collared button shirt, sleeves rolled to forearms, tucked into high-waisted graphite tailored trousers, same dark belt and closed graphite low-heel shoes. Same adult body proportions and silhouette. Do not lengthen hair, change face, lighten skin, alter age or copy the long-haired manager.\nClipboard: ONE physically held plain slate clipboard with a simple small top clip; blank matte back facing viewer, no paper text, sheet, labels, chart, logo or separate pen. This is the single held pose prop required by the manifest, not an added loose prop.\nStyle/medium: retain the exact polished hand-drawn adult editorial cartoon of image 1, confident clean plum contour, flat color planes and restrained soft cel shading, upper-left light. No photorealism, 3D plastic, chibi or style redesign.\nFraming: portrait 2:3, desired 1024x1536. Full body centered, both shoes, head, held clipboard and every fingertip complete. Whole silhouette should occupy about 78 percent of canvas height, with at least 10 percent genuinely TRANSPARENT clear margin at TOP, BOTTOM and SIDES, including the extended hand. Pose legible at display box 420x760 with uniform contain, no independent axis stretch.\nTransparency: TRUE transparent RGBA background, alpha zero everywhere outside the woman and clipboard and in open gaps. Solid opaque person interior, crisp antialias. IGNORE any background haze or halo visible behind the canonical reference: reproduce only her identity. No floor, floor shadow, drop shadow, glow, halo, haze, vignette, gradient cloud or fake checkerboard.\nConstraints: only ONE woman with the specified held clipboard. NO environment, furniture, other people, text, words, labels, letters, numbers, rates, UI, credit cards, badges, checkmark, money, buttons or frame.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": true,
+        "record": "docs/art/qa/ART-25.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-25/ch01_bank-source-01.png",
+      "source_image_sha256": "c42672218c54ce6fa8db7b2f05875276e4911ae6d8093cebcfe5ef6559b397d3",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "visual_composition_proposal": "Mesma CH01 do master: rosto oval, olhos castanhos, bob castanho ondulado com risca lateral, pele morena quente, argolas douradas, camisa lilás dobrada nos antebraços, calça grafite, cinto e sapatos fechados. Corpo inteiro, cabeça e pés completos, prancheta escura sem inscrição sustentada junto ao tronco e mão oposta aberta para apresentar opções. Dedos, punhos, cotovelos e expressão revisados; identidade preservada."
     },
     {
       "id": "CREDIT_CREDITO_DE_INVESTIMENTO",
@@ -15050,7 +15075,7 @@
       "path": "financial/credit/credito_de_investimento.png",
       "name": "Maleta profissional e contrato sem texto, indicando investimento",
       "kind": "credito",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15080,16 +15105,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Maleta profissional e contrato sem texto, indicando investimento.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "d99b9559f29ddd1c21b4a4ac44fa6e007abf90f1a3c6bdfde1b41133a94d3aca",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE investment-credit object illustration for the approved Cogna business game, CREDIT_CREDITO_DE_INVESTIMENTO.\nInput image 1: approved Cogna management concept, ONLY the briefcase in the UPPER LEFT financial panel supplies the object family, cartoon finish and palette. It is a reference, never an interface to reproduce.\nPrimary request: a complete compact professional slate/plum rectangular executive briefcase with a rigid arched top handle and one small warm brass clasp, broad FRONT and narrower RIGHT side visible. In front of the LOWER LEFT of the briefcase lies ONE plain ivory contract sheet, slightly tilted and partly overlapping the case, with a modest folded upper corner and absolutely BLANK face. The briefcase is the dominant shape. Restrained lavender reflected light on its upper-left planes. No money, coins, separate pen, stamp, signatures or marks on the document.\nComposition/camera: ONE complete isolated object or compact object set, SQUARE source, desired 1024x1024; final export 512x512, display 120x120. Centered, fully uncropped, with at least 10 percent clear transparent margin on every side. Three-quarter view from slightly above, broad FRONT and narrower RIGHT side visible. Upright verticals, no extreme perspective. Strong simple silhouette with broad details legible at 120x120.\nStyle/medium: polished adult editorial cartoon consistent with the financial objects in the approved Cogna management concept, confident muted dark plum #30243C contours, controlled clean cel shading, two or three broad tonal areas, subtle upper-left light. Warm ivory #F5F0E8 paper, slate/plum casing, restrained lavender #B99AE8, teal #26776A and small brass #E7B65A accents. Professional business object, no toy plastic 3D, photorealism, grunge or tiny busy details.\nTransparency: genuine RGBA cutout with alpha zero outside silhouette and in open handle gaps; solid opaque object interior, clean antialiased edges. No backdrop, floor patch, cast floor shadow, wide drop shadow, haze, halo or checkerboard.\nConstraints: exactly ONE asset, no sprite sheet, montage, complete card, UI backplate, UI frame, border, people or hands. No words, labels, currency symbols, letters, digits, interest rates, price, numbers, charts, seals, branding or logos. Do not copy ANY text or UI from the reference. No checkmark, selection status, badge or locked/premium overlay.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-25.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-25/credit_credito_de_investimento-source-01.png",
+      "source_image_sha256": "0baf5684e2eadffed3af9ebfe68ba373dfe6c5b1475ba31637d5f2c064d67987",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "visual_composition_proposal": "Maleta profissional ameixa/grafite com alça rígida e fecho de latão; um contrato marfim vazio em primeiro plano. Frente e lado direito legíveis, alça vazada com alfa verdadeiro. Sem assinatura, preço, número, marca ou check."
     },
     {
       "id": "CREDIT_CREDITO_EMPRESARIAL_PADRAO",
@@ -15097,7 +15134,7 @@
       "path": "financial/credit/credito_empresarial_padrao.png",
       "name": "Conjunto de capital de giro com papéis comerciais e poucas cédulas sem inscrições",
       "kind": "credito",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15127,16 +15164,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Conjunto de capital de giro com papéis comerciais e poucas cédulas sem inscrições.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "5328ea2615856f09124088ea50ca09e07f02d7b8cf8490e6ae43335d84437c84",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE working-capital credit illustration for the approved Cogna business game, CREDIT_CREDITO_EMPRESARIAL_PADRAO.\nInput image 1: approved Cogna management concept, ONLY the capital-de-giro object in the UPPER LEFT financial panel supplies broad cash shapes, adult cartoon finish and palette. Do not copy its UI, lettering or currency denominations.\nPrimary request: one compact working-capital set: a tidy stack of THREE blank ivory business sheets, slightly offset with visible edge thickness, and exactly THREE muted teal banknotes loosely fanned in front toward the right. The banknotes are simple plain rectangular paper shapes with a single broad darker teal INSET RECTANGULAR BORDER only; no inner oval, portrait, seal, denomination, currency symbol or inscriptions. The cream sheets are completely BLANK with one small folded corner and NO lines or glyphs. Clear distinction between ivory business documents and three teal notes, organized as ONE readable icon, not a pile of tiny clutter. No clip, folder, briefcase, coins, calculator or props.\nComposition/camera: ONE complete isolated object or compact object set, SQUARE source, desired 1024x1024; final export 512x512, display 120x120. Centered, fully uncropped, with at least 10 percent clear transparent margin on every side. Three-quarter view from slightly above, broad FRONT and narrower RIGHT side visible. Upright verticals, no extreme perspective. Strong simple silhouette with broad details legible at 120x120.\nStyle/medium: polished adult editorial cartoon consistent with the financial objects in the approved Cogna management concept, confident muted dark plum #30243C contours, controlled clean cel shading, two or three broad tonal areas, subtle upper-left light. Warm ivory #F5F0E8 paper, slate/plum casing, restrained lavender #B99AE8, teal #26776A and small brass #E7B65A accents. Professional business object, no toy plastic 3D, photorealism, grunge or tiny busy details.\nTransparency: genuine RGBA cutout with alpha zero outside silhouette and in open handle gaps; solid opaque object interior, clean antialiased edges. No backdrop, floor patch, cast floor shadow, wide drop shadow, haze, halo or checkerboard.\nConstraints: exactly ONE asset, no sprite sheet, montage, complete card, UI backplate, UI frame, border, people or hands. No words, labels, currency symbols, letters, digits, interest rates, price, numbers, charts, seals, branding or logos. Do not copy ANY text or UI from the reference. No checkmark, selection status, badge or locked/premium overlay.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-25.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-25/credit_credito_empresarial_padrao-source-01.png",
+      "source_image_sha256": "293557fac2d8f137cbffe763e8e5721085253e7166326ba0e34c8645f8c6ab04",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "visual_composition_proposal": "Papéis comerciais marfim em pilha e três cédulas verde-petróleo abertas em leque. Folhas sem linhas ou escrita; cédulas apenas com borda retangular, sem inscrição, retrato, valor ou símbolo monetário. Geração trouxe quatro folhas visíveis, variação dentro do brief de papéis comerciais."
     },
     {
       "id": "CREDIT_SEM_CREDITO",
@@ -15144,7 +15193,7 @@
       "path": "financial/credit/sem_credito.png",
       "name": "Documento simples com check separado pela UI, indicando escolha sem crédito; objeto sem texto",
       "kind": "credito",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15174,16 +15223,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Documento simples com check separado pela UI, indicando escolha sem crédito; objeto sem texto.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "3087b34ef2e0b494864d6f99b9b939a26bd8b788b235b4a9df3a3a7f62eeea14",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE no-credit choice object illustration for the approved Cogna business game, CREDIT_SEM_CREDITO.\nInput image 1: approved Cogna management concept, ONLY the document silhouette in the UPPER LEFT financial panel supplies the adult editorial object style. Remove and exclude all printed lines AND the large green check; selection will be rendered separately by the game UI.\nPrimary request: ONE simple upright ivory document sheet, broad BLANK FRONT plane facing the viewer in gentle three-quarter view, small folded upper-right corner and a restrained lavender shaded right edge. Slight natural clockwise tilt, crisp plum outline and broad restrained shading give the paper volume. Its entire face is completely EMPTY ivory with no writing, ruled lines, signature, box, mark, decorative symbol, emblem or check. It is a single physical document, no clipboard, no folder, no second document, no money or pen. Preserve clean paper edges and a legible folded corner.\nComposition/camera: ONE complete isolated object or compact object set, SQUARE source, desired 1024x1024; final export 512x512, display 120x120. Centered, fully uncropped, with at least 10 percent clear transparent margin on every side. Three-quarter view from slightly above, broad FRONT and narrower RIGHT side visible. Upright verticals, no extreme perspective. Strong simple silhouette with broad details legible at 120x120.\nStyle/medium: polished adult editorial cartoon consistent with the financial objects in the approved Cogna management concept, confident muted dark plum #30243C contours, controlled clean cel shading, two or three broad tonal areas, subtle upper-left light. Warm ivory #F5F0E8 paper, slate/plum casing, restrained lavender #B99AE8, teal #26776A and small brass #E7B65A accents. Professional business object, no toy plastic 3D, photorealism, grunge or tiny busy details.\nTransparency: genuine RGBA cutout with alpha zero outside silhouette and in open handle gaps; solid opaque object interior, clean antialiased edges. No backdrop, floor patch, cast floor shadow, wide drop shadow, haze, halo or checkerboard.\nConstraints: exactly ONE asset, no sprite sheet, montage, complete card, UI backplate, UI frame, border, people or hands. No words, labels, currency symbols, letters, digits, interest rates, price, numbers, charts, seals, branding or logos. Do not copy ANY text or UI from the reference. No checkmark, selection status, badge or locked/premium overlay.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-25.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-25/credit_sem_credito-source-01.png",
+      "source_image_sha256": "5abc1227baa0b82526a6d81180c992c026843d75e5a9b2c7bc082a8e31fe1cf2",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "visual_composition_proposal": "Uma folha marfim vazia com canto superior direito dobrado e sombra lavanda discreta. Sem linhas, escrita, check, selo, moldura de UI ou marca de seleção; check fica separado na UI."
     },
     {
       "id": "CREDIT_MICROCREDITO_EMPRESARIAL",
@@ -15191,7 +15252,7 @@
       "path": "financial/credit/microcredito_empresarial.png",
       "name": "Pequeno cofre/caixa de capital comercial, objeto editorial simples sem valores",
       "kind": "credito",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         512,
@@ -15221,16 +15282,28 @@
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "Pequeno cofre/caixa de capital comercial, objeto editorial simples sem valores.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "f31af8f676ebc6a2cfaad5b351d553171cebd8169c882dcd140f786f8f0727b8",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE microcredit small-business cash-box illustration for the approved Cogna business game, CREDIT_MICROCREDITO_EMPRESARIAL.\nInput image 1: approved Cogna management concept supplies adult editorial cartoon contours, business-object palette and light ONLY. This fourth catalog option must have its own distinct object, even though the concept shows only three credit options.\nPrimary request: ONE compact small-business cash box, a low sturdy rectangular muted teal metal petty-cash box with a simple closed fitted lid, a small fold-down handle lying on TOP and one simple small brass rectangular latch centered on the broad FRONT face. Broad front and narrower RIGHT side visible, soft plum-gray shaded side and a restrained pale-teal upper-left highlight. The closed cash box reads as practical small capital, wider than tall and visibly distinct from an upright briefcase and from a large bank vault. All hardware simple, no combination dial or keypad. No loose money, coins, banknote slot, papers, piggy-bank ears, wheels, floor or other props. No values or markings.\nComposition/camera: ONE complete isolated object or compact object set, SQUARE source, desired 1024x1024; final export 512x512, display 120x120. Centered, fully uncropped, with at least 10 percent clear transparent margin on every side. Three-quarter view from slightly above, broad FRONT and narrower RIGHT side visible. Upright verticals, no extreme perspective. Strong simple silhouette with broad details legible at 120x120.\nStyle/medium: polished adult editorial cartoon consistent with the financial objects in the approved Cogna management concept, confident muted dark plum #30243C contours, controlled clean cel shading, two or three broad tonal areas, subtle upper-left light. Warm ivory #F5F0E8 paper, slate/plum casing, restrained lavender #B99AE8, teal #26776A and small brass #E7B65A accents. Professional business object, no toy plastic 3D, photorealism, grunge or tiny busy details.\nTransparency: genuine RGBA cutout with alpha zero outside silhouette and in open handle gaps; solid opaque object interior, clean antialiased edges. No backdrop, floor patch, cast floor shadow, wide drop shadow, haze, halo or checkerboard.\nConstraints: exactly ONE asset, no sprite sheet, montage, complete card, UI backplate, UI frame, border, people or hands. No words, labels, currency symbols, letters, digits, interest rates, price, numbers, charts, seals, branding or logos. Do not copy ANY text or UI from the reference. No checkmark, selection status, badge or locked/premium overlay.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": false,
+        "identity_applicable": false,
+        "record": "docs/art/qa/ART-25.json"
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/references/generations/ART-25/credit_microcredito_empresarial-source-01.png",
+      "source_image_sha256": "70c31d3ef3f4e51d52a0ce0d2d2a135065d651d0d61743e78fc248dcb8d50ca1",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "visual_composition_proposal": "Caixa comercial pequena e baixa em verde-petróleo, tampa fechada, alça recolhida no topo e fecho retangular de latão. Tipologia distinta da maleta vertical de investimento, sem teclado, mostrador, moedas, dinheiro solto, inscrição ou valores."
     },
     {
       "id": "PORTRAIT_ATTENDANT",
@@ -18496,7 +18569,7 @@
         "ART-07"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Quatro opções reais, não as três do concept. Cenário, pessoa e objetos separados; taxas/parcelas/limites em TMP.",
       "asset_ids": [
         "BANK_ENVIRONMENT",
@@ -18507,7 +18580,10 @@
         "CREDIT_MICROCREDITO_EMPRESARIAL"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-25 — Financeiro e quatro opções de crédito. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-25.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-25 — Financeiro e quatro opções de crédito. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-25.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "production_record": "docs/art/prompts/ART-25.json",
+      "delivery_preview": "art-source/previews/ART-25/ART-25-contact-sheet.png",
+      "qa_record": "docs/art/qa/ART-25.json"
     },
     {
       "id": "ART-26",
