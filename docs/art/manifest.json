@@ -18391,7 +18391,7 @@
       "path": "characters/CH01/ch01_guiding_question.png",
       "name": "CH01 orientando reflexão com gesto natural de pergunta; sem balão/texto, face/roupa iguais ao master",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "documental",
       "export_size_px": [
         1024,
@@ -18418,20 +18418,56 @@
         "CH01"
       ],
       "catalog_id": null,
-      "source": null,
+      "source": "Canonical CH01 master; new pose via integrated image_gen.imagegen",
       "references": [
+        "Assets/Art/new/characters/CH01/ch01_canonical.png",
         "art-source/references/concepts/03-gestao.png"
       ],
       "brief": "CH01 orientando reflexão com gesto natural de pergunta; sem balão/texto, face/roupa iguais ao master. Postura profissional, sem dar respostas prontas incorporadas à imagem.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "be3e4a28618dbf63dc21cbb0cb820cf1413f1ac7cabb609de99c724fbb993f96",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: CH01_GUIDING, ONE isolated full-body character sprite for the approved Cogna restaurant-management game, a documentary debriefing support pose.\nInput images: Image 1 is the exact real canonical CH01 master and mandatory identity reference. Image 2 is only the approved editorial art style reference; do not copy its UI, other characters, setting or text.\nPrimary request: draw the SAME adult woman from Image 1 in a natural professional questioning gesture inviting the learner to reflect. Keep her upright in the same gentle three-quarter view and adult body proportions. Bend one forearm outward at waist-to-lower-chest level, with a relaxed open palm facing up and clearly formed natural fingers, as if asking an open question. Let the other arm hang comfortably at her side. Her face stays recognizably identical, with attentive brown eyes, a subtle friendly closed-mouth expression and a very slight inquisitive eyebrow lift. A calm invitation to think, no shrugging or dramatic gesture.\nIdentity invariants: exact canonical face shape, medium warm brown skin and skin color, brown eyes, short wavy dark brown side-parted bob above shoulders, gold hoop earrings, lilac collared buttoned shirt with sleeves folded to forearms, charcoal belted high-waisted trousers, and dark closed low-heeled shoes. Keep the master hairstyle, age, earrings, clothing details, natural silhouette, body proportions, contour weight, cel shading and warm upper-left lighting. No clipboard or props.\nStyle/medium: polished adult editorial cartoon matching the supplied CH01 master, crisp dark plum contours, controlled cel shading, broad readable shapes. Maintain the master colors; no photorealism or new costume.\nComposition/framing: ONE complete full-body woman, entire hair, both hands and both shoes visible, centered portrait 2:3 canvas intended for 1024x1536 export. At least 10 percent transparent margin on every side of the entire silhouette, including the open hand. Preserve aspect ratio and natural adult proportions.\nTransparency: genuine RGBA transparency with alpha zero everywhere outside the woman's silhouette and in gaps. Clean antialiased edges. Do not reproduce the glow/haze seen around the reference master: no aura, gradients, backdrop, ground plane, external cast shadow or checkerboard. The original reference master itself remains unchanged.\nText: none. No question mark, speech balloon, answers, labels, letters, numbers, charts, symbols, UI, logos or watermark. No furniture, scenery, other people, new accessories or objects. Do not give answers or feedback within the image.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "record": "docs/art/qa/ART-38.json",
+        "notes": "Rosto, pele morena quente, olhos castanhos, bob curto ondulado com risca lateral, argolas douradas, camisa lilas de mangas dobradas, calca grafite com cinto e sapatos fechados de salto baixo preservam a identidade CH01. Postura adulta ereta em tres quartos; uma palma aberta convida a refletir, outra mao relaxada, sem gesto exagerado. Dedos, punhos, cabeca e dois pes completos. Leitura clara na caixa 420x760 em contain, sem deformacao. Fundos marfim e ameixa mostram recorte limpo e vazios transparentes, sem checkerboard, cenario ou halo visivel. Sem texto, balao, sinal de interrogacao, respostas, graficos, props ou outras pessoas.",
+        "preview": "art-source/previews/ART-38/CH01_GUIDING-display-light-dark.png",
+        "details": "art-source/previews/ART-38/CH01_GUIDING-details-1x.png",
+        "identity_comparison": "art-source/previews/ART-38/CH01-identity-comparison.png"
+      },
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "generation_model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "production_record": "docs/art/prompts/ART-38.json",
+      "source_raster": "art-source/editable/ART-38/generations/ch01_guiding_question-01.png",
+      "technical_export": {
+        "tool": "Pillow",
+        "uniform_scale": 0.75,
+        "operation": "Uniform full-frame 3/4 Lanczos reduction, transparent padding and sRGB profile. Generated RGBA preserved; no crop, repaint, segmentation or alpha cleanup.",
+        "source_size_px": [
+          1024,
+          1536
+        ],
+        "resampled_size_px": [
+          768,
+          1152
+        ],
+        "transparent_offset_px": [
+          128,
+          192
+        ],
+        "output_size_px": [
+          1024,
+          1536
+        ],
+        "producer_source": "art-source/editable/ART-38/produce_art38.py"
       }
     },
     {
@@ -19528,13 +19564,14 @@
         "ART-28"
       ],
       "scope": "documental",
-      "status": "planejado",
+      "status": "validado",
       "note": "Previsto no relatório técnico; não há UI atual. Produzir apenas pose de apoio; formulários, respostas, feedback e status offline reutilizam componentes. Nenhum serviço/API, backend ou painel docente será criado neste lote.",
       "asset_ids": [
         "CH01_GUIDING"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-38 — Apoio visual para debriefing e justificativas. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-38.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-38 — Apoio visual para debriefing e justificativas. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-38.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-38.json"
     },
     {
       "id": "ART-39",
