@@ -17899,7 +17899,7 @@
       "path": "system/loading/spinner.png",
       "name": "Anel simples com abertura e alfa real, tintável, rotação controlada pela UI; sem porcentagem ou texto",
       "kind": "componente",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         128,
@@ -17924,22 +17924,34 @@
       "padding_percent": 0,
       "character_ids": [],
       "catalog_id": null,
-      "source": null,
+      "source": "Geometria vetorial original da especificação ART-35 e sistema de ícones ART-08.",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/editable/shared/icons/icon_next.svg",
+        "art-source/editable/shared/icons/icon_sync.svg"
       ],
       "brief": "Anel simples com abertura e alfa real, tintável, rotação controlada pela UI; sem porcentagem ou texto.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "e633ed2c7afb04531d2ea8e1116e54bf244c3b5db72a3832c925224075e5a7a0",
+      "actual_size_px": [
+        128,
+        128
+      ],
+      "generation_prompt": "Produzir somente UI_SPINNER: Anel simples com abertura e alfa real, tintável, rotação controlada pela UI; sem porcentagem ou texto.\nGeometria SVG original, branco #FFFFFF tintável, antialias limpo e traço arredondado coerente com ART-08. Sem fundo, sombra, badge, palavras ou números.\nExport PNG RGBA 8-bit sRGB 128x128; caixa de display [48, 48] com contain, pivot central [0.5,0.5], bordas 9-slice zero.\nUma imagem estática por arquivo. UI controla rotação do spinner e visibilidade do tutorial; sem sprite sheet. Anéis têm centro transparente.\nTap e drag usam o mesmo contorno pequeno e neutro de dedo indicador; tap com arco de contato, drag com seta horizontal de duas pontas. Focus ring é um círculo completo.\nNão gerar personagem: montagem de QA reutiliza CH01 canônica. Texto e controles são camadas independentes.",
       "source_editable": "art-source/editable/system/loading/spinner.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": null
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "generation_tool": "original SVG + sharp/librsvg",
+      "generation_model": null,
+      "generation_model_note": "Componentes geométricos previstos como vector_or_code; sem geração por modelo.",
+      "production_record": "docs/art/prompts/ART-35.json",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "qa_record": "docs/art/qa/ART-35.json"
     },
     {
       "id": "TUTORIAL_TAP",
@@ -17947,7 +17959,7 @@
       "path": "tutorials/gestures/tap.png",
       "name": "Pista visual de tutorial tap: desenho simples legível, alfa real, sem palavras ou mão caricata gigante",
       "kind": "icone",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -17972,22 +17984,34 @@
       "padding_percent": 10,
       "character_ids": [],
       "catalog_id": null,
-      "source": null,
+      "source": "Geometria vetorial original da especificação ART-35 e sistema de ícones ART-08.",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/editable/shared/icons/icon_next.svg",
+        "art-source/editable/shared/icons/icon_sync.svg"
       ],
       "brief": "Pista visual de tutorial tap: desenho simples legível, alfa real, sem palavras ou mão caricata gigante. Retirar da tela quando tutorial não estiver ativo.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "babe7378b69befec7e9ee15e430c4fb6f7056dc761cbb3ccc9b12142ea8a45c7",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "generation_prompt": "Produzir somente TUTORIAL_TAP: Pista visual de tutorial tap: desenho simples legível, alfa real, sem palavras ou mão caricata gigante. Retirar da tela quando tutorial não estiver ativo.\nGeometria SVG original, branco #FFFFFF tintável, antialias limpo e traço arredondado coerente com ART-08. Sem fundo, sombra, badge, palavras ou números.\nExport PNG RGBA 8-bit sRGB 256x256; caixa de display [64, 64] com contain, pivot central [0.5,0.5], bordas 9-slice zero.\nUma imagem estática por arquivo. UI controla rotação do spinner e visibilidade do tutorial; sem sprite sheet. Anéis têm centro transparente.\nTap e drag usam o mesmo contorno pequeno e neutro de dedo indicador; tap com arco de contato, drag com seta horizontal de duas pontas. Focus ring é um círculo completo.\nNão gerar personagem: montagem de QA reutiliza CH01 canônica. Texto e controles são camadas independentes.",
       "source_editable": "art-source/editable/tutorials/gestures/tap.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": null
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "generation_tool": "original SVG + sharp/librsvg",
+      "generation_model": null,
+      "generation_model_note": "Componentes geométricos previstos como vector_or_code; sem geração por modelo.",
+      "production_record": "docs/art/prompts/ART-35.json",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "qa_record": "docs/art/qa/ART-35.json"
     },
     {
       "id": "TUTORIAL_DRAG",
@@ -17995,7 +18019,7 @@
       "path": "tutorials/gestures/drag.png",
       "name": "Pista visual de tutorial drag: desenho simples legível, alfa real, sem palavras ou mão caricata gigante",
       "kind": "icone",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -18020,22 +18044,34 @@
       "padding_percent": 10,
       "character_ids": [],
       "catalog_id": null,
-      "source": null,
+      "source": "Geometria vetorial original da especificação ART-35 e sistema de ícones ART-08.",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/editable/shared/icons/icon_next.svg",
+        "art-source/editable/shared/icons/icon_sync.svg"
       ],
       "brief": "Pista visual de tutorial drag: desenho simples legível, alfa real, sem palavras ou mão caricata gigante. Retirar da tela quando tutorial não estiver ativo.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "a5e5c579f28ee4dc48a3dbeddde967de8416f8e0b863682b4cd6fdba032452e9",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "generation_prompt": "Produzir somente TUTORIAL_DRAG: Pista visual de tutorial drag: desenho simples legível, alfa real, sem palavras ou mão caricata gigante. Retirar da tela quando tutorial não estiver ativo.\nGeometria SVG original, branco #FFFFFF tintável, antialias limpo e traço arredondado coerente com ART-08. Sem fundo, sombra, badge, palavras ou números.\nExport PNG RGBA 8-bit sRGB 256x256; caixa de display [64, 64] com contain, pivot central [0.5,0.5], bordas 9-slice zero.\nUma imagem estática por arquivo. UI controla rotação do spinner e visibilidade do tutorial; sem sprite sheet. Anéis têm centro transparente.\nTap e drag usam o mesmo contorno pequeno e neutro de dedo indicador; tap com arco de contato, drag com seta horizontal de duas pontas. Focus ring é um círculo completo.\nNão gerar personagem: montagem de QA reutiliza CH01 canônica. Texto e controles são camadas independentes.",
       "source_editable": "art-source/editable/tutorials/gestures/drag.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": null
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "generation_tool": "original SVG + sharp/librsvg",
+      "generation_model": null,
+      "generation_model_note": "Componentes geométricos previstos como vector_or_code; sem geração por modelo.",
+      "production_record": "docs/art/prompts/ART-35.json",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "qa_record": "docs/art/qa/ART-35.json"
     },
     {
       "id": "TUTORIAL_FOCUS_RING",
@@ -18043,7 +18079,7 @@
       "path": "tutorials/gestures/focus_ring.png",
       "name": "Pista visual de tutorial focus_ring: desenho simples legível, alfa real, sem palavras ou mão caricata gigante",
       "kind": "icone",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         256,
@@ -18068,22 +18104,34 @@
       "padding_percent": 10,
       "character_ids": [],
       "catalog_id": null,
-      "source": null,
+      "source": "Geometria vetorial original da especificação ART-35 e sistema de ícones ART-08.",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/editable/shared/icons/icon_next.svg",
+        "art-source/editable/shared/icons/icon_sync.svg"
       ],
       "brief": "Pista visual de tutorial focus_ring: desenho simples legível, alfa real, sem palavras ou mão caricata gigante. Retirar da tela quando tutorial não estiver ativo.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "0593cbb4a49a90eafcf9d04834f63fc8653dc5578778c48b42892d9aa9babbe3",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "generation_prompt": "Produzir somente TUTORIAL_FOCUS_RING: Pista visual de tutorial focus_ring: desenho simples legível, alfa real, sem palavras ou mão caricata gigante. Retirar da tela quando tutorial não estiver ativo.\nGeometria SVG original, branco #FFFFFF tintável, antialias limpo e traço arredondado coerente com ART-08. Sem fundo, sombra, badge, palavras ou números.\nExport PNG RGBA 8-bit sRGB 256x256; caixa de display [64, 64] com contain, pivot central [0.5,0.5], bordas 9-slice zero.\nUma imagem estática por arquivo. UI controla rotação do spinner e visibilidade do tutorial; sem sprite sheet. Anéis têm centro transparente.\nTap e drag usam o mesmo contorno pequeno e neutro de dedo indicador; tap com arco de contato, drag com seta horizontal de duas pontas. Focus ring é um círculo completo.\nNão gerar personagem: montagem de QA reutiliza CH01 canônica. Texto e controles são camadas independentes.",
       "source_editable": "art-source/editable/tutorials/gestures/focus_ring.svg",
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
+        "technical": true,
+        "visual": true,
+        "identity": null
       },
-      "production_method": "vector_or_code"
+      "production_method": "vector_or_code",
+      "generation_tool": "original SVG + sharp/librsvg",
+      "generation_model": null,
+      "generation_model_note": "Componentes geométricos previstos como vector_or_code; sem geração por modelo.",
+      "production_record": "docs/art/prompts/ART-35.json",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "qa_record": "docs/art/qa/ART-35.json"
     },
     {
       "id": "ICON_PARTNERS",
@@ -19324,7 +19372,7 @@
         "ART-08"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Spinner gira por UI; não gerar uma sprite sheet. Tutorial utiliza CH01 e componentes comuns. Ícone e texto continuam separados.",
       "asset_ids": [
         "UI_SPINNER",
@@ -19333,7 +19381,8 @@
         "TUTORIAL_FOCUS_RING"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-35 — Loading e pistas de tutorial. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-35.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-35 — Loading e pistas de tutorial. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-35.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-35.json"
     },
     {
       "id": "ART-36",
