@@ -16264,7 +16264,7 @@
       "path": "characters/CH01/ch01_discussing.png",
       "name": "CH01 sentado em conversa profissional sobre relatório, identidade e roupa iguais ao master; sem outra pessoa, fundo, mesa, papel, caneca, props ou dados incorporados",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         768,
@@ -16293,19 +16293,30 @@
       "catalog_id": null,
       "source": null,
       "references": [
+        "Assets/Art/new/characters/CH01/ch01_canonical.png",
         "art-source/references/concepts/05-dre-trimestral.png"
       ],
       "brief": "CH01 sentado em conversa profissional sobre relatório, identidade e roupa iguais ao master; sem outra pessoa, fundo, mesa, papel, caneca, props ou dados incorporados. Usar os props independentes do ART-28. Definir posições relativas no dre-layout.json.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "84f8fc4126cd7f8011ec33db074db8d3b10254ad4c79a84e39f778fb0af1bec9",
+      "actual_size_px": [
+        768,
+        1024
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: ONE independent transparent character pose sprite CH01_DISCUSSING for Cogna ART-29 quarterly DRE.\nInput image 1 is CH01 canonical identity master: lock her exact adult face, warm medium brown skin, brown eyes, above-shoulder dark-brown wavy side-parted bob, gold hoop earrings, lilac button-down shirt with rolled sleeves, graphite belted trousers, adult proportions and clean contour/cel shading. Input image 2 is the approved quarterly concept: use ONLY the woman's conversational orientation and the warm upper-left lighting; do not reproduce its scene or props.\nPrimary request: redraw ONLY this same woman seated in professional discussion, three-quarter torso and attentive face turned slightly toward image RIGHT to look at a mentor who will be a separate sprite. Natural subtle friendly smile. Her image-left elbow is bent with relaxed fingers near her chin, attentive listening gesture. Her image-right arm extends gently toward image RIGHT with an EMPTY small pinch grip at chest/lower-chest level, prepared to meet the RIGHT edge of a separate upright report sheet placed just to the left of those fingers. No paper in this image; empty transparent gap between arms. Fingers anatomically coherent. Seated pelvis and graphite-clad upper thighs visible below waist, legs bent toward image right. Frame stops cleanly at upper thighs, no furniture. Both arms and hands fully visible and comfortably inside frame. All fingers drawn, no detached parts.\nComposition: desired 768x1024 portrait RGBA canvas, character centered, top of head at about 12% height, upper thighs ending by 89% height; retain at least 10% transparent breathing room at ALL edges. Face/torso/hand proportions match master. Front-facing camera with slight descending view consistent with sitting at frontal desk. Pose above intended desk edge, no actual desk. Warm diffuse light from upper left, restrained shadows down-right.\nStyle: polished adult editorial cartoon exactly matching canonical master, plum/ink outlines, restrained broad cel-shaded planes, soft warm skin and lilac cloth. NO manga style or child proportions.\nBackground: TRUE RGBA transparency, alpha ZERO outside person and in every gap. No glow, gradient haze, cast shadow cloud, checkerboard, floor or scenery.\nConstraints: ONE person only; NO mentor, chair, desk, table, paper, report, clipboard, pen, mug, calculator, other props, text, labels, numbers, data, chart, logo, UI or watermark. Do not copy reference background. Keep identity and wardrobe unchanged, change only pose/expression/orientation.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-29/generations/ch01_discussing.png",
+      "source_image_sha256": "147592b65d0c3f1a2fe03260761ab24a9b258f7c027d2ac848940d93265e02ab",
+      "production_record": "docs/art/prompts/ART-29.json",
+      "qa_record": "docs/art/qa/ART-29.json"
     },
     {
       "id": "CH04_DISCUSSING",
@@ -16313,7 +16324,7 @@
       "path": "characters/CH04/ch04_discussing.png",
       "name": "CH04 sentado em conversa profissional sobre relatório, identidade e roupa iguais ao master; sem outra pessoa, fundo, mesa, papel, caneca, props ou dados incorporados",
       "kind": "personagem",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         768,
@@ -16342,19 +16353,31 @@
       "catalog_id": null,
       "source": null,
       "references": [
+        "art-source/editable/ART-29/generations/ch04_discussing.png",
+        "Assets/Art/new/characters/CH04/ch04_canonical.png",
         "art-source/references/concepts/05-dre-trimestral.png"
       ],
       "brief": "CH04 sentado em conversa profissional sobre relatório, identidade e roupa iguais ao master; sem outra pessoa, fundo, mesa, papel, caneca, props ou dados incorporados. Usar os props independentes do ART-28. Definir posições relativas no dre-layout.json.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "5436791d0c45c134dbd2cd29149329923d64e8f7240158f0fc1f59400e699891",
+      "actual_size_px": [
+        768,
+        1024
+      ],
+      "generation_prompt": "Use case: identity-preserve\nAsset type: revision of the ONE transparent CH04_DISCUSSING mentor pose for ART-29.\nInput is the already generated mentor sprite; preserve the SAME exact face, expression, gaze toward image LEFT, glasses, hair, beard, skin, navy V-neck sweater, lilac collar, lighting, clean outlines, color planes and upper explanatory image-right hand. Keep its true transparent background and ONE man only.\nMake ONE pose correction for assembly behind a separate desk: RAISE his horizontal IMAGE-LEFT forearm and relaxed empty hand by about one hand-height to MID ABDOMEN, so its lower outline sits clearly ABOVE his belt/waist, with at least half a hand-height of navy sweater visible beneath the hand. The left elbow remains naturally bent, entire left forearm and every finger visible, relaxed hand near the center of the abdomen. The upper explanatory hand stays unchanged. His seated hips and graphite/navy upper thighs must begin BELOW the waist and below both hands, no raised knees beside the hands. Lower the knees and keep them below the belly. The separate desk will later cover the entire body below the sweater hem, while BOTH hands remain fully above that hem. Use a slightly more upright seated posture if required, preserving adult proportions, same head size and natural anatomy. Do not shorten the torso.\nDesired portrait frame 768x1024 with at least 10 percent transparent margin all around; head-to-upper-thigh crop only. TRUE RGBA alpha zero outside the person and in gaps; do not add glow, haze, shadow cloud or background.\nNo desk, chair, table, paper, props, other person, text, numbers, chart, watermark or UI. Change only lower arm placement and seated leg height needed to fit a desk.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-29/generations/ch04_discussing_revision.png",
+      "source_image_sha256": "dc04553bbaac2dd192b63942b5da276ee37547a42235ff19085e76d5259704cf",
+      "production_record": "docs/art/prompts/ART-29.json",
+      "qa_record": "docs/art/qa/ART-29.json"
     },
     {
       "id": "EVENT_BULK_PURCHASE_OPPORTUNITY",
@@ -18864,7 +18887,7 @@
         "ART-28"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Reaproveitar cenário/mesa/props mensais. Duas pessoas em dois PNGs, nenhuma conversa em imagem única. Tabela comparativa e gráficos por UI.",
       "asset_ids": [
         "CH01_DISCUSSING",
