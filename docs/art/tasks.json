@@ -950,11 +950,17 @@
       "ART-35"
     ],
     "scope": "validacao",
-    "status": "planejado",
+    "status": "validado",
     "note": "Sem gerar arte nova ou aplicar às cenas. Conferir arquivos, alfa, dimensões, bounds, estados sem saltos, identidade canônica, alinhamento do mapa, leitura a 100% e escala móvel. Produzir previews separados 1920x1080 e atualizar integração/status reais; não confundir referências aprovadas com sprites finais.",
     "asset_ids": [],
     "auxiliary_deliverables": [],
-    "request_prompt": "Use $cogna-artista para executar somente ART-36 — Validação final e mapa de integração. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-36.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    "request_prompt": "Use $cogna-artista para executar somente ART-36 — Validação final e mapa de integração. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-36.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-36.json",
+    "production_record": "docs/art/prompts/ART-36.json",
+    "delivery_preview": "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+    "integration_map": "docs/art/qa/ART-36-integration-map.json",
+    "validation_asset_count": 265,
+    "new_sprite_count": 0
   },
   {
     "id": "ART-37",

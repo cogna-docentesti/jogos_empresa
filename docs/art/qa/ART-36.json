@@ -1,0 +1,2509 @@
+{
+  "task_id": "ART-36",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex; inspeção direta por view_image na conversa ART-36",
+  "base_commit": "5d18996a6ff6cebc5e6dab0c04eaef4d5e93e107",
+  "scope": "Auditoria final e mapa de integração; zero sprites novos; nenhuma cena/metadado alterado.",
+  "technical": {
+    "passed": true,
+    "asset_count": 265,
+    "tasks_revalidated": 35,
+    "production_pngs_in_this_task": 0,
+    "all_png_sizes_rgba_alpha_hashes_passed": true,
+    "canonical_hashes_matched": 6,
+    "reports": [
+      "docs/art/qa/ART-36-technical.json",
+      "docs/art/qa/ART-36-plan-validation.json",
+      "docs/art/qa/ART-36-prerequisites.json",
+      "docs/art/qa/ART-36-inventory.json",
+      "docs/art/qa/ART-36-contracts.json",
+      "docs/art/qa/ART-36-scope-audit.json"
+    ],
+    "validator_limit": "--task ART-36 valida zero sprites. A cobertura dos 265 vem da revalidação explícita ART-01..35 e da auditoria de hashes/contratos."
+  },
+  "visual": {
+    "passed": true,
+    "new_pages_inspected": 87,
+    "page_size_px": [
+      1920,
+      1080
+    ],
+    "preview_index": "docs/art/qa/ART-36-preview-index.json",
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": [
+      "100% das caixas do manifesto com contain/cover/9-slice",
+      "50% para stress óptico",
+      "cortes nativos 1:1 de rosto/mãos e mapa"
+    ],
+    "mobile_limit": "Redução óptica; não equivale a teste de UI responsiva ou interação móvel.",
+    "inspected_previews": [
+      "art-source/previews/ART-36/ART-36-display-01.png",
+      "art-source/previews/ART-36/ART-36-display-02.png",
+      "art-source/previews/ART-36/ART-36-display-03.png",
+      "art-source/previews/ART-36/ART-36-display-04.png",
+      "art-source/previews/ART-36/ART-36-display-05.png",
+      "art-source/previews/ART-36/ART-36-full-ui_topbar_violet-light.png",
+      "art-source/previews/ART-36/ART-36-full-ui_topbar_violet-dark.png",
+      "art-source/previews/ART-36/ART-36-full-ui_navbar_plum-light.png",
+      "art-source/previews/ART-36/ART-36-full-ui_navbar_plum-dark.png",
+      "art-source/previews/ART-36/ART-36-display-06.png",
+      "art-source/previews/ART-36/ART-36-display-07.png",
+      "art-source/previews/ART-36/ART-36-display-08.png",
+      "art-source/previews/ART-36/ART-36-display-09.png",
+      "art-source/previews/ART-36/ART-36-display-10.png",
+      "art-source/previews/ART-36/ART-36-display-11.png",
+      "art-source/previews/ART-36/ART-36-display-12.png",
+      "art-source/previews/ART-36/ART-36-full-ui_scrim-light.png",
+      "art-source/previews/ART-36/ART-36-full-ui_scrim-dark.png",
+      "art-source/previews/ART-36/ART-36-display-13.png",
+      "art-source/previews/ART-36/ART-36-display-14.png",
+      "art-source/previews/ART-36/ART-36-display-15.png",
+      "art-source/previews/ART-36/ART-36-display-16.png",
+      "art-source/previews/ART-36/ART-36-display-17.png",
+      "art-source/previews/ART-36/ART-36-full-map_base-light.png",
+      "art-source/previews/ART-36/ART-36-full-map_base-dark.png",
+      "art-source/previews/ART-36/ART-36-display-18.png",
+      "art-source/previews/ART-36/ART-36-display-19.png",
+      "art-source/previews/ART-36/ART-36-full-id_environment-light.png",
+      "art-source/previews/ART-36/ART-36-full-id_environment-dark.png",
+      "art-source/previews/ART-36/ART-36-display-20.png",
+      "art-source/previews/ART-36/ART-36-display-21.png",
+      "art-source/previews/ART-36/ART-36-display-22.png",
+      "art-source/previews/ART-36/ART-36-display-23.png",
+      "art-source/previews/ART-36/ART-36-display-24.png",
+      "art-source/previews/ART-36/ART-36-display-25.png",
+      "art-source/previews/ART-36/ART-36-display-26.png",
+      "art-source/previews/ART-36/ART-36-display-27.png",
+      "art-source/previews/ART-36/ART-36-display-28.png",
+      "art-source/previews/ART-36/ART-36-display-29.png",
+      "art-source/previews/ART-36/ART-36-display-30.png",
+      "art-source/previews/ART-36/ART-36-display-31.png",
+      "art-source/previews/ART-36/ART-36-display-32.png",
+      "art-source/previews/ART-36/ART-36-display-33.png",
+      "art-source/previews/ART-36/ART-36-display-34.png",
+      "art-source/previews/ART-36/ART-36-display-35.png",
+      "art-source/previews/ART-36/ART-36-display-36.png",
+      "art-source/previews/ART-36/ART-36-display-37.png",
+      "art-source/previews/ART-36/ART-36-display-38.png",
+      "art-source/previews/ART-36/ART-36-display-39.png",
+      "art-source/previews/ART-36/ART-36-display-40.png",
+      "art-source/previews/ART-36/ART-36-display-41.png",
+      "art-source/previews/ART-36/ART-36-display-42.png",
+      "art-source/previews/ART-36/ART-36-display-43.png",
+      "art-source/previews/ART-36/ART-36-display-44.png",
+      "art-source/previews/ART-36/ART-36-display-45.png",
+      "art-source/previews/ART-36/ART-36-display-46.png",
+      "art-source/previews/ART-36/ART-36-display-47.png",
+      "art-source/previews/ART-36/ART-36-display-48.png",
+      "art-source/previews/ART-36/ART-36-display-49.png",
+      "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+      "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+      "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+      "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+      "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+      "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+      "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+      "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+      "art-source/previews/ART-36/ART-36-map-master-overlay_center.png",
+      "art-source/previews/ART-36/ART-36-dre-monthly.png",
+      "art-source/previews/ART-36/ART-36-dre-quarterly.png",
+      "art-source/previews/ART-36/ART-36-native-ch01_canonical.png",
+      "art-source/previews/ART-36/ART-36-native-ch02_canonical.png",
+      "art-source/previews/ART-36/ART-36-native-ch03_canonical.png",
+      "art-source/previews/ART-36/ART-36-native-ch04_canonical.png",
+      "art-source/previews/ART-36/ART-36-native-ch05_canonical.png",
+      "art-source/previews/ART-36/ART-36-native-ch06_canonical.png",
+      "art-source/previews/ART-36/ART-36-native-ch01_welcome.png",
+      "art-source/previews/ART-36/ART-36-native-ch01_bank.png",
+      "art-source/previews/ART-36/ART-36-native-portrait_attendant.png",
+      "art-source/previews/ART-36/ART-36-native-portrait_grill_cook.png",
+      "art-source/previews/ART-36/ART-36-native-portrait_head_chef.png",
+      "art-source/previews/ART-36/ART-36-native-portrait_manager.png",
+      "art-source/previews/ART-36/ART-36-native-portrait_sushi_chef.png",
+      "art-source/previews/ART-36/ART-36-native-ch01_dre.png",
+      "art-source/previews/ART-36/ART-36-native-ch01_discussing.png",
+      "art-source/previews/ART-36/ART-36-native-ch04_discussing.png",
+      "art-source/previews/ART-36/ART-36-native-ch01_concerned.png"
+    ],
+    "prior_assemblies_reinspected": [
+      {
+        "path": "art-source/previews/ART-14/ART-14-identification-composed.png",
+        "sha256": "629b3ac76be1d54c301a1936ae986a5eb7c9136401b4e56d4991ec01a8466521"
+      },
+      {
+        "path": "art-source/previews/ART-25/ART-25-layer-proof.png",
+        "sha256": "c6ac7585a06d170f007c47ef28d994049cef0b043720458b4fa87961b56ab884"
+      },
+      {
+        "path": "art-source/previews/ART-26/ART-26-layer-proof.png",
+        "sha256": "979d08ee864c82d6656aef74ee5b8d92a2803e7de480e65da796127a23f042c7"
+      },
+      {
+        "path": "art-source/previews/ART-27/ART-27-frances-1920x1080.png",
+        "sha256": "a5e38f7c4aeafa6a4b200741b7a26891f1c5832d3690c4a5a3a206218778db8c"
+      },
+      {
+        "path": "art-source/previews/ART-27/ART-27-japones-1920x1080.png",
+        "sha256": "7099bea6052ae01c4f34a30e38de5813f8f75cf0672580558284b17d8089cb1b"
+      },
+      {
+        "path": "art-source/previews/ART-27/ART-27-lanches-1920x1080.png",
+        "sha256": "828860ec7023eeb3f88078082c3779658af529c9fbd2ee2a312e4d7b190f1350"
+      },
+      {
+        "path": "art-source/previews/ART-27/ART-27-revisao-pendente-1920x1080.png",
+        "sha256": "df5e9759764946e8bd83b113dc191b82b852f62d0397f161a70d49b4c246e891"
+      }
+    ],
+    "approved_concepts_inspected": [
+      {
+        "path": "art-source/references/concepts/01-hub.png",
+        "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+      },
+      {
+        "path": "art-source/references/concepts/02-abertura.png",
+        "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+      },
+      {
+        "path": "art-source/references/concepts/03-gestao.png",
+        "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      {
+        "path": "art-source/references/concepts/04-dre-mensal.png",
+        "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      {
+        "path": "art-source/references/concepts/05-dre-trimestral.png",
+        "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+      }
+    ],
+    "observations_by_task": {
+      "ART-01": "CH01 bob/argolas/camisa lilás; CH02 boné/barba/avental; CH03 cabelo longo/blazer; CH04 óculos/barba/tricô marinho. Cabeças, mãos e pés íntegros; recortes claros nos dois fundos.",
+      "ART-02": "CH05 coque alto/pele escura/avental ameixa e CH06 cabelo curto/sem barba/avental grafite mantêm identidades distintas. Contornos limpos e silhuetas adultas.",
+      "ART-03": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master.",
+      "ART-04": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados.",
+      "ART-05": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos.",
+      "ART-06": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara.",
+      "ART-07": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos.",
+      "ART-08": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque.",
+      "ART-09": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução.",
+      "ART-10": "Geografia transparente fora do terreno, com rio/duas pontes preservados; desenho 1280x720 centralizado no viewport 1280x848 por escala 2/3.",
+      "ART-11": "Cinco landmarks encaixam nos lotes, com luz/perspectiva coerentes e sem construção sobre vias. Texturas compactas usam offsets individuais.",
+      "ART-12": "Três restaurantes alternam no mesmo terreno, entrada e ordem; foreground recobre a frente sem deslocar porta. Apenas uma variante por montagem.",
+      "ART-13": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes.",
+      "ART-14": "Cenário com área livre para formulário; CH01 mantém bob e argolas. Composição anterior conferida: formulário e personagem separados; sem HUD econômico antes da sessão.",
+      "ART-15": "Fachadas francesa/japonesa/lanches compartilham forma externa e distinguem interiores. Alfa sem fundo incorporado; leitura mantida a 480x360 e 240x180.",
+      "ART-16": "Cinco vinhetas de localidades coerentes com landmarks; árvores e piso permanecem na vinheta independente, sem nomes rasterizados.",
+      "ART-17": "Três combos de lanches distinguíveis por composição. Louça/bandeja completas e contornos legíveis em 250/125 px.",
+      "ART-18": "Três produtos japoneses com composições próprias, sem receita ou quantidade dinâmica inferida. Recortes e alimento legíveis.",
+      "ART-19": "Três produtos franceses preservam a composição visual aprovada do lote; pratos e contornos íntegros.",
+      "ART-20": "Quatro equipamentos de cozinha com perspectiva coerente e portas/suportes completos. Detalhes de metal não se confundem com halo de fundo.",
+      "ART-21": "Freezer, geladeira, mobiliário e PDV distintos; bases completas. Peças escuras perdem contraste em ameixa e devem ocupar cards claros no jogo.",
+      "ART-22": "Chapa e fritadeira dupla reconhecíveis nas duas escalas; não há estado adquirido/bloqueado redesenhado no bitmap.",
+      "ART-23": "Balcão, facas e panela de arroz distintos; vidro e lâminas mantêm separação de fundo.",
+      "ART-24": "Adega, forno e mobiliário de luxo completos e distintos. Pernas escuras do mobiliário exigem card claro na integração.",
+      "ART-25": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada.",
+      "ART-26": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados.",
+      "ART-27": "Três estabelecimentos e revisão pendente existentes conferidos diretamente; fachadas, retratos, checklist e botão compostos com peças independentes. Valores são marcadores de QA.",
+      "ART-28": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados.",
+      "ART-29": "DRE trimestral: CH01 olha para CH04, óculos/barba/bob/argolas preservados. Mãos legíveis; mesa oculta coxas. Mesmos props e viewport da mensal.",
+      "ART-30": "Cinco vinhetas de estoque/fornecedor distinguíveis por caixas, etiqueta, relógio, balança ou desperdício. Rótulos vazios e recortes limpos.",
+      "ART-31": "Cinco vinhetas de demanda/concorrência distinguíveis; sem pessoas novas ou opções fixadas no raster. Fachadas e props coerentes com repertório.",
+      "ART-32": "Cinco situações de operação/equipe distinguíveis por freezer, inspeção, fila de louça, fluxo de produção e cabo solto de pagamento. Sem texto de teste no raster.",
+      "ART-33": "Cinco situações de comunicação/contexto distinguíveis; telas em branco, estrelas inteiras/quebradas e chuva legíveis. Chuva sem fundo retangular incorporado.",
+      "ART-34": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida.",
+      "ART-35": "Spinner aberto, tap, drag e focus ring distintos em 48/64 px e miniaturas. Centro dos anéis transparente. Animação/visibilidade ainda são trabalho de UI."
+    },
+    "assets": [
+      {
+        "id": "CH01_CANONICAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-01.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_welcome.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_bank.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_attendant.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_dre.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_discussing.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_concerned.png"
+        ],
+        "observation": "CH01 bob/argolas/camisa lilás; CH02 boné/barba/avental; CH03 cabelo longo/blazer; CH04 óculos/barba/tricô marinho. Cabeças, mãos e pés íntegros; recortes claros nos dois fundos."
+      },
+      {
+        "id": "CH02_CANONICAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-02.png",
+          "art-source/previews/ART-36/ART-36-native-ch02_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch02_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_grill_cook.png"
+        ],
+        "observation": "CH01 bob/argolas/camisa lilás; CH02 boné/barba/avental; CH03 cabelo longo/blazer; CH04 óculos/barba/tricô marinho. Cabeças, mãos e pés íntegros; recortes claros nos dois fundos."
+      },
+      {
+        "id": "CH03_CANONICAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-03.png",
+          "art-source/previews/ART-36/ART-36-native-ch03_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch03_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_manager.png"
+        ],
+        "observation": "CH01 bob/argolas/camisa lilás; CH02 boné/barba/avental; CH03 cabelo longo/blazer; CH04 óculos/barba/tricô marinho. Cabeças, mãos e pés íntegros; recortes claros nos dois fundos."
+      },
+      {
+        "id": "CH04_CANONICAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-04.png",
+          "art-source/previews/ART-36/ART-36-native-ch04_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch04_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch04_discussing.png"
+        ],
+        "observation": "CH01 bob/argolas/camisa lilás; CH02 boné/barba/avental; CH03 cabelo longo/blazer; CH04 óculos/barba/tricô marinho. Cabeças, mãos e pés íntegros; recortes claros nos dois fundos."
+      },
+      {
+        "id": "CH05_CANONICAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-05.png",
+          "art-source/previews/ART-36/ART-36-native-ch05_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch05_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_head_chef.png"
+        ],
+        "observation": "CH05 coque alto/pele escura/avental ameixa e CH06 cabelo curto/sem barba/avental grafite mantêm identidades distintas. Contornos limpos e silhuetas adultas."
+      },
+      {
+        "id": "CH06_CANONICAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-06.png",
+          "art-source/previews/ART-36/ART-36-native-ch06_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-ch06_canonical.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_sushi_chef.png"
+        ],
+        "observation": "CH05 coque alto/pele escura/avental ameixa e CH06 cabelo curto/sem barba/avental grafite mantêm identidades distintas. Contornos limpos e silhuetas adultas."
+      },
+      {
+        "id": "UI_TOPBAR_VIOLET",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-full-ui_topbar_violet-light.png",
+          "art-source/previews/ART-36/ART-36-full-ui_topbar_violet-dark.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_NAVBAR_PLUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-full-ui_navbar_plum-light.png",
+          "art-source/previews/ART-36/ART-36-full-ui_navbar_plum-dark.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_PANEL_IVORY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-07.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_PANEL_LAVENDER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-08.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_PANEL_PLUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-09.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_PANEL_SHADOW",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-10.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_CARD_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-11.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_CARD_SELECTED_OUTLINE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-11.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_CARD_DISABLED_OVERLAY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-11.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_MODAL_SURFACE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-12.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_TOOLTIP_SURFACE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_SCRIM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-full-ui_scrim-light.png",
+          "art-source/previews/ART-36/ART-36-full-ui_scrim-dark.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_BADGE_CIRCLE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "BRAND_COGNA_LOGO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Painéis e cards mantêm cantos em 9-slice. Sombra e scrim são peças de composição. Logo oficial perde contraste direto em ameixa: usar superfície marfim; não recolorir o master."
+      },
+      {
+        "id": "UI_PRIMARY_VIOLET_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_PRIMARY_VIOLET_HOVER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_PRIMARY_VIOLET_PRESSED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_PRIMARY_VIOLET_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_SECONDARY_IVORY_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_SECONDARY_IVORY_HOVER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_SECONDARY_IVORY_PRESSED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_SECONDARY_IVORY_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_DANGER_CORAL_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_DANGER_CORAL_HOVER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_DANGER_CORAL_PRESSED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_DANGER_CORAL_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ACCENT_AMBER_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ACCENT_AMBER_HOVER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-13.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ACCENT_AMBER_PRESSED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ACCENT_AMBER_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ICON_BUTTON_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ICON_BUTTON_HOVER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ICON_BUTTON_PRESSED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_ICON_BUTTON_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Cinco famílias com estados visualmente distintos por cor; bounds, pivots e alfa idênticos. Sem deslocamento desenhado entre estados."
+      },
+      {
+        "id": "UI_INPUT_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_INPUT_FOCUS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_INPUT_INVALID",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_INPUT_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TAB_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TAB_SELECTED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TAB_HOVER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TAB_PRESSED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TAB_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_RADIO_OFF",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_RADIO_ON",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_RADIO_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_CHECKBOX_OFF",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_CHECKBOX_ON",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_CHECKBOX_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TOGGLE_OFF",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TOGGLE_ON",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_TOGGLE_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_SLIDER_TRACK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_SLIDER_FILL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-14.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_SLIDER_THUMB",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_STEPPER_BASE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_SCROLLBAR_TRACK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "UI_SCROLLBAR_THUMB",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "Campos de foco/erro preservam caixa; espessura de contorno pode mudar sem deslocamento. Radio/checkbox/toggle são bases; sinais, thumb e interações permanecem separados. Trilhos e scrollbar sem estiramento de cantos."
+      },
+      {
+        "id": "ICON_HOME",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_RESTAURANT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_PIN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_UNIVERSITY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_BANK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_COMMERCE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_RESIDENTIAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_CORPORATE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_TEAM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_MENU_FOOD",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_EQUIPMENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_DOCUMENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_CALENDAR",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_STAR",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_CASH",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_CHART_BARS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_SETTINGS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_CART",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 glifos de navegação legíveis em 40 px e reconhecíveis no teste óptico de 20 px; branco no escuro, tint ameixa só na prova clara."
+      },
+      {
+        "id": "ICON_REVENUE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_TREND_UP",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_TREND_DOWN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_CLIENTS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_CLIENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_COHERENCE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_REPUTATION",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_RENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_CAPACITY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_COMPETITION",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_INPUT_COSTS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_UTILITIES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_PAYROLL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_INTEREST",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_TERM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_LOAN_PRINCIPAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_INVENTORY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_CREDIT_CONTRACT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "18 indicadores financeiros distinguíveis em 40 px; linhas e vazios limpos nos dois fundos."
+      },
+      {
+        "id": "ICON_BACK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_NEXT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_CHEVRON_UP",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_CHEVRON_DOWN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_CLOSE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_MENU",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_PLUS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_MINUS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_CHECK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_LOCK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_ALERT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_INFO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_HELP",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_SAVE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_EXIT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_RESET",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_DOWNLOAD",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_PLAY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_PAUSE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_FILTER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_EDIT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_TRASH",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_SYNC",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-15.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_OFFLINE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_CLOCK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_SEARCH",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_SOUND_ON",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_SOUND_OFF",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_FULLSCREEN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_KITCHEN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_REFRIGERATION",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_SERVICE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "ICON_FURNITURE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "33 glifos de ações/status/categorias distinguíveis. Lock, alert, info, som e offline mantêm vazios internos; miniaturas são leitura óptica, não alvos de toque."
+      },
+      {
+        "id": "UI_HUD_PILL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_KPI_TILE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_PROGRESS_TRACK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_PROGRESS_FILL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_NAV_UNDERLINE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_PILL_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_PILL_SELECTED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_PILL_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TOAST_NEUTRAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TOAST_SUCCESS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TOAST_WARNING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TABLE_HEADER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-16.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TABLE_ROW_NEUTRAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-17.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TABLE_ROW_SUBTOTAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-17.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TABLE_ROW_POSITIVE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-17.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TABLE_ROW_NEGATIVE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-17.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_TABLE_TOTAL_COLUMN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-18.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "UI_CHART_PANEL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-18.png"
+        ],
+        "observation": "Pills, KPI, tabelas e toasts com bordas preservadas; trilho e preenchimento separados. Dados e gráficos continuam nativos. Linha de navegação de 4 px fica fina a 50%, como previsto pela redução."
+      },
+      {
+        "id": "MAP_BASE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-full-map_base-light.png",
+          "art-source/previews/ART-36/ART-36-full-map_base-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Geografia transparente fora do terreno, com rio/duas pontes preservados; desenho 1280x720 centralizado no viewport 1280x848 por escala 2/3."
+      },
+      {
+        "id": "MAP_BANK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Cinco landmarks encaixam nos lotes, com luz/perspectiva coerentes e sem construção sobre vias. Texturas compactas usam offsets individuais."
+      },
+      {
+        "id": "MAP_CONDOMINIUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Cinco landmarks encaixam nos lotes, com luz/perspectiva coerentes e sem construção sobre vias. Texturas compactas usam offsets individuais."
+      },
+      {
+        "id": "MAP_MARKETING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Cinco landmarks encaixam nos lotes, com luz/perspectiva coerentes e sem construção sobre vias. Texturas compactas usam offsets individuais."
+      },
+      {
+        "id": "MAP_STORE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Cinco landmarks encaixam nos lotes, com luz/perspectiva coerentes e sem construção sobre vias. Texturas compactas usam offsets individuais."
+      },
+      {
+        "id": "MAP_UNIVERSITY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Cinco landmarks encaixam nos lotes, com luz/perspectiva coerentes e sem construção sobre vias. Texturas compactas usam offsets individuais."
+      },
+      {
+        "id": "MAP_REST_FRANCES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Três restaurantes alternam no mesmo terreno, entrada e ordem; foreground recobre a frente sem deslocar porta. Apenas uma variante por montagem."
+      },
+      {
+        "id": "MAP_REST_JAPONES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png"
+        ],
+        "observation": "Três restaurantes alternam no mesmo terreno, entrada e ordem; foreground recobre a frente sem deslocar porta. Apenas uma variante por montagem."
+      },
+      {
+        "id": "MAP_REST_LANCHES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png"
+        ],
+        "observation": "Três restaurantes alternam no mesmo terreno, entrada e ordem; foreground recobre a frente sem deslocar porta. Apenas uma variante por montagem."
+      },
+      {
+        "id": "MAP_FOREGROUND",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Três restaurantes alternam no mesmo terreno, entrada e ordem; foreground recobre a frente sem deslocar porta. Apenas uma variante por montagem."
+      },
+      {
+        "id": "OVERLAY_BANK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "OVERLAY_CONDOMINIUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-19.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_condominium.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "OVERLAY_MARKETING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_marketing.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "OVERLAY_STORE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "OVERLAY_UNIVERSITY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_PIN_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_MAP_LABEL_NORMAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_PIN_SELECTED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_MAP_LABEL_SELECTED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_PIN_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_MAP_LABEL_DISABLED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "UI_MAP_LABEL_TIP",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "OVERLAY_CENTER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-20.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_japones-dark.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-light.png",
+          "art-source/previews/ART-36/ART-36-map-map_rest_lanches-dark.png",
+          "art-source/previews/ART-36/ART-36-map-master-overlay_center.png"
+        ],
+        "observation": "Cinco realces e centro respeitam os polígonos; centro não adiciona Location. Pinos/rótulos preservam silhueta nos estados e mantêm símbolos/textos independentes."
+      },
+      {
+        "id": "ID_ENVIRONMENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-full-id_environment-light.png",
+          "art-source/previews/ART-36/ART-36-full-id_environment-dark.png"
+        ],
+        "observation": "Cenário com área livre para formulário; CH01 mantém bob e argolas. Composição anterior conferida: formulário e personagem separados; sem HUD econômico antes da sessão."
+      },
+      {
+        "id": "ID_ORNAMENT_LEFT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-21.png"
+        ],
+        "observation": "Cenário com área livre para formulário; CH01 mantém bob e argolas. Composição anterior conferida: formulário e personagem separados; sem HUD econômico antes da sessão."
+      },
+      {
+        "id": "ID_ORNAMENT_RIGHT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-21.png"
+        ],
+        "observation": "Cenário com área livre para formulário; CH01 mantém bob e argolas. Composição anterior conferida: formulário e personagem separados; sem HUD econômico antes da sessão."
+      },
+      {
+        "id": "CH01_WELCOME",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-22.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_welcome.png"
+        ],
+        "observation": "Cenário com área livre para formulário; CH01 mantém bob e argolas. Composição anterior conferida: formulário e personagem separados; sem HUD econômico antes da sessão."
+      },
+      {
+        "id": "FACADE_REST_FRANCES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-23.png"
+        ],
+        "observation": "Fachadas francesa/japonesa/lanches compartilham forma externa e distinguem interiores. Alfa sem fundo incorporado; leitura mantida a 480x360 e 240x180."
+      },
+      {
+        "id": "FACADE_REST_JAPONES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-23.png"
+        ],
+        "observation": "Fachadas francesa/japonesa/lanches compartilham forma externa e distinguem interiores. Alfa sem fundo incorporado; leitura mantida a 480x360 e 240x180."
+      },
+      {
+        "id": "FACADE_REST_LANCHES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-24.png"
+        ],
+        "observation": "Fachadas francesa/japonesa/lanches compartilham forma externa e distinguem interiores. Alfa sem fundo incorporado; leitura mantida a 480x360 e 240x180."
+      },
+      {
+        "id": "VIGNETTE_BANK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-24.png"
+        ],
+        "observation": "Cinco vinhetas de localidades coerentes com landmarks; árvores e piso permanecem na vinheta independente, sem nomes rasterizados."
+      },
+      {
+        "id": "VIGNETTE_CONDOMINIUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-25.png"
+        ],
+        "observation": "Cinco vinhetas de localidades coerentes com landmarks; árvores e piso permanecem na vinheta independente, sem nomes rasterizados."
+      },
+      {
+        "id": "VIGNETTE_MARKETING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-25.png"
+        ],
+        "observation": "Cinco vinhetas de localidades coerentes com landmarks; árvores e piso permanecem na vinheta independente, sem nomes rasterizados."
+      },
+      {
+        "id": "VIGNETTE_STORE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-25.png"
+        ],
+        "observation": "Cinco vinhetas de localidades coerentes com landmarks; árvores e piso permanecem na vinheta independente, sem nomes rasterizados."
+      },
+      {
+        "id": "VIGNETTE_UNIVERSITY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-26.png"
+        ],
+        "observation": "Cinco vinhetas de localidades coerentes com landmarks; árvores e piso permanecem na vinheta independente, sem nomes rasterizados."
+      },
+      {
+        "id": "PRODUCT_LAN_COMBO_COMPLETO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-26.png"
+        ],
+        "observation": "Três combos de lanches distinguíveis por composição. Louça/bandeja completas e contornos legíveis em 250/125 px."
+      },
+      {
+        "id": "PRODUCT_LAN_COMBO_ESPECIAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-26.png"
+        ],
+        "observation": "Três combos de lanches distinguíveis por composição. Louça/bandeja completas e contornos legíveis em 250/125 px."
+      },
+      {
+        "id": "PRODUCT_LAN_COMBO_SIMPLES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-26.png"
+        ],
+        "observation": "Três combos de lanches distinguíveis por composição. Louça/bandeja completas e contornos legíveis em 250/125 px."
+      },
+      {
+        "id": "PRODUCT_JAP_COMBINADO_MEDIO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-26.png"
+        ],
+        "observation": "Três produtos japoneses com composições próprias, sem receita ou quantidade dinâmica inferida. Recortes e alimento legíveis."
+      },
+      {
+        "id": "PRODUCT_JAP_COMBINADO_PREMIUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-27.png"
+        ],
+        "observation": "Três produtos japoneses com composições próprias, sem receita ou quantidade dinâmica inferida. Recortes e alimento legíveis."
+      },
+      {
+        "id": "PRODUCT_JAP_SUSHI_EXECUTIVO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-27.png"
+        ],
+        "observation": "Três produtos japoneses com composições próprias, sem receita ou quantidade dinâmica inferida. Recortes e alimento legíveis."
+      },
+      {
+        "id": "PRODUCT_FRA_MENU_CLASSICO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-27.png"
+        ],
+        "observation": "Três produtos franceses preservam a composição visual aprovada do lote; pratos e contornos íntegros."
+      },
+      {
+        "id": "PRODUCT_FRA_MENU_PREMIUM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-27.png"
+        ],
+        "observation": "Três produtos franceses preservam a composição visual aprovada do lote; pratos e contornos íntegros."
+      },
+      {
+        "id": "PRODUCT_FRA_PRATO_EXECUTIVO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-27.png"
+        ],
+        "observation": "Três produtos franceses preservam a composição visual aprovada do lote; pratos e contornos íntegros."
+      },
+      {
+        "id": "EQUIPMENT_BANCADA_INOX_PREPARO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-27.png"
+        ],
+        "observation": "Quatro equipamentos de cozinha com perspectiva coerente e portas/suportes completos. Detalhes de metal não se confundem com halo de fundo."
+      },
+      {
+        "id": "EQUIPMENT_CONJUNTO_PANELAS_INDUSTRIAIS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-28.png"
+        ],
+        "observation": "Quatro equipamentos de cozinha com perspectiva coerente e portas/suportes completos. Detalhes de metal não se confundem com halo de fundo."
+      },
+      {
+        "id": "EQUIPMENT_FOGAO_INDUSTRIAL_6_BOCAS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-28.png"
+        ],
+        "observation": "Quatro equipamentos de cozinha com perspectiva coerente e portas/suportes completos. Detalhes de metal não se confundem com halo de fundo."
+      },
+      {
+        "id": "EQUIPMENT_PIA_INDUSTRIAL_INOX",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-28.png"
+        ],
+        "observation": "Quatro equipamentos de cozinha com perspectiva coerente e portas/suportes completos. Detalhes de metal não se confundem com halo de fundo."
+      },
+      {
+        "id": "EQUIPMENT_FREEZER_HORIZONTAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-28.png"
+        ],
+        "observation": "Freezer, geladeira, mobiliário e PDV distintos; bases completas. Peças escuras perdem contraste em ameixa e devem ocupar cards claros no jogo."
+      },
+      {
+        "id": "EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-28.png"
+        ],
+        "observation": "Freezer, geladeira, mobiliário e PDV distintos; bases completas. Peças escuras perdem contraste em ameixa e devem ocupar cards claros no jogo."
+      },
+      {
+        "id": "EQUIPMENT_MOBILIARIO_BASICO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-28.png"
+        ],
+        "observation": "Freezer, geladeira, mobiliário e PDV distintos; bases completas. Peças escuras perdem contraste em ameixa e devem ocupar cards claros no jogo."
+      },
+      {
+        "id": "EQUIPMENT_SISTEMA_PDV_COMPUTADOR",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-29.png"
+        ],
+        "observation": "Freezer, geladeira, mobiliário e PDV distintos; bases completas. Peças escuras perdem contraste em ameixa e devem ocupar cards claros no jogo."
+      },
+      {
+        "id": "EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-29.png"
+        ],
+        "observation": "Chapa e fritadeira dupla reconhecíveis nas duas escalas; não há estado adquirido/bloqueado redesenhado no bitmap."
+      },
+      {
+        "id": "EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-29.png"
+        ],
+        "observation": "Chapa e fritadeira dupla reconhecíveis nas duas escalas; não há estado adquirido/bloqueado redesenhado no bitmap."
+      },
+      {
+        "id": "EQUIPMENT_BALCAO_REFRIGERADO_SUSHI",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-29.png"
+        ],
+        "observation": "Balcão, facas e panela de arroz distintos; vidro e lâminas mantêm separação de fundo."
+      },
+      {
+        "id": "EQUIPMENT_FACAS_ESPECIAIS_JAPONES",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-29.png"
+        ],
+        "observation": "Balcão, facas e panela de arroz distintos; vidro e lâminas mantêm separação de fundo."
+      },
+      {
+        "id": "EQUIPMENT_PANELA_ELETRICA_ARROZ",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-29.png"
+        ],
+        "observation": "Balcão, facas e panela de arroz distintos; vidro e lâminas mantêm separação de fundo."
+      },
+      {
+        "id": "EQUIPMENT_ADEGA_CLIMATIZADA",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-30.png"
+        ],
+        "observation": "Adega, forno e mobiliário de luxo completos e distintos. Pernas escuras do mobiliário exigem card claro na integração."
+      },
+      {
+        "id": "EQUIPMENT_FORNO_COMBINADO_INTELIGENTE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-30.png"
+        ],
+        "observation": "Adega, forno e mobiliário de luxo completos e distintos. Pernas escuras do mobiliário exigem card claro na integração."
+      },
+      {
+        "id": "EQUIPMENT_MOBILIARIO_LUXO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-30.png"
+        ],
+        "observation": "Adega, forno e mobiliário de luxo completos e distintos. Pernas escuras do mobiliário exigem card claro na integração."
+      },
+      {
+        "id": "BANK_ENVIRONMENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-31.png"
+        ],
+        "observation": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada."
+      },
+      {
+        "id": "CH01_BANK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-32.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_bank.png"
+        ],
+        "observation": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada."
+      },
+      {
+        "id": "CREDIT_CREDITO_DE_INVESTIMENTO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-32.png"
+        ],
+        "observation": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada."
+      },
+      {
+        "id": "CREDIT_CREDITO_EMPRESARIAL_PADRAO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-32.png"
+        ],
+        "observation": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada."
+      },
+      {
+        "id": "CREDIT_SEM_CREDITO",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-32.png"
+        ],
+        "observation": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada."
+      },
+      {
+        "id": "CREDIT_MICROCREDITO_EMPRESARIAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-32.png"
+        ],
+        "observation": "CH01 coerente com canônico; quatro créditos com símbolos próprios. Banco é ambiente opaco independente. Prova anterior personagem/ambiente também inspecionada."
+      },
+      {
+        "id": "PORTRAIT_ATTENDANT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-33.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_attendant.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "PORTRAIT_GRILL_COOK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-33.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_grill_cook.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "PORTRAIT_HEAD_CHEF",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-33.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_head_chef.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "PORTRAIT_MANAGER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-33.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_manager.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "PORTRAIT_SUSHI_CHEF",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-33.png",
+          "art-source/previews/ART-36/ART-36-native-portrait_sushi_chef.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "TEAM_ENV_SERVICE_COUNTER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-33.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "TEAM_ENV_GRILL_KITCHEN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-34.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "TEAM_ENV_MANAGEMENT_OFFICE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-34.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "TEAM_ENV_FRENCH_KITCHEN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-34.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "TEAM_ENV_SUSHI_COUNTER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-34.png"
+        ],
+        "observation": "Cinco retratos comparados aos respectivos canônicos em cortes nativos; cabelo/pele/figurino/acessórios preservados. Cinco ambientes e montagem conjunta inspecionados."
+      },
+      {
+        "id": "DRE_ENVIRONMENT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-34.png",
+          "art-source/previews/ART-36/ART-36-dre-monthly.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png"
+        ],
+        "observation": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados."
+      },
+      {
+        "id": "DRE_DESK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-35.png",
+          "art-source/previews/ART-36/ART-36-dre-monthly.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png"
+        ],
+        "observation": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados."
+      },
+      {
+        "id": "CH01_DRE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-35.png",
+          "art-source/previews/ART-36/ART-36-dre-monthly.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_dre.png"
+        ],
+        "observation": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados."
+      },
+      {
+        "id": "DRE_PROP_CALCULATOR",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-35.png",
+          "art-source/previews/ART-36/ART-36-dre-monthly.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png"
+        ],
+        "observation": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados."
+      },
+      {
+        "id": "DRE_PROP_COFFEE_CUP",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-35.png",
+          "art-source/previews/ART-36/ART-36-dre-monthly.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png"
+        ],
+        "observation": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados."
+      },
+      {
+        "id": "DRE_PROP_REPORT_BLANK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-35.png",
+          "art-source/previews/ART-36/ART-36-dre-monthly.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png"
+        ],
+        "observation": "DRE mensal: papel atrás dos dedos, pessoa atrás da mesa, caneca/calculadora acima do tampo. Recorte comum 560x420 e contato mão/folha preservados."
+      },
+      {
+        "id": "CH01_DISCUSSING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-36.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_discussing.png"
+        ],
+        "observation": "DRE trimestral: CH01 olha para CH04, óculos/barba/bob/argolas preservados. Mãos legíveis; mesa oculta coxas. Mesmos props e viewport da mensal."
+      },
+      {
+        "id": "CH04_DISCUSSING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-36.png",
+          "art-source/previews/ART-36/ART-36-dre-quarterly.png",
+          "art-source/previews/ART-36/ART-36-native-ch04_discussing.png"
+        ],
+        "observation": "DRE trimestral: CH01 olha para CH04, óculos/barba/bob/argolas preservados. Mãos legíveis; mesa oculta coxas. Mesmos props e viewport da mensal."
+      },
+      {
+        "id": "EVENT_BULK_PURCHASE_OPPORTUNITY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-36.png"
+        ],
+        "observation": "Cinco vinhetas de estoque/fornecedor distinguíveis por caixas, etiqueta, relógio, balança ou desperdício. Rótulos vazios e recortes limpos."
+      },
+      {
+        "id": "EVENT_SUPPLIER_DISCOUNT",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-37.png"
+        ],
+        "observation": "Cinco vinhetas de estoque/fornecedor distinguíveis por caixas, etiqueta, relógio, balança ou desperdício. Rótulos vazios e recortes limpos."
+      },
+      {
+        "id": "EVENT_SUPPLIER_DELAY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-37.png"
+        ],
+        "observation": "Cinco vinhetas de estoque/fornecedor distinguíveis por caixas, etiqueta, relógio, balança ou desperdício. Rótulos vazios e recortes limpos."
+      },
+      {
+        "id": "EVENT_INGREDIENT_PRICE_INCREASE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-38.png"
+        ],
+        "observation": "Cinco vinhetas de estoque/fornecedor distinguíveis por caixas, etiqueta, relógio, balança ou desperdício. Rótulos vazios e recortes limpos."
+      },
+      {
+        "id": "EVENT_EXCESSIVE_FOOD_WASTE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-38.png"
+        ],
+        "observation": "Cinco vinhetas de estoque/fornecedor distinguíveis por caixas, etiqueta, relógio, balança ou desperdício. Rótulos vazios e recortes limpos."
+      },
+      {
+        "id": "EVENT_EXTRA_LOCAL_DEMAND",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-39.png"
+        ],
+        "observation": "Cinco vinhetas de demanda/concorrência distinguíveis; sem pessoas novas ou opções fixadas no raster. Fachadas e props coerentes com repertório."
+      },
+      {
+        "id": "EVENT_LUNCH_DEMAND_PEAK",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-39.png"
+        ],
+        "observation": "Cinco vinhetas de demanda/concorrência distinguíveis; sem pessoas novas ou opções fixadas no raster. Fachadas e props coerentes com repertório."
+      },
+      {
+        "id": "EVENT_CORPORATE_ORDER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-40.png"
+        ],
+        "observation": "Cinco vinhetas de demanda/concorrência distinguíveis; sem pessoas novas ou opções fixadas no raster. Fachadas e props coerentes com repertório."
+      },
+      {
+        "id": "EVENT_COMPETITOR_TEMPORARY_CLOSURE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-40.png"
+        ],
+        "observation": "Cinco vinhetas de demanda/concorrência distinguíveis; sem pessoas novas ou opções fixadas no raster. Fachadas e props coerentes com repertório."
+      },
+      {
+        "id": "EVENT_NEW_COMPETITOR",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-41.png"
+        ],
+        "observation": "Cinco vinhetas de demanda/concorrência distinguíveis; sem pessoas novas ou opções fixadas no raster. Fachadas e props coerentes com repertório."
+      },
+      {
+        "id": "EVENT_FREEZER_BREAKDOWN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-41.png"
+        ],
+        "observation": "Cinco situações de operação/equipe distinguíveis por freezer, inspeção, fila de louça, fluxo de produção e cabo solto de pagamento. Sem texto de teste no raster."
+      },
+      {
+        "id": "EVENT_HEALTH_INSPECTION",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-42.png"
+        ],
+        "observation": "Cinco situações de operação/equipe distinguíveis por freezer, inspeção, fila de louça, fluxo de produção e cabo solto de pagamento. Sem texto de teste no raster."
+      },
+      {
+        "id": "EVENT_INSUFFICIENT_TEAM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-42.png"
+        ],
+        "observation": "Cinco situações de operação/equipe distinguíveis por freezer, inspeção, fila de louça, fluxo de produção e cabo solto de pagamento. Sem texto de teste no raster."
+      },
+      {
+        "id": "EVENT_TEAM_PRODUCTIVITY_BOOST",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-43.png"
+        ],
+        "observation": "Cinco situações de operação/equipe distinguíveis por freezer, inspeção, fila de louça, fluxo de produção e cabo solto de pagamento. Sem texto de teste no raster."
+      },
+      {
+        "id": "EVENT_PAYMENT_SYSTEM_FAILURE",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-43.png"
+        ],
+        "observation": "Cinco situações de operação/equipe distinguíveis por freezer, inspeção, fila de louça, fluxo de produção e cabo solto de pagamento. Sem texto de teste no raster."
+      },
+      {
+        "id": "EVENT_INFLUENCER_MENTION",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-44.png"
+        ],
+        "observation": "Cinco situações de comunicação/contexto distinguíveis; telas em branco, estrelas inteiras/quebradas e chuva legíveis. Chuva sem fundo retangular incorporado."
+      },
+      {
+        "id": "EVENT_POSITIVE_ONLINE_REVIEW",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-44.png"
+        ],
+        "observation": "Cinco situações de comunicação/contexto distinguíveis; telas em branco, estrelas inteiras/quebradas e chuva legíveis. Chuva sem fundo retangular incorporado."
+      },
+      {
+        "id": "EVENT_NEGATIVE_REVIEW",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-45.png"
+        ],
+        "observation": "Cinco situações de comunicação/contexto distinguíveis; telas em branco, estrelas inteiras/quebradas e chuva legíveis. Chuva sem fundo retangular incorporado."
+      },
+      {
+        "id": "EVENT_LOCAL_FESTIVAL",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-45.png"
+        ],
+        "observation": "Cinco situações de comunicação/contexto distinguíveis; telas em branco, estrelas inteiras/quebradas e chuva legíveis. Chuva sem fundo retangular incorporado."
+      },
+      {
+        "id": "EVENT_HEAVY_RAIN",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-46.png"
+        ],
+        "observation": "Cinco situações de comunicação/contexto distinguíveis; telas em branco, estrelas inteiras/quebradas e chuva legíveis. Chuva sem fundo retangular incorporado."
+      },
+      {
+        "id": "REPORT_CONCLUSION",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-46.png"
+        ],
+        "observation": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida."
+      },
+      {
+        "id": "BANKRUPTCY_OVERLAY",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-47.png"
+        ],
+        "observation": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida."
+      },
+      {
+        "id": "EMPTY_CART",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-47.png"
+        ],
+        "observation": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida."
+      },
+      {
+        "id": "EMPTY_TEAM",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-48.png"
+        ],
+        "observation": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida."
+      },
+      {
+        "id": "EMPTY_RESULTS",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-48.png"
+        ],
+        "observation": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida."
+      },
+      {
+        "id": "CH01_CONCERNED",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-49.png",
+          "art-source/previews/ART-36/ART-36-native-ch01_concerned.png"
+        ],
+        "observation": "Conclusão e dificuldade distinguíveis por props/ambiente, sem troféu infantil. Três vazios com campos em branco. CH01 preocupada preserva identidade e expressão contida."
+      },
+      {
+        "id": "UI_SPINNER",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-49.png"
+        ],
+        "observation": "Spinner aberto, tap, drag e focus ring distintos em 48/64 px e miniaturas. Centro dos anéis transparente. Animação/visibilidade ainda são trabalho de UI."
+      },
+      {
+        "id": "TUTORIAL_TAP",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-49.png"
+        ],
+        "observation": "Spinner aberto, tap, drag e focus ring distintos em 48/64 px e miniaturas. Centro dos anéis transparente. Animação/visibilidade ainda são trabalho de UI."
+      },
+      {
+        "id": "TUTORIAL_DRAG",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-49.png"
+        ],
+        "observation": "Spinner aberto, tap, drag e focus ring distintos em 48/64 px e miniaturas. Centro dos anéis transparente. Animação/visibilidade ainda são trabalho de UI."
+      },
+      {
+        "id": "TUTORIAL_FOCUS_RING",
+        "directly_inspected": true,
+        "evidence": [
+          "art-source/previews/ART-36/ART-36-display-49.png"
+        ],
+        "observation": "Spinner aberto, tap, drag e focus ring distintos em 48/64 px e miniaturas. Centro dos anéis transparente. Animação/visibilidade ainda são trabalho de UI."
+      }
+    ]
+  },
+  "integration_performed": false,
+  "runtime_tested": false,
+  "integration_ready": false,
+  "integration_report": "docs/art/qa/ART-36-integration-map.json",
+  "pending": [
+    {
+      "kind": "future_integration",
+      "detail": "227 assets têm propostas de importação pendentes: 207 em Multiple, 67 com bordas diferentes, 16 com pivot diferente, 227 com compressão na plataforma padrão. Grupos se sobrepõem. Preservar GUIDs e revisar fileIDs antes de migrar."
+    },
+    {
+      "kind": "future_integration",
+      "detail": "Nenhum dos 265 GUIDs aparece nos 175 arquivos serializados varridos. Vincular sprites aos alvos do integration-map, sem trocar IDs/economia."
+    },
+    {
+      "kind": "future_integration",
+      "detail": "Uniformizar CanvasScalers 1280x720 e 800x600 com a proposta 1920x1080; validar layout e input no Unity/plataformas depois. Nenhum teste de runtime foi executado."
+    },
+    {
+      "kind": "usage_condition",
+      "detail": "Logo oficial e objetos escuros precisam de superfície clara; overlays exigem base; ícones brancos precisam de tint adequado. Textos, valores e gráficos continuam separados."
+    }
+  ],
+  "audit_pending": [],
+  "new_sprite_count": 0,
+  "production_record": "docs/art/prompts/ART-36.json",
+  "integration_status_semantics": "validado refere-se à auditoria e às provas. Não significa importação configurada ou UI integrada."
+}
