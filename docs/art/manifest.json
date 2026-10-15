@@ -11618,7 +11618,7 @@
         95
       ],
       "display_size_px": [
-        90.0,
+        90,
         63.33333333333333
       ],
       "alpha_policy": "recorte",
@@ -12871,7 +12871,7 @@
       "path": "restaurant/facades/rest_frances.png",
       "name": "Fachada isolada Frances, vista frontal em três quartos, detalhes próprios do posicionamento; toldo/detalhe roxo, sem palavras, pessoas, pratos ou moldura",
       "kind": "fachada",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1024,
@@ -12899,19 +12899,31 @@
       "source": "Assets/Resources/Restaurants/REST_Frances.asset",
       "references": [
         "art-source/references/concepts/02-abertura.png",
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-15/rest_lanches-source-01.png",
+        "art-source/references/generations/ART-12/map_rest_frances-source.png"
       ],
       "brief": "Fachada isolada Frances, vista frontal em três quartos, detalhes próprios do posicionamento; toldo/detalhe roxo, sem palavras, pessoas, pratos ou moldura.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "11616f58dbd45dcee03f867578f0b8f5242990f56977cbbf327e92648d33832a",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE isolated restaurant facade sprite for the approved Cogna business game.\nInput images: Image 1 is the exact exterior, framing and lower frontal three-quarter camera to preserve. Image 2 is the canonical ART-12 restaurant fitout for the requested type. Image 3 is the approved opening concept, editorial cartoon style only. Never reproduce any UI, text, meals or people.\nPreserve Image 1's entire exterior geometry and placement exactly: one-story ivory building, flat grey roof with one air conditioner, parapet, blank purple fascia, purple segmented awnings wrapping the corner, two large windows on the main face, narrow glazed door on the right return near the front corner, right-hand window, structural pillars and thin plinth. Same canvas, margins, camera, exterior outline, warm upper-left light, framing, scale and dark plum linework. Do not add or remove any window or doorway and do not alter the building dimensions.\nPrimary request: FACADE_REST_FRANCES. Change only the fitout seen through the glass to the French restaurant in Image 2, a premium contemporary French bistro inside the same neighborhood building.\nFrench interior: warm cream walls with restrained classical rectangular moulding, dark timber panel details and a modest built-in wine rack on a rear wall with unlabelled bottle silhouettes. Replace the casual bar and stools with a few small dining tables covered in crisp ivory tablecloths and refined dark plum chairs. Empty table surfaces with no plates, glasses, flowers or food; keep furniture naturally behind the glazing. Warm amber globe lamps with small restrained brass details. Refined, calm and welcoming, legible without text or dish illustrations.\nRendering: polished adult editorial cartoon with crisp dark muted plum outlines, controlled cel shading, simple clean color regions, minimal texture. Palette: violet #6D28D9, plum #24113D, lavender #B99AE8, ivory #F5F0E8, amber #E7B65A and timber brown. No grain, excessive detail or photographic materials. Facade stays purple rather than changing color per restaurant type.\nTransparency: preserve genuine RGBA alpha zero outside the exterior. Clean antialiased silhouette with complete uncropped building. No backdrop, ground, paving, pedestal, external cast shadow, aura, halo, colored haze, checkerboard, outdoor objects or border.\nConstraints: no lettering, labels, words, numbers, symbols, logos, writing, menu boards, people, meals, food, plates, drinks, tableware, outdoor furniture, exterior plants, unrelated props, scenery, interface, card or sprite sheet. ONE isolated building only. Desired landscape 4:3, 1024x768 export, display box 480x360, complete building and transparent margins.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; continuidade arquitetônica conferida com o restaurante canônico do ART-12.",
+        "record": "docs/art/qa/ART-15.json",
+        "preview": "art-source/previews/ART-15/FACADE_REST_FRANCES-display-light-dark.png",
+        "details": "art-source/previews/ART-15/FACADE_REST_FRANCES-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-15.json"
     },
     {
       "id": "FACADE_REST_JAPONES",
@@ -12919,7 +12931,7 @@
       "path": "restaurant/facades/rest_japones.png",
       "name": "Fachada isolada Japones, vista frontal em três quartos, detalhes próprios do posicionamento; toldo/detalhe roxo, sem palavras, pessoas, pratos ou moldura",
       "kind": "fachada",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1024,
@@ -12947,19 +12959,31 @@
       "source": "Assets/Resources/Restaurants/REST_Japones.asset",
       "references": [
         "art-source/references/concepts/02-abertura.png",
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-15/rest_lanches-source-01.png",
+        "art-source/references/generations/ART-12/map_rest_japones-source.png"
       ],
       "brief": "Fachada isolada Japones, vista frontal em três quartos, detalhes próprios do posicionamento; toldo/detalhe roxo, sem palavras, pessoas, pratos ou moldura.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "97370efd4859a362e30385d1a295fc5a51669b366ed18b2f8ce47a6a440c5ede",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE isolated restaurant facade sprite for the approved Cogna business game.\nInput images: Image 1 is the exact exterior, framing and lower frontal three-quarter camera to preserve. Image 2 is the canonical ART-12 restaurant fitout for the requested type. Image 3 is the approved opening concept, editorial cartoon style only. Never reproduce any UI, text, meals or people.\nPreserve Image 1's entire exterior geometry and placement exactly: one-story ivory building, flat grey roof with one air conditioner, parapet, blank purple fascia, purple segmented awnings wrapping the corner, two large windows on the main face, narrow glazed door on the right return near the front corner, right-hand window, structural pillars and thin plinth. Same canvas, margins, camera, exterior outline, warm upper-left light, framing, scale and dark plum linework. Do not add or remove any window or doorway and do not alter the building dimensions.\nPrimary request: FACADE_REST_JAPONES. Change only the fitout and window reveals to the Japanese restaurant in Image 2, a contemporary Japanese dining room inside the same neighborhood building.\nJapanese interior: dark warm timber service counter with a few plain square stools, slim vertical wood slats, clean simple timber shelving and compact dark tables/chairs. Empty counter and table surfaces, no sushi, dishes, bottles, utensils, food or extra props. Two plain round warm ivory lantern-like pendant lights in the main glazed space, without symbols. Wood slat trim may cover the existing inner window reveals while preserving the ivory structural columns and every exterior boundary. Calm technical craft and understated contemporary Japanese character; no pagoda roof, flags, kanji or themed ornament.\nRendering: polished adult editorial cartoon with crisp dark muted plum outlines, controlled cel shading, simple clean color regions, minimal texture. Palette: violet #6D28D9, plum #24113D, lavender #B99AE8, ivory #F5F0E8, amber #E7B65A and timber brown. No grain, excessive detail or photographic materials. Facade stays purple rather than changing color per restaurant type.\nTransparency: preserve genuine RGBA alpha zero outside the exterior. Clean antialiased silhouette with complete uncropped building. No backdrop, ground, paving, pedestal, external cast shadow, aura, halo, colored haze, checkerboard, outdoor objects or border.\nConstraints: no lettering, labels, words, numbers, symbols, logos, writing, menu boards, people, meals, food, plates, drinks, tableware, outdoor furniture, exterior plants, unrelated props, scenery, interface, card or sprite sheet. ONE isolated building only. Desired landscape 4:3, 1024x768 export, display box 480x360, complete building and transparent margins.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; continuidade arquitetônica conferida com o restaurante canônico do ART-12.",
+        "record": "docs/art/qa/ART-15.json",
+        "preview": "art-source/previews/ART-15/FACADE_REST_JAPONES-display-light-dark.png",
+        "details": "art-source/previews/ART-15/FACADE_REST_JAPONES-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-15.json"
     },
     {
       "id": "FACADE_REST_LANCHES",
@@ -12967,7 +12991,7 @@
       "path": "restaurant/facades/rest_lanches.png",
       "name": "Fachada isolada Lanches, vista frontal em três quartos, detalhes próprios do posicionamento; toldo/detalhe roxo, sem palavras, pessoas, pratos ou moldura",
       "kind": "fachada",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         1024,
@@ -12995,19 +13019,30 @@
       "source": "Assets/Resources/Restaurants/REST_Lanches.asset",
       "references": [
         "art-source/references/concepts/02-abertura.png",
-        "art-source/references/concepts/03-gestao.png"
+        "art-source/references/concepts/03-gestao.png",
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png"
       ],
       "brief": "Fachada isolada Lanches, vista frontal em três quartos, detalhes próprios do posicionamento; toldo/detalhe roxo, sem palavras, pessoas, pratos ou moldura.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "6208671b9d6929da37d3273288fc4fd50ee8196ab9bec07acbbc88b61cfa0427",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE isolated restaurant facade illustration for the approved Cogna business game, FACADE_REST_LANCHES.\nInput images: Image 1 is the canonical casual restaurant from ART-12, architecture and materials reference. Image 2 is the approved opening concept, adult editorial cartoon style reference. Image 3 is the approved management concept, linework and finish reference. Never copy their UI, text, people, meals or scenes.\nPrimary request: depict the SAME low contemporary neighborhood snack restaurant as Image 1 from a LOWER, mostly frontal three-quarter view, with broad storefront on the left and a narrower entrance facade receding to the right. Keep a single story, flat grey roof, low ivory parapet, one modest roof air-conditioning unit, blank broad violet fascia wrapping the corner, purple fabric awnings, ivory structural columns, thin stone plinth and dark plum window frames. Two broad glass windows on the main face; narrow glazed entrance on the right-hand face close to the front corner. Show the whole freestanding building, uncropped.\nCamera/composition: landscape 4:3, desired 1024x768 pixels. Lower architectural front three-quarter view rather than a top-down map view: vertical walls upright, main fascia almost horizontal and the right return clearly visible. Roof remains a shallow visible plane. Center the full building with 6-8 percent truly transparent margin on every side. Stable centered footprint and adult realistic architectural proportions, no exaggerated lens or miniature pedestal. Fill about 86 percent of canvas width. This exterior and view will be reused for French and Japanese fitout variants.\nFitout: popular, welcoming and practical casual restaurant. Warm amber light inside, simple timber service counter, several plain round stools and compact square tables/chairs visible naturally through the windows. Empty counter and empty table surfaces; absolutely no food, meals, plates, drinks, packaging, menu boards or extra props. Furniture belongs inside the building, not outside.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved Cogna concepts. Confident dark muted-plum contours, clean controlled cel-shaded color regions, crisp material edges, two or three broad tones per material, subtle limited gradient only where useful. Avoid painted grain or fine mottled texture. Cozy clear glazing with simple reflections, legible at display size 480x360.\nPalette and light: Cogna violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, ink #30243C, timber brown and warm amber #E7B65A. Soft upper-left lighting with shadows on the architecture only. All fascia and awnings remain purple. No exterior ground shadow.\nTransparency: genuine RGBA cutout, alpha zero all around the building and clean antialiased silhouette. Opaque building and glazing; transparent exterior. No background, floor, pavement patch, landscape, street, backdrop, haze, halo, shadow outside silhouette, checkerboard or border. Keep the transparent margins.\nConstraints: ONE building sprite only, never a sheet or a card. No lettering, words, numbers, symbols, logos, signs with writing, people, faces, food, dishes, exterior plants, outdoor furniture, props, neighboring buildings, scenery or interface. No placeholder shapes. The plain violet fascia is entirely blank.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem personagens; continuidade arquitetônica conferida com o restaurante canônico do ART-12.",
+        "record": "docs/art/qa/ART-15.json",
+        "preview": "art-source/previews/ART-15/FACADE_REST_LANCHES-display-light-dark.png",
+        "details": "art-source/previews/ART-15/FACADE_REST_LANCHES-native-light-dark.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-15.json"
     },
     {
       "id": "VIGNETTE_BANK",
@@ -13015,7 +13050,7 @@
       "path": "location/illustrations/vignette_bank.png",
       "name": "Vinheta ambiental Área Financeira, coerente com a construção do mapa",
       "kind": "vinheta",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -13042,19 +13077,32 @@
       "catalog_id": "bank",
       "source": "Assets/Resources/Locations/LOC_Bank.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-11/map_bank-source-01.png",
+        "Assets/Art/new/location/landmarks/compact/map_bank.png"
       ],
       "brief": "Vinheta ambiental Área Financeira, coerente com a construção do mapa. Sem texto, ícones ou pessoas canônicas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "08eaa244c63d5997d86b6721ee6759d0aaec91100580fc38c09ae9999af939f9",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE environmental location vignette for the approved Cogna business game.\nInput images: Image 1 is the canonical ART-11 landmark or neighborhood, architecture and identity reference. Image 2 is the approved Cogna hub concept, environment, palette and adult cartoon style reference. If Image 3 is supplied, it is the completed financial vignette, shared cutout-scene treatment and finish reference only; never copy its bank into this scene.\nPrimary request: ONE financial district environmental vignette centered on the exact bank building in Image 1: a compact two-story warm ivory institutional building with tall blue glazed bays separated by broad pale stone piers, flat grey roof and a small central rooftop service room, plain blank entablature, central glazed double-door entry and broad shallow front steps. Retain the building's recognizable massing, no bank word or icon. Add a restrained surrounding pedestrian forecourt: warm pale paving, two low integrated shrub planters at the steps, a few rounded green trees framing left and right, and a narrow quiet curb edge across the foreground. The bank is the clear dominant subject; landscaping supports it without hiding the entry or windows.\nComposition/camera: a wide LANDSCAPE 16:9 environmental illustration, desired 960x540 export. A closer, lower front three-quarter urban view than the top-down map, upright verticals and coherent architectural perspective. Full key architecture and foliage crowns completely inside the canvas. Building group centered, with foreground paving flowing naturally around it into one compact, shallow environmental patch. Entire scene about 88 percent of canvas width and 82 percent of canvas height, with comfortable genuinely transparent margins on all sides. Keep an evenly balanced, legible visual weight suited to a 520x292 display box.\nEnvironment boundary/transparency: the inside of the microenvironment is solid opaque color (alpha 255 in buildings, glass, ground and foliage interiors). Outside the natural outer silhouette of roofs, trees, grass beds and foreground pavement is genuine alpha zero. The connected ground patch has an irregular gently curved outer edge, slightly softened through a few grass/plant shapes; it is a thin illustration surface with no vertical cutaway thickness, raised slab, tile base or diorama pedestal. Clean antialiased outline, no outside cast shadow. No opaque sky or rectangular backdrop. This is a cutout environmental scene with a filled center, not a rectangular screenshot.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved concepts and landmark. Confident muted dark-plum contours, clean controlled cel shading, broad near-flat color regions, only restrained gradients, simple architectural detail readable at 520x292. No photographic texture, painterly grain, fine mottled noise or blurry soft edges. Palette: ivory #F5F0E8, ink #30243C, plum #24113D, subtle lavender #B99AE8 shadow accents, cool blue glazing, warm terracotta/coral where shown in canonical architecture, grouped teal/olive greens and small warm amber highlights. Preserve each landmark's own approved material colors. Warm clear upper-left daylight, local contact and architectural shadows contained inside the vignette.\nConstraints: ONE separate location illustration only, no sprite sheet, labels, letters, numbers, words, pseudo-writing, signs, symbols, logos, pins, icons, people of any size, faces, vehicles, pets, food, props in the foreground, UI, panels, buttons, frame or border. Do not copy the concept's HUD, map labels, streetscape text or characters. No white/black/colored background, checkerboard, glow, aura, colored haze or detached floating objects. All trees and fixed environmental features must belong to the same connected scene. Full scene uncropped.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem pessoas; identidade arquitetônica comparada com a construção canônica ART-11.",
+        "record": "docs/art/qa/ART-16.json",
+        "preview": "art-source/previews/ART-16/VIGNETTE_BANK-display-light-dark.png",
+        "details": "art-source/previews/ART-16/VIGNETTE_BANK-native-light-dark.png",
+        "architecture_comparison": "art-source/previews/ART-16/ART-16-architecture-comparison.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-16.json"
     },
     {
       "id": "VIGNETTE_CONDOMINIUM",
@@ -13062,7 +13110,7 @@
       "path": "location/illustrations/vignette_condominium.png",
       "name": "Vinheta ambiental Área Residencial, coerente com a construção do mapa",
       "kind": "vinheta",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -13089,19 +13137,33 @@
       "catalog_id": "condominium",
       "source": "Assets/Resources/Locations/LOC_Condominium.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-11/map_condominium-source-02.png",
+        "art-source/references/generations/ART-16/vignette_bank-source-01.png",
+        "Assets/Art/new/location/landmarks/compact/map_condominium.png"
       ],
       "brief": "Vinheta ambiental Área Residencial, coerente com a construção do mapa. Sem texto, ícones ou pessoas canônicas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "77d974772a6feed0a895ded5a84d19e334a668c3991cbcd2a4e17b4947c07166",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE environmental location vignette for the approved Cogna business game.\nInput images: Image 1 is the canonical ART-11 landmark or neighborhood, architecture and identity reference. Image 2 is the approved Cogna hub concept, environment, palette and adult cartoon style reference. If Image 3 is supplied, it is the completed financial vignette, shared cutout-scene treatment and finish reference only; never copy its bank into this scene.\nPrimary request: ONE residential neighborhood environmental vignette using the exact house vocabulary in Image 1: six small two-story ivory homes with terracotta pitched tile roofs, tiny cream chimneys, blue windows, modest blue doors and little tiled porch hoods. Arrange the houses into a coherent wide neighborhood cluster along one gently bending residential lane, keeping roofs, walls and entry paths readable. Six houses belong to ONE connected scene, never individual scattered stickers or a sheet. Include joined gardens of calm green grass, a few rounded street trees and small hedges, pale narrow paths to doors, and a short quiet lane segment across the front. Preserve the modest middle-income contemporary neighborhood identity, adult architectural proportions and warm tiled roofs.\nComposition/camera: a wide LANDSCAPE 16:9 environmental illustration, desired 960x540 export. A closer, lower front three-quarter urban view than the top-down map, upright verticals and coherent architectural perspective. Full key architecture and foliage crowns completely inside the canvas. Building group centered, with foreground paving flowing naturally around it into one compact, shallow environmental patch. Entire scene about 88 percent of canvas width and 82 percent of canvas height, with comfortable genuinely transparent margins on all sides. Keep an evenly balanced, legible visual weight suited to a 520x292 display box.\nEnvironment boundary/transparency: the inside of the microenvironment is solid opaque color (alpha 255 in buildings, glass, ground and foliage interiors). Outside the natural outer silhouette of roofs, trees, grass beds and foreground pavement is genuine alpha zero. The connected ground patch has an irregular gently curved outer edge, slightly softened through a few grass/plant shapes; it is a thin illustration surface with no vertical cutaway thickness, raised slab, tile base or diorama pedestal. Clean antialiased outline, no outside cast shadow. No opaque sky or rectangular backdrop. This is a cutout environmental scene with a filled center, not a rectangular screenshot.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved concepts and landmark. Confident muted dark-plum contours, clean controlled cel shading, broad near-flat color regions, only restrained gradients, simple architectural detail readable at 520x292. No photographic texture, painterly grain, fine mottled noise or blurry soft edges. Palette: ivory #F5F0E8, ink #30243C, plum #24113D, subtle lavender #B99AE8 shadow accents, cool blue glazing, warm terracotta/coral where shown in canonical architecture, grouped teal/olive greens and small warm amber highlights. Preserve each landmark's own approved material colors. Warm clear upper-left daylight, local contact and architectural shadows contained inside the vignette.\nConstraints: ONE separate location illustration only, no sprite sheet, labels, letters, numbers, words, pseudo-writing, signs, symbols, logos, pins, icons, people of any size, faces, vehicles, pets, food, props in the foreground, UI, panels, buttons, frame or border. Do not copy the concept's HUD, map labels, streetscape text or characters. No white/black/colored background, checkerboard, glow, aura, colored haze or detached floating objects. All trees and fixed environmental features must belong to the same connected scene. Full scene uncropped.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem pessoas; identidade arquitetônica comparada com a construção canônica ART-11.",
+        "record": "docs/art/qa/ART-16.json",
+        "preview": "art-source/previews/ART-16/VIGNETTE_CONDOMINIUM-display-light-dark.png",
+        "details": "art-source/previews/ART-16/VIGNETTE_CONDOMINIUM-native-light-dark.png",
+        "architecture_comparison": "art-source/previews/ART-16/ART-16-architecture-comparison.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-16.json"
     },
     {
       "id": "VIGNETTE_MARKETING",
@@ -13109,7 +13171,7 @@
       "path": "location/illustrations/vignette_marketing.png",
       "name": "Vinheta ambiental Área Corporativa, coerente com a construção do mapa",
       "kind": "vinheta",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -13136,19 +13198,33 @@
       "catalog_id": "marketing",
       "source": "Assets/Resources/Locations/LOC_Marketing.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-11/map_marketing-source-01.png",
+        "art-source/references/generations/ART-16/vignette_bank-source-01.png",
+        "Assets/Art/new/location/landmarks/compact/map_marketing.png"
       ],
       "brief": "Vinheta ambiental Área Corporativa, coerente com a construção do mapa. Sem texto, ícones ou pessoas canônicas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "a544782a5457d3eaa35f5138bf7fdfa31ac0db1cb5daf0e60cbfb23a47848ea0",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE environmental location vignette for the approved Cogna business game.\nInput images: Image 1 is the canonical ART-11 landmark or neighborhood, architecture and identity reference. Image 2 is the approved Cogna hub concept, environment, palette and adult cartoon style reference. If Image 3 is supplied, it is the completed financial vignette, shared cutout-scene treatment and finish reference only; never copy its bank into this scene.\nPrimary request: ONE corporate district environmental vignette centered on the exact three-building office complex in Image 1: one tall rear tower and two shorter front office blocks grouped around a low glazed connection. Warm ivory rectilinear structural frames, broad cool blue glass window strips, flat grey roofs with a few modest service boxes, subtle integrated shrub planters and clear glazed ground-floor entrances. Preserve the distinctive height hierarchy and building silhouette. Add a small unified paved plaza linking the three entrances, restrained rounded trees at the outer sides, low green planting strips and a short quiet curb edge. No extra towers or skyline. The scene communicates an organized contemporary office district, without advertising, charts or marketing symbols.\nComposition/camera: a wide LANDSCAPE 16:9 environmental illustration, desired 960x540 export. A closer, lower front three-quarter urban view than the top-down map, upright verticals and coherent architectural perspective. Full key architecture and foliage crowns completely inside the canvas. Building group centered, with foreground paving flowing naturally around it into one compact, shallow environmental patch. Entire scene about 88 percent of canvas width and 82 percent of canvas height, with comfortable genuinely transparent margins on all sides. Keep an evenly balanced, legible visual weight suited to a 520x292 display box.\nEnvironment boundary/transparency: the inside of the microenvironment is solid opaque color (alpha 255 in buildings, glass, ground and foliage interiors). Outside the natural outer silhouette of roofs, trees, grass beds and foreground pavement is genuine alpha zero. The connected ground patch has an irregular gently curved outer edge, slightly softened through a few grass/plant shapes; it is a thin illustration surface with no vertical cutaway thickness, raised slab, tile base or diorama pedestal. Clean antialiased outline, no outside cast shadow. No opaque sky or rectangular backdrop. This is a cutout environmental scene with a filled center, not a rectangular screenshot.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved concepts and landmark. Confident muted dark-plum contours, clean controlled cel shading, broad near-flat color regions, only restrained gradients, simple architectural detail readable at 520x292. No photographic texture, painterly grain, fine mottled noise or blurry soft edges. Palette: ivory #F5F0E8, ink #30243C, plum #24113D, subtle lavender #B99AE8 shadow accents, cool blue glazing, warm terracotta/coral where shown in canonical architecture, grouped teal/olive greens and small warm amber highlights. Preserve each landmark's own approved material colors. Warm clear upper-left daylight, local contact and architectural shadows contained inside the vignette.\nConstraints: ONE separate location illustration only, no sprite sheet, labels, letters, numbers, words, pseudo-writing, signs, symbols, logos, pins, icons, people of any size, faces, vehicles, pets, food, props in the foreground, UI, panels, buttons, frame or border. Do not copy the concept's HUD, map labels, streetscape text or characters. No white/black/colored background, checkerboard, glow, aura, colored haze or detached floating objects. All trees and fixed environmental features must belong to the same connected scene. Full scene uncropped.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem pessoas; identidade arquitetônica comparada com a construção canônica ART-11.",
+        "record": "docs/art/qa/ART-16.json",
+        "preview": "art-source/previews/ART-16/VIGNETTE_MARKETING-display-light-dark.png",
+        "details": "art-source/previews/ART-16/VIGNETTE_MARKETING-native-light-dark.png",
+        "architecture_comparison": "art-source/previews/ART-16/ART-16-architecture-comparison.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-16.json"
     },
     {
       "id": "VIGNETTE_STORE",
@@ -13156,7 +13232,7 @@
       "path": "location/illustrations/vignette_store.png",
       "name": "Vinheta ambiental Área Comercial, coerente com a construção do mapa",
       "kind": "vinheta",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -13183,19 +13259,33 @@
       "catalog_id": "store",
       "source": "Assets/Resources/Locations/LOC_Store.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-11/map_store-source-01.png",
+        "art-source/references/generations/ART-16/vignette_bank-source-01.png",
+        "Assets/Art/new/location/landmarks/compact/map_store.png"
       ],
       "brief": "Vinheta ambiental Área Comercial, coerente com a construção do mapa. Sem texto, ícones ou pessoas canônicas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "3aa304b0d380c1624db739182a37946bd19ce0f924e360fe03161699d83dfefd",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE environmental location vignette for the approved Cogna business game.\nInput images: Image 1 is the canonical ART-11 landmark or neighborhood, architecture and identity reference. Image 2 is the approved Cogna hub concept, environment, palette and adult cartoon style reference. If Image 3 is supplied, it is the completed financial vignette, shared cutout-scene treatment and finish reference only; never copy its bank into this scene.\nPrimary request: ONE commercial district environmental vignette centered on the exact two-story retail/service building in Image 1: broad rectangular low-rise massing, muted warm coral ground-floor walls, ivory upper story and parapet, flat grey roof with a modest central rooftop service room, large cool-blue storefront windows and central glazed double-door entrance. Keep the blank upper fascia and the warm coral/ivory identity; no word, sign or storefront logo. Through the glass show only a few indistinct fixed empty shelving/counter silhouettes. Surround it with a connected warm pale pedestrian sidewalk/forecourt, a few rounded trees and low shrubs at the lateral edges and a short curb segment in front. The building remains dominant and the entrance unobstructed; no shop merchandise, prices, sales graphics or extra neighboring stores.\nComposition/camera: a wide LANDSCAPE 16:9 environmental illustration, desired 960x540 export. A closer, lower front three-quarter urban view than the top-down map, upright verticals and coherent architectural perspective. Full key architecture and foliage crowns completely inside the canvas. Building group centered, with foreground paving flowing naturally around it into one compact, shallow environmental patch. Entire scene about 88 percent of canvas width and 82 percent of canvas height, with comfortable genuinely transparent margins on all sides. Keep an evenly balanced, legible visual weight suited to a 520x292 display box.\nEnvironment boundary/transparency: the inside of the microenvironment is solid opaque color (alpha 255 in buildings, glass, ground and foliage interiors). Outside the natural outer silhouette of roofs, trees, grass beds and foreground pavement is genuine alpha zero. The connected ground patch has an irregular gently curved outer edge, slightly softened through a few grass/plant shapes; it is a thin illustration surface with no vertical cutaway thickness, raised slab, tile base or diorama pedestal. Clean antialiased outline, no outside cast shadow. No opaque sky or rectangular backdrop. This is a cutout environmental scene with a filled center, not a rectangular screenshot.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved concepts and landmark. Confident muted dark-plum contours, clean controlled cel shading, broad near-flat color regions, only restrained gradients, simple architectural detail readable at 520x292. No photographic texture, painterly grain, fine mottled noise or blurry soft edges. Palette: ivory #F5F0E8, ink #30243C, plum #24113D, subtle lavender #B99AE8 shadow accents, cool blue glazing, warm terracotta/coral where shown in canonical architecture, grouped teal/olive greens and small warm amber highlights. Preserve each landmark's own approved material colors. Warm clear upper-left daylight, local contact and architectural shadows contained inside the vignette.\nConstraints: ONE separate location illustration only, no sprite sheet, labels, letters, numbers, words, pseudo-writing, signs, symbols, logos, pins, icons, people of any size, faces, vehicles, pets, food, props in the foreground, UI, panels, buttons, frame or border. Do not copy the concept's HUD, map labels, streetscape text or characters. No white/black/colored background, checkerboard, glow, aura, colored haze or detached floating objects. All trees and fixed environmental features must belong to the same connected scene. Full scene uncropped.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem pessoas; identidade arquitetônica comparada com a construção canônica ART-11.",
+        "record": "docs/art/qa/ART-16.json",
+        "preview": "art-source/previews/ART-16/VIGNETTE_STORE-display-light-dark.png",
+        "details": "art-source/previews/ART-16/VIGNETTE_STORE-native-light-dark.png",
+        "architecture_comparison": "art-source/previews/ART-16/ART-16-architecture-comparison.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-16.json"
     },
     {
       "id": "VIGNETTE_UNIVERSITY",
@@ -13203,7 +13293,7 @@
       "path": "location/illustrations/vignette_university.png",
       "name": "Vinheta ambiental Área Educacional, coerente com a construção do mapa",
       "kind": "vinheta",
-      "status": "planejado",
+      "status": "validado",
       "scope": "nucleo",
       "export_size_px": [
         960,
@@ -13230,19 +13320,33 @@
       "catalog_id": "university",
       "source": "Assets/Resources/Locations/LOC_University.asset",
       "references": [
-        "art-source/references/concepts/01-hub.png"
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/generations/ART-11/map_university-source-01.png",
+        "art-source/references/generations/ART-16/vignette_bank-source-01.png",
+        "Assets/Art/new/location/landmarks/compact/map_university.png"
       ],
       "brief": "Vinheta ambiental Área Educacional, coerente com a construção do mapa. Sem texto, ícones ou pessoas canônicas.",
-      "sha256": null,
-      "actual_size_px": null,
-      "generation_prompt": null,
+      "sha256": "6d0b75dc5b22b39d89f17f2407b4520e44dd8632c2824b2f9260cf5835a82d8d",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "generation_prompt": "Use case: stylized-concept\nAsset type: ONE environmental location vignette for the approved Cogna business game.\nInput images: Image 1 is the canonical ART-11 landmark or neighborhood, architecture and identity reference. Image 2 is the approved Cogna hub concept, environment, palette and adult cartoon style reference. If Image 3 is supplied, it is the completed financial vignette, shared cutout-scene treatment and finish reference only; never copy its bank into this scene.\nPrimary request: ONE educational district environmental vignette centered on the exact university building in Image 1: cream neoclassical academic landmark with large blue slate dome and small upper cupola/finial, central classical columned portico over a broad symmetric shallow staircase, two balanced two-story side wings with warm terracotta inset roofs and narrow blue windows. Keep the entablature completely blank and preserve the distinctive dome and wing proportions. Add a small connected pale-paved academic forecourt, low neat green gardens and rounded trees flanking the building, with one or two slender cypress-like trees at the sides as in the approved concept. Do not hide the column bases or stairs. This is the approved compact university, not a cathedral, palace or newly invented campus.\nComposition/camera: a wide LANDSCAPE 16:9 environmental illustration, desired 960x540 export. A closer, lower front three-quarter urban view than the top-down map, upright verticals and coherent architectural perspective. Full key architecture and foliage crowns completely inside the canvas. Building group centered, with foreground paving flowing naturally around it into one compact, shallow environmental patch. Entire scene about 88 percent of canvas width and 82 percent of canvas height, with comfortable genuinely transparent margins on all sides. Keep an evenly balanced, legible visual weight suited to a 520x292 display box.\nEnvironment boundary/transparency: the inside of the microenvironment is solid opaque color (alpha 255 in buildings, glass, ground and foliage interiors). Outside the natural outer silhouette of roofs, trees, grass beds and foreground pavement is genuine alpha zero. The connected ground patch has an irregular gently curved outer edge, slightly softened through a few grass/plant shapes; it is a thin illustration surface with no vertical cutaway thickness, raised slab, tile base or diorama pedestal. Clean antialiased outline, no outside cast shadow. No opaque sky or rectangular backdrop. This is a cutout environmental scene with a filled center, not a rectangular screenshot.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved concepts and landmark. Confident muted dark-plum contours, clean controlled cel shading, broad near-flat color regions, only restrained gradients, simple architectural detail readable at 520x292. No photographic texture, painterly grain, fine mottled noise or blurry soft edges. Palette: ivory #F5F0E8, ink #30243C, plum #24113D, subtle lavender #B99AE8 shadow accents, cool blue glazing, warm terracotta/coral where shown in canonical architecture, grouped teal/olive greens and small warm amber highlights. Preserve each landmark's own approved material colors. Warm clear upper-left daylight, local contact and architectural shadows contained inside the vignette.\nConstraints: ONE separate location illustration only, no sprite sheet, labels, letters, numbers, words, pseudo-writing, signs, symbols, logos, pins, icons, people of any size, faces, vehicles, pets, food, props in the foreground, UI, panels, buttons, frame or border. Do not copy the concept's HUD, map labels, streetscape text or characters. No white/black/colored background, checkerboard, glow, aura, colored haze or detached floating objects. All trees and fixed environmental features must belong to the same connected scene. Full scene uncropped.",
       "source_editable": null,
       "display_fit": "contain",
       "qa": {
-        "technical": false,
-        "visual": false,
-        "identity": false
-      }
+        "technical": true,
+        "visual": true,
+        "identity": true,
+        "identity_applicable": false,
+        "identity_note": "Sem pessoas; identidade arquitetônica comparada com a construção canônica ART-11.",
+        "record": "docs/art/qa/ART-16.json",
+        "preview": "art-source/previews/ART-16/VIGNETTE_UNIVERSITY-display-light-dark.png",
+        "details": "art-source/previews/ART-16/VIGNETTE_UNIVERSITY-native-light-dark.png",
+        "architecture_comparison": "art-source/previews/ART-16/ART-16-architecture-comparison.png"
+      },
+      "production_method": "imagegen",
+      "production_record": "docs/art/prompts/ART-16.json"
     },
     {
       "id": "PRODUCT_LAN_COMBO_COMPLETO",
@@ -17761,7 +17865,7 @@
         "ART-12"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Fachada isolada por tipo, não card rasterizado; pode ser reaproveitada no estabelecimento. Referência estilística comum, arquitetura compatível com variante do mapa.",
       "asset_ids": [
         "FACADE_REST_FRANCES",
@@ -17769,7 +17873,10 @@
         "FACADE_REST_LANCHES"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-15 — Fachadas dos três restaurantes. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-15.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-15 — Fachadas dos três restaurantes. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-15.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-15.json",
+      "production_record": "docs/art/prompts/ART-15.json",
+      "delivery_preview": "art-source/previews/ART-15/ART-15-contact-sheet.png"
     },
     {
       "id": "ART-16",
@@ -17778,7 +17885,7 @@
         "ART-11"
       ],
       "scope": "nucleo",
-      "status": "planejado",
+      "status": "validado",
       "note": "Vinhetas sem rótulos. Miolo do cenário opaco com exterior/recorte alfa; pessoas e UI não incorporadas.",
       "asset_ids": [
         "VIGNETTE_BANK",
@@ -17788,7 +17895,10 @@
         "VIGNETTE_UNIVERSITY"
       ],
       "auxiliary_deliverables": [],
-      "request_prompt": "Use $cogna-artista para executar somente ART-16 — Cinco vinhetas de localização. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-16.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+      "request_prompt": "Use $cogna-artista para executar somente ART-16 — Cinco vinhetas de localização. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-16.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+      "qa_record": "docs/art/qa/ART-16.json",
+      "production_record": "docs/art/prompts/ART-16.json",
+      "delivery_preview": "art-source/previews/ART-16/ART-16-contact-sheet.png"
     },
     {
       "id": "ART-17",
