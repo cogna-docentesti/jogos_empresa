@@ -13,6 +13,7 @@ public class RestaurantData : ScriptableObject
     public Segment[] blockedSegments;
 
     [Header("Apresentacao")]
+    public Sprite facade;
     [TextArea]
     public string description;
     [TextArea]

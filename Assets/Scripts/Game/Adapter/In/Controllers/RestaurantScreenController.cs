@@ -73,10 +73,12 @@ namespace Game.Adapter.In.Controllers
 
         private void PopulateView()
         {
+            foreach (var type in new[] { RestaurantType.PODRAO, RestaurantType.JAPONES, RestaurantType.FRANCES })
+                view.SetRestaurantAvailability(type, _restaurantsByType.ContainsKey(type));
             foreach (var pair in _restaurantsByType)
             {
                 var restaurant = pair.Value;
-                view.SetRestaurantCardData(restaurant.type, restaurant.displayName, restaurant.description);
+                view.SetRestaurantCardData(restaurant);
             }
 
             view.SetSegmentButtonData(Segment.LOW, "Classe C");
@@ -120,6 +122,7 @@ namespace Game.Adapter.In.Controllers
                     : null;
             }
 
+            UpdateSegmentAvailability();
             view.SelectRestaurantCard(_selectedRestaurant);
             view.SelectSegmentButton(_selectedSegment);
             UpdateConfirmState();
@@ -128,6 +131,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnRestaurantSelected(RestaurantType type)
         {
+            if (!_restaurantsByType.ContainsKey(type)) return;
             _selectedRestaurant = type;
 
             if (_selectedSegment.HasValue && !IsSegmentAllowed(type, _selectedSegment.Value))
@@ -147,7 +151,7 @@ namespace Game.Adapter.In.Controllers
         {
             if (!_selectedRestaurant.HasValue || !IsSegmentAllowed(_selectedRestaurant.Value, segment))
             {
-                view.SetHint("Esta classe social nao esta disponivel para o restaurante selecionado.");
+                view.SetHint("Esta classe social não está disponível para o restaurante selecionado.");
                 return;
             }
 
@@ -162,7 +166,7 @@ namespace Game.Adapter.In.Controllers
         {
             if (!_selectedRestaurant.HasValue && !_selectedSegment.HasValue)
             {
-                view.SetHint("Selecione o tipo de restaurante e a classe social.");
+                view.SetHint("Restaurantes indisponíveis. Volte e tente novamente.");
                 return;
             }
 
@@ -171,12 +175,12 @@ namespace Game.Adapter.In.Controllers
 
             if (_selectedRestaurant.HasValue && _restaurantsByType.TryGetValue(_selectedRestaurant.Value, out var data) && !string.IsNullOrWhiteSpace(data.selectionHint))
             {
-                view.SetHint(_selectedSegment.HasValue ? $"Voce selecionou: {restName} - {segName}" : data.selectionHint);
+                view.SetHint(_selectedSegment.HasValue ? $"Sua escolha: {restName} · {segName}" : data.selectionHint);
                 return;
             }
 
             string hint = _selectedRestaurant.HasValue && _selectedSegment.HasValue
-                ? $"Voce selecionou: {restName} - {segName}"
+                ? $"Sua escolha: {restName} · {segName}"
                 : _selectedRestaurant.HasValue
                     ? $"Restaurante: {restName} - Selecione o segmento"
                     : $"Segmento: {segName} - Selecione o restaurante";
@@ -225,7 +229,7 @@ namespace Game.Adapter.In.Controllers
                 : 0f;
             string tip2 = _selectedSegment.HasValue
                 ? GetCoherenceTip2(_selectedRestaurant.Value, _selectedSegment.Value)
-                : "Selecione um segmento disponivel.";
+                : "Selecione um segmento disponível.";
 
             view.UpdateCoherence(coh1, tip1, coh2, tip2);
         }
@@ -327,14 +331,14 @@ namespace Game.Adapter.In.Controllers
             string locationName = GetLocationName(locationZone);
 
             if (restaurantSegment == locationSegment)
-                return $"{restaurantName} combina com {locationName}: ambos estao associados a {restaurantClass}.";
+                return $"{restaurantName} combina com {locationName}: ambos estão associados à {restaurantClass}.";
 
             int distance = Mathf.Abs((int)restaurantSegment - (int)locationSegment);
 
             if (distance == 1)
-                return $"{restaurantName} tem foco em {restaurantClass}, enquanto {locationName} indica {locationClass}. A combinacao e viavel, mas exige ajuste de proposta.";
+                return $"{restaurantName} tem foco em {restaurantClass}, enquanto {locationName} indica {locationClass}. A combinação é viável, mas exige ajuste de proposta.";
 
-            return $"{restaurantName} tem foco em {restaurantClass}, enquanto {locationName} indica {locationClass}. A combinacao e pouco coerente para a proposta inicial.";
+            return $"{restaurantName} tem foco em {restaurantClass}, enquanto {locationName} indica {locationClass}. A combinação é pouco coerente para a proposta inicial.";
         }
 
         private static string GetCoherenceTip2(RestaurantType r, Segment s) => (r, s) switch
@@ -351,7 +355,7 @@ namespace Game.Adapter.In.Controllers
                 "Restaurantes franceses possuem proposta premium, ticket elevado e maior exigência de experiência. Para essa opção, está disponível a classe A.",
 
             _ =>
-                "Este público-alvo não está disponível para o restaurante selecionado, pois nao e coerente com sua proposta de valor e estrutura de custos."
+                "Este público-alvo não está disponível para o restaurante selecionado, pois não é coerente com sua proposta de valor e estrutura de custos."
         };
 
         private static string GetRestaurantDisplayName(RestaurantType restaurant) => restaurant switch
@@ -368,7 +372,7 @@ namespace Game.Adapter.In.Controllers
             LocationZone.Educacao => "Área educacional",
             LocationZone.Comercio => "Área comercial",
             LocationZone.Residencial => "Área residencial",
-            LocationZone.Servicos => "Área de servicos",
+            LocationZone.Servicos => "Área de serviços",
             _ => locationZone.ToString()
         };
 

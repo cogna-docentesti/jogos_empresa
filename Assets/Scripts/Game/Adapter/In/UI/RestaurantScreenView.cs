@@ -1,383 +1,141 @@
+using System.Globalization;
+using System.Linq;
 using TMPro;
 using Game.Adapter.In.UI.Theme;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Adapter.In.UI
 {
+    /// <summary>D2 presentation only. Catalog rules and the in-memory draft belong to the controller.</summary>
     public sealed class RestaurantScreenView : MonoBehaviour
     {
-        [Header("Header")]
         [SerializeField] private TextMeshProUGUI hintText;
-
-        [Header("Restaurant Cards")]
-        [SerializeField] private Button cardPodrao;
-        [SerializeField] private Button cardJapones;
-        [SerializeField] private Button cardFrances;
-
-        [Header("Segment Buttons")]
-        [SerializeField] private Button btnLow;
-        [SerializeField] private Button btnMedium;
-        [SerializeField] private Button btnHigh;
-
-        [Header("Coherence Panel")]
-        [SerializeField] private Image coh1BarFill;
-
-        [SerializeField] private TextMeshProUGUI coh1Tip;
-        [SerializeField] private TextMeshProUGUI coh2Tip;
-
-        [Header("Action Buttons")]
-        [SerializeField] private Button confirmButton;
-        [SerializeField] private Button backButton;
-
+        [SerializeField] private UnityEngine.UI.Button cardPodrao, cardJapones, cardFrances;
+        [SerializeField] private UnityEngine.UI.Button btnLow, btnMedium, btnHigh;
+        [SerializeField] private UnityEngine.UI.Image coh1BarFill, coh2BarFill;
+        [SerializeField] private TextMeshProUGUI coh1Tip, coh2Tip, coh1Value, coh2Value;
+        [SerializeField] private UnityEngine.UI.Button confirmButton, backButton;
         private Segment? selectedSegment;
+        private static readonly CultureInfo Br = CultureInfo.GetCultureInfo("pt-BR");
+        private (SharedControlAppearance appearance, UnityEngine.UI.Image tint)[] feedback;
 
-        private const string SegmentTextChildName = "Text (TMP)";
-        private const string SelectedIconChildName = "selectedIcon";
-
-        private static readonly Color CardNormal = GamePalette.Surface;
-        private static readonly Color CardSelected = GamePalette.Lavender;
-
-        private static readonly Color BorderNormal = GamePalette.Hairline;
-        private static readonly Color BorderSelected = GamePalette.Primary;
-
-        // Segmento clicável
-        private static readonly Color SegBtnNormal = GamePalette.Primary;
-        private static readonly Color SegBorderNormal = GamePalette.Lavender;
-
-        // Segmento selecionado
-        private static readonly Color SegBtnSelected = GamePalette.Lavender;
-        private static readonly Color SegBorderSelected = GamePalette.Primary;
-
-        // Segmento desabilitado
-        private static readonly Color SegBtnDisabled = GamePalette.Parse(GamePalette.HexDisabledCard);
-        private static readonly Color SegBorderDisabled = GamePalette.Hairline;
-
-        private static readonly Color SegTextNormal = GamePalette.OnPrimary;
-        private static readonly Color SegTextSelected = GamePalette.Plum;
-        private static readonly Color SegTextDisabled = GamePalette.Muted;
-
-        public void SetHint(string v) => hintText.text = v;
-
-        public void BindCardPodrao(UnityEngine.Events.UnityAction a) => Bind(cardPodrao, a);
-        public void BindCardJapones(UnityEngine.Events.UnityAction a) => Bind(cardJapones, a);
-        public void BindCardFrances(UnityEngine.Events.UnityAction a) => Bind(cardFrances, a);
-
-        public void BindBtnLow(UnityEngine.Events.UnityAction a) => Bind(btnLow, a);
-        public void BindBtnMedium(UnityEngine.Events.UnityAction a) => Bind(btnMedium, a);
-        public void BindBtnHigh(UnityEngine.Events.UnityAction a) => Bind(btnHigh, a);
-
-        public void BindConfirm(UnityEngine.Events.UnityAction a) => Bind(confirmButton, a);
-        public void BindBack(UnityEngine.Events.UnityAction a) => Bind(backButton, a);
-
-        public void SetRestaurantCardData(RestaurantType type, string displayName, string description)
+        private void Awake()
         {
-            Button card = GetRestaurantCard(type);
-
-            SetChildText(card, "RestaurantName", displayName);
-            SetChildText(card, "RestaurantDesc", description);
+            feedback=new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh}
+                .Where(b=>b!=null).Select(b=>(b.GetComponent<SharedControlAppearance>(),
+                    b.transform.Find("InteractionTint")?.GetComponent<UnityEngine.UI.Image>())).ToArray();
+        }
+        private void LateUpdate()
+        {
+            // Card masters have no hover/pressed variant. Add a local surface cue while
+            // the shared component continues to own focus, selection and disabled states.
+            if(feedback==null) return;
+            foreach(var item in feedback)
+            {
+                if(item.appearance==null || item.tint==null) continue;
+                item.appearance.Refresh();
+                float alpha=item.appearance.CurrentState=="pressed"?.65f:item.appearance.CurrentState=="hover"?.32f:0;
+                item.tint.color=new Color(1,1,1,alpha);
+            }
         }
 
-        public void SetSegmentButtonData(Segment segment, string displayName)
+        public void SetHint(string value) { if(hintText != null) hintText.text=value; }
+        public void BindCardPodrao(UnityEngine.Events.UnityAction action) => Bind(cardPodrao,action);
+        public void BindCardJapones(UnityEngine.Events.UnityAction action) => Bind(cardJapones,action);
+        public void BindCardFrances(UnityEngine.Events.UnityAction action) => Bind(cardFrances,action);
+        public void BindBtnLow(UnityEngine.Events.UnityAction action) => Bind(btnLow,action);
+        public void BindBtnMedium(UnityEngine.Events.UnityAction action) => Bind(btnMedium,action);
+        public void BindBtnHigh(UnityEngine.Events.UnityAction action) => Bind(btnHigh,action);
+        public void BindConfirm(UnityEngine.Events.UnityAction action) => Bind(confirmButton,action);
+        public void BindBack(UnityEngine.Events.UnityAction action) => Bind(backButton,action);
+        public void SetRestaurantAvailability(RestaurantType type,bool available)
         {
-            Button button = GetSegmentButton(segment);
-
-            SetChildText(button, SegmentTextChildName, NormalizeSegmentLabel(displayName));
-            ApplySegmentState(button, selectedSegment == segment);
+            GetRestaurantCard(type).interactable=available;
+            SetChildText(GetRestaurantCard(type),"SelectionStatus",available?"Selecionar restaurante":"Indisponível");
         }
-
+        public void SetRestaurantCardData(RestaurantData data)
+        {
+            SetRestaurantCardData(data.type,data.displayName,data.description);
+            var card=GetRestaurantCard(data.type);
+            var image=card.transform.Find("Facade")?.GetComponent<UnityEngine.UI.Image>();
+            if(image != null) { image.sprite=data.facade; image.color=Color.white; image.preserveAspect=true; image.enabled=data.facade != null; }
+            SetChildText(card,"MonthlyCost","R$ "+data.baseMonthlyCost.ToString("N0",Br));
+            SetChildText(card,"TicketRange","R$ "+data.ticketMin.ToString("N0",Br)+" a R$ "+data.ticketMax.ToString("N0",Br));
+        }
+        public void SetRestaurantCardData(RestaurantType type,string displayName,string description)
+        {
+            SetChildText(GetRestaurantCard(type),"RestaurantName",displayName);
+            SetChildText(GetRestaurantCard(type),"RestaurantDesc",description);
+        }
+        public void SetSegmentButtonData(Segment segment,string displayName) => SetChildText(GetSegmentButton(segment),"SegmentLabel",displayName);
         public void SelectRestaurantCard(RestaurantType? selected)
         {
-            ApplyCardState(cardPodrao, selected == RestaurantType.PODRAO);
-            ApplyCardState(cardJapones, selected == RestaurantType.JAPONES);
-            ApplyCardState(cardFrances, selected == RestaurantType.FRANCES);
+            foreach(var type in new[]{RestaurantType.PODRAO,RestaurantType.JAPONES,RestaurantType.FRANCES})
+            {
+                var card=GetRestaurantCard(type); bool chosen=selected==type && card.interactable;
+                card.GetComponent<SharedControlAppearance>()?.SetSelected(chosen);
+                SetChildText(card,"SelectionStatus",!card.interactable?"Indisponível":chosen?"Restaurante selecionado":"Selecionar restaurante");
+                var check=card.transform.Find("SelectedCheck"); if(check != null) check.gameObject.SetActive(chosen);
+            }
         }
-
         public void SelectSegmentButton(Segment? selected)
+        { selectedSegment=selected.HasValue && GetSegmentButton(selected.Value).interactable?selected:null; RefreshSegments(); }
+        public void SetSegmentAvailability(Segment segment,bool available)
         {
-            if (selected.HasValue && !GetSegmentButton(selected.Value).interactable)
-                selectedSegment = null;
-            else
-                selectedSegment = selected;
-
-            RefreshSegmentButtons();
+            GetSegmentButton(segment).interactable=available;
+            if(!available && selectedSegment==segment) selectedSegment=null;
+            RefreshSegments();
         }
-
-        public void SetSegmentAvailability(Segment segment, bool available)
+        public void SetConfirmEnabled(bool enabled) { confirmButton.interactable=enabled; RebuildNavigation(); }
+        public void UpdateCoherence(float coh1,string tip1,float coh2,string tip2)
         {
-            Button button = GetSegmentButton(segment);
-            button.interactable = available;
-
-            if (!available && selectedSegment == segment)
-                selectedSegment = null;
-
-            RefreshSegmentButtons();
+            ApplyCoherenceBar(coh1BarFill,coh1); ApplyCoherenceBar(coh2BarFill,coh2);
+            if(coh1Tip != null) coh1Tip.text=tip1;
+            if(coh2Tip != null) coh2Tip.text=tip2;
+            SetCoherenceValue(coh1Value,coh1); SetCoherenceValue(coh2Value,coh2);
         }
-
-        public void SetConfirmEnabled(bool v)
+        private static void SetCoherenceValue(TMP_Text text,float value)
         {
-            confirmButton.interactable = v;
+            if(text==null) return;
+            text.text=value<=0?"Sem seleção":$"{(value>=.7f?"Alta":value>=.4f?"Média":"Baixa")} · {Mathf.RoundToInt(value*100)}%";
+            text.color=value>=.7f?GamePalette.Money:value>=.4f?GamePalette.Plum:GamePalette.ErrorText;
         }
-
-        public void UpdateCoherence(float coh1, string tip1, float coh2, string tip2)
+        private void RefreshSegments()
         {
-            ApplyCoherenceBar(coh1BarFill, coh1);
-
-            if (coh1Tip != null)
-                coh1Tip.text = tip1;
-
-            if (coh2Tip != null)
-                coh2Tip.text = tip2;
-        }
-
-        private static void Bind(Button button, UnityEngine.Events.UnityAction action)
-        {
-            button.onClick.RemoveAllListeners();
-
-            if (action != null)
-                button.onClick.AddListener(action);
-        }
-
-        private void ApplyCardState(Button card, bool isSelected)
-        {
-            var shared = card.GetComponent<SharedControlAppearance>();
-            if (shared != null) { shared.SetSelected(isSelected); return; }
-            var img = card.GetComponent<Image>();
-
-            if (img != null)
-                img.color = isSelected ? CardSelected : CardNormal;
-
-            card.colors = BuildButtonColors(isSelected ? CardSelected : CardNormal);
-
-            var outline = card.GetComponent<Outline>();
-
-            if (outline == null)
-                outline = card.gameObject.AddComponent<Outline>();
-
-            outline.effectColor = isSelected ? BorderSelected : BorderNormal;
-            outline.effectDistance = isSelected ? new Vector2(4f, -4f) : new Vector2(1f, -1f);
-            outline.enabled = isSelected;
-        }
-
-        private void RefreshSegmentButtons()
-        {
-            ApplySegmentState(btnLow, selectedSegment == Segment.LOW);
-            ApplySegmentState(btnMedium, selectedSegment == Segment.MEDIUM);
-            ApplySegmentState(btnHigh, selectedSegment == Segment.HIGH);
-        }
-
-        private void ApplySegmentState(Button btn, bool isSelected)
-        {
-            var shared = btn.GetComponent<SharedControlAppearance>();
-            if (shared != null)
+            foreach(var segment in new[]{Segment.LOW,Segment.MEDIUM,Segment.HIGH})
             {
-                shared.SetSelected(isSelected);
-                SetSelectedIconVisible(btn, isSelected && btn.interactable);
-                return;
+                var button=GetSegmentButton(segment); bool chosen=selectedSegment==segment && button.interactable;
+                button.GetComponent<SharedControlAppearance>()?.SetSelected(chosen);
+                SetChildText(button,"Availability",!button.interactable?"Indisponível":chosen?"Selecionado":"Disponível");
+                var radio=button.transform.Find("Radio")?.GetComponent<UnityEngine.UI.Image>();
+                if(radio!=null) radio.sprite=SharedUiSkin.Current.Get(!button.interactable?"UI_RADIO_DISABLED":chosen?"UI_RADIO_ON":"UI_RADIO_OFF");
             }
-            bool isDisabled = !btn.interactable;
-            bool showSelected = isSelected && !isDisabled;
-
-            Color bgColor;
-            Color textColor;
-            Color borderColor;
-            Vector2 borderDistance;
-
-            if (isDisabled)
-            {
-                bgColor = SegBtnDisabled;
-                textColor = SegTextDisabled;
-                borderColor = SegBorderDisabled;
-                borderDistance = new Vector2(3f, -3f);
-            }
-            else if (showSelected)
-            {
-                bgColor = SegBtnSelected;
-                textColor = SegTextSelected;
-                borderColor = SegBorderSelected;
-                borderDistance = new Vector2(3f, -3f);
-            }
-            else
-            {
-                bgColor = SegBtnNormal;
-                textColor = SegTextNormal;
-                borderColor = SegBorderNormal;
-                borderDistance = new Vector2(3f, -3f);
-            }
-
-            var img = btn.GetComponent<Image>();
-
-            if (img != null)
-                img.color = bgColor;
-
-            btn.colors = BuildSegmentButtonColors(bgColor);
-
-            var txt = btn.GetComponentInChildren<TextMeshProUGUI>(true);
-
-            if (txt != null)
-            {
-                string label = NormalizeSegmentLabel(txt.text);
-
-                txt.text = showSelected ? $"  {label}" : label;
-                txt.color = textColor;
-                txt.fontStyle = FontStyles.Bold;
-                txt.alignment = TextAlignmentOptions.Center;
-                txt.characterSpacing = GameTypography.CharacterSpacing;
-            }
-
-            SetSelectedIconVisible(btn, showSelected);
-
-            var outline = btn.GetComponent<Outline>();
-
-            if (outline == null)
-                outline = btn.gameObject.AddComponent<Outline>();
-
-            outline.effectColor = borderColor;
-            outline.effectDistance = borderDistance;
-            outline.enabled = true;
+            RebuildNavigation();
         }
-
-        private static void SetSelectedIconVisible(Button button, bool visible)
+        private void RebuildNavigation()
         {
-            Transform icon = FindChildRecursive(button.transform, SelectedIconChildName);
-
-            if (icon != null)
-                icon.gameObject.SetActive(visible);
-        }
-
-        private static Transform FindChildRecursive(Transform parent, string childName)
-        {
-            foreach (Transform child in parent)
+            var controls=new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh,backButton,confirmButton}.Where(b=>b!=null && b.interactable).ToArray();
+            for(int i=0;i<controls.Length;i++)
             {
-                if (child.name == childName)
-                    return child;
-
-                Transform found = FindChildRecursive(child, childName);
-
-                if (found != null)
-                    return found;
-            }
-
-            return null;
-        }
-
-        private static void ApplyCoherenceBar(Image barFill, float value)
-        {
-            if (barFill == null)
-                return;
-
-            float normalizedValue = Mathf.Clamp01(value);
-
-            barFill.color = CoherenceColor(normalizedValue);
-
-            RectTransform rt = barFill.rectTransform;
-
-            rt.pivot = new Vector2(0f, 0.5f);
-            rt.anchorMin = new Vector2(0f, 0f);
-            rt.anchorMax = new Vector2(normalizedValue, 1f);
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
-
-            barFill.fillAmount = 1f;
-            barFill.enabled = normalizedValue > 0.001f;
-        }
-
-        private static ColorBlock BuildButtonColors(Color baseColor)
-        {
-            return new ColorBlock
-            {
-                normalColor = Color.white,
-                highlightedColor = new Color(.96f,.96f,.96f),
-                pressedColor = new Color(.85f,.85f,.85f),
-                selectedColor = Color.white,
-                disabledColor = GamePalette.Parse(GamePalette.HexDisabledCard),
-                colorMultiplier = 1f,
-                fadeDuration = 0.08f
-            };
-        }
-
-        private static ColorBlock BuildSegmentButtonColors(Color baseColor)
-        {
-            return new ColorBlock
-            {
-                normalColor = Color.white,
-                highlightedColor = new Color(.96f,.96f,.96f),
-                pressedColor = new Color(.85f,.85f,.85f),
-                selectedColor = Color.white,
-                disabledColor = SegBtnDisabled,
-                colorMultiplier = 1f,
-                fadeDuration = 0.08f
-            };
-        }
-
-        private Button GetRestaurantCard(RestaurantType type) => type switch
-        {
-            RestaurantType.PODRAO => cardPodrao,
-            RestaurantType.JAPONES => cardJapones,
-            RestaurantType.FRANCES => cardFrances,
-            _ => cardPodrao
-        };
-
-        private Button GetSegmentButton(Segment segment) => segment switch
-        {
-            Segment.LOW => btnLow,
-            Segment.MEDIUM => btnMedium,
-            Segment.HIGH => btnHigh,
-            _ => btnLow
-        };
-
-        private static void SetChildText(Button button, string childName, string value)
-        {
-            var texts = button.GetComponentsInChildren<TextMeshProUGUI>(true);
-
-            foreach (var text in texts)
-            {
-                if (text.name == childName)
-                {
-                    text.text = value;
-                    return;
-                }
+                var nav=new UnityEngine.UI.Navigation{mode=UnityEngine.UI.Navigation.Mode.Explicit};
+                nav.selectOnRight=nav.selectOnDown=controls[(i+1)%controls.Length];
+                nav.selectOnLeft=nav.selectOnUp=controls[(i+controls.Length-1)%controls.Length]; controls[i].navigation=nav;
             }
         }
-
-        private static string NormalizeSegmentLabel(string value)
+        private static void Bind(UnityEngine.UI.Button button,UnityEngine.Events.UnityAction action)
+        { button.onClick.RemoveAllListeners(); if(action!=null) button.onClick.AddListener(action); }
+        private UnityEngine.UI.Button GetRestaurantCard(RestaurantType type) => type switch
+        { RestaurantType.JAPONES=>cardJapones,RestaurantType.FRANCES=>cardFrances,_=>cardPodrao };
+        private UnityEngine.UI.Button GetSegmentButton(Segment segment) => segment switch
+        { Segment.MEDIUM=>btnMedium,Segment.HIGH=>btnHigh,_=>btnLow };
+        private static void SetChildText(UnityEngine.UI.Button button,string name,string value)
+        { var text=button.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(t=>t.name==name && t.gameObject.activeSelf); if(text!=null) text.text=value; }
+        private static void ApplyCoherenceBar(UnityEngine.UI.Image bar,float value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-                return string.Empty;
-
-            return value
-                .Replace("✓", "")
-                .Trim()
-                .ToUpperInvariant();
-        }
-
-        private static Color CoherenceColor(float value)
-        {
-            if (value >= 0.7f)
-                return GamePalette.Money;
-
-            if (value >= 0.4f)
-                return GamePalette.Warn;
-
-            return GamePalette.ErrorText;
-        }
-
-        private static string FormatCoherenceMessage(string label, float value, string tip)
-        {
-            string status = value switch
-            {
-                >= 0.7f => "Alta",
-                >= 0.4f => "Média",
-                > 0f => "Baixa",
-                _ => "-"
-            };
-
-            return $"{label}: {status} ({Mathf.RoundToInt(value * 100f)}%)\n{tip}";
-        }
-
-        private static Color HexColor(byte r, byte g, byte b, byte a = 255)
-        {
-            return new Color32(r, g, b, a);
+            if(bar==null) return;
+            value=Mathf.Clamp01(value); bar.color=value>=.7f?GamePalette.Money:value>=.4f?GamePalette.Warn:GamePalette.ErrorText;
+            bar.rectTransform.anchorMin=Vector2.zero; bar.rectTransform.anchorMax=new Vector2(value,1);
+            bar.rectTransform.offsetMin=bar.rectTransform.offsetMax=Vector2.zero; bar.enabled=value>0;
         }
     }
 }
