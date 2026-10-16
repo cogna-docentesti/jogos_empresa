@@ -38,6 +38,7 @@ namespace Game.Adapter.In.UI.Navigation
 
         /// <summary>Saved event decisions for the campaign.</summary>
         EventHistory = 10,
-        MonthlyResults = 11
+        MonthlyResults = 11,
+        QuarterlyResults = 12
     }
 }

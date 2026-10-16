@@ -16,6 +16,8 @@ namespace Game.Adapter.In.UI
         [SerializeField] private ChartBar[] bars;
         [SerializeField] private UnityEngine.UI.ScrollRect tableScroll;
         [SerializeField] private UnityEngine.UI.Button continueButton, retryButton;
+        [SerializeField] private UnityEngine.UI.Button quarterlyButton;
+        public UnityEngine.UI.Button QuarterlyButton => quarterlyButton;
         [SerializeField] private Sprite neutralRow, subtotalRow, positiveRow, negativeRow;
         public UnityEngine.UI.Button ContinueButton => continueButton;
         public UnityEngine.UI.Button RetryButton => retryButton;

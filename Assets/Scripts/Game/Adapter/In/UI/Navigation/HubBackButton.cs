@@ -10,6 +10,7 @@ namespace Game.Adapter.In.UI.Navigation
         [SerializeField] private GameObject menuPanel;
         [SerializeField] private GameObject eventPanel;
         [SerializeField] private GameObject monthlyResultPanel;
+        [SerializeField] private GameObject quarterlyResultPanel;
         [SerializeField] private RectTransform eventMenuAccess;
         private Vector2 anchorMin,anchorMax,pivot,position,size;
         private Vector2 menuAnchorMin,menuAnchorMax,menuPivot,menuPosition,menuSize;
@@ -21,6 +22,7 @@ namespace Game.Adapter.In.UI.Navigation
         public void ConfigureEvents(GameObject panel,RectTransform menu)
         { eventPanel=panel; eventMenuAccess=menu; }
         public void ConfigureMonthlyResults(GameObject panel) { monthlyResultPanel=panel; }
+        public void ConfigureQuarterlyResults(GameObject panel) { quarterlyResultPanel=panel; }
         private void Awake()
         {
             if(eventMenuAccess!=null)
@@ -38,7 +40,7 @@ namespace Game.Adapter.In.UI.Navigation
             bool visible=MenuNavigator.HubAvailable && MenuNavigator.Instance!=null
                 && MenuNavigator.Instance.Current!=PanelId.None && MenuNavigator.Instance.Current!=PanelId.Menu;
             if(buttonRoot!=null && buttonRoot.activeSelf!=visible) buttonRoot.SetActive(visible);
-            bool events=(eventPanel!=null && eventPanel.activeInHierarchy) || (monthlyResultPanel!=null && monthlyResultPanel.activeInHierarchy);
+            bool events=(eventPanel!=null && eventPanel.activeInHierarchy) || (monthlyResultPanel!=null && monthlyResultPanel.activeInHierarchy) || (quarterlyResultPanel!=null && quarterlyResultPanel.activeInHierarchy);
             if(eventMenuAccess!=null && positionedForEvents!=events)
             {
                 positionedForEvents=events;

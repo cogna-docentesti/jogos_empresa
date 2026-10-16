@@ -2,6 +2,21 @@
 
 The game settles a quarter of three monthly rounds. `MonthlySimulationEngine` calculates a statement without changing any input, accessing SQLite, or drawing random events. `RoundService` commits that statement and the updated session in one SQLite transaction. The in-memory session changes only after the transaction succeeds.
 
+## Quarterly comparison (UI-14)
+
+`QuarterlyResultController` queries `RoundResultRepository.GetBySessionId` for the current campaign on every visit. The hub opens `PanelId.QuarterlyResults = 12`; the monthly result's **Comparar trimestre** action also opens the comparison while `Round_Summary` waits, including after month three. **Voltar** restores that monthly summary and its focus, or the hub's navigation history. Reading, retrying, scrolling and returning never settle or save a month.
+
+`QuarterlyResultPresentation` keeps three explicit month slots. Missing months show **Não salvo** in both the table and chart; partial totals include only saved records. Duplicated months, records from another campaign, months outside 1–3 and nonfinite saved amounts produce an error state. No saved rows produces the empty state.
+
+The aggregate column states its rule on every row:
+
+- Revenue, outflows, signed events, cash results, loan details, customers and demand sum the saved months. Monthly capacity sums the available service slots across those months.
+- Opening cash uses the first saved month's opening; closing cash uses the last saved month's closing. Reputations use those same opening/closing endpoints. Gaps remain visible and are never filled with invented balances.
+- Ticket uses the saved monthly ticket weighted by saved customers. With no customers it shows **Sem clientes**. Alignment score and coherence use simple monthly means; classification uses the last saved label, translated only for display. Reputation deltas sum the saved monthly changes.
+- Variation is the last available month's value minus the first available month's value, in the metric's own units, with explicit month labels. It requires two saved months; classification has no numerical variation. No percentage growth is implied when the baseline is zero or negative.
+
+Monetary aggregates sum the displayed cent values of the persisted floats, using `double` only in this read-only presentation. This avoids adding binary approximation residues above R$ 100,000. Nothing is written back. Loan principal and interest remain details already included once in `loanPayment`; signed event cash is added once by the existing settlement, never reapplied by the report. The quarter chart shows each saved `netResult` on a shared signed scale.
+
 ## Entry points
 
 ```csharp
