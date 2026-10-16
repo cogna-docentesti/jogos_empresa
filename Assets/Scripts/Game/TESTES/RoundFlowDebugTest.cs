@@ -319,7 +319,10 @@ public class RoundFlowDebugTest : MonoBehaviour
             bool incompatible = sample[3] == 1;
             string label = "Save rodada " + sample[0] + ", resultado max " + sample[1] + ", historico " + sample[2];
             check(GameSessionState.HasIncompatibleSave == incompatible, label + ": classificacao correta");
-            check(GameManager.Instance.StateMachine.CurrentState == (incompatible ? GameState.MainMenu : GameState.Management_Hub),
+            var expectedEntry = incompatible ? GameState.MainMenu
+                : Game.Infrastructure.Session.PlayerSession.HasValidIdentification ? GameState.Management_Hub
+                : InitialDecisionFlow.Identification;
+            check(GameManager.Instance.StateMachine.CurrentState == expectedEntry,
                 label + ": encaminhamento correto");
             GameSessionState.Save();
             check(sessions.GetById(session.sessionId)?.currentRound == sample[0]
@@ -429,7 +432,7 @@ public class RoundFlowDebugTest : MonoBehaviour
             confirm.onClick.Invoke();
             check(!warning.activeSelf && !GameSessionState.HasIncompatibleSave
                 && GameSessionState.Current.currentRound == 1
-                && GameManager.Instance.StateMachine.CurrentState == GameState.Config_Location,
+                && GameManager.Instance.StateMachine.CurrentState == InitialDecisionFlow.Identification,
                 "UI: confirmar reinicio fecha modal e inicia configuracao");
             check(new GameSessionRepository(DatabaseInitializer.DatabaseService.Connection).GetById(old.sessionId) == null,
                 "UI: save anterior removido somente apos confirmacao");

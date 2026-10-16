@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class UIStateListener : MonoBehaviour
 {
-    [Header("ConfiguraÁ„o inicial")]
+    [Header("Configura√ß√£o inicial")]
+    [SerializeField] private GameObject identificationPanel;
     [SerializeField] private GameObject configLocationPanel;
     [SerializeField] private GameObject configRestaurantPanel;
     [SerializeField] private GameObject configTargetSegmentPanel;
 
-    [Header("ConfiguraÁ„o operacional inicial")]
+    [Header("Configura√ß√£o operacional inicial")]
     [SerializeField] private GameObject initialEquipmentPanel;
     [SerializeField] private GameObject initialTeamPanel;
     [SerializeField] private GameObject initialCapitalPanel;
@@ -31,7 +32,7 @@ public class UIStateListener : MonoBehaviour
     {
         if (GameManager.Instance == null || GameManager.Instance.StateMachine == null)
         {
-            Debug.LogError("GameManager ou StateMachine n„o encontrados.");
+            Debug.LogError("GameManager ou StateMachine n√£o encontrados.");
             return;
         }
 
@@ -50,6 +51,8 @@ public class UIStateListener : MonoBehaviour
 
     private void HandleStateChanged(GameState state)
     {
+        if (state == InitialDecisionFlow.Identification)
+            Game.Adapter.In.UI.Navigation.MenuNavigator.Instance?.CloseAll();
         HideAllPanels();
         var views = FindObjectsByType<Game.Adapter.In.UI.EstablishmentSummaryView>(
             FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -72,6 +75,10 @@ public class UIStateListener : MonoBehaviour
 
         switch (state)
         {
+            case GameState.Config_Identification:
+                Show(identificationPanel);
+                break;
+
             case GameState.Config_Location:
                 Show(configLocationPanel);
                 break;
@@ -133,6 +140,7 @@ public class UIStateListener : MonoBehaviour
 
     private void HideAllPanels()
     {
+        SetActive(identificationPanel, false);
         SetActive(configLocationPanel, false);
         SetActive(configRestaurantPanel, false);
         SetActive(configTargetSegmentPanel, false);

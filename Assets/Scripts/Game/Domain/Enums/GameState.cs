@@ -21,5 +21,8 @@ public enum GameState
     Round_Summary,
 
     FinalReport,
-    GameOver_Bankruptcy
+    GameOver_Bankruptcy,
+
+    // Append only: values 0-16 are already serialized in existing assets.
+    Config_Identification = 17
 }

@@ -34,27 +34,45 @@ public class GameManager : MonoBehaviour
         StateMachine = new GameStateMachine();
     }
 
+    private bool resumeAfterIdentification;
+
     private void Start()
     {
-        // Todo o preparo da sessao vai dentro do try. O LoadScene fica FORA e
-        // depois dele: seja qual for a falha - banco indisponivel, sessao
-        // corrompida, entidade que nao desserializa - o jogador precisa sair
-        // desta etapa. Antes, uma excecao aqui abortava o Start() antes da
-        // ultima linha e o app ficava parado numa tela vazia, sem aviso nenhum.
         try
         {
             PrepareSession(UserId, ProfessorId);
         }
         catch (System.Exception e)
         {
-            Debug.LogError("[GameManager] Falha ao preparar a sessao: " + e.Message + "\n" + e);
-
-            // Sem sessao valida, o unico ponto de entrada coerente e o comeco
-            // da configuracao.
-            StateMachine.ForceState(InitialDecisionFlow.Location);
+            Debug.LogError("[GameManager] Falha ao preparar a sessao: " + e);
+            StateMachine.ForceState(InitialDecisionFlow.Identification);
         }
 
-        SceneManager.LoadScene(SceneNames.Game);
+        // Legacy Bootstrap remains usable, but GameScene never reloads itself.
+        if (SceneManager.GetActiveScene().name != SceneNames.Game)
+            SceneManager.LoadScene(SceneNames.Game);
+    }
+
+    public bool ConfirmIdentification()
+    {
+        if (!PlayerSession.HasValidIdentification
+            || StateMachine.CurrentState != InitialDecisionFlow.Identification)
+            return false;
+
+        return StateMachine.TryChangeState(resumeAfterIdentification
+            ? GameState.Management_Hub : InitialDecisionFlow.Location);
+    }
+
+    public void BeginNewIdentification()
+    {
+        resumeAfterIdentification = false;
+        StateMachine.ForceState(InitialDecisionFlow.Identification);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     /// <summary>
@@ -64,42 +82,46 @@ public class GameManager : MonoBehaviour
     ///
     ///  - Save incompativel (ciclo antigo de 12 meses): nao abre nada; o
     ///    UIStateListener mostra o aviso com o botao de reinicio.
-    ///  - Sem partida: cria uma sessao SO em memoria e abre a D1.
+    ///  - Sem partida: cria uma sessao SO em memoria e abre a identificacao.
     ///  - Partida sem cardapio (linha antiga, criada antes da regra da D3):
-    ///    abre a D1; o confirm da D3 sobrescreve a mesma linha.
-    ///  - Partida completa: copia as decisoes para o rascunho e abre o hub.
+    ///    abre identificacao; o confirm da D3 sobrescreve a mesma linha.
+    ///  - Partida completa: reidrata o rascunho e abre o hub com cadastro valido.
+    ///    Cadastro ausente/invalido deve ser corrigido antes de retomar o hub.
     /// </summary>
     internal void PrepareSession(string userId, string professorId)
     {
         service = new GameSessionService(userId, professorId);
         service.LoadActiveSession();
-        StateMachine.TryChangeState(GameState.MainMenu);
+        PlayerSession.TryLoadIdentification();
+        resumeAfterIdentification = false;
+        StateMachine.ForceState(GameState.MainMenu);
 
         if (GameSessionState.HasIncompatibleSave)
         {
-            Debug.Log("[GameManager] Save de versao anterior encontrado. Aguardando o jogador confirmar o reinicio.");
+            // Keep the save intact until the player confirms the existing dialog.
             return;
         }
 
         if (!GameSessionState.HasSession)
         {
-            Debug.Log("[GameManager] Nenhuma sessao encontrada, criando nova sessao (so em memoria).");
             PlayerSession.ClearDecisions();
             service.CreateNewSession();
-            StateMachine.TryChangeState(InitialDecisionFlow.Location);
         }
-        else if (!HasCommittedInitialDecisions(GameSessionState.Current))
+        else if (HasCommittedInitialDecisions(GameSessionState.Current))
         {
-            Debug.Log("[GameManager] Sessao encontrada sem decisoes iniciais, voltando para a D1.");
-            PlayerSession.ClearDecisions();
-            StateMachine.TryChangeState(InitialDecisionFlow.Location);
+            PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
+            resumeAfterIdentification = true;
         }
         else
         {
-            Debug.Log("[GameManager] Sessao carregada com sucesso.");
-            PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
-            StateMachine.TryChangeState(GameState.Management_Hub);
+            PlayerSession.ClearDecisions();
         }
+
+        // Prefilled registration never skips step 1 for a new game.
+        bool canResume = resumeAfterIdentification && PlayerSession.HasValidIdentification
+            && !PlayerSession.IdentificationEditRequested;
+        StateMachine.TryChangeState(canResume
+            ? GameState.Management_Hub : InitialDecisionFlow.Identification);
     }
 
     /// <summary>

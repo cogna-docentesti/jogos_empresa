@@ -3,9 +3,9 @@
   "project": "Jogos de Empresa Cogna",
   "created_at": "2026-10-16",
   "title": "Atualização completa das interfaces e identificação na GameScene",
-  "status": "planejado",
-  "implementation_performed": false,
-  "current_request": "Criar tarefas; começar por identificação como passo 1 e migrar para GameScene; atualizar todas as telas com as artes novas.",
+  "status": "em_andamento",
+  "implementation_performed": true,
+  "current_request": "UI-01 entregue; tarefas UI-02 a UI-20 permanecem planejadas.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -84,12 +84,15 @@
     "Round_Event": "UI-12",
     "Round_Summary": "UI-13",
     "FinalReport": "UI-15",
-    "GameOver_Bankruptcy": "UI-16"
+    "GameOver_Bankruptcy": "UI-16",
+    "Config_Identification": "UI-01"
   },
   "planned_state_addition": {
-    "name": "Identification (nome definitivo na UI-01)",
+    "name": "Config_Identification",
     "owner_task": "UI-01",
-    "preserve_existing_enum_values": true
+    "preserve_existing_enum_values": true,
+    "numeric_value": 17,
+    "status": "implementado"
   },
   "panel_id_coverage": {
     "Menu": "UI-04",
@@ -157,7 +160,7 @@
       "title": "Identificação: novo visual, passo 1 e migração para GameScene",
       "phase": "Entrada",
       "priority": "P0",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [],
       "goal": "Entregar primeiro o cadastro atualizado dentro da GameScene, antes de qualquer tomada de decisão.",
       "screens": [
@@ -292,7 +295,11 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-01.json e output/ui-update/UI-01/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-01 — Identificação: novo visual, passo 1 e migração para GameScene no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-01.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-01 — Identificação: novo visual, passo 1 e migração para GameScene no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-01.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "completed_at": "2026-10-16",
+      "qa_record": "docs/ui-update/qa/UI-01.json",
+      "evidence_directory": "output/ui-update/UI-01/",
+      "pending_acceptance": []
     },
     {
       "id": "UI-02",

@@ -5,7 +5,6 @@ using Game.Application.Ports.Out;
 using Game.Infrastructure;
 using Game.Infrastructure.Session;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Adapter.In.Controllers
 {
@@ -23,9 +22,7 @@ namespace Game.Adapter.In.Controllers
     {
         [SerializeField] private Game.Adapter.In.UI.LocationScreenView view;
 
-        // D1 e a primeira decisao. Voltar daqui leva para o cadastro do aluno,
-        // que e outra cena. Avancar leva para a D2, que e outro estado.
-        private const string PreviousScene = SceneNames.Identification;
+        // D1 is step 2; identification is another panel in the same scene.
         private const GameState NextState  = InitialDecisionFlow.Restaurant;
 
         private ILocationRepository _repository;
@@ -207,10 +204,8 @@ namespace Game.Adapter.In.Controllers
             if (_selectedEstablishment != null)
                 SaveDraft();
 
-            // Sem este pedido a tela de identificacao veria o cadastro salvo e
-            // pularia direto de volta para o jogo.
             PlayerSession.RequestIdentificationEdit();
-            SceneManager.LoadScene(PreviousScene);
+            InitialDecisionFlow.GoTo(InitialDecisionFlow.Identification);
         }
 
         private void SaveDraft()

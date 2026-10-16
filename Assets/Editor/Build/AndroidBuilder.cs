@@ -17,17 +17,9 @@ namespace Game.EditorTools
     /// ------------------------------------------------------------------
     ///
     /// 1. CENA DE ENTRADA.
-    ///    O Build Settings do projeto lista a SampleScene como indice 0, e ela
-    ///    tem apenas uma camera e uma luz. A Bootstrap - que carrega o
-    ///    GameManager e o DatabaseInitializer, e e quem chama
-    ///    SceneManager.LoadScene("GameScene") - esta DESABILITADA.
-    ///    Buildar assim entrega um app que abre numa tela vazia e nunca sai
-    ///    dela. Vale para Android e para Windows.
-    ///
-    ///    Aqui a lista de cenas e passada EXPLICITAMENTE para o BuildPipeline,
-    ///    entao o EditorBuildSettings do projeto nao e alterado. Se voce quiser
-    ///    consertar o projeto de vez, use o item de menu "Corrigir cenas do
-    ///    Build Settings".
+    ///    GameScene is the sole production entry. It owns identification,
+    ///    the database and the manager; no bootstrap scene is required.
+    ///    The explicit list below is also used by the scene-settings command.
     ///
     /// 2. PACKAGE NAME.
     ///    applicationIdentifier so tem entrada para Standalone. Sem um id de
@@ -51,12 +43,10 @@ namespace Game.EditorTools
 
         /// <summary>
         /// A ordem importa: o indice 0 e a cena que o app abre.
-        /// Bootstrap monta o GameManager e o banco, e so entao carrega a
-        /// GameScene pelo nome - por isso as duas precisam estar na lista.
+        /// GameScene already contains the manager, database and identification.
         /// </summary>
         private static readonly string[] Scenes =
         {
-            "Assets/Scenes/Bootstrap.unity",
             "Assets/Scenes/GameScene.unity"
         };
 

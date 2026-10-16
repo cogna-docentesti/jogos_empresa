@@ -1,5 +1,5 @@
 UI-01 — Identificação: novo visual, passo 1 e migração para GameScene
-Status: planejado | Prioridade: P0 | Fase: Entrada
+Status: concluído | Prioridade: P0 | Fase: Entrada
 Dependências: nenhuma; primeira entrega solicitada
 
 OBJETIVO
@@ -144,3 +144,34 @@ Não reexecutar a conversão para Single já concluída; não alterar tarefas/lo
 
 COMANDO PARA EXECUTAR ESTA TAREFA
 Execute somente UI-01 — Identificação: novo visual, passo 1 e migração para GameScene no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-01.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.
+
+EXECUÇÃO — 16/10/2026
+Implementada e validada na Unity 6000.3.20f1, branch dev/new-screens.
+Registro: docs/ui-update/qa/UI-01.json. Evidências: output/ui-update/UI-01/.
+43 casos de Edit Mode aprovados; Play Mode: validação/foco/limites, textos longos,
+revisitas, dois smokes D1-D3, retomada, cadastro inválido, reset e save incompatível.
+Build Windows release aprovada e executada com company/product de QA isolados.
+Capturas reais em 1920x1080 e 1280x720, incluindo erro, foco e estados de controles.
+
+DESTINOS DE ENTRADA
+- Sem save ou save sem cardápio: identificação (preenchida se houver cadastro).
+  Confirmar cadastro válido abre Localização, passo 2; não grava decisões no SQLite.
+- Save completo e cadastro válido: hub; decisões carregadas no rascunho.
+- Save completo com cadastro ausente/inválido: identificação; confirmar correção
+  retoma o hub e preserva as decisões/meses existentes.
+- Voltar da Localização: identificação preenchida na mesma cena; confirmar retorna
+  à Localização com rascunho intacto.
+- Reset confirmado: apaga somente a sessão selecionada e seu cadastro, cria rascunho
+  novo e abre identificação vazia na GameScene.
+- Save incompatível: modal existente exige confirmação; só então executa reset.
+
+ENTRADA DE BUILD
+GameScene é a única cena habilitada. Perfis Windows e Android herdam a lista global;
+AndroidBuilder também usa somente GameScene. 0_Identification foi preservada como
+referência, sem consumidor de navegação em produção.
+
+15 assets aplicados; variantes compartilhadas sem função nesta tela permanecem
+planejadas para suas tarefas. PNGs e GUIDs preservados; bordas 9-slice/FullRect e
+compressão dos sprites usados foram ajustados no Editor. Fonte Roboto e alterações
+incidentais de build não integram esta entrega. Pacote de controle temporário removido.
+Pendências de aceite UI-01: nenhuma. UI-02 e demais tarefas não executadas.

@@ -12,7 +12,7 @@ namespace Game.Infrastructure
     /// </summary>
     public static class SceneNames
     {
-        /// <summary>Cadastro do aluno (nome, RA, nome do restaurante). Primeira cena do build.</summary>
+        /// <summary>Archived reference only; excluded from production builds.</summary>
         public const string Identification = "0_Identification";
 
         /// <summary>

@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UnityEditor.PlayerSettings.runInBackground=false; UnityEditor.AssetDatabase.DeleteAsset(\"Assets/output\"); UnityEditor.AssetDatabase.SaveAssets(); return new {project=UnityEngine.Application.dataPath, productionScenes=UnityEditor.EditorBuildSettings.scenes.Select(s=>new {s.path,s.enabled}), profiles=UnityEditor.AssetDatabase.FindAssets(\"t:BuildProfile\",new[]{\"Assets/Settings/Build Profiles\"}).Select(g=> {var p=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.Build.Profile.BuildProfile>(UnityEditor.AssetDatabase.GUIDToAssetPath(g)); var so=new UnityEditor.SerializedObject(p); return new {p.name, inheritsGlobalSceneList=!so.FindProperty(\"m_OverrideGlobalSceneList\").boolValue};}).ToArray(), rootCanvas=UnityEngine.Object.FindObjectsByType<UnityEngine.Canvas>(UnityEngine.FindObjectsSortMode.None).Count(c=>c.isRootCanvas) };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "project": "D:/Cogna/jogos_empresa/Assets",
+        "productionScenes": [
+          {
+            "path": "Assets/Scenes/GameScene.unity",
+            "enabled": true
+          }
+        ],
+        "profiles": [
+          {
+            "name": "Android™",
+            "inheritsGlobalSceneList": true
+          },
+          {
+            "name": "New Windows Profile",
+            "inheritsGlobalSceneList": true
+          }
+        ],
+        "rootCanvas": 1
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

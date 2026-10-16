@@ -36,7 +36,7 @@ namespace Game.Adapter.In.Controllers
         ///  1. RestartSession (Thaysla) apaga meses, eventos e a sessao numa
         ///     transacao so e cria uma sessao nova SO em memoria.
         ///  2. Apaga o cadastro salvo, para a identificacao abrir vazia.
-        ///  3. Volta para a cena de identificacao.
+        ///  3. Abre o painel de identificacao na mesma GameScene.
         /// </summary>
         public void ResetGame()
         {
@@ -59,14 +59,10 @@ namespace Game.Adapter.In.Controllers
 
                 PlayerSession.ClearSavedIdentification();
                 MenuNavigator.Instance?.CloseAll();
-                view.HideResetWarning();
+                view?.HideResetWarning();
 
                 if (GameManager.Instance != null)
-                    GameManager.Instance.StateMachine.ForceState(InitialDecisionFlow.Location);
-
-                // Fora do Play Mode (testes de editor) nao existe troca de cena.
-                if (UnityEngine.Application.isPlaying)
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Identification);
+                    GameManager.Instance.BeginNewIdentification();
             }
             catch (System.Exception exception)
             {

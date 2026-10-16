@@ -28,7 +28,18 @@ namespace Game.Infrastructure.Session
         //  IDENTIFICACAO (cena 0_Identification, do Renan)
         // =============================================================
 
-        private const string IdentificationKey = "PlayerSession.Identification";
+        private static string IdentificationKey
+        {
+            get
+            {
+#if UNITY_EDITOR
+                // Editor QA opts into a separate key; production keeps the original key.
+                string testKey = Environment.GetEnvironmentVariable("COGNA_TEST_IDENTIFICATION_KEY");
+                if (!string.IsNullOrEmpty(testKey)) return testKey;
+#endif
+                return "PlayerSession.Identification";
+            }
+        }
 
         [Serializable]
         private sealed class IdentificationData
@@ -46,6 +57,15 @@ namespace Game.Infrastructure.Session
             !string.IsNullOrWhiteSpace(StudentName)
             && !string.IsNullOrWhiteSpace(StudentRA)
             && !string.IsNullOrWhiteSpace(RestaurantName);
+
+        // The original production form's serialized limits (no new mandatory field).
+        public const int NameMinLength = 5;
+        public const int NameMaxLength = 50;
+        public const int RAMinLength = 5;
+        public const int RAMaxLength = 10;
+        public static bool HasValidIdentification => HasIdentification
+            && StudentName.Trim().Length >= NameMinLength && StudentName.Trim().Length <= NameMaxLength
+            && StudentRA.Trim().Length >= RAMinLength && StudentRA.Trim().Length <= RAMaxLength;
 
         /// <summary>
         /// Ligado quando o jogador aperta Voltar na D1. A tela de identificacao
@@ -102,6 +122,8 @@ namespace Game.Infrastructure.Session
 
         public static bool TryLoadIdentification()
         {
+            // A failed load must not leave an earlier registration in memory.
+            StudentName = StudentRA = RestaurantName = null;
             if (!PlayerPrefs.HasKey(IdentificationKey))
                 return false;
 

@@ -1,7 +1,7 @@
 using Game.Infrastructure.Session;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Game.Adapter.In.UI
@@ -15,12 +15,12 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TMP_Text validationText;
 
         [Header("Minimum Character Counts")]
-        [SerializeField, Min(1)] private int studentNameMinLength = 3;
-        [SerializeField, Min(1)] private int raMinLength = 5;
+        [SerializeField, Min(1)] private int studentNameMinLength = PlayerSession.NameMinLength;
+        [SerializeField, Min(1)] private int raMinLength = PlayerSession.RAMinLength;
 
         [Header("Maximum Character Counts")]
-        [SerializeField, Min(1)] private int studentNameMaxLength = 100;
-        [SerializeField, Min(1)] private int raMaxLength = 20;
+        [SerializeField, Min(1)] private int studentNameMaxLength = PlayerSession.NameMaxLength;
+        [SerializeField, Min(1)] private int raMaxLength = PlayerSession.RAMaxLength;
 
         [Header("Validation Messages")]
         [Tooltip("Use {min} and {max} to display the character limits configured for each field.")]
@@ -40,24 +40,6 @@ namespace Game.Adapter.In.UI
             raMaxLength = Mathf.Max(raMinLength, raMaxLength);
         }
 
-        private void Start()
-        {
-            // Quando o jogador aperta Voltar na D1, ele quer corrigir o cadastro.
-            // Nesse caso a tela mostra os dados preenchidos e espera o clique,
-            // em vez de pular sozinha para o jogo.
-            bool editRequested = PlayerSession.ConsumeIdentificationEditRequest();
-
-            if (!PlayerSession.TryLoadIdentification())
-                return;
-
-            studentNameInput.SetTextWithoutNotify(PlayerSession.StudentName);
-            raInput.SetTextWithoutNotify(PlayerSession.StudentRA);
-            OnInputChanged(string.Empty);
-
-            if (!editRequested && ValidateForm())
-                OpenGameScene();
-        }
-
         private void OnEnable()
         {
             if (studentNameInput == null || raInput == null
@@ -70,22 +52,61 @@ namespace Game.Adapter.In.UI
                 return;
             }
 
+            isRegistering = false;
+            PlayerSession.ConsumeIdentificationEditRequest();
+            PlayerSession.TryLoadIdentification();
+            studentNameInput.SetTextWithoutNotify(PlayerSession.StudentName ?? string.Empty);
+            raInput.SetTextWithoutNotify(PlayerSession.StudentRA ?? string.Empty);
             studentNameInput.onValueChanged.AddListener(OnInputChanged);
             raInput.onValueChanged.AddListener(OnInputChanged);
             buttonRegister.onClick.AddListener(Register);
+            studentNameInput.onSubmit.AddListener(SelectRA);
+            raInput.onSubmit.AddListener(SubmitRA);
             OnInputChanged(string.Empty);
         }
+
+        private void Update()
+        {
+            var keyboard = Keyboard.current;
+            bool tab = keyboard != null && keyboard.tabKey.wasPressedThisFrame;
+            bool backwards = keyboard != null && (keyboard.shiftKey.isPressed || keyboard.shiftKey.wasPressedThisFrame);
+#if ENABLE_LEGACY_INPUT_MANAGER
+            // TMP still consumes native keyboard events through the legacy backend.
+            // Keep Tab working for native/injected input when both backends are enabled.
+            tab |= UnityEngine.Input.GetKeyDown(KeyCode.Tab);
+            backwards |= UnityEngine.Input.GetKey(KeyCode.LeftShift) || UnityEngine.Input.GetKey(KeyCode.RightShift);
+            backwards |= UnityEngine.Input.GetKeyDown(KeyCode.LeftShift) || UnityEngine.Input.GetKeyDown(KeyCode.RightShift);
+#endif
+            if (!tab) return;
+            var selected = UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
+            UnityEngine.UI.Selectable target;
+            if (selected == studentNameInput.gameObject)
+                target = backwards ? (UnityEngine.UI.Selectable)buttonRegister : raInput;
+            else if (selected == raInput.gameObject)
+                target = backwards ? (UnityEngine.UI.Selectable)studentNameInput : buttonRegister;
+            else
+                target = backwards ? raInput : studentNameInput;
+            target.Select();
+            if (target is TMP_InputField input) input.ActivateInputField();
+        }
+
+        private void SelectRA(string _) { raInput.Select(); raInput.ActivateInputField(); }
+        private void SubmitRA(string _) => Register();
 
         private void OnDisable()
         {
             studentNameInput?.onValueChanged.RemoveListener(OnInputChanged);
             raInput?.onValueChanged.RemoveListener(OnInputChanged);
             buttonRegister?.onClick.RemoveListener(Register);
+            studentNameInput?.onSubmit.RemoveListener(SelectRA);
+            raInput?.onSubmit.RemoveListener(SubmitRA);
         }
 
         private void OnInputChanged(string value)
         {
             validationText.text = string.Empty;
+            SetInvalid(studentNameInput, false);
+            SetInvalid(raInput, false);
             buttonRegister.interactable = !isRegistering
                 && !string.IsNullOrWhiteSpace(studentNameInput.text)
                 && !string.IsNullOrWhiteSpace(raInput.text);
@@ -122,7 +143,13 @@ namespace Game.Adapter.In.UI
             buttonRegister.interactable = false;
             validationText.text = string.Empty;
 
-            SceneManager.LoadScene(Game.Infrastructure.SceneNames.Game);
+            // Services and scene already exist. Only the visible state changes.
+            if (GameManager.Instance != null && GameManager.Instance.ConfirmIdentification())
+                return;
+
+            isRegistering = false;
+            validationText.text = "Não foi possível continuar. Abra o jogo pela GameScene.";
+            buttonRegister.interactable = true;
         }
 
         private bool ValidateForm()
@@ -143,9 +170,16 @@ namespace Game.Adapter.In.UI
             validationText.text = (errorMessage ?? string.Empty)
                 .Replace("{min}", minimum.ToString())
                 .Replace("{max}", maximum.ToString());
+            SetInvalid(input, true);
             input.Select();
             input.ActivateInputField();
             return false;
+        }
+
+        private static void SetInvalid(TMP_InputField input, bool invalid)
+        {
+            if (input != null && input.TryGetComponent<IdentificationInputAppearance>(out var appearance))
+                appearance.IsInvalid = invalid;
         }
     }
 }

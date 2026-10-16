@@ -14,6 +14,21 @@ using UnityEngine;
 /// </summary>
 public static class InitialDecisionFlow
 {
+    public const GameState Identification = GameState.Config_Identification;
+    public const int StepCount = 7;
+
+    public static int StepFor(GameState state) => state switch
+    {
+        GameState.Config_Identification => 1,
+        GameState.Config_Location => 2,
+        GameState.Config_Restaurant => 3,
+        GameState.Config_TargetSegment => 4,
+        GameState.Initial_Capital => 5,
+        GameState.Initial_Equipment => 6,
+        GameState.Initial_Team => 7,
+        _ => 0
+    };
+
     /// <summary>D1. Painel Panel_Location.</summary>
     public const GameState Location = GameState.Config_Location;
 
@@ -49,7 +64,7 @@ public static class InitialDecisionFlow
         if (manager == null || manager.StateMachine == null)
         {
             Debug.LogError("[InitialDecisionFlow] GameManager nao encontrado. "
-                         + "Rode o jogo a partir da cena 0_Identification ou da GameScene.");
+                         + "Rode o jogo a partir da GameScene.");
             return false;
         }
 
