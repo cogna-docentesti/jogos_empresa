@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "status": "especificação para implementação; UI ainda não aplicada",
+  "source_of_truth": [
+    "docs/art/tokens.json",
+    "docs/art/manifest.json",
+    "docs/art/layouts/map-layout.json",
+    "docs/art/layouts/identification-layout.json",
+    "docs/art/layouts/establishment-review-layout.json",
+    "docs/art/layouts/dre-layout.json",
+    "art-source/references/concepts"
+  ],
+  "palette": {
+    "violet": "#6D28D9",
+    "plum": "#24113D",
+    "lavender": "#B99AE8",
+    "ivory": "#F5F0E8",
+    "ink": "#30243C",
+    "teal": "#26776A",
+    "coral": "#C55457",
+    "amber": "#E7B65A"
+  },
+  "text_surface_pairs": [
+    {
+      "surface": "#F5F0E8",
+      "text": "#30243C",
+      "use": "corpo, formulários, tabelas e cards claros"
+    },
+    {
+      "surface": "#6D28D9",
+      "text": "#F5F0E8",
+      "use": "ação primária e cabeçalhos"
+    },
+    {
+      "surface": "#24113D",
+      "text": "#F5F0E8",
+      "use": "navegação escura"
+    },
+    {
+      "surface": "#B99AE8",
+      "text": "#24113D",
+      "use": "seleção e apoio"
+    },
+    {
+      "surface": "#E7B65A",
+      "text": "#24113D",
+      "use": "ação de destaque/atenção"
+    }
+  ],
+  "typography": {
+    "renderer": "TextMeshPro",
+    "family": "Inter Tight existente no projeto; preservar fallback para acentos, moeda e números.",
+    "source": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
+    "sizes_are_proposal": true,
+    "size_note": "Valores iniciais em canvas 1920x1080; UI-02 deve aferir em layout real e registrar os valores finais centralizados. Não são uma especificação previamente aprovada dos concepts.",
+    "initial_sizes_px": {
+      "screen_title": 44,
+      "section_title": 32,
+      "body": 24,
+      "button": 24,
+      "input": 24,
+      "label": 22,
+      "caption": 20,
+      "kpi": 42,
+      "table": 22
+    },
+    "weights": {
+      "titles": "Semibold/Bold",
+      "body": "Regular",
+      "button": "Semibold",
+      "values": "Semibold"
+    },
+    "layout": "Corpo alinhado à esquerda; valores monetários alinhados à direita; cabeçalhos/botões conforme componente. Evitar sombras duplicadas antigas e autosize sem limites.",
+    "responsive": "Redimensionar/refluir o layout antes de reduzir texto; definir limites de autosize e garantir leitura na resolução física menor."
+  },
+  "layout": {
+    "canvas_px": [
+      1920,
+      1080
+    ],
+    "topbar_height_px": 88,
+    "navbar_height_px": 96,
+    "content_padding_px": 24,
+    "gutter_px": 24,
+    "spacing_scale_px": [
+      8,
+      12,
+      16,
+      24,
+      32,
+      48
+    ],
+    "scaler": "Scale With Screen Size; referência consistente e match explicitamente validado por tela; preservar tamanho percebido ao migrar 800x600/1280x720.",
+    "safe_area": "Testar áreas seguras e reflow em todos os perfis de produção; alvos de toque precisam de tamanho útil no dispositivo, não só no canvas."
+  },
+  "mandatory_review_on_every_screen": [
+    "família/peso/tamanho de fonte",
+    "cor de texto por superfície e estado",
+    "entrelinha e espaçamento de texto",
+    "margens/gutters/alinhamento",
+    "tamanho e proporção de imagens",
+    "ordem de camadas e máscaras",
+    "normal/hover/pressed/disabled/selecionado/foco",
+    "erros/loading/vazios",
+    "navegação/input/scroll",
+    "dados dinâmicos e atualização ao revisitar",
+    "resolução menor e textos longos"
+  ],
+  "sprite_rules": [
+    "Manter Single: 277/277 já corrigidos em 16/10/2026; não abrir nova tarefa para repetir essa conversão.",
+    "Usar o PNG inteiro; preserveAspect/contain em pessoas/objetos. Nenhuma nova divisão automática de silhuetas.",
+    "FullRect em componentes de UI; bordas 9-slice l,b,r,t conforme manifesto; pivots/posições específicos de mapa e DRE não são intercambiáveis.",
+    "Master branco recebe tint por superfície; arte colorida usa tint branco neutro. Fundo claro para o logo oficial e objetos escuros.",
+    "Revisar maxTextureSize, filtros, mipmaps e compressão usando prova visual e o tamanho real; 9-slice funciona com Single."
+  ],
+  "logic_constraints": [
+    "Manter os valores numéricos existentes de GameState e PanelId; adicionar novos sem renumerar os atuais.",
+    "Identificação é passo 1; manter nomes D1-D6 como IDs/códigos históricos para não quebrar vínculos.",
+    "Identificação permanece em PlayerPrefs; decisões iniciais continuam rascunho até confirmar o cardápio e persistir no SQLite.",
+    "Campanha permanece com 3 meses; não alterar economia, IDs, salários, custos, juros ou regras de simulação para adaptar telas.",
+    "Config_Review continua técnico; telas de eventos/resultados que exigem leitura/ação aguardam o usuário.",
+    "Não criar RoleData de garçom só porque ART-39 está produzido; registrar reserva condicional.",
+    "BMC/relatórios documentais sem fonte devem informar ausência; números fictícios não contam como integração."
+  ],
+  "workflow": "Executar uma tarefa por vez no Editor do projeto correto usando unity:ui-ugui e a conexão disponível. Preservar hierarquias/referências úteis; não reescrever YAML de cenas/prefabs/importadores com Editor vivo. Revalidar baseline antes de editar.",
+  "evidence": {
+    "task_record": "docs/ui-update/qa/UI-XX.json (criar na execução)",
+    "screenshots": "output/ui-update/UI-XX/ (criar na execução)",
+    "completion_rule": "Somente marcar concluído com implementação real, revisão visual e verificações descritas na tarefa; este plano não conclui nenhuma UI."
+  },
+  "out_of_scope": [
+    "Regenerar artes validadas sem necessidade demonstrada",
+    "ART-40/painel docente/marketing/loja externa",
+    "Refazer cenas de demo, cenas antigas desativadas ou interfaces admin fora do jogo",
+    "Alterar motor trimestral, balanceamento ou criar backend documental silenciosamente"
+  ]
+}

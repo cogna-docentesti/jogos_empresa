@@ -1,0 +1,149 @@
+UI-09 — Banco e financeiro: cenário, personagem e quatro créditos
+Status: planejado | Prioridade: P1 | Fase: Telas de abertura e gestão
+Dependências: UI-08
+
+OBJETIVO
+Aplicar a arte do banco e o novo padrão aos quatro créditos e ao retorno pelo hub.
+
+LEITURAS OBRIGATÓRIAS
+docs/ui-update/COMECE-AQUI.txt
+docs/ui-update/visual-contract.json
+docs/ui-update/tasks.json
+docs/ui-update/asset-coverage.json
+docs/art/manifest.json
+docs/art/tokens.json
+Assets/Scripts/Game/Adapter/In/Controllers/FinancialScreenController.cs
+Assets/Scripts/Game/Adapter/In/UI/FinancialScreenView.cs
+Assets/Scripts/Game/Adapter/In/UI/BankCardView.cs
+Assets/Prefabs/Card_loan.prefab
+Assets/Resources/CreditLines
+
+TELAS / DESTINOS
+- Panel_Financial
+- Cards de crédito
+- Detalhes e confirmação financeira
+
+IMPLEMENTAÇÃO
+1. Montar bank_office e CH01_BANK como camadas separadas e substituir imagens dos quatro CreditLineData por ID.
+2. Aplicar tipografia/cores/espaçamento para principal, parcelas, juros, disponibilidade, dicas e erros; manter regras de desbloqueio e prazo.
+3. Atualizar seleção, desabilitado, confirmação e o caso Sem crédito; exibir passo 5 na abertura e modo financeiro de gestão ao revisitar.
+4. Preservar transições Banco -> Equipamentos e Equipamentos -> Banco na configuração inicial.
+
+REVISÃO VISUAL OBRIGATÓRIA
+- família/peso/tamanho de fonte
+- cor de texto por superfície e estado
+- entrelinha e espaçamento de texto
+- margens/gutters/alinhamento
+- tamanho e proporção de imagens
+- ordem de camadas e máscaras
+- normal/hover/pressed/disabled/selecionado/foco
+- erros/loading/vazios
+- navegação/input/scroll
+- dados dinâmicos e atualização ao revisitar
+- resolução menor e textos longos
+
+ARTES EXISTENTES / LOTES
+ART-25, ART-07, ART-03, ART-04, ART-05
+- UI_TOPBAR_VIOLET | Assets/Art/new/hud/bars/topbar_violet.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_NAVBAR_PLUM | Assets/Art/new/hud/bars/navbar_plum.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_IVORY | Assets/Art/new/shared/components/panels/panel_ivory.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_LAVENDER | Assets/Art/new/shared/components/panels/panel_lavender.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_PLUM | Assets/Art/new/shared/components/panels/panel_plum.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_SHADOW | Assets/Art/new/shared/components/panels/panel_shadow.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_NORMAL | Assets/Art/new/shared/components/cards/card_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_SELECTED_OUTLINE | Assets/Art/new/shared/components/cards/card_selected_outline.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_DISABLED_OVERLAY | Assets/Art/new/shared/components/cards/card_disabled_overlay.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_MODAL_SURFACE | Assets/Art/new/shared/components/panels/modal_surface.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOOLTIP_SURFACE | Assets/Art/new/shared/components/feedback/tooltip_surface.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCRIM | Assets/Art/new/shared/components/panels/scrim.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_BADGE_CIRCLE | Assets/Art/new/shared/components/badges/badge_circle.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- BRAND_COGNA_LOGO | Assets/Art/new/shared/brand/logo_cogna.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_NORMAL | Assets/Art/new/shared/components/buttons/primary_violet_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_HOVER | Assets/Art/new/shared/components/buttons/primary_violet_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_PRESSED | Assets/Art/new/shared/components/buttons/primary_violet_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_DISABLED | Assets/Art/new/shared/components/buttons/primary_violet_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_NORMAL | Assets/Art/new/shared/components/buttons/secondary_ivory_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_HOVER | Assets/Art/new/shared/components/buttons/secondary_ivory_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_PRESSED | Assets/Art/new/shared/components/buttons/secondary_ivory_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_DISABLED | Assets/Art/new/shared/components/buttons/secondary_ivory_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_NORMAL | Assets/Art/new/shared/components/buttons/danger_coral_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_HOVER | Assets/Art/new/shared/components/buttons/danger_coral_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_PRESSED | Assets/Art/new/shared/components/buttons/danger_coral_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_DISABLED | Assets/Art/new/shared/components/buttons/danger_coral_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_NORMAL | Assets/Art/new/shared/components/buttons/accent_amber_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_HOVER | Assets/Art/new/shared/components/buttons/accent_amber_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_PRESSED | Assets/Art/new/shared/components/buttons/accent_amber_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_DISABLED | Assets/Art/new/shared/components/buttons/accent_amber_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_NORMAL | Assets/Art/new/shared/components/buttons/icon_button_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_HOVER | Assets/Art/new/shared/components/buttons/icon_button_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_PRESSED | Assets/Art/new/shared/components/buttons/icon_button_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_DISABLED | Assets/Art/new/shared/components/buttons/icon_button_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_NORMAL | Assets/Art/new/shared/components/controls/input_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_FOCUS | Assets/Art/new/shared/components/controls/input_focus.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_INVALID | Assets/Art/new/shared/components/controls/input_invalid.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_DISABLED | Assets/Art/new/shared/components/controls/input_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_NORMAL | Assets/Art/new/shared/components/controls/tab_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_SELECTED | Assets/Art/new/shared/components/controls/tab_selected.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_HOVER | Assets/Art/new/shared/components/controls/tab_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_PRESSED | Assets/Art/new/shared/components/controls/tab_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_DISABLED | Assets/Art/new/shared/components/controls/tab_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_RADIO_OFF | Assets/Art/new/shared/components/controls/radio_off.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_RADIO_ON | Assets/Art/new/shared/components/controls/radio_on.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_RADIO_DISABLED | Assets/Art/new/shared/components/controls/radio_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHECKBOX_OFF | Assets/Art/new/shared/components/controls/checkbox_off.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHECKBOX_ON | Assets/Art/new/shared/components/controls/checkbox_on.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHECKBOX_DISABLED | Assets/Art/new/shared/components/controls/checkbox_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOGGLE_OFF | Assets/Art/new/shared/components/controls/toggle_off.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOGGLE_ON | Assets/Art/new/shared/components/controls/toggle_on.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOGGLE_DISABLED | Assets/Art/new/shared/components/controls/toggle_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SLIDER_TRACK | Assets/Art/new/shared/components/controls/slider_track.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SLIDER_FILL | Assets/Art/new/shared/components/controls/slider_fill.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SLIDER_THUMB | Assets/Art/new/shared/components/controls/slider_thumb.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_STEPPER_BASE | Assets/Art/new/shared/components/controls/stepper_base.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCROLLBAR_TRACK | Assets/Art/new/shared/components/controls/scrollbar_track.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCROLLBAR_THUMB | Assets/Art/new/shared/components/controls/scrollbar_thumb.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_REVENUE | Assets/Art/new/shared/icons/icon_revenue.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TREND_UP | Assets/Art/new/shared/icons/icon_trend_up.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TREND_DOWN | Assets/Art/new/shared/icons/icon_trend_down.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CLIENTS | Assets/Art/new/shared/icons/icon_clients.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CLIENT | Assets/Art/new/shared/icons/icon_client.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_COHERENCE | Assets/Art/new/shared/icons/icon_coherence.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_REPUTATION | Assets/Art/new/shared/icons/icon_reputation.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_RENT | Assets/Art/new/shared/icons/icon_rent.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CAPACITY | Assets/Art/new/shared/icons/icon_capacity.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_COMPETITION | Assets/Art/new/shared/icons/icon_competition.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_INPUT_COSTS | Assets/Art/new/shared/icons/icon_input_costs.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_UTILITIES | Assets/Art/new/shared/icons/icon_utilities.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_PAYROLL | Assets/Art/new/shared/icons/icon_payroll.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_INTEREST | Assets/Art/new/shared/icons/icon_interest.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TERM | Assets/Art/new/shared/icons/icon_term.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_LOAN_PRINCIPAL | Assets/Art/new/shared/icons/icon_loan_principal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_INVENTORY | Assets/Art/new/shared/icons/icon_inventory.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CREDIT_CONTRACT | Assets/Art/new/shared/icons/icon_credit_contract.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- BANK_ENVIRONMENT | Assets/Art/new/financial/backgrounds/bank_office.png | integração visual no destino da tarefa
+- CH01_BANK | Assets/Art/new/characters/CH01/ch01_bank_options.png | integração visual no destino da tarefa
+- CREDIT_CREDITO_DE_INVESTIMENTO | Assets/Art/new/financial/credit/credito_de_investimento.png | integração visual no destino da tarefa
+- CREDIT_CREDITO_EMPRESARIAL_PADRAO | Assets/Art/new/financial/credit/credito_empresarial_padrao.png | integração visual no destino da tarefa
+- CREDIT_SEM_CREDITO | Assets/Art/new/financial/credit/sem_credito.png | integração visual no destino da tarefa
+- CREDIT_MICROCREDITO_EMPRESARIAL | Assets/Art/new/financial/credit/microcredito_empresarial.png | integração visual no destino da tarefa
+
+CRITÉRIOS DE ACEITE
+- As quatro opções existem e são legíveis sem depender da quantidade desenhada no concept.
+- Valores e regras financeiras não mudaram; no mês 3 o feedback usa a condição real de disponibilidade.
+- Personagem, cenário e cards têm proporção e ordem corretas, sem encobrir controles.
+
+VALIDAÇÃO
+- Testar sem crédito e as três linhas contratáveis, voltar de Equipamentos e revisitar pelo hub nos três meses.
+
+ENTREGÁVEIS
+- Cena/prefabs/views/configuração realmente atualizados apenas no escopo desta tarefa.
+- Registro de execução e evidências em docs/ui-update/qa/UI-09.json e output/ui-update/UI-09/.
+- Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão.
+
+LIMITES
+Preservar IDs, dados econômicos, simulação de três meses e regras de persistência.
+PNG validado não deve ser regenerado; usar texto e dados nativos. Garçom permanece condicional sem RoleData.
+Não reexecutar a conversão para Single já concluída; não alterar tarefas/lotes alheios.
+
+COMANDO PARA EXECUTAR ESTA TAREFA
+Execute somente UI-09 — Banco e financeiro: cenário, personagem e quatro créditos no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-09.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.

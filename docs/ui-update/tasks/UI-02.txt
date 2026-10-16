@@ -1,0 +1,110 @@
+UI-02 — Tema global: paleta, tipografia e escala de layout
+Status: planejado | Prioridade: P0 | Fase: Fundação visual
+Dependências: UI-01
+
+OBJETIVO
+Substituir o tema navy/dourado pelo sistema visual das artes aprovadas em todas as fontes de estilo.
+
+LEITURAS OBRIGATÓRIAS
+docs/ui-update/COMECE-AQUI.txt
+docs/ui-update/visual-contract.json
+docs/ui-update/tasks.json
+docs/ui-update/asset-coverage.json
+docs/art/manifest.json
+docs/art/tokens.json
+Assets/Scripts/Game/Adapter/In/UI/Theme/GamePalette.cs
+Assets/Scripts/Game/Adapter/In/UI/Theme/GameTypography.cs
+Assets/Scripts/Game/Adapter/In/UI/Theme/LocationMockupTokens.cs
+Assets/Scripts/Game/Adapter/In/UI/Theme/LocationSkinV2.cs
+Assets/Resources/LocationSkinV2.asset
+Assets/Editor/UI/LegacyScreenRestyler.cs
+Assets/Editor/UI/UiFactory.cs
+Assets/TextMesh Pro/Fonts/InterTight-Variable.asset
+Assets/TextMesh Pro/Fonts/InterTight-Italic.asset
+Assets/Scripts/Game/Adapter/In/UI/Layout/SafeAreaFitter.cs
+docs/art/tokens.json
+
+TELAS / DESTINOS
+- Canvas e textos globais
+- GamePalette
+- GameTypography
+- builders/restylers
+
+IMPLEMENTAÇÃO
+1. Centralizar violeta, ameixa, lavanda, marfim e cores semânticas e seus pares de texto/superfície; migrar aliases usados pelas views e manter a API existente quando viável.
+2. Definir família TMP Inter Tight já disponível, pesos, tamanhos por função, entrelinha, espaçamento, margens, alinhamento e overflow no contrato visual; revisar sombra/outline antigos que prejudicam o novo acabamento.
+3. Partir dos valores propostos de visual-contract.json, aferir nas telas reais e registrar os valores finais compartilhados. Não apresentar os tamanhos atuais 88/52/38 como aprovados para o novo layout.
+4. Uniformizar a referência de layout em 1920x1080; revisar conscientemente os quatro CanvasScalers 800x600, conversão de coordenadas, anchors, safe area e layouts, mantendo o tamanho percebido dos controles.
+5. Atualizar ou desativar explicitamente regras legadas de tint/gradiente/reestilização que restauram navy/dourado; não permitir que OnEnable, builders ou material TMP desfaçam o novo visual.
+6. Revalidar a identificação entregue pela UI-01 com os tokens globais finais.
+
+REVISÃO VISUAL OBRIGATÓRIA
+- família/peso/tamanho de fonte
+- cor de texto por superfície e estado
+- entrelinha e espaçamento de texto
+- margens/gutters/alinhamento
+- tamanho e proporção de imagens
+- ordem de camadas e máscaras
+- normal/hover/pressed/disabled/selecionado/foco
+- erros/loading/vazios
+- navegação/input/scroll
+- dados dinâmicos e atualização ao revisitar
+- resolução menor e textos longos
+
+ARTES EXISTENTES / LOTES
+ART-03, ART-09
+- UI_TOPBAR_VIOLET | Assets/Art/new/hud/bars/topbar_violet.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_NAVBAR_PLUM | Assets/Art/new/hud/bars/navbar_plum.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_IVORY | Assets/Art/new/shared/components/panels/panel_ivory.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_LAVENDER | Assets/Art/new/shared/components/panels/panel_lavender.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_PLUM | Assets/Art/new/shared/components/panels/panel_plum.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_SHADOW | Assets/Art/new/shared/components/panels/panel_shadow.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_NORMAL | Assets/Art/new/shared/components/cards/card_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_SELECTED_OUTLINE | Assets/Art/new/shared/components/cards/card_selected_outline.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_DISABLED_OVERLAY | Assets/Art/new/shared/components/cards/card_disabled_overlay.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_MODAL_SURFACE | Assets/Art/new/shared/components/panels/modal_surface.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOOLTIP_SURFACE | Assets/Art/new/shared/components/feedback/tooltip_surface.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCRIM | Assets/Art/new/shared/components/panels/scrim.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_BADGE_CIRCLE | Assets/Art/new/shared/components/badges/badge_circle.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- BRAND_COGNA_LOGO | Assets/Art/new/shared/brand/logo_cogna.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_HUD_PILL | Assets/Art/new/hud/indicators/hud_pill.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_KPI_TILE | Assets/Art/new/hud/indicators/kpi_tile.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PROGRESS_TRACK | Assets/Art/new/hud/progress/progress_track.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PROGRESS_FILL | Assets/Art/new/hud/progress/progress_fill.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_NAV_UNDERLINE | Assets/Art/new/hud/progress/nav_underline.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PILL_NORMAL | Assets/Art/new/shared/components/badges/pill_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PILL_SELECTED | Assets/Art/new/shared/components/badges/pill_selected.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PILL_DISABLED | Assets/Art/new/shared/components/badges/pill_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOAST_NEUTRAL | Assets/Art/new/shared/components/feedback/toast_neutral.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOAST_SUCCESS | Assets/Art/new/shared/components/feedback/toast_success.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOAST_WARNING | Assets/Art/new/shared/components/feedback/toast_warning.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_HEADER | Assets/Art/new/dre/components/table_header.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_NEUTRAL | Assets/Art/new/dre/components/table_row_neutral.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_SUBTOTAL | Assets/Art/new/dre/components/table_row_subtotal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_POSITIVE | Assets/Art/new/dre/components/table_row_positive.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_NEGATIVE | Assets/Art/new/dre/components/table_row_negative.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_TOTAL_COLUMN | Assets/Art/new/dre/components/table_total_column.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHART_PANEL | Assets/Art/new/dre/components/chart_panel.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+
+CRITÉRIOS DE ACEITE
+- GamePalette, GameTypography, materiais TMP e overrides de cena têm uma fonte coerente de valores finais.
+- Texto escuro sobre marfim e claro sobre violeta/ameixa permanece legível; acentos e erros possuem rótulo/ícone além de cor.
+- Acentos portugueses, R$, números negativos e campos longos não exibem glifos ausentes nem encolhimento arbitrário.
+- Identificação e uma tela de catálogo demonstram a mesma hierarquia tipográfica e escala após sair/entrar no painel.
+
+VALIDAÇÃO
+- Comparar screenshots reais das duas telas em 1920x1080, 1366x768 e 1280x720.
+- Pesquisar cores/tamanhos antigos e registrar as exceções intencionais; verificar sobreposições de estilos em runtime.
+
+ENTREGÁVEIS
+- Cena/prefabs/views/configuração realmente atualizados apenas no escopo desta tarefa.
+- Registro de execução e evidências em docs/ui-update/qa/UI-02.json e output/ui-update/UI-02/.
+- Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão.
+
+LIMITES
+Preservar IDs, dados econômicos, simulação de três meses e regras de persistência.
+PNG validado não deve ser regenerado; usar texto e dados nativos. Garçom permanece condicional sem RoleData.
+Não reexecutar a conversão para Single já concluída; não alterar tarefas/lotes alheios.
+
+COMANDO PARA EXECUTAR ESTA TAREFA
+Execute somente UI-02 — Tema global: paleta, tipografia e escala de layout no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-02.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.

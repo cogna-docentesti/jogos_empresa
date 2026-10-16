@@ -1,0 +1,74 @@
+UI-19 — Fechar navegação, estados e vínculos de todas as telas
+Status: planejado | Prioridade: P1 | Fase: Acabamento e integração
+Dependências: UI-05, UI-06, UI-07, UI-08, UI-09, UI-10, UI-11, UI-12, UI-13, UI-14, UI-15, UI-16, UI-17, UI-18
+
+OBJETIVO
+Garantir que todas as telas atualizadas sejam alcançáveis, persistam visíveis e não disputem a navegação.
+
+LEITURAS OBRIGATÓRIAS
+docs/ui-update/COMECE-AQUI.txt
+docs/ui-update/visual-contract.json
+docs/ui-update/tasks.json
+docs/ui-update/asset-coverage.json
+docs/art/manifest.json
+docs/art/tokens.json
+Assets/Scripts/Game/Infrastructure/GameStateMachine.cs
+Assets/Scripts/Game/Domain/Enums/GameState.cs
+Assets/Scripts/Game/Adapter/In/UI/UIStateListener.cs
+Assets/Scripts/Game/Adapter/In/UI/Navigation
+Assets/Scripts/Game/Domain/Service/GamesSessionService.cs
+Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs
+Assets/Scenes/GameScene.unity
+
+TELAS / DESTINOS
+- GameStateMachine
+- UIStateListener
+- PanelRegistry/MenuNavigator
+- Orquestração mensal
+
+IMPLEMENTAÇÃO
+1. Atualizar a matriz estado -> painel/ação, incluindo identificação, RH, eventos, resultado mensal, final e falência; cada estado deve ser painel visível ou passagem técnica explicitamente documentada.
+2. Definir um único dono da visibilidade ao alternar abertura, navegação do hub e modais: fechar a navegação revisitada antes de entregar o controle ao fluxo, e restaurar histórico quando couber.
+3. Revisar StartRound/ProcessCurrentRound/EvaluateRoundEnd: hoje percorrem vários estados na mesma chamada e saem do resumo imediatamente. A escolha de evento e a leitura de DRE precisam aguardar a ação prevista do usuário.
+4. Separar apresentação e avanço do cálculo já existente; confirmar Continuar não pode liquidar o mês novamente, sortear outro evento indevido nem saltar período.
+5. Manter o ciclo de três meses, persistência, retomada e IDs/valores dos enums já serializados; revisar entradas de painel adicionadas sem renumerar as atuais.
+6. Conferir todos os botões de abrir/voltar/confirmar/resetar/sair e todos os bindings na GameScene e prefabs instanciados.
+
+REVISÃO VISUAL OBRIGATÓRIA
+- família/peso/tamanho de fonte
+- cor de texto por superfície e estado
+- entrelinha e espaçamento de texto
+- margens/gutters/alinhamento
+- tamanho e proporção de imagens
+- ordem de camadas e máscaras
+- normal/hover/pressed/disabled/selecionado/foco
+- erros/loading/vazios
+- navegação/input/scroll
+- dados dinâmicos e atualização ao revisitar
+- resolução menor e textos longos
+
+ARTES EXISTENTES / LOTES
+Reutilizar as telas/assets das dependências; não criar lote de arte novo.
+
+CRITÉRIOS DE ACEITE
+- Percurso completo: Identificação -> Localização -> Restaurante -> Cardápio -> Banco -> Equipamentos -> Equipe -> Hub -> meses -> conclusão/falência.
+- Eventos ficam disponíveis para decisão antes da liquidação aplicável; resumo/DRE continuam visíveis até Continuar.
+- Não há painel obrigatório nulo, tela em branco, enum renumerado, callback duplicado ou recálculo ao avançar.
+- Retomar sessão e navegar de volta mantém escolhas e resultados válidos.
+
+VALIDAÇÃO
+- Executar um smoke completo de campanha e um de falência, com dados isolados, verificando cada estado e painel.
+- Executar testes de fluxo/persistência/simulação afetados e revisar console e handlers duplicados.
+
+ENTREGÁVEIS
+- Cena/prefabs/views/configuração realmente atualizados apenas no escopo desta tarefa.
+- Registro de execução e evidências em docs/ui-update/qa/UI-19.json e output/ui-update/UI-19/.
+- Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão.
+
+LIMITES
+Preservar IDs, dados econômicos, simulação de três meses e regras de persistência.
+PNG validado não deve ser regenerado; usar texto e dados nativos. Garçom permanece condicional sem RoleData.
+Não reexecutar a conversão para Single já concluída; não alterar tarefas/lotes alheios.
+
+COMANDO PARA EXECUTAR ESTA TAREFA
+Execute somente UI-19 — Fechar navegação, estados e vínculos de todas as telas no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-19.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.

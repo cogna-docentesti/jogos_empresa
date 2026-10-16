@@ -1,0 +1,41 @@
+ATUALIZAÇÃO COMPLETA DAS INTERFACES — COGNA
+Planejamento criado em 16/10/2026. Nenhuma tarefa de implementação de UI foi executada nesta entrega.
+
+Abra PLANO-DE-ATUALIZACAO.html para navegar pelas 20 tarefas, dependências e critérios de aceite.
+Fonte estruturada: tasks.json. Especificação comum: visual-contract.json. Cobertura por arquivo: asset-coverage.json.
+Tarefas executáveis individualmente: tasks/UI-01.txt a tasks/UI-20.txt.
+
+COMEÇAR PELA UI-01
+Atualizar a identificação e migrá-la de 0_Identification para um painel na GameScene.
+Ela será o passo 1 antes das decisões, na mesma cena de todo o jogo.
+Sequência de abertura: 1 Identificação -> 2 Localização (D1) -> 3 Restaurante/público (D2) ->
+4 Cardápio/preços (D3) -> 5 Banco (D4) -> 6 Equipamentos (D5) -> 7 Equipe (D6) -> Hub.
+Os códigos D1-D6 e valores numéricos existentes dos enums serão preservados.
+
+ESCOPO DO UPDATE
+Atualizar imagens, cores de texto/superfície, família/peso/tamanho de fonte, espaçamentos, layout,
+proporções, sombras, estados de controles, máscaras, scroll e input de todas as telas do jogo.
+Incluir HUD/mapa, abertura, estabelecimento/revisão, banco, equipamentos, RH, eventos, DRE mensal,
+DRE trimestral, conclusão/BMC/debriefing, falência, tutoriais, loading/vazios e diálogos.
+
+SITUAÇÃO VERIFICADA
+Há 272 assets no manifesto e 277 PNGs reais. Os 5 extras são versões fullframe antigas do mapa;
+o mapa atual usa compactos e seu contrato. ART-37/38/39 estão produzidos; garçom não tem RoleData.
+Todos os 277 PNGs já estão em Single; não repetir a conversão. Ainda conferir bordas/pivots/compressão
+ao integrar. Relatórios ART-36 são snapshots históricos, não evidência de integração atual.
+O tema em código é navy/dourado, enquanto a arte aprovada usa violeta/ameixa/lavanda/marfim.
+GameScene tem um scaler 1920x1080 e quatro 800x600. Vários painéis de estado estão sem referência.
+O fechamento mensal hoje atravessa estados sem aguardar leitura/interação; UI-19 resolverá isso.
+
+COMO EXECUTAR
+1. Ler a tarefa, suas dependências e visual-contract.json; conferir o projeto/cena antes de modificar.
+2. Trabalhar no Editor correto e nas hierarquias/prefabs existentes, com a skill unity:ui-ugui.
+3. Aplicar os assets e revisar TODOS os itens visuais listados, inclusive textos e estados vazios/erro.
+4. Preservar IDs, economia, campanha trimestral, PlayerPrefs e a confirmação SQLite no cardápio.
+5. Testar o percurso e tamanhos relevantes da tarefa; guardar screenshots reais e relatório de QA.
+6. Atualizar status em tasks.json e o registro de QA somente com evidências. Não confundir arte validada
+   com tela implementada. O índice HTML é um retrato do planejamento; atualizar junto com o backlog.
+
+Não criar novas funções econômicas a partir de arte condicional; não substituir dados ausentes por
+valores fictícios. O plano não inclui painel docente, marketing/loja externa, demos ou cenas antigas.
+Os tamanhos tipográficos de visual-contract.json são proposta inicial para aferição pela UI-02.

@@ -1,0 +1,137 @@
+UI-15 — Relatório final, BMC e debriefing
+Status: planejado | Prioridade: P1 | Fase: Rodadas e resultados
+Dependências: UI-14
+
+OBJETIVO
+Atualizar/criar a apresentação de conclusão e os complementos documentais já previstos pelas artes.
+
+LEITURAS OBRIGATÓRIAS
+docs/ui-update/COMECE-AQUI.txt
+docs/ui-update/visual-contract.json
+docs/ui-update/tasks.json
+docs/ui-update/asset-coverage.json
+docs/art/manifest.json
+docs/art/tokens.json
+Assets/Scripts/Game/Domain/Enums/GameState.cs
+Assets/Scripts/Game/Adapter/In/UI/UIStateListener.cs
+Assets/Scripts/Game/Infrastructure/Database/Tables/GameSessionEntity.cs
+docs/art/tasks/ART-37.txt
+docs/art/tasks/ART-38.txt
+docs/art/sources.json
+
+TELAS / DESTINOS
+- FinalReport
+- Conclusão
+- Business Model Canvas
+- Debriefing e justificativas
+
+IMPLEMENTAÇÃO
+1. Construir/vincular o painel FinalReport com conclusão, KPIs finais, período, navegação para DRE e texto dinâmico.
+2. Montar os nove blocos do BMC com quatro ícones novos de ART-37 e ícones existentes do kit para os demais; não rasterizar blocos/textos.
+3. Adicionar CH01_GUIDING à apresentação de reflexão/justificativas em camada independente e com legibilidade do conteúdo.
+4. Definir o vínculo de cada campo aos dados reais existentes. Se não houver fonte/modelo para um campo documental, apresentar indisponibilidade explícita e registrar a lacuna; não preencher com valores de exemplo nem criar regras econômicas.
+5. Planejar navegação de conclusão, consulta e novo jogo sem apagar o resultado automaticamente. Fluxo de caixa/balanço só exibem dados suportados; ausência de modelo não pode ser chamada de relatório completo.
+
+REVISÃO VISUAL OBRIGATÓRIA
+- família/peso/tamanho de fonte
+- cor de texto por superfície e estado
+- entrelinha e espaçamento de texto
+- margens/gutters/alinhamento
+- tamanho e proporção de imagens
+- ordem de camadas e máscaras
+- normal/hover/pressed/disabled/selecionado/foco
+- erros/loading/vazios
+- navegação/input/scroll
+- dados dinâmicos e atualização ao revisitar
+- resolução menor e textos longos
+
+ARTES EXISTENTES / LOTES
+ART-34, ART-37, ART-38, ART-06, ART-07, ART-09
+- ICON_HOME | Assets/Art/new/shared/icons/icon_home.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_RESTAURANT | Assets/Art/new/shared/icons/icon_restaurant.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_PIN | Assets/Art/new/shared/icons/icon_pin.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_UNIVERSITY | Assets/Art/new/shared/icons/icon_university.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_BANK | Assets/Art/new/shared/icons/icon_bank.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_COMMERCE | Assets/Art/new/shared/icons/icon_commerce.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_RESIDENTIAL | Assets/Art/new/shared/icons/icon_residential.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CORPORATE | Assets/Art/new/shared/icons/icon_corporate.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TEAM | Assets/Art/new/shared/icons/icon_team.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_MENU_FOOD | Assets/Art/new/shared/icons/icon_menu_food.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_EQUIPMENT | Assets/Art/new/shared/icons/icon_equipment.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_DOCUMENT | Assets/Art/new/shared/icons/icon_document.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CALENDAR | Assets/Art/new/shared/icons/icon_calendar.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_STAR | Assets/Art/new/shared/icons/icon_star.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CASH | Assets/Art/new/shared/icons/icon_cash.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CHART_BARS | Assets/Art/new/shared/icons/icon_chart_bars.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_SETTINGS | Assets/Art/new/shared/icons/icon_settings.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CART | Assets/Art/new/shared/icons/icon_cart.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_REVENUE | Assets/Art/new/shared/icons/icon_revenue.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TREND_UP | Assets/Art/new/shared/icons/icon_trend_up.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TREND_DOWN | Assets/Art/new/shared/icons/icon_trend_down.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CLIENTS | Assets/Art/new/shared/icons/icon_clients.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CLIENT | Assets/Art/new/shared/icons/icon_client.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_COHERENCE | Assets/Art/new/shared/icons/icon_coherence.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_REPUTATION | Assets/Art/new/shared/icons/icon_reputation.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_RENT | Assets/Art/new/shared/icons/icon_rent.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CAPACITY | Assets/Art/new/shared/icons/icon_capacity.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_COMPETITION | Assets/Art/new/shared/icons/icon_competition.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_INPUT_COSTS | Assets/Art/new/shared/icons/icon_input_costs.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_UTILITIES | Assets/Art/new/shared/icons/icon_utilities.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_PAYROLL | Assets/Art/new/shared/icons/icon_payroll.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_INTEREST | Assets/Art/new/shared/icons/icon_interest.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_TERM | Assets/Art/new/shared/icons/icon_term.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_LOAN_PRINCIPAL | Assets/Art/new/shared/icons/icon_loan_principal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_INVENTORY | Assets/Art/new/shared/icons/icon_inventory.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ICON_CREDIT_CONTRACT | Assets/Art/new/shared/icons/icon_credit_contract.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_HUD_PILL | Assets/Art/new/hud/indicators/hud_pill.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_KPI_TILE | Assets/Art/new/hud/indicators/kpi_tile.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PROGRESS_TRACK | Assets/Art/new/hud/progress/progress_track.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PROGRESS_FILL | Assets/Art/new/hud/progress/progress_fill.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_NAV_UNDERLINE | Assets/Art/new/hud/progress/nav_underline.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PILL_NORMAL | Assets/Art/new/shared/components/badges/pill_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PILL_SELECTED | Assets/Art/new/shared/components/badges/pill_selected.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PILL_DISABLED | Assets/Art/new/shared/components/badges/pill_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOAST_NEUTRAL | Assets/Art/new/shared/components/feedback/toast_neutral.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOAST_SUCCESS | Assets/Art/new/shared/components/feedback/toast_success.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOAST_WARNING | Assets/Art/new/shared/components/feedback/toast_warning.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_HEADER | Assets/Art/new/dre/components/table_header.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_NEUTRAL | Assets/Art/new/dre/components/table_row_neutral.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_SUBTOTAL | Assets/Art/new/dre/components/table_row_subtotal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_POSITIVE | Assets/Art/new/dre/components/table_row_positive.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_ROW_NEGATIVE | Assets/Art/new/dre/components/table_row_negative.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TABLE_TOTAL_COLUMN | Assets/Art/new/dre/components/table_total_column.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHART_PANEL | Assets/Art/new/dre/components/chart_panel.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- REPORT_CONCLUSION | Assets/Art/new/reports/illustrations/conclusion.png | integração visual no destino da tarefa
+- BANKRUPTCY_OVERLAY | Assets/Art/new/reports/illustrations/business_difficulty.png | integração visual no destino da tarefa
+- EMPTY_CART | Assets/Art/new/system/empty_states/cart_empty.png | integração visual no destino da tarefa
+- EMPTY_TEAM | Assets/Art/new/system/empty_states/team_pending.png | integração visual no destino da tarefa
+- EMPTY_RESULTS | Assets/Art/new/system/empty_states/results_pending.png | integração visual no destino da tarefa
+- CH01_CONCERNED | Assets/Art/new/characters/CH01/ch01_concerned.png | integração visual no destino da tarefa
+- ICON_PARTNERS | Assets/Art/new/reports/bmc/icons/partners.png | integração visual no destino da tarefa
+- ICON_VALUE_PROPOSITION | Assets/Art/new/reports/bmc/icons/value_proposition.png | integração visual no destino da tarefa
+- ICON_CUSTOMER_RELATIONSHIP | Assets/Art/new/reports/bmc/icons/customer_relationship.png | integração visual no destino da tarefa
+- ICON_SALES_CHANNELS | Assets/Art/new/reports/bmc/icons/sales_channels.png | integração visual no destino da tarefa
+- CH01_GUIDING | Assets/Art/new/characters/CH01/ch01_guiding_question.png | integração visual no destino da tarefa
+
+CRITÉRIOS DE ACEITE
+- FinalReport tem painel vinculado, conclusão visual nova e acesso aos resultados reais dos três meses.
+- Os nove blocos do BMC são componentes/textos nativos com conteúdo real ou ausência identificada.
+- Arte de debriefing não cobre perguntas/respostas; nenhum texto de preview foi usado como resultado do jogador.
+- Fontes de dados e lacunas documentais ficam registradas separadamente do status de integração visual.
+
+VALIDAÇÃO
+- Abrir uma campanha concluída, consultar relatórios/BMC, voltar e recarregar o resultado.
+- Revisar associação campo -> fonte e estados sem dados; não declarar modelo inexistente como implementado.
+
+ENTREGÁVEIS
+- Cena/prefabs/views/configuração realmente atualizados apenas no escopo desta tarefa.
+- Registro de execução e evidências em docs/ui-update/qa/UI-15.json e output/ui-update/UI-15/.
+- Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão.
+
+LIMITES
+Preservar IDs, dados econômicos, simulação de três meses e regras de persistência.
+PNG validado não deve ser regenerado; usar texto e dados nativos. Garçom permanece condicional sem RoleData.
+Não reexecutar a conversão para Single já concluída; não alterar tarefas/lotes alheios.
+
+COMANDO PARA EXECUTAR ESTA TAREFA
+Execute somente UI-15 — Relatório final, BMC e debriefing no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-15.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.

@@ -15,7 +15,9 @@ O inventário contém 272 assets. Os 265 assets do núcleo (ART-01 a ART-35) est
 
 Consulte a [entrega ART-36](ART-36-entregas.md), a [galeria de provas](../../art-source/previews/ART-36/index.html), o [QA](qa/ART-36.json) e o [mapa de integração por asset](qa/ART-36-integration-map.json). Prompts e revisões dos lotes de produção permanecem em `prompts/ART-XX.json` e `qa/ART-XX.json`.
 
-**Integração no jogo pendente.** A ART-36 encontrou propostas de importação ainda não aplicadas em 227 assets e nenhuma referência aos 265 GUIDs novos nos 175 arquivos serializados varridos. Os [detalhes de importação](qa/ART-36-import-audit.json) e as condições de CanvasScaler, tint, 9-slice e montagem constam da entrega. Nada foi aplicado às cenas ou catálogos; as provas não substituem testes no Unity.
+**Integração no jogo pendente.** Na data da auditoria, a ART-36 encontrou propostas de importação ainda não aplicadas em 227 assets e nenhuma referência aos 265 GUIDs novos nos 175 arquivos serializados varridos. Em 16/10/2026, os 277 PNGs de `Assets/Art/new` foram conferidos em Single, com imagem inteira e GUIDs preservados. Bordas, pivots, compressão, tint e montagem ainda precisam ser conferidos durante a integração; os [detalhes de importação da ART-36](qa/ART-36-import-audit.json) são um registro histórico. As provas não substituem testes no Unity.
+
+O [plano de atualização completa das interfaces](../ui-update/PLANO-DE-ATUALIZACAO.html) organiza 20 tarefas de integração, com instruções em [COMECE-AQUI](../ui-update/COMECE-AQUI.txt). A UI-01 entrega primeiro o novo visual da identificação e sua migração de `0_Identification` para a `GameScene`, como passo 1 antes das decisões. As demais tarefas cobrem todas as telas, tipografia, cores, tamanhos, estados e navegação; o backlog está planejado, sem implementação de UI nesta entrega.
 
 ## Caminhos do manifesto v2
 
