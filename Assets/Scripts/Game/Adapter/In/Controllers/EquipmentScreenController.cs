@@ -14,6 +14,8 @@ namespace Game.Adapter.In.Controllers
         private readonly HashSet<string> ownedEquipmentIds = new();
         private readonly HashSet<string> cartEquipmentIds = new();
         private EquipmentData[] basicEquipments = System.Array.Empty<EquipmentData>();
+        private EquipmentFilter filter = EquipmentFilter.All;
+        private bool ready;
 
         private float AvailableCash => GameSessionState.HasSession
             ? GameSessionState.Current.currentCash
@@ -24,13 +26,18 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 view = GetComponent<EquipmentScreenView>();
 
-            view?.SetFooterVisible(!WasOpenedFromMenu());
+            filter = EquipmentFilter.All;
+            view?.SetContext(!WasOpenedFromMenu(), RestaurantName());
             LoadOwnedEquipmentIds();
             cartEquipmentIds.Clear();
             PopulateEquipments();
             BindActions();
             RefreshScreen();
+            view?.ApplyFilter(filter);
         }
+
+        private static string RestaurantName() => !GameSessionState.HasSession ? string.Empty : GameSessionState.Current.restaurantType switch
+        { RestaurantType.PODRAO => "Restaurante de lanches", RestaurantType.JAPONES => "Restaurante japonês", _ => "Restaurante francês" };
 
         private static bool WasOpenedFromMenu()
         {
@@ -46,6 +53,8 @@ namespace Game.Adapter.In.Controllers
                 view.BindCart(null);
                 view.BindBankBack(null);
                 view.HideCart();
+                view.FilterRequested -= ChangeFilter;
+                view.CartRemovalRequested -= RemoveFromCart;
             }
 
             UnbindCards();
@@ -71,16 +80,18 @@ namespace Game.Adapter.In.Controllers
 
         private void PopulateEquipments()
         {
+            ready = false;
             UnbindCards();
             cards.Clear();
+            view?.ClearCards();
+            view?.ApplyFilter(filter);
 
             if (view == null || !view.HasRequiredReferences())
             {
-                Debug.LogError("EquipmentScreenView nao possui todas as referencias obrigatorias.");
+                view?.SetHint("Não foi possível carregar o catálogo. Volte e tente novamente.");
+                view?.SetConfirmEnabled(false);
                 return;
             }
-
-            view.ClearCards();
 
             RestaurantType restaurantType = GameSessionState.HasSession
                 ? GameSessionState.Current.restaurantType
@@ -110,6 +121,9 @@ namespace Game.Adapter.In.Controllers
                 cards.Add(card);
             }
 
+            ready = visibleEquipments.Length > 0;
+            view.ApplyFilter(filter);
+
             view.SetHint(visibleEquipments.Length == 0
                 ? "Nenhum equipamento foi encontrado em Resources/Equipments."
                 : "Adicione os equipamentos desejados ao carrinho.");
@@ -123,6 +137,18 @@ namespace Game.Adapter.In.Controllers
             view.BindConfirm(OnContinue);
             view.BindCart(OpenCart);
             view.BindBankBack(ReturnToBank);
+            view.FilterRequested -= ChangeFilter;
+            view.FilterRequested += ChangeFilter;
+            view.CartRemovalRequested -= RemoveFromCart;
+            view.CartRemovalRequested += RemoveFromCart;
+        }
+
+        private void ChangeFilter(EquipmentFilter selected) { filter = selected; view.ApplyFilter(filter); }
+        private void RemoveFromCart(string id)
+        {
+            if (!cartEquipmentIds.Remove(id)) return;
+            RemoveInvalidSpecificItemsFromCart(); RefreshScreen(); OpenCart();
+            view.SetHint(cartEquipmentIds.Count == 0 ? "Seu carrinho está vazio." : $"{cartEquipmentIds.Count} unidade(s) no carrinho.");
         }
 
         private void ReturnToBank()
@@ -136,7 +162,7 @@ namespace Game.Adapter.In.Controllers
         {
             EquipmentData equipment = card != null ? card.Equipment : null;
 
-            if (!GameSessionState.HasSession || equipment == null || Owns(equipment))
+            if (!GameSessionState.HasActiveSession || equipment == null || Owns(equipment))
                 return;
 
             if (string.IsNullOrWhiteSpace(equipment.id))
@@ -181,13 +207,15 @@ namespace Game.Adapter.In.Controllers
                 card.SetInCart(cartEquipmentIds.Contains(card.Equipment.id));
                 bool prerequisiteMet = card.Equipment.category == EquipmentCategory.BASIC
                     || hasAllBasicEquipmentsSelected;
-                card.SetCartAvailable(prerequisiteMet);
+                card.SetCartAvailable(ready && GameSessionState.HasActiveSession && prerequisiteMet);
             }
 
             float cartTotal = GetCartTotal();
-            view.SetCartSummary(AvailableCash, cartTotal);
-            view.SetCartButtonCount(cartEquipmentIds.Count);
-            view.SetConfirmEnabled(true);
+            view.SetCartSummary(AvailableCash, CartItems(), GameSessionState.HasActiveSession && ready);
+            view.SetConfirmEnabled(GameSessionState.HasActiveSession && ready);
+
+            if (!GameSessionState.HasActiveSession)
+                view.SetHint("Sessão indisponível. Volte ao menu para continuar.");
 
             if (cartTotal > AvailableCash)
                 view.SetHint("Saldo insuficiente para concluir a compra do carrinho.");
@@ -195,6 +223,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnContinue()
         {
+            if (!ready || !GameSessionState.HasActiveSession) return;
             if (cartEquipmentIds.Count > 0)
             {
                 OpenCart();
@@ -209,20 +238,22 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 return;
 
-            List<EquipmentData> cartItems = cards
+            view.ShowCart(CartItems(), AvailableCash, CompleteCartPurchase);
+        }
+
+        private List<EquipmentData> CartItems() => cards
                 .Where(card => card != null
                     && card.Equipment != null
                     && cartEquipmentIds.Contains(card.Equipment.id))
                 .Select(card => card.Equipment)
                 .ToList();
 
-            view.ShowCart(cartItems, AvailableCash, CompleteCartPurchase);
-        }
-
         private void CompleteCartPurchase()
         {
+            if (!isActiveAndEnabled || !ready || !GameSessionState.HasActiveSession) return;
             float cartTotal = GetCartTotal();
-            if (cartEquipmentIds.Count == 0 || cartTotal > AvailableCash)
+            if (cartEquipmentIds.Count == 0 || cartTotal > AvailableCash
+                || !HasAllBasicEquipmentsSelected() && CartItems().Any(e => e.category == EquipmentCategory.SPECIFIC))
             {
                 OpenCart();
                 return;
@@ -261,7 +292,7 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
 
-            MenuNavigator.Instance.OpenRoot();
+            MenuNavigator.Instance.Back();
         }
 
         private bool Owns(EquipmentData equipment)
@@ -269,11 +300,6 @@ namespace Game.Adapter.In.Controllers
             return equipment != null
                 && !string.IsNullOrWhiteSpace(equipment.id)
                 && ownedEquipmentIds.Contains(equipment.id);
-        }
-
-        private bool OwnsAllBasicEquipments()
-        {
-            return basicEquipments.Length > 0 && basicEquipments.All(Owns);
         }
 
         private bool HasAllBasicEquipmentsSelected()

@@ -2,323 +2,145 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Game.Adapter.In.UI.Theme;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using Game.Adapter.In.UI.Theme;
 
 namespace Game.Adapter.In.UI
 {
+    public enum EquipmentFilter { All, Basic, Specific, Owned }
     public sealed class EquipmentScreenView : MonoBehaviour
     {
-        [Header("Cards")]
         [SerializeField] private EquipmentCardView cardPrefab;
         [SerializeField] private RectTransform cardContainer;
-
-        [Header("Summary (optional)")]
-        [SerializeField] private TextMeshProUGUI hintText;
-        [SerializeField] private TextMeshProUGUI availableCashText;
-        [SerializeField] private TextMeshProUGUI cartTotalValueText;
-        [SerializeField] private TextMeshProUGUI remainingCashValueText;
-
-        [Header("Actions")]
-        [SerializeField] private Button confirmButton;
-        [SerializeField] private Button cartButton;
-        [SerializeField] private Button bankBackButton;
-
+        [SerializeField] private UnityEngine.UI.ScrollRect catalogScroll;
+        [SerializeField] private TextMeshProUGUI hintText, availableCashText, cartTotalValueText, remainingCashValueText;
+        [SerializeField] private TextMeshProUGUI stepText, contextText, resultText, confirmLabel, footerText, summaryItemsText;
+        [SerializeField] private UnityEngine.UI.Button confirmButton, cartButton, bankBackButton;
+        [SerializeField] private UnityEngine.UI.Button[] filterButtons = Array.Empty<UnityEngine.UI.Button>();
+        [SerializeField] private GameObject catalogEmpty, summaryEmpty;
+        [SerializeField] private GameObject cartModal, cartEmpty;
+        [SerializeField] private RectTransform cartLines;
+        [SerializeField] private EquipmentCartLineView cartLinePrefab;
+        [SerializeField] private TextMeshProUGUI cartTotalText, cartStatusText, cartCashText, cartRemainingText;
+        [SerializeField] private UnityEngine.UI.Button checkoutButton, closeCartButton;
         private readonly List<EquipmentCardView> cards = new();
-        private TextMeshProUGUI cartButtonText;
-        private GameObject cartModal;
-        private TextMeshProUGUI cartItemsText;
-        private TextMeshProUGUI cartTotalText;
-        private TextMeshProUGUI cartStatusText;
-        private Button checkoutButton;
+        private readonly List<EquipmentCartLineView> lines = new();
         private UnityAction checkoutAction;
-
+        public event Action<EquipmentFilter> FilterRequested;
+        public event Action<string> CartRemovalRequested;
+        public bool CartIsOpen => cartModal != null && cartModal.activeSelf;
         private void Awake()
-        { 
-            EnsureCartUi();
-        }
-
-        private void OnDestroy()
         {
-            if (checkoutButton != null)
-                checkoutButton.onClick.RemoveAllListeners();
+            for (int i = 0; i < filterButtons.Length; i++)
+            {
+                var filter = (EquipmentFilter)i;
+                if (filterButtons[i] != null) filterButtons[i].onClick.AddListener(() => FilterRequested?.Invoke(filter));
+            }
+            if (checkoutButton != null) checkoutButton.onClick.AddListener(() => checkoutAction?.Invoke());
+            if (closeCartButton != null) closeCartButton.onClick.AddListener(HideCart);
         }
-
-        public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && confirmButton != null;
-
+        public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && confirmButton != null
+            && cartModal != null && cartLinePrefab != null && cartLines != null;
         public EquipmentCardView CreateCard()
         {
-            EquipmentCardView card = Instantiate(cardPrefab, cardContainer);
-            card.gameObject.SetActive(true);
-            cards.Add(card);
-            return card;
+            var card = Instantiate(cardPrefab, cardContainer); card.gameObject.SetActive(true); cards.Add(card); return card;
         }
-
         public void ClearCards()
         {
-            foreach (EquipmentCardView card in cards)
-                if (card != null) Destroy(card.gameObject);
+            foreach (var card in cards) if (card != null) { card.gameObject.SetActive(false); Destroy(card.gameObject); }
             cards.Clear();
         }
-
-        public void SetCartSummary(float availableCash, float cartTotal)
+        public void SetContext(bool setup, string restaurant)
         {
-            if (availableCashText != null)
-                availableCashText.text = $"R$ {availableCash:0,0.00}";
-
-            if (cartTotalValueText != null)
-                cartTotalValueText.text = $"Total do carrinho: R$ {cartTotal:0,0.00}";
-
+            if (stepText != null) stepText.text = setup ? "PASSO 6 DE 7  •  EQUIPAMENTOS" : "LOJA DE EQUIPAMENTOS";
+            if (contextText != null) contextText.text = GameSessionState.HasSession ? restaurant + "  •  Uma unidade por equipamento" : "Sessão indisponível";
+            if (bankBackButton != null) bankBackButton.gameObject.SetActive(setup);
+            if (confirmLabel != null) confirmLabel.text = setup ? "Continuar para equipe" : "Concluir visita";
+            if (footerText != null)
+            {
+                footerText.gameObject.SetActive(!setup);
+                footerText.text = "Compras para o seu restaurante.";
+            }
+        }
+        public void SetCartSummary(float availableCash, IReadOnlyCollection<EquipmentData> items, bool available)
+        {
+            float total = items.Sum(e => Mathf.Max(0, e.cost));
+            if (availableCashText != null) availableCashText.text = available ? FinancialScreenView.Money(availableCash) : "Indisponível";
+            if (cartTotalValueText != null) cartTotalValueText.text = FinancialScreenView.Money(total);
             if (remainingCashValueText != null)
-                remainingCashValueText.text = $"Após a compra: R$ {availableCash - cartTotal:0,0.00}";
-        }
-
-        public void SetHint(string message)
-        {
-            if (hintText != null) hintText.text = message;
-        }
-
-        public void SetConfirmEnabled(bool enabled)
-        {
-            if (confirmButton != null) confirmButton.interactable = enabled;
-        }
-
-        public void SetFooterVisible(bool visible)
-        {
-            SetActionFooterVisible(confirmButton, null, visible);
-            if (bankBackButton != null) bankBackButton.gameObject.SetActive(visible);
-        }
-
-        public void BindBankBack(UnityAction action) => Bind(bankBackButton, action);
-
-        public void SetCartButtonCount(int itemCount)
-        {
-            EnsureCartUi();
-            if (cartButtonText != null)
-                cartButtonText.text = $"Carrinho ({itemCount})";
-        }
-
-        public void BindCart(UnityAction action)
-        {
-            EnsureCartUi();
-            Bind(cartButton, action);
-        }
-
-        public void ShowCart(
-            IReadOnlyCollection<EquipmentData> equipments,
-            float availableCash,
-            UnityAction onCheckout)
-        {
-            EnsureCartUi();
-            checkoutAction = onCheckout;
-
-            EquipmentData[] items = equipments?.Where(item => item != null).ToArray()
-                ?? Array.Empty<EquipmentData>();
-            float total = items.Sum(item => Mathf.Max(0, item.cost));
-            bool hasItems = items.Length > 0;
-            bool hasEnoughCash = total <= availableCash;
-
-            if (cartItemsText != null)
-                cartItemsText.text = hasItems
-                    ? string.Join("\n", items.Select(item =>
-                        $"• {item.displayName} — R$ {Mathf.Max(0, item.cost):0,0.00}"))
-                    : "Nenhum item foi adicionado ao carrinho.";
-
-            if (cartTotalText != null)
-                cartTotalText.text = $"Total: R$ {total:0,0.00}";
-
-            if (cartStatusText != null)
             {
-                cartStatusText.gameObject.SetActive(hasItems && !hasEnoughCash);
-                cartStatusText.text = "Saldo insuficiente para concluir esta compra.";
+                remainingCashValueText.text = available ? FinancialScreenView.Money(availableCash - total) : "Indisponível";
+                remainingCashValueText.color = total > availableCash ? GamePalette.ErrorText : GamePalette.Ink;
             }
-
-            if (checkoutButton != null)
+            if (summaryEmpty != null) summaryEmpty.SetActive(items.Count == 0);
+            if (summaryItemsText != null)
             {
-                checkoutButton.gameObject.SetActive(hasItems);
-                checkoutButton.interactable = hasItems && hasEnoughCash;
+                summaryItemsText.gameObject.SetActive(items.Count > 0);
+                summaryItemsText.text = string.Join("\n\n", items.Select(e => $"1 × {e.displayName}\n{FinancialScreenView.Money(e.cost)}"));
             }
-
-            if (cartModal != null)
-            {
-                cartModal.SetActive(true);
-                cartModal.transform.SetAsLastSibling();
-            }
-        }
-
-        public void HideCart()
-        {
-            if (cartModal != null) cartModal.SetActive(false);
-        }
-
-        public void BindConfirm(UnityAction action) => Bind(confirmButton, action);
-        private void EnsureCartUi()
-        {
-            if (cartModal != null)
-                return;
-
             if (cartButton != null)
-                cartButtonText = cartButton.GetComponentInChildren<TextMeshProUGUI>(true);
-
-            CreateCartModal();
-        }
-
-        private void CreateCartModal()
-        {
-            if (cartModal != null)
-                return;
-
-            cartModal = CreateUiObject("CartModal", transform, typeof(Image));
-            RectTransform overlayRect = cartModal.GetComponent<RectTransform>();
-            overlayRect.anchorMin = new Vector2(0.5f, 0.5f);
-            overlayRect.anchorMax = new Vector2(0.5f, 0.5f);
-            overlayRect.pivot = new Vector2(0.5f, 0.5f);
-            overlayRect.sizeDelta = new Vector2(4000f, 2400f);
-            cartModal.GetComponent<Image>().color = GamePalette.WithAlpha(GamePalette.Plum,.72f);
-            SharedUiStyles.Surface(cartModal, "UI_SCRIM", true).preserveAspect = false;
-
-            GameObject panel = CreateUiObject("CartPanel", cartModal.transform, typeof(Image));
-            RectTransform panelRect = panel.GetComponent<RectTransform>();
-            panelRect.anchorMin = new Vector2(0.5f, 0.5f);
-            panelRect.anchorMax = new Vector2(0.5f, 0.5f);
-            panelRect.pivot = new Vector2(0.5f, 0.5f);
-            panelRect.sizeDelta = new Vector2(760f, 650f);
-            panel.GetComponent<Image>().color = GamePalette.Surface;
-            SharedUiStyles.Surface(panel, "UI_MODAL_SURFACE", true);
-
-            CreateText("Title", panel.transform, "Seu carrinho", GameTypography.SectionTitle, FontStyles.Bold,
-                new Vector2(40f, -30f), new Vector2(-40f, -95f));
-
-            GameObject viewport = CreateUiObject("ItemsViewport", panel.transform, typeof(Image), typeof(Mask));
-            RectTransform viewportRect = viewport.GetComponent<RectTransform>();
-            viewportRect.anchorMin = new Vector2(0f, 1f);
-            viewportRect.anchorMax = new Vector2(1f, 1f);
-            viewportRect.offsetMin = new Vector2(45f, -400f);
-            viewportRect.offsetMax = new Vector2(-45f, -120f);
-            viewport.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.04f);
-            viewport.GetComponent<Mask>().showMaskGraphic = false;
-
-            cartItemsText = CreateText("Items", viewport.transform, string.Empty, GameTypography.Body, FontStyles.Normal,
-                new Vector2(10f, -5f), new Vector2(-10f, -5f));
-            cartItemsText.alignment = TextAlignmentOptions.TopLeft;
-            cartItemsText.overflowMode = TextOverflowModes.Overflow;
-            ContentSizeFitter fitter = cartItemsText.gameObject.AddComponent<ContentSizeFitter>();
-            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-            ScrollRect scroll = viewport.AddComponent<ScrollRect>();
-            scroll.viewport = viewportRect;
-            scroll.content = cartItemsText.rectTransform;
-            scroll.horizontal = false;
-            scroll.vertical = true;
-            scroll.movementType = ScrollRect.MovementType.Clamped;
-
-            cartTotalText = CreateText("Total", panel.transform, string.Empty, GameTypography.Body, FontStyles.Bold,
-                new Vector2(55f, -420f), new Vector2(-55f, -475f));
-            cartTotalText.alignment = TextAlignmentOptions.MidlineRight;
-
-            cartStatusText = CreateText("Status", panel.transform, string.Empty, GameTypography.Body, FontStyles.Bold,
-                new Vector2(55f, -485f), new Vector2(-55f, -530f));
-            cartStatusText.color = GamePalette.ErrorText;
-            cartStatusText.alignment = TextAlignmentOptions.Center;
-
-            checkoutButton = CreateButton("CheckoutButton", panel.transform, "Concluir compra",
-                new Vector2(0.5f, 0f), new Vector2(230f, 70f), new Vector2(135f, 35f));
-            checkoutButton.onClick.AddListener(() => checkoutAction?.Invoke());
-
-            Button closeButton = CreateButton("CloseButton", panel.transform, "Fechar",
-                new Vector2(0.5f, 0f), new Vector2(180f, 70f), new Vector2(-105f, 35f));
-            closeButton.onClick.AddListener(HideCart);
-
-            cartModal.SetActive(false);
-            cartModal.AddComponent<SharedModalFocus>();
-        }
-
-        private TextMeshProUGUI CreateText(string name, Transform parent, string value, float size,
-            FontStyles style, Vector2 offsetMin, Vector2 offsetMax)
-        {
-            GameObject textObject = CreateUiObject(name, parent, typeof(TextMeshProUGUI));
-            RectTransform rect = textObject.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0f, 1f);
-            rect.anchorMax = new Vector2(1f, 1f);
-            rect.pivot = new Vector2(0.5f, 1f);
-            rect.offsetMin = new Vector2(offsetMin.x, offsetMax.y);
-            rect.offsetMax = new Vector2(offsetMax.x, offsetMin.y);
-            TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
-            text.text = value;
-            text.raycastTarget = false;
-            GameTypography.Apply(text, hintText != null ? hintText.font : TMP_Settings.defaultFontAsset, size, (style & FontStyles.Bold) != 0);
-            text.fontStyle = style;
-            text.color = GamePalette.Ink;
-            text.textWrappingMode = TextWrappingModes.Normal;
-            if (hintText != null) text.font = hintText.font;
-            return text;
-        }
-
-        private Button CreateButton(string name, Transform parent, string label,
-            Vector2 anchor, Vector2 size, Vector2 position)
-        {
-            GameObject buttonObject = CreateUiObject(name, parent, typeof(Image), typeof(Button));
-            RectTransform rect = buttonObject.GetComponent<RectTransform>();
-            rect.anchorMin = anchor;
-            rect.anchorMax = anchor;
-            rect.pivot = new Vector2(0.5f, 0f);
-            rect.sizeDelta = size;
-            rect.anchoredPosition = position;
-            buttonObject.GetComponent<Image>().color = GamePalette.Primary;
-
-            TextMeshProUGUI labelText = CreateText("Text", buttonObject.transform, label, GameTypography.Button,
-                FontStyles.Bold, Vector2.zero, Vector2.zero);
-            Stretch(labelText.rectTransform);
-            labelText.alignment = TextAlignmentOptions.Center;
-            labelText.color = GamePalette.OnPrimary;
-            labelText.raycastTarget = false;
-            var button = buttonObject.GetComponent<Button>();
-            SharedUiStyles.Bind(button, name == "CloseButton" ? SharedControlKind.Secondary : SharedControlKind.Primary);
-            return button;
-        }
-
-        private static GameObject CreateUiObject(string name, Transform parent, params Type[] components)
-        {
-            var types = new List<Type> { typeof(RectTransform), typeof(CanvasRenderer) };
-            types.AddRange(components);
-            var instance = new GameObject(name, types.Distinct().ToArray());
-            instance.layer = parent.gameObject.layer;
-            instance.transform.SetParent(parent, false);
-            return instance;
-        }
-
-        private static void Stretch(RectTransform rect)
-        {
-            rect.anchorMin = Vector2.zero;
-            rect.anchorMax = Vector2.one;
-            rect.offsetMin = Vector2.zero;
-            rect.offsetMax = Vector2.zero;
-        }
-
-        private static void Bind(Button button, UnityAction action)
-        {
-            if (button == null) return;
-            button.onClick.RemoveAllListeners();
-            if (action != null) button.onClick.AddListener(action);
-        }
-
-        private static void SetActionFooterVisible(Button primary, Button secondary, bool visible)
-        {
-            Transform current = primary != null ? primary.transform : secondary != null ? secondary.transform : null;
-
-            while (current != null && current.name != "Footer")
-                current = current.parent;
-
-            if (current != null)
             {
-                current.gameObject.SetActive(visible);
-                return;
+                cartButton.interactable = available;
+                cartButton.GetComponentInChildren<TMP_Text>().text = $"Revisar carrinho ({items.Count})";
             }
-
-            if (primary != null) primary.gameObject.SetActive(visible);
-            if (secondary != null) secondary.gameObject.SetActive(visible);
         }
+        public void ApplyFilter(EquipmentFilter filter)
+        {
+            int count = 0;
+            foreach (var card in cards)
+            {
+                bool show = filter == EquipmentFilter.All || filter == EquipmentFilter.Basic && card.Equipment.category == EquipmentCategory.BASIC
+                    || filter == EquipmentFilter.Specific && card.Equipment.category == EquipmentCategory.SPECIFIC || filter == EquipmentFilter.Owned && card.IsOwned;
+                card.gameObject.SetActive(show); if (show) count++;
+            }
+            for (int i = 0; i < filterButtons.Length; i++) filterButtons[i]?.GetComponent<SharedControlAppearance>()?.SetSelected(i == (int)filter);
+            if (catalogEmpty != null) catalogEmpty.SetActive(count == 0);
+            if (resultText != null) resultText.text = $"{count} equipamento(s)";
+            if (catalogScroll != null) { catalogScroll.StopMovement(); catalogScroll.verticalNormalizedPosition = 1; }
+        }
+        private void LateUpdate()
+        {
+            var grid = cardContainer != null ? cardContainer.GetComponent<UnityEngine.UI.GridLayoutGroup>() : null;
+            if (grid == null) return;
+            float height = cards.Where(c => c != null && c.gameObject.activeSelf).Select(c => c.RequiredHeight).DefaultIfEmpty(360).Max();
+            if (!Mathf.Approximately(grid.cellSize.y, height)) grid.cellSize = new Vector2(grid.cellSize.x, height);
+        }
+        public void SetHint(string message) { if (hintText != null) hintText.text = message; }
+        public void SetConfirmEnabled(bool enabled) { if (confirmButton != null) confirmButton.interactable = enabled; }
+        public void BindBankBack(UnityAction action) => Bind(bankBackButton, action);
+        public void BindCart(UnityAction action) => Bind(cartButton, action);
+        public void BindConfirm(UnityAction action) => Bind(confirmButton, action);
+        public void ShowCart(IReadOnlyCollection<EquipmentData> items, float availableCash, UnityAction onCheckout)
+        {
+            if (!isActiveAndEnabled || !HasRequiredReferences()) return;
+            checkoutAction = onCheckout;
+            foreach (var line in lines) if (line != null) { line.gameObject.SetActive(false); Destroy(line.gameObject); }
+            lines.Clear();
+            foreach (var item in items)
+            {
+                var line = Instantiate(cartLinePrefab, cartLines); line.gameObject.SetActive(true);
+                line.Setup(item, () => CartRemovalRequested?.Invoke(item.id)); lines.Add(line);
+            }
+            float total = items.Sum(e => Mathf.Max(0, e.cost));
+            cartTotalText.text = FinancialScreenView.Money(total);
+            cartCashText.text = FinancialScreenView.Money(availableCash);
+            cartRemainingText.text = FinancialScreenView.Money(availableCash - total);
+            cartRemainingText.color = total > availableCash ? GamePalette.ErrorText : GamePalette.Ink;
+            cartStatusText.text = items.Count == 0 ? "Adicione equipamentos no catálogo." : total > availableCash
+                ? "Saldo insuficiente. Remova itens para concluir." : $"{items.Count} unidade(s). Confira os itens e o total.";
+            cartStatusText.color = total > availableCash ? GamePalette.ErrorText : GamePalette.Muted;
+            cartEmpty.SetActive(items.Count == 0);
+            checkoutButton.interactable = items.Count > 0 && total <= availableCash && GameSessionState.HasActiveSession;
+            bool opening = !cartModal.activeSelf;
+            cartModal.SetActive(true); cartModal.transform.SetAsLastSibling();
+            // A prefab's root Canvas cannot serialize overrideSorting until nested under the scene Canvas.
+            var modalCanvas = cartModal.GetComponent<Canvas>();
+            if (modalCanvas != null) { modalCanvas.overrideSorting = true; modalCanvas.sortingOrder = 200; }
+            if (opening) cartLines.GetComponentInParent<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition = 1;
+        }
+        public void HideCart() { if (cartModal != null) cartModal.SetActive(false); }
+        private static void Bind(UnityEngine.UI.Button button, UnityAction action)
+        { if (button == null) return; button.onClick.RemoveAllListeners(); if (action != null) button.onClick.AddListener(action); }
     }
 }
