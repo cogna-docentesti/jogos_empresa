@@ -1,5 +1,5 @@
 UI-03 — Componentes compartilhados, sprites, ícones e estados
-Status: planejado | Prioridade: P0 | Fase: Fundação visual
+Status: concluído | Prioridade: P0 | Fase: Fundação visual
 Dependências: UI-02
 
 OBJETIVO
@@ -214,3 +214,10 @@ Não reexecutar a conversão para Single já concluída; não alterar tarefas/lo
 
 COMANDO PARA EXECUTAR ESTA TAREFA
 Execute somente UI-03 — Componentes compartilhados, sprites, ícones e estados no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-03.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.
+
+REGISTRO DE ENTREGA — 16/10/2026
+Biblioteca compartilhada e controles migrados; composição opt-in dentro da GameScene, desativada na cena salva.
+66 testes Edit Mode e 55 verificações Play Mode aprovados. Capturas reais em 1920x1080, 1366x768 e 1280x720.
+Importação conferida no manifesto atual: 277 Single, 272 contratos, PNGs/GUIDs preservados. Referências serializadas de views/negócio e callbacks preservados.
+QA: docs/ui-update/qa/UI-03.json. Evidências: output/ui-update/UI-03/. Sem pendência indispensável da UI-03.
+Telas completas, aparelho físico e builds finais continuam nas tarefas proprietárias. Encerrar após somente UI-03.

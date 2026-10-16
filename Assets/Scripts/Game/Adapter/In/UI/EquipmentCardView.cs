@@ -44,6 +44,9 @@ namespace Game.Adapter.In.UI
             {
                 equipmentImage.sprite = equipment != null ? equipment.icon : null;
                 equipmentImage.preserveAspect = true;
+                equipmentImage.type = Image.Type.Simple;
+                equipmentImage.color = Color.white;
+                equipmentImage.raycastTarget = false;
                 equipmentImage.gameObject.SetActive(equipmentImage.sprite != null);
             }
 
@@ -73,6 +76,7 @@ namespace Game.Adapter.In.UI
         public void SetInCart(bool inCart)
         {
             IsInCart = !IsOwned && inCart;
+            GetComponent<SharedControlAppearance>()?.SetSelected(IsInCart);
             if (selectionBorder != null) selectionBorder.SetActive(false);
             if (buyButton != null && !IsOwned) buyButton.interactable = true;
             if (buyButtonText != null && !IsOwned)

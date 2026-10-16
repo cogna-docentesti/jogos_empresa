@@ -34,6 +34,10 @@ namespace Game.Adapter.In.UI
             if (productImage != null)
             {
                 productImage.sprite = product.productSprite;
+                productImage.type = Image.Type.Simple;
+                productImage.preserveAspect = true;
+                productImage.color = Color.white;
+                productImage.raycastTarget = false;
                 productImage.enabled = product.productSprite != null;
             }
 

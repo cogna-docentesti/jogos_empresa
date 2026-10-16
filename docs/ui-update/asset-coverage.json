@@ -103,13 +103,16 @@
       "png_sha256_at_planning": "2a8c4a7189c75b0b3e47d33d2144ef5f672276d60efa5750ab7a34dbf4725081",
       "integrated_consumer_tasks": [
         "UI-01",
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
         "UI-01": "docs/ui-update/qa/UI-01.json",
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_NAVBAR_PLUM",
@@ -131,12 +134,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "38a80c13308eff01f90c17f93637995e9916043e315dc324c6fa1a064e9cae81",
       "integrated_consumer_tasks": [
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PANEL_IVORY",
@@ -159,13 +165,16 @@
       "png_sha256_at_planning": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323",
       "integrated_consumer_tasks": [
         "UI-01",
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
         "UI-01": "docs/ui-update/qa/UI-01.json",
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PANEL_LAVENDER",
@@ -187,12 +196,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637",
       "integrated_consumer_tasks": [
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PANEL_PLUM",
@@ -214,12 +226,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "e7a1783d88466ab9b50808febf29269efd1b03d62d41a74fafa4253283c28345",
       "integrated_consumer_tasks": [
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PANEL_SHADOW",
@@ -238,11 +253,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "5a96f8bc90d6d3c037758ffcc08cbbc369d31539a85dbf5714d8c7595fe25035",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CARD_NORMAL",
@@ -261,11 +284,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "7f5f205c8c431999b2e7b60bd84b75a564b4c10f82fea0f3d4657a086deeff73",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CARD_SELECTED_OUTLINE",
@@ -284,11 +315,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "55db63a3624b0fb74d075eff5c1b4ad8e9acb4fe6a7c4db2f1d3238536fc7c1c",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CARD_DISABLED_OVERLAY",
@@ -307,11 +346,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "ad510611151659042b534d5a1e8f438956c2f05d2dd9de6f34da3d1b39e3ac02",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_MODAL_SURFACE",
@@ -330,11 +377,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "5bffd4adee557c625de1110c979abd305b105b38a4c8f0f95a22123cf78b8a6a",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOOLTIP_SURFACE",
@@ -353,11 +408,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "7fa4c18a569978d9543b56376a4d3c3d0897378903f26f96c3e78eddf55fc50e",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SCRIM",
@@ -376,11 +439,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "c6e96c8eca3e97f24386b87d2259700168675d74b8078f965eeb04912f20d53e",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_BADGE_CIRCLE",
@@ -399,11 +470,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "4f6e9e4d8270587e5be00ebc8775954df01ef56364af96b7ee14b9ea47c15027",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "BRAND_COGNA_LOGO",
@@ -425,15 +504,18 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "758d6328f3955b6bd72faf26ee90ff981a102867a333a67166ac7f0a39cb5a45",
       "integrated_consumer_tasks": [
-        "UI-01"
+        "UI-01",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-01": "docs/ui-update/qa/UI-01.json"
+        "UI-01": "docs/ui-update/qa/UI-01.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "Aplicado na identificação; demais telas/variantes continuam nas tarefas proprietárias.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PRIMARY_VIOLET_NORMAL",
@@ -456,13 +538,16 @@
       "png_sha256_at_planning": "235f0eebf049fbc39dbb417fc9d2cb5a912c302cfe726b471e0330acf9e4f0cc",
       "integrated_consumer_tasks": [
         "UI-01",
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
         "UI-01": "docs/ui-update/qa/UI-01.json",
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PRIMARY_VIOLET_HOVER",
@@ -485,13 +570,16 @@
       "png_sha256_at_planning": "cc5096d4a72df2324add3d10a516c4f5a7f026330cf65e3fedc607e5a6b86fda",
       "integrated_consumer_tasks": [
         "UI-01",
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
         "UI-01": "docs/ui-update/qa/UI-01.json",
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PRIMARY_VIOLET_PRESSED",
@@ -514,13 +602,16 @@
       "png_sha256_at_planning": "da213e60e3e9846b4dc06c3a09f87f022dd672f9cbf96fa4628ce20d89f5420f",
       "integrated_consumer_tasks": [
         "UI-01",
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
         "UI-01": "docs/ui-update/qa/UI-01.json",
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PRIMARY_VIOLET_DISABLED",
@@ -543,13 +634,16 @@
       "png_sha256_at_planning": "86eb198d523bbd5d4a55ba3a40814014f9b7c1e4be01ab8cc2f688622c27363f",
       "integrated_consumer_tasks": [
         "UI-01",
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
         "UI-01": "docs/ui-update/qa/UI-01.json",
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SECONDARY_IVORY_NORMAL",
@@ -567,8 +661,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "6450bc986605985fa2d4baa4c4b9e168eeef11ec4be06c22e83615c4dc9026f1"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "6450bc986605985fa2d4baa4c4b9e168eeef11ec4be06c22e83615c4dc9026f1",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SECONDARY_IVORY_HOVER",
@@ -586,8 +688,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "41786792f817f96b7163f28ed4f3a2417cddd5e27b5fe8764c2eb4ae88ffd9f1"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "41786792f817f96b7163f28ed4f3a2417cddd5e27b5fe8764c2eb4ae88ffd9f1",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SECONDARY_IVORY_PRESSED",
@@ -605,8 +715,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "4fdd7ae7831972c03d10b7a7355f85e5db3e859462526685f19de62498a6a08f"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "4fdd7ae7831972c03d10b7a7355f85e5db3e859462526685f19de62498a6a08f",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SECONDARY_IVORY_DISABLED",
@@ -624,8 +742,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "48f38e4fd0e2aa19d4b93e9a56d7489aedaf4234c527adf4af68e022d2ac5e48"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "48f38e4fd0e2aa19d4b93e9a56d7489aedaf4234c527adf4af68e022d2ac5e48",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_DANGER_CORAL_NORMAL",
@@ -643,8 +769,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "4537948b3ff86d0de28139a42977dd5b9b21b673226d5cd40276e886959bba58"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "4537948b3ff86d0de28139a42977dd5b9b21b673226d5cd40276e886959bba58",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_DANGER_CORAL_HOVER",
@@ -662,8 +796,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "55ce84fe98277ee3e2185bde05391e35a86d5fdee9294a0f8c0c7028c44419fb"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "55ce84fe98277ee3e2185bde05391e35a86d5fdee9294a0f8c0c7028c44419fb",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_DANGER_CORAL_PRESSED",
@@ -681,8 +823,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "14e91af66009d6e866967ae9d2e15506c767c0ec66c984998c5688bad142b235"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "14e91af66009d6e866967ae9d2e15506c767c0ec66c984998c5688bad142b235",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_DANGER_CORAL_DISABLED",
@@ -700,8 +850,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "41fcb4b2b9b0ad76042118c87951b7e5609718d82497addcb5af9417094a051b"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "41fcb4b2b9b0ad76042118c87951b7e5609718d82497addcb5af9417094a051b",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ACCENT_AMBER_NORMAL",
@@ -719,8 +877,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "064b1bc5444bc76d6ab7e40863350f81776ea28482e7551d5a08dd13d3e869f5"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "064b1bc5444bc76d6ab7e40863350f81776ea28482e7551d5a08dd13d3e869f5",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ACCENT_AMBER_HOVER",
@@ -738,8 +904,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "6cfeb4806dbf861c04a2e34e9d2a0b498ad3b9ed5cad2b768f0cadc68ad9f55c"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "6cfeb4806dbf861c04a2e34e9d2a0b498ad3b9ed5cad2b768f0cadc68ad9f55c",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ACCENT_AMBER_PRESSED",
@@ -757,8 +931,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "ee04baf3f0e37b89ac23d479520acfaf2653f0886eb26ac81a3af0b3b4c55b93"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "ee04baf3f0e37b89ac23d479520acfaf2653f0886eb26ac81a3af0b3b4c55b93",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ACCENT_AMBER_DISABLED",
@@ -776,8 +958,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "345de191aad6496a2c7c46963170f93dfcb2ca06c582ff29d83faa577c800221"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "345de191aad6496a2c7c46963170f93dfcb2ca06c582ff29d83faa577c800221",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ICON_BUTTON_NORMAL",
@@ -795,8 +985,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "805aa1a88465046e6d77f2fe8657f2db4f1fd1e6f1a85ff2db29a710dc31286d"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "805aa1a88465046e6d77f2fe8657f2db4f1fd1e6f1a85ff2db29a710dc31286d",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ICON_BUTTON_HOVER",
@@ -814,8 +1012,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "b01f19ad09f0902ee3f70e0bb0f56d507b79d2deaca45b5df8a89d8454814f2c"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "b01f19ad09f0902ee3f70e0bb0f56d507b79d2deaca45b5df8a89d8454814f2c",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ICON_BUTTON_PRESSED",
@@ -833,8 +1039,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "06fac25b4827b30e2c0ac193c1f79c529ea76f9230770860e9522ac4ba515f95"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "06fac25b4827b30e2c0ac193c1f79c529ea76f9230770860e9522ac4ba515f95",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_ICON_BUTTON_DISABLED",
@@ -852,8 +1066,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "4085a1b7ddcd842d1334e92ef205efd2d6aaadee2788dddf6a8f1b1d939ae296"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "4085a1b7ddcd842d1334e92ef205efd2d6aaadee2788dddf6a8f1b1d939ae296",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_INPUT_NORMAL",
@@ -873,12 +1095,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "6ff18fef509e19d03de99dfee223fc175da4bf6b4927ab98b096458310ca4461",
       "integrated_consumer_tasks": [
-        "UI-01"
+        "UI-01",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-01": "docs/ui-update/qa/UI-01.json"
+        "UI-01": "docs/ui-update/qa/UI-01.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "Aplicado na identificação; demais telas/variantes continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_INPUT_FOCUS",
@@ -898,12 +1123,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "b726394dba83f94d685219dbddd0e67ce2b2843445f81addc9b514bde2e7c0ac",
       "integrated_consumer_tasks": [
-        "UI-01"
+        "UI-01",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-01": "docs/ui-update/qa/UI-01.json"
+        "UI-01": "docs/ui-update/qa/UI-01.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "Aplicado na identificação; demais telas/variantes continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_INPUT_INVALID",
@@ -923,12 +1151,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "10dac5157b9af1fab67835f9dd07372a1d2518c94f07f3bc47ab6deca4e116e3",
       "integrated_consumer_tasks": [
-        "UI-01"
+        "UI-01",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-01": "docs/ui-update/qa/UI-01.json"
+        "UI-01": "docs/ui-update/qa/UI-01.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "Aplicado na identificação; demais telas/variantes continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_INPUT_DISABLED",
@@ -948,12 +1179,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "80e3dd41e1ffc8394bd21e78794961b3677b53499eab2282b941ddbe524e5235",
       "integrated_consumer_tasks": [
-        "UI-01"
+        "UI-01",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-01": "docs/ui-update/qa/UI-01.json"
+        "UI-01": "docs/ui-update/qa/UI-01.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "Aplicado na identificação; demais telas/variantes continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TAB_NORMAL",
@@ -970,8 +1204,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "9c4d3eecf9b9bdbb1506e17dd5e42f8d1382db441faf5a17675deb02ec66f5b1"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "9c4d3eecf9b9bdbb1506e17dd5e42f8d1382db441faf5a17675deb02ec66f5b1",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TAB_SELECTED",
@@ -988,8 +1230,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TAB_HOVER",
@@ -1006,8 +1256,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "1859cef0a1040ef1a2c3d889428a41bae5cfa0e7ac3a1c7cf70190b289e21c14"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "1859cef0a1040ef1a2c3d889428a41bae5cfa0e7ac3a1c7cf70190b289e21c14",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TAB_PRESSED",
@@ -1024,8 +1282,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "bb1ddb1e131df673dab3f3184ff7bed24c1186585705ee093e2dd5cdc5a2ae61"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "bb1ddb1e131df673dab3f3184ff7bed24c1186585705ee093e2dd5cdc5a2ae61",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TAB_DISABLED",
@@ -1042,8 +1308,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "76571db26e963df324a01435db8bd0b5e81cb816ab3bf326908fb5f1d61a3435"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "76571db26e963df324a01435db8bd0b5e81cb816ab3bf326908fb5f1d61a3435",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_RADIO_OFF",
@@ -1060,8 +1334,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "fb35a7364f05733e8664bd3406d4e5e84028f37f7817c7e00fcc21e32aded691"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "fb35a7364f05733e8664bd3406d4e5e84028f37f7817c7e00fcc21e32aded691",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_RADIO_ON",
@@ -1078,8 +1360,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "af0e7ac72ae0d218d117007fbad69b0bbac8459b4b5f11140c4de99d533c5582"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "af0e7ac72ae0d218d117007fbad69b0bbac8459b4b5f11140c4de99d533c5582",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_RADIO_DISABLED",
@@ -1096,8 +1386,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "0b67b4d030dd22efa9fc5207589cb799ffdf7ee9a07736423e09ba7e42158943"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "0b67b4d030dd22efa9fc5207589cb799ffdf7ee9a07736423e09ba7e42158943",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CHECKBOX_OFF",
@@ -1114,8 +1412,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "898eff950bbeb8ee475fa888aff6a60c043f5e62a941aa6dd2ec0f751bdbb631"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "898eff950bbeb8ee475fa888aff6a60c043f5e62a941aa6dd2ec0f751bdbb631",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CHECKBOX_ON",
@@ -1132,8 +1438,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "aa30c3e63263953056b91aa74f7c982fa342d2ef74d2d8aa7ff106babdff8122"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "aa30c3e63263953056b91aa74f7c982fa342d2ef74d2d8aa7ff106babdff8122",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CHECKBOX_DISABLED",
@@ -1150,8 +1464,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "4f90c99921b1425351d74f7424a51cd4fd6366b77c59e1ce608b02e74f130784"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "4f90c99921b1425351d74f7424a51cd4fd6366b77c59e1ce608b02e74f130784",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOGGLE_OFF",
@@ -1168,8 +1490,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "637148ac465ba6e2833e93d1844f84b93149dab7e044a48278a7e71b028ca4f5"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "637148ac465ba6e2833e93d1844f84b93149dab7e044a48278a7e71b028ca4f5",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOGGLE_ON",
@@ -1186,8 +1516,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "13e6c8d7049c65d486362315f99dcaaffc635a080827503c3eb22fa6925cfafa"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "13e6c8d7049c65d486362315f99dcaaffc635a080827503c3eb22fa6925cfafa",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOGGLE_DISABLED",
@@ -1204,8 +1542,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "1e6c5e229362c5f3fd8e5f69224d1379e52aa2712700f46d93d3dcfb36c4eb0b"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "1e6c5e229362c5f3fd8e5f69224d1379e52aa2712700f46d93d3dcfb36c4eb0b",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SLIDER_TRACK",
@@ -1222,8 +1568,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SLIDER_FILL",
@@ -1240,8 +1594,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "b098c5ba89ff1d23e281520076ae2e55cd9c4a132dc860687011e7f912607787"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "b098c5ba89ff1d23e281520076ae2e55cd9c4a132dc860687011e7f912607787",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SLIDER_THUMB",
@@ -1258,8 +1620,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "81db165f3de66bbc1db52e59e1b37fb50620094d4b5c53ec737f1f9fc666b0dc"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "81db165f3de66bbc1db52e59e1b37fb50620094d4b5c53ec737f1f9fc666b0dc",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_STEPPER_BASE",
@@ -1276,8 +1646,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "6ff18fef509e19d03de99dfee223fc175da4bf6b4927ab98b096458310ca4461"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "6ff18fef509e19d03de99dfee223fc175da4bf6b4927ab98b096458310ca4461",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SCROLLBAR_TRACK",
@@ -1294,8 +1672,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "67af4d9dccdaa0bf05300b260887e1d344b07d1a0e104424f6ab3302ba9ed6df"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "67af4d9dccdaa0bf05300b260887e1d344b07d1a0e104424f6ab3302ba9ed6df",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_SCROLLBAR_THUMB",
@@ -1312,8 +1698,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "2782c8bcf4647e69bfe36dbc97eb2734ec5b9a592de2f7eced8b4a1a71010713"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "2782c8bcf4647e69bfe36dbc97eb2734ec5b9a592de2f7eced8b4a1a71010713",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_HOME",
@@ -1327,8 +1721,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e90280665974e1494840af094b3dc146e008b725d58e89705d5c568898a353b6"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e90280665974e1494840af094b3dc146e008b725d58e89705d5c568898a353b6",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_RESTAURANT",
@@ -1342,8 +1744,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "20dc2f7697a571af92d9871f657151a2d16c9c7eda8f806acaa3e223d818fc71"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "20dc2f7697a571af92d9871f657151a2d16c9c7eda8f806acaa3e223d818fc71",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_PIN",
@@ -1357,8 +1767,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "34f7b8af09f8151ab29af1088fbc57dabad3f79a1cb88f543dda44fa5510a86f"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "34f7b8af09f8151ab29af1088fbc57dabad3f79a1cb88f543dda44fa5510a86f",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_UNIVERSITY",
@@ -1372,8 +1790,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "7bc169515ed9631862c41c09fd7475baa06fcd25a7736bf12c02b9dc57324e92"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "7bc169515ed9631862c41c09fd7475baa06fcd25a7736bf12c02b9dc57324e92",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_BANK",
@@ -1387,8 +1813,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "bbd8be5cd99291fb6af8594581ce9e01d066b3dcf1e3bf8e63edafa0399174ca"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "bbd8be5cd99291fb6af8594581ce9e01d066b3dcf1e3bf8e63edafa0399174ca",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_COMMERCE",
@@ -1402,8 +1836,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e1f969b3b94900c998932c22c4c2efcedc2e0bfa34f8b085739731bbf89c7661"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e1f969b3b94900c998932c22c4c2efcedc2e0bfa34f8b085739731bbf89c7661",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_RESIDENTIAL",
@@ -1417,8 +1859,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "950e98e34aa959e70893e2e392d49424d4e5fbd9d84189b6b040c3a0c693fd84"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "950e98e34aa959e70893e2e392d49424d4e5fbd9d84189b6b040c3a0c693fd84",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CORPORATE",
@@ -1432,8 +1882,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "64b581b20016a313fac817a5674d392d7011738da60164d62eb0a917a9066e10"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "64b581b20016a313fac817a5674d392d7011738da60164d62eb0a917a9066e10",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_TEAM",
@@ -1447,8 +1905,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "40167892a5c5082e50897004afbae6611db75832d945fc8f8063431b3517ee62"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "40167892a5c5082e50897004afbae6611db75832d945fc8f8063431b3517ee62",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_MENU_FOOD",
@@ -1462,8 +1928,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "f349414ac0380798a8942ee6ab7d538ed2fd1961714566fed22b0bddb27cedee"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "f349414ac0380798a8942ee6ab7d538ed2fd1961714566fed22b0bddb27cedee",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_EQUIPMENT",
@@ -1477,8 +1951,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "b842a234f54591b4ae22b3f7fb7b92629798a8baeb0a514f3ed5e21e4328009a"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "b842a234f54591b4ae22b3f7fb7b92629798a8baeb0a514f3ed5e21e4328009a",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_DOCUMENT",
@@ -1492,8 +1974,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "bcd2298d329123adf4004af5be077af9ad1acb31fa13160a3884e3e961f1f7a3"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "bcd2298d329123adf4004af5be077af9ad1acb31fa13160a3884e3e961f1f7a3",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CALENDAR",
@@ -1507,8 +1997,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "aa77815388b21002a8630bff697ee56ef955136d70e7720e1bf85d805bea8135"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "aa77815388b21002a8630bff697ee56ef955136d70e7720e1bf85d805bea8135",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_STAR",
@@ -1522,8 +2020,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CASH",
@@ -1537,8 +2043,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "96644cdb779a7e159b4722c6bee4a3d53c32dc6afa495fdc9a790267ab6c9765"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "96644cdb779a7e159b4722c6bee4a3d53c32dc6afa495fdc9a790267ab6c9765",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CHART_BARS",
@@ -1552,8 +2066,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "56090a067553761af66cc2b69a1c662f680022ff82c8f05f97bd2dca0fccaf2a"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "56090a067553761af66cc2b69a1c662f680022ff82c8f05f97bd2dca0fccaf2a",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SETTINGS",
@@ -1567,8 +2089,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "3681efbc3f87314bb202cec355e46cf40048c6a3ac414002c9b583c8ff92ae00"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "3681efbc3f87314bb202cec355e46cf40048c6a3ac414002c9b583c8ff92ae00",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CART",
@@ -1582,8 +2112,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "27c5ddac871c340732186b9f45489ebb33f8ade3b75e30dfb8a4f109547ee8cf"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "27c5ddac871c340732186b9f45489ebb33f8ade3b75e30dfb8a4f109547ee8cf",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_REVENUE",
@@ -1602,8 +2140,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "3930411f5d5fc35713da84477fa6f1d9b91edb696474f84301a6b00e8336a2f4"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "3930411f5d5fc35713da84477fa6f1d9b91edb696474f84301a6b00e8336a2f4",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_TREND_UP",
@@ -1622,8 +2168,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "a2e7fd403424752984cf9b5681253d6568c70df46a0abc8b6946aaeb0eb95dea"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "a2e7fd403424752984cf9b5681253d6568c70df46a0abc8b6946aaeb0eb95dea",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_TREND_DOWN",
@@ -1642,8 +2196,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "82f531d563a27ff720f91d26717e7477606eb71053c77c7810a1dce3c23feced"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "82f531d563a27ff720f91d26717e7477606eb71053c77c7810a1dce3c23feced",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CLIENTS",
@@ -1662,8 +2224,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CLIENT",
@@ -1682,8 +2252,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "edc837bc444164a718b89773e7e4ab32d6a333f1db6a3bab167fcbb3860e62bd"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "edc837bc444164a718b89773e7e4ab32d6a333f1db6a3bab167fcbb3860e62bd",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_COHERENCE",
@@ -1702,8 +2280,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e5adb6f4bfc894fd0864df0e5bd7c4b1a475131c75e83dc9b3958a66413f15bd"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e5adb6f4bfc894fd0864df0e5bd7c4b1a475131c75e83dc9b3958a66413f15bd",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_REPUTATION",
@@ -1722,8 +2308,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "322f71268ef5ed54a9759dfff70671510f9e62445fee76c52adb993fcfc8bc48"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "322f71268ef5ed54a9759dfff70671510f9e62445fee76c52adb993fcfc8bc48",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_RENT",
@@ -1742,8 +2336,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "25360eaf571d6e54450be18a20afd10ec9e0d16aba5b1fb728b4eee1af2fab5e"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "25360eaf571d6e54450be18a20afd10ec9e0d16aba5b1fb728b4eee1af2fab5e",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CAPACITY",
@@ -1762,8 +2364,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "6fb22a4ed2298f805bfd7456155dc1980e813ad8fd407d48698877871c3a995a"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "6fb22a4ed2298f805bfd7456155dc1980e813ad8fd407d48698877871c3a995a",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_COMPETITION",
@@ -1782,8 +2392,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "da903b6de4c35a80eb8cd982168acc40b6da1283eae8b5f19d959881fcf37dec"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "da903b6de4c35a80eb8cd982168acc40b6da1283eae8b5f19d959881fcf37dec",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_INPUT_COSTS",
@@ -1802,8 +2420,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "7c2a34a53a252e23cd407e2b0e116d4733ee31f685ef3d27b7e21304075add37"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "7c2a34a53a252e23cd407e2b0e116d4733ee31f685ef3d27b7e21304075add37",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_UTILITIES",
@@ -1822,8 +2448,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "2fb6f65b3a13b0d72b9bea92c208df402bb9f7465b9291cb24e2177cab9fff29"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "2fb6f65b3a13b0d72b9bea92c208df402bb9f7465b9291cb24e2177cab9fff29",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_PAYROLL",
@@ -1842,8 +2476,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "c0fda02865b0d3b42ad19b04eb5aa8db53cc3b0c1d9a6eefd0436916c3932de9"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "c0fda02865b0d3b42ad19b04eb5aa8db53cc3b0c1d9a6eefd0436916c3932de9",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_INTEREST",
@@ -1862,8 +2504,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "385b7c00db703706a7a1b0a6072464e8f1ff8b52ff0bc5def2de01aafb092caa"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "385b7c00db703706a7a1b0a6072464e8f1ff8b52ff0bc5def2de01aafb092caa",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_TERM",
@@ -1882,8 +2532,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e7583e2bb5ee84d3f4ad8828d21d319dbf92aa91ce6535627a0bd44e2be6df30"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e7583e2bb5ee84d3f4ad8828d21d319dbf92aa91ce6535627a0bd44e2be6df30",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_LOAN_PRINCIPAL",
@@ -1902,8 +2560,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "c57f5fac1d120cc7be1ec4e4cfa962d530dda0a5331f05a49a43980a8fef1540"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "c57f5fac1d120cc7be1ec4e4cfa962d530dda0a5331f05a49a43980a8fef1540",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_INVENTORY",
@@ -1922,8 +2588,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "ba8ae60618baec0d1e0d5415562c8b633d4ebe157802505193d46bcb580739e1"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "ba8ae60618baec0d1e0d5415562c8b633d4ebe157802505193d46bcb580739e1",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CREDIT_CONTRACT",
@@ -1942,8 +2616,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "d5a15a2228ed44fea0520049783a6318049d1cbd3cf88fa0c5ff7aca936fe6c8"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "d5a15a2228ed44fea0520049783a6318049d1cbd3cf88fa0c5ff7aca936fe6c8",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_BACK",
@@ -1962,8 +2644,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "b1025fb038fcbea4463616fab7a78b956c18b5ccdf44a0c8cee8d6092ee7ff8e"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "b1025fb038fcbea4463616fab7a78b956c18b5ccdf44a0c8cee8d6092ee7ff8e",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_NEXT",
@@ -1982,8 +2672,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "c1f83fca6fb929a78045f6794ed506464f377f5d037eb6ea291f309019001af6"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "c1f83fca6fb929a78045f6794ed506464f377f5d037eb6ea291f309019001af6",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CHEVRON_UP",
@@ -2002,8 +2700,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e12384fff9f30926765f07dc9ba962b0d04968f1c15897e6d5ab8af405d60e59"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e12384fff9f30926765f07dc9ba962b0d04968f1c15897e6d5ab8af405d60e59",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CHEVRON_DOWN",
@@ -2022,8 +2728,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "21031b2c0022cc82d9ee925ffd6936405e476c52870b781ed79c486063ca413d"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "21031b2c0022cc82d9ee925ffd6936405e476c52870b781ed79c486063ca413d",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CLOSE",
@@ -2042,8 +2756,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "5cbd0219b289b752e3bb4e3112c6578c063d256d2778cc84c1ad3fa2b4ec5478"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "5cbd0219b289b752e3bb4e3112c6578c063d256d2778cc84c1ad3fa2b4ec5478",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_MENU",
@@ -2066,12 +2788,15 @@
       "integration_status": "parcial",
       "png_sha256_at_planning": "38fa0d463a6e306112dfd612c810d8f5be3f908576785a43341f61f2d67dea15",
       "integrated_consumer_tasks": [
-        "UI-02"
+        "UI-02",
+        "UI-03"
       ],
       "integration_evidence": {
-        "UI-02": "docs/ui-update/qa/UI-02.json"
+        "UI-02": "docs/ui-update/qa/UI-02.json",
+        "UI-03": "docs/ui-update/qa/UI-03.json"
       },
-      "integration_note": "UI-02: superfícies/ações compartilhadas no tema global; variantes e integrações específicas continuam nas tarefas proprietárias."
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_PLUS",
@@ -2090,8 +2815,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "4013e6b31362dfd89b291f16d533d830889f5d38ca492484f72dfeb02cadd610"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "4013e6b31362dfd89b291f16d533d830889f5d38ca492484f72dfeb02cadd610",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_MINUS",
@@ -2110,8 +2843,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "ce49c81b651e543405f8177b03720ccea0e32cf89225f26eee4c2e325b84436f"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "ce49c81b651e543405f8177b03720ccea0e32cf89225f26eee4c2e325b84436f",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CHECK",
@@ -2130,8 +2871,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "9013bda7b47101d768b9055fcc6ca80c0590cd335584167f4c06accf0f7119f4"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "9013bda7b47101d768b9055fcc6ca80c0590cd335584167f4c06accf0f7119f4",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_LOCK",
@@ -2150,8 +2899,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "1ab9845e3ce251a4c44c8defc25651821cafc0752fb6e40591d526ea18185a69"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "1ab9845e3ce251a4c44c8defc25651821cafc0752fb6e40591d526ea18185a69",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_ALERT",
@@ -2170,8 +2927,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "d3f100deb474987fe24d569d99b43d5bbeb88397d94a456b8c244e73036fdc08"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "d3f100deb474987fe24d569d99b43d5bbeb88397d94a456b8c244e73036fdc08",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_INFO",
@@ -2190,8 +2955,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "f2da19857568a452a9a7d5a26daded6535c582da7964e0a9eff6e42318efef27"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "f2da19857568a452a9a7d5a26daded6535c582da7964e0a9eff6e42318efef27",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_HELP",
@@ -2210,8 +2983,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e5a9104c1a00baf56d9a652076882d424f86e6803fb39b7202074001820a5c3d"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e5a9104c1a00baf56d9a652076882d424f86e6803fb39b7202074001820a5c3d",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SAVE",
@@ -2230,8 +3011,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "609d85112dc0b3587497ce4971e8e7e58a48c76d0a0b3f7daeae8a424554484b"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "609d85112dc0b3587497ce4971e8e7e58a48c76d0a0b3f7daeae8a424554484b",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_EXIT",
@@ -2250,8 +3039,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "eb0c2d254a291dd1e87d80914601a80ec9b5f32a63790c7dd192cccf218e5ef4"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "eb0c2d254a291dd1e87d80914601a80ec9b5f32a63790c7dd192cccf218e5ef4",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_RESET",
@@ -2270,8 +3067,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "f5084f9b027f5846f97db9dcb5977909dccb77c2858a673ad1e6bbfce2acfa1c"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "f5084f9b027f5846f97db9dcb5977909dccb77c2858a673ad1e6bbfce2acfa1c",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_DOWNLOAD",
@@ -2290,8 +3095,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "37b8a4a6d98174a84d7c82605d872b85a7746115d6d70770a62e4323cd796086"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "37b8a4a6d98174a84d7c82605d872b85a7746115d6d70770a62e4323cd796086",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_PLAY",
@@ -2310,8 +3123,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "ae3483953a15bc875bb561ea774f0496d986a5c128eae6544ff140db20278891"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "ae3483953a15bc875bb561ea774f0496d986a5c128eae6544ff140db20278891",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_PAUSE",
@@ -2330,8 +3151,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "2be3994434d312fe2febf275d102bfc2bcc56d3055d33153f8cd245b95ae74b6"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "2be3994434d312fe2febf275d102bfc2bcc56d3055d33153f8cd245b95ae74b6",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_FILTER",
@@ -2350,8 +3179,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "4e57bae2c6284357186253f1642cddb9a4a353871fc5a20f9afd3a1409fed96f"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "4e57bae2c6284357186253f1642cddb9a4a353871fc5a20f9afd3a1409fed96f",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_EDIT",
@@ -2370,8 +3207,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "a99b7ffa93900f18fcf24ee1f7ebe65d825e78799ddbfe1860847a8435dea1d3"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "a99b7ffa93900f18fcf24ee1f7ebe65d825e78799ddbfe1860847a8435dea1d3",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_TRASH",
@@ -2390,8 +3235,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "1add4c336bc57db1fae8c56324c353f8ffa9d029c61ed53c01bfe2b69a57f49a"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "1add4c336bc57db1fae8c56324c353f8ffa9d029c61ed53c01bfe2b69a57f49a",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SYNC",
@@ -2410,8 +3263,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "bb591d924a65235f620232ff7f9cd41432e0d31cb74ea75481cf442b9ac7bd17"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "bb591d924a65235f620232ff7f9cd41432e0d31cb74ea75481cf442b9ac7bd17",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_OFFLINE",
@@ -2430,8 +3291,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "fd23749e67c77d819a00de062892a5e5106975f432fe1ca699893dc393d46ebc"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "fd23749e67c77d819a00de062892a5e5106975f432fe1ca699893dc393d46ebc",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_CLOCK",
@@ -2450,8 +3319,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "c61220f06b769fca66b3dcdd5b4300d436a2760d20b729f1b453f0191cd7c41d"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "c61220f06b769fca66b3dcdd5b4300d436a2760d20b729f1b453f0191cd7c41d",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SEARCH",
@@ -2470,8 +3347,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "65efa2f500ed7add3103760d6c68548df7495bd8ca456184ad0f7d238f727998"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "65efa2f500ed7add3103760d6c68548df7495bd8ca456184ad0f7d238f727998",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SOUND_ON",
@@ -2490,8 +3375,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "0dc36e09b3de01bcda8717b0a4488c9f282109663c12d9ddd63235790342f5ec"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "0dc36e09b3de01bcda8717b0a4488c9f282109663c12d9ddd63235790342f5ec",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SOUND_OFF",
@@ -2510,8 +3403,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "e4bede79b4fcba596a488655c3cd388433ff47536ebe066c4a578fd2bd256fb8"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "e4bede79b4fcba596a488655c3cd388433ff47536ebe066c4a578fd2bd256fb8",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_FULLSCREEN",
@@ -2530,8 +3431,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "5393cb4d87c419b3cd45f4bde4b9f05f9d22ad73d1d6e63766812008ca76bbe9"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "5393cb4d87c419b3cd45f4bde4b9f05f9d22ad73d1d6e63766812008ca76bbe9",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_KITCHEN",
@@ -2550,8 +3459,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "585ec72f1ba9a6da2dd551fb7a7597395b6f9c2aa2cedb5b3d3592bd5505f0ec"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "585ec72f1ba9a6da2dd551fb7a7597395b6f9c2aa2cedb5b3d3592bd5505f0ec",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_REFRIGERATION",
@@ -2570,8 +3487,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "ff5d036bbb361264d06c45baff54e4accb73bffea3d78f5e559abd79dad584d9"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "ff5d036bbb361264d06c45baff54e4accb73bffea3d78f5e559abd79dad584d9",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_SERVICE",
@@ -2590,8 +3515,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "f0e4ab75d1ccedef90038289cc2c5fba0dba756b4ab89bb492c82cb650f037df"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "f0e4ab75d1ccedef90038289cc2c5fba0dba756b4ab89bb492c82cb650f037df",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "ICON_FURNITURE",
@@ -2610,8 +3543,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
-      "png_sha256_at_planning": "3ab9d0976d979719b15172af799d2be79e13acd51ef62e608a5f4a0dbf3af216"
+      "integration_status": "parcial",
+      "png_sha256_at_planning": "3ab9d0976d979719b15172af799d2be79e13acd51ef62e608a5f4a0dbf3af216",
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_HUD_PILL",
@@ -2629,11 +3570,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "f0ed414bcc6362fc4325638077a568a1c5e26ce5e68ce08a01a182713f511197",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_KPI_TILE",
@@ -2651,11 +3600,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "908a53ab9ba655fa0547aa5fd84f4724e7582619dc50dafb6b7b7edc83a0d945",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PROGRESS_TRACK",
@@ -2673,11 +3630,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "8f7a2df0245f7a29780d476933bb1629fe19fde97157fe1786c4d0eefcc8e2c8",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PROGRESS_FILL",
@@ -2695,11 +3660,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "2d1a32a764e6a1338bbf3d4efcd2ab28221f5918d104d156f33f000f853879d6",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_NAV_UNDERLINE",
@@ -2717,11 +3690,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "55527fd5a8aa8aee623c39b5f1264fc5425a8712109fbd25e8d15c65dc155391",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PILL_NORMAL",
@@ -2739,11 +3720,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "85f951fc4f308bd8025843aaea5062f368b5c2440dc4282a7dc8bcf2492f1c48",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PILL_SELECTED",
@@ -2761,11 +3750,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "e4c7a14c752760fbb3b44b1e185d043e5448719290a97e6514c2f679e38fc91a",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_PILL_DISABLED",
@@ -2783,11 +3780,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "7b6c7f525a98d847cf8b34db60fcd8bf58074a93e826a803a0c50d352fff635d",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOAST_NEUTRAL",
@@ -2805,11 +3810,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "9b7a7e7c2a6866bbf5208faec1919b5ff156e1964c185a600cbdd5a7c9518e78",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOAST_SUCCESS",
@@ -2827,11 +3840,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "903189305414cbb5013035c362c076d69b38781f9fd863c38f8effc493eb8afd",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TOAST_WARNING",
@@ -2849,11 +3870,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "32d0c079e4f4e08f0774103621d3c15f24c7af3af5c3a9aaf6cfeff2b6d6b455",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TABLE_HEADER",
@@ -2871,11 +3900,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "ccbc1dc4c014c9a54b916ca62a9a4d701acbf39ef004fd0001a43967f5f91a59",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TABLE_ROW_NEUTRAL",
@@ -2893,11 +3930,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "eb537c647f2de306d83c888e044fdcdbf06dc2e5c60d357b5ca62197e449acd1",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TABLE_ROW_SUBTOTAL",
@@ -2915,11 +3960,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "2d044fb397020c19659fc1cc9d2b96bd0e0e0724d60133eebbb5c0c970f78bf8",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TABLE_ROW_POSITIVE",
@@ -2937,11 +3990,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "3cdacae551cec2775c606a9c00bcce0d8b5e4ba520d78f84c6923da393496b8b",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TABLE_ROW_NEGATIVE",
@@ -2959,11 +4020,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "852b328d44593af34253fa2fc4c966bec1353da6f35a6cf9be6259281c34b5e1",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_TABLE_TOTAL_COLUMN",
@@ -2981,11 +4050,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "2057e855e19321c13c77297e042e27eb9f6420fc93b0b3ff48f7bd2771298d61",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "UI_CHART_PANEL",
@@ -3003,11 +4080,19 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "planejado",
+      "integration_status": "parcial",
       "png_sha256_at_planning": "483288d7f336e57691cfb7a4779f0d7551e69a9ae93b9c23d84f0c27bf34d5db",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
-      }
+      },
+      "integrated_consumer_tasks": [
+        "UI-03"
+      ],
+      "integration_evidence": {
+        "UI-03": "docs/ui-update/qa/UI-03.json"
+      },
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "shared_component_status": "pronto e validado na UI-03"
     },
     {
       "asset_id": "MAP_BASE",

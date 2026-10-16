@@ -140,6 +140,8 @@ namespace Game.Adapter.In.UI
 
         private void ApplyCardState(Button card, bool isSelected)
         {
+            var shared = card.GetComponent<SharedControlAppearance>();
+            if (shared != null) { shared.SetSelected(isSelected); return; }
             var img = card.GetComponent<Image>();
 
             if (img != null)
@@ -166,6 +168,13 @@ namespace Game.Adapter.In.UI
 
         private void ApplySegmentState(Button btn, bool isSelected)
         {
+            var shared = btn.GetComponent<SharedControlAppearance>();
+            if (shared != null)
+            {
+                shared.SetSelected(isSelected);
+                SetSelectedIconVisible(btn, isSelected && btn.interactable);
+                return;
+            }
             bool isDisabled = !btn.interactable;
             bool showSelected = isSelected && !isDisabled;
 

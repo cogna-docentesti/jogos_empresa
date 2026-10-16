@@ -5,7 +5,7 @@
   "title": "Atualização completa das interfaces e identificação na GameScene",
   "status": "em_andamento",
   "implementation_performed": true,
-  "current_request": "UI-01 e UI-02 entregues; UI-03 a UI-20 permanecem planejadas.",
+  "current_request": "UI-01, UI-02 e UI-03 entregues; UI-04 a UI-20 permanecem planejadas.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -416,7 +416,7 @@
       "title": "Componentes compartilhados, sprites, ícones e estados",
       "phase": "Fundação visual",
       "priority": "P0",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-02"
       ],
@@ -626,7 +626,11 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-03.json e output/ui-update/UI-03/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-03 — Componentes compartilhados, sprites, ícones e estados no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-03.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-03 — Componentes compartilhados, sprites, ícones e estados no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-03.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "qa_record": "docs/ui-update/qa/UI-03.json",
+      "completion_date": "2026-10-16",
+      "pending_acceptance": [],
+      "completion_summary": "Biblioteca de 145 sprites, dez templates e doze prefabs novos; estados/navegação e composição opt-in na GameScene. 66 testes Edit Mode e 55 checks Play Mode; PNGs/GUIDs e dados reais preservados."
     },
     {
       "id": "UI-04",

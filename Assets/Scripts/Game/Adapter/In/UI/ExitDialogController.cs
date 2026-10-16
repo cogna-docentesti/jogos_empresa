@@ -79,6 +79,8 @@ namespace Game.Adapter.In.UI
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                // Both update orders preserve the active modal's ownership of Escape.
+                if (SharedModalFocus.LastCancelFrame == Time.frameCount || FindFirstObjectByType<SharedModalFocus>() != null) return;
                 if (IsOpen) Close();
                 else Open();
             }

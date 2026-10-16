@@ -78,6 +78,7 @@ namespace Game.Adapter.In.UI
             backwards |= UnityEngine.Input.GetKeyDown(KeyCode.LeftShift) || UnityEngine.Input.GetKeyDown(KeyCode.RightShift);
 #endif
             if (!tab) return;
+            if (FindFirstObjectByType<SharedComponentsShowcase>() != null || FindFirstObjectByType<SharedModalFocus>() != null) return;
             var selected = UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
             UnityEngine.UI.Selectable target;
             if (selected == studentNameInput.gameObject)

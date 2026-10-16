@@ -25,6 +25,9 @@ namespace Game.Adapter.In.UI.Theme
                 if(image==null || image.color.a<.5f) continue;
                 string sprite=image.sprite!=null?image.sprite.name:"";
                 if(sprite.Contains("primary_violet") || sprite.Contains("topbar_violet") || sprite.Contains("navbar_plum") || sprite.Contains("panel_plum")) return OnDark;
+                if(sprite=="pill_selected" || sprite=="tab_selected" || sprite=="tab_pressed" || sprite.StartsWith("danger_coral")) return OnDark;
+                if(sprite=="modal_surface" || sprite=="tooltip_surface" || sprite.StartsWith("input_") || sprite.StartsWith("icon_button_")
+                    || sprite.StartsWith("tab_") || sprite.StartsWith("pill_") || sprite.StartsWith("toast_") || sprite.StartsWith("table_")) return Ink;
                 if(sprite.Contains("ivory") || sprite.Contains("card_normal") || sprite.Contains("lavender")) return Ink;
                 if(image.color!=Color.white) return TextOn(image.color);
             }

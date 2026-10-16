@@ -173,6 +173,7 @@ namespace Game.Adapter.In.UI
             overlayRect.pivot = new Vector2(0.5f, 0.5f);
             overlayRect.sizeDelta = new Vector2(4000f, 2400f);
             cartModal.GetComponent<Image>().color = GamePalette.WithAlpha(GamePalette.Plum,.72f);
+            SharedUiStyles.Surface(cartModal, "UI_SCRIM", true).preserveAspect = false;
 
             GameObject panel = CreateUiObject("CartPanel", cartModal.transform, typeof(Image));
             RectTransform panelRect = panel.GetComponent<RectTransform>();
@@ -181,6 +182,7 @@ namespace Game.Adapter.In.UI
             panelRect.pivot = new Vector2(0.5f, 0.5f);
             panelRect.sizeDelta = new Vector2(760f, 650f);
             panel.GetComponent<Image>().color = GamePalette.Surface;
+            SharedUiStyles.Surface(panel, "UI_MODAL_SURFACE", true);
 
             CreateText("Title", panel.transform, "Seu carrinho", GameTypography.SectionTitle, FontStyles.Bold,
                 new Vector2(40f, -30f), new Vector2(-40f, -95f));
@@ -226,6 +228,7 @@ namespace Game.Adapter.In.UI
             closeButton.onClick.AddListener(HideCart);
 
             cartModal.SetActive(false);
+            cartModal.AddComponent<SharedModalFocus>();
         }
 
         private TextMeshProUGUI CreateText(string name, Transform parent, string value, float size,
@@ -240,6 +243,7 @@ namespace Game.Adapter.In.UI
             rect.offsetMax = new Vector2(offsetMax.x, offsetMin.y);
             TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
             text.text = value;
+            text.raycastTarget = false;
             GameTypography.Apply(text, hintText != null ? hintText.font : TMP_Settings.defaultFontAsset, size, (style & FontStyles.Bold) != 0);
             text.fontStyle = style;
             text.color = GamePalette.Ink;
@@ -265,7 +269,10 @@ namespace Game.Adapter.In.UI
             Stretch(labelText.rectTransform);
             labelText.alignment = TextAlignmentOptions.Center;
             labelText.color = GamePalette.OnPrimary;
-            return buttonObject.GetComponent<Button>();
+            labelText.raycastTarget = false;
+            var button = buttonObject.GetComponent<Button>();
+            SharedUiStyles.Bind(button, name == "CloseButton" ? SharedControlKind.Secondary : SharedControlKind.Primary);
+            return button;
         }
 
         private static GameObject CreateUiObject(string name, Transform parent, params Type[] components)

@@ -20,6 +20,8 @@ namespace Game.Adapter.In.UI
             if (input == null || input.image == null) return;
             input.image.sprite = !input.interactable ? disabled
                 : IsInvalid ? invalid : input.isFocused ? focus : normal;
+            input.image.color = Color.white;
+            input.image.pixelsPerUnitMultiplier = 1;
         }
     }
 }

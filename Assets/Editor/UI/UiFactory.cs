@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
 using Game.Adapter.In.UI.Theme;
+using Game.Adapter.In.UI;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -22,12 +23,12 @@ namespace Game.EditorTools
         //  CAMINHOS DE ASSET
         // =====================================================
 
-        public const string PathButtonSprite = "Assets/Art/Sprites/UI/botao.png";
+        public const string PathButtonSprite = "Assets/Art/new/shared/components/buttons/primary_violet_normal.png";
         public const string PathMapMenu      = "Assets/Art/Sprites/MenuScene/mapa-menu.png";
         public const string PathIconsFolder  = "Assets/Layer Lab/2D Icons-PictoIconPack01/Icons/PictoIcon_128/";
 
-        /// <summary>Borda 9-slice do botao.png medida na arte (margem 8px + raio ~36px).</summary>
-        public static readonly Vector4 ButtonSpriteBorder = new Vector4(48, 48, 48, 48);
+        /// <summary>Approved primary button border from the current art manifest.</summary>
+        public static readonly Vector4 ButtonSpriteBorder = new Vector4(24, 24, 24, 24);
 
         private static readonly Dictionary<string, Sprite> SpriteCache = new Dictionary<string, Sprite>();
 
@@ -414,7 +415,7 @@ namespace Game.EditorTools
         //  GRAFICOS
         // =====================================================
 
-        /// <summary>Painel/card com cantos arredondados via 9-slice do botao.png.</summary>
+        /// <summary>Approved panel surface, with neutral tint and manifest corners.</summary>
         public static Image Panel(RectTransform rt, Color color, float ppuMultiplier = 2.2f, bool raycast = true)
         {
             var image = Ensure<Image>(rt.gameObject);
@@ -422,10 +423,10 @@ namespace Game.EditorTools
             if (!CanWrite(rt.gameObject)) return image;
 
             Undo.RecordObject(image, "Configurar Panel");
-            image.sprite                 = ButtonSprite();
+            image.sprite                 = Load("Assets/Art/new/shared/components/panels/" + (color.grayscale < .3f ? "panel_plum.png" : "panel_ivory.png"));
             image.type                   = Image.Type.Sliced;
-            image.pixelsPerUnitMultiplier = ppuMultiplier;
-            image.color                  = color;
+            image.pixelsPerUnitMultiplier = 1f;
+            image.color                  = Color.white;
             image.raycastTarget          = raycast;
             image.preserveAspect         = false;
 
@@ -496,17 +497,10 @@ namespace Game.EditorTools
         // =====================================================
 
         /// <summary>
-        /// Botao com ColorTint. Os parametros sao o brilho FINAL desejado:
-        /// 1.0 = cor original, 1.15 = 15% mais claro, 0.90 = 10% mais escuro.
-        ///
-        /// Em tema escuro o hover precisa CLAREAR, e o ColorTint so multiplica -
-        /// nunca passaria de 1. A saida e usar colorMultiplier como teto e
-        /// guardar as cores ja divididas por ele.
+        /// Approved sprite states. Legacy tint parameters remain for builder API compatibility.
         /// </summary>
         public static Button MakeButton(RectTransform rt, float highlightedTint = 1.15f, float pressedTint = 0.90f)
         {
-            const float ceiling = 1.5f;
-
             var button = Ensure<Button>(rt.gameObject);
             var image  = rt.GetComponent<Image>();
 
@@ -515,24 +509,8 @@ namespace Game.EditorTools
             Undo.RecordObject(button, "Configurar Button");
 
             button.targetGraphic = image;
-            button.transition    = Selectable.Transition.ColorTint;
-
-            var colors = button.colors;
-            colors.colorMultiplier  = ceiling;
-            colors.normalColor      = Gray(1f / ceiling);
-            colors.highlightedColor = Gray(Mathf.Clamp(highlightedTint, 0f, ceiling) / ceiling);
-            colors.pressedColor     = Gray(Mathf.Clamp(pressedTint, 0f, ceiling) / ceiling);
-            colors.selectedColor    = Gray(1f / ceiling);
-            colors.disabledColor    = new Color(1f / ceiling, 1f / ceiling, 1f / ceiling, 0.4f);
-            colors.fadeDuration     = 0.12f;
-            button.colors           = colors;
-
+            SharedUiStyles.Bind(button, SharedControlKind.Primary);
             return button;
-        }
-
-        private static Color Gray(float v)
-        {
-            return new Color(v, v, v, 1f);
         }
 
         // =====================================================
@@ -550,10 +528,14 @@ namespace Game.EditorTools
             return Load(PathMapMenu);
         }
 
-        /// <summary>Carrega um icone do PictoIconPack01 pelo nome curto (ex: "Bank").</summary>
+        /// <summary>Resolves the existing builder names to approved monochrome masters.</summary>
         public static Sprite Icon(string shortName)
         {
-            return Load($"{PathIconsFolder}Icon_PictoIcon_{shortName}.Png");
+            string file=shortName switch {
+                "Bank"=>"bank", "Toolbox"=>"equipment", "Home"=>"home", "User"=>"client", "List"=>"document",
+                "Map" or "Location"=>"pin", "Dollar" or "Coin"=>"cash", "Star"=>"star", "Shop"=>"restaurant",
+                "Add_Friend"=>"team", "Piechart"=>"coherence", "Arrow_Prev"=>"back", "Arrow_Next"=>"next", _=>null };
+            return file!=null?Load("Assets/Art/new/shared/icons/icon_"+file+".png"):Load($"{PathIconsFolder}Icon_PictoIcon_{shortName}.Png");
         }
 
         public static Sprite Load(string assetPath)
@@ -572,9 +554,7 @@ namespace Game.EditorTools
         }
 
         /// <summary>
-        /// botao.png vem sem borda 9-slice. Sem borda, o Image.Type.Sliced
-        /// nao funciona e os cantos esticam. Isto configura a borda uma unica
-        /// vez (e nao afeta quem ja usa a sprite como Simple).
+        /// Keeps builders compatible while applying the current manifest import contract.
         /// </summary>
         public static void EnsureButtonSpriteBorder()
         {
@@ -607,7 +587,7 @@ namespace Game.EditorTools
             importer.SaveAndReimport();
             SpriteCache.Remove(PathButtonSprite);
 
-            Debug.Log("[UiFactory] botao.png configurado com borda 9-slice 48px.");
+            Debug.Log("[UiFactory] Approved primary button uses a 24px nine-slice border.");
         }
 
         // =====================================================

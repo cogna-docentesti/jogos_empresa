@@ -294,6 +294,8 @@ namespace Game.Adapter.In.UI
             scrollbar.targetGraphic = handleImage;
             scrollbar.handleRect = handleRect;
             scrollbar.direction = Scrollbar.Direction.BottomToTop;
+            SharedUiStyles.Surface(scrollbarObject, "UI_SCROLLBAR_TRACK", true);
+            SharedUiStyles.Bind(scrollbar, SharedControlKind.Scrollbar);
             return scrollbar;
         }
         private static void CopyRectTransform(RectTransform source, RectTransform target)

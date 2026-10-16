@@ -123,6 +123,7 @@ namespace Game.Adapter.In.UI
         public void SetSelected(bool selected)
         {
             isSelected = selected;
+            GetComponent<SharedControlAppearance>()?.SetSelected(selected);
             ApplyVisualState();
         }
 
@@ -163,6 +164,8 @@ namespace Game.Adapter.In.UI
             }
 
             creditLineIcon.sprite = icon;
+            creditLineIcon.type = Image.Type.Simple;
+            creditLineIcon.color = Color.white;
             creditLineIcon.preserveAspect = true;
             creditLineIcon.raycastTarget = false;
             creditLineIcon.gameObject.SetActive(icon != null);
@@ -171,6 +174,11 @@ namespace Game.Adapter.In.UI
 
         private void ApplyVisualState()
         {
+            if (GetComponent<SharedControlAppearance>() != null)
+            {
+                if (selectionBorder != null) selectionBorder.SetActive(false);
+                return;
+            }
             if (selectionBorder == null)
                 return;
 
