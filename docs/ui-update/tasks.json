@@ -5,7 +5,7 @@
   "title": "Atualização completa das interfaces e identificação na GameScene",
   "status": "em_andamento",
   "implementation_performed": true,
-  "current_request": "UI-01 a UI-10 entregues e validadas; UI-11 a UI-20 permanecem planejadas.",
+  "current_request": "UI-01 a UI-11 entregues e validadas; UI-12 a UI-20 permanecem planejadas.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -1706,11 +1706,11 @@
       "title": "Equipe e RH: cinco funções, ambientes e vínculo de estado",
       "phase": "Telas de abertura e gestão",
       "priority": "P1",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-10"
       ],
-      "goal": "Atualizar RH e ligar Initial_Team ao painel existente que hoje não está vinculado.",
+      "goal": "Atualizar RH e completar a contratação no painel existente, preservando os vínculos reais de Initial_Team e revisita.",
       "screens": [
         "Panel_Team",
         "Cards de função",
@@ -1791,7 +1791,11 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-11.json e output/ui-update/UI-11/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-11 — Equipe e RH: cinco funções, ambientes e vínculo de estado no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-11.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-11 — Equipe e RH: cinco funções, ambientes e vínculo de estado no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-11.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "completed_at": "2026-10-16",
+      "qa_record": "docs/ui-update/qa/UI-11.json",
+      "evidence_directory": "output/ui-update/UI-11/",
+      "pending_acceptance": []
     },
     {
       "id": "UI-12",

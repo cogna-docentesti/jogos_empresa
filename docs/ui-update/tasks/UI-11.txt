@@ -1,9 +1,9 @@
 UI-11 — Equipe e RH: cinco funções, ambientes e vínculo de estado
-Status: planejado | Prioridade: P1 | Fase: Telas de abertura e gestão
+Status: concluído | Prioridade: P1 | Fase: Telas de abertura e gestão
 Dependências: UI-10
 
 OBJETIVO
-Atualizar RH e ligar Initial_Team ao painel existente que hoje não está vinculado.
+Atualizar RH e completar a contratação no painel existente, preservando os vínculos reais de Initial_Team e revisita.
 
 LEITURAS OBRIGATÓRIAS
 docs/ui-update/COMECE-AQUI.txt
@@ -91,3 +91,7 @@ Não reexecutar a conversão para Single já concluída; não alterar tarefas/lo
 
 COMANDO PARA EXECUTAR ESTA TAREFA
 Execute somente UI-11 — Equipe e RH: cinco funções, ambientes e vínculo de estado no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-11.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.
+
+ENTREGA UI-11 — 16/10/2026
+Cinco funções reais com retratos/ambientes por ID, quantidades persistentes, folha/capacidade/alinhamento e passo 7 → hub. Vínculos initialTeamPanel/Team já válidos foram preservados. Confirmação de equipe incompleta mantém a regra anterior, sem mínimo ou custo novo; salário entra no fechamento mensal. Garçom/CH07 permanece reserva.
+189 testes Edit Mode distintos (14 UI-11), 183 checks de fluxo + 16 checks da cena salva, 81 capturas reais em 1920×1080/1366×768/1280×720. Zero erros/avisos finais. QA: docs/ui-update/qa/UI-11.json; evidências: output/ui-update/UI-11/. Sem pendência indispensável de aceite.

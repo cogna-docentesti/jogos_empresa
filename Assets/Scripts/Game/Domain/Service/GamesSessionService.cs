@@ -212,11 +212,14 @@ public class GameSessionService
 
     public void ConfirmInitialTeam(List<RoleData> availableRoles)
     {
-        if (!GameSessionState.HasSession)
-            return;
+        if (!SaveTeamAlignment(availableRoles)) return;
+        GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub);
+    }
 
-        GameSessionState.Save();
-
+    /// <summary>Same alignment calculation for setup and hub visits; does not navigate or debit payroll.</summary>
+    public bool SaveTeamAlignment(List<RoleData> availableRoles)
+    {
+        if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted) return false;
         var session = GameSessionState.Current;
         var teamData = TeamSelectionHelper.FromJson(session.teamJson);
         var restaurantData = GetRestaurantData(session.restaurantType);
@@ -233,10 +236,7 @@ public class GameSessionService
         );
 
         GameSessionState.SetAlignment(alignment);
-        GameSessionState.Save();
-
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Management_Hub);
+        return GameSessionState.Persist();
     }
 
     public void ConfirmInitialCapital()
