@@ -1270,7 +1270,7 @@
       "title": "Meu estabelecimento e revisão das escolhas",
       "phase": "Telas de abertura e gestão",
       "priority": "P1",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-07"
       ],
@@ -1373,7 +1373,29 @@
         "TEAM_ENV_GRILL_KITCHEN",
         "TEAM_ENV_MANAGEMENT_OFFICE",
         "TEAM_ENV_FRENCH_KITCHEN",
-        "TEAM_ENV_SUSHI_COUNTER"
+        "TEAM_ENV_SUSHI_COUNTER",
+        "UI_TOPBAR_VIOLET",
+        "UI_NAVBAR_PLUM",
+        "UI_PANEL_IVORY",
+        "UI_CARD_NORMAL",
+        "UI_CHECKBOX_ON",
+        "UI_CHECKBOX_OFF",
+        "UI_SCROLLBAR_TRACK",
+        "UI_SCROLLBAR_THUMB",
+        "UI_CARD_SELECTED_OUTLINE",
+        "UI_MODAL_SURFACE",
+        "UI_PRIMARY_VIOLET_NORMAL",
+        "UI_PRIMARY_VIOLET_DISABLED",
+        "UI_SECONDARY_IVORY_NORMAL",
+        "UI_SECONDARY_IVORY_HOVER",
+        "UI_SECONDARY_IVORY_PRESSED",
+        "UI_SECONDARY_IVORY_DISABLED",
+        "UI_DANGER_CORAL_NORMAL",
+        "ICON_COMMERCE",
+        "ICON_CASH",
+        "ICON_REVENUE",
+        "ICON_TREND_UP",
+        "ICON_STAR"
       ],
       "required_visual_review": [
         "família/peso/tamanho de fonte",
@@ -1393,7 +1415,10 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-08.json e output/ui-update/UI-08/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-08 — Meu estabelecimento e revisão das escolhas no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-08.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-08 — Meu estabelecimento e revisão das escolhas no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-08.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "completed_at": "2026-10-16",
+      "qa_record": "docs/ui-update/qa/UI-08.json",
+      "implementation_note": "ART-27 no estabelecimento e na revisão com dados reais, três fachadas, cinco funções existentes, indicadores e seis escolhas. 108 testes Edit Mode, 87 verificações Play Mode e 32 capturas; D3/Banco, atalhos, histórico/foco, vazios e revisitas preservados."
     },
     {
       "id": "UI-09",

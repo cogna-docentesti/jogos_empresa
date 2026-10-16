@@ -8,6 +8,19 @@ namespace Game.Domain.Service
     public sealed class EstablishmentSummary
     {
         public bool HasSession;
+        public bool IsDraft, HasChoices, HasScore, IsLastResult, IsReady;
+        public string CompanyLabel = "Meu estabelecimento";
+        public string ContextLabel = "Nenhuma escolha disponível";
+        public string CreditLabel = "Disponível após confirmar o cardápio";
+        public string MenuDetails = "Nenhum preço definido.";
+        public string EquipmentDetails = "Nenhum equipamento adquirido.";
+        public string TeamDetails = "Nenhuma contratação registrada.";
+        public string Notice;
+        public UnityEngine.Sprite Facade;
+        public Decision[] Decisions = System.Array.Empty<Decision>();
+        public Member[] Members = System.Array.Empty<Member>();
+        public sealed class Decision { public string Label, Detail; public bool Ready; }
+        public sealed class Member { public string RoleId, Name; public int Quantity; }
 
         // ---------- RESUMO DA EMPRESA ----------
         public string LocationLabel      = "Pendente";

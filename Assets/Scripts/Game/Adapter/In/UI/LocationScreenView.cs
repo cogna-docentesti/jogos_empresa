@@ -3,6 +3,7 @@ using System.Globalization;
 using Game.Infrastructure.Session;
 using TMPro;
 using UnityEngine;
+using Game.Adapter.In.UI.Navigation;
 
 namespace Game.Adapter.In.UI
 {
@@ -36,9 +37,21 @@ namespace Game.Adapter.In.UI
         public bool CanConfirm => confirmButton != null && confirmButton.interactable;
         private void OnEnable()
         {
+            RestaurantType? type = MenuNavigator.HubAvailable && MenuNavigator.Instance != null && MenuNavigator.Instance.Current == PanelId.Location
+                ? GameSessionState.Current.restaurantType : PlayerSession.SelectedRestaurantType;
             foreach(var variant in restaurants)
-                if(variant.image != null) variant.image.enabled=PlayerSession.SelectedRestaurantType.HasValue && variant.type==PlayerSession.SelectedRestaurantType.Value;
-            if(centerOverlay != null) centerOverlay.enabled=PlayerSession.SelectedRestaurantType.HasValue;
+                if(variant.image != null) variant.image.enabled=type.HasValue && variant.type==type.Value;
+            if(centerOverlay != null) centerOverlay.enabled=type.HasValue;
+        }
+        public void SetReviewMode(bool review)
+        {
+            confirmButton.gameObject.SetActive(!review);backButton.gameObject.SetActive(!review);
+            if(review){confirmButton.interactable=false;foreach(var button in new[]{bankButton,storeButton,marketingButton,universityButton,condominiumButton})button.interactable=false;}
+            var step=transform.Find("DecisionHeader/Step")?.GetComponent<TMP_Text>();if(step!=null)step.text=review?"REVISÃO · LOCALIZAÇÃO":"PASSO 2 DE 7 · LOCALIZAÇÃO";
+            var title=transform.Find("DecisionHeader/Title")?.GetComponent<TMP_Text>();if(title!=null)title.text=review?"Localização confirmada":"Escolha sua localização";
+            var legend=transform.Find("AvailableLegendLabel")?.GetComponent<TMP_Text>();if(legend!=null)legend.text=review?"Outras áreas":"Disponível";
+            var footer=transform.Find("DecisionFooter/DraftHint")?.GetComponent<TMP_Text>();if(footer!=null)footer.text=review?"Localização confirmada · consulta":"Escolha em rascunho";
+            if(review)SetHint("Consulte a localização confirmada. Use Voltar para retornar ao resumo.");
         }
         public void SetRegionName(string value) { if(regionText != null) regionText.text=value; }
         public void SetHint(string value) { if(hintText != null) hintText.text=value; }

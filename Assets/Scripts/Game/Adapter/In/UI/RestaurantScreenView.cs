@@ -40,6 +40,23 @@ namespace Game.Adapter.In.UI
         }
 
         public void SetHint(string value) { if(hintText != null) hintText.text=value; }
+        public void SetReviewMode(bool review)
+        {
+            confirmButton.gameObject.SetActive(!review);backButton.gameObject.SetActive(!review);
+            if(review)
+            {
+                confirmButton.interactable=false;
+                foreach(var button in new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh})button.interactable=false;
+                SetHint("Consulte o restaurante e o público confirmados. Use Voltar para retornar ao resumo.");
+                foreach(var card in new[]{cardPodrao,cardJapones,cardFrances})
+                    if(card.transform.Find("SelectedCheck")?.gameObject.activeSelf!=true)SetChildText(card,"SelectionStatus","Consulta");
+            }
+            var step=transform.Find("DecisionHeader/Step")?.GetComponent<TMP_Text>();if(step!=null)step.text=review?"REVISÃO · RESTAURANTE E PÚBLICO":"PASSO 3 DE 7 · RESTAURANTE";
+            var choice=transform.Find("ChoiceTitle")?.GetComponent<TMP_Text>();if(choice!=null)choice.text=review?"Proposta confirmada":"Qual é a sua proposta?";
+            var title=transform.Find("DecisionSidebar/Title")?.GetComponent<TMP_Text>();if(title!=null)title.text=review?"Público confirmado":"Quem você vai atender?";
+            var help=transform.Find("DecisionSidebar/Help")?.GetComponent<TMP_Text>();if(help!=null)help.text=review?"Consulte a classe definida para o seu restaurante.":"Escolha uma classe disponível para o restaurante selecionado.";
+            var footer=transform.Find("DecisionFooter/DraftHint")?.GetComponent<TMP_Text>();if(footer!=null)footer.text=review?"Escolhas confirmadas · consulta":"Escolha em rascunho";
+        }
         public void BindCardPodrao(UnityEngine.Events.UnityAction action) => Bind(cardPodrao,action);
         public void BindCardJapones(UnityEngine.Events.UnityAction action) => Bind(cardJapones,action);
         public void BindCardFrances(UnityEngine.Events.UnityAction action) => Bind(cardFrances,action);

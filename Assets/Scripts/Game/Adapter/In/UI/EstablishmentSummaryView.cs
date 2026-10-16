@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Game.Adapter.In.UI
 {
@@ -14,27 +15,7 @@ namespace Game.Adapter.In.UI
     /// </summary>
     public sealed class EstablishmentSummaryView : MonoBehaviour
     {
-        [Header("Resumo da empresa")]
-        [SerializeField] private TextMeshProUGUI locationValue;
-        [SerializeField] private TextMeshProUGUI restaurantValue;
-        [SerializeField] private TextMeshProUGUI segmentValue;
-        [SerializeField] private TextMeshProUGUI menuValue;
-        [SerializeField] private TextMeshProUGUI priceValue;
-        [SerializeField] private TextMeshProUGUI equipmentValue;
-        [SerializeField] private TextMeshProUGUI teamValue;
-
-        [Header("Indicadores")]
-        [SerializeField] private TextMeshProUGUI scoreValue;
-        [SerializeField] private TextMeshProUGUI cashValue;
-        [SerializeField] private TextMeshProUGUI revenueValue;
-        [SerializeField] private TextMeshProUGUI monthlyResultValue;
-        [SerializeField] private Image scoreBarFill;
-
-        [Header("Contexto")]
-        [SerializeField] private TextMeshProUGUI coherenceValue;
-        [SerializeField] private TextMeshProUGUI roundValue;
-        [SerializeField] private TextMeshProUGUI noticeText;
-
+        [SerializeField] private EstablishmentReviewContent presentation;
         [Header("Reset do jogo")]
         [SerializeField] private Button resetButton;
         [SerializeField] private GameObject resetWarning;
@@ -42,12 +23,22 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Button confirmResetButton;
 
         private Transform warningOriginalParent;
+        private Transform modalHostParent;
+        private GameObject previousFocus;
         private readonly System.Collections.Generic.Dictionary<TextMeshProUGUI, string> warningOriginalTexts
             = new System.Collections.Generic.Dictionary<TextMeshProUGUI, string>();
 
         private void Awake()
         {
             HideResetWarning();
+        }
+
+        private void Update()
+        {
+            if (resetWarning == null || !resetWarning.activeInHierarchy || EventSystem.current == null) return;
+            var focus = EventSystem.current.currentSelectedGameObject;
+            if (focus == null || !focus.transform.IsChildOf(resetWarning.transform))
+                (cancelResetButton != null && cancelResetButton.gameObject.activeInHierarchy ? cancelResetButton : confirmResetButton)?.Select();
         }
 
         public void BindReset(UnityAction onConfirmed)
@@ -77,6 +68,14 @@ namespace Game.Adapter.In.UI
             if (resetWarning != null)
             {
                 resetWarning.SetActive(false);
+                if (modalHostParent != null)
+                {
+                    resetWarning.transform.SetParent(modalHostParent, false);
+                    modalHostParent = null;
+                }
+                if (EventSystem.current != null && previousFocus != null && previousFocus.activeInHierarchy)
+                    EventSystem.current.SetSelectedGameObject(previousFocus);
+                previousFocus = null;
                 if (warningOriginalParent != null)
                 {
                     resetWarning.transform.SetParent(warningOriginalParent, false);
@@ -128,103 +127,23 @@ namespace Game.Adapter.In.UI
 
         public void Bind(EstablishmentSummary summary)
         {
-            if (summary == null)
-                return;
-
-            if (!summary.HasSession)
-            {
-                ShowEmptyState();
-                return;
-            }
-
-            Set(locationValue,   summary.LocationLabel);
-            Set(restaurantValue, summary.RestaurantLabel);
-            Set(segmentValue,    summary.SegmentLabel);
-            Set(menuValue,       summary.MenuLabel);
-            Set(priceValue,      summary.PriceLabel);
-            Set(equipmentValue,  summary.EquipmentLabel);
-            Set(teamValue,       summary.TeamLabel);
-
-            Set(scoreValue, $"{summary.Score} pts", GamePalette.Xp);
-            Set(cashValue,  EstablishmentSummaryService.Brl(summary.Cash),
-                summary.Cash >= 0f ? GamePalette.Money : GamePalette.Danger);
-            Set(revenueValue, summary.HasMonthlyEstimate ? EstablishmentSummaryService.Brl(summary.EstimatedRevenue) : "Unavailable", GamePalette.Ink);
-            Set(monthlyResultValue, summary.HasMonthlyEstimate ? EstablishmentSummaryService.Brl(summary.MonthlyResult) : "Unavailable",
-                GamePalette.ResultColor(summary.MonthlyResult));
-
-            if (scoreBarFill != null)
-                scoreBarFill.fillAmount = Mathf.Clamp01(summary.ScoreProgress);
-
-            Set(coherenceValue, summary.CoherenceLabel);
-            Set(roundValue, $"Mês {summary.Round} de 3");
-
-            Set(noticeText, BuildNotice(summary), GamePalette.InkCaption);
+            presentation?.Bind(summary ?? EstablishmentSummaryService.BuildDraft());
         }
-
-        private static string BuildNotice(EstablishmentSummary summary)
-        {
-            if (!summary.HasMonthlyEstimate && !string.IsNullOrWhiteSpace(summary.EstimateFailureReason))
-                return "Monthly estimate unavailable: " + summary.EstimateFailureReason;
-
-            if (!summary.HasTeamCatalog && !summary.HasEquipmentCatalog)
-                return "Folha salarial e capacidade nao entram no calculo: os catalogos "
-                     + "RoleData e EquipmentData ainda nao estao em Resources/Roles e Resources/Equipment.";
-
-            if (!summary.HasTeamCatalog)
-                return "Folha salarial fora do calculo: RoleData ainda nao esta em Resources/Roles.";
-
-            if (!summary.HasEquipmentCatalog)
-                return "Bonus de capacidade fora do calculo: EquipmentData ainda nao esta em Resources/Equipment.";
-
-            return "Projecao para o mes corrente com base nas escolhas atuais.";
-        }
-
-        private void ShowEmptyState()
-        {
-            Set(locationValue,   "Pendente");
-            Set(restaurantValue, "Pendente");
-            Set(segmentValue,    "Pendente");
-            Set(menuValue,       "Pendente");
-            Set(priceValue,      "Pendente");
-            Set(equipmentValue,  "Nenhum");
-            Set(teamValue,       "Ninguem");
-
-            Set(scoreValue,          "0 pts",  GamePalette.InkCaption);
-            Set(cashValue,           "R$ 0",   GamePalette.InkCaption);
-            Set(revenueValue,        "R$ 0",   GamePalette.InkCaption);
-            Set(monthlyResultValue,  "R$ 0",   GamePalette.InkCaption);
-
-            if (scoreBarFill != null)
-                scoreBarFill.fillAmount = 0f;
-
-            Set(coherenceValue, "A calcular");
-            Set(roundValue, "Mês 1 de 3");
-            Set(noticeText, "Nenhuma sessao ativa foi carregada.", GamePalette.Warn);
-        }
-
-        private static void Set(TextMeshProUGUI label, string value)
-        {
-            if (label != null)
-                label.text = value;
-        }
-
-        /// <summary>
-        /// A cor foi removida de proposito: a aparencia de cada label vem do
-        /// TMP montado na hierarquia. A sobrecarga continua existindo so para
-        /// nao mexer nas ~10 chamadas, mas o parametro e ignorado.
-        /// </summary>
-        private static void Set(TextMeshProUGUI label, string value, Color _)
-        {
-            Set(label, value);
-        }
-
         private void ShowResetWarning()
         {
             if (resetWarning == null)
                 return;
 
             resetWarning.SetActive(true);
+            var canvas = GetComponentInParent<Canvas>(true);
+            if (canvas != null && resetWarning.transform.parent != canvas.transform)
+            {
+                modalHostParent = resetWarning.transform.parent;
+                resetWarning.transform.SetParent(canvas.transform, false);
+            }
             resetWarning.transform.SetAsLastSibling();
+            if (EventSystem.current != null) previousFocus = EventSystem.current.currentSelectedGameObject;
+            (cancelResetButton != null && cancelResetButton.gameObject.activeInHierarchy ? cancelResetButton : confirmResetButton)?.Select();
         }
     }
 }

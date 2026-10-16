@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Game.Adapter.In.UI;
 using Game.Infrastructure.Session;
 using UnityEngine;
+using Game.Adapter.In.UI.Navigation;
 
 namespace Game.Adapter.In.Controllers
 {
@@ -23,15 +24,19 @@ namespace Game.Adapter.In.Controllers
         private readonly Dictionary<LocationZone, Segment> _locationSegmentsByZone = new();
         private RestaurantType? _selectedRestaurant;
         private Segment? _selectedSegment;
+        private bool _review;
 
         private void OnEnable()
         {
+            _review = MenuNavigator.HubAvailable && MenuNavigator.Instance != null && MenuNavigator.Instance.Current == PanelId.Restaurant;
+            view.SetReviewMode(false);
             LoadRestaurants();
             PopulateView();
             BindActions();
             ResetFromSession();
             UpdateSegmentAvailability();
             UpdateCoherencePanel();
+            view.SetReviewMode(_review);
         }
 
         private void OnDisable()
@@ -106,7 +111,12 @@ namespace Game.Adapter.In.Controllers
         /// </summary>
         private void ResetFromSession()
         {
-            if (PlayerSession.HasRestaurant
+            if (_review && GameSessionState.Current != null)
+            {
+                _selectedRestaurant = _restaurantsByType.ContainsKey(GameSessionState.Current.restaurantType) ? GameSessionState.Current.restaurantType : null;
+                _selectedSegment = _selectedRestaurant.HasValue ? GameSessionState.Current.targetSegment : null;
+            }
+            else if (PlayerSession.HasRestaurant
                 && _restaurantsByType.ContainsKey(PlayerSession.SelectedRestaurantType.Value))
             {
                 _selectedRestaurant = PlayerSession.SelectedRestaurantType.Value;
@@ -131,6 +141,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnRestaurantSelected(RestaurantType type)
         {
+            if (_review) return;
             if (!_restaurantsByType.ContainsKey(type)) return;
             _selectedRestaurant = type;
 
@@ -149,6 +160,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnSegmentSelected(Segment segment)
         {
+            if (_review) return;
             if (!_selectedRestaurant.HasValue || !IsSegmentAllowed(_selectedRestaurant.Value, segment))
             {
                 view.SetHint("Esta classe social não está disponível para o restaurante selecionado.");
@@ -216,7 +228,7 @@ namespace Game.Adapter.In.Controllers
 
             // A zona vem do rascunho da D1. Assim, se o jogador voltar, trocar a
             // localizacao e avancar de novo, este painel ja calcula com a nova.
-            LocationZone zone = PlayerSession.SelectedZone ?? LocationZone.Financas;
+            LocationZone zone = _review ? GameSessionState.Current.locationZone : PlayerSession.SelectedZone ?? LocationZone.Financas;
 
             Segment restaurantSegment = GetRestaurantNaturalSegment(_selectedRestaurant.Value);
             Segment locationSegment = GetLocationSegment(zone);
@@ -344,7 +356,7 @@ namespace Game.Adapter.In.Controllers
         private static string GetCoherenceTip2(RestaurantType r, Segment s) => (r, s) switch
         {
             (RestaurantType.PODRAO, Segment.LOW) or
-            (RestaurantType.PODRAO, Segment.MEDIUM) => 
+            (RestaurantType.PODRAO, Segment.MEDIUM) =>
                 "Restaurantes de lanches trabalham com preço acessível e maior volume de pedidos. Para essa opção, estão disponíveis as classes C e B.",
 
             (RestaurantType.JAPONES, Segment.MEDIUM) or
@@ -378,6 +390,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnConfirm()
         {
+            if (_review) return;
             if (!TrySaveDraft())
                 return;
 
@@ -387,6 +400,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnBack()
         {
+            if (_review) return;
             // Voltar nao apaga a escolha: o jogador esta voltando para trocar a
             // localizacao, nao para desistir. O que esta na tela vai para o
             // rascunho e sera reaplicado quando ele avancar de novo.

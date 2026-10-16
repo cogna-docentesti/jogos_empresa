@@ -5,6 +5,7 @@ using Game.Application.Ports.Out;
 using Game.Infrastructure;
 using Game.Infrastructure.Session;
 using UnityEngine;
+using Game.Adapter.In.UI.Navigation;
 
 namespace Game.Adapter.In.Controllers
 {
@@ -29,6 +30,7 @@ namespace Game.Adapter.In.Controllers
         private LocationScreenData  _data;
         private Establishment       _selectedEstablishment;
         private bool                _initialized;
+        private static bool ReviewContext => MenuNavigator.HubAvailable && MenuNavigator.Instance != null && MenuNavigator.Instance.Current == PanelId.Location;
 
         // ── Ciclo de vida ─────────────────────────────────────────────────
 
@@ -129,6 +131,7 @@ namespace Game.Adapter.In.Controllers
             _selectedEstablishment = null;
             Render();
             RestorePreviousSelection();
+            view.SetReviewMode(ReviewContext);
         }
 
         private void Render()
@@ -148,10 +151,10 @@ namespace Game.Adapter.In.Controllers
 
         private void RestorePreviousSelection()
         {
-            if (!PlayerSession.HasLocation)
+            if (!ReviewContext && !PlayerSession.HasLocation)
                 return;
 
-            string id = PlayerSession.SelectedEstablishmentId;
+            string id = ReviewContext ? LocationZoneMap.ToId(GameSessionState.Current.locationZone) : PlayerSession.SelectedEstablishmentId;
 
             if (!LocationZoneMap.IsKnownId(id))
                 id = LocationZoneMap.ToId(PlayerSession.SelectedZone.Value);
@@ -171,6 +174,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnLocationSelected(string id)
         {
+            if (ReviewContext && id != LocationZoneMap.ToId(GameSessionState.Current.locationZone)) return;
             var e = _data.Establishments.FirstOrDefault(x => x.Id == id);
             if (e == null || !e.IsUnlocked) return;
 
@@ -192,6 +196,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnConfirm()
         {
+            if (ReviewContext) return;
             if (_selectedEstablishment == null || !_selectedEstablishment.IsUnlocked) return;
 
             SaveDraft();
@@ -202,6 +207,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnBack()
         {
+            if (ReviewContext) return;
             // Guarda o que esta na tela antes de sair: quando o jogador voltar
             // da identificacao, a area escolhida continua marcada.
             if (_selectedEstablishment != null)

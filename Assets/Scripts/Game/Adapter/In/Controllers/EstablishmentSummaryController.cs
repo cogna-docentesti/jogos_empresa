@@ -17,6 +17,7 @@ namespace Game.Adapter.In.Controllers
     public sealed class EstablishmentSummaryController : MonoBehaviour
     {
         [SerializeField] private EstablishmentSummaryView view;
+        [SerializeField] private EstablishmentReviewContent reviewContent;
 
         private void Awake()
         {
@@ -72,6 +73,11 @@ namespace Game.Adapter.In.Controllers
 
         public void Refresh()
         {
+            if (reviewContent != null)
+            {
+                reviewContent.Bind(EstablishmentSummaryService.Build());
+                return;
+            }
             if (view == null)
             {
                 Debug.LogError("[EstablishmentSummaryController] View nao configurada.");
