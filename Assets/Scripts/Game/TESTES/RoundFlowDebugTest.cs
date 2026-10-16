@@ -357,25 +357,22 @@ public class RoundFlowDebugTest : MonoBehaviour
 #if UNITY_EDITOR
     private static void RunCreditInterfaceTests(Action<bool, string> check, CreditLineData line)
     {
-        var root = new GameObject("CreditInterfaceTest", typeof(RectTransform));
+        var root = UnityEngine.Object.Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Card_loan.prefab"));
+        root.name = "CreditInterfaceTest";
         root.SetActive(false);
         try
         {
-            var card = root.AddComponent<Game.Adapter.In.UI.BankCardView>();
-            var labelObject = new GameObject("Term", typeof(RectTransform), typeof(TMPro.TextMeshProUGUI));
-            labelObject.transform.SetParent(root.transform, false);
-            var label = labelObject.GetComponent<TMPro.TextMeshProUGUI>();
-            var button = root.AddComponent<UnityEngine.UI.Button>();
+            var card = root.GetComponent<Game.Adapter.In.UI.BankCardView>();
+            var button = root.GetComponent<UnityEngine.UI.Button>();
             var fields = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
-            card.GetType().GetField("termText", fields).SetValue(card, label);
-            card.GetType().GetField("selectButton", fields).SetValue(card, button);
+            var label = (TMPro.TextMeshProUGUI)card.GetType().GetField("termText", fields).GetValue(card);
             GameSessionState.Clear();
             var session = new GameSessionService("credit_ui_test_" + Guid.NewGuid(), "test_professor").CreateNewSession();
             foreach (int month in new[] { 1, 2, 3 })
             {
                 session.currentRound = month;
                 card.Setup(line);
-                check(label.text == (month < 3 ? (4 - month) + " meses" : "Novas contratações indisponíveis")
+                check((month < 3 ? label.text.Contains((4 - month) + " parcela") : label.text == "Contratação indisponível")
                     && button.interactable == (month < 3), "Credito UI: prazo e disponibilidade no mes " + month);
             }
             var view = root.AddComponent<Game.Adapter.In.UI.FinancialScreenView>();

@@ -1,270 +1,71 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using Game.Adapter.In.UI.Theme;
 
 namespace Game.Adapter.In.UI
 {
     public sealed class BankCardView : MonoBehaviour
     {
-        [Header("Texts")]
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI maxAmountText;
         [SerializeField] private TextMeshProUGUI interestRateText;
         [SerializeField] private TextMeshProUGUI termText;
-
-        [Header("Action")]
-        [SerializeField] private Button selectButton;
-
-        [Header("Visual")]
-        [SerializeField] private Image creditLineIcon;
-
-        [SerializeField] private GameObject selectionBorder;
-
-        [Header("Coins")]
-        [SerializeField] private Image coinPrefab;
-
-        [SerializeField] private RectTransform coinContainer;
-
-        [SerializeField] private float coinSpacing = 26f;
-
-        [SerializeField, Min(0)]
-        private int defaultCoinCount = 1;
-
+        [SerializeField] private TextMeshProUGUI installmentText;
+        [SerializeField] private TextMeshProUGUI availabilityText;
+        [SerializeField] private UnityEngine.UI.Button selectButton;
+        [SerializeField] private UnityEngine.UI.Image creditLineIcon;
+        [SerializeField] private UnityEngine.UI.Image selectionMark;
+        [SerializeField] private UnityEngine.UI.Image interactionOutline;
         public CreditLineData CreditLine { get; private set; }
-
         public event Action<BankCardView> Selected;
-
-        private readonly List<Image> coinInstances = new();
-
-        private bool isSelected;
-        private bool hasOriginalCoinPosition;
-        private Vector2 originalCoinAnchoredPosition;
-        private float originalCoinAlpha = 1f;
-
-        private void Awake()
+        private void OnEnable() { if (selectButton != null) selectButton.onClick.AddListener(OnSelected); }
+        private void OnDisable() { if (selectButton != null) selectButton.onClick.RemoveListener(OnSelected); }
+        private void OnSelected() => Selected?.Invoke(this);
+        public void Setup(CreditLineData line)
         {
-            if (selectButton == null)
-                selectButton = GetComponent<Button>();
-
-            CacheOriginalCoinPosition();
-            ApplyVisualState();
-        }
-
-        private void OnEnable()
-        {
-            if (selectButton != null)
-            {
-                selectButton.onClick.RemoveListener(OnSelected);
-                selectButton.onClick.AddListener(OnSelected);
-            }
-        }
-
-        private void OnDisable()
-        {
-            if (selectButton != null)
-                selectButton.onClick.RemoveListener(OnSelected);
-        }
-
-        public void Setup(CreditLineData creditLine)
-        {
-            Setup(creditLine, defaultCoinCount);
-        }
-
-        public void Setup(CreditLineData creditLine, int coinCount)
-        {
-            CreditLine = creditLine;
-
-            ConfigureCreditLineIcon(creditLine.icon);
-
-            if (nameText != null)
-                nameText.text = creditLine.displayName;
-
-            if (descriptionText == null)
-            {
-                Transform descriptionTransform = transform.Find("creditLineDescription");
-                if (descriptionTransform != null)
-                    descriptionText = descriptionTransform.GetComponent<TextMeshProUGUI>();
-            }
-
-            if (descriptionText != null)
-                descriptionText.text = creditLine.cardDescription;
-
-            if (maxAmountText != null)
-                maxAmountText.text = FormatCurrency(creditLine.maxAmount);
-
-            if (interestRateText != null)
-                interestRateText.text = FormatInterestRate(creditLine.monthlyInterestRate);
-
-            if (termText != null)
-            {
-                int term = GameSessionState.HasActiveSession
-                    ? LoanService.ContractTerm(GameSessionState.Current.currentRound) : 0;
-                termText.text = creditLine.maxAmount <= 0f ? "Sem parcelas"
-                    : term > 0 ? $"{term} meses" : "Novas contratações indisponíveis";
-            }
-
-            if (selectButton != null)
-                selectButton.interactable = creditLine.maxAmount <= 0f || LoanService.CanContract;
-
-            SetCoinCount(coinCount);
-
+            CreditLine = line; nameText.text = line.displayName; descriptionText.text = line.cardDescription;
+            creditLineIcon.sprite = line.icon; creditLineIcon.color = Color.white;
+            creditLineIcon.type = UnityEngine.UI.Image.Type.Simple; creditLineIcon.preserveAspect = true; creditLineIcon.raycastTarget = false;
+            bool noCredit = line.maxAmount <= 0; var session = GameSessionState.Current;
+            bool contracted = !noCredit && LoanService.HasLoan(session) && session.creditLineId == line.id;
+            int term = contracted ? LoanService.RemainingPaymentMonths(session.currentRound) : session != null ? LoanService.ContractTerm(session.currentRound) : 0;
+            maxAmountText.text = noCredit ? "Capital próprio" : FinancialScreenView.Money(line.maxAmount);
+            interestRateText.text = noCredit ? "Sem juros" : $"{(line.monthlyInterestRate * 100).ToString("0.##", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))}% ao mês";
+            termText.text = noCredit ? "Sem parcelas" : term > 0 ? $"{term} parcela(s) restante(s)" : "Contratação indisponível";
+            installmentText.text = noCredit ? "Nenhum valor será adicionado ao caixa." : term > 0
+                ? $"{(contracted ? "Parcela deste mês" : "Primeira parcela")}: {FinancialScreenView.Money(LoanService.Installment(contracted ? session.loanBalance : line.maxAmount, line, session.currentRound))}"
+                : "Novos empréstimos indisponíveis.";
+            bool available = GameSessionState.HasActiveSession && (noCredit ? !LoanService.HasLoan(session) : LoanService.CanContract);
+            selectButton.interactable = available;
+            availabilityText.text = contracted ? "Contratado • escolha mantida" : !GameSessionState.HasActiveSession ? "Sessão indisponível"
+                : LoanService.HasLoan(session) ? "Outra linha já foi contratada" : noCredit ? "Disponível • sem empréstimo"
+                : available ? "Disponível para contratação" : "Indisponível no mês atual";
             SetSelected(false);
-
-            if (selectButton != null)
-            {
-                selectButton.onClick.RemoveListener(OnSelected);
-                selectButton.onClick.AddListener(OnSelected);
-            }
         }
-
         public void SetSelected(bool selected)
+        { GetComponent<SharedControlAppearance>()?.SetSelected(selected); if (selectionMark != null) selectionMark.enabled = selected; }
+        private void LateUpdate()
         {
-            isSelected = selected;
-            GetComponent<SharedControlAppearance>()?.SetSelected(selected);
-            ApplyVisualState();
-        }
-
-        public void SetCoinCount(int count)
-        {
-            defaultCoinCount = Mathf.Max(0, count);
-
-            EnsureCoinInstances(defaultCoinCount);
-            ApplyCoinCount(defaultCoinCount);
-        }
-
-       private void OnSelected()
-       {
-           Selected?.Invoke(this);
-       }
-
-        private void ConfigureCreditLineIcon(Sprite icon)
-        {
-            if (creditLineIcon == null)
+            var appearance = GetComponent<SharedControlAppearance>();
+            if (interactionOutline != null && appearance != null)
             {
-                var existing = transform.Find("CreditLineIcon");
-                if (existing != null)
-                    creditLineIcon = existing.GetComponent<Image>();
+                bool pressed = appearance.CurrentState == "pressed";
+                interactionOutline.enabled = pressed || appearance.CurrentState == "hover";
+                var color = GamePalette.Primary; color.a = pressed ? .85f : .4f; interactionOutline.color = color;
             }
-
-            if (creditLineIcon == null)
-            {
-                var iconObject = new GameObject("CreditLineIcon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-                iconObject.transform.SetParent(transform, false);
-                creditLineIcon = iconObject.GetComponent<Image>();
-
-                RectTransform iconRect = creditLineIcon.rectTransform;
-                iconRect.anchorMin = new Vector2(0f, 1f);
-                iconRect.anchorMax = new Vector2(0f, 1f);
-                iconRect.pivot = new Vector2(0f, 1f);
-                iconRect.anchoredPosition = new Vector2(24f, -24f);
-                iconRect.sizeDelta = new Vector2(96f, 96f);
-            }
-
-            creditLineIcon.sprite = icon;
-            creditLineIcon.type = Image.Type.Simple;
-            creditLineIcon.color = Color.white;
-            creditLineIcon.preserveAspect = true;
-            creditLineIcon.raycastTarget = false;
-            creditLineIcon.gameObject.SetActive(icon != null);
-            creditLineIcon.transform.SetAsLastSibling();
+            // Long catalog copy expands the row; scrolling keeps fixed actions reachable.
+            if (nameText == null || descriptionText == null) return;
+            float nameHeight = Mathf.Max(40, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
+            float descriptionHeight = Mathf.Max(60, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
+            nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, nameHeight);
+            descriptionText.rectTransform.anchoredPosition = new Vector2(168, -24 - nameHeight - 8);
+            descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, descriptionHeight);
+            availabilityText.rectTransform.anchoredPosition = new Vector2(168, -24 - nameHeight - 8 - descriptionHeight - 8);
+            var layout = GetComponent<UnityEngine.UI.LayoutElement>();
+            float height = Mathf.Max(212, 24 + nameHeight + 8 + descriptionHeight + 8 + 36 + 24);
+            if (!Mathf.Approximately(layout.preferredHeight, height)) layout.preferredHeight = height;
         }
-
-        private void ApplyVisualState()
-        {
-            if (GetComponent<SharedControlAppearance>() != null)
-            {
-                if (selectionBorder != null) selectionBorder.SetActive(false);
-                return;
-            }
-            if (selectionBorder == null)
-                return;
-
-            selectionBorder.SetActive(isSelected);
-        }
-
-        private void EnsureCoinInstances(int requiredCount)
-        {
-            if (coinPrefab == null)
-                return;
-
-            CacheOriginalCoinPosition();
-
-            if (coinContainer == null)
-                coinContainer = coinPrefab.transform.parent as RectTransform;
-
-            if (!coinInstances.Contains(coinPrefab))
-                coinInstances.Insert(0, coinPrefab);
-
-            while (coinInstances.Count < requiredCount)
-            {
-                Image clone = Instantiate(coinPrefab, coinContainer);
-                clone.name = $"CoinIcon_{coinInstances.Count + 1}";
-                clone.raycastTarget = false;
-
-                coinInstances.Add(clone);
-            }
-        }
-
-        private void ApplyCoinCount(int count)
-        {
-            int visibleCount = Mathf.Max(0, count);
-            bool representsZeroCoins = visibleCount == 0;
-            int displayedCoinCount = representsZeroCoins ? 1 : visibleCount;
-
-            if (coinPrefab == null)
-                return;
-
-            EnsureCoinInstances(displayedCoinCount);
-            float totalWidth = (displayedCoinCount - 1) * coinSpacing;
-
-            for (int i = 0; i < coinInstances.Count; i++)
-            {
-                Image coin = coinInstances[i];
-
-                if (coin == null)
-                    continue;
-
-                bool visible = i < displayedCoinCount;
-                coin.gameObject.SetActive(visible);
-
-                if (!visible)
-                    continue;
-
-                Color coinColor = coin.color;
-                coinColor.a = representsZeroCoins ? 0.4f : originalCoinAlpha;
-                coin.color = coinColor;
-
-                RectTransform rt = coin.rectTransform;
-
-                float xOffset = (i * coinSpacing) - (totalWidth / 2f);
-                rt.anchoredPosition = originalCoinAnchoredPosition + new Vector2(xOffset, 0f);
-
-                rt.SetAsLastSibling();
-            }
-        }
-
-        private void CacheOriginalCoinPosition()
-        {
-            if (coinPrefab == null || hasOriginalCoinPosition)
-                return;
-
-            originalCoinAnchoredPosition = coinPrefab.rectTransform.anchoredPosition;
-            originalCoinAlpha = coinPrefab.color.a;
-            hasOriginalCoinPosition = true;
-        }
-
-        private static string FormatCurrency(float value)
-        {
-            return $"R$ {value:0,0.00}";
-        }
-
-        private static string FormatInterestRate(float value)
-        {
-            return $"{value * 100f:0.##}% ao mes";
-        }
-
     }
 }

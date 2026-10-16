@@ -24,6 +24,7 @@ namespace Game.Adapter.In.UI
         [Header("Actions")]
         [SerializeField] private Button confirmButton;
         [SerializeField] private Button cartButton;
+        [SerializeField] private Button bankBackButton;
 
         private readonly List<EquipmentCardView> cards = new();
         private TextMeshProUGUI cartButtonText;
@@ -87,7 +88,10 @@ namespace Game.Adapter.In.UI
         public void SetFooterVisible(bool visible)
         {
             SetActionFooterVisible(confirmButton, null, visible);
+            if (bankBackButton != null) bankBackButton.gameObject.SetActive(visible);
         }
+
+        public void BindBankBack(UnityAction action) => Bind(bankBackButton, action);
 
         public void SetCartButtonCount(int itemCount)
         {

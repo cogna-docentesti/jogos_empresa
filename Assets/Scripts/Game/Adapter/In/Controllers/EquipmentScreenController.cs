@@ -44,6 +44,7 @@ namespace Game.Adapter.In.Controllers
             {
                 view.BindConfirm(null);
                 view.BindCart(null);
+                view.BindBankBack(null);
                 view.HideCart();
             }
 
@@ -121,6 +122,14 @@ namespace Game.Adapter.In.Controllers
 
             view.BindConfirm(OnContinue);
             view.BindCart(OpenCart);
+            view.BindBankBack(ReturnToBank);
+        }
+
+        private void ReturnToBank()
+        {
+            var machine = GameManager.Instance?.StateMachine;
+            if (machine?.CurrentState == GameState.Initial_Equipment)
+                machine.TryChangeState(GameState.Initial_Capital);
         }
 
         private void OnCartToggleRequested(EquipmentCardView card)
