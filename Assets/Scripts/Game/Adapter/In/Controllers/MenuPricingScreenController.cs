@@ -7,15 +7,15 @@ using UnityEngine;
 namespace Game.Adapter.In.Controllers
 {
     /// <summary>
-    /// D3 Cardapio. Ultima decisao obrigatoria.
+    /// D3 Cardápio. Ultima decisao obrigatoria.
     ///
-    /// Le o restaurante e os precos do rascunho (PlayerSession). No confirm,
+    /// Le o restaurante e os preços do rascunho (PlayerSession). No confirm,
     /// chama GameSessionService.ConfirmInitialDecisions(), que grava tudo no
     /// banco de uma vez.
     ///
     /// Esta tela tambem abre pelo hub (Menu do Jogo) depois que a partida ja
-    /// comecou. Nesse caso o rodape (Confirmar/Voltar) fica escondido e ela so
-    /// mostra o cardapio salvo, que o GameManager colocou no rascunho ao carregar.
+    /// comecou. Nesse caso consulta os preços confirmados; o histórico do hub
+    /// fornece o retorno, sem outra confirmação ou gravação.
     /// </summary>
     public sealed class MenuPricingScreenController : MonoBehaviour
     {
@@ -23,13 +23,19 @@ namespace Game.Adapter.In.Controllers
 
         private readonly List<ProductPricingItemView> _items = new();
         private RestaurantData _currentRestaurant;
+        private readonly Dictionary<string, string> _draftInputs = new();
+        private RestaurantType? _draftRestaurant;
+        private bool _review;
+        private bool _confirmed;
 
         private void OnEnable()
         {
             if (view == null)
                 view = GetComponent<MenuPricingScreenView>();
 
-            view?.SetFooterVisible(!WasOpenedFromMenu());
+            _review = WasOpenedFromMenu();
+            _confirmed = false;
+            view?.SetReviewMode(_review);
             BindActions();
             PopulateProducts();
         }
@@ -64,20 +70,22 @@ namespace Game.Adapter.In.Controllers
         private void PopulateProducts()
         {
             ClearItems();
+            view?.SetPriceSummary(_items);
 
             if (view == null || !view.HasRequiredReferences())
                 return;
 
             // O restaurante vem do rascunho da D2, nao da GameSessionEntity:
             // antes do confirm da D3 a entidade ainda nao recebeu nada.
-            if (!PlayerSession.SelectedRestaurantType.HasValue)
+            if (!_review && !PlayerSession.SelectedRestaurantType.HasValue)
             {
                 view.SetHint("Escolha o restaurante na etapa anterior.");
                 view.SetConfirmEnabled(false);
                 return;
             }
 
-            RestaurantType restaurantType = PlayerSession.SelectedRestaurantType.Value;
+            RestaurantType restaurantType = _review && GameSessionState.Current != null
+                ? GameSessionState.Current.restaurantType : PlayerSession.SelectedRestaurantType.Value;
 
             var restaurant = FindRestaurant(restaurantType);
             if (restaurant == null)
@@ -88,11 +96,16 @@ namespace Game.Adapter.In.Controllers
             }
 
             _currentRestaurant = restaurant;
-            view.SetTitle($"Cardapio - {restaurant.displayName}");
+            view.SetTitle("Cardápio e preços");
+            view.SetRestaurant(restaurant.displayName, _review);
+            if (_draftRestaurant != restaurantType || !PlayerSession.HasMenu) _draftInputs.Clear();
+            _draftRestaurant = restaurantType;
 
-            // Reidratacao: se o jogador ja montou este cardapio (e voltou para a
-            // D2 sem trocar de restaurante), os precos dele voltam aqui.
-            var savedPricing = PlayerSession.MenuRestaurantType == restaurantType
+            // Reidratacao: se o jogador ja montou este cardápio (e voltou para a
+            // D2 sem trocar de restaurante), os preços dele voltam aqui.
+            var savedPricing = _review && GameSessionState.Current != null
+                ? MenuPricingHelper.FromJson(GameSessionState.Current.menuPricingJson)
+                : PlayerSession.MenuRestaurantType == restaurantType
                 ? PlayerSession.GetMenu()
                 : new MenuPricingData();
 
@@ -107,6 +120,8 @@ namespace Game.Adapter.In.Controllers
 
                 var item = view.CreateProductItem();
                 item.Setup(product, initialPrice);
+                item.SetReadOnly(_review);
+                if (!_review && _draftInputs.TryGetValue(product.id, out var raw)) item.RestoreDraftInput(raw);
                 item.PriceChanged += OnItemPriceChanged;
                 _items.Add(item);
             }
@@ -123,25 +138,32 @@ namespace Game.Adapter.In.Controllers
 
         private void ValidatePrices()
         {
+            if (_items.Count != 3)
+            {
+                view.SetHint("Cardápio indisponível. Volte e confira o restaurante.", true);
+                view.SetConfirmEnabled(false);
+                return;
+            }
             foreach (var item in _items)
             {
-                if (item.Product == null || !item.Product.IsPriceInRange(item.SelectedPrice))
+                if (item.Product == null || !item.IsPriceValid || !item.Product.IsPriceInRange(item.SelectedPrice))
                 {
-                    view.SetHint("Ha precos fora do range permitido.");
+                    view.SetHint("Revise os campos destacados antes de confirmar.", true);
                     view.SetConfirmEnabled(false);
                     return;
                 }
             }
 
-            view.SetHint("Cardapio pronto para confirmacao.");
-            view.SetConfirmEnabled(_items.Count > 0);
+            view.SetHint(_review ? "Preços salvos da sua partida." : "Confira os três preços e confirme suas decisões.");
+            view.SetConfirmEnabled(!_review && _items.Count > 0);
         }
 
         private void UpdateCoherencePanel()
         {
+            view?.SetPriceSummary(_items);
             if (view == null || _currentRestaurant == null || _items.Count == 0)
             {
-                view?.UpdatePriceCoherence(0f, "Defina os precos do cardapio.");
+                view?.UpdatePriceCoherence(0f, "Defina os preços do cardápio.");
                 return;
             }
 
@@ -204,34 +226,35 @@ namespace Game.Adapter.In.Controllers
             if (coherence >= 0.7f)
                 return restaurant switch
                 {
-                    RestaurantType.PODRAO => "Cardapio alinhado a uma proposta acessivel e de volume.",
-                    RestaurantType.JAPONES => "Cardapio alinhado a uma proposta de ticket medio/premium.",
-                    RestaurantType.FRANCES => "Cardapio alinhado a uma proposta premium.",
-                    _ => "Cardapio alinhado ao restaurante."
+                    RestaurantType.PODRAO => "Cardápio alinhado a uma proposta acessível e de volume.",
+                    RestaurantType.JAPONES => "Cardápio alinhado a uma proposta de ticket médio/premium.",
+                    RestaurantType.FRANCES => "Cardápio alinhado a uma proposta premium.",
+                    _ => "Cardápio alinhado ao restaurante."
                 };
 
             return restaurant switch
             {
-                RestaurantType.PODRAO => "Precos altos podem reduzir o apelo de volume do podrao.",
-                RestaurantType.JAPONES => "Ajuste os precos para manter uma percepcao equilibrada de valor.",
-                RestaurantType.FRANCES => "Precos baixos podem enfraquecer a percepcao premium do frances.",
-                _ => "Revise os precos para melhorar a coerencia."
+                RestaurantType.PODRAO => "Preços altos podem reduzir o apelo de volume do podrao.",
+                RestaurantType.JAPONES => "Ajuste os preços para manter uma percepção equilibrada de valor.",
+                RestaurantType.FRANCES => "Preços baixos podem enfraquecer a percepção premium do francês.",
+                _ => "Revise os preços para melhorar a coerência."
             };
         }
 
         /// <summary>
         /// Confirm da D3: o UNICO ponto do fluxo inicial que grava no SQLite.
-        /// Primeiro o cardapio vai para o rascunho; depois o service copia o
+        /// Primeiro o cardápio vai para o rascunho; depois o service copia o
         /// rascunho inteiro (D1, D2, D3 e identificacao) para a sessao e grava
         /// uma vez so.
         /// </summary>
         private void OnConfirm()
         {
-            if (_currentRestaurant == null)
+            if (_currentRestaurant == null || _review || _confirmed || GameSessionState.IsPersisted
+                || GameManager.Instance?.StateMachine.CurrentState != InitialDecisionFlow.Menu)
                 return;
 
             var pricing = BuildPricing(requireValidPrices: true);
-            if (pricing == null)
+            if (pricing == null || _items.Count != 3)
             {
                 ValidatePrices();
                 return;
@@ -242,7 +265,7 @@ namespace Game.Adapter.In.Controllers
             var session = GameSessionState.Current;
             if (session == null)
             {
-                view.SetHint("Nenhuma sessao ativa. Reinicie o jogo.");
+                view.SetHint("Nenhuma sessão ativa. Reinicie o jogo.");
                 return;
             }
 
@@ -250,20 +273,23 @@ namespace Game.Adapter.In.Controllers
 
             if (!service.ConfirmInitialDecisions())
             {
-                view.SetHint("Nao foi possivel salvar. Confira suas escolhas e tente de novo.");
+                view.SetHint("Não foi possível salvar. Confira suas escolhas e tente de novo.", true);
                 return;
             }
+            _confirmed = true;
         }
 
         private void OnBack()
         {
-            // Guarda os precos que estao na tela: se o jogador voltar para a D2
-            // e avancar sem trocar de restaurante, encontra o cardapio como deixou.
+            if (_review) { MenuNavigator.Instance?.Back(); return; }
+            // Guarda os preços que estao na tela: se o jogador voltar para a D2
+            // e avancar sem trocar de restaurante, encontra o cardápio como deixou.
             if (_currentRestaurant != null)
             {
                 var pricing = BuildPricing(requireValidPrices: false);
                 if (pricing != null)
                     PlayerSession.SetMenu(_currentRestaurant.type, pricing);
+                foreach (var item in _items) _draftInputs[item.Product.id] = item.DraftInput;
             }
 
             InitialDecisionFlow.GoTo(InitialDecisionFlow.Restaurant);
@@ -282,7 +308,7 @@ namespace Game.Adapter.In.Controllers
                 if (item == null || item.Product == null || string.IsNullOrWhiteSpace(item.Product.id))
                     continue;
 
-                if (requireValidPrices && !item.Product.IsPriceInRange(item.SelectedPrice))
+                if (requireValidPrices && (!item.IsPriceValid || !item.Product.IsPriceInRange(item.SelectedPrice)))
                     return null;
 
                 pricing.items.Add(new MenuPricingItem

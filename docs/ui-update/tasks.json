@@ -5,7 +5,7 @@
   "title": "Atualização completa das interfaces e identificação na GameScene",
   "status": "em_andamento",
   "implementation_performed": true,
-  "current_request": "UI-01 a UI-06 entregues e validadas; UI-07 a UI-20 permanecem planejadas.",
+  "current_request": "UI-01 a UI-07 entregues e validadas; UI-08 a UI-20 permanecem planejadas.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -1127,7 +1127,7 @@
       "title": "Cardápio e preços: nove produtos e edição de valores",
       "phase": "Telas de abertura e gestão",
       "priority": "P1",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-06"
       ],
@@ -1260,7 +1260,10 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-07.json e output/ui-update/UI-07/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-07 — Cardápio e preços: nove produtos e edição de valores no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-07.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-07 — Cardápio e preços: nove produtos e edição de valores no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-07.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "completed_at": "2026-10-16",
+      "qa_record": "docs/ui-update/qa/UI-07.json",
+      "implementation_note": "Nove produtos, preços com validação/limites, rascunho, passo 4 e revisão pelo hub. 83 testes Edit Mode, 108 checks Play Mode e 30 capturas finais; persistência única na D3 e Banco na mesma GameScene."
     },
     {
       "id": "UI-08",
