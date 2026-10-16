@@ -61,7 +61,7 @@ namespace Game.Adapter.In.Controllers
             if (!available)
             {
                 view.SetSummary(0, 0, 0, null, "Confira a sessão, o restaurante e o catálogo de funções.", false);
-                view.SetHint(!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted ? "Sessão indisponível. Volte ao menu para continuar." : "Não foi possível carregar a equipe. Volte e tente novamente.", true);
+                view.SetHint(!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted ? "Sessão indisponível. As contratações estão bloqueadas." : "Não foi possível carregar a equipe. Volte e tente novamente.", true);
                 view.SetConfirmEnabled(false); return;
             }
             var alignment = AlignmentEngine.Calculate(GameSessionState.Current.restaurantType, GameSessionState.Current.targetSegment,

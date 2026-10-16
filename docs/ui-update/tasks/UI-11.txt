@@ -95,3 +95,6 @@ Execute somente UI-11 — Equipe e RH: cinco funções, ambientes e vínculo de 
 ENTREGA UI-11 — 16/10/2026
 Cinco funções reais com retratos/ambientes por ID, quantidades persistentes, folha/capacidade/alinhamento e passo 7 → hub. Vínculos initialTeamPanel/Team já válidos foram preservados. Confirmação de equipe incompleta mantém a regra anterior, sem mínimo ou custo novo; salário entra no fechamento mensal. Garçom/CH07 permanece reserva.
 189 testes Edit Mode distintos (14 UI-11), 183 checks de fluxo + 16 checks da cena salva, 81 capturas reais em 1920×1080/1366×768/1280×720. Zero erros/avisos finais. QA: docs/ui-update/qa/UI-11.json; evidências: output/ui-update/UI-11/. Sem pendência indispensável de aceite.
+
+CORREÇÃO DE ORIENTAÇÃO UI-11 — 16/10/2026
+Sessão indisponível informa bloqueio no cabeçalho/rodapé, sem sugerir Menu/Voltar ausentes nem uso de +/− desabilitados. Sessão válida mantém orientação de quantidades na abertura e revisita. 14 testes Edit Mode, 16 checks Play Mode e seis capturas renovadas nas três resoluções; hashes/dimensões conferidos, cena e regras preservadas. Commit corretivo separado do 6bfd96bca78e3f5e08a9879dbec23a0c0b754add; detalhes em qa/UI-11.json.

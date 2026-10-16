@@ -24,6 +24,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI countText, payrollText, capacityText, alignmentText, requirementsText;
         [SerializeField] private GameObject emptyTeam, catalogError;
         private readonly List<TeamRoleCardView> cards = new();
+        private TextMeshProUGUI footerText;
 
         public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && catalogScroll != null
             && confirmButton != null && roleVisuals.Length == 5 && roleVisuals.All(v => v != null
@@ -50,6 +51,9 @@ namespace Game.Adapter.In.UI
         }
         public void SetSummary(int count, double payroll, long capacity, AlignmentResult alignment, string requirements, bool available)
         {
+            if (footerText == null) footerText = transform.Find("BottomBar/Note")?.GetComponent<TextMeshProUGUI>();
+            if (footerText != null) footerText.text = available
+                ? "Use + e − para ajustar as contratações." : "Contratações indisponíveis no momento.";
             countText.text = available ? $"{count} pessoa(s)" : "Indisponível";
             payrollText.text = available ? Game.Domain.Service.EstablishmentSummaryService.Brl((float)payroll) : "Indisponível";
             capacityText.text = available ? $"{capacity:N0} clientes/mês" : "Indisponível";

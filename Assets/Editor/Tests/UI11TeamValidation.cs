@@ -177,16 +177,16 @@ public static class UI11TeamValidation
         UI01Validation.RequireIsolatedStorage(); if(!EditorApplication.isPlaying) throw new InvalidOperationException("Use isolated Play Mode.");
         reportPath="output/ui-update/UI-11/playmode-saved-scene.json";report=new Report();steps.Clear();captures.Clear();lastFrame=-1;retries=0;
         foreach(var entry in Newtonsoft.Json.Linq.JArray.Parse(File.ReadAllText("output/ui-update/UI-11/capture-frames.json")))
-            if((string)entry["name"]!="session-unavailable-1280x720")captures.Add(entry);
+            if(!((string)entry["name"]).StartsWith("session-unavailable-")&&!((string)entry["name"]).StartsWith("saved-scene-"))captures.Add(entry);
         Add("Prepare isolated saved-scene fixture",()=>{var s=GameSessionState.Current;var r=Resources.LoadAll<RestaurantData>("Restaurants").Single(r=>r.type==RestaurantType.FRANCES);s.restaurantType=r.type;s.targetSegment=Segment.HIGH;s.locationZone=LocationZone.Financas;s.currentCash=65000;s.menuPricingJson=MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(r.products));GameSessionState.Persist();});
         foreach(var size in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
         {
             var viewport=size;string res=size.x+"x"+size.y;
             Add("Prepare saved viewport "+res,()=>{UI01Validation.SetGameView(viewport.x,viewport.y);Fixture(RestaurantType.FRANCES,2);});
-            Add("Saved scene renders complete team "+res,()=>{Expect(Screen.width==viewport.x&&Screen.height==viewport.y,"Resolution");VerifyTotals(2);Capture("saved-scene-"+res);Click(Confirm);});
+            Add("Saved scene renders complete team "+res,()=>{Expect(Screen.width==viewport.x&&Screen.height==viewport.y,"Resolution");VerifyTotals(2);Expect(Field<TMP_Text>(View,"footerText").text=="Use + e − para ajustar as contratações.","Available footer guidance");Capture("saved-scene-"+res);Click(Confirm);});
             Add("Saved scene confirmation reaches hub "+res,()=>{Expect(MenuNavigator.Instance.Current==PanelId.Menu&&Root.Find("Panel_Menu").gameObject.activeInHierarchy,"Saved hub");MenuNavigator.Instance.Open(PanelId.Team);});
-            Add("Saved revisit and missing-session fixture "+res,()=>{VerifyTotals(2);savedSession=GameSessionState.Current;GameSessionState.Clear();Call(Controller,"Populate");});
-            Add("Unavailable session has no text overlay on disabled cards "+res,()=>{Expect(!Confirm.interactable&&!Field<GameObject>(View,"catalogError").activeSelf&&Field<TMP_Text>(View,"payrollText").text=="Indisponível"&&Cards.All(c=>!Field<UnityEngine.UI.Button>(c,"addButton").interactable),"Unavailable presentation");Capture("session-unavailable-"+res);GameSessionState.Set(savedSession);GameSessionState.Persist();GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub);});
+            Add("Saved revisit and missing-session fixture "+res,()=>{VerifyTotals(2);Expect(Field<TMP_Text>(View,"footerText").text=="Use + e − para ajustar as contratações.","Revisit footer guidance");savedSession=GameSessionState.Current;GameSessionState.Clear();Call(Controller,"Populate");});
+            Add("Unavailable session has no text overlay on disabled cards "+res,()=>{Expect(!Confirm.interactable&&!Field<GameObject>(View,"catalogError").activeSelf&&Field<TMP_Text>(View,"payrollText").text=="Indisponível"&&Cards.All(c=>!Field<UnityEngine.UI.Button>(c,"addButton").interactable),"Unavailable presentation");Expect(Field<TMP_Text>(View,"hintText").text=="Sessão indisponível. As contratações estão bloqueadas."&&Field<TMP_Text>(View,"footerText").text=="Contratações indisponíveis no momento.","Unavailable guidance must not suggest blocked controls or hidden navigation");Capture("session-unavailable-"+res);GameSessionState.Set(savedSession);GameSessionState.Persist();GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub);});
         }
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }

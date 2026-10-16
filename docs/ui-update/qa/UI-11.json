@@ -32,7 +32,7 @@
       ]
     ],
     "screenshots": 81,
-    "inspection": "Todas as capturas inspecionadas em sete pranchas e amostras nativas, incluindo cinco funções, ambientes inteiros, gerente ao fim do scroll, vazio/incompleto/válido nos três restaurantes, hub, revisitas, texto longo e erros. Estado ausente corrigido e reinspecionado nas três resoluções após reabrir a cena salva.",
+    "inspection": "Todas as capturas inspecionadas em sete pranchas e amostras nativas, incluindo cinco funções, ambientes inteiros, gerente ao fim do scroll, vazio/incompleto/válido nos três restaurantes, hub, revisitas, texto longo e erros. Estado ausente corrigido e reinspecionado nas três resoluções após reabrir a cena salva. Correção posterior: seis capturas válido/indisponível renovadas e inspecionadas nas três resoluções; cabeçalho e rodapé agora correspondem às ações disponíveis.",
     "typography": "Inter Tight, títulos 44/32, corpo e botões 24, rótulos 22, legenda 20. Sem autosize; nomes longos expandem a altura das células. Valores monetários em pt-BR, cores/estados do kit UI-03.",
     "layout": "Canvas 1920×1080; topbar 88, footer 96; catálogo com Image/Mask, GridLayoutGroup e ContentSizeFitter. Resumo fixo. Retratos e ambientes inteiros em contain, tint branco; superfícies/componentes com 9-slice.",
     "footer": "Confirmação reposicionada para reservar o botão global Menu, Sair e Voltar. Checagem geométrica de não sobreposição e raycasts reais nas três resoluções.",
@@ -114,12 +114,64 @@
     "Roteiro separa troca de tela e clique por frames para aguardar reposicionamento global.",
     "Fixture de projeção usa segmento permitido pelo restaurante.",
     "Botão global Menu deixou de cobrir Concluir visita.",
-    "Mensagem de ausência deixou de sobrepor os cards desabilitados; a orientação permanece no cabeçalho e resumo."
+    "Mensagem de ausência deixou de sobrepor os cards desabilitados; a orientação permanece no cabeçalho e resumo.",
+    "Orientação de +/− fica apenas na sessão válida; sessão indisponível informa bloqueio sem sugerir Menu/Voltar ausentes."
   ],
   "scope_limits": [
     "Somente UI-11; UI-12 a UI-20 não executadas.",
     "16:10, perfil móvel/safe area física e builds gerais pertencem à UI-20."
   ],
   "cleanup": "Serialização normalizada com Editor fechado: ordem/blocos baseline preservados, somente seis blocos existentes do Panel_Team alterados e 129 blocos novos. Incidentes fora do escopo, stripped baseline, metadados/fontes e Pipeline temporário retirados. Cena reaberta e validada após normalização. Sem branch/worktree/push/conversa adicional.",
-  "commit_message": "feat(ui): implement team hiring and hub navigation (UI-11)"
+  "commit_message": "feat(ui): implement team hiring and hub navigation (UI-11)",
+  "implementation_commit": "6bfd96bca78e3f5e08a9879dbec23a0c0b754add",
+  "guidance_correction": {
+    "baseline": "6bfd96bca78e3f5e08a9879dbec23a0c0b754add",
+    "date": "2026-10-16",
+    "scope": "Somente orientação por disponibilidade, sem alterar navegação, contratação, economia ou cena.",
+    "available_footer": "Use + e − para ajustar as contratações.",
+    "unavailable_header": "Sessão indisponível. As contratações estão bloqueadas.",
+    "unavailable_footer": "Contratações indisponíveis no momento.",
+    "editmode": {
+      "path": "output/ui-update/UI-11/guidance-correction-editmode.json",
+      "distinct_tests": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-11/guidance-correction-playmode.json",
+      "checks": 16,
+      "passed": 16,
+      "failed": 0,
+      "text_checks": "Orientação válida conferida na abertura e revisita; indisponível não sugere Menu/Voltar/+ ou − bloqueados."
+    },
+    "refreshed_screenshots": [
+      "saved-scene-1920x1080",
+      "session-unavailable-1920x1080",
+      "saved-scene-1366x768",
+      "session-unavailable-1366x768",
+      "saved-scene-1280x720",
+      "session-unavailable-1280x720"
+    ],
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "hashes_and_dimensions_verified": true,
+    "isolated_database": "D:/Cogna/jogos_empresa/Temp/ui11-guidance.db",
+    "isolated_playerprefs": "Cogna.UI11.GuidanceCorrection; chave removida e ambiente anterior restaurado.",
+    "console_errors": 0,
+    "console_warnings": 0,
+    "scene_unchanged": true,
+    "commit_message": "fix(ui): align unavailable team guidance with available actions (UI-11)"
+  }
 }
