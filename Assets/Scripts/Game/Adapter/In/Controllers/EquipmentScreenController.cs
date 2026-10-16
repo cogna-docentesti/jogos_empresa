@@ -240,6 +240,12 @@ namespace Game.Adapter.In.Controllers
 
         private static void OpenMenu()
         {
+            var machine=GameManager.Instance!=null?GameManager.Instance.StateMachine:null;
+            if(machine!=null && machine.CurrentState==GameState.Initial_Equipment)
+            {
+                machine.TryChangeState(GameState.Initial_Team);
+                return;
+            }
             if (MenuNavigator.Instance == null)
             {
                 Debug.LogWarning("[EquipmentScreenController] MenuNavigator nao esta ativo na cena.");

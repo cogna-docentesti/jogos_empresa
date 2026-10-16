@@ -5,7 +5,7 @@
   "title": "Atualização completa das interfaces e identificação na GameScene",
   "status": "em_andamento",
   "implementation_performed": true,
-  "current_request": "UI-01, UI-02 e UI-03 entregues; UI-04 a UI-20 permanecem planejadas.",
+  "current_request": "UI-01 a UI-04 entregues e validadas; UI-05 a UI-20 permanecem planejadas.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -637,7 +637,7 @@
       "title": "HUD, navegação e mapa do hub",
       "phase": "Telas de abertura e gestão",
       "priority": "P1",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-03"
       ],
@@ -829,7 +829,39 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-04.json e output/ui-update/UI-04/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-04 — HUD, navegação e mapa do hub no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-04.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-04 — HUD, navegação e mapa do hub no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-04.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "completed_at": "2026-10-16",
+      "qa_record": "docs/ui-update/qa/UI-04.json",
+      "implementation_notes": [
+        "GameScene/Panel_Menu migrado no Editor correto, preservando os Buttons/PanelNavButton existentes e seus destinos. Decoração anterior fica inativa, sem raycasts. Nenhuma cena de demonstração criada.",
+        "Topbar 88 e navbar 96 usam PNGs aprovados; logo oficial sobre marfim, identificação nativa da empresa, período, caixa, score e progresso de meses concluídos. Valores vêm de PlayerSession/GameSessionState/EstablishmentSummaryService, atualizados ao revisitar e a cada 0,5 s enquanto o HUD está visível.",
+        "Mapa real com base, cinco landmarks compactos, três restaurantes mutuamente exclusivos, foreground, cinco overlays de localidade e centro independente. Ordem, dimensões e coordenadas vêm do map-layout.json atual; cinco fullframes antigos não são referenciados.",
+        "Polígonos e marcadores vivem no mesmo MapMaster 1920x1080, escala uniforme 2/3 e offset [24,176]. MapPolygonHitArea aplica a transformação inversa sobre os pontos canônicos; ruas e arte decorativa não recebem cliques.",
+        "Pinos, ícones, ponteiras, rótulos e TMP são camadas separadas. MapMenuNode usa sprites normal/selected/disabled; hover/pressed/foco usam o realce aprovado e foco tem contorno independente. IDs de Location preservados; centro não cria LocationData.",
+        "MenuNavigator restaura histórico e foco, mantém o GameState de gestão durante revisitas e recusa entradas durante configuração. UIStateListener inicializa o root ao entrar no hub e encerra a navegação nos demais estados. Registry preserva vínculos reais; seu cache é invalidado ao editar binding.",
+        "Voltar aparece nos painéis revisitáveis. O botão Sair existente ocupa o sétimo espaço da navbar apenas no hub e retorna à posição original nos demais painéis; callback/dialog permanecem os existentes.",
+        "O callback legado Continuar/compra de equipamentos distingue configuração e hub: no passo 6 avança ao Initial_Team previsto, usando o Panel_Team existente; em revisita volta ao mapa. Não foram implementados cards, contratação ou arte da UI-11."
+      ],
+      "validation_results": {
+        "editmode_passed": 74,
+        "playmode_passed": 81,
+        "screenshots": 23,
+        "resolutions": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1366,
+            768
+          ],
+          [
+            1280,
+            720
+          ]
+        ],
+        "pending_acceptance": []
+      }
     },
     {
       "id": "UI-05",

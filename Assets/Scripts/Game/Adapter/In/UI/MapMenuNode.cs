@@ -1,61 +1,62 @@
-using System.Collections;
-using UnityEngine;
+using Game.Adapter.In.UI.Navigation;
 using Game.Adapter.In.UI.Theme;
-using UnityEngine.UI;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Game.Adapter.In.UI
 {
-    // Versão enxuta do LocationAreaComponent, só para o menu:
-    // o glow neon acende no toque/hover.
-    [RequireComponent(typeof(Button))]
-    public sealed class MapMenuNode : MonoBehaviour,
-        IPointerEnterHandler, IPointerExitHandler
+    /// <summary>Map-specific appearance; the existing Button/PanelNavButton owns activation.</summary>
+    [RequireComponent(typeof(UnityEngine.UI.Button))]
+    public sealed class MapMenuNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
+        IPointerDownHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler
     {
-        [Header("Visual")]
-        [SerializeField] private Image glowOverlay;
-        [SerializeField] private string colorHex = GamePalette.HexPrimary;
+        [SerializeField] private string locationId;
+        [SerializeField] private PanelId destination;
+        [SerializeField] private UnityEngine.UI.Image pin, label, tip, icon, focus;
+        [SerializeField] private TMP_Text caption;
+        [SerializeField] private Sprite[] pinStates, labelStates;
+        private UnityEngine.UI.Button button;
+        private bool selected, hovered, pressed;
+        public string LocationId => locationId;
+        public PanelId Destination => destination;
+        public bool IsSelected => selected;
+        public string CurrentState { get; private set; }
 
-        [Header("Animação")]
-        [Range(0f,1f)] [SerializeField] private float hoverAlpha = 0.45f;
-        [SerializeField] private float duration = 0.18f;
-
-        private Color _color;
-        private Coroutine _co;
-
-        private void Awake()
+        public void Configure(string id, PanelId target, UnityEngine.UI.Image pinImage,
+            UnityEngine.UI.Image labelImage, UnityEngine.UI.Image tipImage, UnityEngine.UI.Image iconImage,
+            UnityEngine.UI.Image focusImage, TMP_Text text, Sprite[] pins, Sprite[] labels)
         {
-            if (!ColorUtility.TryParseHtmlString(colorHex, out _color))
-                _color = Color.white;
-            SetAlpha(0f);
+            locationId=id; destination=target; pin=pinImage; label=labelImage; tip=tipImage;
+            icon=iconImage; focus=focusImage; caption=text; pinStates=pins; labelStates=labels;
+            Refresh();
         }
+        private void OnEnable() { hovered=pressed=false; Refresh(); }
+        private void OnDisable() { hovered=pressed=false; }
+        private void LateUpdate() => Refresh();
+        public void SetSelected(bool value) { selected=value; Refresh(); }
+        public void OnPointerEnter(PointerEventData e) { hovered=e.pointerId<0; Refresh(); }
+        public void OnPointerExit(PointerEventData e) { hovered=false; Refresh(); }
+        public void OnPointerDown(PointerEventData e) { pressed=e.button==PointerEventData.InputButton.Left; Refresh(); }
+        public void OnPointerUp(PointerEventData e) { pressed=false; Refresh(); }
+        public void OnSelect(BaseEventData e) => Refresh();
+        public void OnDeselect(BaseEventData e) { hovered=pressed=false; Refresh(); }
 
-        public void OnPointerEnter(PointerEventData e) => AnimateTo(hoverAlpha);
-        public void OnPointerExit(PointerEventData e)  => AnimateTo(0f);
-
-        private void AnimateTo(float a)
+        public void Refresh()
         {
-            if (_co != null) StopCoroutine(_co);
-            _co = StartCoroutine(Lerp(a));
-        }
-
-        private IEnumerator Lerp(float target)
-        {
-            float start = glowOverlay != null ? glowOverlay.color.a : 0f;
-            float t = 0f;
-            while (t < duration)
-            {
-                t += Time.deltaTime;
-                SetAlpha(Mathf.Lerp(start, target, t / duration));
-                yield return null;
-            }
-            SetAlpha(target);
-        }
-
-        private void SetAlpha(float a)
-        {
-            if (glowOverlay != null)
-                glowOverlay.color = new Color(_color.r, _color.g, _color.b, a);
+            if (button==null) button=GetComponent<UnityEngine.UI.Button>();
+            bool enabledState=button!=null && button.IsInteractable();
+            bool focused=EventSystem.current!=null && EventSystem.current.currentSelectedGameObject==gameObject;
+            bool highlighted=selected || hovered || focused || pressed;
+            CurrentState=!enabledState?"disabled":pressed?"pressed":focused?"focus":hovered?"hover":selected?"selected":"normal";
+            int state=!enabledState?2:highlighted?1:0;
+            if(pin!=null && pinStates!=null && pinStates.Length==3) { pin.sprite=pinStates[state]; pin.color=Color.white; }
+            if(label!=null && labelStates!=null && labelStates.Length==3) { label.sprite=labelStates[state]; label.color=Color.white; }
+            var content=!enabledState?GamePalette.Parse("#a69ea3"):highlighted?Color.white:GamePalette.Plum;
+            if(icon!=null) icon.color=content;
+            if(caption!=null) caption.color=content;
+            if(tip!=null) tip.color=!enabledState?GamePalette.Parse("#e7e2dc"):highlighted?GamePalette.Primary:GamePalette.Surface;
+            if(focus!=null) { focus.enabled=enabledState && focused; focus.color=GamePalette.Primary; }
         }
     }
 }

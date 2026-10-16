@@ -85,6 +85,7 @@ namespace Game.Adapter.In.UI.Navigation
         public void EditorSetBinding(PanelId id, GameObject root)
         {
             if (id == PanelId.None) return;
+            _built=false;
 
             foreach (var b in bindings)
             {

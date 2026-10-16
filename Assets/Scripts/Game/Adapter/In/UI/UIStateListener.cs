@@ -51,7 +51,7 @@ public class UIStateListener : MonoBehaviour
 
     private void HandleStateChanged(GameState state)
     {
-        if (state == InitialDecisionFlow.Identification)
+        if (state != GameState.Management_Hub)
             Game.Adapter.In.UI.Navigation.MenuNavigator.Instance?.CloseAll();
         HideAllPanels();
         var views = FindObjectsByType<Game.Adapter.In.UI.EstablishmentSummaryView>(
@@ -105,7 +105,9 @@ public class UIStateListener : MonoBehaviour
                 break;
 
             case GameState.Management_Hub:
-                Show(managementHubPanel);
+                if(Game.Adapter.In.UI.Navigation.MenuNavigator.Instance!=null)
+                    Game.Adapter.In.UI.Navigation.MenuNavigator.Instance.OpenRoot();
+                else Show(managementHubPanel);
                 break;
 
             case GameState.Round_Start:

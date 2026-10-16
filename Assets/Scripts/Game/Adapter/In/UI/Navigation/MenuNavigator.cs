@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Adapter.In.UI.Navigation
 {
@@ -38,6 +39,11 @@ namespace Game.Adapter.In.UI.Navigation
         public PanelId Current { get; private set; } = PanelId.None;
 
         public bool CanGoBack => _history.Count > 0;
+        public static bool HubAvailable => GameManager.Instance!=null
+            && GameManager.Instance.StateMachine!=null
+            && GameManager.Instance.StateMachine.CurrentState==GameState.Management_Hub
+            && GameSessionState.HasActiveSession && !GameSessionState.HasIncompatibleSave;
+        private readonly Dictionary<PanelId,GameObject> focusHistory=new Dictionary<PanelId,GameObject>();
 
         /// <summary>Disparado sempre que a tela visivel muda. (anterior, atual)</summary>
         public event Action<PanelId, PanelId> OnPanelChanged;
@@ -78,7 +84,7 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Abre um painel empilhando o atual no historico.</summary>
         public void Open(PanelId id)
         {
-            if (id == PanelId.None || registry == null)
+            if (!HubAvailable || id == PanelId.None || registry == null)
                 return;
 
             if (id == Current)
@@ -99,7 +105,7 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Abre um painel LIMPANDO o historico. Usado pelo hub (mapa).</summary>
         public void OpenAsRoot(PanelId id)
         {
-            if (id == PanelId.None || registry == null || !registry.IsManaged(id))
+            if (!HubAvailable || id == PanelId.None || registry == null || !registry.IsManaged(id))
                 return;
 
             _history.Clear();
@@ -109,6 +115,7 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Volta para a tela anterior. Se nao houver, cai no rootPanel.</summary>
         public void Back()
         {
+            if(!HubAvailable) return;
             if (_history.Count == 0)
             {
                 OpenRoot();
@@ -176,8 +183,19 @@ namespace Game.Adapter.In.UI.Navigation
             var previous = Current;
             Current = id;
 
+            if(EventSystem.current!=null && EventSystem.current.currentSelectedGameObject!=null)
+                focusHistory[previous]=EventSystem.current.currentSelectedGameObject;
+
             registry.HideAll();
             target.SetActive(true);
+
+            if(EventSystem.current!=null)
+            {
+                if(focusHistory.TryGetValue(id,out var focus) && focus!=null && focus.activeInHierarchy
+                    && focus.GetComponent<UnityEngine.UI.Selectable>() is var control && control!=null && control.IsInteractable())
+                    EventSystem.current.SetSelectedGameObject(focus);
+                else EventSystem.current.SetSelectedGameObject(null);
+            }
 
             OnPanelChanged?.Invoke(previous, Current);
         }

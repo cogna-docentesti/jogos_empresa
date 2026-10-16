@@ -1,5 +1,5 @@
 UI-04 — HUD, navegação e mapa do hub
-Status: planejado | Prioridade: P1 | Fase: Telas de abertura e gestão
+Status: concluído | Prioridade: P1 | Fase: Telas de abertura e gestão
 Dependências: UI-03
 
 OBJETIVO
@@ -194,3 +194,10 @@ Não reexecutar a conversão para Single já concluída; não alterar tarefas/lo
 
 COMANDO PARA EXECUTAR ESTA TAREFA
 Execute somente UI-04 — HUD, navegação e mapa do hub no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-04.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.
+
+EXECUÇÃO UI-04 — 16/10/2026
+Hub/HUD/navbar e mapa compacto integrados na GameScene. Escala uniforme 2/3, offset [24,176], polígonos e rótulos pela mesma matriz. Destinos e cinco IDs preservados; centro sem LocationData.
+74 testes Edit Mode e 81 verificações Play Mode aprovados; 23 capturas finais PNG em 1920x1080, 1366x768 e 1280x720, mais duas iterações históricas. Mouse/teclado/toque, três restaurantes, cinco seleções, histórico/foco, valores reais, nomes longos e ausência do HUD na identificação conferidos.
+QA: docs/ui-update/qa/UI-04.json. Evidências: output/ui-update/UI-04/. Banco/PlayerPrefs reais, 277 PNGs/GUIDs/Single preservados.
+Equipe permanece como destino legado da UI-11; UI-04 apenas liga o painel existente e preserva a transição do passo 6 para 7. Banco/equipamentos não são declarados redesenhados por esta tarefa. Sem pendência indispensável da UI-04.
+Somente UI-04 executada nesta conversa; UI-05 a UI-20 continuam planejadas.
