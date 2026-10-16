@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Game.Adapter.In.UI.Theme;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -13,7 +14,7 @@ namespace Game.Adapter.In.UI
     {
         [Header("Visual")]
         [SerializeField] private Image glowOverlay;
-        [SerializeField] private string colorHex = "#2563EB";
+        [SerializeField] private string colorHex = GamePalette.HexPrimary;
 
         [Header("Animação")]
         [Range(0f,1f)] [SerializeField] private float hoverAlpha = 0.45f;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Game.Adapter.In.UI.Theme;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -171,7 +172,7 @@ namespace Game.Adapter.In.UI
             overlayRect.anchorMax = new Vector2(0.5f, 0.5f);
             overlayRect.pivot = new Vector2(0.5f, 0.5f);
             overlayRect.sizeDelta = new Vector2(4000f, 2400f);
-            cartModal.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.72f);
+            cartModal.GetComponent<Image>().color = GamePalette.WithAlpha(GamePalette.Plum,.72f);
 
             GameObject panel = CreateUiObject("CartPanel", cartModal.transform, typeof(Image));
             RectTransform panelRect = panel.GetComponent<RectTransform>();
@@ -179,9 +180,9 @@ namespace Game.Adapter.In.UI
             panelRect.anchorMax = new Vector2(0.5f, 0.5f);
             panelRect.pivot = new Vector2(0.5f, 0.5f);
             panelRect.sizeDelta = new Vector2(760f, 650f);
-            panel.GetComponent<Image>().color = new Color(0.96f, 0.97f, 0.98f, 1f);
+            panel.GetComponent<Image>().color = GamePalette.Surface;
 
-            CreateText("Title", panel.transform, "Seu carrinho", 38f, FontStyles.Bold,
+            CreateText("Title", panel.transform, "Seu carrinho", GameTypography.SectionTitle, FontStyles.Bold,
                 new Vector2(40f, -30f), new Vector2(-40f, -95f));
 
             GameObject viewport = CreateUiObject("ItemsViewport", panel.transform, typeof(Image), typeof(Mask));
@@ -193,7 +194,7 @@ namespace Game.Adapter.In.UI
             viewport.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.04f);
             viewport.GetComponent<Mask>().showMaskGraphic = false;
 
-            cartItemsText = CreateText("Items", viewport.transform, string.Empty, 25f, FontStyles.Normal,
+            cartItemsText = CreateText("Items", viewport.transform, string.Empty, GameTypography.Body, FontStyles.Normal,
                 new Vector2(10f, -5f), new Vector2(-10f, -5f));
             cartItemsText.alignment = TextAlignmentOptions.TopLeft;
             cartItemsText.overflowMode = TextOverflowModes.Overflow;
@@ -207,13 +208,13 @@ namespace Game.Adapter.In.UI
             scroll.vertical = true;
             scroll.movementType = ScrollRect.MovementType.Clamped;
 
-            cartTotalText = CreateText("Total", panel.transform, string.Empty, 32f, FontStyles.Bold,
+            cartTotalText = CreateText("Total", panel.transform, string.Empty, GameTypography.Body, FontStyles.Bold,
                 new Vector2(55f, -420f), new Vector2(-55f, -475f));
             cartTotalText.alignment = TextAlignmentOptions.MidlineRight;
 
-            cartStatusText = CreateText("Status", panel.transform, string.Empty, 24f, FontStyles.Bold,
+            cartStatusText = CreateText("Status", panel.transform, string.Empty, GameTypography.Body, FontStyles.Bold,
                 new Vector2(55f, -485f), new Vector2(-55f, -530f));
-            cartStatusText.color = new Color(0.75f, 0.12f, 0.12f, 1f);
+            cartStatusText.color = GamePalette.ErrorText;
             cartStatusText.alignment = TextAlignmentOptions.Center;
 
             checkoutButton = CreateButton("CheckoutButton", panel.transform, "Concluir compra",
@@ -239,9 +240,9 @@ namespace Game.Adapter.In.UI
             rect.offsetMax = new Vector2(offsetMax.x, offsetMin.y);
             TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
             text.text = value;
-            text.fontSize = size;
+            GameTypography.Apply(text, hintText != null ? hintText.font : TMP_Settings.defaultFontAsset, size, (style & FontStyles.Bold) != 0);
             text.fontStyle = style;
-            text.color = new Color(0.08f, 0.18f, 0.24f, 1f);
+            text.color = GamePalette.Ink;
             text.textWrappingMode = TextWrappingModes.Normal;
             if (hintText != null) text.font = hintText.font;
             return text;
@@ -257,13 +258,13 @@ namespace Game.Adapter.In.UI
             rect.pivot = new Vector2(0.5f, 0f);
             rect.sizeDelta = size;
             rect.anchoredPosition = position;
-            buttonObject.GetComponent<Image>().color = new Color(0.08f, 0.42f, 0.6f, 1f);
+            buttonObject.GetComponent<Image>().color = GamePalette.Primary;
 
-            TextMeshProUGUI labelText = CreateText("Text", buttonObject.transform, label, 25f,
+            TextMeshProUGUI labelText = CreateText("Text", buttonObject.transform, label, GameTypography.Button,
                 FontStyles.Bold, Vector2.zero, Vector2.zero);
             Stretch(labelText.rectTransform);
             labelText.alignment = TextAlignmentOptions.Center;
-            labelText.color = Color.white;
+            labelText.color = GamePalette.OnPrimary;
             return buttonObject.GetComponent<Button>();
         }
 

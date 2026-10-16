@@ -1,4 +1,5 @@
 using TMPro;
+using Game.Adapter.In.UI.Theme;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -29,12 +30,12 @@ using UnityEngine.UI;
 /// </summary>
 public static class BackButtonStyler
 {
-    private const string BaseSpritePath = "Assets/Art/Sprites/REDESIGN-UI/btn-menu-base.png";
+    private const string BaseSpritePath = "Assets/Art/new/shared/components/buttons/primary_violet_normal.png";
     private const string ChevronPath = "Assets/Art/Sprites/REDESIGN-UI/chevron-right-branco.png";
     private const string FontGuid = "89cea402e3db5bf4d9bc9d4f698b7692"; // InterTight-Variable (TMP)
 
     private static readonly Vector2 Size = new Vector2(260f, 68f);
-    private static readonly Color LabelColor = new Color32(247, 220, 154, 255); // mesmo dourado do MENU
+    private static readonly Color LabelColor = GamePalette.OnDark; // mesmo dourado do MENU
 
     private static readonly (string panel, string bar)[] Targets =
     {
@@ -136,8 +137,8 @@ public static class BackButtonStyler
             label.font = font;
             label.fontStyle = FontStyles.Bold;
             label.enableAutoSizing = false;
-            label.fontSize = 30f;
-            label.characterSpacing = 2f;
+            label.fontSize = GameTypography.Button;
+            label.characterSpacing = GameTypography.CharacterSpacing;
             label.color = LabelColor;
             label.alignment = TextAlignmentOptions.Center;
             label.raycastTarget = false;

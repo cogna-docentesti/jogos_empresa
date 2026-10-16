@@ -836,7 +836,7 @@ namespace Game.EditorTools
                 label.font = font;
 
             label.text               = content;
-            label.fontSize           = size;
+            GameTypography.Apply(label, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, (style & FontStyles.Bold) != 0);
             label.fontStyle          = style;
             label.color              = color;
             label.alignment          = alignment;

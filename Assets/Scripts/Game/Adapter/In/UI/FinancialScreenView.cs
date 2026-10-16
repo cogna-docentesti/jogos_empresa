@@ -1,4 +1,5 @@
 using TMPro;
+using Game.Adapter.In.UI.Theme;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -271,7 +272,7 @@ namespace Game.Adapter.In.UI
             scrollbarRect.sizeDelta = new Vector2(18f, -8f);
 
             Image track = scrollbarObject.GetComponent<Image>();
-            track.color = new Color(0.02f, 0.08f, 0.14f, 0.9f);
+            track.color = GamePalette.Plum;
 
             var handleObject = new GameObject(
                 "Handle",
@@ -287,7 +288,7 @@ namespace Game.Adapter.In.UI
             handleRect.offsetMax = new Vector2(-3f, -3f);
 
             Image handleImage = handleObject.GetComponent<Image>();
-            handleImage.color = new Color(0.08f, 0.55f, 0.9f, 1f);
+            handleImage.color = GamePalette.Lavender;
 
             Scrollbar scrollbar = scrollbarObject.GetComponent<Scrollbar>();
             scrollbar.targetGraphic = handleImage;

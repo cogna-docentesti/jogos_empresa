@@ -1,4 +1,5 @@
-﻿using TMPro;
+using TMPro;
+using Game.Adapter.In.UI.Theme;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,27 +35,27 @@ namespace Game.Adapter.In.UI
         private const string SegmentTextChildName = "Text (TMP)";
         private const string SelectedIconChildName = "selectedIcon";
 
-        private static readonly Color CardNormal = new Color(0.08f, 0.12f, 0.20f, 1f);
-        private static readonly Color CardSelected = new Color(0.45f, 1.00f, 0.10f, 0.18f);
+        private static readonly Color CardNormal = GamePalette.Surface;
+        private static readonly Color CardSelected = GamePalette.Lavender;
 
-        private static readonly Color BorderNormal = new Color(0.16f, 0.24f, 0.36f, 1f);
-        private static readonly Color BorderSelected = new Color(0.70f, 1.00f, 0.00f, 1f);
+        private static readonly Color BorderNormal = GamePalette.Hairline;
+        private static readonly Color BorderSelected = GamePalette.Primary;
 
         // Segmento clicável
-        private static readonly Color SegBtnNormal = HexColor(0x00, 0x68, 0xA4);      // #0068A4
-        private static readonly Color SegBorderNormal = Color.white;                 // #FFFFFF
+        private static readonly Color SegBtnNormal = GamePalette.Primary;
+        private static readonly Color SegBorderNormal = GamePalette.Lavender;
 
         // Segmento selecionado
-        private static readonly Color SegBtnSelected = new Color(0.18f, 0.62f, 0.18f, 1f);
-        private static readonly Color SegBorderSelected = new Color(0.70f, 1.00f, 0.00f, 1f);
+        private static readonly Color SegBtnSelected = GamePalette.Lavender;
+        private static readonly Color SegBorderSelected = GamePalette.Primary;
 
         // Segmento desabilitado
-        private static readonly Color SegBtnDisabled = HexColor(0xAE, 0xAB, 0xAB);    // #AEABAB
-        private static readonly Color SegBorderDisabled = Color.white;                // #FFFFFF
+        private static readonly Color SegBtnDisabled = GamePalette.Parse(GamePalette.HexDisabledCard);
+        private static readonly Color SegBorderDisabled = GamePalette.Hairline;
 
-        private static readonly Color SegTextNormal = Color.white;
-        private static readonly Color SegTextSelected = Color.white;
-        private static readonly Color SegTextDisabled = HexColor(0x93, 0x93, 0x93);   // #939393
+        private static readonly Color SegTextNormal = GamePalette.OnPrimary;
+        private static readonly Color SegTextSelected = GamePalette.Plum;
+        private static readonly Color SegTextDisabled = GamePalette.Muted;
 
         public void SetHint(string v) => hintText.text = v;
 
@@ -212,7 +213,7 @@ namespace Game.Adapter.In.UI
                 txt.color = textColor;
                 txt.fontStyle = FontStyles.Bold;
                 txt.alignment = TextAlignmentOptions.Center;
-                txt.characterSpacing = 2f;
+                txt.characterSpacing = GameTypography.CharacterSpacing;
             }
 
             SetSelectedIconVisible(btn, showSelected);
@@ -276,11 +277,11 @@ namespace Game.Adapter.In.UI
         {
             return new ColorBlock
             {
-                normalColor = baseColor,
-                highlightedColor = Color.Lerp(baseColor, Color.white, 0.08f),
-                pressedColor = Color.Lerp(baseColor, Color.black, 0.18f),
-                selectedColor = baseColor,
-                disabledColor = new Color(0.28f, 0.32f, 0.38f, 0.85f),
+                normalColor = Color.white,
+                highlightedColor = new Color(.96f,.96f,.96f),
+                pressedColor = new Color(.85f,.85f,.85f),
+                selectedColor = Color.white,
+                disabledColor = GamePalette.Parse(GamePalette.HexDisabledCard),
                 colorMultiplier = 1f,
                 fadeDuration = 0.08f
             };
@@ -290,10 +291,10 @@ namespace Game.Adapter.In.UI
         {
             return new ColorBlock
             {
-                normalColor = baseColor,
-                highlightedColor = Color.Lerp(baseColor, Color.white, 0.18f),
-                pressedColor = Color.Lerp(baseColor, Color.black, 0.25f),
-                selectedColor = baseColor,
+                normalColor = Color.white,
+                highlightedColor = new Color(.96f,.96f,.96f),
+                pressedColor = new Color(.85f,.85f,.85f),
+                selectedColor = Color.white,
                 disabledColor = SegBtnDisabled,
                 colorMultiplier = 1f,
                 fadeDuration = 0.08f
@@ -344,12 +345,12 @@ namespace Game.Adapter.In.UI
         private static Color CoherenceColor(float value)
         {
             if (value >= 0.7f)
-                return new Color(0.086f, 0.639f, 0.29f, 1f);
+                return GamePalette.Money;
 
             if (value >= 0.4f)
-                return new Color(0.851f, 0.604f, 0.043f, 1f);
+                return GamePalette.Warn;
 
-            return new Color(0.882f, 0.114f, 0.282f, 1f);
+            return GamePalette.ErrorText;
         }
 
         private static string FormatCoherenceMessage(string label, float value, string tip)

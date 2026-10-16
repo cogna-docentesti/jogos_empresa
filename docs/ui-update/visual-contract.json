@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "date": "2026-10-16",
-  "status": "especificação para implementação; UI ainda não aplicada",
+  "status": "Tema global UI-02 implementado e aferido; demais telas seguem nas tarefas proprietárias.",
   "source_of_truth": [
     "docs/art/tokens.json",
     "docs/art/manifest.json",
@@ -19,7 +19,11 @@
     "ink": "#30243C",
     "teal": "#26776A",
     "coral": "#C55457",
-    "amber": "#E7B65A"
+    "amber": "#E7B65A",
+    "error_text": "#A6323D",
+    "positive_on_dark": "#8DD4C5",
+    "negative_on_dark": "#F2A4A6",
+    "muted_on_light": "#65566F"
   },
   "text_surface_pairs": [
     {
@@ -52,9 +56,17 @@
     "renderer": "TextMeshPro",
     "family": "Inter Tight existente no projeto; preservar fallback para acentos, moeda e números.",
     "source": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
-    "sizes_are_proposal": true,
-    "size_note": "Valores iniciais em canvas 1920x1080; UI-02 deve aferir em layout real e registrar os valores finais centralizados. Não são uma especificação previamente aprovada dos concepts.",
-    "initial_sizes_px": {
+    "sizes_are_proposal": false,
+    "size_note": "Valores finais UI-02 aferidos na identificação e no catálogo real Banco CogCred nas três resoluções; fonte compartilhada GameTypography.cs.",
+    "weights": {
+      "titles": "Bold (TMP Inter Tight existente)",
+      "body": "Regular",
+      "button": "Bold",
+      "values": "Bold quando destaque; Regular para valores de card"
+    },
+    "layout": "Corpo alinhado à esquerda; valores monetários alinhados à direita; cabeçalhos/botões conforme componente. Evitar sombras duplicadas antigas e autosize sem limites.",
+    "responsive": "Redimensionar/refluir o layout antes de reduzir texto; definir limites de autosize e garantir leitura na resolução física menor.",
+    "final_sizes_px": {
       "screen_title": 44,
       "section_title": 32,
       "body": 24,
@@ -63,16 +75,24 @@
       "label": 22,
       "caption": 20,
       "kpi": 42,
-      "table": 22
+      "table": 22,
+      "brand_title": 36
     },
-    "weights": {
-      "titles": "Semibold/Bold",
-      "body": "Regular",
-      "button": "Semibold",
-      "values": "Semibold"
+    "spacing": {
+      "character": 0,
+      "line_additional": 0,
+      "word": 0,
+      "paragraph": 0,
+      "tmp_margin": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_line_height_em": 1.21
     },
-    "layout": "Corpo alinhado à esquerda; valores monetários alinhados à direita; cabeçalhos/botões conforme componente. Evitar sombras duplicadas antigas e autosize sem limites.",
-    "responsive": "Redimensionar/refluir o layout antes de reduzir texto; definir limites de autosize e garantir leitura na resolução física menor."
+    "overflow": "Sem autosize global. Corpo longo quebra linha em caixa dimensionada; rótulo limitado Truncate; inputs usam máscara e scroll horizontal. Não depender do glifo de reticências em overflow.",
+    "material": "Material compartilhado Inter Tight, FaceColor branco, OutlineWidth 0 e Underlay desativado. Sem sombra de texto duplicada."
   },
   "layout": {
     "canvas_px": [
@@ -91,8 +111,9 @@
       32,
       48
     ],
-    "scaler": "Scale With Screen Size; referência consistente e match explicitamente validado por tela; preservar tamanho percebido ao migrar 800x600/1280x720.",
-    "safe_area": "Testar áreas seguras e reflow em todos os perfis de produção; alvos de toque precisam de tamanho útil no dispositivo, não só no canvas."
+    "scaler": "Scale With Screen Size, referência 1920x1080, match Height=1 (baseline preservado). Scalers secundários herdados desativados; Canvas raiz controla a escala.",
+    "safe_area": "SafeAreaFitter converte pixels em unidades do pai; preserva anchors/offsets sem acumulação. Inset simulado validado em Edit Mode; perfis físicos na UI-20.",
+    "migration_notes": "Dimensões de controles e cards preservadas na migração dos scalers; cabeçalhos/caixas de texto baixos corrigidos. Alturas de cabeçalhos legados são exceções temporárias por tela; 88px segue o padrão de novas composições. Botão Confirmar do Banco separado de Menu."
   },
   "mandatory_review_on_every_screen": [
     "família/peso/tamanho de fonte",
@@ -134,5 +155,6 @@
     "ART-40/painel docente/marketing/loja externa",
     "Refazer cenas de demo, cenas antigas desativadas ou interfaces admin fora do jogo",
     "Alterar motor trimestral, balanceamento ou criar backend documental silenciosamente"
-  ]
+  ],
+  "implementation_evidence": "docs/ui-update/qa/UI-02.json"
 }

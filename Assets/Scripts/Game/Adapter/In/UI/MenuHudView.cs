@@ -18,7 +18,7 @@ namespace Game.Adapter.In.UI
 
         [Header("Alerta")]
         [Tooltip("Cor do Caixa quando fica negativo. A cor normal e a que o TMP ja tem na cena.")]
-        [SerializeField] private Color negativeCashColor = new Color(0.973f, 0.443f, 0.443f);
+        [SerializeField] private Color negativeCashColor = GamePalette.Parse(GamePalette.HexNegativeOnDark);
 
         private Color _cashNormalColor = Color.white;
 
@@ -48,7 +48,7 @@ namespace Game.Adapter.In.UI
                 // Caixa negativo e aviso, nao estilo - por isso continua no codigo.
                 // Mas as duas cores vem do Inspector: a normal e a que o TMP ja
                 // tinha, a de alerta e campo serializado.
-                cashValue.color = summary.Cash >= 0f ? _cashNormalColor : negativeCashColor;
+                cashValue.color = summary.Cash >= 0f ? _cashNormalColor : GamePalette.Parse(GamePalette.HexNegativeOnDark);
             }
 
             if (roundValue != null)

@@ -478,12 +478,13 @@ namespace Game.EditorTools
 
             if (!CanWrite(rt.gameObject)) return label;
 
-            label.fontSize             = size;
+            GameTypography.Apply(label, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, (style & FontStyles.Bold) != 0);
             label.fontStyle            = style;
-            label.color                = color;
+            label.color                = color == GamePalette.Ink || color == GamePalette.Muted
+                ? GamePalette.TextOnSurface(rt.parent) : color;
             label.alignment            = alignment;
             label.textWrappingMode      = wrap ? TextWrappingModes.Normal : TextWrappingModes.NoWrap;
-            label.overflowMode         = TextOverflowModes.Overflow;
+            label.overflowMode         = TextOverflowModes.Truncate;
             label.raycastTarget        = false;
             label.characterSpacing     = 0f;
 

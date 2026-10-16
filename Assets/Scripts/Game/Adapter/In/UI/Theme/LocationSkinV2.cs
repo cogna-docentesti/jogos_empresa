@@ -85,12 +85,12 @@ namespace Game.Adapter.In.UI.Theme
         public Sprite toastBackground;          // toast-bg.png
 
         [Header("Cores de texto do redesign")]
-        [Tooltip("Titulo da zona no painel. No redesign ele e dourado, nao a cor da zona.")]
-        public Color panelTitleColor = new Color(0.910f, 0.714f, 0.298f);   // #E8B64C
+        [Tooltip("Shared theme title on the ivory panel.")]
+        public Color panelTitleColor = GamePalette.Ink;
 
-        public Color valueGood = new Color(0.290f, 0.871f, 0.502f);         // #4ADE80
-        public Color valueWarn = new Color(0.941f, 0.749f, 0.310f);         // #F0BF4F
-        public Color valueBad  = new Color(0.973f, 0.443f, 0.443f);         // #F87171
+        public Color valueGood = GamePalette.Money;
+        public Color valueWarn = GamePalette.Parse(GamePalette.HexOnWarn);
+        public Color valueBad = GamePalette.ErrorText;
 
         private Dictionary<string, ZoneSkin> _byId;
 

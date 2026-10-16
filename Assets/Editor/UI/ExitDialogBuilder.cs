@@ -1,5 +1,6 @@
 using Game.Adapter.In.UI;
 using TMPro;
+using Game.Adapter.In.UI.Theme;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -31,17 +32,17 @@ using UnityEngine.UI;
 /// </summary>
 public static class ExitDialogBuilder
 {
-    private const string SecondarySprite = "Assets/Art/Sprites/REDESIGN-UI/btn-menu-base.png";
+    private const string SecondarySprite = "Assets/Art/new/shared/components/buttons/primary_violet_normal.png";
     // Mesmo desenho do btn-menu-base, com o fundo 92% opaco em vez de 55%:
     // embaixo, no hub, o botao fica em cima do mapa e precisa de contraste.
-    private const string ExitSprite = "Assets/Art/Sprites/REDESIGN-UI/btn-menu-solid.png";
-    private const string PrimarySprite = "Assets/Art/Sprites/REDESIGN-UI/btn-continuar-base.png";
-    private const string PanelSprite = "Assets/Art/Sprites/REDESIGN-UI/panel-bg.png";
+    private const string ExitSprite = "Assets/Art/new/shared/components/buttons/primary_violet_normal.png";
+    private const string PrimarySprite = "Assets/Art/new/shared/components/buttons/primary_violet_normal.png";
+    private const string PanelSprite = "Assets/Art/new/shared/components/panels/panel_ivory.png";
     private const string FontGuid = "89cea402e3db5bf4d9bc9d4f698b7692"; // InterTight-Variable (TMP)
 
-    private static readonly Color Gold = new Color32(247, 220, 154, 255);      // texto do MENU
-    private static readonly Color DarkBrown = new Color32(61, 38, 4, 255);     // texto sobre o amarelo
-    private static readonly Color BodyColor = new Color32(226, 224, 236, 255);
+    private static readonly Color Gold = GamePalette.OnDark;      // texto do MENU
+    private static readonly Color DarkBrown = GamePalette.OnPrimary;     // texto sobre o amarelo
+    private static readonly Color BodyColor = GamePalette.Ink;
 
     // Distancia do centro do botao Sair ate a borda de baixo da tela, em
     // unidades do Canvas (referencia 1920 x 1080). O MENU (MenuAccess/Button,
@@ -109,7 +110,7 @@ public static class ExitDialogBuilder
         var backdropRt = NewRect("Backdrop", dialogRt);
         Stretch(backdropRt);
         var backdrop = backdropRt.gameObject.AddComponent<Image>();
-        backdrop.color = new Color(0.04f, 0.04f, 0.06f, 0.62f);
+        backdrop.color = GamePalette.WithAlpha(GamePalette.Plum,.62f);
         backdrop.raycastTarget = true;   // bloqueia cliques nos paineis de tras
 
         var panelRt = NewRect("DialogPanel", dialogRt);
@@ -125,14 +126,14 @@ public static class ExitDialogBuilder
         titleRt.pivot = new Vector2(0.5f, 1f);
         titleRt.anchoredPosition = new Vector2(0f, -40f);
         titleRt.sizeDelta = new Vector2(-80f, 60f);
-        var title = AddText(titleRt, "Sair do jogo", font, 40f, Gold, FontStyles.Bold);
+        var title = AddText(titleRt, "Sair do jogo", font, GameTypography.SectionTitle, GamePalette.Ink, FontStyles.Bold);
 
         var bodyRt = NewRect("BodyText", panelRt);
         bodyRt.anchorMin = new Vector2(0f, 0f);
         bodyRt.anchorMax = new Vector2(1f, 1f);
         bodyRt.offsetMin = new Vector2(60f, 140f);
         bodyRt.offsetMax = new Vector2(-60f, -110f);
-        var body = AddText(bodyRt, "Texto preenchido pelo ExitDialogController.", font, 28f, BodyColor, FontStyles.Normal);
+        var body = AddText(bodyRt, "Texto preenchido pelo ExitDialogController.", font, GameTypography.Body, BodyColor, FontStyles.Normal);
         body.textWrappingMode = TextWrappingModes.Normal;
 
         var rowRt = NewRect("ButtonRow", panelRt);
@@ -225,7 +226,7 @@ public static class ExitDialogBuilder
         rt.offsetMin = new Vector2(12f, 0f);
         rt.offsetMax = new Vector2(-12f, 0f);
         var label = AddText(rt, text, font, size, color, FontStyles.Bold);
-        label.characterSpacing = 2f;
+        label.characterSpacing = GameTypography.CharacterSpacing;
         label.raycastTarget = false;
         return label;
     }
@@ -235,7 +236,7 @@ public static class ExitDialogBuilder
         var label = rt.gameObject.AddComponent<TextMeshProUGUI>();
         label.text = text;
         label.font = font;
-        label.fontSize = size;
+        GameTypography.Apply(label,font,size,(style & FontStyles.Bold)!=0);
         label.fontStyle = style;
         label.color = color;
         label.alignment = TextAlignmentOptions.Center;

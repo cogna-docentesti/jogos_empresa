@@ -2,24 +2,7 @@ using UnityEngine;
 
 namespace Game.Adapter.In.UI.Theme
 {
-    /// <summary>
-    /// Tokens MEDIDOS no mockup "Abertura do Restaurante" (new.png, 1741x903).
-    ///
-    /// Por que isto existe em vez de entrar no GamePalette:
-    /// varios valores aqui divergem da paleta atual, e a paleta e usada por
-    /// TODAS as telas do jogo. Trocar HexMoney, por exemplo, mexeria em
-    /// ResultColor, ScoreColor e no restyler das telas legadas. Estes tokens
-    /// ficam isolados para a cena de mockup poder ser fiel ao pixel sem
-    /// arrastar o resto do jogo junto.
-    ///
-    /// Quando a tela for aprovada, migre o que fizer sentido para o GamePalette.
-    ///
-    /// FATOR DE CONVERSAO usado para chegar nos numeros de canvas:
-    ///   area util do mockup = (66,49)..(1673,851) = 1608 x 803 px
-    ///   S = 1920 / 1608 = 1.19403
-    /// O mockup e 2:1; o Canvas e 16:9. A folga vertical de ~121px foi colocada
-    /// de proposito num unico lugar: entre a Descricao e o primeiro indicador.
-    /// </summary>
+    /// <summary>Compatibility geometry for the location builder; styles share the global theme.</summary>
     public static class LocationMockupTokens
     {
         // =====================================================
@@ -29,76 +12,76 @@ namespace Game.Adapter.In.UI.Theme
         /// <summary>Fundo da tela, do painel lateral E das linhas de indicador.
         /// No mockup os tres sao a MESMA cor - o que separa cada caixa e a
         /// borda, nao um fill mais claro.</summary>
-        public const string HexBg = "#090B1D";
+        public const string HexBg = GamePalette.HexBackground;
 
-        public const string HexChrome        = "#0A0B1A"; // barra superior
-        public const string HexMenuFill      = "#101019"; // miolo do botao MENU
-        public const string HexCardMap       = "#060E21"; // card do marcador
+        public const string HexChrome        = GamePalette.HexChrome; // barra superior
+        public const string HexMenuFill      = GamePalette.HexPlum; // miolo do botao MENU
+        public const string HexCardMap       = GamePalette.HexPlum; // card do marcador
         public const float  CardMapAlpha     = 0.94f;
-        public const string HexHighlightFill = "#040B20"; // caixa de destaque (MAIS escura que o painel)
-        public const string HexCrestFill     = "#242123"; // miolo do brasao
+        public const string HexHighlightFill = GamePalette.HexLavender; // caixa de destaque (MAIS escura que o painel)
+        public const string HexCrestFill     = GamePalette.HexPlum; // miolo do brasao
 
         // =====================================================
         //  BORDAS
         // =====================================================
 
-        public const string HexPanelBorder  = "#4B4275"; // painel lateral
-        public const string HexRowBorder    = "#26253E"; // linhas de indicador
-        public const string HexCardBorder   = "#1E2B4A"; // card do marcador em repouso
+        public const string HexPanelBorder  = GamePalette.HexLavender; // painel lateral
+        public const string HexRowBorder    = GamePalette.HexHairline; // linhas de indicador
+        public const string HexCardBorder   = GamePalette.HexLavender; // card do marcador em repouso
 
         // =====================================================
         //  TEXTO
         // =====================================================
 
-        public const string HexInk        = "#FFFFFF"; // titulo, rotulos, nome do marcador
-        public const string HexInkSubtle  = "#E6EAF2"; // subtitulo do marcador
-        public const string HexMuted      = "#C2C5C7"; // subtitulo da tela
-        public const string HexMutedPanel = "#B4B4BE"; // descricao do painel
-        public const string HexMutedZone  = "#BCBEC2"; // subtitulo de zona
-        public const string HexDisabled   = "#6E7A90"; // estado vazio
+        public const string HexInk        = GamePalette.HexInk; // titulo, rotulos, nome do marcador
+        public const string HexInkSubtle  = GamePalette.HexOnPrimary; // subtitulo do marcador
+        public const string HexMuted      = GamePalette.HexOnPrimary; // subtitulo da tela
+        public const string HexMutedPanel = GamePalette.HexMuted; // descricao do painel
+        public const string HexMutedZone  = GamePalette.HexMuted; // subtitulo de zona
+        public const string HexDisabled   = GamePalette.HexGray; // estado vazio
 
         // =====================================================
         //  DOURADO
         // =====================================================
 
-        public const string HexGoldStep     = "#F0CE6E"; // "ETAPA 1 DE 4"
-        public const string HexGoldText     = "#EFC868"; // texto e icone do MENU
-        public const string HexGoldValue    = "#F7CE66"; // valores Alto / Medio
-        public const string HexGoldBorder   = "#C9A05A"; // contorno do MENU
-        public const string HexGoldOrnament = "#C29A52"; // losangos e traços
-        public const string HexGoldCrest    = "#B39A5F"; // anel do brasao
+        public const string HexGoldStep     = GamePalette.HexOnPrimary; // "ETAPA 1 DE 4"
+        public const string HexGoldText     = GamePalette.HexOnPrimary; // texto e icone do MENU
+        public const string HexGoldValue    = GamePalette.HexOnWarn; // valores Alto / Medio
+        public const string HexGoldBorder   = GamePalette.HexLavender; // contorno do MENU
+        public const string HexGoldOrnament = GamePalette.HexLavender; // losangos e traços
+        public const string HexGoldCrest    = GamePalette.HexLavender; // anel do brasao
 
         // ---- chapa do botao CONTINUAR ----
-        public const string HexPlateTop         = "#F0C05A";
-        public const string HexPlateBottom      = "#C5882A";
-        public const string HexPlateRim         = "#F6D372";
-        public const string HexPlateGlintTop    = "#FFFFFF";
-        public const string HexPlateGlintBottom = "#FFE070";
-        public const string HexOnGold           = "#100C05";
+        public const string HexPlateTop         = GamePalette.HexPrimary;
+        public const string HexPlateBottom      = GamePalette.HexPrimary;
+        public const string HexPlateRim         = GamePalette.HexPrimary;
+        public const string HexPlateGlintTop    = GamePalette.HexPrimary;
+        public const string HexPlateGlintBottom = GamePalette.HexPrimary;
+        public const string HexOnGold           = GamePalette.HexOnPrimary;
 
         // =====================================================
         //  AZUL DE DESTAQUE
         // =====================================================
 
-        public const string HexAccentBlue     = "#0080E0"; // borda da caixa de destaque
-        public const string HexAccentBlueText = "#42A9F1"; // texto da caixa
-        public const string HexAccentBlueIcon = "#2A88F8"; // estrela
+        public const string HexAccentBlue     = GamePalette.HexPrimary; // borda da caixa de destaque
+        public const string HexAccentBlueText = GamePalette.HexPlum; // texto da caixa
+        public const string HexAccentBlueIcon = GamePalette.HexPrimary; // estrela
 
         // =====================================================
         //  ZONAS - medidas no anel de cada badge
         // =====================================================
 
-        public const string HexZoneFinance     = "#1E8FF5";
-        public const string HexZoneEducation   = "#C165D6";
-        public const string HexZoneCommerce    = "#F6962D";
-        public const string HexZoneResidential = "#A1E741";
-        public const string HexZoneCorporate   = "#1EE8E5";
+        public const string HexZoneFinance     = GamePalette.HexZoneFinance;
+        public const string HexZoneEducation   = GamePalette.HexZoneEducation;
+        public const string HexZoneCommerce    = GamePalette.HexZoneCommerce;
+        public const string HexZoneResidential = GamePalette.HexZoneResidential;
+        public const string HexZoneCorporate   = GamePalette.HexZoneCorporate;
 
         /// <summary>Verde do valor "Baixa". Deliberadamente NAO e o HexMoney da
         /// paleta - mexer naquele afetaria as telas financeiras.</summary>
-        public const string HexGood = "#95DD69";
+        public const string HexGood = GamePalette.HexMoney;
 
-        public const string HexMapScrim   = "#060A14";
+        public const string HexMapScrim   = GamePalette.HexPlum;
         public const float  MapScrimAlpha = 0.18f;
 
         // =====================================================
@@ -112,7 +95,7 @@ namespace Game.Adapter.In.UI.Theme
         /// </summary>
         public static Color BadgeCore(Color accent)
         {
-            return Color.Lerp(GamePalette.Parse("#050A18"), accent, 0.22f);
+            return Color.Lerp(GamePalette.Plum, accent, 0.22f);
         }
 
         /// <summary>
@@ -167,16 +150,16 @@ namespace Game.Adapter.In.UI.Theme
         //  TIPOGRAFIA - InterTight (razao cap/em = 0.734)
         // =====================================================
 
-        public const float FontTitle        = 60f; // "Abertura do Restaurante"
-        public const float FontContinue     = 39f; // "CONTINUAR"
-        public const float FontZoneTitle    = 37f; // "AREA FINANCEIRA"
-        public const float FontMarkerName   = 29f;
-        public const float FontStatRow      = 28f; // rotulo e valor
-        public const float FontMenu         = 26f; // MENU e texto de destaque
-        public const float FontBody         = 24f; // subtitulo da tela, descricao
-        public const float FontZoneSubtitle = 23f;
-        public const float FontMarkerSub    = 21f;
-        public const float FontStep         = 20f; // "ETAPA 1 DE 4"
+        public const float FontTitle        = GameTypography.ScreenTitle; // "Abertura do Restaurante"
+        public const float FontContinue     = GameTypography.Button; // "CONTINUAR"
+        public const float FontZoneTitle    = GameTypography.SectionTitle; // "AREA FINANCEIRA"
+        public const float FontMarkerName   = GameTypography.NodeTitle;
+        public const float FontStatRow      = GameTypography.Body; // rotulo e valor
+        public const float FontMenu         = GameTypography.Button; // MENU e texto de destaque
+        public const float FontBody         = GameTypography.Body; // subtitulo da tela, descricao
+        public const float FontZoneSubtitle = GameTypography.Label;
+        public const float FontMarkerSub    = GameTypography.Caption;
+        public const float FontStep         = GameTypography.Caption; // "ETAPA 1 DE 4"
 
         // =====================================================
         //  9-SLICE

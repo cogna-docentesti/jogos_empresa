@@ -2,86 +2,100 @@ using UnityEngine;
 
 namespace Game.Adapter.In.UI.Theme
 {
-    /// <summary>
-    /// Fonte unica de verdade das cores do jogo.
-    /// Nenhum outro script deve conter cor "hard coded".
-    ///
-    /// PALETA ATUAL: navy profundo com dourado, extraida do mockup da tela
-    /// "Abertura do Restaurante".
-    ///
-    /// A logica dela:
-    ///  - O FUNDO e quase preto azulado. Isso deixa o mapa ilustrado ser o
-    ///    unico ponto colorido da tela, sem competicao.
-    ///  - O DOURADO e a cor de acao. Aparece so onde o jogador deve agir:
-    ///    botao principal, botao de menu, valores em destaque. Usado com
-    ///    parcimonia, ele vira o guia do olho.
-    ///  - Cada ZONA tem sua cor, e ela vem do colorHex do LocationData.
-    ///    As constantes aqui sao apenas o padrao de fallback.
-    /// </summary>
+    /// <summary>Approved art palette. Compatibility aliases never restore the former theme.</summary>
     public static class GamePalette
     {
-        // =====================================================
-        //  BASE - navy profundo
+        public const string HexViolet = "#6D28D9";
+        public const string HexPlum = "#24113D";
+        public const string HexLavender = "#B99AE8";
+        public const string HexIvory = "#F5F0E8";
+        public const string HexErrorText = "#A6323D";
+        public const string HexPositiveOnDark = "#8DD4C5";
+        public const string HexNegativeOnDark = "#F2A4A6";
+        public static Color OnDark => Parse(HexIvory);
+        public static Color Plum => Parse(HexPlum);
+        public static Color Lavender => Parse(HexLavender);
+        public static Color ErrorText => Parse(HexErrorText);
+        public static Color TextOn(Color surface) => surface.grayscale > .5f ? Ink : OnDark;
+        public static Color TextOnSurface(Transform parent)
+        {
+            for (var t=parent;t!=null;t=t.parent)
+            {
+                var image=t.GetComponent<UnityEngine.UI.Image>();
+                if(image==null || image.color.a<.5f) continue;
+                string sprite=image.sprite!=null?image.sprite.name:"";
+                if(sprite.Contains("primary_violet") || sprite.Contains("topbar_violet") || sprite.Contains("navbar_plum") || sprite.Contains("panel_plum")) return OnDark;
+                if(sprite.Contains("ivory") || sprite.Contains("card_normal") || sprite.Contains("lavender")) return Ink;
+                if(image.color!=Color.white) return TextOn(image.color);
+            }
+            return Ink;
+        }
+        public static Color SemanticOn(Color surface, float value) => surface.grayscale > .5f
+            ? (value >= 0 ? Money : ErrorText)
+            : Parse(value >= 0 ? HexPositiveOnDark : HexNegativeOnDark);
+
         // =====================================================
 
-        public const string HexBackground   = "#080D1A"; // fundo da tela
-        public const string HexChrome       = "#0B1224"; // barra superior e rodape
-        public const string HexSurface      = "#0E1526"; // painel lateral, cards
-        public const string HexSurfaceAlt   = "#131C33"; // linha de indicador, chip
-        public const string HexHairline     = "#1E2B4A"; // borda de 1px
-        public const string HexBorderStrong = "#2C3E68"; // borda de enfase
+        // =====================================================
+
+        public const string HexBackground   = HexPlum; // fundo da tela
+        public const string HexChrome       = HexViolet; // barra superior e rodape
+        public const string HexSurface      = HexIvory; // painel lateral, cards
+        public const string HexSurfaceAlt   = "#E8DDF4"; // linha de indicador, chip
+        public const string HexHairline     = HexLavender; // borda de 1px
+        public const string HexBorderStrong = HexViolet; // borda de enfase
 
         /// <summary>Fundo dos cards de rotulo sobre o mapa. Escuro e quase opaco.</summary>
-        public const string HexMapLabel = "#0D1424";
+        public const string HexMapLabel = HexPlum;
         public const float  MapLabelAlpha = 0.92f;
 
         // =====================================================
         //  TEXTO
         // =====================================================
 
-        public const string HexInk        = "#FFFFFF"; // titulo e valor
-        public const string HexInkBody    = "#FFFFFF"; // corpo
-        public const string HexInkCaption = "#FFFFFF"; // legenda
+        public const string HexInk        = "#30243C"; // titulo e valor
+        public const string HexInkBody    = HexInk; // corpo
+        public const string HexInkCaption = HexInk; // legenda
 
         /// <summary>Texto de apoio: descricoes, subtitulos, rotulo de indicador.</summary>
-        public const string HexMuted = "#97A3B8";
+        public const string HexMuted = "#65566F";
 
         /// <summary>Cinza mais apagado ainda: estados desabilitados.</summary>
-        public const string HexGray = "#6E7A90";
+        public const string HexGray = "#74677E";
 
         // =====================================================
-        //  DOURADO - a cor de acao
+
         // =====================================================
 
-        public const string HexGold       = "#F2C75C"; // texto e icone dourado
-        public const string HexGoldDeep   = "#D9A63C"; // base do gradiente do botao
-        public const string HexGoldBorder = "#C9A24A"; // contorno do botao de menu
-        public const string HexOnGold     = "#201703"; // texto por cima do dourado
+        public const string HexGold       = HexPrimary;
+        public const string HexGoldDeep   = HexPrimaryDark; // base do gradiente do botao
+        public const string HexGoldBorder = HexLavender; // contorno do botao de menu
+        public const string HexOnGold     = HexOnPrimary;
 
         // Aliases para o resto do codigo continuar falando "primary".
-        public const string HexPrimary      = HexGold;
-        public const string HexPrimaryDark  = HexGoldDeep;
-        public const string HexPrimaryHover = "#FFD97A";
-        public const string HexPrimarySoft  = "#2A2412";
-        public const string HexOnPrimary    = HexOnGold;
-        public const string HexOnWarn       = HexOnGold;
+        public const string HexPrimary      = HexViolet;
+        public const string HexPrimaryDark  = "#5420A6";
+        public const string HexPrimaryHover = "#7C3DEA";
+        public const string HexPrimarySoft  = HexLavender;
+        public const string HexOnPrimary    = HexIvory;
+        public const string HexOnWarn       = HexPlum;
 
         // =====================================================
-        //  AZUL DE SELECAO
+        //  SELECTION
         // =====================================================
 
         /// <summary>Realce da area escolhida no mapa e do card selecionado.</summary>
-        public const string HexAccentBlue     = "#2F80F5";
-        public const string HexAccentBlueSoft = "#2F80F526";
+        public const string HexAccentBlue     = HexViolet;
+        public const string HexAccentBlueSoft = "#6D28D926";
 
         // =====================================================
         //  SEMANTICO
         // =====================================================
 
-        public const string HexMoney  = "#4ADE80"; // positivo, concorrencia baixa
-        public const string HexWarn   = "#F0912E"; // atencao
-        public const string HexDanger = "#EF5350"; // negativo
-        public const string HexXp     = HexGold;   // score
+        public const string HexMoney  = "#26776A"; // positivo, concorrencia baixa
+        public const string HexWarn   = "#E7B65A"; // atencao
+        public const string HexDanger = "#C55457"; // negativo
+        public const string HexXp     = HexViolet;   // score
 
         // =====================================================
         //  CORES DE ZONA
@@ -104,7 +118,7 @@ namespace Game.Adapter.In.UI.Theme
         // Fundo dos badges de icone: a propria cor com alpha baixo.
         public const string HexSoftBank  = "#2F80F540";
         public const string HexSoftStore = "#F0912E40";
-        public const string HexSoftHome  = "#F2C75C40";
+        public const string HexSoftHome  = "#B99AE840";
         public const string HexSoftRh    = "#A855F740";
         public const string HexSoftMenu  = "#22D3EE40";
 
@@ -116,10 +130,10 @@ namespace Game.Adapter.In.UI.Theme
         /// Veu sobre o mapa. Leve: aqui o mapa E o assunto da tela, entao ele
         /// so precisa de um rebaixamento suave para os cards lerem por cima.
         /// </summary>
-        public const string HexMapScrim   = "#060A14";
+        public const string HexMapScrim   = HexPlum;
         public const float  MapScrimAlpha = 0.32f;
 
-        public const string HexShadow   = "#01030A";
+        public const string HexShadow   = HexPlum;
         public const float  ShadowAlpha = 0.55f;
 
         // =====================================================
@@ -131,26 +145,26 @@ namespace Game.Adapter.In.UI.Theme
         public const string HexLegacyHeader     = HexChrome;
         public const string HexLegacyBackground = HexBackground;
         public const string HexLegacyCard       = HexSurface;
-        public const string HexLegacyFooter     = "#0A101F";
+        public const string HexLegacyFooter     = HexPlum;
         public const string HexLegacyMuted      = HexMuted;
 
-        /// <summary>Botao Confirmar. Dourado, como o CONTINUAR do mockup.</summary>
-        public const string HexConfirm = HexGold;
+
+        public const string HexConfirm = HexPrimary;
 
         // ---- Selecao de card no RestaurantScreenView ----
         public const string HexCardNormal      = HexSurface;
-        public const string HexCardSelected    = HexAccentBlue; // com alpha 0.18
-        public const float  CardSelectedAlpha  = 0.18f;
+        public const string HexCardSelected    = HexLavender;
+        public const float  CardSelectedAlpha  = 1f;
         public const string HexBorderNormal    = HexHairline;
-        public const string HexBorderSelected  = HexAccentBlue;
-        public const string HexSegmentSelected = HexAccentBlue;
-        public const string HexDisabledCard    = "#3A4256"; // alpha 0.85
-        public const string HexDisabledBank    = "#4A5164"; // alpha 0.85
+        public const string HexBorderSelected  = HexViolet;
+        public const string HexSegmentSelected = HexLavender;
+        public const string HexDisabledCard    = "#D8CFDF"; // alpha 0.85
+        public const string HexDisabledBank    = HexDisabledCard; // alpha 0.85
         public const float  DisabledAlpha      = 0.85f;
 
         // ---- Faixas de pontuacao ----
         public const string HexScoreGood    = HexMoney;
-        public const string HexScoreAverage = HexGold;
+        public const string HexScoreAverage = HexWarn;
         public const string HexScoreBad     = HexDanger;
 
         /// <summary>Cor da barra de pontuacao conforme o valor normalizado 0..1.</summary>

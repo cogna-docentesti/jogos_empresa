@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -14,8 +15,8 @@ namespace Game.EditorTools
     {
         private const string Art = "Assets/Art/new/";
         private static TMP_FontAsset font;
-        private static Color Ink => Hex("#30243C");
-        private static Color Ivory => Hex("#F5F0E8");
+        private static Color Ink => GamePalette.Ink;
+        private static Color Ivory => GamePalette.OnDark;
 
         [MenuItem("Tools/Jogos de Empresa/UI-01/Migrate identification")]
         public static void Build()
@@ -64,7 +65,7 @@ namespace Game.EditorTools
             fit.aspectMode = UnityEngine.UI.AspectRatioFitter.AspectMode.FitInParent;
             fit.aspectRatio = 16f / 9;
             var rootImage = panel.GetComponent<UnityEngine.UI.Image>() ?? panel.gameObject.AddComponent<UnityEngine.UI.Image>();
-            rootImage.color = Hex("#24113D"); rootImage.raycastTarget = true;
+            rootImage.color = GamePalette.Plum; rootImage.raycastTarget = true;
             // The reference canvas is 1920x1080, so fitting normally retains this design size.
             // Layout at other aspects uses the CanvasScaler plus this local scale adapter.
             var design = frame.Find("Content") as RectTransform;
@@ -118,7 +119,7 @@ namespace Game.EditorTools
 
             var validation = (TMP_Text)so.FindProperty("validationText").objectReferenceValue;
             Place(validation.rectTransform, 48, 542, 554, 72);
-            StyleText(validation, string.Empty, 24, Hex("#A6323D"));
+            StyleText(validation, string.Empty, 24, GamePalette.ErrorText);
             validation.textWrappingMode = TextWrappingModes.Normal;
             var button = (UnityEngine.UI.Button)so.FindProperty("buttonRegister").objectReferenceValue;
             Place((RectTransform)button.transform, 48, 634, 554, 88);
@@ -134,7 +135,7 @@ namespace Game.EditorTools
             button.targetGraphic = button.GetComponent<UnityEngine.UI.Image>();
             var buttonText = button.GetComponentInChildren<TMP_Text>(true);
             Stretch(buttonText.rectTransform);
-            StyleText(buttonText, "Cadastrar", 28, Ivory, true);
+            StyleText(buttonText, "Cadastrar", GameTypography.Button, Ivory, true);
             buttonText.alignment = TextAlignmentOptions.Center;
             Label(form, "StorageNote", "Seus dados ficam salvos neste dispositivo.", 48, 734, 554, 26, 20, Ink);
             foreach (var text in panel.GetComponentsInChildren<TMP_Text>(true))
@@ -250,7 +251,7 @@ namespace Game.EditorTools
         }
         private static void StyleText(TMP_Text text, string value, float size, Color color, bool bold = false)
         {
-            text.font = font; text.fontSharedMaterial = font.material; text.text = value;
+            GameTypography.Apply(text, font, size, bold); text.text = value;
             text.fontSize = size; text.enableAutoSizing = false; text.fontStyle = bold ? FontStyles.Bold : FontStyles.Normal;
             text.color = color; text.alignment = TextAlignmentOptions.MidlineLeft;
             text.characterSpacing = 0; text.lineSpacing = 0; text.margin = Vector4.zero;

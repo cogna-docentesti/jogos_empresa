@@ -194,7 +194,7 @@ namespace Game.Adapter.In.UI
             }
 
             if (nameLabel != null)
-                nameLabel.color = GamePalette.Ink;
+                nameLabel.color = GamePalette.OnDark;
 
             ApplyTarget(instant: false);
         }
