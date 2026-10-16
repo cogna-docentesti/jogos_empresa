@@ -136,6 +136,8 @@ namespace Game.Adapter.In.Controllers
             view.SetRegionName(_data.RegionName);
             view.SetHint("Selecione uma área no mapa para continuar.");
             view.ShowEmptyState();
+            if (_data == null || _data.Establishments.Count == 0)
+                view.ShowUnavailableState();
 
             view.SetBankVisible(IsAvailable("bank"));
             view.SetUniversityVisible(IsAvailable("university"));
@@ -170,7 +172,7 @@ namespace Game.Adapter.In.Controllers
         private void OnLocationSelected(string id)
         {
             var e = _data.Establishments.FirstOrDefault(x => x.Id == id);
-            if (e == null) return;
+            if (e == null || !e.IsUnlocked) return;
 
             _selectedEstablishment = e;
             view.SelectArea(id);
@@ -185,11 +187,12 @@ namespace Game.Adapter.In.Controllers
                 e.ReferencePriceFactor,
                 e.CompetitionLevel,
                 e.Channels);
+            view.SetConfirmEnabled(true);
         }
 
         private void OnConfirm()
         {
-            if (_selectedEstablishment == null) return;
+            if (_selectedEstablishment == null || !_selectedEstablishment.IsUnlocked) return;
 
             SaveDraft();
 

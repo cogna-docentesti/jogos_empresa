@@ -1,160 +1,113 @@
-﻿using TMPro;
+using System;
+using System.Globalization;
+using Game.Infrastructure.Session;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Adapter.In.UI
 {
+    /// <summary>D1 presentation. The controller owns catalog data, availability and the session draft.</summary>
     public sealed class LocationScreenView : MonoBehaviour
     {
-        // â”€â”€ Cabecalho â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        [Header("Header")]
-        [SerializeField] private TextMeshProUGUI regionText;
-        [SerializeField] private TextMeshProUGUI hintText;
-
-        // â”€â”€ Botoes de estabelecimento â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        [Header("Establishment Buttons")]
-        [SerializeField] private Button bankButton;
-        [SerializeField] private Button storeButton;
-        [SerializeField] private Button marketingButton;
-        [SerializeField] private Button universityButton;
-        [SerializeField] private Button condominiumButton;
-
-        // â”€â”€ Painel lateral â€” estado vazio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        [Header("Side Panel â€” Empty State")]
-        [SerializeField] private GameObject emptyStatePanel;
-        [SerializeField] private GameObject infoPanel;
-
-        // â”€â”€ Painel lateral â€” detalhes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        [Header("Side Panel â€” Details")]
-        [SerializeField] private GameObject detailsPanel;
-        [SerializeField] private TextMeshProUGUI detailSegmentText;
-        [SerializeField] private TextMeshProUGUI detailRentText;
-        [SerializeField] private TextMeshProUGUI detailCapacidadeText;
-        [SerializeField] private TextMeshProUGUI detailDemandaText;
-        [SerializeField] private TextMeshProUGUI detailConcorrenciaText;
-        [SerializeField] private TextMeshProUGUI detailZoneNameText;      
-        [SerializeField] private TextMeshProUGUI detailZoneSegmentText;   
-        [SerializeField] private TextMeshProUGUI detailZoneDescriptionText; 
-
-        // â”€â”€ Botces de acao â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        [Header("Action Buttons")]
-        [SerializeField] private Button confirmButton;
-        [SerializeField] private Button backButton;
-
-        // â”€â”€ Textos publicos (header) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        public void SetRegionName(string v) => regionText.text = v;
-        public void SetHint(string v)       => hintText.text = v;
-
-        // â”€â”€ Visibilidade dos botoes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        public void SetBankVisible(bool v)        => bankButton.gameObject.SetActive(v);
-        public void SetStoreVisible(bool v)       => storeButton.gameObject.SetActive(v);
-        public void SetMarketingVisible(bool v)   => marketingButton.gameObject.SetActive(v);
-        public void SetUniversityVisible(bool v)  => universityButton.gameObject.SetActive(v);
-        public void SetCondominiumVisible(bool v) => condominiumButton.gameObject.SetActive(v);
-
-        // â”€â”€ Bind de acoes dos botoes do mapa â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        public void BindBankAction(UnityEngine.Events.UnityAction a)
+        [Serializable] public struct ZonePresentation
         {
-            Debug.Log($"[View] BindBankAction â€” bankButton Ã© null? {bankButton == null}");
-            bankButton.onClick.AddListener(a);
+            public string id;
+            public MapMenuNode marker;
+            public UnityEngine.UI.Image overlay;
+            public Sprite vignette;
         }
-        public void BindUniversityAction(UnityEngine.Events.UnityAction a)  => universityButton.onClick.AddListener(a);
-        
-        public void BindMarketingAction(UnityEngine.Events.UnityAction a)   => marketingButton.onClick.AddListener(a);
-        public void BindStoreAction(UnityEngine.Events.UnityAction a)       => storeButton.onClick.AddListener(a);
-        public void BindCondominiumAction(UnityEngine.Events.UnityAction a) => condominiumButton.onClick.AddListener(a);
-
-        // â”€â”€ Painel lateral â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        [SerializeField] private TextMeshProUGUI regionText, hintText;
+        [SerializeField] private UnityEngine.UI.Button bankButton, storeButton, marketingButton, universityButton, condominiumButton;
+        [SerializeField] private GameObject emptyStatePanel, infoPanel, detailsPanel;
+        [SerializeField] private TextMeshProUGUI detailSegmentText, detailRentText, detailCapacidadeText, detailDemandaText, detailConcorrenciaText;
+        [SerializeField] private TextMeshProUGUI detailZoneNameText, detailZoneSegmentText, detailZoneDescriptionText;
+        [SerializeField] private UnityEngine.UI.Button confirmButton, backButton;
+        // Kept for older scene consumers. GameScene retires these legacy area renderers.
+        [SerializeField] private LocationAreaComponent bankArea, storeArea, marketingArea, universityArea, condominiumArea;
+        [SerializeField] private ZonePresentation[] zones = Array.Empty<ZonePresentation>();
+        [SerializeField] private UnityEngine.UI.Image zoneVignette;
+        [SerializeField] private TextMeshProUGUI referencePriceText, channelsText, emptyMessage;
+        [SerializeField] private UnityEngine.UI.ScrollRect detailScroll;
+        [SerializeField] private HubMapView.Restaurant[] restaurants = Array.Empty<HubMapView.Restaurant>();
+        [SerializeField] private UnityEngine.UI.Image centerOverlay;
+        private static readonly CultureInfo Br = CultureInfo.GetCultureInfo("pt-BR");
+        public ZonePresentation[] Zones => zones;
+        public string SelectedId { get; private set; }
+        public bool CanConfirm => confirmButton != null && confirmButton.interactable;
+        private void OnEnable()
+        {
+            foreach(var variant in restaurants)
+                if(variant.image != null) variant.image.enabled=PlayerSession.SelectedRestaurantType.HasValue && variant.type==PlayerSession.SelectedRestaurantType.Value;
+            if(centerOverlay != null) centerOverlay.enabled=PlayerSession.SelectedRestaurantType.HasValue;
+        }
+        public void SetRegionName(string value) { if(regionText != null) regionText.text=value; }
+        public void SetHint(string value) { if(hintText != null) hintText.text=value; }
+        public void SetBankVisible(bool value) => bankButton.interactable=value;
+        public void SetStoreVisible(bool value) => storeButton.interactable=value;
+        public void SetMarketingVisible(bool value) => marketingButton.interactable=value;
+        public void SetUniversityVisible(bool value) => universityButton.interactable=value;
+        public void SetCondominiumVisible(bool value) => condominiumButton.interactable=value;
+        public void BindBankAction(UnityEngine.Events.UnityAction action) => bankButton.onClick.AddListener(action);
+        public void BindUniversityAction(UnityEngine.Events.UnityAction action) => universityButton.onClick.AddListener(action);
+        public void BindMarketingAction(UnityEngine.Events.UnityAction action) => marketingButton.onClick.AddListener(action);
+        public void BindStoreAction(UnityEngine.Events.UnityAction action) => storeButton.onClick.AddListener(action);
+        public void BindCondominiumAction(UnityEngine.Events.UnityAction action) => condominiumButton.onClick.AddListener(action);
+        public void BindConfirmAction(UnityEngine.Events.UnityAction action) => confirmButton.onClick.AddListener(action);
+        public void BindBackAction(UnityEngine.Events.UnityAction action) => backButton.onClick.AddListener(action);
+        public void SetConfirmEnabled(bool value) => confirmButton.interactable=value;
         public void ShowEmptyState()
         {
-            emptyStatePanel.SetActive(true);
-            detailsPanel.SetActive(false);
-            confirmButton.interactable = false;
-            DeselectAllAreas();
+            if(infoPanel != null) infoPanel.SetActive(false);
+            if(emptyMessage != null) emptyMessage.text="Selecione uma das cinco áreas no mapa para comparar aluguel, público e demanda.";
+            emptyStatePanel.SetActive(true); detailsPanel.SetActive(false);
+            SetConfirmEnabled(false); DeselectAllAreas();
         }
-
-
-        // UI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        [Header("Area Visual Components")]
-        [SerializeField] private LocationAreaComponent bankArea;
-        [SerializeField] private LocationAreaComponent storeArea;
-        [SerializeField] private LocationAreaComponent marketingArea;
-        [SerializeField] private LocationAreaComponent universityArea;
-        [SerializeField] private LocationAreaComponent condominiumArea;
-
-        // â”€â”€ Inicializacao visual das areas (chamado pelo Controller no Start) â”€
-        public void InitializeBankArea(string name, string subtitle, string colorHex, Sprite icon)
-            => bankArea?.Initialize(name, subtitle, colorHex, icon); 
-            
-        public void InitializeUniversityArea(string name, string subtitle, string colorHex, Sprite icon)
-            => universityArea?.Initialize(name, subtitle, colorHex, icon);
-            
-        public void InitializeMarketingArea(string name, string subtitle, string colorHex, Sprite icon)
-            => marketingArea?.Initialize(name, subtitle, colorHex, icon);
-        
-        public void InitializeStoreArea(string name, string subtitle, string colorHex, Sprite icon)
-            => storeArea?.Initialize(name, subtitle, colorHex, icon);
-
-        public void InitializeCondominiumArea(string name, string subtitle, string colorHex, Sprite icon)
-            => condominiumArea?.Initialize(name, subtitle, colorHex, icon);
-
-        // â”€â”€ Selecao visual (chamado pelo Controller ao clicar em uma area) â”€â”€â”€â”€
+        public void ShowUnavailableState()
+        {
+            ShowEmptyState();
+            if(emptyMessage != null) emptyMessage.text="Não foi possível carregar as localizações. Volte e tente novamente.";
+        }
+        public void InitializeBankArea(string name,string subtitle,string color,Sprite icon) => bankArea?.Initialize(name,subtitle,color,icon);
+        public void InitializeUniversityArea(string name,string subtitle,string color,Sprite icon) => universityArea?.Initialize(name,subtitle,color,icon);
+        public void InitializeMarketingArea(string name,string subtitle,string color,Sprite icon) => marketingArea?.Initialize(name,subtitle,color,icon);
+        public void InitializeStoreArea(string name,string subtitle,string color,Sprite icon) => storeArea?.Initialize(name,subtitle,color,icon);
+        public void InitializeCondominiumArea(string name,string subtitle,string color,Sprite icon) => condominiumArea?.Initialize(name,subtitle,color,icon);
+        private LocationAreaComponent Area(string id) => id switch
+        { "bank"=>bankArea,"university"=>universityArea,"marketing"=>marketingArea,"store"=>storeArea,"condominium"=>condominiumArea,_=>null };
         public void SelectArea(string id)
         {
-            // Desseleciona todas antes de selecionar a nova
-            DeselectAllAreas();
-            GetAreaComponent(id)?.Select();
+            DeselectAllAreas(); SelectedId=id; Area(id)?.Select();
+            foreach(var zone in zones)
+            {
+                bool selected=zone.id==id; zone.marker?.SetSelected(selected);
+                if(zone.overlay != null) zone.overlay.enabled=selected;
+                if(selected && zoneVignette != null) zoneVignette.sprite=zone.vignette;
+            }
+            if(detailScroll != null) { detailScroll.StopMovement(); detailScroll.verticalNormalizedPosition=1; }
         }
-
         public void DeselectAllAreas()
         {
-            bankArea?.Deselect();
-            storeArea?.Deselect();
-            marketingArea?.Deselect();
-            universityArea?.Deselect();
-            condominiumArea?.Deselect();
+            SelectedId=null;
+            bankArea?.Deselect(); storeArea?.Deselect(); marketingArea?.Deselect(); universityArea?.Deselect(); condominiumArea?.Deselect();
+            foreach(var zone in zones) { zone.marker?.SetSelected(false); if(zone.overlay != null) zone.overlay.enabled=false; }
         }
-
-       
-        public void HoverEnterArea(string id) => GetAreaComponent(id)?.OnHoverEnter();
-        public void HoverExitArea(string id)  => GetAreaComponent(id)?.OnHoverExit();
-
-        // â”€â”€ Auxiliar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        private LocationAreaComponent GetAreaComponent(string id) => id switch
+        public void HoverEnterArea(string id) => Area(id)?.OnHoverEnter();
+        public void HoverExitArea(string id) => Area(id)?.OnHoverExit();
+        public void ShowLocationDetails(string name,string segment,string description,int rent,int initialPhysicalCapacity,
+            int baseDailyDemand,float referencePriceFactor,string competition,string channels)
         {
-            "bank"        => bankArea,
-            "university"  => universityArea,
-            "marketing"   => marketingArea,
-            "store"       => storeArea,
-            "condominium" => condominiumArea,
-            _             => null
-        };
-
-        public void ShowLocationDetails(
-            string name, string segment, string description,
-            int rent, int initialPhysicalCapacity, int baseDailyDemand,
-            float referencePriceFactor, string competition, string channels)
-        {
-            infoPanel.SetActive(false);
-            emptyStatePanel.SetActive(false);
-            detailsPanel.SetActive(true);
-            confirmButton.interactable = true;
-
-            if (detailZoneNameText != null)        detailZoneNameText.text        = name;
-            if (detailZoneSegmentText != null)     detailZoneSegmentText.text     = segment;
-            if (detailZoneDescriptionText != null) detailZoneDescriptionText.text = description;
-
-            detailSegmentText.text     = segment;
-            detailRentText.text        = $"R$ {rent:N0}";
-            detailCapacidadeText.text      = $"{initialPhysicalCapacity} clientes/dia";
-            detailDemandaText.text = $"{baseDailyDemand} pedidos/dia";
-            detailConcorrenciaText.text    = competition;
+            if(infoPanel != null) infoPanel.SetActive(false);
+            emptyStatePanel.SetActive(false); detailsPanel.SetActive(true);
+            if(detailZoneNameText != null) detailZoneNameText.text=name;
+            if(detailZoneSegmentText != null) detailZoneSegmentText.text=segment;
+            if(detailZoneDescriptionText != null) detailZoneDescriptionText.text=description;
+            if(detailSegmentText != null) detailSegmentText.text=segment;
+            detailRentText.text="R$ "+rent.ToString("N0",Br);
+            detailCapacidadeText.text=initialPhysicalCapacity+" clientes/dia";
+            detailDemandaText.text=baseDailyDemand+" pedidos/dia";
+            detailConcorrenciaText.text=competition;
+            if(referencePriceText != null) referencePriceText.text=referencePriceFactor.ToString("0.00",Br)+"×";
+            if(channelsText != null) channelsText.text=string.IsNullOrWhiteSpace(channels) || channels=="-" ? "Não informados" : channels;
         }
-
-        // â”€â”€ Bind de Confirmar / Voltar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        public void BindConfirmAction(UnityEngine.Events.UnityAction a) => confirmButton.onClick.AddListener(a);
-        public void BindBackAction(UnityEngine.Events.UnityAction a)    => backButton.onClick.AddListener(a);
-
     }
 }
-
