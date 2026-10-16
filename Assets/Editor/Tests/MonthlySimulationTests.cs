@@ -340,8 +340,16 @@ public class MonthlySimulationTests
             {
                 service.StartRound();
                 Assert.AreEqual(GameState.Round_Sales, states.CurrentState);
-                Assert.IsNotNull(service.ProcessCurrentRound());
+                var result = service.ProcessCurrentRound();
+                Assert.IsNotNull(result);
+                Assert.AreEqual(GameState.Round_Summary, states.CurrentState);
+                var cash = GameSessionState.Current.currentCash;
+                Assert.IsFalse(service.ContinueAfterSummary("wrong-result"));
+                Assert.AreEqual(GameState.Round_Summary, states.CurrentState);
+                Assert.IsTrue(service.ContinueAfterSummary(result.roundResultId));
                 Assert.AreEqual(month < 3 ? GameState.Management_Hub : GameState.FinalReport, states.CurrentState);
+                Assert.IsFalse(service.ContinueAfterSummary(result.roundResultId));
+                Assert.AreEqual(cash, GameSessionState.Current.currentCash);
             }
         }
         finally

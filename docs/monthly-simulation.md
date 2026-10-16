@@ -22,6 +22,9 @@ var result = new RoundService().ProcessRound(expectedMonth: 1);
 // Ordered persisted statements.
 var history = new RoundResultRepository(DatabaseInitializer.DatabaseService.Connection)
     .GetBySessionId(GameSessionState.Current.sessionId);
+
+// UI-13: acknowledge the saved statement only after the player reads it.
+service.ContinueAfterSummary(savedResult.roundResultId);
 ```
 
 For a forecast including recorded events, pass `SessionEventHistoryRepository.GetBySessionAndRound(...)` as the second argument of `MonthlySimulationCatalog.Load`. `EstablishmentSummaryService.Build` already does this. For a completed session, the summary uses its last saved statement.
@@ -75,6 +78,12 @@ The GameScene hub has **Fechar mês** and **Eventos e histórico** actions. `Mon
 `OpenDecision(EventData, month, day, onCompleted)` is the explicit presentation entry point for a future orchestrator. `IsAwaitingChoice`, `ChoiceConfirmed`, `Closed` and `Close()` expose the waiting/confirmation lifecycle. Every catalog option is presented, with native text for its real effects and duration. The twenty illustrations are serialized by existing event ID in `EventScreenView`; they do not alter the economic catalog. History shows persisted choice/effect snapshots, including an empty state, and can be consulted without releasing a pending decision.
 
 Confirmation is transactional and idempotent by session/month/event/day. Retrying the same choice returns its existing row, including after settlement; trying a different choice for the same occurrence fails. It calls `SessionEventHistoryRepository.RecordFromOption` only for a new occurrence. It never calls `AddCash` or `SetReputation`. The sixty shipped options are verified against forecast/settlement parity and repeat settlement in isolated SQLite tests.
+
+## Monthly result UI lifecycle (UI-13)
+
+`ProcessCurrentRound()` commits through `RoundService` and enters `Round_Summary`, where it now waits. `MonthlyResultController` reads the latest saved statement for the current session, including completed/bankrupt sessions. Its `Continue()` action calls `GameSessionService.ContinueAfterSummary(resultId)`. That method checks the summary state and saved ID, then follows the existing hub, final-report or bankruptcy destination without recalculation or a database write. Repeated acknowledgement cannot settle a month or apply an event again. `IsAwaitingContinue` and `Continued` expose this presentation lifecycle for UI-19; the other orchestration stages remain in their own tasks.
+
+The hub shortcut opens `PanelId.MonthlyResults = 11` as a read-only consultation. Every visit queries SQLite again. Missing results use `EMPTY_RESULTS` with an explicit absence message; query failures provide retry. No forecast or sample values substitute for a saved result. The cash table uses the existing `TotalCosts`, signed event impact, stored result and opening/closing cash. Loan principal and interest are shown as details already included in the installment. The native chart uses a common absolute scale with outflows to the left of zero. ART-28 layers share the exact viewport, pivot positions, uniform scales and order from `docs/art/layouts/dre-layout.json`.
 
 ## Catalog and balance configuration
 

@@ -427,35 +427,29 @@ public class GameSessionService
         sm.TryChangeState(GameState.Round_Event);
         sm.TryChangeState(GameState.Round_Summary);
 
-        EvaluateRoundEnd(result);
-
         return result;
     }
 
-    private void EvaluateRoundEnd(RoundResultEntity result)
+    /// <summary>Presentation acknowledgement only. Never calculates or persists the month again.</summary>
+    public bool ContinueAfterSummary(string resultId)
     {
         var session = GameSessionState.Current;
-
-        if (session == null)
-            return;
+        var sm = GameManager.Instance?.StateMachine;
+        var db = DatabaseInitializer.DatabaseService?.Connection;
+        if (session == null || sm?.CurrentState != GameState.Round_Summary || db == null) return false;
+        var saved = new RoundResultRepository(db).GetLastRoundBySessionId(session.sessionId);
+        if (saved == null || saved.roundResultId != resultId) return false;
 
         if (session.status == GameSessionStatus.BANKRUPT)
         {
-            GameManager.Instance.StateMachine
-                .TryChangeState(GameState.GameOver_Bankruptcy);
-
-            return;
+            return sm.TryChangeState(GameState.GameOver_Bankruptcy);
         }
 
         if (session.status == GameSessionStatus.COMPLETED)
         {
-            GameManager.Instance.StateMachine
-                .TryChangeState(GameState.FinalReport);
-
-            return;
+            return sm.TryChangeState(GameState.FinalReport);
         }
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Management_Hub);
+        return sm.TryChangeState(GameState.Management_Hub);
     }
 }

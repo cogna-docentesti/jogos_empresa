@@ -9,6 +9,7 @@ namespace Game.Adapter.In.UI.Navigation
         [SerializeField] private RectTransform exitButton;
         [SerializeField] private GameObject menuPanel;
         [SerializeField] private GameObject eventPanel;
+        [SerializeField] private GameObject monthlyResultPanel;
         [SerializeField] private RectTransform eventMenuAccess;
         private Vector2 anchorMin,anchorMax,pivot,position,size;
         private Vector2 menuAnchorMin,menuAnchorMax,menuPivot,menuPosition,menuSize;
@@ -19,6 +20,7 @@ namespace Game.Adapter.In.UI.Navigation
         { buttonRoot=button; exitButton=exit; menuPanel=menu; }
         public void ConfigureEvents(GameObject panel,RectTransform menu)
         { eventPanel=panel; eventMenuAccess=menu; }
+        public void ConfigureMonthlyResults(GameObject panel) { monthlyResultPanel=panel; }
         private void Awake()
         {
             if(eventMenuAccess!=null)
@@ -36,7 +38,7 @@ namespace Game.Adapter.In.UI.Navigation
             bool visible=MenuNavigator.HubAvailable && MenuNavigator.Instance!=null
                 && MenuNavigator.Instance.Current!=PanelId.None && MenuNavigator.Instance.Current!=PanelId.Menu;
             if(buttonRoot!=null && buttonRoot.activeSelf!=visible) buttonRoot.SetActive(visible);
-            bool events=eventPanel!=null && eventPanel.activeInHierarchy;
+            bool events=(eventPanel!=null && eventPanel.activeInHierarchy) || (monthlyResultPanel!=null && monthlyResultPanel.activeInHierarchy);
             if(eventMenuAccess!=null && positionedForEvents!=events)
             {
                 positionedForEvents=events;

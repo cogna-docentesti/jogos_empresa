@@ -179,7 +179,10 @@ public static class UI12EventValidation
             Expect(first.closingCash == expected.closingCash && first.reputationAtEnd == expected.reputationAtEnd, "Event forecast parity");
             float after = state.currentCash; int repAfter = state.reputationScore; Controller.Confirm(); new RoundService().ProcessRound(1);
             Expect(GameSessionState.Current.currentCash == after && GameSessionState.Current.reputationScore == repAfter, "Repeat financial settlement");
-            GameSessionState.LoadActiveSession(state.userId); Expect(GameSessionState.Current.sessionId == activeId && GameSessionState.Current.currentRound == 2, "SQLite reload"); MenuNavigator.Instance.Open(PanelId.EventHistory);
+            GameSessionState.LoadActiveSession(state.userId); Expect(GameSessionState.Current.sessionId == activeId && GameSessionState.Current.currentRound == 2, "SQLite reload");
+            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Summary, "Monthly result awaits acknowledgement");
+            Root.Find("Panel_MonthlyResult").GetComponent<MonthlyResultController>().Continue();
+            MenuNavigator.Instance.Open(PanelId.EventHistory);
         });
         Add("Saved real monthly history", () => { Capture("history-month-one-1280x720"); View.HistoryScroll.verticalNormalizedPosition = 0; });
         Add("History scroll bottom", () => { Capture("history-month-one-bottom-1280x720"); Click(Field<UnityEngine.UI.Button>(View, "returnButton")); });

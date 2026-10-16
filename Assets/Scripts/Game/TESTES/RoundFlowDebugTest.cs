@@ -68,6 +68,8 @@ public class RoundFlowDebugTest : MonoBehaviour
                 check(sm.CurrentState == GameState.Round_Sales, "Inicio valido do mes " + round);
                 var result = service.ProcessCurrentRound();
                 check(result != null && result.round == round, "Resultado do mes " + round);
+                check(sm.CurrentState == GameState.Round_Summary, "Resumo aguarda leitura no mes " + round);
+                check(service.ContinueAfterSummary(result.roundResultId), "Continuacao explicita no mes " + round);
                 check(result != null && result.thirteenthSalary == 0f, "13o salario zero no mes " + round);
                 check(session.currentRound == (round < 3 ? round + 1 : 3), "Avanco/limite apos mes " + round);
                 check(session.status == (round < 3 ? GameSessionStatus.IN_PROGRESS : GameSessionStatus.COMPLETED),
@@ -149,9 +151,8 @@ public class RoundFlowDebugTest : MonoBehaviour
             check(session.currentRound == 3 && session.status == GameSessionStatus.BANKRUPT
                 && session.completedAt.HasValue, "BANKRUPT prevalece sobre COMPLETED no mes 3");
             sm.ForceState(GameState.Round_Summary);
-            typeof(GameSessionService).GetMethod("EvaluateRoundEnd", System.Reflection.BindingFlags.Instance
-                | System.Reflection.BindingFlags.NonPublic).Invoke(service,
-                    new object[] { repository.GetLastRoundBySessionId(session.sessionId) });
+            check(service.ContinueAfterSummary(repository.GetLastRoundBySessionId(session.sessionId).roundResultId),
+                "Resumo falido continua por acao explicita");
             check(sm.CurrentState == GameState.GameOver_Bankruptcy, "Fluxo externo encaminha falencia ao GameOver");
             results = repository.GetBySessionId(session.sessionId);
             check(results.Count == 3 && results.Select(r => r.round).SequenceEqual(new[] { 1, 2, 3 }),
