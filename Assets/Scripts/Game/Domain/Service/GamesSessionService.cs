@@ -86,6 +86,9 @@ public class GameSessionService
                 var historyRepository = new SessionEventHistoryRepository(db);
                 foreach (var item in historyRepository.GetBySession(session.sessionId))
                     historyRepository.Delete(item);
+                db.CreateTable<MonthlyEventPlanEntity>();
+                foreach (var plan in db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == session.sessionId).ToList())
+                    db.Delete(plan);
                 new GameSessionRepository(db).Delete(session);
                 GameSessionState.Clear();
                 replacement = new GameSessionService(session.userId, session.professorId).CreateNewSession();

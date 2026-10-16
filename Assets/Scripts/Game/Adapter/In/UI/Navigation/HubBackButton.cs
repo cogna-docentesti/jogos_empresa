@@ -8,12 +8,25 @@ namespace Game.Adapter.In.UI.Navigation
         [SerializeField] private GameObject buttonRoot;
         [SerializeField] private RectTransform exitButton;
         [SerializeField] private GameObject menuPanel;
+        [SerializeField] private GameObject eventPanel;
+        [SerializeField] private RectTransform eventMenuAccess;
         private Vector2 anchorMin,anchorMax,pivot,position,size;
+        private Vector2 menuAnchorMin,menuAnchorMax,menuPivot,menuPosition,menuSize;
         private bool? positionedForHub;
+        private bool? positionedForEvents;
+        private RectTransform menuCanvas;
         public void Configure(GameObject button,RectTransform exit,GameObject menu)
         { buttonRoot=button; exitButton=exit; menuPanel=menu; }
+        public void ConfigureEvents(GameObject panel,RectTransform menu)
+        { eventPanel=panel; eventMenuAccess=menu; }
         private void Awake()
         {
+            if(eventMenuAccess!=null)
+            {
+                menuCanvas=(RectTransform)eventMenuAccess.GetComponentInParent<Canvas>().rootCanvas.transform;
+                menuAnchorMin=eventMenuAccess.anchorMin;menuAnchorMax=eventMenuAccess.anchorMax;menuPivot=eventMenuAccess.pivot;
+                menuPosition=eventMenuAccess.anchoredPosition;menuSize=eventMenuAccess.sizeDelta;
+            }
             if(exitButton==null) return;
             anchorMin=exitButton.anchorMin; anchorMax=exitButton.anchorMax; pivot=exitButton.pivot;
             position=exitButton.anchoredPosition; size=exitButton.sizeDelta;
@@ -23,7 +36,19 @@ namespace Game.Adapter.In.UI.Navigation
             bool visible=MenuNavigator.HubAvailable && MenuNavigator.Instance!=null
                 && MenuNavigator.Instance.Current!=PanelId.None && MenuNavigator.Instance.Current!=PanelId.Menu;
             if(buttonRoot!=null && buttonRoot.activeSelf!=visible) buttonRoot.SetActive(visible);
-            bool hub=menuPanel!=null && menuPanel.activeInHierarchy;
+            bool events=eventPanel!=null && eventPanel.activeInHierarchy;
+            if(eventMenuAccess!=null && positionedForEvents!=events)
+            {
+                positionedForEvents=events;
+                eventMenuAccess.anchorMin=events?new Vector2(0,1):menuAnchorMin;
+                eventMenuAccess.anchorMax=events?new Vector2(0,1):menuAnchorMax;
+                eventMenuAccess.pivot=events?new Vector2(0,1):menuPivot;
+                eventMenuAccess.anchoredPosition=events?new Vector2(968,-998):menuPosition;
+                eventMenuAccess.sizeDelta=events?new Vector2(252,68):menuSize;
+            }
+            if(events && eventMenuAccess!=null && menuCanvas!=null)
+                eventMenuAccess.position=menuCanvas.TransformPoint(new Vector3(menuCanvas.rect.xMin+968,menuCanvas.rect.yMax-998,0));
+            bool hub=(menuPanel!=null && menuPanel.activeInHierarchy) || events;
             if(exitButton==null || positionedForHub==hub) return;
             positionedForHub=hub;
             exitButton.anchorMin=hub?new Vector2(0,1):anchorMin;

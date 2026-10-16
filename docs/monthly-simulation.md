@@ -13,6 +13,9 @@ var forecast = MonthlySimulationEngine.Calculate(context);
 // Add MonthlySettlementController to a scene object and select CloseMonth.
 // The controller exposes LastResult and MonthSettled after a successful commit.
 
+// GameScene UI-12: CloseMonth first opens EventScreenController.OpenMonth.
+// It reserves the existing selector's draw, waits for every choice, then settles.
+
 // Low-level settlement: explicit months make retries idempotent.
 var result = new RoundService().ProcessRound(expectedMonth: 1);
 
@@ -62,6 +65,16 @@ repository.RecordFromOption(session.sessionId, session.currentRound, day: 16,
 The event repository rejects new records for a settled month or a persisted session that is no longer in the requested active month.
 
 This engine consumes recorded choices. It does not draw events, create an event decision screen, generate the final report, or add cloud synchronization.
+
+### Event UI lifecycle (UI-12)
+
+The GameScene hub has **Fechar mês** and **Eventos e histórico** actions. `MonthlySettlementController.CloseMonth()` starts the month and holds `Round_Sales` while `EventScreenController.OpenMonth(onCompleted)` presents the selected events. It does not settle before the choices. A pending decision rejects `Close()` and additional settlement requests. Only the last confirmation releases the callback and lets the existing `ProcessCurrentRound()` settlement run. The later, brief `Round_Event` transition is retained for compatibility and has a panel reference, but is no longer the player's only interaction opportunity. The remaining round/result orchestration is outside UI-12.
+
+`MonthlyEventDecisionService.OpenMonth` passes the real restaurant, equipment, session history, monthly counts and exclusion groups to `MonthlyEventSelector`. Its default four-event draw is stored once in `MonthlyEventPlanEntity`, keyed by session/month, so reopening or reloading cannot reroll it. New event days are spread evenly through the configured operating days: four events in a 30-day month occur on days 6, 12, 18 and 24. Fewer eligible events remain fewer events; the UI does not force invalid candidates. Restart removes these reservations together with the existing session/history in the same transaction.
+
+`OpenDecision(EventData, month, day, onCompleted)` is the explicit presentation entry point for a future orchestrator. `IsAwaitingChoice`, `ChoiceConfirmed`, `Closed` and `Close()` expose the waiting/confirmation lifecycle. Every catalog option is presented, with native text for its real effects and duration. The twenty illustrations are serialized by existing event ID in `EventScreenView`; they do not alter the economic catalog. History shows persisted choice/effect snapshots, including an empty state, and can be consulted without releasing a pending decision.
+
+Confirmation is transactional and idempotent by session/month/event/day. Retrying the same choice returns its existing row, including after settlement; trying a different choice for the same occurrence fails. It calls `SessionEventHistoryRepository.RecordFromOption` only for a new occurrence. It never calls `AddCash` or `SetReputation`. The sixty shipped options are verified against forecast/settlement parity and repeat settlement in isolated SQLite tests.
 
 ## Catalog and balance configuration
 
