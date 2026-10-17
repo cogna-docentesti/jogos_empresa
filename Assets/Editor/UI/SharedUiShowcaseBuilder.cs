@@ -23,7 +23,7 @@ namespace Game.EditorTools
             var r=Box(p,n,x,y,w,68); var image=UiFactory.Ensure<UnityEngine.UI.Image>(r.gameObject);
             var button=UiFactory.Ensure<UnityEngine.UI.Button>(r.gameObject); button.targetGraphic=image;
             var label=Label(r,"Label",value,icon!=null?60:20,0,w-(icon!=null?80:40),68);
-            label.alignment=TextAlignmentOptions.Center; label.fontStyle=FontStyles.Bold;
+            label.alignment=TextAlignmentOptions.Center; GameTypography.KeepSize(label,TypographyRole.Button);
             if(icon!=null) SharedUiStyles.Surface(Box(r,"Icon",20,18,32,32).gameObject,icon);
             SharedUiStyles.Bind(button,role); return button;
         }

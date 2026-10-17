@@ -1,3 +1,4 @@
+using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +13,7 @@ namespace Game.Adapter.In.UI
         public EquipmentData Equipment { get; private set; }
         public void Setup(EquipmentData equipment, UnityAction remove)
         {
+            GameTypography.KeepSize(nameText,TypographyRole.Body); GameTypography.KeepSize(priceText,TypographyRole.TableTotal);
             Equipment = equipment; artwork.sprite = equipment.icon; artwork.color = Color.white;
             artwork.type = UnityEngine.UI.Image.Type.Simple; artwork.preserveAspect = true;
             nameText.text = equipment.displayName; priceText.text = FinancialScreenView.Money(equipment.cost);

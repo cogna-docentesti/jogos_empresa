@@ -34,7 +34,7 @@ namespace Game.EditorTools
         }
         private static TMP_Text Text(Transform p, string n, string value, float x, float y, float w, float h)
         {
-            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), GameTypography.Body, false);
+            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, GameTypography.Tokens.Body, false);
             t.text = value; t.color = GamePalette.Ink; t.textWrappingMode = TextWrappingModes.Normal; t.overflowMode = TextOverflowModes.Overflow; t.raycastTarget = false; return t;
         }
         private static UnityEngine.UI.Button Button(Transform p, string n, string label, float x, float y, float w, float h)
@@ -80,7 +80,7 @@ namespace Game.EditorTools
             var host = Ensure<FeedbackToast>(Node(canvas, "Feedback", 0, 0, 1920, 1080));
             // Reserved central header area; never intersects cards, navigation or footer actions.
             var panel = Picture(host.transform, "Toast", "UI_TOAST_NEUTRAL", 488, 8, 944, 72);
-            var message = Text(panel.transform, "Message", "", 20, 10, 812, 52); message.fontSize = GameTypography.Caption;
+            var message = Text(panel.transform, "Message", "", 20, 10, 812, 52); message.fontSize = GameTypography.Tokens.Caption;
             var close = Button(panel.transform, "Close", "×", 856, 4, 68, 64);
             Set(host, "panel", panel.gameObject); Set(host, "message", message); Set(host, "surface", panel); Set(host, "close", close);
             Set(host, "success", Art("UI_TOAST_SUCCESS")); Set(host, "warning", Art("UI_TOAST_WARNING")); Set(host, "error", Art("UI_TOAST_NEUTRAL"));

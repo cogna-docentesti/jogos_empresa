@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Game.Adapter.In.UI
 {
-    public enum SharedControlKind { Primary, Secondary, Danger, Accent, Icon, Card, Tab, Pill, Checkbox, Radio, Toggle, Input, Slider, Scrollbar }
+    public enum SharedControlKind { Primary, Secondary, Danger, Accent, Icon, Card, Tab, Pill, Checkbox, Radio, Toggle, Input, Slider, Scrollbar, Navigation }
 
     /// <summary>Visual states only: never replaces a Selectable or registers a business callback.</summary>
     [DisallowMultipleComponent, RequireComponent(typeof(UnityEngine.UI.Selectable))]
@@ -32,10 +32,23 @@ namespace Game.Adapter.In.UI
             UnityEngine.UI.Image selection, UnityEngine.UI.Image disabled, TMP_Text[] text, UnityEngine.UI.Image[] glyphs)
         {
             kind=role; surface=image; focusLayer=focus; selectionLayer=selection; disabledLayer=disabled;
-            labels=text; icons=glyphs; Cache(); Refresh();
+            labels=text; icons=glyphs; Cache(); ApplyTypography(); Refresh();
+        }
+        private void ApplyTypography()
+        {
+            TypographyRole? role = kind == SharedControlKind.Input ? TypographyRole.Input
+                : kind == SharedControlKind.Navigation || kind == SharedControlKind.Tab ? TypographyRole.Navigation
+                : kind == SharedControlKind.Primary || kind == SharedControlKind.Secondary || kind == SharedControlKind.Danger || kind == SharedControlKind.Accent || kind == SharedControlKind.Icon ? TypographyRole.Button : (TypographyRole?)null;
+            if (role.HasValue) foreach (var label in labels)
+            {
+                if (label == null) continue;
+                var binding=label.GetComponent<TypographyRoleBinding>();
+                if (binding != null) binding.Reapply();
+                else GameTypography.KeepSize(label,role.Value);
+            }
         }
         private void Cache() { if(control==null) control=GetComponent<UnityEngine.UI.Selectable>(); if(skin==null) skin=SharedUiSkin.Current; }
-        private void OnEnable() { hovered=pressed=false; Cache(); Refresh(); }
+        private void OnEnable() { hovered=pressed=false; Cache(); ApplyTypography(); Refresh(); }
         private void OnDisable() { hovered=pressed=false; }
         private void LateUpdate() => Refresh();
         public void SetSelected(bool value) { selected=value; Refresh(); }

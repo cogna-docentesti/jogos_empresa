@@ -466,7 +466,7 @@ namespace Game.EditorTools
             return image;
         }
 
-        public static TextMeshProUGUI Text(RectTransform rt, string content, float size, FontStyles style,
+        public static TextMeshProUGUI Text(RectTransform rt, string content, TypographyToken size, FontStyles style,
                                            Color color, TextAlignmentOptions alignment = TextAlignmentOptions.Left,
                                            bool wrap = false)
         {
@@ -479,8 +479,8 @@ namespace Game.EditorTools
 
             if (!CanWrite(rt.gameObject)) return label;
 
-            GameTypography.Apply(label, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, (style & FontStyles.Bold) != 0);
-            label.fontStyle            = style;
+            GameTypography.Apply(label, size, (style & FontStyles.Bold) != 0);
+            label.fontStyle = style & ~FontStyles.Bold;
             label.color                = color == GamePalette.Ink || color == GamePalette.Muted
                 ? GamePalette.TextOnSurface(rt.parent) : color;
             label.alignment            = alignment;
@@ -667,7 +667,7 @@ namespace Game.EditorTools
             captionRt.pivot     = new Vector2(0.5f, 0.5f);
             captionRt.offsetMin = Vector2.zero;
             captionRt.offsetMax = Vector2.zero;
-            Text(captionRt, caption, 22f, FontStyles.Normal, GamePalette.InkBody, TextAlignmentOptions.MidlineLeft);
+            Text(captionRt, caption, new TypographyToken(TypographyRole.Table,22), FontStyles.Normal, GamePalette.InkBody, TextAlignmentOptions.MidlineLeft);
 
             var valueRt = EnsureChild(row, "Value");
             valueRt.anchorMin = new Vector2(0.48f, 0f);
@@ -675,7 +675,7 @@ namespace Game.EditorTools
             valueRt.pivot     = new Vector2(0.5f, 0.5f);
             valueRt.offsetMin = Vector2.zero;
             valueRt.offsetMax = Vector2.zero;
-            valueLabel = Text(valueRt, value, 22f, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineRight);
+            valueLabel = Text(valueRt, value, new TypographyToken(TypographyRole.TableTotal,22), FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineRight);
 
             var divider = EnsureChild(row, "Divider");
             BottomBand(divider, 1f, 0, 0, 0);

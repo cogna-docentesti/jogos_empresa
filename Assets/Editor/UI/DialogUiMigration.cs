@@ -27,9 +27,9 @@ namespace Game.EditorTools
         { r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1); r.anchoredPosition=new Vector2(x,-y); r.sizeDelta=new Vector2(w,h); r.localScale=Vector3.one; r.localRotation=Quaternion.identity; }
         private static void Stretch(RectTransform r)
         { r.anchorMin=Vector2.zero; r.anchorMax=Vector2.one; r.offsetMin=r.offsetMax=Vector2.zero; r.localScale=Vector3.one; }
-        private static TMP_Text Text(RectTransform r,string value,float size,bool bold=false,Color? color=null)
+        private static TMP_Text Text(RectTransform r,string value,TypographyToken size,bool bold=false,Color? color=null)
         {
-            var t=Ensure<TextMeshProUGUI>(r); GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+            var t=Ensure<TextMeshProUGUI>(r); GameTypography.Apply(t,size,bold);
             t.text=value; t.color=color??GamePalette.Ink; t.alignment=TextAlignmentOptions.TopLeft; t.textWrappingMode=TextWrappingModes.Normal; t.overflowMode=TextOverflowModes.Overflow; t.raycastTarget=false;
             return t;
         }
@@ -49,7 +49,7 @@ namespace Game.EditorTools
             var layout=b.GetComponent<UnityEngine.UI.LayoutGroup>(); if(layout!=null) layout.enabled=false;
             var t=b.GetComponentInChildren<TMP_Text>(true); t.gameObject.SetActive(true);
             foreach(var old in b.GetComponentsInChildren<UnityEngine.UI.Image>(true).Where(i=>i.transform!=b.transform && i.name!="SharedFocus")) old.gameObject.SetActive(false);
-            Place(t.rectTransform,icon==null?16:56,12,w-(icon==null?32:72),44); Text(t.rectTransform,label,GameTypography.Button,true); t.alignment=TextAlignmentOptions.Center;
+            Place(t.rectTransform,icon==null?16:56,12,w-(icon==null?32:72),44); Text(t.rectTransform,label,GameTypography.Tokens.Button,true); t.alignment=TextAlignmentOptions.Center;
             if(icon!=null) Icon(b.transform,"ActionIcon",icon,16,18,32);
             SharedUiStyles.Bind(b,kind); b.transform.Find("SharedFocus").gameObject.SetActive(true);
         }
@@ -57,7 +57,7 @@ namespace Game.EditorTools
         {
             var strip=Node(panel,"ModalHeader",0,0,width,104); SharedUiStyles.Surface(strip.gameObject,"UI_PANEL_PLUM"); strip.SetAsFirstSibling();
             Icon(strip,"ContextIcon",icon,40,28,48);
-            title.transform.SetParent(strip,false); Place(title.rectTransform,112,30,width-152,52); Text(title.rectTransform,value,GameTypography.SectionTitle,true,GamePalette.OnDark);
+            title.transform.SetParent(strip,false); Place(title.rectTransform,112,30,width-152,52); Text(title.rectTransform,value,GameTypography.Tokens.SectionTitle,true,GamePalette.OnDark);
         }
         [MenuItem("Tools/Jogos de Empresa/UI-18/Migrate production dialogs")]
         public static void Apply()
@@ -77,15 +77,15 @@ namespace Game.EditorTools
             Button(discard,"Sair sem salvar",SharedControlKind.Danger,0,0,320,"ICON_EXIT");
             Button(save,"Salvar e sair",SharedControlKind.Primary,0,0,336,"ICON_SAVE");
             Header(panel,Get<TMP_Text>(exit,"titleText"),"Sair do jogo","ICON_EXIT",1120);
-            var body=Get<TMP_Text>(exit,"bodyText"); Place(body.rectTransform,48,144,1024,252); Text(body.rectTransform,"As opções de saída dependem do progresso salvo da sua campanha.",GameTypography.Body);
+            var body=Get<TMP_Text>(exit,"bodyText"); Place(body.rectTransform,48,144,1024,252); Text(body.rectTransform,"As opções de saída dependem do progresso salvo da sua campanha.",GameTypography.Tokens.Body);
             Modal(root,cancel); root.SetActive(false); EditorUtility.SetDirty(exit);
             var view=canvas.Find("Panel_Establishment").GetComponent<EstablishmentSummaryView>();
             root=Get<GameObject>(view,"resetWarning"); panel=(RectTransform)root.transform.Find("Dialog");
             panel.anchorMin=panel.anchorMax=panel.pivot=new Vector2(.5f,.5f); panel.anchoredPosition=Vector2.zero; panel.sizeDelta=new Vector2(1120,640); panel.localScale=Vector3.one; SharedUiStyles.Surface(panel.gameObject,"UI_MODAL_SURFACE",true); Scrim(root);
             var title=(panel.Find("Title") ?? panel.Find("ModalHeader/Title")).GetComponent<TMP_Text>(); var message=panel.Find("Text (TMP)").GetComponent<TMP_Text>();
             Header(panel,title,"Reiniciar esta campanha?","ICON_ALERT",1120); Place(message.rectTransform,48,144,1024,260);
-            Text(message.rectTransform,"As decisões, compras e resultados desta campanha serão apagados permanentemente. O cadastro também será limpo.\n\nVocê voltará à identificação para refazer as escolhas iniciais. Esta ação não pode ser desfeita.",GameTypography.Body);
-            var error=Text(Node(panel,"Error",48,404,1024,76),"",GameTypography.Label,false,GamePalette.ErrorText); error.gameObject.SetActive(false);
+            Text(message.rectTransform,"As decisões, compras e resultados desta campanha serão apagados permanentemente. O cadastro também será limpo.\n\nVocê voltará à identificação para refazer as escolhas iniciais. Esta ação não pode ser desfeita.",GameTypography.Tokens.Body);
+            var error=Text(Node(panel,"Error",48,404,1024,76),"",GameTypography.Tokens.Label,false,GamePalette.ErrorText); error.gameObject.SetActive(false);
             Set(view,"resetTitle",title); Set(view,"resetBody",message); Set(view,"resetError",error);
             cancel=Get<UnityEngine.UI.Button>(view,"cancelResetButton"); var confirm=Get<UnityEngine.UI.Button>(view,"confirmResetButton");
             Button(cancel,"Cancelar",SharedControlKind.Secondary,48,524,496); Button(confirm,"Reiniciar jogo",SharedControlKind.Danger,576,524,496,"ICON_RESET");

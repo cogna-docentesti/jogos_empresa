@@ -30,7 +30,7 @@ namespace Game.Adapter.In.UI
             // size; severity already has both a text prefix and its own surface sprite.
             message.color = GamePalette.Ink;
             message.enableVertexGradient = false;
-            message.fontSize = GameTypography.Body;
+            GameTypography.KeepSize(message,TypographyRole.Body);
             surface.color = Color.white;
             var textRect = message.rectTransform;
             float height = Mathf.Max(72, message.GetPreferredValues(message.text, textRect.rect.width, 0).y + 24);

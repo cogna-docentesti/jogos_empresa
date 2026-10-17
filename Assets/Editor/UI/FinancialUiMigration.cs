@@ -31,10 +31,10 @@ namespace Game.EditorTools
             image.type = image.sprite != null && image.sprite.border != Vector4.zero ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
             image.preserveAspect = image.type == UnityEngine.UI.Image.Type.Simple && image.sprite != null; return image;
         }
-        private static TMP_Text Text(Transform p, string n, string value, float x, float y, float w, float h, float size, bool bold = false, Color? color = null)
+        private static TMP_Text Text(Transform p, string n, string value, float x, float y, float w, float h, TypographyToken size, bool bold = false, Color? color = null)
         {
             var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h));
-            GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+            GameTypography.Apply(t, size, bold);
             t.text = value; t.color = color ?? GamePalette.Ink; t.textWrappingMode = TextWrappingModes.Normal; t.overflowMode = TextOverflowModes.Overflow; t.raycastTarget = false; return t;
         }
         private static void Set(UnityEngine.Object target, string field, UnityEngine.Object value)
@@ -48,7 +48,7 @@ namespace Game.EditorTools
         private static UnityEngine.UI.Button Button(Transform p, string n, string label, float x, float y, float w, float h)
         {
             var r = Node(p, n, x, y, w, h); var b = Ensure<UnityEngine.UI.Button>(r); b.targetGraphic = Ensure<UnityEngine.UI.Image>(r);
-            var t = Text(r, "Label", label, 16, 12, w - 32, h - 24, GameTypography.Button, true); t.alignment = TextAlignmentOptions.Center;
+            var t = Text(r, "Label", label, 16, 12, w - 32, h - 24, GameTypography.Tokens.Button, true); t.alignment = TextAlignmentOptions.Center;
             SharedUiStyles.Bind(b, SharedControlKind.Primary); return b;
         }
         private static void Ignore(Component c) => Ensure<UnityEngine.UI.LayoutElement>(c).ignoreLayout = true;
@@ -79,21 +79,21 @@ namespace Game.EditorTools
             var bg = Ensure<UnityEngine.UI.Image>(panel); bg.sprite = null; bg.color = GamePalette.Surface; bg.raycastTarget = true;
             var view = panel.GetComponent<FinancialScreenView>();
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88); Retire(header.transform);
-            Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 700, 60, GameTypography.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "stepText", Text(header.transform, "Context", "PASSO 5 DE 7  •  BANCO E CAPITAL", 1040, 28, 856, 40, GameTypography.Body, false, GamePalette.OnDark));
-            Set(view, "titleText", Text(panel, "TitleText", "Banco CogCred", 24, 112, 740, 64, GameTypography.ScreenTitle, true));
-            Text(panel, "CapitalLabel", "Capital inicial", 1000, 112, 400, 32, GameTypography.Label);
-            Set(view, "capitalValueText", Text(panel, "CapitalValue", "Indisponível", 1000, 148, 400, 48, GameTypography.SectionTitle, true));
-            Text(panel, "CashLabel", "Caixa disponível", 1456, 112, 440, 32, GameTypography.Label);
-            Set(view, "cashValueText", Text(panel, "CashValue", "Indisponível", 1456, 148, 440, 48, GameTypography.SectionTitle, true));
+            Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 700, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
+            Set(view, "stepText", Text(header.transform, "Context", "PASSO 5 DE 7  •  BANCO E CAPITAL", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "titleText", Text(panel, "TitleText", "Banco CogCred", 24, 112, 740, 64, GameTypography.Tokens.ScreenTitle, true));
+            Text(panel, "CapitalLabel", "Capital inicial", 1000, 112, 400, 32, GameTypography.Tokens.Label);
+            Set(view, "capitalValueText", Text(panel, "CapitalValue", "Indisponível", 1000, 148, 400, 48, GameTypography.Tokens.SectionTitle, true));
+            Text(panel, "CashLabel", "Caixa disponível", 1456, 112, 440, 32, GameTypography.Tokens.Label);
+            Set(view, "cashValueText", Text(panel, "CashValue", "Indisponível", 1456, 148, 440, 48, GameTypography.Tokens.SectionTitle, true));
             Picture(panel, "BankEnvironment", "BANK_ENVIRONMENT", 24, 208, 480, 752);
             Picture(panel, "BankAdvisor", "CH01_BANK", 54, 240, 420, 720);
             var scroll = Scroll(panel); Set(view, "cardsScrollRect", scroll); Set(view, "bankCardsContainer", scroll.content);
             var detail = Picture(panel, "CreditDetails", "UI_PANEL_IVORY", 528, 776, 1368, 184);
-            Set(view, "hintText", Text(detail.transform, "Availability", "Selecione uma opção.", 24, 20, 1320, 64, GameTypography.Body, true));
-            Set(view, "summaryText", Text(detail.transform, "Summary", "Nenhuma opção selecionada.", 24, 96, 1320, 68, GameTypography.Body));
+            Set(view, "hintText", Text(detail.transform, "Availability", "Selecione uma opção.", 24, 20, 1320, 64, GameTypography.Tokens.BodyStrong,true));
+            Set(view, "summaryText", Text(detail.transform, "Summary", "Nenhuma opção selecionada.", 24, 96, 1320, 68, GameTypography.Tokens.Body));
             var footer = Picture(panel, "Footer", "UI_NAVBAR_PLUM", 0, 984, 1920, 96); Retire(footer.transform);
-            Set(view, "footerHintText", Text(footer.transform, "Help", "Selecione, confira e confirme.", 328, 22, 504, 56, GameTypography.Label, false, GamePalette.OnDark));
+            Set(view, "footerHintText", Text(footer.transform, "Help", "Selecione, confira e confirme.", 328, 22, 504, 56, GameTypography.Tokens.Label, false, GamePalette.OnDark));
             var confirm = Button(footer.transform, "ConfirmCredit", "Confirmar crédito", 1120, 14, 480, 68); Set(view, "confirmButton", confirm); Set(view, "confirmLabel", confirm.transform.Find("Label").GetComponent<TMP_Text>());
             UpdateCard(); Set(view, "bankCardPrefab", AssetDatabase.LoadAssetAtPath<BankCardView>("Assets/Prefabs/Card_loan.prefab"));
             var manifest = Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText("docs/art/manifest.json"));
@@ -119,13 +119,13 @@ namespace Game.EditorTools
                 var height = Ensure<UnityEngine.UI.LayoutElement>(r); height.preferredHeight = height.minHeight = 212; height.flexibleHeight = 0;
                 var card = root.GetComponent<BankCardView>(); var button = Ensure<UnityEngine.UI.Button>(r); Set(card, "selectButton", button);
                 Set(card, "creditLineIcon", Picture(r, "CreditArtwork", "CREDIT_SEM_CREDITO", 24, 40, 120, 120));
-                Set(card, "nameText", Text(r, "Name", "Linha de crédito", 168, 24, 600, 40, GameTypography.SectionTitle, true));
-                Set(card, "descriptionText", Text(r, "Description", "Descrição da linha.", 168, 72, 600, 60, GameTypography.Body));
-                Set(card, "availabilityText", Text(r, "Availability", "Disponibilidade", 168, 140, 600, 36, GameTypography.Label, true));
-                var principal = Text(r, "Principal", "Capital próprio", 816, 24, 440, 52, GameTypography.DisplayValue, true); principal.alignment = TextAlignmentOptions.Right; Set(card, "maxAmountText", principal);
-                Set(card, "interestRateText", Text(r, "Interest", "Sem juros", 816, 86, 484, 32, GameTypography.Label));
-                Set(card, "termText", Text(r, "Term", "Sem parcelas", 816, 120, 484, 32, GameTypography.Label));
-                Set(card, "installmentText", Text(r, "Installment", "", 816, 154, 484, 52, GameTypography.Label, true));
+                Set(card, "nameText", Text(r, "Name", "Linha de crédito", 168, 24, 600, 40, GameTypography.Tokens.SectionTitle, true));
+                Set(card, "descriptionText", Text(r, "Description", "Descrição da linha.", 168, 72, 600, 60, GameTypography.Tokens.Body));
+                Set(card, "availabilityText", Text(r, "Availability", "Disponibilidade", 168, 140, 600, 36, GameTypography.Tokens.Label, true));
+                var principal = Text(r, "Principal", "Capital próprio", 816, 24, 440, 52, GameTypography.Tokens.DisplayValue, true); principal.alignment = TextAlignmentOptions.Right; Set(card, "maxAmountText", principal);
+                Set(card, "interestRateText", Text(r, "Interest", "Sem juros", 816, 86, 484, 32, GameTypography.Tokens.Label));
+                Set(card, "termText", Text(r, "Term", "Sem parcelas", 816, 120, 484, 32, GameTypography.Tokens.Label));
+                Set(card, "installmentText", Text(r, "Installment", "", 816, 154, 484, 52, GameTypography.Tokens.Label, true));
                 Set(card, "selectionMark", Picture(r, "SelectionMark", "UI_RADIO_ON", 1280, 24, 28, 28));
                 SharedUiStyles.Bind(button, SharedControlKind.Card);
                 foreach (var n in new[] { "SharedFocus", "SharedSelection", "SharedDisabled" }) { root.transform.Find(n).gameObject.SetActive(true); Ignore(root.transform.Find(n)); }

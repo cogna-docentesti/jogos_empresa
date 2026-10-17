@@ -147,19 +147,19 @@ namespace Game.Adapter.In.UI.Theme
         public const float RingBadgeMarker = 4f;
 
         // =====================================================
-        //  TIPOGRAFIA - InterTight (razao cap/em = 0.734)
+        //  TIPOGRAFIA - faces reais por papel; metricas nativas
         // =====================================================
 
-        public const float FontTitle        = GameTypography.ScreenTitle; // "Abertura do Restaurante"
-        public const float FontContinue     = GameTypography.Button; // "CONTINUAR"
-        public const float FontZoneTitle    = GameTypography.SectionTitle; // "AREA FINANCEIRA"
-        public const float FontMarkerName   = GameTypography.NodeTitle;
-        public const float FontStatRow      = GameTypography.Body; // rotulo e valor
-        public const float FontMenu         = GameTypography.Button; // MENU e texto de destaque
-        public const float FontBody         = GameTypography.Body; // subtitulo da tela, descricao
-        public const float FontZoneSubtitle = GameTypography.Label;
-        public const float FontMarkerSub    = GameTypography.Caption;
-        public const float FontStep         = GameTypography.Caption; // "ETAPA 1 DE 4"
+        public static TypographyToken FontTitle => new TypographyToken(TypographyRole.ScreenTitle, GameTypography.ScreenTitle); // "Abertura do Restaurante"
+        public static TypographyToken FontContinue => new TypographyToken(TypographyRole.Button, GameTypography.Button); // "CONTINUAR"
+        public static TypographyToken FontZoneTitle => new TypographyToken(TypographyRole.SectionTitle, GameTypography.SectionTitle); // "AREA FINANCEIRA"
+        public static TypographyToken FontMarkerName => new TypographyToken(TypographyRole.MapMarker, GameTypography.NodeTitle);
+        public static TypographyToken FontStatRow => new TypographyToken(TypographyRole.Table, GameTypography.Body); // rotulo e valor
+        public static TypographyToken FontMenu => new TypographyToken(TypographyRole.Navigation, GameTypography.Button); // MENU e texto de destaque
+        public static TypographyToken FontBody => new TypographyToken(TypographyRole.Body, GameTypography.Body); // subtitulo da tela, descricao
+        public static TypographyToken FontZoneSubtitle => new TypographyToken(TypographyRole.Label, GameTypography.Label);
+        public static TypographyToken FontMarkerSub => new TypographyToken(TypographyRole.Caption, GameTypography.Caption);
+        public static TypographyToken FontStep => new TypographyToken(TypographyRole.Navigation, GameTypography.Caption); // "ETAPA 1 DE 4"
 
         // =====================================================
         //  9-SLICE

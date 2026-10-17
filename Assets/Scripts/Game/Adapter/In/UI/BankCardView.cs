@@ -7,6 +7,16 @@ namespace Game.Adapter.In.UI
 {
     public sealed class BankCardView : MonoBehaviour
     {
+        private void ApplyTypography()
+        {
+            GameTypography.KeepSize(nameText,TypographyRole.SectionTitle);
+            GameTypography.KeepSize(descriptionText,TypographyRole.Body);
+            GameTypography.KeepSize(maxAmountText,TypographyRole.Kpi);
+            GameTypography.KeepSize(interestRateText,TypographyRole.Table);
+            GameTypography.KeepSize(termText,TypographyRole.Caption);
+            GameTypography.KeepSize(installmentText,TypographyRole.Body);
+            GameTypography.KeepSize(availabilityText,TypographyRole.Caption);
+        }
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI maxAmountText;
@@ -20,11 +30,12 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Image interactionOutline;
         public CreditLineData CreditLine { get; private set; }
         public event Action<BankCardView> Selected;
-        private void OnEnable() { if (selectButton != null) selectButton.onClick.AddListener(OnSelected); }
+        private void OnEnable() { ApplyTypography(); if (selectButton != null) selectButton.onClick.AddListener(OnSelected); }
         private void OnDisable() { if (selectButton != null) selectButton.onClick.RemoveListener(OnSelected); }
         private void OnSelected() => Selected?.Invoke(this);
         public void Setup(CreditLineData line)
         {
+            ApplyTypography();
             CreditLine = line; nameText.text = line.displayName; descriptionText.text = line.cardDescription;
             creditLineIcon.sprite = line.icon; creditLineIcon.color = Color.white;
             creditLineIcon.type = UnityEngine.UI.Image.Type.Simple; creditLineIcon.preserveAspect = true; creditLineIcon.raycastTarget = false;

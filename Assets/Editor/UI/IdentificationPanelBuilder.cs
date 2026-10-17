@@ -29,8 +29,8 @@ namespace Game.EditorTools
             var canvas = scene.GetRootGameObjects().Single(g => g.name == "Canvas");
             if (canvas.GetComponent<UnityEngine.UI.CanvasScaler>().referenceResolution != new Vector2(1920, 1080))
                 throw new InvalidOperationException("Unexpected main canvas reference resolution.");
-            font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/InterTight-Variable.asset");
-            if (font == null) throw new InvalidOperationException("Inter Tight is missing.");
+            font = GameTypography.Resolve(TypographyRole.Body).Font;
+            if (font == null) throw new InvalidOperationException("Concept font set is missing.");
 
             var panel = canvas.transform.Find("Panel_Identification");
             if (panel == null)
@@ -94,9 +94,9 @@ namespace Game.EditorTools
             left.SetSiblingIndex(1); right.SetSiblingIndex(2); welcome.SetSiblingIndex(3);
             var header = Child(design, "IdentificationHeader"); Place(header, 0, 0, 1920, 88);
             Paint(header, "hud/bars/topbar_violet.png", false);
-            Label(header, "GameTitle", "Jogos de Empresa", 40, 18, 410, 52, 36, Ivory, true);
+            Label(header, "GameTitle", "Jogos de Empresa", 40, 18, 410, 52, new TypographyToken(TypographyRole.Brand,36), Ivory, true);
             Label(header, "GameSubtitle", "Gestão de restaurantes", 470, 28, 510, 36, 24, Ivory);
-            Label(header, "Step", "PASSO 1 DE 7  ·  Identificação", 1230, 28, 630, 36, 24, Ivory, true);
+            Label(header, "Step", "PASSO 1 DE 7  ·  Identificação", 1230, 28, 630, 36, new TypographyToken(TypographyRole.Navigation,24), Ivory, true);
 
             var form = design.Find("Popup") as RectTransform;
             Place(form, 1180, 184, 650, 772);
@@ -104,7 +104,7 @@ namespace Game.EditorTools
             form.SetAsLastSibling();
             var logo = Child(form, "CognaLogo"); Place(logo, 48, 28, 96, 96);
             Paint(logo, "shared/brand/logo_cogna.png", false, true);
-            StyleText(form.Find("Title").GetComponent<TMP_Text>(), "Identificação", 44, Ink, true);
+            StyleText(form.Find("Title").GetComponent<TMP_Text>(), "Identificação", new TypographyToken(TypographyRole.ScreenTitle,44), Ink, true);
             Place((RectTransform)form.Find("Title"), 168, 26, 438, 60);
             Label(form, "Intro", "Seus dados para começar", 168, 88, 430, 34, 24, Ink);
 
@@ -114,8 +114,8 @@ namespace Game.EditorTools
             var ra = (TMP_InputField)so.FindProperty("raInput").objectReferenceValue;
             StyleInput(name, 182, "Nome do aluno", "Digite seu nome", 50);
             StyleInput(ra, 370, "RA", "Digite seu RA", 10);
-            Label(form, "NameLimits", "De 5 a 50 caracteres", 48, 314, 554, 30, 20, Ink);
-            Label(form, "RALimits", "De 5 a 10 caracteres", 48, 502, 554, 30, 20, Ink);
+            Label(form, "NameLimits", "De 5 a 50 caracteres", 48, 314, 554, 30, new TypographyToken(TypographyRole.Caption,20), Ink);
+            Label(form, "RALimits", "De 5 a 10 caracteres", 48, 502, 554, 30, new TypographyToken(TypographyRole.Caption,20), Ink);
 
             var validation = (TMP_Text)so.FindProperty("validationText").objectReferenceValue;
             Place(validation.rectTransform, 48, 542, 554, 72);
@@ -135,9 +135,9 @@ namespace Game.EditorTools
             button.targetGraphic = button.GetComponent<UnityEngine.UI.Image>();
             var buttonText = button.GetComponentInChildren<TMP_Text>(true);
             Stretch(buttonText.rectTransform);
-            StyleText(buttonText, "Cadastrar", GameTypography.Button, Ivory, true);
+            StyleText(buttonText, "Cadastrar", GameTypography.Tokens.Button, Ivory, true);
             buttonText.alignment = TextAlignmentOptions.Center;
-            Label(form, "StorageNote", "Seus dados ficam salvos neste dispositivo.", 48, 734, 554, 26, 20, Ink);
+            Label(form, "StorageNote", "Seus dados ficam salvos neste dispositivo.", 48, 734, 554, 26, new TypographyToken(TypographyRole.Caption,20), Ink);
             foreach (var text in panel.GetComponentsInChildren<TMP_Text>(true))
             {
                 text.raycastTarget = false;
@@ -188,7 +188,7 @@ namespace Game.EditorTools
             var group = (RectTransform)input.transform.parent;
             Place(group, 48, y, 554, 124);
             var title = group.GetComponentsInChildren<TMP_Text>(true).First(t => t.transform.parent == group);
-            Place(title.rectTransform, 0, 0, 554, 32); StyleText(title, label, 22, Ink, true);
+            Place(title.rectTransform, 0, 0, 554, 32); StyleText(title, label, new TypographyToken(TypographyRole.Label,22), Ink, true);
             Place((RectTransform)input.transform, 0, 44, 554, 80);
             Paint((RectTransform)input.transform, "shared/components/controls/input_normal.png", true).raycastTarget = true;
             input.transition = UnityEngine.UI.Selectable.Transition.None;
@@ -197,8 +197,8 @@ namespace Game.EditorTools
             input.selectionColor = new Color(.725f,.604f,.91f,.5f);
             input.textViewport.anchorMin = Vector2.zero; input.textViewport.anchorMax = Vector2.one;
             input.textViewport.offsetMin = new Vector2(24, 12); input.textViewport.offsetMax = new Vector2(-24, -12);
-            StyleText(input.textComponent, string.Empty, 24, Ink);
-            StyleText((TMP_Text)input.placeholder, placeholder, 24, Hex("#65546F"));
+            StyleText(input.textComponent, string.Empty, GameTypography.Tokens.Input, Ink);
+            StyleText((TMP_Text)input.placeholder, placeholder, GameTypography.Tokens.Input, Hex("#65546F"));
             Stretch(input.textComponent.rectTransform); Stretch(((TMP_Text)input.placeholder).rectTransform);
             var appearance = input.GetComponent<IdentificationInputAppearance>() ?? input.gameObject.AddComponent<IdentificationInputAppearance>();
             var settings = new SerializedObject(appearance);
@@ -249,15 +249,15 @@ namespace Game.EditorTools
             image.color = Color.white; image.type = sliced ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
             image.preserveAspect = contain; image.raycastTarget = false; return image;
         }
-        private static void StyleText(TMP_Text text, string value, float size, Color color, bool bold = false)
+        private static void StyleText(TMP_Text text, string value, TypographyToken size, Color color, bool bold = false)
         {
-            GameTypography.Apply(text, font, size, bold); text.text = value;
-            text.fontSize = size; text.enableAutoSizing = false; text.fontStyle = bold ? FontStyles.Bold : FontStyles.Normal;
+            GameTypography.Apply(text, size, bold); text.text = value;
+            text.fontSize = size; text.enableAutoSizing = false;
             text.color = color; text.alignment = TextAlignmentOptions.MidlineLeft;
             text.characterSpacing = 0; text.lineSpacing = 0; text.margin = Vector4.zero;
             text.overflowMode = TextOverflowModes.Overflow; text.raycastTarget = false;
         }
-        private static void Label(Transform parent, string name, string value, float x, float y, float w, float h, float size, Color color, bool bold = false)
+        private static void Label(Transform parent, string name, string value, float x, float y, float w, float h, TypographyToken size, Color color, bool bold = false)
         {
             var r = Child(parent, name); Place(r,x,y,w,h);
             var text = r.GetComponent<TextMeshProUGUI>() ?? r.gameObject.AddComponent<TextMeshProUGUI>();

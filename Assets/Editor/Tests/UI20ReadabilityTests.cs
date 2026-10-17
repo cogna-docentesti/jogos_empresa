@@ -32,7 +32,7 @@ public class UI20ReadabilityTests
         {
             var panel=new GameObject("Surface",typeof(RectTransform),typeof(UnityEngine.UI.Image));panel.transform.SetParent(root.transform,false);((RectTransform)panel.transform).sizeDelta=new Vector2(944,72);
             var text=new GameObject("Message",typeof(RectTransform),typeof(TextMeshProUGUI)).GetComponent<TMP_Text>();text.transform.SetParent(panel.transform,false);
-            text.rectTransform.sizeDelta=new Vector2(812,52);text.font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/InterTight-Variable.asset");
+            text.rectTransform.sizeDelta=new Vector2(812,52);Game.Adapter.In.UI.Theme.GameTypography.Apply(text,Game.Adapter.In.UI.Theme.TypographyRole.Body,24);
             text.textWrappingMode=TextWrappingModes.Normal;
             var close=new GameObject("Close",typeof(RectTransform),typeof(UnityEngine.UI.Button)).GetComponent<UnityEngine.UI.Button>();close.transform.SetParent(panel.transform,false);
             var toast=root.AddComponent<FeedbackToast>();void Set(string n,object v)=>typeof(FeedbackToast).GetField(n,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(toast,v);

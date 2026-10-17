@@ -33,10 +33,10 @@ namespace Game.EditorTools
             i.type = i.sprite != null && i.sprite.border != Vector4.zero ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
             i.preserveAspect = i.type == UnityEngine.UI.Image.Type.Simple && i.sprite != null; return i;
         }
-        private static TextMeshProUGUI Text(Transform p, string n, string value, float x, float y, float w, float h, float size, bool bold = false, Color? color = null)
+        private static TextMeshProUGUI Text(Transform p, string n, string value, float x, float y, float w, float h, TypographyToken size, bool bold = false, Color? color = null)
         {
             var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h));
-            GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+            GameTypography.Apply(t, size, bold);
             t.text = value; t.color = color ?? GamePalette.Ink; t.alignment = TextAlignmentOptions.TopLeft; t.textWrappingMode = TextWrappingModes.Normal; t.overflowMode = TextOverflowModes.Overflow; t.raycastTarget = false; return t;
         }
         private static void Set(UnityEngine.Object o, string n, UnityEngine.Object v)
@@ -51,7 +51,7 @@ namespace Game.EditorTools
         private static UnityEngine.UI.Button Button(Transform p, string n, string label, float x, float y, float w, float h, SharedControlKind kind = SharedControlKind.Primary)
         {
             var r = Node(p, n, x, y, w, h); Retire(r); var b = Ensure<UnityEngine.UI.Button>(r); b.targetGraphic = Ensure<UnityEngine.UI.Image>(r);
-            var t = Text(r, "Label", label, 12, 8, w - 24, h - 16, GameTypography.Button, true); t.alignment = TextAlignmentOptions.Center;
+            var t = Text(r, "Label", label, 12, 8, w - 24, h - 16, GameTypography.Tokens.Button, true); t.alignment = TextAlignmentOptions.Center;
             SharedUiStyles.Bind(b, kind); r.Find("SharedFocus").gameObject.SetActive(true); return b;
         }
         private static void Card()
@@ -64,12 +64,12 @@ namespace Game.EditorTools
                 var control = go.AddComponent<UnityEngine.UI.Button>(); control.targetGraphic = surface;
                 Set(card, "environment", Picture(r, "Environment", "TEAM_ENV_SERVICE_COUNTER", 20, 20, 242, 136));
                 Set(card, "portrait", Picture(r, "Portrait", "PORTRAIT_ATTENDANT", 34, 164, 216, 192));
-                Set(card, "nameText", Text(r, "Name", "Função", 286, 24, 338, 64, GameTypography.SectionTitle, true));
-                Set(card, "salaryText", Text(r, "Salary", "", 286, 100, 338, 40, GameTypography.Body, true));
-                Set(card, "capacityText", Text(r, "Capacity", "", 286, 144, 338, 64, GameTypography.Label));
-                Set(card, "requirementText", Text(r, "Requirement", "", 286, 216, 338, 56, GameTypography.Caption));
+                Set(card, "nameText", Text(r, "Name", "Função", 286, 24, 338, 64, GameTypography.Tokens.SectionTitle, true));
+                Set(card, "salaryText", Text(r, "Salary", "", 286, 100, 338, 40, GameTypography.Tokens.BodyStrong,true));
+                Set(card, "capacityText", Text(r, "Capacity", "", 286, 144, 338, 64, GameTypography.Tokens.Label));
+                Set(card, "requirementText", Text(r, "Requirement", "", 286, 216, 338, 56, GameTypography.Tokens.Caption));
                 Set(card, "removeButton", Button(r, "Remove", "−", 286, 276, 68, 68, SharedControlKind.Secondary));
-                var q = Text(r, "Quantity", "0", 366, 276, 178, 68, GameTypography.Body, true); q.alignment = TextAlignmentOptions.Center; Set(card, "quantityText", q);
+                var q = Text(r, "Quantity", "0", 366, 276, 178, 68, GameTypography.Tokens.BodyStrong,true); q.alignment = TextAlignmentOptions.Center; Set(card, "quantityText", q);
                 Set(card, "addButton", Button(r, "Add", "+", 556, 276, 68, 68));
                 SharedUiStyles.Bind(control, SharedControlKind.Card);
                 var outline = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 648, 368); Stretch(outline.rectTransform); Set(card, "interactionOutline", outline); outline.enabled = false;
@@ -90,11 +90,11 @@ namespace Game.EditorTools
             var bg = Ensure<UnityEngine.UI.Image>(panel); bg.sprite = null; bg.color = GamePalette.Surface; bg.raycastTarget = true;
             var view = Ensure<TeamScreenView>(panel); Set(Ensure<TeamScreenController>(panel), "view", view);
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88); Retire(header.transform);
-            Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "stepText", Text(header.transform, "Context", "PASSO 7 DE 7  •  EQUIPE", 1040, 28, 856, 40, GameTypography.Body, false, GamePalette.OnDark));
-            Text(panel, "TitleText", "Equipe e RH", 24, 112, 1000, 56, GameTypography.ScreenTitle, true);
-            Set(view, "contextText", Text(panel, "ContextText", "", 24, 172, 1000, 32, GameTypography.Body));
-            Set(view, "hintText", Text(panel, "Guidance", "", 1056, 116, 840, 88, GameTypography.Body));
+            Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
+            Set(view, "stepText", Text(header.transform, "Context", "PASSO 7 DE 7  •  EQUIPE", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Text(panel, "TitleText", "Equipe e RH", 24, 112, 1000, 56, GameTypography.Tokens.ScreenTitle, true);
+            Set(view, "contextText", Text(panel, "ContextText", "", 24, 172, 1000, 32, GameTypography.Tokens.Body));
+            Set(view, "hintText", Text(panel, "Guidance", "", 1056, 116, 840, 88, GameTypography.Tokens.Body));
             var body = Node(panel, "Body", 24, 216, 1872, 752); Retire(body);
             var catalog = Node(body, "CatalogScroll", 0, 0, 1352, 752); var scroll = Ensure<UnityEngine.UI.ScrollRect>(catalog);
             scroll.vertical = true; scroll.horizontal = false; scroll.movementType = UnityEngine.UI.ScrollRect.MovementType.Clamped; scroll.scrollSensitivity = 48;
@@ -109,22 +109,22 @@ namespace Game.EditorTools
             var bar = Ensure<UnityEngine.UI.Scrollbar>(track); bar.handleRect = handle.rectTransform; bar.targetGraphic = handle; bar.direction = UnityEngine.UI.Scrollbar.Direction.BottomToTop;
             bar.navigation = new UnityEngine.UI.Navigation { mode = UnityEngine.UI.Navigation.Mode.None }; scroll.verticalScrollbar = bar; scroll.verticalScrollbarVisibility = UnityEngine.UI.ScrollRect.ScrollbarVisibility.AutoHide;
             Set(view, "cardContainer", content); Set(view, "catalogScroll", scroll); Set(view, "cardPrefab", AssetDatabase.LoadAssetAtPath<TeamRoleCardView>("Assets/Prefabs/TeamRoleCard.prefab"));
-            var error = Text(body, "CatalogError", "Equipe indisponível.\nConfira os dados para continuar.", 80, 280, 1152, 120, GameTypography.Body); error.alignment = TextAlignmentOptions.Center; Set(view, "catalogError", error.gameObject); error.gameObject.SetActive(false);
+            var error = Text(body, "CatalogError", "Equipe indisponível.\nConfira os dados para continuar.", 80, 280, 1152, 120, GameTypography.Tokens.Body); error.alignment = TextAlignmentOptions.Center; Set(view, "catalogError", error.gameObject); error.gameObject.SetActive(false);
             var summary = Picture(body, "Summary", "UI_PANEL_IVORY", 1376, 0, 496, 752);
-            Text(summary.transform, "Title", "Sua equipe", 24, 24, 448, 48, GameTypography.SectionTitle, true);
-            Set(view, "countText", Text(summary.transform, "Count", "", 24, 84, 448, 40, GameTypography.Body, true));
-            Text(summary.transform, "PayrollLabel", "Folha mensal", 24, 140, 448, 32, GameTypography.Label);
-            var payroll = Text(summary.transform, "Payroll", "", 24, 180, 448, 48, GameTypography.SectionTitle, true); payroll.alignment = TextAlignmentOptions.Right; Set(view, "payrollText", payroll);
-            Text(summary.transform, "CapacityLabel", "Capacidade da equipe", 24, 244, 448, 32, GameTypography.Label);
-            Set(view, "capacityText", Text(summary.transform, "Capacity", "", 24, 282, 448, 40, GameTypography.Body, true));
-            Text(summary.transform, "CapacityNote", "A operação também depende do espaço e dos equipamentos.", 24, 326, 448, 64, GameTypography.Caption);
-            Text(summary.transform, "AlignmentLabel", "Alinhamento das escolhas", 24, 406, 448, 32, GameTypography.Label);
-            Set(view, "alignmentText", Text(summary.transform, "Alignment", "", 24, 444, 448, 40, GameTypography.Body, true));
-            Text(summary.transform, "RequirementsLabel", "Mínimos do restaurante", 24, 500, 448, 32, GameTypography.Label);
-            Set(view, "requirementsText", Text(summary.transform, "Requirements", "", 24, 538, 448, 80, GameTypography.Label));
+            Text(summary.transform, "Title", "Sua equipe", 24, 24, 448, 48, GameTypography.Tokens.SectionTitle, true);
+            Set(view, "countText", Text(summary.transform, "Count", "", 24, 84, 448, 40, GameTypography.Tokens.BodyStrong,true));
+            Text(summary.transform, "PayrollLabel", "Folha mensal", 24, 140, 448, 32, GameTypography.Tokens.Label);
+            var payroll = Text(summary.transform, "Payroll", "", 24, 180, 448, 48, GameTypography.Tokens.SectionTitle, true); payroll.alignment = TextAlignmentOptions.Right; Set(view, "payrollText", payroll);
+            Text(summary.transform, "CapacityLabel", "Capacidade da equipe", 24, 244, 448, 32, GameTypography.Tokens.Label);
+            Set(view, "capacityText", Text(summary.transform, "Capacity", "", 24, 282, 448, 40, GameTypography.Tokens.BodyStrong,true));
+            Text(summary.transform, "CapacityNote", "A operação também depende do espaço e dos equipamentos.", 24, 326, 448, 64, GameTypography.Tokens.Caption);
+            Text(summary.transform, "AlignmentLabel", "Alinhamento das escolhas", 24, 406, 448, 32, GameTypography.Tokens.Label);
+            Set(view, "alignmentText", Text(summary.transform, "Alignment", "", 24, 444, 448, 40, GameTypography.Tokens.BodyStrong,true));
+            Text(summary.transform, "RequirementsLabel", "Mínimos do restaurante", 24, 500, 448, 32, GameTypography.Tokens.Label);
+            Set(view, "requirementsText", Text(summary.transform, "Requirements", "", 24, 538, 448, 80, GameTypography.Tokens.Label));
             var empty = Picture(summary.transform, "EmptyTeam", "EMPTY_TEAM", 164, 616, 168, 112); Set(view, "emptyTeam", empty.gameObject);
             var footer = Picture(panel, "BottomBar", "UI_NAVBAR_PLUM", 0, 984, 1920, 96); Retire(footer.transform);
-            Text(footer.transform, "Note", "Use + e − para ajustar as contratações.", 304, 26, 848, 44, GameTypography.Body, false, GamePalette.OnDark);
+            Text(footer.transform, "Note", "Use + e − para ajustar as contratações.", 304, 26, 848, 44, GameTypography.Tokens.Body, false, GamePalette.OnDark);
             var confirm = Button(footer.transform, "Confirm", "Confirmar equipe e abrir hub", 1128, 14, 480, 68); Set(view, "confirmButton", confirm); Set(view, "confirmLabel", confirm.GetComponentInChildren<TextMeshProUGUI>());
             var so = new SerializedObject(view); var visuals = so.FindProperty("roleVisuals");
             var ids = new[] { "attendant", "grill_cook", "head_chef", "manager", "sushi_chef" };

@@ -36,15 +36,15 @@ namespace Game.EditorTools
             i.type = i.sprite != null && i.sprite.border != Vector4.zero ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
             i.preserveAspect = i.type == UnityEngine.UI.Image.Type.Simple && i.sprite != null; return i;
         }
-        private static TextMeshProUGUI Text(Transform p, string n, string value, float x, float y, float w, float h, float size, bool bold = false, Color? color = null)
+        private static TextMeshProUGUI Text(Transform p, string n, string value, float x, float y, float w, float h, TypographyToken size, bool bold = false, Color? color = null)
         {
-            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, size, bold);
             t.text = value; t.color = color ?? GamePalette.Ink; t.alignment = TextAlignmentOptions.TopLeft; t.textWrappingMode = TextWrappingModes.Normal; t.overflowMode = TextOverflowModes.Overflow; t.richText = false; t.raycastTarget = false; return t;
         }
         private static UnityEngine.UI.Button Button(Transform p, string n, string label, float x, float y, float w, float h, SharedControlKind kind = SharedControlKind.Primary)
         {
             var r = Node(p, n, x, y, w, h); var b = Ensure<UnityEngine.UI.Button>(r); b.targetGraphic = Ensure<UnityEngine.UI.Image>(r);
-            var t = Text(r, "Label", label, 16, 8, w - 32, h - 16, GameTypography.Button, true); t.alignment = TextAlignmentOptions.Center; SharedUiStyles.Bind(b, kind); return b;
+            var t = Text(r, "Label", label, 16, 8, w - 32, h - 16, GameTypography.Tokens.Button, true); t.alignment = TextAlignmentOptions.Center; SharedUiStyles.Bind(b, kind); return b;
         }
         private static void Stretch(RectTransform r) { r.anchorMin = Vector2.zero; r.anchorMax = Vector2.one; r.offsetMin = r.offsetMax = Vector2.zero; }
         private static UnityEngine.UI.VerticalLayoutGroup Vertical(RectTransform r, int padding = 6)
@@ -63,7 +63,7 @@ namespace Game.EditorTools
             s.verticalScrollbar = bar; s.verticalScrollbarVisibility = UnityEngine.UI.ScrollRect.ScrollbarVisibility.AutoHide; return s;
         }
 
-        private static TextMeshProUGUI FlowText(Transform parent, string name, float width, float size, bool bold = false)
+        private static TextMeshProUGUI FlowText(Transform parent, string name, float width, TypographyToken size, bool bold = false)
         {
             var t = Text(parent, name, "", 0, 0, width, 48, size, bold);
             Ensure<UnityEngine.UI.LayoutElement>(t).preferredHeight = 48; return t;
@@ -81,9 +81,9 @@ namespace Game.EditorTools
             var layout = Ensure<UnityEngine.UI.LayoutElement>(card); layout.preferredHeight = 320; layout.preferredWidth = width;
             var emblem = Picture(card.transform, "Icon", icon, 24, 24, 40, 40); emblem.color = GamePalette.Primary;
             entry.FindPropertyRelative("root").objectReferenceValue = card.rectTransform;
-            entry.FindPropertyRelative("title").objectReferenceValue = Text(card.transform, "Title", "", 88, 24, width - 112, 64, GameTypography.Body, true);
-            entry.FindPropertyRelative("text").objectReferenceValue = Text(card.transform, "Text", "", 24, 88, width - 48, 160, GameTypography.Body);
-            entry.FindPropertyRelative("source").objectReferenceValue = Text(card.transform, "Source", "", 24, 260, width - 48, 64, GameTypography.Caption, false, GamePalette.Muted);
+            entry.FindPropertyRelative("title").objectReferenceValue = Text(card.transform, "Title", "", 88, 24, width - 112, 64, GameTypography.Tokens.BodyStrong,true);
+            entry.FindPropertyRelative("text").objectReferenceValue = Text(card.transform, "Text", "", 24, 88, width - 48, 160, GameTypography.Tokens.Body);
+            entry.FindPropertyRelative("source").objectReferenceValue = Text(card.transform, "Source", "", 24, 260, width - 48, 64, GameTypography.Tokens.Caption, false, GamePalette.Muted);
         }
         [MenuItem("Tools/Jogos de Empresa/UI-15/Migrate final report")]
         public static void Apply()
@@ -98,9 +98,9 @@ namespace Game.EditorTools
             Set(controller, "quarterly", canvas.Find("Panel_QuarterlyResult").GetComponent<QuarterlyResultController>());
             var listener = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<UIStateListener>(true)).Single(); Set(listener, "finalReportPanel", panel.gameObject);
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88);
-            Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "period", Text(header.transform, "Period", "RELATÓRIO FINAL", 940, 28, 956, 40, GameTypography.Body, false, GamePalette.OnDark));
-            Text(panel, "Title", "Relatório final da campanha", 24, 112, 1848, 60, GameTypography.ScreenTitle, true);
+            Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
+            Set(view, "period", Text(header.transform, "Period", "RELATÓRIO FINAL", 940, 28, 956, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Text(panel, "Title", "Relatório final da campanha", 24, 112, 1848, 60, GameTypography.Tokens.ScreenTitle, true);
             var so = new SerializedObject(view); var tabs = so.FindProperty("tabs"); tabs.arraySize = 3;
             string[] labels = { "Conclusão", "Business Model Canvas", "Reflexão e justificativas" };
             for (int i = 0; i < 3; i++) tabs.GetArrayElementAtIndex(i).objectReferenceValue = Button(panel, "Tab" + i, labels[i], 24 + i * 624, 184, 608, 60, SharedControlKind.Tab);
@@ -110,26 +110,26 @@ namespace Game.EditorTools
             so = new SerializedObject(view); var pages = so.FindProperty("pages"); pages.arraySize = 3;
             pages.GetArrayElementAtIndex(0).objectReferenceValue = overview.gameObject; pages.GetArrayElementAtIndex(1).objectReferenceValue = bmc.gameObject; pages.GetArrayElementAtIndex(2).objectReferenceValue = reflection.gameObject; so.ApplyModifiedPropertiesWithoutUndo();
             var overviewScroll = Scroll(overview, "Scroll", 24, 270, 1268, 690); Set(view, "overviewScroll", overviewScroll); Vertical(overviewScroll.content, 6);
-            Set(view, "company", FlowText(overviewScroll.content, "Company", 1216, GameTypography.SectionTitle, true));
-            Set(view, "identity", FlowText(overviewScroll.content, "Identity", 1216, GameTypography.Body));
-            Set(view, "conclusion", FlowText(overviewScroll.content, "Conclusion", 1216, GameTypography.Body));
+            Set(view, "company", FlowText(overviewScroll.content, "Company", 1216, GameTypography.Tokens.SectionTitle, true));
+            Set(view, "identity", FlowText(overviewScroll.content, "Identity", 1216, GameTypography.Tokens.Body));
+            Set(view, "conclusion", FlowText(overviewScroll.content, "Conclusion", 1216, GameTypography.Tokens.Body));
             var kpis = FlowRow(overviewScroll.content, "Kpis", 120);
             string[] fields = { "revenue", "net", "cash" }; string[] titles = { "Receita acumulada", "Resultado acumulado", "Último caixa salvo" };
             for (int i = 0; i < 3; i++)
             {
                 var card = Picture(kpis, "Kpi" + i, "UI_KPI_TILE", 0, 0, 392, 120); Ensure<UnityEngine.UI.LayoutElement>(card).preferredHeight = 120;
-                Text(card.transform, "Label", titles[i], 20, 16, 352, 32, GameTypography.Label);
-                Set(view, fields[i], Text(card.transform, "Value", "", 20, 54, 352, 56, GameTypography.DisplayValue, true));
+                Text(card.transform, "Label", titles[i], 20, 16, 352, 32, GameTypography.Tokens.Label);
+                Set(view, fields[i], Text(card.transform, "Value", "", 20, 54, 352, 56, GameTypography.Tokens.DisplayValue, true));
             }
-            Set(view, "reputation", FlowText(overviewScroll.content, "Reputation", 1216, GameTypography.Body, true));
-            Set(view, "alignment", FlowText(overviewScroll.content, "Alignment", 1216, GameTypography.Body, true));
+            Set(view, "reputation", FlowText(overviewScroll.content, "Reputation", 1216, GameTypography.Tokens.BodyStrong,true));
+            Set(view, "alignment", FlowText(overviewScroll.content, "Alignment", 1216, GameTypography.Tokens.BodyStrong,true));
             var links = FlowRow(overviewScroll.content, "Results", 68);
             so = new SerializedObject(view); var months = so.FindProperty("monthButtons"); months.arraySize = 3;
             for (int i = 0; i < 3; i++) { var b = Button(links, "Month" + (i + 1), "DRE • mês " + (i + 1), 0, 0, 244, 68, SharedControlKind.Secondary); var layout = Ensure<UnityEngine.UI.LayoutElement>(b); layout.preferredWidth = 244; layout.preferredHeight = 68; months.GetArrayElementAtIndex(i).objectReferenceValue = b; }
             var quarter = Button(links, "Quarterly", "Comparar trimestre", 0, 0, 444, 68); var quarterLayout = Ensure<UnityEngine.UI.LayoutElement>(quarter); quarterLayout.preferredWidth = 444; quarterLayout.preferredHeight = 68; so.FindProperty("quarterlyButton").objectReferenceValue = quarter; so.ApplyModifiedPropertiesWithoutUndo();
-            var notice = FlowText(overviewScroll.content, "Limit", 1216, GameTypography.Caption); notice.text = "Os totais incluem apenas meses salvos. Caixa e indicadores finais usam o último mês disponível. Ausências permanecem identificadas."; notice.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 72;
+            var notice = FlowText(overviewScroll.content, "Limit", 1216, GameTypography.Tokens.Caption); notice.text = "Os totais incluem apenas meses salvos. Caixa e indicadores finais usam o último mês disponível. Ausências permanecem identificadas."; notice.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 72;
             Picture(overview, "ConclusionIllustration", "REPORT_CONCLUSION", 1340, 300, 480, 320);
-            Text(overview, "ArtNote", "Seus registros continuam disponíveis para consulta.\n\nO BMC reúne escolhas confirmadas e aponta o que ainda não possui fonte. A reflexão distingue decisões salvas de justificativas não registradas.", 1340, 660, 532, 260, GameTypography.Body);
+            Text(overview, "ArtNote", "Seus registros continuam disponíveis para consulta.\n\nO BMC reúne escolhas confirmadas e aponta o que ainda não possui fonte. A reflexão distingue decisões salvas de justificativas não registradas.", 1340, 660, 532, 260, GameTypography.Tokens.Body);
             var bmcScroll = Scroll(bmc, "Scroll", 24, 270, 1872, 690); Set(view, "bmcScroll", bmcScroll);
             so = new SerializedObject(view); var blocks = so.FindProperty("bmc"); blocks.arraySize = 9;
             string[] icons = { "ICON_PARTNERS", "ICON_RESTAURANT", "ICON_EQUIPMENT", "ICON_VALUE_PROPOSITION", "ICON_CUSTOMER_RELATIONSHIP", "ICON_SALES_CHANNELS", "ICON_CLIENTS", "ICON_CASH", "ICON_REVENUE" };
@@ -141,17 +141,17 @@ namespace Game.EditorTools
             for (int i = 0; i < 4; i++) Block(reflectionScroll.content, blocks.GetArrayElementAtIndex(i), "Block" + i, 1384, i == 1 ? "ICON_CALENDAR" : "ICON_DOCUMENT"); so.ApplyModifiedPropertiesWithoutUndo();
             var state = Node(panel, "StateBody", 24, 270, 1872, 690); Set(view, "stateBody", state.gameObject);
             Picture(state, "Empty", "EMPTY_RESULTS", 40, 90, 480, 320);
-            Set(view, "stateTitle", Text(state, "Title", "", 600, 130, 1160, 100, GameTypography.SectionTitle, true));
-            Set(view, "stateMessage", Text(state, "Message", "", 600, 260, 1160, 180, GameTypography.Body));
+            Set(view, "stateTitle", Text(state, "Title", "", 600, 130, 1160, 100, GameTypography.Tokens.SectionTitle, true));
+            Set(view, "stateMessage", Text(state, "Message", "", 600, 260, 1160, 180, GameTypography.Tokens.Body));
             Set(view, "retryButton", Button(state, "Retry", "Tentar novamente", 600, 500, 360, 68, SharedControlKind.Secondary));
             var footer = Picture(panel, "BottomBar", "UI_NAVBAR_PLUM", 0, 984, 1920, 96);
             Set(view, "newGameButton", Button(footer.transform, "NewGame", "Novo jogo", 24, 14, 336, 68, SharedControlKind.Secondary));
-            Text(footer.transform, "Note", "Resultado salvo. Novo jogo exige confirmação e preserva os registros anteriores.", 392, 14, 820, 68, GameTypography.Caption, false, GamePalette.OnDark);
+            Text(footer.transform, "Note", "Resultado salvo. Novo jogo exige confirmação e preserva os registros anteriores.", 392, 14, 820, 68, GameTypography.Tokens.Caption, false, GamePalette.OnDark);
             Set(view, "backButton", Button(footer.transform, "Back", "Voltar à conclusão", 1244, 14, 364, 68));
             var modal = Node(panel, "NewGameDialog", 0, 0, 1920, 1080); Stretch(modal); var shade = Ensure<UnityEngine.UI.Image>(modal); shade.color = new Color(.14f, .06f, .23f, .82f); shade.raycastTarget = true; Ensure<SharedModalFocus>(modal);
             var dialog = Picture(modal, "Dialog", "UI_MODAL_SURFACE", 480, 290, 960, 500, true);
-            Text(dialog.transform, "Title", "Iniciar uma nova campanha?", 32, 32, 896, 64, GameTypography.SectionTitle, true);
-            Set(view, "newGameMessage", Text(dialog.transform, "Message", "", 32, 120, 896, 220, GameTypography.Body));
+            Text(dialog.transform, "Title", "Iniciar uma nova campanha?", 32, 32, 896, 64, GameTypography.Tokens.SectionTitle, true);
+            Set(view, "newGameMessage", Text(dialog.transform, "Message", "", 32, 120, 896, 220, GameTypography.Tokens.Body));
             Set(view, "cancelNewGame", Button(dialog.transform, "Cancel", "Continuar consultando", 32, 392, 432, 68, SharedControlKind.Secondary));
             Set(view, "confirmNewGame", Button(dialog.transform, "Confirm", "Iniciar novo jogo", 496, 392, 432, 68));
             Set(view, "newGameDialog", modal.gameObject); modal.gameObject.SetActive(false);

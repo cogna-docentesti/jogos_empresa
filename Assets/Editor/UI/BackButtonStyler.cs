@@ -22,7 +22,7 @@ using UnityEngine.UI;
 ///  - Fundo: btn-menu-base.png (o botao MENU do hub sem o texto: fundo escuro
 ///    translucido e borda dourada). Assim o Voltar fica com cara de botao
 ///    secundario e o Continuar amarelo continua sendo o foco.
-///  - Texto "VOLTAR" em Inter Tight negrito, dourado claro, e uma seta.
+///  - Texto "VOLTAR" em Roboto Condensed SemiBold, cor do tema, e uma seta.
 ///
 /// Como usar: abra a GameScene e rode
 /// Tools > Jogos de Empresa > Ajustar botoes Voltar (D1, D2, D3).
@@ -32,7 +32,6 @@ public static class BackButtonStyler
 {
     private const string BaseSpritePath = "Assets/Art/new/shared/components/buttons/primary_violet_normal.png";
     private const string ChevronPath = "Assets/Art/Sprites/REDESIGN-UI/chevron-right-branco.png";
-    private const string FontGuid = "89cea402e3db5bf4d9bc9d4f698b7692"; // InterTight-Variable (TMP)
 
     private static readonly Vector2 Size = new Vector2(260f, 68f);
     private static readonly Color LabelColor = GamePalette.OnDark; // mesmo dourado do MENU
@@ -62,7 +61,7 @@ public static class BackButtonStyler
 
         var baseSprite = AssetDatabase.LoadAssetAtPath<Sprite>(BaseSpritePath);
         var chevron = AssetDatabase.LoadAssetAtPath<Sprite>(ChevronPath);
-        var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(AssetDatabase.GUIDToAssetPath(FontGuid));
+        var font = GameTypography.Resolve(TypographyRole.Button).Font;
 
         if (baseSprite == null || chevron == null || font == null)
         {
@@ -134,10 +133,9 @@ public static class BackButtonStyler
             labelRt.offsetMin = new Vector2(46f, 0f);   // espaco para a seta
             labelRt.offsetMax = new Vector2(-18f, 0f);
             label.text = "VOLTAR";
-            label.font = font;
-            label.fontStyle = FontStyles.Bold;
+            GameTypography.Apply(label,TypographyRole.Button,GameTypography.Button);
             label.enableAutoSizing = false;
-            label.fontSize = GameTypography.Button;
+            label.fontSize = GameTypography.Tokens.Button;
             label.characterSpacing = GameTypography.CharacterSpacing;
             label.color = LabelColor;
             label.alignment = TextAlignmentOptions.Center;

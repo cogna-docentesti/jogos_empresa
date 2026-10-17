@@ -7,6 +7,8 @@ namespace Game.Adapter.In.UI.Theme
     [CreateAssetMenu(menuName = "Cogna/Shared UI skin")]
     public sealed class SharedUiSkin : ScriptableObject
     {
+        public TypographyStyle Typography(TypographyRole role) => GameTypography.Resolve(role);
+
         [Serializable] public struct Entry { public string id; public Sprite sprite; }
         public Entry[] entries = Array.Empty<Entry>();
         public static SharedUiSkin Current => Resources.Load<SharedUiSkin>("SharedUiSkin");

@@ -1,3 +1,4 @@
+using Game.Adapter.In.UI.Theme;
 using System;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,14 @@ namespace Game.Adapter.In.UI
 {
     public sealed class TeamRoleCardView : MonoBehaviour
     {
+        private void ApplyTypography()
+        {
+            GameTypography.KeepSize(nameText,TypographyRole.SectionTitle);
+            GameTypography.KeepSize(salaryText,TypographyRole.TableTotal);
+            GameTypography.KeepSize(capacityText,TypographyRole.Body);
+            GameTypography.KeepSize(requirementText,TypographyRole.Caption);
+            GameTypography.KeepSize(quantityText,TypographyRole.TableTotal);
+        }
         [SerializeField] private UnityEngine.UI.Image portrait, environment, interactionOutline;
         [SerializeField] private TextMeshProUGUI nameText, salaryText, capacityText, requirementText, quantityText;
         [SerializeField] private UnityEngine.UI.Button addButton, removeButton;
@@ -15,12 +24,13 @@ namespace Game.Adapter.In.UI
         public event Action<TeamRoleCardView, int> QuantityRequested;
         private bool available;
         private int required;
-        private void OnEnable() { addButton?.onClick.AddListener(Add); removeButton?.onClick.AddListener(Remove); }
+        private void OnEnable() { ApplyTypography(); addButton?.onClick.AddListener(Add); removeButton?.onClick.AddListener(Remove); }
         private void OnDisable() { addButton?.onClick.RemoveListener(Add); removeButton?.onClick.RemoveListener(Remove); }
         private void Add() { if (available && Quantity < int.MaxValue) QuantityRequested?.Invoke(this, Quantity + 1); }
         private void Remove() { if (available && Quantity > 0) QuantityRequested?.Invoke(this, Quantity - 1); }
         public void Setup(RoleData role, Sprite face, Sprite setting, int minimum)
         {
+            ApplyTypography();
             Role = role; required = minimum;
             foreach (var pair in new[] { (portrait, face), (environment, setting) })
             { pair.Item1.sprite = pair.Item2; pair.Item1.color = Color.white; pair.Item1.preserveAspect = true; pair.Item1.type = UnityEngine.UI.Image.Type.Simple; pair.Item1.raycastTarget = false; }

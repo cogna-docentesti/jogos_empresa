@@ -1,0 +1,32 @@
+diff --git a/Assets/Editor/UI/ConceptUiRevision.cs b/Assets/Editor/UI/ConceptUiRevision.cs
+--- a/Assets/Editor/UI/ConceptUiRevision.cs
++++ b/Assets/Editor/UI/ConceptUiRevision.cs
+@@ -41,15 +41,15 @@
+             i.color=Color.white;i.raycastTarget=false;i.preserveAspect=i.sprite!=null&&i.sprite.border==Vector4.zero;
+             i.type=i.sprite!=null&&i.sprite.border!=Vector4.zero?UnityEngine.UI.Image.Type.Sliced:UnityEngine.UI.Image.Type.Simple; return i;
+         }
+-        static TMP_Text Label(Transform p,string n,string value,float x,float y,float w,float h,float size=24,bool bold=false,Color? color=null)
++        static TMP_Text Label(Transform p,string n,string value,float x,float y,float w,float h,TypographyToken size = default,bool bold=false,Color? color=null)
+         {
+             var t=Ensure<TextMeshProUGUI>(Node(p,n,x,y,w,h));
+-            GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
++            GameTypography.Apply(t,size.Size > 0 ? size : (TypographyToken)24,bold);
+             t.text=value;t.color=color??GamePalette.Plum;t.raycastTarget=false;t.alignment=TextAlignmentOptions.MidlineLeft;
+             t.textWrappingMode=TextWrappingModes.Normal;t.overflowMode=TextOverflowModes.Truncate;return t;
+         }
+-        static void Type(Transform p,string n,float size,bool bold=true)
+-        {var t=Find(p,n).GetComponent<TMP_Text>();t.fontSize=size;t.fontWeight=bold?FontWeight.Bold:FontWeight.Regular;t.fontStyle=bold?FontStyles.Bold:FontStyles.Normal;}
++        static void Type(Transform p,string n,TypographyToken size,bool bold=true)
++        {var t=Find(p,n).GetComponent<TMP_Text>();FontRoleMigration.TryApply(t);GameTypography.Apply(t,size.Size > 0 ? size : (TypographyToken)24,bold);}
+         static void Height(Component c,float value)
+         {var e=Ensure<UnityEngine.UI.LayoutElement>(c);e.minHeight=e.preferredHeight=value;e.flexibleHeight=0;}
+         static void ResizeScroll(Transform p,string path,float x,float y,float w,float h)
+@@ -141,7 +141,7 @@
+                 Type(content,"RestaurantName",32);var lg=content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();lg.spacing=0;
+                 foreach(var n in new[]{"RestaurantName","RestaurantDesc","CostLabel","MonthlyCost","TicketLabel","TicketRange"})
+                 {
+-                    var t=Find(content,n);float size=n=="RestaurantName"?32:n.EndsWith("Label")?20:24;
++                    var t=Find(content,n);TypographyToken size=n=="RestaurantName"?32:n.EndsWith("Label")?20:24;
+                     Type(content,n,size,n=="RestaurantName"||n=="MonthlyCost"||n=="TicketRange");Height(t,n=="RestaurantName"?40:n.EndsWith("Label")?24:28);
+                 }
+                 Picture(c,"FeaturedDish",i==0?"PRODUCT_LAN_COMBO_SIMPLES":i==1?"PRODUCT_JAP_SUSHI_EXECUTIVO":"PRODUCT_FRA_PRATO_EXECUTIVO",320,282,250,172);

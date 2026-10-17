@@ -47,11 +47,11 @@ namespace Game.EditorTools
             image.type=image.sprite!=null && image.sprite.border!=Vector4.zero?UnityEngine.UI.Image.Type.Sliced:UnityEngine.UI.Image.Type.Simple;
             return image;
         }
-        private static TextMeshProUGUI Text(Transform parent,string name,string value,float x,float y,float w,float h,float size,bool bold=false,Color? color=null)
+        private static TextMeshProUGUI Text(Transform parent,string name,string value,float x,float y,float w,float h,TypographyToken size,bool bold=false,Color? color=null)
         {
             var r=Child(parent,name); Rect(r,x,y,w,h); var text=Ensure<TextMeshProUGUI>(r);
             r.gameObject.SetActive(true);
-            GameTypography.Apply(text,Font,size,bold); text.text=value; text.color=color??GamePalette.Ink;
+            GameTypography.Apply(text,size,bold); text.text=value; text.color=color??GamePalette.Ink;
             text.alignment=TextAlignmentOptions.MidlineLeft; text.textWrappingMode=TextWrappingModes.Normal;
             text.overflowMode=TextOverflowModes.Truncate;
             return text;
@@ -61,7 +61,7 @@ namespace Game.EditorTools
             var image=Image(parent,name,"UI_SECONDARY_IVORY_NORMAL",x,y,width,68,true);
             var button=Ensure<UnityEngine.UI.Button>(image); button.targetGraphic=image;
             Image(image.transform,"Icon",icon,16,18,32,32).color=GamePalette.Ink;
-            Text(image.transform,"Label",title,60,8,width-76,52,GameTypography.Button,true);
+            Text(image.transform,"Label",title,60,8,width-76,52,GameTypography.Tokens.Button,true);
             Ensure<PanelNavButton>(button).EditorConfigure(action,target);
             SharedUiStyles.Bind(button,SharedControlKind.Secondary);
             return button;
@@ -149,17 +149,17 @@ namespace Game.EditorTools
                 button.navigation=navigation;
             }
             var background=Image(panel,"HubBackground",null,0,0,1920,1080); background.color=GamePalette.Surface; background.transform.SetAsFirstSibling(); Stretch(background.rectTransform);
-            Text(panel,"MapHeading","Mapa do negócio",24,110,700,48,GameTypography.SectionTitle,true);
-            Text(panel,"MapHint","Selecione um destino para gerenciar seu restaurante.",24,918,1280,42,GameTypography.Body);
+            Text(panel,"MapHeading","Mapa do negócio",24,110,700,48,GameTypography.Tokens.SectionTitle,true);
+            Text(panel,"MapHint","Selecione um destino para gerenciar seu restaurante.",24,918,1280,42,GameTypography.Tokens.Body);
             var side=Image(panel,"HubSummary","UI_PANEL_LAVENDER",1328,112,568,848);
-            Text(side.transform,"Title","Seu negócio",32,28,504,52,GameTypography.SectionTitle,true);
-            Text(side.transform,"Caption","GESTÃO DO RESTAURANTE",32,92,504,32,GameTypography.Caption,true);
-            var company=Text(side.transform,"Company","Meu restaurante",32,140,504,112,GameTypography.Body,true);
-            var restaurant=Text(side.transform,"Restaurant","Restaurante",32,260,504,40,GameTypography.Body);
+            Text(side.transform,"Title","Seu negócio",32,28,504,52,GameTypography.Tokens.SectionTitle,true);
+            Text(side.transform,"Caption","GESTÃO DO RESTAURANTE",32,92,504,32,GameTypography.Tokens.Caption,true);
+            var company=Text(side.transform,"Company","Meu restaurante",32,140,504,112,GameTypography.Tokens.BodyStrong,true);
+            var restaurant=Text(side.transform,"Restaurant","Restaurante",32,260,504,40,GameTypography.Tokens.Body);
             Image(side.transform,"LocationIcon","ICON_PIN",32,324,32,32).color=GamePalette.Plum;
-            var location=Text(side.transform,"Location","Localização",80,316,456,52,GameTypography.Body,true);
-            Text(side.transform,"Help","A área destacada no mapa é a localização atual. Use os destinos para consultar caixa, cardápio, equipamentos e equipe.",32,398,504,144,GameTypography.Body);
-            var progress=Text(side.transform,"Progress","0 de 3 meses concluídos",32,574,504,40,GameTypography.Label,true);
+            var location=Text(side.transform,"Location","Localização",80,316,456,52,GameTypography.Tokens.BodyStrong,true);
+            Text(side.transform,"Help","A área destacada no mapa é a localização atual. Use os destinos para consultar caixa, cardápio, equipamentos e equipe.",32,398,504,144,GameTypography.Tokens.Body);
+            var progress=Text(side.transform,"Progress","0 de 3 meses concluídos",32,574,504,40,GameTypography.Tokens.Label,true);
             var track=Image(side.transform,"ProgressTrack","UI_PROGRESS_TRACK",32,634,504,16);
             var fill=Image(track.transform,"Fill","UI_PROGRESS_FILL",0,0,0,16); Stretch(fill.rectTransform);
             fill.rectTransform.anchorMax=new Vector2(0,1); fill.color=GamePalette.Primary;
@@ -172,7 +172,7 @@ namespace Game.EditorTools
             Image(top,"LogoSurface","UI_PANEL_IVORY",24,14,200,60);
             // The complete square PNG is preserved; only transparent margins extend beyond the bar.
             Image(top,"Logo","BRAND_COGNA_LOGO",40,-40,168,168).preserveAspect=true;
-            var companyTop=Text(top,"Company","Meu restaurante",248,12,580,64,GameTypography.Body,true,GamePalette.OnDark);
+            var companyTop=Text(top,"Company","Meu restaurante",248,12,580,64,GameTypography.Tokens.BodyStrong,true,GamePalette.OnDark);
             Pill(top,"RoundPill","ICON_CALENDAR","Período",848,12,294,false);
             Pill(top,"ScorePill","ICON_STAR","Score",1166,12,258,true);
             Pill(top,"CashPill","ICON_CASH","Caixa",1448,12,448,true);
@@ -214,10 +214,10 @@ namespace Game.EditorTools
             var pill=Image(top,name,"UI_HUD_PILL",x,y,w,64);
             foreach(Transform child in pill.transform) if(child.name=="Border") child.gameObject.SetActive(false);
             Image(pill.transform,"Icon",icon,18,17,30,30).color=GamePalette.OnDark;
-            if(withCaption) Text(pill.transform,"Caption",title,60,12,100,40,GameTypography.Caption,false,GamePalette.OnDark);
+            if(withCaption) Text(pill.transform,"Caption",title,60,12,100,40,GameTypography.Tokens.Caption,false,GamePalette.OnDark);
             var value=pill.transform.Find("Value").GetComponent<TextMeshProUGUI>();
             Rect(value.rectTransform,withCaption?154:60,12,withCaption?w-174:w-80,40);
-            GameTypography.Apply(value,Font,GameTypography.Body,true); value.color=GamePalette.OnDark;
+            GameTypography.Apply(value,GameTypography.Tokens.BodyStrong,true); value.color=GamePalette.OnDark;
             value.textWrappingMode=TextWrappingModes.NoWrap; value.alignment=TextAlignmentOptions.MidlineRight;
         }
     }

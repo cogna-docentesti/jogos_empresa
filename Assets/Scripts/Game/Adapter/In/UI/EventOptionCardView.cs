@@ -1,3 +1,4 @@
+using Game.Adapter.In.UI.Theme;
 using System;
 using TMPro;
 using UnityEngine;
@@ -6,12 +7,19 @@ namespace Game.Adapter.In.UI
 {
     public sealed class EventOptionCardView : MonoBehaviour
     {
+        private void ApplyTypography()
+        {
+            GameTypography.KeepSize(titleText,TypographyRole.SectionTitle);
+            GameTypography.KeepSize(descriptionText,TypographyRole.Body);
+            GameTypography.KeepSize(effectsText,TypographyRole.Caption);
+        }
         [SerializeField] private TMP_Text titleText, descriptionText, effectsText;
         [SerializeField] private UnityEngine.UI.Button button;
         private UnityEngine.UI.LayoutElement element;
         public UnityEngine.UI.Button Button => button;
         public void Bind(string title, string description, string effects, Action choose, bool enabledChoice, bool selected, bool history = false)
         {
+            ApplyTypography();
             titleText.text = title; descriptionText.text = description; effectsText.text = effects;
             button.onClick.RemoveAllListeners();
             if (choose != null) button.onClick.AddListener(() => { if (button.interactable) choose(); });

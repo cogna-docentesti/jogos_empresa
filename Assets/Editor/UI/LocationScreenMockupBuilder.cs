@@ -59,7 +59,7 @@ namespace Game.EditorTools
         private const string GlowFolder = "Assets/Art/Sprites/LocationScene/";
         private const string CircleSprite = "Assets/Art/Sprites/UI/Circle.png";
         private const string ButtonSprite = "Assets/Art/Sprites/UI/botao.png";
-        private const string FontPath = "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset";
+
         private const string IconFolder = "Assets/Layer Lab/2D Icons-PictoIconPack01/Icons/PictoIcon_128/";
 
         // Os acentos vao como escape unicode para o arquivo continuar 100% ASCII,
@@ -332,7 +332,7 @@ namespace Game.EditorTools
                86f, 2f, 0f, 0f);
             Solid(line, color);
 
-            // ATENCAO: nem LiberationSans nem InterTight tem o glifo U+25C6.
+            // ATENCAO: as fontes antigas nao tinham o glifo U+25C6.
             // Escrever o losango como texto sairia como quadrado vazio. Por isso
             // ele e um Image quadrado girado 45 graus.
             var diamond = Node(root, "Diamond");
@@ -824,20 +824,17 @@ namespace Game.EditorTools
             Pic(core, Load<Sprite>(CircleSprite), coreColor, preserveAspect: false);
         }
 
-        private static TextMeshProUGUI Label(RectTransform rt, string content, float size,
+        private static TextMeshProUGUI Label(RectTransform rt, string content, TypographyToken size,
                                              FontStyles style, Color color,
                                              TextAlignmentOptions alignment, bool wrap = false)
         {
             var label = rt.gameObject.AddComponent<TextMeshProUGUI>();
 
-            var font = Load<TMP_FontAsset>(FontPath);
 
-            if (font != null)
-                label.font = font;
 
             label.text               = content;
-            GameTypography.Apply(label, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, (style & FontStyles.Bold) != 0);
-            label.fontStyle          = style;
+            GameTypography.Apply(label, size, (style & FontStyles.Bold) != 0);
+            label.fontStyle = style & ~FontStyles.Bold;
             label.color              = color;
             label.alignment          = alignment;
             label.textWrappingMode   = wrap ? TextWrappingModes.Normal : TextWrappingModes.NoWrap;

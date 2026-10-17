@@ -34,15 +34,15 @@ namespace Game.EditorTools
             image.type=image.sprite!=null && image.sprite.border!=Vector4.zero?UnityEngine.UI.Image.Type.Sliced:UnityEngine.UI.Image.Type.Simple;
             return image;
         }
-        private static TextMeshProUGUI Text(Transform p,string name,string value,float x,float y,float w,float h,float size,bool bold=false,Color? color=null)
+        private static TextMeshProUGUI Text(Transform p,string name,string value,float x,float y,float w,float h,TypographyToken size,bool bold=false,Color? color=null)
         {
-            var t=Ensure<TextMeshProUGUI>(Node(p,name,x,y,w,h)); GameTypography.Apply(t,Font,size,bold);
+            var t=Ensure<TextMeshProUGUI>(Node(p,name,x,y,w,h)); GameTypography.Apply(t,size,bold);
             t.text=value; t.color=color??GamePalette.Ink; t.alignment=TextAlignmentOptions.MidlineLeft;
             t.textWrappingMode=TextWrappingModes.Normal; t.overflowMode=TextOverflowModes.Overflow; return t;
         }
         private static void Height(Component component,float value)
         { var l=Ensure<UnityEngine.UI.LayoutElement>(component); l.preferredHeight=value; l.flexibleHeight=0; }
-        private static TextMeshProUGUI FlowText(Transform p,string name,string value,float size,bool bold=false)
+        private static TextMeshProUGUI FlowText(Transform p,string name,string value,TypographyToken size,bool bold=false)
         {
             var t=Text(p,name,value,0,0,496,32,size,bold);
             // TMP provides preferred height to the parent's layout; no fixed cap on long copy.
@@ -52,15 +52,15 @@ namespace Game.EditorTools
         {
             var row=Image(p,name,"UI_PANEL_LAVENDER",0,0,496,48); Height(row,48);
             Image(row.transform,"Icon",icon,12,10,28,28).color=GamePalette.Plum;
-            Text(row.transform,"Label",label,52,6,216,36,GameTypography.Label);
-            var value=Text(row.transform,"Value","—",272,6,212,36,GameTypography.Label,true);
+            Text(row.transform,"Label",label,52,6,216,36,GameTypography.Tokens.Label);
+            var value=Text(row.transform,"Value","—",272,6,212,36,GameTypography.Tokens.Label,true);
             value.alignment=TextAlignmentOptions.MidlineRight; return value;
         }
         private static UnityEngine.UI.Button Action(Transform p,string name,string label,SharedControlKind kind,float x,float w)
         {
             var image=Image(p,name,kind==SharedControlKind.Primary?"UI_PRIMARY_VIOLET_NORMAL":"UI_SECONDARY_IVORY_NORMAL",x,14,w,68,true);
             var b=Ensure<UnityEngine.UI.Button>(image); b.targetGraphic=image;
-            var t=Text(b.transform,"Label",label,16,8,w-32,52,GameTypography.Button,true);
+            var t=Text(b.transform,"Label",label,16,8,w-32,52,GameTypography.Tokens.Button,true);
             t.alignment=TextAlignmentOptions.Center; SharedUiStyles.Bind(b,kind); return b;
         }
         [MenuItem("Tools/Jogos de Empresa/UI-05/Migrate location in GameScene")]
@@ -125,22 +125,22 @@ namespace Game.EditorTools
             so.FindProperty("centerOverlay").objectReferenceValue=master.Find("OVERLAY_CENTER").GetComponent<UnityEngine.UI.Image>();
             so.ApplyModifiedPropertiesWithoutUndo(); master.Find("OVERLAY_CENTER").GetComponent<UnityEngine.UI.Image>().enabled=false;
             var bar=Image(panel,"DecisionHeader","UI_TOPBAR_VIOLET",0,0,1920,88);
-            Text(bar.transform,"Title","Escolha sua localização",24,14,1000,60,GameTypography.ScreenTitle,true,GamePalette.OnDark);
-            Text(bar.transform,"Step","PASSO 2 DE 7 · LOCALIZAÇÃO",1210,24,686,40,GameTypography.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
-            var region=Text(panel,"Region","Localização",24,112,1240,48,GameTypography.SectionTitle,true);
-            var hint=Text(panel,"SelectionHint","Selecione uma área no mapa para continuar.",24,918,1280,42,GameTypography.Body);
+            Text(bar.transform,"Title","Escolha sua localização",24,14,1000,60,GameTypography.Tokens.ScreenTitle,true,GamePalette.OnDark);
+            Text(bar.transform,"Step","PASSO 2 DE 7 · LOCALIZAÇÃO",1210,24,686,40,GameTypography.Tokens.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
+            var region=Text(panel,"Region","Localização",24,112,1240,48,GameTypography.Tokens.SectionTitle,true);
+            var hint=Text(panel,"SelectionHint","Selecione uma área no mapa para continuar.",24,918,1280,42,GameTypography.Tokens.Body);
             Image(panel,"AvailableLegend","UI_PIN_NORMAL",822,118,32,32);
-            Text(panel,"AvailableLegendLabel","Disponível",862,116,160,36,GameTypography.Caption);
+            Text(panel,"AvailableLegendLabel","Disponível",862,116,160,36,GameTypography.Tokens.Caption);
             Image(panel,"SelectedLegend","UI_PIN_SELECTED",1040,118,32,32);
-            Text(panel,"SelectedLegendLabel","Selecionada",1080,116,200,36,GameTypography.Caption);
+            Text(panel,"SelectedLegendLabel","Selecionada",1080,116,200,36,GameTypography.Tokens.Caption);
             // Scroll stays inside the sidebar; longer native copy expands vertically, never over the map.
             var side=Image(panel,"DecisionSidebar","UI_PANEL_IVORY",1328,112,568,848,true);
             var empty=Node(side.transform,"Empty",24,24,520,800);
             Image(empty,"Icon","ICON_PIN",216,144,88,88).color=GamePalette.Primary;
-            Text(empty,"Title","Onde vamos começar?",16,270,488,96,GameTypography.SectionTitle,true).alignment=TextAlignmentOptions.Center;
-            var emptyText=Text(empty,"Message","Selecione uma área",16,390,488,140,GameTypography.Body);
+            Text(empty,"Title","Onde vamos começar?",16,270,488,96,GameTypography.Tokens.SectionTitle,true).alignment=TextAlignmentOptions.Center;
+            var emptyText=Text(empty,"Message","Selecione uma área",16,390,488,140,GameTypography.Tokens.Body);
             emptyText.alignment=TextAlignmentOptions.Center;
-            Text(empty,"Help","Cada área tem seu público, custo de aluguel e potencial de demanda.",16,578,488,116,GameTypography.Body).alignment=TextAlignmentOptions.Center;
+            Text(empty,"Help","Cada área tem seu público, custo de aluguel e potencial de demanda.",16,578,488,116,GameTypography.Tokens.Body).alignment=TextAlignmentOptions.Center;
             var scrollRoot=Node(side.transform,"Details",24,20,520,800);
             var scroll=Ensure<UnityEngine.UI.ScrollRect>(scrollRoot); scroll.horizontal=false; scroll.vertical=true;
             scroll.movementType=UnityEngine.UI.ScrollRect.MovementType.Clamped; scroll.scrollSensitivity=44;
@@ -154,16 +154,16 @@ namespace Game.EditorTools
             fit.verticalFit=UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
             scroll.viewport=viewport.rectTransform; scroll.content=content;
             var vignette=Image(content,"Vignette",null,0,0,496,196); vignette.preserveAspect=true; Height(vignette,196);
-            var title=FlowText(content,"ZoneTitle","Área Educacional",GameTypography.SectionTitle,true);
-            var segment=FlowText(content,"Segment","Classe C",GameTypography.Label,true); segment.color=GamePalette.Primary;
-            var description=FlowText(content,"Description","Descrição da área.",GameTypography.Body);
+            var title=FlowText(content,"ZoneTitle","Área Educacional",GameTypography.Tokens.SectionTitle,true);
+            var segment=FlowText(content,"Segment","Classe C",GameTypography.Tokens.Label,true); segment.color=GamePalette.Primary;
+            var description=FlowText(content,"Description","Descrição da área.",GameTypography.Tokens.Body);
             var rent=Row(content,"Rent","Aluguel / mês","ICON_CASH");
             var demand=Row(content,"Demand","Demanda base","ICON_CHART_BARS");
             var capacity=Row(content,"Capacity","Capacidade inicial","ICON_TEAM");
             var competition=Row(content,"Competition","Concorrência","ICON_COMMERCE");
             var price=Row(content,"Price","Fator de preço","ICON_CASH");
-            var channelsTitle=FlowText(content,"ChannelsLabel","CANAIS",GameTypography.Caption,true); channelsTitle.color=GamePalette.Muted;
-            var channels=FlowText(content,"Channels","Não informados",GameTypography.Label);
+            var channelsTitle=FlowText(content,"ChannelsLabel","CANAIS",GameTypography.Tokens.Caption,true); channelsTitle.color=GamePalette.Muted;
+            var channels=FlowText(content,"Channels","Não informados",GameTypography.Tokens.Label);
             var track=Image(scrollRoot,"Scrollbar","UI_SCROLLBAR_TRACK",508,0,12,800);
             var sliding=Node(track.transform,"SlidingArea",0,0,12,800);
             var handle=Image(sliding,"Handle","UI_SCROLLBAR_THUMB",0,0,12,80,true);
@@ -176,7 +176,7 @@ namespace Game.EditorTools
             var footer=Image(panel,"DecisionFooter","UI_NAVBAR_PLUM",0,984,1920,96);
             var back=Action(footer.transform,"Back","Voltar à identificação",SharedControlKind.Secondary,24,332);
             var confirm=Action(footer.transform,"Confirm","Confirmar localização",SharedControlKind.Primary,1500,396);
-            Text(footer.transform,"DraftHint","Escolha em rascunho",388,24,448,48,GameTypography.Label,false,GamePalette.OnDark);
+            Text(footer.transform,"DraftHint","Escolha em rascunho",388,24,448,48,GameTypography.Tokens.Label,false,GamePalette.OnDark);
             Set(view,"regionText",region); Set(view,"hintText",hint); Set(view,"emptyStatePanel",empty.gameObject);
             Set(view,"emptyMessage",emptyText); Set(view,"detailsPanel",scrollRoot.gameObject); Set(view,"infoPanel",null);
             Set(view,"detailZoneNameText",title); Set(view,"detailZoneSegmentText",segment); Set(view,"detailSegmentText",null);

@@ -26,14 +26,14 @@ namespace Game.EditorTools
             image.type=image.sprite!=null && image.sprite.border!=Vector4.zero?UnityEngine.UI.Image.Type.Sliced:UnityEngine.UI.Image.Type.Simple;
             image.preserveAspect=image.type==UnityEngine.UI.Image.Type.Simple && id!=null; return image;
         }
-        private static TextMeshProUGUI Text(Transform p,string name,string value,float x,float y,float w,float h,float size,bool bold=false,Color? color=null)
+        private static TextMeshProUGUI Text(Transform p,string name,string value,float x,float y,float w,float h,TypographyToken size,bool bold=false,Color? color=null)
         {
             var t=Ensure<TextMeshProUGUI>(Node(p,name,x,y,w,h));
-            GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+            GameTypography.Apply(t,size,bold);
             t.text=value; t.color=color??GamePalette.Ink; t.alignment=TextAlignmentOptions.MidlineLeft;
             t.textWrappingMode=TextWrappingModes.Normal; t.overflowMode=TextOverflowModes.Overflow; return t;
         }
-        private static TextMeshProUGUI Flow(Transform p,string name,string value,float size,bool bold=false)
+        private static TextMeshProUGUI Flow(Transform p,string name,string value,TypographyToken size,bool bold=false)
             => Text(p,name,value,0,0,480,32,size,bold);
         private static void Height(Component c,float h) { var e=Ensure<UnityEngine.UI.LayoutElement>(c); e.preferredHeight=h; e.flexibleHeight=0; }
         private static UnityEngine.UI.ScrollRect Scroll(Transform p,string name,float x,float y,float w,float h)
@@ -74,7 +74,7 @@ namespace Game.EditorTools
             var b=Get(v,field); b.transform.SetParent(p,false); b.name=name; RetireChildren(b);
             var r=Node(p,name,x,14,w,68); r.gameObject.SetActive(true);
             var image=Ensure<UnityEngine.UI.Image>(r); b.targetGraphic=image;
-            Text(r,"Label",label,48,8,w-64,52,GameTypography.Button,true).alignment=TextAlignmentOptions.Center;
+            Text(r,"Label",label,48,8,w-64,52,GameTypography.Tokens.Button,true).alignment=TextAlignmentOptions.Center;
             Image(r,"ActionIcon",field=="backButton"?"ICON_BACK":"ICON_NEXT",14,18,32,32);
             SharedUiStyles.Bind(b,kind); return b;
         }
@@ -92,9 +92,9 @@ namespace Game.EditorTools
             { var old=panel.Find(name); old.gameObject.SetActive(false); foreach(var g in old.GetComponentsInChildren<UnityEngine.UI.Graphic>(true)) g.raycastTarget=false; }
             var bg=Image(panel,"DecisionBackground",null,0,0,1920,1080); bg.color=GamePalette.Surface; bg.transform.SetAsFirstSibling();
             var header=Image(panel,"DecisionHeader","UI_TOPBAR_VIOLET",0,0,1920,88);
-            Text(header.transform,"Title","Restaurante e público",24,14,1050,60,GameTypography.ScreenTitle,true,GamePalette.OnDark);
-            Text(header.transform,"Step","PASSO 3 DE 7 · RESTAURANTE",1210,24,686,40,GameTypography.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
-            Text(panel,"ChoiceTitle","Qual é a sua proposta?",24,112,1280,48,GameTypography.SectionTitle,true);
+            Text(header.transform,"Title","Restaurante e público",24,14,1050,60,GameTypography.Tokens.ScreenTitle,true,GamePalette.OnDark);
+            Text(header.transform,"Step","PASSO 3 DE 7 · RESTAURANTE",1210,24,686,40,GameTypography.Tokens.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
+            Text(panel,"ChoiceTitle","Qual é a sua proposta?",24,112,1280,48,GameTypography.Tokens.SectionTitle,true);
             var data=Resources.LoadAll<RestaurantData>("Restaurants");
             var types=new[]{RestaurantType.PODRAO,RestaurantType.JAPONES,RestaurantType.FRANCES};
             var fields=new[]{"cardPodrao","cardJapones","cardFrances"}; var fileNames=new[]{"lanches","japones","frances"};
@@ -107,23 +107,23 @@ namespace Game.EditorTools
                 var b=Get(view,fields[i]); b.transform.SetParent(panel,false); RetireChildren(b);
                 var r=Node(panel,b.name,24+i*434,184,410,704); r.gameObject.SetActive(true); b.targetGraphic=Ensure<UnityEngine.UI.Image>(r);
                 Image(r,"TypeIcon","ICON_RESTAURANT",24,16,32,32);
-                Text(r,"OptionLabel","OPÇÃO 0"+(i+1),68,14,268,36,GameTypography.Caption,true);
+                Text(r,"OptionLabel","OPÇÃO 0"+(i+1),68,14,268,36,GameTypography.Tokens.Caption,true);
                 Image(r,"SelectedCheck","ICON_CHECK",354,16,32,32).gameObject.SetActive(false);
                 var facade=Image(r,"Facade",null,16,60,378,284); facade.sprite=restaurant.facade; facade.preserveAspect=true;
                 var info=Scroll(r,"CardDetails",24,360,362,292);
-                Flow(info.content,"RestaurantName",restaurant.displayName,GameTypography.SectionTitle,true);
-                Flow(info.content,"RestaurantDesc",restaurant.description,GameTypography.Body);
-                Flow(info.content,"CostLabel","Custo fixo / mês",GameTypography.Label);
-                var cost=Flow(info.content,"MonthlyCost","—",GameTypography.Body,true); cost.alignment=TextAlignmentOptions.MidlineRight;
-                Flow(info.content,"TicketLabel","Ticket de referência",GameTypography.Label);
-                var ticket=Flow(info.content,"TicketRange","—",GameTypography.Body,true); ticket.alignment=TextAlignmentOptions.MidlineRight;
-                Text(r,"SelectionStatus","Selecionar restaurante",24,660,362,36,GameTypography.Caption,true).alignment=TextAlignmentOptions.Center;
+                Flow(info.content,"RestaurantName",restaurant.displayName,GameTypography.Tokens.SectionTitle,true);
+                Flow(info.content,"RestaurantDesc",restaurant.description,GameTypography.Tokens.Body);
+                Flow(info.content,"CostLabel","Custo fixo / mês",GameTypography.Tokens.Label);
+                var cost=Flow(info.content,"MonthlyCost","—",GameTypography.Tokens.BodyStrong,true); cost.alignment=TextAlignmentOptions.MidlineRight;
+                Flow(info.content,"TicketLabel","Ticket de referência",GameTypography.Tokens.Label);
+                var ticket=Flow(info.content,"TicketRange","—",GameTypography.Tokens.BodyStrong,true); ticket.alignment=TextAlignmentOptions.MidlineRight;
+                Text(r,"SelectionStatus","Selecionar restaurante",24,660,362,36,GameTypography.Tokens.Caption,true).alignment=TextAlignmentOptions.Center;
                 SharedUiStyles.Bind(b,SharedControlKind.Card); InteractionTint(b); view.SetRestaurantCardData(restaurant);
             }
-            Set(view,"hintText",Text(panel,"SelectionHint","Escolha seu restaurante e público.",24,918,1280,42,GameTypography.Body));
+            Set(view,"hintText",Text(panel,"SelectionHint","Escolha seu restaurante e público.",24,918,1280,42,GameTypography.Tokens.Body));
             var side=Image(panel,"DecisionSidebar","UI_PANEL_IVORY",1328,112,568,848);
-            Text(side.transform,"Title","Quem você vai atender?",24,24,520,48,GameTypography.SectionTitle,true);
-            Text(side.transform,"Help","Escolha uma classe disponível para o restaurante selecionado.",24,80,520,60,GameTypography.Body);
+            Text(side.transform,"Title","Quem você vai atender?",24,24,520,48,GameTypography.Tokens.SectionTitle,true);
+            Text(side.transform,"Help","Escolha uma classe disponível para o restaurante selecionado.",24,80,520,60,GameTypography.Tokens.Body);
             var segments=new[]{"btnLow","btnMedium","btnHigh"};
             for(int i=0;i<3;i++)
             {
@@ -132,25 +132,25 @@ namespace Game.EditorTools
                 // Keep the prefab label inactive; the new native label has its own stable name.
 
                 Image(r,"Radio","UI_RADIO_OFF",12,16,28,28);
-                Text(r,"SegmentLabel","Classe "+(i==0?"C":i==1?"B":"A"),48,12,108,40,GameTypography.Button,true);
-                Text(r,"Availability","Disponível",8,60,152,32,GameTypography.Caption).alignment=TextAlignmentOptions.Center;
+                Text(r,"SegmentLabel","Classe "+(i==0?"C":i==1?"B":"A"),48,12,108,40,GameTypography.Tokens.Button,true);
+                Text(r,"Availability","Disponível",8,60,152,32,GameTypography.Tokens.Caption).alignment=TextAlignmentOptions.Center;
                 SharedUiStyles.Bind(b,SharedControlKind.Card);
                 InteractionTint(b);
             }
             var details=Scroll(side.transform,"Compatibility",24,284,520,540);
-            Flow(details.content,"Title","Compatibilidade",GameTypography.SectionTitle,true);
+            Flow(details.content,"Title","Compatibilidade",GameTypography.Tokens.SectionTitle,true);
             for(int i=1;i<=2;i++)
             {
-                Flow(details.content,"Label"+i,i==1?"Restaurante e localização":"Restaurante e público",GameTypography.Label,true);
-                var value=Flow(details.content,"Value"+i,"Sem seleção",GameTypography.Body,true); Set(view,"coh"+i+"Value",value);
+                Flow(details.content,"Label"+i,i==1?"Restaurante e localização":"Restaurante e público",GameTypography.Tokens.Label,true);
+                var value=Flow(details.content,"Value"+i,"Sem seleção",GameTypography.Tokens.BodyStrong,true); Set(view,"coh"+i+"Value",value);
                 var track=Image(details.content,"Bar"+i,"UI_PANEL_LAVENDER",0,0,496,12); Height(track,12);
                 var fill=Image(track.transform,"Fill",null,0,0,496,12); fill.color=GamePalette.Money; Set(view,"coh"+i+"BarFill",fill);
-                Set(view,"coh"+i+"Tip",Flow(details.content,"Tip"+i,"Selecione um restaurante.",GameTypography.Body));
+                Set(view,"coh"+i+"Tip",Flow(details.content,"Tip"+i,"Selecione um restaurante.",GameTypography.Tokens.Body));
             }
             var footer=Image(panel,"DecisionFooter","UI_NAVBAR_PLUM",0,984,1920,96);
             Action(view,"backButton",footer.transform,"Back","Voltar à localização",24,332,SharedControlKind.Secondary);
             Action(view,"confirmButton",footer.transform,"Confirm","Confirmar restaurante",1500,396,SharedControlKind.Primary);
-            Text(footer.transform,"DraftHint","Escolha em rascunho",388,24,520,48,GameTypography.Label,false,GamePalette.OnDark);
+            Text(footer.transform,"DraftHint","Escolha em rascunho",388,24,520,48,GameTypography.Tokens.Label,false,GamePalette.OnDark);
             view.SelectRestaurantCard(null); view.SelectSegmentButton(null); view.SetConfirmEnabled(false); panel.gameObject.SetActive(false);
             AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }

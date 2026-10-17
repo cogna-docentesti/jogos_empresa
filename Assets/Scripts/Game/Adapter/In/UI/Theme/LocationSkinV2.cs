@@ -24,6 +24,8 @@ namespace Game.Adapter.In.UI.Theme
         menuName = "Game Data/Location Skin V2")]
     public sealed class LocationSkinV2 : ScriptableObject
     {
+        public TypographyStyle Typography(TypographyRole role) => GameTypography.Resolve(role);
+
         /// <summary>Conjunto de arte de UMA zona. `id` casa com LocationData.id.</summary>
         [Serializable]
         public sealed class ZoneSkin

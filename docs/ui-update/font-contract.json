@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "planejado",
-  "task": "FONT-01",
+  "status": "matriz técnica implementada; aplicação e homologação por tela pendentes FONT-05 a FONT-10",
+  "task": "FONT-04",
   "date": "2026-10-17",
   "replaces_visual_contract": false,
   "vigente": "docs/ui-update/visual-contract.json",
@@ -196,8 +196,8 @@
     }
   },
   "implementation": {
-    "resolution": "papel explícito → família/peso/asset/material/tamanho; preservar API antiga durante FONT-04",
-    "runtime": "referências serializadas ou Resources; AssetDatabase somente no Editor; sem fonte de sistema/output",
+    "resolution": "GameTypography.Resolve(TypographyRole) → TypographyStyle(Font, Material, Family, Weight, Size); tokens explícitos levam papel e tamanho aos helpers; binding serializado acompanha clones.",
+    "runtime": "Resources.Load<ConceptFontSet>(\"UI/ConceptFontSet\"); sem UnityEditor, fontes de sistema ou output no Player.",
     "neutral_material": {
       "face_dilate": 0,
       "outline": 0,
@@ -216,7 +216,18 @@
       ],
       "face_scale": 1
     },
-    "fallback": "mesma família quando possível, atlas dinâmico 512–1024 limitado/limpo no build, sem ciclos. Alfabeto fora do corpus precisa de política explícita."
+    "fallback": "FONT-03: Noto Sans Regular/Bold e Noto Sans Math Arrows, atlas estáticos finitos sem ciclos; consultar font-assets.json. Fora do corpus de 536 pontos não homologado.",
+    "api": {
+      "apply": "GameTypography.Apply(text, role, size opcional); sem size usa token inicial do papel.",
+      "preserve_current_size": "GameTypography.KeepSize(text, role); preserva texto, rich text, margens, geometria e tamanho atual.",
+      "factories": "TypographyToken(role, tamanho vigente), ou GameTypography.Tokens.*; constantes float antigas preservadas.",
+      "compatibility": "Apply(text, font, size, bool) mantém chamadores antigos, mas resolve pelo binding ou Roboto Regular/Bold real. Token explícito prevalece sobre bool; fontes antigas nunca são reinstaladas.",
+      "reentry": "TypographyRoleBinding.OnEnable/Reapply restaura apenas face/material/peso neutro e autosize desligado. SharedControlAppearance preserva um papel já explícito.",
+      "migration": "FontRoleMigration.TryApply usa GlobalObjectId congelado em font-coverage.json ou binding existente; não infere por nome.",
+      "materials": "fontSharedMaterial = face.material; FontStyles.Bold removido e fontWeight Regular porque a face real codifica o peso. Tags <b>/<font-weight> usam as tabelas FONT-03, sem dilatação.",
+      "skins": "SharedUiSkin.Typography e LocationSkinV2.Typography consultam o mesmo resolvedor; sem cópias de fontes nas skins."
+    },
+    "evidence": "docs/ui-update/qa/FONT-04.json"
   },
   "exceptions": [
     {
@@ -247,5 +258,5 @@
   ],
   "sources_to_acquire": "output/ui-update/fonts/FONT-01/font-reuse-audit.json",
   "glyphs": "output/ui-update/fonts/FONT-01/glyph-corpus.json",
-  "acceptance": "Contrato planejado. Nenhum consumidor pode ser marcado migrado por FONT-01; aplicação FONT-04 a FONT-09 e homologação final FONT-10."
+  "acceptance": "Infraestrutura FONT-04 aceita no Editor aberto. Tamanhos por consumidor e final_size permanecem não homologados; aplicação serializada e acabamento FONT-05 a FONT-09, contrato final FONT-10. Não substitui visual-contract.json."
 }

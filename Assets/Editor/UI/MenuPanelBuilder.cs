@@ -405,11 +405,11 @@ namespace Game.EditorTools
 
             var title = UiFactory.EnsureChild(safeRow, "MenuTitle");
             UiFactory.AnchorCorner(title, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 620, 50, 116, 18);
-            UiFactory.Text(title, "Menu do Jogo", GameTypography.MapBarTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
+            UiFactory.Text(title, "Menu do Jogo", GameTypography.Tokens.MapBarTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
 
             var subtitle = UiFactory.EnsureChild(safeRow, "MenuSubtitle");
             UiFactory.AnchorCorner(subtitle, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 620, 42, 116, -24);
-            UiFactory.Text(subtitle, "Areas revisitaveis do seu negocio", GameTypography.MapBarSubtitle, FontStyles.Normal,
+            UiFactory.Text(subtitle, "Areas revisitaveis do seu negocio", GameTypography.Tokens.MapBarSubtitle, FontStyles.Normal,
                            GamePalette.InkCaption, TextAlignmentOptions.MidlineLeft);
 
             // ---- pills a direita ----
@@ -447,12 +447,12 @@ namespace Game.EditorTools
 
             var captionLabel = UiFactory.EnsureChild(pill, "Caption");
             UiFactory.AnchorCorner(captionLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 150, 40, 72, 0);
-            UiFactory.Text(captionLabel, caption, GameTypography.PillCaption, FontStyles.Normal, GamePalette.InkBody,
+            UiFactory.Text(captionLabel, caption, GameTypography.Tokens.PillCaption, FontStyles.Normal, GamePalette.InkBody,
                            TextAlignmentOptions.MidlineLeft);
 
             var valueRt = UiFactory.EnsureChild(pill, "Value");
             UiFactory.AnchorCorner(valueRt, new Vector2(1, 0.5f), new Vector2(1, 0.5f), 240, 42, -26, 0);
-            valueLabel = UiFactory.Text(valueRt, value, GameTypography.PillValue, FontStyles.Bold, GamePalette.Parse(accentHex),
+            valueLabel = UiFactory.Text(valueRt, value, GameTypography.Tokens.PillValue, FontStyles.Bold, GamePalette.Parse(accentHex),
                                         TextAlignmentOptions.MidlineRight);
 
             return pill;
@@ -506,11 +506,11 @@ namespace Game.EditorTools
             // ---- textos ----
             var title = UiFactory.EnsureChildRenamed(card, "Title", "MeTitle");
             UiFactory.AnchorCorner(title, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), spec.Width - 20, 36, 0, -92);
-            UiFactory.Text(title, spec.Title, GameTypography.NodeTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.Center);
+            UiFactory.Text(title, spec.Title, GameTypography.Tokens.NodeTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.Center);
 
             var subtitle = UiFactory.EnsureChild(card, "Subtitle");
             UiFactory.AnchorCorner(subtitle, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), spec.Width - 24, 30, 0, -128);
-            UiFactory.Text(subtitle, spec.Subtitle, GameTypography.NodeSubtitle, FontStyles.Normal, GamePalette.InkCaption,
+            UiFactory.Text(subtitle, spec.Subtitle, GameTypography.Tokens.NodeSubtitle, FontStyles.Normal, GamePalette.InkCaption,
                            TextAlignmentOptions.Center);
 
             // ---- comportamento ----
@@ -602,7 +602,7 @@ namespace Game.EditorTools
             var noticeRt = UiFactory.EnsureChild(summaryCard, "Notice");
             UiFactory.BottomBand(noticeRt, 88f, 30, 30, 22);
             var vNotice = UiFactory.Text(noticeRt, "Projecao para o mes corrente com base nas escolhas atuais.",
-                                         GameTypography.Caption, FontStyles.Normal, GamePalette.Muted,
+                                         GameTypography.Tokens.Caption, FontStyles.Normal, GamePalette.Muted,
                                          TextAlignmentOptions.MidlineLeft, wrap: true);
 
             // ---------- WIRING ----------
@@ -657,13 +657,13 @@ namespace Game.EditorTools
 
             var captionRt = UiFactory.EnsureChild(tile, "Caption");
             UiFactory.AnchorCorner(captionRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 400, 42, 38, 58);
-            var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Caption, FontStyles.Bold,
+            var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Tokens.Caption, FontStyles.Bold,
                                               GamePalette.InkCaption, TextAlignmentOptions.MidlineLeft);
             captionLabel.characterSpacing = 3f;
 
             var valueRt = UiFactory.EnsureChild(tile, "Value");
             UiFactory.AnchorCorner(valueRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 400, 78, 38, -14);
-            var label = UiFactory.Text(valueRt, value, GameTypography.DisplayValue, FontStyles.Bold, GamePalette.Parse(accentHex),
+            var label = UiFactory.Text(valueRt, value, GameTypography.Tokens.DisplayValue, FontStyles.Bold, GamePalette.Parse(accentHex),
                                        TextAlignmentOptions.MidlineLeft);
 
             // Barra de progresso so no tile de Score.
@@ -711,13 +711,13 @@ namespace Game.EditorTools
 
             var captionRt = UiFactory.EnsureChild(chip, "Caption");
             UiFactory.AnchorCorner(captionRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 340, 42, 122, 36);
-            var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Caption, FontStyles.Bold,
+            var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Tokens.Caption, FontStyles.Bold,
                                               GamePalette.InkCaption, TextAlignmentOptions.MidlineLeft);
             captionLabel.characterSpacing = 3f;
 
             var valueRt = UiFactory.EnsureChild(chip, "Value");
             UiFactory.AnchorCorner(valueRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 360, 66, 122, -26);
-            return UiFactory.Text(valueRt, value, GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink,
+            return UiFactory.Text(valueRt, value, GameTypography.Tokens.SectionTitle, FontStyles.Bold, GamePalette.Ink,
                                   TextAlignmentOptions.MidlineLeft);
         }
 
@@ -772,7 +772,7 @@ namespace Game.EditorTools
 
             var label = UiFactory.EnsureChild(header, "Label");
             UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 700, 64, 84, 0);
-            UiFactory.Text(label, text, GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
+            UiFactory.Text(label, text, GameTypography.Tokens.SectionTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
         }
 
         // =====================================================
@@ -807,12 +807,12 @@ namespace Game.EditorTools
 
             var headline = UiFactory.EnsureChild(content, "Headline");
             UiFactory.AnchorCorner(headline, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), 900, 40, 0, 12);
-            UiFactory.Text(headline, "Tela em construcao", GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink,
+            UiFactory.Text(headline, "Tela em construcao", GameTypography.Tokens.SectionTitle, FontStyles.Bold, GamePalette.Ink,
                            TextAlignmentOptions.Center);
 
             var body = UiFactory.EnsureChild(content, "Body");
             UiFactory.AnchorCorner(body, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), 900, 90, 0, -46);
-            UiFactory.Text(body, description, GameTypography.Body, FontStyles.Normal, GamePalette.InkBody,
+            UiFactory.Text(body, description, GameTypography.Tokens.Body, FontStyles.Normal, GamePalette.InkBody,
                            TextAlignmentOptions.Top, wrap: true);
 
             panel.gameObject.SetActive(false);
@@ -865,7 +865,7 @@ namespace Game.EditorTools
 
             var backLabel = UiFactory.EnsureChild(back, "Label");
             UiFactory.AnchorCorner(backLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 160, 44, 70, 0);
-            UiFactory.Text(backLabel, "Voltar", GameTypography.Body, FontStyles.Bold, GamePalette.Muted,
+            UiFactory.Text(backLabel, "Voltar", GameTypography.Tokens.Button, FontStyles.Bold, GamePalette.Muted,
                            TextAlignmentOptions.MidlineLeft);
 
             UiFactory.MakeButton(back, highlightedTint: 1.18f, pressedTint: 0.90f);
@@ -885,11 +885,11 @@ namespace Game.EditorTools
 
             var titleRt = UiFactory.EnsureChild(header, "Title");
             UiFactory.AnchorCorner(titleRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 1000, 96, 402, 26);
-            UiFactory.Text(titleRt, title, GameTypography.ScreenTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
+            UiFactory.Text(titleRt, title, GameTypography.Tokens.ScreenTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
 
             var subtitleRt = UiFactory.EnsureChild(header, "Subtitle");
             UiFactory.AnchorCorner(subtitleRt, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 1000, 48, 402, -42);
-            var subtitleLabel = UiFactory.Text(subtitleRt, subtitle, GameTypography.ScreenHint, FontStyles.Normal, GamePalette.InkCaption,
+            var subtitleLabel = UiFactory.Text(subtitleRt, subtitle, GameTypography.Tokens.ScreenHint, FontStyles.Normal, GamePalette.InkCaption,
                                                TextAlignmentOptions.MidlineLeft);
 
             // O "Menu do Jogo" que ficava aqui saiu: agora existe um botao
@@ -922,7 +922,7 @@ namespace Game.EditorTools
 
             var label = UiFactory.EnsureChild(button, "Label");
             UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 280, 46, 76, 0);
-            UiFactory.Text(label, "Menu do Jogo", GameTypography.Body, FontStyles.Bold, GamePalette.Parse(GamePalette.HexOnWarn),
+            UiFactory.Text(label, "Menu do Jogo", new TypographyToken(TypographyRole.Navigation, GameTypography.Body), FontStyles.Bold, GamePalette.Parse(GamePalette.HexOnWarn),
                            TextAlignmentOptions.MidlineLeft);
 
             UiFactory.MakeButton(button, highlightedTint: 1.12f, pressedTint: 0.88f);

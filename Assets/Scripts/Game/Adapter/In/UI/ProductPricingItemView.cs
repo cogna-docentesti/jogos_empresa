@@ -34,6 +34,13 @@ namespace Game.Adapter.In.UI
 
         public void Setup(ProductData product, float initialPrice)
         {
+            GameTypography.KeepSize(productNameText,TypographyRole.SectionTitle);
+            GameTypography.KeepSize(selectedPriceText,TypographyRole.TableTotal);
+            GameTypography.KeepSize(minPriceText,TypographyRole.Caption);
+            GameTypography.KeepSize(maxPriceText,TypographyRole.Caption);
+            GameTypography.KeepSize(errorText,TypographyRole.Body);
+            GameTypography.KeepSize(editingText,TypographyRole.Caption);
+            if (priceInput != null) { GameTypography.KeepSize(priceInput.textComponent,TypographyRole.Input); GameTypography.KeepSize(priceInput.placeholder as TMP_Text,TypographyRole.Input); }
             _product = product;
             _price = product.ClampPrice(initialPrice);
             IsPriceValid = product.IsPriceInRange(_price) && !float.IsNaN(_price) && !float.IsInfinity(_price);

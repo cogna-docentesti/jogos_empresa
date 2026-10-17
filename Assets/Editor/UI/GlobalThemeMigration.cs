@@ -12,7 +12,6 @@ namespace Game.EditorTools
     public static class GlobalThemeMigration
     {
         private const string Art = "Assets/Art/new/";
-        private static TMP_FontAsset font;
 
         [MenuItem("Tools/Jogos de Empresa/UI-02/Apply global theme")]
         public static void Apply()
@@ -21,15 +20,6 @@ namespace Game.EditorTools
                 throw new InvalidOperationException("Use the Cogna Editor outside Play Mode.");
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (scene.path != "Assets/Scenes/GameScene.unity") throw new InvalidOperationException("Open GameScene.");
-            font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath);
-            foreach (var path in new[]{GameTypography.FontAssetPath, "Assets/TextMesh Pro/Fonts/InterTight-Italic.asset"})
-            {
-                var asset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
-                var material = asset.material;
-                material.DisableKeyword("UNDERLAY_ON"); material.DisableKeyword("UNDERLAY_INNER"); material.DisableKeyword("OUTLINE_ON");
-                material.SetFloat("_OutlineWidth",0); material.SetColor("_FaceColor",Color.white);
-                EditorUtility.SetDirty(material);
-            }
             foreach (var root in scene.GetRootGameObjects())
             {
                 Undo.RegisterFullObjectHierarchyUndo(root,"Apply UI-02 theme");
@@ -144,11 +134,8 @@ namespace Game.EditorTools
             {
                 if(text.name.IndexOf("shadow",StringComparison.OrdinalIgnoreCase)>=0) { text.enabled=false; continue; }
                 bool id=InsideIdentification(text.transform);
-                float size=id ? (text.name=="GameTitle" ? GameTypography.BrandTitle : text.name=="Title" ? GameTypography.ScreenTitle
-                    : text.name.Contains("Limits") || text.name=="StorageNote" ? GameTypography.Caption
-                    : text.name=="Label" ? GameTypography.Label : GameTypography.Body) : Role(text);
-                bool bold=(text.fontStyle & FontStyles.Bold)!=0 || size==GameTypography.ScreenTitle || size==GameTypography.SectionTitle;
-                GameTypography.Apply(text,font,size,bold);
+                FontRoleMigration.TryApply(text);
+                float size=text.fontSize;
                 if(!id && text.transform.parent!=null && text.transform.parent.GetComponent<UnityEngine.UI.Button>()!=null)
                     text.gameObject.SetActive(true); // Former button sprites contained lettering; new ones use native text.
                 if (!id && text.rectTransform.rect.height < size * 1.3f)
@@ -164,17 +151,6 @@ namespace Game.EditorTools
                 }
                 foreach(var shadow in text.GetComponents<UnityEngine.UI.Shadow>()) UnityEngine.Object.DestroyImmediate(shadow);
             }
-        }
-
-        private static float Role(TMP_Text text)
-        {
-            string n=text.name.ToLowerInvariant();
-            if(n=="titletext" || n=="screentitle" || n=="regiontext") return GameTypography.ScreenTitle;
-            if(n.Contains("step") || n.Contains("caption")) return GameTypography.Caption;
-            if(n.Contains("capitalvalue") || n=="kpivalue") return GameTypography.DisplayValue;
-            if(n=="title" || n=="paneltitle" || n.Trim()=="restaurantlabel" || n.Trim()=="segmentlabel" || n.Trim()=="equipmentslabel") return GameTypography.SectionTitle;
-            if(n.Contains("label")) return GameTypography.Label;
-            return GameTypography.Body;
         }
 
         private static void HeaderText(Transform parent,string name,float x,float y,float w,float h,TextAlignmentOptions alignment)

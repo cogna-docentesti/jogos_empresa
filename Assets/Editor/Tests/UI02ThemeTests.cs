@@ -25,10 +25,10 @@ public sealed class UI02ThemeTests
     [Test]
     public void FontMaterialsAndPortugueseCurrencyGlyphsAreAvailable()
     {
-        foreach(string path in new[]{GameTypography.FontAssetPath,"Assets/TextMesh Pro/Fonts/InterTight-Italic.asset"})
+        foreach(TypographyRole role in System.Enum.GetValues(typeof(TypographyRole)))
         {
-            var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
-            foreach(char c in "ÁÉÍÓÚáéíóúÂÊÔâêôÃÕãõÇç R$ -12.345,67") Assert.IsTrue(font.HasCharacter(c),path+" / "+c);
+            var font=GameTypography.Resolve(role).Font;
+            foreach(char c in "ÁÉÍÓÚáéíóúÂÊÔâêôÃÕãõÇç R$ -12.345,67") Assert.IsTrue(font.HasCharacter(c),role+" / "+c);
             Assert.IsFalse(font.material.IsKeywordEnabled("UNDERLAY_ON"));
             Assert.AreEqual(0,font.material.GetFloat("_OutlineWidth"));
         }

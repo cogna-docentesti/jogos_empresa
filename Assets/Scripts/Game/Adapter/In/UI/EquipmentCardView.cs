@@ -1,3 +1,4 @@
+using Game.Adapter.In.UI.Theme;
 using System;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,16 @@ namespace Game.Adapter.In.UI
 {
     public sealed class EquipmentCardView : MonoBehaviour
     {
+        private void ApplyTypography()
+        {
+            GameTypography.KeepSize(nameText,TypographyRole.SectionTitle);
+            GameTypography.KeepSize(priceText,TypographyRole.Kpi);
+            GameTypography.KeepSize(categoryText,TypographyRole.Label);
+            GameTypography.KeepSize(descriptionText,TypographyRole.Body);
+            GameTypography.KeepSize(statusText,TypographyRole.Caption);
+            GameTypography.KeepSize(quantityText,TypographyRole.TableTotal);
+            GameTypography.KeepSize(buyButtonText,TypographyRole.Button);
+        }
         [SerializeField] private UnityEngine.UI.Image equipmentImage;
         [SerializeField] private TextMeshProUGUI nameText, priceText, categoryText, descriptionText, statusText, quantityText;
         [SerializeField] private GameObject premiumIndicator, selectionBorder, ownedIndicator;
@@ -20,6 +31,7 @@ namespace Game.Adapter.In.UI
         public float RequiredHeight { get; private set; } = 360;
         private void OnEnable()
         {
+            ApplyTypography();
             buyButton?.onClick.AddListener(Add); removeButton?.onClick.AddListener(Remove);
             GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(Toggle);
         }
@@ -33,6 +45,7 @@ namespace Game.Adapter.In.UI
         private void Toggle() { if (available && !IsOwned) SelectionRequested?.Invoke(this); }
         public void Setup(EquipmentData equipment, bool owned = false)
         {
+            ApplyTypography();
             Equipment = equipment;
             equipmentImage.sprite = equipment != null ? equipment.icon : null;
             equipmentImage.preserveAspect = true; equipmentImage.type = UnityEngine.UI.Image.Type.Simple;

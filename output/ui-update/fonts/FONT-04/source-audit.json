@@ -1,0 +1,443 @@
+{
+  "production_old_font_paths_or_guids": 0,
+  "source_matches": [
+    {
+      "path": "Assets/Editor/Tests/UI02ThemeValidation.cs",
+      "line": 44,
+      "code": "Add(\"Empty form and both Inter Tight assets cover Portuguese, currency and negatives\",()=>{",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI02ThemeValidation.cs",
+      "line": 46,
+      "code": "foreach(var path in new[]{GameTypography.FontAssetPath,\"Assets/TextMesh Pro/Fonts/InterTight-Italic.asset\"})",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI02ThemeValidation.cs",
+      "line": 151,
+      "code": "Expect(text.font.name==\"InterTight-Variable\",text.name+\" wrong font\");",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI03SharedComponentsValidation.cs",
+      "line": 59,
+      "code": "{ Expect(t.font.name==\"InterTight-Variable\" && !t.enableAutoSizing,\"Font/autosize \"+t.name); Expect(t.rectTransform.rect.height>=t.fontSize*1.2f,\"Short text bounds \"+t.name); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI04HubValidation.cs",
+      "line": 104,
+      "code": "text.ForceMeshUpdate(); Expect(text.font.name==\"InterTight-Variable\" && !text.enableAutoSizing,\"Font \"+text.name);",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI05LocationValidation.cs",
+      "line": 61,
+      "code": "{ t.ForceMeshUpdate(); Expect(t.font.name==\"InterTight-Variable\" && !t.enableAutoSizing,\"Native typography \"+t.name); Expect(!t.isTextOverflowing,\"Text overflow \"+t.name); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI06RestaurantValidation.cs",
+      "line": 51,
+      "code": "{ t.ForceMeshUpdate(); Expect(t.font.name==\"InterTight-Variable\" && !t.enableAutoSizing,\"Native type \"+t.name); Expect(!t.isTextOverflowing,\"Overflow \"+t.name); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI07MenuPricingValidation.cs",
+      "line": 52,
+      "code": "t.ForceMeshUpdate();Expect(t.font.name==\"InterTight-Variable\" && !t.enableAutoSizing,\"Native typography \"+t.name);",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI08EstablishmentValidation.cs",
+      "line": 74,
+      "code": "foreach(var t in Content.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name==\"InterTight-Variable\" && !t.enableAutoSizing,\"Typography \"+t.name);Expect(!t.isTextOverflowing,\"Overflow \"+t.name+\" \"+t.text);}",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI09FinancialValidation.cs",
+      "line": 53,
+      "code": "{ t.ForceMeshUpdate(); Expect(t.font.name == \"InterTight-Variable\" && !t.enableAutoSizing, \"Typography \" + t.name); Expect(!t.isTextOverflowing, \"Overflow \" + t.name + \": \" + t.text); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI10EquipmentValidation.cs",
+      "line": 66,
+      "code": "{ text.ForceMeshUpdate(); Expect(text.font.name==\"InterTight-Variable\" && !text.enableAutoSizing,\"Typography \"+text.name); Expect(!text.isTextOverflowing,\"Text overflow \"+text.name+\": \"+text.text); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI11TeamValidation.cs",
+      "line": 52,
+      "code": "{ text.ForceMeshUpdate(); Expect(text.font.name==\"InterTight-Variable\"&&!text.enableAutoSizing,\"Typography \"+text.name); Expect(!text.isTextOverflowing,\"Overflow \"+text.name+\": \"+text.text); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI12EventValidation.cs",
+      "line": 65,
+      "code": "{ t.ForceMeshUpdate(); Expect(t.font.name == \"InterTight-Variable\" && !t.enableAutoSizing, \"Typography \" + t.name); Expect(!t.isTextOverflowing, \"Overflow \" + t.name + \": \" + t.text); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI13MonthlyResultValidation.cs",
+      "line": 64,
+      "code": "Canvas.ForceUpdateCanvases();foreach(var t in View.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name==\"InterTight-Variable\"&&!t.enableAutoSizing,\"Typography \"+t.name);Expect(!t.isTextOverflowing,\"Overflow \"+t.name+\": \"+t.text);}",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI14QuarterlyResultValidation.cs",
+      "line": 65,
+      "code": "Canvas.ForceUpdateCanvases();foreach(var t in View.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name==\"InterTight-Variable\"&&!t.enableAutoSizing,\"Typography \"+t.name);Expect(!t.isTextOverflowing,\"Overflow \"+t.name+\": \"+t.text);}",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI15FinalReportValidation.cs",
+      "line": 83,
+      "code": "foreach (var t in View.GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(t.font.name == \"InterTight-Variable\" && !t.enableAutoSizing, \"Typography \" + t.name); Expect(!t.isTextOverflowing, \"Overflow \" + t.name + \": \" + t.text); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI16BankruptcyValidation.cs",
+      "line": 82,
+      "code": "foreach (var t in View.GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(t.font.name == \"InterTight-Variable\" && !t.enableAutoSizing, \"Typography \" + t.name); Expect(!t.isTextOverflowing, \"Overflow \" + t.name + \": \" + t.text); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI17FeedbackValidation.cs",
+      "line": 66,
+      "code": "foreach (var t in Field<GameObject>(help, \"panel\").GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(!t.isTextOverflowing && t.font.name == \"InterTight-Variable\" && !t.enableAutoSizing, \"Guide typography/overflow \" + t.name); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI18DialogTests.cs",
+      "line": 101,
+      "code": "foreach(var text in modal.GetComponentsInChildren<TMPro.TMP_Text>(true)) { Assert.AreEqual(\"InterTight-Variable\",text.font.name,path); Assert.IsFalse(text.enableAutoSizing); }",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    },
+    {
+      "path": "Assets/Editor/Tests/UI18DialogValidation.cs",
+      "line": 79,
+      "code": "foreach(var t in modal.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name==\"InterTight-Variable\"&&!t.enableAutoSizing,\"Typography \"+t.name);Expect(!t.isTextOverflowing,\"Text overflow \"+t.name+\": \"+t.text);}",
+      "classification": "historical screen validator; migrate expectation with owning FONT-05..09 screen",
+      "production": false
+    }
+  ],
+  "serialized_old_font_references": [
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05",
+        "FONT-06",
+        "FONT-07",
+        "FONT-08",
+        "FONT-09"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Button_Segment.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-06"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Card_equipment.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-07"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Card_Generic.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-06"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Card_loan.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-07"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Card_ProductItem.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-06"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Chip.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/DetailRow.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/EquipmentCartLine.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-07"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/EventOptionCard.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-09"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/MainArea_Equipment.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-07"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-07",
+        "FONT-09"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/TeamRoleCard.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-07"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Accent.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Checkbox.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Danger.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Input.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Pill.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Primary.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Radio.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Secondary.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/SelectableCard.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Tab.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Toggle.prefab",
+      "old_font_guids": [
+        "89cea402e3db5bf4d9bc9d4f698b7692"
+      ],
+      "classification": "serialized screen/template typography retained for owning follow-up task",
+      "owners": [
+        "FONT-05"
+      ]
+    }
+  ],
+  "old_fonts": {
+    "Assets/TextMesh Pro/Fonts/InterTight-Italic.asset": "f087b58655035e54bbf21e1f658d1f06",
+    "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset": "89cea402e3db5bf4d9bc9d4f698b7692"
+  },
+  "runtime_review": "Player font assignments are centralized in GameTypography. Content/lifecycle providers do not restore old fonts.",
+  "legacy_api": "Numeric sizes without a binding choose real Roboto Regular/Bold only. Explicit tokens and serialized bindings take precedence. No GameObject-name inference.",
+  "changed_providers": [
+    "Assets/Editor/UI/FinancialUiMigration.cs",
+    "Assets/Editor/UI/IdentificationPanelBuilder.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/Theme/SharedUiSkin.cs",
+    "Assets/Editor/UI/SharedUiShowcaseBuilder.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/EventOptionCardView.cs",
+    "Assets/Editor/UI/TeamUiMigration.cs",
+    "Assets/Editor/UI/EstablishmentUiMigration.cs",
+    "Assets/Editor/UI/UiFactory.cs",
+    "Assets/Editor/UI/QuarterlyResultUiMigration.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/BankCardView.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs",
+    "Assets/Editor/UI/FeedbackUiMigration.cs",
+    "Assets/Editor/UI/BackButtonStyler.cs",
+    "Assets/Editor/UI/MenuPanelBuilder.cs",
+    "Assets/Editor/UI/MonthlyResultUiMigration.cs",
+    "Assets/Editor/UI/LocationScreenMockupBuilder.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/TeamRoleCardView.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/FeedbackToast.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/Theme/GameTypography.cs",
+    "Assets/Editor/UI/DialogUiMigration.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs",
+    "Assets/Editor/UI/EquipmentUiMigration.cs",
+    "Assets/Editor/UI/RestaurantUiMigration.cs",
+    "Assets/Editor/UI/FinalReportUiMigration.cs",
+    "Assets/Editor/UI/HubUiMigration.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/EquipmentCartLineView.cs",
+    "Assets/Editor/Tests/UI02ThemeTests.cs",
+    "Assets/Editor/UI/LocationUiMigration.cs",
+    "Assets/Editor/UI/MenuPricingUiMigration.cs",
+    "Assets/Editor/Tests/UI20ReadabilityTests.cs",
+    "Assets/Editor/UI/EventUiMigration.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/Theme/LocationMockupTokens.cs",
+    "Assets/Editor/UI/GlobalThemeMigration.cs",
+    "Assets/Scripts/Game/Adapter/In/UI/Theme/LocationSkinV2.cs",
+    "Assets/Editor/UI/BankruptcyUiMigration.cs",
+    "Assets/Editor/UI/ConceptUiRevision.cs"
+  ],
+  "preexisting_untracked_delta": {
+    "path": "Assets/Editor/UI/ConceptUiRevision.cs",
+    "baseline_sha256": "72f2423d9cd3dfba2818706d7ad6dd5d7410cd386af85b2b89a294b063d32b50",
+    "patch": "output/ui-update/fonts/FONT-04/ConceptUiRevision.font04.patch",
+    "reason": "Preexisting untracked composition tool preserved outside the index. Only the applied FONT-04 delta is recorded in the patch."
+  }
+}
