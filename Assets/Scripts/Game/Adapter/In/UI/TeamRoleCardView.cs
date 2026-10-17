@@ -30,14 +30,14 @@ namespace Game.Adapter.In.UI
         }
         public static string Label(RoleData role) => role == null ? "Função indisponível" : role.id switch
         { "attendant" => "Atendente", "grill_cook" => "Chapeiro", "head_chef" => "Chef de cozinha", "manager" => "Gerente", "sushi_chef" => "Profissional de sushi", _ => role.displayName };
-        public void SetQuantity(int quantity, bool enabled)
+        public void SetQuantity(int quantity, bool enabled, bool known = true)
         {
             Quantity = quantity; available = enabled;
-            quantityText.text = quantity.ToString();
+            quantityText.text = known ? quantity.ToString() : "—";
             addButton.interactable = enabled && quantity < int.MaxValue; removeButton.interactable = enabled && quantity > 0;
             GetComponent<UnityEngine.UI.Button>().interactable = enabled;
             GetComponent<SharedControlAppearance>()?.SetSelected(quantity > 0);
-            requirementText.text = required > 0 ? $"Mínimo do restaurante: {required}  •  Atual: {quantity}" : "Função adicional";
+            requirementText.text = !known ? "Quantidade indisponível." : required > 0 ? $"Mínimo do restaurante: {required}  •  Atual: {quantity}" : "Função adicional";
         }
         private void LateUpdate()
         {

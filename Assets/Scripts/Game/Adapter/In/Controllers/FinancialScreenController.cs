@@ -33,6 +33,7 @@ namespace Game.Adapter.In.Controllers
             var saved = _cards.FirstOrDefault(c => c.CreditLine.id == GameSessionState.Current?.creditLineId);
             if (saved != null) { _selectedCreditLine = saved.CreditLine; saved.SetSelected(true); }
             _selectionLocked = LoanService.HasLoan(GameSessionState.Current); RefreshDetails();
+            GetComponent<ContextualHelp>()?.Refresh(GameSessionState.HasActiveSession && lines.Length > 0, _selectedCreditLine != null || _selectionLocked);
             if (lines.Length == 0) view.SetHint("Nenhuma linha de crédito disponível no catálogo.", true);
         }
         private void OnCardSelected(BankCardView card)
@@ -40,6 +41,7 @@ namespace Game.Adapter.In.Controllers
             if (!GameSessionState.HasActiveSession || _selectionLocked || card?.CreditLine == null) return;
             if (card.CreditLine.maxAmount > 0 && !LoanService.CanContract) { RefreshDetails(); return; }
             _selectedCreditLine = card.CreditLine;
+            GetComponent<ContextualHelp>()?.Complete();
             foreach (var item in _cards) item.SetSelected(item == card);
             RefreshDetails();
         }
@@ -72,17 +74,30 @@ namespace Game.Adapter.In.Controllers
         }
         private void OnConfirm()
         {
+            try { ConfirmSelection(); }
+            catch (System.Exception)
+            {
+                view.SetHint("Não foi possível confirmar a escolha. Confira a sessão e tente novamente.", true);
+                FeedbackToast.Show("A escolha no banco não foi confirmada. Tente novamente.", FeedbackKind.Error);
+            }
+        }
+        private void ConfirmSelection()
+        {
             if (_selectedCreditLine == null || !GameSessionState.HasActiveSession) return;
+            GetComponent<ContextualHelp>()?.Complete();
+            bool contractedNow = false;
             if (!_selectionLocked)
             {
                 if (_selectedCreditLine.maxAmount > 0)
                 {
-                    if (!LoanService.TryContract(_selectedCreditLine)) { PopulateCreditLines(); view.SetHint(GameSessionState.Current.currentRound == 3 ? LoanService.LastMonthMessage : "Não foi possível contratar o crédito. Confira a disponibilidade da sessão.", true); view.SetConfirmEnabled(false); return; }
+                    if (!LoanService.TryContract(_selectedCreditLine)) { PopulateCreditLines(); view.SetHint(GameSessionState.Current.currentRound == 3 ? LoanService.LastMonthMessage : "Não foi possível contratar o crédito. Confira a disponibilidade da sessão.", true); FeedbackToast.Show("Crédito não contratado. Confira a disponibilidade da sessão.", FeedbackKind.Error); view.SetConfirmEnabled(false); return; }
                     _selectionLocked = true;
+                    contractedNow = true;
                 }
                 else if (!LoanService.HasLoan(GameSessionState.Current)) GameSessionState.SetLoan(_selectedCreditLine.id, 0);
                 else { PopulateCreditLines(); return; }
             }
+            FeedbackToast.Show(contractedNow ? "Crédito contratado. O valor foi adicionado ao caixa." : _selectionLocked ? "Contrato mantido. Confira o saldo e as parcelas no banco." : "Escolha sem crédito salva. Seu caixa foi mantido.", FeedbackKind.Success);
             if (Management) { MenuNavigator.Instance.Back(); return; }
             if (GameManager.Instance?.StateMachine.CurrentState == GameState.Initial_Capital)
                 GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);

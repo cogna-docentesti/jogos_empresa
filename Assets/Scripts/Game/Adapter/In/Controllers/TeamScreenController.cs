@@ -46,18 +46,20 @@ namespace Game.Adapter.In.Controllers
                 var card = view.CreateCard(role, required); card.QuantityRequested += SetQuantity; cards.Add(card);
             }
             Refresh();
+            GetComponent<ContextualHelp>()?.Refresh(Available, team.members.Any(m => m.quantity > 0));
         }
         private bool Available => ready && restaurant != null && GameSessionState.HasActiveSession && GameSessionState.IsPersisted;
         private void SetQuantity(TeamRoleCardView card, int quantity)
         {
             if (!isActiveAndEnabled || !Available || card?.Role == null || quantity < 0) return;
             Service.SetTeamMemberQuantity(card.Role, quantity);
+            GetComponent<ContextualHelp>()?.Complete();
             team = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson); Refresh();
         }
         private void Refresh()
         {
             bool available = Available;
-            foreach (var card in cards) card.SetQuantity(TeamSelectionHelper.GetMemberQuantity(team, card.Role.id), available);
+            foreach (var card in cards) card.SetQuantity(TeamSelectionHelper.GetMemberQuantity(team, card.Role.id), available, ready && restaurant != null && GameSessionState.HasSession);
             if (!available)
             {
                 view.SetSummary(0, 0, 0, null, "Confira a sessão, o restaurante e o catálogo de funções.", false);
@@ -84,12 +86,14 @@ namespace Game.Adapter.In.Controllers
             if (!isActiveAndEnabled || !Available) return;
             try
             {
-                if (!Service.SaveTeamAlignment(roles)) { view.SetHint("Não foi possível salvar a equipe. Tente novamente.", true); return; }
+                if (!Service.SaveTeamAlignment(roles)) { view.SetHint("Não foi possível salvar a equipe. Tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Tente novamente.", FeedbackKind.Error); return; }
+                GetComponent<ContextualHelp>()?.Complete();
+                FeedbackToast.Show(team.members.Sum(m => m.quantity) == 0 ? "Equipe vazia confirmada. A capacidade e o alinhamento refletem essa escolha." : "Equipe confirmada. Salários serão cobrados no fechamento mensal.", team.members.Sum(m => m.quantity) == 0 ? FeedbackKind.Warning : FeedbackKind.Success);
                 var machine = GameManager.Instance?.StateMachine;
                 if (machine?.CurrentState == GameState.Initial_Team) machine.TryChangeState(GameState.Management_Hub);
                 else MenuNavigator.Instance?.Back();
             }
-            catch (Exception) { view.SetHint("Não foi possível confirmar a equipe. Confira os dados e tente novamente.", true); }
+            catch (Exception) { view.SetHint("Não foi possível confirmar a equipe. Confira os dados e tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Confira os dados e tente novamente.", FeedbackKind.Error); }
         }
     }
 }

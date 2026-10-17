@@ -1,0 +1,42 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using Game.Adapter.In.UI.Theme;
+
+namespace Game.Adapter.In.UI
+{
+    public enum FeedbackKind { Success, Warning, Error }
+    /// <summary>Nonmodal, dismissible feedback. Its surface never intercepts clicks outside its close button.</summary>
+    public sealed class FeedbackToast : MonoBehaviour
+    {
+        [SerializeField] private GameObject panel;
+        [SerializeField] private TMP_Text message;
+        [SerializeField] private UnityEngine.UI.Image surface;
+        [SerializeField] private UnityEngine.UI.Button close;
+        [SerializeField] private Sprite success, warning, error;
+        private float remaining;
+        public static FeedbackToast Current { get; private set; }
+        public bool IsVisible => panel != null && panel.activeSelf;
+        public FeedbackKind Kind { get; private set; }
+        private void Awake() { Current = this; close?.onClick.AddListener(Hide); Hide(); }
+        public static void Show(string text, FeedbackKind kind) { if (Current != null) Current.Display(text, kind); }
+        public void Display(string text, FeedbackKind kind)
+        {
+            if (string.IsNullOrWhiteSpace(text)) { Hide(); return; }
+            Kind = kind; message.text = (kind == FeedbackKind.Success ? "Sucesso • " : kind == FeedbackKind.Warning ? "Atenção • " : "Não foi possível • ") + text;
+            surface.sprite = kind == FeedbackKind.Success ? success : kind == FeedbackKind.Warning ? warning : error;
+            message.color = kind == FeedbackKind.Error ? GamePalette.ErrorText : GamePalette.Ink; surface.color = Color.white;
+            remaining = Mathf.Max(6, message.text.Length / 14f); panel.SetActive(true);
+        }
+        private void Update()
+        {
+            if (!IsVisible) return;
+            // Keyboard focus keeps feedback available until the reader leaves it or closes it.
+            if (EventSystem.current?.currentSelectedGameObject == close.gameObject) return;
+            remaining -= Time.unscaledDeltaTime; if (remaining <= 0) Hide();
+        }
+        public void Hide() { panel?.SetActive(false); }
+        private void OnDisable() => Hide();
+        private void OnDestroy() { if (Current == this) Current = null; }
+    }
+}

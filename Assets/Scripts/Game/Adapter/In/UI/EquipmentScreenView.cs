@@ -24,6 +24,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private EquipmentCartLineView cartLinePrefab;
         [SerializeField] private TextMeshProUGUI cartTotalText, cartStatusText, cartCashText, cartRemainingText;
         [SerializeField] private UnityEngine.UI.Button checkoutButton, closeCartButton;
+        [SerializeField] private UnityEngine.UI.Button retryCatalogButton;
         private readonly List<EquipmentCardView> cards = new();
         private readonly List<EquipmentCartLineView> lines = new();
         private UnityAction checkoutAction;
@@ -67,13 +68,13 @@ namespace Game.Adapter.In.UI
         {
             float total = items.Sum(e => Mathf.Max(0, e.cost));
             if (availableCashText != null) availableCashText.text = available ? FinancialScreenView.Money(availableCash) : "Indisponível";
-            if (cartTotalValueText != null) cartTotalValueText.text = FinancialScreenView.Money(total);
+            if (cartTotalValueText != null) cartTotalValueText.text = available ? FinancialScreenView.Money(total) : "Indisponível";
             if (remainingCashValueText != null)
             {
                 remainingCashValueText.text = available ? FinancialScreenView.Money(availableCash - total) : "Indisponível";
                 remainingCashValueText.color = total > availableCash ? GamePalette.ErrorText : GamePalette.Ink;
             }
-            if (summaryEmpty != null) summaryEmpty.SetActive(items.Count == 0);
+            if (summaryEmpty != null) summaryEmpty.SetActive(available && items.Count == 0);
             if (summaryItemsText != null)
             {
                 summaryItemsText.gameObject.SetActive(items.Count > 0);
@@ -107,6 +108,27 @@ namespace Game.Adapter.In.UI
             if (!Mathf.Approximately(grid.cellSize.y, height)) grid.cellSize = new Vector2(grid.cellSize.x, height);
         }
         public void SetHint(string message) { if (hintText != null) hintText.text = message; }
+        public void BindRetry(UnityAction action) => Bind(retryCatalogButton, action);
+        public void SetCatalogLoading(bool loading)
+        {
+            if (retryCatalogButton != null) retryCatalogButton.gameObject.SetActive(false);
+            if (catalogEmpty != null) catalogEmpty.SetActive(false);
+            if (resultText != null) resultText.text = loading ? "Carregando catálogo…" : "";
+            if (loading)
+            {
+                SetCartSummary(0, Array.Empty<EquipmentData>(), false);
+                SetHint("Carregando o catálogo de equipamentos…");
+            }
+        }
+        public void ShowCatalogFailure(string message)
+        {
+            if (catalogEmpty != null) { catalogEmpty.SetActive(true); catalogEmpty.GetComponent<TMP_Text>().text = message; }
+            if (retryCatalogButton != null) { retryCatalogButton.gameObject.SetActive(true); retryCatalogButton.Select(); }
+            if (resultText != null) resultText.text = "Catálogo indisponível";
+            SetHint(message);
+        }
+        public void ResetCatalogMessage()
+        { if (catalogEmpty != null) catalogEmpty.GetComponent<TMP_Text>().text = "Nenhum equipamento neste filtro.\nEscolha outra categoria para continuar."; }
         public void SetConfirmEnabled(bool enabled) { if (confirmButton != null) confirmButton.interactable = enabled; }
         public void BindBankBack(UnityAction action) => Bind(bankBackButton, action);
         public void BindCart(UnityAction action) => Bind(cartButton, action);
