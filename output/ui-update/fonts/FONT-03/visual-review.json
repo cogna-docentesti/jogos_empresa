@@ -1,0 +1,25 @@
+{
+  "task": "FONT-03",
+  "date": "2026-10-17",
+  "passed": true,
+  "review_method": "Inspeção direta dos PNGs nativos do Game View em Play mode, após descartar e substituir a primeira tentativa de capturas em Edit mode que manteve o frame em cache.",
+  "viewport": [1920, 1080],
+  "specimen": "output/ui-update/fonts/FONT-03/all-faces-specimen.png",
+  "sizes_reviewed": [20, 24, 36],
+  "faces": [
+    {"face": "Roboto-Regular", "screen": "identification-Roboto-Regular.png", "accepted": true, "notes": "Contorno leve e legível; acentos e cedilhas definidos, numerais/moeda sem perdas."},
+    {"face": "Roboto-Bold", "screen": "identification-Roboto-Bold.png", "accepted": true, "notes": "Peso claramente maior que Regular, sem outline ou dilatação; miolos permanecem abertos no corpo 20."},
+    {"face": "RobotoCondensed-Regular", "screen": "identification-RobotoCondensed-Regular.png", "accepted": true, "notes": "Largura condensada nativa, traço leve e leitura preservada em 20/24."},
+    {"face": "RobotoCondensed-Medium", "screen": "identification-RobotoCondensed-Medium.png", "accepted": true, "notes": "Traço intermediário visível, distinto do Regular; sem escala horizontal aplicada."},
+    {"face": "RobotoCondensed-SemiBold", "screen": "identification-RobotoCondensed-SemiBold.png", "accepted": true, "notes": "Progressão de peso real entre Medium e Bold; títulos e rótulos renderizam sem empastamento."},
+    {"face": "RobotoCondensed-Bold", "screen": "identification-RobotoCondensed-Bold.png", "accepted": true, "notes": "Maior peso nativo da família na amostra, com curvas/acentos preservados."}
+  ],
+  "required_examples_reviewed": "ÁÉÍÓÚ ÂÊÔ ÃÕ Ç áéíóú âêô ãõ ç R$ -12.345,67 72 / 100 + − % ← ↑ → ↓",
+  "fallback_review": "Amostra dos glifos latinos excepcionais e as quatro setas visíveis na folha; nenhuma caixa de glifo ausente. Setas são a face real Noto Sans Math Regular em todos os pesos, sem engrossamento artificial.",
+  "screen_scope": "Cada face foi aplicada temporariamente a todos os TMP ativos da tela real de identificação, preservando cores/tamanhos/layout, e desfeita ao encerrar o Play. Estas imagens qualificam assets, não homologam a futura composição de pesos por papel.",
+  "limitations": [
+    "Qualidade aferida em 1920×1080 no Editor, sem build standalone nesta tarefa.",
+    "Não homologa itálico, emoji ou caracteres fora do corpus declarado.",
+    "A primeira comparação pós-Play ocorreu antes da restauração nativa da cena; a comparação final foi refeita após a restauração e reproduziu integralmente o fingerprint original. O verificador agora espera o número original de raízes."
+  ]
+}

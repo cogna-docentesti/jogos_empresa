@@ -1,6 +1,6 @@
 # Substituição da tipografia para aproximar os concepts
 
-Data: 17/10/2026. Status: **FONT-01 e FONT-02 concluídos; FONT-03 a FONT-10 pendentes**.
+Data: 17/10/2026. Status: **FONT-01 a FONT-03 concluídos; FONT-04 a FONT-10 pendentes**.
 
 Este lote substitui a Inter Tight usada na interface por Roboto e Roboto Condensed, distribuídas por função visual. Inclui localizar ou baixar as fontes, criar os assets TextMeshPro necessários e aplicar a mudança nas interfaces reais. Os registros de conclusão de UI-01 a UI-20 continuam sendo evidências da entrega anterior; não comprovam esta substituição.
 
@@ -41,7 +41,7 @@ O inventário de FONT-01 está concluído; a substituição das fontes ainda est
 | --- | --- | --- | --- |
 | 1 | [FONT-01 — Inventário e matriz por texto](FONT-01-inventario-e-matriz.md) | — | Concluído — [QA](../qa/FONT-01.json) |
 | 2 | [FONT-02 — Download, fontes de produção e licenças](FONT-02-download-e-licencas.md) | FONT-01 | Concluído — [QA](../qa/FONT-02.json) |
-| 3 | [FONT-03 — Assets TextMeshPro e glifos](FONT-03-assets-tmpro.md) | FONT-02 | Pendente |
+| 3 | [FONT-03 — Assets TextMeshPro e glifos](FONT-03-assets-tmpro.md) | FONT-02 | Concluído — [QA](../qa/FONT-03.json) |
 | 4 | [FONT-04 — Tema, builders e geração em runtime](FONT-04-tema-e-geracao-runtime.md) | FONT-03 | Pendente |
 | 5 | [FONT-05 — Componentes, HUD, hub e entrada](FONT-05-componentes-hud-e-entrada.md) | FONT-04 | Pendente |
 | 6 | [FONT-06 — Restaurante, cardápio e revisão](FONT-06-restaurante-cardapio-e-revisao.md) | FONT-05 | Pendente |
