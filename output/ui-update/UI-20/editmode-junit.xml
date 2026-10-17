@@ -1,0 +1,1446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="JogosDeEmpresa" tests="381" failures="0" errors="0" skipped="0" time="26.522">
+  <testsuite name="InitialDecisionsTests" tests="17" failures="0" errors="0" skipped="0" time="0.289">
+    <testcase name="Commit_recusa_rascunho_incompleto" classname="InitialDecisionsTests" time="0.019">
+      <system-out>[GameSessionService] Decisões incompletas: localização: True, restaurante: False, cardápio: False, cardápio do restaurante certo: True</system-out>
+    </testcase>
+    <testcase name="Commit_sem_sessao_avisa_e_nao_grava" classname="InitialDecisionsTests" time="0.001" />
+    <testcase name="Financas_escolhida_e_diferente_de_nada_escolhido" classname="InitialDecisionsTests" time="0.005" />
+    <testcase name="GetMenu_devolve_copia_que_nao_altera_o_rascunho" classname="InitialDecisionsTests" time="0.002" />
+    <testcase name="LoadDecisionsFrom_preenche_o_rascunho_com_a_sessao_salva" classname="InitialDecisionsTests" time="0.004" />
+    <testcase name="Manter_o_restaurante_preserva_o_cardapio" classname="InitialDecisionsTests" time="0.000" />
+    <testcase name="Mapa_de_zonas_ida_e_volta" classname="InitialDecisionsTests" time="0.001" />
+    <testcase name="Migracao_adiciona_colunas_novas_sem_perder_linhas" classname="InitialDecisionsTests" time="0.233" />
+    <testcase name="Pedido_de_edicao_da_identificacao_vale_uma_vez" classname="InitialDecisionsTests" time="0.001" />
+    <testcase name="Persist_sem_banco_devolve_false_sem_quebrar" classname="InitialDecisionsTests" time="0.001" />
+    <testcase name="Rascunho_comeca_vazio_e_incompleto" classname="InitialDecisionsTests" time="0.000" />
+    <testcase name="Rascunho_fica_completo_com_as_tres_decisoes" classname="InitialDecisionsTests" time="0.000" />
+    <testcase name="Sessao_nova_nasce_sem_linha_no_banco" classname="InitialDecisionsTests" time="0.007">
+      <system-out>[Banco] Save ignorado: a sessao ainda nao foi gravada (isso so acontece no confirm da D3).
+[Banco] Save ignorado: a sessao ainda nao foi gravada (isso so acontece no confirm da D3).
+[Banco] Save ignorado: a sessao ainda nao foi gravada (isso so acontece no confirm da D3).</system-out>
+    </testcase>
+    <testcase name="StateMachine_D3_segue_para_o_primeiro_tutorial_pela_revisao" classname="InitialDecisionsTests" time="0.007">
+      <system-out>Estado forçado: Config_TargetSegment
+Estado atual: Config_Review
+Estado atual: Initial_Capital</system-out>
+    </testcase>
+    <testcase name="StateMachine_nao_deixa_pular_da_D1_para_a_D3" classname="InitialDecisionsTests" time="0.002">
+      <system-out>Estado forçado: Config_Location
+Transição inválida: Config_Location -&gt; Config_TargetSegment</system-out>
+    </testcase>
+    <testcase name="StateMachine_permite_avancar_e_voltar_entre_D1_D2_D3" classname="InitialDecisionsTests" time="0.005">
+      <system-out>Estado forçado: Config_Location
+Estado atual: Config_Restaurant
+Estado atual: Config_TargetSegment
+Estado atual: Config_Restaurant
+Estado atual: Config_Location</system-out>
+    </testcase>
+    <testcase name="Trocar_de_restaurante_descarta_o_cardapio_do_anterior" classname="InitialDecisionsTests" time="0.001" />
+  </testsuite>
+  <testsuite name="MonthlySimulationTests" tests="25" failures="0" errors="0" skipped="0" time="0.668">
+    <testcase name="CapacityLimitsCustomersAndEmptyTeamCannotSell" classname="MonthlySimulationTests" time="0.045">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 12ee935e-9a94-4d9e-bc4a-b4aa73cbcfab (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="DailyAndMonthlyEffectsRespectTheirRecordedStartDay" classname="MonthlySimulationTests" time="0.037">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8124815d-fa61-440d-a369-7cb29cba313f (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="DatabaseFailureRollsBackResultAndPreservesMemoryAndAllowsRetry" classname="MonthlySimulationTests" time="0.095">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 7f0f44a2-f1d9-406b-8e67-db39e9560471 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=11520,00, reputation=52.</system-out>
+    </testcase>
+    <testcase name="EquipmentCapacityIsCountedOnceAndDoesNotRepeatPurchaseCosts" classname="MonthlySimulationTests" time="0.034">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao aada2b59-e60c-4e76-8749-2e119580b37d (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="EventsCannotChangeAnAlreadySettledStatement" classname="MonthlySimulationTests" time="0.046">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 206ef3b2-2fec-4e27-94df-c8623160ef7e (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=11520,00, reputation=52.</system-out>
+    </testcase>
+    <testcase name="ExistingDatabaseSchemaAddsMonthlyFieldsWithoutRemovingRows" classname="MonthlySimulationTests" time="0.024">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 9a1cef57-008b-4b1c-9f1f-a58aeef4300f (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="GameFlowUsesTheEngineAndReachesTheFinalReportAfterMonthThree" classname="MonthlySimulationTests" time="0.132">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 460855b4-2331-4a20-b8eb-e39c38a4e58a (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 460855b4-2331-4a20-b8eb-e39c38a4e58a atualizada (rodada 1, caixa 10.000).
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=71600,00, reputation=45.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+Estado atual: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=133200,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+Estado atual: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=194800,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+Estado atual: FinalReport</system-out>
+    </testcase>
+    <testcase name="HigherPricesReduceDemandAndReputationFeedsTheNextMonth" classname="MonthlySimulationTests" time="0.050">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f4054fd8-67c8-4f2c-adfe-376dddeb6da6 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="InvalidCatalogAndNonFiniteValuesFailBeforeSettlement" classname="MonthlySimulationTests" time="0.024">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 7dc70e28-a3c2-42f5-a1e5-249257f75b70 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="InvalidMonthIsRejected(0)" classname="MonthlySimulationTests" time="0.014">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a481d6e3-fbe0-43f2-ac53-a7b9a4093719 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="InvalidMonthIsRejected(4)" classname="MonthlySimulationTests" time="0.026">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f4edd014-35df-4ff3-9127-b8ffe6dcec55 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="KnownMonthlyStatementUsesSelectedPricesAndCatalogCosts" classname="MonthlySimulationTests" time="0.007">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 16f4051d-0f7a-4126-aa21-284cbf5c1d1f (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="MissingSpecialistPreventsOperationAndQuantitiesAffectAlignment" classname="MonthlySimulationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 3d0e0cd1-e670-4756-a6a8-2e3a40ead2b9 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="MonthTwoLoanUsesTwoInstallmentsAndClearsTheRemainingBalance" classname="MonthlySimulationTests" time="0.019">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao acd25738-cf37-47c2-82d4-6c7233e0232c (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=11520,00, reputation=52.
+[Banco] Sessao acd25738-cf37-47c2-82d4-6c7233e0232c atualizada (rodada 2, caixa 11.520).
+[RoundService] Month 2 settled: customers=367, revenue=11010,00, cash=12691,00, reputation=54.
+[RoundService] Month 3 settled: customers=374, revenue=11220,00, cash=13990,00, reputation=56.</system-out>
+    </testcase>
+    <testcase name="RecordedOptionKeepsAnImmutableEffectSnapshot" classname="MonthlySimulationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 0a8665eb-cd71-46a9-b9a0-688520ed02a7 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="ReloadRestoresTheSettledMonthAndReputationForTheNextCalculation" classname="MonthlySimulationTests" time="0.013">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 0584ce55-411f-4088-8dc0-3a62ff873e94 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=11520,00, reputation=52.</system-out>
+    </testcase>
+    <testcase name="RepeatedCalculationIsDeterministicAndDoesNotChangeInputs" classname="MonthlySimulationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 9b93b465-716e-41fc-9f7a-0747d61bf182 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="SettlementPersistsStatementAndSessionAndExplicitRetryIsIdempotent" classname="MonthlySimulationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 19973f3f-679b-4001-b70f-8868aac2159c (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=11520,00, reputation=52.</system-out>
+    </testcase>
+    <testcase name="ShippedCatalogAndSummaryUseTheSameMonthlyEngine" classname="MonthlySimulationTests" time="0.016">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b1d66cc2-9b79-4705-81fc-491127d30345 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="SignedEventCashChangesAreAddedAndReputationIsClamped" classname="MonthlySimulationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 93aa8552-a8f2-49b5-a777-57b23837d4b8 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="ThreeLossesRetainExistingBankruptcyRuleAndAProfitResetsTheCounter" classname="MonthlySimulationTests" time="0.012">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 500dc2c4-f86b-4c35-8440-9bd7e7a24eaf (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=-7980,00, reputation=52.
+[RoundService] Month 2 settled: customers=367, revenue=11010,00, cash=-25841,00, reputation=54.
+[RoundService] Month 3 settled: customers=374, revenue=11220,00, cash=-43583,00, reputation=56.</system-out>
+    </testcase>
+    <testcase name="ThreeMonthsCompleteTheQuarterAndLoanIsFullyRepaid" classname="MonthlySimulationTests" time="0.012">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao cbd57c20-b1d7-4e42-80e5-f90f2f93d994 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao cbd57c20-b1d7-4e42-80e5-f90f2f93d994 atualizada (rodada 1, caixa 10.000).
+[RoundService] Month 1 settled: customers=360, revenue=10800,00, cash=11166,67, reputation=52.
+[RoundService] Month 2 settled: customers=367, revenue=11010,00, cash=12459,00, reputation=54.
+[RoundService] Month 3 settled: customers=374, revenue=11220,00, cash=13877,00, reputation=56.</system-out>
+    </testcase>
+    <testcase name="TicketAndIngredientEffectsChangeRevenueAndSuppliesIndependently" classname="MonthlySimulationTests" time="0.005">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 768cc008-f37c-45c6-96d9-129e18cf3091 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UncommittedSetupAndMissingMonthHistoryCannotBeSettled" classname="MonthlySimulationTests" time="0.007">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 746b4032-44c9-41be-b28e-83107e080536 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] PRIMEIRA GRAVACAO da sessao 746b4032-44c9-41be-b28e-83107e080536 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 746b4032-44c9-41be-b28e-83107e080536 atualizada (rodada 2, caixa 10.000).</system-out>
+    </testcase>
+    <testcase name="ZeroStockStopsSalesAndFractionalDemandNeverCreatesFractionalCustomers" classname="MonthlySimulationTests" time="0.005">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 57294f5c-463c-4bf2-8b1b-0fad29018d89 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="PersistenceAndLocationTests" tests="16" failures="0" errors="0" skipped="0" time="1.677">
+    <testcase name="E04_migracao_cria_a_tabela_de_localizacoes_num_banco_antigo" classname="PersistenceAndLocationTests" time="0.026" />
+    <testcase name="E04_registro_de_evento_grava_os_tres_impactos" classname="PersistenceAndLocationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 207a3402-3329-4fd2-b16f-8aef7da98a35 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 207a3402-3329-4fd2-b16f-8aef7da98a35 atualizada (rodada 2, caixa 0).</system-out>
+    </testcase>
+    <testcase name="E05_alteracao_sem_save_aparece_como_pendente_e_some_ao_salvar" classname="PersistenceAndLocationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao d263c150-5f2e-4956-8270-fb32cd46ff3e (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao d263c150-5f2e-4956-8270-fb32cd46ff3e atualizada (rodada 1, caixa 500).</system-out>
+    </testcase>
+    <testcase name="E05_dialogo_antes_da_D3_nao_oferece_salvar" classname="PersistenceAndLocationTests" time="0.006" />
+    <testcase name="E05_Shutdown_salvando_grava_o_que_estava_pendente" classname="PersistenceAndLocationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 0d59b3ed-b529-4fbb-822b-af14f407d8fb (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 0d59b3ed-b529-4fbb-822b-af14f407d8fb atualizada (rodada 1, caixa 4.321).
+[Banco] Sessao 0d59b3ed-b529-4fbb-822b-af14f407d8fb atualizada (rodada 1, caixa 4.321).
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="E05_Shutdown_sem_salvar_descarta_e_fecha_o_banco_uma_vez_so" classname="PersistenceAndLocationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 79d911d9-e4ef-44e4-9c3f-fcaa78ad9973 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="E06_abrir_de_novo_nao_duplica_linhas" classname="PersistenceAndLocationTests" time="0.008">
+      <system-out>[SqliteLocationRepository] Primeira carga: 5 localizacoes copiadas dos assets para o banco.</system-out>
+    </testcase>
+    <testcase name="E06_assets_nao_tem_mais_lorem_ipsum_nem_descricao_vazia" classname="PersistenceAndLocationTests" time="0.007" />
+    <testcase name="E06_banco_e_assets_mostram_os_mesmos_dados_na_D1" classname="PersistenceAndLocationTests" time="0.014">
+      <system-out>[StaticLocationRepository] 5 localizacoes carregadas.
+[SqliteLocationRepository] Primeira carga: 5 localizacoes copiadas dos assets para o banco.</system-out>
+    </testcase>
+    <testcase name="E06_o_jogo_le_do_banco_e_nao_dos_assets" classname="PersistenceAndLocationTests" time="0.007">
+      <system-out>[SqliteLocationRepository] Primeira carga: 5 localizacoes copiadas dos assets para o banco.</system-out>
+    </testcase>
+    <testcase name="E06_primeira_carga_copia_os_assets_para_o_banco" classname="PersistenceAndLocationTests" time="0.009">
+      <system-out>[SqliteLocationRepository] Primeira carga: 5 localizacoes copiadas dos assets para o banco.</system-out>
+    </testcase>
+    <testcase name="Merge_capital_inicial_da_Thaysla_vale_no_confirm_da_D3" classname="PersistenceAndLocationTests" time="0.010">
+      <system-out>[GameSessionService] Identificação do aluno não encontrada. studentName, studentRA e companyName serão gravados vazios.
+[Banco] Save ignorado: a sessao ainda nao foi gravada (isso so acontece no confirm da D3).
+[Banco] PRIMEIRA GRAVACAO da sessao 94da8c49-017a-4abd-a1cd-3217d569f206 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[GameSessionService] Decisões iniciais gravadas. Sessão 94da8c49-017a-4abd-a1cd-3217d569f206.</system-out>
+    </testcase>
+    <testcase name="Merge_partida_carregada_do_banco_continua_marcada_como_gravada" classname="PersistenceAndLocationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao be9e2f40-bb4e-4527-90c7-35d740b35859 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao be9e2f40-bb4e-4527-90c7-35d740b35859 atualizada (rodada 1, caixa 1.234).</system-out>
+    </testcase>
+    <testcase name="Merge_RestartSession_apaga_tudo_e_a_nova_sessao_nasce_so_em_memoria" classname="PersistenceAndLocationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao cd18a173-989e-4ce5-af83-85fa3088e486 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="Merge_save_do_ciclo_antigo_fica_separado_como_incompativel" classname="PersistenceAndLocationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 3f5745b4-4a27-4435-afc2-d8e6faae47be (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 3f5745b4-4a27-4435-afc2-d8e6faae47be atualizada (rodada 7, caixa 0).</system-out>
+    </testcase>
+    <testcase name="Thaysla_bateria_do_ciclo_trimestral_passa_depois_do_merge" classname="PersistenceAndLocationTests" time="1.525">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f2b7562f-ebb5-432c-ab5a-31ddc9a73278 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Trimestre] PASSOU: Nova sessao ativa comeca na rodada 1
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[Trimestre] PASSOU: Inicio valido do mes 1
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=61600,00, reputation=45.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: Resultado do mes 1
+[Trimestre] PASSOU: Resumo aguarda leitura no mes 1
+Estado atual: Management_Hub
+[Trimestre] PASSOU: Continuacao explicita no mes 1
+[Trimestre] PASSOU: 13o salario zero no mes 1
+[Trimestre] PASSOU: Avanco/limite apos mes 1
+[Trimestre] PASSOU: Status apos mes 1
+[Trimestre] PASSOU: Estado externo apos mes 1
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[Trimestre] PASSOU: Inicio valido do mes 2
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=123200,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: Resultado do mes 2
+[Trimestre] PASSOU: Resumo aguarda leitura no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: Continuacao explicita no mes 2
+[Trimestre] PASSOU: 13o salario zero no mes 2
+[Trimestre] PASSOU: Avanco/limite apos mes 2
+[Trimestre] PASSOU: Status apos mes 2
+[Trimestre] PASSOU: Estado externo apos mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[Trimestre] PASSOU: Inicio valido do mes 3
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=184800,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: Resultado do mes 3
+[Trimestre] PASSOU: Resumo aguarda leitura no mes 3
+Estado atual: FinalReport
+[Trimestre] PASSOU: Continuacao explicita no mes 3
+[Trimestre] PASSOU: 13o salario zero no mes 3
+[Trimestre] PASSOU: Avanco/limite apos mes 3
+[Trimestre] PASSOU: Status apos mes 3
+[Trimestre] PASSOU: Estado externo apos mes 3
+[Trimestre] PASSOU: Exatamente tres resultados: 1, 2 e 3
+[Trimestre] PASSOU: 13o salario persistido zero em todo trimestre
+[Trimestre] PASSOU: Nenhum resultado da rodada 4
+Estado forçado: Management_Hub
+[Trimestre] PASSOU: Sessao COMPLETED: StartRound bloqueado
+[Trimestre] PASSOU: Sessao COMPLETED: ProcessRound retorna null
+Estado forçado: Round_Sales
+[Trimestre] PASSOU: Sessao COMPLETED: fluxo externo nao chega ao resumo
+[Trimestre] PASSOU: Sessao COMPLETED: rodada, status e dados financeiros preservados
+[Trimestre] PASSOU: Sessao COMPLETED: nenhum resultado adicional persistido
+[Trimestre] PASSOU: AdvanceRound ativo nao avanca de 3 para 4
+Estado forçado: Management_Hub
+[Trimestre] PASSOU: Rodada invalida 0: StartRound bloqueado
+[Trimestre] PASSOU: Rodada invalida 0: ProcessRound retorna null
+Estado forçado: Round_Sales
+[Trimestre] PASSOU: Rodada invalida 0: fluxo externo nao chega ao resumo
+[Trimestre] PASSOU: Rodada invalida 0: rodada, status e dados financeiros preservados
+[Trimestre] PASSOU: Rodada invalida 0: nenhum resultado adicional persistido
+Estado forçado: Management_Hub
+[Trimestre] PASSOU: Rodada invalida 4: StartRound bloqueado
+[Trimestre] PASSOU: Rodada invalida 4: ProcessRound retorna null
+Estado forçado: Round_Sales
+[Trimestre] PASSOU: Rodada invalida 4: fluxo externo nao chega ao resumo
+[Trimestre] PASSOU: Rodada invalida 4: rodada, status e dados financeiros preservados
+[Trimestre] PASSOU: Rodada invalida 4: nenhum resultado adicional persistido
+[Trimestre] PASSOU: Rodada 4 continua sem resultado
+[Banco] PRIMEIRA GRAVACAO da sessao 2ae9e738-8721-4b4a-87ca-18e795a0f1dc (confirm da D3). Linhas na tabela GameSessionEntity: 2.
+[Banco] Sessao 2ae9e738-8721-4b4a-87ca-18e795a0f1dc atualizada (rodada 2, caixa -100).
+[Trimestre] PASSOU: Prejuizos consecutivos no mes 1
+[Trimestre] PASSOU: Limite no trimestre com prejuizos: mes 1
+[Trimestre] PASSOU: Precedencia de falencia no mes 1
+[Banco] Sessao 2ae9e738-8721-4b4a-87ca-18e795a0f1dc atualizada (rodada 3, caixa -200).
+[Trimestre] PASSOU: Prejuizos consecutivos no mes 2
+[Trimestre] PASSOU: Limite no trimestre com prejuizos: mes 2
+[Trimestre] PASSOU: Precedencia de falencia no mes 2
+[Banco] Sessao 2ae9e738-8721-4b4a-87ca-18e795a0f1dc atualizada (rodada 3, caixa -300).
+[Trimestre] PASSOU: Prejuizos consecutivos no mes 3
+[Trimestre] PASSOU: Limite no trimestre com prejuizos: mes 3
+[Trimestre] PASSOU: Precedencia de falencia no mes 3
+[Trimestre] PASSOU: BANKRUPT prevalece sobre COMPLETED no mes 3
+Estado forçado: Round_Summary
+Estado atual: GameOver_Bankruptcy
+[Trimestre] PASSOU: Resumo falido continua por acao explicita
+[Trimestre] PASSOU: Fluxo externo encaminha falencia ao GameOver
+[Trimestre] PASSOU: Trimestre falido tem somente resultados 1, 2 e 3
+Estado forçado: Management_Hub
+[Trimestre] PASSOU: Sessao BANKRUPT: StartRound bloqueado
+[Trimestre] PASSOU: Sessao BANKRUPT: ProcessRound retorna null
+Estado forçado: Round_Sales
+[Trimestre] PASSOU: Sessao BANKRUPT: fluxo externo nao chega ao resumo
+[Trimestre] PASSOU: Sessao BANKRUPT: rodada, status e dados financeiros preservados
+[Trimestre] PASSOU: Sessao BANKRUPT: nenhum resultado adicional persistido
+[Trimestre] PASSOU: Nenhum resultado 4 depois da falencia
+Estado forçado: Management_Hub
+[Trimestre] PASSOU: Sem sessao: inicio bloqueado
+[Trimestre] PASSOU: Sem sessao: processamento bloqueado
+[Trimestre] PASSOU: Sem sessao: fluxo externo retorna null
+[Trimestre] PASSOU: Sem sessao: AdvanceRound nao causa excecao
+[Trimestre] PASSOU: Credito: tres linhas oficiais disponiveis
+[Trimestre] PASSOU: Credito: valor e juros preservados em credito_de_investimento
+[Banco] PRIMEIRA GRAVACAO da sessao 74300bff-af27-43f9-b05b-9a64c823d467 (confirm da D3). Linhas na tabela GameSessionEntity: 3.
+[Trimestre] PASSOU: credito_de_investimento: prazo 3 no mes 1
+[Banco] Sessao 74300bff-af27-43f9-b05b-9a64c823d467 atualizada (rodada 1, caixa 250.000).
+[Trimestre] PASSOU: credito_de_investimento: contratacao credita caixa e registra principal
+[Trimestre] PASSOU: credito_de_investimento: confirmacao repetida nao duplica emprestimo
+[Trimestre] PASSOU: credito_de_investimento: resumo usa parcela trimestral no mes 1
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=218266,70, reputation=45.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_de_investimento: parcela processada no mes 1
+[Trimestre] PASSOU: credito_de_investimento: amortizacao persistida no mes 1
+Estado atual: Management_Hub
+[Trimestre] PASSOU: credito_de_investimento: acknowledge saved statement 1
+[Trimestre] PASSOU: credito_de_investimento: resumo usa parcela trimestral no mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=189866,70, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_de_investimento: parcela processada no mes 2
+[Trimestre] PASSOU: credito_de_investimento: amortizacao persistida no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: credito_de_investimento: acknowledge saved statement 2
+[Trimestre] PASSOU: credito_de_investimento: resumo usa parcela trimestral no mes 3
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=164800,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_de_investimento: parcela processada no mes 3
+[Trimestre] PASSOU: credito_de_investimento: amortizacao persistida no mes 3
+Estado atual: GameOver_Bankruptcy
+[Trimestre] PASSOU: credito_de_investimento: acknowledge saved statement 3
+[Trimestre] PASSOU: credito_de_investimento: emprestimo quitado dentro do trimestre
+[Trimestre] PASSOU: credito_de_investimento: nenhuma parcela ou resultado do mes 4
+[Banco] PRIMEIRA GRAVACAO da sessao e1b672b0-21c2-4ee5-b155-23e5f33807bc (confirm da D3). Linhas na tabela GameSessionEntity: 4.
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=61600,00, reputation=45.
+[Trimestre] PASSOU: Credit fixture: settle month one before a month-two loan
+Estado forçado: Round_Summary
+Estado atual: Management_Hub
+[Trimestre] PASSOU: Credit fixture: acknowledge month one before contracting
+[Trimestre] PASSOU: credito_de_investimento: prazo 2 no mes 2
+[Banco] Sessao e1b672b0-21c2-4ee5-b155-23e5f33807bc atualizada (rodada 2, caixa 311.600).
+[Trimestre] PASSOU: credito_de_investimento: contratacao credita caixa e registra principal
+[Trimestre] PASSOU: credito_de_investimento: confirmacao repetida nao duplica emprestimo
+[Trimestre] PASSOU: credito_de_investimento: resumo usa parcela trimestral no mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=238200,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_de_investimento: parcela processada no mes 2
+[Trimestre] PASSOU: credito_de_investimento: amortizacao persistida no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: credito_de_investimento: acknowledge saved statement 2
+[Trimestre] PASSOU: credito_de_investimento: resumo usa parcela trimestral no mes 3
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=169800,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_de_investimento: parcela processada no mes 3
+[Trimestre] PASSOU: credito_de_investimento: amortizacao persistida no mes 3
+Estado atual: FinalReport
+[Trimestre] PASSOU: credito_de_investimento: acknowledge saved statement 3
+[Trimestre] PASSOU: credito_de_investimento: emprestimo quitado dentro do trimestre
+[Trimestre] PASSOU: credito_de_investimento: nenhuma parcela ou resultado do mes 4
+[Banco] PRIMEIRA GRAVACAO da sessao fc619bf2-798d-4ce4-bac2-dd606da459f4 (confirm da D3). Linhas na tabela GameSessionEntity: 5.
+[Trimestre] PASSOU: credito_de_investimento: mes 3 bloqueia contratacao sem alterar caixa ou divida
+[Trimestre] PASSOU: Credito: valor e juros preservados em credito_empresarial_padrao
+[Banco] PRIMEIRA GRAVACAO da sessao 3248557b-a59c-4048-a4a9-fa4ddfe05937 (confirm da D3). Linhas na tabela GameSessionEntity: 6.
+[Trimestre] PASSOU: credito_empresarial_padrao: prazo 3 no mes 1
+[Banco] Sessao 3248557b-a59c-4048-a4a9-fa4ddfe05937 atualizada (rodada 1, caixa 120.000).
+[Trimestre] PASSOU: credito_empresarial_padrao: contratacao credita caixa e registra principal
+[Trimestre] PASSOU: credito_empresarial_padrao: confirmacao repetida nao duplica emprestimo
+[Trimestre] PASSOU: credito_empresarial_padrao: resumo usa parcela trimestral no mes 1
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=138000,00, reputation=45.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_empresarial_padrao: parcela processada no mes 1
+[Trimestre] PASSOU: credito_empresarial_padrao: amortizacao persistida no mes 1
+Estado atual: Management_Hub
+[Trimestre] PASSOU: credito_empresarial_padrao: acknowledge saved statement 1
+[Trimestre] PASSOU: credito_empresarial_padrao: resumo usa parcela trimestral no mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=157200,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_empresarial_padrao: parcela processada no mes 2
+[Trimestre] PASSOU: credito_empresarial_padrao: amortizacao persistida no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: credito_empresarial_padrao: acknowledge saved statement 2
+[Trimestre] PASSOU: credito_empresarial_padrao: resumo usa parcela trimestral no mes 3
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=177600,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_empresarial_padrao: parcela processada no mes 3
+[Trimestre] PASSOU: credito_empresarial_padrao: amortizacao persistida no mes 3
+Estado atual: FinalReport
+[Trimestre] PASSOU: credito_empresarial_padrao: acknowledge saved statement 3
+[Trimestre] PASSOU: credito_empresarial_padrao: emprestimo quitado dentro do trimestre
+[Trimestre] PASSOU: credito_empresarial_padrao: nenhuma parcela ou resultado do mes 4
+[Banco] PRIMEIRA GRAVACAO da sessao 4894b76f-c865-4b16-b8d2-9cdf09147e3e (confirm da D3). Linhas na tabela GameSessionEntity: 7.
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=61600,00, reputation=45.
+[Trimestre] PASSOU: Credit fixture: settle month one before a month-two loan
+Estado forçado: Round_Summary
+Estado atual: Management_Hub
+[Trimestre] PASSOU: Credit fixture: acknowledge month one before contracting
+[Trimestre] PASSOU: credito_empresarial_padrao: prazo 2 no mes 2
+[Banco] Sessao 4894b76f-c865-4b16-b8d2-9cdf09147e3e atualizada (rodada 2, caixa 181.600).
+[Trimestre] PASSOU: credito_empresarial_padrao: contratacao credita caixa e registra principal
+[Trimestre] PASSOU: credito_empresarial_padrao: confirmacao repetida nao duplica emprestimo
+[Trimestre] PASSOU: credito_empresarial_padrao: resumo usa parcela trimestral no mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=179600,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_empresarial_padrao: parcela processada no mes 2
+[Trimestre] PASSOU: credito_empresarial_padrao: amortizacao persistida no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: credito_empresarial_padrao: acknowledge saved statement 2
+[Trimestre] PASSOU: credito_empresarial_padrao: resumo usa parcela trimestral no mes 3
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=179400,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: credito_empresarial_padrao: parcela processada no mes 3
+[Trimestre] PASSOU: credito_empresarial_padrao: amortizacao persistida no mes 3
+Estado atual: FinalReport
+[Trimestre] PASSOU: credito_empresarial_padrao: acknowledge saved statement 3
+[Trimestre] PASSOU: credito_empresarial_padrao: emprestimo quitado dentro do trimestre
+[Trimestre] PASSOU: credito_empresarial_padrao: nenhuma parcela ou resultado do mes 4
+[Banco] PRIMEIRA GRAVACAO da sessao 565a2a12-abf7-4e08-8318-4be2fb642f31 (confirm da D3). Linhas na tabela GameSessionEntity: 8.
+[Trimestre] PASSOU: credito_empresarial_padrao: mes 3 bloqueia contratacao sem alterar caixa ou divida
+[Trimestre] PASSOU: Credito: valor e juros preservados em microcredito_empresarial
+[Banco] PRIMEIRA GRAVACAO da sessao d81581f6-4b1e-4dc0-8830-66df36738313 (confirm da D3). Linhas na tabela GameSessionEntity: 9.
+[Trimestre] PASSOU: microcredito_empresarial: prazo 3 no mes 1
+[Banco] Sessao d81581f6-4b1e-4dc0-8830-66df36738313 atualizada (rodada 1, caixa 50.000).
+[Trimestre] PASSOU: microcredito_empresarial: contratacao credita caixa e registra principal
+[Trimestre] PASSOU: microcredito_empresarial: confirmacao repetida nao duplica emprestimo
+[Trimestre] PASSOU: microcredito_empresarial: resumo usa parcela trimestral no mes 1
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=93933,33, reputation=45.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: microcredito_empresarial: parcela processada no mes 1
+[Trimestre] PASSOU: microcredito_empresarial: amortizacao persistida no mes 1
+Estado atual: Management_Hub
+[Trimestre] PASSOU: microcredito_empresarial: acknowledge saved statement 1
+[Trimestre] PASSOU: microcredito_empresarial: resumo usa parcela trimestral no mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=138200,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: microcredito_empresarial: parcela processada no mes 2
+[Trimestre] PASSOU: microcredito_empresarial: amortizacao persistida no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: microcredito_empresarial: acknowledge saved statement 2
+[Trimestre] PASSOU: microcredito_empresarial: resumo usa parcela trimestral no mes 3
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=182800,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: microcredito_empresarial: parcela processada no mes 3
+[Trimestre] PASSOU: microcredito_empresarial: amortizacao persistida no mes 3
+Estado atual: FinalReport
+[Trimestre] PASSOU: microcredito_empresarial: acknowledge saved statement 3
+[Trimestre] PASSOU: microcredito_empresarial: emprestimo quitado dentro do trimestre
+[Trimestre] PASSOU: microcredito_empresarial: nenhuma parcela ou resultado do mes 4
+[Banco] PRIMEIRA GRAVACAO da sessao 3db2d97d-a990-49a9-bad3-946de4264342 (confirm da D3). Linhas na tabela GameSessionEntity: 10.
+[RoundService] Month 1 settled: customers=1950, revenue=117000,00, cash=61600,00, reputation=45.
+[Trimestre] PASSOU: Credit fixture: settle month one before a month-two loan
+Estado forçado: Round_Summary
+Estado atual: Management_Hub
+[Trimestre] PASSOU: Credit fixture: acknowledge month one before contracting
+[Trimestre] PASSOU: microcredito_empresarial: prazo 2 no mes 2
+[Banco] Sessao 3db2d97d-a990-49a9-bad3-946de4264342 atualizada (rodada 2, caixa 111.600).
+[Trimestre] PASSOU: microcredito_empresarial: contratacao credita caixa e registra principal
+[Trimestre] PASSOU: microcredito_empresarial: confirmacao repetida nao duplica emprestimo
+[Trimestre] PASSOU: microcredito_empresarial: resumo usa parcela trimestral no mes 2
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 2 settled: customers=1950, revenue=117000,00, cash=147200,00, reputation=40.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: microcredito_empresarial: parcela processada no mes 2
+[Trimestre] PASSOU: microcredito_empresarial: amortizacao persistida no mes 2
+Estado atual: Management_Hub
+[Trimestre] PASSOU: microcredito_empresarial: acknowledge saved statement 2
+[Trimestre] PASSOU: microcredito_empresarial: resumo usa parcela trimestral no mes 3
+Estado forçado: Management_Hub
+Estado atual: Round_Start
+Estado atual: Round_Sales
+[RoundService] Month 3 settled: customers=1950, revenue=117000,00, cash=183300,00, reputation=35.
+Estado atual: Round_Costs
+Estado atual: Round_Event
+Estado atual: Round_Summary
+[Trimestre] PASSOU: microcredito_empresarial: parcela processada no mes 3
+[Trimestre] PASSOU: microcredito_empresarial: amortizacao persistida no mes 3
+Estado atual: FinalReport
+[Trimestre] PASSOU: microcredito_empresarial: acknowledge saved statement 3
+[Trimestre] PASSOU: microcredito_empresarial: emprestimo quitado dentro do trimestre
+[Trimestre] PASSOU: microcredito_empresarial: nenhuma parcela ou resultado do mes 4
+[Banco] PRIMEIRA GRAVACAO da sessao a717efee-9877-4752-858b-53d8cc3e1594 (confirm da D3). Linhas na tabela GameSessionEntity: 11.
+[Trimestre] PASSOU: microcredito_empresarial: mes 3 bloqueia contratacao sem alterar caixa ou divida
+[Trimestre] PASSOU: Credito UI: prazo e disponibilidade no mes 1
+[Trimestre] PASSOU: Credito UI: prazo e disponibilidade no mes 2
+[Trimestre] PASSOU: Credito UI: prazo e disponibilidade no mes 3
+[Trimestre] PASSOU: Credito UI: confirmacao no mes 3 bloqueada com mensagem clara
+[Banco] PRIMEIRA GRAVACAO da sessao 1631ada2-1163-4f90-a79e-46c960b97724 (confirm da D3). Linhas na tabela GameSessionEntity: 12.
+[Banco] Sessao 1631ada2-1163-4f90-a79e-46c960b97724 atualizada (rodada 4, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: classificacao correta
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: encaminhamento correto
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: deteccao preserva sessao, resultados e historico
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: save isolado da sessao jogavel
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: nova sessao exige confirmar reinicio
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: reinicio remove todos os dados relacionados
+[Trimestre] PASSOU: Save rodada 4, resultado max 0, historico 0: nova sessao ativa so em memoria (grava no confirm da D3)
+[Banco] PRIMEIRA GRAVACAO da sessao 48332c0e-0743-4408-82b2-81991d58f69d (confirm da D3). Linhas na tabela GameSessionEntity: 12.
+[Banco] Sessao 48332c0e-0743-4408-82b2-81991d58f69d atualizada (rodada 12, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: classificacao correta
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: encaminhamento correto
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: deteccao preserva sessao, resultados e historico
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: save isolado da sessao jogavel
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: nova sessao exige confirmar reinicio
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: reinicio remove todos os dados relacionados
+[Trimestre] PASSOU: Save rodada 12, resultado max 0, historico 0: nova sessao ativa so em memoria (grava no confirm da D3)
+[Banco] PRIMEIRA GRAVACAO da sessao 72a4479e-b9b2-4202-b3cb-4faea0a10ece (confirm da D3). Linhas na tabela GameSessionEntity: 12.
+[Banco] Sessao 72a4479e-b9b2-4202-b3cb-4faea0a10ece atualizada (rodada 3, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+Estado atual: Config_Identification
+[Trimestre] PASSOU: Save rodada 3, resultado max 3, historico 0: classificacao correta
+[Trimestre] PASSOU: Save rodada 3, resultado max 3, historico 0: encaminhamento correto
+[Banco] Sessao 72a4479e-b9b2-4202-b3cb-4faea0a10ece atualizada (rodada 3, caixa 0).
+[Trimestre] PASSOU: Save rodada 3, resultado max 3, historico 0: deteccao preserva sessao, resultados e historico
+[Banco] PRIMEIRA GRAVACAO da sessao 0fa4cfb6-c464-4aa8-999d-2396cd65f670 (confirm da D3). Linhas na tabela GameSessionEntity: 13.
+[Banco] Sessao 0fa4cfb6-c464-4aa8-999d-2396cd65f670 atualizada (rodada 2, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: classificacao correta
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: encaminhamento correto
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: deteccao preserva sessao, resultados e historico
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: save isolado da sessao jogavel
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: nova sessao exige confirmar reinicio
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: reinicio remove todos os dados relacionados
+[Trimestre] PASSOU: Save rodada 2, resultado max 4, historico 0: nova sessao ativa so em memoria (grava no confirm da D3)
+[Banco] PRIMEIRA GRAVACAO da sessao 69557805-5e00-4fce-b5d5-f6446cd8ac74 (confirm da D3). Linhas na tabela GameSessionEntity: 13.
+[Banco] Sessao 69557805-5e00-4fce-b5d5-f6446cd8ac74 atualizada (rodada 2, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: classificacao correta
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: encaminhamento correto
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: deteccao preserva sessao, resultados e historico
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: save isolado da sessao jogavel
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: nova sessao exige confirmar reinicio
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: reinicio remove todos os dados relacionados
+[Trimestre] PASSOU: Save rodada 2, resultado max 0, historico 4: nova sessao ativa so em memoria (grava no confirm da D3)
+[Banco] PRIMEIRA GRAVACAO da sessao 87430399-ab8a-46e8-ae85-d5672731af78 (confirm da D3). Linhas na tabela GameSessionEntity: 13.
+[Banco] Sessao 87430399-ab8a-46e8-ae85-d5672731af78 atualizada (rodada 1, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+Estado atual: Config_Identification
+[Trimestre] PASSOU: Save rodada 1, resultado max 0, historico 0: classificacao correta
+[Trimestre] PASSOU: Save rodada 1, resultado max 0, historico 0: encaminhamento correto
+[Banco] Sessao 87430399-ab8a-46e8-ae85-d5672731af78 atualizada (rodada 1, caixa 0).
+[Trimestre] PASSOU: Save rodada 1, resultado max 0, historico 0: deteccao preserva sessao, resultados e historico
+[Banco] PRIMEIRA GRAVACAO da sessao e51abe8a-18b4-48ff-95bd-0efa848fcd4d (confirm da D3). Linhas na tabela GameSessionEntity: 14.
+[Banco] Sessao e51abe8a-18b4-48ff-95bd-0efa848fcd4d atualizada (rodada 4, caixa 0).
+Estado forçado: Bootstrap
+Estado forçado: MainMenu
+[Trimestre] PASSOU: UI: modal existente visivel sem abrir hub
+[Trimestre] PASSOU: UI: mensagem explica incompatibilidade trimestral
+[Trimestre] PASSOU: UI: reinicio destrutivo explicito e saida que preserva o save bloqueado
+[Trimestre] PASSOU: UI: exibir modal nao apaga save
+[Banco] RESET: sessao e51abe8a-18b4-48ff-95bd-0efa848fcd4d apagada (meses, eventos e sessao). Nova sessao so em memoria.
+Estado forçado: Config_Identification
+[Trimestre] PASSOU: UI: confirmar reinicio fecha modal e inicia configuracao
+[Trimestre] PASSOU: UI: save anterior removido somente apos confirmacao
+[Trimestre] TODOS OS 215 CHECKS PASSARAM.
+Estado forçado: Bootstrap</system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="UI01IdentificationTests" tests="10" failures="0" errors="0" skipped="0" time="0.076">
+    <testcase name="BackAndIdentificationConfirmationPreserveEntireDraft" classname="UI01IdentificationTests" time="0.013">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification
+Estado atual: Config_Location
+Estado atual: Config_Identification
+Estado atual: Config_Location</system-out>
+    </testcase>
+    <testcase name="CompleteSaveResumesHubAndMissingIdentityRequiresRepair" classname="UI01IdentificationTests" time="0.010">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Management_Hub
+Estado forçado: MainMenu
+Estado atual: Config_Identification
+Estado forçado: Management_Hub</system-out>
+    </testcase>
+    <testcase name="CorruptPrefsCannotReuseStaleRuntimeIdentity" classname="UI01IdentificationTests" time="0.005">
+      <system-out>[PlayerSession] Failed to read saved identification: JSON parse error: Missing a name for object member.</system-out>
+    </testcase>
+    <testcase name="EntryChecksOriginalFormLimits(&quot;abcd&quot;,&quot;12345&quot;,False)" classname="UI01IdentificationTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="EntryChecksOriginalFormLimits(&quot;abcde&quot;,&quot;1234&quot;,False)" classname="UI01IdentificationTests" time="0.007">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="EntryChecksOriginalFormLimits(&quot;abcde&quot;,&quot;12345&quot;,True)" classname="UI01IdentificationTests" time="0.007">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Management_Hub</system-out>
+    </testcase>
+    <testcase name="EntryChecksOriginalFormLimits(&quot;abcde&quot;,&quot;12345678901&quot;,False)" classname="UI01IdentificationTests" time="0.007">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="IncompatibleSaveWaitsForExplicitResetThenReturnsToStepOne" classname="UI01IdentificationTests" time="0.009">
+      <system-out>Estado forçado: MainMenu
+[Banco] RESET: sessao ui01-save apagada (meses, eventos e sessao). Nova sessao so em memoria.
+Estado forçado: Config_Identification</system-out>
+    </testcase>
+    <testcase name="NewGameWithPrefilledRegistrationWaitsForConfirmation" classname="UI01IdentificationTests" time="0.007">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification
+Estado atual: Config_Location</system-out>
+    </testcase>
+    <testcase name="SerializedEnumValuesAndSevenStepsStayStable" classname="UI01IdentificationTests" time="0.005" />
+  </testsuite>
+  <testsuite name="UI02ThemeTests" tests="8" failures="0" errors="0" skipped="0" time="0.030">
+    <testcase name="FontMaterialsAndPortugueseCurrencyGlyphsAreAvailable" classname="UI02ThemeTests" time="0.022" />
+    <testcase name="SafeAreaPreservesAnchorsAndDoesNotAccumulateOnRevisit" classname="UI02ThemeTests" time="0.006" />
+    <testcase name="TextSurfacePairsHaveReadableContrast(&quot;#F5F0E8&quot;,&quot;#30243C&quot;)" classname="UI02ThemeTests" time="0.001" />
+    <testcase name="TextSurfacePairsHaveReadableContrast(&quot;#6D28D9&quot;,&quot;#F5F0E8&quot;)" classname="UI02ThemeTests" time="0.000" />
+    <testcase name="TextSurfacePairsHaveReadableContrast(&quot;#24113D&quot;,&quot;#F5F0E8&quot;)" classname="UI02ThemeTests" time="0.000" />
+    <testcase name="TextSurfacePairsHaveReadableContrast(&quot;#B99AE8&quot;,&quot;#24113D&quot;)" classname="UI02ThemeTests" time="0.000" />
+    <testcase name="TextSurfacePairsHaveReadableContrast(&quot;#E7B65A&quot;,&quot;#24113D&quot;)" classname="UI02ThemeTests" time="0.000" />
+    <testcase name="TextSurfacePairsHaveReadableContrast(&quot;#F5F0E8&quot;,&quot;#A6323D&quot;)" classname="UI02ThemeTests" time="0.000" />
+  </testsuite>
+  <testsuite name="UI03SharedComponentsTests" tests="15" failures="0" errors="0" skipped="0" time="0.820">
+    <testcase name="All277SpritesRemainSingleAndAllManifestImportsMatchCurrentContract" classname="UI03SharedComponentsTests" time="0.312" />
+    <testcase name="BindingDoesNotReplaceButtonOrDuplicateCallbacks" classname="UI03SharedComponentsTests" time="0.008" />
+    <testcase name="InactiveTemplatesRetainNativeTextReferencesAndSurfaceContrast" classname="UI03SharedComponentsTests" time="0.003" />
+    <testcase name="ProductionEntryAndOptInCompositionRemainInGameScene" classname="UI03SharedComponentsTests" time="0.487" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_PRIMARY_VIOLET&quot;)" classname="UI03SharedComponentsTests" time="0.004" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_SECONDARY_IVORY&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_DANGER_CORAL&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_ACCENT_AMBER&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_ICON_BUTTON&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_INPUT&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_TAB&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_PILL&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_RADIO&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_CHECKBOX&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+    <testcase name="StateFamiliesShareBoundsPivotAndBorders(&quot;UI_TOGGLE&quot;)" classname="UI03SharedComponentsTests" time="0.001" />
+  </testsuite>
+  <testsuite name="UI04HubTests" tests="8" failures="0" errors="0" skipped="0" time="4.259">
+    <testcase name="EveryCompactLayerUsesItsAuthoritativeBoundsAndOrder" classname="UI04HubTests" time="0.684" />
+    <testcase name="EveryEnabledGraphicRaycastIsAnExplicitHitAreaOrButton" classname="UI04HubTests" time="0.513" />
+    <testcase name="ExistingDestinationsAndNativePanelReferencesArePreserved" classname="UI04HubTests" time="0.496" />
+    <testcase name="HudAndHubAreScopedToTheMenuAndPreviewStaysOff" classname="UI04HubTests" time="0.496" />
+    <testcase name="PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1920,1080)" classname="UI04HubTests" time="0.518" />
+    <testcase name="PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1366,768)" classname="UI04HubTests" time="0.505" />
+    <testcase name="PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1280,720)" classname="UI04HubTests" time="0.539" />
+    <testcase name="PolygonsAndMarkersShareTheMasterWithNoIndependentScaling" classname="UI04HubTests" time="0.508" />
+  </testsuite>
+  <testsuite name="UI05LocationTests" tests="5" failures="0" errors="0" skipped="0" time="2.505">
+    <testcase name="DecisionUsesTheExactSharedMapTransformAndCompactLayerBounds" classname="UI05LocationTests" time="0.543" />
+    <testcase name="EveryHitPolygonMatchesTheAuthoritativeMasterCoordinates" classname="UI05LocationTests" time="0.504" />
+    <testcase name="LongCopyHasALayoutDrivenMaskedSidebarAndFixedActions" classname="UI05LocationTests" time="0.485" />
+    <testcase name="OneActiveControllerAndOnePresentationOwnThePanel" classname="UI05LocationTests" time="0.488" />
+    <testcase name="OnlyFiveCatalogIdsAreInteractiveAndNoHubDestinationCanLeak" classname="UI05LocationTests" time="0.485" />
+  </testsuite>
+  <testsuite name="UI06RestaurantTests" tests="5" failures="0" errors="0" skipped="0" time="2.474">
+    <testcase name="EveryControlUsesSharedStateAppearanceAndNativeText" classname="UI06RestaurantTests" time="0.489" />
+    <testcase name="FacadesAreWholeNeutralSingleSpritesAndCatalogEconomicsRemainUnchanged" classname="UI06RestaurantTests" time="0.496" />
+    <testcase name="FiveAllowedCombinationsArePreserved" classname="UI06RestaurantTests" time="0.490" />
+    <testcase name="LongCopyIsMaskedLayoutDrivenAndActionsStayOutsideScrolls" classname="UI06RestaurantTests" time="0.509" />
+    <testcase name="PanelPreservesOneControllerAndRetiresLegacyPresentation" classname="UI06RestaurantTests" time="0.491" />
+  </testsuite>
+  <testsuite name="UI07MenuPricingTests" tests="22" failures="0" errors="0" skipped="0" time="0.089">
+    <testcase name="AllNineProductIdsMapToTheApprovedWholeImagesWithoutEconomicChanges" classname="UI07MenuPricingTests" time="0.011" />
+    <testcase name="CurrencyUsesBrazilianDecimalsAndThousands" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InclusiveLimitsAndBothDecimalSeparatorsAreAcceptedForEveryProduct" classname="UI07MenuPricingTests" time="0.002" />
+    <testcase name="InvalidInputKeepsLastValidValueAndReadOnlyControlsCannotMutateIt" classname="UI07MenuPricingTests" time="0.071" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot; &quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;NaN&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;Infinity&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;-42&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;+42&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;42,123&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;42.123&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;4e1&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;R$ 42&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;1.000,00&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;34,99&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;52,01&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;9999999999999999&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="InvalidTextCannotBecomeAConfirmedPrice(&quot;42,&quot;)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="SolidCoherenceFillUsesProportionalGeometry(0.0f)" classname="UI07MenuPricingTests" time="0.001" />
+    <testcase name="SolidCoherenceFillUsesProportionalGeometry(0.35f)" classname="UI07MenuPricingTests" time="0.000" />
+    <testcase name="SolidCoherenceFillUsesProportionalGeometry(1.0f)" classname="UI07MenuPricingTests" time="0.001" />
+  </testsuite>
+  <testsuite name="UI08EstablishmentTests" tests="10" failures="0" errors="0" skipped="0" time="0.096">
+    <testcase name="ConfirmedSummaryUsesTheExactCatalogAndCalculatorWithoutMutatingItsInput(PODRAO)" classname="UI08EstablishmentTests" time="0.085" />
+    <testcase name="ConfirmedSummaryUsesTheExactCatalogAndCalculatorWithoutMutatingItsInput(FRANCES)" classname="UI08EstablishmentTests" time="0.001" />
+    <testcase name="ConfirmedSummaryUsesTheExactCatalogAndCalculatorWithoutMutatingItsInput(JAPONES)" classname="UI08EstablishmentTests" time="0.001" />
+    <testcase name="CurrencyKeepsRealCentsAndBrazilianSeparators" classname="UI08EstablishmentTests" time="0.000" />
+    <testcase name="DraftChangesRestaurantLocationAndPricesWithoutBorrowingSessionMoney" classname="UI08EstablishmentTests" time="0.001" />
+    <testcase name="EmptyDraftNeverShowsSessionDefaultsOrInventedIndicators" classname="UI08EstablishmentTests" time="0.001" />
+    <testcase name="MissingPricesArePendingAndNeverReplacedWithCatalogDefaults" classname="UI08EstablishmentTests" time="0.001" />
+    <testcase name="NoWaiterRoleOrEconomicExtensionWasIntroduced" classname="UI08EstablishmentTests" time="0.001" />
+    <testcase name="RebuildReadsEachChoiceAgainAndLoansUseTheExistingFormula" classname="UI08EstablishmentTests" time="0.004" />
+    <testcase name="UnavailableAndCorruptDataRemainReadableAndDoNotCreateFakePeople" classname="UI08EstablishmentTests" time="0.001" />
+  </testsuite>
+  <testsuite name="UI09FinancialTests" tests="10" failures="0" errors="0" skipped="0" time="0.032">
+    <testcase name="FourArtworksAreBoundByExistingCatalogIdAndEconomyIsUnchanged" classname="UI09FinancialTests" time="0.001" />
+    <testcase name="MonthThreeExistingContractShowsItsRealBalancePaymentAndCannotBeReplaced" classname="UI09FinancialTests" time="0.006" />
+    <testcase name="NewLoanAvailabilityAndDisplayedTermUseRealService(1,True,3)" classname="UI09FinancialTests" time="0.004" />
+    <testcase name="NewLoanAvailabilityAndDisplayedTermUseRealService(2,True,2)" classname="UI09FinancialTests" time="0.003" />
+    <testcase name="NewLoanAvailabilityAndDisplayedTermUseRealService(3,False,0)" classname="UI09FinancialTests" time="0.003" />
+    <testcase name="NoCreditCannotReplaceAnExistingLoanEvenAfterBalanceIsPaid" classname="UI09FinancialTests" time="0.003" />
+    <testcase name="NoCreditIsAvailableWithoutInventedInterestOrPayment(1)" classname="UI09FinancialTests" time="0.003" />
+    <testcase name="NoCreditIsAvailableWithoutInventedInterestOrPayment(2)" classname="UI09FinancialTests" time="0.003" />
+    <testcase name="NoCreditIsAvailableWithoutInventedInterestOrPayment(3)" classname="UI09FinancialTests" time="0.003" />
+    <testcase name="UnavailableSessionHasNoActionAndCurrencyKeepsCents" classname="UI09FinancialTests" time="0.003" />
+  </testsuite>
+  <testsuite name="UI10EquipmentTests" tests="24" failures="0" errors="0" skipped="0" time="0.095">
+    <testcase name="BlockedSpecificsCannotRequestAcquisitionAndExplainPrerequisite" classname="UI10EquipmentTests" time="0.008" />
+    <testcase name="LongCatalogNamesExpandCardInsteadOfShrinkingOrCroppingText" classname="UI10EquipmentTests" time="0.008" />
+    <testcase name="MissingSessionDisablesQuantityActionsWithoutChangingData" classname="UI10EquipmentTests" time="0.003" />
+    <testcase name="QuantityIsZeroOrOneAndOwnedItemsCannotBePurchasedAgain" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="RestaurantCompatibilityKeepsAllEightBasicsAndOnlyApplicableSpecifics(PODRAO,10)" classname="UI10EquipmentTests" time="0.002" />
+    <testcase name="RestaurantCompatibilityKeepsAllEightBasicsAndOnlyApplicableSpecifics(JAPONES,11)" classname="UI10EquipmentTests" time="0.000" />
+    <testcase name="RestaurantCompatibilityKeepsAllEightBasicsAndOnlyApplicableSpecifics(FRANCES,11)" classname="UI10EquipmentTests" time="0.000" />
+    <testcase name="SerializationKeepsUniqueIdsAndPurchaseCapacityCannotBecomeQuantity" classname="UI10EquipmentTests" time="0.000" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;bancada_inox_preparo&quot;,1500)" classname="UI10EquipmentTests" time="0.005" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;conjunto_panelas_industriais&quot;,1200)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;fogao_industrial_6_bocas&quot;,2500)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;pia_industrial_inox&quot;,1800)" classname="UI10EquipmentTests" time="0.005" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;freezer_horizontal&quot;,3000)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;geladeira_comercial_dupla&quot;,4500)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;mobiliario_basico&quot;,6000)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;sistema_pdv_computador&quot;,3500)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;chapa_profissional_podrao&quot;,1500)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;fritadeira_eletrica_dupla_podrao&quot;,1800)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;balcao_refrigerado_sushi&quot;,5500)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;facas_especiais_japones&quot;,1200)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;panela_eletrica_arroz&quot;,800)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;adega_climatizada&quot;,4500)" classname="UI10EquipmentTests" time="0.005" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;forno_combinado_inteligente&quot;,18000)" classname="UI10EquipmentTests" time="0.004" />
+    <testcase name="WholeArtworkIsMappedByCatalogIdWithOriginalPrice(&quot;mobiliario_luxo&quot;,12000)" classname="UI10EquipmentTests" time="0.004" />
+  </testsuite>
+  <testsuite name="UI11TeamTests" tests="14" failures="0" errors="0" skipped="0" time="0.040">
+    <testcase name="AlignmentSaveCannotCreateFirstInsertBeforeD3" classname="UI11TeamTests" time="0.001" />
+    <testcase name="CompleteTeamUsesRestaurantRequirementsAndExistingAlignment(PODRAO,&quot;grill_cook&quot;,6900,2550)" classname="UI11TeamTests" time="0.002" />
+    <testcase name="CompleteTeamUsesRestaurantRequirementsAndExistingAlignment(JAPONES,&quot;sushi_chef&quot;,8900,2400)" classname="UI11TeamTests" time="0.000" />
+    <testcase name="CompleteTeamUsesRestaurantRequirementsAndExistingAlignment(FRANCES,&quot;head_chef&quot;,12400,2250)" classname="UI11TeamTests" time="0.000" />
+    <testcase name="FiveRealRolesKeepSalaryCapacityAndWholePortrait(&quot;attendant&quot;,2200,900)" classname="UI11TeamTests" time="0.009" />
+    <testcase name="FiveRealRolesKeepSalaryCapacityAndWholePortrait(&quot;grill_cook&quot;,2500,750)" classname="UI11TeamTests" time="0.004" />
+    <testcase name="FiveRealRolesKeepSalaryCapacityAndWholePortrait(&quot;head_chef&quot;,8000,450)" classname="UI11TeamTests" time="0.004" />
+    <testcase name="FiveRealRolesKeepSalaryCapacityAndWholePortrait(&quot;manager&quot;,5000,0)" classname="UI11TeamTests" time="0.003" />
+    <testcase name="FiveRealRolesKeepSalaryCapacityAndWholePortrait(&quot;sushi_chef&quot;,4500,600)" classname="UI11TeamTests" time="0.004" />
+    <testcase name="LongNamesExpandWithoutReducingTypeSize" classname="UI11TeamTests" time="0.004" />
+    <testcase name="NoWaiterRoleIsCreatedAndJsonRoundTripKeepsQuantities" classname="UI11TeamTests" time="0.001" />
+    <testcase name="QuantitiesAboveOneRemainSupportedAndSelected" classname="UI11TeamTests" time="0.003" />
+    <testcase name="UnavailableControlsCannotChangeQuantity" classname="UI11TeamTests" time="0.003" />
+    <testcase name="ZeroCannotBeDecrementedAndAddRequestsOne" classname="UI11TeamTests" time="0.003" />
+  </testsuite>
+  <testsuite name="UI12EventTests" tests="86" failures="0" errors="0" skipped="0" time="10.711">
+    <testcase name="UI12.ArtAndOptions.bulk_purchase_opportunity" classname="UI12EventTests" time="0.525">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 78ce1e06-8947-49a9-87cc-1d9aeec22440 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.competitor_temporary_closure" classname="UI12EventTests" time="0.567">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f87942e1-2225-42ac-86e0-570bbe9ce862 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.corporate_order" classname="UI12EventTests" time="0.512">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a8b246c6-a75a-4f44-bb17-b79e4afdb608 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.excessive_food_waste" classname="UI12EventTests" time="0.489">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao e388c470-ae50-46bb-972b-31d0e6e4de00 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.extra_local_demand" classname="UI12EventTests" time="0.491">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a027e3a5-e8e1-4385-9ffb-f364fb5d9826 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.freezer_breakdown" classname="UI12EventTests" time="0.496">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 66c32620-091f-400d-9726-ee3834513dd5 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.health_inspection" classname="UI12EventTests" time="0.505">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8a3b960c-68ed-4194-88ed-fb392236a154 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.heavy_rain" classname="UI12EventTests" time="0.492">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao e6ae9b39-c255-41ae-8b55-be6a935c4c42 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.influencer_mention" classname="UI12EventTests" time="0.501">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 6a02e137-86ad-443f-839a-9429b16e5096 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.ingredient_price_increase" classname="UI12EventTests" time="0.495">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 19f52081-87ae-4659-8d11-b6af9e66b449 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.insufficient_team" classname="UI12EventTests" time="0.517">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 883720ce-e501-45f3-b343-5e350e82f589 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.local_festival" classname="UI12EventTests" time="0.492">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao e0c06362-8b63-4f3d-b573-cabdd2d53d8f (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.lunch_demand_peak" classname="UI12EventTests" time="0.501">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8cf8e4e1-fe64-46a4-a6e8-efa0bef9347f (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.negative_review" classname="UI12EventTests" time="0.565">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao ba6ff2db-85a0-4eb0-9be4-187ff1ad27e2 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.new_competitor" classname="UI12EventTests" time="0.489">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 069a7ccd-9079-425e-8303-f53f35d6d003 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.payment_system_failure" classname="UI12EventTests" time="0.488">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a9acd358-832a-448a-9fae-c482f585c444 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.positive_online_review" classname="UI12EventTests" time="0.495">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 22259479-adb4-460d-b61a-d21b0485470c (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.supplier_delay" classname="UI12EventTests" time="0.486">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 167060a7-2cf8-4b32-a80c-320270f48e3b (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.supplier_discount" classname="UI12EventTests" time="0.495">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 57e27acf-43d0-420d-9863-4165e4c632b5 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ArtAndOptions.team_productivity_boost" classname="UI12EventTests" time="0.489">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 0b53d2a7-d4a0-43b4-8749-e0e4e421bba6 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="CatalogCopyContainsNoTestResidues" classname="UI12EventTests" time="0.011">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 09bf7853-c0ba-4d2a-b94d-e5a86e60439a (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.bulk_purchase_opportunity.small_batch" classname="UI12EventTests" time="0.012">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 6cd55a41-f3db-43d9-a54c-a4c471e423b8 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.bulk_purchase_opportunity.large_batch" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 1d37fe27-d0ac-4dd1-9c01-abfe990cfd45 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.bulk_purchase_opportunity.decline_purchase" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 36d7e18c-fc53-44f3-8932-441fb26f77ec (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.competitor_temporary_closure.serve_extra_demand" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 9721fa93-b202-44d3-86ea-3d9808cae5f7 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.competitor_temporary_closure.increase_stock" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8bd8ac6c-1a7d-446c-8ebb-5a3a0760f155 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.competitor_temporary_closure.local_advertising" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao fb41e586-25a6-4416-8f27-2465a372d21e (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55100,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.corporate_order.accept_current_capacity" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 63345b88-65c5-4dc0-8a37-479e3b537968 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.corporate_order.temporary_support" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f5b9e2cf-737b-4ceb-83dc-8a56df97f7b0 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=54900,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.corporate_order.corporate_discount" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 332e3e4e-6d90-48da-ba0f-c8801e7cc38b (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.excessive_food_waste.adjust_planning" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao cb5f282c-bf55-4323-8ea6-032d68cfefca (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.excessive_food_waste.create_promotion" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 100061ca-ad14-417f-af11-ca8117a24edf (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.excessive_food_waste.keep_planning" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 93675acc-c4f1-44b2-a4c4-15a1c4579a14 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.extra_local_demand.normal_operation" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b63c69c5-376a-4dfc-a52a-e024b42fb165 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.extra_local_demand.reinforce_operation" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 30afce07-49a1-469c-8cb4-b90054f06675 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55000,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.extra_local_demand.special_promotion" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 17272d42-c788-48a9-bda4-ea96eabd4ccc (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.freezer_breakdown.repair_now" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f595d8af-7814-4bf0-917c-255eb57df87a (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=52000,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.freezer_breakdown.temporary_repair" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 7fb237c9-fb59-4763-8be4-59d2aa3bc466 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=54000,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.freezer_breakdown.postpone_repair" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 07a0ce2f-e493-4ebb-8408-9348a49c54e9 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.health_inspection.full_compliance" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 680f5681-9be3-4700-a694-df86bbd9050b (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=54000,00, reputation=47.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.health_inspection.minimum_compliance" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 9ef859cb-d010-4712-a377-059b95aec6bd (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=54900,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.health_inspection.ignore_requirements" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao eae7b35a-f4d7-4761-92b7-f4ce6a5c6e57 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=53500,00, reputation=40.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.heavy_rain.normal_operation" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 7d81283c-fbb8-4e2b-b771-878ecb11e48f (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.heavy_rain.external_orders" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b2959159-7eb7-4171-b1e1-9da5c52121f1 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55200,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.heavy_rain.rain_promotion" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b4a6dbbc-81cc-4025-bd74-512d202c33bf (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.influencer_mention.organic_reach" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 72fc45e8-ffca-4f04-86dc-9785b4f0b8d5 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=48.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.influencer_mention.boost_mention" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao bace4832-0e21-4cfb-a34f-b9b66b645ef9 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55100,00, reputation=49.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.influencer_mention.new_customer_offer" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 09361a9a-17b9-448f-9e7f-aadd10cb6648 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=48.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.ingredient_price_increase.absorb_increase" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 5e4b4285-4e00-49d4-b839-b0cbf8118b98 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.ingredient_price_increase.partial_price_pass" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 205cacc4-3923-4de6-b835-535445dd6e39 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.ingredient_price_increase.replace_ingredients" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a61fe359-9cf8-4b0e-bb30-327005de6c8c (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=43.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.insufficient_team.hire_temporary" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao ee183c7d-2ddb-4e46-b4c9-05f47772a356 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55150,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.insufficient_team.redistribute_team" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao d679a6a0-acfb-4ac0-9cdc-9570d6d596de (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.insufficient_team.operate_reduced" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 47db5ee9-fb23-46a4-a839-8f47e83bdaba (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=43.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.local_festival.normal_operation" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 23c16677-264d-4174-9db6-9716926606f8 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.local_festival.reinforce_team" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f47fc99b-3a35-44f2-93c6-fb4396c0464a (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=54700,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.local_festival.festival_combo" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 64e5f094-c9b3-4e4b-9700-8b0684875d5e (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.lunch_demand_peak.current_capacity" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao eb6e81a1-de06-45d9-aaf4-11e65e231b54 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.lunch_demand_peak.temporary_reinforcement" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 1670369b-35d8-4979-9c5d-0e4394ebc657 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55100,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.lunch_demand_peak.high_margin_items" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8327ec84-4e36-4d21-89ed-bf5cc75f3969 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.negative_review.compensate_customer" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 67904695-0a43-4f85-b916-21a832aa2554 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55200,00, reputation=48.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.negative_review.reply_only" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 209bceed-18af-4246-8c4b-17d27f4b8a46 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=46.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.negative_review.ignore_review" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 255d7572-b06c-4659-8a0d-dc24850b85f3 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=41.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.new_competitor.keep_strategy" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 1d70f43e-decc-454e-b0f6-27fcadbbb409 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.new_competitor.marketing_campaign" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 56bcfc12-d4bd-4ed0-b7d0-1c4f622feab3 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=54800,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.new_competitor.promotional_prices" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 82174e1f-18c2-4631-844e-b8c3423074c2 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.payment_system_failure.emergency_support" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8553c620-d9c5-429a-9824-42a8f59bae7f (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55000,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.payment_system_failure.alternative_payments" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b6052f2e-da75-4f9d-af3a-31a3130f6883 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.payment_system_failure.wait_normalization" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao d3d64177-a2de-4fd3-af7d-4e255d4a13e4 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.positive_online_review.organic_exposure" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 5d3969fa-efac-462c-8a08-7b1b23e29c13 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=48.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.positive_online_review.boost_post" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8aa11ce6-0c9a-4a6c-8293-dbd9101db242 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55250,00, reputation=49.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.positive_online_review.review_promotion" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 19032ebf-5c5a-4a42-bb9e-9f9e3e171439 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=48.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.supplier_delay.emergency_supplier" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 1b9e077b-cd85-43a1-81f7-145fabd88a6a (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.supplier_delay.reduce_menu" classname="UI12EventTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao efc2c71c-05d3-455b-905b-73a30819e6ba (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.supplier_delay.use_available_stock" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 444c15d0-16ba-48b8-8cf9-9b3228a574fb (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.supplier_discount.normal_purchase" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao d360ff74-81ee-4248-8b65-df86784bfd71 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.supplier_discount.larger_purchase" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 2a4b3697-0759-443e-a991-8eaacc7cd43d (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.supplier_discount.decline_offer" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b793c66f-ed80-4e3e-b0d9-e7c1cfc32bbd (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.team_productivity_boost.maintain_pace" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 84b6755e-af56-40a1-b3f7-a9af6381854b (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=45.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.team_productivity_boost.team_bonus" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a130224a-3036-41d2-9ba1-92442e9bc4aa (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55000,00, reputation=48.</system-out>
+    </testcase>
+    <testcase name="UI12.ConfirmOnce.team_productivity_boost.increase_service_volume" classname="UI12EventTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8bae1481-a6f2-404b-9de2-4e2898393fa5 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[RoundService] Month 1 settled: customers=0, revenue=0,00, cash=55500,00, reputation=44.</system-out>
+    </testcase>
+    <testcase name="ConflictingAndStaleChoicesAreRejected" classname="UI12EventTests" time="0.007">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b1e01e84-99b5-41b5-9124-b460840eb7c1 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="EffectsUseAllRealFieldsAndDurationWithoutInventedPreviews" classname="UI12EventTests" time="0.005">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 9075addd-9394-4ce1-bffe-c3df9a9af9f0 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="FailedInsertRollsBackAndRetryRecordsOnce" classname="UI12EventTests" time="0.007">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao d1a4b3a6-8fb9-43e1-8a8e-191ff1992b88 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="MonthlyDrawIsPersistedAndReopeningCannotReroll" classname="UI12EventTests" time="0.021">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao d0ae4bf2-340e-422a-8bfd-a744e38be033 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="RestartDeletesReservationsAndHistoryWithSession" classname="UI12EventTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao e3ea8a10-8f04-4cf7-9a90-3c0e430b9af9 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="UI13MonthlyResultTests" tests="19" failures="0" errors="0" skipped="0" time="0.510">
+    <testcase name="ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(&quot;HIGH&quot;,&quot;Alto&quot;)" classname="UI13MonthlyResultTests" time="0.002" />
+    <testcase name="ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(&quot;ADEQUATE&quot;,&quot;Adequado&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(&quot;FRAGILE&quot;,&quot;Frágil&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(&quot;CRITICAL&quot;,&quot;Crítico&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(null,&quot;Não registrada&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="LargeStoredFloatAmountsKeepTheirCentsInPresentation(123456.8f,&quot;123.456,78&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="LargeStoredFloatAmountsKeepTheirCentsInPresentation(-123456.8f,&quot;123.456,78&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="LargeStoredFloatAmountsKeepTheirCentsInPresentation(158533.3f,&quot;158.533,33&quot;)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="MissingResultIsNotAZeroStatement" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="MonthlyCompositionMatchesApprovedPivotsAndOrder" classname="UI13MonthlyResultTests" time="0.496" />
+    <testcase name="NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float.NaN)" classname="UI13MonthlyResultTests" time="0.001" />
+    <testcase name="NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float.PositiveInfinity)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float.NegativeInfinity)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="PersistedCashModelIsPresentedWithoutReapplyingSignedEvents(-2500.0f)" classname="UI13MonthlyResultTests" time="0.003" />
+    <testcase name="PersistedCashModelIsPresentedWithoutReapplyingSignedEvents(0.0f)" classname="UI13MonthlyResultTests" time="0.002" />
+    <testcase name="PersistedCashModelIsPresentedWithoutReapplyingSignedEvents(2500.0f)" classname="UI13MonthlyResultTests" time="0.002" />
+    <testcase name="ZeroAndBothSignsHaveDistinctLegibleSemantics(0.0f)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="ZeroAndBothSignsHaveDistinctLegibleSemantics(100.0f)" classname="UI13MonthlyResultTests" time="0.000" />
+    <testcase name="ZeroAndBothSignsHaveDistinctLegibleSemantics(-100.0f)" classname="UI13MonthlyResultTests" time="0.000" />
+  </testsuite>
+  <testsuite name="UI14QuarterlyResultTests" tests="19" failures="0" errors="0" skipped="0" time="0.542">
+    <testcase name="AggregationFollowsEachMetricAndNeverAddsBalancesOrLoanDetailsAgain" classname="UI14QuarterlyResultTests" time="0.012" />
+    <testcase name="ClassificationDoesNotMutateHistoricalStrings" classname="UI14QuarterlyResultTests" time="0.001" />
+    <testcase name="CorruptStoredDataHasNoZeroFallback(float.NaN)" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="CorruptStoredDataHasNoZeroFallback(float.PositiveInfinity)" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="CorruptStoredDataHasNoZeroFallback(float.NegativeInfinity)" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="EmptyHistoryIsEmpty" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="ExistingPanelIdsRemainStable" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="ForeignCampaignDuplicateAndOldCycleAreRejected" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="MissingMiddleMonthIsExplicitAndOnlySavedMonthsContribute" classname="UI14QuarterlyResultTests" time="0.001" />
+    <testcase name="OneMonthCannotImplyVariation" classname="UI14QuarterlyResultTests" time="0.001" />
+    <testcase name="QuarterlyCompositionAndHandAnchorsMatchApprovedContract" classname="UI14QuarterlyResultTests" time="0.505" />
+    <testcase name="QuarterlyTotalsSumDisplayedCentsFromLargePersistedFloats" classname="UI14QuarterlyResultTests" time="0.001" />
+    <testcase name="SavedMonthsAreOrderedAndAbsentMonthsNeverBecomeZero(1)" classname="UI14QuarterlyResultTests" time="0.006" />
+    <testcase name="SavedMonthsAreOrderedAndAbsentMonthsNeverBecomeZero(2)" classname="UI14QuarterlyResultTests" time="0.006" />
+    <testcase name="SavedMonthsAreOrderedAndAbsentMonthsNeverBecomeZero(3)" classname="UI14QuarterlyResultTests" time="0.007" />
+    <testcase name="SignedEventsAndNegativeOrZeroBalancesArePreserved(-500)" classname="UI14QuarterlyResultTests" time="0.001" />
+    <testcase name="SignedEventsAndNegativeOrZeroBalancesArePreserved(0)" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="SignedEventsAndNegativeOrZeroBalancesArePreserved(500)" classname="UI14QuarterlyResultTests" time="0.000" />
+    <testcase name="ZeroCustomersHaveNoInventedWeightedTicket" classname="UI14QuarterlyResultTests" time="0.001" />
+  </testsuite>
+  <testsuite name="UI15FinalReportTests" tests="18" failures="0" errors="0" skipped="0" time="0.151">
+    <testcase name="BankruptcyStillHasPrecedenceOnContinue" classname="UI15FinalReportTests" time="0.008">
+      <system-out>Estado forçado: Round_Summary
+Estado atual: GameOver_Bankruptcy</system-out>
+    </testcase>
+    <testcase name="CompletedCampaignReloadRespectsSummaryAcknowledgement(False,Round_Summary)" classname="UI15FinalReportTests" time="0.009">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary</system-out>
+    </testcase>
+    <testcase name="CompletedCampaignReloadRespectsSummaryAcknowledgement(True,FinalReport)" classname="UI15FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: FinalReport</system-out>
+    </testcase>
+    <testcase name="DocumentaryProjectionUsesOnlySavedMonthsAndExplicitAbsences(0)" classname="UI15FinalReportTests" time="0.009" />
+    <testcase name="DocumentaryProjectionUsesOnlySavedMonthsAndExplicitAbsences(1)" classname="UI15FinalReportTests" time="0.006" />
+    <testcase name="DocumentaryProjectionUsesOnlySavedMonthsAndExplicitAbsences(2)" classname="UI15FinalReportTests" time="0.006" />
+    <testcase name="DocumentaryProjectionUsesOnlySavedMonthsAndExplicitAbsences(3)" classname="UI15FinalReportTests" time="0.006" />
+    <testcase name="ExplicitContinueAcknowledgesOnlyTheSavedFinalSummary" classname="UI15FinalReportTests" time="0.012">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary
+Estado atual: FinalReport
+Estado forçado: MainMenu
+Estado forçado: FinalReport</system-out>
+    </testcase>
+    <testcase name="FailureToAcknowledgeKeepsTheMonthlySummaryReadable" classname="UI15FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary</system-out>
+    </testcase>
+    <testcase name="InvalidCompletedResultsAreRejectedAndUnrecordedIdentityIsExplicit" classname="UI15FinalReportTests" time="0.006" />
+    <testcase name="LaterBankruptcyNeverResurrectsAnOlderCompletion" classname="UI15FinalReportTests" time="0.009">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary</system-out>
+    </testcase>
+    <testcase name="LatestCompletionAndActiveSessionAreSelectedForTheirOwnUser" classname="UI15FinalReportTests" time="0.013">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: FinalReport
+Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="LegacySessionMigrationDefaultsResumeMetadataWithoutChangingCash" classname="UI15FinalReportTests" time="0.006" />
+    <testcase name="MissingChoiceRecordsAreDistinctFromEmptySelectionsAndCorruption" classname="UI15FinalReportTests" time="0.007" />
+    <testcase name="NewGamePreservesAllResultsAndStartsAnUnpersistedIdentificationDraft" classname="UI15FinalReportTests" time="0.013">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: FinalReport
+Estado forçado: Config_Identification
+Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="NewGameStorageFailurePreservesCurrentReportAndIdentification" classname="UI15FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: FinalReport</system-out>
+    </testcase>
+    <testcase name="OldTwelveMonthCompletionStaysIncompatible" classname="UI15FinalReportTests" time="0.007">
+      <system-out>Estado forçado: MainMenu</system-out>
+    </testcase>
+    <testcase name="PersistedEventChoicesAreNeverInventedAsReflectionAnswers" classname="UI15FinalReportTests" time="0.008" />
+  </testsuite>
+  <testsuite name="UI16FinalReportTests" tests="16" failures="0" errors="0" skipped="0" time="0.140">
+    <testcase name="AcknowledgementIsIdempotentAndPreservesEveryEconomicField" classname="UI16FinalReportTests" time="0.014">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary
+Estado atual: GameOver_Bankruptcy
+Estado forçado: MainMenu
+Estado forçado: GameOver_Bankruptcy</system-out>
+    </testcase>
+    <testcase name="ActiveCampaignHasPriorityOverFinishedBankruptcy" classname="UI16FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="ArchivedBankruptcyNeverResurrectsOlderConclusion" classname="UI16FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="CorruptForeignOrNonfiniteResultsAreRejected" classname="UI16FinalReportTests" time="0.007" />
+    <testcase name="ExplanationAndIndicatorsUseOnlySavedRows(0)" classname="UI16FinalReportTests" time="0.006" />
+    <testcase name="ExplanationAndIndicatorsUseOnlySavedRows(1)" classname="UI16FinalReportTests" time="0.006" />
+    <testcase name="ExplanationAndIndicatorsUseOnlySavedRows(2)" classname="UI16FinalReportTests" time="0.006" />
+    <testcase name="ExplanationAndIndicatorsUseOnlySavedRows(3)" classname="UI16FinalReportTests" time="0.006" />
+    <testcase name="FailedAcknowledgementKeepsSummaryAndStoredHistory" classname="UI16FinalReportTests" time="0.009">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary</system-out>
+    </testcase>
+    <testcase name="FailureToArchiveDoesNotLoseCurrentCampaign" classname="UI16FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: GameOver_Bankruptcy</system-out>
+    </testcase>
+    <testcase name="NegativeCashAloneNeverChangesTheExistingEndingRule" classname="UI16FinalReportTests" time="0.005" />
+    <testcase name="NewGamePreservesBankruptcyResultsEventsPlansAndD3Boundary" classname="UI16FinalReportTests" time="0.030">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: GameOver_Bankruptcy
+Estado forçado: Config_Identification
+Estado forçado: MainMenu
+Estado atual: Config_Identification</system-out>
+    </testcase>
+    <testcase name="NonnegativeResultDoesNotFalselyConfirmThreeLosses(0.0f)" classname="UI16FinalReportTests" time="0.006" />
+    <testcase name="NonnegativeResultDoesNotFalselyConfirmThreeLosses(1.0f)" classname="UI16FinalReportTests" time="0.006" />
+    <testcase name="ReloadRecoversBankruptcyBeforeAndAfterAcknowledgement(False,Round_Summary)" classname="UI16FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: Round_Summary</system-out>
+    </testcase>
+    <testcase name="ReloadRecoversBankruptcyBeforeAndAfterAcknowledgement(True,GameOver_Bankruptcy)" classname="UI16FinalReportTests" time="0.008">
+      <system-out>Estado forçado: MainMenu
+Estado forçado: GameOver_Bankruptcy</system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="UI18DialogTests" tests="11" failures="0" errors="0" skipped="0" time="1.132">
+    <testcase name="DiscardAfterFailedSaveKeepsLastSavedRow" classname="UI18DialogTests" time="0.061">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 2a0ba81a-d6e7-487d-a006-cfe2f9d4283f (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="DraftExitNeverInsertsBeforeD3(False)" classname="UI18DialogTests" time="0.058">
+      <system-out>[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="DraftExitNeverInsertsBeforeD3(True)" classname="UI18DialogTests" time="0.047">
+      <system-out>[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="FinishedCampaignSaveExitPreservesEndingMetadata(COMPLETED)" classname="UI18DialogTests" time="0.055">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 7cb09f62-bd62-491d-ac38-3e1a3cdcd1e4 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 7cb09f62-bd62-491d-ac38-3e1a3cdcd1e4 atualizada (rodada 1, caixa 129).
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="FinishedCampaignSaveExitPreservesEndingMetadata(BANKRUPT)" classname="UI18DialogTests" time="0.058">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 202629ad-2049-4584-bca5-0a656942c86b (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 202629ad-2049-4584-bca5-0a656942c86b atualizada (rodada 1, caixa 129).
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="IncompatibleSaveIsPreservedUntilExplicitResetAndExitDoesNotRewriteIt" classname="UI18DialogTests" time="0.057">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao fd46f00a-e567-4864-a5c2-482febd5732b (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao fd46f00a-e567-4864-a5c2-482febd5732b atualizada (rodada 4, caixa 0).
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="MissingConnectionCannotClaimSuccessfulSave" classname="UI18DialogTests" time="0.052">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao bd1e7d41-218a-4ff4-9ab5-99c20c01013d (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+    <testcase name="ProductionDialogsHaveModalFocusCanvasAndCurrentArtwork" classname="UI18DialogTests" time="0.553" />
+    <testcase name="ResetDeletesOnlyTheConfirmedCampaignAndIgnoresDuplicateCallback" classname="UI18DialogTests" time="0.068">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 64686681-9206-44c0-a461-dc156a990241 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] RESET: sessao 64686681-9206-44c0-a461-dc156a990241 apagada (meses, eventos e sessao). Nova sessao so em memoria.
+Estado forçado: Config_Identification</system-out>
+    </testcase>
+    <testcase name="RetryAcknowledgesWriteBeforeClosingAndRepeatedShutdownCannotSaveAgain" classname="UI18DialogTests" time="0.067">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 06ffac65-c48f-4cda-9ab4-96e7869ac18c (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+[Banco] Sessao 06ffac65-c48f-4cda-9ab4-96e7869ac18c atualizada (rodada 1, caixa 129).
+[GameManager] Banco fechado após a opção de saída escolhida.</system-out>
+    </testcase>
+    <testcase name="SaveFailurePreservesRowMemoryDirtyFlagAndConnection" classname="UI18DialogTests" time="0.055">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 0a65c64b-d4fc-4e76-9412-2de62ac93b92 (confirm da D3). Linhas na tabela GameSessionEntity: 1.</system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="UI19NavigationTests" tests="17" failures="0" errors="0" skipped="0" time="0.144">
+    <testcase name="FailedSetupHandoffKeepsTheCurrentScreenAndMarker" classname="UI19NavigationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 470017d7-dd4f-40f6-bf75-1ce083101da0 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: Initial_Equipment</system-out>
+    </testcase>
+    <testcase name="FailedSummaryAcknowledgementCannotEscapeOrRecalculate" classname="UI19NavigationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 129a998a-489e-4d50-8ec8-6dfdf7b7487f (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Round_Summary</system-out>
+    </testcase>
+    <testcase name="IdentificationCorrectionReturnsToThePendingOperationalStep(Initial_Capital)" classname="UI19NavigationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 22a7c5a7-235d-44d5-952a-a76647e0dcee (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado atual: Config_Identification
+Estado forçado: Initial_Capital</system-out>
+    </testcase>
+    <testcase name="IdentificationCorrectionReturnsToThePendingOperationalStep(Initial_Equipment)" classname="UI19NavigationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 28b6f8e4-ea20-4f6c-8e19-318f84f18980 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado atual: Config_Identification
+Estado forçado: Initial_Equipment</system-out>
+    </testcase>
+    <testcase name="IdentificationCorrectionReturnsToThePendingOperationalStep(Initial_Team)" classname="UI19NavigationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b5348c23-4382-4edb-adb9-d1351f35cf63 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado atual: Config_Identification
+Estado forçado: Initial_Team</system-out>
+    </testcase>
+    <testcase name="LegacyConfiguredSessionWithNullableMetadataStillResumesTheHub" classname="UI19NavigationTests" time="0.008">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 9d5e5ccf-7283-4afb-8c6b-9a94fc55496a (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Management_Hub</system-out>
+    </testcase>
+    <testcase name="PendingSummaryPreventsStartingTheNextMonth" classname="UI19NavigationTests" time="0.006">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao b9d6c0c5-5b60-4e6b-8810-5c644676767f (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: Management_Hub</system-out>
+    </testcase>
+    <testcase name="ReloadResumesEachSavedOperationalStep(Initial_Capital)" classname="UI19NavigationTests" time="0.010">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 8deee780-3f91-4476-b2b3-22686523d797 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Initial_Capital</system-out>
+    </testcase>
+    <testcase name="ReloadResumesEachSavedOperationalStep(Initial_Equipment)" classname="UI19NavigationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao eed76347-4f20-48df-8fef-ecdc39af16eb (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Initial_Equipment</system-out>
+    </testcase>
+    <testcase name="ReloadResumesEachSavedOperationalStep(Initial_Team)" classname="UI19NavigationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f9b32a48-90da-4d00-94f7-ed84aa2b0ca5 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Initial_Team</system-out>
+    </testcase>
+    <testcase name="ReloadWaitsAtUnreadSummaryAndContinueOnlyAcknowledgesItsSavedResult(1)" classname="UI19NavigationTests" time="0.013">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao 85404a98-0e89-4558-83a7-115015246aad (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Round_Summary
+Estado atual: Management_Hub
+Estado forçado: MainMenu
+Estado forçado: Management_Hub</system-out>
+    </testcase>
+    <testcase name="ReloadWaitsAtUnreadSummaryAndContinueOnlyAcknowledgesItsSavedResult(2)" classname="UI19NavigationTests" time="0.013">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao f205bff8-75b4-4ed9-bdf0-9be970b5fcd6 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Round_Summary
+Estado atual: Management_Hub
+Estado forçado: MainMenu
+Estado forçado: Management_Hub</system-out>
+    </testcase>
+    <testcase name="SavedEventPlanResumesItsDecisionWithoutRedrawingOrSettling" classname="UI19NavigationTests" time="0.009">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao dba10d07-1b8f-43a7-87bc-c9ea60b0e328 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: MainMenu
+Estado forçado: Round_Event</system-out>
+    </testcase>
+    <testcase name="SetupHandoffPersistsOnlyItsScreenAndRejectsADoubleCallback(Initial_Capital,Initial_Equipment)" classname="UI19NavigationTests" time="0.007">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao a20c282e-c2b1-4b22-972c-696e5e0ead3f (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: Initial_Capital
+Estado atual: Initial_Equipment</system-out>
+    </testcase>
+    <testcase name="SetupHandoffPersistsOnlyItsScreenAndRejectsADoubleCallback(Initial_Equipment,Initial_Team)" classname="UI19NavigationTests" time="0.006">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao e6598aff-181f-431a-bb7f-7ab7b1225507 (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: Initial_Equipment
+Estado atual: Initial_Team</system-out>
+    </testcase>
+    <testcase name="SetupHandoffPersistsOnlyItsScreenAndRejectsADoubleCallback(Initial_Team,Management_Hub)" classname="UI19NavigationTests" time="0.007">
+      <system-out>[Banco] PRIMEIRA GRAVACAO da sessao db5aa581-c337-4df8-a4d4-36eccd35053a (confirm da D3). Linhas na tabela GameSessionEntity: 1.
+Estado forçado: Initial_Team
+Estado atual: Management_Hub</system-out>
+    </testcase>
+    <testcase name="TechnicalStatesAndSerializedEnumsRemainExplicitAndStable" classname="UI19NavigationTests" time="0.005" />
+  </testsuite>
+  <testsuite name="UI20ReadabilityTests" tests="6" failures="0" errors="0" skipped="0" time="0.041">
+    <testcase name="LongFeedbackFitsItsSurfaceWithoutShrinkingTheFont(Error)" classname="UI20ReadabilityTests" time="0.029" />
+    <testcase name="LongFeedbackFitsItsSurfaceWithoutShrinkingTheFont(Warning)" classname="UI20ReadabilityTests" time="0.004" />
+    <testcase name="LongFeedbackFitsItsSurfaceWithoutShrinkingTheFont(Success)" classname="UI20ReadabilityTests" time="0.003" />
+    <testcase name="SmallFinancialValuesRemainReadableOnLavender(100.0f)" classname="UI20ReadabilityTests" time="0.003" />
+    <testcase name="SmallFinancialValuesRemainReadableOnLavender(-100.0f)" classname="UI20ReadabilityTests" time="0.001" />
+    <testcase name="SmallFinancialValuesRemainReadableOnLavender(0.0f)" classname="UI20ReadabilityTests" time="0.001">
+      <system-out>Saving results to: C:/Users/Pichau/AppData/LocalLow/DefaultCompany/JogosDeEmpresa\TestResults.xml</system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

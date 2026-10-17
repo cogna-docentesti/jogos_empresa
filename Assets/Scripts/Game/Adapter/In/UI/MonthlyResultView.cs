@@ -30,7 +30,7 @@ namespace Game.Adapter.In.UI
             continueButton.onClick.RemoveAllListeners(); continueButton.onClick.AddListener(() => proceed());
             retryButton.onClick.RemoveAllListeners(); retryButton.onClick.AddListener(() => retry());
         }
-        public static Color Semantic(float value) => value == 0 ? GamePalette.Ink : value > 0 ? GamePalette.Money : GamePalette.ErrorText;
+        public static Color Semantic(float value) => value == 0 ? GamePalette.Ink : value > 0 ? GamePalette.PositiveReportText : GamePalette.NegativeReportText;
         public void Show(RoundResultEntity result, bool awaiting)
         {
             var values = MonthlyResultPresentation.Build(result);

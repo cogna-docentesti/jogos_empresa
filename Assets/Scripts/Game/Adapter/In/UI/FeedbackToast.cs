@@ -26,7 +26,16 @@ namespace Game.Adapter.In.UI
             if (string.IsNullOrWhiteSpace(text)) { Hide(); return; }
             Kind = kind; message.text = (kind == FeedbackKind.Success ? "Sucesso • " : kind == FeedbackKind.Warning ? "Atenção • " : "Não foi possível • ") + text;
             surface.sprite = kind == FeedbackKind.Success ? success : kind == FeedbackKind.Warning ? warning : error;
-            message.color = kind == FeedbackKind.Error ? GamePalette.ErrorText : GamePalette.Ink; surface.color = Color.white;
+            // Toast artwork has a pale message surface. Use the body color at a readable
+            // size; severity already has both a text prefix and its own surface sprite.
+            message.color = GamePalette.Ink;
+            message.enableVertexGradient = false;
+            message.fontSize = GameTypography.Body;
+            surface.color = Color.white;
+            var textRect = message.rectTransform;
+            float height = Mathf.Max(72, message.GetPreferredValues(message.text, textRect.rect.width, 0).y + 24);
+            ((RectTransform)panel.transform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+            textRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height - 20);
             remaining = Mathf.Max(6, message.text.Length / 14f); panel.SetActive(true);
         }
         private void Update()

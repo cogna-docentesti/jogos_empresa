@@ -117,11 +117,11 @@ public static class UI19NavigationValidation
         Canvas.ForceUpdateCanvases(); Inventory();
         if (name.StartsWith("supp-continue-"))
             Expect(MonthlyView.ContinueButton.GetComponent<SharedControlAppearance>().CurrentState == name.Substring("supp-continue-".Length), "Control state " + name);
-        string path = UI01Validation.Capture("../UI-19/" + name + "-" + res);
+        string path = UI01Validation.Capture(UiValidationContext.CaptureName("UI-19", name + "-" + res)); UiValidationContext.OnCapture?.Invoke(name, path);
         using var h = System.Security.Cryptography.SHA256.Create();
         captures.Add(new { name, path, width = UnityEngine.Screen.width, height = UnityEngine.Screen.height, frame = Time.frameCount,
             sha256 = BitConverter.ToString(h.ComputeHash(File.ReadAllBytes(path))).Replace("-", "").ToLowerInvariant() });
-        File.WriteAllText("output/ui-update/UI-19/capture-frames" + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-19", "capture-frames") + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
     }
     private static void NewDraft()
     {
@@ -304,10 +304,10 @@ public static class UI19NavigationValidation
     {
         UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use isolated Play Mode");
         evidenceSuffix = ""; report = new(); steps.Clear(); captures.Clear(); transitions.Clear(); inventories.Clear(); lastFrame = -1;
-        Directory.CreateDirectory("output/ui-update/UI-19");
+        Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-19"));
         Settlement.MonthSettled -= OnSettled; Settlement.MonthSettled += OnSettled; Monthly.Continued -= OnContinued; Monthly.Continued += OnContinued;
         States.OnStateChanged -= StateChanged; States.OnStateChanged += StateChanged;
-        foreach (var size in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var size in UiValidationContext.Resolutions)
         {
             var viewport = size;
             Add("Viewport " + size, () => { res = viewport.x + "x" + viewport.y; UI01Validation.SetGameView(viewport.x, viewport.y); });
@@ -335,17 +335,17 @@ public static class UI19NavigationValidation
     {
         report.completed = report.failures == 0; EditorApplication.update -= Tick;
         States.OnStateChanged -= StateChanged; Settlement.MonthSettled -= OnSettled; Monthly.Continued -= OnContinued;
-        File.WriteAllText("output/ui-update/UI-19/playmode" + evidenceSuffix + ".json", JsonUtility.ToJson(report, true));
-        File.WriteAllText("output/ui-update/UI-19/state-transitions" + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(transitions, Newtonsoft.Json.Formatting.Indented));
-        File.WriteAllText("output/ui-update/UI-19/runtime-bindings" + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(inventories, Newtonsoft.Json.Formatting.Indented));
-        File.WriteAllText("output/ui-update/UI-19/runtime" + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, database = Db?.DatabasePath, key = Environment.GetEnvironmentVariable("COGNA_TEST_IDENTIFICATION_KEY"), frame = Time.frameCount }, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-19", "playmode") + evidenceSuffix + ".json", JsonUtility.ToJson(report, true));
+        File.WriteAllText(UiValidationContext.FileFor("UI-19", "state-transitions") + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(transitions, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-19", "runtime-bindings") + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(inventories, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-19", "runtime") + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, database = Db?.DatabasePath, key = Environment.GetEnvironmentVariable("COGNA_TEST_IDENTIFICATION_KEY"), frame = Time.frameCount }, Newtonsoft.Json.Formatting.Indented));
     }
 
     public static void RunSupplement()
     {
         UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode");
         evidenceSuffix = "-supplemental"; report = new(); steps.Clear(); captures.Clear(); transitions.Clear(); inventories.Clear(); lastFrame = -1;
-        foreach (var size in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var size in UiValidationContext.Resolutions)
         {
             var viewport = size;
             Add("Supplement viewport", () => { res = viewport.x + "x" + viewport.y; UI01Validation.SetGameView(viewport.x, viewport.y); NewDraft(); });
@@ -436,7 +436,7 @@ public static class UI19NavigationValidation
                 Expect(pngs == 277, "Art count");
                 var manifest = File.ReadAllText("Packages/manifest.json"); Expect(!manifest.Contains("com.unity.pipeline"), "Temporary tool dependency remains");
                 Expect(!scene.isDirty, "Incidental scene edits");
-                File.WriteAllText("output/ui-update/UI-19/final-editor-audit.json", Newtonsoft.Json.JsonConvert.SerializeObject(new {
+                File.WriteAllText(UiValidationContext.FileFor("UI-19", "final-editor-audit.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new {
                     passed = true, project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion,
                     scene = scene.path, dirty = scene.isDirty, missingScripts = 0, registryBindings = 12, requiredStatePanels = 12,
                     technicalNullPanels = 3, pngs, temporaryPipelineRemoved = true,
@@ -447,7 +447,7 @@ public static class UI19NavigationValidation
             }
             catch (Exception e)
             {
-                File.WriteAllText("output/ui-update/UI-19/final-editor-audit.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { passed = false, error = e.ToString() }, Newtonsoft.Json.Formatting.Indented));
+                File.WriteAllText(UiValidationContext.FileFor("UI-19", "final-editor-audit.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new { passed = false, error = e.ToString() }, Newtonsoft.Json.Formatting.Indented));
                 EditorApplication.Exit(1);
             }
         };
@@ -504,14 +504,14 @@ public static class UI19NavigationValidation
                 && States.CurrentState == GameState.Round_Event && GameSessionState.Current.currentCash == modalCash
                 && new RoundResultRepository(Db).GetBySessionId(GameSessionState.Current.sessionId).Count == 0,
                 "Cancel did not release the pending event without settlement");
-            File.WriteAllText("output/ui-update/UI-19/resume-modal.json", JsonUtility.ToJson(new ResumeModalEvidence {
+            File.WriteAllText(UiValidationContext.FileFor("UI-19", "resume-modal.json"), JsonUtility.ToJson(new ResumeModalEvidence {
                 passed = true, frame = Time.frameCount, month = GameSessionState.Current.currentRound, cash = modalCash,
                 pendingSurvivesModal = true, eventOpensAfterCancel = true, results = 0 }, true));
             SessionState.SetBool(ResumeModalAudit, false); EditorApplication.update -= ResumeModalTick; EditorApplication.Exit(0);
         }
         catch (Exception e)
         {
-            File.WriteAllText("output/ui-update/UI-19/resume-modal.json", JsonUtility.ToJson(new ResumeModalEvidence { error = e.ToString() }, true));
+            File.WriteAllText(UiValidationContext.FileFor("UI-19", "resume-modal.json"), JsonUtility.ToJson(new ResumeModalEvidence { error = e.ToString() }, true));
             SessionState.SetBool(ResumeModalAudit, false); EditorApplication.update -= ResumeModalTick; EditorApplication.Exit(1);
         }
     }

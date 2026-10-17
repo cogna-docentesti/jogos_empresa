@@ -46,7 +46,7 @@ public sealed class UI13MonthlyResultTests
     public void ZeroAndBothSignsHaveDistinctLegibleSemantics(float value)
     {
         var c=MonthlyResultView.Semantic(value);
-        Assert.AreEqual(value==0?Game.Adapter.In.UI.Theme.GamePalette.Ink:value>0?Game.Adapter.In.UI.Theme.GamePalette.Money:Game.Adapter.In.UI.Theme.GamePalette.ErrorText,c);
+        Assert.AreEqual(value==0?Game.Adapter.In.UI.Theme.GamePalette.Ink:value>0?Game.Adapter.In.UI.Theme.GamePalette.PositiveReportText:Game.Adapter.In.UI.Theme.GamePalette.NegativeReportText,c);
     }
     [TestCase(float.NaN)] [TestCase(float.PositiveInfinity)] [TestCase(float.NegativeInfinity)]
     public void NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float value)

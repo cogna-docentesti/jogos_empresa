@@ -78,17 +78,17 @@ public static class UI17FeedbackValidation
     }
     private static void Capture(string name)
     {
-        Fits(); string p = UI01Validation.Capture("../UI-17/" + name + "-" + res);
+        Fits(); string p = UI01Validation.Capture(UiValidationContext.CaptureName("UI-17", name + "-" + res)); UiValidationContext.OnCapture?.Invoke(name, p);
         using var hash = System.Security.Cryptography.SHA256.Create();
         captures.Add(new { name, path = p, frame = Time.frameCount, width = Screen.width, height = Screen.height, sha256 = BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(p))).Replace("-", "").ToLowerInvariant() });
         lastCaptureFrame = Time.frameCount;
-        File.WriteAllText("output/ui-update/UI-17/capture-frames.json", Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-17", "capture-frames.json"), Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
     }
     public static void Run()
     {
-        UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode"); Directory.CreateDirectory("output/ui-update/UI-17");
+        UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode"); Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-17"));
         steps.Clear(); captures.Clear(); report = new Report(); lastFrame = -1; paths = Resources.Load<EquipmentCatalogIndex>("EquipmentCatalogIndex").resourcePaths.ToArray();
-        foreach (var size in new[] { new Vector2Int(1920,1080), new Vector2Int(1366,768), new Vector2Int(1280,720) })
+        foreach (var size in UiValidationContext.Resolutions)
         {
             var resolution = size;
             Add("Set resolution " + size, () => { res = resolution.x + "x" + resolution.y; UI01Validation.SetGameView(resolution.x,resolution.y); });
@@ -136,7 +136,7 @@ public static class UI17FeedbackValidation
             Add("Final report empty", () => { Expect(Root.Find("Panel_FinalReport").GetComponent<FinalReportView>().DisplayState=="empty","No invented report"); Capture("results-final-empty"); GameManager.Instance.StateMachine.ForceState(GameState.Initial_Team); });
             Add("Unavailable team has no tutorial", () => { Expect(!Help(Team).IsVisible && !Field<GameObject>(Team,"emptyTeam").activeSelf,"Unavailable differs from empty"); Expect(Team.GetComponentsInChildren<TeamRoleCardView>().All(c=>Field<TMP_Text>(c,"quantityText").text=="—"),"Unknown quantities are not zero"); Capture("team-unavailable"); });
         }
-        Add("Runtime evidence", () => File.WriteAllText("output/ui-update/UI-17/runtime.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=Db.DatabasePath,frame=Time.frameCount,lastCaptureFrame},Newtonsoft.Json.Formatting.Indented)));
+        Add("Runtime evidence", () => File.WriteAllText(UiValidationContext.FileFor("UI-17", "runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=Db.DatabasePath,frame=Time.frameCount,lastCaptureFrame},Newtonsoft.Json.Formatting.Indented)));
         next=EditorApplication.timeSinceStartup+.3; EditorApplication.update-=Tick; EditorApplication.update+=Tick;
     }
     private static void Tick()
@@ -160,6 +160,6 @@ public static class UI17FeedbackValidation
     private static void Finish()
     {
         Resources.Load<EquipmentCatalogIndex>("EquipmentCatalogIndex").resourcePaths=paths;
-        report.completed=report.failures==0; EditorApplication.update-=Tick; File.WriteAllText("output/ui-update/UI-17/playmode.json",JsonUtility.ToJson(report,true));
+        report.completed=report.failures==0; EditorApplication.update-=Tick; File.WriteAllText(UiValidationContext.FileFor("UI-17", "playmode.json"),JsonUtility.ToJson(report,true));
     }
 }

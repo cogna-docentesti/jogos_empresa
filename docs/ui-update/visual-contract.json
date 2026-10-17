@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "date": "2026-10-16",
-  "status": "Tema global UI-02 implementado e aferido; demais telas seguem nas tarefas proprietárias.",
+  "date": "2026-10-17",
+  "status": "UI-01 a UI-20 integradas; contrato final aferido nas cinco viewports do Editor e no Windows Player. Runtime Android em aparelho não homologado.",
   "source_of_truth": [
     "docs/art/tokens.json",
     "docs/art/manifest.json",
@@ -23,7 +23,9 @@
     "error_text": "#A6323D",
     "positive_on_dark": "#8DD4C5",
     "negative_on_dark": "#F2A4A6",
-    "muted_on_light": "#65566F"
+    "muted_on_light": "#65566F",
+    "positive_report_text": "#145146",
+    "negative_report_text": "#82212E"
   },
   "text_surface_pairs": [
     {
@@ -92,7 +94,8 @@
       "native_line_height_em": 1.21
     },
     "overflow": "Sem autosize global. Corpo longo quebra linha em caixa dimensionada; rótulo limitado Truncate; inputs usam máscara e scroll horizontal. Não depender do glifo de reticências em overflow.",
-    "material": "Material compartilhado Inter Tight, FaceColor branco, OutlineWidth 0 e Underlay desativado. Sem sombra de texto duplicada."
+    "material": "Material compartilhado Inter Tight, FaceColor branco, OutlineWidth 0 e Underlay desativado. Sem sombra de texto duplicada.",
+    "feedback": "Toast usa Inter Tight no tamanho Body=24, texto Ink sobre a superfície clara e altura adaptada ao texto nativo; severidade mantém prefixo textual e sprite. Valores financeiros pequenos usam cores mais escuras com contraste medido sobre o centro real de UI_TABLE_TOTAL_COLUMN, separado das cores decorativas dos ícones."
   },
   "layout": {
     "canvas_px": [
@@ -111,9 +114,10 @@
       32,
       48
     ],
-    "scaler": "Scale With Screen Size, referência 1920x1080, match Height=1 (baseline preservado). Scalers secundários herdados desativados; Canvas raiz controla a escala.",
-    "safe_area": "SafeAreaFitter converte pixels em unidades do pai; preserva anchors/offsets sem acumulação. Inset simulado validado em Edit Mode; perfis físicos na UI-20.",
-    "migration_notes": "Dimensões de controles e cards preservadas na migração dos scalers; cabeçalhos/caixas de texto baixos corrigidos. Alturas de cabeçalhos legados são exceções temporárias por tela; 88px segue o padrão de novas composições. Botão Confirmar do Banco separado de Menu. UI-09: cabeçalho do Banco corrigido para 88 px; passo 5 somente na abertura e gestão nas revisitas."
+    "scaler": "Scale With Screen Size, referência 1920x1080, Screen Match Mode Expand. A escala do Canvas usa o menor fator entre largura e altura, evitando um canvas menor que o quadro autoral em 16:10; scalers secundários herdados permanecem desativados.",
+    "safe_area": "Screen.safeArea é convertida para coordenadas do Canvas e aplicada uma vez ao quadro comum. A escala uniforme é o menor fator entre largura/1920 e altura/1080 da área disponível. SafeAreaFitter nos filhos diretos do Canvas é desativado pelo enquadramento central; fitters aninhados específicos são preservados. QA distingue a simulação no Editor de execução em aparelho Android.",
+    "migration_notes": "Dimensões de controles e cards preservadas na migração dos scalers; cabeçalhos/caixas de texto baixos corrigidos. Alturas de cabeçalhos legados são exceções temporárias por tela; 88px segue o padrão de novas composições. Botão Confirmar do Banco separado de Menu. UI-09: cabeçalho do Banco corrigido para 88 px; passo 5 somente na abertura e gestão nas revisitas. UI-20: Expand e quadro comum substituem match Height=1 como contrato efetivo; espaços excedentes usam ameixa. Nenhum dado econômico, tamanho autoral ou PNG foi alterado.",
+    "production_frame": "ProductionCanvasLayout preserva as hierarquias e interpreta anchors/offsets originais no quadro autoral 1920x1080. Painéis, HUD, histórico, feedback e Sair compartilham uma transformação uniforme, centrada na área segura. Em proporções diferentes de 16:9, o espaço excedente fica com GamePalette.Background (ameixa), sem cortar a coluna direita nem separar controles globais do rodapé."
   },
   "mandatory_review_on_every_screen": [
     "família/peso/tamanho de fonte",
@@ -156,5 +160,6 @@
     "Refazer cenas de demo, cenas antigas desativadas ou interfaces admin fora do jogo",
     "Alterar motor trimestral, balanceamento ou criar backend documental silenciosamente"
   ],
-  "implementation_evidence": "docs/ui-update/qa/UI-02.json"
+  "implementation_evidence": "docs/ui-update/qa/UI-02.json",
+  "final_validation": "docs/ui-update/qa/UI-20.json"
 }

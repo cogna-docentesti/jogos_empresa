@@ -55,7 +55,11 @@ namespace Game.Adapter.In.UI.Navigation
                 eventMenuAccess.sizeDelta=events?new Vector2(252,68):menuSize;
             }
             if(events && eventMenuAccess!=null && menuCanvas!=null)
-                eventMenuAccess.position=menuCanvas.TransformPoint(new Vector3(menuCanvas.rect.xMin+968,menuCanvas.rect.yMax-998,0));
+            {
+                var frame = UIStateListener.Instance?.CurrentPanel?.transform as RectTransform;
+                if(frame!=null)
+                    eventMenuAccess.position=frame.TransformPoint(new Vector3(frame.rect.xMin+968,frame.rect.yMax-998,0));
+            }
             bool hub=(menuPanel!=null && menuPanel.activeInHierarchy) || events;
             if(exitButton==null || positionedForHub==hub) return;
             positionedForHub=hub;

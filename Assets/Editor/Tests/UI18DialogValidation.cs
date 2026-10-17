@@ -88,15 +88,15 @@ public static class UI18DialogValidation
     }
     private static void Capture(string name)
     {
-        Fits();string p=UI01Validation.Capture("../UI-18/"+name+"-"+res);using var h=System.Security.Cryptography.SHA256.Create();captures.Add(new{name,path=p,width=Screen.width,height=Screen.height,frame=Time.frameCount,sha256=BitConverter.ToString(h.ComputeHash(File.ReadAllBytes(p))).Replace("-","").ToLowerInvariant()});
-        File.WriteAllText("output/ui-update/UI-18/capture-frames.json",Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
+        Fits();string p=UI01Validation.Capture(UiValidationContext.CaptureName("UI-18",name+"-"+res)); UiValidationContext.OnCapture?.Invoke(name, p);using var h=System.Security.Cryptography.SHA256.Create();captures.Add(new{name,path=p,width=Screen.width,height=Screen.height,frame=Time.frameCount,sha256=BitConverter.ToString(h.ComputeHash(File.ReadAllBytes(p))).Replace("-","").ToLowerInvariant()});
+        File.WriteAllText(UiValidationContext.FileFor("UI-18", "capture-frames.json"),Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
     }
     public static void Run()
     {
-        UI01Validation.RequireIsolatedStorage();Expect(EditorApplication.isPlaying,"Use Play Mode");Directory.CreateDirectory("output/ui-update/UI-18");steps.Clear();captures.Clear();report=new();lastFrame=-1;
+        UI01Validation.RequireIsolatedStorage();Expect(EditorApplication.isPlaying,"Use Play Mode");Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-18"));steps.Clear();captures.Clear();report=new();lastFrame=-1;
         testKeyboard=InputSystem.AddDevice<Keyboard>("UI18ValidationKeyboard");testKeyboard.MakeCurrent();
         Db.Execute("DROP TRIGGER IF EXISTS ui18_fail");Db.Execute("DROP TRIGGER IF EXISTS ui18_reset_fail");
-        foreach(var size in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var size in UiValidationContext.Resolutions)
         {
             var s=size;
             Add("Viewport "+s,()=>{res=s.x+"x"+s.y;UI01Validation.SetGameView(s.x,s.y);Draft();});
@@ -149,7 +149,7 @@ public static class UI18DialogValidation
             Add("Bankrupt cancel preserves results",()=>{Press();var v=Root.Find("Panel_Bankruptcy").GetComponent<BankruptcyView>();Expect(SharedModalFocus.Active==null&&!Exit.IsOpen&&EventSystem.current.currentSelectedGameObject==B(v,"newGameButton").gameObject,"Bankrupt modal cancel focus");Click(B(v,"newGameButton"));});
             Add("Explicit bankrupt new game preserves results",()=>{var v=Root.Find("Panel_Bankruptcy").GetComponent<BankruptcyView>();Click(B(v,"confirmNewGame"));Expect(new GameSessionRepository(Db).GetById(id).finalReportArchived&&new RoundResultRepository(Db).GetBySessionId(id).Count==3,"Bankrupt new game lost history");Expect(!GameSessionState.IsPersisted,"Bankrupt draft inserted");});
         }
-        Add("Runtime evidence",()=>File.WriteAllText("output/ui-update/UI-18/runtime.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=Db.DatabasePath,frame=Time.frameCount},Newtonsoft.Json.Formatting.Indented)));
+        Add("Runtime evidence",()=>File.WriteAllText(UiValidationContext.FileFor("UI-18", "runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=Db.DatabasePath,frame=Time.frameCount},Newtonsoft.Json.Formatting.Indented)));
         next=EditorApplication.timeSinceStartup+.3;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
     private static void Tick()
@@ -162,5 +162,5 @@ public static class UI18DialogValidation
         try{step.Item2();check.passed=true;}catch(Exception e){check.detail=e.ToString();report.failures++;steps.Clear();Debug.LogError("[UI-18 QA] "+step.Item1+": "+e.Message);}
         report.checks.Add(check);lastFrame=Time.frameCount;next=EditorApplication.timeSinceStartup+.3;EditorApplication.QueuePlayerLoopUpdate();EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint();
     }
-    private static void Finish(){Press();if(testKeyboard!=null){InputSystem.RemoveDevice(testKeyboard);testKeyboard=null;}report.completed=report.failures==0;EditorApplication.update-=Tick;File.WriteAllText("output/ui-update/UI-18/playmode.json",JsonUtility.ToJson(report,true));}
+    private static void Finish(){Press();if(testKeyboard!=null){InputSystem.RemoveDevice(testKeyboard);testKeyboard=null;}report.completed=report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-18", "playmode.json"),JsonUtility.ToJson(report,true));}
 }

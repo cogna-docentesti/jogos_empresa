@@ -29,7 +29,7 @@ namespace Game.Adapter.In.UI
             backButton.onClick.RemoveAllListeners(); backButton.onClick.AddListener(() => back());
             retryButton.onClick.RemoveAllListeners(); retryButton.onClick.AddListener(() => retry());
         }
-        private static Color Semantic(double? value) => !value.HasValue || value == 0 ? GamePalette.Ink : value > 0 ? GamePalette.Money : GamePalette.ErrorText;
+        private static Color Semantic(double? value) => !value.HasValue || value == 0 ? GamePalette.Ink : value > 0 ? GamePalette.PositiveReportText : GamePalette.NegativeReportText;
         public void Show(QuarterlyResultPresentation.Report data)
         {
             DisplayState = "loaded"; loadedBody.SetActive(true); stateBody.SetActive(false); retryButton.gameObject.SetActive(false);

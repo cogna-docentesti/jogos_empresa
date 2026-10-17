@@ -16,6 +16,10 @@ namespace Game.Adapter.In.UI.Theme
         public static Color Plum => Parse(HexPlum);
         public static Color Lavender => Parse(HexLavender);
         public static Color ErrorText => Parse(HexErrorText);
+        // Small financial values also sit on lavender cells, where the artwork's
+        // teal/coral accents do not provide sufficient text contrast.
+        public static Color PositiveReportText => Parse("#145146");
+        public static Color NegativeReportText => Parse("#82212E");
         public static Color TextOn(Color surface) => surface.grayscale > .5f ? Ink : OnDark;
         public static Color TextOnSurface(Transform parent)
         {

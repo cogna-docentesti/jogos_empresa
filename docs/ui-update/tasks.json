@@ -3,9 +3,9 @@
   "project": "Jogos de Empresa Cogna",
   "created_at": "2026-10-16",
   "title": "Atualização completa das interfaces e identificação na GameScene",
-  "status": "em_andamento",
+  "status": "concluído",
   "implementation_performed": true,
-  "current_request": "UI-01 a UI-19 entregues e validadas; UI-20 permanece planejada.",
+  "current_request": "UI-01 a UI-20 entregues e validadas no escopo documentado. Runtime Android em aparelho permanece sem homologação; demais limites em qa/UI-20-pending.json.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -2780,7 +2780,7 @@
       "title": "QA final: todas as telas, resoluções e build",
       "phase": "Acabamento e integração",
       "priority": "P1",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-19"
       ],
@@ -2838,7 +2838,10 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-20.json e output/ui-update/UI-20/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-20 — QA final: todas as telas, resoluções e build no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-20.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-20 — QA final: todas as telas, resoluções e build no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-20.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "implementation_evidence": "docs/ui-update/qa/UI-20.json",
+      "validation_summary": "381 testes Edit Mode e 3565 checks Play Mode aprovados; 14 campanhas, 42 meses, cinco viewports e 1144 capturas. Windows executado com saída/retomada; APK Android ARM64 compilado. Limites e avisos separados em UI-20-pending.json.",
+      "pending_acceptance": []
     }
   ]
 }
