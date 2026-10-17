@@ -150,6 +150,20 @@ public static class GameSessionState
         HasUnsavedChanges = false;
     }
 
+    /// <summary>Recover the latest completed report without replacing an active or incompatible save.</summary>
+    public static bool TryLoadCompletedReport(string userId)
+    {
+        if (HasSession || HasIncompatibleSave) return false;
+        var session = Repository?.GetLastFinishedSessionByUserId(userId);
+        // A later bankruptcy must never resurrect an older successful campaign.
+        if (session == null || session.status != GameSessionStatus.COMPLETED || session.finalReportArchived) return false;
+        var db = DatabaseInitializer.DatabaseService.Connection;
+        if (session.currentRound > 3 || new RoundResultRepository(db).GetBySessionId(session.sessionId).Exists(r => r.round > 3)
+            || new SessionEventHistoryRepository(db).GetBySession(session.sessionId).Exists(e => e.round > 3))
+        { IncompatibleSession = session; return false; }
+        Current = session; IsPersisted = true; HasUnsavedChanges = false; return true;
+    }
+
     /// <summary>
     /// Primeira gravacao da sessao. Chamado uma unica vez no fluxo inicial, por
     /// GameSessionService.CommitInitialDecisions() (confirm da D3).

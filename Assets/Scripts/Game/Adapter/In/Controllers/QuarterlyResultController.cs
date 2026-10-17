@@ -10,6 +10,7 @@ namespace Game.Adapter.In.Controllers
         [SerializeField] private QuarterlyResultView view;
         [SerializeField] private GameObject monthlyPanel;
         private bool fromMonthly;
+        private Action returnToReport;
         public QuarterlyResultPresentation.Report Report { get; private set; }
         private void OnEnable() { view.Actions(Back, Refresh); Refresh(); }
         public void OpenFromMonthly()
@@ -18,6 +19,8 @@ namespace Game.Adapter.In.Controllers
             monthlyPanel.SetActive(false);
             gameObject.SetActive(true);
         }
+        public void OpenFromFinal(Action back)
+        { fromMonthly = false; returnToReport = back; gameObject.SetActive(true); }
         public void Refresh()
         {
             Report = null;
@@ -36,6 +39,8 @@ namespace Game.Adapter.In.Controllers
         }
         public void Back()
         {
+            if (returnToReport != null)
+            { var back = returnToReport; gameObject.SetActive(false); back(); return; }
             if (fromMonthly)
             {
                 fromMonthly = false; gameObject.SetActive(false); monthlyPanel.SetActive(true);
@@ -43,11 +48,11 @@ namespace Game.Adapter.In.Controllers
             }
             else MenuNavigator.Instance?.Back();
         }
-        private void OnDisable() { fromMonthly = false; }
+        private void OnDisable() { fromMonthly = false; returnToReport = null; }
         private void Update()
         {
             // A state transition owns visibility; never leave a consultation above a different flow.
-            if (fromMonthly && GameManager.Instance?.StateMachine?.CurrentState != GameState.Round_Summary && GameManager.Instance?.StateMachine?.CurrentState != GameState.Management_Hub)
+            if ((fromMonthly || returnToReport != null) && GameManager.Instance?.StateMachine?.CurrentState != GameState.Round_Summary && GameManager.Instance?.StateMachine?.CurrentState != GameState.Management_Hub && GameManager.Instance?.StateMachine?.CurrentState != GameState.FinalReport)
             { fromMonthly = false; gameObject.SetActive(false); }
         }
     }

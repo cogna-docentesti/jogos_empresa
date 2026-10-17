@@ -16,4 +16,11 @@ public class GameSessionRepository : BaseRepository<GameSessionEntity>
         return db.Table<GameSessionEntity>()
             .FirstOrDefault(x => x.userId == userId && x.status == GameSessionStatus.IN_PROGRESS);
     }
+
+    public GameSessionEntity GetLastFinishedSessionByUserId(string userId)
+    {
+        return db.Table<GameSessionEntity>().Where(x => x.userId == userId && x.status != GameSessionStatus.IN_PROGRESS)
+            .ToList().OrderByDescending(x => x.completedAt ?? x.startedAt)
+            .ThenByDescending(x => x.startedAt).ThenByDescending(x => x.sessionId).FirstOrDefault();
+    }
 }

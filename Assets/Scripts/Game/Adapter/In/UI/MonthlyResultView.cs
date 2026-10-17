@@ -68,5 +68,12 @@ namespace Game.Adapter.In.UI
             continueButton.interactable = !awaiting; continueButton.GetComponentInChildren<TMP_Text>().text = awaiting ? "Continuar" : "Voltar ao hub";
             retryButton.gameObject.SetActive(state == "error");
         }
+        public void FinalReportContext(int month)
+        {
+            continueButton.interactable = true;
+            continueButton.GetComponentInChildren<TMP_Text>().text = "Voltar ao relatório";
+            footer.text = $"Consulta do mês {month}. Nenhum valor é aplicado novamente.";
+            if (DisplayState != "loaded") period.text = $"MÊS {month} DE 3 • CONSULTA DO RELATÓRIO";
+        }
     }
 }

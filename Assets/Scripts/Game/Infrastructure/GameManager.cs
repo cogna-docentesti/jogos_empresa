@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
     {
         service = new GameSessionService(userId, professorId);
         service.LoadActiveSession();
+        GameSessionState.TryLoadCompletedReport(userId);
         PlayerSession.TryLoadIdentification();
         resumeAfterIdentification = false;
         StateMachine.ForceState(GameState.MainMenu);
@@ -99,6 +100,14 @@ public class GameManager : MonoBehaviour
         if (GameSessionState.HasIncompatibleSave)
         {
             // Keep the save intact until the player confirms the existing dialog.
+            return;
+        }
+
+        if (GameSessionState.Current?.status == GameSessionStatus.COMPLETED)
+        {
+            PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
+            StateMachine.ForceState(GameSessionState.Current.finalSummaryAcknowledged
+                ? GameState.FinalReport : GameState.Round_Summary);
             return;
         }
 
