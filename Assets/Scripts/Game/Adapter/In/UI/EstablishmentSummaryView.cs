@@ -1,149 +1,98 @@
-using Game.Adapter.In.UI.Theme;
 using Game.Domain.Service;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 namespace Game.Adapter.In.UI
 {
-    /// <summary>
-    /// Camada burra da tela "Meu Estabelecimento": so recebe um
-    /// EstablishmentSummary pronto e escreve nos TextMeshPro.
-    /// Nao calcula nada e nao conhece GameSessionState.
-    /// </summary>
+    /// <summary>Presentation and explicit confirmation for destructive reset and incompatible saves.</summary>
     public sealed class EstablishmentSummaryView : MonoBehaviour
     {
         [SerializeField] private EstablishmentReviewContent presentation;
-        [Header("Reset do jogo")]
         [SerializeField] private Button resetButton;
         [SerializeField] private GameObject resetWarning;
         [SerializeField] private Button cancelResetButton;
         [SerializeField] private Button confirmResetButton;
+        [SerializeField] private TMP_Text resetTitle, resetBody, resetError;
+        private bool incompatible;
+        private UnityAction resetAction;
+        public bool IsResetOpen => resetWarning != null && resetWarning.activeInHierarchy;
+        private const string ResetMessage = "As decisões, compras e resultados desta campanha serão apagados permanentemente. O cadastro também será limpo.\n\nVocê voltará à identificação para refazer as escolhas iniciais. Esta ação não pode ser desfeita.";
+        private const string IncompatibleMessage = "Esta sessão pertence ao ciclo anterior e não pode ser continuada no jogo de três meses.\n\nReiniciar apaga a sessão anterior, seus resultados e o cadastro. Para manter os dados, escolha Sair sem reiniciar. Nada é apagado ao abrir este aviso.";
 
-        private Transform warningOriginalParent;
-        private Transform modalHostParent;
-        private GameObject previousFocus;
-        private readonly System.Collections.Generic.Dictionary<TextMeshProUGUI, string> warningOriginalTexts
-            = new System.Collections.Generic.Dictionary<TextMeshProUGUI, string>();
-
-        private void Awake()
-        {
-            HideResetWarning();
-        }
-
-        private void Update()
-        {
-            if (resetWarning == null || !resetWarning.activeInHierarchy || EventSystem.current == null) return;
-            var focus = EventSystem.current.currentSelectedGameObject;
-            if (focus == null || !focus.transform.IsChildOf(resetWarning.transform))
-                (cancelResetButton != null && cancelResetButton.gameObject.activeInHierarchy ? cancelResetButton : confirmResetButton)?.Select();
-        }
-
+        private void Awake() { if (resetWarning != null) resetWarning.SetActive(false); }
         public void BindReset(UnityAction onConfirmed)
         {
-            if (resetButton != null)
-            {
-                resetButton.onClick.RemoveAllListeners();
-                resetButton.onClick.AddListener(ShowResetWarning);
-            }
-
-            if (cancelResetButton != null)
-            {
-                cancelResetButton.onClick.RemoveAllListeners();
-                cancelResetButton.onClick.AddListener(HideResetWarning);
-            }
-
-            if (confirmResetButton != null)
-            {
-                confirmResetButton.onClick.RemoveAllListeners();
-                if (onConfirmed != null)
-                    confirmResetButton.onClick.AddListener(onConfirmed);
-            }
+            resetAction = onConfirmed;
+            Bind(resetButton, ShowResetWarning);
+            Bind(confirmResetButton, () => resetAction?.Invoke());
+            Bind(cancelResetButton, Cancel);
         }
-
+        private static void Bind(Button button, UnityAction action)
+        { if (button == null) return; button.onClick.RemoveAllListeners(); button.onClick.AddListener(action); }
+        private void Cancel()
+        {
+            if (incompatible)
+            {
+                // Leaving preserves the incompatible row and registration. Only the danger action deletes them.
+                FindFirstObjectByType<ExitDialogController>()?.Quit(false);
+            }
+            else HideResetWarning();
+        }
         public void HideResetWarning()
         {
-            if (resetWarning != null)
-            {
-                resetWarning.SetActive(false);
-                if (modalHostParent != null)
-                {
-                    resetWarning.transform.SetParent(modalHostParent, false);
-                    modalHostParent = null;
-                }
-                if (EventSystem.current != null && previousFocus != null && previousFocus.activeInHierarchy)
-                    EventSystem.current.SetSelectedGameObject(previousFocus);
-                previousFocus = null;
-                if (warningOriginalParent != null)
-                {
-                    resetWarning.transform.SetParent(warningOriginalParent, false);
-                    warningOriginalParent = null;
-                    foreach (var item in warningOriginalTexts)
-                        item.Key.text = item.Value;
-                    warningOriginalTexts.Clear();
-                    cancelResetButton?.gameObject.SetActive(true);
-                }
-            }
+            if (resetWarning == null) return;
+            resetWarning.SetActive(false);
+            incompatible = false;
+            SetCopy();
         }
-
         public void ShowIncompatibleSave(UnityAction onConfirmed)
         {
-            if (warningOriginalParent != null)
-                return;
-            if (resetWarning == null || confirmResetButton == null)
-            {
-                Debug.LogError("Modal de reinicio nao configurado.");
-                return;
-            }
-            // Reutiliza o modal existente sem abrir o hub ou o resumo da empresa.
-            var canvas = GetComponentInParent<Canvas>(true);
-            if (canvas == null)
-                return;
-            warningOriginalParent = resetWarning.transform.parent;
-            foreach (var label in resetWarning.GetComponentsInChildren<TextMeshProUGUI>(true))
-            {
-                warningOriginalTexts[label] = label.text;
-                if (label.GetComponentInParent<Button>() == null)
-                    label.text = label.text.Length > 100
-                        ? "Esta sessão foi criada em uma versão anterior do jogo e não é compatível com o novo ciclo trimestral de 3 meses. Para continuar, será necessário iniciar uma nova sessão.\n\nAo confirmar, a sessão anterior e seus dados serão apagados."
-                        : "Sessão incompatível";
-            }
-            BindReset(onConfirmed);
-            var confirmLabel = confirmResetButton.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (confirmLabel != null)
-                confirmLabel.text = "Iniciar nova sessão";
-            cancelResetButton?.gameObject.SetActive(false);
-            resetWarning.transform.SetParent(canvas.transform, false);
-            ShowResetWarning();
+            if (IsResetOpen) return;
+            incompatible = true; BindReset(onConfirmed); ShowWarning();
         }
-
-        public void HideIncompatibleSave()
+        public void HideIncompatibleSave() { if (incompatible) HideResetWarning(); }
+        public void ShowResetFailure()
         {
-            if (warningOriginalParent != null)
-                HideResetWarning();
+            if (resetError != null)
+            {
+                resetError.text = "Não foi possível reiniciar. Os dados foram mantidos. Tente novamente ou saia deste aviso.";
+                resetError.gameObject.SetActive(true);
+            }
+            cancelResetButton?.Select();
         }
-
-        public void Bind(EstablishmentSummary summary)
+        public void Bind(EstablishmentSummary summary) => presentation?.Bind(summary ?? EstablishmentSummaryService.BuildDraft());
+        private void SetCopy()
         {
-            presentation?.Bind(summary ?? EstablishmentSummaryService.BuildDraft());
+            if (resetTitle != null) resetTitle.text = incompatible ? "Sessão incompatível" : "Reiniciar esta campanha?";
+            if (resetBody != null) resetBody.text = incompatible ? IncompatibleMessage : ResetMessage;
+            if (resetError != null) { resetError.text = ""; resetError.gameObject.SetActive(false); }
+            if (cancelResetButton != null) cancelResetButton.GetComponentInChildren<TMP_Text>(true).text = incompatible ? "Sair sem reiniciar" : "Cancelar";
+            if (confirmResetButton != null) confirmResetButton.GetComponentInChildren<TMP_Text>(true).text = incompatible ? "Apagar e reiniciar" : "Reiniciar jogo";
         }
         private void ShowResetWarning()
         {
-            if (resetWarning == null)
-                return;
-
-            resetWarning.SetActive(true);
-            var canvas = GetComponentInParent<Canvas>(true);
-            if (canvas != null && resetWarning.transform.parent != canvas.transform)
-            {
-                modalHostParent = resetWarning.transform.parent;
-                resetWarning.transform.SetParent(canvas.transform, false);
-            }
+            if (SharedModalFocus.Active != null) return;
+            incompatible = false; ShowWarning();
+        }
+        private void ShowWarning()
+        {
+            if (resetWarning == null || IsResetOpen) return;
+            var canvas = GetComponentInParent<Canvas>(true)?.rootCanvas;
+            if (canvas == null) return;
+            if (resetWarning.transform.parent != canvas.transform) resetWarning.transform.SetParent(canvas.transform, false);
             resetWarning.transform.SetAsLastSibling();
-            if (EventSystem.current != null) previousFocus = EventSystem.current.currentSelectedGameObject;
-            (cancelResetButton != null && cancelResetButton.gameObject.activeInHierarchy ? cancelResetButton : confirmResetButton)?.Select();
+            SetCopy();
+            resetWarning.GetComponent<SharedModalFocus>()?.Configure(cancelResetButton, cancelResetButton, !incompatible);
+            resetWarning.SetActive(true);
+            cancelResetButton?.Select();
+        }
+        private void OnDisable()
+        {
+            // The incompatible warning deliberately lives outside its inactive source panel.
+            // Do not reparent while an ancestor is being deactivated. The hosted modal stays reusable.
+            if (!incompatible && resetWarning != null) resetWarning.SetActive(false);
         }
     }
 }

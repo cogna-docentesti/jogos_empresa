@@ -77,10 +77,14 @@ namespace Game.Adapter.In.UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            bool escape = UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame;
+#if ENABLE_LEGACY_INPUT_MANAGER
+            escape |= Input.GetKeyDown(KeyCode.Escape);
+#endif
+            if (escape)
             {
                 // Both update orders preserve the active modal's ownership of Escape.
-                if (SharedModalFocus.LastCancelFrame == Time.frameCount || FindFirstObjectByType<SharedModalFocus>() != null) return;
+                if (SharedModalFocus.LastCancelFrame == Time.frameCount || SharedModalFocus.Active != null) return;
                 if (IsOpen) Close();
                 else Open();
             }
@@ -90,13 +94,15 @@ namespace Game.Adapter.In.UI
 
         public void Open()
         {
-            if (dialogRoot == null || _quitting)
+            if (dialogRoot == null || _quitting || IsOpen || SharedModalFocus.Active != null)
                 return;
 
             CurrentMode = EvaluateMode();
             ApplyMode(CurrentMode);
+            dialogRoot.GetComponent<SharedModalFocus>()?.Configure(cancelButton, cancelButton);
             dialogRoot.SetActive(true);
             dialogRoot.transform.SetAsLastSibling();
+            cancelButton?.Select();
         }
 
         public void Close()
@@ -117,25 +123,30 @@ namespace Game.Adapter.In.UI
         {
             if (titleText != null)
                 titleText.text = "Sair do jogo";
+            if (bodyText != null) bodyText.color = Theme.GamePalette.Ink;
+            if (saveExitButton != null) saveExitButton.GetComponentInChildren<TMP_Text>(true).text = "Salvar e sair";
 
             switch (mode)
             {
                 case ExitMode.BeforeFirstSave:
-                    SetBody("Suas escolhas de localização, restaurante e cardápio só são salvas quando você confirma o cardápio.\n"
-                          + "Se sair agora, elas serão perdidas.");
-                    SetDiscardLabel("SAIR");
+                    SetBody(GameSessionState.HasIncompatibleSave
+                        ? "A sessão anterior será mantida. Você poderá decidir sobre o reinício quando abrir o jogo novamente."
+                        : "As escolhas de localização, restaurante e cardápio ainda estão em rascunho. Elas só são salvas ao confirmar o cardápio.\n\nSe sair agora, essas escolhas serão perdidas. O cadastro já confirmado será mantido.");
+                    SetDiscardLabel("Sair sem salvar");
                     SetVisible(saveExitButton, false);
                     break;
 
                 case ExitMode.UnsavedChanges:
                     SetBody("Você tem alterações que ainda não foram salvas.\nQuer salvar seu progresso antes de sair?");
-                    SetDiscardLabel("SAIR SEM SALVAR");
+                    SetDiscardLabel("Sair sem salvar");
                     SetVisible(saveExitButton, true);
                     break;
 
                 default:
-                    SetBody("Seu progresso está salvo.\nQuando voltar, o jogo continua de onde você parou.");
-                    SetDiscardLabel("SAIR");
+                    SetBody(GameSessionState.HasActiveSession
+                        ? "Seu progresso está salvo.\nQuando voltar, o jogo continua de onde você parou."
+                        : "Sua campanha encerrada e os resultados estão salvos. Você poderá consultá-los quando voltar ao jogo.");
+                    SetDiscardLabel("Sair");
                     SetVisible(saveExitButton, false);
                     break;
             }
@@ -148,10 +159,18 @@ namespace Game.Adapter.In.UI
                 return;
 
             _quitting = true;
+            if (GameManager.Instance == null || !GameManager.Instance.TryShutdown(save, out _))
+            {
+                _quitting = false;
+                if (titleText != null) titleText.text = save ? "Não foi possível salvar" : "Não foi possível sair";
+                SetBody("O jogo continua aberto e seu progresso permanece na memória.\n\nTente novamente ou cancele para continuar jogando. Se escolher Sair sem salvar, as alterações pendentes serão perdidas.");
+                if (bodyText != null) bodyText.color = Theme.GamePalette.ErrorText;
+                if (saveExitButton != null && saveExitButton.gameObject.activeSelf)
+                    saveExitButton.GetComponentInChildren<TMP_Text>(true).text = "Tentar salvar e sair";
+                cancelButton?.Select();
+                return;
+            }
             Close();
-
-            if (GameManager.Instance != null)
-                GameManager.Instance.Shutdown(save);
 
 #if UNITY_EDITOR
             // Application.Quit nao faz nada dentro do editor: aqui o equivalente

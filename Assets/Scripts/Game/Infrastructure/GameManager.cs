@@ -160,18 +160,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Shutdown(bool salvar)
     {
-        if (_shutdownDone)
-            return;
+        if (!TryShutdown(salvar, out var error)) Debug.LogWarning("[GameManager] " + error);
+    }
 
+    public bool TryShutdown(bool salvar, out string error)
+    {
+        error = null;
+        if (_shutdownDone) return true;
+        if (salvar && !GameSessionState.TrySave(out error)) return false;
+        try { DatabaseInitializer.DatabaseService?.Close(); }
+        catch (System.Exception)
+        {
+            error = "Não foi possível fechar o banco de dados. Tente novamente.";
+            return false;
+        }
         _shutdownDone = true;
-
-        if (salvar)
-            GameSessionState.Save();
-        else
-            Debug.Log("[GameManager] Saindo sem salvar: alteracoes nao gravadas foram descartadas.");
-
-        DatabaseInitializer.DatabaseService?.Close();
-        Debug.Log("[GameManager] Banco fechado.");
+        Debug.Log("[GameManager] Banco fechado após a opção de saída escolhida.");
+        return true;
     }
 
     private void OnApplicationQuit()

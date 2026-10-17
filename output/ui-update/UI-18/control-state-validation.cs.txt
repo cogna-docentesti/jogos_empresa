@@ -1,0 +1,51 @@
+UI01Validation.RequireIsolatedStorage();
+var root=UnityEngine.GameObject.Find("Canvas").transform;
+var exit=root.Find("ExitUI").GetComponent<Game.Adapter.In.UI.ExitDialogController>();
+var flags=System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic;
+typeof(UI18DialogValidation).GetMethod("Active",flags).Invoke(null,null);
+GameSessionState.AddCash(17,false);
+var field=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+var cancel=(UnityEngine.UI.Button)typeof(Game.Adapter.In.UI.ExitDialogController).GetField("cancelButton",field).GetValue(exit);
+var discard=(UnityEngine.UI.Button)typeof(Game.Adapter.In.UI.ExitDialogController).GetField("discardButton",field).GetValue(exit);
+var save=(UnityEngine.UI.Button)typeof(Game.Adapter.In.UI.ExitDialogController).GetField("saveExitButton",field).GetValue(exit);
+var buttons=new[]{cancel,discard,save};
+var steps=new System.Collections.Generic.Queue<System.Action>();
+var records=new System.Collections.Generic.List<object>();
+string resolution="";
+System.Action reset=()=>{
+ foreach(var b in buttons){b.interactable=true;var p=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=-1,button=UnityEngine.EventSystems.PointerEventData.InputButton.Left};UnityEngine.EventSystems.ExecuteEvents.Execute(b.gameObject,p,UnityEngine.EventSystems.ExecuteEvents.pointerUpHandler);UnityEngine.EventSystems.ExecuteEvents.Execute(b.gameObject,p,UnityEngine.EventSystems.ExecuteEvents.pointerExitHandler);b.GetComponent<Game.Adapter.In.UI.SharedControlAppearance>().SetSelected(false);}
+ cancel.Select();
+};
+System.Action<string> capture=(name)=>{
+ Canvas.ForceUpdateCanvases();
+ foreach(var t in Game.Adapter.In.UI.SharedModalFocus.Active.GetComponentsInChildren<TMPro.TMP_Text>()){t.ForceMeshUpdate();if(t.isTextOverflowing)throw new System.Exception("Overflow "+t.text);}
+ string path=UI01Validation.Capture("../UI-18/states-"+name+"-"+resolution);
+ records.Add(new{name,path,width=UnityEngine.Screen.width,height=UnityEngine.Screen.height,frame=UnityEngine.Time.frameCount,controls=buttons.Select(b=>new{b.name,state=b.GetComponent<Game.Adapter.In.UI.SharedControlAppearance>().CurrentState,sprite=b.image.sprite.name,text=b.GetComponentInChildren<TMPro.TMP_Text>().color.ToString()}).ToArray()});
+ System.IO.File.WriteAllText("output/ui-update/UI-18/control-states.json",Newtonsoft.Json.JsonConvert.SerializeObject(records,Newtonsoft.Json.Formatting.Indented));
+};
+foreach(var size in new[]{new UnityEngine.Vector2Int(1920,1080),new UnityEngine.Vector2Int(1366,768),new UnityEngine.Vector2Int(1280,720)})
+{
+ var v=size;
+ steps.Enqueue(()=>{exit.Close();UI01Validation.SetGameView(v.x,v.y);resolution=v.x+"x"+v.y;exit.Open();reset();});
+ steps.Enqueue(()=>{capture("normal-focus-cancel");foreach(var b in buttons){UnityEngine.EventSystems.ExecuteEvents.Execute(b.gameObject,new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=-1},UnityEngine.EventSystems.ExecuteEvents.pointerEnterHandler);}});
+ steps.Enqueue(()=>{capture("hover");foreach(var b in buttons){UnityEngine.EventSystems.ExecuteEvents.Execute(b.gameObject,new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=-1,button=UnityEngine.EventSystems.PointerEventData.InputButton.Left},UnityEngine.EventSystems.ExecuteEvents.pointerDownHandler);}});
+ steps.Enqueue(()=>{capture("pressed");reset();foreach(var b in buttons)b.GetComponent<Game.Adapter.In.UI.SharedControlAppearance>().SetSelected(true);});
+ steps.Enqueue(()=>{capture("selected");reset();discard.interactable=save.interactable=false;});
+ steps.Enqueue(()=>{capture("disabled-danger-primary");reset();save.Select();cancel.interactable=false;});
+ steps.Enqueue(()=>{capture("disabled-secondary");reset();discard.Select();});
+ steps.Enqueue(()=>{capture("focus-danger");save.Select();});
+ steps.Enqueue(()=>{capture("focus-primary");reset();UnityEngine.EventSystems.ExecuteEvents.Execute(cancel.gameObject,new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=-1,button=UnityEngine.EventSystems.PointerEventData.InputButton.Left},UnityEngine.EventSystems.ExecuteEvents.pointerDownHandler);});
+ steps.Enqueue(()=>{capture("pressed-secondary");reset();UnityEngine.EventSystems.ExecuteEvents.Execute(discard.gameObject,new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=-1,button=UnityEngine.EventSystems.PointerEventData.InputButton.Left},UnityEngine.EventSystems.ExecuteEvents.pointerDownHandler);});
+ steps.Enqueue(()=>{capture("pressed-danger");reset();});
+}
+int last=UnityEngine.Time.frameCount;
+double next=UnityEditor.EditorApplication.timeSinceStartup+.3;
+UnityEditor.EditorApplication.CallbackFunction tick=null;
+tick=()=>{
+ if(UnityEngine.Time.frameCount<=last||UnityEditor.EditorApplication.timeSinceStartup<next){UnityEditor.EditorApplication.QueuePlayerLoopUpdate();return;}
+ if(steps.Count==0){UnityEditor.EditorApplication.update-=tick;reset();exit.Close();return;}
+ try{steps.Dequeue()();}catch(System.Exception e){steps.Clear();System.IO.File.WriteAllText("output/ui-update/UI-18/control-state-error.json",e.ToString());}
+ last=UnityEngine.Time.frameCount;next=UnityEditor.EditorApplication.timeSinceStartup+.3;UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+};
+UnityEditor.EditorApplication.update+=tick;
+return "state review started";

@@ -18,7 +18,7 @@ namespace Game.Adapter.In.UI
             backwards |= Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 #endif
             if(!tab) return;
-            var modal=FindFirstObjectByType<SharedModalFocus>();
+            var modal=SharedModalFocus.Active;
             var preview=FindFirstObjectByType<SharedComponentsShowcase>();
             // Identification keeps its validated Name -> RA -> Register traversal.
             if(modal==null && preview==null && FindFirstObjectByType<UIIndentification>()!=null) return;

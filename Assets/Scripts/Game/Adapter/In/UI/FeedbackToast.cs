@@ -22,6 +22,7 @@ namespace Game.Adapter.In.UI
         public static void Show(string text, FeedbackKind kind) { if (Current != null) Current.Display(text, kind); }
         public void Display(string text, FeedbackKind kind)
         {
+            if (SharedModalFocus.Active != null) return;
             if (string.IsNullOrWhiteSpace(text)) { Hide(); return; }
             Kind = kind; message.text = (kind == FeedbackKind.Success ? "Sucesso • " : kind == FeedbackKind.Warning ? "Atenção • " : "Não foi possível • ") + text;
             surface.sprite = kind == FeedbackKind.Success ? success : kind == FeedbackKind.Warning ? warning : error;

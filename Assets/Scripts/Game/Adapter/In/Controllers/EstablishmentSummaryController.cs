@@ -18,6 +18,8 @@ namespace Game.Adapter.In.Controllers
     {
         [SerializeField] private EstablishmentSummaryView view;
         [SerializeField] private EstablishmentReviewContent reviewContent;
+        private bool resetting;
+        private int lastResetFrame = -1;
 
         private void Awake()
         {
@@ -41,34 +43,39 @@ namespace Game.Adapter.In.Controllers
         /// </summary>
         public void ResetGame()
         {
+            if (resetting || lastResetFrame == Time.frameCount) return;
             GameSessionEntity session = GameSessionState.Current ?? GameSessionState.IncompatibleSession;
             var databaseService = DatabaseInitializer.DatabaseService;
 
             if (session == null || databaseService == null || databaseService.Connection == null)
             {
-                Debug.LogError("[EstablishmentSummaryController] Nao foi possivel resetar: sessao ou banco indisponivel.");
+                view?.ShowResetFailure();
                 return;
             }
 
             try
             {
+                resetting = true;
                 string oldSessionId = session.sessionId;
 
                 var sessionService = new GameSessionService(session.userId, session.professorId);
                 sessionService.RestartSession();
+                lastResetFrame = Time.frameCount;
                 Debug.Log($"[Banco] RESET: sessao {oldSessionId} apagada (meses, eventos e sessao). Nova sessao so em memoria.");
 
                 PlayerSession.ClearSavedIdentification();
-                MenuNavigator.Instance?.CloseAll();
                 view?.HideResetWarning();
+                MenuNavigator.Instance?.CloseAll();
 
                 if (GameManager.Instance != null)
                     GameManager.Instance.BeginNewIdentification();
             }
             catch (System.Exception exception)
             {
-                Debug.LogError("[EstablishmentSummaryController] Falha ao resetar o jogo: " + exception);
+                view?.ShowResetFailure();
+                Debug.LogWarning("[EstablishmentSummaryController] Falha ao resetar o jogo: " + exception.Message);
             }
+            finally { resetting = false; }
         }
 
         public void Refresh()

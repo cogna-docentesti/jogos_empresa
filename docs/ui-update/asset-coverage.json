@@ -321,7 +321,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "e7a1783d88466ab9b50808febf29269efd1b03d62d41a74fafa4253283c28345",
       "integrated_consumer_tasks": [
         "UI-02",
@@ -331,9 +331,10 @@
       "integration_evidence": {
         "UI-02": "docs/ui-update/qa/UI-02.json",
         "UI-03": "docs/ui-update/qa/UI-03.json",
-        "UI-17": "docs/ui-update/qa/UI-17.json"
+        "UI-17": "docs/ui-update/qa/UI-17.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-17: ajuda/feedback e vazios em contextos reais; spinner/gestos independentes em Single, motion e input verificados nas três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-17: ajuda/feedback e vazios em contextos reais; spinner/gestos independentes em Single, motion e input verificados nas três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -434,7 +435,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "55db63a3624b0fb74d075eff5c1b4ad8e9acb4fe6a7c4db2f1d3238536fc7c1c",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
@@ -459,9 +460,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -523,7 +525,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "5bffd4adee557c625de1110c979abd305b105b38a4c8f0f95a22123cf78b8a6a",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
@@ -536,9 +538,10 @@
       "integration_evidence": {
         "UI-03": "docs/ui-update/qa/UI-03.json",
         "UI-08": "docs/ui-update/qa/UI-08.json",
-        "UI-10": "docs/ui-update/qa/UI-10.json"
+        "UI-10": "docs/ui-update/qa/UI-10.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -592,7 +595,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "c6e96c8eca3e97f24386b87d2259700168675d74b8078f965eeb04912f20d53e",
       "theme_validation": {
         "UI-02": "Tokens fixados; integração específica deste componente permanece na tarefa proprietária."
@@ -603,9 +606,10 @@
       ],
       "integration_evidence": {
         "UI-03": "docs/ui-update/qa/UI-03.json",
-        "UI-10": "docs/ui-update/qa/UI-10.json"
+        "UI-10": "docs/ui-update/qa/UI-10.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -694,7 +698,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "235f0eebf049fbc39dbb417fc9d2cb5a912c302cfe726b471e0330acf9e4f0cc",
       "integrated_consumer_tasks": [
         "UI-01",
@@ -718,9 +722,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -742,7 +747,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "cc5096d4a72df2324add3d10a516c4f5a7f026330cf65e3fedc607e5a6b86fda",
       "integrated_consumer_tasks": [
         "UI-01",
@@ -764,9 +769,10 @@
         "UI-07": "docs/ui-update/qa/UI-07.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -788,7 +794,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "da213e60e3e9846b4dc06c3a09f87f022dd672f9cbf96fa4628ce20d89f5420f",
       "integrated_consumer_tasks": [
         "UI-01",
@@ -810,9 +816,10 @@
         "UI-07": "docs/ui-update/qa/UI-07.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -835,7 +842,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "86eb198d523bbd5d4a55ba3a40814014f9b7c1e4be01ab8cc2f688622c27363f",
       "integrated_consumer_tasks": [
         "UI-01",
@@ -859,9 +866,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -883,7 +891,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "6450bc986605985fa2d4baa4c4b9e168eeef11ec4be06c22e83615c4dc9026f1",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -905,9 +913,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -929,7 +938,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "41786792f817f96b7163f28ed4f3a2417cddd5e27b5fe8764c2eb4ae88ffd9f1",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -951,9 +960,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -975,7 +985,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "4fdd7ae7831972c03d10b7a7355f85e5db3e859462526685f19de62498a6a08f",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -997,9 +1007,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -1021,7 +1032,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "48f38e4fd0e2aa19d4b93e9a56d7489aedaf4234c527adf4af68e022d2ac5e48",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -1043,9 +1054,10 @@
         "UI-08": "docs/ui-update/qa/UI-08.json",
         "UI-09": "docs/ui-update/qa/UI-09.json",
         "UI-10": "docs/ui-update/qa/UI-10.json",
-        "UI-11": "docs/ui-update/qa/UI-11.json"
+        "UI-11": "docs/ui-update/qa/UI-11.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-05: aplicado na localização/passo 2 e validado em três resoluções; demais consumidores preservam sua tarefa. UI-06: aplicado na D2/Passo 3; fachadas inteiras, cards, segmentos e estados aferidos. Demais consumidores mantêm suas tarefas. UI-07: aplicado no Cardápio/passo 4 e revisão, com preços, estados e três resoluções verificados. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-09: Banco com dados reais, camadas inteiras e estados aferidos em três resoluções; confirmação, consulta e disponibilidade por mês validadas. UI-10: loja com catálogo por ID, arte inteira, filtros, quantidades 0/1, carrinho e estados aferidos em três resoluções; economia e histórico preservados. UI-11: RH com cinco funções reais por ID, arte inteira, quantidades, folha/capacidade/alinhamento e estados aferidos em três resoluções. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -1065,7 +1077,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "4537948b3ff86d0de28139a42977dd5b9b21b673226d5cd40276e886959bba58",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -1073,9 +1085,10 @@
       ],
       "integration_evidence": {
         "UI-03": "docs/ui-update/qa/UI-03.json",
-        "UI-08": "docs/ui-update/qa/UI-08.json"
+        "UI-08": "docs/ui-update/qa/UI-08.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -1094,15 +1107,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "55ce84fe98277ee3e2185bde05391e35a86d5fdee9294a0f8c0c7028c44419fb",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -1121,15 +1135,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "14e91af66009d6e866967ae9d2e15506c767c0ec66c984998c5688bad142b235",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -1148,15 +1163,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "41fcb4b2b9b0ad76042118c87951b7e5609718d82497addcb5af9417094a051b",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -2366,7 +2382,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "b842a234f54591b4ae22b3f7fb7b92629798a8baeb0a514f3ed5e21e4328009a",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -2376,9 +2392,10 @@
       "integration_evidence": {
         "UI-03": "docs/ui-update/qa/UI-03.json",
         "UI-04": "docs/ui-update/qa/UI-04.json",
-        "UI-15": "docs/ui-update/qa/UI-15.json"
+        "UI-15": "docs/ui-update/qa/UI-15.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-15: aplicado ao relatório final/BMC/reflexão com dados salvos ou ausência explícita, textos/componentes nativos e validação nas três resoluções. Lacunas de modelo documentadas separadamente.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-04: aplicado no hub/HUD/nav e validado em três resoluções; demais consumidores mantêm sua tarefa. UI-15: aplicado ao relatório final/BMC/reflexão com dados salvos ou ausência explícita, textos/componentes nativos e validação nas três resoluções. Lacunas de modelo documentadas separadamente. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -3396,15 +3413,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "d3f100deb474987fe24d569d99b43d5bbeb88397d94a456b8c244e73036fdc08",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -3480,15 +3498,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "609d85112dc0b3587497ce4971e8e7e58a48c76d0a0b3f7daeae8a424554484b",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -3508,15 +3527,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "eb0c2d254a291dd1e87d80914601a80ec9b5f32a63790c7dd192cccf218e5ef4",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -3536,7 +3556,7 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "f5084f9b027f5846f97db9dcb5977909dccb77c2858a673ad1e6bbfce2acfa1c",
       "integrated_consumer_tasks": [
         "UI-03",
@@ -3544,9 +3564,10 @@
       ],
       "integration_evidence": {
         "UI-03": "docs/ui-update/qa/UI-03.json",
-        "UI-08": "docs/ui-update/qa/UI-08.json"
+        "UI-08": "docs/ui-update/qa/UI-08.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-08: componente consumido no estabelecimento/revisão; fachada e equipe por dados reais, estados e consultas aferidos. Demais consumidores mantêm suas tarefas. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {
@@ -3594,15 +3615,16 @@
       ],
       "usage": "componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela",
       "production_status": "validado",
-      "integration_status": "parcial",
+      "integration_status": "integrado e validado",
       "png_sha256_at_planning": "ae3483953a15bc875bb561ea774f0496d986a5c128eae6544ff140db20278891",
       "integrated_consumer_tasks": [
         "UI-03"
       ],
       "integration_evidence": {
-        "UI-03": "docs/ui-update/qa/UI-03.json"
+        "UI-03": "docs/ui-update/qa/UI-03.json",
+        "UI-18": "docs/ui-update/qa/UI-18.json"
       },
-      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos.",
+      "integration_note": "UI-03: importador conferido e sprite disponível por ID na SharedUiSkin; componentes/estados aplicados na GameScene/templates/composição. Uso final de cada variante/ícone em tela permanece nas tarefas consumidoras, sem exigir exibição artificial de todos. UI-18: diálogos, scrim/camadas e estados/foco verificados em três resoluções; PNG/GUID preservados.",
       "shared_component_status": "pronto e validado na UI-03"
     },
     {

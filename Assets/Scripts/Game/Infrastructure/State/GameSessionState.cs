@@ -239,6 +239,25 @@ public static class GameSessionState
         Debug.Log($"[Banco] Sessao {Current.sessionId} atualizada (rodada {Current.currentRound}, caixa {Current.currentCash:N0}).");
     }
 
+    /// <summary>Exit needs an acknowledged write; an unavailable connection is not a successful save.</summary>
+    public static bool TrySave(out string error)
+    {
+        error = null;
+        // Drafts and incompatible saves must never be inserted by an exit action.
+        if (Current == null || !IsPersisted) return true;
+        if (DatabaseInitializer.DatabaseService?.Connection == null)
+        {
+            error = "O banco de dados está indisponível.";
+            return false;
+        }
+        try { Save(); return true; }
+        catch (Exception)
+        {
+            error = "Não foi possível gravar o progresso no banco de dados.";
+            return false;
+        }
+    }
+
     // =============================
     // CONFIGURACAO INICIAL
     // =============================

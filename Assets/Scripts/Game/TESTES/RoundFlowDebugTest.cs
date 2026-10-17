@@ -421,10 +421,11 @@ public class RoundFlowDebugTest : MonoBehaviour
             check(warning.activeInHierarchy && !hub.activeInHierarchy,
                 "UI: modal existente visivel sem abrir hub");
             check(warning.GetComponentsInChildren<TMPro.TextMeshProUGUI>().Any(label =>
-                label.text.Contains("versão anterior") && label.text.Contains("3 meses")),
+                label.text.Contains("ciclo anterior") && label.text.Contains("três meses")),
                 "UI: mensagem explica incompatibilidade trimestral");
-            check(confirm.GetComponentInChildren<TMPro.TextMeshProUGUI>().text == "Iniciar nova sessão"
-                && !cancel.gameObject.activeSelf, "UI: acao de reinicio clara sem liberar save bloqueado");
+            check(confirm.GetComponentInChildren<TMPro.TextMeshProUGUI>().text == "Apagar e reiniciar"
+                && cancel.gameObject.activeSelf && cancel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text == "Sair sem reiniciar",
+                "UI: reinicio destrutivo explicito e saida que preserva o save bloqueado");
             check(new GameSessionRepository(DatabaseInitializer.DatabaseService.Connection).GetById(old.sessionId) != null,
                 "UI: exibir modal nao apaga save");
             confirm.onClick.Invoke();

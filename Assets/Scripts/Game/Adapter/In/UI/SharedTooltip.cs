@@ -9,7 +9,8 @@ namespace Game.Adapter.In.UI
     {
         public GameObject panel;
         private bool hovered, focused, pinned;
-        private void Show() { if(panel!=null) panel.SetActive(hovered || focused || pinned); }
+        private void Show() { if(panel!=null) panel.SetActive(SharedModalFocus.Active == null && (hovered || focused || pinned)); }
+        public void Dismiss() { hovered=focused=pinned=false; Show(); }
         public void OnPointerEnter(PointerEventData e) { hovered=e.pointerId<0; Show(); }
         public void OnPointerExit(PointerEventData e) { hovered=false; Show(); }
         public void OnSelect(BaseEventData e) { focused=true; Show(); }

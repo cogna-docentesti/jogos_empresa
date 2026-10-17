@@ -158,7 +158,7 @@ namespace Game.Adapter.In.UI
             cartModal.SetActive(true); cartModal.transform.SetAsLastSibling();
             // A prefab's root Canvas cannot serialize overrideSorting until nested under the scene Canvas.
             var modalCanvas = cartModal.GetComponent<Canvas>();
-            if (modalCanvas != null) { modalCanvas.overrideSorting = true; modalCanvas.sortingOrder = 200; }
+            if (modalCanvas != null) modalCanvas.overrideSorting = true;
             if (opening) cartLines.GetComponentInParent<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition = 1;
         }
         public void HideCart() { if (cartModal != null) cartModal.SetActive(false); }
