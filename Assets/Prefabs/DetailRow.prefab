@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8817644156305016382}
   - component: {fileID: 3400470919589120524}
   - component: {fileID: 7021882563527650074}
+  - component: {fileID: 9015497434205554380}
   m_Layer: 5
   m_Name: 'RowLabel '
   m_TagString: Untagged
@@ -55,8 +56,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
@@ -67,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 89cea402e3db5bf4d9bc9d4f698b7692, type: 2}
-  m_sharedMaterial: {fileID: 4744382643187915359, guid: 89cea402e3db5bf4d9bc9d4f698b7692, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4b38925db4dd7204d8d73cfae01569ed, type: 2}
+  m_sharedMaterial: {fileID: -6845662585732925437, guid: 4b38925db4dd7204d8d73cfae01569ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -111,7 +112,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 3
+  m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9015497434205554380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674438392133000796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1671a5f91bd919f4d9f56f7492aa8ebb, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.UI.Theme.TypographyRoleBinding
+  role: 10
 --- !u!1 &4988178894128367431
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +162,7 @@ GameObject:
   - component: {fileID: 6989195694095573130}
   - component: {fileID: 2117725258212991602}
   - component: {fileID: 7431323456144008401}
+  - component: {fileID: 7181630388690270690}
   m_Layer: 5
   m_Name: RowValue
   m_TagString: Untagged
@@ -192,8 +207,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
@@ -204,8 +219,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 89cea402e3db5bf4d9bc9d4f698b7692, type: 2}
-  m_sharedMaterial: {fileID: 4744382643187915359, guid: 89cea402e3db5bf4d9bc9d4f698b7692, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0aa0cf4df3b55964a923915989ed2948, type: 2}
+  m_sharedMaterial: {fileID: 9212854653892101583, guid: 0aa0cf4df3b55964a923915989ed2948, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -248,7 +263,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 3
+  m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -274,6 +289,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7181630388690270690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988178894128367431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1671a5f91bd919f4d9f56f7492aa8ebb, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.UI.Theme.TypographyRoleBinding
+  role: 0
 --- !u!1 &7654610173079190354
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,8 +351,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_IgnoreLayout: 1
   m_MinWidth: -1
   m_MinHeight: -1
@@ -343,8 +371,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Padding:
     m_Left: 0
     m_Right: 0

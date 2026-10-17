@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8679665731217465970}
   - component: {fileID: 8829252481205142964}
   - component: {fileID: 8374784531179032687}
+  - component: {fileID: 6246586629275569729}
   m_Layer: 0
   m_Name: Label
   m_TagString: Untagged
@@ -67,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continuar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 89cea402e3db5bf4d9bc9d4f698b7692, type: 2}
-  m_sharedMaterial: {fileID: 4744382643187915359, guid: 89cea402e3db5bf4d9bc9d4f698b7692, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: be88295496768fd49aabf63a873819e2, type: 2}
+  m_sharedMaterial: {fileID: 5941695903790888292, guid: be88295496768fd49aabf63a873819e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -111,7 +112,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 3
+  m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6246586629275569729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130266747533912017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1671a5f91bd919f4d9f56f7492aa8ebb, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.UI.Theme.TypographyRoleBinding
+  role: 8
 --- !u!1 &2180659077064300574
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,16 @@ namespace Game.Adapter.In.UI
 
         private void OnEnable()
         {
+            ApplyTypography();
             Refresh();
+        }
+
+        public void ApplyTypography()
+        {
+            foreach (var text in new[] { scoreValue, cashValue, roundValue })
+                GameTypography.KeepSize(text, TypographyRole.Kpi);
+            GameTypography.KeepSize(companyValue, TypographyRole.Body);
+            GameTypography.KeepSize(progressValue, TypographyRole.Label);
         }
 
         public void Refresh()

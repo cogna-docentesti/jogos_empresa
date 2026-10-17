@@ -94,6 +94,12 @@ namespace Game.Adapter.In.UI
             Color textColor=!enabledState?GamePalette.Muted:DarkSurface?GamePalette.OnDark:GamePalette.Ink;
             foreach(var label in labels) if(label!=null) label.color=textColor;
             foreach(var icon in icons) if(icon!=null) icon.color=textColor;
+            if(kind==SharedControlKind.Navigation)
+            {
+                surface.color=new Color(1,1,1,(hovered || down) ? .10f : 0);
+                foreach(var label in labels)if(label!=null)label.color=!enabledState?GamePalette.Muted:chosen?GamePalette.OnDark:GamePalette.Lavender;
+                foreach(var icon in icons)if(icon!=null)icon.color=!enabledState?GamePalette.Muted:GamePalette.Lavender;
+            }
         }
         private bool DarkSurface => kind==SharedControlKind.Primary || kind==SharedControlKind.Danger
             || surface!=null && surface.sprite!=null && (surface.sprite.name=="pill_selected" || surface.sprite.name=="tab_selected" || surface.sprite.name=="tab_pressed");

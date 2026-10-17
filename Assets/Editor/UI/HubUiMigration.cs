@@ -53,7 +53,7 @@ namespace Game.EditorTools
             r.gameObject.SetActive(true);
             GameTypography.Apply(text,size,bold); text.text=value; text.color=color??GamePalette.Ink;
             text.alignment=TextAlignmentOptions.MidlineLeft; text.textWrappingMode=TextWrappingModes.Normal;
-            text.overflowMode=TextOverflowModes.Truncate;
+            text.overflowMode=TextOverflowModes.Overflow;
             return text;
         }
         private static UnityEngine.UI.Button Action(Transform parent,string name,string title,string icon,PanelId target,float x,float y,float width,PanelNavButton.NavAction action=PanelNavButton.NavAction.Open)
@@ -61,7 +61,7 @@ namespace Game.EditorTools
             var image=Image(parent,name,"UI_SECONDARY_IVORY_NORMAL",x,y,width,68,true);
             var button=Ensure<UnityEngine.UI.Button>(image); button.targetGraphic=image;
             Image(image.transform,"Icon",icon,16,18,32,32).color=GamePalette.Ink;
-            Text(image.transform,"Label",title,60,8,width-76,52,GameTypography.Tokens.Button,true);
+            Text(image.transform,"Label",title,60,8,width-76,52,new TypographyToken(TypographyRole.Navigation,24),true);
             Ensure<PanelNavButton>(button).EditorConfigure(action,target);
             SharedUiStyles.Bind(button,SharedControlKind.Secondary);
             return button;
@@ -128,7 +128,7 @@ namespace Game.EditorTools
                 var icon=Image(button.transform,"MapIcon",spec.Item5,px+25,py+18.125f,30,30);
                 var tip=Image(button.transform,"MapLabelTip","UI_MAP_LABEL_TIP",px+58,py+26,20,20);
                 var label=Image(button.transform,"MapLabel","UI_MAP_LABEL_NORMAL",px+72,py-2,labelWidth,76);
-                var caption=Text(button.transform,"MapCaption",spec.Item3,px+96,py+14,labelWidth-48,44,32,true);
+                var caption=Text(button.transform,"MapCaption",spec.Item3,px+96,py+14,labelWidth-48,44,new TypographyToken(TypographyRole.MapMarker,32),true);
                 var focus=Image(button.transform,"MapFocus","UI_CARD_SELECTED_OUTLINE",px+68,py-6,labelWidth+8,84); focus.enabled=false;
                 var hit=Image(button.transform,"MarkerTouchTarget",null,px-8,py-14,labelWidth+88,104,true); hit.color=Color.clear;
                 button.targetGraphic=pin;

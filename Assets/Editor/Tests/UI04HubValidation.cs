@@ -101,7 +101,7 @@ public static class UI04HubValidation
                 }
                 foreach(var text in hub.GetComponentsInChildren<TMP_Text>().Where(t=>t.enabled && t.text.Length>0))
                 {
-                    text.ForceMeshUpdate(); Expect(text.font.name=="InterTight-Variable" && !text.enableAutoSizing,"Font "+text.name);
+                    text.ForceMeshUpdate(); Expect(text.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>()!=null && text.font==Game.Adapter.In.UI.Theme.GameTypography.Resolve(text.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>().Role).Font && !text.enableAutoSizing,"Font "+text.name);
                     Expect(!text.isTextOverflowing,"Overflow "+text.name+": "+text.text);
                 }
                 foreach(var button in hub.transform.Find("HubNavbar").GetComponentsInChildren<UnityEngine.UI.Button>().Concat(new[]{GameObject.Find("Canvas/ExitUI/ExitButton").GetComponent<UnityEngine.UI.Button>()}))

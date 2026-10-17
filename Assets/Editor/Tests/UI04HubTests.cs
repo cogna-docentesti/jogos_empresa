@@ -19,6 +19,9 @@ public sealed class UI04HubTests
         scene=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity"); opened=!scene.isLoaded;
         if(opened) scene=EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity",OpenSceneMode.Additive);
         canvas=scene.GetRootGameObjects().First(r=>r.name=="Canvas").transform;
+        // Edit-mode runs do not call Awake; hot reload preserves the bool but cannot serialize its dictionary.
+        typeof(PanelRegistry).GetField("_built",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)
+            .SetValue(canvas.Find("UiNavigation").GetComponent<PanelRegistry>(),false);
         master=canvas.Find("Panel_Menu/MapMaster"); Assert.IsNotNull(master);
     }
     [TearDown] public void Close() { if(opened) EditorSceneManager.CloseScene(scene,true); }
@@ -39,8 +42,8 @@ public sealed class UI04HubTests
     }
     [Test] public void PolygonsAndMarkersShareTheMasterWithNoIndependentScaling()
     {
-        var rect=(RectTransform)master; Assert.AreEqual(new Vector2(24,-176),rect.anchoredPosition);
-        Assert.AreEqual(Vector3.one*(2f/3f),rect.localScale); Assert.AreEqual(new Vector2(1920,1080),rect.sizeDelta);
+        var rect=(RectTransform)master; Assert.AreEqual(new Vector2(-104,-88),rect.anchoredPosition);
+        Assert.AreEqual(Vector3.one*(896f/1080f),rect.localScale); Assert.AreEqual(new Vector2(1920,1080),rect.sizeDelta);
         var layout=JObject.Parse(File.ReadAllText("docs/art/layouts/map-layout.json"));
         foreach(var node in master.GetComponentsInChildren<MapMenuNode>(true))
         {
@@ -57,7 +60,7 @@ public sealed class UI04HubTests
         try
         {
             var r=(RectTransform)go.transform; r.pivot=new Vector2(0,1); r.sizeDelta=new Vector2(1920,1080);
-            r.position=new Vector3(24*height/1080f,height-176*height/1080f); r.localScale=Vector3.one*(height/1080f)*(2f/3f);
+            r.position=new Vector3(-104*height/1080f,height-88*height/1080f); r.localScale=Vector3.one*(height/1080f)*(896f/1080f);
             var hit=go.GetComponent<MapPolygonHitArea>(); hit.Configure(new[]{new Vector2(1062,242),new Vector2(1236,315),new Vector2(1121,387),new Vector2(947,315)});
             foreach(var point in new[]{new Vector2(1100,315),new Vector2(1000,315),new Vector2(1200,200),new Vector2(900,500)})
             {

@@ -58,7 +58,7 @@ public static class UI05LocationValidation
     {
         Canvas.ForceUpdateCanvases();
         foreach(var t in View.GetComponentsInChildren<TMP_Text>().Where(t=>t.enabled && t.text.Length>0))
-        { t.ForceMeshUpdate(); Expect(t.font.name=="InterTight-Variable" && !t.enableAutoSizing,"Native typography "+t.name); Expect(!t.isTextOverflowing,"Text overflow "+t.name); }
+        { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>()!=null && t.font==Game.Adapter.In.UI.Theme.GameTypography.Resolve(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>().Role).Font && !t.enableAutoSizing,"Native typography "+t.name); Expect(!t.isTextOverflowing,"Text overflow "+t.name); }
     }
     private static void ScrollbarFits()
     {

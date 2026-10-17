@@ -31,8 +31,8 @@ public sealed class UI05LocationTests
     }
     [Test] public void DecisionUsesTheExactSharedMapTransformAndCompactLayerBounds()
     {
-        Assert.AreEqual(new Vector2(24,-176),((RectTransform)master).anchoredPosition);
-        Assert.AreEqual(Vector3.one*(2f/3f),master.localScale);
+        Assert.AreEqual(new Vector2(-104,-88),((RectTransform)master).anchoredPosition);
+        Assert.AreEqual(Vector3.one*(896f/1080f),master.localScale);
         Assert.AreEqual(Vector2.zero,((RectTransform)panel).anchorMin); Assert.AreEqual(Vector2.one,((RectTransform)panel).anchorMax);
         var source=JObject.Parse(File.ReadAllText("docs/art/layouts/map-layout.json"));
         foreach(var layer in source["layers"])
