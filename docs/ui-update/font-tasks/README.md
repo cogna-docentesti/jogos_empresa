@@ -1,6 +1,6 @@
 # Substituição da tipografia para aproximar os concepts
 
-Data: 17/10/2026. Status: **planejado; implementação pendente**.
+Data: 17/10/2026. Status: **FONT-01 concluído; FONT-02 a FONT-10 pendentes**.
 
 Este lote substitui a Inter Tight usada na interface por Roboto e Roboto Condensed, distribuídas por função visual. Inclui localizar ou baixar as fontes, criar os assets TextMeshPro necessários e aplicar a mudança nas interfaces reais. Os registros de conclusão de UI-01 a UI-20 continuam sendo evidências da entrega anterior; não comprovam esta substituição.
 
@@ -35,11 +35,11 @@ Os tamanhos são os tokens atuais como ponto de partida, não novos valores já 
 
 ## Tarefas e ordem de execução
 
-Todas as tarefas começam **pendentes**. Cada arquivo contém escopo, dependências, implementação e critérios de aceite.
+O inventário de FONT-01 está concluído; a substituição das fontes ainda está planejada. Cada arquivo contém escopo, dependências, implementação e critérios de aceite.
 
 | Ordem | Tarefa | Depende de | Status |
 | --- | --- | --- | --- |
-| 1 | [FONT-01 — Inventário e matriz por texto](FONT-01-inventario-e-matriz.md) | — | Pendente |
+| 1 | [FONT-01 — Inventário e matriz por texto](FONT-01-inventario-e-matriz.md) | — | Concluído — [QA](../qa/FONT-01.json) |
 | 2 | [FONT-02 — Download, fontes de produção e licenças](FONT-02-download-e-licencas.md) | FONT-01 | Pendente |
 | 3 | [FONT-03 — Assets TextMeshPro e glifos](FONT-03-assets-tmpro.md) | FONT-02 | Pendente |
 | 4 | [FONT-04 — Tema, builders e geração em runtime](FONT-04-tema-e-geracao-runtime.md) | FONT-03 | Pendente |
