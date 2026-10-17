@@ -16,7 +16,8 @@ namespace Game.Adapter.In.Controllers
         private Action returnToReport;
         private void OnEnable()
         {
-            if (GameManager.Instance?.StateMachine?.CurrentState != GameState.FinalReport) { requestedMonth = null; returnToReport = null; }
+            var state = GameManager.Instance?.StateMachine?.CurrentState;
+            if (state != GameState.FinalReport && state != GameState.GameOver_Bankruptcy) { requestedMonth = null; returnToReport = null; }
             view.Actions(Continue, Refresh); Refresh();
         }
         public void OpenFromFinal(int month, Action back)
@@ -38,7 +39,8 @@ namespace Game.Adapter.In.Controllers
             }
             catch (Exception)
             { view.State("error", "Não foi possível consultar o resultado", "O resultado salvo está indisponível. Tente novamente para atualizar esta consulta.", IsAwaitingContinue); }
-            finally { if (returnToReport != null) view.FinalReportContext(requestedMonth ?? 0); }
+            finally { if (returnToReport != null) view.FinalReportContext(requestedMonth ?? 0,
+                GameManager.Instance?.StateMachine?.CurrentState == GameState.GameOver_Bankruptcy); }
         }
         public void Continue()
         {

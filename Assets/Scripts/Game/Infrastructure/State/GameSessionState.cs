@@ -150,13 +150,14 @@ public static class GameSessionState
         HasUnsavedChanges = false;
     }
 
-    /// <summary>Recover the latest completed report without replacing an active or incompatible save.</summary>
+    /// <summary>Recover the latest finished campaign without replacing an active or incompatible save.</summary>
     public static bool TryLoadCompletedReport(string userId)
     {
         if (HasSession || HasIncompatibleSave) return false;
         var session = Repository?.GetLastFinishedSessionByUserId(userId);
-        // A later bankruptcy must never resurrect an older successful campaign.
-        if (session == null || session.status != GameSessionStatus.COMPLETED || session.finalReportArchived) return false;
+        // Select the latest ending first; never resurrect an older campaign.
+        if (session == null || (session.status != GameSessionStatus.COMPLETED && session.status != GameSessionStatus.BANKRUPT)
+            || session.finalReportArchived) return false;
         var db = DatabaseInitializer.DatabaseService.Connection;
         if (session.currentRound > 3 || new RoundResultRepository(db).GetBySessionId(session.sessionId).Exists(r => r.round > 3)
             || new SessionEventHistoryRepository(db).GetBySession(session.sessionId).Exists(e => e.round > 3))

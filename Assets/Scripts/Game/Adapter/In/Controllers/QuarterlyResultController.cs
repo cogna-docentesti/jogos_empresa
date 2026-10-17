@@ -52,7 +52,7 @@ namespace Game.Adapter.In.Controllers
         private void Update()
         {
             // A state transition owns visibility; never leave a consultation above a different flow.
-            if ((fromMonthly || returnToReport != null) && GameManager.Instance?.StateMachine?.CurrentState != GameState.Round_Summary && GameManager.Instance?.StateMachine?.CurrentState != GameState.Management_Hub && GameManager.Instance?.StateMachine?.CurrentState != GameState.FinalReport)
+            if ((fromMonthly || returnToReport != null) && GameManager.Instance?.StateMachine?.CurrentState != GameState.Round_Summary && GameManager.Instance?.StateMachine?.CurrentState != GameState.Management_Hub && GameManager.Instance?.StateMachine?.CurrentState != GameState.FinalReport && GameManager.Instance?.StateMachine?.CurrentState != GameState.GameOver_Bankruptcy)
             { fromMonthly = false; gameObject.SetActive(false); }
         }
     }

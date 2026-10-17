@@ -103,11 +103,12 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (GameSessionState.Current?.status == GameSessionStatus.COMPLETED)
+        if (GameSessionState.Current?.status == GameSessionStatus.COMPLETED || GameSessionState.Current?.status == GameSessionStatus.BANKRUPT)
         {
             PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
             StateMachine.ForceState(GameSessionState.Current.finalSummaryAcknowledged
-                ? GameState.FinalReport : GameState.Round_Summary);
+                ? (GameSessionState.Current.status == GameSessionStatus.BANKRUPT ? GameState.GameOver_Bankruptcy : GameState.FinalReport)
+                : GameState.Round_Summary);
             return;
         }
 

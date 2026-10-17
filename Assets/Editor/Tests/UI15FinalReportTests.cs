@@ -60,11 +60,11 @@ public sealed class UI15FinalReportTests
         GameSessionState.Clear(); Seed("active", status: GameSessionStatus.IN_PROGRESS); Prepare(); Assert.AreEqual("active", GameSessionState.Current.sessionId);
     }
     [Test] public void LaterBankruptcyNeverResurrectsAnOlderCompletion()
-    { Seed("older", true); Seed("bankrupt", status: GameSessionStatus.BANKRUPT, finished: 200); Prepare(); Assert.AreEqual(GameState.Config_Identification, manager.StateMachine.CurrentState); Assert.IsFalse(GameSessionState.IsPersisted); }
+    { Seed("older", true); Seed("bankrupt", status: GameSessionStatus.BANKRUPT, finished: 200); Prepare(); Assert.AreEqual(GameState.Round_Summary, manager.StateMachine.CurrentState); Assert.AreEqual("bankrupt", GameSessionState.Current.sessionId); Assert.IsTrue(GameSessionState.IsPersisted); }
     [Test] public void BankruptcyStillHasPrecedenceOnContinue()
     {
         Seed(status: GameSessionStatus.BANKRUPT); GameSessionState.Set(db.Find<GameSessionEntity>("completed")); manager.StateMachine.ForceState(GameState.Round_Summary);
-        Assert.IsTrue(new GameSessionService("ui15-user", "qa").ContinueAfterSummary("completed3")); Assert.AreEqual(GameState.GameOver_Bankruptcy, manager.StateMachine.CurrentState); Assert.IsFalse(db.Find<GameSessionEntity>("completed").finalSummaryAcknowledged);
+        Assert.IsTrue(new GameSessionService("ui15-user", "qa").ContinueAfterSummary("completed3")); Assert.AreEqual(GameState.GameOver_Bankruptcy, manager.StateMachine.CurrentState); Assert.IsTrue(db.Find<GameSessionEntity>("completed").finalSummaryAcknowledged);
     }
     [Test] public void NewGamePreservesAllResultsAndStartsAnUnpersistedIdentificationDraft()
     {

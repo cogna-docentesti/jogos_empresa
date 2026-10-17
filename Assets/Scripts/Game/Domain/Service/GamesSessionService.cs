@@ -108,16 +108,17 @@ public class GameSessionService
         GameSessionState.Initialize(_userId);
     }
 
-    /// <summary>Explicit new-game action. Keep every completed row and result; the replacement is a D3 draft.</summary>
+    /// <summary>Explicit new-game action. Keep every finished row and result; the replacement is a D3 draft.</summary>
     public GameSessionEntity StartNewCampaignPreservingReport()
     {
         var previous = GameSessionState.Current;
         var db = DatabaseInitializer.DatabaseService?.Connection;
-        if (previous == null || previous.status != GameSessionStatus.COMPLETED || !GameSessionState.IsPersisted || db == null)
-            throw new InvalidOperationException("A saved completed campaign is required.");
+        if (previous == null || (previous.status != GameSessionStatus.COMPLETED && previous.status != GameSessionStatus.BANKRUPT)
+            || !GameSessionState.IsPersisted || db == null)
+            throw new InvalidOperationException("A saved finished campaign is required.");
         if (db.Execute("UPDATE GameSessionEntity SET finalReportArchived = ? WHERE sessionId = ? AND status = ?",
-            true, previous.sessionId, GameSessionStatus.COMPLETED) != 1)
-            throw new InvalidOperationException("The completed report could not be preserved.");
+            true, previous.sessionId, previous.status) != 1)
+            throw new InvalidOperationException("The finished report could not be preserved.");
         previous.finalReportArchived = true;
         GameSessionState.Clear(); PlayerSession.Clear();
         return new GameSessionService(previous.userId, previous.professorId).CreateNewSession();
@@ -457,6 +458,10 @@ public class GameSessionService
 
         if (session.status == GameSessionStatus.BANKRUPT)
         {
+            if (!sm.CanTransitionTo(GameState.GameOver_Bankruptcy)) return false;
+            if (db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = ? WHERE sessionId = ? AND status = ?",
+                true, session.sessionId, GameSessionStatus.BANKRUPT) != 1) return false;
+            session.finalSummaryAcknowledged = true;
             return sm.TryChangeState(GameState.GameOver_Bankruptcy);
         }
 
