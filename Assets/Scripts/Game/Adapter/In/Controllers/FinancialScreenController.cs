@@ -100,7 +100,9 @@ namespace Game.Adapter.In.Controllers
             FeedbackToast.Show(contractedNow ? "Crédito contratado. O valor foi adicionado ao caixa." : _selectionLocked ? "Contrato mantido. Confira o saldo e as parcelas no banco." : "Escolha sem crédito salva. Seu caixa foi mantido.", FeedbackKind.Success);
             if (Management) { MenuNavigator.Instance.Back(); return; }
             if (GameManager.Instance?.StateMachine.CurrentState == GameState.Initial_Capital)
-                GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);
+                if (!new GameSessionService(GameSessionState.Current.userId, GameSessionState.Current.professorId)
+                    .ContinueInitialSetup(GameState.Initial_Equipment))
+                    view.SetHint("Não foi possível avançar. Tente novamente; sua escolha foi preservada.", true);
         }
     }
 }

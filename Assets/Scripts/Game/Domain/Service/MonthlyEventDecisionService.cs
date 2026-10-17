@@ -82,4 +82,15 @@ public sealed class MonthlyEventDecisionService
             || new RoundResultRepository(db).GetBySessionAndRound(sessionId, month) != null)
             throw new InvalidOperationException("Events require a persisted, unsettled active month.");
     }
+
+    public bool HasUnconfirmedChoices(GameSessionEntity session)
+    {
+        db.CreateTable<MonthlyEventPlanEntity>();
+        var saved = db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound);
+        if (saved == null) return false;
+        var plan = JsonUtility.FromJson<Plan>(saved.entriesJson);
+        if (plan?.entries == null) throw new InvalidOperationException("The saved event plan is invalid.");
+        var history = new SessionEventHistoryRepository(db).GetBySessionAndRound(session.sessionId, session.currentRound);
+        return plan.entries.Any(e => !history.Any(h => h.eventId == e.eventId && h.day == e.day));
+    }
 }

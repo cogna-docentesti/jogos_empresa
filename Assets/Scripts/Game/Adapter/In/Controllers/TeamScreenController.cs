@@ -90,7 +90,11 @@ namespace Game.Adapter.In.Controllers
                 GetComponent<ContextualHelp>()?.Complete();
                 FeedbackToast.Show(team.members.Sum(m => m.quantity) == 0 ? "Equipe vazia confirmada. A capacidade e o alinhamento refletem essa escolha." : "Equipe confirmada. Salários serão cobrados no fechamento mensal.", team.members.Sum(m => m.quantity) == 0 ? FeedbackKind.Warning : FeedbackKind.Success);
                 var machine = GameManager.Instance?.StateMachine;
-                if (machine?.CurrentState == GameState.Initial_Team) machine.TryChangeState(GameState.Management_Hub);
+                if (machine?.CurrentState == GameState.Initial_Team)
+                {
+                    if (!Service.ContinueInitialSetup(GameState.Management_Hub))
+                        view.SetHint("Não foi possível avançar. Tente novamente; sua equipe foi preservada.", true);
+                }
                 else MenuNavigator.Instance?.Back();
             }
             catch (Exception) { view.SetHint("Não foi possível confirmar a equipe. Confira os dados e tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Confira os dados e tente novamente.", FeedbackKind.Error); }

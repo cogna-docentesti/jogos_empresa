@@ -1,5 +1,5 @@
 ATUALIZAÇÃO COMPLETA DAS INTERFACES — COGNA
-Planejamento criado em 16/10/2026. UI-01 a UI-18 concluídas e validadas; UI-19 e UI-20 permanecem planejadas.
+Planejamento criado em 16/10/2026. UI-01 a UI-19 concluídas e validadas; UI-20 permanece planejada.
 Evidências da identificação na GameScene: qa/UI-01.json e ../../output/ui-update/UI-01/.
 
 Abra PLANO-DE-ATUALIZACAO.html para navegar pelas 20 tarefas, dependências e critérios de aceite.
@@ -102,3 +102,7 @@ QA: qa/UI-17.json e ../../output/ui-update/UI-17/. UI-18 não iniciada; Sair leg
 ATUALIZAÇÃO UI-18
 Diálogos de produção, foco/camadas comuns e saída com gravação reconhecida antes de fechar o banco. Erro/retry e reset/incompatibilidade explícitos na mesma GameScene. Novo jogo preserva histórico. 358 testes Edit Mode, 156 checks de fluxo/input, 90 checks de estados, 9 saídas reais e 96 capturas.
 QA: qa/UI-18.json e ../../output/ui-update/UI-18/. UI-19 não iniciada nesta conversa.
+
+ATUALIZAÇÃO UI-19
+Matriz completa de estados/destinos, visibilidade central, modais isolados e retomada persistida de Banco/Equipamentos/Equipe, eventos e resumos. Seis campanhas reais nas três resoluções; final/falência, consultas, reset, retry e saída/retomada validados. O baseline de painéis nulos e resumo imediato acima é histórico: passagens técnicas são explícitas; painéis obrigatórios têm vínculos reais.
+QA: qa/UI-19.json; matriz: qa/UI-19-state-matrix.json; evidências: ../../output/ui-update/UI-19/. Somente UI-20 permanece planejada.

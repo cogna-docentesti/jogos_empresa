@@ -16,11 +16,10 @@ namespace Game.Adapter.In.Controllers
         public void OpenFromMonthly()
         {
             fromMonthly = true;
-            monthlyPanel.SetActive(false);
-            gameObject.SetActive(true);
+            UIStateListener.PresentScreen(gameObject);
         }
         public void OpenFromFinal(Action back)
-        { fromMonthly = false; returnToReport = back; gameObject.SetActive(true); }
+        { fromMonthly = false; returnToReport = back; UIStateListener.PresentScreen(gameObject); }
         public void Refresh()
         {
             Report = null;
@@ -40,20 +39,14 @@ namespace Game.Adapter.In.Controllers
         public void Back()
         {
             if (returnToReport != null)
-            { var back = returnToReport; gameObject.SetActive(false); back(); return; }
+            { var back = returnToReport; back(); return; }
             if (fromMonthly)
             {
-                fromMonthly = false; gameObject.SetActive(false); monthlyPanel.SetActive(true);
+                fromMonthly = false; UIStateListener.PresentScreen(monthlyPanel);
                 monthlyPanel.GetComponent<MonthlyResultView>().QuarterlyButton.Select();
             }
             else MenuNavigator.Instance?.Back();
         }
         private void OnDisable() { fromMonthly = false; returnToReport = null; }
-        private void Update()
-        {
-            // A state transition owns visibility; never leave a consultation above a different flow.
-            if ((fromMonthly || returnToReport != null) && GameManager.Instance?.StateMachine?.CurrentState != GameState.Round_Summary && GameManager.Instance?.StateMachine?.CurrentState != GameState.Management_Hub && GameManager.Instance?.StateMachine?.CurrentState != GameState.FinalReport && GameManager.Instance?.StateMachine?.CurrentState != GameState.GameOver_Bankruptcy)
-            { fromMonthly = false; gameObject.SetActive(false); }
-        }
     }
 }

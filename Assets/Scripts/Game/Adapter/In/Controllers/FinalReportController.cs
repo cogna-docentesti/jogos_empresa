@@ -32,20 +32,20 @@ namespace Game.Adapter.In.Controllers
         }
         public void OpenMonth(int month)
         {
-            if (Report?.Quarter.Months[month - 1] == null) return;
-            var focus = view.MonthButtons[month - 1]; gameObject.SetActive(false);
+            if (month < 1 || month > 3 || Report?.Quarter.Months[month - 1] == null) return;
+            var focus = view.MonthButtons[month - 1];
             monthly.OpenFromFinal(month, () => Return(focus));
         }
         public void OpenQuarterly()
         {
             if (Report == null) return;
-            var focus = view.QuarterlyButton; gameObject.SetActive(false);
+            var focus = view.QuarterlyButton;
             quarterly.OpenFromFinal(() => Return(focus));
         }
         private void Return(UnityEngine.UI.Button focus)
         {
             if (GameManager.Instance?.StateMachine?.CurrentState != GameState.FinalReport) return;
-            gameObject.SetActive(true); focus.Select();
+            UIStateListener.PresentScreen(gameObject); focus.Select();
         }
         public void StartNewGame()
         {

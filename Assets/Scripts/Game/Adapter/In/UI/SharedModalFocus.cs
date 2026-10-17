@@ -19,6 +19,13 @@ namespace Game.Adapter.In.UI
         private bool cancelling;
         private bool initializing;
 
+        public static void CloseForNavigation()
+        {
+            // State handoff releases modal ownership; it does not invoke a destructive/cancel action.
+            foreach (var modal in stack.ToArray())
+                if (modal != null && modal.gameObject.activeSelf) modal.gameObject.SetActive(false);
+        }
+
         public void Configure(UnityEngine.UI.Selectable first, UnityEngine.UI.Button cancel, bool cancellable = true)
         { initialFocus = first; cancelButton = cancel; allowCancel = cancellable; }
 

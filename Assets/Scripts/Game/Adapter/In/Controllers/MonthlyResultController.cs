@@ -21,7 +21,7 @@ namespace Game.Adapter.In.Controllers
             view.Actions(Continue, Refresh); Refresh();
         }
         public void OpenFromFinal(int month, Action back)
-        { requestedMonth = month; returnToReport = back; gameObject.SetActive(true); }
+        { requestedMonth = month; returnToReport = back; UIStateListener.PresentScreen(gameObject); }
         public void Refresh()
         {
             Result = null;
@@ -47,7 +47,7 @@ namespace Game.Adapter.In.Controllers
             if (returnToReport != null)
             {
                 var back = returnToReport; returnToReport = null; requestedMonth = null;
-                gameObject.SetActive(false); back(); return;
+                back(); return;
             }
             if (IsAwaitingContinue)
             {
@@ -55,9 +55,10 @@ namespace Game.Adapter.In.Controllers
                 var session = GameSessionState.Current;
                 try
                 {
-                    if (session == null || !new GameSessionService(session.userId, session.professorId).ContinueAfterSummary(Result.roundResultId)) return;
+                    if (session == null || !new GameSessionService(session.userId, session.professorId).ContinueAfterSummary(Result.roundResultId))
+                    { FeedbackToast.Show("Não foi possível continuar. Seu resultado está salvo; tente novamente.", FeedbackKind.Error); return; }
                 }
-                catch (Exception) { Refresh(); return; }
+                catch (Exception) { Refresh(); FeedbackToast.Show("Não foi possível continuar. Seu resultado está salvo; tente novamente.", FeedbackKind.Error); return; }
                 Continued?.Invoke(Result);
             }
             else MenuNavigator.Instance?.Back();

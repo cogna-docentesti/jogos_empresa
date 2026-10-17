@@ -158,7 +158,7 @@ public static class UI12EventValidation
         Add("Close month waits for player before settlement", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<UnityEngine.UI.Button>()); });
         Add("Selector reservations and no financial mutation", () =>
         {
-            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Sales && Controller.IsAwaitingChoice, "Wait before settlement");
+            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event && Controller.IsAwaitingChoice, "Wait before settlement");
             Expect(MonthlySettlementController.SettleCurrentMonth() == null, "A pending choice cannot be bypassed by another settlement request");
             Expect(Db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == activeId).Count() == 1 && new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0, "Reserved without settlement");
             cash = GameSessionState.Current.currentCash; reputation = GameSessionState.Current.reputationScore; Capture("monthly-await-1280x720");

@@ -189,7 +189,7 @@ namespace Game.Adapter.In.Controllers
         {
             var machine = GameManager.Instance?.StateMachine;
             if (machine?.CurrentState == GameState.Initial_Equipment)
-                machine.TryChangeState(GameState.Initial_Capital);
+                AdvanceSetup(GameState.Initial_Capital);
         }
 
         private void OnCartToggleRequested(EquipmentCardView card)
@@ -317,12 +317,12 @@ namespace Game.Adapter.In.Controllers
             OpenMenu();
         }
 
-        private static void OpenMenu()
+        private void OpenMenu()
         {
             var machine=GameManager.Instance!=null?GameManager.Instance.StateMachine:null;
             if(machine!=null && machine.CurrentState==GameState.Initial_Equipment)
             {
-                machine.TryChangeState(GameState.Initial_Team);
+                AdvanceSetup(GameState.Initial_Team);
                 return;
             }
             if (MenuNavigator.Instance == null)
@@ -332,6 +332,18 @@ namespace Game.Adapter.In.Controllers
             }
 
             MenuNavigator.Instance.Back();
+        }
+
+        private void AdvanceSetup(GameState next)
+        {
+            try
+            {
+                var s = GameSessionState.Current;
+                if (new GameSessionService(s.userId, s.professorId).ContinueInitialSetup(next)) return;
+            }
+            catch (Exception) { /* Keep the current screen and the already committed purchase. */ }
+            view.SetHint("Não foi possível avançar. Tente novamente; suas compras foram preservadas.");
+            FeedbackToast.Show("Não foi possível avançar. Tente novamente.", FeedbackKind.Error);
         }
 
         private bool Owns(EquipmentData equipment)

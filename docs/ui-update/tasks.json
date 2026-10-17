@@ -5,7 +5,7 @@
   "title": "Atualização completa das interfaces e identificação na GameScene",
   "status": "em_andamento",
   "implementation_performed": true,
-  "current_request": "UI-01 a UI-17 entregues e validadas; UI-18 a UI-20 permanecem planejadas.",
+  "current_request": "UI-01 a UI-19 entregues e validadas; UI-20 permanece planejada.",
   "first_task": "UI-01",
   "execution_order": [
     "UI-01",
@@ -2698,7 +2698,7 @@
       "title": "Fechar navegação, estados e vínculos de todas as telas",
       "phase": "Acabamento e integração",
       "priority": "P1",
-      "status": "planejado",
+      "status": "concluído",
       "dependencies": [
         "UI-05",
         "UI-06",
@@ -2770,7 +2770,10 @@
         "Registro de execução e evidências em docs/ui-update/qa/UI-19.json e output/ui-update/UI-19/.",
         "Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão."
       ],
-      "request_prompt": "Execute somente UI-19 — Fechar navegação, estados e vínculos de todas as telas no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-19.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente."
+      "request_prompt": "Execute somente UI-19 — Fechar navegação, estados e vínculos de todas as telas no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-19.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.",
+      "implementation_evidence": "docs/ui-update/qa/UI-19.json",
+      "validation_summary": "375 testes Edit Mode, 633 checks de campanha e 129 suplementares aprovados; seis campanhas completas, retomada e auditoria de vínculos nas três resoluções.",
+      "pending_acceptance": []
     },
     {
       "id": "UI-20",

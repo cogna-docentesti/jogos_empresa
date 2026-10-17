@@ -27,6 +27,12 @@ namespace Game.Adapter.In.Controllers
         private SessionEventHistoryRepository History => new(DatabaseInitializer.DatabaseService.Connection);
         private void Awake() { view ??= GetComponent<EventScreenView>(); Bind(); }
         private void Bind() => view?.BindActions(Confirm, ShowHistory, Return);
+        public void ReleasePresentation()
+        {
+            completed = null; IsAwaitingChoice = false; current = null; sessionId = null;
+            monthFlow = confirmed = recording = historyVisible = failed = false;
+            entries.Clear(); selected = -1; index = 0;
+        }
         private void OnEnable()
         {
             view ??= GetComponent<EventScreenView>(); Bind();
@@ -34,7 +40,8 @@ namespace Game.Adapter.In.Controllers
         }
         public void OpenMonth(Action onCompleted)
         {
-            if (IsAwaitingChoice && !failed) { gameObject.SetActive(true); Render(); return; }
+            if (IsAwaitingChoice && !failed && sessionId == GameSessionState.Current?.sessionId
+                && month == GameSessionState.Current?.currentRound) { UIStateListener.PresentScreen(gameObject); Render(); return; }
             completed = onCompleted; monthFlow = true; failed = false;
             try
             {
@@ -52,7 +59,7 @@ namespace Game.Adapter.In.Controllers
                 OpenNext();
             }
             catch (Exception)
-            { failed = true; IsAwaitingChoice = true; gameObject.SetActive(true); view.Error("Não foi possível carregar os eventos. Tente novamente para continuar o fechamento.", true); }
+            { failed = true; IsAwaitingChoice = true; UIStateListener.PresentScreen(gameObject); view.Error("Não foi possível carregar os eventos. Tente novamente para continuar o fechamento.", true); }
         }
         private void OpenNext()
         {
@@ -69,7 +76,7 @@ namespace Game.Adapter.In.Controllers
         private void Present(EventData data, int eventMonth, int eventDay)
         {
             current = data; month = eventMonth; day = eventDay; selected = -1; confirmed = recording = failed = historyVisible = false;
-            IsAwaitingChoice = true; gameObject.SetActive(true);
+            IsAwaitingChoice = true; UIStateListener.PresentScreen(gameObject);
             try
             {
                 if (!view.Ready || current?.options == null || current.options.Length == 0 || view.Illustration(current.id) == null
@@ -136,7 +143,7 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
             if (MenuNavigator.HubAvailable) MenuNavigator.Instance.Back();
-            else { gameObject.SetActive(false); Closed?.Invoke(); }
+            else { UIStateListener.DismissScreen(gameObject); Closed?.Invoke(); }
         }
         public bool Close()
         {
@@ -145,13 +152,13 @@ namespace Game.Adapter.In.Controllers
         }
         private void Finish()
         {
-            IsAwaitingChoice = false; gameObject.SetActive(false);
+            IsAwaitingChoice = false; UIStateListener.DismissScreen(gameObject);
             var callback = completed; completed = null; Closed?.Invoke(); callback?.Invoke();
         }
         public void ShowSettlementFailure(Action retry)
         {
             IsAwaitingChoice = true; failed = true; monthFlow = true; completed = retry;
-            gameObject.SetActive(true);
+            UIStateListener.PresentScreen(gameObject);
             view.Error("Não foi possível fechar o mês. As escolhas registradas foram preservadas. Tente novamente.", true);
         }
     }

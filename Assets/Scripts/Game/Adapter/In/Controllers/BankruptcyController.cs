@@ -37,11 +37,11 @@ namespace Game.Adapter.In.Controllers
         }
         public void OpenLastMonth() { if (Report?.LastMonth > 0) Open(Report.LastMonth, view.ReviewButton); }
         private void Open(int month, UnityEngine.UI.Button focus)
-        { gameObject.SetActive(false); monthly.OpenFromFinal(month, () => Return(focus)); }
+        { monthly.OpenFromFinal(month, () => Return(focus)); }
         public void OpenQuarterly()
-        { if (Report == null) return; gameObject.SetActive(false); quarterly.OpenFromFinal(() => Return(view.QuarterlyButton)); }
+        { if (Report == null) return; quarterly.OpenFromFinal(() => Return(view.QuarterlyButton)); }
         private void Return(UnityEngine.UI.Button focus)
-        { if (GameManager.Instance?.StateMachine?.CurrentState != GameState.GameOver_Bankruptcy) return; gameObject.SetActive(true); focus.Select(); }
+        { if (GameManager.Instance?.StateMachine?.CurrentState != GameState.GameOver_Bankruptcy) return; UIStateListener.PresentScreen(gameObject); focus.Select(); }
         public void StartNewGame()
         {
             try

@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
     private bool resumeAfterIdentification;
+    private GameState resumeDestination = GameState.Management_Hub;
 
     private void Start()
     {
@@ -59,13 +60,15 @@ public class GameManager : MonoBehaviour
             || StateMachine.CurrentState != InitialDecisionFlow.Identification)
             return false;
 
-        return StateMachine.TryChangeState(resumeAfterIdentification
-            ? GameState.Management_Hub : InitialDecisionFlow.Location);
+        if (resumeAfterIdentification)
+        { StateMachine.ForceState(resumeDestination); return true; }
+        return StateMachine.TryChangeState(InitialDecisionFlow.Location);
     }
 
     public void BeginNewIdentification()
     {
         resumeAfterIdentification = false;
+        resumeDestination = GameState.Management_Hub;
         StateMachine.ForceState(InitialDecisionFlow.Identification);
     }
 
@@ -85,8 +88,9 @@ public class GameManager : MonoBehaviour
     ///  - Sem partida: cria uma sessao SO em memoria e abre a identificacao.
     ///  - Partida sem cardapio (linha antiga, criada antes da regra da D3):
     ///    abre identificacao; o confirm da D3 sobrescreve a mesma linha.
-    ///  - Partida completa: reidrata o rascunho e abre o hub com cadastro valido.
-    ///    Cadastro ausente/invalido deve ser corrigido antes de retomar o hub.
+    ///  - Partida configurada: reidrata as escolhas e retoma o passo operacional,
+    ///    evento ou resumo pendente; sem pendencia, abre o hub. Cadastro invalido
+    ///    e corrigido antes de entregar o destino persistido.
     /// </summary>
     internal void PrepareSession(string userId, string professorId)
     {
@@ -95,6 +99,7 @@ public class GameManager : MonoBehaviour
         GameSessionState.TryLoadCompletedReport(userId);
         PlayerSession.TryLoadIdentification();
         resumeAfterIdentification = false;
+        resumeDestination = GameState.Management_Hub;
         StateMachine.ForceState(GameState.MainMenu);
 
         if (GameSessionState.HasIncompatibleSave)
@@ -121,6 +126,19 @@ public class GameManager : MonoBehaviour
         {
             PlayerSession.LoadDecisionsFrom(GameSessionState.Current);
             resumeAfterIdentification = true;
+            var session = GameSessionState.Current;
+            if (!string.IsNullOrEmpty(session.pendingSummaryResultId)) resumeDestination = GameState.Round_Summary;
+            else if (session.initialSetupResumeState == (int)GameState.Initial_Capital
+                || session.initialSetupResumeState == (int)GameState.Initial_Equipment
+                || session.initialSetupResumeState == (int)GameState.Initial_Team)
+                resumeDestination = (GameState)session.initialSetupResumeState.Value;
+            else
+            {
+                var db = DatabaseInitializer.DatabaseService.Connection;
+                db.CreateTable<MonthlyEventPlanEntity>();
+                if (db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound) != null)
+                    resumeDestination = GameState.Round_Event;
+            }
         }
         else
         {
@@ -130,8 +148,8 @@ public class GameManager : MonoBehaviour
         // Prefilled registration never skips step 1 for a new game.
         bool canResume = resumeAfterIdentification && PlayerSession.HasValidIdentification
             && !PlayerSession.IdentificationEditRequested;
-        StateMachine.TryChangeState(canResume
-            ? GameState.Management_Hub : InitialDecisionFlow.Identification);
+        if (canResume) StateMachine.ForceState(resumeDestination);
+        else StateMachine.TryChangeState(InitialDecisionFlow.Identification);
     }
 
     /// <summary>

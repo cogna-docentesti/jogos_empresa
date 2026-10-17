@@ -70,6 +70,7 @@ public class RoundService
                 result.roundResultId = Guid.NewGuid().ToString();
                 result.createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                 next = MonthlySessionSettlement.Apply(session, result, result.createdAt);
+                next.pendingSummaryResultId = result.roundResultId;
                 results.Insert(result);
                 if (_db.Update(next) != 1)
                     throw new InvalidOperationException("The monthly session update was not persisted.");

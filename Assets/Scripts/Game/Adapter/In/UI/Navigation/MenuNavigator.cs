@@ -11,10 +11,9 @@ namespace Game.Adapter.In.UI.Navigation
     /// devolve o jogador exatamente para onde ele estava - inclusive se ele
     /// quiser mudar a escolha que acabou de fazer.
     ///
-    /// Esta classe NAO fala com GameState nem com o banco. Ela so liga e
-    /// desliga GameObjects registrados no PanelRegistry. Isso mantem a
-    /// navegacao isolada do fluxo de decisoes (UIStateListener) e da
-    /// persistencia (GameSessionState), que continuam intactos.
+    /// Destino, historico e foco pertencem a esta classe; a visibilidade e
+    /// delegada ao UIStateListener. O registry permanece a fonte dos destinos.
+    /// A navegacao nao calcula nem grava resultados financeiros.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class MenuNavigator : MonoBehaviour
@@ -26,9 +25,8 @@ namespace Game.Adapter.In.UI.Navigation
         [Tooltip("Painel exibido quando a navegacao inicia e para onde o Voltar cai quando o historico acaba.")]
         [SerializeField] private PanelId rootPanel = PanelId.Menu;
 
-        [Tooltip("Abrir o rootPanel automaticamente no Start. Deixe DESLIGADO enquanto o UIStateListener "
-               + "for quem mostra o Panel_Menu no estado Management_Hub - senao os dois disputam a tela. "
-               + "Ligue apenas para testar o mapa isolado.")]
+        [Tooltip("Abrir o rootPanel automaticamente no Start. Na GameScene, deixe desligado: "
+               + "o UIStateListener entrega o hub ao navegador. Ligue apenas para testar o mapa isolado.")]
         [SerializeField] private bool openRootOnStart = false;
 
         [Tooltip("Profundidade maxima do historico. Evita crescer sem limite em sessoes longas.")]
@@ -84,7 +82,7 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Abre um painel empilhando o atual no historico.</summary>
         public void Open(PanelId id)
         {
-            if (!HubAvailable || id == PanelId.None || registry == null)
+            if (!HubAvailable || SharedModalFocus.Active != null || id == PanelId.None || registry == null)
                 return;
 
             if (id == Current)
@@ -105,7 +103,7 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Abre um painel LIMPANDO o historico. Usado pelo hub (mapa).</summary>
         public void OpenAsRoot(PanelId id)
         {
-            if (!HubAvailable || id == PanelId.None || registry == null || !registry.IsManaged(id))
+            if (!HubAvailable || SharedModalFocus.Active != null || id == PanelId.None || registry == null || !registry.IsManaged(id))
                 return;
 
             _history.Clear();
@@ -115,7 +113,7 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Volta para a tela anterior. Se nao houver, cai no rootPanel.</summary>
         public void Back()
         {
-            if(!HubAvailable) return;
+            if(!HubAvailable || SharedModalFocus.Active != null) return;
             if (_history.Count == 0)
             {
                 OpenRoot();
@@ -138,6 +136,7 @@ namespace Game.Adapter.In.UI.Navigation
         public void ClearHistory()
         {
             _history.Clear();
+            focusHistory.Clear();
         }
 
         /// <summary>
@@ -147,12 +146,13 @@ namespace Game.Adapter.In.UI.Navigation
         public void CloseAll()
         {
             _history.Clear();
+            focusHistory.Clear();
 
             var previous = Current;
             Current = PanelId.None;
 
-            if (registry != null)
-                registry.HideAll();
+            if (UIStateListener.Instance != null) UIStateListener.PresentScreen(null);
+            else if (registry != null) registry.HideAll();
 
             if (previous != PanelId.None)
                 OnPanelChanged?.Invoke(previous, Current);
@@ -186,8 +186,8 @@ namespace Game.Adapter.In.UI.Navigation
             if(EventSystem.current!=null && EventSystem.current.currentSelectedGameObject!=null)
                 focusHistory[previous]=EventSystem.current.currentSelectedGameObject;
 
-            registry.HideAll();
-            target.SetActive(true);
+            if (UIStateListener.Instance != null) UIStateListener.PresentScreen(target);
+            else { registry.HideAll(); target.SetActive(true); }
 
             if(EventSystem.current!=null)
             {

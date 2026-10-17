@@ -105,6 +105,7 @@ public static class GameSessionState
         Current.alignmentClassification = settled.alignmentClassification;
         Current.alignmentFactor = settled.alignmentFactor;
         Current.coherenceRating = settled.coherenceRating;
+        Current.pendingSummaryResultId = settled.pendingSummaryResultId;
         IsPersisted = true;
         HasUnsavedChanges = false;
     }

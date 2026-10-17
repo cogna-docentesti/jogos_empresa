@@ -232,7 +232,12 @@ public class RoundFlowDebugTest : MonoBehaviour
                 var service = new GameSessionService("credit_test_" + Guid.NewGuid(), "test_professor");
                 var session = NewSavedSession(service);
                 if (startMonth == 2)
+                {
                     check(new RoundService().ProcessRound(1) != null, "Credit fixture: settle month one before a month-two loan");
+                    GameManager.Instance.StateMachine.ForceState(GameState.Round_Summary);
+                    check(service.ContinueAfterSummary(repository.GetLastRoundBySessionId(session.sessionId).roundResultId),
+                        "Credit fixture: acknowledge month one before contracting");
+                }
                 session.currentRound = startMonth;
                 float originalCash = session.currentCash;
                 check(LoanService.ContractTerm(startMonth) == 4 - startMonth,
@@ -257,6 +262,7 @@ public class RoundFlowDebugTest : MonoBehaviour
                     check(Mathf.Abs(session.loanBalance - (openingBalance - principal)) < 0.05f
                         && Mathf.Abs(new GameSessionRepository(db).GetById(session.sessionId).loanBalance - session.loanBalance) < 0.05f,
                         line.id + ": amortizacao persistida no mes " + month);
+                    check(service.ContinueAfterSummary(result.roundResultId), line.id + ": acknowledge saved statement " + month);
                 }
                 check(session.currentRound == 3 && session.loanBalance == 0f && !GameSessionState.HasActiveSession,
                     line.id + ": emprestimo quitado dentro do trimestre");
