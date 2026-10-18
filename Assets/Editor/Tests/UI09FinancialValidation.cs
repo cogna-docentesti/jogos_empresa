@@ -36,7 +36,7 @@ public static class UI09FinancialValidation
     private static UnityEngine.UI.Button Button(BankCardView c) => Field<UnityEngine.UI.Button>(c, "selectButton");
     private static void Expect(bool value, string message) { if (!value) throw new InvalidOperationException(message); }
     private static void Add(string name, Action action) => steps.Enqueue((name, action));
-    private static void Capture(string name) => UI01Validation.Capture("../UI-09/" + name);
+    private static void Capture(string name) { name=System.Text.RegularExpressions.Regex.Replace(name,@"[0-9]+x[0-9]+$",Screen.width+"x"+Screen.height); var path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-09",name)); UiValidationContext.OnCapture?.Invoke(name,path); }
     private static PointerEventData Pointer(UnityEngine.UI.Button b)
     { var r = (RectTransform)(b.transform.Find("MarkerTouchTarget") ?? b.transform); return new PointerEventData(EventSystem.current) { position = RectTransformUtility.WorldToScreenPoint(null, r.TransformPoint(r.rect.center)), pointerId = -1, button = PointerEventData.InputButton.Left }; }
     private static void Click(UnityEngine.UI.Button b)
@@ -50,10 +50,14 @@ public static class UI09FinancialValidation
     {
         Canvas.ForceUpdateCanvases();
         foreach (var t in View.GetComponentsInChildren<TMP_Text>())
-        { t.ForceMeshUpdate(); Expect(t.font.name == "InterTight-Variable" && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
+        { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
         Expect(Scroll.viewport.GetComponent<UnityEngine.UI.Mask>() != null && Scroll.content.parent == Scroll.viewport && Scroll.vertical && !Scroll.horizontal, "Scroll hierarchy");
         Expect(Scroll.verticalScrollbar.handleRect.sizeDelta == Vector2.zero, "Scrollbar handle dimensions");
         Expect(Cards.Length == 4, "Missing or duplicate options");
+        var grid = Scroll.content.GetComponent<UnityEngine.UI.GridLayoutGroup>();
+        if (grid != null) foreach (var card in Cards)
+            Expect(grid.cellSize.y + .5f >= card.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight,
+                "Native card content extends beyond the scrollable grid cell: " + card.CreditLine.id);
         var guidance = Field<TMP_Text>(View, "footerHintText").text;
         Expect(guidance.Contains("Selecione") == (GameSessionState.HasActiveSession && !LoanService.HasLoan(GameSessionState.Current) && GameSessionState.Current.currentRound < 3), "Footer instruction does not match availability");
         foreach (var c in Cards)
@@ -64,7 +68,13 @@ public static class UI09FinancialValidation
         var controls = UnityEngine.Object.FindObjectsByType<UnityEngine.UI.Button>(FindObjectsSortMode.None).Where(b => b.IsInteractable() && b.GetComponentInParent<UnityEngine.UI.ScrollRect>() == null).ToArray();
         for (int i = 0; i < controls.Length; i++) for (int j = i + 1; j < controls.Length; j++)
         {
-            var a = RectTransformUtility.CalculateRelativeRectTransformBounds(CanvasRoot, controls[i].transform); var b = RectTransformUtility.CalculateRelativeRectTransformBounds(CanvasRoot, controls[j].transform);
+            Bounds TargetBounds(UnityEngine.UI.Button button)
+            {
+                var rect=button.targetGraphic!=null?button.targetGraphic.rectTransform:(RectTransform)button.transform;
+                var corners=new Vector3[4];rect.GetWorldCorners(corners);var bounds=new Bounds(CanvasRoot.InverseTransformPoint(corners[0]),Vector3.zero);
+                foreach(var corner in corners)bounds.Encapsulate(CanvasRoot.InverseTransformPoint(corner));return bounds;
+            }
+            var a = TargetBounds(controls[i]); var b = TargetBounds(controls[j]);
             Expect(Mathf.Min(a.max.x, b.max.x) - Mathf.Max(a.min.x, b.min.x) < 1 || Mathf.Min(a.max.y, b.max.y) - Mathf.Max(a.min.y, b.min.y) < 1, "Overlapping fixed controls " + controls[i].name + "/" + controls[j].name);
         }
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length == 1, "Duplicate EventSystem");
@@ -93,7 +103,7 @@ public static class UI09FinancialValidation
         Add("Choose D1 without persistence", () => { var v = UnityEngine.Object.FindFirstObjectByType<LocationScreenView>(); ExecuteEvents.Execute(v.Zones.Single(z => z.id == "bank").marker.gameObject, new PointerEventData(EventSystem.current) { pointerId = 4 }, ExecuteEvents.pointerClickHandler); Click(Field<UnityEngine.UI.Button>(v, "confirmButton")); Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count() == 0, "Inserted in D1"); });
         Add("Choose D2 without persistence", () => { var v = UnityEngine.Object.FindFirstObjectByType<RestaurantScreenView>(); Click(Field<UnityEngine.UI.Button>(v, "cardPodrao")); Click(Field<UnityEngine.UI.Button>(v, "confirmButton")); Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count() == 0, "Inserted in D2"); });
         Add("D3 makes first INSERT through technical review to Banco", () => { Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<MenuPricingScreenView>(), "confirmButton")); Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Initial_Capital, "D3 destination"); sessionId = GameSessionState.Current.sessionId; SameSession(); });
-        foreach (var size in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var size in UiValidationContext.Resolutions)
         {
             var s = size; string suffix = s.x + "x" + s.y;
             Add("Viewport and clean setup " + suffix, () => { UI01Validation.SetGameView(s.x, s.y); Fixture(1); ReopenSetup(); EventSystem.current.SetSelectedGameObject(null); });
@@ -106,8 +116,9 @@ public static class UI09FinancialValidation
                 Add("Rendered selection and real values " + id + " " + suffix, () => { Fits(); Expect(Card(id).GetComponent<SharedControlAppearance>().IsSelected && Field<UnityEngine.UI.Image>(Card(id), "selectionMark").enabled, "Selection mark"); Expect(Field<TMP_Text>(Card(id), "interestRateText").text.Contains(id == "sem_credito" ? "Sem juros" : (Card(id).CreditLine.monthlyInterestRate * 100).ToString("0")), "Interest"); Capture(id + "-selected-" + suffix); SameSession(); });
             }
         }
-        Add("Prepare shared card hover", () => { Fixture(1); ReopenSetup(); EventSystem.current.SetSelectedGameObject(null); ExecuteEvents.Execute(Button(Card("sem_credito")).gameObject, Pointer(Button(Card("sem_credito"))), ExecuteEvents.pointerEnterHandler); });
-        Add("Rendered shared hover outline", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "hover" && Field<UnityEngine.UI.Image>(c, "interactionOutline").enabled, "Hover state"); Capture("card-hover-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerDownHandler); });
+        Add("Recreate bank cards before hover", () => { Fixture(1); ReopenSetup(); EventSystem.current.SetSelectedGameObject(null); });
+        Add("Prepare shared card hover", () => { EventSystem.current.SetSelectedGameObject(null); ExecuteEvents.Execute(Button(Card("sem_credito")).gameObject, Pointer(Button(Card("sem_credito"))), ExecuteEvents.pointerEnterHandler); });
+        Add("Rendered shared hover outline", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "hover" && Field<UnityEngine.UI.Image>(c, "interactionOutline").enabled, "Hover state: " + c.GetComponent<SharedControlAppearance>().CurrentState + "; outline=" + Field<UnityEngine.UI.Image>(c, "interactionOutline").enabled); Capture("card-hover-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerDownHandler); });
         Add("Rendered shared pressed outline", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "pressed", "Pressed state"); Capture("card-pressed-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerUpHandler); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerExitHandler); Button(Card("credito_de_investimento")).Select(); });
         Add("Keyboard focus reveals last masked row", () => { Expect(Card("credito_de_investimento").GetComponent<SharedControlAppearance>().CurrentState == "focus", "Focus state"); Fits(); Capture("card-focus-1280x720"); ExecuteEvents.Execute(Button(Card("credito_de_investimento")).gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler); });
         Add("Keyboard submit selects without contracting", () => { Expect(Confirm.interactable && GameSessionState.Current.loanBalance == 0, "Submit contracted before confirmation"); Button(Card("sem_credito")).Select(); });
@@ -124,7 +135,7 @@ public static class UI09FinancialValidation
             Add("Continuing existing contract never adds money twice " + id, () => { Expect(GameSessionState.Current.currentCash == 65000 + LoanService.FindLine(id).maxAmount, "Cash duplicated"); Click(EquipmentBack); });
         }
         Add("Reach hub through existing setup states", () => { Click(Confirm); GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team); GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub); });
-        foreach (var size in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var size in UiValidationContext.Resolutions)
         {
             var s = size; var suffix = s.x + "x" + s.y;
             foreach (int round in new[] { 1, 2, 3 })
@@ -157,14 +168,14 @@ public static class UI09FinancialValidation
         Add("Missing catalog presentation is explicit with no confirmation", () => { Expect(!Confirm.interactable && Field<TMP_Text>(View, "hintText").text.Contains("Não foi possível"), "Missing reference feedback"); Capture("missing-reference-error-1280x720"); Set(View, "bankCardPrefab", prefab); Call(View.GetComponent<FinancialScreenController>(), "PopulateCreditLines"); Click(Back); });
         Add("Prepare missing-session state", () => { OpenBank(); savedSession = GameSessionState.Current; GameSessionState.Clear(); Call(View.GetComponent<FinancialScreenController>(), "PopulateCreditLines"); });
         Add("Missing session clears monetary values and disables every action", () => { Fits(); Expect(!Confirm.interactable && Cards.All(c => !Button(c).interactable) && Field<TMP_Text>(View, "capitalValueText").text == "Indisponível" && Field<TMP_Text>(View, "cashValueText").text == "Indisponível", "Missing session invented values"); Capture("unavailable-session-1280x720"); GameSessionState.Set(savedSession); GameSessionState.Persist(); GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); });
-        Add("Final runtime and isolation", () => { SameSession(); File.WriteAllText("output/ui-update/UI-09/runtime.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().path, frame = Time.frameCount, managerId, databaseId, sceneHandle, sessionId, database = DatabaseInitializer.DatabaseService.Connection.DatabasePath, sessionRows = 1, state = GameManager.Instance.StateMachine.CurrentState.ToString(), panel = MenuNavigator.Instance.Current.ToString() }, Newtonsoft.Json.Formatting.Indented)); });
+        Add("Final runtime and isolation", () => { SameSession(); File.WriteAllText(UiValidationContext.FileFor("UI-09","runtime.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().path, frame = Time.frameCount, managerId, databaseId, sceneHandle, sessionId, database = DatabaseInitializer.DatabaseService.Connection.DatabasePath, sessionRows = 1, state = GameManager.Instance.StateMachine.CurrentState.ToString(), panel = MenuNavigator.Instance.Current.ToString() }, Newtonsoft.Json.Formatting.Indented)); });
         next = EditorApplication.timeSinceStartup + .5; EditorApplication.update -= Tick; EditorApplication.update += Tick;
     }
     private static void Tick()
     {
         if (EditorApplication.timeSinceStartup < next) return;
         if (!EditorApplication.isPlaying || steps.Count == 0)
-        { report.completed = steps.Count == 0 && report.failures == 0; EditorApplication.update -= Tick; if (longLine != null) { longLine.displayName = oldName; longLine.cardDescription = oldDescription; longLine = null; } File.WriteAllText("output/ui-update/UI-09/playmode-financial.json", JsonUtility.ToJson(report, true)); return; }
+        { report.completed = steps.Count == 0 && report.failures == 0; EditorApplication.update -= Tick; if (longLine != null) { longLine.displayName = oldName; longLine.cardDescription = oldDescription; longLine = null; } File.WriteAllText(UiValidationContext.FileFor("UI-09","playmode-financial.json"), JsonUtility.ToJson(report, true)); return; }
         if (Time.frameCount <= lastFrame) { EditorApplication.QueuePlayerLoopUpdate(); EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint(); return; }
         var step = steps.Dequeue(); var check = new Check { name = step.Item1, frame = Time.frameCount };
         try { step.Item2(); check.passed = true; captureRetries = 0; }

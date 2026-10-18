@@ -19,7 +19,7 @@ public static class UI11TeamValidation
     private static readonly Queue<(string,Action)> steps = new();
     private static readonly List<object> captures = new();
     private static Report report; private static double next; private static int lastFrame, retries, managerId, databaseId, sceneHandle;
-    private static string reportPath = "output/ui-update/UI-11/playmode-team.json";
+    private static string reportPath = UiValidationContext.FileFor("UI-11","playmode-team.json");
     private static string sessionId, snapshot; private static GameObject origin; private static TeamRoleCardView prefab; private static GameSessionEntity savedSession;
     private static Transform Root => GameObject.Find("Canvas").transform;
     private static TeamScreenView View => Root.Find("Panel_Team").GetComponent<TeamScreenView>();
@@ -49,7 +49,7 @@ public static class UI11TeamValidation
     {
         Canvas.ForceUpdateCanvases();
         foreach(var text in View.GetComponentsInChildren<TMP_Text>())
-        { text.ForceMeshUpdate(); Expect(text.font.name=="InterTight-Variable"&&!text.enableAutoSizing,"Typography "+text.name); Expect(!text.isTextOverflowing,"Overflow "+text.name+": "+text.text); }
+        { text.ForceMeshUpdate(); Expect(text.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !text.enableAutoSizing,"Typography "+text.name); Expect(!text.isTextOverflowing,"Overflow "+text.name+": "+text.text); }
         Expect(Scroll.content.parent==Scroll.viewport&&Scroll.viewport.GetComponent<UnityEngine.UI.Mask>()!=null&&Scroll.vertical&&!Scroll.horizontal,"Scroll hierarchy");
         foreach(var c in Cards) foreach(var n in new[]{"portrait","environment"})
         { var i=Field<UnityEngine.UI.Image>(c,n); Expect(i.sprite!=null&&i.preserveAspect&&i.color==Color.white&&i.type==UnityEngine.UI.Image.Type.Simple,"Artwork "+c.Role.id+" "+n); }
@@ -65,9 +65,10 @@ public static class UI11TeamValidation
     }
     private static void Capture(string name, bool teamScreen = true)
     {
-        if(teamScreen) Fits(); string path=UI01Validation.Capture("../UI-11/"+name); using var hash=System.Security.Cryptography.SHA256.Create();
+        name=System.Text.RegularExpressions.Regex.Replace(name,@"[0-9]+x[0-9]+$",Screen.width+"x"+Screen.height);
+        if(teamScreen) Fits(); string path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-11",name)); UiValidationContext.OnCapture?.Invoke(name,path); using var hash=System.Security.Cryptography.SHA256.Create();
         captures.Add(new {name,path,frame=Time.frameCount,width=Screen.width,height=Screen.height,sha256=BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(path))).Replace("-","").ToLowerInvariant()});
-        File.WriteAllText("output/ui-update/UI-11/capture-frames.json",Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-11","capture-frames.json"),Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
     }
     private static void SameSession()
     {
@@ -105,7 +106,7 @@ public static class UI11TeamValidation
     public static void Run()
     {
         UI01Validation.RequireIsolatedStorage(); if(!EditorApplication.isPlaying)throw new InvalidOperationException("Use isolated Play Mode.");
-        reportPath="output/ui-update/UI-11/playmode-team.json"; report=new Report(); steps.Clear(); captures.Clear(); lastFrame=-1; retries=0;
+        reportPath=UiValidationContext.FileFor("UI-11","playmode-team.json"); report=new Report(); steps.Clear(); captures.Clear(); lastFrame=-1; retries=0;
         managerId=GameManager.Instance.GetInstanceID(); databaseId=DatabaseInitializer.DatabaseService.GetInstanceID(); sceneHandle=UnityEngine.SceneManagement.SceneManager.GetActiveScene().handle;
         Add("Fresh isolated identification",()=>{Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==0,"Fresh database required");var f=UnityEngine.Object.FindFirstObjectByType<UIIndentification>();Field<TMP_InputField>(f,"studentNameInput").text="Aluna UI11";Field<TMP_InputField>(f,"raInput").text="111111";f.Register();});
         Add("D1 stays draft",()=>{var v=UnityEngine.Object.FindFirstObjectByType<LocationScreenView>();ExecuteEvents.Execute(v.Zones.Single(z=>z.id=="bank").marker.gameObject,new PointerEventData(EventSystem.current){pointerId=4},ExecuteEvents.pointerClickHandler);Click(Field<UnityEngine.UI.Button>(v,"confirmButton"));Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==0,"D1 insert");});
@@ -114,7 +115,7 @@ public static class UI11TeamValidation
         Add("Choose no credit",()=>Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(c=>c.CreditLine.id=="sem_credito"),"selectButton")));
         Add("Bank to equipment step 6",()=>Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<FinancialScreenView>(),"confirmButton")));
         Add("Equipment step 6 to team step 7",()=>{Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<EquipmentScreenView>(),"confirmButton"));Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Team&&View.gameObject.activeInHierarchy,"Initial team binding");});
-        foreach(var size in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var size in UiValidationContext.Resolutions)
         {
             var viewport=size;string res=size.x+"x"+size.y;
             foreach(var restaurant in new[]{RestaurantType.PODRAO,RestaurantType.JAPONES,RestaurantType.FRANCES})
@@ -169,17 +170,17 @@ public static class UI11TeamValidation
             Add("Open hiring month "+currentMonth,()=>{GameSessionState.Current.currentRound=currentMonth;GameSessionState.Save();MenuNavigator.Instance.Open(PanelId.Team);});
             Add("Month "+currentMonth+" preserves hiring and quantities",()=>{Expect(Cards.Length==5&&Card("attendant").Quantity==2&&Card("head_chef").Quantity==1&&Confirm.interactable,"Month hiring");Capture("month-"+currentMonth+"-1280x720");Click(Confirm);SameSession();});
         }
-        Add("Final services and runtime evidence",()=>{File.WriteAllText("output/ui-update/UI-11/runtime.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,frame=Time.frameCount,sessionId,managerId,databaseId,sceneHandle,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,state=GameManager.Instance.StateMachine.CurrentState.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));});
+        Add("Final services and runtime evidence",()=>{File.WriteAllText(UiValidationContext.FileFor("UI-11","runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,frame=Time.frameCount,sessionId,managerId,databaseId,sceneHandle,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,state=GameManager.Instance.StateMachine.CurrentState.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));});
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
     public static void RunFinalSavedScene()
     {
         UI01Validation.RequireIsolatedStorage(); if(!EditorApplication.isPlaying) throw new InvalidOperationException("Use isolated Play Mode.");
-        reportPath="output/ui-update/UI-11/playmode-saved-scene.json";report=new Report();steps.Clear();captures.Clear();lastFrame=-1;retries=0;
-        foreach(var entry in Newtonsoft.Json.Linq.JArray.Parse(File.ReadAllText("output/ui-update/UI-11/capture-frames.json")))
+        reportPath=UiValidationContext.FileFor("UI-11","playmode-saved-scene.json");report=new Report();steps.Clear();captures.Clear();lastFrame=-1;retries=0;
+        foreach(var entry in Newtonsoft.Json.Linq.JArray.Parse(File.ReadAllText(UiValidationContext.FileFor("UI-11","capture-frames.json"))))
             if(!((string)entry["name"]).StartsWith("session-unavailable-")&&!((string)entry["name"]).StartsWith("saved-scene-"))captures.Add(entry);
         Add("Prepare isolated saved-scene fixture",()=>{var s=GameSessionState.Current;var r=Resources.LoadAll<RestaurantData>("Restaurants").Single(r=>r.type==RestaurantType.FRANCES);s.restaurantType=r.type;s.targetSegment=Segment.HIGH;s.locationZone=LocationZone.Financas;s.currentCash=65000;s.menuPricingJson=MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(r.products));GameSessionState.Persist();});
-        foreach(var size in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var size in UiValidationContext.Resolutions)
         {
             var viewport=size;string res=size.x+"x"+size.y;
             Add("Prepare saved viewport "+res,()=>{UI01Validation.SetGameView(viewport.x,viewport.y);Fixture(RestaurantType.FRANCES,2);});

@@ -104,7 +104,8 @@ namespace Game.Adapter.In.UI
         {
             var grid = cardContainer != null ? cardContainer.GetComponent<UnityEngine.UI.GridLayoutGroup>() : null;
             if (grid == null) return;
-            float height = cards.Where(c => c != null && c.gameObject.activeSelf).Select(c => c.RequiredHeight).DefaultIfEmpty(360).Max();
+            float minimum = grid.constraintCount >= 3 ? 704 : 360;
+            float height = Mathf.Max(minimum, cards.Where(c => c != null && c.gameObject.activeSelf).Select(c => c.RequiredHeight).DefaultIfEmpty(minimum).Max());
             if (!Mathf.Approximately(grid.cellSize.y, height)) grid.cellSize = new Vector2(grid.cellSize.x, height);
         }
         public void SetHint(string message) { if (hintText != null) hintText.text = message; }

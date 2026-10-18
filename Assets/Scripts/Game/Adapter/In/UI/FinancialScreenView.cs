@@ -36,6 +36,19 @@ namespace Game.Adapter.In.UI
         public void SetFooterHint(string value) { if (footerHintText != null) footerHintText.text = value; }
         public void BindConfirm(UnityEngine.Events.UnityAction action)
         { if (confirmButton == null) return; confirmButton.onClick.RemoveAllListeners(); if (action != null) confirmButton.onClick.AddListener(action); }
+        private void LateUpdate()
+        {
+            // The four-column composition must scroll through native long-copy heights too.
+            var grid = bankCardsContainer != null ? bankCardsContainer.GetComponent<UnityEngine.UI.GridLayoutGroup>() : null;
+            if (grid == null) return;
+            float height = 660;
+            foreach (var card in bankCardsContainer.GetComponentsInChildren<BankCardView>())
+            {
+                var layout = card.GetComponent<UnityEngine.UI.LayoutElement>();
+                if (layout != null) height = Mathf.Max(height, layout.preferredHeight);
+            }
+            if (!Mathf.Approximately(grid.cellSize.y, height)) grid.cellSize = new Vector2(grid.cellSize.x, height);
+        }
         public BankCardView CreateBankCard() => Instantiate(bankCardPrefab, bankCardsContainer);
         public void ClearBankCards()
         {

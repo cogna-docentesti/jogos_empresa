@@ -50,7 +50,9 @@ public sealed class Font04TypographyTests
             Assert.AreEqual(FontStyles.Normal,text.fontStyle&FontStyles.Bold); Assert.AreEqual(1,root.GetComponents<TypographyRoleBinding>().Length);
             clone=UnityEngine.Object.Instantiate(root); clone.SetActive(false); clone.SetActive(true);
             var other=clone.GetComponent<TMP_Text>();
-            Assert.AreEqual(text.font,other.font); Assert.AreSame(text.font.material,other.fontSharedMaterial);
+            Assert.AreEqual(text.font,other.font);
+            Assert.AreEqual(text.font.material.GetInstanceID(),other.fontSharedMaterial.GetInstanceID(),
+                "Clone must reuse the same native shared face material; managed wrappers may be recreated by the Editor.");
             Assert.AreEqual(30,other.fontSize); Assert.AreEqual(content,other.text);
             Assert.AreEqual(position,other.rectTransform.anchoredPosition); Assert.AreEqual(bounds,other.rectTransform.sizeDelta);
             Assert.AreEqual(Vector3.one,other.rectTransform.localScale);

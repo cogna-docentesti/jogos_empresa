@@ -107,6 +107,7 @@ namespace Game.EditorTools
             var back = Button(eqFooter, "ReturnToBank", "Voltar ao banco", 328, 14, 320, 68); SharedUiStyles.Bind(back, SharedControlKind.Secondary);
             var backRect = (RectTransform)back.transform; backRect.anchorMin = backRect.anchorMax = new Vector2(.5f, 0); backRect.pivot = Vector2.zero; backRect.anchoredPosition = new Vector2(-632, 14);
             Set(equipment.GetComponent<EquipmentScreenView>(), "bankBackButton", back);
+            Font07Migration.Apply(new[] { panel.gameObject }, "Assets/Scenes/GameScene.unity");
             EditorUtility.SetDirty(view); panel.gameObject.SetActive(false); AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
         private static void UpdateCard()
@@ -132,7 +133,8 @@ namespace Game.EditorTools
                 root.transform.Find("SelectionMark").SetAsLastSibling(); PrefabUtility.SaveAsPrefabAsset(root, path);
                 var interaction = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 1332, 212);
                 interaction.rectTransform.anchorMin = Vector2.zero; interaction.rectTransform.anchorMax = Vector2.one; interaction.rectTransform.offsetMin = interaction.rectTransform.offsetMax = Vector2.zero;
-                Set(card, "interactionOutline", interaction); interaction.enabled = false; PrefabUtility.SaveAsPrefabAsset(root, path);
+                Set(card, "interactionOutline", interaction); interaction.enabled = false;
+                Font07Migration.Apply(new[] { root }, path); PrefabUtility.SaveAsPrefabAsset(root, path);
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }
         }

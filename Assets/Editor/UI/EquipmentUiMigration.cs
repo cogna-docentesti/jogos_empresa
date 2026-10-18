@@ -174,7 +174,7 @@ namespace Game.EditorTools
                 var b = Ensure<UnityEngine.UI.Button>(r); SharedUiStyles.Bind(b, SharedControlKind.Card);
                 foreach (var n in new[] { "SharedFocus", "SharedSelection", "SharedDisabled" }) { var t = root.transform.Find(n); t.gameObject.SetActive(true); Ensure<UnityEngine.UI.LayoutElement>(t).ignoreLayout = true; }
                 var outline = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 648, 360); Stretch(outline.rectTransform); Set(card, "interactionOutline", outline); outline.enabled = false;
-                PrefabUtility.SaveAsPrefabAsset(root, path);
+                Font07Migration.Apply(new[] { root }, path); PrefabUtility.SaveAsPrefabAsset(root, path);
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }
             var line = new GameObject("EquipmentCartLine", typeof(RectTransform));
@@ -188,6 +188,7 @@ namespace Game.EditorTools
                 Set(view, "removeButton", Button(r, "Remove", "−", 612, 36, 68, 68, SharedControlKind.Secondary));
                 var q = Text(r, "Quantity", "1", 692, 36, 68, 68, GameTypography.Tokens.BodyStrong,true); q.alignment = TextAlignmentOptions.Center;
                 var plus = Button(r, "Maximum", "+", 772, 36, 68, 68); plus.interactable = false;
+                Font07Migration.Apply(new[] { line }, "Assets/Prefabs/EquipmentCartLine.prefab");
                 PrefabUtility.SaveAsPrefabAsset(line, "Assets/Prefabs/EquipmentCartLine.prefab");
             }
             finally { UnityEngine.Object.DestroyImmediate(line); }
@@ -200,11 +201,12 @@ namespace Game.EditorTools
             Card();
             foreach (var equipment in Resources.LoadAll<EquipmentData>("Equipments")) { equipment.icon = Art("EQUIPMENT_" + equipment.id.ToUpperInvariant()); EditorUtility.SetDirty(equipment); }
             var prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/Panel_Equipment.prefab");
-            try { Panel((RectTransform)prefab.transform); PrefabUtility.SaveAsPrefabAsset(prefab, "Assets/Prefabs/Panel_Equipment.prefab"); } finally { PrefabUtility.UnloadPrefabContents(prefab); }
+            try { Panel((RectTransform)prefab.transform); Font07Migration.Apply(new[] { prefab }, "Assets/Prefabs/Panel_Equipment.prefab"); PrefabUtility.SaveAsPrefabAsset(prefab, "Assets/Prefabs/Panel_Equipment.prefab"); } finally { PrefabUtility.UnloadPrefabContents(prefab); }
             var body = PrefabUtility.LoadPrefabContents("Assets/Prefabs/MainArea_Equipment.prefab");
-            try { ((RectTransform)body.transform).sizeDelta = new Vector2(1872, 752); Body((RectTransform)body.transform, null); PrefabUtility.SaveAsPrefabAsset(body, "Assets/Prefabs/MainArea_Equipment.prefab"); } finally { PrefabUtility.UnloadPrefabContents(body); }
+            try { ((RectTransform)body.transform).sizeDelta = new Vector2(1872, 752); Body((RectTransform)body.transform, null); Font07Migration.Apply(new[] { body }, "Assets/Prefabs/MainArea_Equipment.prefab"); PrefabUtility.SaveAsPrefabAsset(body, "Assets/Prefabs/MainArea_Equipment.prefab"); } finally { PrefabUtility.UnloadPrefabContents(body); }
             var panel = scene.GetRootGameObjects().Single(g => g.name == "Canvas").transform.Find("Panel_Equipment") as RectTransform;
             Undo.RegisterFullObjectHierarchyUndo(panel.gameObject, "UI-10 equipment store"); Panel(panel); panel.gameObject.SetActive(false);
+            Font07Migration.Apply(new[] { panel.gameObject }, "Assets/Scenes/GameScene.unity");
             AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
     }

@@ -73,6 +73,7 @@ namespace Game.EditorTools
                 Set(card, "addButton", Button(r, "Add", "+", 556, 276, 68, 68));
                 SharedUiStyles.Bind(control, SharedControlKind.Card);
                 var outline = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 648, 368); Stretch(outline.rectTransform); Set(card, "interactionOutline", outline); outline.enabled = false;
+                Font07Migration.Apply(new[] { go }, "Assets/Prefabs/TeamRoleCard.prefab");
                 PrefabUtility.SaveAsPrefabAsset(go, "Assets/Prefabs/TeamRoleCard.prefab");
             }
             finally { UnityEngine.Object.DestroyImmediate(go); }
@@ -135,6 +136,7 @@ namespace Game.EditorTools
             var listener = UnityEngine.Object.FindFirstObjectByType<UIStateListener>();
             var listenerSo = new SerializedObject(listener); if (listenerSo.FindProperty("initialTeamPanel").objectReferenceValue == null) Set(listener, "initialTeamPanel", panel.gameObject);
             var registry = canvas.GetComponentInChildren<PanelRegistry>(true); if (registry.Resolve(PanelId.Team) == null) registry.EditorSetBinding(PanelId.Team, panel.gameObject);
+            Font07Migration.Apply(new[] { panel.gameObject }, "Assets/Scenes/GameScene.unity");
             panel.gameObject.SetActive(false); AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
     }

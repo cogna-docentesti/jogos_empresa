@@ -11,10 +11,10 @@ namespace Game.Adapter.In.UI
         {
             GameTypography.KeepSize(nameText,TypographyRole.SectionTitle);
             GameTypography.KeepSize(descriptionText,TypographyRole.Body);
-            GameTypography.KeepSize(maxAmountText,TypographyRole.Kpi);
+            GameTypography.KeepSize(maxAmountText,TypographyRole.Table);
             GameTypography.KeepSize(interestRateText,TypographyRole.Table);
-            GameTypography.KeepSize(termText,TypographyRole.Caption);
-            GameTypography.KeepSize(installmentText,TypographyRole.Body);
+            GameTypography.KeepSize(termText,TypographyRole.Table);
+            GameTypography.KeepSize(installmentText,TypographyRole.Table);
             GameTypography.KeepSize(availabilityText,TypographyRole.Caption);
         }
         [SerializeField] private TextMeshProUGUI nameText;
@@ -68,6 +68,23 @@ namespace Game.Adapter.In.UI
             }
             // Long catalog copy expands the row; scrolling keeps fixed actions reachable.
             if (nameText == null || descriptionText == null) return;
+            if (((RectTransform)transform).rect.width < 500)
+            {
+                float h = Mathf.Max(60, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
+                nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);
+                float y = 190 + h + 12;
+                maxAmountText.rectTransform.anchoredPosition = new Vector2(16, -y);
+                interestRateText.rectTransform.anchoredPosition = new Vector2(16, -y - 50);
+                termText.rectTransform.anchoredPosition = new Vector2(16, -y - 86);
+                installmentText.rectTransform.anchoredPosition = new Vector2(16, -y - 132);
+                descriptionText.rectTransform.anchoredPosition = new Vector2(16, -y - 202);
+                float dh = Mathf.Max(64, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
+                descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, dh);
+                availabilityText.rectTransform.anchoredPosition = new Vector2(16, -y - 214 - dh);
+                var le = GetComponent<UnityEngine.UI.LayoutElement>();
+                le.preferredHeight = Mathf.Max(640, y + 282 + dh);
+                return;
+            }
             float nameHeight = Mathf.Max(40, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
             float descriptionHeight = Mathf.Max(60, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
             nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, nameHeight);

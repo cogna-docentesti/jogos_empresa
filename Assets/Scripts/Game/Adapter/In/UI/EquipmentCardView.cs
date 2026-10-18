@@ -10,11 +10,11 @@ namespace Game.Adapter.In.UI
         private void ApplyTypography()
         {
             GameTypography.KeepSize(nameText,TypographyRole.SectionTitle);
-            GameTypography.KeepSize(priceText,TypographyRole.Kpi);
+            GameTypography.KeepSize(priceText,TypographyRole.Table);
             GameTypography.KeepSize(categoryText,TypographyRole.Label);
             GameTypography.KeepSize(descriptionText,TypographyRole.Body);
             GameTypography.KeepSize(statusText,TypographyRole.Caption);
-            GameTypography.KeepSize(quantityText,TypographyRole.TableTotal);
+            GameTypography.KeepSize(quantityText,TypographyRole.Table);
             GameTypography.KeepSize(buyButtonText,TypographyRole.Button);
         }
         [SerializeField] private UnityEngine.UI.Image equipmentImage;
@@ -87,6 +87,25 @@ namespace Game.Adapter.In.UI
                 interactionOutline.color = Theme.GamePalette.WithAlpha(Theme.GamePalette.Primary, state.CurrentState == "pressed" ? .85f : .4f);
             }
             if (nameText == null || descriptionText == null || quantityText == null) return;
+            if (((RectTransform)transform).rect.width < 500)
+            {
+                float nameH = Mathf.Max(64, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
+                nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, nameH);
+                float artY = 24 + nameH + 48;
+                equipmentImage.rectTransform.anchoredPosition = new Vector2(24, -artY);
+                float portraitY = artY + 274;
+                priceText.rectTransform.anchoredPosition = new Vector2(24, -portraitY);
+                descriptionText.rectTransform.anchoredPosition = new Vector2(24, -portraitY - 48);
+                float descH = Mathf.Max(54, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
+                descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, descH);
+                statusText.rectTransform.anchoredPosition = new Vector2(24, -portraitY - 54 - descH);
+                portraitY += 104 + descH;
+                removeButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(24, -portraitY);
+                quantityText.rectTransform.anchoredPosition = new Vector2(100, -portraitY);
+                buyButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(326, -portraitY);
+                RequiredHeight = portraitY + 92;
+                return;
+            }
             float nameHeight = Mathf.Max(72, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
             float descriptionHeight = Mathf.Max(56, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
             nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, nameHeight);
