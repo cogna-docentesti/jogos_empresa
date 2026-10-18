@@ -1,0 +1,510 @@
+{
+  "task_id": "ART-03",
+  "date": "2026-10-14",
+  "status": "validado",
+  "scope": "Somente os 14 assets de barras, painéis e bases compartilhadas; logo oficial reutilizado. Personagens já entregues não são gerados novamente.",
+  "tool": "SVG editável e rasterização determinística sharp/librsvg; Pillow para conversão do logo paletizado",
+  "model": null,
+  "model_note": "Nenhum modelo generativo necessário para este lote geométrico.",
+  "producer_source": "art-source/editable/ART-03/build-art03.cjs",
+  "renderer_versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "assets": [
+    {
+      "id": "UI_TOPBAR_VIOLET",
+      "output_path": "Assets/Art/new/hud/bars/topbar_violet.png",
+      "source_editable": "art-source/editable/hud/bars/topbar_violet.svg",
+      "source_sha256": "547c71f68a0833c5ecd46f0089f4e2b89bb44902ea4eadae22aec2acae532809",
+      "sha256": "2a8c4a7189c75b0b3e47d33d2144ef5f672276d60efa5750ab7a34dbf4725081",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Barra superior opaca de 1920×88. Gradiente horizontal discreto em torno do violeta #6D28D9, conforme o concept 01-hub. Sem linha, sombra ou arredondamento.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 1920×88 px; display 1920×88 px; 9-slice l,b,r,t [0, 0, 0, 0].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        1920,
+        88
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_NAVBAR_PLUM",
+      "output_path": "Assets/Art/new/hud/bars/navbar_plum.png",
+      "source_editable": "art-source/editable/hud/bars/navbar_plum.svg",
+      "source_sha256": "ea6b39e6ad539151e1e8997d502fad5b5fa96b771d3c38f41ed821878a2ca9df",
+      "sha256": "38a80c13308eff01f90c17f93637995e9916043e315dc324c6fa1a064e9cae81",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Barra inferior opaca de 1920×96 em ameixa #24113D; contorno superior lavanda de 1 px a 20% de opacidade. Sem sombra ou arredondamento.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 1920×96 px; display 1920×96 px; 9-slice l,b,r,t [0, 0, 0, 0].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        1920,
+        96
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PANEL_IVORY",
+      "output_path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+      "source_editable": "art-source/editable/shared/components/panels/panel_ivory.svg",
+      "source_sha256": "c04f6c884a03b9c798fb1623bf4ca2c66e43960d69524a9aa97d97fcb9be80a4",
+      "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Painel marfim #F5F0E8. Raio externo 16 px; contorno de 1 px em #30243C a 12%. Centro opaco e uniforme; cantos transparentes; bordas 24 px.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 568×848 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PANEL_LAVENDER",
+      "output_path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+      "source_editable": "art-source/editable/shared/components/panels/panel_lavender.svg",
+      "source_sha256": "7552d0b8e12a5d76ea2be04569a0ef9887d91832700f518cd3200f534699f971",
+      "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Painel lavanda suave #e9dfe8 derivado de 80% marfim e 20% lavanda dos tokens, conforme superfícies claras dos concepts. Raio externo 16 px; contorno lavanda de 1 px a 50%. Centro opaco e uniforme; bordas 24 px.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 568×848 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PANEL_PLUM",
+      "output_path": "Assets/Art/new/shared/components/panels/panel_plum.png",
+      "source_editable": "art-source/editable/shared/components/panels/panel_plum.svg",
+      "source_sha256": "8dcdfe8b2e79badd524e9d23f5dccffe0d0e9bf34c3cd11cf2049c27070d1c56",
+      "sha256": "e7a1783d88466ab9b50808febf29269efd1b03d62d41a74fafa4253283c28345",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Painel ameixa #24113D. Raio externo 16 px; contorno lavanda de 1 px a 30%. Centro opaco e uniforme; cantos transparentes; bordas 24 px.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 568×848 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PANEL_SHADOW",
+      "output_path": "Assets/Art/new/shared/components/panels/panel_shadow.png",
+      "source_editable": "art-source/editable/shared/components/panels/panel_shadow.svg",
+      "source_sha256": "b32697d8482796a78962a3864b0163785427402d8b74600694b232055618e81f",
+      "sha256": "5a96f8bc90d6d3c037758ffcc08cbbc369d31539a85dbf5714d8c7595fe25035",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Sombra independente, sem superfície. Ameixa a 18%, retângulo interno em (8,8) de 240×240, raio 14 px e desfoque gaussiano sigma 2,5 px. Margem transparente e cantos contidos nas faixas 32 px. Alinhar centralizada atrás do painel: caixa 580×860 versus painel 568×848.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 580×860 px; 9-slice l,b,r,t [32, 32, 32, 32].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_CARD_NORMAL",
+      "output_path": "Assets/Art/new/shared/components/cards/card_normal.png",
+      "source_editable": "art-source/editable/shared/components/cards/card_normal.svg",
+      "source_sha256": "af76ab84563c335f0e6c975ebf371b3c25e2b0e46807aba44a5770b2e5fbc16b",
+      "sha256": "7f5f205c8c431999b2e7b60bd84b75a564b4c10f82fea0f3d4657a086deeff73",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Card claro #fbf8f5 derivado do marfim, como os cards do concept 03-gestao. Raio externo 16 px; contorno de 1 px em #30243C a 12%. Canvas e bounds iguais aos estados selecionado/desabilitado; bordas 24 px.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 360×430 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_CARD_SELECTED_OUTLINE",
+      "output_path": "Assets/Art/new/shared/components/cards/card_selected_outline.png",
+      "source_editable": "art-source/editable/shared/components/cards/card_selected_outline.svg",
+      "source_sha256": "8a3782cfd617f1636547d74e548e819be24be86cac469a72a23b2e7cfc85231f",
+      "sha256": "55db63a3624b0fb74d075eff5c1b4ad8e9acb4fe6a7c4db2f1d3238536fc7c1c",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Apenas contorno violeta #6D28D9 de 3 px, sem preenchimento; centro com alfa zero. Raio externo 16 px e bounds externos iguais ao card normal. Bordas 24 px; aplicar como camada sobre o card normal.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 360×430 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_CARD_DISABLED_OVERLAY",
+      "output_path": "Assets/Art/new/shared/components/cards/card_disabled_overlay.png",
+      "source_editable": "art-source/editable/shared/components/cards/card_disabled_overlay.svg",
+      "source_sha256": "a809ae3e9afd6610f2e03ff7478ee74620932ac0e784675aecf60cda55ba254f",
+      "sha256": "ad510611151659042b534d5a1e8f438956c2f05d2dd9de6f34da3d1b39e3ac02",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Overlay marfim #F5F0E8 a 64% de opacidade, centro semitransparente. Raio externo 16 px, canvas e bounds iguais ao card normal. Bordas 24 px; aplicar sobre conteúdo e superfície do card.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 360×430 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_MODAL_SURFACE",
+      "output_path": "Assets/Art/new/shared/components/panels/modal_surface.png",
+      "source_editable": "art-source/editable/shared/components/panels/modal_surface.svg",
+      "source_sha256": "9fdd3a3c1e737572eafc2f812a09823acf769c3a48a37d6404220bc95242cc3f",
+      "sha256": "5bffd4adee557c625de1110c979abd305b105b38a4c8f0f95a22123cf78b8a6a",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Superfície modal marfim #F5F0E8. Raio externo 16 px; contorno lavanda de 1 px a 50%; centro opaco e uniforme. Sem scrim ou sombra incorporados; bordas 24 px.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×256 px; display 900×440 px; 9-slice l,b,r,t [24, 24, 24, 24].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TOOLTIP_SURFACE",
+      "output_path": "Assets/Art/new/shared/components/feedback/tooltip_surface.png",
+      "source_editable": "art-source/editable/shared/components/feedback/tooltip_surface.svg",
+      "source_sha256": "8b12336a1332ce0f4eb5f2a1387f5afefdf8201a2eb52ac528f39ff284c3cd3e",
+      "sha256": "7fa4c18a569978d9543b56376a4d3c3d0897378903f26f96c3e78eddf55fc50e",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Superfície de tooltip 256×128, marfim #F5F0E8. Raio externo 12 px; contorno #30243C de 1 px a 18%; centro opaco uniforme. Sem seta ou texto; bordas 20 px.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 256×128 px; display 420×160 px; 9-slice l,b,r,t [20, 20, 20, 20].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_SCRIM",
+      "output_path": "Assets/Art/new/shared/components/panels/scrim.png",
+      "source_editable": "art-source/editable/shared/components/panels/scrim.svg",
+      "source_sha256": "58da6696f7ab627c471fa8bf9c3695309cbdc5ad0169b1d1dfd51ceb700cb4e3",
+      "sha256": "c6e96c8eca3e97f24386b87d2259700168675d74b8078f965eeb04912f20d53e",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Scrim sólido de 1×1 px em #24113D a 56% de opacidade. Preenche a caixa inteira de 1920×1080 por expansão do pixel uniforme, sem preservar proporção de imagem. Nenhum gradiente.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 1×1 px; display 1920×1080 px; 9-slice l,b,r,t [0, 0, 0, 0].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        1,
+        1
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_BADGE_CIRCLE",
+      "output_path": "Assets/Art/new/shared/components/badges/badge_circle.png",
+      "source_editable": "art-source/editable/shared/components/badges/badge_circle.svg",
+      "source_sha256": "40a105e0fb28f41c4f731938185ff0356348499c5b9f36ae77db323f52949d07",
+      "sha256": "4f6e9e4d8270587e5be00ebc8775954df01ef56364af96b7ee14b9ea47c15027",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "final_prompt": "Base circular 128×128, centro (64,64), raio do traço 62 px, fill violeta #6D28D9 e contorno lavanda de 2 px. Sem ícone. Display 64×64 com escala uniforme e pivot central.\nComponente isolado, sem texto, ícone, conteúdo de card ou sombra incorporada. PNG RGBA 8-bit em sRGB; bordas antialias com alfa verdadeiro. Pivot central. Cantos e bordas contidos nas faixas 9-slice do manifesto.\nExport 128×128 px; display 64×64 px; 9-slice l,b,r,t [0, 0, 0, 0].",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "BRAND_COGNA_LOGO",
+      "output_path": "Assets/Art/new/shared/brand/logo_cogna.png",
+      "source_editable": null,
+      "origin": "Assets/Art/Sprites/Identification/logo-cogna.png",
+      "origin_sha256": "7ab6593d21582fbf2ad07dd14f98127a1d72fd94fe6fe109516b633884265e8c",
+      "sha256": "758d6328f3955b6bd72faf26ee90ff981a102867a333a67166ac7f0a39cb5a45",
+      "references": [
+        {
+          "path": "Assets/Art/Sprites/Identification/logo-cogna.png",
+          "sha256": "7ab6593d21582fbf2ad07dd14f98127a1d72fd94fe6fe109516b633884265e8c"
+        }
+      ],
+      "final_prompt": "Reutilizar o logo oficial existente sem redesenhar, recolorir, recortar ou reinterpretar. Converter PNG paletizado com tRNS para RGBA 8-bit sRGB em 512×512, preservando todos os pixels RGBA e a transparência. Sem moldura ou slogan adicional. Display contain 120×120, pivot central.",
+      "tool": "Pillow: Image.convert(RGBA), PNG export",
+      "model": null,
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "rgba_pixels_equal_to_origin": true,
+      "alpha_equal_to_origin": true,
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "status": "validado"
+    }
+  ],
+  "logo_converter_source": "art-source/editable/ART-03/convert-logo.py",
+  "qa_record": "docs/art/qa/ART-03.json"
+}

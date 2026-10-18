@@ -1,0 +1,388 @@
+{
+  "task_id": "ART-15",
+  "date": "2026-10-14",
+  "status": "validado",
+  "tool": "image_gen.imagegen",
+  "model": null,
+  "assets": [
+    {
+      "id": "FACADE_REST_FRANCES",
+      "prompt": "Use case: precise-object-edit\nAsset type: ONE isolated restaurant facade sprite for the approved Cogna business game.\nInput images: Image 1 is the exact exterior, framing and lower frontal three-quarter camera to preserve. Image 2 is the canonical ART-12 restaurant fitout for the requested type. Image 3 is the approved opening concept, editorial cartoon style only. Never reproduce any UI, text, meals or people.\nPreserve Image 1's entire exterior geometry and placement exactly: one-story ivory building, flat grey roof with one air conditioner, parapet, blank purple fascia, purple segmented awnings wrapping the corner, two large windows on the main face, narrow glazed door on the right return near the front corner, right-hand window, structural pillars and thin plinth. Same canvas, margins, camera, exterior outline, warm upper-left light, framing, scale and dark plum linework. Do not add or remove any window or doorway and do not alter the building dimensions.\nPrimary request: FACADE_REST_FRANCES. Change only the fitout seen through the glass to the French restaurant in Image 2, a premium contemporary French bistro inside the same neighborhood building.\nFrench interior: warm cream walls with restrained classical rectangular moulding, dark timber panel details and a modest built-in wine rack on a rear wall with unlabelled bottle silhouettes. Replace the casual bar and stools with a few small dining tables covered in crisp ivory tablecloths and refined dark plum chairs. Empty table surfaces with no plates, glasses, flowers or food; keep furniture naturally behind the glazing. Warm amber globe lamps with small restrained brass details. Refined, calm and welcoming, legible without text or dish illustrations.\nRendering: polished adult editorial cartoon with crisp dark muted plum outlines, controlled cel shading, simple clean color regions, minimal texture. Palette: violet #6D28D9, plum #24113D, lavender #B99AE8, ivory #F5F0E8, amber #E7B65A and timber brown. No grain, excessive detail or photographic materials. Facade stays purple rather than changing color per restaurant type.\nTransparency: preserve genuine RGBA alpha zero outside the exterior. Clean antialiased silhouette with complete uncropped building. No backdrop, ground, paving, pedestal, external cast shadow, aura, halo, colored haze, checkerboard, outdoor objects or border.\nConstraints: no lettering, labels, words, numbers, symbols, logos, writing, menu boards, people, meals, food, plates, drinks, tableware, outdoor furniture, exterior plants, unrelated props, scenery, interface, card or sprite sheet. ONE isolated building only. Desired landscape 4:3, 1024x768 export, display box 480x360, complete building and transparent margins.",
+      "references": [
+        "art-source/references/generations/ART-15/rest_lanches-source-01.png",
+        "art-source/references/generations/ART-12/map_rest_frances-source.png",
+        "art-source/references/concepts/02-abertura.png"
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "transparent_background": true,
+      "source_path": "art-source/references/generations/ART-15/rest_frances-source-01.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13cd3-a5f1-7de2-a2f9-f3c1b9e5d3c3 as C:\\Users\\Pichau\\.codex\\generated_images\\01a13cd3-a5f1-7de2-a2f9-f3c1b9e5d3c3\\exec-5b58ffc8-98c8-4284-b217-3bf1745f9367.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "production_method": "imagegen",
+      "model_note": "Identificador de modelo não exposto pela ferramenta integrada.",
+      "source_sha256": "579943d216420eb41edb0baa8a493b9c52060ed6f79252cfe27d0b3fb9ce61f8",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGBA",
+      "source_editable": null,
+      "output_path": "Assets/Art/new/restaurant/facades/rest_frances.png",
+      "path": "restaurant/facades/rest_frances.png",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "output_bytes": 619674,
+      "sha256": "11616f58dbd45dcee03f867578f0b8f5242990f56977cbbf327e92648d33832a",
+      "color_space": "srgb",
+      "srgb_profile": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        480,
+        360
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "uniform_scale": 0.6629834254143646,
+        "resampled_frame_px": [
+          960,
+          720
+        ],
+        "transparent_padding_ltrb_px": [
+          32,
+          24,
+          32,
+          24
+        ],
+        "operation": "Uniform reduction of the entire generated source frame plus transparent padding. No crop, alpha cleanup, masks, painting, recolor, perspective change or independent axis stretch."
+      },
+      "reference_sha256": {
+        "art-source/references/generations/ART-15/rest_lanches-source-01.png": "bebcadccfb04f09770f366832bdf8bc6187bc82a5abd8253ce0c925ba84be7c6",
+        "art-source/references/generations/ART-12/map_rest_frances-source.png": "813ca4fd787da73c6154b75e4998d46a90e09e94a60b2e01f81117d5b381ff1e",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.49045054117838544,
+        "opaque_fraction": 0.0021565755208333335,
+        "alpha_bbox_xywh": [
+          54,
+          30,
+          919,
+          714
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          57,
+          134,
+          913,
+          571
+        ],
+        "outer_edge_alpha_max": 0,
+        "semitransparent_fraction": 0.5073928833007812,
+        "fully_opaque_fraction": 0.0021565755208333335,
+        "alpha_250_or_more_fraction": 0.49863560994466144,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            329009
+          ],
+          [
+            254,
+            56077
+          ],
+          [
+            252,
+            3878
+          ],
+          [
+            255,
+            1696
+          ]
+        ]
+      },
+      "status": "validado",
+      "qa_record": "docs/art/qa/ART-15.json",
+      "display_preview": "art-source/previews/ART-15/FACADE_REST_FRANCES-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-15/FACADE_REST_FRANCES-native-light-dark.png"
+    },
+    {
+      "id": "FACADE_REST_JAPONES",
+      "prompt": "Use case: precise-object-edit\nAsset type: ONE isolated restaurant facade sprite for the approved Cogna business game.\nInput images: Image 1 is the exact exterior, framing and lower frontal three-quarter camera to preserve. Image 2 is the canonical ART-12 restaurant fitout for the requested type. Image 3 is the approved opening concept, editorial cartoon style only. Never reproduce any UI, text, meals or people.\nPreserve Image 1's entire exterior geometry and placement exactly: one-story ivory building, flat grey roof with one air conditioner, parapet, blank purple fascia, purple segmented awnings wrapping the corner, two large windows on the main face, narrow glazed door on the right return near the front corner, right-hand window, structural pillars and thin plinth. Same canvas, margins, camera, exterior outline, warm upper-left light, framing, scale and dark plum linework. Do not add or remove any window or doorway and do not alter the building dimensions.\nPrimary request: FACADE_REST_JAPONES. Change only the fitout and window reveals to the Japanese restaurant in Image 2, a contemporary Japanese dining room inside the same neighborhood building.\nJapanese interior: dark warm timber service counter with a few plain square stools, slim vertical wood slats, clean simple timber shelving and compact dark tables/chairs. Empty counter and table surfaces, no sushi, dishes, bottles, utensils, food or extra props. Two plain round warm ivory lantern-like pendant lights in the main glazed space, without symbols. Wood slat trim may cover the existing inner window reveals while preserving the ivory structural columns and every exterior boundary. Calm technical craft and understated contemporary Japanese character; no pagoda roof, flags, kanji or themed ornament.\nRendering: polished adult editorial cartoon with crisp dark muted plum outlines, controlled cel shading, simple clean color regions, minimal texture. Palette: violet #6D28D9, plum #24113D, lavender #B99AE8, ivory #F5F0E8, amber #E7B65A and timber brown. No grain, excessive detail or photographic materials. Facade stays purple rather than changing color per restaurant type.\nTransparency: preserve genuine RGBA alpha zero outside the exterior. Clean antialiased silhouette with complete uncropped building. No backdrop, ground, paving, pedestal, external cast shadow, aura, halo, colored haze, checkerboard, outdoor objects or border.\nConstraints: no lettering, labels, words, numbers, symbols, logos, writing, menu boards, people, meals, food, plates, drinks, tableware, outdoor furniture, exterior plants, unrelated props, scenery, interface, card or sprite sheet. ONE isolated building only. Desired landscape 4:3, 1024x768 export, display box 480x360, complete building and transparent margins.",
+      "references": [
+        "art-source/references/generations/ART-15/rest_lanches-source-01.png",
+        "art-source/references/generations/ART-12/map_rest_japones-source.png",
+        "art-source/references/concepts/02-abertura.png"
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "transparent_background": true,
+      "source_path": "art-source/references/generations/ART-15/rest_japones-source-01.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13cd3-a5f1-7de2-a2f9-f3c1b9e5d3c3 as C:\\Users\\Pichau\\.codex\\generated_images\\01a13cd3-a5f1-7de2-a2f9-f3c1b9e5d3c3\\exec-77f7433a-b83c-4c9d-b25c-6e406c17560b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "production_method": "imagegen",
+      "model_note": "Identificador de modelo não exposto pela ferramenta integrada.",
+      "source_sha256": "d8da6f86b4832f65ae14e214d5deb67935fc33a803c7c7a411af20335c95ba0b",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGBA",
+      "source_editable": null,
+      "output_path": "Assets/Art/new/restaurant/facades/rest_japones.png",
+      "path": "restaurant/facades/rest_japones.png",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "output_bytes": 611756,
+      "sha256": "97370efd4859a362e30385d1a295fc5a51669b366ed18b2f8ce47a6a440c5ede",
+      "color_space": "srgb",
+      "srgb_profile": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        480,
+        360
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "uniform_scale": 0.6629834254143646,
+        "resampled_frame_px": [
+          960,
+          720
+        ],
+        "transparent_padding_ltrb_px": [
+          32,
+          24,
+          32,
+          24
+        ],
+        "operation": "Uniform reduction of the entire generated source frame plus transparent padding. No crop, alpha cleanup, masks, painting, recolor, perspective change or independent axis stretch."
+      },
+      "reference_sha256": {
+        "art-source/references/generations/ART-15/rest_lanches-source-01.png": "bebcadccfb04f09770f366832bdf8bc6187bc82a5abd8253ce0c925ba84be7c6",
+        "art-source/references/generations/ART-12/map_rest_japones-source.png": "8ffbfd78d132621cd7434dd4c7784a62c14bc2314a43c3ac42af5c04e0e12c6b",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4917920430501302,
+        "opaque_fraction": 0.0018908182779947917,
+        "alpha_bbox_xywh": [
+          54,
+          29,
+          919,
+          715
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          57,
+          135,
+          913,
+          569
+        ],
+        "outer_edge_alpha_max": 0,
+        "semitransparent_fraction": 0.506317138671875,
+        "fully_opaque_fraction": 0.0018908182779947917,
+        "alpha_250_or_more_fraction": 0.49724706013997394,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            326194
+          ],
+          [
+            254,
+            51889
+          ],
+          [
+            252,
+            9871
+          ],
+          [
+            255,
+            1487
+          ]
+        ]
+      },
+      "status": "validado",
+      "qa_record": "docs/art/qa/ART-15.json",
+      "display_preview": "art-source/previews/ART-15/FACADE_REST_JAPONES-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-15/FACADE_REST_JAPONES-native-light-dark.png"
+    },
+    {
+      "id": "FACADE_REST_LANCHES",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated restaurant facade illustration for the approved Cogna business game, FACADE_REST_LANCHES.\nInput images: Image 1 is the canonical casual restaurant from ART-12, architecture and materials reference. Image 2 is the approved opening concept, adult editorial cartoon style reference. Image 3 is the approved management concept, linework and finish reference. Never copy their UI, text, people, meals or scenes.\nPrimary request: depict the SAME low contemporary neighborhood snack restaurant as Image 1 from a LOWER, mostly frontal three-quarter view, with broad storefront on the left and a narrower entrance facade receding to the right. Keep a single story, flat grey roof, low ivory parapet, one modest roof air-conditioning unit, blank broad violet fascia wrapping the corner, purple fabric awnings, ivory structural columns, thin stone plinth and dark plum window frames. Two broad glass windows on the main face; narrow glazed entrance on the right-hand face close to the front corner. Show the whole freestanding building, uncropped.\nCamera/composition: landscape 4:3, desired 1024x768 pixels. Lower architectural front three-quarter view rather than a top-down map view: vertical walls upright, main fascia almost horizontal and the right return clearly visible. Roof remains a shallow visible plane. Center the full building with 6-8 percent truly transparent margin on every side. Stable centered footprint and adult realistic architectural proportions, no exaggerated lens or miniature pedestal. Fill about 86 percent of canvas width. This exterior and view will be reused for French and Japanese fitout variants.\nFitout: popular, welcoming and practical casual restaurant. Warm amber light inside, simple timber service counter, several plain round stools and compact square tables/chairs visible naturally through the windows. Empty counter and empty table surfaces; absolutely no food, meals, plates, drinks, packaging, menu boards or extra props. Furniture belongs inside the building, not outside.\nStyle/medium: polished hand-drawn adult editorial cartoon matching the approved Cogna concepts. Confident dark muted-plum contours, clean controlled cel-shaded color regions, crisp material edges, two or three broad tones per material, subtle limited gradient only where useful. Avoid painted grain or fine mottled texture. Cozy clear glazing with simple reflections, legible at display size 480x360.\nPalette and light: Cogna violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, ink #30243C, timber brown and warm amber #E7B65A. Soft upper-left lighting with shadows on the architecture only. All fascia and awnings remain purple. No exterior ground shadow.\nTransparency: genuine RGBA cutout, alpha zero all around the building and clean antialiased silhouette. Opaque building and glazing; transparent exterior. No background, floor, pavement patch, landscape, street, backdrop, haze, halo, shadow outside silhouette, checkerboard or border. Keep the transparent margins.\nConstraints: ONE building sprite only, never a sheet or a card. No lettering, words, numbers, symbols, logos, signs with writing, people, faces, food, dishes, exterior plants, outdoor furniture, props, neighboring buildings, scenery or interface. No placeholder shapes. The plain violet fascia is entirely blank.",
+      "references": [
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png",
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "transparent_background": true,
+      "source_path": "art-source/references/generations/ART-15/rest_lanches-source-01.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13cd3-a5f1-7de2-a2f9-f3c1b9e5d3c3 as C:\\Users\\Pichau\\.codex\\generated_images\\01a13cd3-a5f1-7de2-a2f9-f3c1b9e5d3c3\\exec-901b67be-e76d-4dad-bbe9-39ce72867bc4.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "production_method": "imagegen",
+      "model_note": "Identificador de modelo não exposto pela ferramenta integrada.",
+      "source_sha256": "bebcadccfb04f09770f366832bdf8bc6187bc82a5abd8253ce0c925ba84be7c6",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGBA",
+      "source_editable": null,
+      "output_path": "Assets/Art/new/restaurant/facades/rest_lanches.png",
+      "path": "restaurant/facades/rest_lanches.png",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "output_bytes": 612064,
+      "sha256": "6208671b9d6929da37d3273288fc4fd50ee8196ab9bec07acbbc88b61cfa0427",
+      "color_space": "srgb",
+      "srgb_profile": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        480,
+        360
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "uniform_scale": 0.6629834254143646,
+        "resampled_frame_px": [
+          960,
+          720
+        ],
+        "transparent_padding_ltrb_px": [
+          32,
+          24,
+          32,
+          24
+        ],
+        "operation": "Uniform reduction of the entire generated source frame plus transparent padding. No crop, alpha cleanup, masks, painting, recolor, perspective change or independent axis stretch."
+      },
+      "reference_sha256": {
+        "art-source/references/generations/ART-12/map_rest_lanches-source.png": "f0f523b7daa50dadfbbae0f10941b881bd247f3fc81dd46826cb0115f9e43bd8",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4940630594889323,
+        "opaque_fraction": 0.00213623046875,
+        "alpha_bbox_xywh": [
+          32,
+          43,
+          941,
+          701
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          58,
+          136,
+          911,
+          568
+        ],
+        "outer_edge_alpha_max": 0,
+        "semitransparent_fraction": 0.5038007100423177,
+        "fully_opaque_fraction": 0.00213623046875,
+        "alpha_250_or_more_fraction": 0.4949633280436198,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            216818
+          ],
+          [
+            254,
+            165164
+          ],
+          [
+            252,
+            4079
+          ],
+          [
+            255,
+            1680
+          ]
+        ]
+      },
+      "status": "validado",
+      "qa_record": "docs/art/qa/ART-15.json",
+      "display_preview": "art-source/previews/ART-15/FACADE_REST_LANCHES-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-15/FACADE_REST_LANCHES-native-light-dark.png"
+    }
+  ],
+  "renderer_versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "producer_source": "art-source/editable/ART-15/export-art15.cjs",
+  "integration_performed": false,
+  "qa_record": "docs/art/qa/ART-15.json"
+}

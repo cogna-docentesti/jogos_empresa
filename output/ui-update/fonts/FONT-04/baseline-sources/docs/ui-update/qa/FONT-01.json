@@ -1,0 +1,91 @@
+{
+  "task": "FONT-01",
+  "date": "2026-10-17",
+  "status": "concluído",
+  "scope": "inventário/planejamento; nenhuma fonte aplicada",
+  "acceptance": {
+    "ui01_to_ui20_owned": true,
+    "each_consumer_role_and_target": true,
+    "inactive_inputs_and_clones_included": true,
+    "scene_prefab_global_ids_unique": true,
+    "runtime_sibling_keys_unique": true,
+    "font_reuse_and_six_required_faces_recorded": true,
+    "no_italic_needed": true,
+    "six_current_reference_categories": true,
+    "planned_contract_kept_separate": true,
+    "old_captures_not_reused": true
+  },
+  "inventory": {
+    "serialized": 1233,
+    "runtime_hierarchy_slots": 1323,
+    "consumers": 2556,
+    "roles": {
+      "screen_title": 50,
+      "body": 531,
+      "input": 24,
+      "map_marker": 90,
+      "label": 333,
+      "caption": 282,
+      "button": 351,
+      "brand": 53,
+      "section_title": 200,
+      "table": 382,
+      "kpi": 91,
+      "navigation": 45,
+      "table_total": 124
+    },
+    "source_consumers": 1094,
+    "text_3d": 0,
+    "inactive_self": 143
+  },
+  "validation": {
+    "unity": "6000.3.20f1",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "native_suites": [
+      {
+        "suite": "campaigns",
+        "checks": 211,
+        "failures": 0,
+        "file": "output/ui-update/fonts/FONT-01/campaigns/playmode.json"
+      },
+      {
+        "suite": "dialogs",
+        "checks": 50,
+        "failures": 0,
+        "file": "output/ui-update/fonts/FONT-01/dialogs/playmode.json"
+      }
+    ],
+    "advancing_captures": 86,
+    "frame": 4587,
+    "console_errors": 0,
+    "sqlite": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\fonts\\FONT-01\\qa-game.db",
+    "identification_key": "Cogna.Font01.QA.Identification",
+    "dirty_editor_scene_restored": true,
+    "live_texts_before": 1052,
+    "live_texts_after": 1052,
+    "preexisting_files_checked": 773,
+    "preexisting_files_changed": [],
+    "production_assets_saved": false
+  },
+  "evidence": {
+    "gallery": "output/ui-update/fonts/FONT-01/index.html",
+    "regions": "output/ui-update/fonts/FONT-01/reference-regions.json",
+    "coverage": "docs/ui-update/font-coverage.json",
+    "contract": "docs/ui-update/font-contract.json",
+    "corpus": "output/ui-update/fonts/FONT-01/glyph-corpus.json",
+    "font_reuse": "output/ui-update/fonts/FONT-01/font-reuse-audit.json"
+  },
+  "limitations": [
+    "FONT-01 não gera fontes/assets TMP nem homologa Roboto; isto pertence a FONT-02 a FONT-10.",
+    "Baseline visual desta tarefa somente 1920×1080 no Editor; outras viewports/Player e homologação das fontes novas são tarefas seguintes.",
+    "Cena suja preexistente possui um TMP extra em memória: Canvas/Text (TMP), texto Restaurante. Preservado, inventariado e não salvo.",
+    "Nomes livres aceitam alfabetos além do corpus latino; FONT-03 precisa registrar cobertura/fallback explícitos.",
+    "O inventário retrata o workspace com alterações anteriores ainda não commitadas; a reprodução exige o estado inicial registrado, preservado fora deste commit.",
+    "Pipeline ausente no Editor aberto; execução iniciada pelo menu local do verificador via Computer Use. Tentativa de abrir outro Editor não executou QA e não é evidência.",
+    "Patches iniciais completos e log bruto de inicialização ficam locais fora do commit; hashes, cabeçalho inicial e estado inicial preservam sua rastreabilidade."
+  ],
+  "next_task": "FONT-02; iniciada somente pela conversa coordenadora"
+}

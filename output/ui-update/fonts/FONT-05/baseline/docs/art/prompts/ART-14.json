@@ -1,0 +1,387 @@
+{
+  "task_id": "ART-14",
+  "date": "2026-10-14",
+  "status": "validado",
+  "assets": [
+    {
+      "id": "ID_ENVIRONMENT",
+      "prompt": "Use case: precise-object-edit\nEdit target: this ONE restaurant-street environment illustration, which is for a game identification screen. Keep the exact composition, camera, facade, blank purple sign, awning shape, windows, furniture placements, planting, sky, and the spacious empty ivory wall on the right. No added person or UI.\nMake a production pass toward clean adult editorial CEL SHADING: simplify the existing surface rendering into large smooth nearly-flat color regions with crisp soft-edged shadow shapes and two or three tones per material. Remove the tiny mottled/grainy painted surface variation, photographic texture, complex pavement leaf-shadow speckle and continuous noisy gradients. Preserve well-drawn architectural contours and foreground line detail so this remains the same approved cartoon scene, not a wireframe or primitive placeholder.\nPurple sign and awnings: flat coherent purple planes with simple lavender highlight and plum shadow; sign completely blank. Right ivory wall and sidewalk: broad flat warm ivory base with only a few simple subdued shadow shapes, visually calm for a form overlay; no speckled leaf-shadow noise. Sky: very pale blue simple broad color with two simple softly outlined white clouds. Leaves: clean grouped olive/teal cel-shaded shapes, no fine stipple. Do not add blur, posterization artifact, jagged contours or photographic materials.\nGoal: the final full-size PNG should compress efficiently with fewer small color fluctuations, while retaining the welcoming Brazilian contemporary restaurant exterior and palette. This is a polished 2D game background, not a photo.\nDesired output 1920x1080 landscape, fully opaque, entire scene uncropped. No text, words, numbers, logo, icons, lettering, labels, menu signs, foreground character, forms, buttons, panels, purple ornamental arcs, HUD, border or checkerboard. One environment image only.",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13c43-dcdb-78b0-b50c-624dd5a2c15b as C:\\Users\\Pichau\\.codex\\generated_images\\01a13c43-dcdb-78b0-b50c-624dd5a2c15b\\exec-603d6231-8ea9-4585-b61f-c57fe1b30959.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "source_path": "art-source/references/generations/ART-14/street_restaurant-source-02-flat.png",
+      "references": [
+        "art-source/references/generations/ART-14/street_restaurant-source.png",
+        "art-source/references/concepts/02-abertura.png"
+      ],
+      "transparent_background": false,
+      "previous_generation": {
+        "id": "ID_ENVIRONMENT",
+        "prompt": "Use case: stylized-concept\nAsset type: ONE background illustration for the identification screen of Jogos de Empresa Cogna, ART-14.\nInput images: the approved opening concept is an architectural/style reference ONLY. The approved management concept is a complementary restaurant/color reference ONLY. Do not copy any interface, typography, person, or layout panel from these images.\nScene: a welcoming contemporary Brazilian neighborhood restaurant street exterior in warm soft daylight. A low cream masonry restaurant with broad plain violet #6D28D9 sign fascia and purple awning, dark plum storefront frames, amber lit windows, a few simple leafy terrace plants and unoccupied tables, ivory stone sidewalk. Small neighboring cream buildings, low greenery and pale blue sky. Eye-level editorial exterior view with a gentle three-quarter angle, like the restaurant behind the woman in the upper-left opening concept, NOT the isometric city map.\nComposition: wide 16:9 landscape intended for a 1920x1080 canvas. All distinctive restaurant architecture is in the LEFT 58% of the picture. The lower-left quarter has calm sidewalk space for a SEPARATE standing character added later, not generated here. The RIGHT 40% must remain visually quiet and spacious for a separate form: a pale ivory unadorned neighboring wall receding slightly, pale sky above and sidewalk below; minimal contrast, no doors, window frames, foliage, chairs or detailed focal objects in that right area. The scene is continuous, not split into panels, and the empty area is part of the street, not a UI card. Whole image fully opaque.\nStyle: polished hand-drawn adult editorial cartoon matching the references, clean muted plum linework, warm cream/ivory, violet and lavender, teal/olive greenery and amber glazing. Controlled flat cel shading with light painted material detail, not noisy or photo-textured. Readable at application scale and efficient to compress as PNG. Keep lighting and colors consistent across the entire background.\nConstraints: absolutely no people or characters, no cars, no readable writing, letters, numerals, prices, logos, symbols, icons, label bubbles, menus, A-frame boards, posters, UI panels, inputs, buttons, headings, HUD, cash/score/month indicators, checkerboard or border. Restaurant fascia is completely BLANK. No decorative purple arcs; those are separate assets. Output ONE environment, no collage or spritesheet.",
+        "tool": "image_gen.imagegen",
+        "model": null,
+        "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13c43-dcdb-78b0-b50c-624dd5a2c15b as C:\\Users\\Pichau\\.codex\\generated_images\\01a13c43-dcdb-78b0-b50c-624dd5a2c15b\\exec-f6b08a07-4329-40a3-8c35-4bca0f95e832.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "source_path": "art-source/references/generations/ART-14/street_restaurant-source.png",
+        "references": [
+          "art-source/references/concepts/02-abertura.png",
+          "art-source/references/concepts/03-gestao.png"
+        ],
+        "transparent_background": false,
+        "source_sha256": "2e24e96a50c825e4101600f01eda0d4077442f787abbb1a4b114845f812c87fa",
+        "source_size_px": [
+          1672,
+          941
+        ],
+        "reference_sha256": {
+          "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+          "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        }
+      },
+      "selection_note": "Passagem de acabamento em cel shading para reduzir microtextura mantendo a composição.",
+      "production_method": "imagegen",
+      "source_sha256": "9a425db199b031511cafc3f23b432cc743dd6ebeda866656ef334101817c913c",
+      "source_size_px": [
+        1672,
+        940
+      ],
+      "source_mode": "RGB",
+      "source_editable": null,
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "technical_export": {
+        "tool": "sharp",
+        "nominal_uniform_scale": 1.148936170212766,
+        "padding_ltrb_px": null,
+        "operation": "Uniform cover resize; slight centered aspect crop only, preserve colors. Opaque RGB source gains alpha 255."
+      },
+      "canonical_reference": null,
+      "output_path": "Assets/Art/new/identification/backgrounds/street_restaurant.png",
+      "path": "identification/backgrounds/street_restaurant.png",
+      "sha256": "b2302d34778b2e43c3a23140864c0b401c410ad1eadbae3fb9375ff2a28b9d70",
+      "output_bytes": 2340257,
+      "status": "validado",
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        1920,
+        1080
+      ],
+      "display_fit": "cover",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible_bbox_alpha_128_px": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "reference_sha256": {
+        "art-source/references/generations/ART-14/street_restaurant-source.png": "2e24e96a50c825e4101600f01eda0d4077442f787abbb1a4b114845f812c87fa",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+      },
+      "lossless_optimization": {
+        "tool": "sharp PNG recompression",
+        "before_bytes": 2340257,
+        "after_bytes": 2340257,
+        "selected_adaptive_filtering": "original",
+        "trials": [
+          {
+            "adaptiveFiltering": false,
+            "bytes": 3550233,
+            "all_rgba_bytes_equal": true
+          },
+          {
+            "adaptiveFiltering": true,
+            "bytes": 2340449,
+            "all_rgba_bytes_equal": true
+          }
+        ],
+        "all_rgba_bytes_equal": true
+      }
+    },
+    {
+      "id": "ID_ORNAMENT_LEFT",
+      "production_method": "vector_or_code",
+      "tool": "SVG editable geometry + sharp/libvips",
+      "model": null,
+      "source_editable": "art-source/editable/identification/ornaments/arc_left.svg",
+      "source_sha256": "4968a3027a8fffae77198ea1568948bd58c4240dc61c817ce16107cb7958537c",
+      "prompt": "Produzir somente ID_ORNAMENT_LEFT: arcos largos lavanda #B99AE8 a 24%, arco fino violeta #6D28D9 a 18% e três círculos discretos a 14–24%, fundo alfa zero, sem efeito/sombra/texto/ícone. Export SVG editável e PNG RGBA sRGB 512x1024; display contain na caixa 320x860, sem esticar. Ornamento esquerdo. Linguagem dos arcos roxos do concept de identificação aprovado.",
+      "references": [
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/concepts/01-hub.png",
+        "docs/art/tokens.json"
+      ],
+      "mirror_of": null,
+      "alpha_preserved": "Direct SVG alpha coverage, no bitmap background.",
+      "actual_size_px": [
+        512,
+        1024
+      ],
+      "output_path": "Assets/Art/new/identification/ornaments/arc_left.png",
+      "path": "identification/ornaments/arc_left.png",
+      "sha256": "41981d2b61aa6e742e31027d518ff49fd26d339805758c831dd86c5bae10213d",
+      "output_bytes": 25302,
+      "status": "validado",
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        320,
+        860
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible_bbox_alpha_128_px": null,
+      "reference_sha256": {
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "docs/art/tokens.json": "00984b3a1c6fa2dea7b21a383b8c0b57f711d49af695e33d054925d715c6b7a8"
+      },
+      "lossless_optimization": {
+        "tool": "sharp PNG recompression",
+        "before_bytes": 33250,
+        "after_bytes": 25302,
+        "selected_adaptive_filtering": false,
+        "trials": [
+          {
+            "adaptiveFiltering": false,
+            "bytes": 25302,
+            "all_rgba_bytes_equal": true
+          },
+          {
+            "adaptiveFiltering": true,
+            "bytes": 33442,
+            "all_rgba_bytes_equal": true
+          }
+        ],
+        "all_rgba_bytes_equal": true
+      }
+    },
+    {
+      "id": "ID_ORNAMENT_RIGHT",
+      "production_method": "vector_or_code",
+      "tool": "SVG editable geometry + sharp/libvips",
+      "model": null,
+      "source_editable": "art-source/editable/identification/ornaments/arc_right.svg",
+      "source_sha256": "e073403e5ae865b5d0d91f68c979456d2c022c5f66eeb22a4e3b261cb9301d04",
+      "prompt": "Produzir somente ID_ORNAMENT_RIGHT: arcos largos lavanda #B99AE8 a 24%, arco fino violeta #6D28D9 a 18% e três círculos discretos a 14–24%, fundo alfa zero, sem efeito/sombra/texto/ícone. Export SVG editável e PNG RGBA sRGB 512x1024; display contain na caixa 320x860, sem esticar. Ornamento direito, espelhado horizontalmente do desenho geométrico esquerdo. Linguagem dos arcos roxos do concept de identificação aprovado.",
+      "references": [
+        "art-source/references/concepts/02-abertura.png",
+        "art-source/references/concepts/01-hub.png",
+        "docs/art/tokens.json"
+      ],
+      "mirror_of": "ID_ORNAMENT_LEFT",
+      "alpha_preserved": "Direct SVG alpha coverage, no bitmap background.",
+      "actual_size_px": [
+        512,
+        1024
+      ],
+      "output_path": "Assets/Art/new/identification/ornaments/arc_right.png",
+      "path": "identification/ornaments/arc_right.png",
+      "sha256": "603e902e8155875477aff2d789b0ce342d0f9c855e94bb8cfc72d1478beaba20",
+      "output_bytes": 25521,
+      "status": "validado",
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        320,
+        860
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible_bbox_alpha_128_px": null,
+      "reference_sha256": {
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "docs/art/tokens.json": "00984b3a1c6fa2dea7b21a383b8c0b57f711d49af695e33d054925d715c6b7a8"
+      },
+      "lossless_optimization": {
+        "tool": "sharp PNG recompression",
+        "before_bytes": 33261,
+        "after_bytes": 25521,
+        "selected_adaptive_filtering": false,
+        "trials": [
+          {
+            "adaptiveFiltering": false,
+            "bytes": 25521,
+            "all_rgba_bytes_equal": true
+          },
+          {
+            "adaptiveFiltering": true,
+            "bytes": 33453,
+            "all_rgba_bytes_equal": true
+          }
+        ],
+        "all_rgba_bytes_equal": true
+      }
+    },
+    {
+      "id": "CH01_WELCOME",
+      "prompt": "Use case: identity-preserve\nAsset type: ONE isolated full-body welcoming pose of CH01 for the identification screen, transparent RGBA.\nInput image 1 is the canonical CH01 EDIT TARGET and sole identity authority. Input image 2 is only the approved welcoming clipboard pose/context reference. Do not copy the scene or a different face from the concept.\nPreserve the exact canonical woman: adult medium warm brown skin, brown eyes and eye shape, same eyebrows, nose, lips and oval face, dark brown short wavy side-parted bob above shoulders, gold hoop earrings, lilac collared buttoned shirt with rolled sleeves, charcoal high-waisted trousers, same black belt with square buckle and charcoal low-heel shoes. Same adult physique, proportions, linework and upper-left light. No change in age, ethnicity, hair length, outfit or accessories. Keep the same natural friendly closed-mouth smile and direct welcoming gaze.\nChange only pose and the authorized prop: stand comfortably in three-quarter view facing viewer, shoulders relaxed; hold a plain charcoal clipboard with blank paper gently against the lower chest with one hand; other hand makes a modest natural open-palmed welcoming gesture at waist level toward viewer's right. Five anatomically clear fingers, not an exaggerated wave. Entire head, both hands, both feet and shoes are complete.\nComposition: vertical 2:3 canvas, desired 1024x1536. Figure centered and large, roughly 80% of canvas height with at least 10% transparent space above hair and below shoes. No crops or perspective distortion. Her body is an individual sprite; no second person.\nTransparency: true alpha zero around the figure and between limbs. Remove any diffuse color aura/background haze visible around the reference; clean transparent cutout. No ground shadow, glow or outside silhouette shadow, no black/white/colored background or checkerboard.\nConstraints: no scenery, form, UI, purple ornament, furniture, logos, words, letters, numbers, written clipboard content or extra prop. Blank clipboard only. ONE full-body sprite, not a sheet.",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13c43-dcdb-78b0-b50c-624dd5a2c15b as C:\\Users\\Pichau\\.codex\\generated_images\\01a13c43-dcdb-78b0-b50c-624dd5a2c15b\\exec-aeb190d4-cf65-4bd4-a97c-6f9285d24198.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "source_path": "art-source/references/generations/ART-14/ch01_welcome-source-01.png",
+      "references": [
+        "Assets/Art/new/characters/CH01/ch01_canonical.png",
+        "art-source/references/concepts/02-abertura.png"
+      ],
+      "transparent_background": true,
+      "production_method": "imagegen",
+      "source_sha256": "c5f436fd965d3baef51eb2a136c09822b387e37221cff8dea342c1e8a45f0118",
+      "source_size_px": [
+        1024,
+        1536
+      ],
+      "source_mode": "RGBA",
+      "source_editable": null,
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "technical_export": {
+        "tool": "sharp",
+        "nominal_uniform_scale": 0.875,
+        "padding_ltrb_px": [
+          64,
+          96,
+          64,
+          96
+        ],
+        "operation": "Uniform 7/8 resample of complete generated sprite and transparent padding. No alpha cleanup, painting, mask, anatomy edit or independent axis stretch."
+      },
+      "canonical_reference": {
+        "path": "Assets/Art/new/characters/CH01/ch01_canonical.png",
+        "sha256": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+      },
+      "output_path": "Assets/Art/new/characters/CH01/ch01_welcome.png",
+      "path": "characters/CH01/ch01_welcome.png",
+      "sha256": "69fd8be6730b94aa28abfb9907bccbf81e4eda966307959a1c998b087b9b6af2",
+      "output_bytes": 474758,
+      "status": "validado",
+      "color_space": "sRGB",
+      "mode": "RGBA",
+      "display_size_px": [
+        420,
+        760
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible_bbox_alpha_128_px": [
+        289,
+        183,
+        566,
+        1189
+      ],
+      "reference_sha256": {
+        "Assets/Art/new/characters/CH01/ch01_canonical.png": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+      },
+      "lossless_optimization": {
+        "tool": "sharp PNG recompression",
+        "before_bytes": 474758,
+        "after_bytes": 474758,
+        "selected_adaptive_filtering": "original",
+        "trials": [
+          {
+            "adaptiveFiltering": false,
+            "bytes": 591147,
+            "all_rgba_bytes_equal": true
+          },
+          {
+            "adaptiveFiltering": true,
+            "bytes": 474950,
+            "all_rgba_bytes_equal": true
+          }
+        ],
+        "all_rgba_bytes_equal": true
+      }
+    }
+  ],
+  "renderer_versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "model_note": "ImageGen integrado não expõe identificador de modelo. Ornamentos são vetoriais e não usam modelo.",
+  "integration_performed": false,
+  "lossless_optimizer": "art-source/editable/ART-14/optimize-lossless.cjs",
+  "summary": {
+    "png_count": 4,
+    "svg_count": 2,
+    "png_bytes": 2865838,
+    "rgba8_capacity_bytes": 18780160,
+    "environment_bytes": 2340257,
+    "cutouts_bytes": 525581,
+    "environment_initial_draft_export_bytes": 2784175,
+    "environment_reduction_percent": 15.944328212127468,
+    "memory_note": "Capacidade RGBA8 sem compressão/mipmaps; tamanho de build e memória real dependem de import/plataforma/atlas."
+  },
+  "qa_record": "docs/art/qa/ART-14.json",
+  "layout_record": "docs/art/layouts/identification-layout.json",
+  "build_source_sha256": "11dd41cd09933412bfb61ee0a96ba0902d10f4cbcfc141c4abeb6c61a597eecb",
+  "lossless_optimizer_sha256": "38a089441e239b18de7bce7333880ab3274874157631f0dcdbe6f50b38f5ef40"
+}

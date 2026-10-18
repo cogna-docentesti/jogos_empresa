@@ -1,0 +1,120 @@
+{
+  "task_id": "UI-12",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "43f5327d8ff48ccc0df1f8cdfe681d2c52030cd7",
+  "unity_version": "6000.3.20f1",
+  "pending_acceptance": [],
+  "implementation": [
+    "Panel_Event e EventOptionCard criados com componentes nativos uGUI/TMP. Vinte ilustrações por EventData.id, título, descrição, período, conceito quando presente, todas as três opções de cada evento e seus efeitos reais.",
+    "MonthlyEventDecisionService usa MonthlyEventSelector e os indicadores existentes, com restaurante/equipamentos/histórico reais. MonthlyEventPlanEntity preserva o sorteio no SQLite por sessão/mês. Em 30 dias, quatro eventos são distribuídos nos dias 6,12,18,24. Nenhuma regra de elegibilidade, peso, grupo ou repetição foi alterada.",
+    "Confirmação transacional por sessão/mês/evento/dia: a mesma escolha repetida retorna o registro; outra escolha para a ocorrência é recusada. Apenas SessionEventHistoryRepository.RecordFromOption grava os snapshots; nenhum AddCash/SetReputation novo. RoundService continua responsável pela liquidação única.",
+    "Fechar mês no hub mantém Round_Sales aguardando todas as escolhas antes da liquidação. OpenMonth/OpenDecision, IsAwaitingChoice, ChoiceConfirmed, Closed e Close expõem o ciclo para UI-19. Close e outro pedido de liquidação recusam uma escolha pendente.",
+    "Histórico real no hub e durante a escolha, com vazio, snapshots de efeitos, retorno à decisão e foco da origem. EventHistory=10 adicionado ao PanelId sem renumerar valores anteriores. roundEventPanel recebeu a referência do novo painel; a passagem posterior por Round_Event é mantida por compatibilidade.",
+    "Migração mantém o painel abaixo dos controles globais e a ordem é estável quando reaplicada. Menu e Sair têm espaço próprio na consulta e recuperam o posicionamento anterior nas outras telas. Visibilidade, não sobreposição e raycasts reais verificados.",
+    "Cópia do freezer corrigida por solicitação de revisão: título Quebra do freezer; removido somente TESTE DE ALTERACAO da descrição. IDs, condições, opções e todos os efeitos iguais ao baseline. Os vinte eventos foram pesquisados sem outros resíduos."
+  ],
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "screenshots": 177,
+    "review_boards": "output/ui-update/UI-12/visual-review-boards.json",
+    "inspection": "177 capturas reais revisadas em 23 pranchas e amostras nativas, incluindo catálogo completo, 60 opções, todos os estados, consulta, vazios/erros, textos longos, máscaras/scroll, hub e histórico. Freezer renovado após importação e novamente na cena normalizada.",
+    "typography": "Inter Tight; títulos 44/32, corpo/botões 24, opções/efeitos 22 e legendas 20. Sem autosize ou fallback novo. Cores/estados UI-03.",
+    "layout": "Canvas 1920x1080, cabeçalho 88, rodapé 96. ScrollRect/Image/Mask/VerticalLayoutGroup/ContentSizeFitter; células crescem com texto. Artes inteiras contain, tint branco e componentes 9-slice.",
+    "loading": "Resources síncrono; ausência de referência/sessão tem erro e ação disponíveis, sem loading ou números fictícios."
+  },
+  "validation": {
+    "editmode": {
+      "path": "output/ui-update/UI-12/editmode-regression.json",
+      "total": 275,
+      "passed": 275,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-12/playmode-events.json",
+      "checks": 381,
+      "passed": 381,
+      "failures": 0
+    },
+    "saved_scene_playmode": {
+      "path": "output/ui-update/UI-12/playmode-saved-scene.json",
+      "checks": 45,
+      "passed": 45,
+      "failures": 0
+    },
+    "total_playmode_checks": 426,
+    "screenshots": "output/ui-update/UI-12/screenshots.json",
+    "capture_frames": "output/ui-update/UI-12/capture-frames.json",
+    "frame_advancement": "output/ui-update/UI-12/frame-runs.json",
+    "native_frame_proof": [
+      "output/ui-update/UI-12/frame-advance.json",
+      "output/ui-update/UI-12/saved-scene-frame-advance.json"
+    ],
+    "saved_scene": "output/ui-update/UI-12/saved-scene-validation.json",
+    "art_audit": "output/ui-update/UI-12/art-audit.json",
+    "catalog_copy_audit": "output/ui-update/UI-12/catalog-copy-audit.json",
+    "scene_diff": "output/ui-update/UI-12/scene-diff-audit.json",
+    "file_audit": "output/ui-update/UI-12/file-audit.json",
+    "console": [
+      "output/ui-update/UI-12/playmode-console.json",
+      "output/ui-update/UI-12/saved-scene-console.json"
+    ],
+    "console_errors": 0,
+    "console_warnings": 0,
+    "distinct_editmode_tests": 275,
+    "ui12_distinct_tests": 86
+  },
+  "economic_validation": [
+    "Sessenta opções reais em SQLite isolado: snapshot igual ao catálogo, registro único, caixa/reputação sem mutação imediata, forecast igual à liquidação e repetição idempotente mesmo após liquidar.",
+    "Sorteio recuperado sem nova consulta à fonte aleatória. Regras de compatibilidade/condições existentes e dias reais da reserva conferidos.",
+    "Cliques reais nos índices 0,1,2 dos vinte eventos, distribuídos pelas três resoluções; confirmação repetida, reabertura somente consulta, fechamento recusado enquanto pendente, teclado/foco/submit e histórico durante espera.",
+    "Falha de INSERT por trigger SQLite isolada faz rollback; retry grava uma vez. Reinício remove reserva/histórico/sessão. Regressões de D3, empréstimo, equipe/equipamentos e campanha trimestral preservadas.",
+    "Fluxo real do hub: quatro escolhas, zero resultados antes da última, um resultado e um callback após a última, paridade de forecast, reload no mês 2 e histórico real."
+  ],
+  "invariants": {
+    "pngs_preserved": 277,
+    "manifest_hashes_verified": 272,
+    "single": 277,
+    "guids_preserved": 277,
+    "game_state_values_unchanged": true,
+    "panel_existing_values_unchanged": true,
+    "campaign_months": 3,
+    "economy_ids_conditions_options_effects_unchanged": true,
+    "catalog_text_exception": "Somente freezer_breakdown.title/description, conforme revisão; auditoria de igualdade de todos os outros campos.",
+    "isolated_databases": [
+      "D:/Cogna/jogos_empresa/Temp/ui12-validation.db",
+      "D:/Cogna/jogos_empresa/Temp/ui12-saved-scene.db"
+    ],
+    "playerprefs": "Somente Cogna.UI12.Validation e Cogna.UI12.SavedScene, removidas ao encerrar. Partida e identificação reais preservadas.",
+    "first_insert": "D3 preservado na regressão. Fixtures Play Mode persistem configuração sintética diretamente e não são evidência de percurso D1-D3.",
+    "no_new_role_or_stock_model": true
+  },
+  "resolved_during_validation": [
+    "Reserva do rodapé e ordem estável abaixo dos controles globais; conversão de coordenadas do Menu entre o seu pai e o Canvas.",
+    "Botões da consulta separados e texto sem glifo ausente, sem mudar fontes.",
+    "Roteiro de QA repetido mantinha observador anônimo duplicado. Inscrição nomeada substitui a anterior; um callback e uma liquidação verificados em Play Mode novo.",
+    "Cópia baseline de teste do freezer removida; todas as capturas desse evento renovadas."
+  ],
+  "cleanup": "Editor fechado para normalizar a cena: seis blocos existentes intencionais e 195 novos, preservando 5761 blocos e 11 stripped baseline. Metadados incidentais, fallback de fonte e Pipeline retirados. Cena reaberta e validada depois da normalização. Limpeza posterior de whitespace YAML exclusivamente em blocos novos/intencionais, verificada como semanticamente idêntica à serialização validada; hashes anterior/final no file-audit.",
+  "scope_limits": [
+    "Somente UI-12; UI-13 a UI-20 não executadas.",
+    "Demais etapas/resultados ainda seguem a orquestração existente, de responsabilidade da UI-19."
+  ],
+  "commit_message": "feat(ui): implement event decisions and history (UI-12)"
+}

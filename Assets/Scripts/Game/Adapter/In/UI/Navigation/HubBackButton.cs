@@ -51,14 +51,14 @@ namespace Game.Adapter.In.UI.Navigation
                 eventMenuAccess.anchorMin=events?new Vector2(0,1):menuAnchorMin;
                 eventMenuAccess.anchorMax=events?new Vector2(0,1):menuAnchorMax;
                 eventMenuAccess.pivot=events?new Vector2(0,1):menuPivot;
-                eventMenuAccess.anchoredPosition=events?new Vector2(968,-998):menuPosition;
-                eventMenuAccess.sizeDelta=events?new Vector2(252,68):menuSize;
+                eventMenuAccess.anchoredPosition=events?new Vector2(1760,-16):menuPosition;
+                eventMenuAccess.sizeDelta=events?new Vector2(68,56):menuSize;
             }
             if(events && eventMenuAccess!=null && menuCanvas!=null)
             {
                 var frame = UIStateListener.Instance?.CurrentPanel?.transform as RectTransform;
                 if(frame!=null)
-                    eventMenuAccess.position=frame.TransformPoint(new Vector3(frame.rect.xMin+968,frame.rect.yMax-998,0));
+                    eventMenuAccess.position=frame.TransformPoint(new Vector3(frame.rect.xMin+1760,frame.rect.yMax-16,0));
             }
             bool hub=(menuPanel!=null && menuPanel.activeInHierarchy) || events;
             if(exitButton==null || positionedForHub==hub) return;
@@ -66,8 +66,8 @@ namespace Game.Adapter.In.UI.Navigation
             exitButton.anchorMin=hub?new Vector2(0,1):anchorMin;
             exitButton.anchorMax=hub?new Vector2(0,1):anchorMax;
             exitButton.pivot=hub?new Vector2(0,1):pivot;
-            exitButton.anchoredPosition=hub?new Vector2(1632,-998):position;
-            exitButton.sizeDelta=hub?new Vector2(264,68):size;
+            exitButton.anchoredPosition=hub?new Vector2(1840,-16):position;
+            exitButton.sizeDelta=hub?new Vector2(56,56):size;
         }
     }
 }

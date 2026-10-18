@@ -1,0 +1,412 @@
+{
+  "task_id": "ART-39",
+  "status": "validado",
+  "date": "2026-10-15",
+  "asset_count": 2,
+  "new_sprite_count": 2,
+  "technical": {
+    "passed": true,
+    "task_validation": "docs/art/qa/ART-39-technical.json",
+    "plan_validation": "docs/art/qa/ART-39-plan-validation.json",
+    "prerequisites": "docs/art/qa/ART-39-prerequisites.json",
+    "prerequisite_asset_count": 16,
+    "prior_png_hash_count": 270,
+    "rgba_srgb": true,
+    "true_transparency": true,
+    "transparent_margins_at_least_10_percent": true,
+    "source_rasters_preserved": true,
+    "import_metadata_verified": true,
+    "unity_executed": false,
+    "import_verification": "Serialized Single/FullRect, Bilinear, PPU100, no mipmaps, alpha transparency, sRGB, max2048 and uncompressed platform settings inspected.",
+    "source_size_note": "Canonical generation is 1024x1536. Portrait generation returned 1254x1254 despite desired 1024x1024; actual dimensions recorded, uniformly reduced and padded to exact 512x512."
+  },
+  "visual": {
+    "passed": true,
+    "identity_passed": true,
+    "method": "Actual manual inspection of the listed references and proofs.",
+    "references_inspected": [
+      "art-source/references/concepts/03-gestao.png",
+      "Assets/Art/new/characters/CH06/ch06_canonical.png",
+      "Assets/Art/new/team/portraits/manager.png",
+      "art-source/previews/ART-39/existing-six-identities.png",
+      "Assets/Art/new/characters/CH07/ch07_canonical.png"
+    ],
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "native_sizes_inspected_px": [
+      [
+        1024,
+        1536
+      ],
+      [
+        512,
+        512
+      ]
+    ],
+    "display_boxes_inspected_px": [
+      [
+        420,
+        760
+      ],
+      [
+        240,
+        240
+      ]
+    ],
+    "display_fit": "contain",
+    "inspected_previews": [
+      "art-source/previews/ART-39/CH07_CANONICAL-native-light.png",
+      "art-source/previews/ART-39/CH07_CANONICAL-native-dark.png",
+      "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png",
+      "art-source/previews/ART-39/PORTRAIT_WAITER-native-light.png",
+      "art-source/previews/ART-39/PORTRAIT_WAITER-native-dark.png",
+      "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png",
+      "art-source/previews/ART-39/CH07-identity-comparison.png",
+      "art-source/previews/ART-39/CH07-details-1x.png"
+    ],
+    "raw_diagnostics_inspected": [
+      "art-source/previews/ART-39/CH07_CANONICAL-initial-light-dark.png"
+    ],
+    "canonical_master": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+    "canonical_master_sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+    "portrait_uses_real_master": true,
+    "observations": {
+      "CH07_CANONICAL": "Nova identidade adulta distinta de CH01-CH06: homem de cabelo crespo curto, sem barba, colete ameixa de tres botoes, camisa marfim, calca e sapatos grafite. Corpo inteiro em tres quartos, bracos relaxados, duas maos coerentes e dois sapatos completos. Rosto, olhos, cabelo e silhueta legiveis. Recorte sem checkerboard ou halo visivel sobre marfim/ameixa, sem cenario, props, texto ou UI. Caixa 420x760 usa contain com raster 420x630 e offset 0,65; proporcoes preservadas.",
+      "PORTRAIT_WAITER": "O retrato conserva rosto, tom de pele, olhos, nariz, labios, cachos curtos, ausencia de barba e colete ameixa de tres botoes do master CH07 real. Pose de meio corpo com maos relaxadas sobrepostas a cintura; dedos, ombros, cotovelos e cabelo completos. Corte inferior intencional abaixo das maos e margem transparente. Leitura clara a 240x240, sem deformacao; alfa limpo visualmente em marfim e ameixa, sem halo visivel, fundo, texto, salario, props ou UI."
+    },
+    "final_ui_proposed": false
+  },
+  "character": {
+    "id": "CH07",
+    "name": "Garçom — extensão de arte",
+    "origin": "Especificação de produção ART-39 explicitamente autorizada; estilo de 03-gestao.png e masters existentes.",
+    "roles": [
+      "waiter"
+    ],
+    "appearance": "Homem adulto negro de cerca de 30 anos, pele castanha quente, olhos castanho-escuros, rosto oval retangular alongado com queixo suave, nariz largo arredondado, labios naturais e sobrancelhas escuras espessas. Cabelo preto crespo curto, cachos densos no topo e laterais discretamente aparadas. Sem barba, bigode, oculos, bone ou joias. Compleicao adulta esguia. Colete ameixa ajustado de decote V, tres botoes pequenos grafite e dois bolsos inferiores embutidos; camisa marfim com gola aberta sem gravata e mangas dobradas ate os antebracos; calca reta grafite e sapatos de trabalho fechados grafite. Sorriso leve de boca fechada. Preservar rosto, cabelo, pele, proporcoes e figurino.",
+    "canonical_asset": "characters/CH07/ch07_canonical.png",
+    "status": "validado",
+    "identity_hash": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+    "allowed_changes": [
+      "pose",
+      "expressão natural",
+      "objeto segurado previsto"
+    ],
+    "locked_features": [
+      "rosto",
+      "tom de pele",
+      "cor dos olhos",
+      "penteado",
+      "figurino base",
+      "acessórios de identidade",
+      "proporção corporal"
+    ],
+    "canonical_reference_path": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+    "actual_size_px": [
+      1024,
+      1536
+    ],
+    "identity_qa_record": "docs/art/qa/ART-39.json",
+    "source_raster": "art-source/editable/ART-39/generations/ch07_canonical-01.png",
+    "source_raster_sha256": "739a906556e98d4dba2e578ad588d66898aae7f9bf9f51a431c0b2b9e706f304",
+    "scope_note": "Art identity only. No RoleData, enum, gameplay, role catalog or balance change.",
+    "dependent_portrait": "Assets/Art/new/team/portraits/waiter.png"
+  },
+  "assets": [
+    {
+      "id": "CH07_CANONICAL",
+      "path": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "status": "validado",
+      "mode": "RGBA",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+      "source_path": "art-source/editable/ART-39/generations/ch07_canonical-01.png",
+      "source_sha256": "739a906556e98d4dba2e578ad588d66898aae7f9bf9f51a431c0b2b9e706f304",
+      "source_size_px": [
+        1024,
+        1536
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/characters/CH06/ch06_canonical.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/characters/CH06/ch06_canonical.png": "d03069edac6fadbde95d4c9d440c6a109d7efad7e1b3aa520930963bbd87bba9"
+      },
+      "character_ids": [
+        "CH07"
+      ],
+      "canonical_asset": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "canonical_sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          166,
+          211,
+          865,
+          1326
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          318,
+          214,
+          717,
+          1322
+        ],
+        "transparent_fraction": 0.8361301422119141,
+        "opaque_fraction": 0.0015621185302734375,
+        "outer_edge_alpha_max": 0,
+        "transparent_margins_ltrb_px": [
+          166,
+          211,
+          159,
+          210
+        ]
+      },
+      "display_size_px": [
+        420,
+        760
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "Pillow",
+        "uniform_scale": 0.75,
+        "source_size_px": [
+          1024,
+          1536
+        ],
+        "resampled_size_px": [
+          768,
+          1152
+        ],
+        "transparent_offset_px": [
+          128,
+          192
+        ],
+        "output_size_px": [
+          1024,
+          1536
+        ],
+        "producer_source": "art-source/editable/ART-39/produce_art39.py",
+        "operation": "Uniform full-frame Lanczos resample, transparent padding and sRGB profile only; original generated RGBA preserved."
+      },
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": true
+      },
+      "visual_observation": "Nova identidade adulta distinta de CH01-CH06: homem de cabelo crespo curto, sem barba, colete ameixa de tres botoes, camisa marfim, calca e sapatos grafite. Corpo inteiro em tres quartos, bracos relaxados, duas maos coerentes e dois sapatos completos. Rosto, olhos, cabelo e silhueta legiveis. Recorte sem checkerboard ou halo visivel sobre marfim/ameixa, sem cenario, props, texto ou UI. Caixa 420x760 usa contain com raster 420x630 e offset 0,65; proporcoes preservadas.",
+      "inspected_previews": [
+        "art-source/previews/ART-39/CH07_CANONICAL-native-light.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-native-dark.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-light.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png",
+        "art-source/previews/ART-39/CH07-identity-comparison.png",
+        "art-source/previews/ART-39/CH07-details-1x.png"
+      ],
+      "identity_comparison": "art-source/previews/ART-39/CH07-identity-comparison.png",
+      "display_proof": "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png"
+    },
+    {
+      "id": "PORTRAIT_WAITER",
+      "path": "Assets/Art/new/team/portraits/waiter.png",
+      "status": "validado",
+      "mode": "RGBA",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "30ede6995e33b4feda3a3302e42619e8266cc189a0331dde8aeba9fc08110b8f",
+      "source_path": "art-source/editable/ART-39/generations/waiter-01.png",
+      "source_sha256": "38e22a0893605a6d3b5c6969d330db2afe66fa1a8f6c4140692d30ecc13f1c7e",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "Assets/Art/new/characters/CH07/ch07_canonical.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "Assets/Art/new/characters/CH07/ch07_canonical.png": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "character_ids": [
+        "CH07"
+      ],
+      "canonical_asset": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "canonical_sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          86,
+          72,
+          442,
+          439
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          137,
+          75,
+          376,
+          436
+        ],
+        "transparent_fraction": 0.785552978515625,
+        "opaque_fraction": 0.003269195556640625,
+        "outer_edge_alpha_max": 0,
+        "transparent_margins_ltrb_px": [
+          86,
+          72,
+          70,
+          73
+        ]
+      },
+      "display_size_px": [
+        240,
+        240
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "Pillow",
+        "uniform_scale": 0.32,
+        "source_size_px": [
+          1254,
+          1254
+        ],
+        "resampled_size_px": [
+          401,
+          401
+        ],
+        "transparent_offset_px": [
+          55,
+          55
+        ],
+        "output_size_px": [
+          512,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-39/produce_art39.py",
+        "operation": "Uniform full-frame Lanczos resample, transparent padding and sRGB profile only; original generated RGBA preserved."
+      },
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": true
+      },
+      "visual_observation": "O retrato conserva rosto, tom de pele, olhos, nariz, labios, cachos curtos, ausencia de barba e colete ameixa de tres botoes do master CH07 real. Pose de meio corpo com maos relaxadas sobrepostas a cintura; dedos, ombros, cotovelos e cabelo completos. Corte inferior intencional abaixo das maos e margem transparente. Leitura clara a 240x240, sem deformacao; alfa limpo visualmente em marfim e ameixa, sem halo visivel, fundo, texto, salario, props ou UI.",
+      "inspected_previews": [
+        "art-source/previews/ART-39/CH07_CANONICAL-native-light.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-native-dark.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-light.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png",
+        "art-source/previews/ART-39/CH07-identity-comparison.png",
+        "art-source/previews/ART-39/CH07-details-1x.png"
+      ],
+      "identity_comparison": "art-source/previews/ART-39/CH07-identity-comparison.png",
+      "display_proof": "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png"
+    }
+  ],
+  "production_record": "docs/art/prompts/ART-39.json",
+  "scope": {
+    "task_id": "ART-39",
+    "passed": true,
+    "base_commit": "1a9d59652ac379d52ac853066937a0c063cb3bec",
+    "branch": "dev/new-screens",
+    "initial_head_verified": true,
+    "initial_tree_clean": true,
+    "current_lot_only": true,
+    "changed_manifest_asset_ids": [
+      "CH07_CANONICAL",
+      "PORTRAIT_WAITER"
+    ],
+    "changed_manifest_task_ids": [
+      "ART-39"
+    ],
+    "added_character_ids": [
+      "CH07"
+    ],
+    "prior_six_character_records_preserved": true,
+    "unrelated_manifest_records_preserved": true,
+    "prior_png_hash_count": 270,
+    "prior_png_hashes_preserved": true,
+    "unrelated_changed_paths": [],
+    "reviewed_paths": [
+      "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "Assets/Art/new/characters/CH07/ch07_canonical.png.meta",
+      "Assets/Art/new/team/portraits/waiter.png",
+      "Assets/Art/new/team/portraits/waiter.png.meta",
+      "art-source/editable/ART-39/generations/ch07_canonical-01.png",
+      "art-source/editable/ART-39/generations/waiter-01.png",
+      "art-source/editable/ART-39/produce_art39.py",
+      "art-source/editable/ART-39/record_review_art39.py",
+      "art-source/previews/ART-39/CH07-details-1x.png",
+      "art-source/previews/ART-39/CH07-identity-comparison.png",
+      "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png",
+      "art-source/previews/ART-39/CH07_CANONICAL-initial-light-dark.png",
+      "art-source/previews/ART-39/CH07_CANONICAL-native-dark.png",
+      "art-source/previews/ART-39/CH07_CANONICAL-native-light.png",
+      "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png",
+      "art-source/previews/ART-39/PORTRAIT_WAITER-native-dark.png",
+      "art-source/previews/ART-39/PORTRAIT_WAITER-native-light.png",
+      "art-source/previews/ART-39/existing-six-identities.png",
+      "docs/art/characters.json",
+      "docs/art/manifest.json",
+      "docs/art/prompts/ART-39.json",
+      "docs/art/qa/ART-39-plan-validation.json",
+      "docs/art/qa/ART-39-prerequisites.json",
+      "docs/art/qa/ART-39-preview-index.json",
+      "docs/art/qa/ART-39-scope-audit.json",
+      "docs/art/qa/ART-39-technical.json",
+      "docs/art/qa/ART-39.json",
+      "docs/art/tasks.json"
+    ],
+    "recorded_before_commit": true
+  },
+  "pending": [],
+  "integration_pending": [
+    "Future Unity integration remains outside ART-39.",
+    "CH07 is art only; waiter has no RoleData. No game role, catalog or balance was added.",
+    "ART-36 historical audit reported 227 earlier importers differing from proposals and no matches for its 265 GUIDs in 175 serialized files; those findings were not re-audited or repaired in ART-39.",
+    "BMC, documentary reports and debriefing still await their final model/screen."
+  ],
+  "commit_reference": "Recorded by queue finish after creation of the single commit.",
+  "integration_note": "No Unity execution, scenes, gameplay, catalogs, economy, packages or push."
+}

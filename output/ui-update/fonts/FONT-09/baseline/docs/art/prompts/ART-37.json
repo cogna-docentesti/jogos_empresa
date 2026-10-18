@@ -1,0 +1,427 @@
+{
+  "task_id": "ART-37",
+  "date": "2026-10-15",
+  "status": "validado",
+  "tool": "original SVG + sharp/librsvg",
+  "model": null,
+  "imagegen_required": false,
+  "imagegen_used": false,
+  "method_reason": "Os quatro ícones são vector_or_code no manifesto; SVG original mantém precisão e consistência do kit.",
+  "producer_source": "art-source/editable/ART-37/produce_art37.py",
+  "renderer": {
+    "tool": "sharp/librsvg",
+    "versions": {
+      "aom": "3.15.1",
+      "archive": "3.8.9",
+      "cairo": "1.18.6",
+      "cgif": "0.5.4",
+      "exif": "0.6.26",
+      "expat": "2.8.5",
+      "ffi": "3.8.0",
+      "fontconfig": "2.18.3",
+      "freetype": "2.14.3",
+      "fribidi": "1.0.17",
+      "glib": "2.90.0",
+      "harfbuzz": "14.5.0",
+      "heif": "1.23.5",
+      "highway": "1.4.0",
+      "imagequant": "2.4.1",
+      "lcms": "2.19.1",
+      "mozjpeg": "0826579",
+      "pango": "1.58.2",
+      "pixman": "0.46.4",
+      "png": "1.6.58",
+      "proxy-libintl": "0.5",
+      "rsvg": "2.63.2",
+      "tiff": "4.7.2",
+      "uhdr": "2.0.2",
+      "vips": "8.18.7",
+      "webp": "1.6.0",
+      "xml2": "2.15.4",
+      "zlib-ng": "2.3.3",
+      "sharp": "0.35.5"
+    },
+    "exported": 4
+  },
+  "assets": [
+    {
+      "id": "ICON_PARTNERS",
+      "path": "Assets/Art/new/reports/bmc/icons/partners.png",
+      "status": "validado",
+      "tool": "original SVG + sharp/librsvg",
+      "model": null,
+      "origin": "Geometria vetorial original da especificação ART-37 e linguagem de ícones ART-06/07.",
+      "exact_prompt": "Produzir somente ICON_PARTNERS: Símbolo sóbrio do bloco BMC partners; alfa real, master tintável, sem label. Outros cinco blocos reutilizam ícones do kit.\nAperto de mãos geométrico com dois punhos, representando acordo entre parceiros; não repetir equipe ou elos de coerência.\nSVG original, branco #FFFFFF tintável, traço-base 16 px com terminais e junções arredondados coerentes com ART-06/07. Sem fundo, badge, sombra, label ou logo.\nPNG RGBA 8-bit sRGB 256x256; display 40x40 contain; conferência adicional 32/48 px. Pivot [0.5,0.5], bordas 9-slice zero, margem transparente mínima de 10%.\nUm símbolo por arquivo. Cinco blocos do BMC reutilizam o kit. BMC, balanço e fluxo de caixa mantêm layout, texto e dados nativos; período aceita 3 ou 12 meses.\nNão produzir tela, screenshot de relatório, números, gráfico, personagem, cenário ou UI.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_team.svg",
+          "sha256": "c085706e510d8b87213db405c272b0f3b41d6991668bed72200c4a1d455e1a66"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_coherence.svg",
+          "sha256": "321383af290c2ddab0535f4ad01dd514d3bbdc07846972d807963f54745895aa"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_cart.svg",
+          "sha256": "e587fb31fabf26224f4184b366f2502ac10292bd4adb861b8f5cc624c86d3653"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_star.png",
+          "sha256": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_clients.png",
+          "sha256": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d"
+        }
+      ],
+      "source_editable": "art-source/editable/reports/bmc/icons/partners.svg",
+      "source_sha256": "85f471f3b201b4dc0307443c784450e3e35391ba21b61a66803d0ff8e111c4bd",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "display_size_px": [
+        40,
+        40
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "sha256": "eec0b27141d683ca4ea1943bc488183e68767b30e047896a4d49c7865dba52b7",
+      "meta_sha256": "10822bedabde5ba2cff3648de02508c7568f4b1ba5a8848382f0f2233d265a8f",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          32,
+          64,
+          224,
+          198
+        ],
+        "transparent_fraction": 0.8166351318359375,
+        "opaque_fraction": 0.15985107421875,
+        "transparent_margins_ltrb_px": [
+          32,
+          64,
+          32,
+          58
+        ],
+        "all_visible_rgb_white": true,
+        "outer_edge_alpha_max": 0,
+        "alpha_sha256": "4af2828ebb8455a209337c9efc7acaadce620fece485ff125dfc7a8f25ff9953"
+      },
+      "character_ids": [],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "inspection_proof": "art-source/previews/ART-37/partners-native-and-display.png",
+      "visual_observation": "Aperto de mãos abstrato legível: dois punhos e contato central preservados em 40 px. Símbolo largo e centrado, distinto do grupo de equipe e dos elos de coerência. Sem anatomia ilustrada ou detalhe fino de dedos."
+    },
+    {
+      "id": "ICON_VALUE_PROPOSITION",
+      "path": "Assets/Art/new/reports/bmc/icons/value_proposition.png",
+      "status": "validado",
+      "tool": "original SVG + sharp/librsvg",
+      "model": null,
+      "origin": "Geometria vetorial original da especificação ART-37 e linguagem de ícones ART-06/07.",
+      "exact_prompt": "Produzir somente ICON_VALUE_PROPOSITION: Símbolo sóbrio do bloco BMC value_proposition; alfa real, master tintável, sem label. Outros cinco blocos reutilizam ícones do kit.\nDiamante facetado, representando valor oferecido; silhueta distinta da estrela de pontuação e do polegar de reputação.\nSVG original, branco #FFFFFF tintável, traço-base 16 px com terminais e junções arredondados coerentes com ART-06/07. Sem fundo, badge, sombra, label ou logo.\nPNG RGBA 8-bit sRGB 256x256; display 40x40 contain; conferência adicional 32/48 px. Pivot [0.5,0.5], bordas 9-slice zero, margem transparente mínima de 10%.\nUm símbolo por arquivo. Cinco blocos do BMC reutilizam o kit. BMC, balanço e fluxo de caixa mantêm layout, texto e dados nativos; período aceita 3 ou 12 meses.\nNão produzir tela, screenshot de relatório, números, gráfico, personagem, cenário ou UI.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_team.svg",
+          "sha256": "c085706e510d8b87213db405c272b0f3b41d6991668bed72200c4a1d455e1a66"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_coherence.svg",
+          "sha256": "321383af290c2ddab0535f4ad01dd514d3bbdc07846972d807963f54745895aa"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_cart.svg",
+          "sha256": "e587fb31fabf26224f4184b366f2502ac10292bd4adb861b8f5cc624c86d3653"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_star.png",
+          "sha256": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_clients.png",
+          "sha256": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d"
+        }
+      ],
+      "source_editable": "art-source/editable/reports/bmc/icons/value_proposition.svg",
+      "source_sha256": "9b738290a87a9db6016903a2598c307306144895c2b090cffb5bcd085738e037",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "display_size_px": [
+        40,
+        40
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "sha256": "9737522bd95d6e01bc581d9f1b10cd11045e3c6d9685bcbf88b4d40327a58d3b",
+      "meta_sha256": "8bb7f7e68a34d00bad8e521111593a2df5802e309666235b21f7c530ae65e41f",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          32,
+          48,
+          224,
+          216
+        ],
+        "transparent_fraction": 0.77850341796875,
+        "opaque_fraction": 0.2013702392578125,
+        "transparent_margins_ltrb_px": [
+          32,
+          48,
+          32,
+          40
+        ],
+        "all_visible_rgb_white": true,
+        "outer_edge_alpha_max": 0,
+        "alpha_sha256": "a40e29b324de251cd5bc1dc169f660761cce6dcffa2c9a92c80660d89630745a"
+      },
+      "character_ids": [],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "inspection_proof": "art-source/previews/ART-37/value_proposition-native-and-display.png",
+      "visual_observation": "Diamante facetado com silhueta e vazios internos claros em 40 px; distinto da estrela de score. Contorno, junções e peso coerentes com os ícones financeiros existentes."
+    },
+    {
+      "id": "ICON_CUSTOMER_RELATIONSHIP",
+      "path": "Assets/Art/new/reports/bmc/icons/customer_relationship.png",
+      "status": "validado",
+      "tool": "original SVG + sharp/librsvg",
+      "model": null,
+      "origin": "Geometria vetorial original da especificação ART-37 e linguagem de ícones ART-06/07.",
+      "exact_prompt": "Produzir somente ICON_CUSTOMER_RELATIONSHIP: Símbolo sóbrio do bloco BMC customer_relationship; alfa real, master tintável, sem label. Outros cinco blocos reutilizam ícones do kit.\nBalão de conversa com coração sólido, representando cuidado e vínculo com o cliente; não repetir pessoa ou grupo de clientes.\nSVG original, branco #FFFFFF tintável, traço-base 16 px com terminais e junções arredondados coerentes com ART-06/07. Sem fundo, badge, sombra, label ou logo.\nPNG RGBA 8-bit sRGB 256x256; display 40x40 contain; conferência adicional 32/48 px. Pivot [0.5,0.5], bordas 9-slice zero, margem transparente mínima de 10%.\nUm símbolo por arquivo. Cinco blocos do BMC reutilizam o kit. BMC, balanço e fluxo de caixa mantêm layout, texto e dados nativos; período aceita 3 ou 12 meses.\nNão produzir tela, screenshot de relatório, números, gráfico, personagem, cenário ou UI.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_team.svg",
+          "sha256": "c085706e510d8b87213db405c272b0f3b41d6991668bed72200c4a1d455e1a66"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_coherence.svg",
+          "sha256": "321383af290c2ddab0535f4ad01dd514d3bbdc07846972d807963f54745895aa"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_cart.svg",
+          "sha256": "e587fb31fabf26224f4184b366f2502ac10292bd4adb861b8f5cc624c86d3653"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_star.png",
+          "sha256": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_clients.png",
+          "sha256": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d"
+        }
+      ],
+      "source_editable": "art-source/editable/reports/bmc/icons/customer_relationship.svg",
+      "source_sha256": "047f0086c434e3ba5a6e85ce282da2fb089e51a9e696ad42767722137b23d056",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "display_size_px": [
+        40,
+        40
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "sha256": "51d16f29117bd09047dc8aa21f041721d05c30f1c8865ba6e29a5a1c0e365233",
+      "meta_sha256": "7f8e3d25e2d56c9a1167d543f3e815ef010b592127ef2f70e6ebea437969a86c",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          32,
+          40,
+          224,
+          224
+        ],
+        "transparent_fraction": 0.7866973876953125,
+        "opaque_fraction": 0.200958251953125,
+        "transparent_margins_ltrb_px": [
+          32,
+          40,
+          32,
+          32
+        ],
+        "all_visible_rgb_white": true,
+        "outer_edge_alpha_max": 0,
+        "alpha_sha256": "4207cdeb237e009843368291838c795a3a3bbb7616d7911ad4594ad83bbba5fa"
+      },
+      "character_ids": [],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "inspection_proof": "art-source/previews/ART-37/customer_relationship-native-and-display.png",
+      "visual_observation": "Balão com cauda e coração reconhecíveis em 40 px; contorno e coração permanecem separados. Sem retrato de cliente, label ou texto no sprite."
+    },
+    {
+      "id": "ICON_SALES_CHANNELS",
+      "path": "Assets/Art/new/reports/bmc/icons/sales_channels.png",
+      "status": "validado",
+      "tool": "original SVG + sharp/librsvg",
+      "model": null,
+      "origin": "Geometria vetorial original da especificação ART-37 e linguagem de ícones ART-06/07.",
+      "exact_prompt": "Produzir somente ICON_SALES_CHANNELS: Símbolo sóbrio do bloco BMC sales_channels; alfa real, master tintável, sem label. Outros cinco blocos reutilizam ícones do kit.\nUm ponto de origem ligado a três saídas, representando distribuição por canais; sem copiar carrinho ou loja existentes.\nSVG original, branco #FFFFFF tintável, traço-base 16 px com terminais e junções arredondados coerentes com ART-06/07. Sem fundo, badge, sombra, label ou logo.\nPNG RGBA 8-bit sRGB 256x256; display 40x40 contain; conferência adicional 32/48 px. Pivot [0.5,0.5], bordas 9-slice zero, margem transparente mínima de 10%.\nUm símbolo por arquivo. Cinco blocos do BMC reutilizam o kit. BMC, balanço e fluxo de caixa mantêm layout, texto e dados nativos; período aceita 3 ou 12 meses.\nNão produzir tela, screenshot de relatório, números, gráfico, personagem, cenário ou UI.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_team.svg",
+          "sha256": "c085706e510d8b87213db405c272b0f3b41d6991668bed72200c4a1d455e1a66"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_coherence.svg",
+          "sha256": "321383af290c2ddab0535f4ad01dd514d3bbdc07846972d807963f54745895aa"
+        },
+        {
+          "path": "art-source/editable/shared/icons/icon_cart.svg",
+          "sha256": "e587fb31fabf26224f4184b366f2502ac10292bd4adb861b8f5cc624c86d3653"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_star.png",
+          "sha256": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7"
+        },
+        {
+          "path": "Assets/Art/new/shared/icons/icon_clients.png",
+          "sha256": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d"
+        }
+      ],
+      "source_editable": "art-source/editable/reports/bmc/icons/sales_channels.svg",
+      "source_sha256": "fd9f4ef6bb74266e4bf9aefcd10ac3479772457f34d7cbcdd6b0479db03daeaf",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "display_size_px": [
+        40,
+        40
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "sha256": "ab4e39fc5ccefc1fff5cff0abf678a64b157d62cc86cd8879c9add530b028ab2",
+      "meta_sha256": "431dd8fa7b2cd402093f8bb59b073ce8f2511e3bfbed4bdd67df2c68f98abecd",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          36,
+          32,
+          220,
+          224
+        ],
+        "transparent_fraction": 0.774169921875,
+        "opaque_fraction": 0.217803955078125,
+        "transparent_margins_ltrb_px": [
+          36,
+          32,
+          36,
+          32
+        ],
+        "all_visible_rgb_white": true,
+        "outer_edge_alpha_max": 0,
+        "alpha_sha256": "115e9022c047d5a1bbc866b01119c33cb238ad7b938bec8e85634ecaea0f1a7c"
+      },
+      "character_ids": [],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "inspection_proof": "art-source/previews/ART-37/sales_channels-native-and-display.png",
+      "visual_observation": "Origem superior e três terminais inferiores distintos, com vazios internos e conexões visíveis em 40 px. A revisão ampliou a separação dos terminais; prova final reinspecionada nos dois fundos."
+    }
+  ],
+  "revisions": [
+    "Após inspeção visual, saídas de ICON_SALES_CHANNELS reduzidas para separar os três terminais. Fontes e provas atualizadas antes da validação final."
+  ]
+}

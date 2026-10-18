@@ -1,0 +1,121 @@
+Assets/Scripts/Game\Adapter\Out\Persistence\SqliteLocationRepository.cs:20:    /// o banco. Depois disso o banco e a fonte. Para levar uma mudanca feita nos
+Assets/Scripts/Game\Adapter\Out\Persistence\SqliteLocationRepository.cs:124:        // exatamente o mesmo texto vindo de qualquer uma das duas fontes.
+Assets/Editor/UI\ConceptUiRevision.cs:47:            GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+Assets/Editor/UI\ConceptUiRevision.cs:52:        {var t=Find(p,n).GetComponent<TMP_Text>();t.fontSize=size;t.fontWeight=bold?FontWeight.Bold:FontWeight.Regular;t.fontStyle=bold?FontStyles.Bold:FontStyles.Normal;}
+Assets/Editor/UI\ConceptUiRevision.cs:266:                var b=Find(side,buttonName);var label=b.GetComponentInChildren<TMP_Text>(true);Place(label.transform,44,4,180,40);label.fontSize=22;
+Assets/Editor/UI\ConceptUiRevision.cs:287:            var font=AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath);
+Assets/Editor/UI\ConceptUiRevision.cs:288:            font.boldStyle=2.5f;font.boldSpacing=0;EditorUtility.SetDirty(font);
+Assets/Editor/UI\ConceptUiRevision.cs:314:                    var t=period.GetComponent<TMP_Text>();t.fontSize=20;t.color=GamePalette.Muted;
+Assets/Editor/UI\ConceptUiRevision.cs:423:            foreach(var t in canvas.GetComponentsInChildren<TMP_Text>(true)) if((t.fontStyle&FontStyles.Bold)!=0)t.characterSpacing=0;
+Assets/Editor/UI\BankruptcyUiMigration.cs:41:            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\BackButtonStyler.cs:35:    private const string FontGuid = "89cea402e3db5bf4d9bc9d4f698b7692"; // InterTight-Variable (TMP)
+Assets/Editor/UI\BackButtonStyler.cs:65:        var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(AssetDatabase.GUIDToAssetPath(FontGuid));
+Assets/Editor/UI\BackButtonStyler.cs:67:        if (baseSprite == null || chevron == null || font == null)
+Assets/Editor/UI\BackButtonStyler.cs:69:            Debug.LogError($"[BackButtonStyler] Asset nao encontrado. sprite={baseSprite != null} seta={chevron != null} fonte={font != null}");
+Assets/Editor/UI\BackButtonStyler.cs:127:                label = go.AddComponent<TextMeshProUGUI>();
+Assets/Editor/UI\BackButtonStyler.cs:137:            label.font = font;
+Assets/Editor/UI\BackButtonStyler.cs:138:            label.fontStyle = FontStyles.Bold;
+Assets/Editor/UI\BackButtonStyler.cs:140:            label.fontSize = GameTypography.Button;
+Assets/Editor/UI\DialogUiMigration.cs:32:            var t=Ensure<TextMeshProUGUI>(r); GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+Assets/Editor/UI\EventUiMigration.cs:40:            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\EstablishmentUiMigration.cs:41:            GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+Assets/Editor/UI\FeedbackUiMigration.cs:37:            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), GameTypography.Body, false);
+Assets/Editor/UI\FeedbackUiMigration.cs:83:            var message = Text(panel.transform, "Message", "", 20, 10, 812, 52); message.fontSize = GameTypography.Caption;
+Assets/Editor/UI\FinancialUiMigration.cs:37:            GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\FinalReportUiMigration.cs:41:            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\FinalReportUiMigration.cs:132:            Text(overview, "ArtNote", "Seus registros continuam disponíveis para consulta.\n\nO BMC reúne escolhas confirmadas e aponta o que ainda não possui fonte. A reflexão distingue decisões salvas de justificativas não registradas.", 1340, 660, 532, 260, GameTypography.Body);
+Assets/Editor/UI\HubUiMigration.cs:19:        private static TMP_FontAsset Font => AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath);
+Assets/Editor/UI\HubUiMigration.cs:54:            GameTypography.Apply(text,Font,size,bold); text.text=value; text.color=color??GamePalette.Ink;
+Assets/Editor/UI\HubUiMigration.cs:220:            GameTypography.Apply(value,Font,GameTypography.Body,true); value.color=GamePalette.OnDark;
+Assets/Editor/UI\GlobalThemeMigration.cs:15:        private static TMP_FontAsset font;
+Assets/Editor/UI\GlobalThemeMigration.cs:24:            font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath);
+Assets/Editor/UI\GlobalThemeMigration.cs:25:            foreach (var path in new[]{GameTypography.FontAssetPath, "Assets/TextMesh Pro/Fonts/InterTight-Italic.asset"})
+Assets/Editor/UI\GlobalThemeMigration.cs:27:                var asset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
+Assets/Editor/UI\GlobalThemeMigration.cs:150:                bool bold=(text.fontStyle & FontStyles.Bold)!=0 || size==GameTypography.ScreenTitle || size==GameTypography.SectionTitle;
+Assets/Editor/UI\GlobalThemeMigration.cs:151:                GameTypography.Apply(text,font,size,bold);
+Assets/Editor/UI\LegacyScreenRestyler.cs:13:        public static void DryRunFonts() => DryRun();
+Assets/Editor/UI\LegacyScreenRestyler.cs:14:        public static void ApplyFonts() => Debug.LogWarning("The legacy +25% font operation is retired. Use the UI-02 shared roles.");
+Assets/Editor/UI\IdentificationPanelBuilder.cs:17:        private static TMP_FontAsset font;
+Assets/Editor/UI\IdentificationPanelBuilder.cs:32:            font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/TextMesh Pro/Fonts/InterTight-Variable.asset");
+Assets/Editor/UI\IdentificationPanelBuilder.cs:33:            if (font == null) throw new InvalidOperationException("Inter Tight is missing.");
+Assets/Editor/UI\IdentificationPanelBuilder.cs:254:            GameTypography.Apply(text, font, size, bold); text.text = value;
+Assets/Editor/UI\IdentificationPanelBuilder.cs:255:            text.fontSize = size; text.enableAutoSizing = false; text.fontStyle = bold ? FontStyles.Bold : FontStyles.Normal;
+Assets/Editor/UI\IdentificationPanelBuilder.cs:263:            var text = r.GetComponent<TextMeshProUGUI>() ?? r.gameObject.AddComponent<TextMeshProUGUI>();
+Assets/Editor/UI\EquipmentUiMigration.cs:38:            GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:62:        private const string FontPath = "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset";
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:262:                  LocationMockupTokens.FontTitle, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:268:                  LocationMockupTokens.FontBody, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:310:            var label = Label(step, text, LocationMockupTokens.FontStep, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:375:            var text = Label(label, "MENU", LocationMockupTokens.FontMenu, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:449:            Label(name, zone.Name, LocationMockupTokens.FontMarkerName, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:455:            Label(sub, zone.Subtitle, LocationMockupTokens.FontMarkerSub, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:517:                  LocationMockupTokens.FontBody, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:551:                  LocationMockupTokens.FontZoneTitle, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:557:                  LocationMockupTokens.FontZoneSubtitle, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:563:                  LocationMockupTokens.FontBody, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:618:            Label(captionRt, caption, LocationMockupTokens.FontStatRow, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:623:            Label(valueRt, value, LocationMockupTokens.FontStatRow, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:646:                  LocationMockupTokens.FontMenu, FontStyles.Normal,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:689:            var text = Label(label, "CONTINUAR", LocationMockupTokens.FontContinue, FontStyles.Bold,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:828:                                             FontStyles style, Color color,
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:831:            var label = rt.gameObject.AddComponent<TextMeshProUGUI>();
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:833:            var font = Load<TMP_FontAsset>(FontPath);
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:835:            if (font != null)
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:836:                label.font = font;
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:839:            GameTypography.Apply(label, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, (style & FontStyles.Bold) != 0);
+Assets/Editor/UI\LocationScreenMockupBuilder.cs:840:            label.fontStyle          = style;
+Assets/Editor/UI\MenuPanelBuilder.cs:92:                   "TUDO PRONTO. Nada que ja existia teve cor, fonte ou posicao alterada.");
+Assets/Editor/UI\MenuPanelBuilder.cs:146:                    + "Panel_Menu que voce ajustou na mao.\n\nAs cores, fontes e posicoes que voce "
+Assets/Editor/UI\MenuPanelBuilder.cs:408:            UiFactory.Text(title, "Menu do Jogo", GameTypography.MapBarTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
+Assets/Editor/UI\MenuPanelBuilder.cs:412:            UiFactory.Text(subtitle, "Areas revisitaveis do seu negocio", GameTypography.MapBarSubtitle, FontStyles.Normal,
+Assets/Editor/UI\MenuPanelBuilder.cs:450:            UiFactory.Text(captionLabel, caption, GameTypography.PillCaption, FontStyles.Normal, GamePalette.InkBody,
+Assets/Editor/UI\MenuPanelBuilder.cs:455:            valueLabel = UiFactory.Text(valueRt, value, GameTypography.PillValue, FontStyles.Bold, GamePalette.Parse(accentHex),
+Assets/Editor/UI\MenuPanelBuilder.cs:509:            UiFactory.Text(title, spec.Title, GameTypography.NodeTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.Center);
+Assets/Editor/UI\MenuPanelBuilder.cs:513:            UiFactory.Text(subtitle, spec.Subtitle, GameTypography.NodeSubtitle, FontStyles.Normal, GamePalette.InkCaption,
+Assets/Editor/UI\MenuPanelBuilder.cs:605:                                         GameTypography.Caption, FontStyles.Normal, GamePalette.Muted,
+Assets/Editor/UI\MenuPanelBuilder.cs:660:            var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Caption, FontStyles.Bold,
+Assets/Editor/UI\MenuPanelBuilder.cs:666:            var label = UiFactory.Text(valueRt, value, GameTypography.DisplayValue, FontStyles.Bold, GamePalette.Parse(accentHex),
+Assets/Editor/UI\MenuPanelBuilder.cs:714:            var captionLabel = UiFactory.Text(captionRt, caption.ToUpperInvariant(), GameTypography.Caption, FontStyles.Bold,
+Assets/Editor/UI\MenuPanelBuilder.cs:720:            return UiFactory.Text(valueRt, value, GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink,
+Assets/Editor/UI\MenuPanelBuilder.cs:775:            UiFactory.Text(label, text, GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
+Assets/Editor/UI\MenuPanelBuilder.cs:810:            UiFactory.Text(headline, "Tela em construcao", GameTypography.SectionTitle, FontStyles.Bold, GamePalette.Ink,
+Assets/Editor/UI\MenuPanelBuilder.cs:815:            UiFactory.Text(body, description, GameTypography.Body, FontStyles.Normal, GamePalette.InkBody,
+Assets/Editor/UI\MenuPanelBuilder.cs:868:            UiFactory.Text(backLabel, "Voltar", GameTypography.Body, FontStyles.Bold, GamePalette.Muted,
+Assets/Editor/UI\MenuPanelBuilder.cs:888:            UiFactory.Text(titleRt, title, GameTypography.ScreenTitle, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineLeft);
+Assets/Editor/UI\MenuPanelBuilder.cs:892:            var subtitleLabel = UiFactory.Text(subtitleRt, subtitle, GameTypography.ScreenHint, FontStyles.Normal, GamePalette.InkCaption,
+Assets/Editor/UI\MenuPanelBuilder.cs:925:            UiFactory.Text(label, "Menu do Jogo", GameTypography.Body, FontStyles.Bold, GamePalette.Parse(GamePalette.HexOnWarn),
+Assets/Editor/UI\LocationUiMigration.cs:16:        private static TMP_FontAsset Font => AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath);
+Assets/Editor/UI\LocationUiMigration.cs:39:            var t=Ensure<TextMeshProUGUI>(Node(p,name,x,y,w,h)); GameTypography.Apply(t,Font,size,bold);
+Assets/Editor/UI\MonthlyResultUiMigration.cs:41:            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\MenuPricingUiMigration.cs:31:            GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+Assets/Editor/UI\QuarterlyResultUiMigration.cs:41:            var t = Ensure<TextMeshProUGUI>(Node(p, n, x, y, w, h)); GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Editor/UI\RestaurantUiMigration.cs:32:            GameTypography.Apply(t,AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath),size,bold);
+Assets/Editor/UI\SharedUiShowcaseBuilder.cs:18:            return UiFactory.Text(Box(p,n,x,y,w,h),value,size,size>=32?FontStyles.Bold:FontStyles.Normal,
+Assets/Editor/UI\SharedUiShowcaseBuilder.cs:26:            label.alignment=TextAlignmentOptions.Center; label.fontStyle=FontStyles.Bold;
+Assets/Editor/UI\SharedUiShowcaseBuilder.cs:61:            var text=(TextMeshProUGUI)UiFactory.Text(UiFactory.EnsureChild(viewport,"Text"),"",24,FontStyles.Normal,GamePalette.Ink);
+Assets/Editor/UI\UiFactory.cs:40:        /// Quando FALSO (padrao), o builder so escreve cor, fonte e layout em
+Assets/Editor/UI\UiFactory.cs:469:        public static TextMeshProUGUI Text(RectTransform rt, string content, float size, FontStyles style,
+Assets/Editor/UI\UiFactory.cs:482:            GameTypography.Apply(label, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, (style & FontStyles.Bold) != 0);
+Assets/Editor/UI\UiFactory.cs:483:            label.fontStyle            = style;
+Assets/Editor/UI\UiFactory.cs:670:            Text(captionRt, caption, 22f, FontStyles.Normal, GamePalette.InkBody, TextAlignmentOptions.MidlineLeft);
+Assets/Editor/UI\UiFactory.cs:678:            valueLabel = Text(valueRt, value, 22f, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineRight);
+Assets/Editor/UI\TeamUiMigration.cs:39:            GameTypography.Apply(t, AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GameTypography.FontAssetPath), size, bold);
+Assets/Scripts/Game\Adapter\In\UI\FinalReportPresentation.cs:63:                Item("Fontes de receita", flow + "\nReceitas por produto ou canal: não disponíveis.", "Origem: receitas e resultados mensais salvos, sem divisão por produto ou canal.")
+Assets/Scripts/Game\Adapter\In\UI\FeedbackToast.cs:33:            message.fontSize = GameTypography.Body;
+Assets/Scripts/Game\Adapter\In\UI\Navigation\MenuNavigator.cs:15:    /// delegada ao UIStateListener. O registry permanece a fonte dos destinos.
+Assets/Scripts/Game\Adapter\In\UI\Theme\GameTypography.cs:9:        public const string FontAssetPath = "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset";
+Assets/Scripts/Game\Adapter\In\UI\Theme\GameTypography.cs:33:        public static void Apply(TMP_Text text, TMP_FontAsset font, float size, bool bold = false)
+Assets/Scripts/Game\Adapter\In\UI\Theme\GameTypography.cs:35:            text.font = font; text.fontSharedMaterial = font.material;
+Assets/Scripts/Game\Adapter\In\UI\Theme\GameTypography.cs:36:            text.fontSize = size; text.enableAutoSizing = false;
+Assets/Scripts/Game\Adapter\In\UI\Theme\GameTypography.cs:37:            text.fontStyle = bold ? FontStyles.Bold : FontStyles.Normal;
+Assets/Scripts/Game\Adapter\In\UI\Theme\GameTypography.cs:38:            text.fontWeight = bold ? FontWeight.Bold : FontWeight.Regular;
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:153:        public const float FontTitle        = GameTypography.ScreenTitle; // "Abertura do Restaurante"
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:154:        public const float FontContinue     = GameTypography.Button; // "CONTINUAR"
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:155:        public const float FontZoneTitle    = GameTypography.SectionTitle; // "AREA FINANCEIRA"
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:156:        public const float FontMarkerName   = GameTypography.NodeTitle;
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:157:        public const float FontStatRow      = GameTypography.Body; // rotulo e valor
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:158:        public const float FontMenu         = GameTypography.Button; // MENU e texto de destaque
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:159:        public const float FontBody         = GameTypography.Body; // subtitulo da tela, descricao
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:160:        public const float FontZoneSubtitle = GameTypography.Label;
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:161:        public const float FontMarkerSub    = GameTypography.Caption;
+Assets/Scripts/Game\Adapter\In\UI\Theme\LocationMockupTokens.cs:162:        public const float FontStep         = GameTypography.Caption; // "ETAPA 1 DE 4"

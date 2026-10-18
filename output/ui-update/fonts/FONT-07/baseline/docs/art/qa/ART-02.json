@@ -1,0 +1,58 @@
+{
+  "task_id": "ART-02",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — revisão visual do agente",
+  "scope": "Dois novos masters, CH05 e CH06, conforme confirmação do usuário.",
+  "identity_basis": "Novas identidades propostas no briefing ART-02, fixadas pelos arquivos entregues. Concepts e masters ART-01 usados como referência de linguagem visual.",
+  "technical_validation": {
+    "command": "python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-02",
+    "passed": true,
+    "asset_count": 2,
+    "errors": [],
+    "report": "docs/art/qa/ART-02-technical.json"
+  },
+  "visual_validation": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "display_box_px": [
+      420,
+      760
+    ],
+    "fit": "contain, escala uniforme",
+    "detail_scale": "1:1",
+    "contact_sheet": "art-source/previews/ART-02/ART-02-contact-sheet.png",
+    "preview_source": "art-source/editable/qa/ART-02-preview.py",
+    "checks": [
+      "Cartoon editorial adulto, contornos e sombreamento coerentes com os concepts e masters ART-01.",
+      "CH05: pele castanha escura, coque crespo, dólmã clara e avental ameixa.",
+      "CH06: cabelo preto curto, rosto sem barba, jaqueta clara e avental grafite com detalhe lilás; identidade distinta de CH02/CH04.",
+      "Corpo inteiro, mãos, cabeça, pés, silhueta, perspectiva e luz inspecionados.",
+      "Alfa real sobre fundos claros e escuros, sem checkerboard ou halo perceptível.",
+      "Margem da silhueta visível superior a 10% em cada borda; medidas em ART-02-measurements.json.",
+      "Sem texto, logo, UI, cenário, outras pessoas ou props incorporados.",
+      "PNG final copiado byte a byte da ferramenta integrada; previews não alteram o master."
+    ]
+  },
+  "alpha_note": "Alfa original de 0 a 254 preservado. alpha_bbox inclui pixels de opacidade residual muito baixa; a margem da silhueta visível é medida com alfa >= 128 e complementada pela inspeção visual.",
+  "assets": [
+    {
+      "id": "CH05_CANONICAL",
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Mulher adulta de cerca de 40 anos, pele negra castanha escura de subtom quente, olhos castanho-escuros, rosto oval largo com maçãs suaves, nariz proporcional e lábios naturais. Cabelo preto crespo preso em coque alto compacto. Compleição adulta média robusta. Dólmã marfim de gola curta, fechamento transpassado e botões claros em duas fileiras visíveis, mangas dobradas até os antebraços; avental ameixa de alças simples, bolso frontal retangular liso e comprimento próximo dos joelhos; calça de trabalho grafite e sapatos fechados grafite de sola robusta. Sem chapéu, boné, óculos ou joias. Preservar estes traços e proporções nas próximas poses."
+    },
+    {
+      "id": "CH06_CANONICAL",
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Homem adulto de cerca de 40 anos, pele morena clara de subtom quente, olhos castanho-escuros, rosto oval retangular com queixo arredondado, sem barba nem bigode. Cabelo preto curto penteado para o lado, risca lateral discreta e volume suave na frente. Compleição adulta média. Jaqueta de cozinha marfim de gola curta e fechamento transpassado, botões grafite e mangas dobradas até os antebraços; avental grafite de alças simples, comprimento próximo dos joelhos, bolso frontal retangular liso com faixa lilás fina na borda superior; calça de trabalho e sapatos fechados grafite. Sem óculos, boné ou caricatura. Rosto distinto de CH02 e CH04; preservar estes traços e proporções nas próximas poses."
+    }
+  ],
+  "pending": []
+}

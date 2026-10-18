@@ -1,0 +1,48 @@
+ART-21 — Equipamentos básicos de estrutura
+Escopo: nucleo
+Pré-requisitos: ART-03
+
+Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.
+
+COMANDO PARA O CODEX
+Use $cogna-artista para executar somente ART-21 — Equipamentos básicos de estrutura. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-21.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.
+
+LEITURAS
+docs/art/manifest.json, tokens.json, characters.json e sources.json
+Referências em art-source/references/concepts; masters canônicos em Assets/Art/new/characters/CHxx após ART-01/02.
+
+ENTREGÁVEIS
+Caminhos dos PNGs relativos a Assets/Art/new. Referências, fontes editáveis e contratos relativos à raiz do projeto, conforme o manifesto.
+EQUIPMENT_FREEZER_HORIZONTAL | equipment/basic/freezer_horizontal.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Freezer Horizontal. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.
+Fonte: Assets/Resources/Equipments/EQUIP_FreezerHorizontal.asset
+Personagens: nenhum
+
+EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA | equipment/basic/geladeira_comercial_dupla.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Geladeira Comercial Dupla. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família.
+Fonte: Assets/Resources/Equipments/EQUIP_GeladeiraComercialDupla.asset
+Personagens: nenhum
+
+EQUIPMENT_MOBILIARIO_BASICO | equipment/basic/mobiliario_basico.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Mobiliário Básico (10 mesas/40 cadeiras). Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família. Representar conjunto legível com uma mesa e algumas cadeiras; quantidade contratada permanece em texto, não desenhar 40 miniaturas.
+Fonte: Assets/Resources/Equipments/EQUIP_MobiliarioBasico.asset
+Personagens: nenhum
+
+EQUIPMENT_SISTEMA_PDV_COMPUTADOR | equipment/basic/sistema_pdv_computador.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Sistema PDV + Computador. Equipamento comercial em três quartos com frente e lado direito visíveis, luz no alto à esquerda, contorno ameixa, metal fosco cinza-ardósia em 2–3 tonalidades, silhueta reconhecível. Mesmo enquadramento e escala relativa da família. Conjunto de terminal/computador, monitor e impressora de recibo; acessórios coerentes com o sprite atual.
+Fonte: Assets/Resources/Equipments/EQUIP_SistemaPdvComputador.asset
+Personagens: nenhum
+
+CRITÉRIOS DE ENTREGA
+Cada PNG separado e no caminho do manifesto; nada permanece apenas em pasta de geração.
+Alfa real nos recortes e dimensões exatas verificadas; não fingir export correto quando divergir.
+Nomes e IDs preservados; sem texto, UI ou gráfico incorporado às ilustrações.
+Validar tecnicamente com o helper do agente e inspecionar visualmente estilo/identidade.
+Atualizar status somente após arquivos reais e QA. Registrar prompts em docs/art/prompts/ART-21.json e preview de QA em art-source/previews.
+Não mudar o jogo; não produzir outros lotes automaticamente.
+display_size_px é caixa de layout: preserveAspect/contain nos recortes, sem esticar. Componentes 9-slice usam bordas preservadas. Fontes SVG/código editáveis precisam existir no source_editable especificado quando production_method=vector_or_code.
+Validador: python tools/art/validate_assets.py --task ART-21

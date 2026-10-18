@@ -1,0 +1,960 @@
+{
+  "schema_version": 2,
+  "task_id": "ART-10",
+  "date": "2026-10-14",
+  "master_size_px": [
+    1920,
+    1080
+  ],
+  "coordinate_space": "map1920x1080",
+  "coordinate_origin": "top_left_y_down",
+  "rect_semantics": "[x,y,width,height], pixels do master; pontos e polígonos em pixels do master.",
+  "canonical_master": {
+    "asset_id": "MAP_BASE",
+    "path": "Assets/Art/new/location/map/map_base.png",
+    "sha256": "9d0df1c72c2ba94620a8bfa7ad4179755e59b10ae54a11f8c9fc329a0accc71a",
+    "source_concept": "art-source/references/concepts/01-hub.png"
+  },
+  "camera": {
+    "projection": "orthographic_oblique_editorial",
+    "orientation_description": "Vista elevada oblíqua do sudeste para o noroeste, com verticais desenhadas para cima e ruas em diagonais. Rio em curva do alto/esquerda para a margem esquerda inferior; duas pontes. Orientação aprovada do concept, reenquadrada para o master horizontal.",
+    "light_direction_description": "Luz quente suave do alto à esquerda; sombras locais para baixo/direita. Sem sombra externa de pedestal.",
+    "screen_axes_guide": {
+      "ground_right": [
+        0.8660254,
+        0.5
+      ],
+      "ground_left": [
+        -0.8660254,
+        0.5
+      ],
+      "vertical": [
+        0,
+        -1
+      ]
+    },
+    "calibration_note": "Eixos são guias de desenho aproximados, não parâmetros de câmera 3D calibrados. O PNG final é a autoridade de composição."
+  },
+  "display_transform": {
+    "uniform_scale": 0.6666666666666666,
+    "offset_px": [
+      24,
+      176
+    ],
+    "target_viewport_px": [
+      24,
+      112,
+      1280,
+      848
+    ],
+    "fit_mode": "contain",
+    "offset_semantics": "Offset absoluto no canvas 1920x1080. x_canvas = 24 + x_master * 2/3; y_canvas = 176 + y_master * 2/3.",
+    "rendered_bounds_px": [
+      24,
+      176,
+      1280,
+      720
+    ],
+    "viewport_local_offset_px": [
+      0,
+      64
+    ],
+    "native_unity_top_left_conversion": "Para RectTransform com âncora/pivot top-left, anchoredPosition = [x_canvas, -y_canvas] relativo ao canvas. Não reutilizar coordenadas legadas.",
+    "rule": "Aplicar exatamente a mesma escala uniforme e offset a todas as camadas, polígonos, hit-areas e âncoras. Não esticar para 1280x848 nem recortar o master."
+  },
+  "zones": [
+    {
+      "catalog_id": "university",
+      "name": "Área Educacional",
+      "landmark_asset_id": "MAP_UNIVERSITY",
+      "polygon_px": [
+        [
+          125,
+          282
+        ],
+        [
+          449,
+          127
+        ],
+        [
+          650,
+          240
+        ],
+        [
+          297,
+          388
+        ]
+      ],
+      "label_anchor_px": [
+        430,
+        88
+      ],
+      "building_ground_anchor_px": [
+        390,
+        315
+      ],
+      "building_envelope_px": [
+        125,
+        40,
+        525,
+        365
+      ],
+      "notes": "Lote superior esquerdo, na margem oeste do rio. Edificação do ART-11 deve permanecer dentro do envelope e da implantação."
+    },
+    {
+      "catalog_id": "bank",
+      "name": "Área Financeira",
+      "landmark_asset_id": "MAP_BANK",
+      "polygon_px": [
+        [
+          1062,
+          242
+        ],
+        [
+          1236,
+          315
+        ],
+        [
+          1121,
+          387
+        ],
+        [
+          947,
+          315
+        ]
+      ],
+      "label_anchor_px": [
+        1100,
+        172
+      ],
+      "building_ground_anchor_px": [
+        1100,
+        341
+      ],
+      "building_envelope_px": [
+        935,
+        162,
+        320,
+        239
+      ],
+      "notes": "Lote superior central a leste do rio; manter a ponte e suas margens livres."
+    },
+    {
+      "catalog_id": "store",
+      "name": "Área Comercial",
+      "landmark_asset_id": "MAP_STORE",
+      "polygon_px": [
+        [
+          1575,
+          249
+        ],
+        [
+          1838,
+          344
+        ],
+        [
+          1670,
+          493
+        ],
+        [
+          1370,
+          382
+        ]
+      ],
+      "label_anchor_px": [
+        1600,
+        194
+      ],
+      "building_ground_anchor_px": [
+        1638,
+        409
+      ],
+      "building_envelope_px": [
+        1360,
+        180,
+        485,
+        326
+      ],
+      "notes": "Lote superior direito; fachada principal voltada para a rua central, abaixo/esquerda."
+    },
+    {
+      "catalog_id": "condominium",
+      "name": "Área Residencial",
+      "landmark_asset_id": "MAP_CONDOMINIUM",
+      "polygon_px": [
+        [
+          652,
+          647
+        ],
+        [
+          922,
+          855
+        ],
+        [
+          742,
+          979
+        ],
+        [
+          549,
+          1007
+        ],
+        [
+          307,
+          853
+        ]
+      ],
+      "label_anchor_px": [
+        637,
+        602
+      ],
+      "building_ground_anchor_px": [
+        640,
+        866
+      ],
+      "building_envelope_px": [
+        300,
+        592,
+        635,
+        425
+      ],
+      "notes": "Lote inferior esquerdo subdividido. Casas futuras ocupam gramados; conservar os caminhos internos e as margens com arbustos."
+    },
+    {
+      "catalog_id": "marketing",
+      "name": "Área Corporativa",
+      "landmark_asset_id": "MAP_MARKETING",
+      "polygon_px": [
+        [
+          1607,
+          675
+        ],
+        [
+          1835,
+          799
+        ],
+        [
+          1599,
+          993
+        ],
+        [
+          1332,
+          844
+        ]
+      ],
+      "label_anchor_px": [
+        1600,
+        615
+      ],
+      "building_ground_anchor_px": [
+        1595,
+        899
+      ],
+      "building_envelope_px": [
+        1320,
+        602,
+        535,
+        415
+      ],
+      "notes": "Lote inferior direito. Torres futuras respeitam o envelope sem invadir o comércio, o restaurante ou a rua."
+    }
+  ],
+  "central_site_bounds_px": [
+    945,
+    480,
+    455,
+    260
+  ],
+  "central_site": {
+    "polygon_px": [
+      [
+        1154,
+        496
+      ],
+      [
+        1371,
+        592
+      ],
+      [
+        1171,
+        711
+      ],
+      [
+        963,
+        596
+      ]
+    ],
+    "label_anchor_px": [
+      1165,
+      417
+    ],
+    "building_ground_anchor_px": [
+      1172,
+      657
+    ],
+    "door_anchor_px": [
+      1280,
+      642
+    ],
+    "building_envelope_px": [
+      960,
+      422,
+      425,
+      315
+    ],
+    "restaurant_asset_ids": [
+      "MAP_REST_FRANCES",
+      "MAP_REST_JAPONES",
+      "MAP_REST_LANCHES"
+    ],
+    "orientation_description": "Fachada/entrada voltada para baixo/direita; usar o mesmo chão, âncora de porta, footprint e escala nas três variantes.",
+    "footprint_rule": "Implantação da construção no polígono central; altura e detalhes dentro do envelope. Conservação da calçada e dos canteiros; sem construir sobre a rua."
+  },
+  "layers": [
+    {
+      "asset_id": "MAP_BASE",
+      "position_px": [
+        0,
+        0
+      ],
+      "scale": 1,
+      "order": 0,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-10"
+    },
+    {
+      "asset_id": "OVERLAY_UNIVERSITY",
+      "position_px": [
+        123,
+        125
+      ],
+      "scale": 1,
+      "order": 10,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-13",
+      "selection_group": "selected_zone",
+      "texture_size_px": [
+        529,
+        265
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        123,
+        125,
+        529,
+        265
+      ],
+      "asset_path": "Assets/Art/new/location/overlays/selection_university.png"
+    },
+    {
+      "asset_id": "OVERLAY_BANK",
+      "position_px": [
+        945,
+        240
+      ],
+      "scale": 1,
+      "order": 10,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-13",
+      "selection_group": "selected_zone",
+      "texture_size_px": [
+        293,
+        149
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        945,
+        240,
+        293,
+        149
+      ],
+      "asset_path": "Assets/Art/new/location/overlays/selection_bank.png"
+    },
+    {
+      "asset_id": "OVERLAY_STORE",
+      "position_px": [
+        1368,
+        247
+      ],
+      "scale": 1,
+      "order": 10,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-13",
+      "selection_group": "selected_zone",
+      "texture_size_px": [
+        472,
+        248
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1368,
+        247,
+        472,
+        248
+      ],
+      "asset_path": "Assets/Art/new/location/overlays/selection_store.png"
+    },
+    {
+      "asset_id": "OVERLAY_CONDOMINIUM",
+      "position_px": [
+        305,
+        645
+      ],
+      "scale": 1,
+      "order": 10,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-13",
+      "selection_group": "selected_zone",
+      "texture_size_px": [
+        619,
+        364
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        305,
+        645,
+        619,
+        364
+      ],
+      "asset_path": "Assets/Art/new/location/overlays/selection_condominium.png"
+    },
+    {
+      "asset_id": "OVERLAY_MARKETING",
+      "position_px": [
+        1330,
+        673
+      ],
+      "scale": 1,
+      "order": 10,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-13",
+      "selection_group": "selected_zone",
+      "texture_size_px": [
+        507,
+        322
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1330,
+        673,
+        507,
+        322
+      ],
+      "asset_path": "Assets/Art/new/location/overlays/selection_marketing.png"
+    },
+    {
+      "asset_id": "OVERLAY_CENTER",
+      "position_px": [
+        961,
+        494
+      ],
+      "scale": 1,
+      "order": 11,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-13",
+      "selection_group": "center_highlight",
+      "texture_size_px": [
+        412,
+        219
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        961,
+        494,
+        412,
+        219
+      ],
+      "asset_path": "Assets/Art/new/location/overlays/selection_center.png"
+    },
+    {
+      "asset_id": "MAP_UNIVERSITY",
+      "position_px": [
+        218,
+        51
+      ],
+      "scale": 1,
+      "order": 20,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-11",
+      "texture_size_px": [
+        309,
+        277
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        218,
+        51,
+        309,
+        277
+      ],
+      "asset_path": "Assets/Art/new/location/landmarks/compact/map_university.png"
+    },
+    {
+      "asset_id": "MAP_BANK",
+      "position_px": [
+        986,
+        151
+      ],
+      "scale": 1,
+      "order": 30,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-11",
+      "texture_size_px": [
+        250,
+        235
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        986,
+        151,
+        250,
+        235
+      ],
+      "asset_path": "Assets/Art/new/location/landmarks/compact/map_bank.png"
+    },
+    {
+      "asset_id": "MAP_STORE",
+      "position_px": [
+        1475,
+        175
+      ],
+      "scale": 1,
+      "order": 40,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-11",
+      "texture_size_px": [
+        317,
+        274
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1475,
+        175,
+        317,
+        274
+      ],
+      "asset_path": "Assets/Art/new/location/landmarks/compact/map_store.png"
+    },
+    {
+      "asset_id": "MAP_CONDOMINIUM",
+      "position_px": [
+        393,
+        631
+      ],
+      "scale": 1,
+      "order": 50,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-11",
+      "texture_size_px": [
+        391,
+        313
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        393,
+        631,
+        391,
+        313
+      ],
+      "asset_path": "Assets/Art/new/location/landmarks/compact/map_condominium.png"
+    },
+    {
+      "asset_id": "MAP_MARKETING",
+      "position_px": [
+        1372,
+        575
+      ],
+      "scale": 1,
+      "order": 60,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-11",
+      "texture_size_px": [
+        364,
+        364
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1372,
+        575,
+        364,
+        364
+      ],
+      "asset_path": "Assets/Art/new/location/landmarks/compact/map_marketing.png"
+    },
+    {
+      "asset_id": "MAP_REST_FRANCES",
+      "position_px": [
+        1040,
+        418
+      ],
+      "scale": 1,
+      "order": 70,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-12",
+      "selection_group": "restaurant_variant",
+      "texture_size_px": [
+        316,
+        247
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1040,
+        418,
+        316,
+        247
+      ],
+      "asset_path": "Assets/Art/new/location/restaurants/map_rest_frances.png"
+    },
+    {
+      "asset_id": "MAP_REST_JAPONES",
+      "position_px": [
+        1042,
+        418
+      ],
+      "scale": 1,
+      "order": 70,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-12",
+      "selection_group": "restaurant_variant",
+      "texture_size_px": [
+        314,
+        271
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1042,
+        418,
+        314,
+        271
+      ],
+      "asset_path": "Assets/Art/new/location/restaurants/map_rest_japones.png"
+    },
+    {
+      "asset_id": "MAP_REST_LANCHES",
+      "position_px": [
+        1036,
+        418
+      ],
+      "scale": 1,
+      "order": 70,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-12",
+      "selection_group": "restaurant_variant",
+      "texture_size_px": [
+        320,
+        259
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1036,
+        418,
+        320,
+        259
+      ],
+      "asset_path": "Assets/Art/new/location/restaurants/map_rest_lanches.png"
+    },
+    {
+      "asset_id": "MAP_FOREGROUND",
+      "position_px": [
+        1088,
+        588
+      ],
+      "scale": 1,
+      "order": 90,
+      "pivot": [
+        0,
+        1
+      ],
+      "status": "validado",
+      "production_task": "ART-12",
+      "texture_size_px": [
+        135,
+        95
+      ],
+      "texture_storage": "cropped",
+      "crop_rect_px": [
+        1088,
+        588,
+        135,
+        95
+      ],
+      "asset_path": "Assets/Art/new/location/map/map_foreground.png"
+    }
+  ],
+  "layer_notes": {
+    "full_frame": "O master continua 1920x1080. Camadas full-frame usam position_px [0,0]; texturas compactas usam seu canto superior esquerdo em position_px, tamanho texture_size_px, escala 1 e pivot [0,1]. Aplicar a transformação uniforme do mapa ao parent.",
+    "selection": "Realces do ART-13 ficam entre a geografia e as construções. Mostrar só a zona selecionada; o centro pode ser realçado independentemente.",
+    "restaurant": "As três variantes são mutuamente exclusivas, na mesma ordem de camada; produzir apenas no ART-12.",
+    "labels": "Pinos, ponteiras, rótulos vazios, ícones ART-06 e texto nativo são camadas independentes. Proposta de montagem no map-selection-compact.json.",
+    "future_status": "ART-11, ART-12 e realces ART-13 usam PNGs compactos com posições explícitas. Outros lotes preservam seu escopo."
+  },
+  "hit_areas": [
+    {
+      "catalog_id": "university",
+      "polygon_px": [
+        [
+          125,
+          282
+        ],
+        [
+          449,
+          127
+        ],
+        [
+          650,
+          240
+        ],
+        [
+          297,
+          388
+        ]
+      ],
+      "shape": "polygon",
+      "coordinate_space": "map1920x1080",
+      "derived_from": "zones.polygon_px",
+      "includes_roads": false
+    },
+    {
+      "catalog_id": "bank",
+      "polygon_px": [
+        [
+          1062,
+          242
+        ],
+        [
+          1236,
+          315
+        ],
+        [
+          1121,
+          387
+        ],
+        [
+          947,
+          315
+        ]
+      ],
+      "shape": "polygon",
+      "coordinate_space": "map1920x1080",
+      "derived_from": "zones.polygon_px",
+      "includes_roads": false
+    },
+    {
+      "catalog_id": "store",
+      "polygon_px": [
+        [
+          1575,
+          249
+        ],
+        [
+          1838,
+          344
+        ],
+        [
+          1670,
+          493
+        ],
+        [
+          1370,
+          382
+        ]
+      ],
+      "shape": "polygon",
+      "coordinate_space": "map1920x1080",
+      "derived_from": "zones.polygon_px",
+      "includes_roads": false
+    },
+    {
+      "catalog_id": "condominium",
+      "polygon_px": [
+        [
+          652,
+          647
+        ],
+        [
+          922,
+          855
+        ],
+        [
+          742,
+          979
+        ],
+        [
+          549,
+          1007
+        ],
+        [
+          307,
+          853
+        ]
+      ],
+      "shape": "polygon",
+      "coordinate_space": "map1920x1080",
+      "derived_from": "zones.polygon_px",
+      "includes_roads": false
+    },
+    {
+      "catalog_id": "marketing",
+      "polygon_px": [
+        [
+          1607,
+          675
+        ],
+        [
+          1835,
+          799
+        ],
+        [
+          1599,
+          993
+        ],
+        [
+          1332,
+          844
+        ]
+      ],
+      "shape": "polygon",
+      "coordinate_space": "map1920x1080",
+      "derived_from": "zones.polygon_px",
+      "includes_roads": false
+    }
+  ],
+  "central_hit_area": {
+    "polygon_px": [
+      [
+        1154,
+        496
+      ],
+      [
+        1371,
+        592
+      ],
+      [
+        1171,
+        711
+      ],
+      [
+        963,
+        596
+      ]
+    ],
+    "shape": "polygon",
+    "selectable_location": false,
+    "note": "O centro não cria um sexto ID no catálogo de localidades."
+  },
+  "transparency": {
+    "policy": "Interior visualmente sólido em RGBA (alfa original entre 250 e 254 nos lotes); alfa real zero fora do recorte geográfico, conforme pedido do usuário.",
+    "external_pixels": "Alfa zero fora do terreno; sem checkerboard, frame UI, sombra externa ou pedestal."
+  },
+  "scene_remapping": {
+    "required": true,
+    "applied": false,
+    "snapshot_path": "docs/art/qa/ART-10-scene-snapshot.json",
+    "affected_scenes": [
+      "Assets/Scenes/GameScene.unity",
+      "Assets/Scenes/LocationSelectionScene.unity"
+    ],
+    "preserved_catalog_ids": [
+      "university",
+      "bank",
+      "store",
+      "condominium",
+      "marketing"
+    ],
+    "steps": [
+      "Na integração futura, criar um parent de mapa master 1920x1080 com pivot top-left e aplicar o display_transform uniforme.",
+      "Substituir os retângulos atuais de AreaBank/AreaUniversity/AreaStore/AreaCondominium/AreaMarketing pelos polígonos do contrato, transformados com a mesma matriz.",
+      "Reposicionar labels e marcadores por label_anchor_px; não reaproveitar anchors de Node_Bank/Node_Store ou os offsets independentes de LocationMapImage.",
+      "Importar bordas zero, pivot [0,1], sem mipmaps, sRGB e alphaIsTransparency para todos os full-frame.",
+      "Ajustar o encaixe ao espaço de viewport da cena na integração, preservando escala uniforme e registrando qualquer transformação nova."
+    ],
+    "note": "Os RectTransforms atuais têm parents/anchors/offsets distintos e não podem ser tratados como pixels deste master. Somente evidência e instruções de remapeamento foram registradas; cenas e scripts intactos."
+  },
+  "pending_art10": [],
+  "integration_performed": false,
+  "texture_storage_revision": {
+    "date": "2026-10-14",
+    "task_id": "ART-11",
+    "request": "Construções compactas com posições exatas; preservar arte e encaixe.",
+    "previous_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json",
+    "previous_sha256": "9fa8e5e174504952b5b6f5d833de31de5434b76629b6229cb9a5333bd4884810",
+    "master_geometry_unchanged": true,
+    "landmarks_contract": "docs/art/layouts/map-landmarks-compact.json"
+  },
+  "art12_revision": {
+    "date": "2026-10-14",
+    "task_id": "ART-12",
+    "previous_contract": "docs/art/layouts/archive/map-layout-before-art12.json",
+    "previous_contract_sha256": "1556db21e738ed760bfeb0a8ce4ca4c6395ccce43b7967a5f9197134c7a17565",
+    "compact_contract": "docs/art/layouts/map-restaurants-compact.json",
+    "master_geometry_unchanged": true,
+    "request": "PNG compacto transparente com coordenadas exatas de encaixe, conforme preferência do usuário."
+  },
+  "art13_revision": {
+    "date": "2026-10-14",
+    "task_id": "ART-13",
+    "previous_contract": "docs/art/layouts/archive/map-layout-before-art13.json",
+    "previous_contract_sha256": "ab53f127ca79d9fac3b89d9f2b4cf60b129c5f2dbc640c9c23c663663295c901",
+    "selection_contract": "docs/art/layouts/map-selection-compact.json",
+    "master_geometry_unchanged": true
+  }
+}

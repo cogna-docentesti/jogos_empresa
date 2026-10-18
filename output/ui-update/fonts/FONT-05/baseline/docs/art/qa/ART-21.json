@@ -1,0 +1,339 @@
+{
+  "task_id": "ART-21",
+  "title": "Equipamentos básicos de estrutura",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "scope_resolution": "ART-20 estava em execução quando o usuário pediu ART-21. Ambos foram autorizados e produzidos em sequência, cada qual com arquivos e registros separados. Trecho repetido sobre controles corresponde ao ART-05, preservado.",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Identificador de modelo não exposto pela ferramenta integrada.",
+    "distinct_generations": 4,
+    "transparent_background": true,
+    "prompts_record": "docs/art/prompts/ART-21.json",
+    "technical_export_source": "art-source/editable/shared/export-equipment.cjs"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 4,
+    "report": "docs/art/qa/ART-21-technical.json",
+    "plan_report": "docs/art/qa/ART-21-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-21-prerequisites.json"
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "native_size_px": [
+      512,
+      512
+    ],
+    "display_box_px": [
+      250,
+      250
+    ],
+    "display_fit": "contain/preserveAspect, escala uniforme 250/512",
+    "contact_sheet": "art-source/previews/ART-21/ART-21-contact-sheet.png",
+    "inspected_previews": [
+      "art-source/previews/ART-21/ART-21-contact-sheet.png",
+      "art-source/previews/ART-21/EQUIPMENT_FREEZER_HORIZONTAL-native-light-dark.png",
+      "art-source/previews/ART-21/EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA-native-light-dark.png",
+      "art-source/previews/ART-21/EQUIPMENT_MOBILIARIO_BASICO-native-light-dark.png",
+      "art-source/previews/ART-21/EQUIPMENT_SISTEMA_PDV_COMPUTADOR-native-light-dark.png"
+    ],
+    "checks": [
+      "Quatro PNGs individuais inspecionados a 512×512 e 250×250 em fundos marfim e ameixa; silhuetas completas, contornos antialias limpos e sem halo perceptível.",
+      "Freezer contém uma tampa sólida fechada, puxador frontal com pequeno cilindro mecânico, grelha no lado direito e pés curtos; a chave mecânica integra o equipamento e não é overlay de status.",
+      "Geladeira contém duas portas sólidas fechadas, dois puxadores verticais junto à junta central, conjunto superior ventilado, pequenos componentes sem dígitos e pés; proporção alta comercial preservada.",
+      "Mobiliário representado por uma mesa quadrada de madeira sobre pedestal grafite e quatro cadeiras coerentes, assentos e encostos legíveis, vãos realmente transparentes. A quantidade contratada permanece no catálogo e não foi rasterizada.",
+      "Kit PDV contém gaveta de caixa, monitor de computador, terminal touchscreen, teclado, mouse, impressora térmica com recibo liso e leitor em suporte. São duas telas lisas sem GUI, letras, ícones, grids ou números; teclas e recibo sem texto.",
+      "Componentes do kit mantêm apoio e espaçamento coerentes em um único grupo de equipamento; cabo curto do leitor contido, sem mesa, plataforma, fundo ou chão incorporado.",
+      "Câmera de três quartos, frente e lado direito nos aparelhos retangulares, luz superior esquerda, contorno ameixa e cinza-ardósia coerentes com o concept de gestão e ART-20. Madeira natural e grafite usados apenas no mobiliário; PDV conserva gabinete grafite e tela azul-lavanda lisa.",
+      "Alfas e vãos revistos sobre ambos os fundos. Miolo visualmente sólido, exterior alfa zero; eventuais resíduos de alfa baixo do ImageGen preservados sem limpeza por código.",
+      "Sem moldura metálica antiga, fundo opaco, preço, quantidade, label, palavra, logo, status adquirido/bloqueado/premium, carrinho, check ou outro overlay de UI nos PNGs.",
+      "Uma geração por asset, sem sprite sheet. Originais RGBA 1254×1254 preservados; redução uniforme do frame completo a 410×410 e padding transparente de 51 px por lado até 512×512, sem crop, pintura ou deformação dos eixos.",
+      "Quatro pivots centrais [0.5,0.5], sem 9-slice, proporção preservada e margem visual mínima de 51 px. Textos e fundos somente nas provas de QA."
+    ],
+    "alpha_note": "Alfa retornado pelo ImageGen preservado, inclusive antialias e eventuais resíduos esparsos de alfa baixo. Miolos visualmente sólidos e contornos conferidos sobre marfim e ameixa; medições completas por arquivo.",
+    "technical_export_note": "Frame completo reduzido uniformemente para caixa máxima 410×410, com padding transparente até 512×512. Sem crop, pintura, recolor, limpeza de alfa ou deformação independente dos eixos.",
+    "framing_note": "Ícones com enquadramento comum e proporções comerciais plausíveis, câmera de três quartos e peso visual comparável para exibição em caixas 250×250. Preservar proporção; não esticar os eixos."
+  },
+  "assets": [
+    {
+      "id": "EQUIPMENT_FREEZER_HORIZONTAL",
+      "name": "Freezer Horizontal",
+      "output_path": "Assets/Art/new/equipment/basic/freezer_horizontal.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "eddb22e1b324174a64e5d46e6d753420000b5c54565c5d63c67a4b565d8a97ee",
+      "output_bytes": 104218,
+      "source_path": "art-source/references/generations/ART-21/freezer_horizontal-source-01.png",
+      "source_sha256": "20bf61429881370914ea9145b68ef42381d2ac2f836c26d1b9f91f7ed8fdb038",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Freezer horizontal de tampa única fechada, puxador frontal, pequeno cilindro mecânico, grelha de ventilação lateral e pés curtos, adaptado à câmera frontal de três quartos com lado direito visível.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.682830810546875,
+        "fully_opaque_fraction": 0.003414154052734375,
+        "alpha_250_or_more_fraction": 0.30590057373046875,
+        "semitransparent_fraction": 0.3137550354003906,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 60355
+          },
+          {
+            "alpha": 252,
+            "count": 14762
+          },
+          {
+            "alpha": 254,
+            "count": 2681
+          },
+          {
+            "alpha": 251,
+            "count": 1152
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          66,
+          128,
+          447,
+          391
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          68,
+          130,
+          445,
+          388
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-21/EQUIPMENT_FREEZER_HORIZONTAL-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-21/EQUIPMENT_FREEZER_HORIZONTAL-display-light-dark.png"
+    },
+    {
+      "id": "EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA",
+      "name": "Geladeira Comercial Dupla",
+      "output_path": "Assets/Art/new/equipment/basic/geladeira_comercial_dupla.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "b7ae52c5b7ae7d4ef4a2697487863d75795772e4082ded8f1454f8ff46d1b0b8",
+      "output_bytes": 112528,
+      "source_path": "art-source/references/generations/ART-21/geladeira_comercial_dupla-source-01.png",
+      "source_sha256": "b166a9cc1c718735ef4ff3e6aded6b9b69034565506d69c2e95daf38f176ab9b",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Geladeira comercial alta com duas portas sólidas fechadas, dois puxadores verticais centrais, compartimento superior ventilado e pés reguláveis; sem conteúdo, marca ou dígitos.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6424789428710938,
+        "fully_opaque_fraction": 0.003726959228515625,
+        "alpha_250_or_more_fraction": 0.3452415466308594,
+        "semitransparent_fraction": 0.3537940979003906,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 85334
+          },
+          {
+            "alpha": 254,
+            "count": 2668
+          },
+          {
+            "alpha": 252,
+            "count": 1031
+          },
+          {
+            "alpha": 255,
+            "count": 977
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          51,
+          71,
+          427,
+          448
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          121,
+          73,
+          397,
+          444
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-21/EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-21/EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA-display-light-dark.png"
+    },
+    {
+      "id": "EQUIPMENT_MOBILIARIO_BASICO",
+      "name": "Mobiliário Básico (10 mesas/40 cadeiras)",
+      "output_path": "Assets/Art/new/equipment/basic/mobiliario_basico.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "65c606c2060f7f217b682e75bb6e722ceb81680b45cda40f65cef0d853d86374",
+      "output_bytes": 144502,
+      "source_path": "art-source/references/generations/ART-21/mobiliario_basico-source-01.png",
+      "source_sha256": "759c23da873f5ea6c8cdf1aa04f701a3ae338f8a26bce74cf68df739f65eeaf1",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Conjunto representativo com uma mesa quadrada de madeira, pedestal escuro e quatro cadeiras com assentos de madeira e estrutura grafite. Quantidade contratada permanece apenas no catálogo, sem números no bitmap.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7445030212402344,
+        "fully_opaque_fraction": 0.010211944580078125,
+        "alpha_250_or_more_fraction": 0.21862411499023438,
+        "semitransparent_fraction": 0.2452850341796875,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 45749
+          },
+          {
+            "alpha": 252,
+            "count": 5781
+          },
+          {
+            "alpha": 255,
+            "count": 2677
+          },
+          {
+            "alpha": 3,
+            "count": 1280
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          72,
+          111,
+          440,
+          432
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          75,
+          114,
+          437,
+          421
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-21/EQUIPMENT_MOBILIARIO_BASICO-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-21/EQUIPMENT_MOBILIARIO_BASICO-display-light-dark.png"
+    },
+    {
+      "id": "EQUIPMENT_SISTEMA_PDV_COMPUTADOR",
+      "name": "Sistema PDV + Computador",
+      "output_path": "Assets/Art/new/equipment/basic/sistema_pdv_computador.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "334591c3cb1f540550ae7a0adacf4a15dea8d80183c05d2e24f2495c537c3900",
+      "output_bytes": 135169,
+      "source_path": "art-source/references/generations/ART-21/sistema_pdv_computador-source-01.png",
+      "source_sha256": "af7f8f0e7e3be6fd71cc5d478c1e2d403e28d331650d5a401a8a32125106636d",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Kit PDV e computador com gaveta de caixa, terminal touchscreen, monitor separado, teclado, mouse, impressora de recibo com papel liso e leitor em suporte. Duas telas sem interface ou texto, componentes grafite/cinza-ardósia.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6908721923828125,
+        "fully_opaque_fraction": 0.005970001220703125,
+        "alpha_250_or_more_fraction": 0.285003662109375,
+        "semitransparent_fraction": 0.3031578063964844,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 59008
+          },
+          {
+            "alpha": 252,
+            "count": 11516
+          },
+          {
+            "alpha": 255,
+            "count": 1565
+          },
+          {
+            "alpha": 254,
+            "count": 1490
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          62,
+          60,
+          450,
+          453
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          65,
+          112,
+          448,
+          403
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-21/EQUIPMENT_SISTEMA_PDV_COMPUTADOR-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-21/EQUIPMENT_SISTEMA_PDV_COMPUTADOR-display-light-dark.png"
+    }
+  ],
+  "total_bytes": 496417,
+  "integration_proposal": {
+    "textureType": "Sprite (2D and UI)",
+    "spriteMode": "Single",
+    "pixelsPerUnit": 100,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "display_box_px": [
+      250,
+      250
+    ],
+    "fit": "contain/preserveAspect",
+    "maxTextureSize": 512,
+    "sRGBTexture": true,
+    "alphaIsTransparency": true,
+    "filterMode": "Bilinear",
+    "generateMipmaps": false,
+    "compression": "Sem compressão na QA; ajustar por plataforma na integração."
+  },
+  "pending": [],
+  "integration_performed": false
+}

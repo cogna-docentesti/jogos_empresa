@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-13",
+  "method": "Unity 6000.3.20f1, batch mode, renderização de edição sem Play Mode e sem salvar cenas. Leitura de prefabs, catálogos, scripts e artes.",
+  "captureResolution": [
+    1920,
+    1080
+  ],
+  "captureCount": 11,
+  "scope": [
+    {
+      "screen": "Identificação",
+      "source": "0_Identification.unity",
+      "state": "Implementada: nome, RA e cadastro; referência roxa principal.",
+      "proposal": "Manter círculos/arcos; acrescentar cenário e profissional adulto. Formulário em marfim. Sem HUD financeiro antes da sessão.",
+      "capture": "referencias/0_Identification.png"
+    },
+    {
+      "screen": "Localização",
+      "source": "GameScene / Panel_Location",
+      "state": "Mapa com cinco áreas, seleção e informações laterais.",
+      "proposal": "Mapa isométrico editorial; pinos e rótulos curtos. Cor por zona, detalhes no painel lateral.",
+      "capture": "referencias/Panel_Location.png"
+    },
+    {
+      "screen": "Restaurante",
+      "source": "GameScene / Panel_Restaurant",
+      "state": "Três tipos e segmento de público.",
+      "proposal": "Cards com fachada e prato da mesma família visual; seleção roxa com check; chips de público.",
+      "capture": "referencias/Panel_Restaurant.png"
+    },
+    {
+      "screen": "Cardápio",
+      "source": "GameScene / Panel_MenuPricing + Card_ProductItem",
+      "state": "Preços por produto; cards são preenchidos em execução.",
+      "proposal": "Pratos isolados; preço e intervalo legíveis. +/− no concept é uma proposta; o controle atual usa slider.",
+      "capture": "referencias/Panel_MenuPricing.png"
+    },
+    {
+      "screen": "Financeiro",
+      "source": "GameScene / Panel_Financial + Card_loan",
+      "state": "Capital e opções de crédito geradas em execução.",
+      "proposal": "Cards de contrato, juros, prazo e parcela. Conselheiro adulto como ilustração secundária.",
+      "capture": "referencias/Panel_Financial.png"
+    },
+    {
+      "screen": "Equipamentos",
+      "source": "Panel_Equipment.prefab + Card_equipment",
+      "state": "Catálogo e carrinho preenchidos em execução.",
+      "proposal": "Sprites comerciais em três quartos; metal fosco; básicos, adquiridos e bloqueados com ícone e rótulo.",
+      "capture": "referencias/Panel_Equipment.png"
+    },
+    {
+      "screen": "Equipe",
+      "source": "GameScene / Panel_Team",
+      "state": "Placeholder “Tela em construção”; initialTeamPanel sem referência no UIStateListener.",
+      "proposal": "Proposta de cards de profissionais, quantidade, folha e capacidade. Papéis: atendente, chapeiro, sushiman, chef e gerente.",
+      "capture": "referencias/Panel_Team.png"
+    },
+    {
+      "screen": "Revisão",
+      "source": "GameScene / Panel_Review",
+      "state": "Painel sem conteúdo visível na captura de edição; etapa de passagem no fluxo.",
+      "proposal": "Checklist de escolhas seguindo o resumo do estabelecimento; se houver tela dedicada, reutilizar os mesmos cards.",
+      "capture": "referencias/Panel_Review.png"
+    },
+    {
+      "screen": "Hub e HUD",
+      "source": "GameScene / Panel_Menu + MenuHudView",
+      "state": "Mapa com Banco, Loja, RH, Restaurante e Cardápio; mês, caixa e score.",
+      "proposal": "Prancha 01: mapa mais legível, restaurante central e resumo lateral; navegação inferior persistente.",
+      "capture": "referencias/Panel_Menu.png"
+    },
+    {
+      "screen": "Meu estabelecimento",
+      "source": "GameScene / Panel_Establishment",
+      "state": "Resumo, indicadores e confirmação de reset.",
+      "proposal": "Prancha 03: fachada, indicadores e checklist. Corrigir a legenda estática “Receita mensal” do campo que recebe o resultado.",
+      "capture": "referencias/Panel_Establishment.png"
+    },
+    {
+      "screen": "Localização V2",
+      "source": "LocationSelectionScene.unity",
+      "state": "Versão alternativa de seleção; não está habilitada no build atual.",
+      "proposal": "Convergir para os mesmos tokens e arte de mapa; evitar uma segunda linguagem visual.",
+      "capture": "referencias/LocationSelectionScene.png"
+    },
+    {
+      "screen": "DRE / fechamento / relatório",
+      "source": "GameState, UIStateListener, RoundResultEntity",
+      "state": "Há estados e dados mensais; painéis de rodada, relatório e falência estão sem referência na cena.",
+      "proposal": "Pranchas 04 e 05 propõem tabela mensal, comparação trimestral e conciliação de caixa.",
+      "capture": null
+    }
+  ],
+  "deliverables": [
+    "01-concept-hub.png",
+    "02-concept-abertura.png",
+    "03-concept-gestao.png",
+    "04-concept-dre-mensal.png",
+    "05-concept-dre-trimestral.png"
+  ],
+  "imageGeneration": "image_gen integrado do Codex, sem fallback CLI",
+  "palette": [
+    {
+      "name": "Violeta",
+      "hex": "#6D28D9",
+      "role": "Ações principais e cabeçalho"
+    },
+    {
+      "name": "Ameixa",
+      "hex": "#24113D",
+      "role": "Navegação e contornos"
+    },
+    {
+      "name": "Lavanda",
+      "hex": "#B99AE8",
+      "role": "Seleção e subtotais"
+    },
+    {
+      "name": "Marfim",
+      "hex": "#F5F0E8",
+      "role": "Tabelas e superfícies"
+    },
+    {
+      "name": "Tinta",
+      "hex": "#30243C",
+      "role": "Texto sobre áreas claras"
+    },
+    {
+      "name": "Verde-petróleo",
+      "hex": "#26776A",
+      "role": "Resultado positivo"
+    },
+    {
+      "name": "Coral",
+      "hex": "#C55457",
+      "role": "Alerta e perda"
+    },
+    {
+      "name": "Âmbar",
+      "hex": "#E7B65A",
+      "role": "Pequenos destaques"
+    }
+  ],
+  "dre": {
+    "status": "proposta de UI, dados ilustrativos",
+    "months": [
+      {
+        "revenue": 42000,
+        "supplies": 14700,
+        "payroll": 6900,
+        "rent": 3000,
+        "utilities": 1500,
+        "interest": 200,
+        "eventOutflow": 500,
+        "resultBeforePrincipal": 15200,
+        "principal": 2000,
+        "cashVariation": 13200,
+        "closingCash": 38200
+      },
+      {
+        "revenue": 45000,
+        "supplies": 15750,
+        "payroll": 6900,
+        "rent": 3000,
+        "utilities": 1500,
+        "interest": 150,
+        "eventOutflow": 700,
+        "resultBeforePrincipal": 17000,
+        "principal": 2000,
+        "cashVariation": 15000,
+        "closingCash": 53200
+      },
+      {
+        "revenue": 48000,
+        "supplies": 16800,
+        "payroll": 7200,
+        "rent": 3000,
+        "utilities": 1500,
+        "interest": 100,
+        "eventOutflow": 600,
+        "resultBeforePrincipal": 18800,
+        "principal": 2000,
+        "cashVariation": 16800,
+        "closingCash": 70000
+      }
+    ],
+    "quarter": {
+      "revenue": 135000,
+      "costsAndEvents": 84000,
+      "resultBeforePrincipal": 51000,
+      "principal": 6000,
+      "openingCash": 25000,
+      "closingCash": 70000
+    },
+    "mapping": {
+      "interest": "loanPayment - loanPrincipalPayment",
+      "resultBeforePrincipal": "netResult + loanPrincipalPayment",
+      "closingCash": "openingCash + resultBeforePrincipal - loanPrincipalPayment"
+    },
+    "historicLimitation": "Registros antigos sem principal confiável não permitem separar juros e principal."
+  },
+  "productionCorrections": [
+    "Não exibir HUD financeiro antes da identificação/criação de sessão.",
+    "Valores das pranchas não substituem os catálogos.",
+    "Texto, números e gráficos dinâmicos devem ser elementos de UI fora das imagens.",
+    "Equipe é proposta sobre placeholder; DRE é proposta nova.",
+    "Novos controles, filtros e ações das pranchas não são funcionalidades implementadas."
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "task_id": "UI-06",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "b6bf37387cbcba632bbccdfafc4c89a1bea49fea",
+  "unity_version": "6000.3.20f1",
+  "pending_acceptance": [],
+  "implementation": [
+    "Panel_Restaurant na GameScene ocupa o canvas inteiro. Um RestaurantScreenController e a RestaurantScreenView existentes continuam responsáveis pela D2; referências de registry, enums e IDs preservados. Header/MainArea/SidePanel/Footer legados ficam inativos; cards, três instâncias do Button_Segment e ações existentes foram reposicionados pelo Editor, sem destruir objetos ou alterar o prefab global.",
+    "Três fachadas ART-15 completas em contain/preserveAspect, caixa 378x284, Simple e branco neutro; ícones independentes. Nomes/descrições/custo fixo mensal/ticket de referência são TMP nativos preenchidos pelo catálogo. RestaurantData recebeu apenas o campo visual facade, e os três assets receberam a referência correta e acentuação de apresentação.",
+    "Passo 3 de 7, título 44, seções 32, corpo e ações 24, labels 22, legendas 20; Inter Tight/material/tokens finais. Custos/tickets alinhados à direita; superfície clara e texto ink; compatibilidade tem números nativos, rótulos e barras por função.",
+    "SharedUiStyles/SharedControlAppearance aplicados aos cards, públicos e ações. Borda/check/rótulo distinguem a seleção; rádio e disponibilidade distinguem públicos bloqueados. Realce lavanda local diferencia hover e pressed, mantendo foco compartilhado. Navegação explícita omite indisponíveis; Tab, Enter, setas e toque verificados.",
+    "Três ScrollRects mascarados nos detalhes dos cards e um na compatibilidade permitem texto extenso sem cobrir fachada, rótulo selecionado ou ações. Handles com sizeDelta zero permanecem dentro do trilho. Catálogo indisponível bloqueia cartões/públicos/confirmação, mostra mensagem e permite Voltar.",
+    "Reidratação aplica disponibilidade antes do público selecionado, corrigindo o retorno de um restaurante com classes antes bloqueadas. Cinco combinações originais e fórmulas de compatibilidade preservadas; callback de restaurante ausente é recusado. Voltar guarda rascunho e refaz coerência após mudar a localização.",
+    "Trocar restaurante usa o fluxo existente do Cardápio: três produtos do catálogo correspondente, preços dentro das faixas; voltar sem trocar mantém preços editados, trocar limpa o cardápio anterior. Sem INSERT de sessão na D1/D2/retornos; a confirmação da D3 gravou exatamente uma sessão com cadastro e decisões reais da fixture isolada."
+  ],
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "states": "Cinco combinações nas três resoluções; normal, hover, pressed, selecionado, foco, indisponível/disabled e mensagem de combinação inválida. Hover/pressed/foco têm capturas e hashes distintos.",
+    "long_copy": "Fixture isolada de nome/descrição e compatibilidade extensos em 1920x1080 e 1280x720; topo/fim do scroll, máscaras, custos e ações conferidos.",
+    "inspection": "32 capturas finais conferidas visualmente, por arquivo/formato/dimensões/hash e correspondência com o estado. Ações de mudança e captura são passos distintos do roteiro, após renderizar um novo quadro.",
+    "loading": "Catálogos locais carregam de forma síncrona; ausência explícita validada sem loading artificial."
+  },
+  "validation": {
+    "baseline_initial_decisions": "output/ui-update/UI-06/baseline-editmode-initial.json",
+    "editmode": {
+      "InitialDecisionsTests": {
+        "path": "output/ui-update/UI-06/editmode-InitialDecisionsTests.json",
+        "summary": {
+          "Total": 17,
+          "Passed": 17,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "PersistenceAndLocationTests": {
+        "path": "output/ui-update/UI-06/editmode-PersistenceAndLocationTests.json",
+        "summary": {
+          "Total": 16,
+          "Passed": 16,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "UI01IdentificationTests": {
+        "path": "output/ui-update/UI-06/editmode-UI01IdentificationTests.json",
+        "summary": {
+          "Total": 10,
+          "Passed": 10,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "UI04HubTests": {
+        "path": "output/ui-update/UI-06/editmode-UI04HubTests.json",
+        "summary": {
+          "Total": 8,
+          "Passed": 8,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "UI05LocationTests": {
+        "path": "output/ui-update/UI-06/editmode-UI05LocationTests.json",
+        "summary": {
+          "Total": 5,
+          "Passed": 5,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "UI06RestaurantTests": {
+        "path": "output/ui-update/UI-06/editmode-UI06RestaurantTests.json",
+        "summary": {
+          "Total": 5,
+          "Passed": 5,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      }
+    },
+    "editmode_total_passed": 61,
+    "playmode": {
+      "path": "output/ui-update/UI-06/playmode-restaurant.json",
+      "passed": 76,
+      "failures": 0
+    },
+    "runtime": "output/ui-update/UI-06/runtime-scene.json",
+    "playmode_console": "output/ui-update/UI-06/playmode-console.json",
+    "playmode_errors": 0,
+    "playmode_warnings": 0,
+    "editor_console": "output/ui-update/UI-06/editor-console-final.json",
+    "editor_errors": 0,
+    "editor_expected_test_warnings": [
+      "InitialDecisionsTests: decisões incompletas e tentativa de salto D1 -> D3 recusados.",
+      "UI01IdentificationTests: JSON de identificação propositalmente corrompido."
+    ],
+    "screenshots": "output/ui-update/UI-06/screenshots.json",
+    "screenshot_count": 32,
+    "file_audit": "output/ui-update/UI-06/file-audit.json",
+    "scene_diff_audit": "output/ui-update/UI-06/scene-diff-audit.json"
+  },
+  "invariants": {
+    "pngs_preserved": 277,
+    "manifest_sha256_verified": 272,
+    "sprite_mode_single": 277,
+    "economic_data_ids_catalogs_campaign_unchanged": true,
+    "database_isolated": "Temp/ui06-final-v3.db",
+    "playerprefs_isolated": "Cogna.UI06.QA.FinalV3 (removida após QA)",
+    "sqlite_boundary": "Uma sessão somente na confirmação da D3",
+    "art_or_package_changes_committed": false
+  },
+  "asset_ids_used": [
+    "FACADE_REST_LANCHES",
+    "FACADE_REST_JAPONES",
+    "FACADE_REST_FRANCES",
+    "UI_TOPBAR_VIOLET",
+    "UI_NAVBAR_PLUM",
+    "UI_PANEL_IVORY",
+    "UI_PANEL_LAVENDER",
+    "UI_CARD_NORMAL",
+    "UI_CARD_SELECTED_OUTLINE",
+    "UI_CARD_DISABLED_OVERLAY",
+    "UI_PRIMARY_VIOLET_NORMAL",
+    "UI_PRIMARY_VIOLET_HOVER",
+    "UI_PRIMARY_VIOLET_PRESSED",
+    "UI_PRIMARY_VIOLET_DISABLED",
+    "UI_SECONDARY_IVORY_NORMAL",
+    "UI_SECONDARY_IVORY_HOVER",
+    "UI_SECONDARY_IVORY_PRESSED",
+    "UI_SECONDARY_IVORY_DISABLED",
+    "UI_RADIO_OFF",
+    "UI_RADIO_ON",
+    "UI_RADIO_DISABLED",
+    "UI_SCROLLBAR_TRACK",
+    "UI_SCROLLBAR_THUMB",
+    "ICON_RESTAURANT",
+    "ICON_CHECK",
+    "ICON_BACK",
+    "ICON_NEXT"
+  ],
+  "resolved_during_validation": [
+    "Test Runner aguardava diálogo de salvar cena após Play Mode; cena salva e suíte executada novamente.",
+    "Tolerância de 0,1 unidade no teste de bounds evita tratar a aresta superior direita exclusiva de Rect.Contains como extrapolação; sizeDelta dos handles permaneceu zero.",
+    "Auditoria de hashes identificou foco/pressed iguais no card master; realce local acrescentado e todo o roteiro de 76 checks e 61 testes repetido."
+  ],
+  "scope_limits": [
+    "Composição visual do Cardápio continua legada e pertence à UI-07; esta entrega verifica apenas integração de restaurante/produtos/preços/retorno.",
+    "Perfis 16:10, móvel e build geral pertencem à UI-20."
+  ],
+  "cleanup": "Editor Cogna salvo e fechado; outro Editor preservado. Pipeline 0.8.0-exp.1 usado apenas para validação e retirado do manifest/lock. Metadados reimportados e variações de serialização/float/scale fora da D2 restaurados. Sem branch/worktree/push.",
+  "commit_message": "feat(ui): rebuild restaurant and audience selection (UI-06)"
+}

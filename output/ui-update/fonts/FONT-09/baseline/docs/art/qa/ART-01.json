@@ -1,0 +1,69 @@
+{
+  "task_id": "ART-01",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — revisão visual do agente",
+  "technical_validation": {
+    "command": "python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-01",
+    "passed": true,
+    "asset_count": 4,
+    "errors": [],
+    "report": "docs/art/qa/ART-01-technical.json"
+  },
+  "visual_validation": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "display_box_px": [
+      420,
+      760
+    ],
+    "fit": "contain, escala uniforme",
+    "detail_scale": "1:1",
+    "contact_sheet": "art-source/previews/ART-01/ART-01-contact-sheet.png",
+    "preview_source": "art-source/editable/qa/ART-01-preview.py",
+    "checks": [
+      "Identidade comparada com os concepts aprovados.",
+      "Cartoon editorial adulto e linguagem de contorno coerentes nos quatro masters.",
+      "Silhueta, mãos, cabeça, pés, perspectiva e luz inspecionados.",
+      "Sem textos, logos, props, painéis ou cenários incorporados.",
+      "Alfa inspecionado em fundos claros e escuros, sem quadriculado ou halo perceptível.",
+      "Margem da silhueta visível igual ou superior a 10% em cada borda; medidas em ART-01-measurements.json.",
+      "PNG final copiado byte a byte da ferramenta integrada, sem edição de pixels por script."
+    ]
+  },
+  "alpha_note": "Os PNGs originais têm alfa de 0 a 254; esse alfa foi preservado. alpha_bbox inclui pixels residuais de opacidade muito baixa. A margem da silhueta visível foi medida com alfa >= 128, além da revisão visual em 1:1 e no tamanho de exibição.",
+  "assets": [
+    {
+      "id": "CH01_CANONICAL",
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Rosto e pele coerentes com a mulher do banco em 03-gestao e com CH01 em 04-dre-mensal; bob curto ondulado, argolas douradas, camisa lilás e calça grafite preservados. Mãos legíveis, pés e cabeça completos."
+    },
+    {
+      "id": "CH02_CANONICAL",
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Identidade do chapeiro do card central de equipe preservada: boné grafite para trás, barba escura, pele morena, camiseta branca e avental grafite. Físico adulto distinto do mentor; mãos e botas completas."
+    },
+    {
+      "id": "CH03_CANONICAL",
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Identidade da gerente do card direito de equipe preservada: cabelo longo ondulado, rosto mais alongado, blazer ameixa e blusa clara. Distinta de CH01 por cabelo, rosto e roupa. Mãos e sapatos completos."
+    },
+    {
+      "id": "CH04_CANONICAL",
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Identidade do mentor da reunião em 05-dre-trimestral preservada: óculos escuros retangulares, cabelo castanho ondulado, barba curta e suéter azul-marinho com camisa lilás. Olhos legíveis através das lentes, mãos e sapatos completos."
+    }
+  ],
+  "pending": []
+}

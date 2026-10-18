@@ -94,3 +94,5 @@ Executar nessa ordem para manter uma referência coerente durante as alteraçõe
 ## Ressalvas finais de plataforma
 
 A tipografia e o fluxo renderizado passaram. O Player Windows falha na limpeza nativa ao fechar (0xc0000005); encerramento não homologado. Android mantém o aviso de entrada Both e não foi executado em aparelho. O check de encerramento permanece falho no QA; não equivale à homologação completa do Player. Roboto está instalada neste host: a independência foi verificada por referências sourceFontFile nulas e glifos de atlas estáticos, sem desinstalar fontes do sistema.
+
+Atualização Windows em 18/10/2026: o crash histórico acima foi corrigido pelo patch Unity 6000.3.21f1 (UUM-146676). Passaram oito casos de saída em Development/release QA e as 254 verificações da campanha, após consulta de UI Automation, todos com saída 0. [Investigação, evidências e build corrigido](../../windows-shutdown.txt). A ressalva Android permanece fora desta correção Windows.

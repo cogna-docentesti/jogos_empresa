@@ -1,0 +1,107 @@
+{
+  "task": "FONT-07",
+  "date": "2026-10-18",
+  "status": "concluído",
+  "scope": "UI-09 banco, UI-10 equipamentos/carrinho e UI-11 equipe, incluindo seis prefabs, estados, clones, filtros, binds, templates inativos e reentrada.",
+  "acceptance": {
+    "scene_and_six_prefabs_saved_and_reopened": true,
+    "four_credit_lines_sixteen_equipment_five_real_roles": true,
+    "body_prices_salary_quantity_regular_and_summary_totals_real_bold": true,
+    "neutral_materials_no_synthetic_weight_autosize_or_per_text_scale": true,
+    "normal_selected_owned_required_unavailable_empty_cart_and_errors": true,
+    "all_catalog_ends_and_cart_summary_accessible": true,
+    "filters_purchase_hiring_confirmation_return_reentry_and_persistence": true,
+    "concept_comparison_three_resolutions": true,
+    "dirty_scene_and_unsaved_restaurante_extra_preserved": true,
+    "scoped_commit_scene_reopened_and_checked": true
+  },
+  "validation": {
+    "unity": "6000.3.20f1",
+    "edit_tests": 65,
+    "test_suites": [
+      "Font04TypographyTests",
+      "UI09FinancialTests",
+      "UI10EquipmentTests",
+      "UI11TeamTests"
+    ],
+    "suite_checks": {
+      "bank": 129,
+      "equipment": 228,
+      "team": 183
+    },
+    "focused_checks": 39,
+    "runtime_checks_total": 579,
+    "serialized_consumers": 236,
+    "scene_consumers": 132,
+    "prefab_consumers": 104,
+    "runtime_entries_observed_active": 221,
+    "runtime_entries_verified_via_saved_counterpart": 126,
+    "capture_count": 233,
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1600,
+        1000
+      ]
+    ],
+    "console_errors": 0,
+    "console_warnings": 0,
+    "unchanged_domain_controller_infrastructure_resource_files": 285,
+    "font_files_preserved": 149,
+    "incidental_font_caches_restored": 6,
+    "post_runtime_only_dormant_consumers_changed": 12,
+    "second_editor_opened": false,
+    "legacy_full_migrations_executed": false
+  },
+  "visual_review": {
+    "reference": "art-source/references/concepts/03-gestao.png",
+    "comparison": "output/ui-update/fonts/FONT-07/index.html",
+    "judgment": "Hierarquia, peso e largura conferidos nas três viewports. Conteúdo e valores são os reais dos catálogos; as ilustrações não forneceram novos produtos ou cargos. Paleta, artes e composição mantidas.",
+    "bank": "Título 44, contrato 28, principal Regular 27 e informações 20. O resumo de duas linhas ganhou altura de 56 para 64. A grade mantém mínimo 660 e acompanha a altura nativa dos textos longos no scroll existente.",
+    "equipment": "Produto 28, preço individual Regular 30, descrição 21, quantidade Regular 24, total 32. Oito básicos e oito específicos aferidos pela compatibilidade dos três restaurantes; modal e último item de carrinho verificados.",
+    "team": "Cargo 30, salário Regular 27, capacidade 21, requisito 20, quantidade Regular 24, folha total 32. Cinco funções, mínimos, decremento, contratação, consulta, dados inválidos e quantidades amplas aferidos.",
+    "legacy": "Oito labels inativos de nome/descrição/valor/rótulo deixaram de ser tratados como botões. Quatro totais legados também receberam TableTotal. Todos foram reabertos; nenhum consumidor ativo das 233 capturas mudou depois da passagem runtime.",
+    "test_updates": "A suite reconhece o carregamento assíncrono e a assinatura vigente de PopulateEquipments, fecha a ajuda pelo botão real antes dos filtros, aguarda o frame de criação antes do hover e mede targetGraphic nos controles. Overflow, raycast, foco, seleção, economia e persistência permanecem obrigatórios.",
+    "session": "Cena suja com sete raízes e TMP Restaurante somente em memória preservada. Game view voltou a 1600x1000. IdentificationDesignScale.ExecuteAlways recalculou seu wrapper uniforme de 0.8333333 para 1; efeito automático documentado, sem mudança nos textos ou no driver. Avisos de recarga externa ignorados."
+  },
+  "persistence": {
+    "storage": "SQLite e identificação isolados por COGNA_TEST_DATABASE_PATH/COGNA_TEST_IDENTIFICATION_KEY; nenhum banco do usuário usado.",
+    "checks": "INSERT somente na confirmação D3, uma sessão persistida, IDs/valores reais, nenhum débito/crédito duplicado e sobrevivência das escolhas no retorno/recarga.",
+    "write_count": "SELECT total_changes() permanece igual ao reaplicar papéis e rebinds nas três viewports. Fontes de modelos, controladores e persistência são idênticas ao baseline; callbacks de negócio e cálculos das views também foram comparados."
+  },
+  "evidence": {
+    "execution": "output/ui-update/fonts/FONT-07/execution.json",
+    "tests": "output/ui-update/fonts/FONT-07/edit-tests.json",
+    "saved_consumers": "output/ui-update/fonts/FONT-07/saved-verification.json",
+    "focused": "output/ui-update/fonts/FONT-07/focused-checks.json",
+    "bank": "output/ui-update/fonts/FONT-07/bank/playmode-financial.json",
+    "equipment": "output/ui-update/fonts/FONT-07/equipment/playmode-equipment.json",
+    "team": "output/ui-update/fonts/FONT-07/team/playmode-team.json",
+    "metrics_and_baselines": "output/ui-update/fonts/FONT-07/captures.json",
+    "capture_hashes": "output/ui-update/fonts/FONT-07/capture-manifest.json",
+    "gallery": "output/ui-update/fonts/FONT-07/index.html",
+    "preservation": "output/ui-update/fonts/FONT-07/preservation.json",
+    "fonts": "output/ui-update/fonts/FONT-07/font-cache-preservation.json",
+    "source": "output/ui-update/fonts/FONT-07/source-audit.json",
+    "commit_scene": "output/ui-update/fonts/FONT-07/commit-scene-verification.json",
+    "post_runtime_templates": "output/ui-update/fonts/FONT-07/post-runtime-template-audit.json",
+    "staging": "output/ui-update/fonts/FONT-07/staging-plan.json",
+    "baseline": "output/ui-update/fonts/FONT-07/baseline-preservation.json",
+    "builder_delta": "output/ui-update/fonts/FONT-07/ConceptUiRevision.font07.patch"
+  },
+  "limitations": [
+    "Player do Editor; build e Player independente pertencem à FONT-10.",
+    "126 entradas de runtime inativas/retiradas verificadas por contraparte/template, sem serem apresentadas como capturas ativas. Variantes de índice de irmãos ligadas pelo GlobalObjectId congelado.",
+    "FONT-09 conserva o comportamento da ajuda/loading. Sua tipografia nestes painéis foi integrada como dependência; o teste fecha a ajuda antes de usar todos os filtros.",
+    "Commit inclui composição anterior mínima dos três painéis/cards e o mínimo 704 da grade de equipamentos. TeamScreenController e demais deltas anteriores excluídos.",
+    "ConceptUiRevision.cs permanece preexistente não rastreado; delta FONT-07 entregue em patch. Seis faces e três fallbacks finitos reutilizados; corpus além de 536 pontos não homologado."
+  ],
+  "next_task": "FONT-08, somente após este aceite e commit local em inglês, conforme sequential-handoff.txt."
+}

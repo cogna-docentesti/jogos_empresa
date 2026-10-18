@@ -1,0 +1,85 @@
+UI-20 — QA final: todas as telas, resoluções e build
+Status: concluído | Prioridade: P1 | Fase: Acabamento e integração
+Dependências: UI-19
+
+OBJETIVO
+Comprovar que o jogo inteiro usa o novo visual e funciona da entrada ao encerramento.
+
+LEITURAS OBRIGATÓRIAS
+docs/ui-update/COMECE-AQUI.txt
+docs/ui-update/visual-contract.json
+docs/ui-update/tasks.json
+docs/ui-update/asset-coverage.json
+docs/art/manifest.json
+docs/art/tokens.json
+docs/ui-update/asset-coverage.json
+docs/ui-update/visual-contract.json
+Assets/Scenes/GameScene.unity
+ProjectSettings/EditorBuildSettings.asset
+Assets/Settings/Build Profiles
+Assets/Editor/Tests
+Assets/Scripts/Game/TESTES
+
+TELAS / DESTINOS
+- Todas as telas e estados deste plano
+- Build Windows
+- Perfil Android existente
+
+IMPLEMENTAÇÃO
+1. Revisar cada tela/estado com screenshots reais de Play Mode, incluindo texto longo, vazios, erro, seleção, hover, foco e desabilitado; não aceitar apenas previews de produção de arte.
+2. Testar 1920x1080, 1366x768, 1280x720 e 16:10; testar uma viewport móvel landscape e safe area do perfil Android, refluindo textos e controles quando necessário.
+3. Auditar fontes/tamanhos/cores/alinhamentos, contraste, clipping, scroll, proporção dos recortes, pixels de borda e bloqueio de raycast em todas as telas.
+4. Conferir cobertura dos assets, referências por catálogo e exceções documentadas; nenhum asset antigo deve continuar ativo por esquecimento. Não exigir uso artificial de todas as variantes/ícones.
+5. Executar testes relevantes de identificação, decisões iniciais, persistência, fluxo e simulação, compilar Windows e validar o perfil Android quando o toolchain disponível permitir; registrar qualquer limitação real.
+6. Entregar índice de screenshots, matriz tela x resolução x estado, evidências de testes/build e lista final de pendências; atualizar os status das tarefas apenas após evidências.
+
+REVISÃO VISUAL OBRIGATÓRIA
+- família/peso/tamanho de fonte
+- cor de texto por superfície e estado
+- entrelinha e espaçamento de texto
+- margens/gutters/alinhamento
+- tamanho e proporção de imagens
+- ordem de camadas e máscaras
+- normal/hover/pressed/disabled/selecionado/foco
+- erros/loading/vazios
+- navegação/input/scroll
+- dados dinâmicos e atualização ao revisitar
+- resolução menor e textos longos
+
+ARTES EXISTENTES / LOTES
+Reutilizar as telas/assets das dependências; não criar lote de arte novo.
+
+CRITÉRIOS DE ACEITE
+- A GameScene é a entrada de produção e a identificação é o passo 1; nenhum caminho depende de 0_Identification.
+- Todas as telas listadas estão alcançáveis com os assets/fontes/cores/controles novos e têm evidência visual.
+- Sem referências ausentes, texto cortado, interação bloqueada, resultados fictícios ou mudanças involuntárias de economia.
+- Status de integração visual, funcionalidade e dados documentais indisponíveis são relatados separadamente; limitações não contam como teste aprovado.
+
+VALIDAÇÃO
+- Campanha nova, retomada, edição inicial, três fechamentos mensais, conclusão, falência e saída/reset em dados de teste.
+- Salvar relatório real de QA em docs/ui-update/qa e capturas em output/ui-update; nenhuma tarefa fica concluída apenas por possuir arquivos.
+
+ENTREGÁVEIS
+- Cena/prefabs/views/configuração realmente atualizados apenas no escopo desta tarefa.
+- Registro de execução e evidências em docs/ui-update/qa/UI-20.json e output/ui-update/UI-20/.
+- Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão.
+
+LIMITES
+Preservar IDs, dados econômicos, simulação de três meses e regras de persistência.
+PNG validado não deve ser regenerado; usar texto e dados nativos. Garçom permanece condicional sem RoleData.
+Não reexecutar a conversão para Single já concluída; não alterar tarefas/lotes alheios.
+
+COMANDO PARA EXECUTAR ESTA TAREFA
+Execute somente UI-20 — QA final: todas as telas, resoluções e build no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-20.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.
+
+ENTREGA VALIDADA — 17/10/2026
+381 testes Edit Mode e 3565 checks Play Mode; 14 campanhas completas e 42 fechamentos mensais.
+Cinco viewports, 75 combinações tela/resolução com seis estados e 1144 capturas reais.
+Correções: quadro responsivo comum/safe area, fundo excedente ameixa, toast e contraste financeiro.
+Windows x64 Development compilado e executado com saída/retomada; dados de teste preservados.
+APK Android IL2CPP ARM64 compilado pelo perfil existente e auditado; sem aparelho/emulador.
+Avisos: Both no Android e ComputeBuffer no shutdown Windows, reproduzido sem probe.
+277 PNGs/GUIDs/Single, economia, enums, perfis e partida real preservados.
+QA: docs/ui-update/qa/UI-20.json; matriz e limites nos arquivos UI-20-*.json.
+Galeria: output/ui-update/UI-20/index.html. Sem pendência indispensável de aceite UI-20;
+runtime Android e modelos documentais ausentes não são declarados aprovados/implementados.

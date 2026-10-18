@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "concept_revision": {
+    "request_date": "2026-10-17",
+    "authority": "Pedido do usuário para revisar integralmente UI-01 a UI-20 contra os concepts, incluindo composição e variantes de arte necessárias.",
+    "layout": "docs/ui-update/concept-layout.json",
+    "art": "docs/ui-update/concept-art.json",
+    "evidence": "output/ui-update/concept-revision/index.html",
+    "note": "Geometrias descritas nas tarefas e QAs anteriores são históricas; o quadro uniforme 1920x1080 e as regras de negócio permanecem."
+  },
+  "date": "2026-10-17",
+  "status": "UI-01 a UI-20 integradas; contrato final aferido nas cinco viewports do Editor e no Windows Player. Runtime Android em aparelho não homologado.",
+  "source_of_truth": [
+    "docs/art/tokens.json",
+    "docs/art/manifest.json",
+    "docs/art/layouts/map-layout.json",
+    "docs/art/layouts/identification-layout.json",
+    "docs/art/layouts/establishment-review-layout.json",
+    "docs/art/layouts/dre-layout.json",
+    "art-source/references/concepts"
+  ],
+  "palette": {
+    "violet": "#6D28D9",
+    "plum": "#24113D",
+    "lavender": "#B99AE8",
+    "ivory": "#F5F0E8",
+    "ink": "#30243C",
+    "teal": "#26776A",
+    "coral": "#C55457",
+    "amber": "#E7B65A",
+    "error_text": "#A6323D",
+    "positive_on_dark": "#8DD4C5",
+    "negative_on_dark": "#F2A4A6",
+    "muted_on_light": "#65566F",
+    "positive_report_text": "#145146",
+    "negative_report_text": "#82212E"
+  },
+  "text_surface_pairs": [
+    {
+      "surface": "#F5F0E8",
+      "text": "#30243C",
+      "use": "corpo, formulários, tabelas e cards claros"
+    },
+    {
+      "surface": "#6D28D9",
+      "text": "#F5F0E8",
+      "use": "ação primária e cabeçalhos"
+    },
+    {
+      "surface": "#24113D",
+      "text": "#F5F0E8",
+      "use": "navegação escura"
+    },
+    {
+      "surface": "#B99AE8",
+      "text": "#24113D",
+      "use": "seleção e apoio"
+    },
+    {
+      "surface": "#E7B65A",
+      "text": "#24113D",
+      "use": "ação de destaque/atenção"
+    }
+  ],
+  "typography": {
+    "renderer": "TextMeshPro",
+    "family": "Inter Tight existente no projeto; preservar fallback para acentos, moeda e números.",
+    "source": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
+    "sizes_are_proposal": false,
+    "size_note": "Valores finais UI-02 aferidos na identificação e no catálogo real Banco CogCred nas três resoluções; fonte compartilhada GameTypography.cs.",
+    "weights": {
+      "titles": "Bold (TMP Inter Tight existente)",
+      "body": "Regular",
+      "button": "Bold",
+      "values": "Bold quando destaque; Regular para valores de card"
+    },
+    "layout": "Corpo alinhado à esquerda; valores monetários alinhados à direita; cabeçalhos/botões conforme componente. Evitar sombras duplicadas antigas e autosize sem limites.",
+    "responsive": "Redimensionar/refluir o layout antes de reduzir texto; definir limites de autosize e garantir leitura na resolução física menor.",
+    "final_sizes_px": {
+      "screen_title": 44,
+      "section_title": 32,
+      "body": 24,
+      "button": 24,
+      "input": 24,
+      "label": 22,
+      "caption": 20,
+      "kpi": 42,
+      "table": 22,
+      "brand_title": 36
+    },
+    "spacing": {
+      "character": 0,
+      "line_additional": 0,
+      "word": 0,
+      "paragraph": 0,
+      "tmp_margin": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_line_height_em": 1.21
+    },
+    "overflow": "Sem autosize global. Corpo longo quebra linha em caixa dimensionada; rótulo limitado Truncate; inputs usam máscara e scroll horizontal. Não depender do glifo de reticências em overflow.",
+    "material": "Material compartilhado Inter Tight, FaceColor branco, OutlineWidth 0 e Underlay desativado. Sem sombra de texto duplicada.",
+    "feedback": "Toast usa Inter Tight no tamanho Body=24, texto Ink sobre a superfície clara e altura adaptada ao texto nativo; severidade mantém prefixo textual e sprite. Valores financeiros pequenos usam cores mais escuras com contraste medido sobre o centro real de UI_TABLE_TOTAL_COLUMN, separado das cores decorativas dos ícones."
+  },
+  "layout": {
+    "canvas_px": [
+      1920,
+      1080
+    ],
+    "topbar_height_px": 88,
+    "navbar_height_px": 96,
+    "content_padding_px": 24,
+    "gutter_px": 24,
+    "spacing_scale_px": [
+      8,
+      12,
+      16,
+      24,
+      32,
+      48
+    ],
+    "scaler": "Scale With Screen Size, referência 1920x1080, Screen Match Mode Expand. A escala do Canvas usa o menor fator entre largura e altura, evitando um canvas menor que o quadro autoral em 16:10; scalers secundários herdados permanecem desativados.",
+    "safe_area": "Screen.safeArea é convertida para coordenadas do Canvas e aplicada uma vez ao quadro comum. A escala uniforme é o menor fator entre largura/1920 e altura/1080 da área disponível. SafeAreaFitter nos filhos diretos do Canvas é desativado pelo enquadramento central; fitters aninhados específicos são preservados. QA distingue a simulação no Editor de execução em aparelho Android.",
+    "migration_notes": "Dimensões de controles e cards preservadas na migração dos scalers; cabeçalhos/caixas de texto baixos corrigidos. Alturas de cabeçalhos legados são exceções temporárias por tela; 88px segue o padrão de novas composições. Botão Confirmar do Banco separado de Menu. UI-09: cabeçalho do Banco corrigido para 88 px; passo 5 somente na abertura e gestão nas revisitas. UI-20: Expand e quadro comum substituem match Height=1 como contrato efetivo; espaços excedentes usam ameixa. Nenhum dado econômico, tamanho autoral ou PNG foi alterado.",
+    "production_frame": "ProductionCanvasLayout preserva as hierarquias e interpreta anchors/offsets originais no quadro autoral 1920x1080. Painéis, HUD, histórico, feedback e Sair compartilham uma transformação uniforme, centrada na área segura. Em proporções diferentes de 16:9, o espaço excedente fica com GamePalette.Background (ameixa), sem cortar a coluna direita nem separar controles globais do rodapé."
+  },
+  "mandatory_review_on_every_screen": [
+    "família/peso/tamanho de fonte",
+    "cor de texto por superfície e estado",
+    "entrelinha e espaçamento de texto",
+    "margens/gutters/alinhamento",
+    "tamanho e proporção de imagens",
+    "ordem de camadas e máscaras",
+    "normal/hover/pressed/disabled/selecionado/foco",
+    "erros/loading/vazios",
+    "navegação/input/scroll",
+    "dados dinâmicos e atualização ao revisitar",
+    "resolução menor e textos longos"
+  ],
+  "sprite_rules": [
+    "Manter Single: 277/277 já corrigidos em 16/10/2026; não abrir nova tarefa para repetir essa conversão.",
+    "Usar o PNG inteiro; preserveAspect/contain em pessoas/objetos. Nenhuma nova divisão automática de silhuetas.",
+    "FullRect em componentes de UI; bordas 9-slice l,b,r,t conforme manifesto; pivots/posições específicos de mapa e DRE não são intercambiáveis.",
+    "Master branco recebe tint por superfície; arte colorida usa tint branco neutro. Fundo claro para o logo oficial e objetos escuros.",
+    "Revisar maxTextureSize, filtros, mipmaps e compressão usando prova visual e o tamanho real; 9-slice funciona com Single."
+  ],
+  "logic_constraints": [
+    "Manter os valores numéricos existentes de GameState e PanelId; adicionar novos sem renumerar os atuais.",
+    "Identificação é passo 1; manter nomes D1-D6 como IDs/códigos históricos para não quebrar vínculos.",
+    "Identificação permanece em PlayerPrefs; decisões iniciais continuam rascunho até confirmar o cardápio e persistir no SQLite.",
+    "Campanha permanece com 3 meses; não alterar economia, IDs, salários, custos, juros ou regras de simulação para adaptar telas.",
+    "Config_Review continua técnico; telas de eventos/resultados que exigem leitura/ação aguardam o usuário.",
+    "Não criar RoleData de garçom só porque ART-39 está produzido; registrar reserva condicional.",
+    "BMC/relatórios documentais sem fonte devem informar ausência; números fictícios não contam como integração."
+  ],
+  "workflow": "Executar uma tarefa por vez no Editor do projeto correto usando unity:ui-ugui e a conexão disponível. Preservar hierarquias/referências úteis; não reescrever YAML de cenas/prefabs/importadores com Editor vivo. Revalidar baseline antes de editar.",
+  "evidence": {
+    "task_record": "docs/ui-update/qa/UI-XX.json (criar na execução)",
+    "screenshots": "output/ui-update/UI-XX/ (criar na execução)",
+    "completion_rule": "Somente marcar concluído com implementação real, revisão visual e verificações descritas na tarefa; este plano não conclui nenhuma UI."
+  },
+  "out_of_scope": [
+    "Regenerar artes validadas sem necessidade demonstrada",
+    "ART-40/painel docente/marketing/loja externa",
+    "Refazer cenas de demo, cenas antigas desativadas ou interfaces admin fora do jogo",
+    "Alterar motor trimestral, balanceamento ou criar backend documental silenciosamente"
+  ],
+  "implementation_evidence": "docs/ui-update/qa/UI-02.json",
+  "final_validation": "docs/ui-update/qa/UI-20.json"
+}

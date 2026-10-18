@@ -1,0 +1,276 @@
+{
+  "task_id": "ART-23",
+  "title": "Equipamentos japoneses",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "scope_resolution": "Executado somente ART-23 — Equipamentos japoneses, conforme manifesto e esclarecimento anterior do usuário sobre os lotes numerados. Trecho repetido sobre controles corresponde ao ART-05, preservado, assim como lotes anteriores.",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Identificador de modelo não exposto pela ferramenta integrada.",
+    "distinct_generations": 3,
+    "transparent_background": true,
+    "prompts_record": "docs/art/prompts/ART-23.json",
+    "technical_export_source": "art-source/editable/ART-23/export-art23.cjs"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 3,
+    "report": "docs/art/qa/ART-23-technical.json",
+    "plan_report": "docs/art/qa/ART-23-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-23-prerequisites.json"
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "native_size_px": [
+      512,
+      512
+    ],
+    "display_box_px": [
+      250,
+      250
+    ],
+    "display_fit": "contain/preserveAspect, escala uniforme 250/512",
+    "contact_sheet": "art-source/previews/ART-23/ART-23-contact-sheet.png",
+    "inspected_previews": [
+      "art-source/previews/ART-23/ART-23-contact-sheet.png",
+      "art-source/previews/ART-23/EQUIPMENT_BALCAO_REFRIGERADO_SUSHI-native-light-dark.png",
+      "art-source/previews/ART-23/EQUIPMENT_FACAS_ESPECIAIS_JAPONES-native-light-dark.png",
+      "art-source/previews/ART-23/EQUIPMENT_PANELA_ELETRICA_ARROZ-native-light-dark.png"
+    ],
+    "checks": [
+      "Três PNGs individuais inspecionados a 512×512 e 250×250 sobre marfim e ameixa; silhuetas completas, contornos limpos e sem halo perceptível.",
+      "Balcão preserva a vitrine baixa de vidro curvo, compartimento compressor à direita, base inox e pés. Sete cubas internas vazias, vidro com reflexos azulados e translucidez, sem alimentos ou cenário incorporado.",
+      "Facas formam um conjunto de três ferramentas culinárias: lâmina longa de corte, média larga e curta utilitária, com cabos escuros, colares de metal e pontas completas. Espaçamento e perfis legíveis sem suporte, inscrições ou objeto extra.",
+      "Panela de arroz preserva corpo cilíndrico, tampa fechada, dois pegadores escuros, base e pés. Painel frontal com tela lisa, acionador e dois indicadores físicos sem dígitos, letras ou GUI.",
+      "Tipologia e componentes comparados com os sprites atuais. Não foram incorporados alimentos, molduras douradas, fundo opaco ou acabamento fotográfico dos antigos cards.",
+      "Família mantém contorno ameixa, aço cinza-ardósia, luz superior esquerda e perspectiva levemente elevada; balcão mostra frente e lado direito, facas mostram bisel/facetas em diagonal e panela mantém elipses coerentes.",
+      "Sem preço, quantidade, nome, label, logo, escrita japonesa, carrinho, badge ou overlay de adquirido/bloqueado/premium nos sprites. Indicadores físicos da panela pertencem ao aparelho.",
+      "Uma geração por asset; o conjunto de três facas é um único equipamento de catálogo, sem sprite sheet ou recorte de card.",
+      "Originais RGBA 1254×1254 preservados. Redução uniforme do frame completo a 410×410 e padding transparente de 51 px por lado até 512×512, sem crop, pintura, recolor ou limpeza de alfa por código.",
+      "Exterior com alfa zero, recortes conferidos nos dois fundos, pivots [0.5,0.5], sem 9-slice e margem visual mínima de 51 px. Vidro conserva a translucidez da geração; labels e fundos apenas nos previews de QA."
+    ],
+    "alpha_note": "Alfa retornado pelo ImageGen preservado, inclusive antialias e eventuais resíduos esparsos de alfa baixo. Miolos visualmente sólidos e contornos conferidos sobre marfim e ameixa; medições completas por arquivo.",
+    "technical_export_note": "Frame completo reduzido uniformemente para caixa máxima 410×410, com padding transparente até 512×512. Sem crop, pintura, recolor, limpeza de alfa ou deformação independente dos eixos.",
+    "framing_note": "Ícones com enquadramento comum e proporções comerciais plausíveis, câmera de três quartos e peso visual comparável para exibição em caixas 250×250. Preservar proporção; não esticar os eixos."
+  },
+  "assets": [
+    {
+      "id": "EQUIPMENT_BALCAO_REFRIGERADO_SUSHI",
+      "name": "Balcão Refrigerado p/ Sushi",
+      "output_path": "Assets/Art/new/equipment/japones/balcao_refrigerado_sushi.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "91aa55e83cbabad8544015ccdd54d3c02f34381441effdc65de4ca3aa6ca7710",
+      "output_bytes": 109970,
+      "source_path": "art-source/references/generations/ART-23/balcao_refrigerado_sushi-source-01.png",
+      "source_sha256": "4586b05c43fc0938a17405cae84621c6cbec8cde2ac5f611934b6fe0581c8cb6",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Vitrine refrigerada baixa com canopy de vidro curvo, base de inox, sete cubas internas vazias e compartimento compressor à direita com grelha. Tipologia do sprite atual preservada, sem alimentos.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7599372863769531,
+        "fully_opaque_fraction": 0.003269195556640625,
+        "alpha_250_or_more_fraction": 0.19646453857421875,
+        "semitransparent_fraction": 0.23679351806640625,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 45321
+          },
+          {
+            "alpha": 252,
+            "count": 1976
+          },
+          {
+            "alpha": 254,
+            "count": 1591
+          },
+          {
+            "alpha": 251,
+            "count": 896
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          51,
+          89,
+          451,
+          443
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          63,
+          170,
+          448,
+          367
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-23/EQUIPMENT_BALCAO_REFRIGERADO_SUSHI-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-23/EQUIPMENT_BALCAO_REFRIGERADO_SUSHI-display-light-dark.png"
+    },
+    {
+      "id": "EQUIPMENT_FACAS_ESPECIAIS_JAPONES",
+      "name": "Facas Especiais",
+      "output_path": "Assets/Art/new/equipment/japones/facas_especiais_japones.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "1065b11f855c2a49eaa42af07ea81353e82b7f46840e25814d2d99081ec8da09",
+      "output_bytes": 88748,
+      "source_path": "art-source/references/generations/ART-23/facas_especiais_japones-source-01.png",
+      "source_sha256": "1f19dbf7f3b71d667903feeeafebb4efe921210e877ce1dddaf32eab12ad57dd",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Três facas culinárias com perfis longo de corte, médio largo e curto utilitário, cabos escuros e colares de metal. Dispostas em paralelo diagonal, com lâminas e pontas completas, sem suporte ou inscrições.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8540267944335938,
+        "fully_opaque_fraction": 0.005672454833984375,
+        "alpha_250_or_more_fraction": 0.127044677734375,
+        "semitransparent_fraction": 0.14030075073242188,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 27520
+          },
+          {
+            "alpha": 254,
+            "count": 2245
+          },
+          {
+            "alpha": 255,
+            "count": 1487
+          },
+          {
+            "alpha": 252,
+            "count": 974
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          69,
+          79,
+          435,
+          433
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          86,
+          82,
+          432,
+          431
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-23/EQUIPMENT_FACAS_ESPECIAIS_JAPONES-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-23/EQUIPMENT_FACAS_ESPECIAIS_JAPONES-display-light-dark.png"
+    },
+    {
+      "id": "EQUIPMENT_PANELA_ELETRICA_ARROZ",
+      "name": "Panela Elétrica de Arroz",
+      "output_path": "Assets/Art/new/equipment/japones/panela_eletrica_arroz.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "2cfefbdff05ed3649810796cd890e5ba6b9f78ce112ffb6c30b3fd0a03c39c88",
+      "output_bytes": 138574,
+      "source_path": "art-source/references/generations/ART-23/panela_eletrica_arroz-source-01.png",
+      "source_sha256": "dbc67abf05fd5f3d4921ae9511016798328f98a4b67c88623dabf27fea8935ff",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "visual_composition_proposal": "Panela de arroz cilíndrica fechada com tampa baixa, dois pegadores isolados, base e pés escuros e painel frontal com tela lisa, acionador e pequenos indicadores físicos sem texto.",
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6407585144042969,
+        "fully_opaque_fraction": 0.003387451171875,
+        "alpha_250_or_more_fraction": 0.3453941345214844,
+        "semitransparent_fraction": 0.3558540344238281,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 76769
+          },
+          {
+            "alpha": 252,
+            "count": 11384
+          },
+          {
+            "alpha": 255,
+            "count": 888
+          },
+          {
+            "alpha": 1,
+            "count": 845
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          57,
+          67,
+          453,
+          461
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          85,
+          99,
+          435,
+          415
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "native_preview": "art-source/previews/ART-23/EQUIPMENT_PANELA_ELETRICA_ARROZ-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-23/EQUIPMENT_PANELA_ELETRICA_ARROZ-display-light-dark.png"
+    }
+  ],
+  "total_bytes": 337292,
+  "integration_proposal": {
+    "textureType": "Sprite (2D and UI)",
+    "spriteMode": "Single",
+    "pixelsPerUnit": 100,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "display_box_px": [
+      250,
+      250
+    ],
+    "fit": "contain/preserveAspect",
+    "maxTextureSize": 512,
+    "sRGBTexture": true,
+    "alphaIsTransparency": true,
+    "filterMode": "Bilinear",
+    "generateMipmaps": false,
+    "compression": "Sem compressão na QA; ajustar por plataforma na integração."
+  },
+  "pending": [],
+  "integration_performed": false
+}

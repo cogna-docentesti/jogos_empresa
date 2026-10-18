@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var path=UI01Validation.Capture(\"resume-invalid-registration-1920x1080\"); var ui=UnityEngine.Object.FindFirstObjectByType<Game.Adapter.In.UI.UIIndentification>(); var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic; var input=(TMPro.TMP_InputField)ui.GetType().GetField(\"studentNameInput\",flags).GetValue(ui); if(input.text!=\"Ana\") throw new System.Exception(\"Invalid prefilling lost\"); input.text=\"Aluna Teste\"; ui.Register(); if(GameManager.Instance.StateMachine.CurrentState!=GameState.Management_Hub) throw new System.Exception(\"Repaired complete save did not return to hub\"); return new {invalidOpenedStep1=true, restoredName=true, repairedDestination=\"Management_Hub\", screenshot=path, preservedRows=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()};",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "invalidOpenedStep1": true,
+        "restoredName": true,
+        "repairedDestination": "Management_Hub",
+        "screenshot": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\UI-01\\resume-invalid-registration-1920x1080.png",
+        "preservedRows": 1
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

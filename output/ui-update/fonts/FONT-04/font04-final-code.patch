@@ -1,0 +1,54 @@
+diff --git a/Assets/Editor/UI/MenuPanelBuilder.cs b/Assets/Editor/UI/MenuPanelBuilder.cs
+--- a/Assets/Editor/UI/MenuPanelBuilder.cs
++++ b/Assets/Editor/UI/MenuPanelBuilder.cs
+@@ -865,7 +865,7 @@
+ 
+             var backLabel = UiFactory.EnsureChild(back, "Label");
+             UiFactory.AnchorCorner(backLabel, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 160, 44, 70, 0);
+-            UiFactory.Text(backLabel, "Voltar", GameTypography.Tokens.Body, FontStyles.Bold, GamePalette.Muted,
++            UiFactory.Text(backLabel, "Voltar", GameTypography.Tokens.Button, FontStyles.Bold, GamePalette.Muted,
+                            TextAlignmentOptions.MidlineLeft);
+ 
+             UiFactory.MakeButton(back, highlightedTint: 1.18f, pressedTint: 0.90f);
+@@ -922,7 +922,7 @@
+ 
+             var label = UiFactory.EnsureChild(button, "Label");
+             UiFactory.AnchorCorner(label, new Vector2(0, 0.5f), new Vector2(0, 0.5f), 280, 46, 76, 0);
+-            UiFactory.Text(label, "Menu do Jogo", GameTypography.Tokens.Body, FontStyles.Bold, GamePalette.Parse(GamePalette.HexOnWarn),
++            UiFactory.Text(label, "Menu do Jogo", new TypographyToken(TypographyRole.Navigation, GameTypography.Body), FontStyles.Bold, GamePalette.Parse(GamePalette.HexOnWarn),
+                            TextAlignmentOptions.MidlineLeft);
+ 
+             UiFactory.MakeButton(button, highlightedTint: 1.12f, pressedTint: 0.88f);
+diff --git a/Assets/Editor/UI/UiFactory.cs b/Assets/Editor/UI/UiFactory.cs
+--- a/Assets/Editor/UI/UiFactory.cs
++++ b/Assets/Editor/UI/UiFactory.cs
+@@ -667,7 +667,7 @@
+             captionRt.pivot     = new Vector2(0.5f, 0.5f);
+             captionRt.offsetMin = Vector2.zero;
+             captionRt.offsetMax = Vector2.zero;
+-            Text(captionRt, caption, 22f, FontStyles.Normal, GamePalette.InkBody, TextAlignmentOptions.MidlineLeft);
++            Text(captionRt, caption, new TypographyToken(TypographyRole.Table,22), FontStyles.Normal, GamePalette.InkBody, TextAlignmentOptions.MidlineLeft);
+ 
+             var valueRt = EnsureChild(row, "Value");
+             valueRt.anchorMin = new Vector2(0.48f, 0f);
+@@ -675,7 +675,7 @@
+             valueRt.pivot     = new Vector2(0.5f, 0.5f);
+             valueRt.offsetMin = Vector2.zero;
+             valueRt.offsetMax = Vector2.zero;
+-            valueLabel = Text(valueRt, value, 22f, FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineRight);
++            valueLabel = Text(valueRt, value, new TypographyToken(TypographyRole.TableTotal,22), FontStyles.Bold, GamePalette.Ink, TextAlignmentOptions.MidlineRight);
+ 
+             var divider = EnsureChild(row, "Divider");
+             BottomBand(divider, 1f, 0, 0, 0);
+diff --git a/Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs b/Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs
+--- a/Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs
++++ b/Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs
+@@ -5,7 +5,7 @@
+ 
+ namespace Game.Adapter.In.UI
+ {
+-    public enum SharedControlKind { Primary, Secondary, Danger, Accent, Icon, Card, Tab, Pill, Checkbox, Radio, Toggle, Input, Slider, Scrollbar }
++    public enum SharedControlKind { Primary, Secondary, Danger, Accent, Icon, Card, Tab, Pill, Checkbox, Radio, Toggle, Input, Slider, Scrollbar, Navigation }
+ 
+     /// <summary>Visual states only: never replaces a Selectable or registers a business callback.</summary>
+     [DisallowMultipleComponent, RequireComponent(typeof(UnityEngine.UI.Selectable))]

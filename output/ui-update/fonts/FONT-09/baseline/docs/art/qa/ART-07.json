@@ -1,0 +1,355 @@
+{
+  "task_id": "ART-07",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — revisão visual do agente",
+  "technical_validation": {
+    "command": "python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-07",
+    "passed": true,
+    "asset_count": 18,
+    "errors": [],
+    "report": "docs/art/qa/ART-07-technical.json"
+  },
+  "visual_validation": {
+    "passed": true,
+    "export_scale": "1:1",
+    "checked_display_sizes_px": [
+      32,
+      40,
+      48
+    ],
+    "backgrounds": [
+      "#24113D",
+      "#F5F0E8"
+    ],
+    "tint_policy": "Master branco sobre ameixa; tint ameixa sobre marfim apenas na QA. Nenhuma variante colorida de produção.",
+    "contact_sheet": "art-source/previews/ART-07/ART-07-contact-sheet.png",
+    "review_pages": [
+      "art-source/previews/ART-07/ART-07-review-01.png",
+      "art-source/previews/ART-07/ART-07-review-02.png",
+      "art-source/previews/ART-07/ART-07-review-03.png",
+      "art-source/previews/ART-07/ART-07-review-04.png",
+      "art-source/previews/ART-07/ART-07-review-05.png",
+      "art-source/previews/ART-07/ART-07-review-06.png"
+    ],
+    "preview_source": "art-source/editable/qa/ART-07-preview.py",
+    "checks": [
+      "Todos os 18 ícones inspecionados em export 1:1 e em 32, 40 e 48 px, sobre fundo claro/escuro.",
+      "Acabamento, traço-base 16 px, preenchimentos e escala coerentes com o kit ART-06 e os concepts.",
+      "RGB 255/255/255 em todos os pixels visíveis, alfa verdadeiro e preservação do alfa na tintura de QA.",
+      "Margem transparente mínima real de 32 px; pivot central e escala uniforme contain.",
+      "Vazios internos legíveis, antialias limpo, sem halo, checkerboard, fundo, badge ou sombra incorporados.",
+      "Receita, principal, custos, estoque e contrato têm silhuetas distintas; sem repetir moedas, barras ou documento do ART-06.",
+      "Tendências de alta e queda são pares espelhados no mesmo canvas/pivot, com direção inequívoca.",
+      "Cliente individual, grupo de três clientes e equipe do ART-06 permanecem símbolos distintos.",
+      "Juros usam apenas geometria percentual; prazo usa ampulheta; nenhuma taxa, data ou valor rasterizado.",
+      "Reputação, coerência, capacidade e concorrência recebem símbolos próprios, sem duplicar os indicadores genéricos existentes.",
+      "Dezoito PNGs e fontes SVG separados; hashes de alfa diferentes dentro do lote e sem duplicatas do ART-06.",
+      "Export exato, perfil sRGB, hashes e ausência de texto/bitmap incorporado nas fontes conferidos."
+    ]
+  },
+  "semantic_choices": {
+    "revenue": "Entrada em cédula",
+    "clients": "Três pessoas versus equipe de duas do ART-06",
+    "client": "Pessoa única",
+    "coherence": "Elos interligados",
+    "reputation": "Polegar de aprovação versus estrela de score",
+    "rent": "Chave",
+    "capacity": "Medidor operacional",
+    "competition": "Setas opostas",
+    "input_costs": "Saco de insumos",
+    "utilities": "Água/energia",
+    "payroll": "Recibo de pagamento",
+    "interest": "Percentual geométrico",
+    "term": "Ampulheta",
+    "loan_principal": "Cédulas sobrepostas",
+    "inventory": "Caixa",
+    "credit_contract": "Folha com caneta"
+  },
+  "true_alpha_internal_cutouts": {
+    "ICON_REVENUE": [
+      [
+        128,
+        164
+      ]
+    ],
+    "ICON_INTEREST": [
+      [
+        80,
+        80
+      ],
+      [
+        176,
+        176
+      ]
+    ],
+    "ICON_UTILITIES": [
+      [
+        124,
+        136
+      ]
+    ],
+    "ICON_INVENTORY": [
+      [
+        128,
+        80
+      ]
+    ]
+  },
+  "assets": [
+    {
+      "id": "ICON_REVENUE",
+      "name": "Receita",
+      "technical": true,
+      "visual": true,
+      "notes": "Entrada de receita representada por cédula com seta entrando por cima; distinta das barras e moedas do ART-06.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "3930411f5d5fc35713da84477fa6f1d9b91edb696474f84301a6b00e8336a2f4",
+      "source_editable": "art-source/editable/shared/icons/icon_revenue.svg",
+      "preview": "art-source/previews/ART-07/ICON_REVENUE-export-and-display.png"
+    },
+    {
+      "id": "ICON_TREND_UP",
+      "name": "Tendência de alta",
+      "technical": true,
+      "visual": true,
+      "notes": "Linha ascendente em zigue-zague com seta no extremo superior direito, conforme o resultado previsto dos concepts.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "a2e7fd403424752984cf9b5681253d6568c70df46a0abc8b6946aaeb0eb95dea",
+      "source_editable": "art-source/editable/shared/icons/icon_trend_up.svg",
+      "preview": "art-source/previews/ART-07/ICON_TREND_UP-export-and-display.png"
+    },
+    {
+      "id": "ICON_TREND_DOWN",
+      "name": "Tendência de queda",
+      "technical": true,
+      "visual": true,
+      "notes": "Par descendente da tendência de alta, espelhado verticalmente no mesmo canvas e pivot.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "82f531d563a27ff720f91d26717e7477606eb71053c77c7810a1dce3c23feced",
+      "source_editable": "art-source/editable/shared/icons/icon_trend_down.svg",
+      "preview": "art-source/previews/ART-07/ICON_TREND_DOWN-export-and-display.png"
+    },
+    {
+      "id": "ICON_CLIENTS",
+      "name": "Clientes",
+      "technical": true,
+      "visual": true,
+      "notes": "Três pessoas abstratas, para público/clientes; distinto do símbolo de equipe com duas pessoas do ART-06.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "a7090e2f0dd6ae0a52c97b70dc398f1dc0adbfd153477d5348adc13f97a5b18d",
+      "source_editable": "art-source/editable/shared/icons/icon_clients.svg",
+      "preview": "art-source/previews/ART-07/ICON_CLIENTS-export-and-display.png"
+    },
+    {
+      "id": "ICON_CLIENT",
+      "name": "Cliente",
+      "technical": true,
+      "visual": true,
+      "notes": "Uma pessoa abstrata, sem retrato ou identidade canônica, para unidade de cliente.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "edc837bc444164a718b89773e7e4ab32d6a333f1db6a3bab167fcbb3860e62bd",
+      "source_editable": "art-source/editable/shared/icons/icon_client.svg",
+      "preview": "art-source/previews/ART-07/ICON_CLIENT-export-and-display.png"
+    },
+    {
+      "id": "ICON_COHERENCE",
+      "name": "Coerência",
+      "technical": true,
+      "visual": true,
+      "notes": "Dois elos interligados simbolizando compatibilidade entre decisões; sem check ou badge.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "e5adb6f4bfc894fd0864df0e5bd7c4b1a475131c75e83dc9b3958a66413f15bd",
+      "source_editable": "art-source/editable/shared/icons/icon_coherence.svg",
+      "preview": "art-source/previews/ART-07/ICON_COHERENCE-export-and-display.png"
+    },
+    {
+      "id": "ICON_REPUTATION",
+      "name": "Reputação",
+      "technical": true,
+      "visual": true,
+      "notes": "Polegar de aprovação; diferencia avaliação/reputação da estrela genérica de score já entregue no ART-06.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "322f71268ef5ed54a9759dfff70671510f9e62445fee76c52adb993fcfc8bc48",
+      "source_editable": "art-source/editable/shared/icons/icon_reputation.svg",
+      "preview": "art-source/previews/ART-07/ICON_REPUTATION-export-and-display.png"
+    },
+    {
+      "id": "ICON_RENT",
+      "name": "Aluguel",
+      "technical": true,
+      "visual": true,
+      "notes": "Chave de acesso ao imóvel, para custo de aluguel; sem casa duplicada, preço ou contrato incorporado.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "25360eaf571d6e54450be18a20afd10ec9e0d16aba5b1fb728b4eee1af2fab5e",
+      "source_editable": "art-source/editable/shared/icons/icon_rent.svg",
+      "preview": "art-source/previews/ART-07/ICON_RENT-export-and-display.png"
+    },
+    {
+      "id": "ICON_CAPACITY",
+      "name": "Capacidade",
+      "technical": true,
+      "visual": true,
+      "notes": "Medidor com ponteiro, representando capacidade operacional; sem escala numérica ou gráfico de dados.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "6fb22a4ed2298f805bfd7456155dc1980e813ad8fd407d48698877871c3a995a",
+      "source_editable": "art-source/editable/shared/icons/icon_capacity.svg",
+      "preview": "art-source/previews/ART-07/ICON_CAPACITY-export-and-display.png"
+    },
+    {
+      "id": "ICON_COMPETITION",
+      "name": "Concorrência",
+      "technical": true,
+      "visual": true,
+      "notes": "Duas setas em sentidos opostos, para comparação e disputa de alternativas; sem logotipos ou concorrentes específicos.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "da903b6de4c35a80eb8cd982168acc40b6da1283eae8b5f19d959881fcf37dec",
+      "source_editable": "art-source/editable/shared/icons/icon_competition.svg",
+      "preview": "art-source/previews/ART-07/ICON_COMPETITION-export-and-display.png"
+    },
+    {
+      "id": "ICON_INPUT_COSTS",
+      "name": "Custos de insumos",
+      "technical": true,
+      "visual": true,
+      "notes": "Saco de insumos com pequeno ramo geométrico, distinto da caixa de estoque e de valores monetários.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "7c2a34a53a252e23cd407e2b0e116d4733ee31f685ef3d27b7e21304075add37",
+      "source_editable": "art-source/editable/shared/icons/icon_input_costs.svg",
+      "preview": "art-source/previews/ART-07/ICON_INPUT_COSTS-export-and-display.png"
+    },
+    {
+      "id": "ICON_UTILITIES",
+      "name": "Despesas operacionais",
+      "technical": true,
+      "visual": true,
+      "notes": "Gota com raio em recorte transparente, combinando água e energia como despesas de utilidades.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "2fb6f65b3a13b0d72b9bea92c208df402bb9f7465b9291cb24e2177cab9fff29",
+      "source_editable": "art-source/editable/shared/icons/icon_utilities.svg",
+      "preview": "art-source/previews/ART-07/ICON_UTILITIES-export-and-display.png"
+    },
+    {
+      "id": "ICON_PAYROLL",
+      "name": "Folha de pagamento",
+      "technical": true,
+      "visual": true,
+      "notes": "Recibo de pagamento com pessoa e campos geométricos, sem nome, salário, letras ou valores.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "c0fda02865b0d3b42ad19b04eb5aa8db53cc3b0c1d9a6eefd0436916c3932de9",
+      "source_editable": "art-source/editable/shared/icons/icon_payroll.svg",
+      "preview": "art-source/previews/ART-07/ICON_PAYROLL-export-and-display.png"
+    },
+    {
+      "id": "ICON_INTEREST",
+      "name": "Juros",
+      "technical": true,
+      "visual": true,
+      "notes": "Taxa percentual desenhada com duas circunferências e diagonal, sem tipografia ou números.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "385b7c00db703706a7a1b0a6072464e8f1ff8b52ff0bc5def2de01aafb092caa",
+      "source_editable": "art-source/editable/shared/icons/icon_interest.svg",
+      "preview": "art-source/previews/ART-07/ICON_INTEREST-export-and-display.png"
+    },
+    {
+      "id": "ICON_TERM",
+      "name": "Prazo",
+      "technical": true,
+      "visual": true,
+      "notes": "Ampulheta de prazo, distinta do calendário do ART-06; sem datas ou contagem.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "e7583e2bb5ee84d3f4ad8828d21d319dbf92aa91ce6535627a0bd44e2be6df30",
+      "source_editable": "art-source/editable/shared/icons/icon_term.svg",
+      "preview": "art-source/previews/ART-07/ICON_TERM-export-and-display.png"
+    },
+    {
+      "id": "ICON_LOAN_PRINCIPAL",
+      "name": "Principal do empréstimo",
+      "technical": true,
+      "visual": true,
+      "notes": "Duas cédulas sobrepostas, simbolizando principal disponibilizado; sem repetir a pilha de moedas ou seta de receita.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "c57f5fac1d120cc7be1ec4e4cfa962d530dda0a5331f05a49a43980a8fef1540",
+      "source_editable": "art-source/editable/shared/icons/icon_loan_principal.svg",
+      "preview": "art-source/previews/ART-07/ICON_LOAN_PRINCIPAL-export-and-display.png"
+    },
+    {
+      "id": "ICON_INVENTORY",
+      "name": "Estoque",
+      "technical": true,
+      "visual": true,
+      "notes": "Caixa tridimensional simples, para estoque; faces transparentes e nenhuma quantidade ou produto incorporado.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "ba8ae60618baec0d1e0d5415562c8b633d4ebe157802505193d46bcb580739e1",
+      "source_editable": "art-source/editable/shared/icons/icon_inventory.svg",
+      "preview": "art-source/previews/ART-07/ICON_INVENTORY-export-and-display.png"
+    },
+    {
+      "id": "ICON_CREDIT_CONTRACT",
+      "name": "Contrato de crédito",
+      "technical": true,
+      "visual": true,
+      "notes": "Folha contratual com caneta geométrica; sem assinatura, letras, valores ou texto rasterizado.",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "sha256": "d5a15a2228ed44fea0520049783a6318049d1cbd3cf88fa0c5ff7aca936fe6c8",
+      "source_editable": "art-source/editable/shared/icons/icon_credit_contract.svg",
+      "preview": "art-source/previews/ART-07/ICON_CREDIT_CONTRACT-export-and-display.png"
+    }
+  ],
+  "pending": [],
+  "integration_performed": false
+}

@@ -433,7 +433,7 @@ public static class UI19NavigationValidation
                     var importer = AssetImporter.GetAtPath(path.Replace('\\', '/')) as TextureImporter;
                     Expect(importer != null && importer.spriteImportMode == SpriteImportMode.Single, "Sprite mode " + path); pngs++;
                 }
-                Expect(pngs == 277, "Art count");
+                Expect(pngs == 280, "Art count");
                 var manifest = File.ReadAllText("Packages/manifest.json"); Expect(!manifest.Contains("com.unity.pipeline"), "Temporary tool dependency remains");
                 Expect(!scene.isDirty, "Incidental scene edits");
                 File.WriteAllText(UiValidationContext.FileFor("UI-19", "final-editor-audit.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new {

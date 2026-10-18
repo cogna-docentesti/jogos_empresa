@@ -1,0 +1,266 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "tail": "50"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 1395,
+          "timestampUtc": "2026-10-16T18:05:34.3771801Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado forçado: MainMenu",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:ForceState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:119)\nGameManager:PrepareSession (string,string) (at Assets/Scripts/Game/Infrastructure/GameManager.cs:97)\nGameManager:Start () (at Assets/Scripts/Game/Infrastructure/GameManager.cs:43)\n",
+          "seeded": false
+        },
+        {
+          "seq": 1396,
+          "timestampUtc": "2026-10-16T18:05:34.3822427Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_Identification",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nGameManager:PrepareSession (string,string) (at Assets/Scripts/Game/Infrastructure/GameManager.cs:123)\nGameManager:Start () (at Assets/Scripts/Game/Infrastructure/GameManager.cs:43)\n",
+          "seeded": false
+        },
+        {
+          "seq": 1397,
+          "timestampUtc": "2026-10-16T18:06:16.8814648Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] Iniciando 8 passos.",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Start (double) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:82)\nInitialDecisionsFlowSmokeTest:RunWithIdentification () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:71)\nPipelineEvaluation.PipelineEval_21778adf:Execute ()\nSystem.Reflection.MethodBase:Invoke (object,object[])\nUnity.Pipeline.Compilation.EvalCodeCompiler:ExecuteCompiledAssembly (System.Reflection.Assembly) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Compilation/EvalCodeCompiler.cs:190)\nUnity.Pipeline.Compilation.EvalCodeCompiler:CompileAndExecuteOnMainThread (string,int,System.Diagnostics.Stopwatch) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Compilation/EvalCodeCompiler.cs:54)\nUnity.Pipeline.Runtime.Commands.CodeEvalCommand:EvaluateSource (string,int,string) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Commands/CodeEvalCommand.cs:112)\nUnity.Pipeline.Runtime.Commands.CodeEvalCommand:EvaluateCode (string,int) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Commands/CodeEvalCommand.cs:24)\nSystem.Reflection.MethodBase:Invoke (object,object[])\nUnity.Pipeline.BasePipelineServer:ExecuteCommandDirect (Unity.Pipeline.Commands.CommandInfo,object[]) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2820)\nUnity.Pipeline.BasePipelineServer/<>c__DisplayClass138_0:<ExecuteCommand>b__1 () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2694)\nUnity.Pipeline.Threading.Dispatcher/WorkItem`1<object>:ExecuteCore () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:284)\nUnity.Pipeline.Threading.Dispatcher/WorkItem:Execute () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:229)\nUnity.Pipeline.Threading.Dispatcher:ProcessWorkQueue (int) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:195)\nUnity.Pipeline.Threading.Dispatcher:ProcessWorkQueue () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:210)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1398,
+          "timestampUtc": "2026-10-16T18:06:17.1930463Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_Location",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nGameManager:ConfirmIdentification () (at Assets/Scripts/Game/Infrastructure/GameManager.cs:62)\nGame.Adapter.In.UI.UIIndentification:OpenGameScene () (at Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs:148)\nGame.Adapter.In.UI.UIIndentification:Register () (at Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs:138)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_0 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:142)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1399,
+          "timestampUtc": "2026-10-16T18:06:17.2159806Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[SqliteLocationRepository] Primeira carga: 5 localizacoes copiadas dos assets para o banco.",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGame.Adapter.Out.Persistence.SqliteLocationRepository:SeedIfEmpty (SQLite4Unity3d.SQLiteConnection) (at Assets/Scripts/Game/Adapter/Out/Persistence/SqliteLocationRepository.cs:64)\nGame.Adapter.Out.Persistence.SqliteLocationRepository:.ctor (SQLite4Unity3d.SQLiteConnection) (at Assets/Scripts/Game/Adapter/Out/Persistence/SqliteLocationRepository.cs:34)\nGame.Adapter.In.Controllers.LocationScreenController:Awake () (at Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs:45)\nUnityEngine.GameObject:SetActive (bool)\nUIStateListener:SetActive (UnityEngine.GameObject,bool) (at Assets/Scripts/Game/Adapter/In/UI/UIStateListener.cs:174)\nUIStateListener:Show (UnityEngine.GameObject) (at Assets/Scripts/Game/Adapter/In/UI/UIStateListener.cs:168)\nUIStateListener:HandleStateChanged (GameState) (at Assets/Scripts/Game/Adapter/In/UI/UIStateListener.cs:83)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:110)\nGameManager:ConfirmIdentification () (at Assets/Scripts/Game/Infrastructure/GameManager.cs:62)\nGame.Adapter.In.UI.UIIndentification:OpenGameScene () (at Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs:148)\nGame.Adapter.In.UI.UIIndentification:Register () (at Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs:138)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_0 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:142)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1400,
+          "timestampUtc": "2026-10-16T18:06:17.2252449Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      Identificacao: preenche e Cadastrar abre o jogo na D1",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1401,
+          "timestampUtc": "2026-10-16T18:06:17.6309719Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      GameScene: D1 vazia, banco sem sessao",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1402,
+          "timestampUtc": "2026-10-16T18:06:18.0519726Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_Identification",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nInitialDecisionFlow:GoTo (GameState) (at Assets/Scripts/Game/Infrastructure/InitialDecisionFlow.cs:71)\nGame.Adapter.In.Controllers.LocationScreenController:OnBack () (at Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs:211)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_2 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:155)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1403,
+          "timestampUtc": "2026-10-16T18:06:18.0585218Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      D1: escolhe a Area Financeira e aperta Voltar",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1404,
+          "timestampUtc": "2026-10-16T18:06:18.4642499Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_Location",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nGameManager:ConfirmIdentification () (at Assets/Scripts/Game/Infrastructure/GameManager.cs:62)\nGame.Adapter.In.UI.UIIndentification:OpenGameScene () (at Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs:148)\nGame.Adapter.In.UI.UIIndentification:Register () (at Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs:138)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_3 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:166)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1405,
+          "timestampUtc": "2026-10-16T18:06:18.4737901Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      Identificacao reaberta com os dados preenchidos (sem pular sozinha); corrige o nome do aluno",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1406,
+          "timestampUtc": "2026-10-16T18:06:18.8769461Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      D1 reidratada com a Area Financeira depois da troca de painel",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1407,
+          "timestampUtc": "2026-10-16T18:06:19.2777386Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_Restaurant",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nInitialDecisionFlow:GoTo (GameState) (at Assets/Scripts/Game/Infrastructure/InitialDecisionFlow.cs:71)\nGame.Adapter.In.Controllers.LocationScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs:200)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_5 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:181)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1408,
+          "timestampUtc": "2026-10-16T18:06:19.3191767Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_TargetSegment",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nInitialDecisionFlow:GoTo (GameState) (at Assets/Scripts/Game/Infrastructure/InitialDecisionFlow.cs:71)\nGame.Adapter.In.Controllers.RestaurantScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/RestaurantScreenController.cs:385)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_5 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:183)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1409,
+          "timestampUtc": "2026-10-16T18:06:19.3548091Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      D1 -> D2 (Frances)",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1410,
+          "timestampUtc": "2026-10-16T18:06:19.7652233Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Banco] Save ignorado: a sessao ainda nao foi gravada (isso so acontece no confirm da D3).",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameSessionState:Save () (at Assets/Scripts/Game/Infrastructure/State/GameSessionState.cs:204)\nGameSessionState:SetRestaurant (RestaurantType) (at Assets/Scripts/Game/Infrastructure/State/GameSessionState.cs:270)\nGameSessionService:CommitInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:164)\nGameSessionService:ConfirmInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:187)\nGame.Adapter.In.Controllers.MenuPricingScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs:274)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_6 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:189)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1411,
+          "timestampUtc": "2026-10-16T18:06:19.7742337Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Banco] PRIMEIRA GRAVACAO da sessao 02216c2c-c7bb-4999-807c-0ece7d84fdef (confirm da D3). Linhas na tabela GameSessionEntity: 1.",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameSessionState:Persist () (at Assets/Scripts/Game/Infrastructure/State/GameSessionState.cs:180)\nGameSessionService:CommitInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:172)\nGameSessionService:ConfirmInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:187)\nGame.Adapter.In.Controllers.MenuPricingScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs:274)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_6 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:189)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1412,
+          "timestampUtc": "2026-10-16T18:06:19.7742337Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[GameSessionService] Decisões iniciais gravadas. Sessão 02216c2c-c7bb-4999-807c-0ece7d84fdef.",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameSessionService:CommitInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:175)\nGameSessionService:ConfirmInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:187)\nGame.Adapter.In.Controllers.MenuPricingScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs:274)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_6 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:189)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1413,
+          "timestampUtc": "2026-10-16T18:06:19.7742337Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Config_Review",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nGameSessionService:ConfirmInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:199)\nGame.Adapter.In.Controllers.MenuPricingScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs:274)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_6 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:189)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1414,
+          "timestampUtc": "2026-10-16T18:06:19.7797712Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "Estado atual: Initial_Capital",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nGameStateMachine:TryChangeState (GameState) (at Assets/Scripts/Game/Infrastructure/GameStateMachine.cs:108)\nGameSessionService:ConfirmInitialDecisions () (at Assets/Scripts/Game/Domain/Service/GamesSessionService.cs:201)\nGame.Adapter.In.Controllers.MenuPricingScreenController:OnConfirm () (at Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs:274)\nUnityEngine.Events.UnityEvent:Invoke ()\nInitialDecisionsFlowSmokeTest:Click (object,string) (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:406)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_6 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:189)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1415,
+          "timestampUtc": "2026-10-16T18:06:19.8542987Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] linha gravada: aluno='Aluna Teste Revisada' RA='123456' empresa='123456 Aluna Teste Revisada' zona=Financas restaurante=FRANCES segmento=HIGH",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest/<>c:<BuildIdentificationSteps>b__15_6 () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:197)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1416,
+          "timestampUtc": "2026-10-16T18:06:19.8542987Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      D3: Confirmar grava nome, RA e nome do restaurante novo",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1417,
+          "timestampUtc": "2026-10-16T18:06:20.2626637Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] Nenhum cadastro de teste no PlayerPrefs. Nada foi apagado.",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:RemoveTestRegistration () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:222)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:109)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1418,
+          "timestampUtc": "2026-10-16T18:06:20.2626637Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] OK      Limpeza: apaga o cadastro de teste do PlayerPrefs",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:110)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 1419,
+          "timestampUtc": "2026-10-16T18:06:20.6638944Z",
+          "level": "log",
+          "logType": "Log",
+          "message": "[Fumaca] TERMINOU: todos os passos passaram.",
+          "stackTrace": "UnityEngine.Debug:Log (object)\nInitialDecisionsFlowSmokeTest:Tick () (at Assets/Editor/Tests/InitialDecisionsFlowSmokeTest.cs:100)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        }
+      ],
+      "cursor": 1419,
+      "session": "6b6f152178b8486cb26823d978ccf7f1",
+      "returned": 25,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 25
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-16T18:06:35.6804919Z",
+        "ageMs": 164,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 25,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

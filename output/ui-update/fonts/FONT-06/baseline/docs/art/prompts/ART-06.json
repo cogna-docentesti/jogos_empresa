@@ -1,0 +1,895 @@
+{
+  "task_id": "ART-06",
+  "date": "2026-10-14",
+  "status": "validado",
+  "scope": "Somente os dezoito ícones de navegação e HUD; controles/campos/seleção já entregues no ART-05 não são repetidos.",
+  "tool": "SVG original e rasterização determinística sharp/librsvg",
+  "model": null,
+  "model_note": "Nenhum modelo generativo necessário para geometria simples e consistente.",
+  "producer_source": "art-source/editable/ART-06/build-art06.cjs",
+  "renderer_versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "assets": [
+    {
+      "id": "ICON_HOME",
+      "name": "Início",
+      "semantic": "Casa única com porta em recorte, conforme o símbolo de navegação do hub.",
+      "output_path": "Assets/Art/new/shared/icons/icon_home.png",
+      "source_editable": "art-source/editable/shared/icons/icon_home.svg",
+      "source_sha256": "8fc608728e0e023d7012b10f460cd742d081d738e6abb3e37e8b627662e31653",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_HOME: Casa única com porta em recorte, conforme o símbolo de navegação do hub.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "e90280665974e1494840af094b3dc146e008b725d58e89705d5c568898a353b6",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_RESTAURANT",
+      "name": "Restaurante",
+      "semantic": "Garfo de três dentes e faca de cabo completo, sem círculo/badge, como o marcador de restaurante do concept.",
+      "output_path": "Assets/Art/new/shared/icons/icon_restaurant.png",
+      "source_editable": "art-source/editable/shared/icons/icon_restaurant.svg",
+      "source_sha256": "5e3d2d54f118633b64976efa4e7652c451ea8f3407445801f0cbacd93d9cc9ee",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_RESTAURANT: Garfo de três dentes e faca de cabo completo, sem círculo/badge, como o marcador de restaurante do concept.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "20dc2f7697a571af92d9871f657151a2d16c9c7eda8f806acaa3e223d818fc71",
+      "status": "validado",
+      "repair": {
+        "reason": "Corrigir separadores numéricos nos caminhos quadráticos do SVG para restaurar os três dentes, haste do garfo e cabo da faca.",
+        "before": {
+          "sha256": "ff3d829413ae8598382610556f99d2910f2ce693da06fa251aa7c5bbdc245331",
+          "source_sha256": "9c0f3be233c72e23eabc0545edd2018fb63a123180804555d8d064f176893b1c",
+          "prompt": "Criar somente o master ICON_RESTAURANT: Garfo e faca sem círculo/badge, como o marcador de restaurante do concept.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário."
+        },
+        "after": {
+          "sha256": "20dc2f7697a571af92d9871f657151a2d16c9c7eda8f806acaa3e223d818fc71",
+          "source_sha256": "5e3d2d54f118633b64976efa4e7652c451ea8f3407445801f0cbacd93d9cc9ee"
+        },
+        "source": "art-source/editable/ART-06/repair-restaurant.cjs"
+      }
+    },
+    {
+      "id": "ICON_PIN",
+      "name": "Localização",
+      "semantic": "Pin de localização com centro vazado, sem mapa ou label.",
+      "output_path": "Assets/Art/new/shared/icons/icon_pin.png",
+      "source_editable": "art-source/editable/shared/icons/icon_pin.svg",
+      "source_sha256": "7b7ffa8242b0b508aad8a3c097d063dc35b59409dd0858f2c9635a87a9ee4bf8",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_PIN: Pin de localização com centro vazado, sem mapa ou label.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "34f7b8af09f8151ab29af1088fbc57dabad3f79a1cb88f543dda44fa5510a86f",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_UNIVERSITY",
+      "name": "Universidade",
+      "semantic": "Capelo acadêmico com borla; diferencia universidade de banco e edifício corporativo.",
+      "output_path": "Assets/Art/new/shared/icons/icon_university.png",
+      "source_editable": "art-source/editable/shared/icons/icon_university.svg",
+      "source_sha256": "05ab0fa5dae48bf4800e4fd7e6ddde4646c65fff3fc05bf6669d10c73548430b",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_UNIVERSITY: Capelo acadêmico com borla; diferencia universidade de banco e edifício corporativo.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "7bc169515ed9631862c41c09fd7475baa06fcd25a7736bf12c02b9dc57324e92",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_BANK",
+      "name": "Banco",
+      "semantic": "Fachada bancária clássica com frontão e três colunas, distinta da pilha de moedas do caixa.",
+      "output_path": "Assets/Art/new/shared/icons/icon_bank.png",
+      "source_editable": "art-source/editable/shared/icons/icon_bank.svg",
+      "source_sha256": "0c8c9344bf7e6231bede4fe1f25171084192e1c5b8e62d7f3999c8837897d22c",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_BANK: Fachada bancária clássica com frontão e três colunas, distinta da pilha de moedas do caixa.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "bbd8be5cd99291fb6af8594581ce9e01d066b3dcf1e3bf8e63edafa0399174ca",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_COMMERCE",
+      "name": "Comércio",
+      "semantic": "Loja com toldo e vitrine; símbolo comercial distinto da casa e do restaurante.",
+      "output_path": "Assets/Art/new/shared/icons/icon_commerce.png",
+      "source_editable": "art-source/editable/shared/icons/icon_commerce.svg",
+      "source_sha256": "83d813610cc6dee81ebebed6c170d4f8b760603fbda021c31fe32be9d9c63189",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_COMMERCE: Loja com toldo e vitrine; símbolo comercial distinto da casa e do restaurante.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "e1f969b3b94900c998932c22c4c2efcedc2e0bfa34f8b085739731bbf89c7661",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_RESIDENTIAL",
+      "name": "Residencial",
+      "semantic": "Duas casas de alturas diferentes; distingue bairro residencial do botão de início.",
+      "output_path": "Assets/Art/new/shared/icons/icon_residential.png",
+      "source_editable": "art-source/editable/shared/icons/icon_residential.svg",
+      "source_sha256": "1623dda53a8328ee11fd5a7cab36e5525591b0ca786ef82b690570f4b733bf8d",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_RESIDENTIAL: Duas casas de alturas diferentes; distingue bairro residencial do botão de início.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "950e98e34aa959e70893e2e392d49424d4e5fbd9d84189b6b040c3a0c693fd84",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_CORPORATE",
+      "name": "Empresas",
+      "semantic": "Edifício de escritórios vertical com janelas vazadas e entrada, sem letras.",
+      "output_path": "Assets/Art/new/shared/icons/icon_corporate.png",
+      "source_editable": "art-source/editable/shared/icons/icon_corporate.svg",
+      "source_sha256": "595eeb0bb306917a49fbf7a4999f73388467760d82b5a34f182a262bafe85299",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_CORPORATE: Edifício de escritórios vertical com janelas vazadas e entrada, sem letras.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "64b581b20016a313fac817a5674d392d7011738da60164d62eb0a917a9066e10",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_TEAM",
+      "name": "Equipe",
+      "semantic": "Duas pessoas abstratas com cabeças e corpos distintos, como o glyph de equipe do concept; sem retratos.",
+      "output_path": "Assets/Art/new/shared/icons/icon_team.png",
+      "source_editable": "art-source/editable/shared/icons/icon_team.svg",
+      "source_sha256": "c085706e510d8b87213db405c272b0f3b41d6991668bed72200c4a1d455e1a66",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_TEAM: Duas pessoas abstratas com cabeças e corpos distintos, como o glyph de equipe do concept; sem retratos.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "40167892a5c5082e50897004afbae6611db75832d945fc8f8063431b3517ee62",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_MENU_FOOD",
+      "name": "Cardápio",
+      "semantic": "Livro de cardápio com garfo na capa, sem texto; distinto da folha de documento.",
+      "output_path": "Assets/Art/new/shared/icons/icon_menu_food.png",
+      "source_editable": "art-source/editable/shared/icons/icon_menu_food.svg",
+      "source_sha256": "98745782b481b90930cad3ec9b4e13a275f84bc1716e2fe0d4b30075c9eb789f",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_MENU_FOOD: Livro de cardápio com garfo na capa, sem texto; distinto da folha de documento.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "f349414ac0380798a8942ee6ab7d538ed2fd1961714566fed22b0bddb27cedee",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_EQUIPMENT",
+      "name": "Equipamentos",
+      "semantic": "Engrenagem de oito dentes, conforme navegação de equipamentos nos concepts. Centro vazado; sem objetos fotográficos.",
+      "output_path": "Assets/Art/new/shared/icons/icon_equipment.png",
+      "source_editable": "art-source/editable/shared/icons/icon_equipment.svg",
+      "source_sha256": "4173f667fe523d5c18e4d5d567722949200f071cca1a6bf5d0ddc02a5ac41f1b",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_EQUIPMENT: Engrenagem de oito dentes, conforme navegação de equipamentos nos concepts. Centro vazado; sem objetos fotográficos.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "b842a234f54591b4ae22b3f7fb7b92629798a8baeb0a514f3ed5e21e4328009a",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_DOCUMENT",
+      "name": "Documento",
+      "semantic": "Folha com dobra e duas linhas geométricas de conteúdo, sem letras ou valores.",
+      "output_path": "Assets/Art/new/shared/icons/icon_document.png",
+      "source_editable": "art-source/editable/shared/icons/icon_document.svg",
+      "source_sha256": "dfb8644d54722f8e73f17245cff468fa4c58b3dc1a085c75049d557bc2647d5f",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_DOCUMENT: Folha com dobra e duas linhas geométricas de conteúdo, sem letras ou valores.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "bcd2298d329123adf4004af5be077af9ad1acb31fa13160a3884e3e961f1f7a3",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_CALENDAR",
+      "name": "Calendário",
+      "semantic": "Calendário com duas argolas e seis células geométricas, sem mês, datas ou números.",
+      "output_path": "Assets/Art/new/shared/icons/icon_calendar.png",
+      "source_editable": "art-source/editable/shared/icons/icon_calendar.svg",
+      "source_sha256": "dc44a33700f21d9af15f8731996d2a47319694322b60439d8ed1a14a639feb00",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_CALENDAR: Calendário com duas argolas e seis células geométricas, sem mês, datas ou números.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "aa77815388b21002a8630bff697ee56ef955136d70e7720e1bf85d805bea8135",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_STAR",
+      "name": "Estrela",
+      "semantic": "Estrela sólida de cinco pontas, como o indicador de reputação/score do concept, sem valor ou badge.",
+      "output_path": "Assets/Art/new/shared/icons/icon_star.png",
+      "source_editable": "art-source/editable/shared/icons/icon_star.svg",
+      "source_sha256": "00d002c1b72fcc302bf18c96dae1c3328dac5870032abef97c3453d8224866de",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_STAR: Estrela sólida de cinco pontas, como o indicador de reputação/score do concept, sem valor ou badge.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "b97484d1153393a0187fffe71a7f69786d5d7d1ee55dbf132b59566802a332c7",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_CASH",
+      "name": "Caixa",
+      "semantic": "Pilha de moedas com separações transparentes, como o indicador de caixa do HUD; sem símbolo monetário ou quantidade.",
+      "output_path": "Assets/Art/new/shared/icons/icon_cash.png",
+      "source_editable": "art-source/editable/shared/icons/icon_cash.svg",
+      "source_sha256": "d87a29ecc11b159f43fa71a191b7bc0fe929e698b4516d77d17028bcbf19bd4c",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_CASH: Pilha de moedas com separações transparentes, como o indicador de caixa do HUD; sem símbolo monetário ou quantidade.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "96644cdb779a7e159b4722c6bee4a3d53c32dc6afa495fdc9a790267ab6c9765",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_CHART_BARS",
+      "name": "Gráfico de barras",
+      "semantic": "Três barras crescentes abstratas, conforme navegação financeira do concept; sem eixo, dados ou valores.",
+      "output_path": "Assets/Art/new/shared/icons/icon_chart_bars.png",
+      "source_editable": "art-source/editable/shared/icons/icon_chart_bars.svg",
+      "source_sha256": "9ab840ea528ae5a2a9756ede5f7d403674f7f40fc24181dd10d76351e0502820",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_CHART_BARS: Três barras crescentes abstratas, conforme navegação financeira do concept; sem eixo, dados ou valores.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "56090a067553761af66cc2b69a1c662f680022ff82c8f05f97bd2dca0fccaf2a",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_SETTINGS",
+      "name": "Configurações",
+      "semantic": "Três ajustes horizontais com seletores vazados; diferencia configurações da engrenagem de equipamentos.",
+      "output_path": "Assets/Art/new/shared/icons/icon_settings.png",
+      "source_editable": "art-source/editable/shared/icons/icon_settings.svg",
+      "source_sha256": "74fd7683c01afe3841acb09b26db98eddfa1aac7936c2b2d628d39a56f50acd5",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_SETTINGS: Três ajustes horizontais com seletores vazados; diferencia configurações da engrenagem de equipamentos.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "3681efbc3f87314bb202cec355e46cf40048c6a3ac414002c9b583c8ff92ae00",
+      "status": "validado"
+    },
+    {
+      "id": "ICON_CART",
+      "name": "Carrinho",
+      "semantic": "Carrinho de compras com cesto aberto e duas rodas, sem quantidade ou badge.",
+      "output_path": "Assets/Art/new/shared/icons/icon_cart.png",
+      "source_editable": "art-source/editable/shared/icons/icon_cart.svg",
+      "source_sha256": "e587fb31fabf26224f4184b366f2502ac10292bd4adb861b8f5cc624c86d3653",
+      "origin": "Geometria vetorial original, interpretada dos concepts aprovados e especificação do manifesto.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ],
+      "final_prompt": "Criar somente o master ICON_CART: Carrinho de compras com cesto aberto e duas rodas, sem quantidade ou badge.\nSímbolo UI editorial sóbrio, monocromático branco #FFFFFF tintável, sem fundo, badge, sombra ou texto; geometria original coerente com os concepts Cogna.\nExport PNG RGBA 8-bit sRGB exatamente 256×256; SVG editável no mesmo viewBox. Pivot [0.5, 0.5], sem 9-slice; escala uniforme contain para 40×40.\nLeitura em 32, 40 e 48 px. Traço-base 16 px no master equivale a 2, 2.5 e 3 px; preenchimentos sólidos para silhuetas que aparecem assim nos concepts.\nMargem segura mínima de 10% em cada borda; desenho centralizado opticamente em caixa comum de aproximadamente x/y=32..224. Vazios internos verdadeiramente transparentes.\nApenas um master por símbolo, sem variantes finais por tela ou cor. Sem letras, números, datas, valores, gráficos de dados, logotipos, outras pessoas ou cenário.",
+      "tool": "original SVG + deterministic sharp/librsvg rasterization",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "master_color": "#FFFFFF",
+      "tintable": true,
+      "line_weight_master_px": 16,
+      "line_weight_at_display_px": {
+        "32": 2,
+        "40": 2.5,
+        "48": 3
+      },
+      "sha256": "27c5ddac871c340732186b9f45489ebb33f8ade3b75e30dfb8a4f109547ee8cf",
+      "status": "validado"
+    }
+  ],
+  "semantic_choices": {
+    "university": "Capelo acadêmico",
+    "bank": "Fachada com colunas",
+    "equipment": "Engrenagem conforme concept",
+    "settings": "Ajustes horizontais para evitar duplicar a engrenagem",
+    "menu_food": "Livro com garfo",
+    "document": "Folha dobrada",
+    "residential": "Duas casas",
+    "home": "Casa única"
+  },
+  "qa_record": "docs/art/qa/ART-06.json"
+}

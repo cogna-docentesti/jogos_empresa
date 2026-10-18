@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UI01Validation.Capture(\"identification-button-pressed-1920x1080\"); var ui=UnityEngine.Object.FindFirstObjectByType<Game.Adapter.In.UI.UIIndentification>(); var f=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic; var b=(UnityEngine.UI.Button)ui.GetType().GetField(\"buttonRegister\",f).GetValue(ui); b.OnPointerUp(new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current)); b.Select(); var i=(TMPro.TMP_InputField)ui.GetType().GetField(\"studentNameInput\",f).GetValue(ui); i.interactable=false; return new { selected=b.image.overrideSprite.name };",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "selected": "primary_violet_hover"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

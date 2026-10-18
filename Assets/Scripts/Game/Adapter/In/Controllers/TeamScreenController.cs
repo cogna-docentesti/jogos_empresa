@@ -30,7 +30,9 @@ namespace Game.Adapter.In.Controllers
             if (view == null) return;
             restaurant = GameSessionState.HasSession ? Resources.LoadAll<RestaurantData>("Restaurants").FirstOrDefault(r => r != null && r.type == GameSessionState.Current.restaurantType) : null;
             view.SetContext(GameManager.Instance?.StateMachine?.CurrentState == GameState.Initial_Team, restaurant != null ? restaurant.displayName : "Restaurante indisponível");
-            roles = Resources.LoadAll<RoleData>("Roles").Where(r => r != null).OrderBy(r => r.roleType).ToList();
+            roles = Resources.LoadAll<RoleData>("Roles").Where(r => r != null)
+                .OrderBy(r => r.id=="attendant"?0:restaurant?.requiredRoles?.Any(req=>req!=null&&req.roleId==r.id)==true?1:r.id=="manager"?2:3)
+                .ThenBy(r=>r.roleType).ToList();
             try
             {
                 team = GameSessionState.HasSession ? TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson) : new TeamSelectionData();

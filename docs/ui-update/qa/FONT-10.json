@@ -179,5 +179,18 @@
     "The concepts use drawn typography. The production families are approximations; real catalog detail, text density, case, artwork and economic content differ. Side-by-side comparisons retain those differences.",
     "An initial Edit-mode audit mutated transient UI presentation; a recovery attempt caused an Editor crash. The sole Editor was restarted, recovery backups were preserved, and entry/recovered/final scene snapshots were verified byte-identical. Native instance IDs were recreated by the restart.",
     "Validation is of the recorded working baseline, including preexisting uncommitted concept work. The commit selects FONT-10 changes and justified dependencies; it does not claim a clean checkout build of unrelated prior deltas."
-  ]
+  ],
+  "shutdown_follow_up": {
+    "date": "2026-10-18",
+    "resolved": true,
+    "issue": "UUM-146676",
+    "unity": "6000.3.21f1",
+    "native_shutdown_cases": 8,
+    "campaign_checks": 254,
+    "captures": 79,
+    "exit_code": 0,
+    "evidence": "output/windows-shutdown/report.json",
+    "build": "Builds/Windows/JogosDeEmpresa.exe",
+    "note": "Original FONT-10 results above are historical. This Windows follow-up validates the fixed official runtime in isolated release/Development QA builds and delivers a production build with QA code excluded. Android limits remain unchanged."
+  }
 }

@@ -1,0 +1,2219 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 25.72,
+      "summary": {
+        "total": 313,
+        "passed": 313,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InitialDecisionsTests.Commit_recusa_rascunho_incompleto",
+          "Status": "Passed",
+          "Duration": 0.0175736,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Commit_sem_sessao_avisa_e_nao_grava",
+          "Status": "Passed",
+          "Duration": 0.0015378,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Financas_escolhida_e_diferente_de_nada_escolhido",
+          "Status": "Passed",
+          "Duration": 0.0051119,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.GetMenu_devolve_copia_que_nao_altera_o_rascunho",
+          "Status": "Passed",
+          "Duration": 0.0017155,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.LoadDecisionsFrom_preenche_o_rascunho_com_a_sessao_salva",
+          "Status": "Passed",
+          "Duration": 0.0059354,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Manter_o_restaurante_preserva_o_cardapio",
+          "Status": "Passed",
+          "Duration": 0.0004008,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Mapa_de_zonas_ida_e_volta",
+          "Status": "Passed",
+          "Duration": 0.0007561,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Migracao_adiciona_colunas_novas_sem_perder_linhas",
+          "Status": "Passed",
+          "Duration": 0.1822153,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Pedido_de_edicao_da_identificacao_vale_uma_vez",
+          "Status": "Passed",
+          "Duration": 0.0004422,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Persist_sem_banco_devolve_false_sem_quebrar",
+          "Status": "Passed",
+          "Duration": 0.0009194,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Rascunho_comeca_vazio_e_incompleto",
+          "Status": "Passed",
+          "Duration": 0.0003446,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Rascunho_fica_completo_com_as_tres_decisoes",
+          "Status": "Passed",
+          "Duration": 0.0003461,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Sessao_nova_nasce_sem_linha_no_banco",
+          "Status": "Passed",
+          "Duration": 0.0024022,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.StateMachine_D3_segue_para_o_primeiro_tutorial_pela_revisao",
+          "Status": "Passed",
+          "Duration": 0.0054622,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.StateMachine_nao_deixa_pular_da_D1_para_a_D3",
+          "Status": "Passed",
+          "Duration": 0.0013276,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.StateMachine_permite_avancar_e_voltar_entre_D1_D2_D3",
+          "Status": "Passed",
+          "Duration": 0.0029835,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InitialDecisionsTests.Trocar_de_restaurante_descarta_o_cardapio_do_anterior",
+          "Status": "Passed",
+          "Duration": 0.0003561,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.CapacityLimitsCustomersAndEmptyTeamCannotSell",
+          "Status": "Passed",
+          "Duration": 0.0203803,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.DailyAndMonthlyEffectsRespectTheirRecordedStartDay",
+          "Status": "Passed",
+          "Duration": 0.006969,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.DatabaseFailureRollsBackResultAndPreservesMemoryAndAllowsRetry",
+          "Status": "Passed",
+          "Duration": 0.0268292,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.EquipmentCapacityIsCountedOnceAndDoesNotRepeatPurchaseCosts",
+          "Status": "Passed",
+          "Duration": 0.0061346,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.EventsCannotChangeAnAlreadySettledStatement",
+          "Status": "Passed",
+          "Duration": 0.0077789,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ExistingDatabaseSchemaAddsMonthlyFieldsWithoutRemovingRows",
+          "Status": "Passed",
+          "Duration": 0.0060063,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.GameFlowUsesTheEngineAndReachesTheFinalReportAfterMonthThree",
+          "Status": "Passed",
+          "Duration": 0.0471647,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.HigherPricesReduceDemandAndReputationFeedsTheNextMonth",
+          "Status": "Passed",
+          "Duration": 0.0066763,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.InvalidCatalogAndNonFiniteValuesFailBeforeSettlement",
+          "Status": "Passed",
+          "Duration": 0.0055867,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.InvalidMonthIsRejected(0)",
+          "Status": "Passed",
+          "Duration": 0.0048765,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.InvalidMonthIsRejected(4)",
+          "Status": "Passed",
+          "Duration": 0.0044707,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.KnownMonthlyStatementUsesSelectedPricesAndCatalogCosts",
+          "Status": "Passed",
+          "Duration": 0.0049295,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.MissingSpecialistPreventsOperationAndQuantitiesAffectAlignment",
+          "Status": "Passed",
+          "Duration": 0.0048978,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.MonthTwoLoanUsesTwoInstallmentsAndClearsTheRemainingBalance",
+          "Status": "Passed",
+          "Duration": 0.012789,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.RecordedOptionKeepsAnImmutableEffectSnapshot",
+          "Status": "Passed",
+          "Duration": 0.0056375,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ReloadRestoresTheSettledMonthAndReputationForTheNextCalculation",
+          "Status": "Passed",
+          "Duration": 0.0093927,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.RepeatedCalculationIsDeterministicAndDoesNotChangeInputs",
+          "Status": "Passed",
+          "Duration": 0.0050694,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.SettlementPersistsStatementAndSessionAndExplicitRetryIsIdempotent",
+          "Status": "Passed",
+          "Duration": 0.0080968,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ShippedCatalogAndSummaryUseTheSameMonthlyEngine",
+          "Status": "Passed",
+          "Duration": 0.0145447,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.SignedEventCashChangesAreAddedAndReputationIsClamped",
+          "Status": "Passed",
+          "Duration": 0.0055611,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ThreeLossesRetainExistingBankruptcyRuleAndAProfitResetsTheCounter",
+          "Status": "Passed",
+          "Duration": 0.0116318,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ThreeMonthsCompleteTheQuarterAndLoanIsFullyRepaid",
+          "Status": "Passed",
+          "Duration": 0.0121102,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.TicketAndIngredientEffectsChangeRevenueAndSuppliesIndependently",
+          "Status": "Passed",
+          "Duration": 0.0048656,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.UncommittedSetupAndMissingMonthHistoryCannotBeSettled",
+          "Status": "Passed",
+          "Duration": 0.0067915,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ZeroStockStopsSalesAndFractionalDemandNeverCreatesFractionalCustomers",
+          "Status": "Passed",
+          "Duration": 0.007102,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E04_migracao_cria_a_tabela_de_localizacoes_num_banco_antigo",
+          "Status": "Passed",
+          "Duration": 0.0268218,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E04_registro_de_evento_grava_os_tres_impactos",
+          "Status": "Passed",
+          "Duration": 0.0075942,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E05_alteracao_sem_save_aparece_como_pendente_e_some_ao_salvar",
+          "Status": "Passed",
+          "Duration": 0.0061687,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E05_dialogo_antes_da_D3_nao_oferece_salvar",
+          "Status": "Passed",
+          "Duration": 0.0044182,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E05_Shutdown_salvando_grava_o_que_estava_pendente",
+          "Status": "Passed",
+          "Duration": 0.0085376,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E05_Shutdown_sem_salvar_descarta_e_fecha_o_banco_uma_vez_so",
+          "Status": "Passed",
+          "Duration": 0.0088594,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E06_abrir_de_novo_nao_duplica_linhas",
+          "Status": "Passed",
+          "Duration": 0.0108953,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E06_assets_nao_tem_mais_lorem_ipsum_nem_descricao_vazia",
+          "Status": "Passed",
+          "Duration": 0.0070144,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E06_banco_e_assets_mostram_os_mesmos_dados_na_D1",
+          "Status": "Passed",
+          "Duration": 0.015266,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E06_o_jogo_le_do_banco_e_nao_dos_assets",
+          "Status": "Passed",
+          "Duration": 0.0081458,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.E06_primeira_carga_copia_os_assets_para_o_banco",
+          "Status": "Passed",
+          "Duration": 0.0069036,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.Merge_capital_inicial_da_Thaysla_vale_no_confirm_da_D3",
+          "Status": "Passed",
+          "Duration": 0.0100263,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.Merge_partida_carregada_do_banco_continua_marcada_como_gravada",
+          "Status": "Passed",
+          "Duration": 0.0089146,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.Merge_RestartSession_apaga_tudo_e_a_nova_sessao_nasce_so_em_memoria",
+          "Status": "Passed",
+          "Duration": 0.010744,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.Merge_save_do_ciclo_antigo_fica_separado_como_incompativel",
+          "Status": "Passed",
+          "Duration": 0.0104106,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "PersistenceAndLocationTests.Thaysla_bateria_do_ciclo_trimestral_passa_depois_do_merge",
+          "Status": "Passed",
+          "Duration": 1.3036116,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.BackAndIdentificationConfirmationPreserveEntireDraft",
+          "Status": "Passed",
+          "Duration": 0.0306097,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.CompleteSaveResumesHubAndMissingIdentityRequiresRepair",
+          "Status": "Passed",
+          "Duration": 0.023644,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.CorruptPrefsCannotReuseStaleRuntimeIdentity",
+          "Status": "Passed",
+          "Duration": 0.0085618,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.EntryChecksOriginalFormLimits(\"abcd\",\"12345\",False)",
+          "Status": "Passed",
+          "Duration": 0.0156069,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.EntryChecksOriginalFormLimits(\"abcde\",\"1234\",False)",
+          "Status": "Passed",
+          "Duration": 0.0245769,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.EntryChecksOriginalFormLimits(\"abcde\",\"12345\",True)",
+          "Status": "Passed",
+          "Duration": 0.0107924,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.EntryChecksOriginalFormLimits(\"abcde\",\"12345678901\",False)",
+          "Status": "Passed",
+          "Duration": 0.0084451,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.IncompatibleSaveWaitsForExplicitResetThenReturnsToStepOne",
+          "Status": "Passed",
+          "Duration": 0.0108849,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.NewGameWithPrefilledRegistrationWaitsForConfirmation",
+          "Status": "Passed",
+          "Duration": 0.0087096,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI01IdentificationTests.SerializedEnumValuesAndSevenStepsStayStable",
+          "Status": "Passed",
+          "Duration": 0.0052737,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.FontMaterialsAndPortugueseCurrencyGlyphsAreAvailable",
+          "Status": "Passed",
+          "Duration": 0.0298437,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.SafeAreaPreservesAnchorsAndDoesNotAccumulateOnRevisit",
+          "Status": "Passed",
+          "Duration": 0.0061029,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(\"#F5F0E8\",\"#30243C\")",
+          "Status": "Passed",
+          "Duration": 0.0008971,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(\"#6D28D9\",\"#F5F0E8\")",
+          "Status": "Passed",
+          "Duration": 0.0001419,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(\"#24113D\",\"#F5F0E8\")",
+          "Status": "Passed",
+          "Duration": 0.0001173,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(\"#B99AE8\",\"#24113D\")",
+          "Status": "Passed",
+          "Duration": 0.000114,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(\"#E7B65A\",\"#24113D\")",
+          "Status": "Passed",
+          "Duration": 0.0001154,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(\"#F5F0E8\",\"#A6323D\")",
+          "Status": "Passed",
+          "Duration": 0.0001118,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.All277SpritesRemainSingleAndAllManifestImportsMatchCurrentContract",
+          "Status": "Passed",
+          "Duration": 0.9510822,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.BindingDoesNotReplaceButtonOrDuplicateCallbacks",
+          "Status": "Passed",
+          "Duration": 0.0082224,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.InactiveTemplatesRetainNativeTextReferencesAndSurfaceContrast",
+          "Status": "Passed",
+          "Duration": 0.0037531,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.ProductionEntryAndOptInCompositionRemainInGameScene",
+          "Status": "Passed",
+          "Duration": 0.4497551,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_PRIMARY_VIOLET\")",
+          "Status": "Passed",
+          "Duration": 0.004506,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_SECONDARY_IVORY\")",
+          "Status": "Passed",
+          "Duration": 0.0008625,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_DANGER_CORAL\")",
+          "Status": "Passed",
+          "Duration": 0.0006944,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_ACCENT_AMBER\")",
+          "Status": "Passed",
+          "Duration": 0.0006841,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_ICON_BUTTON\")",
+          "Status": "Passed",
+          "Duration": 0.0007762,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_INPUT\")",
+          "Status": "Passed",
+          "Duration": 0.0006767,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_TAB\")",
+          "Status": "Passed",
+          "Duration": 0.0006919,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_PILL\")",
+          "Status": "Passed",
+          "Duration": 0.0006389,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_RADIO\")",
+          "Status": "Passed",
+          "Duration": 0.0006416,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_CHECKBOX\")",
+          "Status": "Passed",
+          "Duration": 0.0006613,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(\"UI_TOGGLE\")",
+          "Status": "Passed",
+          "Duration": 0.0006477,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.EveryCompactLayerUsesItsAuthoritativeBoundsAndOrder",
+          "Status": "Passed",
+          "Duration": 0.9442432,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.EveryEnabledGraphicRaycastIsAnExplicitHitAreaOrButton",
+          "Status": "Passed",
+          "Duration": 0.5271744,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.ExistingDestinationsAndNativePanelReferencesArePreserved",
+          "Status": "Passed",
+          "Duration": 0.5263774,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.HudAndHubAreScopedToTheMenuAndPreviewStaysOff",
+          "Status": "Passed",
+          "Duration": 0.435951,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1920,1080)",
+          "Status": "Passed",
+          "Duration": 0.431603,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1366,768)",
+          "Status": "Passed",
+          "Duration": 0.4257404,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1280,720)",
+          "Status": "Passed",
+          "Duration": 0.4423025,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonsAndMarkersShareTheMasterWithNoIndependentScaling",
+          "Status": "Passed",
+          "Duration": 0.4977952,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI05LocationTests.DecisionUsesTheExactSharedMapTransformAndCompactLayerBounds",
+          "Status": "Passed",
+          "Duration": 0.4381263,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI05LocationTests.EveryHitPolygonMatchesTheAuthoritativeMasterCoordinates",
+          "Status": "Passed",
+          "Duration": 0.4325938,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI05LocationTests.LongCopyHasALayoutDrivenMaskedSidebarAndFixedActions",
+          "Status": "Passed",
+          "Duration": 0.435045,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI05LocationTests.OneActiveControllerAndOnePresentationOwnThePanel",
+          "Status": "Passed",
+          "Duration": 0.4344922,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI05LocationTests.OnlyFiveCatalogIdsAreInteractiveAndNoHubDestinationCanLeak",
+          "Status": "Passed",
+          "Duration": 0.4512269,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI06RestaurantTests.EveryControlUsesSharedStateAppearanceAndNativeText",
+          "Status": "Passed",
+          "Duration": 0.4367828,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI06RestaurantTests.FacadesAreWholeNeutralSingleSpritesAndCatalogEconomicsRemainUnchanged",
+          "Status": "Passed",
+          "Duration": 0.4483285,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI06RestaurantTests.FiveAllowedCombinationsArePreserved",
+          "Status": "Passed",
+          "Duration": 0.4621678,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI06RestaurantTests.LongCopyIsMaskedLayoutDrivenAndActionsStayOutsideScrolls",
+          "Status": "Passed",
+          "Duration": 0.476409,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI06RestaurantTests.PanelPreservesOneControllerAndRetiresLegacyPresentation",
+          "Status": "Passed",
+          "Duration": 0.4841466,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.AllNineProductIdsMapToTheApprovedWholeImagesWithoutEconomicChanges",
+          "Status": "Passed",
+          "Duration": 0.0136492,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.CurrencyUsesBrazilianDecimalsAndThousands",
+          "Status": "Passed",
+          "Duration": 0.0003783,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InclusiveLimitsAndBothDecimalSeparatorsAreAcceptedForEveryProduct",
+          "Status": "Passed",
+          "Duration": 0.0020032,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidInputKeepsLastValidValueAndReadOnlyControlsCannotMutateIt",
+          "Status": "Passed",
+          "Duration": 0.0785514,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"\")",
+          "Status": "Passed",
+          "Duration": 0.0004687,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\" \")",
+          "Status": "Passed",
+          "Duration": 0.0001413,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"NaN\")",
+          "Status": "Passed",
+          "Duration": 0.0001394,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"Infinity\")",
+          "Status": "Passed",
+          "Duration": 0.0001406,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"-42\")",
+          "Status": "Passed",
+          "Duration": 0.0001419,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"+42\")",
+          "Status": "Passed",
+          "Duration": 0.0001357,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"42,123\")",
+          "Status": "Passed",
+          "Duration": 0.0006432,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"42.123\")",
+          "Status": "Passed",
+          "Duration": 0.0003795,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"4e1\")",
+          "Status": "Passed",
+          "Duration": 0.0001566,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"R$ 42\")",
+          "Status": "Passed",
+          "Duration": 0.0001396,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"1.000,00\")",
+          "Status": "Passed",
+          "Duration": 0.000144,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"34,99\")",
+          "Status": "Passed",
+          "Duration": 0.000157,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"52,01\")",
+          "Status": "Passed",
+          "Duration": 0.000215,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"9999999999999999\")",
+          "Status": "Passed",
+          "Duration": 0.0001822,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.InvalidTextCannotBecomeAConfirmedPrice(\"42,\")",
+          "Status": "Passed",
+          "Duration": 0.000146,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.SolidCoherenceFillUsesProportionalGeometry(0.0f)",
+          "Status": "Passed",
+          "Duration": 0.0016034,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.SolidCoherenceFillUsesProportionalGeometry(0.35f)",
+          "Status": "Passed",
+          "Duration": 0.0004448,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI07MenuPricingTests.SolidCoherenceFillUsesProportionalGeometry(1.0f)",
+          "Status": "Passed",
+          "Duration": 0.0004903,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.ConfirmedSummaryUsesTheExactCatalogAndCalculatorWithoutMutatingItsInput(PODRAO)",
+          "Status": "Passed",
+          "Duration": 0.0306646,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.ConfirmedSummaryUsesTheExactCatalogAndCalculatorWithoutMutatingItsInput(FRANCES)",
+          "Status": "Passed",
+          "Duration": 0.0015251,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.ConfirmedSummaryUsesTheExactCatalogAndCalculatorWithoutMutatingItsInput(JAPONES)",
+          "Status": "Passed",
+          "Duration": 0.0013755,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.CurrencyKeepsRealCentsAndBrazilianSeparators",
+          "Status": "Passed",
+          "Duration": 0.0004555,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.DraftChangesRestaurantLocationAndPricesWithoutBorrowingSessionMoney",
+          "Status": "Passed",
+          "Duration": 0.0022447,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.EmptyDraftNeverShowsSessionDefaultsOrInventedIndicators",
+          "Status": "Passed",
+          "Duration": 0.0006665,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.MissingPricesArePendingAndNeverReplacedWithCatalogDefaults",
+          "Status": "Passed",
+          "Duration": 0.0005986,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.NoWaiterRoleOrEconomicExtensionWasIntroduced",
+          "Status": "Passed",
+          "Duration": 0.0005855,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.RebuildReadsEachChoiceAgainAndLoansUseTheExistingFormula",
+          "Status": "Passed",
+          "Duration": 0.0057142,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI08EstablishmentTests.UnavailableAndCorruptDataRemainReadableAndDoNotCreateFakePeople",
+          "Status": "Passed",
+          "Duration": 0.0010648,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.FourArtworksAreBoundByExistingCatalogIdAndEconomyIsUnchanged",
+          "Status": "Passed",
+          "Duration": 0.0015014,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.MonthThreeExistingContractShowsItsRealBalancePaymentAndCannotBeReplaced",
+          "Status": "Passed",
+          "Duration": 0.0061933,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NewLoanAvailabilityAndDisplayedTermUseRealService(1,True,3)",
+          "Status": "Passed",
+          "Duration": 0.0037517,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NewLoanAvailabilityAndDisplayedTermUseRealService(2,True,2)",
+          "Status": "Passed",
+          "Duration": 0.0038851,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NewLoanAvailabilityAndDisplayedTermUseRealService(3,False,0)",
+          "Status": "Passed",
+          "Duration": 0.0034669,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NoCreditCannotReplaceAnExistingLoanEvenAfterBalanceIsPaid",
+          "Status": "Passed",
+          "Duration": 0.0035564,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NoCreditIsAvailableWithoutInventedInterestOrPayment(1)",
+          "Status": "Passed",
+          "Duration": 0.0045932,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NoCreditIsAvailableWithoutInventedInterestOrPayment(2)",
+          "Status": "Passed",
+          "Duration": 0.00449,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.NoCreditIsAvailableWithoutInventedInterestOrPayment(3)",
+          "Status": "Passed",
+          "Duration": 0.0045626,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI09FinancialTests.UnavailableSessionHasNoActionAndCurrencyKeepsCents",
+          "Status": "Passed",
+          "Duration": 0.0037677,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.BlockedSpecificsCannotRequestAcquisitionAndExplainPrerequisite",
+          "Status": "Passed",
+          "Duration": 0.0113371,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.LongCatalogNamesExpandCardInsteadOfShrinkingOrCroppingText",
+          "Status": "Passed",
+          "Duration": 0.0103481,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.MissingSessionDisablesQuantityActionsWithoutChangingData",
+          "Status": "Passed",
+          "Duration": 0.004127,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.QuantityIsZeroOrOneAndOwnedItemsCannotBePurchasedAgain",
+          "Status": "Passed",
+          "Duration": 0.0063043,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.RestaurantCompatibilityKeepsAllEightBasicsAndOnlyApplicableSpecifics(PODRAO,10)",
+          "Status": "Passed",
+          "Duration": 0.0024726,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.RestaurantCompatibilityKeepsAllEightBasicsAndOnlyApplicableSpecifics(JAPONES,11)",
+          "Status": "Passed",
+          "Duration": 0.0004741,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.RestaurantCompatibilityKeepsAllEightBasicsAndOnlyApplicableSpecifics(FRANCES,11)",
+          "Status": "Passed",
+          "Duration": 0.0002901,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.SerializationKeepsUniqueIdsAndPurchaseCapacityCannotBecomeQuantity",
+          "Status": "Passed",
+          "Duration": 0.0013234,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"bancada_inox_preparo\",1500)",
+          "Status": "Passed",
+          "Duration": 0.0072231,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"conjunto_panelas_industriais\",1200)",
+          "Status": "Passed",
+          "Duration": 0.005845,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"fogao_industrial_6_bocas\",2500)",
+          "Status": "Passed",
+          "Duration": 0.0070471,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"pia_industrial_inox\",1800)",
+          "Status": "Passed",
+          "Duration": 0.005015,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"freezer_horizontal\",3000)",
+          "Status": "Passed",
+          "Duration": 0.0054824,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"geladeira_comercial_dupla\",4500)",
+          "Status": "Passed",
+          "Duration": 0.0047834,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"mobiliario_basico\",6000)",
+          "Status": "Passed",
+          "Duration": 0.0036508,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"sistema_pdv_computador\",3500)",
+          "Status": "Passed",
+          "Duration": 0.0041432,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"chapa_profissional_podrao\",1500)",
+          "Status": "Passed",
+          "Duration": 0.0052885,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"fritadeira_eletrica_dupla_podrao\",1800)",
+          "Status": "Passed",
+          "Duration": 0.0044588,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"balcao_refrigerado_sushi\",5500)",
+          "Status": "Passed",
+          "Duration": 0.0047051,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"facas_especiais_japones\",1200)",
+          "Status": "Passed",
+          "Duration": 0.0042676,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"panela_eletrica_arroz\",800)",
+          "Status": "Passed",
+          "Duration": 0.0047395,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"adega_climatizada\",4500)",
+          "Status": "Passed",
+          "Duration": 0.0047344,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"forno_combinado_inteligente\",18000)",
+          "Status": "Passed",
+          "Duration": 0.0053244,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI10EquipmentTests.WholeArtworkIsMappedByCatalogIdWithOriginalPrice(\"mobiliario_luxo\",12000)",
+          "Status": "Passed",
+          "Duration": 0.0052177,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.AlignmentSaveCannotCreateFirstInsertBeforeD3",
+          "Status": "Passed",
+          "Duration": 0.0010852,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.CompleteTeamUsesRestaurantRequirementsAndExistingAlignment(PODRAO,\"grill_cook\",6900,2550)",
+          "Status": "Passed",
+          "Duration": 0.002619,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.CompleteTeamUsesRestaurantRequirementsAndExistingAlignment(JAPONES,\"sushi_chef\",8900,2400)",
+          "Status": "Passed",
+          "Duration": 0.0003189,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.CompleteTeamUsesRestaurantRequirementsAndExistingAlignment(FRANCES,\"head_chef\",12400,2250)",
+          "Status": "Passed",
+          "Duration": 0.0002605,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.FiveRealRolesKeepSalaryCapacityAndWholePortrait(\"attendant\",2200,900)",
+          "Status": "Passed",
+          "Duration": 0.0081041,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.FiveRealRolesKeepSalaryCapacityAndWholePortrait(\"grill_cook\",2500,750)",
+          "Status": "Passed",
+          "Duration": 0.0041429,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.FiveRealRolesKeepSalaryCapacityAndWholePortrait(\"head_chef\",8000,450)",
+          "Status": "Passed",
+          "Duration": 0.0038459,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.FiveRealRolesKeepSalaryCapacityAndWholePortrait(\"manager\",5000,0)",
+          "Status": "Passed",
+          "Duration": 0.004069,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.FiveRealRolesKeepSalaryCapacityAndWholePortrait(\"sushi_chef\",4500,600)",
+          "Status": "Passed",
+          "Duration": 0.0046506,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.LongNamesExpandWithoutReducingTypeSize",
+          "Status": "Passed",
+          "Duration": 0.0059441,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.NoWaiterRoleIsCreatedAndJsonRoundTripKeepsQuantities",
+          "Status": "Passed",
+          "Duration": 0.0009592,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.QuantitiesAboveOneRemainSupportedAndSelected",
+          "Status": "Passed",
+          "Duration": 0.0043662,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.UnavailableControlsCannotChangeQuantity",
+          "Status": "Passed",
+          "Duration": 0.0032362,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI11TeamTests.ZeroCannotBeDecrementedAndAddRequestsOne",
+          "Status": "Passed",
+          "Duration": 0.0034788,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.bulk_purchase_opportunity",
+          "Status": "Passed",
+          "Duration": 0.5004735,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.competitor_temporary_closure",
+          "Status": "Passed",
+          "Duration": 0.4978786,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.corporate_order",
+          "Status": "Passed",
+          "Duration": 0.4843749,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.excessive_food_waste",
+          "Status": "Passed",
+          "Duration": 0.447899,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.extra_local_demand",
+          "Status": "Passed",
+          "Duration": 0.6505435,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.freezer_breakdown",
+          "Status": "Passed",
+          "Duration": 0.5424866,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.health_inspection",
+          "Status": "Passed",
+          "Duration": 0.4264555,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.heavy_rain",
+          "Status": "Passed",
+          "Duration": 0.4428149,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.influencer_mention",
+          "Status": "Passed",
+          "Duration": 0.4441349,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.ingredient_price_increase",
+          "Status": "Passed",
+          "Duration": 0.4455059,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.insufficient_team",
+          "Status": "Passed",
+          "Duration": 0.4379736,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.local_festival",
+          "Status": "Passed",
+          "Duration": 0.456383,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.lunch_demand_peak",
+          "Status": "Passed",
+          "Duration": 0.5412704,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.negative_review",
+          "Status": "Passed",
+          "Duration": 0.5372703,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.new_competitor",
+          "Status": "Passed",
+          "Duration": 0.5637163,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.payment_system_failure",
+          "Status": "Passed",
+          "Duration": 0.5450259,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.positive_online_review",
+          "Status": "Passed",
+          "Duration": 0.53568,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.supplier_delay",
+          "Status": "Passed",
+          "Duration": 0.5205413,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.supplier_discount",
+          "Status": "Passed",
+          "Duration": 0.6411662,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ArtAndOptions.team_productivity_boost",
+          "Status": "Passed",
+          "Duration": 0.4860676,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.CatalogCopyContainsNoTestResidues",
+          "Status": "Passed",
+          "Duration": 0.010121,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.bulk_purchase_opportunity.small_batch",
+          "Status": "Passed",
+          "Duration": 0.0119257,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.bulk_purchase_opportunity.large_batch",
+          "Status": "Passed",
+          "Duration": 0.0091125,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.bulk_purchase_opportunity.decline_purchase",
+          "Status": "Passed",
+          "Duration": 0.0092933,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.competitor_temporary_closure.serve_extra_demand",
+          "Status": "Passed",
+          "Duration": 0.0090844,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.competitor_temporary_closure.increase_stock",
+          "Status": "Passed",
+          "Duration": 0.0092603,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.competitor_temporary_closure.local_advertising",
+          "Status": "Passed",
+          "Duration": 0.0090425,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.corporate_order.accept_current_capacity",
+          "Status": "Passed",
+          "Duration": 0.0089608,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.corporate_order.temporary_support",
+          "Status": "Passed",
+          "Duration": 0.0103967,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.corporate_order.corporate_discount",
+          "Status": "Passed",
+          "Duration": 0.0090629,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.excessive_food_waste.adjust_planning",
+          "Status": "Passed",
+          "Duration": 0.013123,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.excessive_food_waste.create_promotion",
+          "Status": "Passed",
+          "Duration": 0.0097265,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.excessive_food_waste.keep_planning",
+          "Status": "Passed",
+          "Duration": 0.0104077,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.extra_local_demand.normal_operation",
+          "Status": "Passed",
+          "Duration": 0.0120569,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.extra_local_demand.reinforce_operation",
+          "Status": "Passed",
+          "Duration": 0.0106919,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.extra_local_demand.special_promotion",
+          "Status": "Passed",
+          "Duration": 0.0104466,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.freezer_breakdown.repair_now",
+          "Status": "Passed",
+          "Duration": 0.0104972,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.freezer_breakdown.temporary_repair",
+          "Status": "Passed",
+          "Duration": 0.0109311,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.freezer_breakdown.postpone_repair",
+          "Status": "Passed",
+          "Duration": 0.01075,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.health_inspection.full_compliance",
+          "Status": "Passed",
+          "Duration": 0.0109565,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.health_inspection.minimum_compliance",
+          "Status": "Passed",
+          "Duration": 0.0114005,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.health_inspection.ignore_requirements",
+          "Status": "Passed",
+          "Duration": 0.0100814,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.heavy_rain.normal_operation",
+          "Status": "Passed",
+          "Duration": 0.0106267,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.heavy_rain.external_orders",
+          "Status": "Passed",
+          "Duration": 0.0128911,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.heavy_rain.rain_promotion",
+          "Status": "Passed",
+          "Duration": 0.0183827,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.influencer_mention.organic_reach",
+          "Status": "Passed",
+          "Duration": 0.0173528,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.influencer_mention.boost_mention",
+          "Status": "Passed",
+          "Duration": 0.0192618,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.influencer_mention.new_customer_offer",
+          "Status": "Passed",
+          "Duration": 0.0207009,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.ingredient_price_increase.absorb_increase",
+          "Status": "Passed",
+          "Duration": 0.0412487,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.ingredient_price_increase.partial_price_pass",
+          "Status": "Passed",
+          "Duration": 0.0111684,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.ingredient_price_increase.replace_ingredients",
+          "Status": "Passed",
+          "Duration": 0.0092333,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.insufficient_team.hire_temporary",
+          "Status": "Passed",
+          "Duration": 0.0091506,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.insufficient_team.redistribute_team",
+          "Status": "Passed",
+          "Duration": 0.0142787,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.insufficient_team.operate_reduced",
+          "Status": "Passed",
+          "Duration": 0.0158173,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.local_festival.normal_operation",
+          "Status": "Passed",
+          "Duration": 0.0106613,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.local_festival.reinforce_team",
+          "Status": "Passed",
+          "Duration": 0.0101,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.local_festival.festival_combo",
+          "Status": "Passed",
+          "Duration": 0.009194,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.lunch_demand_peak.current_capacity",
+          "Status": "Passed",
+          "Duration": 0.0108633,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.lunch_demand_peak.temporary_reinforcement",
+          "Status": "Passed",
+          "Duration": 0.0108422,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.lunch_demand_peak.high_margin_items",
+          "Status": "Passed",
+          "Duration": 0.0104347,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.negative_review.compensate_customer",
+          "Status": "Passed",
+          "Duration": 0.024578,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.negative_review.reply_only",
+          "Status": "Passed",
+          "Duration": 0.0182637,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.negative_review.ignore_review",
+          "Status": "Passed",
+          "Duration": 0.0188471,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.new_competitor.keep_strategy",
+          "Status": "Passed",
+          "Duration": 0.014435,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.new_competitor.marketing_campaign",
+          "Status": "Passed",
+          "Duration": 0.0106152,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.new_competitor.promotional_prices",
+          "Status": "Passed",
+          "Duration": 0.0100879,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.payment_system_failure.emergency_support",
+          "Status": "Passed",
+          "Duration": 0.0109812,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.payment_system_failure.alternative_payments",
+          "Status": "Passed",
+          "Duration": 0.0107411,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.payment_system_failure.wait_normalization",
+          "Status": "Passed",
+          "Duration": 0.0111667,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.positive_online_review.organic_exposure",
+          "Status": "Passed",
+          "Duration": 0.0105177,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.positive_online_review.boost_post",
+          "Status": "Passed",
+          "Duration": 0.0100542,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.positive_online_review.review_promotion",
+          "Status": "Passed",
+          "Duration": 0.0097773,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.supplier_delay.emergency_supplier",
+          "Status": "Passed",
+          "Duration": 0.010138,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.supplier_delay.reduce_menu",
+          "Status": "Passed",
+          "Duration": 0.0096342,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.supplier_delay.use_available_stock",
+          "Status": "Passed",
+          "Duration": 0.0092201,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.supplier_discount.normal_purchase",
+          "Status": "Passed",
+          "Duration": 0.0104395,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.supplier_discount.larger_purchase",
+          "Status": "Passed",
+          "Duration": 0.0095884,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.supplier_discount.decline_offer",
+          "Status": "Passed",
+          "Duration": 0.009834,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.team_productivity_boost.maintain_pace",
+          "Status": "Passed",
+          "Duration": 0.0109599,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.team_productivity_boost.team_bonus",
+          "Status": "Passed",
+          "Duration": 0.0093442,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.UI12.ConfirmOnce.team_productivity_boost.increase_service_volume",
+          "Status": "Passed",
+          "Duration": 0.0105729,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.ConflictingAndStaleChoicesAreRejected",
+          "Status": "Passed",
+          "Duration": 0.0079338,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.EffectsUseAllRealFieldsAndDurationWithoutInventedPreviews",
+          "Status": "Passed",
+          "Duration": 0.0048603,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.FailedInsertRollsBackAndRetryRecordsOnce",
+          "Status": "Passed",
+          "Duration": 0.0074788,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.MonthlyDrawIsPersistedAndReopeningCannotReroll",
+          "Status": "Passed",
+          "Duration": 0.0223183,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI12EventTests.RestartDeletesReservationsAndHistoryWithSession",
+          "Status": "Passed",
+          "Duration": 0.0084723,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(\"HIGH\",\"Alto\")",
+          "Status": "Passed",
+          "Duration": 0.0021396,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(\"ADEQUATE\",\"Adequado\")",
+          "Status": "Passed",
+          "Duration": 0.0001889,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(\"FRAGILE\",\"Frágil\")",
+          "Status": "Passed",
+          "Duration": 0.0001755,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(\"CRITICAL\",\"Crítico\")",
+          "Status": "Passed",
+          "Duration": 0.0002911,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ClassificationUsesPortuguesePresentationWithoutChangingTheStoredValue(null,\"Não registrada\")",
+          "Status": "Passed",
+          "Duration": 0.0001765,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.LargeStoredFloatAmountsKeepTheirCentsInPresentation(123456.8f,\"123.456,78\")",
+          "Status": "Passed",
+          "Duration": 0.0006467,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.LargeStoredFloatAmountsKeepTheirCentsInPresentation(-123456.8f,\"123.456,78\")",
+          "Status": "Passed",
+          "Duration": 0.0002265,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.LargeStoredFloatAmountsKeepTheirCentsInPresentation(158533.3f,\"158.533,33\")",
+          "Status": "Passed",
+          "Duration": 0.0001245,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.MissingResultIsNotAZeroStatement",
+          "Status": "Passed",
+          "Duration": 0.0007381,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.MonthlyCompositionMatchesApprovedPivotsAndOrder",
+          "Status": "Passed",
+          "Duration": 0.5389834,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float.NaN)",
+          "Status": "Passed",
+          "Duration": 0.0006589,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float.PositiveInfinity)",
+          "Status": "Passed",
+          "Duration": 0.0001539,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.NonfinitePersistedValuesAreUnavailableInsteadOfFabricatedZero(float.NegativeInfinity)",
+          "Status": "Passed",
+          "Duration": 0.0001303,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.PersistedCashModelIsPresentedWithoutReapplyingSignedEvents(-2500.0f)",
+          "Status": "Passed",
+          "Duration": 0.0040393,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.PersistedCashModelIsPresentedWithoutReapplyingSignedEvents(0.0f)",
+          "Status": "Passed",
+          "Duration": 0.0027839,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.PersistedCashModelIsPresentedWithoutReapplyingSignedEvents(2500.0f)",
+          "Status": "Passed",
+          "Duration": 0.0027601,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ZeroAndBothSignsHaveDistinctLegibleSemantics(0.0f)",
+          "Status": "Passed",
+          "Duration": 0.000591,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ZeroAndBothSignsHaveDistinctLegibleSemantics(100.0f)",
+          "Status": "Passed",
+          "Duration": 0.0001326,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI13MonthlyResultTests.ZeroAndBothSignsHaveDistinctLegibleSemantics(-100.0f)",
+          "Status": "Passed",
+          "Duration": 0.0001228,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.AggregationFollowsEachMetricAndNeverAddsBalancesOrLoanDetailsAgain",
+          "Status": "Passed",
+          "Duration": 0.0121873,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.ClassificationDoesNotMutateHistoricalStrings",
+          "Status": "Passed",
+          "Duration": 0.0008879,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.CorruptStoredDataHasNoZeroFallback(float.NaN)",
+          "Status": "Passed",
+          "Duration": 0.0006716,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.CorruptStoredDataHasNoZeroFallback(float.PositiveInfinity)",
+          "Status": "Passed",
+          "Duration": 0.0003146,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.CorruptStoredDataHasNoZeroFallback(float.NegativeInfinity)",
+          "Status": "Passed",
+          "Duration": 0.0002533,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.EmptyHistoryIsEmpty",
+          "Status": "Passed",
+          "Duration": 0.0004804,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.ExistingPanelIdsRemainStable",
+          "Status": "Passed",
+          "Duration": 0.0001977,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.ForeignCampaignDuplicateAndOldCycleAreRejected",
+          "Status": "Passed",
+          "Duration": 0.0005676,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.MissingMiddleMonthIsExplicitAndOnlySavedMonthsContribute",
+          "Status": "Passed",
+          "Duration": 0.0008857,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.OneMonthCannotImplyVariation",
+          "Status": "Passed",
+          "Duration": 0.0005607,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.QuarterlyCompositionAndHandAnchorsMatchApprovedContract",
+          "Status": "Passed",
+          "Duration": 0.4770638,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.QuarterlyTotalsSumDisplayedCentsFromLargePersistedFloats",
+          "Status": "Passed",
+          "Duration": 0.0013216,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.SavedMonthsAreOrderedAndAbsentMonthsNeverBecomeZero(1)",
+          "Status": "Passed",
+          "Duration": 0.0055615,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.SavedMonthsAreOrderedAndAbsentMonthsNeverBecomeZero(2)",
+          "Status": "Passed",
+          "Duration": 0.0060166,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.SavedMonthsAreOrderedAndAbsentMonthsNeverBecomeZero(3)",
+          "Status": "Passed",
+          "Duration": 0.0064552,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.SignedEventsAndNegativeOrZeroBalancesArePreserved(-500)",
+          "Status": "Passed",
+          "Duration": 0.0007283,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.SignedEventsAndNegativeOrZeroBalancesArePreserved(0)",
+          "Status": "Passed",
+          "Duration": 0.0003874,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.SignedEventsAndNegativeOrZeroBalancesArePreserved(500)",
+          "Status": "Passed",
+          "Duration": 0.0004859,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI14QuarterlyResultTests.ZeroCustomersHaveNoInventedWeightedTicket",
+          "Status": "Passed",
+          "Duration": 0.000599,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

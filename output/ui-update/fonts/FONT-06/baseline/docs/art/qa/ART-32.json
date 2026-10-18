@@ -1,0 +1,698 @@
+{
+  "task_id": "ART-32",
+  "title": "Eventos da operação e equipe",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex — revisão técnica e visual repetida após recuperação dos metadados; lote isolado para commit",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Specific model identifier is not exposed by the integrated tool.",
+    "mode": "built-in",
+    "distinct_asset_generations": 5,
+    "revision_generations": 0,
+    "one_independent_asset_per_generation": true,
+    "prompts_record": "docs/art/prompts/ART-32.json",
+    "original_generations": "art-source/editable/ART-32/generations",
+    "export_and_preview_source": "art-source/editable/ART-32/produce_art32.py",
+    "review_record_source": "art-source/editable/ART-32/record_review_art32.py"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 5,
+    "report": "docs/art/qa/ART-32-technical.json",
+    "plan_report": "docs/art/qa/ART-32-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-32-prerequisites.json",
+    "scope_report": "docs/art/qa/ART-32-scope-audit.json",
+    "format": "PNG RGBA 8-bit sRGB",
+    "all_export_size_px": [
+      768,
+      512
+    ],
+    "all_source_size_px": [
+      1536,
+      1024
+    ],
+    "true_alpha": true,
+    "outer_edge_alpha_max": 0,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "export": {
+      "operation": "Uniform full-frame reduction from 1536x1024 to 720x480; centered on transparent 768x512 at [24,16].",
+      "visual_edits": false,
+      "illustration_and_transparency_origin": "Integrated imagegen; original RGBA sources preserved byte-for-byte.",
+      "display_fit": "Contain: 639x426 inside 640x426 slot; no independent axis scaling."
+    }
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": "Cinco previews nativos 768x512 e cinco previews de display 640x426 inspecionados individualmente em resolução original. Contact sheet também revisada (exibida reduzida), além de dois canvases 1920x1080 em resolução original.",
+    "inspected_previews": [
+      "art-source/previews/ART-32/freezer_breakdown-native-light-dark.png",
+      "art-source/previews/ART-32/freezer_breakdown-display-light-dark.png",
+      "art-source/previews/ART-32/health_inspection-native-light-dark.png",
+      "art-source/previews/ART-32/health_inspection-display-light-dark.png",
+      "art-source/previews/ART-32/insufficient_team-native-light-dark.png",
+      "art-source/previews/ART-32/insufficient_team-display-light-dark.png",
+      "art-source/previews/ART-32/team_productivity_boost-native-light-dark.png",
+      "art-source/previews/ART-32/team_productivity_boost-display-light-dark.png",
+      "art-source/previews/ART-32/payment_system_failure-native-light-dark.png",
+      "art-source/previews/ART-32/payment_system_failure-display-light-dark.png",
+      "art-source/previews/ART-32/ART-32-contact-sheet.png",
+      "art-source/previews/ART-32/ART-32-canvas-light.png",
+      "art-source/previews/ART-32/ART-32-canvas-dark.png"
+    ],
+    "canvas_proofs_are_scene_integration": false,
+    "checks": [
+      "Cartoon adulto, roxo Cogna, contornos ameixa, volumes sombreados e luz superior esquerda coerentes com os concepts.",
+      "Recortes limpos nos dois fundos, sem checkerboard ou halo amplo; sombras locais preservadas.",
+      "Situações distintas legíveis por objetos e ambiente. Observações individuais registradas por asset.",
+      "Sem pessoas, rostos, mãos ou identidade nova. Masters preservados e pré-requisitos verificados por hash.",
+      "Sem palavras, números, títulos, opções, efeitos, logos, gráficos ou UI no bitmap. Telas e prancheta vazias.",
+      "Freezer e PDV usam referências reais aprovadas; respectivos hashes registrados.",
+      "Fontes RGBA preservadas. Export usa apenas redução uniforme e padding, sem pintura nem limpeza de alfa."
+    ]
+  },
+  "assets": [
+    {
+      "id": "EVENT_FREEZER_BREAKDOWN",
+      "path": "Assets/Art/new/events/illustrations/freezer_breakdown.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "3bf63978250b7d5ecf7e5de28e6841ceae760d1835f9c20cce703ab0e5b4d776",
+      "source_path": "art-source/editable/ART-32/generations/freezer_breakdown.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "ea5fa1168d658397a0415ee3d3a7ca99dbe41972e86b8976fbdc5fa9356db797",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/equipment/basic/freezer_horizontal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/equipment/basic/freezer_horizontal.png": "eddb22e1b324174a64e5d46e6d753420000b5c54565c5d63c67a4b565d8a97ee"
+      },
+      "catalog_source": "Assets/Resources/Events/freezer_breakdown.asset",
+      "catalog_source_sha256": "0204e0e39eb3c01a54a74e98c2d6d20c70c93b713e96ed193f437381d71383b8",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          47,
+          54,
+          737,
+          489
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          60,
+          57,
+          734,
+          449
+        ],
+        "transparent_fraction": 0.5278727213541666,
+        "opaque_fraction": 0.0031560262044270835,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-32/produce_art32.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Freezer horizontal preserva corpo claro, puxador, pés e ventilação direita do master. Tampa aberta, gelo derretendo, poça, ingredientes em cubas e caixa de ferramentas comunicam falha e risco ao estoque.",
+      "inspected_previews": [
+        "art-source/previews/ART-32/freezer_breakdown-native-light-dark.png",
+        "art-source/previews/ART-32/freezer_breakdown-display-light-dark.png",
+        "art-source/previews/ART-32/ART-32-contact-sheet.png",
+        "art-source/previews/ART-32/ART-32-canvas-light.png",
+        "art-source/previews/ART-32/ART-32-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-32/freezer_breakdown-display-light-dark.png",
+      "display_review_note": "Individual 640x426 light/dark row inspected at original resolution; the contact sheet was also inspected, displayed at reduced resolution."
+    },
+    {
+      "id": "EVENT_HEALTH_INSPECTION",
+      "path": "Assets/Art/new/events/illustrations/health_inspection.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "75dcf36978bd72cdacdbd47c5e491762ece385402ee41a2fb6b947dd53447ed2",
+      "source_path": "art-source/editable/ART-32/generations/health_inspection.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "8d59351df41f31d38b713f952e424d404a0a57d64a571580c0220a920eddf601",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/health_inspection.asset",
+      "catalog_source_sha256": "5b1c8a7d78de4cf77d8208d58533c383762d63c32f516ccf06b41b3c869727de",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          31,
+          26,
+          740,
+          494
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          34,
+          29,
+          737,
+          491
+        ],
+        "transparent_fraction": 0.4031168619791667,
+        "opaque_fraction": 0.00489044189453125,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-32/produce_art32.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Lupa amplia resíduos e desgaste na tábua da bancada; prancheta completamente vazia, termômetro sem números e materiais de limpeza em bandeja lateral comunicam inspeção e adequação. Sem fiscal ou texto.",
+      "inspected_previews": [
+        "art-source/previews/ART-32/health_inspection-native-light-dark.png",
+        "art-source/previews/ART-32/health_inspection-display-light-dark.png",
+        "art-source/previews/ART-32/ART-32-contact-sheet.png",
+        "art-source/previews/ART-32/ART-32-canvas-light.png",
+        "art-source/previews/ART-32/ART-32-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-32/health_inspection-display-light-dark.png",
+      "display_review_note": "Individual 640x426 light/dark row inspected at original resolution; the contact sheet was also inspected, displayed at reduced resolution."
+    },
+    {
+      "id": "EVENT_INSUFFICIENT_TEAM",
+      "path": "Assets/Art/new/events/illustrations/insufficient_team.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "e43f7a69c27a519fe2296ce76890d3507cad4c966fde778ad0bd27b801c1e3aa",
+      "source_path": "art-source/editable/ART-32/generations/insufficient_team.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "89a2530e3aa8fabb19380dd6574f29461be709d378994f2f0698a4499815470e",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/insufficient_team.asset",
+      "catalog_source_sha256": "70b60431d89fb03d44ff369a0068ecaff6bc3869fe7c9279d4ff359fc9a85bc6",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          52,
+          16,
+          716,
+          491
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          55,
+          21,
+          712,
+          488
+        ],
+        "transparent_fraction": 0.4449869791666667,
+        "opaque_fraction": 0.004343668619791667,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-32/produce_art32.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Avental grafite pendurado, banco vazio e posto sem operador contrastam com louça usada acumulada. Ausência e atraso de atendimento legíveis sem introduzir pessoas.",
+      "inspected_previews": [
+        "art-source/previews/ART-32/insufficient_team-native-light-dark.png",
+        "art-source/previews/ART-32/insufficient_team-display-light-dark.png",
+        "art-source/previews/ART-32/ART-32-contact-sheet.png",
+        "art-source/previews/ART-32/ART-32-canvas-light.png",
+        "art-source/previews/ART-32/ART-32-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-32/insufficient_team-display-light-dark.png",
+      "display_review_note": "Individual 640x426 light/dark row inspected at original resolution; the contact sheet was also inspected, displayed at reduced resolution."
+    },
+    {
+      "id": "EVENT_TEAM_PRODUCTIVITY_BOOST",
+      "path": "Assets/Art/new/events/illustrations/team_productivity_boost.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "cc289f447de5367dce2594de7a307dfd918e2e7560e882bbb1fa9c0a70e5d004",
+      "source_path": "art-source/editable/ART-32/generations/team_productivity_boost.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "aafde6de39e0dab9e3746f7bd4a54d6374059d0a2084ec5abae8f1494548d6b6",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/team_productivity_boost.asset",
+      "catalog_source_sha256": "143832803c968f3b05ddcf3f05c1570a7caac62e0378ded0dd168d3fbf20e8cb",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          24,
+          27,
+          733,
+          476
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          42,
+          53,
+          730,
+          474
+        ],
+        "transparent_fraction": 0.47362518310546875,
+        "opaque_fraction": 0.005793253580729167,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-32/produce_art32.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Preparo organizado à esquerda, prato sob lâmpada ao centro e carrinho com três refeições prontas à direita sugerem fluxo eficiente. Ampulheta física, campainha e utensílios organizados reforçam ritmo de trabalho.",
+      "inspected_previews": [
+        "art-source/previews/ART-32/team_productivity_boost-native-light-dark.png",
+        "art-source/previews/ART-32/team_productivity_boost-display-light-dark.png",
+        "art-source/previews/ART-32/ART-32-contact-sheet.png",
+        "art-source/previews/ART-32/ART-32-canvas-light.png",
+        "art-source/previews/ART-32/ART-32-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-32/team_productivity_boost-display-light-dark.png",
+      "display_review_note": "Individual 640x426 light/dark row inspected at original resolution; the contact sheet was also inspected, displayed at reduced resolution."
+    },
+    {
+      "id": "EVENT_PAYMENT_SYSTEM_FAILURE",
+      "path": "Assets/Art/new/events/illustrations/payment_system_failure.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "6aff37beb1a1b1b9bb70c04919ad4d637252b52257c6007ca6baa4548c81aabe",
+      "source_path": "art-source/editable/ART-32/generations/payment_system_failure.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "dfb5ce671e50cf01d33b3bddbf44eeff327d7bd96345aae46109d4bfada07e05",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/equipment/basic/sistema_pdv_computador.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/equipment/basic/sistema_pdv_computador.png": "334591c3cb1f540550ae7a0adacf4a15dea8d80183c05d2e24f2495c537c3900"
+      },
+      "catalog_source": "Assets/Resources/Events/payment_system_failure.asset",
+      "catalog_source_sha256": "eacf47ec123abc0d9a397d434966d710bdd94bc093d5b03393b638684501e002",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          49,
+          42,
+          739,
+          492
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          52,
+          52,
+          737,
+          474
+        ],
+        "transparent_fraction": 0.4826405843098958,
+        "opaque_fraction": 0.00566864013671875,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-32/produce_art32.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "PDV preserva gaveta, monitores, impressora e leitor do master. Telas vazias, cabo de rede desconectado, LED âmbar e cartão liso junto à sacola aguardando comunicam interrupção no pagamento.",
+      "inspected_previews": [
+        "art-source/previews/ART-32/payment_system_failure-native-light-dark.png",
+        "art-source/previews/ART-32/payment_system_failure-display-light-dark.png",
+        "art-source/previews/ART-32/ART-32-contact-sheet.png",
+        "art-source/previews/ART-32/ART-32-canvas-light.png",
+        "art-source/previews/ART-32/ART-32-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-32/payment_system_failure-display-light-dark.png",
+      "display_review_note": "Individual 640x426 light/dark row inspected at original resolution; the contact sheet was also inspected, displayed at reduced resolution."
+    }
+  ],
+  "scope": {
+    "task_id": "ART-32",
+    "passed": true,
+    "base_commit": "1eb2c054479f42f1c13caea09075bc4234168bb4",
+    "branch": "dev/new-screens",
+    "initial_head_verified": true,
+    "initial_tree_clean": true,
+    "changed_manifest_asset_ids": [
+      "EVENT_FREEZER_BREAKDOWN",
+      "EVENT_HEALTH_INSPECTION",
+      "EVENT_INSUFFICIENT_TEAM",
+      "EVENT_TEAM_PRODUCTIVITY_BOOST",
+      "EVENT_PAYMENT_SYSTEM_FAILURE"
+    ],
+    "changed_manifest_task_ids": [
+      "ART-32"
+    ],
+    "unrelated_manifest_records_preserved": true,
+    "source_and_catalog_reference_hashes_verified": true,
+    "current_lot_only": true,
+    "unrelated_changed_paths": [],
+    "metadata_recovery_record": "docs/art/qa/ART-32-metadata-recovery.json",
+    "reviewed_paths": [
+      "Assets/Art/new/events/illustrations/freezer_breakdown.png",
+      "Assets/Art/new/events/illustrations/freezer_breakdown.png.meta",
+      "Assets/Art/new/events/illustrations/health_inspection.png",
+      "Assets/Art/new/events/illustrations/health_inspection.png.meta",
+      "Assets/Art/new/events/illustrations/insufficient_team.png",
+      "Assets/Art/new/events/illustrations/insufficient_team.png.meta",
+      "Assets/Art/new/events/illustrations/payment_system_failure.png",
+      "Assets/Art/new/events/illustrations/payment_system_failure.png.meta",
+      "Assets/Art/new/events/illustrations/team_productivity_boost.png",
+      "Assets/Art/new/events/illustrations/team_productivity_boost.png.meta",
+      "art-source/editable/ART-32/generations/freezer_breakdown.png",
+      "art-source/editable/ART-32/generations/health_inspection.png",
+      "art-source/editable/ART-32/generations/insufficient_team.png",
+      "art-source/editable/ART-32/generations/payment_system_failure.png",
+      "art-source/editable/ART-32/generations/team_productivity_boost.png",
+      "art-source/editable/ART-32/produce_art32.py",
+      "art-source/editable/ART-32/record_review_art32.py",
+      "art-source/previews/ART-32/ART-32-canvas-dark.png",
+      "art-source/previews/ART-32/ART-32-canvas-light.png",
+      "art-source/previews/ART-32/ART-32-contact-sheet.png",
+      "art-source/previews/ART-32/freezer_breakdown-display-light-dark.png",
+      "art-source/previews/ART-32/freezer_breakdown-native-light-dark.png",
+      "art-source/previews/ART-32/health_inspection-display-light-dark.png",
+      "art-source/previews/ART-32/health_inspection-native-light-dark.png",
+      "art-source/previews/ART-32/insufficient_team-display-light-dark.png",
+      "art-source/previews/ART-32/insufficient_team-native-light-dark.png",
+      "art-source/previews/ART-32/payment_system_failure-display-light-dark.png",
+      "art-source/previews/ART-32/payment_system_failure-native-light-dark.png",
+      "art-source/previews/ART-32/team_productivity_boost-display-light-dark.png",
+      "art-source/previews/ART-32/team_productivity_boost-native-light-dark.png",
+      "docs/art/manifest.json",
+      "docs/art/prompts/ART-32.json",
+      "docs/art/qa/ART-32-metadata-recovery.json",
+      "docs/art/qa/ART-32-plan-validation.json",
+      "docs/art/qa/ART-32-prerequisites.json",
+      "docs/art/qa/ART-32-scope-audit.json",
+      "docs/art/qa/ART-32-technical.json",
+      "docs/art/qa/ART-32.json",
+      "docs/art/tasks.json"
+    ],
+    "recorded_before_commit": true
+  },
+  "pending": [],
+  "recovery": {
+    "record": "docs/art/qa/ART-32-metadata-recovery.json",
+    "new_generations": 0,
+    "artwork_bytes_preserved": true,
+    "manual_visual_review_repeated": true,
+    "proofs_reviewed_again": [
+      "art-source/previews/ART-32/freezer_breakdown-native-light-dark.png",
+      "art-source/previews/ART-32/freezer_breakdown-display-light-dark.png",
+      "art-source/previews/ART-32/health_inspection-native-light-dark.png",
+      "art-source/previews/ART-32/health_inspection-display-light-dark.png",
+      "art-source/previews/ART-32/insufficient_team-native-light-dark.png",
+      "art-source/previews/ART-32/insufficient_team-display-light-dark.png",
+      "art-source/previews/ART-32/team_productivity_boost-native-light-dark.png",
+      "art-source/previews/ART-32/team_productivity_boost-display-light-dark.png",
+      "art-source/previews/ART-32/payment_system_failure-native-light-dark.png",
+      "art-source/previews/ART-32/payment_system_failure-display-light-dark.png",
+      "art-source/previews/ART-32/ART-32-contact-sheet.png",
+      "art-source/previews/ART-32/ART-32-canvas-light.png",
+      "art-source/previews/ART-32/ART-32-canvas-dark.png"
+    ]
+  },
+  "commit_reference": "Recorded in the serial queue history after commit creation.",
+  "integration_note": "Unity não foi executado por esta conversa; sem alterações de gameplay, cenas ou catálogo e sem push."
+}

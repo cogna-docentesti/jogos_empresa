@@ -1,0 +1,623 @@
+{
+  "task_id": "ART-31",
+  "title": "Eventos de demanda e concorrência",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Specific model identifier is not exposed by the integrated tool.",
+    "mode": "built-in",
+    "distinct_asset_generations": 5,
+    "revision_generations": 0,
+    "one_independent_asset_per_generation": true,
+    "prompts_record": "docs/art/prompts/ART-31.json",
+    "original_generations": "art-source/editable/ART-31/generations",
+    "export_and_preview_source": "art-source/editable/ART-31/produce_art31.py",
+    "review_record_source": "art-source/editable/ART-31/finalize_art31.py"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 5,
+    "report": "docs/art/qa/ART-31-technical.json",
+    "plan_report": "docs/art/qa/ART-31-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-31-prerequisites.json",
+    "scope_report": "docs/art/qa/ART-31-scope-audit.json",
+    "format": "PNG RGBA 8-bit sRGB",
+    "all_export_size_px": [
+      768,
+      512
+    ],
+    "all_source_size_px": [
+      1536,
+      1024
+    ],
+    "full_source_resampled_size_px": [
+      720,
+      480
+    ],
+    "transparent_offset_px": [
+      24,
+      16
+    ],
+    "true_alpha": true,
+    "outer_edge_alpha_max": 0,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "export": {
+      "operation": "Uniform full-frame reduction from 1536x1024 to 720x480; centered on transparent 768x512 canvas at offset [24,16].",
+      "illustration_and_transparency_origin": "Integrated imagegen; original RGBA sources preserved byte-for-byte.",
+      "safety_padding": "Uses the existing event-vignette export method to preserve all source pixels and ensure a transparent outer edge.",
+      "visual_edits": false,
+      "display_fit": "Contain: 639x426 inside 640x426 slot; no independent axis scaling."
+    },
+    "import_metadatas": "Single Sprite, 100 PPU, Bilinear, mipmaps off, sRGB, alpha transparency on, FullRect, no compression, max texture 1024. Editor not executed."
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": "Cada arquivo revisado no preview nativo 768x512; cada linha de display 640x426 revista na contact sheet em resolução original; duas provas de canvas 1920x1080 também inspecionadas. Contain preserva proporção.",
+    "inspected_previews": [
+      "art-source/previews/ART-31/extra_local_demand-native-light-dark.png",
+      "art-source/previews/ART-31/lunch_demand_peak-native-light-dark.png",
+      "art-source/previews/ART-31/corporate_order-native-light-dark.png",
+      "art-source/previews/ART-31/competitor_temporary_closure-native-light-dark.png",
+      "art-source/previews/ART-31/new_competitor-native-light-dark.png",
+      "art-source/previews/ART-31/ART-31-contact-sheet.png",
+      "art-source/previews/ART-31/ART-31-canvas-light.png",
+      "art-source/previews/ART-31/ART-31-canvas-dark.png"
+    ],
+    "display_proof_rows_in_contact_sheet": [
+      "art-source/previews/ART-31/extra_local_demand-display-light-dark.png",
+      "art-source/previews/ART-31/lunch_demand_peak-display-light-dark.png",
+      "art-source/previews/ART-31/corporate_order-display-light-dark.png",
+      "art-source/previews/ART-31/competitor_temporary_closure-display-light-dark.png",
+      "art-source/previews/ART-31/new_competitor-display-light-dark.png"
+    ],
+    "canvas_proofs_are_scene_integration": false,
+    "checks": [
+      "Cinco vinhetas independentes no cartoon adulto aprovado, com contornos ameixa, arquitetura marfim, roxo Cogna, volumes sombreados e luz superior esquerda coerentes.",
+      "Contornos, silhuetas, perspectiva, luz e materiais revisados nos dois fundos. Recortes sem halo amplo, checkerboard incorporado ou fundo retangular; sombras locais de contato preservadas.",
+      "Demanda local, pico de almoço, encomenda corporativa, manutenção temporária do concorrente e inauguração distinguem-se pelos props e situações observados por asset.",
+      "Sem pessoas, rostos ou mãos. QA de identidade não aplicável; masters canônicos e pré-requisitos mantidos e verificados por hash.",
+      "Sem letras, números, preços, logos, título, opções, efeitos, gráficos ou UI. Relógio, pegadas no pavimento, fita e tesoura são elementos físicos da situação.",
+      "Catálogo mantém três opções dinâmicas por evento; nenhuma opção é rasterizada. IDs, EventData e regras permanecem intactos.",
+      "As fontes RGBA originais são preservadas e têm hashes registrados. Export contém apenas redução uniforme e padding técnico, sem pintura, extração de fundo ou correção manual do alfa.",
+      "Textos e fundos dos previews são exclusivos das provas fora de Assets/Art/new."
+    ]
+  },
+  "assets": [
+    {
+      "id": "EVENT_EXTRA_LOCAL_DEMAND",
+      "path": "Assets/Art/new/events/illustrations/extra_local_demand.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "ac8561133d1952fa0826e6aff3330d8d3d86fc553a02a53a873a46f694e3a19b",
+      "source_path": "art-source/editable/ART-31/generations/extra_local_demand.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "61f1d62c5593ff0194b8d7b5c7e62ae6f57b871a915bd55b2607c532684955d4",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/extra_local_demand.asset",
+      "catalog_source_sha256": "a84aaa579c41dae3d8c87d51687a8ef054bdc83d833e79387c687d9d42cc5123",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          38,
+          29,
+          732,
+          489
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          40,
+          32,
+          729,
+          485
+        ],
+        "transparent_fraction": 0.34573109944661456,
+        "opaque_fraction": 0.00389862060546875,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-31/produce_art31.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Travessia e pegadas físicas no pavimento convergem para a entrada aberta do restaurante roxo; mesa com pratos e bolsa de passageiro reforçam circulação local. Sem pessoas, texto ou setas de UI.",
+      "inspected_previews": [
+        "art-source/previews/ART-31/extra_local_demand-native-light-dark.png",
+        "art-source/previews/ART-31/ART-31-contact-sheet.png",
+        "art-source/previews/ART-31/ART-31-canvas-light.png",
+        "art-source/previews/ART-31/ART-31-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-31/extra_local_demand-display-light-dark.png",
+      "display_review_note": "The exact 640x426 light/dark preview row was inspected within the contact sheet, at original resolution."
+    },
+    {
+      "id": "EVENT_LUNCH_DEMAND_PEAK",
+      "path": "Assets/Art/new/events/illustrations/lunch_demand_peak.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "4dcdb367faeeb445815ce591ee6300035dd4b5b1e408bf4fd225fe2fb798cd1d",
+      "source_path": "art-source/editable/ART-31/generations/lunch_demand_peak.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "b3461cf8b111c30aa9899839669ce4049d2d153e77177c033686cd20014261f6",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/lunch_demand_peak.asset",
+      "catalog_source_sha256": "23ef02d5d12a54ee0f0ce645c70069bae189d3275ef8ee40d9c445044723bb9e",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          24,
+          16,
+          723,
+          485
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          60,
+          42,
+          721,
+          473
+        ],
+        "transparent_fraction": 0.39481862386067706,
+        "opaque_fraction": 0.0032984415690104165,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-31/produce_art31.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Muitos pratos distintos aguardam no passe de refeições, com bandejas, pilhas de louça e campainha. Relógio físico sem números marca meio-dia com ponteiros sobrepostos; leitura de almoço e volume clara.",
+      "inspected_previews": [
+        "art-source/previews/ART-31/lunch_demand_peak-native-light-dark.png",
+        "art-source/previews/ART-31/ART-31-contact-sheet.png",
+        "art-source/previews/ART-31/ART-31-canvas-light.png",
+        "art-source/previews/ART-31/ART-31-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-31/lunch_demand_peak-display-light-dark.png",
+      "display_review_note": "The exact 640x426 light/dark preview row was inspected within the contact sheet, at original resolution."
+    },
+    {
+      "id": "EVENT_CORPORATE_ORDER",
+      "path": "Assets/Art/new/events/illustrations/corporate_order.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "ab6c37505cb8e0943dc8160477aebc47fd973379b8b9e6889c6baaecc06d83c9",
+      "source_path": "art-source/editable/ART-31/generations/corporate_order.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "be5f64c67b08335a7a5a1b766815c36d3d13a94e833bebc0ec810043ea3eda50",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/corporate_order.asset",
+      "catalog_source_sha256": "d3b6d581a9024491b62e029eccc77c0f01d626878f661d8971ff0288632ccb4d",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          34,
+          21,
+          734,
+          496
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          36,
+          23,
+          731,
+          492
+        ],
+        "transparent_fraction": 0.4254862467447917,
+        "opaque_fraction": 0.0046234130859375,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-31/produce_art31.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Dois caixotes de transporte contêm muitas embalagens kraft uniformes; três refeições abertas, maleta executiva, telefone sem dígitos e prédio comercial ao fundo distinguem encomenda de empresa.",
+      "inspected_previews": [
+        "art-source/previews/ART-31/corporate_order-native-light-dark.png",
+        "art-source/previews/ART-31/ART-31-contact-sheet.png",
+        "art-source/previews/ART-31/ART-31-canvas-light.png",
+        "art-source/previews/ART-31/ART-31-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-31/corporate_order-display-light-dark.png",
+      "display_review_note": "The exact 640x426 light/dark preview row was inspected within the contact sheet, at original resolution."
+    },
+    {
+      "id": "EVENT_COMPETITOR_TEMPORARY_CLOSURE",
+      "path": "Assets/Art/new/events/illustrations/competitor_temporary_closure.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "2a4e99eec4df9f5ef61a767d586a24e7ee6c18a8c828d92ca3dad52f111d7462",
+      "source_path": "art-source/editable/ART-31/generations/competitor_temporary_closure.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "0ea2b1f713839c5155159bb0452be4b17e0b0cd22d704adda3ac2dd4d4ee6e09",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/competitor_temporary_closure.asset",
+      "catalog_source_sha256": "30d3f3f6b18b9776d95a5b617de07d4e4253bf4b1f32bf5b85926b813e511f57",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          24,
+          27,
+          731,
+          477
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          41,
+          52,
+          728,
+          463
+        ],
+        "transparent_fraction": 0.4159088134765625,
+        "opaque_fraction": 0.00336456298828125,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-31/produce_art31.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Restaurante de toldo verde com persiana fechada e cadeado, caixa de ferramentas e rolo de pintura indica manutenção temporária. Restaurante vizinho roxo permanece com porta aberta; fachadas sem escrita.",
+      "inspected_previews": [
+        "art-source/previews/ART-31/competitor_temporary_closure-native-light-dark.png",
+        "art-source/previews/ART-31/ART-31-contact-sheet.png",
+        "art-source/previews/ART-31/ART-31-canvas-light.png",
+        "art-source/previews/ART-31/ART-31-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-31/competitor_temporary_closure-display-light-dark.png",
+      "display_review_note": "The exact 640x426 light/dark preview row was inspected within the contact sheet, at original resolution."
+    },
+    {
+      "id": "EVENT_NEW_COMPETITOR",
+      "path": "Assets/Art/new/events/illustrations/new_competitor.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "c03e36bdee1fc6a5f30c09040b45c1be426c740c2368363e6384edd30c4558a3",
+      "source_path": "art-source/editable/ART-31/generations/new_competitor.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "71eef78dcc95516c00bdc5947f198ee21c65f9545c0017425294f189a8e64504",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/new_competitor.asset",
+      "catalog_source_sha256": "b1888206258dde0ab3ff5175f039b3630232ff129abaa576e8f1c882120dd846",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          32,
+          17,
+          737,
+          481
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          35,
+          39,
+          733,
+          478
+        ],
+        "transparent_fraction": 0.41146596272786456,
+        "opaque_fraction": 0.0034306844075520835,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-31/produce_art31.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Novo restaurante com toldo coral/verde, fita cerimonial, tesoura no banco e três balões contrasta com restaurante estabelecido de toldo roxo. Inauguração próxima legível sem pessoas ou escrita.",
+      "inspected_previews": [
+        "art-source/previews/ART-31/new_competitor-native-light-dark.png",
+        "art-source/previews/ART-31/ART-31-contact-sheet.png",
+        "art-source/previews/ART-31/ART-31-canvas-light.png",
+        "art-source/previews/ART-31/ART-31-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-31/new_competitor-display-light-dark.png",
+      "display_review_note": "The exact 640x426 light/dark preview row was inspected within the contact sheet, at original resolution."
+    }
+  ],
+  "scope": {
+    "base_commit": "ecec447b64195e08b2181e4df8b74f4b71a60658",
+    "task_only": "ART-31",
+    "unity_executed": false,
+    "gameplay_changed": false,
+    "scene_integration_performed": false,
+    "push_performed": false
+  },
+  "pending": [],
+  "integration_note": "Aplicação nas cenas e teste no Unity pertencem à integração posterior, fora deste lote autorizado."
+}

@@ -1,0 +1,1356 @@
+{
+  "task_id": "ART-04",
+  "date": "2026-10-14",
+  "status": "validado",
+  "scope": "Somente vinte bases de botão em cinco famílias e quatro estados, sem texto nem ícones.",
+  "tool": "SVG editável e rasterização determinística sharp/librsvg",
+  "model": null,
+  "model_note": "Nenhum modelo generativo necessário para geometria exata e estados consistentes.",
+  "producer_source": "art-source/editable/ART-04/build-art04.cjs",
+  "renderer_versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "palette": {
+    "violet": "#6D28D9",
+    "plum": "#24113D",
+    "lavender": "#B99AE8",
+    "ivory": "#F5F0E8",
+    "ink": "#30243C",
+    "teal": "#26776A",
+    "coral": "#C55457",
+    "amber": "#E7B65A"
+  },
+  "state_formulas": {
+    "primary_violet": {
+      "label": "Primário violeta",
+      "base": "#6D28D9",
+      "normal": {
+        "fill": "#6D28D9",
+        "stroke": "#8f5be0"
+      },
+      "hover": {
+        "fill": "#7f42de",
+        "stroke": "#B99AE8"
+      },
+      "pressed": {
+        "fill": "#5b22b4",
+        "stroke": "#491d8b"
+      },
+      "disabled": {
+        "fill": "#cfb8e4",
+        "stroke": "#dac8e5"
+      }
+    },
+    "secondary_ivory": {
+      "label": "Secundário marfim",
+      "base": "#F5F0E8",
+      "normal": {
+        "fill": "#F5F0E8",
+        "stroke": "#cbb4e8"
+      },
+      "hover": {
+        "fill": "#eae1e8",
+        "stroke": "#aa82e0"
+      },
+      "pressed": {
+        "fill": "#dccce8",
+        "stroke": "#9664de"
+      },
+      "disabled": {
+        "fill": "#e7e2dc",
+        "stroke": "#dbd5d2"
+      }
+    },
+    "danger_coral": {
+      "label": "Ação de risco coral",
+      "base": "#C55457",
+      "normal": {
+        "fill": "#C55457",
+        "stroke": "#b24c54"
+      },
+      "hover": {
+        "fill": "#cc696b",
+        "stroke": "#e2b2ae"
+      },
+      "pressed": {
+        "fill": "#a24551",
+        "stroke": "#81384c"
+      },
+      "disabled": {
+        "fill": "#e8c4bf",
+        "stroke": "#ebd1cb"
+      }
+    },
+    "accent_amber": {
+      "label": "Destaque âmbar",
+      "base": "#E7B65A",
+      "normal": {
+        "fill": "#E7B65A",
+        "stroke": "#edcd93"
+      },
+      "hover": {
+        "fill": "#ecc67e",
+        "stroke": "#f2e3c9"
+      },
+      "pressed": {
+        "fill": "#c29954",
+        "stroke": "#a17f4f"
+      },
+      "disabled": {
+        "fill": "#f1e0c0",
+        "stroke": "#f2e4cc"
+      }
+    },
+    "icon_button": {
+      "label": "Base compacta para ícone",
+      "base": "#e9dfe8",
+      "normal": {
+        "fill": "#e9dfe8",
+        "stroke": "#c5abe8"
+      },
+      "hover": {
+        "fill": "#ddcee8",
+        "stroke": "#a378df"
+      },
+      "pressed": {
+        "fill": "#cfb9e8",
+        "stroke": "#8f5add"
+      },
+      "disabled": {
+        "fill": "#e7e2dc",
+        "stroke": "#dbd5d2"
+      }
+    }
+  },
+  "assets": [
+    {
+      "id": "UI_PRIMARY_VIOLET_NORMAL",
+      "family": "primary_violet",
+      "state": "normal",
+      "output_path": "Assets/Art/new/shared/components/buttons/primary_violet_normal.png",
+      "source_editable": "art-source/editable/shared/components/buttons/primary_violet_normal.svg",
+      "source_sha256": "3ac419ab9f33dda6ffa2f38deade62fdbf3c134da200f5cf73f45a2b2999f255",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão primary_violet, estado normal, no estilo UI aprovado Cogna.\nEstado normal: cor base e contorno discreto, conforme a família.\nPreenchimento uniforme #6D28D9; contorno interno opaco #8f5be0 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "235f0eebf049fbc39dbb417fc9d2cb5a912c302cfe726b471e0330acf9e4f0cc",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#6D28D9",
+        "stroke": "#8f5be0"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_PRIMARY_VIOLET_HOVER",
+      "family": "primary_violet",
+      "state": "hover",
+      "output_path": "Assets/Art/new/shared/components/buttons/primary_violet_hover.png",
+      "source_editable": "art-source/editable/shared/components/buttons/primary_violet_hover.svg",
+      "source_sha256": "cef31d2e88b3e73967f4b3c99c4782867a19d81e0a671597401d254960f628de",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão primary_violet, estado hover, no estilo UI aprovado Cogna.\nEstado hover: realce de cor e contorno mais perceptível, sem halo, crescimento ou deslocamento.\nPreenchimento uniforme #7f42de; contorno interno opaco #B99AE8 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "cc5096d4a72df2324add3d10a516c4f5a7f026330cf65e3fedc607e5a6b86fda",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#7f42de",
+        "stroke": "#B99AE8"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_PRIMARY_VIOLET_PRESSED",
+      "family": "primary_violet",
+      "state": "pressed",
+      "output_path": "Assets/Art/new/shared/components/buttons/primary_violet_pressed.png",
+      "source_editable": "art-source/editable/shared/components/buttons/primary_violet_pressed.svg",
+      "source_sha256": "5577de667b7f5326f3b1f733679bf6329680236644cd9615d04e7d3f8f15190a",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão primary_violet, estado pressed, no estilo UI aprovado Cogna.\nEstado pressionado: preenchimento mais profundo e contorno de maior peso visual; nenhuma translação da geometria.\nPreenchimento uniforme #5b22b4; contorno interno opaco #491d8b de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "da213e60e3e9846b4dc06c3a09f87f022dd672f9cbf96fa4628ce20d89f5420f",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#5b22b4",
+        "stroke": "#491d8b"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_PRIMARY_VIOLET_DISABLED",
+      "family": "primary_violet",
+      "state": "disabled",
+      "output_path": "Assets/Art/new/shared/components/buttons/primary_violet_disabled.png",
+      "source_editable": "art-source/editable/shared/components/buttons/primary_violet_disabled.svg",
+      "source_sha256": "9ab045963dfe87b9a84d11800c187c1e583395817bf3b354c2a661963067cb02",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão primary_violet, estado disabled, no estilo UI aprovado Cogna.\nEstado desabilitado: preenchimento dessaturado de baixo contraste e contorno discreto; centro permanece opaco para leitura consistente nos fundos claros e escuros.\nPreenchimento uniforme #cfb8e4; contorno interno opaco #dac8e5 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "86eb198d523bbd5d4a55ba3a40814014f9b7c1e4be01ab8cc2f688622c27363f",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#cfb8e4",
+        "stroke": "#dac8e5"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_SECONDARY_IVORY_NORMAL",
+      "family": "secondary_ivory",
+      "state": "normal",
+      "output_path": "Assets/Art/new/shared/components/buttons/secondary_ivory_normal.png",
+      "source_editable": "art-source/editable/shared/components/buttons/secondary_ivory_normal.svg",
+      "source_sha256": "df7089acd191e837013eb3b25787f238acf6069348ee8151fefdaac95cfd8c8c",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão secondary_ivory, estado normal, no estilo UI aprovado Cogna.\nEstado normal: cor base e contorno discreto, conforme a família.\nPreenchimento uniforme #F5F0E8; contorno interno opaco #cbb4e8 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "6450bc986605985fa2d4baa4c4b9e168eeef11ec4be06c22e83615c4dc9026f1",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#F5F0E8",
+        "stroke": "#cbb4e8"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_SECONDARY_IVORY_HOVER",
+      "family": "secondary_ivory",
+      "state": "hover",
+      "output_path": "Assets/Art/new/shared/components/buttons/secondary_ivory_hover.png",
+      "source_editable": "art-source/editable/shared/components/buttons/secondary_ivory_hover.svg",
+      "source_sha256": "104567f37583d7cceb1007d4386b6ce5e3cb8bfa26ca5aa56c28749a157163eb",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão secondary_ivory, estado hover, no estilo UI aprovado Cogna.\nEstado hover: realce de cor e contorno mais perceptível, sem halo, crescimento ou deslocamento.\nPreenchimento uniforme #eae1e8; contorno interno opaco #aa82e0 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "41786792f817f96b7163f28ed4f3a2417cddd5e27b5fe8764c2eb4ae88ffd9f1",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#eae1e8",
+        "stroke": "#aa82e0"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_SECONDARY_IVORY_PRESSED",
+      "family": "secondary_ivory",
+      "state": "pressed",
+      "output_path": "Assets/Art/new/shared/components/buttons/secondary_ivory_pressed.png",
+      "source_editable": "art-source/editable/shared/components/buttons/secondary_ivory_pressed.svg",
+      "source_sha256": "6ddcd949a02f406b8be362e31f0101a59b4867d6e2026e6f1c2e7a5a4a0390b6",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão secondary_ivory, estado pressed, no estilo UI aprovado Cogna.\nEstado pressionado: preenchimento mais profundo e contorno de maior peso visual; nenhuma translação da geometria.\nPreenchimento uniforme #dccce8; contorno interno opaco #9664de de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "4fdd7ae7831972c03d10b7a7355f85e5db3e859462526685f19de62498a6a08f",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#dccce8",
+        "stroke": "#9664de"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_SECONDARY_IVORY_DISABLED",
+      "family": "secondary_ivory",
+      "state": "disabled",
+      "output_path": "Assets/Art/new/shared/components/buttons/secondary_ivory_disabled.png",
+      "source_editable": "art-source/editable/shared/components/buttons/secondary_ivory_disabled.svg",
+      "source_sha256": "d973add2183c182292ce0add9e8d56624739d81485be6e60dadfb2f23a20f291",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão secondary_ivory, estado disabled, no estilo UI aprovado Cogna.\nEstado desabilitado: preenchimento dessaturado de baixo contraste e contorno discreto; centro permanece opaco para leitura consistente nos fundos claros e escuros.\nPreenchimento uniforme #e7e2dc; contorno interno opaco #dbd5d2 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "48f38e4fd0e2aa19d4b93e9a56d7489aedaf4234c527adf4af68e022d2ac5e48",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#e7e2dc",
+        "stroke": "#dbd5d2"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_DANGER_CORAL_NORMAL",
+      "family": "danger_coral",
+      "state": "normal",
+      "output_path": "Assets/Art/new/shared/components/buttons/danger_coral_normal.png",
+      "source_editable": "art-source/editable/shared/components/buttons/danger_coral_normal.svg",
+      "source_sha256": "286202f3ad5c3f65cb74c3ceb48820b9a3f95244e6bbf82239b485c42c83e561",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão danger_coral, estado normal, no estilo UI aprovado Cogna.\nEstado normal: cor base e contorno discreto, conforme a família.\nPreenchimento uniforme #C55457; contorno interno opaco #b24c54 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "4537948b3ff86d0de28139a42977dd5b9b21b673226d5cd40276e886959bba58",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#C55457",
+        "stroke": "#b24c54"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_DANGER_CORAL_HOVER",
+      "family": "danger_coral",
+      "state": "hover",
+      "output_path": "Assets/Art/new/shared/components/buttons/danger_coral_hover.png",
+      "source_editable": "art-source/editable/shared/components/buttons/danger_coral_hover.svg",
+      "source_sha256": "b3d8bd66ac726a4683445167d7648b4e92e8865ae2c8c9f01a5ab14c7e7966a5",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão danger_coral, estado hover, no estilo UI aprovado Cogna.\nEstado hover: realce de cor e contorno mais perceptível, sem halo, crescimento ou deslocamento.\nPreenchimento uniforme #cc696b; contorno interno opaco #e2b2ae de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "55ce84fe98277ee3e2185bde05391e35a86d5fdee9294a0f8c0c7028c44419fb",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#cc696b",
+        "stroke": "#e2b2ae"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_DANGER_CORAL_PRESSED",
+      "family": "danger_coral",
+      "state": "pressed",
+      "output_path": "Assets/Art/new/shared/components/buttons/danger_coral_pressed.png",
+      "source_editable": "art-source/editable/shared/components/buttons/danger_coral_pressed.svg",
+      "source_sha256": "5e8537dcdced483b0291e8a927e2db4faf07996138f4aa6c030307277b55467e",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão danger_coral, estado pressed, no estilo UI aprovado Cogna.\nEstado pressionado: preenchimento mais profundo e contorno de maior peso visual; nenhuma translação da geometria.\nPreenchimento uniforme #a24551; contorno interno opaco #81384c de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "14e91af66009d6e866967ae9d2e15506c767c0ec66c984998c5688bad142b235",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#a24551",
+        "stroke": "#81384c"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_DANGER_CORAL_DISABLED",
+      "family": "danger_coral",
+      "state": "disabled",
+      "output_path": "Assets/Art/new/shared/components/buttons/danger_coral_disabled.png",
+      "source_editable": "art-source/editable/shared/components/buttons/danger_coral_disabled.svg",
+      "source_sha256": "0af8cde1a1f53ee5a204c3ad38944cb84afcb342f22a235077a970334a67b03c",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão danger_coral, estado disabled, no estilo UI aprovado Cogna.\nEstado desabilitado: preenchimento dessaturado de baixo contraste e contorno discreto; centro permanece opaco para leitura consistente nos fundos claros e escuros.\nPreenchimento uniforme #e8c4bf; contorno interno opaco #ebd1cb de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "41fcb4b2b9b0ad76042118c87951b7e5609718d82497addcb5af9417094a051b",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#e8c4bf",
+        "stroke": "#ebd1cb"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ACCENT_AMBER_NORMAL",
+      "family": "accent_amber",
+      "state": "normal",
+      "output_path": "Assets/Art/new/shared/components/buttons/accent_amber_normal.png",
+      "source_editable": "art-source/editable/shared/components/buttons/accent_amber_normal.svg",
+      "source_sha256": "079ba1c0f8692e722023d9a161da860b9a032cdc92a456b1ae50564e6d496d8b",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão accent_amber, estado normal, no estilo UI aprovado Cogna.\nEstado normal: cor base e contorno discreto, conforme a família.\nPreenchimento uniforme #E7B65A; contorno interno opaco #edcd93 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "064b1bc5444bc76d6ab7e40863350f81776ea28482e7551d5a08dd13d3e869f5",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#E7B65A",
+        "stroke": "#edcd93"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ACCENT_AMBER_HOVER",
+      "family": "accent_amber",
+      "state": "hover",
+      "output_path": "Assets/Art/new/shared/components/buttons/accent_amber_hover.png",
+      "source_editable": "art-source/editable/shared/components/buttons/accent_amber_hover.svg",
+      "source_sha256": "71d7e3b135a3daab5a49a739a2ca3a4a40e9d04a967536dd6583aa593599fd60",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão accent_amber, estado hover, no estilo UI aprovado Cogna.\nEstado hover: realce de cor e contorno mais perceptível, sem halo, crescimento ou deslocamento.\nPreenchimento uniforme #ecc67e; contorno interno opaco #f2e3c9 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "6cfeb4806dbf861c04a2e34e9d2a0b498ad3b9ed5cad2b768f0cadc68ad9f55c",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#ecc67e",
+        "stroke": "#f2e3c9"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ACCENT_AMBER_PRESSED",
+      "family": "accent_amber",
+      "state": "pressed",
+      "output_path": "Assets/Art/new/shared/components/buttons/accent_amber_pressed.png",
+      "source_editable": "art-source/editable/shared/components/buttons/accent_amber_pressed.svg",
+      "source_sha256": "db0111da69d30a7baddbf47f4098c45249c5b23c7bda924a3bc100c2f5154df6",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão accent_amber, estado pressed, no estilo UI aprovado Cogna.\nEstado pressionado: preenchimento mais profundo e contorno de maior peso visual; nenhuma translação da geometria.\nPreenchimento uniforme #c29954; contorno interno opaco #a17f4f de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "ee04baf3f0e37b89ac23d479520acfaf2653f0886eb26ac81a3af0b3b4c55b93",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#c29954",
+        "stroke": "#a17f4f"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ACCENT_AMBER_DISABLED",
+      "family": "accent_amber",
+      "state": "disabled",
+      "output_path": "Assets/Art/new/shared/components/buttons/accent_amber_disabled.png",
+      "source_editable": "art-source/editable/shared/components/buttons/accent_amber_disabled.svg",
+      "source_sha256": "aaa281baf4b18c4063daf25b987c57577d7fe424b6e0dab63fb1765727f07785",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão accent_amber, estado disabled, no estilo UI aprovado Cogna.\nEstado desabilitado: preenchimento dessaturado de baixo contraste e contorno discreto; centro permanece opaco para leitura consistente nos fundos claros e escuros.\nPreenchimento uniforme #f1e0c0; contorno interno opaco #f2e4cc de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 256×128 px; display 360×72 px em 9-slice com bordas l,b,r,t [24, 24, 24, 24].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "345de191aad6496a2c7c46963170f93dfcb2ca06c582ff29d83faa577c800221",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          24,
+          24,
+          24,
+          24
+        ]
+      },
+      "colors": {
+        "fill": "#f1e0c0",
+        "stroke": "#f2e4cc"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ICON_BUTTON_NORMAL",
+      "family": "icon_button",
+      "state": "normal",
+      "output_path": "Assets/Art/new/shared/components/buttons/icon_button_normal.png",
+      "source_editable": "art-source/editable/shared/components/buttons/icon_button_normal.svg",
+      "source_sha256": "80b4a7a7266eb631520416d0c41e40057f00d2846baf5b0d9e970e82f9915209",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão icon_button, estado normal, no estilo UI aprovado Cogna.\nEstado normal: cor base e contorno discreto, conforme a família.\nPreenchimento uniforme #e9dfe8; contorno interno opaco #c5abe8 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 128×128 px; display 64×64 px em 9-slice com bordas l,b,r,t [16, 16, 16, 16].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "805aa1a88465046e6d77f2fe8657f2db4f1fd1e6f1a85ff2db29a710dc31286d",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          16,
+          16,
+          16,
+          16
+        ]
+      },
+      "colors": {
+        "fill": "#e9dfe8",
+        "stroke": "#c5abe8"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ICON_BUTTON_HOVER",
+      "family": "icon_button",
+      "state": "hover",
+      "output_path": "Assets/Art/new/shared/components/buttons/icon_button_hover.png",
+      "source_editable": "art-source/editable/shared/components/buttons/icon_button_hover.svg",
+      "source_sha256": "47c7b1b46c8cd8fc849e20a4b6ddc347da67bc621342ed71cbfdfe6b45a40886",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão icon_button, estado hover, no estilo UI aprovado Cogna.\nEstado hover: realce de cor e contorno mais perceptível, sem halo, crescimento ou deslocamento.\nPreenchimento uniforme #ddcee8; contorno interno opaco #a378df de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 128×128 px; display 64×64 px em 9-slice com bordas l,b,r,t [16, 16, 16, 16].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "b01f19ad09f0902ee3f70e0bb0f56d507b79d2deaca45b5df8a89d8454814f2c",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          16,
+          16,
+          16,
+          16
+        ]
+      },
+      "colors": {
+        "fill": "#ddcee8",
+        "stroke": "#a378df"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ICON_BUTTON_PRESSED",
+      "family": "icon_button",
+      "state": "pressed",
+      "output_path": "Assets/Art/new/shared/components/buttons/icon_button_pressed.png",
+      "source_editable": "art-source/editable/shared/components/buttons/icon_button_pressed.svg",
+      "source_sha256": "5cab340b9b18450baa27c0005cacf763b9af777965a7fe7250054aeab14056a8",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão icon_button, estado pressed, no estilo UI aprovado Cogna.\nEstado pressionado: preenchimento mais profundo e contorno de maior peso visual; nenhuma translação da geometria.\nPreenchimento uniforme #cfb9e8; contorno interno opaco #8f5add de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 128×128 px; display 64×64 px em 9-slice com bordas l,b,r,t [16, 16, 16, 16].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "06fac25b4827b30e2c0ac193c1f79c529ea76f9230770860e9522ac4ba515f95",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          16,
+          16,
+          16,
+          16
+        ]
+      },
+      "colors": {
+        "fill": "#cfb9e8",
+        "stroke": "#8f5add"
+      },
+      "status": "validado"
+    },
+    {
+      "id": "UI_ICON_BUTTON_DISABLED",
+      "family": "icon_button",
+      "state": "disabled",
+      "output_path": "Assets/Art/new/shared/components/buttons/icon_button_disabled.png",
+      "source_editable": "art-source/editable/shared/components/buttons/icon_button_disabled.svg",
+      "source_sha256": "e7e058dbfef9a0599c94a7fdb5e88026b92731b440692eda446785a40074a856",
+      "origin": "Geometria SVG determinística; paleta e medidas do manifesto/tokens, concepts aprovados e superfícies ART-03.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/02-abertura.png",
+          "sha256": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        }
+      ],
+      "final_prompt": "Produzir somente a base do botão icon_button, estado disabled, no estilo UI aprovado Cogna.\nEstado desabilitado: preenchimento dessaturado de baixo contraste e contorno discreto; centro permanece opaco para leitura consistente nos fundos claros e escuros.\nPreenchimento uniforme #e7e2dc; contorno interno opaco #dbd5d2 de 2 px; raio externo 12 px.\nPNG RGBA 8-bit sRGB 128×128 px; display 64×64 px em 9-slice com bordas l,b,r,t [16, 16, 16, 16].\nMesma silhueta alfa, bounds e pivot central [0.5, 0.5] nos quatro estados; cantos transparentes antialias, centro opaco.\nSem texto, label, ícone, números, logo, conteúdo, sombra, halo, cenário ou quadriculado incorporados.\nConcepts determinam a linguagem do estado normal; estados de interação são derivados dos tokens, com coerência entre famílias e sem alteração da geometria.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "4085a1b7ddcd842d1334e92ef205efd2d6aaadee2788dddf6a8f1b1d939ae296",
+      "geometry": {
+        "outer_radius_px": 12,
+        "border_px": 2,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "nine_slice_lbrt_px": [
+          16,
+          16,
+          16,
+          16
+        ]
+      },
+      "colors": {
+        "fill": "#e7e2dc",
+        "stroke": "#dbd5d2"
+      },
+      "status": "validado"
+    }
+  ],
+  "qa_record": "docs/art/qa/ART-04.json"
+}

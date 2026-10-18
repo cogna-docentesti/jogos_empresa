@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "result": "Succeeded",
+  "target": "StandaloneWindows64",
+  "profile": "Assets/Settings/Build Profiles/New Windows Profile.asset",
+  "profileSubtarget": 2,
+  "effectiveSubtarget": 2,
+  "profileUsed": true,
+  "options": "ForceOptimizeScriptCompilation, Il2CPP, CompressTextures, StripDebugSymbols, ShaderLivelinkSupport, Development",
+  "note": "Existing profile used directly; development validation instrumentation enabled. Profile files remain unchanged. Scene content comparison uses saved-copy bytes; native object IDs may be recreated by the build.",
+  "output": "D:\\Cogna\\jogos_empresa\\Builds\\FONT-10\\Windows\\Cogna.exe",
+  "scenes": [
+    "Assets/Scenes/GameScene.unity"
+  ],
+  "errors": 0,
+  "warnings": 0,
+  "bytes": 487498413,
+  "seconds": 35.6067268,
+  "sessionPreserved": true,
+  "nativeIdentityPreserved": false,
+  "steps": [
+    {
+      "name": "Build player",
+      "messages": []
+    },
+    {
+      "name": "Preprocess Player",
+      "messages": [
+        {
+          "type": "Log",
+          "content": "1 URP assets included in build\r\n- UniversalRP - Assets/Settings/UniversalRP.asset\r\n\t - Renderer2D - Assets/Settings/Renderer2D.asset - UnityEngine.Rendering.Universal.Renderer2DData\r\n"
+        }
+      ]
+    },
+    {
+      "name": "Prepare For Build",
+      "messages": []
+    },
+    {
+      "name": "ProducePlayerScriptAssemblies",
+      "messages": []
+    },
+    {
+      "name": "Prebuild Cleanup and Recompile",
+      "messages": []
+    },
+    {
+      "name": "Compile scripts",
+      "messages": []
+    },
+    {
+      "name": "Generate and validate platform script types",
+      "messages": []
+    },
+    {
+      "name": "Verify Build setup",
+      "messages": []
+    },
+    {
+      "name": "GetUnityAssemblies",
+      "messages": []
+    },
+    {
+      "name": "GetPlayerAssemblies",
+      "messages": []
+    },
+    {
+      "name": "Check old data build",
+      "messages": []
+    },
+    {
+      "name": "Set up scripts only build",
+      "messages": []
+    },
+    {
+      "name": "Prepare assets for target platform",
+      "messages": []
+    },
+    {
+      "name": "Prepare splash screen",
+      "messages": [
+        {
+          "type": "Log",
+          "content": "Including Unity Splash Screen logo because 'Show Unity Logo' is enabled."
+        }
+      ]
+    },
+    {
+      "name": "Run script only build",
+      "messages": []
+    },
+    {
+      "name": "Build scripts DLLs",
+      "messages": []
+    },
+    {
+      "name": "GetSystemAssemblies",
+      "messages": []
+    },
+    {
+      "name": "Postprocess built player",
+      "messages": [
+        {
+          "type": "Log",
+          "content": "Stripping Runtime Debug Shader Variants, you won't be able to use some features of Rendering Debugger in the Player Build."
+        }
+      ]
+    },
+    {
+      "name": "Setup incremental player build",
+      "messages": []
+    },
+    {
+      "name": "Incremental player build",
+      "messages": []
+    },
+    {
+      "name": "Report output files",
+      "messages": []
+    }
+  ]
+}

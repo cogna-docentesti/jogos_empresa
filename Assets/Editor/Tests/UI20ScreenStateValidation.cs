@@ -70,6 +70,8 @@ public static class UI20ScreenStateValidation
             var viewport=size;
             Add("Viewport",()=>{res=viewport.x+"x"+viewport.y;UI01Validation.SetGameView(viewport.x,viewport.y);});
             var targets=new[]{"Panel_Identification","Panel_Location","Panel_Restaurant","Panel_MenuPricing","Panel_Financial","Panel_Equipment","Panel_Team","Panel_Menu","Panel_Establishment","Panel_Review","Panel_Event","Panel_MonthlyResult","Panel_QuarterlyResult","Panel_FinalReport","Panel_Bankruptcy"};
+            var requestedPanels=Environment.GetEnvironmentVariable("COGNA_CONCEPT_PANELS");
+            if(!string.IsNullOrEmpty(requestedPanels))targets=targets.Where(t=>requestedPanels.Split(',').Contains(t)).ToArray();
             foreach(var name in targets)
             {
                 var screen=name;

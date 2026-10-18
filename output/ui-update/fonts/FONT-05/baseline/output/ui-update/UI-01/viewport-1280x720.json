@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UI01Validation.Capture(\"identification-normal-1280x720\"); return new {screen=new[]{UnityEngine.Screen.width,UnityEngine.Screen.height},frame=UnityEngine.Time.frameCount};",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "screen": [
+          1280,
+          720
+        ],
+        "frame": 8948
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

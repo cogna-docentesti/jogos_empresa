@@ -1,0 +1,399 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var root=UnityEngine.GameObject.Find(\"Canvas\").transform; var eq=root.Find(\"Panel_Equipment\"); return eq.GetComponentsInChildren<UnityEngine.Transform>(true).Select(t=>new {path=t==eq?t.name:t.name, parent=t.parent==null?null:t.parent.name, active=t.gameObject.activeSelf, components=t.GetComponents<UnityEngine.Component>().Select(c=>c==null?\"MISSING\":c.GetType().Name).ToArray(), rect=t is UnityEngine.RectTransform?((UnityEngine.RectTransform)t).rect.ToString():\"\"}).ToArray();"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": [
+        {
+          "path": "Panel_Equipment",
+          "parent": "Canvas",
+          "active": false,
+          "components": [
+            "RectTransform",
+            "EquipmentScreenView",
+            "EquipmentScreenController",
+            "SafeAreaFitter"
+          ],
+          "rect": "(x:-50.00, y:-50.00, width:100.00, height:100.00)"
+        },
+        {
+          "path": "Background",
+          "parent": "Panel_Equipment",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-1029.00, y:-540.00, width:2058.00, height:1080.00)"
+        },
+        {
+          "path": "Header",
+          "parent": "Panel_Equipment",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "Canvas",
+            "CanvasScaler",
+            "GraphicRaycaster",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-1577.75, y:-120.00, width:3155.50, height:120.00)"
+        },
+        {
+          "path": "RegionText",
+          "parent": "Header",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:0.00, y:-60.00, width:800.00, height:60.00)"
+        },
+        {
+          "path": "StepsText",
+          "parent": "Header",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-420.00, y:-32.00, width:420.00, height:32.00)"
+        },
+        {
+          "path": "HintText",
+          "parent": "Header",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:0.00, y:-60.00, width:1800.00, height:60.00)"
+        },
+        {
+          "path": "CashValue",
+          "parent": "Header",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-900.00, y:-52.71, width:900.00, height:52.71)"
+        },
+        {
+          "path": "MainArea_Equipment",
+          "parent": "Panel_Equipment",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-962.50, y:-454.00, width:1925.00, height:908.00)"
+        },
+        {
+          "path": "ContentContainer",
+          "parent": "MainArea_Equipment",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "VerticalLayoutGroup"
+          ],
+          "rect": "(x:-962.50, y:-454.00, width:1925.00, height:908.00)"
+        },
+        {
+          "path": "EquipmentsLabel",
+          "parent": "ContentContainer",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-596.80, y:-25.00, width:1193.60, height:50.00)"
+        },
+        {
+          "path": "Scroll View",
+          "parent": "ContentContainer",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image",
+            "ScrollRect"
+          ],
+          "rect": "(x:-909.19, y:-281.80, width:1818.38, height:563.60)"
+        },
+        {
+          "path": "Viewport",
+          "parent": "Scroll View",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image",
+            "Mask"
+          ],
+          "rect": "(x:0.00, y:-563.60, width:1801.38, height:563.60)"
+        },
+        {
+          "path": "Content",
+          "parent": "Viewport",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "GridLayoutGroup",
+            "ContentSizeFitter"
+          ],
+          "rect": "(x:0.00, y:-180.00, width:1801.38, height:180.00)"
+        },
+        {
+          "path": "Scrollbar Vertical",
+          "parent": "Scroll View",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image",
+            "Scrollbar",
+            "SharedControlAppearance"
+          ],
+          "rect": "(x:-20.00, y:-546.60, width:20.00, height:546.60)"
+        },
+        {
+          "path": "SharedTouchTarget",
+          "parent": "Scrollbar Vertical",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-34.00, y:-273.30, width:68.00, height:546.60)"
+        },
+        {
+          "path": "Sliding Area",
+          "parent": "Scrollbar Vertical",
+          "active": true,
+          "components": [
+            "RectTransform"
+          ],
+          "rect": "(x:0.00, y:-263.30, width:0.00, height:526.60)"
+        },
+        {
+          "path": "Handle",
+          "parent": "Sliding Area",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-10.00, y:-273.30, width:20.00, height:546.60)"
+        },
+        {
+          "path": "SharedFocus",
+          "parent": "Scrollbar Vertical",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-14.00, y:-277.30, width:28.00, height:554.60)"
+        },
+        {
+          "path": "CartInfo",
+          "parent": "ContentContainer",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "HorizontalLayoutGroup"
+          ],
+          "rect": "(x:-891.61, y:-44.11, width:1783.22, height:88.21)"
+        },
+        {
+          "path": "TotalCart",
+          "parent": "CartInfo",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-306.38, y:-30.00, width:612.76, height:60.00)"
+        },
+        {
+          "path": "RemainingMoney",
+          "parent": "CartInfo",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-342.00, y:-30.00, width:683.99, height:60.00)"
+        },
+        {
+          "path": "Carrinho",
+          "parent": "CartInfo",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image",
+            "Button",
+            "SharedControlAppearance"
+          ],
+          "rect": "(x:-154.92, y:-34.00, width:309.84, height:68.00)"
+        },
+        {
+          "path": "Text (TMP)",
+          "parent": "Carrinho",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-154.92, y:-34.00, width:309.84, height:68.00)"
+        },
+        {
+          "path": "SharedFocus",
+          "parent": "Carrinho",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-158.92, y:-38.00, width:317.84, height:76.00)"
+        },
+        {
+          "path": "BottomBar",
+          "parent": "Panel_Equipment",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-1573.78, y:0.00, width:3147.57, height:100.00)"
+        },
+        {
+          "path": "ConfirmButton",
+          "parent": "BottomBar",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image",
+            "Button",
+            "SharedControlAppearance"
+          ],
+          "rect": "(x:-190.00, y:0.00, width:380.00, height:68.00)"
+        },
+        {
+          "path": "TextShadow",
+          "parent": "ConfirmButton",
+          "active": false,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI",
+            "Shadow"
+          ],
+          "rect": "(x:-190.00, y:-34.00, width:380.00, height:68.00)"
+        },
+        {
+          "path": "Text (TMP)",
+          "parent": "ConfirmButton",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-190.00, y:-34.00, width:380.00, height:68.00)"
+        },
+        {
+          "path": "SharedFocus",
+          "parent": "ConfirmButton",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-194.00, y:-38.00, width:388.00, height:76.00)"
+        },
+        {
+          "path": "HintBarText ",
+          "parent": "BottomBar",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:-100.00, y:-25.00, width:200.00, height:50.00)"
+        },
+        {
+          "path": "ReturnToBank",
+          "parent": "BottomBar",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "Button",
+            "CanvasRenderer",
+            "Image",
+            "SharedControlAppearance"
+          ],
+          "rect": "(x:0.00, y:0.00, width:320.00, height:68.00)"
+        },
+        {
+          "path": "Label",
+          "parent": "ReturnToBank",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "TextMeshProUGUI"
+          ],
+          "rect": "(x:0.00, y:-44.00, width:288.00, height:44.00)"
+        },
+        {
+          "path": "SharedFocus",
+          "parent": "ReturnToBank",
+          "active": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "rect": "(x:-164.00, y:-38.00, width:328.00, height:76.00)"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

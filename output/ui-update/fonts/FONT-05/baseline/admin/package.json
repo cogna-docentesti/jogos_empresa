@@ -1,0 +1,19 @@
+{
+  "name": "jogos-empresa-admin",
+  "version": "1.0.0",
+  "description": "Painel administrativo para cadastrar os dados do Jogo de Empresas (eventos, e futuramente ingredientes, equipamentos etc.)",
+  "private": true,
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
