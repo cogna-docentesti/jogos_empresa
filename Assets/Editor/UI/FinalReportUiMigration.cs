@@ -81,7 +81,7 @@ namespace Game.EditorTools
             var layout = Ensure<UnityEngine.UI.LayoutElement>(card); layout.preferredHeight = 320; layout.preferredWidth = width;
             var emblem = Picture(card.transform, "Icon", icon, 24, 24, 40, 40); emblem.color = GamePalette.Primary;
             entry.FindPropertyRelative("root").objectReferenceValue = card.rectTransform;
-            entry.FindPropertyRelative("title").objectReferenceValue = Text(card.transform, "Title", "", 88, 24, width - 112, 64, GameTypography.Tokens.BodyStrong,true);
+            entry.FindPropertyRelative("title").objectReferenceValue = Text(card.transform, "Title", "", 88, 24, width - 112, 64,new TypographyToken(TypographyRole.SectionTitle,24),true);
             entry.FindPropertyRelative("text").objectReferenceValue = Text(card.transform, "Text", "", 24, 88, width - 48, 160, GameTypography.Tokens.Body);
             entry.FindPropertyRelative("source").objectReferenceValue = Text(card.transform, "Source", "", 24, 260, width - 48, 64, GameTypography.Tokens.Caption, false, GamePalette.Muted);
         }
@@ -99,11 +99,16 @@ namespace Game.EditorTools
             var listener = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<UIStateListener>(true)).Single(); Set(listener, "finalReportPanel", panel.gameObject);
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88);
             Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "period", Text(header.transform, "Period", "RELATÓRIO FINAL", 940, 28, 956, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "period", Text(header.transform, "Period", "RELATÓRIO FINAL", 940, 28, 956, 40, new TypographyToken(TypographyRole.Caption,24), false, GamePalette.OnDark));
             Text(panel, "Title", "Relatório final da campanha", 24, 112, 1848, 60, GameTypography.Tokens.ScreenTitle, true);
             var so = new SerializedObject(view); var tabs = so.FindProperty("tabs"); tabs.arraySize = 3;
             string[] labels = { "Conclusão", "Business Model Canvas", "Reflexão e justificativas" };
-            for (int i = 0; i < 3; i++) tabs.GetArrayElementAtIndex(i).objectReferenceValue = Button(panel, "Tab" + i, labels[i], 24 + i * 624, 184, 608, 60, SharedControlKind.Tab);
+            for (int i = 0; i < 3; i++)
+            {
+                var button = Button(panel, "Tab" + i, labels[i], 24 + i * 624, 184, 608, 60, SharedControlKind.Tab);
+                GameTypography.KeepSize(button.GetComponentInChildren<TMP_Text>(), TypographyRole.Navigation);
+                tabs.GetArrayElementAtIndex(i).objectReferenceValue = button;
+            }
             so.ApplyModifiedPropertiesWithoutUndo();
             var loaded = Node(panel, "LoadedBody", 0, 0, 1920, 984); Set(view, "loadedBody", loaded.gameObject);
             var overview = Node(loaded, "Conclusion", 0, 0, 1920, 984); var bmc = Node(loaded, "BMC", 0, 0, 1920, 984); var reflection = Node(loaded, "Reflection", 0, 0, 1920, 984);

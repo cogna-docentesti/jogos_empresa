@@ -338,5 +338,42 @@
     },
     "weights": "Individual prices, salary and quantities use Roboto Regular; summary totals/KPIs use Roboto Bold; compact headings and controls use the real condensed faces.",
     "cart_scope": "11 serialized modal consumers and their runtime entries transferred from FONT-09 because FONT-07 explicitly owns the cart summary and actions."
+  },
+  "font08": {
+    "qa": "docs/ui-update/qa/FONT-08.json",
+    "sizes": "Final sizes per consumer in font-coverage.json. No global reduction.",
+    "monthly": {
+      "title": 46,
+      "kpi": 38,
+      "table": 24,
+      "bridge_value": 28,
+      "bridge_title": 32,
+      "chart_title": 28,
+      "chart_values": 20
+    },
+    "quarterly": {
+      "title": 46,
+      "kpi": 38,
+      "row_label": 22,
+      "rule": 18,
+      "cell": 20,
+      "chart_value": 22,
+      "layout": "Preferred text height drives each cell and row; signed chart values retain their full height. Negative bars, values and months occupy separate bands around the visible zero axis."
+    },
+    "signed_kpi_width": {
+      "from": 294,
+      "to": 306,
+      "consumers": "Monthly result; quarterly result and closing cash. Font size remains 38; right inset is 4 inside each 400-wide card.",
+      "evidence": "Three explicit font08_layout entries in font-coverage.json."
+    },
+    "final_bankruptcy": {
+      "title": 44,
+      "kpi": 42,
+      "body": 24,
+      "bmc_heading": 24,
+      "sources": 20
+    },
+    "weights": "Roboto Regular for values and body; real Roboto Bold for totals and KPIs; Condensed faces for compact headings, labels, captions and actions.",
+    "shared_scope": "20 state/dialog consumers retain FONT-09 ownership and behavior, with typography integrated as font08_shared."
   }
 }

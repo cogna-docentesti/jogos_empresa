@@ -1,0 +1,176 @@
+{
+  "passed": true,
+  "references": [
+    "art-source/references/concepts/04-dre-mensal.png",
+    "art-source/references/concepts/05-dre-trimestral.png"
+  ],
+  "comparison": "output/ui-update/fonts/FONT-08/index.html",
+  "resolutions": [
+    [
+      1920,
+      1080
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1600,
+      1000
+    ]
+  ],
+  "judgment": "Família, largura, peso e hierarquia comparados diretamente aos concepts nas três viewports. Dados, casas decimais, linhas e classificação são os reais da aplicação; o conteúdo ilustrativo dos concepts não alterou o modelo financeiro.",
+  "monthly": "Título 46, KPIs 38, tabela 24, valores da reconciliação 28, seção 32 e gráfico 28/20. Corpo/valores em Roboto Regular; totais e KPIs em Bold real. Alinhamento, sinais, cores semânticas e reconciliação legíveis, inclusive nos detalhes roláveis.",
+  "quarterly": "Rótulos 22, células 20, regras 18 e gráfico 22/28. Células longas seguem altura nativa; as curtas conservam a compactação e permitem dez linhas monetárias iniciais. Sinais mistos têm eixo zero, bandas separadas para barras, valores e meses; o teste compara contornos renderizados e mantém escala comum entre barras.",
+  "signed_kpis": "Só três caixas passaram de 294 para 306 dentro de cards de 400, preservando tamanho 38 e margem direita 4. Valores positivos até R$ 3.703.703,25, resultados -R$ 1.234.567,75 e saldos -R$ 2.469.135,50 aferidos nas três viewports; o cash bridge também mostra -R$ 3.703.703,25.",
+  "final_bankruptcy": "Títulos 44, KPIs 42, corpo 24, títulos BMC 24 e fontes documentais 20. Abas, nove blocos BMC, reflexão, meses, ausências, erro/retry, confirmações e conteúdo extenso preservam as faces e o scroll. Nenhum documento ou formulário ausente foi inventado.",
+  "test_updates": "Os asserts de overflow, raycast, foco, posição, economia e persistência permanecem. A coordenação sincroniza o driver nativo e a suite de falência aguarda um frame intermediário completo. Três suítes já aprovadas com a cena final foram retidas por hash; falência e casos focados repetidos com SQLite novo. Callbacks pendentes são removidos antes de liberar o contexto de output; o relatório histórico UI-13 foi restaurado ao hash inicial.",
+  "session": "Cena suja, sete raízes e TMP Restaurante só em memória preservados; viewport restaurada a 1600x1000. IdentificationDesignScale recalculou seu wrapper de .8333333 para 1; driver e Canvas raiz não foram alterados manualmente. O efeito dirigido está separado na auditoria.",
+  "reviewed_current_captures": [
+    {
+      "name": "positive-top-1920x1080",
+      "path": "output/ui-update/fonts/FONT-08/monthly/positive-top-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "b841ed956ada3739af0bf0af412cdba3d488900f259abd6020dc1726e0100e42"
+    },
+    {
+      "name": "positive-bottom-1280x720",
+      "path": "output/ui-update/fonts/FONT-08/monthly/positive-bottom-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "3140055d3ca1ac596223d170353bbe8bbdf25541c0e891178fbd9ec934a0258c"
+    },
+    {
+      "name": "positive-top-1600x1000",
+      "path": "output/ui-update/fonts/FONT-08/monthly/positive-top-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "0999c2a23e857403d4751cdc66a9cb702cec8c6d6d2c09ebb2bfff301209980f"
+    },
+    {
+      "name": "months-3-scroll-1.00-1920x1080",
+      "path": "output/ui-update/fonts/FONT-08/quarterly/months-3-scroll-1.00-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "97605e137279454a2c0549aaf9db616391d9e21b912bdd9e4607590267f1d24f"
+    },
+    {
+      "name": "months-3-scroll-0.00-1920x1080",
+      "path": "output/ui-update/fonts/FONT-08/quarterly/months-3-scroll-0.00-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "155678f7d95e315eb83b5ddad55979c7994370c8200538fb89d8d55cd4b24b1c"
+    },
+    {
+      "name": "negative-1920x1080",
+      "path": "output/ui-update/fonts/FONT-08/quarterly/negative-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "138aae35e64f02f46d3396e33724cc1961eea6de865bacc86f3a5e5702495db6"
+    },
+    {
+      "name": "conclusion-1920x1080",
+      "path": "output/ui-update/fonts/FONT-08/final/conclusion-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "891a1ec3bb1311a80c7e441c33e76b8af95a5ab7399ddf9d4b76570884d61271"
+    },
+    {
+      "name": "bmc-0.0-1280x720",
+      "path": "output/ui-update/fonts/FONT-08/final/bmc-0.0-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "f7694e6bc67e86b6955ddc3889e97d42b349a14a70d866428bc23fea23aab7d8"
+    },
+    {
+      "name": "conclusion-1600x1000",
+      "path": "output/ui-update/fonts/FONT-08/final/conclusion-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "5bf61fe658d8cd7d84f45b753cf79e7f34446dd1df874ae04fe89d115fe49ae0"
+    },
+    {
+      "name": "reflection-0.00-1600x1000",
+      "path": "output/ui-update/fonts/FONT-08/final/reflection-0.00-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "81f678f07356be05d015e4745ffa74c2462d4a2aaecc6bb25f3e1ad6ec0ccb4b"
+    },
+    {
+      "name": "bankruptcy-1920x1080",
+      "path": "output/ui-update/fonts/FONT-08/bankruptcy/bankruptcy-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "4c8625060e0c60df0c0159ccba3e617d087cfd8cea4278c86420dbab0b2b5cf3"
+    },
+    {
+      "name": "bankruptcy-1280x720",
+      "path": "output/ui-update/fonts/FONT-08/bankruptcy/bankruptcy-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "6203227354c1fd8ec6165de9a002b24d012f66d0fd6f4cefe1d566ce9dd6b9c5"
+    },
+    {
+      "name": "wide-quarterly-top",
+      "path": "output/ui-update/fonts/FONT-08/wide-quarterly-top-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "321c820aef0d48ccaca4d89cb59b2b7db86031fed197b950fc16b381f09f0fdb"
+    },
+    {
+      "name": "wide-monthly-top",
+      "path": "output/ui-update/fonts/FONT-08/wide-monthly-top-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "7f1050f38780f99561cdd9c1a88ed9b17c547de7c7145570aabf422e92fc5cf5"
+    },
+    {
+      "name": "wide-final",
+      "path": "output/ui-update/fonts/FONT-08/wide-final-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "fa385a082ed0622a9444ee75d0f46b0d20dca12a1faf5aff53d1bcb66f1f3678"
+    },
+    {
+      "name": "wide-bankruptcy",
+      "path": "output/ui-update/fonts/FONT-08/wide-bankruptcy-1920x1080.png",
+      "resolution": "1920x1080",
+      "sha256": "8cee7dc5c270b92d6786a6cfba1f507178dd74e03f5be3d0db85117dcaed526f"
+    },
+    {
+      "name": "wide-quarterly-top",
+      "path": "output/ui-update/fonts/FONT-08/wide-quarterly-top-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "85b862d3a67342325b399a3fac064afd9aefde1e091023f619c6808ba604b4bf"
+    },
+    {
+      "name": "wide-monthly-top",
+      "path": "output/ui-update/fonts/FONT-08/wide-monthly-top-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "0a369ec84f53c1439fa8ad09cd941d83c55788ffec1a24397c2e53cf3587279f"
+    },
+    {
+      "name": "wide-final",
+      "path": "output/ui-update/fonts/FONT-08/wide-final-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "f103fb1269838a533a8a1cb0b6cb777738ff87ddbbb5cb5b10cae754457fd29e"
+    },
+    {
+      "name": "wide-bankruptcy",
+      "path": "output/ui-update/fonts/FONT-08/wide-bankruptcy-1280x720.png",
+      "resolution": "1280x720",
+      "sha256": "60585845c613a8b62dbbb666c9a78ebc8ff9a030394cda1e7b9905f23171d30b"
+    },
+    {
+      "name": "wide-quarterly-top",
+      "path": "output/ui-update/fonts/FONT-08/wide-quarterly-top-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "609eaf46a80a98b32cbc971d3d7064ac309e6321171b783423bcc21a99dc8f87"
+    },
+    {
+      "name": "wide-monthly-top",
+      "path": "output/ui-update/fonts/FONT-08/wide-monthly-top-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "6bc83e1f31170ff68bcaa6e4fdf43d65bcc297818c8fde383ff7a6e73ff3fd4f"
+    },
+    {
+      "name": "wide-final",
+      "path": "output/ui-update/fonts/FONT-08/wide-final-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "23877667fc9b3907e24b86e40c252f62734a4ff589fb6351b4b7ffb8fc41331f"
+    },
+    {
+      "name": "wide-bankruptcy",
+      "path": "output/ui-update/fonts/FONT-08/wide-bankruptcy-1600x1000.png",
+      "resolution": "1600x1000",
+      "sha256": "0cfda258ee9d9d98f51617920b5599ab361563dd799b704427fcf934fad2072f"
+    }
+  ],
+  "limits": "Revisão no Player do Editor. Build/Player independente pertencem à FONT-10; entradas inativas têm somente evidência de contraparte salva, explicitamente separada das capturas ativas."
+}

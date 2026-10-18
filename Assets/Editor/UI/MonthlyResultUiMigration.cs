@@ -74,21 +74,21 @@ namespace Game.EditorTools
             var view = Ensure<MonthlyResultView>(panel); var controller = Ensure<MonthlyResultController>(panel); Set(controller,"view",view);
             var header = Picture(panel,"Header","UI_TOPBAR_VIOLET",0,0,1920,88);
             Text(header.transform,"Brand","Jogos de Empresa",24,18,800,60,GameTypography.Tokens.BrandTitle,true,GamePalette.OnDark);
-            Set(view,"period",Text(header.transform,"Period","RESULTADOS MENSAIS",1000,28,896,40,GameTypography.Tokens.Body,false,GamePalette.OnDark));
+            Set(view,"period",Text(header.transform,"Period","RESULTADOS MENSAIS",1000,28,896,40,new TypographyToken(TypographyRole.Caption,24),false,GamePalette.OnDark));
             Set(view,"title",Text(panel,"Title","DRE mensal",24,112,1240,60,GameTypography.Tokens.ScreenTitle,true));
             var loaded=Node(panel,"LoadedBody",0,0,1920,984); Set(view,"loadedBody",loaded.gameObject);
             string[] kpis={"Resultado do mês","Caixa no fechamento","Clientes atendidos"}; string[] fields={"resultValue","cashValue","clientsValue"};
             for(int i=0;i<3;i++) { var k=Picture(loaded,"Kpi"+i,"UI_KPI_TILE",24+i*416,184,408,108); Text(k.transform,"Label",kpis[i],20,14,368,30,GameTypography.Tokens.Label); Set(view,fields[i],Text(k.transform,"Value","",20,48,368,52,GameTypography.Tokens.DisplayValue,true)); }
             var tableHeader=Picture(loaded,"TableHeader","UI_TABLE_HEADER",24,312,1240,52);
-            Text(tableHeader.transform,"Label","Movimentação e indicadores do mês",20,10,830,36,GameTypography.Tokens.TableTotal,true);
-            Text(tableHeader.transform,"Total","Total salvo",864,10,356,36,GameTypography.Tokens.TableTotal,true).alignment=TextAlignmentOptions.TopRight;
+            Text(tableHeader.transform,"Label","Movimentação e indicadores do mês",20,10,830,36,GameTypography.Tokens.Label,false);
+            Text(tableHeader.transform,"Total","Total salvo",864,10,356,36,GameTypography.Tokens.Label,false).alignment=TextAlignmentOptions.TopRight;
             var scroll=Scroll(loaded,"TableScroll",24,372,1268,588); Set(view,"tableScroll",scroll); var layout=scroll.content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();layout.spacing=4;layout.padding=new RectOffset(0,0,0,8);
             var so=new SerializedObject(view); var rows=so.FindProperty("rows"); rows.arraySize=22;
             for(int i=0;i<22;i++)
             {
                 var row=Picture(scroll.content,"Row"+i,"UI_TABLE_ROW_NEUTRAL",0,0,1240,48); Ensure<UnityEngine.UI.LayoutElement>(row).preferredHeight=48;
                 var total=Picture(row.transform,"TotalColumn","UI_TABLE_TOTAL_COLUMN",850,0,390,48);total.rectTransform.anchorMin=new Vector2(0,0);total.rectTransform.anchorMax=new Vector2(0,1);total.rectTransform.offsetMin=new Vector2(850,0);total.rectTransform.offsetMax=new Vector2(1240,0);
-                var label=Text(row.transform,"Label","",20,10,810,28,GameTypography.Tokens.Table); var value=Text(row.transform,"Value","",866,10,354,28,(i==7||i==9||i==11?GameTypography.Tokens.TableTotal:GameTypography.Tokens.Table),i==7||i==9||i==11); value.alignment=TextAlignmentOptions.TopRight;
+                var label=Text(row.transform,"Label","",20,10,810,28,(i==7||i==9||i==11?GameTypography.Tokens.TableTotal:GameTypography.Tokens.Table)); var value=Text(row.transform,"Value","",866,10,354,28,(i==7||i==9||i==11?GameTypography.Tokens.TableTotal:GameTypography.Tokens.Table),i==7||i==9||i==11); value.alignment=TextAlignmentOptions.TopRight;
                 foreach(var text in new[]{label,value}) { var r=text.rectTransform; r.anchorMin=new Vector2(0,0);r.anchorMax=new Vector2(0,1);r.offsetMin=new Vector2(r.offsetMin.x,8);r.offsetMax=new Vector2(r.offsetMax.x,-8); }
                 var item=rows.GetArrayElementAtIndex(i);item.FindPropertyRelative("label").objectReferenceValue=label;item.FindPropertyRelative("value").objectReferenceValue=value;item.FindPropertyRelative("background").objectReferenceValue=row;
             }
@@ -103,13 +103,13 @@ namespace Game.EditorTools
                 var image=Picture(art,id,id,(float)layer["position_px"][0]-w*(float)layer["pivot"][0]-(float)clip[0],(float)layer["position_px"][1]-h*(float)layer["pivot"][1]-(float)clip[1],w,h);image.type=UnityEngine.UI.Image.Type.Simple;image.preserveAspect=true;image.color=Color.white;
             }
             var chart=Picture(loaded,"CashChart","UI_CHART_PANEL",1320,564,560,396);
-            Text(chart.transform,"Title","Entradas e saídas do mês",20,18,520,42,GameTypography.Tokens.BodyStrong,true);
+            Text(chart.transform,"Title","Entradas e saídas do mês",20,18,520,42,new TypographyToken(TypographyRole.SectionTitle,24),true);
             Text(chart.transform,"Note","Escala comum • saídas à esquerda do zero",20,62,520,30,GameTypography.Tokens.Caption);
             var axis=Picture(chart.transform,"Zero",null,279,102,2,250);axis.color=GamePalette.Hairline;
             so=new SerializedObject(view); var bars=so.FindProperty("bars");bars.arraySize=4;string[] labels={"Receita","Saídas (com parcela)","Eventos","Resultado"};
             for(int i=0;i<4;i++)
             {
-                float y=104+i*66;var label=Text(chart.transform,"BarLabel"+i,labels[i],24,y,260,30,GameTypography.Tokens.Caption);var value=Text(chart.transform,"BarValue"+i,"",290,y,246,30,GameTypography.Tokens.Caption,true);value.alignment=TextAlignmentOptions.TopRight;
+                float y=104+i*66;var label=Text(chart.transform,"BarLabel"+i,labels[i],24,y,260,30,GameTypography.Tokens.Caption);var value=Text(chart.transform,"BarValue"+i,"",290,y,246,30,new TypographyToken(TypographyRole.TableTotal,20),true);value.alignment=TextAlignmentOptions.TopRight;
                 var fill=Picture(chart.transform,"BarFill"+i,null,280,y+42,0,12);fill.rectTransform.pivot=new Vector2(0,.5f);fill.rectTransform.anchoredPosition=new Vector2(280,-y-42);
                 var b=bars.GetArrayElementAtIndex(i);b.FindPropertyRelative("label").objectReferenceValue=label;b.FindPropertyRelative("value").objectReferenceValue=value;b.FindPropertyRelative("fill").objectReferenceValue=fill.rectTransform;
             }

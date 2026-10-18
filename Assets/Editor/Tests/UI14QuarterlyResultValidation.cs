@@ -62,7 +62,7 @@ public static class UI14QuarterlyResultValidation
     }
     private static void Fits()
     {
-        Canvas.ForceUpdateCanvases();foreach(var t in View.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name=="InterTight-Variable"&&!t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Overflow "+t.name+": "+t.text);}
+        Canvas.ForceUpdateCanvases();foreach(var t in View.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>()!=null&&!t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Overflow "+t.name+": "+t.text);}
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length==1,"One EventSystem");
         var globals=new List<UnityEngine.UI.Button>();foreach(var path in new[]{"MenuAccess/Button","HubHistory/Back","ExitUI/ExitButton"}) {var b=Root.Find(path).GetComponent<UnityEngine.UI.Button>();if(b.gameObject.activeInHierarchy)globals.Add(b);}
         globals.AddRange(View.GetComponentsInChildren<UnityEngine.UI.Button>());
@@ -81,20 +81,20 @@ public static class UI14QuarterlyResultValidation
             for(int c=0;c<5;c++)Expect(View.Rows[i].cells[c].text==cells[c].Text,"Saved cell "+i+"/"+c);
         }
         double max=Math.Max(1,saved.Select(r=>Math.Abs((double)r.netResult)).Max());
-        for(int i=0;i<3;i++) {var r=expected.Months[i];Expect(View.Bars[i].value.text==(r==null?"Não salvo":QuarterlyResultPresentation.SignedMoney(r.netResult)),"Chart value");Expect(Math.Abs(View.Bars[i].fill.sizeDelta.x-(r==null?0:232*Math.Abs(r.netResult)/max))<.01,"Chart scale");}
+        for(int i=0;i<3;i++) {var r=expected.Months[i];Expect(View.Bars[i].value.text==(r==null?"Não salvo":QuarterlyResultPresentation.SignedMoney(r.netResult)),"Chart value");bool mixed=expected.Months.Any(m=>m!=null&&m.netResult<0); float baseline=mixed?210:330; float valueHeight=View.Bars.Max(b=>Mathf.Max(36,b.value.GetPreferredValues(b.value.text,b.value.rectTransform.rect.width,0).y+4)); float available=Mathf.Max(0,Mathf.Min(mixed?90:210,baseline-64-valueHeight-2,mixed?346-8-baseline-valueHeight-2:float.PositiveInfinity)); Expect(Math.Abs(View.Bars[i].fill.sizeDelta.y-(r==null?0:available*Math.Abs(r.netResult)/max))<.01,"Chart scale"); Expect(View.Bars[i].fill.sizeDelta.x==116&&View.Bars[i].fill.anchoredPosition.y==-baseline&&View.Bars[i].fill.pivot.y==(r!=null&&r.netResult<0?1:0),"Chart sign and baseline");}
         Expect(Newtonsoft.Json.JsonConvert.SerializeObject(GameSessionState.Current)==snapshot,"Consultation mutated session");Expect(saved.Count==count,"Consultation settled again");
     }
     private static void Capture(string name,bool screen=true)
     {
-        if(screen)Fits();string path=UI01Validation.Capture("../UI-14/"+name);using var hash=System.Security.Cryptography.SHA256.Create();
+        if(screen)Fits();string path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-14",name));UiValidationContext.OnCapture?.Invoke(name,path); using var hash=System.Security.Cryptography.SHA256.Create();
         captures.Add(new {name,path,frame=Time.frameCount,width=Screen.width,height=Screen.height,sha256=BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(path))).Replace("-","").ToLowerInvariant()});
-        File.WriteAllText("output/ui-update/UI-14/capture-frames.json",Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-14","capture-frames.json"),Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
     }
     public static void Run()
     {
-        UI01Validation.RequireIsolatedStorage();Expect(EditorApplication.isPlaying,"Use Play Mode");Directory.CreateDirectory("output/ui-update/UI-14");
+        UI01Validation.RequireIsolatedStorage();Expect(EditorApplication.isPlaying,"Use Play Mode");Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-14"));
         report=new Report();steps.Clear();captures.Clear();lastFrame=-1;retries=0;isolatedDb=Db;
-        foreach(var resolution in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var resolution in UiValidationContext.Resolutions)
         {
             var size=resolution;string res=size.x+"x"+size.y;Add("Set viewport "+res,()=>UI01Validation.SetGameView(size.x,size.y));
             foreach(int n in new[]{1,2,3})
@@ -135,13 +135,13 @@ public static class UI14QuarterlyResultValidation
             Add("Reload refreshes quarterly "+res,()=>{Parity();Capture("reload-"+res);Click(View.BackButton);});
             Add("Return from monthly consultation "+res,()=>Click(Monthly.ContinueButton));
         }
-        Add("Runtime evidence",()=>File.WriteAllText("output/ui-update/UI-14/runtime.json",Newtonsoft.Json.JsonConvert.SerializeObject(new {project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=isolatedDb.DatabasePath,frame=Time.frameCount},Newtonsoft.Json.Formatting.Indented)));
+        Add("Runtime evidence",()=>File.WriteAllText(UiValidationContext.FileFor("UI-14","runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new {project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=isolatedDb.DatabasePath,frame=Time.frameCount},Newtonsoft.Json.Formatting.Indented)));
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
     private static void Tick()
     {
         if(EditorApplication.timeSinceStartup<next)return;
-        if(!EditorApplication.isPlaying||steps.Count==0) {report.completed=steps.Count==0&&report.failures==0;EditorApplication.update-=Tick;File.WriteAllText("output/ui-update/UI-14/playmode.json",JsonUtility.ToJson(report,true));return;}
+        if(!EditorApplication.isPlaying||steps.Count==0) {report.completed=steps.Count==0&&report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-14","playmode.json"),JsonUtility.ToJson(report,true));return;}
         if(Time.frameCount<=lastFrame){EditorApplication.QueuePlayerLoopUpdate();EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint();return;}
         var step=steps.Dequeue();var check=new Check {name=step.Item1,frame=Time.frameCount};
         try {step.Item2();check.passed=true;retries=0;}

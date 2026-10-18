@@ -82,14 +82,14 @@ namespace Game.EditorTools
             var listener = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<UIStateListener>(true)).Single(); Set(listener, "bankruptcyPanel", panel.gameObject);
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88);
             Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "period", Text(header.transform, "Period", "ENCERRAMENTO DA CAMPANHA", 940, 28, 956, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "period", Text(header.transform, "Period", "ENCERRAMENTO DA CAMPANHA", 940, 28, 956, 40, new TypographyToken(TypographyRole.Caption,24), false, GamePalette.OnDark));
             Set(view, "screenTitle", Text(panel, "Title", "Seu negócio encerrou esta campanha", 24, 112, 1848, 60, GameTypography.Tokens.ScreenTitle, true));
             Picture(panel, "BusinessDifficulty", "BANKRUPTCY_OVERLAY", 64, 220, 480, 320);
             Picture(panel, "ConcernedCharacter", "CH01_CONCERNED", 144, 540, 320, 440);
             var loaded = Node(panel, "LoadedBody", 0, 0, 1920, 984); Set(view, "loadedBody", loaded.gameObject);
             var scroll = Scroll(loaded, "Scroll", 624, 208, 1272, 752); Set(view, "scroll", scroll);
             var content = scroll.content; Vertical(content, 6);
-            foreach (var item in new[] { ("company", "Company", GameTypography.Tokens.SectionTitle), ("reason", "Reason", GameTypography.Tokens.Body), ("counter", "Counter", GameTypography.Tokens.Body) })
+            foreach (var item in new[] { ("company", "Company", GameTypography.Tokens.SectionTitle), ("reason", "Reason", GameTypography.Tokens.Body), ("counter", "Counter", new TypographyToken(TypographyRole.Caption,24)) })
                 Set(view, item.Item1, FlowText(content, item.Item2, 1192, item.Item3, item.Item1 != "reason"));
             var rule = FlowText(content, "CashRule", 1192, GameTypography.Tokens.Body); rule.text = "Saldo negativo isolado não causa falência. Um mês com resultado zero ou positivo interrompe a sequência de prejuízos."; rule.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = 72;
             var kpis = Node(content, "Kpis", 0, 0, 1232, 128); Ensure<UnityEngine.UI.LayoutElement>(kpis).preferredHeight = 128;
@@ -106,8 +106,8 @@ namespace Game.EditorTools
             for (int i = 0; i < 3; i++)
             {
                 var row = Picture(content, "Month" + (i + 1), "UI_CARD_NORMAL", 0, 0, 1232, 88); Ensure<UnityEngine.UI.LayoutElement>(row).preferredHeight = 88;
-                Text(row.transform, "Label", "Resultado • mês " + (i + 1), 24, 26, 320, 40, GameTypography.Tokens.BodyStrong,true);
-                var amount = Text(row.transform, "Value", "", 380, 26, 440, 40, GameTypography.Tokens.BodyStrong,true); amount.alignment = TextAlignmentOptions.TopRight;
+                Text(row.transform, "Label", "Resultado • mês " + (i + 1), 24, 26, 320, 40,new TypographyToken(TypographyRole.Label,24),false);
+                var amount = Text(row.transform, "Value", "", 380, 26, 440, 40,GameTypography.Tokens.Body,false); amount.alignment = TextAlignmentOptions.TopRight;
                 values.GetArrayElementAtIndex(i).objectReferenceValue = amount;
                 buttons.GetArrayElementAtIndex(i).objectReferenceValue = Button(row.transform, "Review", "Consultar mês " + (i + 1), 856, 12, 344, 64, SharedControlKind.Secondary);
             }

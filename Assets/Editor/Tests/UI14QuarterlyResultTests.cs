@@ -98,7 +98,7 @@ public sealed class UI14QuarterlyResultTests
         try
         {
             var view=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<QuarterlyResultView>(true)).Single();
-            var art=(RectTransform)view.transform.Find("QuarterlyIllustration");Assert.AreEqual(new Vector2(1320,-120),art.anchoredPosition);Assert.AreEqual(new Vector2(560,420),art.sizeDelta);Assert.NotNull(art.GetComponent<UnityEngine.UI.RectMask2D>());
+            var art=(RectTransform)view.transform.Find("QuarterlyIllustration");Assert.AreEqual(new Vector2(1312,-100),art.anchoredPosition);Assert.AreEqual(new Vector2(560,420),art.sizeDelta);Assert.AreEqual(Vector3.one*(584f/560f),art.localScale);Assert.NotNull(art.GetComponent<UnityEngine.UI.RectMask2D>());
             var spec=Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText("docs/art/layouts/dre-layout.json"))["quarterly"];int index=0;
             foreach(var layer in spec["layers"])
             {

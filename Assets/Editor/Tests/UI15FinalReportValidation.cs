@@ -80,7 +80,7 @@ public static class UI15FinalReportValidation
     private static void Fits()
     {
         Canvas.ForceUpdateCanvases();
-        foreach (var t in View.GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(t.font.name == "InterTight-Variable" && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
+        foreach (var t in View.GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length == 1, "One EventSystem"); Expect(!Root.Find("MenuAccess/Button").gameObject.activeInHierarchy, "Menu hidden outside hub");
         var controls = View.GetComponentsInChildren<UnityEngine.UI.Button>().Where(b => b.IsInteractable()).ToList(); controls.Add(Root.Find("ExitUI/ExitButton").GetComponent<UnityEngine.UI.Button>());
         foreach (var b in controls)
@@ -95,15 +95,15 @@ public static class UI15FinalReportValidation
     }
     private static void Capture(string name, bool final = true)
     {
-        if (final) Fits(); string path = UI01Validation.Capture("../UI-15/" + name); using var hash = System.Security.Cryptography.SHA256.Create();
+        if (final) Fits(); string path = UI01Validation.Capture(UiValidationContext.CaptureName("UI-15", name)); UiValidationContext.OnCapture?.Invoke(name,path); using var hash = System.Security.Cryptography.SHA256.Create();
         captures.Add(new { name, path, frame = Time.frameCount, width = Screen.width, height = Screen.height, sha256 = BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(path))).Replace("-", "").ToLowerInvariant() });
-        File.WriteAllText("output/ui-update/UI-15/capture-frames.json", Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-15","capture-frames.json"), Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
     }
     public static void Run()
     {
-        UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode"); Directory.CreateDirectory("output/ui-update/UI-15");
+        UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode"); Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-15"));
         report = new Report(); steps.Clear(); captures.Clear(); lastFrame = -1; retries = 0; isolatedDb = Db;
-        foreach (var resolution in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var resolution in UiValidationContext.Resolutions)
         {
             var size = resolution; string res = size.x + "x" + size.y;
             Add("Set viewport " + res, () => UI01Validation.SetGameView(size.x, size.y)); Add("Settle completed campaign " + res, () => Complete());
@@ -156,13 +156,13 @@ public static class UI15FinalReportValidation
             Add("New campaign capture " + res, () => Capture("new-identification-" + res, false));
             Add("Bankruptcy precedence " + res, () => Complete(true)); Add("Bankruptcy final route " + res, () => { Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Summary, "Bankruptcy summary waits"); Click(Monthly.ContinueButton); Expect(GameManager.Instance.StateMachine.CurrentState == GameState.GameOver_Bankruptcy && !View.gameObject.activeInHierarchy, "Bankruptcy wins"); });
         }
-        Add("Runtime evidence", () => File.WriteAllText("output/ui-update/UI-15/runtime.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, database = isolatedDb.DatabasePath, frame = Time.frameCount }, Newtonsoft.Json.Formatting.Indented)));
+        Add("Runtime evidence", () => File.WriteAllText(UiValidationContext.FileFor("UI-15","runtime.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, database = isolatedDb.DatabasePath, frame = Time.frameCount }, Newtonsoft.Json.Formatting.Indented)));
         next = EditorApplication.timeSinceStartup + .5; EditorApplication.update -= Tick; EditorApplication.update += Tick;
     }
     private static void Tick()
     {
         if (EditorApplication.timeSinceStartup < next) return;
-        if (!EditorApplication.isPlaying || steps.Count == 0) { report.completed = steps.Count == 0 && report.failures == 0; EditorApplication.update -= Tick; File.WriteAllText("output/ui-update/UI-15/playmode.json", JsonUtility.ToJson(report, true)); return; }
+        if (!EditorApplication.isPlaying || steps.Count == 0) { report.completed = steps.Count == 0 && report.failures == 0; EditorApplication.update -= Tick; File.WriteAllText(UiValidationContext.FileFor("UI-15","playmode.json"), JsonUtility.ToJson(report, true)); return; }
         if (Time.frameCount <= lastFrame) { EditorApplication.QueuePlayerLoopUpdate(); EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint(); return; }
         var step = steps.Dequeue(); var check = new Check { name = step.Item1, frame = Time.frameCount };
         try { step.Item2(); check.passed = true; retries = 0; }

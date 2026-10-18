@@ -75,18 +75,18 @@ namespace Game.EditorTools
             var monthly=canvas.Find("Panel_MonthlyResult");Set(controller,"monthlyPanel",monthly.gameObject);
             var header=Picture(panel,"Header","UI_TOPBAR_VIOLET",0,0,1920,88);
             Text(header.transform,"Brand","Jogos de Empresa",24,18,800,60,GameTypography.Tokens.BrandTitle,true,GamePalette.OnDark);
-            Set(view,"period",Text(header.transform,"Period","COMPARATIVO DA CAMPANHA",940,28,956,40,GameTypography.Tokens.Body,false,GamePalette.OnDark));
+            Set(view,"period",Text(header.transform,"Period","COMPARATIVO DA CAMPANHA",940,28,956,40,new TypographyToken(TypographyRole.Caption,24),false,GamePalette.OnDark));
             Text(panel,"Title","DRE • comparativo trimestral",24,112,1240,60,GameTypography.Tokens.ScreenTitle,true);
             var loaded=Node(panel,"LoadedBody",0,0,1920,984);Set(view,"loadedBody",loaded.gameObject);
             string[] kpis={"Receita acumulada","Resultado acumulado","Último caixa salvo"};string[] fields={"revenueValue","resultValue","cashValue"};
             for(int i=0;i<3;i++){var k=Picture(loaded,"Kpi"+i,"UI_KPI_TILE",24+i*416,184,408,108);Text(k.transform,"Label",kpis[i],20,14,368,30,GameTypography.Tokens.Label);Set(view,fields[i],Text(k.transform,"Value","",20,48,368,52,GameTypography.Tokens.DisplayValue,true));}
             Set(view,"note",Text(loaded,"AggregationNote","",24,308,1240,92,GameTypography.Tokens.Caption));
             var tableHeader=Picture(loaded,"TableHeader","UI_TABLE_HEADER",24,408,1240,72);
-            Text(tableHeader.transform,"Label","Métrica / agregação",14,18,282,48,GameTypography.Tokens.TableTotal,true);
+            Text(tableHeader.transform,"Label","Métrica / agregação",14,18,282,48,GameTypography.Tokens.Label,false);
             float[] xs={310,486,662,838,1040};float[] widths={176,176,176,202,200};
             var so=new SerializedObject(view);var monthLabels=so.FindProperty("monthLabels");monthLabels.arraySize=3;
             for(int i=0;i<5;i++){
-                var t=Text(tableHeader.transform,"Column"+i,i<3?"Mês "+(i+1):i==3?"Agregado":"Variação",xs[i]+8,8,widths[i]-16,56,GameTypography.Tokens.TableTotal,true);t.alignment=TextAlignmentOptions.TopRight;
+                var t=Text(tableHeader.transform,"Column"+i,i<3?"Mês "+(i+1):i==3?"Agregado":"Variação",xs[i]+8,8,widths[i]-16,56,new TypographyToken(i<3?TypographyRole.Caption:i==3?TypographyRole.Label:TypographyRole.Body,22),false);t.alignment=TextAlignmentOptions.TopRight;
                 if(i<3)monthLabels.GetArrayElementAtIndex(i).objectReferenceValue=t;else if(i==4)so.FindProperty("changeLabel").objectReferenceValue=t;
             }
             var scroll=Scroll(loaded,"TableScroll",24,488,1268,472);var layout=scroll.content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();layout.spacing=4;layout.padding=new RectOffset(0,0,0,8);
@@ -96,11 +96,11 @@ namespace Game.EditorTools
                 var row=Picture(scroll.content,"Row"+i,"UI_TABLE_ROW_NEUTRAL",0,0,1240,88);Ensure<UnityEngine.UI.LayoutElement>(row).preferredHeight=88;
                 var total=Picture(row.transform,"AggregateColumn","UI_TABLE_TOTAL_COLUMN",838,0,202,88);total.rectTransform.anchorMin=new Vector2(0,0);total.rectTransform.anchorMax=new Vector2(0,1);total.rectTransform.offsetMin=new Vector2(838,0);total.rectTransform.offsetMax=new Vector2(1040,0);
                 var item=rows.GetArrayElementAtIndex(i);item.FindPropertyRelative("background").objectReferenceValue=row;
-                item.FindPropertyRelative("label").objectReferenceValue=Text(row.transform,"Label","",14,12,282,30,GameTypography.Tokens.TableTotal,true);
+                item.FindPropertyRelative("label").objectReferenceValue=Text(row.transform,"Label","",14,12,282,30,(i==7||i==9||i==11?GameTypography.Tokens.TableTotal:GameTypography.Tokens.Table),i==7||i==9||i==11);
                 item.FindPropertyRelative("rule").objectReferenceValue=Text(row.transform,"Rule","",14,46,282,48,GameTypography.Tokens.Caption,false,GamePalette.Muted);
                 var cells=item.FindPropertyRelative("cells");cells.arraySize=5;
                 for(int c=0;c<5;c++){
-                    var t=Text(row.transform,"Cell"+c,"",xs[c]+8,12,widths[c]-16,64,(c==3?GameTypography.Tokens.TableTotal:GameTypography.Tokens.Table),c==3);t.alignment=TextAlignmentOptions.TopRight;
+                    var t=Text(row.transform,"Cell"+c,"",xs[c]+8,12,widths[c]-16,64,(c==3||i==7||i==9||i==11?GameTypography.Tokens.TableTotal:GameTypography.Tokens.Table),c==3||i==7||i==9||i==11);t.alignment=TextAlignmentOptions.TopRight;
                     var r=t.rectTransform;r.anchorMin=new Vector2(0,0);r.anchorMax=new Vector2(0,1);r.offsetMin=new Vector2(xs[c]+8,12);r.offsetMax=new Vector2(xs[c]+widths[c]-8,-12);
                     cells.GetArrayElementAtIndex(c).objectReferenceValue=t;
                 }
@@ -114,7 +114,7 @@ namespace Game.EditorTools
                 var image=Picture(art,id,id,(float)layer["position_px"][0]-w*(float)layer["pivot"][0]-(float)clip[0],(float)layer["position_px"][1]-h*(float)layer["pivot"][1]-(float)clip[1],w,h);image.type=UnityEngine.UI.Image.Type.Simple;image.preserveAspect=true;image.color=Color.white;
             }
             var chart=Picture(loaded,"ResultChart","UI_CHART_PANEL",1320,564,560,396);
-            Text(chart.transform,"Title","Evolução do resultado de caixa",20,18,520,42,GameTypography.Tokens.BodyStrong,true);
+            Text(chart.transform,"Title","Evolução do resultado de caixa",20,18,520,42,new TypographyToken(TypographyRole.SectionTitle,24),true);
             Text(chart.transform,"Note","Mesma escala • negativo à esquerda do zero",20,62,520,54,GameTypography.Tokens.Caption);
             var axis=Picture(chart.transform,"Zero",null,279,124,2,244);axis.color=GamePalette.Hairline;
             so=new SerializedObject(view);var bars=so.FindProperty("bars");bars.arraySize=3;

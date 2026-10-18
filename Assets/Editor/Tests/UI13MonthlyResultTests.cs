@@ -59,7 +59,7 @@ public sealed class UI13MonthlyResultTests
         try
         {
             var view=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<MonthlyResultView>(true)).Single();
-            var viewport=(RectTransform)view.transform.Find("MonthlyIllustration");Assert.AreEqual(new Vector2(1320,-120),viewport.anchoredPosition);Assert.AreEqual(new Vector2(560,420),viewport.sizeDelta);Assert.NotNull(viewport.GetComponent<UnityEngine.UI.RectMask2D>());
+            var viewport=(RectTransform)view.transform.Find("MonthlyIllustration");Assert.AreEqual(new Vector2(1312,-100),viewport.anchoredPosition);Assert.AreEqual(new Vector2(560,420),viewport.sizeDelta);Assert.AreEqual(Vector3.one*(584f/560f),viewport.localScale);Assert.NotNull(viewport.GetComponent<UnityEngine.UI.RectMask2D>());
             var contract=Newtonsoft.Json.Linq.JObject.Parse(System.IO.File.ReadAllText("docs/art/layouts/dre-layout.json"));int order=0;
             foreach(var layer in contract["layers"])
             {

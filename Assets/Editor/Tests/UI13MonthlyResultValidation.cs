@@ -61,14 +61,14 @@ public static class UI13MonthlyResultValidation
     }
     private static void Fits()
     {
-        Canvas.ForceUpdateCanvases();foreach(var t in View.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name=="InterTight-Variable"&&!t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Overflow "+t.name+": "+t.text);}
+        Canvas.ForceUpdateCanvases();foreach(var t in View.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>()!=null&&!t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Overflow "+t.name+": "+t.text);}
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length==1,"One EventSystem");
         var globals=new List<UnityEngine.UI.Button>();foreach(var path in new[]{"MenuAccess/Button","HubHistory/Back","ExitUI/ExitButton"})
         {var b=Root.Find(path).GetComponent<UnityEngine.UI.Button>();if(b.gameObject.activeInHierarchy)globals.Add(b);}
         globals.AddRange(View.GetComponentsInChildren<UnityEngine.UI.Button>());
         foreach(var b in globals) {var r=Bounds((RectTransform)b.transform);Expect(r.xMin>=-.5&&r.yMin>=-.5&&r.xMax<=Screen.width+.5&&r.yMax<=Screen.height+.5,"Offscreen "+b.name);var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(Pointer(b),hits);Expect(hits.Count>0&&hits[0].gameObject.GetComponentInParent<UnityEngine.UI.Button>()==b,"Control covered "+b.name);}
         for(int i=0;i<globals.Count;i++)for(int j=i+1;j<globals.Count;j++)Expect(!Bounds((RectTransform)globals[i].transform).Overlaps(Bounds((RectTransform)globals[j].transform)),"Overlapping controls");
-        var clip=Bounds((RectTransform)View.transform.Find("MonthlyIllustration"));var chart=Bounds((RectTransform)View.transform.Find("LoadedBody/CashChart"));Expect(!clip.Overlaps(chart),"Props overlap chart");
+        var clip=Bounds((RectTransform)View.transform.Find("MonthlyIllustration"));var chart=Bounds((RectTransform)View.transform.Find("LoadedBody/TableScroll/Viewport/Content/CashChart"));Expect(!clip.Overlaps(chart),"Props overlap chart");
         foreach(var image in View.transform.Find("MonthlyIllustration").GetComponentsInChildren<UnityEngine.UI.Image>())Expect(image.preserveAspect&&image.type==UnityEngine.UI.Image.Type.Simple&&image.color==Color.white&&!image.raycastTarget,"Whole art");
     }
     private static void Parity()
@@ -83,15 +83,15 @@ public static class UI13MonthlyResultValidation
     }
     private static void Capture(string name,bool screen=true)
     {
-        if(screen)Fits();string path=UI01Validation.Capture("../UI-13/"+name);using var hash=System.Security.Cryptography.SHA256.Create();
+        if(screen)Fits();string path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-13",name));UiValidationContext.OnCapture?.Invoke(name,path); using var hash=System.Security.Cryptography.SHA256.Create();
         captures.Add(new {name,path,frame=Time.frameCount,width=Screen.width,height=Screen.height,sha256=BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(path))).Replace("-","").ToLowerInvariant()});
-        File.WriteAllText("output/ui-update/UI-13/capture-frames.json",Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-13","capture-frames.json"),Newtonsoft.Json.JsonConvert.SerializeObject(captures,Newtonsoft.Json.Formatting.Indented));
     }
     public static void Run()
     {
-        UI01Validation.RequireIsolatedStorage();Expect(EditorApplication.isPlaying,"Use Play Mode");Directory.CreateDirectory("output/ui-update/UI-13");
+        UI01Validation.RequireIsolatedStorage();Expect(EditorApplication.isPlaying,"Use Play Mode");Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-13"));
         report=new Report();steps.Clear();captures.Clear();lastFrame=-1;continued=0;retries=0;Controller.Continued-=OnContinued;Controller.Continued+=OnContinued;
-        foreach(var resolution in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var resolution in UiValidationContext.Resolutions)
         {
             var size=resolution;string res=size.x+"x"+size.y;Add("Set viewport "+res,()=>UI01Validation.SetGameView(size.x,size.y));
             foreach(string kind in new[]{"positive","negative","zero"})
@@ -137,12 +137,12 @@ public static class UI13MonthlyResultValidation
         Add("Actual close-month flow",()=>{Fixture();GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub);Root.Find("UiNavigation").GetComponent<MonthlySettlementController>().CloseMonth();});
         Add("Waits for all event choices",()=>{var e=Root.Find("Panel_Event").GetComponent<EventScreenController>();Expect(e.IsAwaitingChoice&&new RoundResultRepository(Db).GetBySessionId(sessionId).Count==0,"UI12 wait");});
         for(int i=0;i<4;i++)Add("Confirm real monthly event "+i,()=>{var e=Root.Find("Panel_Event").GetComponent<EventScreenController>();var v=e.GetComponent<EventScreenView>();Click(v.Cards[0].Button);Click(v.ConfirmButton);});
-        Add("Summary remains after all choices",()=>{expected=new RoundResultRepository(Db).GetLastRoundBySessionId(sessionId);cash=GameSessionState.Current.currentCash;rep=GameSessionState.Current.reputationScore;Parity();Capture("actual-flow-waits-1280x720");});
+        Add("Summary remains after all choices",()=>{expected=new RoundResultRepository(Db).GetLastRoundBySessionId(sessionId);cash=GameSessionState.Current.currentCash;rep=GameSessionState.Current.reputationScore;Parity();Capture("actual-flow-waits-"+Screen.width+"x"+Screen.height);});
         Add("Continue actual flow",()=>{Click(View.ContinueButton);Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Management_Hub,"Hub destination");GameSessionState.LoadActiveSession(GameSessionState.Current.userId);MenuNavigator.Instance.Open(PanelId.MonthlyResults);});
-        Add("Reloaded persisted consultation",()=>{Expect(Controller.Result.roundResultId==expected.roundResultId,"Reload");Capture("reload-1280x720");Click(View.ContinueButton);});
-        Add("Completed month-three waits",()=>FinalCase(false));Add("Completed still readable",()=>{Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Round_Summary,"Final wait");Capture("month-three-completed-1280x720");Click(View.ContinueButton);Expect(GameManager.Instance.StateMachine.CurrentState==GameState.FinalReport,"Final report destination");});
-        Add("Bankrupt month-three waits",()=>FinalCase(true));Add("Bankrupt still readable",()=>{Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Round_Summary,"Bankrupt wait");Capture("month-three-bankrupt-1280x720");Click(View.ContinueButton);Expect(GameManager.Instance.StateMachine.CurrentState==GameState.GameOver_Bankruptcy,"Bankruptcy destination");});
-        Add("Runtime evidence",()=>File.WriteAllText("output/ui-update/UI-13/runtime.json",Newtonsoft.Json.JsonConvert.SerializeObject(new {project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=isolatedDb.DatabasePath,frame=Time.frameCount,continued},Newtonsoft.Json.Formatting.Indented)));
+        Add("Reloaded persisted consultation",()=>{Expect(Controller.Result.roundResultId==expected.roundResultId,"Reload");Capture("reload-"+Screen.width+"x"+Screen.height);Click(View.ContinueButton);});
+        Add("Completed month-three waits",()=>FinalCase(false));Add("Completed still readable",()=>{Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Round_Summary,"Final wait");Capture("month-three-completed-"+Screen.width+"x"+Screen.height);Click(View.ContinueButton);Expect(GameManager.Instance.StateMachine.CurrentState==GameState.FinalReport,"Final report destination");});
+        Add("Bankrupt month-three waits",()=>FinalCase(true));Add("Bankrupt still readable",()=>{Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Round_Summary,"Bankrupt wait");Capture("month-three-bankrupt-"+Screen.width+"x"+Screen.height);Click(View.ContinueButton);Expect(GameManager.Instance.StateMachine.CurrentState==GameState.GameOver_Bankruptcy,"Bankruptcy destination");});
+        Add("Runtime evidence",()=>File.WriteAllText(UiValidationContext.FileFor("UI-13","runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new {project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,database=isolatedDb.DatabasePath,frame=Time.frameCount,continued},Newtonsoft.Json.Formatting.Indented)));
         isolatedDb=Db;next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
     private static SQLite4Unity3d.SQLiteConnection isolatedDb;
@@ -160,7 +160,7 @@ public static class UI13MonthlyResultValidation
     private static void Tick()
     {
         if(EditorApplication.timeSinceStartup<next)return;
-        if(!EditorApplication.isPlaying||steps.Count==0) {report.completed=steps.Count==0&&report.failures==0;EditorApplication.update-=Tick;File.WriteAllText("output/ui-update/UI-13/playmode.json",JsonUtility.ToJson(report,true));return;}
+        if(!EditorApplication.isPlaying||steps.Count==0) {report.completed=steps.Count==0&&report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-13","playmode.json"),JsonUtility.ToJson(report,true));return;}
         if(Time.frameCount<=lastFrame){EditorApplication.QueuePlayerLoopUpdate();EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint();return;}
         var step=steps.Dequeue();var check=new Check {name=step.Item1,frame=Time.frameCount};
         try {step.Item2();check.passed=true;retries=0;}

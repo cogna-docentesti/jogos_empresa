@@ -18,6 +18,8 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.ScrollRect tableScroll;
         [SerializeField] private UnityEngine.UI.Button backButton, retryButton;
         [SerializeField] private Sprite neutralRow, subtotalRow, positiveRow, negativeRow;
+        [SerializeField] private bool verticalChart;
+        [SerializeField] private bool compactRows;
         public string DisplayState { get; private set; }
         public IReadOnlyList<TableRow> Rows => rows;
         public IReadOnlyList<MonthlyResultView.ChartBar> Bars => bars;
@@ -38,32 +40,70 @@ namespace Game.Adapter.In.UI
             resultValue.text = QuarterlyResultPresentation.Money(data.Net); resultValue.color = Semantic(data.Net);
             cashValue.text = QuarterlyResultPresentation.Money(data.Closing); cashValue.color = Semantic(data.Closing);
             note.text = $"Agregado de {data.Count}/3 meses salvos. Δ compara valores mensais (último − primeiro), sem percentual. Principal e juros já estão na parcela. As regras de cada agregado aparecem sob o rótulo.";
+            if(compactRows)note.text=$"Somatório de {data.Count}/3 meses salvos. Caixa: primeiro saldo inicial e último saldo final. Δ: último − primeiro.";
             for (int m = 0; m < 3; m++) monthLabels[m].text = $"Mês {m + 1}" + (data.Months[m] == null ? "\nNão salvo" : "\nSalvo");
+            if(compactRows)for(int m=0;m<3;m++)monthLabels[m].text=$"Mês {m+1}";
             for (int i = 0; i < rows.Length; i++)
             {
                 var row = rows[i]; var d = data.Rows[i]; row.label.text = d.Label; row.rule.text = d.Rule;
                 var cells = d.Months.Concat(new[] { d.Aggregate, d.Change }).ToArray();
-                float labelHeight = row.label.GetPreferredValues(d.Label, 282, 0).y;
-                row.label.rectTransform.sizeDelta = new Vector2(282, labelHeight);
+                float labelWidth=row.label.rectTransform.rect.width;
+                float labelHeight = row.label.GetPreferredValues(d.Label, labelWidth, 0).y;
+                row.label.rectTransform.sizeDelta = new Vector2(labelWidth, labelHeight);
                 row.rule.rectTransform.anchoredPosition = new Vector2(14, -12 - labelHeight - 6);
                 float ruleHeight = row.rule.GetPreferredValues(d.Rule, 282, 0).y;
                 row.rule.rectTransform.sizeDelta = new Vector2(282, ruleHeight);
                 float h = labelHeight + ruleHeight + 30;
+                bool showRule=!compactRows||i>=10;
+                row.rule.gameObject.SetActive(showRule);
+                if(!showRule)h=labelHeight+24;
                 for (int c = 0; c < cells.Length; c++)
                 {
                     row.cells[c].text = cells[c].Text; row.cells[c].color = d.Monetary ? Semantic(cells[c].Amount) : GamePalette.Ink;
-                    h = Mathf.Max(h, row.cells[c].GetPreferredValues(cells[c].Text, row.cells[c].rectTransform.rect.width, 0).y + 24);
+                    float cellHeight = Mathf.Max(28, row.cells[c].GetPreferredValues(cells[c].Text, row.cells[c].rectTransform.rect.width, 0).y + 4);
+                    row.cells[c].rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cellHeight);
+                    h = Mathf.Max(h, cellHeight + 24);
                 }
                 row.background.sprite = d.Highlight ? (d.Aggregate.Amount == 0 ? subtotalRow : d.Aggregate.Amount > 0 ? positiveRow : negativeRow) : neutralRow;
-                row.background.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = Mathf.Max(88, h);
+                row.background.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight = Mathf.Max(compactRows&&!showRule?54:88, h);
             }
             double max = Math.Max(1, data.Months.Where(r => r != null).Select(r => Math.Abs((double)r.netResult)).DefaultIfEmpty().Max());
+            // Reserve native value height above the positive bars and below negative
+            // bars, keeping the month labels in their own bottom band. All bars share
+            // this single geometric range; persisted values and ratios are unchanged.
+            bool mixed=data.Months.Any(m=>m!=null&&m.netResult<0);
+            float chartValueHeight=bars.Select((b,i)=>Mathf.Max(36,b.value.GetPreferredValues(data.Months[i]==null?"Não salvo":QuarterlyResultPresentation.SignedMoney(data.Months[i].netResult),b.value.rectTransform.rect.width,0).y+4)).Max();
+            float chartBaseline=mixed?210:330;
+            float chartAvailable=Mathf.Max(0,Mathf.Min(mixed?90:210,chartBaseline-64-chartValueHeight-2,mixed?346-8-chartBaseline-chartValueHeight-2:float.PositiveInfinity));
             for (int i = 0; i < 3; i++)
             {
                 var r = data.Months[i]; var b = bars[i]; b.label.text = $"Mês {i + 1}";
                 b.value.text = r == null ? "Não salvo" : QuarterlyResultPresentation.SignedMoney(r.netResult);
                 b.value.color = Semantic(r?.netResult); b.fill.sizeDelta = new Vector2(r == null ? 0 : (float)(232 * Math.Abs(r.netResult) / max), 14);
                 b.fill.pivot = new Vector2(r != null && r.netResult < 0 ? 1 : 0, .5f); b.fill.GetComponent<UnityEngine.UI.Image>().color = Semantic(r?.netResult);
+                if(verticalChart)
+                {
+                    float baseline=chartBaseline, available=chartAvailable;
+                    float height=r==null?0:(float)(available*Math.Abs(r.netResult)/max);
+                    float x=64+i*166;
+                    b.fill.pivot=new Vector2(0,r!=null&&r.netResult<0?1:0);
+                    b.fill.anchoredPosition=new Vector2(x,-baseline);b.fill.sizeDelta=new Vector2(116,height);
+                    b.fill.GetComponent<UnityEngine.UI.Image>().color=r!=null&&r.netResult<0?GamePalette.ErrorText:GamePalette.Money;
+                    b.label.rectTransform.anchoredPosition=new Vector2(x,-346);
+                    float valueHeight=Mathf.Max(36,b.value.GetPreferredValues(b.value.text,b.value.rectTransform.rect.width,0).y+4);
+                    b.value.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,valueHeight);
+                    b.value.rectTransform.anchoredPosition=new Vector2(x-30,-(r!=null&&r.netResult<0?baseline+height+2:baseline-height-valueHeight-2));
+                }
+            }
+            if(verticalChart)
+            {
+                var zero=bars[0].fill.parent.Find("Zero") as RectTransform;
+                if(zero!=null)
+                {
+                    zero.gameObject.SetActive(mixed);
+                    zero.anchoredPosition=new Vector2(24,-chartBaseline);
+                    zero.sizeDelta=new Vector2(536,2);
+                }
             }
             Canvas.ForceUpdateCanvases(); tableScroll.verticalNormalizedPosition = 1;
         }

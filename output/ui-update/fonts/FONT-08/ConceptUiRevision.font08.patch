@@ -1,0 +1,81 @@
+--- a/Assets/Editor/UI/ConceptUiRevision.cs
++++ b/Assets/Editor/UI/ConceptUiRevision.cs
+@@ -312,7 +312,7 @@
+             foreach(var name in new[]{"Panel_MonthlyResult","Panel_QuarterlyResult"})
+             {
+                 bool monthly=name.Contains("Monthly");var p=Find(canvas,name);Header(p,"Header");
+-                Move(p,"Title",40,108,1224,68);Type(p,"Title",46);
++                Move(p,"Title",40,108,1224,68);Type(p,"Title",new TypographyToken(TypographyRole.ScreenTitle,46));
+                 if(monthly)
+                 {
+                     var period=p.Find("Header/Period")??p.Find("SavedPeriod");period.SetParent(p,false);period.name="SavedPeriod";period.gameObject.SetActive(true);Place(period,40,170,1224,30);
+@@ -322,7 +322,7 @@
+                 for(int i=0;i<3;i++)
+                 {
+                     Move(loaded,"Kpi"+i,40+i*414,204,400,112);
+-                    Move(loaded,"Kpi"+i+"/Label",90,12,294,36);Move(loaded,"Kpi"+i+"/Value",90,50,294,52);Type(loaded,"Kpi"+i+"/Value",38);
++                    Move(loaded,"Kpi"+i+"/Label",90,12,294,36);Move(loaded,"Kpi"+i+"/Value",90,50,i==1||(!monthly&&i==2)?306:294,52);Type(loaded,"Kpi"+i+"/Value",new TypographyToken(TypographyRole.Kpi,38));
+                     Picture(Find(loaded,"Kpi"+i),"ConceptIcon",i==0?"ICON_REVENUE":i==1?"ICON_TREND_UP":"ICON_CASH",22,32,52,52).color=i==1?GamePalette.Money:GamePalette.Primary;
+                 }
+                 Move(p,monthly?"MonthlyIllustration":"QuarterlyIllustration",1312,100,584,462);
+@@ -333,20 +333,20 @@
+                 Place(ill,1312,100,oldW,oldH);ill.localScale=Vector3.one*Mathf.Min(584/oldW,462/oldH);
+                 Move(loaded,"TableHeader",40,340,1224,56);
+                 ResizeScroll(loaded,"TableScroll",40,400,1244,560);
+-                if(!monthly){Move(loaded,"AggregationNote",40,166,1224,30);Type(loaded,"AggregationNote",18,false);}
++                if(!monthly){Move(loaded,"AggregationNote",40,166,1224,30);Type(loaded,"AggregationNote",new TypographyToken(TypographyRole.Body,18),false);}
+                 var chart=monthly?(loaded.Find("CashChart")??Find(loaded,"TableScroll/Viewport/Content/CashChart")):Find(loaded,"ResultChart");Place(chart,1312,576,584,384);
+-                Type(chart,"Title",28);Move(chart,"Title",20,14,544,44);
++                Type(chart,"Title",new TypographyToken(TypographyRole.SectionTitle,28));Move(chart,"Title",20,14,544,44);
+                 // Financial details remain scrollable; table spacing is compact enough for ten monetary lines.
+                 var scroll=Find(loaded,"TableScroll").GetComponent<UnityEngine.UI.ScrollRect>();scroll.content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>().spacing=2;
+                 for(int i=0;i<(monthly?22:25);i++)
+                 {
+                     var row=Find(scroll.content,"Row"+i);
+-                    if(monthly){Height(row,48);Type(row,"Label",24,false);Type(row,"Value",24,i==9||i==11);Off(row,"TotalColumn");}
++                    if(monthly){Height(row,48);Type(row,"Label",new TypographyToken(i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,24),i==7||i==9||i==11);Type(row,"Value",new TypographyToken(i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,24),i==7||i==9||i==11);Off(row,"TotalColumn");}
+                     else {
+-                        Type(row,"Label",22,true);Type(row,"Rule",18,false);
++                        Type(row,"Label",new TypographyToken(i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,22),i==7||i==9||i==11);Type(row,"Rule",new TypographyToken(TypographyRole.Caption,18),false);
+                         float[] xx={304,464,624,784,1008};float[] ww={160,160,160,224,224};
+                         for(int j=0;j<5;j++){
+-                            Move(row,"Cell"+j,xx[j]+6,10,ww[j]-12,48);Type(row,"Cell"+j,20,j==3);
++                            Move(row,"Cell"+j,xx[j]+6,10,ww[j]-12,48);Type(row,"Cell"+j,new TypographyToken(j==3||i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,20),j==3||i==7||i==9||i==11);
+                             Move(loaded,"TableHeader/Column"+j,xx[j]+6,8,ww[j]-12,40);
+                         }
+                         Move(row,"AggregateColumn",784,0,224,54);
+@@ -358,19 +358,19 @@
+                     chart.SetParent(scroll.content,false);Height(chart,396);
+                     var bridge=Picture(loaded,"CashBridge","UI_PANEL_IVORY",1312,576,584,384).transform;
+                     Picture(bridge,"Icon","ICON_CASH",20,16,44,44).color=GamePalette.Plum;
+-                    Label(bridge,"Title","Do resultado ao caixa",80,12,484,52,32,true);
++                    Label(bridge,"Title","Do resultado ao caixa",80,12,484,52,new TypographyToken(TypographyRole.SectionTitle,32),true);
+                     var view=p.GetComponent<MonthlyResultView>();
+                     string[] titles={"Caixa inicial","Resultado do mês","Caixa final","Variação de caixa"};
+                     string[] fields={"openingValue","bridgeResultValue","closingValue","cashChangeValue"};
+                     for(int j=0;j<4;j++)
+                     {
+                         if(j>=2)Picture(bridge,"Row"+j,j==2?"UI_TABLE_ROW_SUBTOTAL":"UI_TABLE_ROW_POSITIVE",16,82+j*58,552,54);
+-                        Label(bridge,"Label"+j,titles[j],30,82+j*58,270,50,24,j>=2);
+-                        var val=Label(bridge,"Value"+j,"",290,82+j*58,260,50,28,true);val.alignment=TextAlignmentOptions.MidlineRight;Set(view,fields[j],val);
++                        Label(bridge,"Label"+j,titles[j],30,82+j*58,270,50,new TypographyToken(TypographyRole.Label,24),false);
++                        var val=Label(bridge,"Value"+j,"",290,82+j*58,260,50,new TypographyToken(j==2?TypographyRole.Kpi:TypographyRole.TableTotal,28),true);val.alignment=TextAlignmentOptions.MidlineRight;Set(view,fields[j],val);
+                     }
+-                    Label(bridge,"Note","A parcela já está incluída no resultado.",30,324,524,44,19);
+-                    Label(Find(loaded,"Kpi0"),"Label","Receita",90,12,294,36,24);
+-                    Label(Find(loaded,"Kpi1"),"Label","Resultado",90,12,294,36,24);
++                    Label(bridge,"Note","A parcela já está incluída no resultado.",30,324,524,44,new TypographyToken(TypographyRole.Caption,19));
++                    Label(Find(loaded,"Kpi0"),"Label","Receita",90,12,294,36,new TypographyToken(TypographyRole.Label,24));
++                    Label(Find(loaded,"Kpi1"),"Label","Resultado",90,12,294,36,new TypographyToken(TypographyRole.Label,24));
+                     Set(view,"revenueValue",Find(loaded,"Kpi0/Value").GetComponent<TMP_Text>());
+                     Set(view,"resultValue",Find(loaded,"Kpi1/Value").GetComponent<TMP_Text>());
+                     Set(view,"cashValue",Find(bridge,"Value2").GetComponent<TMP_Text>());
+@@ -381,7 +381,7 @@
+                     var so=new SerializedObject(p.GetComponent<QuarterlyResultView>());so.FindProperty("verticalChart").boolValue=true;so.ApplyModifiedPropertiesWithoutUndo();
+                     so.Update();so.FindProperty("compactRows").boolValue=true;so.ApplyModifiedPropertiesWithoutUndo();
+                     Off(chart,"Zero","Note");
+-                    for(int j=0;j<3;j++){Move(chart,"BarValue"+j,34+j*166,80,176,36);Type(chart,"BarValue"+j,22);Move(chart,"BarLabel"+j,64+j*166,346,116,30);}
++                    for(int j=0;j<3;j++){Move(chart,"BarValue"+j,34+j*166,80,176,36);Type(chart,"BarValue"+j,new TypographyToken(TypographyRole.TableTotal,22));Move(chart,"BarLabel"+j,64+j*166,346,116,30);}
+                 }
+             }
+         }

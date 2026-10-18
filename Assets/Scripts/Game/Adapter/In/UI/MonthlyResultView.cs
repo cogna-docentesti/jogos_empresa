@@ -19,6 +19,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Button quarterlyButton;
         public UnityEngine.UI.Button QuarterlyButton => quarterlyButton;
         [SerializeField] private Sprite neutralRow, subtotalRow, positiveRow, negativeRow;
+        [SerializeField] private TMP_Text revenueValue, openingValue, bridgeResultValue, closingValue, cashChangeValue;
         public UnityEngine.UI.Button ContinueButton => continueButton;
         public UnityEngine.UI.Button RetryButton => retryButton;
         public UnityEngine.UI.ScrollRect TableScroll => tableScroll;
@@ -39,6 +40,11 @@ namespace Game.Adapter.In.UI
             resultValue.text = MonthlyResultPresentation.Money(result.netResult); resultValue.color = Semantic(result.netResult);
             cashValue.text = MonthlyResultPresentation.Money(result.closingCash); cashValue.color = Semantic(result.closingCash);
             clientsValue.text = MonthlyResultPresentation.Number(result.customers);
+            if(revenueValue!=null)revenueValue.text=MonthlyResultPresentation.Money(result.grossRevenue);
+            if(openingValue!=null)openingValue.text=MonthlyResultPresentation.Money(result.openingCash);
+            if(bridgeResultValue!=null){bridgeResultValue.text=MonthlyResultPresentation.SignedMoney(result.netResult);bridgeResultValue.color=Semantic(result.netResult);}
+            if(closingValue!=null)closingValue.text=MonthlyResultPresentation.Money(result.closingCash);
+            if(cashChangeValue!=null){cashChangeValue.text=MonthlyResultPresentation.SignedMoney(result.closingCash-result.openingCash);cashChangeValue.color=Semantic(result.closingCash-result.openingCash);}
             for (int i = 0; i < rows.Length; i++)
             {
                 var row = rows[i]; var data = values[i]; row.label.text = data.Label; row.value.text = data.Value;

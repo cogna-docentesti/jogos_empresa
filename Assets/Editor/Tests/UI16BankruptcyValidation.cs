@@ -46,6 +46,8 @@ public static class UI16BankruptcyValidation
     private static void Click(UnityEngine.UI.Button b)
     {
         Canvas.ForceUpdateCanvases(); Expect(b.IsActive() && b.IsInteractable(), "Unavailable " + b.name); var p = Pointer(b); var hits = new List<RaycastResult>(); EventSystem.current.RaycastAll(p, hits);
+        if(hits.Count==0)
+            File.WriteAllText(UiValidationContext.FileFor("UI-16","layout-failure.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{button=b.name,rect=Bounds((RectTransform)b.transform),p.position,screen=new[]{Screen.width,Screen.height},Screen.safeArea,canvas=Root.GetComponent<Canvas>().scaleFactor,rootRect=((RectTransform)Root).rect,panels=Root.Cast<Transform>().Where(t=>t.gameObject.activeInHierarchy).Select(t=>new{t.name,t.localScale,t.localPosition,rect=t is RectTransform r?r.rect:default(Rect)}).ToArray()},Newtonsoft.Json.Formatting.Indented));
         Expect(hits.Count > 0 && hits[0].gameObject.GetComponentInParent<UnityEngine.UI.Button>() == b, "Blocked " + b.name + " by " + (hits.Count > 0 ? hits[0].gameObject.name : "nothing"));
         ExecuteEvents.Execute(b.gameObject, p, ExecuteEvents.pointerDownHandler); ExecuteEvents.Execute(b.gameObject, p, ExecuteEvents.pointerUpHandler); ExecuteEvents.Execute(b.gameObject, p, ExecuteEvents.pointerClickHandler);
     }
@@ -79,7 +81,7 @@ public static class UI16BankruptcyValidation
     private static void Fits()
     {
         Canvas.ForceUpdateCanvases();
-        foreach (var t in View.GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(t.font.name == "InterTight-Variable" && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
+        foreach (var t in View.GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length == 1, "One EventSystem");
         Expect(!Root.Find("MenuAccess/Button").gameObject.activeInHierarchy, "Menu hidden outside hub");
         foreach (var n in new[] { "BusinessDifficulty", "ConcernedCharacter" })
@@ -88,21 +90,21 @@ public static class UI16BankruptcyValidation
         foreach (var b in controls)
         {
             var r = Bounds((RectTransform)b.transform); var scroll = b.GetComponentInParent<UnityEngine.UI.ScrollRect>(); if (scroll != null && !Bounds(scroll.viewport).Contains(r.center)) continue;
-            Expect(r.xMin >= -.5 && r.yMin >= -.5 && r.xMax <= Screen.width + .5 && r.yMax <= Screen.height + .5, "Offscreen " + b.name);
+            Expect(r.xMin >= -.5 && r.yMin >= -.5 && r.xMax <= Screen.width + .5 && r.yMax <= Screen.height + .5, "Offscreen " + b.name + " " + r + " screen " + Screen.width + "x" + Screen.height + " viewport " + (scroll != null ? Bounds(scroll.viewport).ToString() : "none"));
             var hits = new List<RaycastResult>(); EventSystem.current.RaycastAll(Pointer(b), hits); Expect(hits.Count > 0 && hits[0].gameObject.GetComponentInParent<UnityEngine.UI.Button>() == b, "Control covered " + b.name);
         }
     }
     private static void Capture(string name, bool final = true)
     {
-        if (final) Fits(); string path = UI01Validation.Capture("../UI-16/" + name); using var hash = System.Security.Cryptography.SHA256.Create();
+        if (final) Fits(); string path = UI01Validation.Capture(UiValidationContext.CaptureName("UI-16", name)); UiValidationContext.OnCapture?.Invoke(name,path); using var hash = System.Security.Cryptography.SHA256.Create();
         captures.Add(new { name, path, frame = Time.frameCount, width = Screen.width, height = Screen.height, sha256 = BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(path))).Replace("-", "").ToLowerInvariant() });
-        File.WriteAllText("output/ui-update/UI-16/capture-frames.json", Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-16","capture-frames.json"), Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
     }
     public static void Run()
     {
-        UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode"); Directory.CreateDirectory("output/ui-update/UI-16");
+        UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use Play Mode"); Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-16"));
         report = new Report(); steps.Clear(); captures.Clear(); lastFrame = -1; retries = 0; isolatedDb = Db;
-        foreach (var resolution in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var resolution in UiValidationContext.Resolutions)
         {
             var size = resolution; string res = size.x + "x" + size.y;
             Add("Set viewport " + res, () => UI01Validation.SetGameView(size.x, size.y)); Add("Settle bankrupt campaign " + res, () => Complete());
@@ -161,14 +163,17 @@ public static class UI16BankruptcyValidation
             Add("Negative cash summary " + res, () => { Expect(!View.gameObject.activeInHierarchy, "No bankruptcy from balance"); Capture("negative-cash-summary-" + res, false); Click(Monthly.ContinueButton); });
             Add("Negative cash completion " + res, () => { Expect(GameManager.Instance.StateMachine.CurrentState == GameState.FinalReport && !View.gameObject.activeInHierarchy, "Completion with negative cash"); Capture("negative-cash-completed-" + res, false); });
         }
-        Add("Runtime evidence", () => File.WriteAllText("output/ui-update/UI-16/runtime.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, database = isolatedDb.DatabasePath, frame = Time.frameCount }, Newtonsoft.Json.Formatting.Indented)));
+        Add("Runtime evidence", () => File.WriteAllText(UiValidationContext.FileFor("UI-16","runtime.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, database = isolatedDb.DatabasePath, frame = Time.frameCount }, Newtonsoft.Json.Formatting.Indented)));
         next = EditorApplication.timeSinceStartup + .5; EditorApplication.update -= Tick; EditorApplication.update += Tick;
     }
     private static void Tick()
     {
         if (EditorApplication.timeSinceStartup < next) return;
-        if (!EditorApplication.isPlaying || steps.Count == 0) { report.completed = steps.Count == 0 && report.failures == 0; EditorApplication.update -= Tick; File.WriteAllText("output/ui-update/UI-16/playmode.json", JsonUtility.ToJson(report, true)); return; }
-        if (Time.frameCount <= lastFrame) { EditorApplication.QueuePlayerLoopUpdate(); EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint(); return; }
+        if (!EditorApplication.isPlaying || steps.Count == 0) { report.completed = steps.Count == 0 && report.failures == 0; EditorApplication.update -= Tick; File.WriteAllText(UiValidationContext.FileFor("UI-16","playmode.json"), JsonUtility.ToJson(report, true)); return; }
+        // Large capture serialization can consume the wall-clock delay before the
+        // Player finishes its layout/render pass. Require a completed intervening
+        // Player frame before sampling coordinates or dispatching the next control.
+        if (Time.frameCount <= lastFrame + 1) { EditorApplication.QueuePlayerLoopUpdate(); EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint(); return; }
         var step = steps.Dequeue(); var check = new Check { name = step.Item1, frame = Time.frameCount };
         try { step.Item2(); check.passed = true; retries = 0; }
         catch (InvalidOperationException e) when (e.Message == "The Game View must render at the evidence resolution." && retries++ < 10) { var rest = steps.ToArray(); steps.Clear(); steps.Enqueue(step); foreach (var r in rest) steps.Enqueue(r); next = EditorApplication.timeSinceStartup + 1; return; }
