@@ -42,8 +42,8 @@ public static class UI08EstablishmentValidation
             Expect(importer.spriteImportMode==SpriteImportMode.Single && sprite!=null && sprite.rect.size==new Vector2(texture.width,texture.height),"Whole Single sprite "+path);
             sprites.Add(new{path=path.Replace('\\','/'),guid=AssetDatabase.AssetPathToGUID(path),width=texture.width,height=texture.height,mode=importer.spriteImportMode.ToString(),whole=true});
         }
-        Expect(sprites.Count==277,"Sprite count");
-        File.WriteAllText("output/ui-update/UI-08/saved-scene-validation.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{success=true,project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,scene=scene.path,missingComponents=missing,compositions=2,resetOwners=1,wholeSingleSprites=sprites.Count,sprites},Newtonsoft.Json.Formatting.Indented));
+        Expect(sprites.Count==280,"Sprite count");
+        File.WriteAllText(UiValidationContext.FileFor("UI-08","saved-scene-validation.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{success=true,project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,scene=scene.path,missingComponents=missing,compositions=2,resetOwners=1,wholeSingleSprites=sprites.Count,sprites},Newtonsoft.Json.Formatting.Indented));
     }
     [Serializable] private class Check {public string name,detail;public bool passed;public int frame;}
     [Serializable] private class Report {public bool completed;public int failures;public List<Check> checks=new();}
@@ -56,7 +56,8 @@ public static class UI08EstablishmentValidation
     private static T Field<T>(object o,string f)=>(T)o.GetType().GetField(f,BindingFlags.Instance|BindingFlags.NonPublic).GetValue(o);
     private static void Expect(bool v,string m){if(!v)throw new InvalidOperationException(m);}
     private static void Add(string n,Action action)=>steps.Enqueue((n,action));
-    private static void Capture(string n)=>UI01Validation.Capture("../UI-08/"+n);
+    private static void Capture(string n)
+    { var path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-08",n)); UiValidationContext.OnCapture?.Invoke(n,path); }
     private static void Click(UnityEngine.UI.Button button)
     {
         Expect(button.IsActive() && button.interactable,"Unavailable control "+button.name);
@@ -71,7 +72,7 @@ public static class UI08EstablishmentValidation
     private static void Fits()
     {
         UnityEngine.Canvas.ForceUpdateCanvases();
-        foreach(var t in Content.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name=="InterTight-Variable" && !t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Overflow "+t.name+" "+t.text);}
+        foreach(var t in Content.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && t.font == Game.Adapter.In.UI.Theme.GameTypography.Resolve(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>().Role).Font && !t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Overflow "+t.name+" "+t.text);}
         foreach(var scroll in Content.GetComponentsInChildren<UnityEngine.UI.ScrollRect>())
         {
             Expect(scroll.viewport.GetComponent<UnityEngine.UI.Mask>()!=null,"Missing mask");Expect(scroll.vertical && !scroll.horizontal,"Scroll direction");
@@ -81,7 +82,14 @@ public static class UI08EstablishmentValidation
         var footer=UnityEngine.Object.FindObjectsByType<UnityEngine.UI.Button>(FindObjectsSortMode.None).Where(b=>b.IsInteractable() && b.GetComponentInParent<UnityEngine.UI.ScrollRect>()==null).ToArray();
         for(int i=0;i<footer.Length;i++)for(int j=i+1;j<footer.Length;j++)
         {
-            var a=RectTransformUtility.CalculateRelativeRectTransformBounds(CanvasRoot,footer[i].transform);var b=RectTransformUtility.CalculateRelativeRectTransformBounds(CanvasRoot,footer[j].transform);
+            // Measure the actual target rectangles. Descendant bounds also include retired labels/decorations.
+            Bounds TargetBounds(UnityEngine.UI.Button button)
+            {
+                var rect=button.targetGraphic!=null?button.targetGraphic.rectTransform:(RectTransform)button.transform;
+                var corners=new Vector3[4];rect.GetWorldCorners(corners);var bounds=new Bounds(CanvasRoot.InverseTransformPoint(corners[0]),Vector3.zero);
+                foreach(var corner in corners)bounds.Encapsulate(CanvasRoot.InverseTransformPoint(corner));return bounds;
+            }
+            var a=TargetBounds(footer[i]);var b=TargetBounds(footer[j]);
             float x=Mathf.Min(a.max.x,b.max.x)-Mathf.Max(a.min.x,b.min.x),y=Mathf.Min(a.max.y,b.max.y)-Mathf.Max(a.min.y,b.min.y);
             Expect(x<1 || y<1,"Overlapping fixed controls "+footer[i].name+" and "+footer[j].name);
         }
@@ -127,7 +135,7 @@ public static class UI08EstablishmentValidation
         Add("Confirm D3 remains the first INSERT and goes straight to Banco",()=>{Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==0,"Inserted early");Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<MenuPricingScreenView>(),"confirmButton"));Expect(GameManager.Instance.StateMachine.CurrentState==InitialDecisionFlow.AfterCommit,"Review became mandatory");sessionId=GameSessionState.Current.sessionId;SingleSession();GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team);GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub);});
         Add("Render hub before clicking its establishment marker",()=>MenuNavigator.Instance.OpenRoot());
         Add("Open establishment through real hub marker",()=>{var node=UnityEngine.Object.FindObjectsByType<MapMenuNode>(FindObjectsSortMode.None).Single(n=>n.Destination==PanelId.Establishment && string.IsNullOrEmpty(n.LocationId));origin=node.gameObject;node.GetComponent<UnityEngine.UI.Button>().Select();Click(node.GetComponent<UnityEngine.UI.Button>());});
-        foreach(var sizeValue in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var sizeValue in UiValidationContext.Resolutions)
         {
             var size=sizeValue;string suffix=size.x+"x"+size.y;Add("Set viewport "+suffix,()=>UI01Validation.SetGameView(size.x,size.y));
             foreach(var typeValue in new[]{RestaurantType.PODRAO,RestaurantType.FRANCES,RestaurantType.JAPONES})
@@ -174,13 +182,13 @@ public static class UI08EstablishmentValidation
         Add("Reset warning is modal and cancel preserves the isolated session",()=>{var view=Content.GetComponent<EstablishmentSummaryView>();var warning=Field<GameObject>(view,"resetWarning");Expect(warning.activeInHierarchy,"Reset modal");Expect(EventSystem.current.currentSelectedGameObject.transform.IsChildOf(warning.transform),"Modal focus");var r=(RectTransform)Back.transform;var p=new PointerEventData(EventSystem.current){position=RectTransformUtility.WorldToScreenPoint(null,r.TransformPoint(r.rect.center))};var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(p,hits);Expect(hits.Count>0 && hits[0].gameObject.transform.IsChildOf(warning.transform),"Modal did not block underlying history");Capture("reset-warning-1280x720");Click(Field<UnityEngine.UI.Button>(view,"cancelResetButton"));SingleSession();});
         Add("Review button uses the same hub history",()=>{Click(Field<UnityEngine.UI.Button>(Content,"reviewButton"));Expect(MenuNavigator.Instance.Current==PanelId.Review,"Review action");});
         Add("Review remains revisitable without new persistence",()=>{VerifySnapshot();Click(Back);Click(Back);});
-        Add("Hub origin focus and session preserved",()=>{Expect(MenuNavigator.Instance.Current==PanelId.Menu,"Final hub return");Expect(EventSystem.current.currentSelectedGameObject==origin,"Origin focus");SingleSession();File.WriteAllText("output/ui-update/UI-08/runtime.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,sessionId,sceneHandle,managerId,databaseId,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,sessionRows=1,state=GameManager.Instance.StateMachine.CurrentState.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));});
+        Add("Hub origin focus and session preserved",()=>{Expect(MenuNavigator.Instance.Current==PanelId.Menu,"Final hub return");Expect(EventSystem.current.currentSelectedGameObject==origin,"Origin focus");SingleSession();File.WriteAllText(UiValidationContext.FileFor("UI-08","runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,sessionId,sceneHandle,managerId,databaseId,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,sessionRows=1,state=GameManager.Instance.StateMachine.CurrentState.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));});
         next=EditorApplication.timeSinceStartup+.4;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
     private static void Tick()
     {
         if(EditorApplication.timeSinceStartup<next)return;
-        if(!EditorApplication.isPlaying || steps.Count==0){report.completed=steps.Count==0 && report.failures==0;EditorApplication.update-=Tick;File.WriteAllText("output/ui-update/UI-08/playmode-establishment.json",JsonUtility.ToJson(report,true));return;}
+        if(!EditorApplication.isPlaying || steps.Count==0){report.completed=steps.Count==0 && report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-08","playmode-establishment.json"),JsonUtility.ToJson(report,true));return;}
         var step=steps.Dequeue();var check=new Check{name=step.Item1,frame=Time.frameCount};
         try{step.Item2();check.passed=true;}catch(Exception e){check.detail=e.ToString();report.failures++;steps.Clear();Debug.LogError("[UI-08 QA] "+check.name+": "+e.Message);}
         report.checks.Add(check);EditorApplication.QueuePlayerLoopUpdate();EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint();next=EditorApplication.timeSinceStartup+.4;

@@ -32,15 +32,20 @@ namespace Game.Adapter.In.UI
         public string DraftInput => priceInput != null ? priceInput.text : Number(_price);
         public event Action<ProductPricingItemView> PriceChanged;
 
-        public void Setup(ProductData product, float initialPrice)
+        private void OnEnable() => ApplyTypography();
+        private void ApplyTypography()
         {
             GameTypography.KeepSize(productNameText,TypographyRole.SectionTitle);
-            GameTypography.KeepSize(selectedPriceText,TypographyRole.TableTotal);
-            GameTypography.KeepSize(minPriceText,TypographyRole.Caption);
-            GameTypography.KeepSize(maxPriceText,TypographyRole.Caption);
+            GameTypography.KeepSize(selectedPriceText,TypographyRole.Table);
+            GameTypography.KeepSize(minPriceText,TypographyRole.Table);
+            GameTypography.KeepSize(maxPriceText,TypographyRole.Table);
             GameTypography.KeepSize(errorText,TypographyRole.Body);
             GameTypography.KeepSize(editingText,TypographyRole.Caption);
             if (priceInput != null) { GameTypography.KeepSize(priceInput.textComponent,TypographyRole.Input); GameTypography.KeepSize(priceInput.placeholder as TMP_Text,TypographyRole.Input); }
+        }
+        public void Setup(ProductData product, float initialPrice)
+        {
+            ApplyTypography();
             _product = product;
             _price = product.ClampPrice(initialPrice);
             IsPriceValid = product.IsPriceInRange(_price) && !float.IsNaN(_price) && !float.IsInfinity(_price);

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using Game.Domain.Service;
+using Game.Adapter.In.UI.Theme;
 
 namespace Game.Adapter.In.UI
 {
@@ -12,6 +13,9 @@ namespace Game.Adapter.In.UI
 
         public void Bind(EstablishmentSummary summary)
         {
+            GameTypography.KeepSize(companyText, TypographyRole.SectionTitle);
+            foreach (var t in new TMP_Text[] { selectedText, locationText, emptyText }) GameTypography.KeepSize(t, TypographyRole.Body);
+            GameTypography.KeepSize(segmentText, TypographyRole.Label);
             SetSelectedText(segmentText != null ? summary.RestaurantLabel : summary.RestaurantLabel + " · Público " + summary.SegmentLabel.ToLowerInvariant());
             if (companyText != null) companyText.text = summary.CompanyLabel;
             if (locationText != null) locationText.text = summary.LocationLabel;

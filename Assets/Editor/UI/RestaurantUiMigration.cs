@@ -152,6 +152,7 @@ namespace Game.EditorTools
             Action(view,"confirmButton",footer.transform,"Confirm","Confirmar restaurante",1500,396,SharedControlKind.Primary);
             Text(footer.transform,"DraftHint","Escolha em rascunho",388,24,520,48,GameTypography.Tokens.Label,false,GamePalette.OnDark);
             view.SelectRestaurantCard(null); view.SelectSegmentButton(null); view.SetConfirmEnabled(false); panel.gameObject.SetActive(false);
+            Font06Migration.Apply(new[] { panel.gameObject }, "Assets/Scenes/GameScene.unity");
             AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
     }

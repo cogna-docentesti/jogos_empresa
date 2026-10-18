@@ -104,6 +104,7 @@ namespace Game.EditorTools
                 var outline=Image(rect,"EditingOutline","UI_CARD_SELECTED_OUTLINE",0,0,1250,228);outline.rectTransform.anchorMin=Vector2.zero;outline.rectTransform.anchorMax=Vector2.one;outline.rectTransform.offsetMin=outline.rectTransform.offsetMax=Vector2.zero;outline.color=GamePalette.Primary;outline.enabled=false;Set(item,"editingOutline",outline);
                 // The old display is retained for serialized compatibility, but the input is the visible value.
                 Get<TextMeshProUGUI>(item,"selectedPriceText").gameObject.SetActive(false);
+                Font06Migration.Apply(new[] { root }, path);
                 PrefabUtility.SaveAsPrefabAsset(root,path);
             }
             finally{PrefabUtility.UnloadPrefabContents(root);}
@@ -157,6 +158,7 @@ namespace Game.EditorTools
             var confirm=Button(footer.transform,"Confirm","Confirmar decisões",1516,14,380,68,SharedControlKind.Primary,Get<UnityEngine.UI.Button>(view,"confirmButton"));Set(view,"confirmButton",confirm);
             Set(view,"footerText",Text(footer.transform,"DraftHint","Suas decisões serão salvas ao confirmar",396,24,440,48,GameTypography.Tokens.Label,false,GamePalette.OnDark));
             view.SetReviewMode(false);view.SetConfirmEnabled(false);panel.gameObject.SetActive(false);
+            Font06Migration.Apply(new[] { panel.gameObject }, "Assets/Scenes/GameScene.unity");
             EditorUtility.SetDirty(view);AssetDatabase.SaveAssets();EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
         }
     }

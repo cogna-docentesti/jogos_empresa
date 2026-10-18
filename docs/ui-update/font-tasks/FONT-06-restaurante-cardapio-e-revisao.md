@@ -1,6 +1,6 @@
 # FONT-06 — Restaurante, cardápio, estabelecimento e revisão
 
-Status: **pendente**. Prioridade: P1. Dependência: FONT-05.
+Status: **concluído** — [QA real](../qa/FONT-06.json), 289 consumidores salvos, 54 testes, 355 verificações de runtime e 148 capturas. Prioridade: P1. Dependência: FONT-05.
 
 ## Escopo e arquivos
 
@@ -10,18 +10,18 @@ Ler o [índice](README.md), o inventário e os concepts `02-abertura.png` e `03-
 
 ## Implementação
 
-- [ ] Aplicar papéis a nomes de restaurante, público, títulos de cards, descrições, restrições, legenda, valores e botões. Usar fonte normal no corpo/preço e condensada nas funções compactas previstas.
-- [ ] Cobrir os três restaurantes, as combinações de público existentes e todos os produtos. Atualizar textos criados em runtime e templates, não apenas o primeiro card visível.
-- [ ] Revisar os inputs de preço, sufixos/prefixos, limites, avisos e estados inválidos. Testar números com larguras diferentes e moeda em português.
-- [ ] Revisar KPIs, checklist, textos de compatibilidade e detalhes expansíveis. Distinguir totais e títulos sem engordar artificialmente o material.
-- [ ] Ajustar caixas e entrelinha para nomes longos e acentos; preservar fachada/prato, proporção de imagens e composição da revisão anterior.
-- [ ] Conferir seleção, bloqueio, edição inicial e consulta no hub. Rebind/reentrada não pode restaurar fonte antiga.
+- [x] Aplicar papéis a nomes de restaurante, público, títulos de cards, descrições, restrições, legenda, valores e botões. Usar fonte normal no corpo/preço e condensada nas funções compactas previstas.
+- [x] Cobrir os três restaurantes, as combinações de público existentes e todos os produtos. Atualizar textos criados em runtime e templates, não apenas o primeiro card visível.
+- [x] Revisar os inputs de preço, sufixos/prefixos, limites, avisos e estados inválidos. Testar números com larguras diferentes e moeda em português.
+- [x] Revisar KPIs, checklist, textos de compatibilidade e detalhes expansíveis. Distinguir totais e títulos sem engordar artificialmente o material.
+- [x] Ajustar caixas e entrelinha para nomes longos e acentos; preservar fachada/prato, proporção de imagens e composição da revisão anterior.
+- [x] Conferir seleção, bloqueio, edição inicial e consulta no hub. Rebind/reentrada não pode restaurar fonte antiga.
 
 ## Aceite e validação
 
-- [ ] Capturas de seleção, cardápio e estabelecimento/revisão em 1920×1080, 1280×720 e 1600×1000, comparadas aos concepts correspondentes.
-- [ ] Nomes, preços e valores são legíveis, sem sobreposição e com hierarquia coerente. Últimos itens continuam acessíveis por scroll.
-- [ ] Preços e escolhas permanecem nos mesmos modelos; a migração não altera IDs, cálculos, quantidade de gravações SQLite nem regras de confirmação.
+- [x] Capturas de seleção, cardápio e estabelecimento/revisão em 1920×1080, 1280×720 e 1600×1000, comparadas aos concepts correspondentes.
+- [x] Nomes, preços e valores são legíveis, sem sobreposição e com hierarquia coerente. Últimos itens continuam acessíveis por scroll.
+- [x] Preços e escolhas permanecem nos mesmos modelos; a migração não altera IDs, cálculos, quantidade de gravações SQLite nem regras de confirmação.
 
 ## Entregáveis
 

@@ -28,7 +28,8 @@ public static class UI06RestaurantValidation
     private static void Call(object o,string method,params object[] args)=>o.GetType().GetMethod(method,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(o,args);
     private static void Expect(bool v,string message) { if(!v) throw new InvalidOperationException(message); }
     private static void Add(string name,Action run)=>steps.Enqueue((name,run));
-    private static void Capture(string name)=>UI01Validation.Capture("../UI-06/"+name);
+    private static void Capture(string name)
+    { var path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-06",name)); UiValidationContext.OnCapture?.Invoke(name,path); }
     private static void NoPersistence()
     {
         Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==0,"Persisted before D3");
@@ -47,8 +48,10 @@ public static class UI06RestaurantValidation
     private static void Fits()
     {
         Canvas.ForceUpdateCanvases();
+        var overflowing=new List<string>();
         foreach(var t in View.GetComponentsInChildren<TMP_Text>())
-        { t.ForceMeshUpdate(); Expect(t.font.name=="InterTight-Variable" && !t.enableAutoSizing,"Native type "+t.name); Expect(!t.isTextOverflowing,"Overflow "+t.name); }
+        { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && t.font == Game.Adapter.In.UI.Theme.GameTypography.Resolve(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>().Role).Font && !t.enableAutoSizing,"Native type "+t.name); if(t.isTextOverflowing)overflowing.Add(t.name+" rect="+t.rectTransform.rect.size+" preferred="+t.preferredWidth+","+t.preferredHeight); }
+        Expect(overflowing.Count==0,"Overflow "+string.Join("; ",overflowing));
         foreach(var s in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>())
         {
             var bounds=(RectTransform)s.transform; var corners=new Vector3[4]; s.verticalScrollbar.handleRect.GetWorldCorners(corners);
@@ -105,7 +108,7 @@ public static class UI06RestaurantValidation
             Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length==1,"EventSystem count");
             Expect(View.transform.Find("DecisionHeader/Step").GetComponent<TMP_Text>().text.Contains("3 DE 7"),"Wrong step");
         });
-        foreach(var size in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var size in UiValidationContext.Resolutions)
         {
             var resolution=size; string suffix=size.x+"x"+size.y;
             Add("Set viewport "+suffix,()=>UI01Validation.SetGameView(resolution.x,resolution.y));
@@ -211,7 +214,7 @@ public static class UI06RestaurantValidation
             var rows=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().ToList(); Expect(rows.Count==1,"D3 must write exactly one session");
             Expect(rows[0].studentName=="Aluna Teste UI06" && rows[0].studentRA=="123456" && rows[0].restaurantType==RestaurantType.FRANCES && rows[0].targetSegment==Segment.HIGH && rows[0].locationZone==LocationZone.Educacao,"Persisted identification/decisions");
             Expect(State==InitialDecisionFlow.AfterCommit,"D3 progression"); Expect(PlayerSession.StudentName=="Aluna Teste UI06" && PlayerSession.SelectedRestaurantType==RestaurantType.FRANCES && PlayerSession.SelectedTargetSegment==Segment.HIGH,"Draft/cadastro");
-            File.WriteAllText("output/ui-update/UI-06/runtime-scene.json",Newtonsoft.Json.JsonConvert.SerializeObject(new {project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,state=State.ToString(),database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,sessionRows=rows.Count,selectedRestaurant=PlayerSession.SelectedRestaurantType.ToString(),selectedSegment=PlayerSession.SelectedTargetSegment.ToString()},Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(UiValidationContext.FileFor("UI-06","runtime-scene.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new {project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,state=State.ToString(),database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,sessionRows=rows.Count,selectedRestaurant=PlayerSession.SelectedRestaurantType.ToString(),selectedSegment=PlayerSession.SelectedTargetSegment.ToString()},Newtonsoft.Json.Formatting.Indented));
         });
         next=EditorApplication.timeSinceStartup+.4; EditorApplication.update-=Tick; EditorApplication.update+=Tick;
     }
@@ -221,7 +224,7 @@ public static class UI06RestaurantValidation
         if(!EditorApplication.isPlaying || steps.Count==0)
         {
             report.completed=steps.Count==0 && report.failures==0; EditorApplication.update-=Tick;
-            File.WriteAllText("output/ui-update/UI-06/playmode-restaurant.json",JsonUtility.ToJson(report,true)); return;
+            File.WriteAllText(UiValidationContext.FileFor("UI-06","playmode-restaurant.json"),JsonUtility.ToJson(report,true)); return;
         }
         var step=steps.Dequeue(); var check=new Check{name=step.name,frame=Time.frameCount};
         try { step.run(); check.passed=true; } catch(Exception e) {check.detail=e.ToString(); report.failures++; steps.Clear(); Debug.LogError("[UI-06 QA] "+step.name+": "+e.Message);}

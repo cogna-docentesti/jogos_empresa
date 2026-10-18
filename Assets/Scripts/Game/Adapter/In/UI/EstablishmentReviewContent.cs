@@ -35,8 +35,26 @@ namespace Game.Adapter.In.UI
         [SerializeField] private RectTransform teamGrid;
         [SerializeField] private UnityEngine.UI.Button reviewButton;
 
+        private void OnEnable() => ApplyTypography();
+        public void ApplyTypography()
+        {
+            foreach (var binding in GetComponentsInChildren<TypographyRoleBinding>(true)) binding.Reapply();
+            foreach (var t in new[] { context, round }) GameTypography.KeepSize(t, TypographyRole.Caption);
+            foreach (var t in new[] { cash, revenue, result, score }) GameTypography.KeepSize(t, TypographyRole.Kpi);
+            foreach (var t in new[] { revenueTitle, resultTitle }) GameTypography.KeepSize(t, TypographyRole.Label);
+            foreach (var t in new[] { status, notice, coherence, menuDetails, equipmentDetails, teamDetails, teamEmpty }) GameTypography.KeepSize(t, TypographyRole.Body);
+            foreach (var d in decisions)
+            {
+                GameTypography.KeepSize(d.title, TypographyRole.SectionTitle);
+                GameTypography.KeepSize(d.detail, TypographyRole.Body);
+                GameTypography.KeepSize(d.state, TypographyRole.Label);
+            }
+            foreach (var m in members) GameTypography.KeepSize(m.label, TypographyRole.Body);
+        }
+
         public void Bind(EstablishmentSummary s)
         {
+            ApplyTypography();
             selected?.Bind(s);
             Set(context, s.ContextLabel);
             Set(round, s.HasSession ? $"Mês {s.Round} de 3" : "Indicadores após a confirmação");

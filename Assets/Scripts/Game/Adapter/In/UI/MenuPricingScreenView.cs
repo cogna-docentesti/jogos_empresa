@@ -43,9 +43,22 @@ namespace Game.Adapter.In.UI
 
         private void OnEnable()
         {
+            ApplyTypography();
             tabAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/tab");
             tabAction.performed += OnTab;
             tabAction.Enable();
+        }
+
+        public void ApplyTypography()
+        {
+            foreach (var binding in GetComponentsInChildren<TypographyRoleBinding>(true)) binding.Reapply();
+            GameTypography.KeepSize(titleText, TypographyRole.ScreenTitle);
+            foreach (var t in new[] { hintText, restaurantText, strategyHelpText, priceCoherenceText }) GameTypography.KeepSize(t, TypographyRole.Body);
+            GameTypography.KeepSize(stepText, TypographyRole.Caption);
+            GameTypography.KeepSize(footerText, TypographyRole.Label);
+            GameTypography.KeepSize(inputHelpText, TypographyRole.Caption);
+            if (summaryNames != null) foreach (var t in summaryNames) GameTypography.KeepSize(t, TypographyRole.Body);
+            if (summaryPrices != null) foreach (var t in summaryPrices) GameTypography.KeepSize(t, TypographyRole.Table);
         }
 
         private void OnDisable()
@@ -138,6 +151,7 @@ namespace Game.Adapter.In.UI
 
         public void SetReviewMode(bool review)
         {
+            ApplyTypography();
             if (stepText != null)
             {
                 stepText.text = review ? "GESTÃO · REVISÃO DO CARDÁPIO" : "PASSO 4 DE 7 · CARDÁPIO";

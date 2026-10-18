@@ -82,6 +82,7 @@ namespace Game.EditorTools
             registry.EditorSetBinding(PanelId.Review,canvas.Find("Panel_Review").gameObject);EditorUtility.SetDirty(registry);
             registry.EditorSetBinding(PanelId.Location,canvas.Find("Panel_Location").gameObject);
             registry.EditorSetBinding(PanelId.Restaurant,canvas.Find("Panel_Restaurant").gameObject);
+            Font06Migration.Apply(new[] { canvas.Find("Panel_Establishment").gameObject, canvas.Find("Panel_Review").gameObject }, "Assets/Scenes/GameScene.unity");
             AssetDatabase.SaveAssets();EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
         }
 

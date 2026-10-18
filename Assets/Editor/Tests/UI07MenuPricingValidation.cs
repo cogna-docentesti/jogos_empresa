@@ -29,7 +29,8 @@ public static class UI07MenuPricingValidation
     private static UnityEngine.UI.Button Action(string n)=>Field<UnityEngine.UI.Button>(View,n);
     private static void Expect(bool v,string message){if(!v)throw new InvalidOperationException(message);}
     private static void Add(string n,Action a)=>steps.Enqueue((n,a));
-    private static void Capture(string n)=>UI01Validation.Capture("../UI-07/"+n);
+    private static void Capture(string n)
+    { var path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-07",n)); UiValidationContext.OnCapture?.Invoke(n,path); }
     private static PointerEventData Pointer(UnityEngine.UI.Selectable b,int id=-1)
     {var target=b.transform.Find("MarkerTouchTarget");var r=(RectTransform)(target!=null?target:b.transform);return new PointerEventData(EventSystem.current){position=RectTransformUtility.WorldToScreenPoint(null,r.TransformPoint(r.rect.center)),pointerId=id,button=PointerEventData.InputButton.Left};}
     private static void Click(UnityEngine.UI.Button b,int id=-1)
@@ -49,7 +50,7 @@ public static class UI07MenuPricingValidation
         Canvas.ForceUpdateCanvases();
         foreach(var t in View.GetComponentsInChildren<TMP_Text>())
         {
-            t.ForceMeshUpdate();Expect(t.font.name=="InterTight-Variable" && !t.enableAutoSizing,"Native typography "+t.name);
+            t.ForceMeshUpdate();Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && t.font == Game.Adapter.In.UI.Theme.GameTypography.Resolve(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>().Role).Font && !t.enableAutoSizing,"Native typography "+t.name);
             if(t.GetComponentInParent<TMP_InputField>()==null)Expect(!t.isTextOverflowing,"Overflow "+t.name+" "+t.text);
         }
         foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>())
@@ -90,7 +91,7 @@ public static class UI07MenuPricingValidation
         });
         Add("Location choice stays in memory",()=>{var v=UnityEngine.Object.FindFirstObjectByType<LocationScreenView>();var marker=v.Zones.Single(z=>z.id=="bank").marker;ExecuteEvents.Execute(marker.gameObject,new PointerEventData(EventSystem.current){pointerId=4},ExecuteEvents.pointerClickHandler);Click(Field<UnityEngine.UI.Button>(v,"confirmButton"));NoPersistence();});
         Add("Restaurant choice enters step four",()=>Choose(RestaurantType.PODRAO));
-        foreach(var sizeValue in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var sizeValue in UiValidationContext.Resolutions)
         {
             var size=sizeValue;var suffix=size.x+"x"+size.y;
             Add("Set viewport "+suffix,()=>UI01Validation.SetGameView(size.x,size.y));
@@ -186,7 +187,7 @@ public static class UI07MenuPricingValidation
         });
         Add("Hub root renders before map interaction",()=>{Expect(State==GameState.Management_Hub,"Hub state");MenuNavigator.Instance.OpenRoot();});
         Add("Hub opens cardapio through navigator",()=>{var origin=UnityEngine.Object.FindObjectsByType<MapMenuNode>(FindObjectsSortMode.None).Single(n=>n.Destination==PanelId.MenuPricing);hubOrigin=origin.gameObject;origin.GetComponent<UnityEngine.UI.Button>().Select();Click(origin.GetComponent<UnityEngine.UI.Button>());});
-        foreach(var sizeValue in new[]{new Vector2Int(1920,1080),new Vector2Int(1366,768),new Vector2Int(1280,720)})
+        foreach(var sizeValue in UiValidationContext.Resolutions)
         {
             var size=sizeValue;var suffix=size.x+"x"+size.y;
             Add("Set review viewport "+suffix,()=>UI01Validation.SetGameView(size.x,size.y));
@@ -203,14 +204,14 @@ public static class UI07MenuPricingValidation
             MenuNavigator.Instance.Open(PanelId.MenuPricing);
         });
         Add("Review reentry is stable",()=>{Expect(Items.Length==3 && Items.All(i=>Mathf.Approximately(i.SelectedPrice,i.Product.price+.25f)),"Reentry");Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==1,"Review insert");
-            File.WriteAllText("output/ui-update/UI-07/runtime-scene.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,managerId,databaseId,sessionRows=1,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,menuJson=confirmedJson,state=State.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));
+            File.WriteAllText(UiValidationContext.FileFor("UI-07","runtime-scene.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,managerId,databaseId,sessionRows=1,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,menuJson=confirmedJson,state=State.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));
         });
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
     private static void Tick()
     {
         if(EditorApplication.timeSinceStartup<next)return;
-        if(!EditorApplication.isPlaying || steps.Count==0){report.completed=steps.Count==0 && report.failures==0;EditorApplication.update-=Tick;File.WriteAllText("output/ui-update/UI-07/playmode-menu-pricing.json",JsonUtility.ToJson(report,true));return;}
+        if(!EditorApplication.isPlaying || steps.Count==0){report.completed=steps.Count==0 && report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-07","playmode-menu-pricing.json"),JsonUtility.ToJson(report,true));return;}
         var step=steps.Dequeue();var check=new Check{name=step.Item1,frame=Time.frameCount};
         try{step.Item2();check.passed=true;}catch(Exception e){check.detail=e.ToString();report.failures++;steps.Clear();Debug.LogError("[UI-07 QA] "+check.name+": "+e.Message);}
         report.checks.Add(check);EditorApplication.QueuePlayerLoopUpdate();EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint();next=EditorApplication.timeSinceStartup+.5;

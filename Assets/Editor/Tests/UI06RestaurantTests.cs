@@ -37,7 +37,7 @@ public sealed class UI06RestaurantTests
         {
             Assert.AreEqual(3,data[i].products.Length); var image=Field<UnityEngine.UI.Button>(fields[i]).transform.Find("Facade").GetComponent<UnityEngine.UI.Image>();
             Assert.AreSame(data[i].facade,image.sprite); Assert.AreEqual(Color.white,image.color); Assert.IsTrue(image.preserveAspect);
-            Assert.AreEqual(new Rect(0,0,1024,768),image.sprite.rect); Assert.AreEqual(UnityEngine.UI.Image.Type.Simple,image.type);
+            Assert.AreEqual(new Rect(0,0,1448,1086),image.sprite.rect); Assert.AreEqual(UnityEngine.UI.Image.Type.Simple,image.type);
             var importer=(TextureImporter)AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(image.sprite)); Assert.AreEqual(SpriteImportMode.Single,importer.spriteImportMode);
         }
     }

@@ -19,6 +19,26 @@ namespace Game.Adapter.In.UI
         private static readonly CultureInfo Br = CultureInfo.GetCultureInfo("pt-BR");
         private (SharedControlAppearance appearance, UnityEngine.UI.Image tint)[] feedback;
 
+        private void OnEnable() => ApplyTypography();
+        public void ApplyTypography()
+        {
+            foreach (var binding in GetComponentsInChildren<TypographyRoleBinding>(true)) binding.Reapply();
+            GameTypography.KeepSize(hintText, TypographyRole.Body);
+            foreach (var t in new[] { coh1Tip, coh2Tip, coh1Value, coh2Value }) GameTypography.KeepSize(t, TypographyRole.Body);
+            foreach (var card in new[] { cardPodrao, cardJapones, cardFrances })
+            {
+                var content = card != null ? card.transform.Find("CardDetails/Viewport/Content") : null;
+                if (content == null) continue;
+                foreach (var path in new[] { "RestaurantName", "RestaurantDesc", "CostLabel", "MonthlyCost", "TicketLabel", "TicketRange" })
+                {
+                    var text = content.Find(path)?.GetComponent<TMP_Text>();
+                    var layout = text != null ? text.GetComponent<UnityEngine.UI.LayoutElement>() : null;
+                    if (layout == null) continue;
+                    layout.preferredHeight = -1; // Let TMP's native preferred height grow the existing scroll content.
+                }
+            }
+        }
+
         private void Awake()
         {
             feedback=new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh}
@@ -42,6 +62,7 @@ namespace Game.Adapter.In.UI
         public void SetHint(string value) { if(hintText != null) hintText.text=value; }
         public void SetReviewMode(bool review)
         {
+            ApplyTypography();
             confirmButton.gameObject.SetActive(!review);backButton.gameObject.SetActive(!review);
             if(review)
             {
