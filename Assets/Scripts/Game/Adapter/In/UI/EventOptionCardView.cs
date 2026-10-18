@@ -11,7 +11,7 @@ namespace Game.Adapter.In.UI
         {
             GameTypography.KeepSize(titleText,TypographyRole.SectionTitle);
             GameTypography.KeepSize(descriptionText,TypographyRole.Body);
-            GameTypography.KeepSize(effectsText,TypographyRole.Caption);
+            GameTypography.KeepSize(effectsText,TypographyRole.Body);
         }
         [SerializeField] private TMP_Text titleText, descriptionText, effectsText;
         [SerializeField] private UnityEngine.UI.Button button;

@@ -85,7 +85,7 @@ namespace Game.EditorTools
             var title=(panel.Find("Title") ?? panel.Find("ModalHeader/Title")).GetComponent<TMP_Text>(); var message=panel.Find("Text (TMP)").GetComponent<TMP_Text>();
             Header(panel,title,"Reiniciar esta campanha?","ICON_ALERT",1120); Place(message.rectTransform,48,144,1024,260);
             Text(message.rectTransform,"As decisões, compras e resultados desta campanha serão apagados permanentemente. O cadastro também será limpo.\n\nVocê voltará à identificação para refazer as escolhas iniciais. Esta ação não pode ser desfeita.",GameTypography.Tokens.Body);
-            var error=Text(Node(panel,"Error",48,404,1024,76),"",GameTypography.Tokens.Label,false,GamePalette.ErrorText); error.gameObject.SetActive(false);
+            var error=Text(Node(panel,"Error",48,404,1024,76),"",new TypographyToken(TypographyRole.Body,22),false,GamePalette.ErrorText); error.gameObject.SetActive(false);
             Set(view,"resetTitle",title); Set(view,"resetBody",message); Set(view,"resetError",error);
             cancel=Get<UnityEngine.UI.Button>(view,"cancelResetButton"); var confirm=Get<UnityEngine.UI.Button>(view,"confirmResetButton");
             Button(cancel,"Cancelar",SharedControlKind.Secondary,48,524,496); Button(confirm,"Reiniciar jogo",SharedControlKind.Danger,576,524,496,"ICON_RESET");

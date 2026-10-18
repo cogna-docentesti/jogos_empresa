@@ -20,7 +20,7 @@ public static class UI12EventValidation
     private static Report report; private static int lastFrame, retries, callbacks, monthCallbacks; private static double next;
     private static EventData longData; private static EventOptionCardView savedPrefab; private static GameSessionEntity savedSession;
     private static GameObject origin; private static string activeId; private static float cash; private static int reputation;
-    private static string reportPath = "output/ui-update/UI-12/playmode-events.json", capturePrefix = "";
+    private static string reportPath, capturePrefix = "";
     private static Transform Root => GameObject.Find("Canvas").transform;
     private static EventScreenView View => Root.Find("Panel_Event").GetComponent<EventScreenView>();
     private static EventScreenController Controller => View.GetComponent<EventScreenController>();
@@ -62,7 +62,7 @@ public static class UI12EventValidation
     {
         Canvas.ForceUpdateCanvases();
         foreach (var t in View.GetComponentsInChildren<TMP_Text>())
-        { t.ForceMeshUpdate(); Expect(t.font.name == "InterTight-Variable" && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
+        { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
         foreach (var s in new[] { View.DecisionScroll, View.HistoryScroll })
             Expect(s.content.parent == s.viewport && s.viewport.GetComponent<UnityEngine.UI.Mask>() != null && s.vertical && !s.horizontal, "Scroll hierarchy");
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length == 1, "EventSystem");
@@ -88,18 +88,18 @@ public static class UI12EventValidation
     private static void Capture(string name, bool screen = true)
     {
         name = capturePrefix + name;
-        if (screen) Fits(); string path = UI01Validation.Capture("../UI-12/" + name); using var hash = System.Security.Cryptography.SHA256.Create();
+        if (screen) Fits(); string path = UI01Validation.Capture(UiValidationContext.CaptureName("UI-12",name)); UiValidationContext.OnCapture?.Invoke(name,path); using var hash = System.Security.Cryptography.SHA256.Create();
         captures.Add(new { name, path, frame = Time.frameCount, width = Screen.width, height = Screen.height, sha256 = BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(path))).Replace("-", "").ToLowerInvariant() });
-        File.WriteAllText("output/ui-update/UI-12/capture-frames.json", Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
+        File.WriteAllText(UiValidationContext.FileFor("UI-12","capture-frames.json"), Newtonsoft.Json.JsonConvert.SerializeObject(captures, Newtonsoft.Json.Formatting.Indented));
     }
     [MenuItem("Tools/Jogos de Empresa/UI-12/Validate events in isolated Play Mode")]
     public static void Run()
     {
         UI01Validation.RequireIsolatedStorage(); if (!EditorApplication.isPlaying) throw new InvalidOperationException("Use isolated Play Mode.");
-        Directory.CreateDirectory("output/ui-update/UI-12"); reportPath="output/ui-update/UI-12/playmode-events.json";capturePrefix="";report = new Report(); steps.Clear(); captures.Clear(); lastFrame = -1; retries = 0;
+        Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-12")); reportPath=UiValidationContext.FileFor("UI-12","playmode-events.json");capturePrefix="";report = new Report(); steps.Clear(); captures.Clear(); lastFrame = -1; retries = 0;
         var catalog = Resources.LoadAll<EventData>("Events").OrderBy(e => e.id).ToArray();
         int sizeIndex = 0;
-        foreach (var resolution in new[] { new Vector2Int(1920, 1080), new Vector2Int(1366, 768), new Vector2Int(1280, 720) })
+        foreach (var resolution in UiValidationContext.Resolutions)
         {
             var size = resolution; string res = size.x + "x" + size.y; int optionIndex = sizeIndex++;
             Add("Prepare viewport " + res, () => UI01Validation.SetGameView(size.x, size.y));
@@ -150,7 +150,7 @@ public static class UI12EventValidation
             Add("Prepare unavailable session " + res, () => { Fixture(); savedSession = GameSessionState.Current; GameSessionState.Clear(); Controller.OpenDecision(sample, 1, 6); });
             Add("Unavailable session has no fake figures " + res, () => { Expect(!View.ConfirmButton.gameObject.activeSelf && !Field<GameObject>(View, "decisionBody").activeSelf, "Unavailable session"); Capture("session-error-" + res); Controller.Close(); GameSessionState.Set(savedSession); GameSessionState.Persist(); });
             Add("Open history from actual hub action " + res, () => { GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); });
-            Add("Hub layout and action " + res, () => { Capture("hub-actions-" + res, false); var b = Root.Find("Panel_Menu/EventActions/History").GetComponent<UnityEngine.UI.Button>(); origin = b.gameObject; b.Select(); Click(b); });
+            Add("Hub layout and action " + res, () => { Capture("hub-actions-" + res, false); var b = Root.Find("Panel_Menu/HubSummary/History").GetComponent<UnityEngine.UI.Button>(); origin = b.gameObject; b.Select(); Click(b); });
             Add("Empty hub history " + res, () => { Capture("history-empty-hub-" + res); Click(Field<UnityEngine.UI.Button>(View, "returnButton")); });
             Add("History returns focus to hub " + res, () => { Expect(MenuNavigator.Instance.Current == PanelId.Menu && EventSystem.current.currentSelectedGameObject == origin, "History focus restore"); });
         }
@@ -186,13 +186,13 @@ public static class UI12EventValidation
         });
         Add("Saved real monthly history", () => { Capture("history-month-one-1280x720"); View.HistoryScroll.verticalNormalizedPosition = 0; });
         Add("History scroll bottom", () => { Capture("history-month-one-bottom-1280x720"); Click(Field<UnityEngine.UI.Button>(View, "returnButton")); });
-        Add("Runtime evidence", () => File.WriteAllText("output/ui-update/UI-12/runtime.json", Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, frame = Time.frameCount, database = Db.DatabasePath, sessions = Db.Table<GameSessionEntity>().Count(), session = activeId, month = GameSessionState.Current.currentRound, state = GameManager.Instance.StateMachine.CurrentState.ToString(), panel = MenuNavigator.Instance.Current.ToString() }, Newtonsoft.Json.Formatting.Indented)));
+        Add("Runtime evidence", () => File.WriteAllText(UiValidationContext.FileFor("UI-12","runtime.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, frame = Time.frameCount, database = Db.DatabasePath, sessions = Db.Table<GameSessionEntity>().Count(), session = activeId, month = GameSessionState.Current.currentRound, state = GameManager.Instance.StateMachine.CurrentState.ToString(), panel = MenuNavigator.Instance.Current.ToString() }, Newtonsoft.Json.Formatting.Indented)));
         next = EditorApplication.timeSinceStartup + .5; EditorApplication.update -= Tick; EditorApplication.update += Tick;
     }
     public static void RunSavedScene()
     {
-        var previous = Newtonsoft.Json.Linq.JArray.Parse(File.ReadAllText("output/ui-update/UI-12/capture-frames.json"));
-        Run(); reportPath="output/ui-update/UI-12/playmode-saved-scene.json";capturePrefix="saved-scene-";
+        var previous = Newtonsoft.Json.Linq.JArray.Parse(File.ReadAllText(UiValidationContext.FileFor("UI-12","capture-frames.json")));
+        Run(); reportPath=UiValidationContext.FileFor("UI-12","playmode-saved-scene.json");capturePrefix="saved-scene-";
         foreach(var entry in previous) if(!((string)entry["name"]).StartsWith("saved-scene-")) captures.Add(entry);
         bool monthly=false; var pending=steps.ToArray();steps.Clear();
         foreach(var step in pending)

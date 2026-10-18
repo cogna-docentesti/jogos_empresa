@@ -1302,5 +1302,9 @@
     "static_texture_bytes": 33816576,
     "note": "Eight finite 2048 atlases plus one 512 arrow atlas; 1024 packing attempts and actual packed counts are recorded per face. No growth at runtime."
   },
-  "ui_migration": "No production scene/prefab/theme migration in FONT-03. Screen swaps and specimen existed only during QA and were restored without saving."
+  "ui_migration": "No production scene/prefab/theme migration in FONT-03. Screen swaps and specimen existed only during QA and were restored without saving.",
+  "font09": {
+    "qa": "docs/ui-update/qa/FONT-09.json",
+    "faces": "Six existing production faces and three finite fallbacks reused; per-message materials/atlases prohibited."
+  }
 }

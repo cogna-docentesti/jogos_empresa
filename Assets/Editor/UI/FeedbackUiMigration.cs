@@ -80,7 +80,7 @@ namespace Game.EditorTools
             var host = Ensure<FeedbackToast>(Node(canvas, "Feedback", 0, 0, 1920, 1080));
             // Reserved central header area; never intersects cards, navigation or footer actions.
             var panel = Picture(host.transform, "Toast", "UI_TOAST_NEUTRAL", 488, 8, 944, 72);
-            var message = Text(panel.transform, "Message", "", 20, 10, 812, 52); message.fontSize = GameTypography.Tokens.Caption;
+            var message = Text(panel.transform, "Message", "", 20, 10, 812, 52); GameTypography.Apply(message, new TypographyToken(TypographyRole.Body,20));
             var close = Button(panel.transform, "Close", "×", 856, 4, 68, 64);
             Set(host, "panel", panel.gameObject); Set(host, "message", message); Set(host, "surface", panel); Set(host, "close", close);
             Set(host, "success", Art("UI_TOAST_SUCCESS")); Set(host, "warning", Art("UI_TOAST_WARNING")); Set(host, "error", Art("UI_TOAST_NEUTRAL"));

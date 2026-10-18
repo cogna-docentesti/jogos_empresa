@@ -68,9 +68,9 @@ namespace Game.EditorTools
             {
                 var r = (RectTransform)go.transform; r.sizeDelta = new Vector2(1120, 200); Ensure<UnityEngine.UI.LayoutElement>(r).preferredHeight = 200;
                 var card = go.AddComponent<EventOptionCardView>(); var button = go.AddComponent<UnityEngine.UI.Button>(); button.targetGraphic = SharedUiStyles.Surface(go, "UI_CARD_NORMAL", true); Set(card, "button", button);
-                Set(card, "titleText", Text(r, "Title", "Opção", 24, 20, 1072, 36, GameTypography.Tokens.BodyStrong,true));
-                Set(card, "descriptionText", Text(r, "Description", "", 24, 68, 1072, 32, GameTypography.Tokens.Label));
-                Set(card, "effectsText", Text(r, "Effects", "", 24, 112, 1072, 64, GameTypography.Tokens.Label)); SharedUiStyles.Bind(button, SharedControlKind.Card);
+                Set(card, "titleText", Text(r, "Title", "Opção", 24, 20, 1072, 36, new TypographyToken(TypographyRole.SectionTitle,24),true));
+                Set(card, "descriptionText", Text(r, "Description", "", 24, 68, 1072, 32, new TypographyToken(TypographyRole.Body,22)));
+                Set(card, "effectsText", Text(r, "Effects", "", 24, 112, 1072, 64, new TypographyToken(TypographyRole.Body,22))); SharedUiStyles.Bind(button, SharedControlKind.Card);
                 PrefabUtility.SaveAsPrefabAsset(go, "Assets/Prefabs/EventOptionCard.prefab");
             }
             finally { UnityEngine.Object.DestroyImmediate(go); }
@@ -86,7 +86,7 @@ namespace Game.EditorTools
             var view = Ensure<EventScreenView>(panel); var controller = Ensure<EventScreenController>(panel); Set(controller, "view", view);
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88);
             Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "periodText", Text(header.transform, "Period", "EVENTOS DO MÊS", 1000, 28, 896, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "periodText", Text(header.transform, "Period", "EVENTOS DO MÊS", 1000, 28, 896, 40, new TypographyToken(TypographyRole.Caption,24), false, GamePalette.OnDark));
             Set(view, "screenTitle", Text(panel, "TitleText", "Decisões do mês", 24, 112, 1100, 60, GameTypography.Tokens.ScreenTitle, true));
             Set(view, "guidanceText", Text(panel, "Guidance", "", 24, 176, 1872, 36, GameTypography.Tokens.Body));
             var body = Node(panel, "DecisionBody", 24, 232, 1872, 736); Set(view, "decisionBody", body.gameObject);
@@ -98,8 +98,8 @@ namespace Game.EditorTools
             var scroll = Scroll(body, "DecisionScroll", 664, 0, 1208, 736); Set(view, "decisionScroll", scroll);
             Set(view, "titleText", Text(scroll.content, "EventTitle", "", 0, 0, 1150, 40, GameTypography.Tokens.SectionTitle, true));
             Set(view, "descriptionText", Text(scroll.content, "EventDescription", "", 0, 0, 1150, 60, GameTypography.Tokens.Body));
-            Set(view, "conceptText", Text(scroll.content, "Concept", "", 0, 0, 1150, 30, GameTypography.Tokens.Caption));
-            Text(scroll.content, "OptionsHeading", "Escolha uma opção", 0, 0, 1150, 40, GameTypography.Tokens.BodyStrong,true);
+            Set(view, "conceptText", Text(scroll.content, "Concept", "", 0, 0, 1150, 30, new TypographyToken(TypographyRole.Body,20)));
+            Text(scroll.content, "OptionsHeading", "Escolha uma opção", 0, 0, 1150, 40, new TypographyToken(TypographyRole.SectionTitle,24),true);
             var options = Node(scroll.content, "Options", 0, 0, 1150, 0); Vertical(options, 0); Set(view, "optionContainer", options);
             var history = Scroll(panel, "HistoryBody", 24, 232, 1872, 736); Set(view, "historyBody", history.gameObject); Set(view, "historyScroll", history); Set(view, "historyContainer", history.content);
             Set(view, "cardPrefab", AssetDatabase.LoadAssetAtPath<EventOptionCardView>("Assets/Prefabs/EventOptionCard.prefab"));

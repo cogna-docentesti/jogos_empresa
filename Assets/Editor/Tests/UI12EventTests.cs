@@ -35,7 +35,9 @@ public sealed class UI12EventTests
     { GameSessionState.Clear(); db.Close(); typeof(DatabaseInitializer).GetProperty("DatabaseService").SetValue(null, previous); Object.DestroyImmediate(databaseObject); }
     [TestCaseSource(nameof(Events))] public void ArtAndOptions(string id)
     {
-        var scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity", UnityEditor.SceneManagement.OpenSceneMode.Additive);
+        var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");
+        bool opened=!scene.isLoaded;
+        if(opened)scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity", UnityEditor.SceneManagement.OpenSceneMode.Additive);
         try
         {
         var view = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<EventScreenView>(true)).Single();
@@ -45,7 +47,7 @@ public sealed class UI12EventTests
         Assert.AreEqual(new Rect(0, 0, 768, 512), sprite.rect);
         foreach (var option in data.options) { Assert.IsNotEmpty(option.title); Assert.IsNotEmpty(option.description); Assert.That(EventEffectText.Format(option.effects), Does.Contain("Duração operacional:")); }
         }
-        finally { UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene, true); }
+        finally { if(opened)UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene, true); }
     }
     [TestCaseSource(nameof(Choices))] public void ConfirmOnce(string id, string choice)
     {

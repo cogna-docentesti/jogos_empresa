@@ -1,6 +1,6 @@
 # Substituição da tipografia para aproximar os concepts
 
-Data: 17/10/2026. Status: **FONT-01 a FONT-08 concluídos; FONT-09 a FONT-10 pendentes**.
+Data: 17/10/2026. Status: **FONT-01 a FONT-09 concluídos; FONT-10 pendente**.
 
 Este lote substitui a Inter Tight usada na interface por Roboto e Roboto Condensed, distribuídas por função visual. Inclui localizar ou baixar as fontes, criar os assets TextMeshPro necessários e aplicar a mudança nas interfaces reais. Os registros de conclusão de UI-01 a UI-20 continuam sendo evidências da entrega anterior; não comprovam esta substituição.
 
@@ -47,7 +47,7 @@ O inventário de FONT-01 está concluído; a substituição das fontes ainda est
 | 6 | [FONT-06 — Restaurante, cardápio, estabelecimento e revisão](FONT-06-restaurante-cardapio-e-revisao.md) | FONT-05 | Concluído — [QA](../qa/FONT-06.json) |
 | 7 | [FONT-07 — Banco, equipamentos e equipe](FONT-07-banco-equipamentos-e-equipe.md) | FONT-06 | Concluído — [QA](../qa/FONT-07.json) |
 | 8 | [FONT-08 — DRE, relatórios, conclusão e falência](FONT-08-dre-relatorios-e-falencia.md) | FONT-07 | Concluído — [QA](../qa/FONT-08.json) |
-| 9 | [FONT-09 — Eventos, diálogos, feedback e ajuda](FONT-09-eventos-dialogos-e-ajuda.md) | FONT-08 | Pendente |
+| 9 | [FONT-09 — Eventos, diálogos, feedback e ajuda](FONT-09-eventos-dialogos-e-ajuda.md) | FONT-08 | Concluído — [QA](../qa/FONT-09.json) |
 | 10 | [FONT-10 — Validação final e atualização do contrato](FONT-10-validacao-final.md) | FONT-09 | Pendente |
 
 Executar nessa ordem para manter uma referência coerente durante as alterações da mesma cena. Um pedido de execução do lote autoriza percorrer a sequência; os arquivos permitem também solicitar uma tarefa individual.

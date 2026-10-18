@@ -375,5 +375,13 @@
     },
     "weights": "Roboto Regular for values and body; real Roboto Bold for totals and KPIs; Condensed faces for compact headings, labels, captions and actions.",
     "shared_scope": "20 state/dialog consumers retain FONT-09 ownership and behavior, with typography integrated as font08_shared."
+  },
+  "font09": {
+    "qa": "docs/ui-update/qa/FONT-09.json",
+    "sizes": "Final size and explicit role per consumer in font-coverage.json. No global reduction; saved 46/32/24/22/20 sizes retained.",
+    "events": "20 real catalog events and all 60 choices; saved/reopened template and actual decision/history clones. Option titles use Condensed Bold; descriptions/effects use Roboto Regular.",
+    "dialogs": "Real Condensed Bold headings and SemiBold actions; Roboto Regular explanatory body/error. Modal ownership, keyboard, raycast and persistence assertions retained.",
+    "feedback": "Roboto Regular body, neutral shared material; actual help, tooltip, toast, loading, empty and error controls. Native wrapping and box height, no autosize, synthetic bold, truncation or text scale.",
+    "scope": "Proposed typography contract only; global promotion remains FONT-10."
   }
 }

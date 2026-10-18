@@ -76,7 +76,7 @@ public static class UI18DialogValidation
     {
         Canvas.ForceUpdateCanvases();Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length==1,"One EventSystem");
         var modal=SharedModalFocus.Active;if(modal==null)return;
-        foreach(var t in modal.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.font.name=="InterTight-Variable"&&!t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Text overflow "+t.name+": "+t.text);}
+        foreach(var t in modal.GetComponentsInChildren<TMP_Text>()) {t.ForceMeshUpdate();Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>()!=null&&!t.enableAutoSizing,"Typography "+t.name);Expect(!t.isTextOverflowing,"Text overflow "+t.name+": "+t.text);}
         foreach(var b in modal.GetComponentsInChildren<UnityEngine.UI.Button>())
         {var r=Bounds((RectTransform)b.transform);Expect(r.xMin>=0&&r.yMin>=0&&r.xMax<=Screen.width+.5f&&r.yMax<=Screen.height+.5f,"Offscreen "+b.name);Expect(r.height>=44-.1f,"Touch target "+b.name);}
         Expect(modal.GetComponent<Canvas>().overrideSorting&&modal.GetComponent<Canvas>().sortingOrder>=1000,"Modal layer ownership");

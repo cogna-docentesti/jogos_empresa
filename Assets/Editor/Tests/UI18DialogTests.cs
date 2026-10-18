@@ -98,7 +98,17 @@ public sealed class UI18DialogTests
             {
                 var modal=root.Find(path); Assert.IsNotNull(modal.GetComponent<SharedModalFocus>(),path); Assert.IsNotNull(modal.GetComponent<Canvas>(),path); Assert.IsNotNull(modal.GetComponent<UnityEngine.UI.GraphicRaycaster>(),path);
                 foreach(var i in modal.GetComponentsInChildren<UnityEngine.UI.Image>(true).Where(i=>i.sprite!=null)) Assert.IsTrue(UnityEditor.AssetDatabase.GetAssetPath(i.sprite).StartsWith("Assets/Art/new/"),path+"/"+i.name);
-                foreach(var text in modal.GetComponentsInChildren<TMPro.TMP_Text>(true)) { Assert.AreEqual("InterTight-Variable",text.font.name,path); Assert.IsFalse(text.enableAutoSizing); }
+                foreach(var text in modal.GetComponentsInChildren<TMPro.TMP_Text>(true))
+                {
+                    var binding=text.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>();
+                    Assert.IsNotNull(binding,path+"/"+text.name);
+                    var style=Game.Adapter.In.UI.Theme.GameTypography.Resolve(binding.Role);
+                    Assert.AreEqual(style.Font,text.font,path);
+                    Assert.AreEqual(style.Material,text.fontSharedMaterial,path);
+                    Assert.AreEqual(TMPro.FontWeight.Regular,text.fontWeight,path);
+                    Assert.AreEqual(TMPro.FontStyles.Normal,text.fontStyle & TMPro.FontStyles.Bold,path);
+                    Assert.IsFalse(text.enableAutoSizing);
+                }
             }
         }
         finally { if(opened)UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene,true); }

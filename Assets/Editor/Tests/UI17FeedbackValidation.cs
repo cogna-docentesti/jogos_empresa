@@ -63,12 +63,27 @@ public static class UI17FeedbackValidation
         foreach (var help in Root.GetComponentsInChildren<ContextualHelp>())
         {
             if (!help.IsVisible) continue;
-            foreach (var t in Field<GameObject>(help, "panel").GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(!t.isTextOverflowing && t.font.name == "InterTight-Variable" && !t.enableAutoSizing, "Guide typography/overflow " + t.name); }
+            foreach (var t in Field<GameObject>(help, "panel").GetComponentsInChildren<TMP_Text>()) { t.ForceMeshUpdate(); Expect(!t.isTextOverflowing && t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Guide typography/overflow " + t.name); }
         }
         if (FeedbackToast.Current.IsVisible)
         { var t = Field<TMP_Text>(FeedbackToast.Current, "message"); t.ForceMeshUpdate(); Expect(!t.isTextOverflowing, "Toast overflow"); }
         foreach (var b in Root.GetComponentsInChildren<UnityEngine.UI.Button>().Where(x => x.IsInteractable()))
         {
+            if(b.TryGetComponent<MapMenuNode>(out var node))
+            {
+                // The map card owns the complete authored polygon. Its marker,
+                // rather than that large authoring rectangle, is the visible target.
+                var target=b.transform.Find("MarkerTouchTarget") as RectTransform;
+                Expect(target!=null,"Missing map marker target "+node.LocationId);
+                var marker=Bounds(target);
+                Expect(marker.xMin>=-1 && marker.yMin>=-1 && marker.xMax<=Screen.width+1 && marker.yMax<=Screen.height+1,"Offscreen map target "+node.LocationId);
+                var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position=marker.center},hits);
+                if(SharedModalFocus.Active==null)
+                    Expect(hits.Count>0 && hits[0].gameObject.GetComponentInParent<MapMenuNode>()==node,"Map marker covered "+node.LocationId);
+                else
+                    Expect(hits.Count>0 && hits[0].gameObject.transform.IsChildOf(SharedModalFocus.Active.transform),"Map raycast escaped modal "+node.LocationId);
+                continue;
+            }
             var scroll = b.GetComponentInParent<UnityEngine.UI.ScrollRect>(); var r = Bounds((RectTransform)b.transform);
             if (scroll != null && !Bounds(scroll.viewport).Contains(r.center)) continue;
             if (b.GetComponentInParent<SharedComponentsShowcase>() != null) continue;
