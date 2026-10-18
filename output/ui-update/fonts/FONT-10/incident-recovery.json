@@ -1,0 +1,65 @@
+{
+  "scene_sha256": "927af221e96cc14637dc7cf7935efb29af74b82d92886bc61b869b0e306f7136",
+  "scene_preserved": true,
+  "editor_restart": true,
+  "native_ids_recreated": true,
+  "concurrent_second_editor": false,
+  "incidents": [
+    {
+      "id": "attempt-01",
+      "cause": "UI18 fixture assumed only the serialized reset-modal path; production legitimately promotes it to Canvas. Fixture now accepts either path and retains all focus/canvas/raycast/font assertions.",
+      "report": "attempt-01-edit-tests.json"
+    },
+    {
+      "id": "attempt-02/03",
+      "cause": "An initial manual Edit-mode fixture run mutated live presentation. A broad transient-reference restoration attempt was incorrect and crashed the Editor. Saved scene bytes never changed. The sole Editor was restarted, its recovery backup preserved, and the original scene content recovered byte-exactly.",
+      "reports": [
+        "attempt-02-edit-tests.json",
+        "attempt-03-crash-excerpt.log"
+      ]
+    },
+    {
+      "id": "attempt-04",
+      "cause": "The UI12 fixture indexed an option using the fourth viewport index although events have three options. Selection now cycles modulo the real option count; all assertions remain. First three full viewport results were hash-retained; two remaining viewports and post-loop monthly flow passed after the fix.",
+      "evidence": "retained-native-evidence.json"
+    },
+    {
+      "id": "segment-01",
+      "cause": "The coordinator checked preservation during the Play stop transition and attempted a save too early. Its false result is retained. After Edit mode settled, the real saved-copy bytes matched entry. The coordinator now waits for the real stop, original seven roots and settled rendering.",
+      "evidence": "segment-01-session.json"
+    },
+    {
+      "id": "attempt-05/06/07/09/10",
+      "cause": "The additional input fixture initially captured the starting text twice. Public Select/MoveTextStart/MoveTextEnd now drive actual input scrolling. Follow-up geometry assertions were corrected to ignore unused character-info capacity and TMP’s appended invisible caret character, and measure glyph ink metrics instead of the padded SDF quad. The final assertion measures the actual typed y and verifies the offset and viewport bounds.",
+      "final_evidence": "stress/playmode.json"
+    },
+    {
+      "id": "attempt-08",
+      "cause": "The first graphical Development Player completed all campaign/font assertions but Windows recorded access violation 0xc0000005 in UnityPlayer.dll at offset 0xc2f499 on teardown. A preexisting UI-20 Player had the identical Development module/version/offset on 17/10/2026. Collecting screenshot resources did not fix it. The clean-shutdown check remains explicitly failed.",
+      "execution": "attempt-08-windows-shutdown/execution.json",
+      "process_exit": "attempt-08-windows-shutdown/process-exit.json",
+      "log": "attempt-08-windows-shutdown/Player.log"
+    },
+    {
+      "id": "attempt-11",
+      "cause": "The repeated Windows build was cancelled while a Windows Firewall request blocked access to the Editor. The human handled the security prompt; the build was rerun successfully with the existing saved scene.",
+      "report": "attempt-11-build-cancelled.json"
+    },
+    {
+      "id": "attempt-12",
+      "cause": "Collecting screenshot resources did not fix the Development Player native shutdown fault. All 254 campaign/font checks and 79 captures again passed before the same native fault. The final non-development Player also passed those assertions and reproduced native static-cleanup failure. Typography acceptance is distinct from full Player homologation, which remains false.",
+      "execution": "attempt-12-windows-shutdown/execution.json",
+      "process_exit": "attempt-12-windows-shutdown/process-exit.json",
+      "native_symbols": "native-fault-symbol.json",
+      "release_symbols": "native-fault-release-symbol.json"
+    },
+    {
+      "id": "attempt-14",
+      "cause": "The first non-development proof included the QA driver but omitted the dedicated symbol from the older database/key isolation hooks. Startup opened the original storage, the driver waited for its disposable path and ran no QA action, and the launcher terminated its own child at the readiness deadline. The original database was checked byte-identical. Both hooks now include only the dedicated QA symbol in addition to the existing Editor/Development guards; ordinary release behavior stays unchanged. A mismatch now fails immediately.",
+      "storage_safety": "attempt-14-storage-safety.json",
+      "player_log": "attempt-14-release-isolation-guard/Player.log"
+    }
+  ],
+  "filename_limit": "Three legacy post-loop UI12 PNG names end in 1280x720 although their actual final viewport is 2340x1080. The capture matrix and PNG dimensions are authoritative. These are distinct monthly-flow checks, not additional resolution repetitions.",
+  "failed_evidence_policy": "Superseded reports remain archived and are excluded from accepted check/capture totals. No existing assertion was dropped to obtain acceptance."
+}

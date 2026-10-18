@@ -1,0 +1,74 @@
+{
+  "module": "UnityPlayer.dll",
+  "fault_offset": "0xb1d7f1",
+  "symbol": "RuntimeStatic<PlatformAccessibilityManager,0>::StaticDestroy",
+  "release": true,
+  "pid": 26204,
+  "installed_symbols": "C:\\Program Files\\Unity Editors\\6000.3.20f1\\Editor\\Data\\PlaybackEngines\\WindowsStandaloneSupport\\Variations\\win64_player_nondevelopment_mono",
+  "symbol_server_downloaded": false,
+  "matching_pdb_guid": "411f6c3f-cbd3-4843-bd44-77c72d8795fb",
+  "age": 1,
+  "stack_pointer_scan_not_unwound": [
+    {
+      "stack_offset": 8,
+      "rva": "0xb3df4e",
+      "symbol": "AnimatorStatistics::StaticDestroy",
+      "displacement": 62
+    },
+    {
+      "stack_offset": 72,
+      "rva": "0x5ca556",
+      "symbol": "RuntimeCleanup",
+      "displacement": 246
+    },
+    {
+      "stack_offset": 120,
+      "rva": "0x6facc9",
+      "symbol": "DestroyGfxDevice",
+      "displacement": 649
+    },
+    {
+      "stack_offset": 136,
+      "rva": "0x12b0010",
+      "symbol": "DualThreadAllocator<DynamicHeapAllocator>::PrintDetailedMemoryStatistics",
+      "displacement": 64
+    },
+    {
+      "stack_offset": 184,
+      "rva": "0x78f1c1",
+      "symbol": "UnloadMono",
+      "displacement": 2017
+    },
+    {
+      "stack_offset": 200,
+      "rva": "0x1debb00",
+      "symbol": "`string'",
+      "displacement": 8
+    },
+    {
+      "stack_offset": 224,
+      "rva": "0x1debb00",
+      "symbol": "`string'",
+      "displacement": 8
+    },
+    {
+      "stack_offset": 232,
+      "rva": "0x8096db",
+      "symbol": "UnityMainImpl",
+      "displacement": 5963
+    },
+    {
+      "stack_offset": 240,
+      "rva": "0x1debb00",
+      "symbol": "`string'",
+      "displacement": 8
+    },
+    {
+      "stack_offset": 320,
+      "rva": "0x1debb08",
+      "symbol": "`string'",
+      "displacement": 0
+    }
+  ],
+  "limit": "Symbol names can represent linker-folded functions. This is a stack-pointer scan, not a debugger-unwound call stack; it supports native static-cleanup localization rather than a proven source-level engine cause."
+}

@@ -10,8 +10,8 @@ public class DatabaseService : MonoBehaviour
     public void Initialize()
     {
         string dbPath = Path.Combine(Application.persistentDataPath, "game.db");
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        // Explicitly isolated Editor/development-player QA never opens the player's database.
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || FONT10_QA_PLAYER
+        // Explicit QA builds can use disposable storage; ordinary release builds keep the original path.
         string testPath = System.Environment.GetEnvironmentVariable("COGNA_TEST_DATABASE_PATH");
         if (!string.IsNullOrEmpty(testPath)) dbPath = testPath;
 #endif

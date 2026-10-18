@@ -55,7 +55,9 @@ public sealed class UI13MonthlyResultTests
     { Assert.Throws<ArgumentNullException>(()=>MonthlyResultPresentation.Build(null)); }
     [Test] public void MonthlyCompositionMatchesApprovedPivotsAndOrder()
     {
-        var scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity",UnityEditor.SceneManagement.OpenSceneMode.Additive);
+        var scene=UnityEngine.SceneManagement.SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");
+        bool opened=!scene.isLoaded;
+        if(opened)scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity",UnityEditor.SceneManagement.OpenSceneMode.Additive);
         try
         {
             var view=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<MonthlyResultView>(true)).Single();
@@ -70,6 +72,6 @@ public sealed class UI13MonthlyResultTests
             }
             Assert.AreEqual(22,view.Rows.Count);Assert.AreEqual(4,view.Bars.Count);Assert.NotNull(view.ContinueButton.GetComponent<SharedControlAppearance>());
         }
-        finally { UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene,true); }
+        finally { if(opened)UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene,true); }
     }
 }

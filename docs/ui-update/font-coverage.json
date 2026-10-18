@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "task": "FONT-01",
-  "status": "FONT-01 preserved; FONT-04 providers and FONT-05..09 consumers integrated and validated; FONT-10 pending",
+  "status": "homologado FONT-01 a FONT-10; consumidores salvos e observações runtime distinguem templates inativos de observação ativa",
   "date": "2026-10-17",
   "production_scene": "Assets/Scenes/GameScene.unity",
   "build_scenes": [
@@ -233200,5 +233200,11 @@
     "focused_checks": 39,
     "captures": 339,
     "qa": "docs/ui-update/qa/FONT-09.json"
+  },
+  "font10": {
+    "qa": "docs/ui-update/qa/FONT-10.json",
+    "saved_consumers": 1190,
+    "matrix": "output/ui-update/fonts/FONT-10/screen-resolution-state-matrix.csv",
+    "sizes": "Todos os consumidores serializados de produção têm target.final_size explícito; tokens não sobrescrevem esses tamanhos."
   }
 }

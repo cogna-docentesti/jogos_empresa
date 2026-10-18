@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "task": "FONT-03",
-  "status": "concluído",
-  "date": "2026-10-17",
+  "status": "assets e integração homologados FONT-10",
+  "date": "2026-10-18",
   "unity": "6000.3.20f1",
   "package": "com.unity.ugui 2.0.0, fingerprint e20f1880fa04 (TMP integrado)",
   "generator": "Assets/Editor/UI/ConceptFontAssetGenerator.cs",
@@ -1289,7 +1289,7 @@
     "baked_atlas_materials": true,
     "source_font_required_at_runtime": false,
     "system_fonts": false,
-    "tested": "Resource load, transitive asset dependencies, static coverage and advancing Play-mode Game View in Editor. Standalone Player build remains FONT-10."
+    "tested": "Windows graphical Player built and executed in FONT-10; six static primary atlases and finite fallbacks verified without sourceFontFile references. Android APK built; physical runtime not tested."
   },
   "regeneration": {
     "guid_and_subasset_local_ids_stable": true,
@@ -1306,5 +1306,11 @@
   "font09": {
     "qa": "docs/ui-update/qa/FONT-09.json",
     "faces": "Six existing production faces and three finite fallbacks reused; per-message materials/atlases prohibited."
+  },
+  "font10": {
+    "qa": "docs/ui-update/qa/FONT-10.json",
+    "windows_player": "output/ui-update/fonts/FONT-10/windows-player/font-assets.json",
+    "android_build": "output/ui-update/fonts/FONT-10/build-android.json",
+    "android_device_runtime": false
   }
 }

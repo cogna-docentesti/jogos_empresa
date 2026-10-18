@@ -11,9 +11,9 @@ using UnityEngine;
 public sealed class UI03SharedComponentsTests
 {
     [Test]
-    public void All277SpritesRemainSingleAndAllManifestImportsMatchCurrentContract()
+    public void All280SpritesRemainSingleAndAllManifestImportsMatchCurrentContract()
     {
-        Assert.AreEqual(277,Directory.GetFiles("Assets/Art/new","*.png",SearchOption.AllDirectories).Length);
+        Assert.AreEqual(280,Directory.GetFiles("Assets/Art/new","*.png",SearchOption.AllDirectories).Length);
         foreach(var path in Directory.GetFiles("Assets/Art/new","*.png",SearchOption.AllDirectories))
             Assert.AreEqual(SpriteImportMode.Single,((TextureImporter)AssetImporter.GetAtPath(path.Replace('\\','/'))).spriteImportMode,path);
         foreach(var rule in SharedUiImportRules.Read())

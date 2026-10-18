@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "date": "2026-10-17",
-  "status": "UI-01 a UI-20 integradas; contrato final aferido nas cinco viewports do Editor e no Windows Player. Runtime Android em aparelho não homologado.",
+  "date": "2026-10-18",
+  "status": "Tipografia FONT-01 a FONT-10 homologada no escopo documentado: cinco viewports do Editor e renderização/fluxo no Windows Player. Encerramento nativo Windows falha e não está homologado. APK Android gerado; aparelho não testado.",
   "source_of_truth": [
     "docs/art/tokens.json",
     "docs/art/manifest.json",
@@ -56,18 +56,20 @@
   ],
   "typography": {
     "renderer": "TextMeshPro",
-    "family": "Inter Tight existente no projeto; preservar fallback para acentos, moeda e números.",
-    "source": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
+    "family": "Roboto / Roboto Condensed, seis faces estáticas reais por papel tipográfico.",
+    "source": "Assets/Resources/UI/ConceptFontSet.asset",
     "sizes_are_proposal": false,
-    "size_note": "Valores finais UI-02 aferidos na identificação e no catálogo real Banco CogCred nas três resoluções; fonte compartilhada GameTypography.cs.",
+    "size_note": "Defaults de GameTypography e tamanhos finais por consumidor homologados em FONT-10; font-contract.json e font-coverage.json.",
     "weights": {
-      "titles": "Bold (TMP Inter Tight existente)",
-      "body": "Regular",
-      "button": "Bold",
-      "values": "Bold quando destaque; Regular para valores de card"
+      "titles": "Roboto Bold 700; títulos compactos Roboto Condensed Bold 700",
+      "body": "Roboto Regular 400",
+      "button": "Roboto Condensed SemiBold 600",
+      "navigation": "Roboto Condensed Medium 500",
+      "caption": "Roboto Condensed Regular 400",
+      "values": "Roboto Regular 400; totais e KPIs Roboto Bold 700"
     },
-    "layout": "Corpo alinhado à esquerda; valores monetários alinhados à direita; cabeçalhos/botões conforme componente. Evitar sombras duplicadas antigas e autosize sem limites.",
-    "responsive": "Redimensionar/refluir o layout antes de reduzir texto; definir limites de autosize e garantir leitura na resolução física menor.",
+    "layout": "Corpo alinhado à esquerda e moeda à direita, com hierarquia por papel explícito. Geometria e scroll precedem ajuste pontual de tamanho; autosize desligado nos consumidores homologados.",
+    "responsive": "Quadro uniforme 1920x1080. Refluir caixas e usar scroll nativo; fonte e Transform do texto em escala 1, sem autosize de contadores.",
     "final_sizes_px": {
       "screen_title": 44,
       "section_title": 32,
@@ -91,11 +93,217 @@
         0,
         0
       ],
-      "native_line_height_em": 1.21
+      "native_line_height_em": 1.171875,
+      "native_line_height_em_by_face": {
+        "Roboto-Regular": 1.171875,
+        "Roboto-Bold": 1.171875,
+        "RobotoCondensed-Regular": 1.171875,
+        "RobotoCondensed-Medium": 1.171875,
+        "RobotoCondensed-SemiBold": 1.171875,
+        "RobotoCondensed-Bold": 1.171875,
+        "NotoSans-Regular": 1.3619999999999999,
+        "NotoSans-Bold": 1.3619999999999999,
+        "NotoSansMath-Arrows": 1.492
+      }
     },
-    "overflow": "Sem autosize global. Corpo longo quebra linha em caixa dimensionada; rótulo limitado Truncate; inputs usam máscara e scroll horizontal. Não depender do glifo de reticências em overflow.",
-    "material": "Material compartilhado Inter Tight, FaceColor branco, OutlineWidth 0 e Underlay desativado. Sem sombra de texto duplicada.",
-    "feedback": "Toast usa Inter Tight no tamanho Body=24, texto Ink sobre a superfície clara e altura adaptada ao texto nativo; severidade mantém prefixo textual e sprite. Valores financeiros pequenos usam cores mais escuras com contraste medido sobre o centro real de UI_TABLE_TOTAL_COLUMN, separado das cores decorativas dos ícones."
+    "overflow": "Corpo longo quebra em caixas dimensionadas pela métrica nativa e usa scroll quando necessário. Sem truncamento ou ellipsis para esconder problemas; inputs usam máscara e scroll horizontal.",
+    "material": "Material neutro compartilhado de cada face: FaceColor branco, FaceDilate/WeightNormal/WeightBold/OutlineWidth 0 e Underlay desativado. Sem negrito sintético cumulativo.",
+    "feedback": "Toast, tooltip e ajuda usam Roboto Regular; o corpo nativo determina a altura da superfície. Ações usam Condensed SemiBold. Severidade, contraste e ícones mantêm o contrato de cores.",
+    "roles": {
+      "brand": {
+        "role": "brand",
+        "family": "Roboto",
+        "weight": 700,
+        "face": "Bold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+        "start_size": 36,
+        "token_size": 36,
+        "final_size": 36,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "screen_title": {
+        "role": "screen_title",
+        "family": "Roboto",
+        "weight": 700,
+        "face": "Bold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+        "start_size": 44,
+        "token_size": 44,
+        "final_size": 44,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "section_title": {
+        "role": "section_title",
+        "family": "Roboto Condensed",
+        "weight": 700,
+        "face": "Bold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+        "start_size": 32,
+        "token_size": 32,
+        "final_size": 32,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "body": {
+        "role": "body",
+        "family": "Roboto",
+        "weight": 400,
+        "face": "Regular",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+        "start_size": 24,
+        "token_size": 24,
+        "final_size": 24,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "input": {
+        "role": "input",
+        "family": "Roboto",
+        "weight": 400,
+        "face": "Regular",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+        "start_size": 24,
+        "token_size": 24,
+        "final_size": 24,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "table": {
+        "role": "table",
+        "family": "Roboto",
+        "weight": 400,
+        "face": "Regular",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+        "start_size": 22,
+        "token_size": 22,
+        "final_size": 22,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "table_total": {
+        "role": "table_total",
+        "family": "Roboto",
+        "weight": 700,
+        "face": "Bold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+        "start_size": 22,
+        "token_size": 22,
+        "final_size": 22,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "kpi": {
+        "role": "kpi",
+        "family": "Roboto",
+        "weight": 700,
+        "face": "Bold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+        "start_size": 42,
+        "token_size": 42,
+        "final_size": 42,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "button": {
+        "role": "button",
+        "family": "Roboto Condensed",
+        "weight": 600,
+        "face": "SemiBold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+        "start_size": 24,
+        "token_size": 24,
+        "final_size": 24,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "navigation": {
+        "role": "navigation",
+        "family": "Roboto Condensed",
+        "weight": 500,
+        "face": "Medium",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+        "start_size": 22,
+        "token_size": 22,
+        "final_size": 22,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "label": {
+        "role": "label",
+        "family": "Roboto Condensed",
+        "weight": 500,
+        "face": "Medium",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+        "start_size": 22,
+        "token_size": 22,
+        "final_size": 22,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "caption": {
+        "role": "caption",
+        "family": "Roboto Condensed",
+        "weight": 400,
+        "face": "Regular",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+        "start_size": 20,
+        "token_size": 20,
+        "final_size": 20,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      },
+      "map_marker": {
+        "role": "map_marker",
+        "family": "Roboto Condensed",
+        "weight": 600,
+        "face": "SemiBold",
+        "font_asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+        "start_size": null,
+        "token_size": null,
+        "final_size": 24,
+        "size_status": "Token default homologado; tamanhos finais por consumidor em font-coverage.json.",
+        "scale": 1,
+        "synthetic_bold": false,
+        "material": "neutro compartilhado da face"
+      }
+    },
+    "finite_fallbacks": {
+      "assets": [
+        "NotoSans-Regular",
+        "NotoSans-Bold",
+        "NotoSansMath-Arrows"
+      ],
+      "coverage": 536,
+      "population": "Static",
+      "system_fonts": false,
+      "manifest": "docs/ui-update/font-assets.json"
+    }
   },
   "layout": {
     "canvas_px": [
@@ -161,5 +369,15 @@
     "Alterar motor trimestral, balanceamento ou criar backend documental silenciosamente"
   ],
   "implementation_evidence": "docs/ui-update/qa/UI-02.json",
-  "final_validation": "docs/ui-update/qa/UI-20.json"
+  "final_validation": "docs/ui-update/qa/UI-20.json",
+  "font_homologation": {
+    "task": "FONT-10",
+    "date": "2026-10-18",
+    "qa": "docs/ui-update/qa/FONT-10.json",
+    "gallery": "output/ui-update/fonts/index.html",
+    "sizes": "docs/ui-update/font-coverage.json",
+    "android_device_runtime": false,
+    "windows_native_shutdown": false,
+    "platform_limits": "A tipografia e o fluxo renderizado passaram. O Player Windows falha na limpeza nativa ao fechar (0xc0000005); encerramento não homologado. Android mantém o aviso de entrada Both e não foi executado em aparelho."
+  }
 }

@@ -101,11 +101,12 @@ public static class UI12EventValidation
         int sizeIndex = 0;
         foreach (var resolution in UiValidationContext.Resolutions)
         {
-            var size = resolution; string res = size.x + "x" + size.y; int optionIndex = sizeIndex++;
+            var size = resolution; string res = size.x + "x" + size.y; int viewportIndex = sizeIndex++;
             Add("Prepare viewport " + res, () => UI01Validation.SetGameView(size.x, size.y));
             foreach (var data in catalog)
             {
                 var e = data; string tag = e.id + "-" + res;
+                int optionIndex = viewportIndex % e.options.Length;
                 Add("Open actual catalog " + tag, () => { Fixture(); Controller.OpenDecision(e, 1, 16, () => callbacks++); });
                 Add("Read all options and illustration " + tag, () =>
                 {

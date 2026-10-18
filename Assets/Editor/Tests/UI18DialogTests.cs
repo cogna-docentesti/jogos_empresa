@@ -96,7 +96,10 @@ public sealed class UI18DialogTests
             var root=scene.GetRootGameObjects().Single(g=>g.name=="Canvas").transform;
             foreach(var path in new[]{"ExitUI/ExitDialog","Panel_Establishment/PanelReset","Panel_FinalReport/NewGameDialog","Panel_Bankruptcy/NewGameDialog","Panel_Equipment/CartModal"})
             {
-                var modal=root.Find(path); Assert.IsNotNull(modal.GetComponent<SharedModalFocus>(),path); Assert.IsNotNull(modal.GetComponent<Canvas>(),path); Assert.IsNotNull(modal.GetComponent<UnityEngine.UI.GraphicRaycaster>(),path);
+                // ShowWarning legitimately promotes the reset modal to Canvas for modal ownership.
+                var modal=root.Find(path) ?? (path=="Panel_Establishment/PanelReset"?root.Find("PanelReset"):null);
+                Assert.IsNotNull(modal,path);
+                Assert.IsNotNull(modal.GetComponent<SharedModalFocus>(),path); Assert.IsNotNull(modal.GetComponent<Canvas>(),path); Assert.IsNotNull(modal.GetComponent<UnityEngine.UI.GraphicRaycaster>(),path);
                 foreach(var i in modal.GetComponentsInChildren<UnityEngine.UI.Image>(true).Where(i=>i.sprite!=null)) Assert.IsTrue(UnityEditor.AssetDatabase.GetAssetPath(i.sprite).StartsWith("Assets/Art/new/"),path+"/"+i.name);
                 foreach(var text in modal.GetComponentsInChildren<TMPro.TMP_Text>(true))
                 {

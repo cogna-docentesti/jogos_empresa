@@ -1,0 +1,157 @@
+{
+  "passed": true,
+  "result": "Succeeded",
+  "target": "StandaloneWindows64",
+  "profile": "Assets/Settings/Build Profiles/New Windows Profile.asset",
+  "profileSubtarget": 2,
+  "effectiveSubtarget": 2,
+  "profileUsed": true,
+  "options": "ForceOptimizeScriptCompilation, Il2CPP, CompressTextures, StripDebugSymbols, ShaderLivelinkSupport, Development",
+  "note": "Existing profile used directly; development validation instrumentation enabled. Profile files remain unchanged.",
+  "output": "D:\\Cogna\\jogos_empresa\\Builds\\FONT-10\\Windows\\Cogna.exe",
+  "scenes": [
+    "Assets/Scenes/GameScene.unity"
+  ],
+  "errors": 0,
+  "warnings": 0,
+  "bytes": 487495613,
+  "seconds": 249.5803664,
+  "sessionPreserved": false,
+  "steps": [
+    {
+      "name": "Build player",
+      "messages": []
+    },
+    {
+      "name": "Preprocess Player",
+      "messages": [
+        {
+          "type": "Log",
+          "content": "1 URP assets included in build\r\n- UniversalRP - Assets/Settings/UniversalRP.asset\r\n\t - Renderer2D - Assets/Settings/Renderer2D.asset - UnityEngine.Rendering.Universal.Renderer2DData\r\n"
+        },
+        {
+          "type": "Log",
+          "content": "[TestRunBuilder] Creating new file 'Assets/Resources/PerformanceTestRunInfo.json' (3186 bytes)"
+        },
+        {
+          "type": "Log",
+          "content": "[TestRunBuilder] Creating new file 'Assets/Resources/PerformanceTestRunSettings.json' (23 bytes)"
+        }
+      ]
+    },
+    {
+      "name": "Prepare For Build",
+      "messages": []
+    },
+    {
+      "name": "ProducePlayerScriptAssemblies",
+      "messages": []
+    },
+    {
+      "name": "Prebuild Cleanup and Recompile",
+      "messages": []
+    },
+    {
+      "name": "Compile scripts",
+      "messages": []
+    },
+    {
+      "name": "Generate and validate platform script types",
+      "messages": []
+    },
+    {
+      "name": "Verify Build setup",
+      "messages": []
+    },
+    {
+      "name": "GetUnityAssemblies",
+      "messages": []
+    },
+    {
+      "name": "GetPlayerAssemblies",
+      "messages": []
+    },
+    {
+      "name": "Check old data build",
+      "messages": []
+    },
+    {
+      "name": "Prepare assets for target platform",
+      "messages": []
+    },
+    {
+      "name": "Prepare splash screen",
+      "messages": [
+        {
+          "type": "Log",
+          "content": "Including Unity Splash Screen logo because 'Show Unity Logo' is enabled."
+        }
+      ]
+    },
+    {
+      "name": "Building scenes",
+      "messages": []
+    },
+    {
+      "name": "Building scene Assets/Scenes/GameScene.unity",
+      "messages": []
+    },
+    {
+      "name": "Build scripts DLLs",
+      "messages": []
+    },
+    {
+      "name": "GetSystemAssemblies",
+      "messages": []
+    },
+    {
+      "name": "Build GlobalGameManagers file",
+      "messages": []
+    },
+    {
+      "name": "Writing asset files",
+      "messages": []
+    },
+    {
+      "name": "Packaging assets - globalgamemanagers.assets",
+      "messages": []
+    },
+    {
+      "name": "Packaging assets - resources.assets",
+      "messages": []
+    },
+    {
+      "name": "Packaging assets - sharedassets0.assets = additional assets for scene 0: Assets/Scenes/GameScene.unity",
+      "messages": []
+    },
+    {
+      "name": "Building Resources/unity_builtin_extra",
+      "messages": []
+    },
+    {
+      "name": "Write data build dirty tracking information",
+      "messages": []
+    },
+    {
+      "name": "Postprocess built player",
+      "messages": [
+        {
+          "type": "Log",
+          "content": "Stripping Runtime Debug Shader Variants, you won't be able to use some features of Rendering Debugger in the Player Build."
+        }
+      ]
+    },
+    {
+      "name": "Setup incremental player build",
+      "messages": []
+    },
+    {
+      "name": "Incremental player build",
+      "messages": []
+    },
+    {
+      "name": "Report output files",
+      "messages": []
+    }
+  ]
+}

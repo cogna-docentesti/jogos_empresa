@@ -1,0 +1,183 @@
+{
+  "task": "FONT-10",
+  "status": "concluído no escopo tipográfico, com ressalvas de plataforma",
+  "typography_accepted": true,
+  "full_player_homologation": false,
+  "platform_checks": [
+    {
+      "name": "Windows Player clean native shutdown",
+      "passed": false,
+      "exit_code": 3221225477,
+      "scope": "engine/platform, distinct from typography assertions"
+    }
+  ],
+  "date": "2026-10-18",
+  "unity": "6000.3.20f1",
+  "scope": "Final typography validation for UI-01 through UI-20; native Windows shutdown remains a recorded platform failure",
+  "validation": {
+    "edit_tests": 398,
+    "edit_execution": "NUnit fixture methods invoked with their existing setup, teardown and parameterized cases; per-case JSON, not a Unity Test Runner XML claim.",
+    "serialized_consumers": 1190,
+    "native_suites": {
+      "campaigns": {
+        "checks": 1055,
+        "report": "output/ui-update/fonts/FONT-10/campaigns/playmode.json"
+      },
+      "supplemental": {
+        "checks": 215,
+        "report": "output/ui-update/fonts/FONT-10/supplemental/playmode-supplemental.json"
+      },
+      "states": {
+        "checks": 1132,
+        "report": "output/ui-update/fonts/FONT-10/states/playmode.json"
+      },
+      "events": {
+        "checks": 625,
+        "report": "output/ui-update/fonts/FONT-10/events/playmode-events.json"
+      },
+      "feedback": {
+        "checks": 221,
+        "report": "output/ui-update/fonts/FONT-10/feedback/playmode.json"
+      },
+      "dialogs": {
+        "checks": 246,
+        "report": "output/ui-update/fonts/FONT-10/dialogs/playmode.json"
+      },
+      "stress": {
+        "checks": 77,
+        "report": "output/ui-update/fonts/FONT-10/stress/playmode.json"
+      }
+    },
+    "editor_checks": 3571,
+    "editor_captures": 1444,
+    "editor_text_observations": 66682,
+    "overflow": 0,
+    "wrong_or_null_font_material": 0,
+    "synthetic_bold_autosize": 0,
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2340,
+        1080
+      ]
+    ],
+    "mobile_safe_area": {
+      "rect": [
+        90,
+        24,
+        2160,
+        1056
+      ],
+      "mode": "Editor simulation, not physical hardware"
+    },
+    "windows": {
+      "build": {
+        "result": "Succeeded",
+        "profile": "Assets/Settings/Build Profiles/New Windows Profile.asset",
+        "profileUsed": true,
+        "output": "D:\\Cogna\\jogos_empresa\\Builds\\FONT-10\\Windows\\Cogna.exe",
+        "errors": 0,
+        "warnings": 0,
+        "bytes": 419610352,
+        "seconds": 26.8808881
+      },
+      "player": {
+        "passed": true,
+        "error": null,
+        "unity": "6000.3.20f1",
+        "platform": "WindowsPlayer",
+        "frame": 57081,
+        "captures": 79,
+        "database": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\fonts\\FONT-10\\windows-player\\qa-515bc9db-7c4f-4561-a3a3-bdf048fbb6f6.db",
+        "key": "Cogna.Font10.Windows.487e5f2e-f363-46fc-9fa0-9badd7c4d540",
+        "actualPlayer": true,
+        "developmentBuild": false
+      },
+      "checks": {
+        "campaigns": 211,
+        "supplemental": 43
+      },
+      "process_exit": {
+        "exit_code": 3221225477,
+        "finished_utc": "2026-10-18T16:50:15.435685+00:00"
+      },
+      "font_assets": "output/ui-update/fonts/FONT-10/windows-player/font-assets.json",
+      "installed_family_diagnostic": [
+        "Roboto"
+      ],
+      "font_dependency_proof": "All six primaries and finite fallback assets have sourceFontFile=null, static atlases, bound materials and finite glyph coverage with dynamic insertion disabled. Captured character glyphs resolve only to these bundled assets."
+    },
+    "android": {
+      "build": {
+        "result": "Succeeded",
+        "profile": "Assets/Settings/Build Profiles/Android™.asset",
+        "profileUsed": true,
+        "output": "D:\\Cogna\\jogos_empresa\\Builds\\FONT-10\\Android\\Cogna.apk",
+        "errors": 0,
+        "warnings": 1,
+        "bytes": 1393774360,
+        "seconds": 607.81689
+      },
+      "device_runtime_tested": false,
+      "adb_devices": [],
+      "existing_input_warning": {
+        "existing_setting": "Active Input Handling = Both",
+        "observed_warning": "Unsupported Input Handling on Android",
+        "message": "Unity warns that Both is unsupported on Android and might cause input and performance issues.",
+        "build_action": "Ignore once to produce the conditional APK with the existing profile. No input setting was changed.",
+        "device_runtime_tested": false,
+        "limit": "APK generation does not homologate touch/input behavior on hardware. The existing input-mode warning remains a platform limitation."
+      }
+    },
+    "source_license_files_verified": 22,
+    "corpus": 536,
+    "finite_fallbacks": 3,
+    "primary_faces": 6
+  },
+  "accepted": [
+    "All 1190 saved scene/prefab TMP consumers have role-correct native faces and shared neutral materials, including inactive templates. Legacy scenes and third-party samples are explicitly separated in the GUID audit.",
+    "Real registration, editing, D3 first persistence, navigation, scene resume, three month closes, completion, bankruptcy, history and confirmations use disposable SQLite and identification keys.",
+    "All six native interaction suites run in five viewports. The wide signed monetary fixture, enable/rebind cycles and all 536 corpus points run in an additional focused pass.",
+    "Current renderings are compared with all five approved concepts, with crop coordinates and uniform proportional scales declared. Roboto/Roboto Condensed remain approved approximations.",
+    "Windows graphical Player executes all 254 preserved campaign assertions and 79 captures, loads the bundled font set, and checks all six static atlases/materials and finite fallback coverage. Its native engine shutdown fails and remains explicitly unhomologated."
+  ],
+  "evidence": {
+    "gallery": "output/ui-update/fonts/index.html",
+    "matrix": "output/ui-update/fonts/FONT-10/screen-resolution-state-matrix.csv",
+    "manifest": "output/ui-update/fonts/FONT-10/capture-manifest.json",
+    "audit": "output/ui-update/fonts/FONT-10/source-guid-audit.json",
+    "saved_audit": "output/ui-update/fonts/FONT-10/saved-audit.json",
+    "concepts": "output/ui-update/fonts/FONT-10/concept-comparisons.json",
+    "source_hashes": "output/ui-update/fonts/FONT-10/source-license-hashes.json",
+    "preservation": "output/ui-update/fonts/FONT-10/baseline-preservation.json",
+    "session": "output/ui-update/fonts/FONT-10/scene-user-storage-preservation.json",
+    "windows_build": "output/ui-update/fonts/FONT-10/build-windows.json",
+    "windows_player": "output/ui-update/fonts/FONT-10/windows-player/execution.json",
+    "android_build": "output/ui-update/fonts/FONT-10/build-android.json"
+  },
+  "limits": [
+    "No Android phone or emulator is attached; APK build validation does not claim device execution.",
+    "Android keeps the preexisting Both input setting. Unity warned that it is unsupported on Android; APK generation continued without changing it. Touch/input behavior requires a device test.",
+    "Both Development and the final non-development Windows Player complete all typography/campaign assertions but crash during native engine static cleanup, with exit 0xc0000005. A preexisting UI-20 Development Player had the same Development module/version/offset. Matching installed symbols localize the final release failure to native static cleanup. The clean-shutdown check remains failed; full Windows Player homologation is false. No engine binary, accessibility feature or system setting was altered to suppress it.",
+    "Roboto is installed on this Windows host; no OS-font-uninstalled machine was used. Independence is established by sourceFontFile=null, static atlas/material checks and actual per-character bundled glyph sources. Installed system fonts were preserved.",
+    "The 536-codepoint corpus is finite. Other scripts, emoji and future input coverage require an explicit extension.",
+    "The concepts use drawn typography. The production families are approximations; real catalog detail, text density, case, artwork and economic content differ. Side-by-side comparisons retain those differences.",
+    "An initial Edit-mode audit mutated transient UI presentation; a recovery attempt caused an Editor crash. The sole Editor was restarted, recovery backups were preserved, and entry/recovered/final scene snapshots were verified byte-identical. Native instance IDs were recreated by the restart.",
+    "Validation is of the recorded working baseline, including preexisting uncommitted concept work. The commit selects FONT-10 changes and justified dependencies; it does not claim a clean checkout build of unrelated prior deltas."
+  ]
+}

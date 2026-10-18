@@ -32,8 +32,8 @@ namespace Game.Infrastructure.Session
         {
             get
             {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-                // Editor/development QA opts into a separate key; release keeps the original key.
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || FONT10_QA_PLAYER
+                // Explicit QA builds opt into a separate key; ordinary release keeps the original key.
                 string testKey = Environment.GetEnvironmentVariable("COGNA_TEST_IDENTIFICATION_KEY");
                 if (!string.IsNullOrEmpty(testKey)) return testKey;
 #endif

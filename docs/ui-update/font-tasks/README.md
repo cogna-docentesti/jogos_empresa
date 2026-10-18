@@ -1,6 +1,6 @@
 # Substituição da tipografia para aproximar os concepts
 
-Data: 17/10/2026. Status: **FONT-01 a FONT-09 concluídos; FONT-10 pendente**.
+Data: 18/10/2026. Status: **FONT-01 a FONT-10 concluídos no escopo tipográfico, com ressalvas de plataforma — QA de 18/10/2026**.
 
 Este lote substitui a Inter Tight usada na interface por Roboto e Roboto Condensed, distribuídas por função visual. Inclui localizar ou baixar as fontes, criar os assets TextMeshPro necessários e aplicar a mudança nas interfaces reais. Os registros de conclusão de UI-01 a UI-20 continuam sendo evidências da entrega anterior; não comprovam esta substituição.
 
@@ -8,9 +8,9 @@ Este lote substitui a Inter Tight usada na interface por Roboto e Roboto Condens
 
 Os cinco concepts estão em [art-source/references/concepts](../../../art-source/references/concepts). A [análise comparativa](../../../output/ui-update/font-identification/index.html) encontrou semelhança com Roboto e Roboto Condensed. Os concepts são imagens geradas, sem uma família tipográfica identificada no prompt. O objetivo é reproduzir sua aparência com fontes reais, sem afirmar uma identificação exata.
 
-A matriz abaixo é a decisão inicial deste lote. Aferir altura aparente, peso, largura e espaçamento nas telas, em vez de considerar concluída uma simples troca de arquivo. Barlow e Source Sans 3 são alternativas da pesquisa, não famílias obrigatórias a importar.
+A matriz abaixo registra os defaults homologados; tamanhos específicos de cada consumidor estão em font-coverage.json. Aferir altura aparente, peso, largura e espaçamento nas telas, em vez de considerar concluída uma simples troca de arquivo. Barlow e Source Sans 3 são alternativas da pesquisa, não famílias obrigatórias a importar.
 
-| Função | Família e peso inicial | Tamanho inicial no quadro 1920×1080 |
+| Função | Família e peso homologados | Default no quadro 1920×1080 |
 | --- | --- | --- |
 | Marca “Jogos de Empresa” | Roboto Bold 700 | 36 |
 | Título principal de tela | Roboto Bold 700 | 44 |
@@ -21,9 +21,9 @@ A matriz abaixo é a decisão inicial deste lote. Aferir altura aparente, peso, 
 | Botões principais e secundários | Roboto Condensed SemiBold 600 | 24 |
 | Navegação, filtros e rótulos compactos | Roboto Condensed Medium 500 | 22–24 |
 | Legendas e informação secundária curta | Roboto Condensed Regular 400 | 20 |
-| Marcadores de mapa | Roboto Condensed SemiBold 600 | Partir do tamanho vigente por marcador |
+| Marcadores de mapa | Roboto Condensed SemiBold 600 | Tamanho explícito por consumidor |
 
-Os tamanhos são os tokens atuais como ponto de partida, não novos valores já homologados. Nomes de funções não devem virar heurísticas baseadas apenas no nome do GameObject. Registrar o papel de cada texto e as exceções justificadas por comparação visual.
+Os defaults e os tamanhos finais por consumidor foram homologados pela FONT-10. Nomes de funções não devem virar heurísticas baseadas apenas no nome do GameObject. Registrar o papel de cada texto e as exceções justificadas por comparação visual.
 
 ## Estado inventariado na FONT-01
 
@@ -35,7 +35,7 @@ Os tamanhos são os tokens atuais como ponto de partida, não novos valores já 
 
 ## Tarefas e ordem de execução
 
-O inventário de FONT-01 está concluído; a substituição das fontes ainda está planejada. Cada arquivo contém escopo, dependências, implementação e critérios de aceite.
+O lote FONT-01 a FONT-10 está concluído; ver [QA final](../qa/FONT-10.json) e [galeria global](../../../output/ui-update/fonts/index.html). Cada arquivo contém escopo, dependências, implementação e critérios de aceite.
 
 | Ordem | Tarefa | Depende de | Status |
 | --- | --- | --- | --- |
@@ -48,7 +48,7 @@ O inventário de FONT-01 está concluído; a substituição das fontes ainda est
 | 7 | [FONT-07 — Banco, equipamentos e equipe](FONT-07-banco-equipamentos-e-equipe.md) | FONT-06 | Concluído — [QA](../qa/FONT-07.json) |
 | 8 | [FONT-08 — DRE, relatórios, conclusão e falência](FONT-08-dre-relatorios-e-falencia.md) | FONT-07 | Concluído — [QA](../qa/FONT-08.json) |
 | 9 | [FONT-09 — Eventos, diálogos, feedback e ajuda](FONT-09-eventos-dialogos-e-ajuda.md) | FONT-08 | Concluído — [QA](../qa/FONT-09.json) |
-| 10 | [FONT-10 — Validação final e atualização do contrato](FONT-10-validacao-final.md) | FONT-09 | Pendente |
+| 10 | [FONT-10 — Validação final e atualização do contrato](FONT-10-validacao-final.md) | FONT-09 | Concluído — [QA](../qa/FONT-10.json) |
 
 Executar nessa ordem para manter uma referência coerente durante as alterações da mesma cena. Um pedido de execução do lote autoriza percorrer a sequência; os arquivos permitem também solicitar uma tarefa individual.
 
@@ -90,3 +90,7 @@ Executar nessa ordem para manter uma referência coerente durante as alteraçõe
 > Execute FONT-01 conforme docs/ui-update/font-tasks/FONT-01-inventario-e-matriz.md, seguindo o índice do lote e registrando os resultados reais.
 
 > Execute o lote FONT-01 a FONT-10 de docs/ui-update/font-tasks/README.md, incluindo downloads necessários, geração dos assets TMP, integração nas interfaces e validação final.
+
+## Ressalvas finais de plataforma
+
+A tipografia e o fluxo renderizado passaram. O Player Windows falha na limpeza nativa ao fechar (0xc0000005); encerramento não homologado. Android mantém o aviso de entrada Both e não foi executado em aparelho. O check de encerramento permanece falho no QA; não equivale à homologação completa do Player. Roboto está instalada neste host: a independência foi verificada por referências sourceFontFile nulas e glifos de atlas estáticos, sem desinstalar fontes do sistema.

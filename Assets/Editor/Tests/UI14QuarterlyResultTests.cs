@@ -94,7 +94,9 @@ public sealed class UI14QuarterlyResultTests
     }
     [Test] public void QuarterlyCompositionAndHandAnchorsMatchApprovedContract()
     {
-        var scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity",UnityEditor.SceneManagement.OpenSceneMode.Additive);
+        var scene=UnityEngine.SceneManagement.SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");
+        bool opened=!scene.isLoaded;
+        if(opened)scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity",UnityEditor.SceneManagement.OpenSceneMode.Additive);
         try
         {
             var view=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<QuarterlyResultView>(true)).Single();
@@ -116,6 +118,6 @@ public sealed class UI14QuarterlyResultTests
             }
             Assert.AreEqual(25,view.Rows.Count);Assert.AreEqual(3,view.Bars.Count);Assert.NotNull(view.TableScroll.viewport.GetComponent<UnityEngine.UI.Mask>());
         }
-        finally { UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene,true); }
+        finally { if(opened)UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene,true); }
     }
 }
