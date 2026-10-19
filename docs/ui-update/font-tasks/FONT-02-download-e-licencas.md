@@ -61,7 +61,7 @@ python tools/ui/font02_sources.py specimen
 
 `generate` funciona offline com os originais versionados; `verify` regenera em memória, compara os bytes e confere os contornos/métricas. Timestamps das fontes são preservados, sem incorporar o relógio da máquina. As regras restritas ao lote em `.gitattributes` preservam os bytes oficiais e os hashes de `.meta` entre checkouts Windows, mesmo com `core.autocrlf` habilitado. Espaços finais das licenças oficiais e dos `.meta` gerados pelo Unity são mantidos.
 
-No Editor já aberto, atualizar assets e executar `Tools > Jogos de Empresa > FONT-02 > Import and validate source faces` (`Ctrl+Alt+F2`), em Edit mode. O relatório fica em `output/ui-update/fonts/FONT-02/unity-import.json`. O verificador não salva cenas. Não abrir outro Editor contra o projeto aberto. O script `tools/ui/finalize_font02_evidence.py` fecha o QA desta execução a partir dos relatórios aprovados e do baseline local original; o baseline bruto e os pacotes de ferramentas não integram o commit.
+No Editor já aberto, atualizar assets e executar `Tools > Jogos de Empresa > FONT-02 > Import and validate source faces` (`Ctrl+Alt+F2`), em Edit mode. O relatório fica em `output/ui-update/fonts/FONT-02/unity-import.json`. O verificador não salva cenas. Não abrir outro Editor contra o projeto aberto. O empacotamento pontual desta entrega foi retirado após a conclusão; seus relatórios finais foram preservados. Os comandos de aquisição, geração e verificação acima continuam disponíveis.
 
 ## Comando para execução
 

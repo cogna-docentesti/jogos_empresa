@@ -97,3 +97,27 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Automatic scene recovery copies
+/Assets/_Recovery/
+/Assets/_Recovery.meta
+
+# Local Python bytecode; FONT-02 dependencies are inputs to the font tools
+__pycache__/
+*.pyc
+*.pyo
+
+# Disposable copies from retired task acceptance/commit packaging workflows
+/output/ui-update/fonts/*/baseline/
+/output/ui-update/fonts/*/baseline-assets/
+/output/ui-update/fonts/*/baseline-fonts/
+/output/ui-update/fonts/*/baseline-sources/
+/output/ui-update/**/*.backup
+/output/ui-update/fonts/**/*.patch
+/output/ui-update/**/*.nul
+/output/ui-update/**/*.db
+/output/ui-update/**/*.db-shm
+/output/ui-update/**/*.db-wal
+
+# Approved concepts live in art-source/references/concepts
+/output/concept-art/2026-10-13/0*-concept-*.png

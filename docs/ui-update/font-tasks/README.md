@@ -2,6 +2,12 @@
 
 Data: 18/10/2026. Status: **FONT-01 a FONT-10 concluídos no escopo tipográfico, com ressalvas de plataforma — QA de 18/10/2026**.
 
+## Manutenção após a conclusão
+
+Os comandos de aceitação e empacotamento específicos das entregas abaixo são históricos. Foram retirados os orquestradores `ConceptRevisionValidation`, `Font01InventoryValidation`, `Font04RuntimeValidation` e `Font09ExitValidation`, já cobertos pela aceitação final e pela correção Windows, além dos scripts Python de inventário inicial, fechamento de evidências, preparação de commits e investigação do crash antigo. As cópias `baseline*` e os patches usados exclusivamente por esses scripts também foram retirados. O código anterior permanece no histórico Git.
+
+Permanecem os relatórios finais em `docs/ui-update/qa`, as galerias aprovadas, os testes de regressão das interfaces e da tipografia, e `tools/ui/test_windows_shutdown.py`. A geração de fontes continua usando `font02_sources.py`, `font03_support.py`, `requirements-font02.txt`, as dependências de FONT-02 e o `glyph-corpus.json` de FONT-01. As cenas de comparação ainda lidas pelos validadores mantidos foram preservadas.
+
 Este lote substitui a Inter Tight usada na interface por Roboto e Roboto Condensed, distribuídas por função visual. Inclui localizar ou baixar as fontes, criar os assets TextMeshPro necessários e aplicar a mudança nas interfaces reais. Os registros de conclusão de UI-01 a UI-20 continuam sendo evidências da entrega anterior; não comprovam esta substituição.
 
 ## Referência e decisão visual
