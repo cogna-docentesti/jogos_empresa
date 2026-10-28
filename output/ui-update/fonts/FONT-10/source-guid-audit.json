@@ -1,0 +1,696 @@
+{
+  "font_guids": {
+    "af21d9ebff459f840adc72362486ec1a": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+    "d2b79af7b8c7b83428d26881ce6f38b7": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+    "24cb84bd35845c94e9e0f659a7d15ea3": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+    "8a89fa14b10d46a99122fd4f73fca9a2": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asset",
+    "125cb55b44b24c4393181402bc6200e6": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset",
+    "dc36b3fdc14f47ebb36fd484a67e268a": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset",
+    "0161d805a3764c089bef00bfe00793f5": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset",
+    "5302535af1044152a457ed104f1f4b91": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset",
+    "c9adb1f542a93ae489bacfeae21e8394": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF.asset",
+    "14aa93acbb234d16aaef0e8b46814db6": "Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/DropCap Numbers.asset",
+    "f087b58655035e54bbf21e1f658d1f06": "Assets/TextMesh Pro/Fonts/InterTight-Italic.asset",
+    "89cea402e3db5bf4d9bc9d4f698b7692": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
+    "da72d02077bbda74d8f0ae3ef8a436f2": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+    "2c3718d34dc5fc14caf8824bd4ace045": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+    "0aa0cf4df3b55964a923915989ed2948": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+    "f902d93324c078d47802c66a44849482": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+    "4b38925db4dd7204d8d73cfae01569ed": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+    "be88295496768fd49aabf63a873819e2": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+    "2e498d1c8094910479dc3e1b768306a4": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+    "8f586378b4e144a9851e7b34d9b748ee": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+    "c41005c129ba4d66911b75229fd70b45": "Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset"
+  },
+  "references": [
+    {
+      "asset": "Assets/Layer Lab/2D Icons-PictoIconPack01/Scene/DemoScene_2D Icons-PictoIconPack01.unity",
+      "guid": "8f586378b4e144a9851e7b34d9b748ee",
+      "font": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+      "classification": "third-party-scene-outside-build"
+    },
+    {
+      "asset": "Assets/Prefabs/Button_Segment.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_equipment.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_equipment.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_equipment.prefab",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_equipment.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_equipment.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_Generic.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_Generic.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_loan.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_loan.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_loan.prefab",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_loan.prefab",
+      "guid": "89cea402e3db5bf4d9bc9d4f698b7692",
+      "font": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
+      "classification": "residual-nested-prefab-font-override",
+      "note": "Old GUID retained in a serialized nested prefab property override. Exhaustive reopened scene/prefab TMP audit and actual Player observations resolve the current consumers to role-correct production faces. These references remain build dependencies; no primary legacy face was observed. Unrelated prefab overrides are preserved."
+    },
+    {
+      "asset": "Assets/Prefabs/Card_loan.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_ProductItem.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_ProductItem.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_ProductItem.prefab",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_ProductItem.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Card_ProductItem.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Chip.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Chip.prefab",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/DetailRow.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/DetailRow.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/EquipmentCartLine.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/EquipmentCartLine.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/EventOptionCard.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/EventOptionCard.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/MainArea_Equipment.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/MainArea_Equipment.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/MainArea_Equipment.prefab",
+      "guid": "d2b79af7b8c7b83428d26881ce6f38b7",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/MainArea_Equipment.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/MainArea_Equipment.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "guid": "d2b79af7b8c7b83428d26881ce6f38b7",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/Panel_Equipment.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/TeamRoleCard.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/TeamRoleCard.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/TeamRoleCard.prefab",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/TeamRoleCard.prefab",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Accent.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Checkbox.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Danger.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Input.prefab",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Pill.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Primary.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Radio.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Secondary.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/SelectableCard.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Tab.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Prefabs/SharedUI/Toggle.prefab",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Resources/UI/ConceptFontSet.asset",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Resources/UI/ConceptFontSet.asset",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Resources/UI/ConceptFontSet.asset",
+      "guid": "d2b79af7b8c7b83428d26881ce6f38b7",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Resources/UI/ConceptFontSet.asset",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Resources/UI/ConceptFontSet.asset",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Resources/UI/ConceptFontSet.asset",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/0_Identification.unity",
+      "guid": "5302535af1044152a457ed104f1f4b91",
+      "font": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset",
+      "classification": "legacy-scene-outside-build"
+    },
+    {
+      "asset": "Assets/Scenes/0_Identification.unity",
+      "guid": "8f586378b4e144a9851e7b34d9b748ee",
+      "font": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+      "classification": "legacy-scene-outside-build"
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "d2b79af7b8c7b83428d26881ce6f38b7",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "5302535af1044152a457ed104f1f4b91",
+      "font": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset",
+      "classification": "residual-nested-prefab-font-override",
+      "note": "Old GUID retained in a serialized nested prefab property override. Exhaustive reopened scene/prefab TMP audit and actual Player observations resolve the current consumers to role-correct production faces. These references remain build dependencies; no primary legacy face was observed. Unrelated prefab overrides are preserved."
+    },
+    {
+      "asset": "Assets/Scenes/GameScene.unity",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/Scenes/LocationSelectionScene.unity",
+      "guid": "8f586378b4e144a9851e7b34d9b748ee",
+      "font": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+      "classification": "legacy-scene-outside-build"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+      "guid": "2c3718d34dc5fc14caf8824bd4ace045",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+      "guid": "da72d02077bbda74d8f0ae3ef8a436f2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "guid": "da72d02077bbda74d8f0ae3ef8a436f2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "guid": "af21d9ebff459f840adc72362486ec1a",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "guid": "af21d9ebff459f840adc72362486ec1a",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "guid": "d2b79af7b8c7b83428d26881ce6f38b7",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "guid": "2c3718d34dc5fc14caf8824bd4ace045",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "guid": "da72d02077bbda74d8f0ae3ef8a436f2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "guid": "af21d9ebff459f840adc72362486ec1a",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "guid": "2c3718d34dc5fc14caf8824bd4ace045",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "guid": "af21d9ebff459f840adc72362486ec1a",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "guid": "2c3718d34dc5fc14caf8824bd4ace045",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "guid": "af21d9ebff459f840adc72362486ec1a",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "guid": "da72d02077bbda74d8f0ae3ef8a436f2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "guid": "af21d9ebff459f840adc72362486ec1a",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Resources/TMP Settings.asset",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "production-face-or-finite-fallback"
+    },
+    {
+      "asset": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+      "guid": "2e498d1c8094910479dc3e1b768306a4",
+      "font": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+      "classification": "retained-TMP-settings-or-legacy-font"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "4b38925db4dd7204d8d73cfae01569ed",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "f902d93324c078d47802c66a44849482",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "d2b79af7b8c7b83428d26881ce6f38b7",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "24cb84bd35845c94e9e0f659a7d15ea3",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "0aa0cf4df3b55964a923915989ed2948",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "5302535af1044152a457ed104f1f4b91",
+      "font": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    },
+    {
+      "asset": "Assets/_Recovery/0.unity",
+      "guid": "be88295496768fd49aabf63a873819e2",
+      "font": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "classification": "recovered-editor-backup-outside-build"
+    }
+  ],
+  "source_matches": [
+    {
+      "path": "Assets/Scripts/Game/Validation/Font10PlayerValidation.cs",
+      "line": 98,
+      "text": "Write(\"font-assets\",new{passed=true,fonts=rows,codepoints=corpus.Distinct().Count(),systemFonts=Font.GetOSInstalledFontNames().Where(n=>n.Contains(\"Roboto\")||n.Contains(\"Noto\")).ToArray(),fontSource=\"Bundled static TMP atlases; HasCharacter(..., searchFallbacks:true, tryAddCharacter:false). No OS font lookup by the production resolver.\"});"
+    }
+  ],
+  "classification_counts": {
+    "third-party-scene-outside-build": 1,
+    "production-face-or-finite-fallback": 92,
+    "residual-nested-prefab-font-override": 2,
+    "legacy-scene-outside-build": 3,
+    "retained-TMP-settings-or-legacy-font": 1,
+    "recovered-editor-backup-outside-build": 7
+  },
+  "inventory_rows": 2556,
+  "excluded_samples": "TMP Examples & Extras are third-party examples, outside production. Historical scenes remain outside the sole GameScene build entry.",
+  "illustration_exceptions": [
+    {
+      "scope": "Assets/Art e art-source/references/concepts",
+      "decision": "preservar texto pintado na ilustração; fora da troca TMP",
+      "examples": [
+        "fachadas e letreiros RESTAURANTE",
+        "quadros de cozinha e papéis do escritório",
+        "texto gerado dentro dos cinco concepts"
+      ],
+      "owner": "FONT-05 a FONT-09 conforme tela"
+    }
+  ],
+  "reopened_consumer_evidence": "output/ui-update/fonts/FONT-10/saved-audit.json",
+  "os_font_api_match": "Font10PlayerValidation only lists installed names as a diagnostic; the production resolver does not call OS font creation or lookup."
+}

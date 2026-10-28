@@ -1,0 +1,188 @@
+{
+  "passed": false,
+  "count": 45,
+  "results": [
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Brand,Roboto-Bold,700,36)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(ScreenTitle,Roboto-Bold,700,44)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(SectionTitle,RobotoCondensed-Bold,700,32)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Body,Roboto-Regular,400,24)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Input,Roboto-Regular,400,24)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Table,Roboto-Regular,400,22)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(TableTotal,Roboto-Bold,700,22)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Kpi,Roboto-Bold,700,42)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Button,RobotoCondensed-SemiBold,600,24)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Navigation,RobotoCondensed-Medium,500,22)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Label,RobotoCondensed-Medium,500,22)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(Caption,RobotoCondensed-Regular,400,20)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.RoleUsesRealFaceAndNeutralMaterial(MapMarker,RobotoCondensed-SemiBold,600,24)",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.ExplicitFactoryRoleOverridesLegacyBoldAndSurvivesCloneAndReentry()",
+      "passed": true
+    },
+    {
+      "name": "Font04TypographyTests.ApplyingRoleKeepsContentRichTextAndExistingDimensions()",
+      "passed": false,
+      "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at Font04TypographyTests.ApplyingRoleKeepsContentRichTextAndExistingDimensions () [0x000ea] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\Font04TypographyTests.cs:72 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <41d29b352f6a475ab1bf7c6628b82790>:0 "
+    },
+    {
+      "name": "Font04TypographyTests.RoleBindingsSurviveSavingAndReopeningAnAdditiveScene()",
+      "passed": false,
+      "error": "NUnit.Framework.AssertionException:   Expected: same as <Roboto-Bold Material (UnityEngine.Material)>\r\n  But was:  <Roboto-Bold Material (UnityEngine.Material)>\r\n\r\n  at NUnit.Framework.Assert.That[TActual] (TActual actual, NUnit.Framework.Constraints.IResolveConstraint expression, System.String message, System.Object[] args) [0x00039] in <f577cd9686154d6ab10efd7e65e64366>:0 \r\n  at NUnit.Framework.Assert.AreSame (System.Object expected, System.Object actual) [0x00007] in <f577cd9686154d6ab10efd7e65e64366>:0 \r\n  at Font04TypographyTests.RoleBindingsSurviveSavingAndReopeningAnAdditiveScene () [0x00132] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\Font04TypographyTests.cs:100 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <41d29b352f6a475ab1bf7c6628b82790>:0 "
+    },
+    {
+      "name": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(#F5F0E8,#30243C)",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(#6D28D9,#F5F0E8)",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(#24113D,#F5F0E8)",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(#B99AE8,#24113D)",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(#E7B65A,#24113D)",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.TextSurfacePairsHaveReadableContrast(#F5F0E8,#A6323D)",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.FontMaterialsAndPortugueseCurrencyGlyphsAreAvailable()",
+      "passed": true
+    },
+    {
+      "name": "UI02ThemeTests.SafeAreaPreservesAnchorsAndDoesNotAccumulateOnRevisit()",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.All280SpritesRemainSingleAndAllManifestImportsMatchCurrentContract()",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_PRIMARY_VIOLET)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_SECONDARY_IVORY)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_DANGER_CORAL)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_ACCENT_AMBER)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_ICON_BUTTON)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_INPUT)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_TAB)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_PILL)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_RADIO)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_CHECKBOX)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.StateFamiliesShareBoundsPivotAndBorders(UI_TOGGLE)",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.BindingDoesNotReplaceButtonOrDuplicateCallbacks()",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.InactiveTemplatesRetainNativeTextReferencesAndSurfaceContrast()",
+      "passed": true
+    },
+    {
+      "name": "UI03SharedComponentsTests.ProductionEntryAndOptInCompositionRemainInGameScene()",
+      "passed": true
+    },
+    {
+      "name": "UI20ReadabilityTests.SmallFinancialValuesRemainReadableOnLavender(100)",
+      "passed": true
+    },
+    {
+      "name": "UI20ReadabilityTests.SmallFinancialValuesRemainReadableOnLavender(-100)",
+      "passed": true
+    },
+    {
+      "name": "UI20ReadabilityTests.SmallFinancialValuesRemainReadableOnLavender(0)",
+      "passed": true
+    },
+    {
+      "name": "UI20ReadabilityTests.LongFeedbackFitsItsSurfaceWithoutShrinkingTheFont(Error)",
+      "passed": true
+    },
+    {
+      "name": "UI20ReadabilityTests.LongFeedbackFitsItsSurfaceWithoutShrinkingTheFont(Warning)",
+      "passed": true
+    },
+    {
+      "name": "UI20ReadabilityTests.LongFeedbackFitsItsSurfaceWithoutShrinkingTheFont(Success)",
+      "passed": true
+    }
+  ]
+}

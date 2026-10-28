@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-14",
+  "documents": [
+    {
+      "file": "C:\\Users\\Pichau\\Downloads\\arq.pdf",
+      "pages": 25,
+      "use": "EquipmentData/RoleData/CreditLineData são modelos e exemplos, não inventário completo. DRE/BMC/fluxo de caixa/balanço e ciclo de 12 rodadas são escopo documental. Páginas relevantes 5–8, 10–12, 22–24."
+    },
+    {
+      "file": "C:\\Users\\Pichau\\Downloads\\Relatorio_Reservado_Jogo_Unity_Cogna.docx",
+      "use": "Contexto POC, seis decisões e camada de debriefing/justificativas/diagnóstico. Não contém lista exaustiva de equipamentos. Não transportar orçamento/recomendações administrativas para prompts de arte."
+    },
+    {
+      "file": "C:\\Users\\Pichau\\Downloads\\Opportunity Explorer.pdf",
+      "pages": 13,
+      "use": "Documento de métricas Amazon Seller/Vendor. Sem conteúdo de assets do jogo; excluído do inventário."
+    }
+  ],
+  "priority": "Pedido atual e catálogo Unity definem conteúdo confirmado; concepts aprovados definem linguagem visual; documentos definem complementos previstos sem substituir código atual.",
+  "conflicts": [
+    "Documentos: 12 rodadas e DRE anual; implementação atual: ciclo trimestral de 3 meses. Não rasterizar contagem nem mudar motor.",
+    "Documento EventData prevê 2 opções; 20 assets atuais têm 3. Cards reutilizáveis com quantidade dinâmica.",
+    "Concept financeiro mostra 3 opções; catálogo possui 4 IDs únicos.",
+    "Concept equipe mostra 3 funções; catálogo contém 5 e enum inclui garçom sem RoleData.",
+    "freezer_breakdown contém texto de teste no título/descrição; manter ID e não levar texto de teste para arte.",
+    "Produtos usam nomes genéricos sem receita; consultar sprites atuais e registrar composição visual, não mudar regras de produto."
+  ]
+}

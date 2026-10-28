@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(GameManager.Instance.StateMachine.CurrentState!=InitialDecisionFlow.Identification || GameSessionState.IsPersisted) throw new System.Exception(\"Prefill skipped new game step 1\"); var ui=UnityEngine.Object.FindFirstObjectByType<Game.Adapter.In.UI.UIIndentification>(); var f=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic; var input=(TMPro.TMP_InputField)ui.GetType().GetField(\"studentNameInput\",f).GetValue(ui); if(input.text!=\"Aluna Teste\") throw new System.Exception(\"Prefill missing\"); var path=UI01Validation.Capture(\"new-game-prefilled-1920x1080\"); return new {state=GameManager.Instance.StateMachine.CurrentState.ToString(),prefilled=input.text, rows=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count(),screenshot=path};",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "state": "Config_Identification",
+        "prefilled": "Aluna Teste",
+        "rows": 0,
+        "screenshot": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\UI-01\\new-game-prefilled-1920x1080.png"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

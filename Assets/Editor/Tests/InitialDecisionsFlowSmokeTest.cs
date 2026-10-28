@@ -16,13 +16,14 @@ using UnityEngine.UI;
 /// painel visivel, rascunho em memoria e quantidade de linhas no SQLite.
 ///
 /// Como usar:
-///   1. Feche o jogo, apague (ou renomeie) o game.db para comecar sem partida salva.
-///   2. Abra a GameScene e aperte Play. Espere a D1 (mapa) aparecer.
+///   1. Configure COGNA_TEST_DATABASE_PATH e COGNA_TEST_IDENTIFICATION_KEY antes do Play.
+///      Use um banco novo e uma chave de QA; nunca apague o game.db do jogador.
+///   2. Abra a GameScene, confirme o cadastro e espere a D1 (mapa) aparecer.
 ///   3. Menu Tools > Jogos de Empresa > Teste de fumaca D1-D3.
 ///   4. Acompanhe o Console: cada passo imprime [Fumaca] OK ou [Fumaca] FALHOU.
 ///
 /// Atencao: o teste confirma a D3 de verdade, entao no fim existe UMA sessao
-/// gravada no game.db. Apague o arquivo de novo se quiser repetir.
+/// gravada no banco isolado. O banco real nao participa do teste.
 /// </summary>
 public static class InitialDecisionsFlowSmokeTest
 {
@@ -45,27 +46,29 @@ public static class InitialDecisionsFlowSmokeTest
             return;
         }
 
+        RequireIsolatedStorage();
         BuildSteps();
         Start(0.4);
     }
 
     /// <summary>
-    /// Mesmo teste, mas comecando pela cena 0_Identification e passando pelo
+    /// Mesmo teste, mas comecando pela cena GameScene e passando pelo
     /// Voltar da D1 (que volta para a identificacao). Confere que nome, RA e
     /// nome do restaurante chegam na linha gravada.
-    /// Como usar: game.db apagado, abrir a cena 0_Identification, Play, e rodar.
+    /// Como usar: banco isolado vazio, abrir GameScene no passo 1 e rodar.
     /// </summary>
     [MenuItem("Tools/Jogos de Empresa/Teste de fumaca Identificacao + D1-D3")]
     public static void RunWithIdentification()
     {
         if (!EditorApplication.isPlaying)
         {
-            Debug.LogError(Tag + "Entre no Play Mode na cena 0_Identification antes de rodar.");
+            Debug.LogError(Tag + "Entre no Play Mode na cena GameScene antes de rodar.");
             return;
         }
 
+        RequireIsolatedStorage();
         BuildIdentificationSteps();
-        Start(1.2);   // troca de cena leva mais tempo que troca de painel
+        Start(0.4);
     }
 
     private static void Start(double stepDelay)
@@ -122,8 +125,8 @@ public static class InitialDecisionsFlowSmokeTest
 
     private const string StudentName = "Aluna Teste";
     private const string StudentRA = "123456";
-    private const string FirstCompanyName = "Sushi Bom";
-    private const string SecondCompanyName = "Sushi Mar";
+    private const string EditedStudentName = "Aluna Teste Revisada";
+    private const string SecondCompanyName = StudentRA + " " + EditedStudentName;
 
     private static void BuildIdentificationSteps()
     {
@@ -131,12 +134,11 @@ public static class InitialDecisionsFlowSmokeTest
 
         Steps.Add(("Identificacao: preenche e Cadastrar abre o jogo na D1", () =>
         {
-            Expect(ActiveScene == Game.Infrastructure.SceneNames.Identification,
-                "o teste precisa comecar na cena 0_Identification (e sem cadastro salvo). Cena atual: " + ActiveScene);
+            Expect(ActiveScene == Game.Infrastructure.SceneNames.Game && State == InitialDecisionFlow.Identification,
+                "o teste precisa comecar na cena GameScene (e sem cadastro salvo). Cena atual: " + ActiveScene);
             var ui = Identification;
             Input(ui, "studentNameInput").text = StudentName;
             Input(ui, "raInput").text = StudentRA;
-            Input(ui, "restaurantNameInput").text = FirstCompanyName;
             ui.Register();
         }));
 
@@ -153,18 +155,18 @@ public static class InitialDecisionsFlowSmokeTest
             Click(LocationView, "backButton");
         }));
 
-        Steps.Add(("Identificacao reaberta com os dados preenchidos (sem pular sozinha); troca o nome do restaurante", () =>
+        Steps.Add(("Identificacao reaberta com os dados preenchidos (sem pular sozinha); corrige o nome do aluno", () =>
         {
-            Expect(ActiveScene == Game.Infrastructure.SceneNames.Identification,
+            Expect(ActiveScene == Game.Infrastructure.SceneNames.Game && State == InitialDecisionFlow.Identification,
                 "Voltar da D1 deveria abrir a identificacao e ficar nela. Cena atual: " + ActiveScene);
             var ui = Identification;
             Expect(Input(ui, "studentNameInput").text == StudentName, "nome do aluno deveria vir preenchido");
-            Expect(Input(ui, "restaurantNameInput").text == FirstCompanyName, "nome do restaurante deveria vir preenchido");
-            Input(ui, "restaurantNameInput").text = SecondCompanyName;
+            Expect(Input(ui, "raInput").text == StudentRA, "RA deveria vir preenchido");
+            Input(ui, "studentNameInput").text = EditedStudentName;
             ui.Register();
         }));
 
-        Steps.Add(("D1 reidratada com a Area Financeira depois da troca de cena", () =>
+        Steps.Add(("D1 reidratada com a Area Financeira depois da troca de painel", () =>
         {
             Expect(ActiveScene == Game.Infrastructure.SceneNames.Game, "deveria estar na GameScene, esta em " + ActiveScene);
             Expect(State == GameState.Config_Location, "estado deveria continuar Config_Location, e " + State);
@@ -187,7 +189,7 @@ public static class InitialDecisionsFlowSmokeTest
             Click(MenuView, "confirmButton");
             Expect(SessionRows() == 1, $"esperava 1 linha no banco, ha {SessionRows()}");
             var row = Db.Table<GameSessionEntity>().Single();
-            Expect(row.studentName == StudentName, "studentName gravado: " + row.studentName);
+            Expect(row.studentName == EditedStudentName, "studentName gravado: " + row.studentName);
             Expect(row.studentRA == StudentRA, "studentRA gravado: " + row.studentRA);
             Expect(row.companyName == SecondCompanyName, "companyName deveria ser o nome corrigido, e " + row.companyName);
             Expect(row.locationZone == LocationZone.Financas, "zona gravada: " + row.locationZone);
@@ -200,13 +202,13 @@ public static class InitialDecisionsFlowSmokeTest
 
     /// <summary>
     /// O teste salva "Aluna Teste" no PlayerPrefs (e o que o botao Cadastrar faz).
-    /// Sem limpar, a cena de identificacao passaria a pular sozinha para o jogo
-    /// com esse cadastro falso. So apaga se o cadastro salvo for o do teste.
+    /// Apaga somente o cadastro do ambiente isolado; nunca toca na chave real.
     /// </summary>
     [MenuItem("Tools/Jogos de Empresa/Apagar cadastro de teste (PlayerPrefs)")]
     public static void RemoveTestRegistration()
     {
-        const string key = "PlayerSession.Identification";
+        RequireIsolatedStorage();
+        string key = Environment.GetEnvironmentVariable("COGNA_TEST_IDENTIFICATION_KEY");
         string saved = PlayerPrefs.GetString(key, string.Empty);
 
         if (saved.Contains("\"" + StudentName + "\""))
@@ -219,6 +221,11 @@ public static class InitialDecisionsFlowSmokeTest
         {
             Debug.Log(Tag + "Nenhum cadastro de teste no PlayerPrefs. Nada foi apagado.");
         }
+    }
+
+    private static void RequireIsolatedStorage()
+    {
+        UI01Validation.RequireIsolatedStorage();
     }
 
     private static string ActiveScene => UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;

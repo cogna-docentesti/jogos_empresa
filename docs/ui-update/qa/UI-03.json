@@ -1,0 +1,380 @@
+{
+  "task_id": "UI-03",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "8fea55d78816203f5200123e92b975737e047204",
+  "unity_version": "6000.3.20f1",
+  "pending_acceptance": [],
+  "implementation": [
+    "SharedUiSkin referencia 145 sprites aprovados por ID. SharedControlAppearance compartilha normal/hover/pressed/disabled/seleção/foco/erro sem substituir Selectables ou registrar callbacks de negócio.",
+    "Dez templates existentes migrados no Editor; doze prefabs reutilizáveis em Assets/Prefabs/SharedUI. GameScene atualizada em posição, hierarquia e referências úteis. Botões, cards, inputs, tabs, pills, checkbox/radio/toggle, sliders, scrollbars e tooltip nativo.",
+    "Composição opt-in SharedComponentsPreview dentro da GameScene; desativada na cena salva. Nenhuma cena de demo criada. Ativar por Tools/Jogos de Empresa/UI-03/Show composition in GameScene, após iniciar Play Mode com dados isolados.",
+    "Navegação Tab/Shift+Tab suplementa setas/submit e toque do EventSystem. A identificação conserva sua ordem Name -> RA -> Register e cede o teclado quando a composição/modal está aberto. Modal limita foco, restaura o invocador e consome Escape sem abrir o diálogo de saída por trás.",
+    "Ícones e TMP separados da superfície. Seleção/foco/disabled/shadow/scrim em camadas. Ilustrações coloridas usam Simple/contain e tint branco, sem multiplicar cor no hover/seleção.",
+    "Banco/restaurante/equipamentos propagam seleção para o componente compartilhado. Sliders de preços, scrollbar do banco e ações/modal do carrinho usam os mesmos sprites, preservando callbacks e valores existentes.",
+    "Alvos de toque de 68 unidades de referência nos novos controles; expansão transparente de hit area em sliders/scrollbars. Thumb 64x64 e trilho/fill 12px nos sliders existentes. Texto/decoração sem raycast; máscaras/viewport e scrim preservam o alvo necessário.",
+    "Menu mantém ícone/rótulo visíveis sem a moldura antiga. Confirmar equipamentos foi separado do Menu como no Banco; limites/raycast foram conferidos. Ícone Voltar recebe orientação correta. Card de equipamentos com altura 500, imagem contain 220x220 e nome 268x96 dentro de seus limites, sem corte pelo viewport."
+  ],
+  "component_mapping": {
+    "Button_Segment": "Tab com seleção/foco e sprites de estado; onClick preservado.",
+    "Chip": "UI_PILL_NORMAL, ícone separado e TMP.",
+    "DetailRow": "UI_TABLE_ROW_NEUTRAL; rótulo/valor nativos preservados.",
+    "Card_Generic": "Card normal, seleção/foco/disabled em camadas.",
+    "ItemCard": "Superfície UI_CARD_NORMAL, conteúdo nativo preservado.",
+    "Card_loan / BankCardView": "Card compartilhado; seleção propagada; CreditLineData e callbacks preservados.",
+    "Card_equipment / EquipmentCardView": "Card/Buy compartilhados; seleção do carrinho; imagens neutras e nomes sem truncamento.",
+    "Card_ProductItem / ProductPricingItemView": "Card, imagem contain e slider compartilhado; preços nativos e callback original.",
+    "MainArea_Equipment / Panel_Equipment": "Ações de catálogo; parâmetros do painel mantidos. A instância GameScene continua com o scaler secundário desativado da UI-02.",
+    "UiFactory": "Superfícies/ações/ícones aprovados; parâmetros legados de tint mantidos só por compatibilidade de assinatura."
+  },
+  "sprite_import": {
+    "audit": "output/ui-update/UI-03/import-audit.json",
+    "manifest_entries_compared": 272,
+    "pngs_audited": 277,
+    "single_count": 277,
+    "shared_skin_entries": 145,
+    "single_conversion_repeated": false,
+    "pngs_regenerated": false,
+    "guid_changes": false,
+    "policy": "Importadores configurados pela Unity usando o manifesto atual: FullRect para componentes/UI; borders l,b,r,t e pivot do asset; PPU 100, maxTextureSize potência de dois >= dimensão real, Bilinear, Clamp, mipmaps off, alpha transparency e sRGB on, Uncompressed. Overrides existentes de plataforma seguem a mesma qualidade de QA.",
+    "families": "ART-03 superfícies/sombra/scrim; ART-04 botões; ART-05 controles; ART-06/07 ícones brancos; ART-08 HUD/pills/toasts; ART-09 tabela/chart. Estados com bounds/pivot/border compatíveis verificados em Edit Mode e observados no renderer.",
+    "extra_map_pngs": "Cinco fullframes antigos fora do manifesto mantidos sem alterações; Single conferido. Não são o mapa compacto atual.",
+    "quality": "Gradientes/bordas/alfa observados sem blocos de compressão ou banding introduzido. Cantos 9-slice e tint neutro conferidos em capturas reais. ART-36 tratado apenas como histórico.",
+    "stale_subsprite_references": [],
+    "serialized_art_references_checked": 463
+  },
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "typography": "Inter Tight TMP, títulos 44/32, corpo/input 24, botões Bold 24, rótulos 22. Espaçamentos nativos/sem autosize; ícones recebem cor de texto por superfície; seleção de tabs/pills troca para marfim sobre violeta. Modal/tooltip usam ink sobre marfim.",
+    "layout": "Composição com padding 32, gutters 24 e controles 68 de altura; texto longo com máscara/scroll horizontal. Conteúdo de scroll usa VLG + ContentSizeFitter, viewport com Mask. Foco revela o último item.",
+    "states": "Normal/foco/hover/pressed/disabled/seleção/input inválido/tooltip/modal/revisita. Capturas adicionais por família em hover/pressed/disabled; registros family-states-*.json guardam os estados efetivos.",
+    "empty_loading": "Identificação vazia preservada; composição usa apenas controles genéricos. Catálogos reais não foram substituídos por dados inventados. Feedbacks específicos de loading/vazios permanecem nas telas proprietárias.",
+    "layers": "Um EventSystem. GraphicRaycaster raiz e na composição para override sorting. Scrim bloqueia fundo; modal restaura foco. Decoração e textos sem raycast; inputs, viewport, scrim e alvos transparentes mantêm interação.",
+    "dynamic_data": "Passagem real identificação -> localização -> restaurante -> cardápio -> banco -> equipamentos; uma sessão isolada persistida apenas ao confirmar D3. Banco quatro créditos, equipamentos filtrados para o restaurante a partir dos 16 assets reais, carrinho/revisita sem duplicar handlers."
+  },
+  "validation": {
+    "editmode": {
+      "editmode-components": {
+        "path": "output/ui-update/UI-03/editmode-components.json",
+        "summary": {
+          "Total": 15,
+          "Passed": 15,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "editmode-InitialDecisionsTests": {
+        "path": "output/ui-update/UI-03/editmode-InitialDecisionsTests.json",
+        "summary": {
+          "Total": 17,
+          "Passed": 17,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "editmode-PersistenceAndLocationTests": {
+        "path": "output/ui-update/UI-03/editmode-PersistenceAndLocationTests.json",
+        "summary": {
+          "Total": 16,
+          "Passed": 16,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "editmode-UI01IdentificationTests": {
+        "path": "output/ui-update/UI-03/editmode-UI01IdentificationTests.json",
+        "summary": {
+          "Total": 10,
+          "Passed": 10,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      },
+      "editmode-UI02ThemeTests": {
+        "path": "output/ui-update/UI-03/editmode-UI02ThemeTests.json",
+        "summary": {
+          "Total": 8,
+          "Passed": 8,
+          "Failed": 0,
+          "Skipped": 0,
+          "Inconclusive": 0
+        }
+      }
+    },
+    "editmode_total_passed": 66,
+    "playmode_components": {
+      "path": "output/ui-update/UI-03/playmode-components.json",
+      "passed": 28,
+      "failures": 0
+    },
+    "playmode_consumers": {
+      "path": "output/ui-update/UI-03/playmode-catalog-consumers.json",
+      "passed": 27,
+      "failures": 0
+    },
+    "playmode_total_passed": 55,
+    "console": "output/ui-update/UI-03/playmode-console.json",
+    "console_final_errors": 0,
+    "console_final_warnings": 0,
+    "serialized_references_preserved": 341,
+    "file_audit": "output/ui-update/UI-03/file-audit.json"
+  },
+  "data_isolation": {
+    "project": "D:/Cogna/jogos_empresa/Assets",
+    "realDatabaseHash": "D6-3A-B6-0B-63-22-D1-F5-BA-52-F5-5F-48-3F-BB-DA-AC-2F-FF-3A-1F-7F-AC-E1-64-CD-33-10-9D-13-FE-DF",
+    "realDatabaseUnchanged": true,
+    "realIdentificationPrefsUnchanged": true,
+    "testDatabase": "D:\\Cogna\\jogos_empresa\\.utmp\\UI-03\\verified-game.db",
+    "testPrefs": "UI03.QA.Identification",
+    "scene": "Assets/Scenes/GameScene.unity",
+    "frame": 7360
+  },
+  "screenshots": [
+    {
+      "path": "output/ui-update/UI-03/composition-disabled-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "03bb3dc1c2a9fa4e7155b4769f97e7cd8d7503546b5de18933c73da65b29fb1e"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-families-disabled-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "d4dfbc930f808517cfa938bb9573ebf6ac98507468e343e35134ba9738c25f6a"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-families-hover-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "db64c499c735b460b2550eb96755f9cd07d9a13c13152fbd6152d71686ec4743"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-families-pressed-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "3248dfb820ffa3e928a1fa08364efaa8c904d2dcec83faa38039c3c64cf7d534"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-hover-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "058949322adde6c2cb195a6b36319fd48a466d3cc5ac22d6dee492c62dcbda2d"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-input-focus-1280x720.png",
+      "format": "PNG",
+      "width": 1280,
+      "height": 720,
+      "sha256": "58d63152e4841197e10890a4108d2a418db8ebc67bfe43a47f07724cd66da3f3"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-input-focus-1366x768.png",
+      "format": "PNG",
+      "width": 1366,
+      "height": 768,
+      "sha256": "21f37c75e4d036099feea53d00a437986bf2911112bfe16a0dcc73cf42f4f0ef"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-input-focus-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "a34cc9a5f74ee8a3b49cf62f7fa64b89591123fde0ee730135f3ba913a89172c"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-invalid-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "803e26145894137b2f81da27b502a80ddd31d4a7de17c0734946a7f4824cbb4b"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-keyboard-focus-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "ac1b8710560b1a165023540b6e20528f74be4d010bbf37a3c0d64833787800c3"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-modal-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "e5a92cd448de92cdda20a37ce0294ccb4346f5e7211c3c1ae76bfadaa6ad6c57"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-normal-1280x720.png",
+      "format": "PNG",
+      "width": 1280,
+      "height": 720,
+      "sha256": "4950e9bddecad036510eaa32f006086bb7e9521b9cf2b7dfa194ce9854f20d10"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-normal-1366x768.png",
+      "format": "PNG",
+      "width": 1366,
+      "height": 768,
+      "sha256": "c05b6dd20da6a757aaa634ab02198df6a103789280c2065d1c8f9c90a0a01da4"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-normal-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "22d678e61a03b7f3f1dc2125bbefba3f75cf842942f00fff91ff1fc72d5b853d"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-pressed-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "fa4cba247094b037aabe61884af3e8545cd5a88fbcda0e751a8ba8f37859213a"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-revisited-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "198b22d78aa777b0991ecbeaeefd32bc55b170be50d76c368e8221bbf5752ef0"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-scroll-bottom-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "144ff1bf1410d8ff516fa1e6597925dbd40160297e954bab57701eaca4a69ae3"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-selected-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "3bfb370b81311707e5ef9fd5425b22ea36e5b63cb6ceeeb2b9ffa49aeebae1c2"
+    },
+    {
+      "path": "output/ui-update/UI-03/composition-tooltip-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "e8991e97047cdc3d4c322c9405e02c0847ea476ea38378e270a224c588cbe355"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-bank-bottom-1280x720.png",
+      "format": "PNG",
+      "width": 1280,
+      "height": 720,
+      "sha256": "41d3c4b6178c124aa8da4a42c8fa149ec5fe81126e998573e485130480a32f9c"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-bank-bottom-1366x768.png",
+      "format": "PNG",
+      "width": 1366,
+      "height": 768,
+      "sha256": "d0e7d44246a27dcd770bc8f62dfdeaff0dcb0e3672208817d2073ef93d9fdb95"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-bank-bottom-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "2de131e52545615f38433ed447fc627fd5c341be13a23cd209620928f4a7155f"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-bank-selected-1280x720.png",
+      "format": "PNG",
+      "width": 1280,
+      "height": 720,
+      "sha256": "dcd57b130450faf0bdc86f5ccd34018f4e4b6210d1446ab9653364c5ace398bc"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-bank-selected-1366x768.png",
+      "format": "PNG",
+      "width": 1366,
+      "height": 768,
+      "sha256": "3c6bc8677bf27b1a61fc2fcc7362a5d69531e899ca5e401052ea9dcb2dc7e6f4"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-bank-selected-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f96d64af5159172713dbc517af546ea53d00dee936eb7691797e1ca582200e29"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-equipment-cart-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "b9014949450be7713c5bc58e1063af12daf80a8196440df0878106be2e15365f"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-equipment-selected-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f5afceb17c9289572aea13d6db98044d995dc0b287b19d42d675773ff620df7d"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-pricing-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "e0a254ba278c714a97fcc38badd25c537de44cf837b4f91b3f05be921914034d"
+    },
+    {
+      "path": "output/ui-update/UI-03/consumer-restaurant-1920x1080.png",
+      "format": "PNG",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "4587761a4c922be555f163f5e2252876a07b996cef18f37d0b384e6677829f97"
+    }
+  ],
+  "legacy_followups": [
+    {
+      "owner_task": "UI-10",
+      "issue": "Título de equipamentos quase todo fora da borda esquerda, StepsText fora da borda direita e hint de desbloqueio cortado. Dimensões do cabeçalho/hint iguais ao baseline. A UI-03 não declara a tela inteira validada.",
+      "evidence": "output/ui-update/UI-03/legacy-equipment-layout.json",
+      "status": "legado registrado para o redesign UI-10"
+    }
+  ],
+  "resolved_during_qa": [
+    "Diálogo de salvar GameScene bloqueou chamadas do runner; resolvido pela UI do Editor. Tentativas com timeout não foram contadas como testes aprovados.",
+    "Teste de cena ativa corrigido para abrir a GameScene aditivamente dentro da cena vazia do NUnit.",
+    "Refs de textos/ícones em hierarquia inativa, disputa de Tab, contraste do modal, moldura sobre Menu, tamanho do thumb, sobreposição no rodapé e nome longo do card foram corrigidos antes do aceite.",
+    "Rodadas finais usaram banco de QA vazio; a sessão criada em uma rodada anterior não foi confundida com escrita pela composição."
+  ],
+  "scope_limits": [
+    "Somente UI-03. Integrações completas das telas e artes de catálogo continuam nas tarefas proprietárias; a biblioteca não exige exibição artificial de todo ícone/variante.",
+    "Cabeçalhos e composição legada de telas futuras (por exemplo o título de equipamentos e topo do cardápio) não foram redesenhados nesta tarefa. A composição exigida da UI-03 e os componentes compartilhados foram aferidos.",
+    "Toque validado pelo caminho nativo de PointerEventData e eventos de controles, teclado por eventos InputSystem. Aparelho Android físico, 16:10 e builds finais pertencem à UI-20."
+  ],
+  "cleanup": {
+    "pipeline_package_removed": true,
+    "incidental_settings_and_font_atlas_restored": true,
+    "editor_saved_and_closed": true,
+    "whitespace_normalized_only_after_editor_close": true
+  }
+}

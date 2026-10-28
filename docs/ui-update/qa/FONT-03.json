@@ -1,0 +1,84 @@
+{
+  "task": "FONT-03",
+  "date": "2026-10-17",
+  "status": "concluído",
+  "scope": "Six real TMP faces, three finite fallback atlases, neutral materials, Player-safe reference set and idempotent native Editor generation.",
+  "acceptance": {
+    "complete_tmp_assets": true,
+    "real_weights": true,
+    "no_synthetic_bold": true,
+    "shared_neutral_materials": true,
+    "actual_corpus_covered": true,
+    "expanded_corpus_covered": true,
+    "explicit_limited_fallbacks": true,
+    "no_old_family_or_os_fallback": true,
+    "stable_guids_and_subasset_ids": true,
+    "identical_regenerated_pixels_and_metrics": true,
+    "reimport_valid": true,
+    "all_faces_visually_reviewed": true,
+    "real_screen_rendered": true,
+    "dirty_scene_preserved": true,
+    "previous_work_preserved": true
+  },
+  "validation": {
+    "unity": "6000.3.20f1",
+    "primary_faces": 6,
+    "fallback_assets": 3,
+    "expanded_codepoints": 536,
+    "actual_codepoints": 118,
+    "weight_mesh_cases": 36,
+    "captures": 8,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "mode": "Play mode, existing Game View, isolated QA SQLite/identification key",
+    "console_errors": 0,
+    "console_warnings": 0,
+    "scene_before": {
+      "scenes": [
+        {
+          "path": "Assets/Scenes/GameScene.unity",
+          "isDirty": true,
+          "rootCount": 7
+        }
+      ],
+      "texts": 1052,
+      "fingerprint": "a2f7dfaf2a3aa653a1797b874d4fb38785411b98c6a550ede28c8f6bc40de755",
+      "unsavedRestaurant": 1
+    },
+    "scene_after": {
+      "scenes": [
+        {
+          "path": "Assets/Scenes/GameScene.unity",
+          "isDirty": true,
+          "rootCount": 7
+        }
+      ],
+      "texts": 1052,
+      "fingerprint": "a2f7dfaf2a3aa653a1797b874d4fb38785411b98c6a550ede28c8f6bc40de755",
+      "unsavedRestaurant": 1
+    },
+    "previous_files_checked": 10954,
+    "unexpected_changes": []
+  },
+  "evidence": {
+    "manifest": "docs/ui-update/font-assets.json",
+    "sources": "docs/ui-update/font-sources.json",
+    "gallery": "output/ui-update/fonts/FONT-03/index.html",
+    "execution": "output/ui-update/fonts/FONT-03/execution.json",
+    "coverage": "output/ui-update/fonts/FONT-03/coverage.json",
+    "weights": "output/ui-update/fonts/FONT-03/weight-resolution.json",
+    "regeneration": "output/ui-update/fonts/FONT-03/regeneration.json",
+    "visual": "output/ui-update/fonts/FONT-03/visual-review.json",
+    "preservation": "output/ui-update/fonts/FONT-03/baseline-preservation.json"
+  },
+  "limitations": [
+    "Other scripts, emoji and characters outside the 536-codepoint corpus are not homologated. Future input policy/coverage changes must extend this manifest explicitly.",
+    "Captures qualify font asset rendering at 1920×1080 in the existing Editor screen; no persistent screen typography/layout migration is claimed.",
+    "Standalone Player build and viewport/device qualification remain FONT-10; FONT-04 to FONT-09 own integration and per-screen sizing.",
+    "Pipeline/Unity CLI is absent; the native validator was invoked through the open Editor menu via Computer Use. No second Editor was opened.",
+    "Existing dirty scene and the unsaved Restaurante TMP were preserved. Original workspace baseline and patches remain local outside this commit."
+  ],
+  "next_task": "FONT-04, started only by the coordinator"
+}

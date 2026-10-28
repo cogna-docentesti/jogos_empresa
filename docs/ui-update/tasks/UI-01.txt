@@ -1,0 +1,177 @@
+UI-01 — Identificação: novo visual, passo 1 e migração para GameScene
+Status: concluído | Prioridade: P0 | Fase: Entrada
+Dependências: nenhuma; primeira entrega solicitada
+
+OBJETIVO
+Entregar primeiro o cadastro atualizado dentro da GameScene, antes de qualquer tomada de decisão.
+
+LEITURAS OBRIGATÓRIAS
+docs/ui-update/COMECE-AQUI.txt
+docs/ui-update/visual-contract.json
+docs/ui-update/tasks.json
+docs/ui-update/asset-coverage.json
+docs/art/manifest.json
+docs/art/tokens.json
+Assets/Scenes/0_Identification.unity
+Assets/Scenes/GameScene.unity
+Assets/Scripts/Game/Adapter/In/UI/UIIndentification.cs
+Assets/Scripts/Game/Infrastructure/GameManager.cs
+Assets/Scripts/Game/Domain/Enums/GameState.cs
+Assets/Scripts/Game/Infrastructure/GameStateMachine.cs
+Assets/Scripts/Game/Infrastructure/InitialDecisionFlow.cs
+Assets/Scripts/Game/Infrastructure/Session/PlayerSession.cs
+Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs
+Assets/Scripts/Game/Adapter/In/Controllers/EstablishmentSummaryController.cs
+Assets/Scripts/Game/Adapter/In/UI/UIStateListener.cs
+Assets/Scripts/Game/Infrastructure/SceneNames.cs
+Assets/Prefabs/GameManager.prefab
+ProjectSettings/EditorBuildSettings.asset
+Assets/Settings/Build Profiles
+docs/art/layouts/identification-layout.json
+
+TELAS / DESTINOS
+- Panel_Identification (novo na GameScene)
+- 0_Identification (origem da migração)
+
+IMPLEMENTAÇÃO
+1. Migrar a hierarquia e os vínculos existentes para Panel_Identification na GameScene, preservando campos, validação, foco e callbacks; não transportar outro EventSystem ou duplicar Canvas raiz, Database ou GameManager.
+2. Adicionar um estado explícito de identificação sem alterar os valores numéricos dos 17 GameState existentes; nova partida: identificação -> localização. O indicador de abertura terá 7 passos: identificação, localização, restaurante, cardápio, banco, equipamentos e equipe; manter D1-D6 como códigos internos históricos.
+3. Revisar GameManager.Start/PrepareSession e UIIndentification.OpenGameScene: a GameScene não pode carregar a si própria; inicializar serviços uma vez e trocar de painel/estado ao confirmar o cadastro.
+4. Trocar o Voltar da localização e o fluxo Resetar para o painel de identificação na mesma cena, preservando o rascunho e preenchendo o cadastro quando for edição.
+5. Aplicar cenário street_restaurant, ornamentos separados, CH01_WELCOME, logo oficial, painel marfim, campos e botão novos conforme identification-layout.json; texto TMP e tipografia/cores do contrato visual deste plano. Sem caixa, score ou mês antes de existir uma sessão apropriada.
+6. Preservar nome e RA, seus limites/validações e PlayerPrefs. Hoje o nome do restaurante é derivado de RA + nome; não inventar um terceiro campo obrigatório nesta migração.
+7. Novo jogo deve mostrar o passo 1 mesmo com dados de cadastro disponíveis para preenchimento. Retomar partida completa válida pode seguir ao hub; cadastro ausente/inválido, edição ou reset devem abrir identificação. Documentar o destino de cada caso.
+8. Definir GameScene como entrada nos Build Settings e perfis ativos. Retirar 0_Identification do fluxo de produção após validar a migração; preservar o arquivo antigo como referência até não haver consumidor, sem apagá-lo nesta tarefa.
+
+REVISÃO VISUAL OBRIGATÓRIA
+- família/peso/tamanho de fonte
+- cor de texto por superfície e estado
+- entrelinha e espaçamento de texto
+- margens/gutters/alinhamento
+- tamanho e proporção de imagens
+- ordem de camadas e máscaras
+- normal/hover/pressed/disabled/selecionado/foco
+- erros/loading/vazios
+- navegação/input/scroll
+- dados dinâmicos e atualização ao revisitar
+- resolução menor e textos longos
+
+ARTES EXISTENTES / LOTES
+ART-14, ART-03, ART-04, ART-05
+- UI_TOPBAR_VIOLET | Assets/Art/new/hud/bars/topbar_violet.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_NAVBAR_PLUM | Assets/Art/new/hud/bars/navbar_plum.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_IVORY | Assets/Art/new/shared/components/panels/panel_ivory.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_LAVENDER | Assets/Art/new/shared/components/panels/panel_lavender.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_PLUM | Assets/Art/new/shared/components/panels/panel_plum.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PANEL_SHADOW | Assets/Art/new/shared/components/panels/panel_shadow.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_NORMAL | Assets/Art/new/shared/components/cards/card_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_SELECTED_OUTLINE | Assets/Art/new/shared/components/cards/card_selected_outline.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CARD_DISABLED_OVERLAY | Assets/Art/new/shared/components/cards/card_disabled_overlay.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_MODAL_SURFACE | Assets/Art/new/shared/components/panels/modal_surface.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOOLTIP_SURFACE | Assets/Art/new/shared/components/feedback/tooltip_surface.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCRIM | Assets/Art/new/shared/components/panels/scrim.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_BADGE_CIRCLE | Assets/Art/new/shared/components/badges/badge_circle.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- BRAND_COGNA_LOGO | Assets/Art/new/shared/brand/logo_cogna.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_NORMAL | Assets/Art/new/shared/components/buttons/primary_violet_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_HOVER | Assets/Art/new/shared/components/buttons/primary_violet_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_PRESSED | Assets/Art/new/shared/components/buttons/primary_violet_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_PRIMARY_VIOLET_DISABLED | Assets/Art/new/shared/components/buttons/primary_violet_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_NORMAL | Assets/Art/new/shared/components/buttons/secondary_ivory_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_HOVER | Assets/Art/new/shared/components/buttons/secondary_ivory_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_PRESSED | Assets/Art/new/shared/components/buttons/secondary_ivory_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SECONDARY_IVORY_DISABLED | Assets/Art/new/shared/components/buttons/secondary_ivory_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_NORMAL | Assets/Art/new/shared/components/buttons/danger_coral_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_HOVER | Assets/Art/new/shared/components/buttons/danger_coral_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_PRESSED | Assets/Art/new/shared/components/buttons/danger_coral_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_DANGER_CORAL_DISABLED | Assets/Art/new/shared/components/buttons/danger_coral_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_NORMAL | Assets/Art/new/shared/components/buttons/accent_amber_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_HOVER | Assets/Art/new/shared/components/buttons/accent_amber_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_PRESSED | Assets/Art/new/shared/components/buttons/accent_amber_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ACCENT_AMBER_DISABLED | Assets/Art/new/shared/components/buttons/accent_amber_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_NORMAL | Assets/Art/new/shared/components/buttons/icon_button_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_HOVER | Assets/Art/new/shared/components/buttons/icon_button_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_PRESSED | Assets/Art/new/shared/components/buttons/icon_button_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_ICON_BUTTON_DISABLED | Assets/Art/new/shared/components/buttons/icon_button_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_NORMAL | Assets/Art/new/shared/components/controls/input_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_FOCUS | Assets/Art/new/shared/components/controls/input_focus.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_INVALID | Assets/Art/new/shared/components/controls/input_invalid.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_INPUT_DISABLED | Assets/Art/new/shared/components/controls/input_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_NORMAL | Assets/Art/new/shared/components/controls/tab_normal.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_SELECTED | Assets/Art/new/shared/components/controls/tab_selected.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_HOVER | Assets/Art/new/shared/components/controls/tab_hover.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_PRESSED | Assets/Art/new/shared/components/controls/tab_pressed.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TAB_DISABLED | Assets/Art/new/shared/components/controls/tab_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_RADIO_OFF | Assets/Art/new/shared/components/controls/radio_off.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_RADIO_ON | Assets/Art/new/shared/components/controls/radio_on.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_RADIO_DISABLED | Assets/Art/new/shared/components/controls/radio_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHECKBOX_OFF | Assets/Art/new/shared/components/controls/checkbox_off.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHECKBOX_ON | Assets/Art/new/shared/components/controls/checkbox_on.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_CHECKBOX_DISABLED | Assets/Art/new/shared/components/controls/checkbox_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOGGLE_OFF | Assets/Art/new/shared/components/controls/toggle_off.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOGGLE_ON | Assets/Art/new/shared/components/controls/toggle_on.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_TOGGLE_DISABLED | Assets/Art/new/shared/components/controls/toggle_disabled.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SLIDER_TRACK | Assets/Art/new/shared/components/controls/slider_track.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SLIDER_FILL | Assets/Art/new/shared/components/controls/slider_fill.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SLIDER_THUMB | Assets/Art/new/shared/components/controls/slider_thumb.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_STEPPER_BASE | Assets/Art/new/shared/components/controls/stepper_base.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCROLLBAR_TRACK | Assets/Art/new/shared/components/controls/scrollbar_track.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- UI_SCROLLBAR_THUMB | Assets/Art/new/shared/components/controls/scrollbar_thumb.png | componente reutilizável; aplicar onde há função real, sem forçar todas as variantes numa mesma tela
+- ID_ENVIRONMENT | Assets/Art/new/identification/backgrounds/street_restaurant.png | integração visual no destino da tarefa
+- ID_ORNAMENT_LEFT | Assets/Art/new/identification/ornaments/arc_left.png | integração visual no destino da tarefa
+- ID_ORNAMENT_RIGHT | Assets/Art/new/identification/ornaments/arc_right.png | integração visual no destino da tarefa
+- CH01_WELCOME | Assets/Art/new/characters/CH01/ch01_welcome.png | integração visual no destino da tarefa
+
+CRITÉRIOS DE ACEITE
+- Abrir a build e dar Play diretamente na GameScene inicia corretamente sem loop de carregamento, singleton duplicado ou tela vazia.
+- Nome/RA inválidos mostram erro legível e foco no campo; cadastro válido avança somente após confirmação para Localização.
+- Voltar da Localização reabre cadastro preenchido sem reload e sem perder decisões em memória; reset retorna ao passo 1.
+- Identificação já apresenta as artes novas e fontes/campos/botões coerentes; screenshot real em 1920x1080 e 1280x720.
+- Os testes de identificação, fluxo inicial e retomada afetados foram adaptados e executados.
+
+VALIDAÇÃO
+- Play Mode: cadastro novo, cadastro pré-preenchido, limites de entrada, edição pela Localização, reset, retorno com save completo e save incompatível.
+- Verificar todos os SceneManager.LoadScene relacionados e os perfis de build; registrar caminhos e screenshots em qa/UI-01.
+
+ENTREGÁVEIS
+- Cena/prefabs/views/configuração realmente atualizados apenas no escopo desta tarefa.
+- Registro de execução e evidências em docs/ui-update/qa/UI-01.json e output/ui-update/UI-01/.
+- Status atualizado no tasks.json após aceite; registrar pendências sem declarar conclusão.
+
+LIMITES
+Preservar IDs, dados econômicos, simulação de três meses e regras de persistência.
+PNG validado não deve ser regenerado; usar texto e dados nativos. Garçom permanece condicional sem RoleData.
+Não reexecutar a conversão para Single já concluída; não alterar tarefas/lotes alheios.
+
+COMANDO PARA EXECUTAR ESTA TAREFA
+Execute somente UI-01 — Identificação: novo visual, passo 1 e migração para GameScene no projeto D:/Cogna/jogos_empresa. Leia D:/Cogna/jogos_empresa/docs/ui-update/tasks/UI-01.txt, docs/ui-update/COMECE-AQUI.txt, visual-contract.json e tasks.json. Confira as dependências e o estado atual; aplique as artes existentes de Assets/Art/new e o visual completo previsto (fontes, cores, tamanhos, layout e estados), preserve dados/regras e valide no Editor correto. Registre screenshots e verificações reais. Não execute as próximas tarefas automaticamente.
+
+EXECUÇÃO — 16/10/2026
+Implementada e validada na Unity 6000.3.20f1, branch dev/new-screens.
+Registro: docs/ui-update/qa/UI-01.json. Evidências: output/ui-update/UI-01/.
+43 casos de Edit Mode aprovados; Play Mode: validação/foco/limites, textos longos,
+revisitas, dois smokes D1-D3, retomada, cadastro inválido, reset e save incompatível.
+Build Windows release aprovada e executada com company/product de QA isolados.
+Capturas reais em 1920x1080 e 1280x720, incluindo erro, foco e estados de controles.
+
+DESTINOS DE ENTRADA
+- Sem save ou save sem cardápio: identificação (preenchida se houver cadastro).
+  Confirmar cadastro válido abre Localização, passo 2; não grava decisões no SQLite.
+- Save completo e cadastro válido: hub; decisões carregadas no rascunho.
+- Save completo com cadastro ausente/inválido: identificação; confirmar correção
+  retoma o hub e preserva as decisões/meses existentes.
+- Voltar da Localização: identificação preenchida na mesma cena; confirmar retorna
+  à Localização com rascunho intacto.
+- Reset confirmado: apaga somente a sessão selecionada e seu cadastro, cria rascunho
+  novo e abre identificação vazia na GameScene.
+- Save incompatível: modal existente exige confirmação; só então executa reset.
+
+ENTRADA DE BUILD
+GameScene é a única cena habilitada. Perfis Windows e Android herdam a lista global;
+AndroidBuilder também usa somente GameScene. 0_Identification foi preservada como
+referência, sem consumidor de navegação em produção.
+
+15 assets aplicados; variantes compartilhadas sem função nesta tela permanecem
+planejadas para suas tarefas. PNGs e GUIDs preservados; bordas 9-slice/FullRect e
+compressão dos sprites usados foram ajustados no Editor. Fonte Roboto e alterações
+incidentais de build não integram esta entrega. Pacote de controle temporário removido.
+Pendências de aceite UI-01: nenhuma. UI-02 e demais tarefas não executadas.

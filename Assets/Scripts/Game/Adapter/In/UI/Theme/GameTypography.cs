@@ -1,72 +1,117 @@
+using TMPro;
+using UnityEngine;
+
 namespace Game.Adapter.In.UI.Theme
 {
-    /// <summary>
-    /// Escala tipografica do jogo, extraida das telas que ja existem
-    /// (Panel_Financial, Panel_MenuPricing, Panel_Restaurant e o Panel_Menu
-    /// depois do ajuste manual). Nenhum numero aqui foi inventado.
-    ///
-    /// Qualquer texto criado por codigo deve usar uma destas constantes.
-    /// Se um tamanho novo for realmente necessario, ele entra AQUI primeiro.
-    ///
-    /// Duas escalas convivem de proposito:
-    ///  - TELA: telas cheias, onde o texto compete com muito espaco.
-    ///  - MAPA: marcadores sobre o mapa, que precisam caber em cards pequenos.
-    /// </summary>
+    /// <summary>Shared typography roles in 1920x1080 design units. See visual-contract.json.</summary>
     public static class GameTypography
     {
-        // =====================================================
-        //  ESCALA DE TELA
-        //  Referencia: Panel_Financial e Panel_MenuPricing
-        // =====================================================
+        public const string FontAssetPath = "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset";
+        public const float ScreenTitle = 44f;
+        public const float ScreenHint = 24f;
+        public const float SectionTitle = 32f;
+        public const float DisplayValue = 42f;
+        public const float Body = 24f;
+        public const float Button = 24f;
+        public const float Input = 24f;
+        public const float Label = 22f;
+        public const float Caption = 20f;
+        public const float Table = 22f;
+        public const float BrandTitle = 36f;
+        public const float MapBarTitle = SectionTitle;
+        public const float MapBarSubtitle = Body;
+        public const float PillCaption = Caption;
+        public const float PillValue = Body;
+        public const float NodeTitle = Body;
+        public const float NodeSubtitle = Caption;
+        public const float LineSpacing = 0f; // Native face metrics; per-screen sizing is validated separately.
+        public const float CharacterSpacing = 0f;
+        public const float ShadowOffsetX = 0f;
+        public const float ShadowOffsetY = 0f;
+        public const float ShadowAlpha = 0f;
 
-        /// <summary>Titulo da tela. "Financeiro", "Cardapio". Era 70.</summary>
-        public const float ScreenTitle = 88f;
+        private static ConceptFontSet fonts;
+        public static ConceptFontSet Fonts => fonts != null ? fonts : fonts = Resources.Load<ConceptFontSet>("UI/ConceptFontSet");
 
-        /// <summary>Linha de apoio do cabecalho. Bold na cena original. Era 32.</summary>
-        public const float ScreenHint = 40f;
+        public static TypographyStyle Resolve(TypographyRole role)
+        {
+            var set = Fonts;
+            if (set == null) throw new System.InvalidOperationException("Missing UI/ConceptFontSet resource.");
+            switch (role)
+            {
+                case TypographyRole.Brand: return new TypographyStyle(set.robotoBold, BrandTitle, "Roboto", 700);
+                case TypographyRole.ScreenTitle: return new TypographyStyle(set.robotoBold, ScreenTitle, "Roboto", 700);
+                case TypographyRole.SectionTitle: return new TypographyStyle(set.condensedBold, SectionTitle, "Roboto Condensed", 700);
+                case TypographyRole.Kpi: return new TypographyStyle(set.robotoBold, DisplayValue, "Roboto", 700);
+                case TypographyRole.TableTotal: return new TypographyStyle(set.robotoBold, Table, "Roboto", 700);
+                case TypographyRole.Button: return new TypographyStyle(set.condensedSemiBold, Button, "Roboto Condensed", 600);
+                case TypographyRole.MapMarker: return new TypographyStyle(set.condensedSemiBold, NodeTitle, "Roboto Condensed", 600);
+                case TypographyRole.Navigation: case TypographyRole.Label: return new TypographyStyle(set.condensedMedium, Label, "Roboto Condensed", 500);
+                case TypographyRole.Caption: return new TypographyStyle(set.condensedRegular, Caption, "Roboto Condensed", 400);
+                case TypographyRole.Input: return new TypographyStyle(set.robotoRegular, Input, "Roboto", 400);
+                case TypographyRole.Table: return new TypographyStyle(set.robotoRegular, Table, "Roboto", 400);
+                default: return new TypographyStyle(set.robotoRegular, Body, "Roboto", 400);
+            }
+        }
 
-        /// <summary>Titulo de secao ou de card. Era 42.</summary>
-        public const float SectionTitle = 52f;
+        // Explicit tokens keep the old dimensions while carrying semantic roles through factory helpers.
+        public static class Tokens
+        {
+            public static TypographyToken BrandTitle => new TypographyToken(TypographyRole.Brand, GameTypography.BrandTitle);
+            public static TypographyToken ScreenTitle => new TypographyToken(TypographyRole.ScreenTitle, GameTypography.ScreenTitle);
+            public static TypographyToken ScreenHint => Body;
+            public static TypographyToken SectionTitle => new TypographyToken(TypographyRole.SectionTitle, GameTypography.SectionTitle);
+            public static TypographyToken DisplayValue => new TypographyToken(TypographyRole.Kpi, GameTypography.DisplayValue);
+            public static TypographyToken Body => new TypographyToken(TypographyRole.Body, GameTypography.Body);
+            public static TypographyToken BodyStrong => new TypographyToken(TypographyRole.TableTotal, GameTypography.Body);
+            public static TypographyToken Button => new TypographyToken(TypographyRole.Button, GameTypography.Button);
+            public static TypographyToken Input => new TypographyToken(TypographyRole.Input, GameTypography.Input);
+            public static TypographyToken Label => new TypographyToken(TypographyRole.Label, GameTypography.Label);
+            public static TypographyToken Caption => new TypographyToken(TypographyRole.Caption, GameTypography.Caption);
+            public static TypographyToken Table => new TypographyToken(TypographyRole.Table, GameTypography.Table);
+            public static TypographyToken TableTotal => new TypographyToken(TypographyRole.TableTotal, GameTypography.Table);
+            public static TypographyToken MapBarTitle => SectionTitle;
+            public static TypographyToken MapBarSubtitle => Body;
+            public static TypographyToken PillCaption => Caption;
+            public static TypographyToken PillValue => new TypographyToken(TypographyRole.Kpi, GameTypography.PillValue);
+            public static TypographyToken NodeTitle => new TypographyToken(TypographyRole.MapMarker, GameTypography.NodeTitle);
+            public static TypographyToken NodeSubtitle => Caption;
+        }
 
-        /// <summary>Numero de destaque. "R$ 150.000". Era 50.</summary>
-        public const float DisplayValue = 62f;
+        public static void Apply(TMP_Text text, TypographyRole role, float? size = null)
+        {
+            if (text == null) return;
+            var binding = text.GetComponent<TypographyRoleBinding>() ?? text.gameObject.AddComponent<TypographyRoleBinding>();
+            binding.SetRole(role);
+            ApplyFace(text, role);
+            text.fontSize = size ?? Resolve(role).Size;
+        }
+        public static void KeepSize(TMP_Text text, TypographyRole role)
+        { if (text != null) Apply(text, role, text.fontSize); }
 
-        /// <summary>Corpo de texto e rotulos comuns. Tambem o texto dos botoes. Era 30.</summary>
-        public const float Body = 38f;
+        internal static void ApplyFace(TMP_Text text, TypographyRole role)
+        {
+            var style = Resolve(role);
+            text.font = style.Font; text.fontSharedMaterial = style.Material;
+            // Real face encodes weight. TMP weight tables still handle valid inline <b>/<font-weight>.
+            text.fontStyle &= ~FontStyles.Bold;
+            text.fontWeight = FontWeight.Regular;
+            text.enableAutoSizing = false;
+        }
 
-        /// <summary>Texto secundario e botao Voltar. Era 28.</summary>
-        public const float Caption = 35f;
+        public static void Apply(TMP_Text text, TypographyToken token, bool bold = false)
+        {
+            if (text == null) return;
+            var binding = text.GetComponent<TypographyRoleBinding>();
+            var role = token.Role ?? (binding != null ? binding.Role : bold ? TypographyRole.TableTotal : TypographyRole.Body);
+            Apply(text, role, token.Size);
+            text.characterSpacing = CharacterSpacing; text.lineSpacing = LineSpacing;
+            text.wordSpacing = 0; text.paragraphSpacing = 0; text.margin = Vector4.zero;
+            text.enableVertexGradient = false; text.raycastTarget = false;
+        }
 
-        // =====================================================
-        //  ESCALA DO MAPA
-        //  Referencia: Panel_Menu depois do ajuste manual
-        // =====================================================
-
-        /// <summary>Titulo da barra do menu. Era 32.</summary>
-        public const float MapBarTitle = 40f;
-
-        /// <summary>Subtitulo da barra do menu. Era 28.</summary>
-        public const float MapBarSubtitle = 35f;
-
-        /// <summary>Rotulo dentro de uma pill da barra. Era 23.</summary>
-        public const float PillCaption = 29f;
-
-        /// <summary>Valor dentro de uma pill da barra. Era 27.</summary>
-        public const float PillValue = 34f;
-
-        /// <summary>Titulo de um node do mapa. Era 28.</summary>
-        public const float NodeTitle = 35f;
-
-        /// <summary>Subtitulo de um node do mapa. Era 21.</summary>
-        public const float NodeSubtitle = 26f;
-
-        // =====================================================
-        //  SOMBRA DE TEXTO
-        //  Padrao das telas antigas: uma copia preta atras, deslocada.
-        // =====================================================
-
-        public const float ShadowOffsetX = 3f;
-        public const float ShadowOffsetY = -3f;
-        public const float ShadowAlpha   = 0.39f;
+        // Compatibility for callers not yet assigning a role. A saved binding takes precedence over legacy font/bold.
+        public static void Apply(TMP_Text text, TMP_FontAsset font, float size, bool bold = false)
+            => Apply(text, (TypographyToken)size, bold);
     }
 }

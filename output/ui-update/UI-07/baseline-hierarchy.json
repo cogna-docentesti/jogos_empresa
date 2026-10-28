@@ -1,0 +1,402 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var panel=UnityEngine.Object.FindFirstObjectByType<Game.Adapter.In.UI.MenuPricingScreenView>(UnityEngine.FindObjectsInactive.Include); var prefab=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(\"Assets/Prefabs/Card_ProductItem.prefab\"); return new {scene=panel.GetComponentsInChildren<UnityEngine.Transform>(true).Select(t=>new {name=t.name,parent=t.parent.name,components=t.GetComponents<UnityEngine.Component>().Select(c=>c.GetType().Name).ToArray()}).ToArray(),prefab=prefab.GetComponentsInChildren<UnityEngine.Transform>(true).Select(t=>new {name=t.name,parent=t.parent?.name,components=t.GetComponents<UnityEngine.Component>().Select(c=>c.GetType().Name).ToArray()}).ToArray()};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": [
+          {
+            "name": "Panel_MenuPricing",
+            "parent": "Canvas",
+            "components": [
+              "RectTransform",
+              "MenuPricingScreenView",
+              "MenuPricingScreenController",
+              "SafeAreaFitter"
+            ]
+          },
+          {
+            "name": "Header",
+            "parent": "Panel_MenuPricing",
+            "components": [
+              "RectTransform",
+              "Canvas",
+              "CanvasScaler",
+              "GraphicRaycaster",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "StepsText",
+            "parent": "Header",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "TitleText",
+            "parent": "Header",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "HintText",
+            "parent": "Header",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "MainArea",
+            "parent": "Panel_MenuPricing",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "ContentContainer",
+            "parent": "MainArea",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "VerticalLayoutGroup"
+            ]
+          },
+          {
+            "name": "PrincingLabel",
+            "parent": "ContentContainer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "Scroll View",
+            "parent": "ContentContainer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image",
+              "ScrollRect"
+            ]
+          },
+          {
+            "name": "Viewport",
+            "parent": "Scroll View",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image",
+              "Mask"
+            ]
+          },
+          {
+            "name": "Content",
+            "parent": "Viewport",
+            "components": [
+              "RectTransform",
+              "VerticalLayoutGroup"
+            ]
+          },
+          {
+            "name": "Scrollbar Vertical",
+            "parent": "Scroll View",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image",
+              "Scrollbar",
+              "SharedControlAppearance"
+            ]
+          },
+          {
+            "name": "SharedTouchTarget",
+            "parent": "Scrollbar Vertical",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "Sliding Area",
+            "parent": "Scrollbar Vertical",
+            "components": [
+              "RectTransform"
+            ]
+          },
+          {
+            "name": "Handle",
+            "parent": "Sliding Area",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "SharedFocus",
+            "parent": "Scrollbar Vertical",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "Footer",
+            "parent": "Panel_MenuPricing",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "ConfirmButton",
+            "parent": "Footer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image",
+              "Button",
+              "SharedControlAppearance"
+            ]
+          },
+          {
+            "name": "TextShadow",
+            "parent": "ConfirmButton",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI",
+              "Shadow"
+            ]
+          },
+          {
+            "name": "Text (TMP)",
+            "parent": "ConfirmButton",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "SharedFocus",
+            "parent": "ConfirmButton",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "BackButton",
+            "parent": "Footer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image",
+              "Button",
+              "SharedControlAppearance"
+            ]
+          },
+          {
+            "name": "Text (TMP)",
+            "parent": "BackButton",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "Icon",
+            "parent": "BackButton",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "SharedFocus",
+            "parent": "BackButton",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          }
+        ],
+        "prefab": [
+          {
+            "name": "Card_ProductItem",
+            "parent": null,
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image",
+              "ProductPricingItemView"
+            ]
+          },
+          {
+            "name": "Image",
+            "parent": "Card_ProductItem",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "SelectionBorder ",
+            "parent": "Card_ProductItem",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "ProductName",
+            "parent": "Card_ProductItem",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "SliderContainer",
+            "parent": "Card_ProductItem",
+            "components": [
+              "RectTransform"
+            ]
+          },
+          {
+            "name": "MinPrice",
+            "parent": "SliderContainer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "MaxPrice",
+            "parent": "SliderContainer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "CurrentPrice",
+            "parent": "SliderContainer",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "TextMeshProUGUI"
+            ]
+          },
+          {
+            "name": "Slider",
+            "parent": "SliderContainer",
+            "components": [
+              "RectTransform",
+              "Slider",
+              "SharedControlAppearance"
+            ]
+          },
+          {
+            "name": "SharedTouchTarget",
+            "parent": "Slider",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "Background",
+            "parent": "Slider",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "Fill Area",
+            "parent": "Slider",
+            "components": [
+              "RectTransform"
+            ]
+          },
+          {
+            "name": "Fill",
+            "parent": "Fill Area",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "Handle Slide Area",
+            "parent": "Slider",
+            "components": [
+              "RectTransform"
+            ]
+          },
+          {
+            "name": "Handle",
+            "parent": "Handle Slide Area",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          },
+          {
+            "name": "SharedFocus",
+            "parent": "Slider",
+            "components": [
+              "RectTransform",
+              "CanvasRenderer",
+              "Image"
+            ]
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

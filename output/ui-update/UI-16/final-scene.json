@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene(); var v=UnityEngine.Object.FindObjectsByType<Game.Adapter.In.UI.BankruptcyView>(UnityEngine.FindObjectsInactive.Include,UnityEngine.FindObjectsSortMode.None).Single(); return new { project=UnityEngine.Application.dataPath,version=UnityEngine.Application.unityVersion,scene=scene.path,bankruptcy=v.name,title=new UnityEditor.SerializedObject(v).FindProperty(\"screenTitle\").objectReferenceValue.name,missingScripts=scene.GetRootGameObjects().Sum(r=>r.GetComponentsInChildren<UnityEngine.Transform>(true).Sum(t=>UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject))),sha256=System.BitConverter.ToString(System.Security.Cryptography.SHA256.Create().ComputeHash(System.IO.File.ReadAllBytes(scene.path))).Replace(\"-\", \"\").ToLowerInvariant() };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "project": "D:/Cogna/jogos_empresa/Assets",
+        "version": "6000.3.20f1",
+        "scene": "Assets/Scenes/GameScene.unity",
+        "bankruptcy": "Panel_Bankruptcy",
+        "title": "Title",
+        "missingScripts": 0,
+        "sha256": "97da54e1e297a9070cbada78142a44e29d26942782db5dfe974453a4012d69b4"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

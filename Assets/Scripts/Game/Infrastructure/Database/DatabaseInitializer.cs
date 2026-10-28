@@ -48,6 +48,7 @@ public class DatabaseInitializer : MonoBehaviour
             db.CreateTable<GameSessionEntity>();
             db.CreateTable<RoundResultEntity>();
             db.CreateTable<SessionEventHistoryEntity>();
+            db.CreateTable<MonthlyEventPlanEntity>();
             db.CreateTable<LocationEntity>();          // E-06: localizacoes da D1
 
             IsReady = true;

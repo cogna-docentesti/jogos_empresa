@@ -68,6 +68,8 @@ public class RoundFlowDebugTest : MonoBehaviour
                 check(sm.CurrentState == GameState.Round_Sales, "Inicio valido do mes " + round);
                 var result = service.ProcessCurrentRound();
                 check(result != null && result.round == round, "Resultado do mes " + round);
+                check(sm.CurrentState == GameState.Round_Summary, "Resumo aguarda leitura no mes " + round);
+                check(service.ContinueAfterSummary(result.roundResultId), "Continuacao explicita no mes " + round);
                 check(result != null && result.thirteenthSalary == 0f, "13o salario zero no mes " + round);
                 check(session.currentRound == (round < 3 ? round + 1 : 3), "Avanco/limite apos mes " + round);
                 check(session.status == (round < 3 ? GameSessionStatus.IN_PROGRESS : GameSessionStatus.COMPLETED),
@@ -149,9 +151,8 @@ public class RoundFlowDebugTest : MonoBehaviour
             check(session.currentRound == 3 && session.status == GameSessionStatus.BANKRUPT
                 && session.completedAt.HasValue, "BANKRUPT prevalece sobre COMPLETED no mes 3");
             sm.ForceState(GameState.Round_Summary);
-            typeof(GameSessionService).GetMethod("EvaluateRoundEnd", System.Reflection.BindingFlags.Instance
-                | System.Reflection.BindingFlags.NonPublic).Invoke(service,
-                    new object[] { repository.GetLastRoundBySessionId(session.sessionId) });
+            check(service.ContinueAfterSummary(repository.GetLastRoundBySessionId(session.sessionId).roundResultId),
+                "Resumo falido continua por acao explicita");
             check(sm.CurrentState == GameState.GameOver_Bankruptcy, "Fluxo externo encaminha falencia ao GameOver");
             results = repository.GetBySessionId(session.sessionId);
             check(results.Count == 3 && results.Select(r => r.round).SequenceEqual(new[] { 1, 2, 3 }),
@@ -231,7 +232,12 @@ public class RoundFlowDebugTest : MonoBehaviour
                 var service = new GameSessionService("credit_test_" + Guid.NewGuid(), "test_professor");
                 var session = NewSavedSession(service);
                 if (startMonth == 2)
+                {
                     check(new RoundService().ProcessRound(1) != null, "Credit fixture: settle month one before a month-two loan");
+                    GameManager.Instance.StateMachine.ForceState(GameState.Round_Summary);
+                    check(service.ContinueAfterSummary(repository.GetLastRoundBySessionId(session.sessionId).roundResultId),
+                        "Credit fixture: acknowledge month one before contracting");
+                }
                 session.currentRound = startMonth;
                 float originalCash = session.currentCash;
                 check(LoanService.ContractTerm(startMonth) == 4 - startMonth,
@@ -256,6 +262,7 @@ public class RoundFlowDebugTest : MonoBehaviour
                     check(Mathf.Abs(session.loanBalance - (openingBalance - principal)) < 0.05f
                         && Mathf.Abs(new GameSessionRepository(db).GetById(session.sessionId).loanBalance - session.loanBalance) < 0.05f,
                         line.id + ": amortizacao persistida no mes " + month);
+                    check(service.ContinueAfterSummary(result.roundResultId), line.id + ": acknowledge saved statement " + month);
                 }
                 check(session.currentRound == 3 && session.loanBalance == 0f && !GameSessionState.HasActiveSession,
                     line.id + ": emprestimo quitado dentro do trimestre");
@@ -319,10 +326,10 @@ public class RoundFlowDebugTest : MonoBehaviour
             bool incompatible = sample[3] == 1;
             string label = "Save rodada " + sample[0] + ", resultado max " + sample[1] + ", historico " + sample[2];
             check(GameSessionState.HasIncompatibleSave == incompatible, label + ": classificacao correta");
-            // This fixture commits D3, but has not chosen financing or bought the basic kit.
-            var expectedState = incompatible ? GameState.MainMenu
-                : sample[0] == 1 ? GameState.Initial_Capital : GameState.Management_Hub;
-            check(GameManager.Instance.StateMachine.CurrentState == expectedState,
+            var expectedEntry = incompatible ? GameState.MainMenu
+                : Game.Infrastructure.Session.PlayerSession.HasValidIdentification ? GameManager.ResumeOperationalSetup(GameSessionState.Current)
+                : InitialDecisionFlow.Identification;
+            check(GameManager.Instance.StateMachine.CurrentState == expectedEntry,
                 label + ": encaminhamento correto");
             GameSessionState.Save();
             check(sessions.GetById(session.sessionId)?.currentRound == sample[0]
@@ -357,25 +364,22 @@ public class RoundFlowDebugTest : MonoBehaviour
 #if UNITY_EDITOR
     private static void RunCreditInterfaceTests(Action<bool, string> check, CreditLineData line)
     {
-        var root = new GameObject("CreditInterfaceTest", typeof(RectTransform));
+        var root = UnityEngine.Object.Instantiate(UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Card_loan.prefab"));
+        root.name = "CreditInterfaceTest";
         root.SetActive(false);
         try
         {
-            var card = root.AddComponent<Game.Adapter.In.UI.BankCardView>();
-            var labelObject = new GameObject("Term", typeof(RectTransform), typeof(TMPro.TextMeshProUGUI));
-            labelObject.transform.SetParent(root.transform, false);
-            var label = labelObject.GetComponent<TMPro.TextMeshProUGUI>();
-            var button = root.AddComponent<UnityEngine.UI.Button>();
+            var card = root.GetComponent<Game.Adapter.In.UI.BankCardView>();
+            var button = root.GetComponent<UnityEngine.UI.Button>();
             var fields = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
-            card.GetType().GetField("termText", fields).SetValue(card, label);
-            card.GetType().GetField("selectButton", fields).SetValue(card, button);
+            var label = (TMPro.TextMeshProUGUI)card.GetType().GetField("termText", fields).GetValue(card);
             GameSessionState.Clear();
             var session = new GameSessionService("credit_ui_test_" + Guid.NewGuid(), "test_professor").CreateNewSession();
             foreach (int month in new[] { 1, 2, 3 })
             {
                 session.currentRound = month;
                 card.Setup(line);
-                check(label.text == (month < 3 ? (4 - month) + " meses" : "Novas contratações indisponíveis")
+                check((month < 3 ? label.text.Contains((4 - month) + " parcela") : label.text == "Contratação indisponível")
                     && button.interactable == (month < 3), "Credito UI: prazo e disponibilidade no mes " + month);
             }
             var view = root.AddComponent<Game.Adapter.In.UI.FinancialScreenView>();
@@ -423,16 +427,17 @@ public class RoundFlowDebugTest : MonoBehaviour
             check(warning.activeInHierarchy && !hub.activeInHierarchy,
                 "UI: modal existente visivel sem abrir hub");
             check(warning.GetComponentsInChildren<TMPro.TextMeshProUGUI>().Any(label =>
-                label.text.Contains("versão anterior") && label.text.Contains("3 meses")),
+                label.text.Contains("ciclo anterior") && label.text.Contains("três meses")),
                 "UI: mensagem explica incompatibilidade trimestral");
-            check(confirm.GetComponentInChildren<TMPro.TextMeshProUGUI>().text == "Iniciar nova sessão"
-                && !cancel.gameObject.activeSelf, "UI: acao de reinicio clara sem liberar save bloqueado");
+            check(confirm.GetComponentInChildren<TMPro.TextMeshProUGUI>().text == "Apagar e reiniciar"
+                && cancel.gameObject.activeSelf && cancel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text == "Sair sem reiniciar",
+                "UI: reinicio destrutivo explicito e saida que preserva o save bloqueado");
             check(new GameSessionRepository(DatabaseInitializer.DatabaseService.Connection).GetById(old.sessionId) != null,
                 "UI: exibir modal nao apaga save");
             confirm.onClick.Invoke();
             check(!warning.activeSelf && !GameSessionState.HasIncompatibleSave
                 && GameSessionState.Current.currentRound == 1
-                && GameManager.Instance.StateMachine.CurrentState == GameState.Config_Location,
+                && GameManager.Instance.StateMachine.CurrentState == InitialDecisionFlow.Identification,
                 "UI: confirmar reinicio fecha modal e inicia configuracao");
             check(new GameSessionRepository(DatabaseInitializer.DatabaseService.Connection).GetById(old.sessionId) == null,
                 "UI: save anterior removido somente apos confirmacao");

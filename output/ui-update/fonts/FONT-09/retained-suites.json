@@ -1,0 +1,30 @@
+{
+  "suites": {
+    "events": {
+      "report": "playmode-events.json",
+      "sha256": "af169b92850083cc166b393c7723768a15595d3cdd8546f7a8aab4bf4d59bf78",
+      "checks": 381
+    },
+    "feedback": {
+      "report": "playmode.json",
+      "sha256": "46fc39606f675f3c2c772310e89e9816a3508d53e540504c2ee17be3d2bfa840",
+      "checks": 133
+    },
+    "dialogs": {
+      "report": "playmode.json",
+      "sha256": "39ef40b41f12c55767877fdd53fbdac1f340a9aa09247de694ef7d18b79cccf9",
+      "checks": 148
+    }
+  },
+  "captures": 318,
+  "production_scene_sha256": "927af221e96cc14637dc7cf7935efb29af74b82d92886bc61b869b0e306f7136",
+  "production_sources_sha256": {
+    "Assets\\Scripts\\Game\\Adapter\\In\\UI\\EventOptionCardView.cs": "8b0d3a34669f23e99a866082f2a3ad5384f6cba011ff6ce0ad6ecba77de411b2",
+    "Assets\\Scripts\\Game\\Adapter\\In\\UI\\SharedTooltip.cs": "950a2b68c64d3b24f1b360eb3372097b31e7c434a90cb36b538c882308d88861",
+    "Assets\\Scripts\\Game\\Adapter\\In\\UI\\ContextualHelp.cs": "b5771a4670d5d97db1b3285a50e1755a3be7cc3294b53b89e1eb8adcd3bf9273"
+  },
+  "expected_warning_count": 3,
+  "expected_warning": "[EstablishmentSummaryController] Falha ao resetar o jogo: Constraint",
+  "warning_reason": "Intentional SQLite reset failure once per viewport. All three dialog-suite checks passed; no unexpected warning was recorded.",
+  "reason": "Passed suites retained from FONT-09 runs against the same production scene and runtime source bytes. Only Editor QA lookup for the existing reset-modal reparenting changed."
+}

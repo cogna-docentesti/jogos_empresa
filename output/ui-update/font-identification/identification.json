@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-17",
+  "request": "Identificar a tipografia dos concepts aprovados.",
+  "original_font_confirmed": false,
+  "origin_evidence": {
+    "file": "output/concept-art/2026-10-13/auditoria-ui.json",
+    "field": "imageGeneration",
+    "value": "image_gen integrado do Codex, sem fallback CLI",
+    "prompt_file": "output/concept-art/2026-10-13/PROMPTS.txt",
+    "prompt_line": 75,
+    "typography_instruction": "Typography modern sober sans serif",
+    "named_typeface": null
+  },
+  "conclusion": "O concept contém letras geradas na imagem, sem uma família de fonte especificada. A família Roboto é uma aproximação prática para o conjunto, combinando largura normal e condensada; não é uma identificação exata.",
+  "visual_hypotheses": [
+    { "use": "Cabeçalho e valores", "candidate": "Roboto Bold", "status": "aproximação visual" },
+    { "use": "Corpo", "candidate": "Roboto Regular", "status": "aproximação visual" },
+    { "use": "Rótulos e botões estreitos", "candidate": "Roboto Condensed Medium/SemiBold", "status": "aproximação visual; ajustar largura e peso por função" },
+    { "use": "Alguns títulos internos", "candidate": "Barlow Semi Condensed Bold", "status": "alternativa próxima; Source Sans 3 também apresentou semelhança em amostras" }
+  ],
+  "comparison": {
+    "samples": ["Jogos de Empresa", "Demonstrativo do mês", "Receita de vendas", "VER RESULTADOS"],
+    "families": ["Roboto", "Roboto Condensed", "Barlow Semi Condensed", "Barlow", "Source Sans 3", "Inter Tight", "Oswald"],
+    "normalization": "Altura visível das letras igual nas pranchas; sem comprimir horizontalmente. A linha Roboto SemiCondensed usa o eixo Width=87.5 da Roboto variável, não uma família separada.",
+    "metric_limit": "As distâncias de borda auxiliares não são probabilidades de identificação e variam por amostra. A distorção e os espaçamentos da imagem impedem confirmar uma família única."
+  },
+  "sources": [
+    "https://fonts.google.com/specimen/Roboto",
+    "https://fonts.google.com/specimen/Roboto+Condensed",
+    "https://fonts.google.com/specimen/Barlow+Semi+Condensed",
+    "https://github.com/google/fonts/tree/main/ofl/robotocondensed",
+    "https://github.com/google/fonts/tree/main/ofl/barlowsemicondensed"
+  ],
+  "game_files_changed": false
+}

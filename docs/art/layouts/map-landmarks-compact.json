@@ -1,0 +1,869 @@
+{
+  "schema_version": 1,
+  "task_id": "ART-11",
+  "revision": "compact",
+  "date": "2026-10-14",
+  "master_size_px": [
+    1920,
+    1080
+  ],
+  "coordinate_origin": "top_left_y_down",
+  "rect_semantics": "[x,y,width,height] in master pixels. Position is the top-left of the cropped texture.",
+  "display_transform": {
+    "uniform_scale": 0.6666666666666666,
+    "offset_px": [
+      24,
+      176
+    ],
+    "target_viewport_px": [
+      24,
+      112,
+      1280,
+      848
+    ],
+    "fit_mode": "contain",
+    "offset_semantics": "Offset absoluto no canvas 1920x1080. x_canvas = 24 + x_master * 2/3; y_canvas = 176 + y_master * 2/3.",
+    "rendered_bounds_px": [
+      24,
+      176,
+      1280,
+      720
+    ],
+    "viewport_local_offset_px": [
+      0,
+      64
+    ],
+    "native_unity_top_left_conversion": "Para RectTransform com âncora/pivot top-left, anchoredPosition = [x_canvas, -y_canvas] relativo ao canvas. Não reutilizar coordenadas legadas.",
+    "rule": "Aplicar exatamente a mesma escala uniforme e offset a todas as camadas, polígonos, hit-areas e âncoras. Não esticar para 1280x848 nem recortar o master."
+  },
+  "pivot": [
+    0,
+    1
+  ],
+  "scale": 1,
+  "assets": [
+    {
+      "id": "MAP_BANK",
+      "catalog_id": "bank",
+      "source_path": "Assets/Art/new/location/landmarks/map_bank.png",
+      "source_sha256": "b795ac072f99eb8f692176ec05eb9a955ebc7c77f4931a462aaff890abaff813",
+      "source_size_px": [
+        1920,
+        1080
+      ],
+      "source_bytes": 119167,
+      "output_path": "Assets/Art/new/location/landmarks/compact/map_bank.png",
+      "path": "location/landmarks/compact/map_bank.png",
+      "sha256": "d63f2a9bc644c66f83a285f4c7a944380b33921910db7c95486bb03788da95ce",
+      "output_bytes": 83184,
+      "actual_size_px": [
+        250,
+        235
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "crop_rect_px": [
+        986,
+        151,
+        250,
+        235
+      ],
+      "source_alpha_bbox": [
+        988,
+        153,
+        1234,
+        384
+      ],
+      "padding_px": 2,
+      "position_px": [
+        986,
+        151
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_origin": "top_left_y_down",
+      "ground_anchor_master_px": [
+        1100,
+        341
+      ],
+      "ground_anchor_local_px": [
+        114,
+        190
+      ],
+      "ground_polygons_master_px": [
+        [
+          [
+            991.3030303030303,
+            312.1515151515151
+          ],
+          [
+            1095.030303030303,
+            270.5757575757576
+          ],
+          [
+            1210.8484848484848,
+            314.06060606060606
+          ],
+          [
+            1112,
+            369.6363636363636
+          ]
+        ]
+      ],
+      "unity_master_rect": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0,
+          1
+        ],
+        "anchored_position_px": [
+          986,
+          -151
+        ],
+        "size_delta_px": [
+          250,
+          235
+        ]
+      },
+      "viewport_display_rect": {
+        "top_left_px": [
+          657.3333333333333,
+          164.66666666666666
+        ],
+        "size_px": [
+          166.66666666666666,
+          156.66666666666666
+        ],
+        "unity_anchored_position_px": [
+          657.3333333333333,
+          -164.66666666666666
+        ]
+      },
+      "canvas_display_rect": {
+        "top_left_px": [
+          681.3333333333333,
+          276.66666666666663
+        ],
+        "size_px": [
+          166.66666666666666,
+          156.66666666666666
+        ]
+      },
+      "center_pivot_master_option": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "anchored_position_px": [
+          1111,
+          -268.5
+        ]
+      },
+      "rgba8_bytes_before": 8294400,
+      "rgba8_bytes_after": 235000,
+      "status": "validado"
+    },
+    {
+      "id": "MAP_CONDOMINIUM",
+      "catalog_id": "condominium",
+      "source_path": "Assets/Art/new/location/landmarks/map_condominium.png",
+      "source_sha256": "3b507d79e6b63d240e3e308f6424f145456aa5b8e6ee39f4f0221012d1f4acc6",
+      "source_size_px": [
+        1920,
+        1080
+      ],
+      "source_bytes": 129759,
+      "output_path": "Assets/Art/new/location/landmarks/compact/map_condominium.png",
+      "path": "location/landmarks/compact/map_condominium.png",
+      "sha256": "dc20b4a6f5be465fcde3c72fbb770fb101d7a12068a84f46217677d4fcf7fb81",
+      "output_bytes": 100739,
+      "actual_size_px": [
+        391,
+        313
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "crop_rect_px": [
+        393,
+        631,
+        391,
+        313
+      ],
+      "source_alpha_bbox": [
+        395,
+        633,
+        782,
+        942
+      ],
+      "padding_px": 2,
+      "position_px": [
+        393,
+        631
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_origin": "top_left_y_down",
+      "ground_anchor_master_px": [
+        640,
+        866
+      ],
+      "ground_anchor_local_px": [
+        247,
+        235
+      ],
+      "ground_polygons_master_px": [
+        [
+          [
+            585.5430622009569,
+            713.4992025518342
+          ],
+          [
+            626.579744816587,
+            690.3333333333334
+          ],
+          [
+            670.5948963317385,
+            708.2041467304625
+          ],
+          [
+            630.22009569378,
+            734.0175438596491
+          ]
+        ],
+        [
+          [
+            699.7177033492824,
+            787.299043062201
+          ],
+          [
+            736.7830940988836,
+            768.1044657097289
+          ],
+          [
+            774.5103668261563,
+            788.6228070175439
+          ],
+          [
+            736.1212121212121,
+            805.5007974481659
+          ]
+        ],
+        [
+          [
+            523.3261562998405,
+            787.299043062201
+          ],
+          [
+            560.3915470494418,
+            766.4497607655503
+          ],
+          [
+            597.4569377990431,
+            788.9537480063796
+          ],
+          [
+            560.3915470494418,
+            808.1483253588517
+          ]
+        ],
+        [
+          [
+            605.3995215311005,
+            851.170653907496
+          ],
+          [
+            649.414673046252,
+            829.9904306220096
+          ],
+          [
+            688.4657097288676,
+            851.8325358851675
+          ],
+          [
+            652.7240829346092,
+            873.6746411483255
+          ]
+        ],
+        [
+          [
+            420.73444976076553,
+            858.7822966507177
+          ],
+          [
+            463.0948963317384,
+            836.9401913875598
+          ],
+          [
+            501.81499202551834,
+            858.451355661882
+          ],
+          [
+            465.0805422647528,
+            874.3365231259968
+          ]
+        ],
+        [
+          [
+            527.9593301435407,
+            920.6682615629984
+          ],
+          [
+            566.0175438596491,
+            900.1499202551834
+          ],
+          [
+            603.0829346092504,
+            920.9992025518342
+          ],
+          [
+            565.3556618819777,
+            937.5462519936204
+          ]
+        ]
+      ],
+      "unity_master_rect": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0,
+          1
+        ],
+        "anchored_position_px": [
+          393,
+          -631
+        ],
+        "size_delta_px": [
+          391,
+          313
+        ]
+      },
+      "viewport_display_rect": {
+        "top_left_px": [
+          262,
+          484.66666666666663
+        ],
+        "size_px": [
+          260.66666666666663,
+          208.66666666666666
+        ],
+        "unity_anchored_position_px": [
+          262,
+          -484.66666666666663
+        ]
+      },
+      "canvas_display_rect": {
+        "top_left_px": [
+          286,
+          596.6666666666666
+        ],
+        "size_px": [
+          260.66666666666663,
+          208.66666666666666
+        ]
+      },
+      "center_pivot_master_option": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "anchored_position_px": [
+          588.5,
+          -787.5
+        ]
+      },
+      "rgba8_bytes_before": 8294400,
+      "rgba8_bytes_after": 489532,
+      "status": "validado"
+    },
+    {
+      "id": "MAP_MARKETING",
+      "catalog_id": "marketing",
+      "source_path": "Assets/Art/new/location/landmarks/map_marketing.png",
+      "source_sha256": "a23855b223b529492491956ef1e2b8bb458bfafb90e9c330378a805ded06d93a",
+      "source_size_px": [
+        1920,
+        1080
+      ],
+      "source_bytes": 227356,
+      "output_path": "Assets/Art/new/location/landmarks/compact/map_marketing.png",
+      "path": "location/landmarks/compact/map_marketing.png",
+      "sha256": "e904c3f2db8a302bd91ef7126aa5636d5dbb251c0ec3acc766e5e1e0d0fa684d",
+      "output_bytes": 157097,
+      "actual_size_px": [
+        364,
+        364
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "crop_rect_px": [
+        1372,
+        575,
+        364,
+        364
+      ],
+      "source_alpha_bbox": [
+        1374,
+        577,
+        1734,
+        937
+      ],
+      "padding_px": 2,
+      "position_px": [
+        1372,
+        575
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_origin": "top_left_y_down",
+      "ground_anchor_master_px": [
+        1595,
+        899
+      ],
+      "ground_anchor_local_px": [
+        223,
+        324
+      ],
+      "ground_polygons_master_px": [
+        [
+          [
+            1389.3062200956938,
+            844.1961722488038
+          ],
+          [
+            1560.5861244019138,
+            778.7703349282297
+          ],
+          [
+            1730.6315789473683,
+            867.9593301435407
+          ],
+          [
+            1616.4449760765551,
+            927.5215311004785
+          ],
+          [
+            1456.5837320574162,
+            892.9569377990431
+          ]
+        ]
+      ],
+      "unity_master_rect": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0,
+          1
+        ],
+        "anchored_position_px": [
+          1372,
+          -575
+        ],
+        "size_delta_px": [
+          364,
+          364
+        ]
+      },
+      "viewport_display_rect": {
+        "top_left_px": [
+          914.6666666666666,
+          447.3333333333333
+        ],
+        "size_px": [
+          242.66666666666666,
+          242.66666666666666
+        ],
+        "unity_anchored_position_px": [
+          914.6666666666666,
+          -447.3333333333333
+        ]
+      },
+      "canvas_display_rect": {
+        "top_left_px": [
+          938.6666666666666,
+          559.3333333333333
+        ],
+        "size_px": [
+          242.66666666666666,
+          242.66666666666666
+        ]
+      },
+      "center_pivot_master_option": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "anchored_position_px": [
+          1554,
+          -757
+        ]
+      },
+      "rgba8_bytes_before": 8294400,
+      "rgba8_bytes_after": 529984,
+      "status": "validado"
+    },
+    {
+      "id": "MAP_STORE",
+      "catalog_id": "store",
+      "source_path": "Assets/Art/new/location/landmarks/map_store.png",
+      "source_sha256": "5a59a8052457aacf82926dfe6230c64a282eb262f72efb7c311c3e3103fb439f",
+      "source_size_px": [
+        1920,
+        1080
+      ],
+      "source_bytes": 173151,
+      "output_path": "Assets/Art/new/location/landmarks/compact/map_store.png",
+      "path": "location/landmarks/compact/map_store.png",
+      "sha256": "2bafb4bc33de10ca342159fd7941e19506d395843c1dda4187d1881a86c95fa4",
+      "output_bytes": 129015,
+      "actual_size_px": [
+        317,
+        274
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "crop_rect_px": [
+        1475,
+        175,
+        317,
+        274
+      ],
+      "source_alpha_bbox": [
+        1477,
+        177,
+        1790,
+        447
+      ],
+      "padding_px": 2,
+      "position_px": [
+        1475,
+        175
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_origin": "top_left_y_down",
+      "ground_anchor_master_px": [
+        1638,
+        409
+      ],
+      "ground_anchor_local_px": [
+        163,
+        234
+      ],
+      "ground_polygons_master_px": [
+        [
+          [
+            1480.3460925039872,
+            343.3094098883572
+          ],
+          [
+            1571.670653907496,
+            302.0845295055821
+          ],
+          [
+            1786.66985645933,
+            365.06698564593296
+          ],
+          [
+            1689.3333333333333,
+            442.93620414673046
+          ]
+        ]
+      ],
+      "unity_master_rect": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0,
+          1
+        ],
+        "anchored_position_px": [
+          1475,
+          -175
+        ],
+        "size_delta_px": [
+          317,
+          274
+        ]
+      },
+      "viewport_display_rect": {
+        "top_left_px": [
+          983.3333333333333,
+          180.66666666666666
+        ],
+        "size_px": [
+          211.33333333333331,
+          182.66666666666666
+        ],
+        "unity_anchored_position_px": [
+          983.3333333333333,
+          -180.66666666666666
+        ]
+      },
+      "canvas_display_rect": {
+        "top_left_px": [
+          1007.3333333333333,
+          292.66666666666663
+        ],
+        "size_px": [
+          211.33333333333331,
+          182.66666666666666
+        ]
+      },
+      "center_pivot_master_option": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "anchored_position_px": [
+          1633.5,
+          -312
+        ]
+      },
+      "rgba8_bytes_before": 8294400,
+      "rgba8_bytes_after": 347432,
+      "status": "validado"
+    },
+    {
+      "id": "MAP_UNIVERSITY",
+      "catalog_id": "university",
+      "source_path": "Assets/Art/new/location/landmarks/map_university.png",
+      "source_sha256": "811eb9d5ec634f4822bdb816b52a6b088a5f3da5cc0f7c8d66603410715e1a44",
+      "source_size_px": [
+        1920,
+        1080
+      ],
+      "source_bytes": 168439,
+      "output_path": "Assets/Art/new/location/landmarks/compact/map_university.png",
+      "path": "location/landmarks/compact/map_university.png",
+      "sha256": "ef67d0bc70b94341d4819993bf0be8aac543619fa650a81deb373aa9a51aff79",
+      "output_bytes": 124576,
+      "actual_size_px": [
+        309,
+        277
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "crop_rect_px": [
+        218,
+        51,
+        309,
+        277
+      ],
+      "source_alpha_bbox": [
+        220,
+        53,
+        525,
+        326
+      ],
+      "padding_px": 2,
+      "position_px": [
+        218,
+        51
+      ],
+      "pivot": [
+        0,
+        1
+      ],
+      "scale": 1,
+      "master_size_px": [
+        1920,
+        1080
+      ],
+      "coordinate_origin": "top_left_y_down",
+      "ground_anchor_master_px": [
+        390,
+        315
+      ],
+      "ground_anchor_local_px": [
+        172,
+        264
+      ],
+      "ground_polygons_master_px": [
+        [
+          [
+            224.05502392344496,
+            234.83253588516746
+          ],
+          [
+            284.46650717703346,
+            212.8181818181818
+          ],
+          [
+            520.7368421052631,
+            281.42105263157896
+          ],
+          [
+            459.81339712918657,
+            318.79425837320576
+          ],
+          [
+            354.8612440191388,
+            313.41866028708137
+          ],
+          [
+            266.03588516746413,
+            272.71770334928226
+          ]
+        ]
+      ],
+      "unity_master_rect": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0,
+          1
+        ],
+        "anchored_position_px": [
+          218,
+          -51
+        ],
+        "size_delta_px": [
+          309,
+          277
+        ]
+      },
+      "viewport_display_rect": {
+        "top_left_px": [
+          145.33333333333331,
+          98
+        ],
+        "size_px": [
+          206,
+          184.66666666666666
+        ],
+        "unity_anchored_position_px": [
+          145.33333333333331,
+          -98
+        ]
+      },
+      "canvas_display_rect": {
+        "top_left_px": [
+          169.33333333333331,
+          210
+        ],
+        "size_px": [
+          206,
+          184.66666666666666
+        ]
+      },
+      "center_pivot_master_option": {
+        "anchor_min": [
+          0,
+          1
+        ],
+        "anchor_max": [
+          0,
+          1
+        ],
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "anchored_position_px": [
+          372.5,
+          -189.5
+        ]
+      },
+      "rgba8_bytes_before": 8294400,
+      "rgba8_bytes_after": 342372,
+      "status": "validado"
+    }
+  ],
+  "assembly_rule": "Place each compact PNG at position_px, at native size, under the same 1920x1080 map parent. Then apply the shared display_transform once to the parent.",
+  "unity_rule": "For a master-space RectTransform with top-left anchors and pivot [0,1], anchoredPosition=[x,-y] and sizeDelta=texture size. Values for the 1280x848 viewport are separately recorded; do not mix coordinate spaces.",
+  "source_contract": "docs/art/layouts/archive/map-layout-art11-fullframe.json",
+  "integration_performed": false,
+  "active_contract": "docs/art/layouts/map-layout.json",
+  "active_contract_sha256": "1556db21e738ed760bfeb0a8ce4ca4c6395ccce43b7967a5f9197134c7a17565"
+}

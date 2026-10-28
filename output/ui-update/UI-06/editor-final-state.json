@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UnityEngine.PlayerPrefs.DeleteKey(\"Cogna.UI06.QA.FinalV3\"); UnityEngine.PlayerPrefs.Save(); System.Environment.SetEnvironmentVariable(\"COGNA_TEST_DATABASE_PATH\",null); System.Environment.SetEnvironmentVariable(\"COGNA_TEST_IDENTIFICATION_KEY\",null); UnityEditor.SceneManagement.EditorSceneManager.SaveOpenScenes(); return new {project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,playing=UnityEditor.EditorApplication.isPlaying,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "project": "D:/Cogna/jogos_empresa/Assets",
+        "scene": "Assets/Scenes/GameScene.unity",
+        "playing": false,
+        "dirty": false
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

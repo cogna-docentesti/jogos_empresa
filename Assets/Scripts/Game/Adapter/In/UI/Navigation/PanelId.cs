@@ -34,6 +34,11 @@ namespace Game.Adapter.In.UI.Navigation
         Restaurant = 8,
 
         /// <summary>Revisao das escolhas.</summary>
-        Review = 9
+        Review = 9,
+
+        /// <summary>Saved event decisions for the campaign.</summary>
+        EventHistory = 10,
+        MonthlyResults = 11,
+        QuarterlyResults = 12
     }
 }

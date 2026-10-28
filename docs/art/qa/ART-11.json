@@ -1,0 +1,124 @@
+{
+  "task_id": "ART-11",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual do agente",
+  "technical_validation": {
+    "command": "python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-11",
+    "passed": true,
+    "asset_count": 5,
+    "errors": [],
+    "report": "docs/art/qa/ART-11-technical.json"
+  },
+  "visual_validation": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "export_scale": "PNG full-frame 1920x1080 e detalhes das construções em 1:1.",
+    "display_method": "Todas as camadas usam o mesmo contain 2/3; conjunto 1280x720 dentro da caixa 1280x848 com offset local [0,64].",
+    "previews": {
+      "assembly_master_light": "art-source/previews/ART-11/ART-11-assembly-master-light.png",
+      "assembly_display_light": "art-source/previews/ART-11/ART-11-assembly-display-light.png",
+      "assembly_master_dark": "art-source/previews/ART-11/ART-11-assembly-master-dark.png",
+      "assembly_display_dark": "art-source/previews/ART-11/ART-11-assembly-display-dark.png",
+      "footprint_assembly": "art-source/previews/ART-11/ART-11-footprint-assembly.png",
+      "contact_sheet": "art-source/previews/ART-11/ART-11-contact-sheet.png"
+    },
+    "checks": [
+      "Cinco construções/bairros separados, sem nomes, números, ícones, HUD, pinos ou realces rasterizados.",
+      "Universidade com cúpula índigo/colunas/alas terracota, banco marfim/vidro azul, comércio coral, escritórios marfim/azul e seis casas terracota reconhecíveis.",
+      "Câmera oblíqua, luz superior esquerda, contornos e paleta coerentes entre os assets e o hub aprovado.",
+      "Montagem conjunta sobre MAP_BASE conferida; edifícios apoiados nas zonas corretas, vias e pontes legíveis e restaurante central livre.",
+      "Bairro residencial revisado por ImageGen para encaixar as seis casas nos gramados existentes e conservar caminhos.",
+      "RGBA8 sRGB 1920x1080, alfa zero real externo, antialias e recortes conferidos sobre fundos claros/escuros.",
+      "Escala técnica uniforme por asset, sem warp/esticamento, seguida de master/origem/pivot iguais em todas as camadas.",
+      "Footprints físicos no polígono da respectiva zona; volume alto dentro do envelope de construção.",
+      "Full-frame e provas no tamanho de exibição revisados, com boa leitura das silhuetas e volumes."
+    ]
+  },
+  "assets": [
+    {
+      "id": "MAP_BANK",
+      "catalog_id": "bank",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "sha256": "b795ac072f99eb8f692176ec05eb9a955ebc7c77f4931a462aaff890abaff813",
+      "technical": true,
+      "visual": true,
+      "review_page": "art-source/previews/ART-11/ART-11-review-01.png",
+      "detail_preview": "art-source/previews/ART-11/MAP_BANK-detail-1x.png",
+      "ground_inside_zone": true,
+      "visible_inside_envelope": true
+    },
+    {
+      "id": "MAP_CONDOMINIUM",
+      "catalog_id": "condominium",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "sha256": "3b507d79e6b63d240e3e308f6424f145456aa5b8e6ee39f4f0221012d1f4acc6",
+      "technical": true,
+      "visual": true,
+      "review_page": "art-source/previews/ART-11/ART-11-review-02.png",
+      "detail_preview": "art-source/previews/ART-11/MAP_CONDOMINIUM-detail-1x.png",
+      "ground_inside_zone": true,
+      "visible_inside_envelope": true
+    },
+    {
+      "id": "MAP_MARKETING",
+      "catalog_id": "marketing",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "sha256": "a23855b223b529492491956ef1e2b8bb458bfafb90e9c330378a805ded06d93a",
+      "technical": true,
+      "visual": true,
+      "review_page": "art-source/previews/ART-11/ART-11-review-03.png",
+      "detail_preview": "art-source/previews/ART-11/MAP_MARKETING-detail-1x.png",
+      "ground_inside_zone": true,
+      "visible_inside_envelope": true
+    },
+    {
+      "id": "MAP_STORE",
+      "catalog_id": "store",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "sha256": "5a59a8052457aacf82926dfe6230c64a282eb262f72efb7c311c3e3103fb439f",
+      "technical": true,
+      "visual": true,
+      "review_page": "art-source/previews/ART-11/ART-11-review-04.png",
+      "detail_preview": "art-source/previews/ART-11/MAP_STORE-detail-1x.png",
+      "ground_inside_zone": true,
+      "visible_inside_envelope": true
+    },
+    {
+      "id": "MAP_UNIVERSITY",
+      "catalog_id": "university",
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "sha256": "811eb9d5ec634f4822bdb816b52a6b088a5f3da5cc0f7c8d66603410715e1a44",
+      "technical": true,
+      "visual": true,
+      "review_page": "art-source/previews/ART-11/ART-11-review-05.png",
+      "detail_preview": "art-source/previews/ART-11/MAP_UNIVERSITY-detail-1x.png",
+      "ground_inside_zone": true,
+      "visible_inside_envelope": true
+    }
+  ],
+  "coordinate_contract": "docs/art/layouts/map-layout.json",
+  "contract_unchanged": true,
+  "pending": [],
+  "integration_performed": false,
+  "alpha_note": "Alfa original de ImageGen preservado. Há pixels residuais de baixa opacidade na fonte; silhueta visível e envelopes são medidos com alfa >=128 e complementados pela revisão visual.",
+  "future_work": "Restaurantes/foreground ART-12 e realces/marcadores ART-13 continuam planejados."
+}

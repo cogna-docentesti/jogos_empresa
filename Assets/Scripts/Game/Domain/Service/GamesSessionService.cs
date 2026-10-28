@@ -86,6 +86,9 @@ public class GameSessionService
                 var historyRepository = new SessionEventHistoryRepository(db);
                 foreach (var item in historyRepository.GetBySession(session.sessionId))
                     historyRepository.Delete(item);
+                db.CreateTable<MonthlyEventPlanEntity>();
+                foreach (var plan in db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == session.sessionId).ToList())
+                    db.Delete(plan);
                 new GameSessionRepository(db).Delete(session);
                 GameSessionState.Clear();
                 replacement = new GameSessionService(session.userId, session.professorId).CreateNewSession();
@@ -103,6 +106,22 @@ public class GameSessionService
     public void LoadActiveSession()
     {
         GameSessionState.Initialize(_userId);
+    }
+
+    /// <summary>Explicit new-game action. Keep every finished row and result; the replacement is a D3 draft.</summary>
+    public GameSessionEntity StartNewCampaignPreservingReport()
+    {
+        var previous = GameSessionState.Current;
+        var db = DatabaseInitializer.DatabaseService?.Connection;
+        if (previous == null || (previous.status != GameSessionStatus.COMPLETED && previous.status != GameSessionStatus.BANKRUPT)
+            || !GameSessionState.IsPersisted || db == null)
+            throw new InvalidOperationException("A saved finished campaign is required.");
+        if (db.Execute("UPDATE GameSessionEntity SET finalReportArchived = ? WHERE sessionId = ? AND status = ?",
+            true, previous.sessionId, previous.status) != 1)
+            throw new InvalidOperationException("The finished report could not be preserved.");
+        previous.finalReportArchived = true;
+        GameSessionState.Clear(); PlayerSession.Clear();
+        return new GameSessionService(previous.userId, previous.professorId).CreateNewSession();
     }
 
     // =============================
@@ -169,6 +188,7 @@ public class GameSessionService
         // AlignmentEngine no ConfirmInitialTeam, quando a equipe ja existe, e
         // depende da matriz que a Thaysla esta recalibrando (T-06).
 
+        GameSessionState.Current.initialSetupResumeState = (int)GameState.Initial_Capital;
         bool saved = GameSessionState.Persist();
 
         if (saved)
@@ -206,17 +226,19 @@ public class GameSessionService
     {
         AddEquipments(equipments);
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Initial_Team);
+        ContinueInitialSetup(GameState.Initial_Team);
     }
 
     public void ConfirmInitialTeam(List<RoleData> availableRoles)
     {
-        if (!GameSessionState.HasSession)
-            return;
+        if (!SaveTeamAlignment(availableRoles)) return;
+        ContinueInitialSetup(GameState.Management_Hub);
+    }
 
-        GameSessionState.Save();
-
+    /// <summary>Same alignment calculation for setup and hub visits; does not navigate or debit payroll.</summary>
+    public bool SaveTeamAlignment(List<RoleData> availableRoles)
+    {
+        if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted) return false;
         var session = GameSessionState.Current;
         var teamData = TeamSelectionHelper.FromJson(session.teamJson);
         var restaurantData = GetRestaurantData(session.restaurantType);
@@ -233,18 +255,29 @@ public class GameSessionService
         );
 
         GameSessionState.SetAlignment(alignment);
-        GameSessionState.Save();
-
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Management_Hub);
+        return GameSessionState.Persist();
     }
 
     public void ConfirmInitialCapital()
     {
         GameSessionState.Save();
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Initial_Equipment);
+        ContinueInitialSetup(GameState.Initial_Equipment);
+    }
+
+    /// <summary>Persist the next setup screen before handing visibility to it. No financial operation.</summary>
+    public bool ContinueInitialSetup(GameState next)
+    {
+        var sm = GameManager.Instance?.StateMachine;
+        var session = GameSessionState.Current;
+        var db = DatabaseInitializer.DatabaseService?.Connection;
+        if (sm == null || session == null || !GameSessionState.IsPersisted || db == null
+            || !sm.CanTransitionTo(next) || (sm.CurrentState != GameState.Initial_Capital
+                && sm.CurrentState != GameState.Initial_Equipment && sm.CurrentState != GameState.Initial_Team)) return false;
+        if (db.Execute("UPDATE GameSessionEntity SET initialSetupResumeState = ? WHERE sessionId = ?",
+            (int)next, session.sessionId) != 1) return false;
+        session.initialSetupResumeState = (int)next;
+        return sm.TryChangeState(next);
     }
 
     private RestaurantData GetRestaurantData(RestaurantType restaurantType)
@@ -381,7 +414,8 @@ public class GameSessionService
 
     public void StartRound()
     {
-        if (!GameSessionState.HasActiveSession)
+        if (!GameSessionState.HasActiveSession || GameManager.Instance?.StateMachine?.CurrentState != GameState.Management_Hub
+            || !string.IsNullOrEmpty(GameSessionState.Current.pendingSummaryResultId))
             return;
 
         var session = GameSessionState.Current;
@@ -395,6 +429,14 @@ public class GameSessionService
             .TryChangeState(GameState.Round_Sales);
     }
 
+    /// <summary>Technical preparation ends at the visible event decision; calculation still waits.</summary>
+    public bool BeginEventDecisions()
+    {
+        var sm = GameManager.Instance?.StateMachine;
+        if (sm?.CurrentState != GameState.Round_Sales) return sm?.CurrentState == GameState.Round_Event;
+        return sm.TryChangeState(GameState.Round_Costs) && sm.TryChangeState(GameState.Round_Event);
+    }
+
     public RoundResultEntity ProcessCurrentRound()
     {
         if (!GameSessionState.HasActiveSession || GameManager.Instance?.StateMachine == null)
@@ -402,7 +444,7 @@ public class GameSessionService
 
         var sm = GameManager.Instance.StateMachine;
 
-        if (sm.CurrentState != GameState.Round_Sales)
+        if (sm.CurrentState != GameState.Round_Sales && sm.CurrentState != GameState.Round_Event)
         {
             Debug.LogWarning("[GameSessionService] The month is not in the sales state.");
             return null;
@@ -411,6 +453,9 @@ public class GameSessionService
         RoundResultEntity result;
         try
         {
+            if (!string.IsNullOrEmpty(GameSessionState.Current.pendingSummaryResultId)
+                || new MonthlyEventDecisionService(DatabaseInitializer.DatabaseService.Connection)
+                    .HasUnconfirmedChoices(GameSessionState.Current)) return null;
             result = new RoundService().ProcessRound();
             if (result == null) return null;
         }
@@ -420,39 +465,45 @@ public class GameSessionService
             return null;
         }
 
-        sm.TryChangeState(GameState.Round_Costs);
-        sm.TryChangeState(GameState.Round_Event);
+        if (sm.CurrentState == GameState.Round_Sales) BeginEventDecisions();
         sm.TryChangeState(GameState.Round_Summary);
-
-        EvaluateRoundEnd(result);
 
         return result;
     }
 
-    private void EvaluateRoundEnd(RoundResultEntity result)
+    /// <summary>Presentation acknowledgement only. Never calculates or persists the month again.</summary>
+    public bool ContinueAfterSummary(string resultId)
     {
         var session = GameSessionState.Current;
-
-        if (session == null)
-            return;
+        var sm = GameManager.Instance?.StateMachine;
+        var db = DatabaseInitializer.DatabaseService?.Connection;
+        if (session == null || sm?.CurrentState != GameState.Round_Summary || db == null) return false;
+        var saved = new RoundResultRepository(db).GetLastRoundBySessionId(session.sessionId);
+        if (saved == null || saved.roundResultId != resultId) return false;
 
         if (session.status == GameSessionStatus.BANKRUPT)
         {
-            GameManager.Instance.StateMachine
-                .TryChangeState(GameState.GameOver_Bankruptcy);
-
-            return;
+            if (!sm.CanTransitionTo(GameState.GameOver_Bankruptcy)) return false;
+            if (db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = ?, pendingSummaryResultId = NULL WHERE sessionId = ? AND status = ?",
+                true, session.sessionId, GameSessionStatus.BANKRUPT) != 1) return false;
+            session.finalSummaryAcknowledged = true;
+            session.pendingSummaryResultId = null;
+            return sm.TryChangeState(GameState.GameOver_Bankruptcy);
         }
 
         if (session.status == GameSessionStatus.COMPLETED)
         {
-            GameManager.Instance.StateMachine
-                .TryChangeState(GameState.FinalReport);
-
-            return;
+            if (!sm.CanTransitionTo(GameState.FinalReport)) return false;
+            if (db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = ?, pendingSummaryResultId = NULL WHERE sessionId = ? AND status = ?",
+                true, session.sessionId, GameSessionStatus.COMPLETED) != 1) return false;
+            session.finalSummaryAcknowledged = true;
+            session.pendingSummaryResultId = null;
+            return sm.TryChangeState(GameState.FinalReport);
         }
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Management_Hub);
+        if (db.Execute("UPDATE GameSessionEntity SET pendingSummaryResultId = NULL WHERE sessionId = ?",
+            session.sessionId) != 1) return false;
+        session.pendingSummaryResultId = null;
+        return sm.TryChangeState(GameState.Management_Hub);
     }
 }

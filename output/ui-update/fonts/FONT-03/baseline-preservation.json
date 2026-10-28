@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "head": "7dbfdac87b55cb9c9fa3c25bae82cf014b044149",
+  "baseline_local": "output/ui-update/fonts/FONT-03/baseline.json",
+  "baseline_sha256": "fa820e5b1761cb4a598426cd1518043461916a7a10b00f33e1e7f19be908cc9c",
+  "files_checked": 10954,
+  "authorized_edits": [
+    "tools/ui/font03_support.py",
+    "docs/ui-update/font-tasks/README.md",
+    "docs/ui-update/font-tasks/FONT-03-assets-tmpro.md",
+    "docs/ui-update/font-sources.json"
+  ],
+  "changed": [
+    "docs/ui-update/font-sources.json",
+    "docs/ui-update/font-tasks/FONT-03-assets-tmpro.md",
+    "docs/ui-update/font-tasks/README.md",
+    "output/ui-update/fonts/orchestration/sequence-state.json",
+    "tools/ui/font03_support.py"
+  ],
+  "unexpected_changes": [],
+  "external_orchestration_changes": [
+    {
+      "path": "output/ui-update/fonts/orchestration/sequence-state.json",
+      "before": "58ac2cc6261d404a5c0d01a786835247cd47c673a3e27df42661897ba0a15a83",
+      "after": "f793e4555c9a6256a37e32c3c50e43e4ca2739ad6b041a6472854a599b6472f5",
+      "owner": "Coordinator conversation; observed status update during FONT-03; preserved without writing"
+    }
+  ],
+  "initial_status_sha256": "d8d8560e93ea5b59f47ec9ddc5f57ce5e356ad0078a44d7acc3056e2609825a5",
+  "initial_patch_sha256": "f2cc3b0eabf6f9d0bedd4147b8d6d1850b301fddf761f873c5e6fb9a44aa2607",
+  "initial_index_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "note": "Raw baseline, patches, dependencies, caches and databases stay local and are not committed."
+}

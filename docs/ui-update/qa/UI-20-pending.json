@@ -1,0 +1,60 @@
+{
+  "task_id": "UI-20",
+  "integration_visual": [],
+  "functional_ui": [],
+  "documentary_models_unavailable": [
+    {
+      "item": "BMC autoral completo",
+      "status": "indisponível no modelo existente",
+      "source": "docs/ui-update/qa/UI-15-field-sources.json",
+      "detail": "Parcerias, canais, proposta textual, atividades detalhadas e estratégia de relacionamento não possuem respostas autorais persistidas. O canvas mostra apenas evidências salvas e ausências explícitas."
+    },
+    {
+      "item": "Reflexão, justificativas e feedback docente",
+      "status": "indisponível no modelo existente",
+      "source": "docs/ui-update/qa/UI-15-field-sources.json",
+      "detail": "Sem questionário, respostas persistidas, justificativas ou serviço de avaliação/feedback; as escolhas de evento não são respostas reflexivas."
+    },
+    {
+      "item": "Balanço e fluxo de caixa completo",
+      "status": "indisponível no modelo existente",
+      "source": "docs/ui-update/qa/UI-15-field-sources.json",
+      "detail": "DRE de caixa mensal/trimestral real não equivale a esses modelos contábeis."
+    },
+    {
+      "item": "Navegador de campanhas anteriores",
+      "status": "fora da integração atual",
+      "source": "docs/ui-update/qa/UI-15-field-sources.json",
+      "detail": "Histórico é preservado no SQLite; não há navegador multicampanha."
+    },
+    {
+      "item": "Garçom",
+      "status": "reserva condicional",
+      "detail": "Duas artes preservadas, sem criar RoleData nem alterar o catálogo de cinco funções."
+    }
+  ],
+  "platform_validation": [
+    {
+      "item": "Android em aparelho/emulador",
+      "status": "não executado",
+      "reason": "adb devices -l não lista dispositivos; nenhum emulador foi executado. A simulação 2340x1080 no Editor é evidência separada e não aprova runtime Android.",
+      "blocking_for_conditional_UI20_acceptance": false
+    },
+    {
+      "item": "Active Input Handling Both no Android",
+      "status": "aviso preexistente do build",
+      "reason": "O perfil compila com uma advertência de suporte/performance por Both. Não houve alteração global do sistema de input; testar toque/teclado no runtime Android antes de homologar a plataforma.",
+      "evidence": "output/ui-update/UI-20/build-android.json",
+      "blocking_for_conditional_UI20_acceptance": false
+    }
+  ],
+  "diagnostics": [
+    {
+      "item": "Mensagem ComputeBuffer no encerramento do Windows Development Player",
+      "status": "observada e reproduzida sem instrumentação QA",
+      "message": "GarbageCollector disposing of ComputeBuffer. Please use ComputeBuffer.Release() or .Dispose() to manually release the buffer.",
+      "detail": "Duas execuções automatizadas e um controle sem o probe emitem a mensagem após shutdown. Nenhuma alocação ComputeBuffer existe em Assets/Scripts. Sem exceção de gameplay nem alteração de dados. Origem do recurso no engine/pacotes permanece para investigação separada; não foi feita alteração de URP/economia.",
+      "blocking": false
+    }
+  ]
+}

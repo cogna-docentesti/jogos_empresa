@@ -1,0 +1,13 @@
+{
+  "task": "FONT-05",
+  "passed": false,
+  "failures": [
+    "System.ArgumentException: An item with the same key has already been added. Key: Canvas/Panel_Equipment/MainArea_Equipment/Filter0/Label\r\n  at System.Collections.Generic.Dictionary`2[TKey,TValue].TryInsert (TKey key, TValue value, System.Collections.Generic.InsertionBehavior behavior) [0x0015a] in <41d29b352f6a475ab1bf7c6628b82790>:0 \r\n  at System.Collections.Generic.Dictionary`2[TKey,TValue].Add (TKey key, TValue value) [0x00000] in <41d29b352f6a475ab1bf7c6628b82790>:0 \r\n  at System.Linq.Enumerable.ToDictionary[TSource,TKey] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] keySelector, System.Collections.Generic.IEqualityComparer`1[T] comparer) [0x00086] in <80564d689e48448fa2a7101993ee7201>:0 \r\n  at System.Linq.Enumerable.ToDictionary[TSource,TKey] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] keySelector) [0x00000] in <80564d689e48448fa2a7101993ee7201>:0 \r\n  at Font05Validation.ValidateRoots (UnityEngine.GameObject[] roots, System.String asset, System.Collections.Generic.List`1[T] rows) [0x0000e] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\Font05Validation.cs:119 \r\n  at Font05Validation.ValidateSaved () [0x00033] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\Font05Validation.cs:107 \r\n  at Font05Validation.Run () [0x00085] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\Font05Validation.cs:59 "
+  ],
+  "scenePreserved": true,
+  "isDirty": true,
+  "rootCount": 7,
+  "consoleErrors": 0,
+  "consoleWarnings": 1,
+  "unity": "6000.3.20f1"
+}

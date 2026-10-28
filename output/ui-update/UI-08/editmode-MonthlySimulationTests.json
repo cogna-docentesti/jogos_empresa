@@ -1,0 +1,210 @@
+{
+  "success": true,
+  "command": "command run_tests",
+  "data": {
+    "command": "run_tests",
+    "parameters": {
+      "mode": "editor",
+      "filter": "MonthlySimulationTests"
+    },
+    "result": {
+      "Summary": {
+        "Total": 25,
+        "Passed": 25,
+        "Failed": 0,
+        "Skipped": 0,
+        "Inconclusive": 0
+      },
+      "Results": [
+        {
+          "FullName": "MonthlySimulationTests.CapacityLimitsCustomersAndEmptyTeamCannotSell",
+          "Status": "Passed",
+          "Duration": 0.0076166,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.DailyAndMonthlyEffectsRespectTheirRecordedStartDay",
+          "Status": "Passed",
+          "Duration": 0.0076277,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.DatabaseFailureRollsBackResultAndPreservesMemoryAndAllowsRetry",
+          "Status": "Passed",
+          "Duration": 0.0108796,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.EquipmentCapacityIsCountedOnceAndDoesNotRepeatPurchaseCosts",
+          "Status": "Passed",
+          "Duration": 0.0079677,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.EventsCannotChangeAnAlreadySettledStatement",
+          "Status": "Passed",
+          "Duration": 0.008245,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ExistingDatabaseSchemaAddsMonthlyFieldsWithoutRemovingRows",
+          "Status": "Passed",
+          "Duration": 0.0070647,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.GameFlowUsesTheEngineAndReachesTheFinalReportAfterMonthThree",
+          "Status": "Passed",
+          "Duration": 0.0520774,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.HigherPricesReduceDemandAndReputationFeedsTheNextMonth",
+          "Status": "Passed",
+          "Duration": 0.0072581,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.InvalidCatalogAndNonFiniteValuesFailBeforeSettlement",
+          "Status": "Passed",
+          "Duration": 0.0054571,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.InvalidMonthIsRejected(0)",
+          "Status": "Passed",
+          "Duration": 0.0054553,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.InvalidMonthIsRejected(4)",
+          "Status": "Passed",
+          "Duration": 0.0049807,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.KnownMonthlyStatementUsesSelectedPricesAndCatalogCosts",
+          "Status": "Passed",
+          "Duration": 0.0050888,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.MissingSpecialistPreventsOperationAndQuantitiesAffectAlignment",
+          "Status": "Passed",
+          "Duration": 0.0061881,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.MonthTwoLoanUsesTwoInstallmentsAndClearsTheRemainingBalance",
+          "Status": "Passed",
+          "Duration": 0.015088,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.RecordedOptionKeepsAnImmutableEffectSnapshot",
+          "Status": "Passed",
+          "Duration": 0.0061331,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ReloadRestoresTheSettledMonthAndReputationForTheNextCalculation",
+          "Status": "Passed",
+          "Duration": 0.0085199,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.RepeatedCalculationIsDeterministicAndDoesNotChangeInputs",
+          "Status": "Passed",
+          "Duration": 0.0054974,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.SettlementPersistsStatementAndSessionAndExplicitRetryIsIdempotent",
+          "Status": "Passed",
+          "Duration": 0.0081733,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ShippedCatalogAndSummaryUseTheSameMonthlyEngine",
+          "Status": "Passed",
+          "Duration": 0.0063641,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.SignedEventCashChangesAreAddedAndReputationIsClamped",
+          "Status": "Passed",
+          "Duration": 0.0059046,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ThreeLossesRetainExistingBankruptcyRuleAndAProfitResetsTheCounter",
+          "Status": "Passed",
+          "Duration": 0.0135273,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ThreeMonthsCompleteTheQuarterAndLoanIsFullyRepaid",
+          "Status": "Passed",
+          "Duration": 0.0130732,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.TicketAndIngredientEffectsChangeRevenueAndSuppliesIndependently",
+          "Status": "Passed",
+          "Duration": 0.0052887,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.UncommittedSetupAndMissingMonthHistoryCannotBeSettled",
+          "Status": "Passed",
+          "Duration": 0.0071848,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "MonthlySimulationTests.ZeroStockStopsSalesAndFractionalDemandNeverCreatesFractionalCustomers",
+          "Status": "Passed",
+          "Duration": 0.0050263,
+          "Message": null,
+          "StackTrace": null
+        }
+      ],
+      "Duration": 2.74,
+      "StatusPath": null,
+      "Mode": "EditMode",
+      "FilterApplied": "testname: MonthlySimulationTests",
+      "success": true,
+      "result": null
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

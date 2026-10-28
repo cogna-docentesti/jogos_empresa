@@ -1,94 +1,21 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Adapter.In.Controllers
 {
     public sealed class TeamScreenController : MonoBehaviour
     {
-        private RoleData[] roles;
+        [SerializeField] private TeamScreenView view;
+        private readonly List<TeamRoleCardView> cards = new();
+        private List<RoleData> roles = new();
         private RestaurantData restaurant;
-        private TeamSelectionData draft;
-        [System.Serializable]
-        public sealed class RoleCard
-        {
-            public RoleData role;
-            public GameObject root;
-            public TextMeshProUGUI quantity;
-            public Button hire;
-            public Button undo;
-        }
-
-        [SerializeField] private TextMeshProUGUI minimumText;
-        [SerializeField] private TextMeshProUGUI summary;
-        [SerializeField] private Button confirm;
-        [SerializeField] private Button back;
-        [SerializeField] private RoleCard[] roleCards;
-        private readonly Dictionary<string, TextMeshProUGUI> quantities = new();
+        private TeamSelectionData team;
+        private bool ready;
         private bool IsInitial => InitialTutorialView.IsInitial(GameState.Initial_Team);
-
-        private void OnEnable()
-        {
-            if (!GameSessionState.HasSession) return;
-            if (minimumText == null || summary == null || confirm == null || back == null || roleCards == null) return;
-            roles = Resources.LoadAll<RoleData>("Roles").Where(r => r != null).ToArray();
-            restaurant = Resources.LoadAll<RestaurantData>("Restaurants").FirstOrDefault(r => r.type == GameSessionState.Current.restaurantType);
-            draft = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);
-            BuildScreen();
-            Refresh();
-            InitialTutorialView.Configure(transform, IsInitial);
-        }
-
-        private void BuildScreen()
-        {
-            quantities.Clear();
-            minimumText.text = restaurant?.requiredRoles == null ? "Equipe mínima não cadastrada."
-                : "Equipe mínima — " + restaurant.displayName + "\n" + string.Join("\n", restaurant.requiredRoles.Where(r => r != null).Select(r =>
-                    r.quantity + " × " + RoleName(roles.FirstOrDefault(role => role.id == r.roleId), r.roleId)));
-            foreach (var card in roleCards)
-            {
-                var role = card.role;
-                card.root.SetActive(!IsInitial || Minimum(role.id) > 0);
-                quantities[role.id] = card.quantity;
-                card.hire.onClick.RemoveAllListeners();
-                card.hire.onClick.AddListener(() =>
-                {
-                    if (!GameSessionState.HasActiveSession || (IsInitial && TeamSelectionHelper.GetMemberQuantity(draft, role.id) >= Minimum(role.id))) return;
-                    TeamSelectionHelper.AddMember(draft, role.id);
-                    Refresh();
-                });
-                card.undo.onClick.RemoveAllListeners();
-                card.undo.onClick.AddListener(() =>
-                {
-                    int saved = TeamSelectionHelper.GetMemberQuantity(TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson), role.id);
-                    if (TeamSelectionHelper.GetMemberQuantity(draft, role.id) > saved)
-                        TeamSelectionHelper.RemoveMember(draft, role.id);
-                    Refresh();
-                });
-            }
-            confirm.GetComponentInChildren<TextMeshProUGUI>(true).text = IsInitial ? "Confirmar equipe e continuar" : "Confirmar contratações";
-            confirm.onClick.RemoveAllListeners();
-            confirm.onClick.AddListener(Confirm);
-            back.gameObject.SetActive(!IsInitial);
-            back.onClick.RemoveAllListeners();
-            back.onClick.AddListener(() => MenuNavigator.Instance?.Back());
-        }
-        private int Minimum(string id) => restaurant?.requiredRoles?.Where(r => r != null && r.roleId == id).Sum(r => Mathf.Max(0, r.quantity)) ?? 0;
-
-        private void Refresh()
-        {
-            foreach (var pair in quantities)
-                pair.Value.text = $"Selecionados: {TeamSelectionHelper.GetMemberQuantity(draft, pair.Key)} · mínimo: {Minimum(pair.Key)}";
-            float payroll = roles.Sum(r => (float)r.salary * TeamSelectionHelper.GetMemberQuantity(draft, r.id));
-            var saved = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);
-            float previous = roles.Sum(r => (float)r.salary * TeamSelectionHelper.GetMemberQuantity(saved, r.id));
-            summary.text = $"Folha mensal: R$ {payroll:N2}\nAumento mensal com esta contratação: R$ {payroll - previous:N2}";
-            confirm.interactable = GameSessionState.HasActiveSession && HasMinimum(restaurant, draft, roles);
-        }
 
         public static bool HasMinimum(RestaurantData restaurant, TeamSelectionData team, IEnumerable<RoleData> roles)
         {
@@ -97,24 +24,98 @@ namespace Game.Adapter.In.Controllers
                 && restaurant.requiredRoles.All(r => r != null && ids.Contains(r.roleId)
                     && TeamSelectionHelper.GetMemberQuantity(team, r.roleId) >= r.quantity);
         }
-
-        private void Confirm()
+        private GameSessionService Service => new(GameSessionState.Current.userId, GameSessionState.Current.professorId);
+        private void OnEnable()
         {
-            if (!GameSessionState.HasActiveSession || !HasMinimum(restaurant, draft, roles)) return;
-            GameSessionState.SetTeamJson(TeamSelectionHelper.ToJson(draft));
+            if (view == null) view = GetComponent<TeamScreenView>();
+            Populate(); view?.BindConfirm(Confirm);
+            InitialTutorialView.Configure(transform, IsInitial);
+        }
+        private void OnDisable() { view?.BindConfirm(null); foreach (var card in cards) if (card != null) card.QuantityRequested -= SetQuantity; }
+        private void Populate()
+        {
+            ready = false;
+            foreach (var card in cards) if (card != null) card.QuantityRequested -= SetQuantity;
+            cards.Clear(); view?.ClearCards();
+            if (view == null) return;
+            restaurant = GameSessionState.HasSession ? Resources.LoadAll<RestaurantData>("Restaurants").FirstOrDefault(r => r != null && r.type == GameSessionState.Current.restaurantType) : null;
+            view.SetContext(GameManager.Instance?.StateMachine?.CurrentState == GameState.Initial_Team, restaurant != null ? restaurant.displayName : "Restaurante indisponível");
+            roles = Resources.LoadAll<RoleData>("Roles").Where(r => r != null)
+                .OrderBy(r => r.id=="attendant"?0:restaurant?.requiredRoles?.Any(req=>req!=null&&req.roleId==r.id)==true?1:r.id=="manager"?2:3)
+                .ThenBy(r=>r.roleType).ToList();
+            try
+            {
+                team = GameSessionState.HasSession ? TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson) : new TeamSelectionData();
+                ready = view.HasRequiredReferences() && roles.Count == 5 && roles.Select(r => r.id).Distinct().Count() == roles.Count
+                    && roles.All(r => !string.IsNullOrWhiteSpace(r.id) && r.salary >= 0 && r.maxClientsSupported >= 0 && view.HasVisual(r.id))
+                    && team.members.All(m => m != null && m.quantity >= 0 && roles.Any(r => r.id == m.roleId))
+                    && team.members.Select(m => m.roleId).Distinct().Count() == team.members.Count;
+            }
+            catch (Exception) { team = new TeamSelectionData(); }
+            if (ready) foreach (var role in roles)
+            {
+                int required = restaurant?.requiredRoles?.Where(r => r != null && r.roleId == role.id).Sum(r => r.quantity) ?? 0;
+                if (IsInitial && required <= 0) continue;
+                var card = view.CreateCard(role, required); card.QuantityRequested += SetQuantity; cards.Add(card);
+            }
+            Refresh();
+            GetComponent<ContextualHelp>()?.Refresh(Available, team.members.Any(m => m.quantity > 0));
+        }
+        private bool Available => ready && restaurant != null && GameSessionState.HasActiveSession && GameSessionState.IsPersisted;
+        private void SetQuantity(TeamRoleCardView card, int quantity)
+        {
+            if (!isActiveAndEnabled || !Available || card?.Role == null || quantity < 0) return;
             if (IsInitial)
             {
-                var session = GameSessionState.Current;
-                new GameSessionService(session.userId, session.professorId).ConfirmInitialTeam(roles.ToList());
+                int required = restaurant.requiredRoles?.Where(r => r != null && r.roleId == card.Role.id).Sum(r => r.quantity) ?? 0;
+                if (quantity > required) return;
             }
-            else MenuNavigator.Instance?.OpenRoot();
+            Service.SetTeamMemberQuantity(card.Role, quantity);
+            GetComponent<ContextualHelp>()?.Complete();
+            team = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson); Refresh();
         }
-
-        private static string RoleName(RoleData role, string fallback) => role == null ? fallback : role.roleType switch
+        private void Refresh()
         {
-            RoleType.ATENDENTE => "Atendente", RoleType.GARCOM => "Garçom", RoleType.CHAPEIRO => "Chapeiro",
-            RoleType.CHEF => "Chef de cozinha", RoleType.SUSHIMAN => "Sushiman", RoleType.GERENTE => "Gerente",
-            _ => role.displayName
-        };
+            bool available = Available;
+            foreach (var card in cards) card.SetQuantity(TeamSelectionHelper.GetMemberQuantity(team, card.Role.id), available, ready && restaurant != null && GameSessionState.HasSession);
+            if (!available)
+            {
+                view.SetSummary(0, 0, 0, null, "Confira a sessão, o restaurante e o catálogo de funções.", false);
+                view.SetHint(!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted ? "Sessão indisponível. As contratações estão bloqueadas." : "Não foi possível carregar a equipe. Volte e tente novamente.", true);
+                view.SetConfirmEnabled(false); return;
+            }
+            var alignment = AlignmentEngine.Calculate(GameSessionState.Current.restaurantType, GameSessionState.Current.targetSegment,
+                GameSessionState.Current.locationZone, restaurant, MenuPricingHelper.FromJson(GameSessionState.Current.menuPricingJson), team, roles);
+            int count = team.members.Sum(m => m.quantity);
+            double payroll = team.members.Sum(m => (double)roles.Single(r => r.id == m.roleId).salary * m.quantity);
+            long capacity = team.members.Sum(m => (long)roles.Single(r => r.id == m.roleId).maxClientsSupported * m.quantity);
+            var requirements = (restaurant.requiredRoles ?? Array.Empty<RoleRequirement>()).Where(r => r != null && r.quantity > 0).ToArray();
+            bool complete = requirements.All(r => TeamSelectionHelper.GetMemberQuantity(team, r.roleId) >= r.quantity);
+            string detail = string.Join("\n", requirements.Select(r => $"{TeamRoleCardView.Label(roles.FirstOrDefault(role => role.id == r.roleId))}: {TeamSelectionHelper.GetMemberQuantity(team, r.roleId)}/{r.quantity}"));
+            view.SetSummary(count, payroll, capacity, alignment, detail, true);
+            view.SetHint(count == 0 ? "Equipe vazia. Use + para contratar. A folha será cobrada no fechamento mensal."
+                : !complete ? "Equipe incompleta. Confira os mínimos do restaurante; eles afetam a capacidade e o alinhamento."
+                : "Equipe atende aos mínimos. Alterações salvas; salários entram no fechamento mensal.", !complete);
+            // Existing rules allow incomplete teams, with lower alignment/capacity. Do not add a new hiring gate.
+            view.SetConfirmEnabled(!IsInitial || HasMinimum(restaurant, team, roles));
+        }
+        private void Confirm()
+        {
+            if (!isActiveAndEnabled || !Available || (IsInitial && !HasMinimum(restaurant, team, roles))) return;
+            try
+            {
+                if (!Service.SaveTeamAlignment(roles)) { view.SetHint("Não foi possível salvar a equipe. Tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Tente novamente.", FeedbackKind.Error); return; }
+                GetComponent<ContextualHelp>()?.Complete();
+                FeedbackToast.Show(team.members.Sum(m => m.quantity) == 0 ? "Equipe vazia confirmada. A capacidade e o alinhamento refletem essa escolha." : "Equipe confirmada. Salários serão cobrados no fechamento mensal.", team.members.Sum(m => m.quantity) == 0 ? FeedbackKind.Warning : FeedbackKind.Success);
+                var machine = GameManager.Instance?.StateMachine;
+                if (machine?.CurrentState == GameState.Initial_Team)
+                {
+                    if (!Service.ContinueInitialSetup(GameState.Management_Hub))
+                        view.SetHint("Não foi possível avançar. Tente novamente; sua equipe foi preservada.", true);
+                }
+                else MenuNavigator.Instance?.Back();
+            }
+            catch (Exception) { view.SetHint("Não foi possível confirmar a equipe. Confira os dados e tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Confira os dados e tente novamente.", FeedbackKind.Error); }
+        }
     }
 }

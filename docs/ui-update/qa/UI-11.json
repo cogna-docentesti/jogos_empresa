@@ -1,0 +1,177 @@
+{
+  "task_id": "UI-11",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "0d7d87da61e1bdbcf6baedf6abb3b6bbe93c6c55",
+  "unity_version": "6000.3.20f1",
+  "pending_acceptance": [],
+  "implementation": [
+    "Panel_Team era um placeholder sem controlador de contratação. Root e filhos legados úteis preservados; apresentação antiga desativada, um TeamScreenController e uma TeamScreenView, prefab TeamRoleCard e migração opt-in no Editor.",
+    "Os cinco RoleData reais são associados a retratos e ambientes por roleId. Atendente, Chapeiro, Chef de cozinha, Gerente e Profissional de sushi mostram salário mensal, capacidade e qualidade por pessoa, mínimos do RestaurantData e quantidades reais com +/−.",
+    "UIStateListener.initialTeamPanel e a entrada Team do PanelRegistry já eram válidos no baseline. Foram inspecionados por referências reais/Resolve e preservados, sem atribuir um reparo inexistente. openRootOnStart permanece false; UIStateListener controla a abertura e MenuNavigator controla a revisita.",
+    "Passo 7 na abertura, modo Gestão de equipe na revisita, confirmação para Management_Hub sem tela vazia e conclusão de visita por MenuNavigator.Back com origem/histórico/foco preservados.",
+    "Contagem, folha mensal, capacidade bruta da equipe e alinhamento são calculados a partir dos dados existentes. A capacidade é identificada como da equipe e o texto explica a dependência de espaço/equipamentos. Não foi inventado custo imediato de contratação ou débito de salário.",
+    "Quantidades usam GameSessionService.SetTeamMemberQuantity e persistência existentes. O cálculo de confirmação foi extraído para SaveTeamAlignment sem alterar a fórmula; serve a abertura e revisita. Equipes vazias/incompletas continuam confirmáveis pela regra anterior, com feedback e alinhamento menor. Não foi criado um bloqueio econômico novo.",
+    "Estados zero, team_pending, incompleto, válido, selecionado, normal/hover/pressed/disabled/focus, texto longo, catálogo/referência ausente, JSON inválido e sessão indisponível aferidos. Nenhum número de preview substitui ausência de sessão.",
+    "ART-39/CH07 e PORTRAIT_WAITER permanecem reserva condicional, sem RoleData de garçom. Masters canônicos são referências de identidade; os retratos são a exibição adequada. Artes genéricas de resultados/falência/cart não foram integradas artificialmente ao RH."
+  ],
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "screenshots": 81,
+    "inspection": "Todas as capturas inspecionadas em sete pranchas e amostras nativas, incluindo cinco funções, ambientes inteiros, gerente ao fim do scroll, vazio/incompleto/válido nos três restaurantes, hub, revisitas, texto longo e erros. Estado ausente corrigido e reinspecionado nas três resoluções após reabrir a cena salva. Correção posterior: seis capturas válido/indisponível renovadas e inspecionadas nas três resoluções; cabeçalho e rodapé agora correspondem às ações disponíveis.",
+    "typography": "Inter Tight, títulos 44/32, corpo e botões 24, rótulos 22, legenda 20. Sem autosize; nomes longos expandem a altura das células. Valores monetários em pt-BR, cores/estados do kit UI-03.",
+    "layout": "Canvas 1920×1080; topbar 88, footer 96; catálogo com Image/Mask, GridLayoutGroup e ContentSizeFitter. Resumo fixo. Retratos e ambientes inteiros em contain, tint branco; superfícies/componentes com 9-slice.",
+    "footer": "Confirmação reposicionada para reservar o botão global Menu, Sair e Voltar. Checagem geométrica de não sobreposição e raycasts reais nas três resoluções.",
+    "loading": "Resources síncrono; ausência de referências/sessão e dados inválidos informada sem loading fictício."
+  },
+  "validation": {
+    "editmode": {
+      "path": "output/ui-update/UI-11/editmode-regression.json",
+      "total": 189,
+      "passed": 189,
+      "failed": 0,
+      "distinct_tests": 189,
+      "ui11_distinct_tests": 14
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-11/playmode-team.json",
+      "passed": 183,
+      "failures": 0
+    },
+    "saved_scene_playmode": {
+      "path": "output/ui-update/UI-11/playmode-saved-scene.json",
+      "passed": 16,
+      "failures": 0
+    },
+    "total_playmode_checks": 199,
+    "screenshots": "output/ui-update/UI-11/screenshots.json",
+    "capture_frames": "output/ui-update/UI-11/capture-frames.json",
+    "frame_advancement": "output/ui-update/UI-11/frame-advance.json",
+    "runtime": "output/ui-update/UI-11/runtime.json",
+    "console": [
+      "output/ui-update/UI-11/playmode-console.json",
+      "output/ui-update/UI-11/saved-scene-console.json"
+    ],
+    "saved_scene": "output/ui-update/UI-11/saved-scene-validation.json",
+    "scene_diff": "output/ui-update/UI-11/scene-diff-audit.json",
+    "art_audit": "output/ui-update/UI-11/art-audit.json",
+    "final_playmode_errors": 0,
+    "final_playmode_warnings": 0,
+    "saved_scene_missing_components": 0,
+    "file_audit": "output/ui-update/UI-11/file-audit.json",
+    "saved_scene_registry_bindings": 9
+  },
+  "economic_examples_verified": [
+    {
+      "restaurant": "PODRAO",
+      "team": "2 attendant + 1 grill_cook",
+      "monthly_payroll": 6900,
+      "team_capacity": 2550
+    },
+    {
+      "restaurant": "JAPONES",
+      "team": "2 attendant + 1 sushi_chef",
+      "monthly_payroll": 8900,
+      "team_capacity": 2400
+    },
+    {
+      "restaurant": "FRANCES",
+      "team": "2 attendant + 1 head_chef",
+      "monthly_payroll": 12400,
+      "team_capacity": 2250
+    }
+  ],
+  "invariants": {
+    "pngs_preserved": 277,
+    "manifest_sha256_verified": 272,
+    "sprite_mode_single": 277,
+    "sprite_guids_preserved": 277,
+    "catalog_ids_economy_enums_campaign_unchanged": true,
+    "first_insert": "D3; D1/D2 permanecem rascunho, Config_Review técnico e Banco preservados. Fixture final de cena salva usa banco isolado, sem alegar ser o fluxo D3.",
+    "isolated_databases": [
+      "D:/Cogna/jogos_empresa/Temp/ui11-dev.db",
+      "D:/Cogna/jogos_empresa/Temp/ui11-reopen.db"
+    ],
+    "playerprefs": "Somente chave Cogna.UI11.Dev para Play Mode; removida na limpeza. Suíte existente usa suas próprias chaves isoladas. Partida e identificação reais preservadas.",
+    "months": "Contratação e quantidades recuperadas nos meses 1, 2 e 3; campanha continua trimestral.",
+    "no_new_role": "Cinco RoleData; garçom reservado sem salário/capacidade inventados."
+  },
+  "resolved_during_validation": [
+    "Roteiro separa troca de tela e clique por frames para aguardar reposicionamento global.",
+    "Fixture de projeção usa segmento permitido pelo restaurante.",
+    "Botão global Menu deixou de cobrir Concluir visita.",
+    "Mensagem de ausência deixou de sobrepor os cards desabilitados; a orientação permanece no cabeçalho e resumo.",
+    "Orientação de +/− fica apenas na sessão válida; sessão indisponível informa bloqueio sem sugerir Menu/Voltar ausentes."
+  ],
+  "scope_limits": [
+    "Somente UI-11; UI-12 a UI-20 não executadas.",
+    "16:10, perfil móvel/safe area física e builds gerais pertencem à UI-20."
+  ],
+  "cleanup": "Serialização normalizada com Editor fechado: ordem/blocos baseline preservados, somente seis blocos existentes do Panel_Team alterados e 129 blocos novos. Incidentes fora do escopo, stripped baseline, metadados/fontes e Pipeline temporário retirados. Cena reaberta e validada após normalização. Sem branch/worktree/push/conversa adicional.",
+  "commit_message": "feat(ui): implement team hiring and hub navigation (UI-11)",
+  "implementation_commit": "6bfd96bca78e3f5e08a9879dbec23a0c0b754add",
+  "guidance_correction": {
+    "baseline": "6bfd96bca78e3f5e08a9879dbec23a0c0b754add",
+    "date": "2026-10-16",
+    "scope": "Somente orientação por disponibilidade, sem alterar navegação, contratação, economia ou cena.",
+    "available_footer": "Use + e − para ajustar as contratações.",
+    "unavailable_header": "Sessão indisponível. As contratações estão bloqueadas.",
+    "unavailable_footer": "Contratações indisponíveis no momento.",
+    "editmode": {
+      "path": "output/ui-update/UI-11/guidance-correction-editmode.json",
+      "distinct_tests": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-11/guidance-correction-playmode.json",
+      "checks": 16,
+      "passed": 16,
+      "failed": 0,
+      "text_checks": "Orientação válida conferida na abertura e revisita; indisponível não sugere Menu/Voltar/+ ou − bloqueados."
+    },
+    "refreshed_screenshots": [
+      "saved-scene-1920x1080",
+      "session-unavailable-1920x1080",
+      "saved-scene-1366x768",
+      "session-unavailable-1366x768",
+      "saved-scene-1280x720",
+      "session-unavailable-1280x720"
+    ],
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "hashes_and_dimensions_verified": true,
+    "isolated_database": "D:/Cogna/jogos_empresa/Temp/ui11-guidance.db",
+    "isolated_playerprefs": "Cogna.UI11.GuidanceCorrection; chave removida e ambiente anterior restaurado.",
+    "console_errors": 0,
+    "console_warnings": 0,
+    "scene_unchanged": true,
+    "commit_message": "fix(ui): align unavailable team guidance with available actions (UI-11)"
+  }
+}

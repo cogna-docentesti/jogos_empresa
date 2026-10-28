@@ -1,5 +1,6 @@
 using Game.Adapter.In.UI.Theme;
 using Game.Domain.Service;
+using Game.Infrastructure.Session;
 using TMPro;
 using UnityEngine;
 
@@ -15,10 +16,14 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI scoreValue;
         [SerializeField] private TextMeshProUGUI cashValue;
         [SerializeField] private TextMeshProUGUI roundValue;
+        [SerializeField] private TextMeshProUGUI companyValue;
+        [SerializeField] private TextMeshProUGUI progressValue;
+        [SerializeField] private RectTransform progressFill;
+        private float nextRefresh;
 
         [Header("Alerta")]
         [Tooltip("Cor do Caixa quando fica negativo. A cor normal e a que o TMP ja tem na cena.")]
-        [SerializeField] private Color negativeCashColor = new Color(0.973f, 0.443f, 0.443f);
+        [SerializeField] private Color negativeCashColor = GamePalette.Parse(GamePalette.HexNegativeOnDark);
 
         private Color _cashNormalColor = Color.white;
 
@@ -30,7 +35,16 @@ namespace Game.Adapter.In.UI
 
         private void OnEnable()
         {
+            ApplyTypography();
             Refresh();
+        }
+
+        public void ApplyTypography()
+        {
+            foreach (var text in new[] { scoreValue, cashValue, roundValue })
+                GameTypography.KeepSize(text, TypographyRole.Kpi);
+            GameTypography.KeepSize(companyValue, TypographyRole.Body);
+            GameTypography.KeepSize(progressValue, TypographyRole.Label);
         }
 
         public void Refresh()
@@ -53,6 +67,17 @@ namespace Game.Adapter.In.UI
 
             if (roundValue != null)
                 roundValue.text = $"Mês {summary.Round} de 3";
+            if(companyValue!=null) companyValue.text=string.IsNullOrWhiteSpace(PlayerSession.RestaurantName)?"Meu restaurante":PlayerSession.RestaurantName;
+            int completed=summary.HasSession?Mathf.Clamp(summary.Round-1,0,3):0;
+            if(progressValue!=null) progressValue.text=$"{completed} de 3 meses concluídos";
+            if(progressFill!=null) progressFill.anchorMax=new Vector2(completed/3f,1);
+        }
+
+        private void Update()
+        {
+            if(Time.unscaledTime<nextRefresh) return;
+            nextRefresh=Time.unscaledTime+.5f;
+            Refresh();
         }
     }
 }

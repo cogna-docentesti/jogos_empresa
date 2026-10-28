@@ -1,0 +1,34 @@
+{
+  "reason": "The events fixture assumed at most three viewports and indexed option 3 at the fourth. Option selection now cycles modulo the actual option count. No assertion/scenario was removed. First three event viewports passed all 366 checks, including every actual option, and are retained; the two remaining viewports run after the correction. Feedback/dialog fixtures run in a fresh isolated Player.",
+  "reports": [
+    {
+      "suite": "campaigns",
+      "report": "output/ui-update/fonts/FONT-10/campaigns/playmode.json",
+      "sha256": "1d9ec5c4e23ea239efee0cd04fc3ecccedbecb433b2fb7cba98f265bda58d34c",
+      "checks": 1055
+    },
+    {
+      "suite": "supplemental",
+      "report": "output/ui-update/fonts/FONT-10/supplemental/playmode-supplemental.json",
+      "sha256": "78cb00babd361a22cfdb00ff88d88b5f014d9a3f68f7aa8e7a312baf1beb0a26",
+      "checks": 215
+    },
+    {
+      "suite": "states",
+      "report": "output/ui-update/fonts/FONT-10/states/playmode.json",
+      "sha256": "ecef2dfec92d3a738b5c2e7ead0ce289b8e4845bfdcaff604e8d103620795776",
+      "checks": 1132
+    }
+  ],
+  "event_checks_retained": 366,
+  "retained_captures": 1034,
+  "partial_unaccepted_captures": 1,
+  "scene_sha256": "927af221e96cc14637dc7cf7935efb29af74b82d92886bc61b869b0e306f7136",
+  "actual_edit_scene_restored_byte_exactly": true,
+  "early_identity_snapshot_check": "The first coordinator checked during the stop transition. Its false result and the failed attempted save are retained; the later valid Edit-mode scene copy matches the entry bytes. The coordinator now waits for Play=false, seven restored roots and settled rendering.",
+  "runtime_and_font_files": 825,
+  "runtime_and_font_files_unchanged": true,
+  "coordinator_before_sha256": "d44460cf757599401087bf2c9196d9549d955f7fa968124db10a88c8ec64af29",
+  "coordinator_after_sha256": "138fa2ec73e621d668b7de4cc5241b06e00ab00c1151a3f71f625aa1ec33fc13",
+  "segment_01": "output/ui-update/fonts/FONT-10/segment-01-execution.json"
+}

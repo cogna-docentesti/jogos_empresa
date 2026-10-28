@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections;
+using System;
 using System.Linq;
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
@@ -16,6 +18,8 @@ namespace Game.Adapter.In.Controllers
         private EquipmentData[] basicEquipments = System.Array.Empty<EquipmentData>();
         private EquipmentData tutorialKit;
         private bool IsInitial => InitialTutorialView.IsInitial(GameState.Initial_Equipment);
+        private EquipmentFilter filter = EquipmentFilter.All;
+        private bool ready;
 
         private float AvailableCash => GameSessionState.HasSession
             ? GameSessionState.Current.currentCash
@@ -26,14 +30,17 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 view = GetComponent<EquipmentScreenView>();
 
-            view?.SetFooterVisible(!WasOpenedFromMenu());
+            filter = EquipmentFilter.All;
+            view?.SetContext(!WasOpenedFromMenu(), RestaurantName());
             LoadOwnedEquipmentIds();
             cartEquipmentIds.Clear();
-            PopulateEquipments();
             BindActions();
-            RefreshScreen();
+            BeginCatalogLoad();
             InitialTutorialView.Configure(transform, IsInitial);
         }
+
+        private static string RestaurantName() => !GameSessionState.HasSession ? string.Empty : GameSessionState.Current.restaurantType switch
+        { RestaurantType.PODRAO => "Restaurante de lanches", RestaurantType.JAPONES => "Restaurante japonês", _ => "Restaurante francês" };
 
         private static bool WasOpenedFromMenu()
         {
@@ -43,11 +50,15 @@ namespace Game.Adapter.In.Controllers
 
         private void OnDisable()
         {
+            GetComponent<SharedLoading>()?.Cancel();
             if (view != null)
             {
                 view.BindConfirm(null);
                 view.BindCart(null);
+                view.BindBankBack(null);
                 view.HideCart();
+                view.FilterRequested -= ChangeFilter;
+                view.CartRemovalRequested -= RemoveFromCart;
             }
 
             UnbindCards();
@@ -76,27 +87,61 @@ namespace Game.Adapter.In.Controllers
             }
         }
 
-        private void PopulateEquipments()
+        public void BeginCatalogLoad()
         {
+            if (FeedbackToast.Current != null && FeedbackToast.Current.Kind != FeedbackKind.Success) FeedbackToast.Current.Hide();
+            var loader = GetComponent<SharedLoading>();
+            if (loader == null) { PopulateEquipments(Resources.LoadAll<EquipmentData>("Equipments")); FinishCatalog(); return; }
+            ready = false; view.ClearCards(); view.SetConfirmEnabled(false); view.SetCatalogLoading(true);
+            GetComponent<ContextualHelp>()?.Refresh(false, false);
+            loader.Run(LoadCatalog(), e => CatalogFailed(false), () => CatalogFailed(true));
+        }
+        private IEnumerator LoadCatalog()
+        {
+            var indexRequest = Resources.LoadAsync<EquipmentCatalogIndex>("EquipmentCatalogIndex");
+            if (!indexRequest.isDone) yield return indexRequest;
+            var index = indexRequest.asset as EquipmentCatalogIndex;
+            if (index == null || index.resourcePaths.Length == 0) throw new InvalidOperationException("Equipment catalog unavailable.");
+            var loaded = new List<EquipmentData>();
+            foreach (string path in index.resourcePaths)
+            {
+                var request = Resources.LoadAsync<EquipmentData>(path);
+                if (!request.isDone) yield return request;
+                if (request.asset is not EquipmentData item) throw new InvalidOperationException("Equipment resource unavailable.");
+                loaded.Add(item);
+            }
+            PopulateEquipments(loaded.ToArray()); FinishCatalog();
+        }
+        private void FinishCatalog()
+        {
+            view.SetCatalogLoading(false); view.ResetCatalogMessage(); RefreshScreen(); view.ApplyFilter(filter);
+            GetComponent<ContextualHelp>()?.Refresh(ready && GameSessionState.HasActiveSession, ownedEquipmentIds.Count > 0);
+        }
+        private void CatalogFailed(bool cancelled)
+        {
+            if (!isActiveAndEnabled) return;
+            ready = false; view.ClearCards(); cards.Clear(); view.SetCatalogLoading(false);
+            RefreshScreen(); view.ShowCatalogFailure(cancelled ? "Carregamento cancelado. Tente novamente para consultar o catálogo." : "Catálogo indisponível. Tente carregar novamente.");
+            FeedbackToast.Show(cancelled ? "Carregamento cancelado. Nenhuma compra foi feita." : "O catálogo não foi carregado. Nenhuma compra foi feita.", cancelled ? FeedbackKind.Warning : FeedbackKind.Error);
+        }
+        private void PopulateEquipments(EquipmentData[] allEquipments)
+        {
+            ready = false;
             UnbindCards();
             cards.Clear();
+            view?.ClearCards();
+            view?.ApplyFilter(filter);
 
             if (view == null || !view.HasRequiredReferences())
             {
-                Debug.LogError("EquipmentScreenView nao possui todas as referencias obrigatorias.");
+                view?.SetHint("Não foi possível carregar o catálogo. Volte e tente novamente.");
+                view?.SetConfirmEnabled(false);
                 return;
             }
-
-            view.ClearCards();
 
             RestaurantType restaurantType = GameSessionState.HasSession
                 ? GameSessionState.Current.restaurantType
                 : RestaurantType.PODRAO;
-
-            EquipmentData[] allEquipments = Resources
-                .LoadAll<EquipmentData>("Equipments")
-                .Where(equipment => equipment != null)
-                .ToArray();
 
             basicEquipments = allEquipments
                 .Where(equipment => equipment.category == EquipmentCategory.BASIC)
@@ -133,8 +178,11 @@ namespace Game.Adapter.In.Controllers
                 cards.Add(card);
             }
 
+            ready = visibleEquipments.Length > 0;
+            view.ApplyFilter(filter);
+
             view.SetHint(visibleEquipments.Length == 0
-                ? "Nenhum equipamento foi encontrado em Resources/Equipments."
+                ? "Nenhum equipamento disponível no catálogo."
                 : "Adicione os equipamentos desejados ao carrinho.");
         }
 
@@ -145,25 +193,50 @@ namespace Game.Adapter.In.Controllers
 
             view.BindConfirm(OnContinue);
             view.BindCart(OpenCart);
+            view.BindBankBack(ReturnToBank);
+            view.BindRetry(BeginCatalogLoad);
+            view.FilterRequested -= ChangeFilter;
+            view.FilterRequested += ChangeFilter;
+            view.CartRemovalRequested -= RemoveFromCart;
+            view.CartRemovalRequested += RemoveFromCart;
+        }
+
+        private void ChangeFilter(EquipmentFilter selected) { filter = selected; view.ApplyFilter(filter); }
+        private void RemoveFromCart(string id)
+        {
+            if (tutorialKit != null && basicEquipments.Any(e => e.id == id)
+                && cartEquipmentIds.Contains(tutorialKit.id)) id = tutorialKit.id;
+            if (!cartEquipmentIds.Remove(id)) return;
+            RemoveInvalidSpecificItemsFromCart(); RefreshScreen(); OpenCart();
+            view.SetHint(cartEquipmentIds.Count == 0 ? "Seu carrinho está vazio." : $"{cartEquipmentIds.Count} unidade(s) no carrinho.");
+        }
+
+        private void ReturnToBank()
+        {
+            var machine = GameManager.Instance?.StateMachine;
+            if (machine?.CurrentState == GameState.Initial_Equipment)
+                AdvanceSetup(GameState.Initial_Capital);
         }
 
         private void OnCartToggleRequested(EquipmentCardView card)
         {
             EquipmentData equipment = card != null ? card.Equipment : null;
 
-            if (!GameSessionState.HasSession || equipment == null || Owns(equipment))
+            if (!GameSessionState.HasActiveSession || equipment == null || Owns(equipment))
                 return;
 
             if (string.IsNullOrWhiteSpace(equipment.id))
             {
                 Debug.LogError($"O equipamento '{equipment.displayName}' precisa ter um ID antes de ser comprado.");
-                view.SetHint("Este equipamento ainda não possui um ID válido.");
+                view.SetHint("Este equipamento está indisponível para compra.");
+                FeedbackToast.Show("Equipamento indisponível para compra.", FeedbackKind.Error);
                 return;
             }
 
             if (equipment.category == EquipmentCategory.SPECIFIC && !HasAllBasicEquipmentsSelected())
             {
                 view.SetHint("Adicione todos os equipamentos básicos antes dos específicos.");
+                FeedbackToast.Show("Adicione os equipamentos básicos antes dos específicos.", FeedbackKind.Warning);
                 RefreshScreen();
                 return;
             }
@@ -173,6 +246,7 @@ namespace Game.Adapter.In.Controllers
                 cartEquipmentIds.Remove(equipment.id);
                 RemoveInvalidSpecificItemsFromCart();
             }
+            GetComponent<ContextualHelp>()?.Complete();
 
             view.SetHint(cartEquipmentIds.Count == 0
                 ? "Seu carrinho está vazio."
@@ -196,13 +270,16 @@ namespace Game.Adapter.In.Controllers
                 card.SetInCart(cartEquipmentIds.Contains(card.Equipment.id));
                 bool prerequisiteMet = card.Equipment.category == EquipmentCategory.BASIC
                     || hasAllBasicEquipmentsSelected;
-                card.SetCartAvailable(prerequisiteMet);
+                card.SetCartAvailable(ready && GameSessionState.HasActiveSession && prerequisiteMet);
             }
 
             float cartTotal = GetCartTotal();
-            view.SetCartSummary(AvailableCash, cartTotal);
-            view.SetCartButtonCount(cartEquipmentIds.Count);
-            view.SetConfirmEnabled(!IsInitial || OwnsAllBasicEquipments() || HasAllBasicEquipmentsSelected());
+            view.SetCartSummary(AvailableCash, CartItems(), GameSessionState.HasActiveSession && ready);
+            view.SetConfirmEnabled(GameSessionState.HasActiveSession && ready
+                && (!IsInitial || OwnsAllBasicEquipments() || HasAllBasicEquipmentsSelected()));
+
+            if (!GameSessionState.HasActiveSession)
+                view.SetHint("Sessão indisponível. As compras estão bloqueadas.");
 
             if (cartTotal > AvailableCash)
                 view.SetHint("Saldo insuficiente para concluir a compra do carrinho.");
@@ -210,6 +287,8 @@ namespace Game.Adapter.In.Controllers
 
         private void OnContinue()
         {
+            if (!ready || !GameSessionState.HasActiveSession) return;
+            GetComponent<ContextualHelp>()?.Complete();
             if (cartEquipmentIds.Count > 0)
             {
                 OpenCart();
@@ -223,7 +302,7 @@ namespace Game.Adapter.In.Controllers
                     view.SetHint("Compre o kit básico no carrinho antes de continuar.");
                     return;
                 }
-                GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team);
+                AdvanceSetup(GameState.Initial_Team);
             }
             else OpenMenu();
         }
@@ -233,22 +312,28 @@ namespace Game.Adapter.In.Controllers
             if (view == null)
                 return;
 
-            List<EquipmentData> cartItems = cards
+            view.ShowCart(CartItems(), AvailableCash, CompleteCartPurchase);
+        }
+
+        private List<EquipmentData> CartItems()
+        {
+            var items = cards
                 .Where(card => card != null
                     && card.Equipment != null
                     && cartEquipmentIds.Contains(card.Equipment.id))
                 .Select(card => card.Equipment)
                 .ToList();
-
-            if (tutorialKit != null && cartItems.Remove(tutorialKit))
-                cartItems.AddRange(basicEquipments.Where(e => !Owns(e)));
-            view.ShowCart(cartItems, AvailableCash, CompleteCartPurchase);
+            if (tutorialKit != null && items.Remove(tutorialKit))
+                items.AddRange(basicEquipments.Where(e => !Owns(e)));
+            return items;
         }
 
         private void CompleteCartPurchase()
         {
+            if (!isActiveAndEnabled || !ready || !GameSessionState.HasActiveSession) return;
             float cartTotal = GetCartTotal();
-            if (cartEquipmentIds.Count == 0 || cartTotal > AvailableCash)
+            if (cartEquipmentIds.Count == 0 || cartTotal > AvailableCash
+                || !HasAllBasicEquipmentsSelected() && CartItems().Any(e => e.category == EquipmentCategory.SPECIFIC))
             {
                 OpenCart();
                 return;
@@ -273,20 +358,39 @@ namespace Game.Adapter.In.Controllers
             cartEquipmentIds.Clear();
             view.HideCart();
             view.SetHint($"Compra concluída: {purchasedCount} item(ns) adquirido(s).");
+            FeedbackToast.Show($"Compra concluída: {purchasedCount} equipamento(s) adquirido(s).", FeedbackKind.Success);
             RefreshScreen();
             if (IsInitial) OnContinue();
             else OpenMenu();
         }
 
-        private static void OpenMenu()
+        private void OpenMenu()
         {
+            var machine=GameManager.Instance!=null?GameManager.Instance.StateMachine:null;
+            if(machine!=null && machine.CurrentState==GameState.Initial_Equipment)
+            {
+                AdvanceSetup(GameState.Initial_Team);
+                return;
+            }
             if (MenuNavigator.Instance == null)
             {
                 Debug.LogWarning("[EquipmentScreenController] MenuNavigator nao esta ativo na cena.");
                 return;
             }
 
-            MenuNavigator.Instance.OpenRoot();
+            MenuNavigator.Instance.Back();
+        }
+
+        private void AdvanceSetup(GameState next)
+        {
+            try
+            {
+                var s = GameSessionState.Current;
+                if (new GameSessionService(s.userId, s.professorId).ContinueInitialSetup(next)) return;
+            }
+            catch (Exception) { /* Keep the current screen and the already committed purchase. */ }
+            view.SetHint("Não foi possível avançar. Tente novamente; suas compras foram preservadas.");
+            FeedbackToast.Show("Não foi possível avançar. Tente novamente.", FeedbackKind.Error);
         }
 
         private bool Owns(EquipmentData equipment)
@@ -297,10 +401,8 @@ namespace Game.Adapter.In.Controllers
                 && ownedEquipmentIds.Contains(equipment.id);
         }
 
-        private bool OwnsAllBasicEquipments()
-        {
-            return basicEquipments.Length > 0 && basicEquipments.All(Owns);
-        }
+        private bool OwnsAllBasicEquipments() => basicEquipments.Length > 0
+            && basicEquipments.All(e => ownedEquipmentIds.Contains(e.id));
 
         private bool HasAllBasicEquipmentsSelected()
         {

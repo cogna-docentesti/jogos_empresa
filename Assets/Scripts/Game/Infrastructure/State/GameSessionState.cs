@@ -105,6 +105,7 @@ public static class GameSessionState
         Current.alignmentClassification = settled.alignmentClassification;
         Current.alignmentFactor = settled.alignmentFactor;
         Current.coherenceRating = settled.coherenceRating;
+        Current.pendingSummaryResultId = settled.pendingSummaryResultId;
         IsPersisted = true;
         HasUnsavedChanges = false;
     }
@@ -148,6 +149,21 @@ public static class GameSessionState
         Current = session;
         IsPersisted = true;
         HasUnsavedChanges = false;
+    }
+
+    /// <summary>Recover the latest finished campaign without replacing an active or incompatible save.</summary>
+    public static bool TryLoadCompletedReport(string userId)
+    {
+        if (HasSession || HasIncompatibleSave) return false;
+        var session = Repository?.GetLastFinishedSessionByUserId(userId);
+        // Select the latest ending first; never resurrect an older campaign.
+        if (session == null || (session.status != GameSessionStatus.COMPLETED && session.status != GameSessionStatus.BANKRUPT)
+            || session.finalReportArchived) return false;
+        var db = DatabaseInitializer.DatabaseService.Connection;
+        if (session.currentRound > 3 || new RoundResultRepository(db).GetBySessionId(session.sessionId).Exists(r => r.round > 3)
+            || new SessionEventHistoryRepository(db).GetBySession(session.sessionId).Exists(e => e.round > 3))
+        { IncompatibleSession = session; return false; }
+        Current = session; IsPersisted = true; HasUnsavedChanges = false; return true;
     }
 
     /// <summary>
@@ -222,6 +238,25 @@ public static class GameSessionState
         repository.InsertOrReplace(Current);
         HasUnsavedChanges = false;
         Debug.Log($"[Banco] Sessao {Current.sessionId} atualizada (rodada {Current.currentRound}, caixa {Current.currentCash:N0}).");
+    }
+
+    /// <summary>Exit needs an acknowledged write; an unavailable connection is not a successful save.</summary>
+    public static bool TrySave(out string error)
+    {
+        error = null;
+        // Drafts and incompatible saves must never be inserted by an exit action.
+        if (Current == null || !IsPersisted) return true;
+        if (DatabaseInitializer.DatabaseService?.Connection == null)
+        {
+            error = "O banco de dados está indisponível.";
+            return false;
+        }
+        try { Save(); return true; }
+        catch (Exception)
+        {
+            error = "Não foi possível gravar o progresso no banco de dados.";
+            return false;
+        }
     }
 
     // =============================

@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var path=UI01Validation.Capture(\"identification-input-disabled-1920x1080\"); var ui=UnityEngine.Object.FindFirstObjectByType<Game.Adapter.In.UI.UIIndentification>(); var f=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic; var i=(TMPro.TMP_InputField)ui.GetType().GetField(\"studentNameInput\",f).GetValue(ui); var sprite=i.image.sprite.name; i.interactable=true; if(sprite!=\"input_disabled\") throw new System.Exception(\"Disabled input art missing\"); UI01Validation.SetGameView(1280,720); return new {disabled=sprite,screenshot=path};",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "disabled": "input_disabled",
+        "screenshot": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\UI-01\\identification-input-disabled-1920x1080.png"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

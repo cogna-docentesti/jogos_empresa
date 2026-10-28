@@ -1,0 +1,289 @@
+{
+  "task_id": "ART-39",
+  "date": "2026-10-15",
+  "production_method": "imagegen",
+  "tool": "image_gen.imagegen",
+  "model": null,
+  "model_note": "Integrated ImageGen did not expose a model identifier. No API or CLI was used.",
+  "authorization": "ART-39 explicitly authorized as CH07 art extension only. No RoleData, role catalog or balance changes.",
+  "generations": [
+    {
+      "asset_id": "CH07_CANONICAL",
+      "generation": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: ONE separate full-body canonical character master sprite, CH07, for the approved Cogna restaurant business game, ART-39.\nInput image 1: approved management concept; STYLE REFERENCE ONLY, adult editorial cartoon linework and restrained shading. Input image 2: existing CH06 master, STYLE AND ADULT BODY PROPORTIONS ONLY. CH07 must be a NEW DISTINCT person, never copy either reference person's face, haircut or clothing. The glow surrounding reference 2 is NOT part of its character and must NOT be reproduced.\nPrimary request: create the canonical identity of CH07, a Brazilian male restaurant waiter around 30, warm deep-brown Black skin, dark-brown eyes, a slightly elongated rectangular oval face with soft jaw, broad rounded nose, natural full lips, thick dark eyebrows, short dense tightly curled black hair with subtly tapered temples. Clean-shaven, no beard or mustache, no glasses, no hat, no earrings or jewelry. Slender average adult build, natural adult head-to-body proportions, friendly restrained closed-mouth smile.\nClothing: fitted dark-plum #583658 single-breasted waistcoat, V neck, THREE small dark buttons, two plain lower welt pockets; ivory #F5F0E8 collared button-up shirt, open collar without tie, sleeves rolled neatly to forearms; straight graphite trousers and closed graphite non-slip service shoes. No apron, chef coat, uniform badge, logo, bow tie, tray, food, tools or other props. Outfit recognizable as a professional waiter, harmonized with Cogna violet #6D28D9, plum #24113D and lavender #B99AE8 palette.\nComposition/framing: PORTRAIT 2:3, desired 1024x1536. One complete isolated person standing upright in a calm neutral three-quarter stance, face and gaze toward viewer. Both arms relaxed by sides, both complete natural hands visible, all fingers coherent; both complete shoes visible and separated. Crown, hair, shoulders, elbows and feet entirely inside frame with approximately 10 percent empty transparent padding on every edge. Centered, no perspective exaggeration, no cutoffs. This will define later portraits and poses, so make face, hairline and clothing details clear and consistent.\nStyle/medium: polished adult editorial cartoon matching approved concept and existing masters: crisp dark-plum contours, broad restrained cel shading, natural warm skin, soft upper-left illumination, clean readable silhouette. Not chibi, not photorealistic, not a 3D render. No texture noise.\nBackdrop: TRUE RGBA TRANSPARENCY. Alpha zero everywhere outside the character silhouette and between arms and torso/legs. No colored haze, halo, glow, vignette, environment, ground plane, cast shadow, checkerboard, frame, card or UI. No words, letters, numbers, salary, name, labels, logos, watermark, charts, other people, inset views or sprite sheet. ONE asset only.",
+      "parameters": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "D:/Cogna/jogos_empresa/art-source/references/concepts/03-gestao.png",
+          "D:/Cogna/jogos_empresa/Assets/Art/new/characters/CH06/ch06_canonical.png"
+        ]
+      },
+      "source_path": "art-source/editable/ART-39/generations/ch07_canonical-01.png",
+      "original_tool_output": "C:/Users/Pichau/.codex/generated_images/01a1404e-ad43-77d2-b4b1-680f8405b52e/exec-290b52a1-e21a-461d-b13a-77a303a5f467.png",
+      "selected": true,
+      "source_sha256": "739a906556e98d4dba2e578ad588d66898aae7f9bf9f51a431c0b2b9e706f304",
+      "source_size_px": [
+        1024,
+        1536
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/characters/CH06/ch06_canonical.png": "d03069edac6fadbde95d4c9d440c6a109d7efad7e1b3aa520930963bbd87bba9"
+      }
+    },
+    {
+      "asset_id": "PORTRAIT_WAITER",
+      "generation": 1,
+      "prompt": "Use case: identity-preserve\nAsset type: ONE separate transparent half-body team portrait sprite, PORTRAIT_WAITER, for the approved Cogna restaurant business game, ART-39.\nInput image 1 is the REAL CANONICAL IDENTITY MASTER of CH07 generated in this task. Preserve THAT EXACT man, his face, skin tone, facial proportions, eye spacing, hairline, curls, clothing and accessories. Input image 2 is the approved management concept for adult editorial cartoon style and the lower-left half-body team portraits ONLY; never its other people, text or UI.\nSubject: CH07 waiter, adult man around 30, warm brown Black skin, dark-brown almond eyes, elongated rectangular oval face, soft jaw, broad rounded nose, natural full lips, thick dark eyebrows, short dense tightly curled black hair with subtly tapered temples. Clean-shaven, no beard/mustache, no glasses/hat/jewelry. Slender adult build. His exact fitted plum waistcoat with V neck, THREE small dark buttons and two lower welt pockets; ivory open-collar shirt without tie, sleeves rolled to forearms; glimpse of graphite trousers. Match the master's face and hairstyle precisely, no age or ethnicity change, no reinterpretation.\nPose: professional relaxed closed-mouth smile, gentle three-quarter stance and gaze toward viewer. Both elbows gently bent and both hands loosely together at lower waist, relaxed distinct fingers, fully visible. No props, tray, plate, clipboard, apron, food or tools.\nFraming: SQUARE 1:1, desired 1024x1024 for uniform reduction to final 512x512 and display 240x240. Complete isolated waist-up / half-body portrait. Keep entire crown, curls, BOTH shoulders, elbows and BOTH hands inside frame. End cleanly across the lower torso BELOW hands with an intentional straight portrait cutoff, no fade. Approximately 12 percent clear transparent padding on ALL four sides, including below torso cutoff. Make the face readable at 240x240. No legs or full-body view.\nStyle: exact same clean dark-plum contours and broad restrained cel shading as canonical master and existing approved portraits, natural adult proportions, warm upper-left illumination. No chibi, realism, 3D render or texture noise.\nBackdrop: TRUE RGBA TRANSPARENCY, alpha zero everywhere outside silhouette and in gaps. Ignore any faint glow visible in the canonical file viewer: it is NOT part of the character. No halo, haze, glow, vignette, environment, ground, shadow, checkerboard, round badge, frame, card, UI, labels, salary, name, letters, numbers, logos, charts or watermark. One person, one asset; no sprite sheet or inset.",
+      "parameters": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "D:/Cogna/jogos_empresa/Assets/Art/new/characters/CH07/ch07_canonical.png",
+          "D:/Cogna/jogos_empresa/art-source/references/concepts/03-gestao.png"
+        ]
+      },
+      "source_path": "art-source/editable/ART-39/generations/waiter-01.png",
+      "original_tool_output": "C:/Users/Pichau/.codex/generated_images/01a1404e-ad43-77d2-b4b1-680f8405b52e/exec-306941b8-ddd5-469c-9490-6b70490a4497.png",
+      "selected": true,
+      "source_sha256": "38e22a0893605a6d3b5c6969d330db2afe66fa1a8f6c4140692d30ecc13f1c7e",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "reference_sha256": {
+        "Assets/Art/new/characters/CH07/ch07_canonical.png": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "CH07_CANONICAL",
+      "path": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "status": "validado",
+      "mode": "RGBA",
+      "actual_size_px": [
+        1024,
+        1536
+      ],
+      "sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+      "source_path": "art-source/editable/ART-39/generations/ch07_canonical-01.png",
+      "source_sha256": "739a906556e98d4dba2e578ad588d66898aae7f9bf9f51a431c0b2b9e706f304",
+      "source_size_px": [
+        1024,
+        1536
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/characters/CH06/ch06_canonical.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/characters/CH06/ch06_canonical.png": "d03069edac6fadbde95d4c9d440c6a109d7efad7e1b3aa520930963bbd87bba9"
+      },
+      "character_ids": [
+        "CH07"
+      ],
+      "canonical_asset": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "canonical_sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          166,
+          211,
+          865,
+          1326
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          318,
+          214,
+          717,
+          1322
+        ],
+        "transparent_fraction": 0.8361301422119141,
+        "opaque_fraction": 0.0015621185302734375,
+        "outer_edge_alpha_max": 0,
+        "transparent_margins_ltrb_px": [
+          166,
+          211,
+          159,
+          210
+        ]
+      },
+      "display_size_px": [
+        420,
+        760
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "Pillow",
+        "uniform_scale": 0.75,
+        "source_size_px": [
+          1024,
+          1536
+        ],
+        "resampled_size_px": [
+          768,
+          1152
+        ],
+        "transparent_offset_px": [
+          128,
+          192
+        ],
+        "output_size_px": [
+          1024,
+          1536
+        ],
+        "producer_source": "art-source/editable/ART-39/produce_art39.py",
+        "operation": "Uniform full-frame Lanczos resample, transparent padding and sRGB profile only; original generated RGBA preserved."
+      },
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": true
+      },
+      "visual_observation": "Nova identidade adulta distinta de CH01-CH06: homem de cabelo crespo curto, sem barba, colete ameixa de tres botoes, camisa marfim, calca e sapatos grafite. Corpo inteiro em tres quartos, bracos relaxados, duas maos coerentes e dois sapatos completos. Rosto, olhos, cabelo e silhueta legiveis. Recorte sem checkerboard ou halo visivel sobre marfim/ameixa, sem cenario, props, texto ou UI. Caixa 420x760 usa contain com raster 420x630 e offset 0,65; proporcoes preservadas.",
+      "inspected_previews": [
+        "art-source/previews/ART-39/CH07_CANONICAL-native-light.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-native-dark.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-light.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png",
+        "art-source/previews/ART-39/CH07-identity-comparison.png",
+        "art-source/previews/ART-39/CH07-details-1x.png"
+      ],
+      "identity_comparison": "art-source/previews/ART-39/CH07-identity-comparison.png",
+      "display_proof": "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png"
+    },
+    {
+      "id": "PORTRAIT_WAITER",
+      "path": "Assets/Art/new/team/portraits/waiter.png",
+      "status": "validado",
+      "mode": "RGBA",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "sha256": "30ede6995e33b4feda3a3302e42619e8266cc189a0331dde8aeba9fc08110b8f",
+      "source_path": "art-source/editable/ART-39/generations/waiter-01.png",
+      "source_sha256": "38e22a0893605a6d3b5c6969d330db2afe66fa1a8f6c4140692d30ecc13f1c7e",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "Assets/Art/new/characters/CH07/ch07_canonical.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "Assets/Art/new/characters/CH07/ch07_canonical.png": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "character_ids": [
+        "CH07"
+      ],
+      "canonical_asset": "Assets/Art/new/characters/CH07/ch07_canonical.png",
+      "canonical_sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          86,
+          72,
+          442,
+          439
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          137,
+          75,
+          376,
+          436
+        ],
+        "transparent_fraction": 0.785552978515625,
+        "opaque_fraction": 0.003269195556640625,
+        "outer_edge_alpha_max": 0,
+        "transparent_margins_ltrb_px": [
+          86,
+          72,
+          70,
+          73
+        ]
+      },
+      "display_size_px": [
+        240,
+        240
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "Pillow",
+        "uniform_scale": 0.32,
+        "source_size_px": [
+          1254,
+          1254
+        ],
+        "resampled_size_px": [
+          401,
+          401
+        ],
+        "transparent_offset_px": [
+          55,
+          55
+        ],
+        "output_size_px": [
+          512,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-39/produce_art39.py",
+        "operation": "Uniform full-frame Lanczos resample, transparent padding and sRGB profile only; original generated RGBA preserved."
+      },
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": true
+      },
+      "visual_observation": "O retrato conserva rosto, tom de pele, olhos, nariz, labios, cachos curtos, ausencia de barba e colete ameixa de tres botoes do master CH07 real. Pose de meio corpo com maos relaxadas sobrepostas a cintura; dedos, ombros, cotovelos e cabelo completos. Corte inferior intencional abaixo das maos e margem transparente. Leitura clara a 240x240, sem deformacao; alfa limpo visualmente em marfim e ameixa, sem halo visivel, fundo, texto, salario, props ou UI.",
+      "inspected_previews": [
+        "art-source/previews/ART-39/CH07_CANONICAL-native-light.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-native-dark.png",
+        "art-source/previews/ART-39/CH07_CANONICAL-display-light-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-light.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-native-dark.png",
+        "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png",
+        "art-source/previews/ART-39/CH07-identity-comparison.png",
+        "art-source/previews/ART-39/CH07-details-1x.png"
+      ],
+      "identity_comparison": "art-source/previews/ART-39/CH07-identity-comparison.png",
+      "display_proof": "art-source/previews/ART-39/PORTRAIT_WAITER-display-light-dark.png"
+    }
+  ]
+}

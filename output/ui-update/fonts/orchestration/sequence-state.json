@@ -1,0 +1,130 @@
+{
+  "user_request": "Execute FONT-01 through FONT-10 sequentially, each in a new conversation named after the task, and make a local commit in English at the end of each task.",
+  "project_id": "e2b363c4-28a5-45e4-a8ac-e16d01847f6d",
+  "coordinator_thread_id": "01a14aa4-b170-74d1-8041-c641d57ff754",
+  "workspace": "D:/Cogna/jogos_empresa",
+  "tasks": [
+    {
+      "task": "FONT-01",
+      "title": "FONT-01 — Inventário e matriz por texto",
+      "thread_id": "01a14aa7-f5a2-7eb3-89c9-d22b432bc253",
+      "status": "completed",
+      "commit": "9871b7720f6569b2047c8b67d095bdd88c7eb215",
+      "commit_subject": "Document per-text font inventory and planned typography contract"
+    },
+    {
+      "task": "FONT-02",
+      "title": "FONT-02 — Download, fontes de produção e licenças",
+      "thread_id": "01a14add-3149-7960-8179-36988cd08801",
+      "status": "completed",
+      "commit": "7dbfdac87b55cb9c9fa3c25bae82cf014b044149"
+    },
+    {
+      "task": "FONT-03",
+      "title": "FONT-03 — Assets TextMeshPro, materiais e cobertura de glifos",
+      "thread_id": "01a14b11-8d03-7662-ac96-b4b836edf0bd",
+      "status": "completed",
+      "commit": "a9bf1b9a73e794c2118c86012f58779a221174c7"
+    },
+    {
+      "task": "FONT-04",
+      "title": "FONT-04 — Tema tipográfico, builders e geração em runtime",
+      "thread_id": "01a14b6d-666c-7023-a832-065ebd73fe3a",
+      "status": "completed",
+      "commit": "86cf63dc8cf47dfd0b969c40e2369b882f71a8b6"
+    },
+    {
+      "task": "FONT-05",
+      "title": "FONT-05 — Componentes compartilhados, HUD, hub e entrada",
+      "thread_id": "01a14bc1-7509-7d12-921c-015128f9ab91",
+      "status": "completed",
+      "commit": "07a9f5019bff46af25ed37f67cc131f8b102acd6"
+    },
+    {
+      "task": "FONT-06",
+      "title": "FONT-06 — Restaurante, cardápio, estabelecimento e revisão",
+      "thread_id": "01a14c3f-106f-75b3-a731-cc11f4794a57",
+      "status": "completed",
+      "commit": "7a13eabe8d62cd46d54d33e49bc08d4a4be61af8",
+      "commit_subject": "Integrate typography in restaurant, menu and establishment review"
+    },
+    {
+      "task": "FONT-07",
+      "title": "FONT-07 — Banco, equipamentos e equipe",
+      "thread_id": "01a14e3e-3112-7ee3-844f-615a63fe07f3",
+      "status": "completed",
+      "commit": "6865df48a37cab17c797b9ab9b1904b4e38d8ed2",
+      "commit_subject": "Integrate typography for bank, equipment cart and team"
+    },
+    {
+      "task": "FONT-08",
+      "title": "FONT-08 — DRE, relatórios, conclusão e falência",
+      "thread_id": "01a14e77-8577-7173-a893-d2946bd507dd",
+      "status": "completed",
+      "commit": "6686f6925cbf89ba6a8ecd8902377f06ba93872b",
+      "commit_subject": "Integrate typography for financial reports and campaign endings",
+      "handoff": {
+        "next_task": "FONT-09",
+        "status": "resumed_by_coordinator",
+        "create_thread_result": "MCP tool call requires approval, but approval policy is never",
+        "prepared_prompt": "output/ui-update/fonts/orchestration/font09-handoff-from-font08.txt",
+        "thread_created": true,
+        "thread_id": "01a14ee5-1386-7533-bec3-e1bfaf2dc481"
+      }
+    },
+    {
+      "task": "FONT-09",
+      "title": "FONT-09 — Eventos, diálogos, feedback e ajuda",
+      "thread_id": "01a14ee5-1386-7533-bec3-e1bfaf2dc481",
+      "status": "completed",
+      "commit": "ba52fd4834f4bc02b1e0a00ad818ed6b287fa3c1",
+      "commit_subject": "Integrate typography for events, dialogs, feedback and help",
+      "validation": {
+        "edit_tests": 114,
+        "runtime_checks": 710,
+        "captures": 339,
+        "qa": "docs/ui-update/qa/FONT-09.json",
+        "gallery": "output/ui-update/fonts/FONT-09/index.html"
+      },
+      "handoff": {
+        "next_task": "FONT-10",
+        "status": "resumed_by_coordinator",
+        "create_thread_result": "MCP tool call requires approval, but approval policy is never",
+        "prepared_prompt": "output/ui-update/fonts/orchestration/font10-handoff-from-font09.txt",
+        "thread_created": true,
+        "thread_id": "01a14f43-aa76-7e90-b9a1-b4cba67836c9"
+      }
+    },
+    {
+      "task": "FONT-10",
+      "title": "FONT-10 — Validação final, build e contrato entregue",
+      "thread_id": "01a14f43-aa76-7e90-b9a1-b4cba67836c9",
+      "status": "completed",
+      "commit": "256616f6851903f84dcca48037a3fe18730475b8",
+      "validation_progress": {
+        "edit_tests_passed": 398,
+        "editor_checks_passed": 3571,
+        "windows_checks_passed": 254,
+        "captures": 1523,
+        "serialized_consumers": 1190,
+        "source_license_hashes_verified": 22,
+        "windows_build": "Succeeded, 0 errors, 0 warnings, existing non-development profile with temporary QA define",
+        "windows_shutdown": "FAILED native cleanup, exit 0xc0000005; full Player homologation is false",
+        "android_build": "Succeeded, 0 errors, 1 warning; no device attached",
+        "contract_promoted": "typography only, with explicit platform limits",
+        "scene_and_user_database_preserved": true
+      },
+      "scope_status": "completed_with_platform_limits",
+      "commit_subject": "Validate typography and document player platform limits",
+      "qa": "docs/ui-update/qa/FONT-10.json",
+      "gallery": "output/ui-update/fonts/index.html",
+      "completed_at": "2026-10-18",
+      "resolved_user_action": "The human handled the Windows Firewall request; no pending permission request remains."
+    }
+  ],
+  "not_started": [],
+  "resume": "All ten typography tasks are delivered with local English commits. FONT-10 promotes only the typography contract: Windows runtime typography/campaign assertions pass, but native shutdown still fails, including in the non-development profile. Android APK builds with the existing Both-input warning and no physical runtime test. These failed/untested platform checks remain explicit in FONT-10 QA and current contract pointers. No next chat is required.",
+  "editor": "One Unity 6000.3.20f1 Editor remains open without Pipeline. It was restarted once after a validation recovery failure; entry/recovered/final scene copies are byte-identical, seven roots, dirty flag true, 873x491 viewport and original Windows target/profile restored. Native IDs and undo history were recreated by the restart.",
+  "font02_handoff": "Six official static upright faces are generated, licensed, hash-verified, visually checked, imported and reimported with stable GUIDs. No italic consumers. FONT-03 must provide an explicit fallback for U+2190 and other documented corpus gaps. See font-sources.json, font-contract.json and QA FONT-02.json.",
+  "status": "completed_with_platform_limits"
+}

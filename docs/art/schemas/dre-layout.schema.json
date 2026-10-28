@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DRE composition contract",
+  "type": "object",
+  "required": [
+    "canvas_px",
+    "coordinate_origin",
+    "camera",
+    "layers",
+    "anchors",
+    "occlusion_masks"
+  ],
+  "properties": {
+    "canvas_px": {
+      "const": [
+        1920,
+        1080
+      ]
+    },
+    "coordinate_origin": {
+      "const": "top_left_y_down"
+    },
+    "camera": {
+      "type": "object",
+      "required": [
+        "orientation_description",
+        "light_direction_description"
+      ]
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "asset_id",
+          "position_px",
+          "scale",
+          "order",
+          "pivot"
+        ],
+        "properties": {
+          "asset_id": {
+            "type": "string"
+          },
+          "position_px": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "scale": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "order": {
+            "type": "integer"
+          },
+          "pivot": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    "anchors": {
+      "type": "object",
+      "required": [
+        "ch01_hand",
+        "paper_grip",
+        "desk_front_edge"
+      ],
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "occlusion_masks": {
+      "type": "array",
+      "description": "Empty if separate z-order is sufficient. Otherwise each mask records asset_id, polygon_px and which layers it clips."
+    }
+  }
+}
