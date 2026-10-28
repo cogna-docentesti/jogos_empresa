@@ -1,0 +1,169 @@
+JOGOS DE EMPRESA — PROMPTS DE DIREÇÃO ARTÍSTICA
+13/10/2026
+Modo utilizado: geração de imagens integrada do Codex (image_gen); sem CLI de geração.
+Pranchas finais: 01-concept-hub.png, 02-concept-abertura.png, 03-concept-gestao.png, 04-concept-dre-mensal.png, 05-concept-dre-trimestral.png
+
+PROMPT-BASE EM PORTUGUÊS
+====================================================================
+Crie [ASSET OU TELA] para Jogos de Empresa, um simulador brasileiro de gestão de restaurantes destinado a alunos adultos da faculdade de Administração. Use as pranchas anexadas como referência obrigatória de estilo.
+
+Direção: cartoon editorial adulto em 2D, com volume sugerido por cel shading de duas ou três tonalidades, contornos finos em ameixa, formas simplificadas, proporções humanas e arquitetônicas plausíveis, materiais foscos e textura discreta. Ambiente urbano brasileiro contemporâneo; profissionais adultos diversos, expressões naturais, roupas funcionais; atmosfera acolhedora e profissional.
+
+Paleta constante: violeta #6D28D9, ameixa #24113D, lavanda #B99AE8, marfim #F5F0E8, texto #30243C. Verde-petróleo #26776A para resultados positivos, coral #C55457 para alertas e âmbar #E7B65A em pequenos destaques. Cenários em pedra clara, terracota, vegetação verde moderada e água azul-ardósia. O roxo conecta a arte à identidade da Cogna; não invente logotipos oficiais.
+
+Composição: [DESCREVA OBJETO, POSE, PERSPECTIVA, ENQUADRAMENTO E ÁREAS LIVRES]. Luz suave vinda do alto à esquerda, sombras consistentes, silhueta legível no tamanho final. Mantenha o mesmo traço, acabamento e nível de detalhe das referências.
+
+Entrega: [PNG COM FUNDO REALMENTE TRANSPARENTE PARA ITEM/PERSONAGEM, OU CENÁRIO 16:9]. Para assets de produção, sem texto, números, preços, moldura, interface, logotipo ou marca-d'água. Deixe os elementos dinâmicos para a UI do jogo.
+
+Evitar: chibi, cabeças desproporcionais, infantilização, mascotes, objetos com rosto, cores neon, brilho exagerado, dourado de cassino, fantasia medieval, fotorrealismo e aparência de brinquedo 3D.
+
+
+USO E COMPLEMENTOS
+====================================================================
+COMO USAR
+1. Anexe 01-concept-hub.png como referência de estilo. Para pessoas/equipamentos, anexe também 03-concept-gestao.png; para DRE, 04-concept-dre-mensal.png.
+2. Substitua os campos entre colchetes no prompt-base por UM asset específico. Gere um asset por vez.
+3. Reutilize a mesma referência aprovada a cada geração; só o prompt textual não fixa a identidade.
+4. Para sprites isolados, solicite alfa real e uma margem livre de 8–12%, sem cortar extremidades. Para cenários, use 16:9 e áreas livres para HUD.
+5. Textos, preços, gráficos e valores devem ser montados na UI, fora do bitmap. As pranchas são concepts de composição, não sprites prontos.
+6. Antes de aprovar, confira perspectiva, direção da luz, contorno, escala, paleta, transparência e leitura em tamanho pequeno.
+
+COMPLEMENTOS AO PROMPT-BASE
+
+CENÁRIO / MAPA
+Asset: mapa urbano isométrico visto de cima em três quartos, câmera ortográfica, com cinco zonas distintas: universidade, financeira, comercial, residencial e corporativa. Restaurante central com toldo roxo, rio e pontes. Formas amplas, fachadas simplificadas, pouca microtextura, sem rótulos ou pinos incorporados. Reservar aproximadamente 30% à direita para um painel sobreposto. Entregar cenário 16:9 opaco.
+
+FACHADAS DOS RESTAURANTES
+Asset: fachada de [lanchonete brasileira contemporânea / restaurante japonês contemporâneo / bistrô francês], vista frontal em três quartos. Mesma escala de porta, altura de câmera, contorno e direção da luz entre variantes. Toldo ou detalhe roxo comum; variar materiais e detalhes funcionais. Sem palavras na placa. Fundo transparente para objeto isolado, cenário opaco para uma cena.
+
+PRATOS / CARDÁPIO
+Asset: [produto exato do catálogo] em prato ou bandeja coerente, visto em três quartos, leitura clara e apetitosa, proporção plausível, duas ou três tonalidades por material. Objeto central, sem prato exagerado, sem decoração alheia ao produto, sem texto. PNG transparente. Manter o mesmo tamanho relativo entre itens da mesma categoria.
+
+EQUIPAMENTOS
+Asset: [equipamento exato], vista em três quartos com frente visível e lado direito visível, metal fosco cinza-ardósia, contorno ameixa, sombras simplificadas. Escala de equipamento comercial, funcionamento visual reconhecível, sem realismo fotográfico, sem pedestal, etiqueta, preço ou moldura. PNG transparente com margem.
+
+PROFISSIONAIS / RH
+Asset: [atendente / chapeiro / sushiman / chef de cozinha / gerente] adulto, [características físicas], [uniforme coerente], em pose profissional natural. Proporção de cerca de 7 a 7,5 cabeças, mãos e ferramentas legíveis; roxo no uniforme ou acessório. Meio corpo em três quartos para o card, margem acima da cabeça e nas mãos. PNG transparente, sem ficha, salário ou texto. Criar uma pessoa distinta por função sem caricatura de gênero ou nacionalidade.
+
+ILUSTRAÇÃO DE EVENTO
+Asset: cena do restaurante mostrando [evento do catálogo, por exemplo atraso do fornecedor ou quebra do freezer], adultos reagindo de modo crível, expressões sóbrias, problema legível pela situação. Preservar a mesma arquitetura e uniformes. Deixar espaço negativo para o painel de escolha. Sem alternativas, valores ou efeitos incorporados à imagem.
+
+UI / COMPONENTE
+Asset: [painel / botão / card / marcador] com base marfim ou ameixa, borda fina lavanda, raio moderado, volume muito discreto. Estados normal, foco, pressionado e desabilitado consistentes; pedido individual por estado. Sem texto, número ou ícone embutido quando eles precisarem variar. Reservar faixa central uniforme para 9-slice. Ícones existentes devem ser redesenhados como vetores simples quando for mais adequado.
+
+DRE / COMPOSIÇÃO DE TELA
+Tela 16:9 com cabeçalho roxo e navegação ameixa, tabela em marfim com números alinhados à direita, linhas de subtotal lavanda e resultado positivo verde-petróleo. Uma ilustração editorial pequena do gerente analisando um relatório como apoio. DRE ocupa a maior parte da tela. Na tela mensal, reconciliação de caixa separada; na trimestral, colunas Mês 1, Mês 2, Mês 3 e Total. Ao gerar apenas o fundo, não incluir texto nem valores. Se for concept de UI, fornecer a lista exata de rótulos e dados e conferir todas as somas após a geração.
+
+NEGATIVO REUTILIZÁVEL
+chibi, infantil, cabeças grandes, mascote, objetos com rosto, emoji 3D, brinquedo de plástico, fotorealismo, neon, bloom intenso, moldura dourada, cassino, medieval, glitter, cores aleatórias, anatomia incorreta, sombras conflitantes, letras inventadas, watermark, detalhes excessivos
+
+NOTA SOBRE DADOS
+Todo número nas pranchas é ilustrativo. Algumas opções e controles são propostas visuais, não funcionalidades existentes. A identificação de produção deve exibir só título, campos e ação; não mostrar caixa/score/mês antes de criar a sessão. Na produção, substituir os exemplos de salário, aluguel e preço pelos dados dos catálogos.
+
+
+
+PROMPT EXATO 01 — HUB (GERAÇÃO INICIAL)
+====================================================================
+Use case: ui-mockup.
+Asset type: hero concept of the main management hub of a Brazilian university business simulation game, landscape 16:9, extremely polished high fidelity 2D raster illustration and usable UI mockup.
+Primary request: Create a full-screen concept art titled "Jogos de Empresa". A restaurant management learning game for ADULT university administration students. Establish a distinctive cohesive sophisticated CARTOON EDITORIAL visual style, playful through illustration but credible for business decisions. Brazilian contemporary urban setting. Everything must appear as one artist drew it.
+Composition: straight-on screen design, NOT a photo of a device. Purple header about 9% height, a beautiful large isometric city map about 66% width on the left below it, an ivory restaurant management summary panel on right about 30%, narrow purple bottom navigation strip. Leave generous whitespace and excellent text hierarchy. Art is main hero, not a generic SaaS dashboard. Crisp flat UI over 2.5D hand-painted cel-shaded city, realistic building proportions with simplified forms, subtle dark plum contour lines, flat two-tone shadows, matte surfaces, restrained texture.
+City map: city with river, bridges, streets, green spaces, university with dome upper left, bank at upper center, equipment shop upper right, residential neighborhood lower left, corporate offices lower right, player's modest restaurant at center emphasized by violet canopy and selection ring. Use warm stone, muted eucalyptus foliage, slate blue river, cream facades, terracotta accents. The map is immediately readable with broad shapes, less busy micro detail. Floating ivory/plum labels with sober matching illustrated line icons: "Banco", "Equipamentos", "Meu restaurante", "Equipe", "Cardápio". No neon glow.
+Right panel: label "MEU ESTABELECIMENTO"; compact illustration of a contemporary Brazilian snack restaurant storefront with purple canopy and warm interior, then "Lanches • Público médio", "Área Educacional"; compact stat rows "Receita estimada" / "R$ 42.000", "Resultado previsto" / "+ R$ 15.200", "Reputação" / "72 / 100"; small refined three-segment month progress; primary violet button "VER RESULTADOS". Values are illustrative and mockup only.
+Header typography: exact "Jogos de Empresa" at left, quiet small label "GESTÃO DE RESTAURANTES". HUD pill labels "Mês 1 de 3", "Caixa  R$ 25.000", "Score  78". Header icon is a minimal illustrated restaurant NOT a invented heraldic shield. Footer links "Meu estabelecimento", "Financeiro", "Equipamentos", "Equipe", "Cardápio"; far right warm amber restrained button "FECHAR MÊS".
+Palette specification: primary violet #6D28D9, deep plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, surfaces white/cream, text dark plum #30243C, muted blue-gray #7F8FA3. Semantic small teal #26776A and muted coral #C55457. Warm amber #E7B65A only a small action accent. Purple must visibly carry the identity and connect to Cogna's existing purple identification screen, but don't invent or render an official Cogna logo.
+Lighting/mood: inviting late morning soft light, composed and thoughtful, not flashy. Typography modern sober sans serif, clear numbers aligned, large readable concise Brazilian Portuguese labels exactly as specified.
+Constraints: illustration and HUD belong to the same mature game. No children, chibi, huge heads, mascots, smiling coins, glitter, fantasy gear, photorealism, glossy toy/plastic 3D, casino UI, gold bevels, dark military HUD, unnecessary tiny text, watermarks, extra devices. Deliver a single coherent professional art direction screen, no outside page border or montage.
+
+
+AJUSTE EXATO 01 — CARTOON EDITORIAL (RESULTADO FINAL)
+====================================================================
+Use case: style-transfer.
+Asset type: final hero concept for an ADULT Brazilian university restaurant business simulation game.
+Input image 1 is the edit target and UI composition reference. Keep its 16:9 composition, violet/plum HUD, ivory right panel, exact menu navigation, financial values and restrained palette.
+Change ONLY the illustration rendering throughout the city map and restaurant inset into unmistakable MATURE 2D CARTOON EDITORIAL GAME ART: hand-drawn clean slightly variable dark-plum outlines, simplified architectural silhouettes with sensible real-world proportions, windows reduced to broad graphic rhythms, rounded tree crowns with just two cel-shaded tonal planes, flat matte colors and crisp two-tone cast shadows, no gradients within individual materials, sparse gentle paper texture. Show confident visible graphic lines. Restaurant facade also becomes drawn cel-shaded art. Simplify city micro-details by at least 60 percent while keeping the university, bank, central purple restaurant, equipment shop, houses, river/bridges and offices recognizable and in the same positions. Reduce realistic reflections, realistic lighting, realistic textures and all dense tiny signage. Remove all motivational slogans from buildings, far right header and bottom right. Restaurant sign should simply read "RESTAURANTE". Keep the city lively but restrained. No photorealism, architectural visualization, rendered plastic miniature diorama, glossy 3D, children's style, chibi, fantasy.
+Maintain all meaningful UI labels and readable values in Brazilian Portuguese, and the existing proportional placement of header, map, right summary and footer. Purple #6D28D9, deep plum #24113D, ivory #F5F0E8, lavender #B99AE8, warm earthy neutral architecture and eucalyptus greens. Final should look drawn by a skilled editorial illustrator for a strategy game, not like a 3D render.
+
+
+PROMPT EXATO 02 — ABERTURA
+====================================================================
+Use case: ui-mockup.
+Asset type: cohesive art-direction board with FOUR 16:9 game-screen concepts in a precise 2x2 grid, wide overall canvas, each screen legible and polished.
+Input image 1 is STYLE REFERENCE ONLY: preserve its purple/plum HUD identity, warm ivory panels, restrained modern typography, mature editorial cel-shaded hand-drawn architecture, dark plum outlines, matte colors, two-tone shadows, human scale and warm Brazilian setting. Build NEW screens, not copies of the map screen.
+Primary request: show the initial screens of "Jogos de Empresa", an adult university business simulation about opening and managing a restaurant. No children, chibi, glossy toys or casino design.
+All four screens use sober violet #6D28D9 and deep plum #24113D headers, ivory #F5F0E8 content, lavender accents and sparse teal success color. Adult editorial cartoon with confident outlines, visible graphic two-tone shading, simplified forms. Each screen takes equal area. Thin plum gutters and clear large captions ABOVE each screen: "01 • IDENTIFICAÇÃO", "02 • LOCALIZAÇÃO", "03 • RESTAURANTE", "04 • CARDÁPIO".
+Screen upper left IDENTIFICAÇÃO: purple softly geometric background referencing Cogna's circle-and-arc identity, on left a small adult female entrepreneur standing beside a modest Brazilian restaurant drawn with normal human proportions, medium skin tone, short dark hair, lavender shirt, graphite trousers, clipboard. On right ivory registration panel with exact labels "Identificação", "Nome do aluno", "RA", two clean blank input fields, large violet "CADASTRAR" button. "Jogos de Empresa" heading. No generated Cogna logo.
+Screen upper right LOCALIZAÇÃO: violet header "Abertura do restaurante" and "Etapa 1 de 6"; left clean isometric illustrated city map with river/bridge and five distinctive districts (bank, university, commerce, residences, corporate offices), small colored zone markers consistent with blue financial, lavender educational, amber commercial, teal residential, cyan corporate. Right ivory detail panel "Área Educacional", concise rows "Aluguel", "Demanda", "Concorrência"; violet "CONTINUAR" button. Make clearly a SELECTION screen with selected purple pin, not management hub.
+Screen lower left RESTAURANTE: violet header "Tipo de restaurante" and "Etapa 2 de 6". Three balanced selection cards each with MATURE CARTOON illustration: "Lanches" hamburger and modest counter storefront, "Japonês" sushi and contemporary sober Japanese facade, "Francês" plated dish and refined bistro with small terracotta details. Thin purple selected outline on Lanches card and check. Bottom three chips under "Público-alvo": "Baixo", "Médio", "Alto". Highlight Médio; violet "CONTINUAR" button. Food drawn with restrained proportions, no faces on food.
+Screen lower right CARDÁPIO: violet header "Gestão de cardápio" and "Etapa 3 de 6". Three ivory rows with modest clean editorial cartoon food thumbnails, labels "Combo simples", "Combo especial", "Combo completo"; prices in input controls "R$ 35", "R$ 55", "R$ 75" with small minus and plus buttons; right compact guidance panel "Público médio", "Ticket médio", "R$ 55"; bottom violet "CONFIRMAR" button.
+Keep labels few, large, perfectly spelled Brazilian Portuguese; no dense explanatory copy, no slogans, no extra screen concepts. Each screen must retain clear grid, margins and natural illustration/UI balance. No devices, no photo, no watermarks. Make a professional concept art board, not a diagram.
+
+
+PROMPT EXATO 03 — GESTÃO
+====================================================================
+Use case: ui-mockup.
+Asset type: professional art-direction board with FOUR new 16:9 game-screen concepts in precise 2x2 grid, landscape overall canvas.
+Input images 1 and 2 are STYLE REFERENCES ONLY. Match the same "Jogos de Empresa" sophisticated mature editorial cartoon, purple/plum identity, warm ivory panels, modern sober sans serif, visible dark plum outlines, matte cel shading, believable adult human proportions and equipment proportions. New screens for the SAME adult university administration restaurant-management simulation.
+Shared palette violet #6D28D9, plum #24113D, warm ivory #F5F0E8, lavender #B99AE8, teal #26776A, muted coral #C55457. Purple headers and restrained thin selected borders. NO tiny excess body copy, no gold luxury bevel, no neon, no photographed equipment, no polished toy CGI, no children/chibi.
+Clear large captions above equal-size screens: "05 • FINANCEIRO", "06 • EQUIPAMENTOS", "07 • EQUIPE", "08 • MEU ESTABELECIMENTO". Screen titles and short copy in exact Brazilian Portuguese.
+Upper left FINANCEIRO: header "Financeiro" with "Etapa 4 de 6". Left area small editorial cartoon of an adult bank advisor in lavender blouse holding a folder beside a simple cream-and-plum desk, subtle bank arch behind. Main area three ivory credit-option cards labeled "Sem empréstimo", "Capital de giro", "Investimento", each with tasteful small document/briefcase illustration; use only restrained simple rows "Valor", "Juros", "Parcela", no speculative rates. Selected Sem empréstimo with violet outline and check. Bottom visible violet "CONTINUAR" button. Compact value "Capital disponível  R$ 65.000". Illustration secondary to credit options.
+Upper right EQUIPAMENTOS: header "Loja de equipamentos" / "Etapa 5 de 6"; clean 3-column card grid showing beautifully drawn 3/4 view commercial "Chapa", "Geladeira", "PDV". The PDV is a contemporary counter terminal with receipt printer. These are drawn 2D matte with plum outlines and only two-tone grey/slate shading, not photos. Each card has small price label and modest quantity/plus control. Small badges "Básico", "Adquirido" (check), "Bloqueado" (lock). Right lower compact cart summary "Carrinho  R$ 8.000" and violet "CONFIRMAR COMPRA". No exaggerated industrial fantasy machinery.
+Lower left EQUIPE: header "Equipe" / "Etapa 6 de 6". Three cards with diverse ADULT normal-proportioned waist-up illustrated professionals: female "Atendente" in neat lavender shirt holding order tablet, male "Chapeiro" in graphite apron and simple white shirt, female "Gerente" in plum overshirt holding clipboard, all professional relaxed expressions, no huge heads or chef caricatures. Cards show short salary row, minus/count/plus controls; bottom compact "Folha mensal" and "Capacidade"; violet "CONFIRMAR EQUIPE". Salaries optional if necessary, do not crowd.
+Lower right MEU ESTABELECIMENTO: header "Meu estabelecimento", "Mês 1 de 3". Left compact cartoon snack restaurant storefront with violet canopy; right 2x2 sober KPI cards "Caixa", "Receita prevista", "Resultado previsto", "Score"; small checklist strip "Localização", "Restaurante", "Cardápio", "Equipamentos", "Equipe" with small checks; primary violet "VER DRE". Show one lavender progress bar titled "Coerência" and a restrained "78 / 100". It is an illustrated strategy game summary, not a generic corporate analytics page.
+Consistent margins and rectangle rounding, all four equal-size screens, thin dark plum gutters. Preserve world and character visual style from references without repeating the original screens. Only readable required text, no slogans, no logos, no extra decorative labels, no outside devices, no watermark.
+
+
+PROMPT EXATO 04 — DRE MENSAL
+====================================================================
+Use case: ui-mockup.
+Asset type: single full-screen 16:9 DRE monthly concept for the SAME "Jogos de Empresa" adult university restaurant management game.
+Input images 1 and 2 are STYLE REFERENCES ONLY. Reuse their sophisticated mature editorial 2D cartoon, violet/plum top and bottom HUD, warm ivory surfaces, lavender selected elements, matte colors, dark plum fine outlines, believable adult proportions, sober modern sans serif. This must feel part of the game, while making the dense financial table very readable. Straight-on screen, no outside board captions or devices.
+Palette violet #6D28D9, deep plum #24113D, ivory #F5F0E8, lavender #B99AE8, dark plum text #30243C, success teal #26776A, restrained muted coral for negative amounts. Not all costs red, dark body text for normal costs.
+Top violet HUD: left "Jogos de Empresa"; right pills "Mês 1 de 3", "Caixa  R$ 38.200", "Score  78". Below, title "DRE • Resultado mensal", subtitle "Restaurante • Área Educacional", small badge "DADOS ILUSTRATIVOS". Tab row "Mês 1", "Mês 2", "Mês 3", "Trimestre", selected Mês 1; month 2 and 3 visibly grey/future.
+A compact three-KPI strip: "Receita" / "R$ 42.000", "Resultado" / "+ R$ 15.200", "Clientes" / "840". All numbers legible.
+Main left financial statement table about 64 percent width, on white/ivory rounded panel, fine horizontal rules, right-aligned exact values, subtle icons optional outside text. Header "Demonstrativo do mês". Rows MUST be exactly these and match arithmetic:
+"Receita de vendas" | "R$ 42.000"
+"(−) Insumos" | "R$ 14.700"
+"(=) Resultado bruto" | "R$ 27.300"
+"(−) Equipe" | "R$ 6.900"
+"(−) Aluguel" | "R$ 3.000"
+"(−) Despesas operacionais" | "R$ 1.500"
+"(=) Resultado operacional" | "R$ 15.900"
+"(−) Juros" | "R$ 200"
+"(−) Eventos" | "R$ 500"
+"(=) Resultado do mês" | "+ R$ 15.200"
+Subtotal rows light lavender and semibold. Final row visibly teal-tinted with dark teal value. Render every number exactly, no hallucinated additional taxes or deductions. This is a SIMPLIFIED game statement.
+Right side about 29 percent width: upper small editorial cartoon vignette of the same dark-haired adult female manager in lavender shirt sitting at a restaurant office desk with a financial report, calculator and coffee, purple restaurant canopy seen through window. Secondary decoration and no character speech.
+Below vignette, title "Do resultado ao caixa" and clean legible exact reconciliation:
+"Caixa inicial" | "R$ 25.000"
+"(+) Resultado" | "R$ 15.200"
+"(−) Amortização" | "R$ 2.000"
+"Caixa final" | "R$ 38.200"
+Small explanatory chip "Variação de caixa: + R$ 13.200".
+The principal AMORTIZAÇÃO belongs ONLY to this cash side panel, not as a DRE expense. Do not mislabel R$ 38.200 as profit. Make cash and result very distinct.
+Bottom slim plum navigation "Meu estabelecimento", "Financeiro", "Equipamentos", "Equipe", "Cardápio"; far right prominent violet/lavender accessible button "INICIAR MÊS 2". Financial table and side reconciliation must not get occluded by footer.
+Generous row heights, enough whitespace, adult educational credibility, no tiny slogans or dense tips. No chibi, no children, no mascot, smiling coins, stock photo, photorealism, toy CGI, neon, parchment, casino bevels, watermarks or extra charts. Deliver polished game concept with readable exact Brazilian Portuguese text.
+
+
+PROMPT EXATO 05 — DRE TRIMESTRAL
+====================================================================
+Use case: ui-mockup.
+Asset type: single full-screen landscape 16:9 DRE THREE-MONTH COMPARISON / completed quarter report concept for the SAME "Jogos de Empresa" university restaurant business game.
+Input image 1 is the DRE MONTHLY style and design reference, image 2 is the overall world style reference. Continue exactly the purple/plum HUD, warm ivory table panels, subtle lavender subtotal bands, teal positive outcome, restrained modern typography and editorial cartoon illustration. Create the quarter screen, not a duplicate monthly screen. A mature educational game, no photorealism or childish elements.
+Top violet bar: "Jogos de Empresa"; HUD pills "Mês 3 de 3", "Caixa  R$ 70.000", "Score  84". Title "DRE • Comparativo trimestral", small subtitle "Restaurante • Área Educacional", small badge "DADOS ILUSTRATIVOS". Tabs "Mês 1", "Mês 2", "Mês 3", "Trimestre", Trimestre violet selected.
+Three top KPI cards concise and large: "Receita total" / "R$ 135.000"; "Custos e eventos" / "R$ 84.000"; "Resultado acumulado" / "+ R$ 51.000".
+Main white/ivory comparative table about 70% width. Clear column headers "Demonstrativo", "Mês 1", "Mês 2", "Mês 3", "Total". Right align numbers, each row enough space, Brazilian amounts and punctuation EXACT. Render these rows EXACTLY, no additional rows:
+"Receita de vendas" | "42.000" | "45.000" | "48.000" | "135.000"
+"(−) Insumos" | "14.700" | "15.750" | "16.800" | "47.250"
+"(−) Equipe" | "6.900" | "6.900" | "7.200" | "21.000"
+"(−) Aluguel" | "3.000" | "3.000" | "3.000" | "9.000"
+"(−) Despesas operacionais" | "1.500" | "1.500" | "1.500" | "4.500"
+"(−) Juros" | "200" | "150" | "100" | "450"
+"(−) Eventos" | "500" | "700" | "600" | "1.800"
+"(=) Resultado" | "15.200" | "17.000" | "18.800" | "51.000"
+Unit label above table "Valores em R$". Final result row light teal background and dark teal bold numbers; total column subtle lavender tint and bold. All sums and arithmetic are given and must be preserved. No invented taxes or graphical placeholders.
+Under table a compact lavender/ivory horizontal strip "Do resultado ao caixa" with four labeled values: "Caixa inicial R$ 25.000", "+ Resultado R$ 51.000", "− Amortização R$ 6.000", "= Caixa final R$ 70.000". Principal belongs ONLY to this reconciliation, not as DRE expense.
+Right sidebar about 24% width: upper small editorial cartoon vignette of a normal-proportioned adult entrepreneur in lavender shirt inside the same purple-canopy restaurant, calmly discussing a report with an adult colleague, restrained friendly professional mood, purple plant/paper accents. Keep it secondary, no slogans, no text inside illustration, no trophies or confetti.
+Below illustration a sober three-bar mini-chart titled "Evolução do resultado", values "+ R$ 15.200", "+ R$ 17.000", "+ R$ 18.800", labels "Mês 1", "Mês 2", "Mês 3"; bars accurately ascending and equal baseline; teal bars with lavender light background. A small badge "Trimestre concluído". These results exclude amortization.
+Bottom slim plum navigation same as reference with "Meu estabelecimento", "Financeiro", "Equipamentos", "Equipe", "Cardápio"; far right violet button "VER RELATÓRIO FINAL". No action buttons blocking numbers.
+Purple #6D28D9, deep plum #24113D, ivory #F5F0E8, lavender #B99AE8, body text #30243C, success teal #26776A. Excellent table readability, art secondary, polished playful yet serious learning game. No charts replacing table, no dense microcopy, no watermarks, devices, neon or fantasy.
