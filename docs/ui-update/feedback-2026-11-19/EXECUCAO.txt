@@ -1,0 +1,91 @@
+EXECUÇÃO SEQUENCIAL AUTORIZADA — FEEDBACKS COGNA
+Autorização do usuário: 19/11/2026.
+Projeto: D:/Cogna/jogos_empresa
+Project ID no Codex: e2b363c4-28a5-45e4-a8ac-e16d01847f6d
+Ambiente: projeto local, checkout compartilhado. Não criar worktree nem fazer push.
+
+PEDIDO DO USUÁRIO
+Atualizar o planejamento com os esclarecimentos do calendário e fazer commit local com
+mensagem em inglês. Depois executar as tarefas uma após a outra. Cada tarefa deve ter
+uma conversa nova com seu nome, modelo/raciocínio adequados, e commit local em inglês
+antes de iniciar a próxima. A implementação e a continuação sequencial estão autorizadas.
+Não é necessário pedir confirmação para começar a tarefa ou criar sua sucessora.
+
+FONTE CANÔNICA
+docs/ui-update/feedback-2026-11-19/tasks.json
+Cada tarefa contém status, depends_on, execution.chat_title, execution.model,
+execution.thinking, execution.commit_message e execution.next_task_id.
+As especificações individuais são documentos derivados: tasks/FB-XX.txt.
+Após alterar o JSON, regenerar com: python tools/ui/render_feedback_plan.py
+
+REGRAS DEFINITIVAS DO CALENDÁRIO
+- Os 30 dias ficam visíveis. O jogador avança de compromisso em compromisso.
+- Avançar progride ao próximo dia que tem compromisso: conta ou evento.
+- Ao alcançar uma conta, debitar efetivamente o valor do caixa e persistir o pagamento.
+- Ao alcançar um evento, abrir popup com as opções reais e aguardar a decisão.
+- Eventos previsíveis, como show na cidade, aparecem com antecedência.
+- Imprevisíveis, como quebra de freezer, ficam ocultos até o avanço alcançá-los.
+  Não vazar data, ícone, tooltip, contagem ou marcador que denuncie o imprevisto.
+- As regras de incidência atuais permanecem iguais: seletor, pesos, condições,
+  compatibilidade, limites, exclusões e repetição. Usar aleatoriedade separada para dias.
+- O fechamento concilia contas já debitadas e não pode cobrá-las novamente.
+
+RESPONSABILIDADE DE CADA CONVERSA
+1. Executar somente a tarefa recebida. Ler o JSON, a especificação, o contrato visual,
+   as instruções locais e as skills pertinentes. Não implementar a sucessora nesta conversa.
+2. Verificar git status e dependências. Não sobrescrever alterações alheias, descartar
+   arquivos do usuário ou incluir output/windows-distribution/ em commits do lote.
+3. Reproduzir os problemas na cena atual quando a tarefa for visual. Confirmar o Editor
+   e o projeto corretos. Preservar IDs, referências, dados salvos e geradores relevantes.
+4. Concluir o escopo e os critérios. Rodar verificações pertinentes; não substituir
+   screenshots reais por imagens simuladas nem declarar QA que não foi executado.
+5. Se faltar arte necessária, produzir na própria tarefa com cogna-artista e a skill
+   adequada: PNG final em Assets/Art/new, fonte em art-source/editable, QA em docs/art.
+   O inventário já inclui painéis/cards/estados e ícones de calendário, pin, aluguel,
+   folha e empréstimo. Casas/dias/textos podem ser UI nativa, sem nova ilustração.
+6. Salvar QA e evidências nos caminhos da tarefa. Atualizar seu status para concluída
+   apenas após aceite; registrar implementation_performed e limitações reais.
+   FB-21 é um contrato funcional: sua entrega é documental e deve ser assim identificada.
+7. Regenerar os documentos derivados e revisar git diff/check. Adicionar ao stage somente
+   os arquivos da tarefa e seus documentos/evidências. Fazer o commit local com a mensagem
+   em inglês definida em execution.commit_message, ajustando-a ao resultado se necessário.
+8. Conferir o commit e ausência de modificações próprias pendentes. Só então iniciar a
+   próxima conversa. Após criá-la, não fazer mais alterações nem operações Git neste checkout.
+
+COMO INICIAR A PRÓXIMA CONVERSA
+A criação das conversas sucessoras foi explicitamente autorizada pelo usuário, não é
+uma delegação inferida. A continuação pertence à conversa que acabou de fazer seu commit.
+Há no máximo uma conversa escrevendo/implementando por vez.
+
+1. Consultar a ferramenta list_projects e confirmar o projeto de D:/Cogna/jogos_empresa.
+2. Ler execution.next_task_id e a configuração da próxima tarefa no tasks.json atualizado.
+3. Se não houver sucessora, apresentar o resultado final do lote. Não iniciar FB-28, adiada.
+4. Se houver sucessora, verificar que o status e as dependências permitem iniciá-la.
+   Antes de criar, consultar list_threads para evitar duplicar uma conversa já iniciada
+   para a mesma tarefa. Se já existir uma em execução, apenas informar seu resultado.
+5. Usar create_thread com target project/local, o projectId confirmado, title igual a
+   execution.chat_title, model igual a execution.model e thinking igual a execution.thinking.
+   Não criar worktree e não trocar o modelo arbitrariamente. Se a ferramenta rejeitar o
+   modelo, usar um modelo disponível com capacidade equivalente e registrar a troca.
+6. Escrever o prompt em português com estes elementos:
+   “Implemente [ID e título] no projeto D:/Cogna/jogos_empresa. O usuário autorizou esta
+   sequência, um chat e um commit local em inglês por tarefa. A tarefa anterior [ID]
+   foi concluída no commit [HASH]. Leia docs/ui-update/feedback-2026-11-19/EXECUCAO.txt,
+   tasks.json e tasks/[ID].txt. Execute e valide somente sua tarefa, atualize o backlog,
+   regenere os derivados e faça o commit local. Após esse commit, crie a conversa da
+   sucessora usando as configurações do JSON. Não implemente a sucessora neste chat.
+   Preserve as regras definitivas do calendário. Não faça push.”
+7. create_thread é assíncrono. Confirmar o despacho com um wait_threads compacto usando
+   o threadId e hostId retornados; se houver clientThreadId, não passá-lo a ferramentas
+   que exigem threadId. Não disparar a mesma sucessora outra vez enquanto a primeira
+   estiver em preparação. Não esperar a implementação da sucessora inteira: ela assume
+   a continuação e criará sua própria sucessora ao concluir.
+8. Informar na resposta o commit concluído e o início da sucessora e emitir o directive
+   ::created-thread com o ID retornado. Não escrever no checkout após a passagem.
+
+EXCEÇÕES REAIS
+Se não for possível satisfazer os critérios com segurança, registrar o impedimento
+concreto e não marcar concluída nem iniciar uma dependente. Não transformar decisões
+rotineiras em pedidos de aprovação: o usuário já autorizou implementação, arte necessária,
+commit local e criação sequencial de conversas. Nunca fazer commit vazio para aparentar
+conclusão nem afirmar que uma conversa/commit foi criado sem retorno da ferramenta.

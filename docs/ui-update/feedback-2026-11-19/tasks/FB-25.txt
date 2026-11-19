@@ -1,0 +1,59 @@
+FB-25 — Abrir decisões do mês e de eventos sobre o calendário
+Status: planejada | Prioridade: P1 | Tipo: interface e interação
+Área: Calendário; decisões
+Dependências: FB-02, FB-14, FB-23, FB-24
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-25 — Abrir decisões do mês e de eventos sobre o calendário
+Escolha do modelo: Integração de modais, avanço e persistência de decisões requer revisão de foco e retomada.
+Commit local em inglês: feat: present monthly and event decisions above the calendar
+Próxima tarefa: FB-26
+Feedbacks: F-36, F-44, F-47
+Esclarecimentos do calendário: C-03, C-05
+
+OBJETIVO
+Exibir a decisão pertinente em uma camada acima do tabuleiro, sem perder a posição.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/EventScreenController.cs
+Assets/Scripts/Game/Adapter/In/UI/EventScreenView.cs
+Assets/Scripts/Game/Adapter/In/UI/EventOptionCardView.cs
+Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs
+
+ESCOPO
+1. Apresentar a tela de decisões do mês sobre o calendário no ponto definido em FB-21 e corrigir sua borda dupla.
+2. Usar a mesma hierarquia de camadas para decisões de eventos, distinguindo revisão mensal de escolha de ocorrência.
+3. Bloquear avanço e input no tabuleiro enquanto uma decisão obrigatória estiver aberta.
+4. Confirmar uma ocorrência uma única vez, registrar a escolha e devolver ao calendário no mesmo dia.
+5. Definir fechar/cancelar conforme tipo: consulta pode fechar; decisão obrigatória não pode ser descartada para pular o evento.
+6. Ao alcançar qualquer evento no avanço, abrir o popup com as opções existentes; manter show previsível anunciado antes e revelar quebra somente no momento da interrupção.
+7. Uma conta alcançada é debitada pelo domínio, sem exibir um popup de decisão fictício de pagamento.
+
+CRITÉRIOS DE ACEITE
+1. Modal fica acima do calendário, com uma única borda e conteúdo legível.
+2. Confirmar registra a opção correta uma vez e libera a continuação quando não houver outras pendências.
+3. A posição e o destino de movimento são preservados; revisitar/reload não pula decisão obrigatória.
+4. Revisão mensal respeita os mínimos da equipe.
+5. Evento previsível ou imprevisto alcançado abre as mesmas opções reais do catálogo; a confirmação mantém os efeitos existentes.
+6. Não há popups antecipados nem sinais que denunciem um imprevisto futuro.
+
+VALIDAÇÃO PREVISTA
+1. Verificar abrir/confirmar/cancelar onde permitido, X/voltar, foco, cliques no fundo, duplo clique e reload com decisão pendente.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-25.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-25/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-25 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

@@ -1,0 +1,62 @@
+FB-27 — Validar o lote completo e registrar evidências
+Status: planejada | Prioridade: P1 | Tipo: QA
+Área: Todas as telas
+Dependências: FB-01, FB-02, FB-03, FB-04, FB-05, FB-06, FB-07, FB-08, FB-09, FB-10, FB-11, FB-12, FB-13, FB-14, FB-15, FB-16, FB-17, FB-18, FB-19, FB-20, FB-21, FB-22, FB-23, FB-24, FB-25, FB-26
+Modelo: gpt-6.2-astra | Raciocínio: high
+Conversa: FB-27 — Validar o lote completo e registrar evidências
+Escolha do modelo: QA integrado da campanha, pagamentos, incidência, retomada e evidências visuais.
+Commit local em inglês: test: validate calendar flow and UI feedback acceptance
+Próxima tarefa: nenhuma
+Feedbacks: validação transversal
+Esclarecimentos do calendário: C-07
+
+OBJETIVO
+Homologar os feedbacks implementados e o novo ciclo do calendário com evidências verificáveis.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/qa/UI-20.json
+docs/ui-update/qa/FONT-10.json
+Assets/Editor/Tests
+Assets/Scenes/GameScene.unity
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+
+ESCOPO
+1. Revisar os 47 itens do feedback pela matriz de rastreabilidade; FB-28 permanece futuro.
+2. Validar layout/input em 1280×720, 1366×768, 1600×1000, 1920×1080 e 2340×1080, concentrando inspeção detalhada nas telas alteradas.
+3. Percorrer abertura, revisitas, popup, loja, equipe mínima, calendário, interrupções, histórico, DRE, final e falência.
+4. Registrar screenshots reais e resultados dos testes necessários às regras alteradas; atualizar status por tarefa somente após aceite.
+5. Verificar os sete esclarecimentos C-01 a C-07: 30 dias simultaneamente visíveis; débito no compromisso; decisões em popup; show anunciado; quebra oculta até Avançar; incidência inalterada; fechamento conciliado.
+6. Conferir que cada tarefa teve conversa própria, modelo/raciocínio registrados e commit local em inglês antes da próxima.
+
+CRITÉRIOS DE ACEITE
+1. Todos os critérios das tarefas ativas possuem evidência ou pendência explicitamente registrada.
+2. Não há contagem de passos, borda dupla, corte por remoção de scroll, imagem trocada ou ação desalinhada nas telas afetadas.
+3. Fluxo mensal, contas, histórico e retomada estão consistentes; não há duplicação de compra, evento ou liquidação.
+4. O relatório distingue planejamento, implementação, validação e limites de plataforma.
+5. O QA comprova tanto a ausência de pistas sobre imprevistos quanto a presença antecipada dos eventos previsíveis.
+6. Contas debitadas durante o percurso não são debitadas novamente no fechamento; o comportamento do seletor de incidência permanece igual.
+
+VALIDAÇÃO PREVISTA
+1. Rodar os testes existentes afetados e os novos testes significativos de regras/fluxo; realizar inspeção visual dos cenários alterados e smoke da campanha.
+
+OBSERVAÇÕES E LIMITES
+1. Não repetir testes sem relação com mudanças ou afirmar execução em plataforma indisponível. Registrar execução e limites reais.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-27.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-27/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-27 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

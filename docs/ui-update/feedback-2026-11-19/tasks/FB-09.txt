@@ -1,0 +1,55 @@
+FB-09 — Trocar o slider de preço por quatro botões e melhorar a rolagem
+Status: planejada | Prioridade: P1 | Tipo: interação
+Área: Cardápio
+Dependências: FB-02, FB-08
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-09 — Trocar o slider de preço por quatro botões e melhorar a rolagem
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: feat: replace price sliders with fixed adjustment buttons
+Próxima tarefa: FB-10
+Feedbacks: F-16
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Permitir ajustes claros de preço em incrementos de R$ 0,50 e R$ 1,00.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs
+Assets/Scripts/Game/Adapter/In/UI/MenuPricingScreenView.cs
+Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs
+Assets/Scripts/Game/Domain/Helpers/MenuPricingHelper.cs
+Assets/Editor/UI/MenuPricingUiMigration.cs
+Assets/Prefabs/Card_ProductItem.prefab
+
+ESCOPO
+1. Substituir o slider de preço por quatro botões abaixo do valor: −1, −0,5, +0,5 e +1.
+2. Aplicar os deltas em reais, formatar o valor em pt-BR e respeitar minPrice/maxPrice sem acumular erros numéricos.
+3. Definir o comportamento de um preço salvo fora do passo de R$ 0,50 sem arredondar silenciosamente o dado na leitura.
+4. Melhorar o scroll da lista: roda, arraste/toque, máscaras e espaçamento; impedir que a roda altere o preço ao navegar.
+5. Preservar o rascunho, confirmação e persistência atuais do cardápio.
+
+CRITÉRIOS DE ACEITE
+1. Cada botão altera o preço pelo delta indicado quando o resultado é válido; ações que ultrapassam os limites ficam desabilitadas.
+2. Não há slider contínuo de preço, e rolar a lista não altera valores.
+3. Todos os produtos e botões são acessíveis sem sobreposição; confirmar e revisitar mantém os valores.
+
+VALIDAÇÃO PREVISTA
+1. Verificar limites, cliques repetidos, preços com decimais, troca de restaurante e persistência; rodar testes de pricing afetados se a lógica mudar.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-09.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-09/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-09 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

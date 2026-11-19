@@ -1,0 +1,55 @@
+FB-16 — Melhorar o popup de saída do jogo
+Status: planejada | Prioridade: P2 | Tipo: interface
+Área: Menu / hub; saída
+Dependências: FB-02
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-16 — Melhorar o popup de saída do jogo
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: fix: improve exit confirmation dialog
+Próxima tarefa: FB-19
+Feedbacks: F-32
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Tornar a confirmação de saída clara e visualmente consistente.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/ExitDialogController.cs
+Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs
+Assets/Editor/UI/ExitDialogBuilder.cs
+Assets/Editor/UI/DialogUiMigration.cs
+docs/windows-shutdown.txt
+
+ESCOPO
+1. Revisar tamanho, padding, bordas, contraste, título e hierarquia entre continuar jogando e sair.
+2. Conferir fechamento pelo X/voltar, foco inicial e bloqueio do fundo.
+3. Preservar o comportamento real de salvamento, erro e retry antes de encerrar.
+
+CRITÉRIOS DE ACEITE
+1. Modal legível, sem borda dupla e com ações claramente distinguíveis.
+2. Cancelar/X retorna à partida no mesmo contexto; sair executa o fluxo de gravação existente.
+3. Falha ao salvar mantém a aplicação aberta e apresenta a ação de tentar novamente.
+
+VALIDAÇÃO PREVISTA
+1. Verificar cancelar, X, confirmar e falha de gravação nas resoluções de referência; conferir limitações de encerramento já documentadas.
+
+OBSERVAÇÕES E LIMITES
+1. O escopo é a apresentação e o fluxo afetado. O histórico de crash nativo no encerramento não deve ser declarado resolvido apenas por melhorar este popup.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-16.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-16/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-16 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

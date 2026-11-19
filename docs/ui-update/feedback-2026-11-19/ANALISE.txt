@@ -1,0 +1,97 @@
+ANÁLISE — FEEDBACKS E CALENDÁRIO MENSAL
+Base estática inicial: 38ffcf17.
+Planejamento autorizado para execução sequencial pelo usuário em 19/11/2026.
+Somente tarefas com aceite e evidências reais podem ser marcadas concluídas.
+
+Contagem de passos aparece em múltiplos geradores e textos de contexto.
+Implicação: Remover só o objeto da cena não resolve a origem; FB-01 cobre fontes e reaplicação.
+Fontes: Assets/Editor/UI/ConceptUiRevision.cs; Assets/Editor/UI/RestaurantUiMigration.cs; Assets/Editor/UI/MenuPricingUiMigration.cs
+
+LocationMarkerV2 já implementa glow, sprites ativo/inativo e transições de alpha.
+Implicação: FB-03 começa por reproduzir e religar/ajustar a composição existente; não presume ausência do efeito.
+Fontes: Assets/Scripts/Game/Adapter/In/UI/LocationMarkerV2.cs
+
+A compatibilidade atual é um painel escondido/expandido por ConceptDetailsToggle e tem scroll.
+Implicação: FB-05 e FB-06 substituem esse padrão pelo modal com navegação entre restaurantes.
+Fontes: Assets/Editor/UI/ConceptUiRevision.cs; Assets/Scripts/Game/Adapter/In/UI/ConceptDetailsToggle.cs
+
+O cardápio usa Slider com wholeNumbers=false e mantém o texto Incluído no cardápio no gerador.
+Implicação: FB-08 e FB-09 cobrem texto, deltas discretos e preservação da persistência.
+Fontes: Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs; Assets/Editor/UI/MenuPricingUiMigration.cs
+
+A loja já guarda posse/carrinho por conjuntos de IDs e há bloqueios de itens adquiridos.
+Implicação: FB-11 investiga o defeito observado e simplifica a apresentação de quantidade 0/1.
+Fontes: Assets/Scripts/Game/Adapter/In/Controllers/EquipmentScreenController.cs; Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs
+
+A equipe carrega as cinco funções, informa capacidade/qualidade e habilita confirmação mesmo incompleta.
+Implicação: FB-13 revisa pertinência/efeitos; FB-14 é mudança explícita da regra de avanço.
+Fontes: Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs; Assets/Scripts/Game/Adapter/In/UI/TeamRoleCardView.cs
+
+Reputação textual do ConceptHudView vem da sessão e usa escala 0–100; o gerador usa ICON_STAR.
+Implicação: FB-15 confirma o significado e a representação visual das estrelas em vez de presumir conversão.
+Fontes: Assets/Scripts/Game/Adapter/In/UI/ConceptHudView.cs; Assets/Editor/UI/ConceptUiRevision.cs
+
+Eventos já são reservados por sessão/mês e têm dia salvo, mas OpenMonth distribui os dias regularmente.
+Implicação: FB-22/24 reaproveitam reserva/persistência e acrescentam posição, avanço e dias aleatórios.
+Fontes: Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs; Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs
+
+O motor considera o dia/duração dos eventos e liquida aluguel, salários, custos e empréstimo no fechamento.
+Implicação: FB-21/22/26 introduzem pagamentos no compromisso com ledger e reconciliação, evitando duplo débito. Datas de eventos exigem atenção à duração; a incidência fica inalterada.
+Fontes: Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs; docs/monthly-simulation.md
+
+Não foi localizada fonte separada de análise de balanceamento por nome ou planilha; há regras em código/catálogos e monthly-simulation.md.
+Implicação: FB-04/13 precisam registrar a fonte usada e distinguir regra atual de regra homologada.
+Fontes: docs/monthly-simulation.md; Assets/Resources/Restaurants; Assets/Resources/Roles
+
+O usuário confirmou 30 dias visíveis, débito real no compromisso e visibilidade distinta de eventos previsíveis/imprevisíveis.
+Implicação: FB-21 a FB-26 e o QA foram atualizados; não há mais alternativa de contas apenas informativas.
+Fontes: Esclarecimentos do usuário de 19/11/2026 registrados em calendar_clarification_original.
+
+O catálogo EventData não tem atualmente um campo de previsibilidade; o seletor tem regras existentes independentes da UI.
+Implicação: Adicionar metadado de anúncio sem alterar pesos, filtros, limites ou repetição.
+Fontes: Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs; Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs
+
+REQUISITOS CONFIRMADOS DO CALENDÁRIO
+1. O fechamento do mês acontece no formato de calendário com todos os 30 dias visíveis.
+2. Avançar percorre as casas e para no próximo dia com compromisso; compromissos são contas e eventos.
+3. Ao alcançar um evento, abrir um popup com as opções reais de decisão e aguardar a escolha.
+4. Ao alcançar uma conta, debitar efetivamente o valor do caixa, uma única vez, e registrar o pagamento.
+5. Eventos imprevisíveis, como quebra de freezer, ficam ocultos até o jogador avançar e ser surpreendido; a interface não revela data, título, ícone, quantidade ou marcador antecipado.
+6. Eventos previsíveis, como show na cidade, aparecem no calendário com antecedência.
+7. As regras de incidência de eventos existentes permanecem iguais: seletor, pesos, condições, compatibilidade, limites, exclusões e repetição. Visibilidade e agendamento não criam outro sorteio de incidência.
+
+DECISÕES E INTERPRETAÇÕES
+A-01 — Alpha 80%
+Aplicar alpha 0,80 ao fundo/scrim do popup e manter o conteúdo opaco.
+Estado: interpretação de planejamento; responsável: FB-05
+
+A-02 — Profissionais
+Filtrar por pertinência comprovada, mantendo funções compartilhadas justificadas; não ocultar toda função apenas por não ser obrigatória.
+Estado: depende da matriz; responsável: FB-13
+
+A-03 — Mínimo da equipe
+Impedir confirmar/avançar sem satisfazer requiredRoles do restaurante.
+Estado: solicitado pelo usuário; responsável: FB-14
+
+A-06 — Venda de usados
+Manter fora deste lote.
+Estado: adiada pelo usuário; responsável: FB-28
+
+A-04 — Pagamento das contas
+Debitar efetivamente ao alcançar o compromisso, persistir pagamento e conciliar no fechamento sem novo débito.
+Estado: confirmado pelo usuário; responsável: FB-21
+
+A-05 — Visibilidade e incidência dos eventos
+Previsíveis anunciados antes; imprevistos ocultos até Avançar. Preservar integralmente as regras existentes de incidência.
+Estado: confirmado pelo usuário; responsável: FB-24
+
+A-07 — Calendário de 30 dias
+Todos os 30 dias visíveis; avançar ao próximo dia com compromisso, incluindo interrupção oculta.
+Estado: confirmado pelo usuário; responsável: FB-23
+
+FLUXO
+Hub → Calendário com 30 dias visíveis → Avançar ao próximo compromisso → Conta: debitar e registrar / Evento: abrir decisão → Continuar → Fim do mês → Fechamento conciliado sem dupla cobrança → DRE aguardando Continuar.
+Shows e demais eventos previsíveis são anunciados antes. Quebras e demais imprevistos não têm qualquer marcador antecipado. As regras atuais de incidência permanecem iguais.
+
+ORDEM
+FB-21 → FB-01 → FB-02 → FB-03 → FB-04 → FB-05 → FB-06 → FB-08 → FB-07 → FB-09 → FB-10 → FB-11 → FB-12 → FB-13 → FB-14 → FB-15 → FB-16 → FB-19 → FB-20 → FB-22 → FB-24 → FB-23 → FB-25 → FB-26 → FB-17 → FB-18 → FB-27

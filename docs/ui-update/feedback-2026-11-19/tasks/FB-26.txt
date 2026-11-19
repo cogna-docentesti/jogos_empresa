@@ -1,0 +1,64 @@
+FB-26 — Mover o fechamento mensal para o fim do calendário
+Status: planejada | Prioridade: P1 | Tipo: integração
+Área: Calendário; fechamento; DRE
+Dependências: FB-14, FB-22, FB-24, FB-25
+Modelo: gpt-6.2-astra | Raciocínio: xhigh
+Conversa: FB-26 — Mover o fechamento mensal para o fim do calendário
+Escolha do modelo: Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.
+Commit local em inglês: feat: reconcile calendar payments during month-end settlement
+Próxima tarefa: FB-17
+Feedbacks: F-42, F-43
+Esclarecimentos do calendário: C-01, C-04
+
+OBJETIVO
+Fechar o mês ao terminar os compromissos do calendário de 30 dias e conciliar contas já debitadas sem nova cobrança.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs
+Assets/Scripts/Game/Domain/Service/RoundService.cs
+Assets/Scripts/Game/Domain/Service/GamesSessionService.cs
+Assets/Scripts/Game/Domain/Service/MonthlySessionSettlement.cs
+Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs
+Assets/Scripts/Game/Adapter/In/Controllers/MonthlyResultController.cs
+docs/monthly-simulation.md
+
+ESCOPO
+1. Conectar o último marco do dia 30 ao fechamento existente e bloquear decisões obrigatórias pendentes.
+2. Conciliar o ledger de contas pagas com o caixa inicial/final e as linhas da DRE. Aluguel, folha, empréstimo e demais contas pagas no calendário continuam sendo custo na DRE, mas não são debitados outra vez.
+3. Aplicar receitas e demais efeitos no momento definido em FB-21; preservar efeitos dos eventos e as regras existentes de incidência.
+4. Persistir o fechamento com idempotência e exibir a DRE mensal aguardando Continuar.
+5. Iniciar o próximo mês somente depois do resumo, preservando campanha de três meses, relatório final e falência.
+6. Proteger entradas antigas contra bypass do calendário, fechamento prematuro e repetição/retry.
+
+CRITÉRIOS DE ACEITE
+1. O mês fecha pelo fluxo de calendário após os compromissos e decisões; os 30 dias são a referência de término.
+2. Cada conta debitada no seu dia aparece uma vez na DRE e não volta a reduzir o caixa no fechamento.
+3. DRE/caixa reconciliam abertura, débitos durante o mês, receitas e efeitos restantes, inclusive após erro/retry/reload.
+4. DRE aguarda Continuar e segue ao próximo mês, relatório final ou falência sem reaplicação de efeitos.
+
+VALIDAÇÃO PREVISTA
+1. Executar campanha de três meses e caminho de falência com ledger, contas e eventos em dados isolados.
+2. Verificar a reconciliação antes/depois de cada pagamento e fechamento, incluindo crash/retry no commit.
+
+OBSERVAÇÕES E LIMITES
+1. O usuário confirmou débito real no dia da conta. Não manter a proposta anterior de contas apenas informativas.
+2. Guardar o caixa de abertura e reconciliar pagamentos já feitos é obrigatório; não basta subtrair despesas do currentCash já reduzido.
+3. Comparar previsão e fechamento com o mesmo plano/dias de eventos; as regras de incidência permanecem as existentes.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-26.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-26/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-26 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

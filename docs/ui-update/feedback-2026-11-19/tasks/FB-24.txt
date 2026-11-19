@@ -1,0 +1,64 @@
+FB-24 — Preservar a incidência e revelar eventos anunciados ou surpresa
+Status: planejada | Prioridade: P1 | Tipo: funcionalidade
+Área: Calendário; eventos
+Dependências: FB-21, FB-22
+Modelo: gpt-6.2-astra | Raciocínio: xhigh
+Conversa: FB-24 — Preservar a incidência e revelar eventos anunciados ou surpresa
+Escolha do modelo: Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.
+Commit local em inglês: feat: reveal scheduled and surprise events without changing incidence
+Próxima tarefa: FB-23
+Feedbacks: F-36, F-44, F-46
+Esclarecimentos do calendário: C-02, C-03, C-05, C-06, C-07
+
+OBJETIVO
+Agendar os eventos existentes e interromper o avanço, preservando integralmente sua incidência e separando visibilidade previsível de surpresa.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventSelectionContext.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs
+Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs
+Assets/Editor/Tests/MonthlySimulationTests.cs
+Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs
+Assets/Resources/Events
+
+ESCOPO
+1. Manter MonthlyEventSelector e suas regras atuais: pesos, condições, compatibilidade, limites, exclusões e repetição. Não introduzir novo sorteio por clique ou por casa.
+2. Adicionar metadados de previsibilidade aos 20 eventos conforme a matriz de FB-21, sem inferir previsibilidade pela polaridade nem usá-la como filtro de seleção.
+3. Distribuir e persistir dias válidos 1–30 com fonte aleatória separada, sem perturbar a seleção de incidência; retomar o plano reservado sem reroll.
+4. Mostrar previamente apenas eventos previsíveis; conservar o plano dos imprevistos em domínio/persistência, sem vazá-lo pela projeção da UI.
+5. No avanço, considerar o primeiro compromisso entre contas, eventos anunciados e imprevistos ocultos; revelar o imprevisto ao alcançá-lo, abrir decisão e interromper movimento.
+6. Após confirmar, retomar os compromissos seguintes, preservando datas e ocorrências. Não substituir opções ou efeitos existentes.
+
+CRITÉRIOS DE ACEITE
+1. A mesma entrada e fonte de sorteio de incidência mantêm os eventos elegíveis/selecionados e os limites vigentes; a camada de previsibilidade não altera incidência.
+2. Show previsto aparece antes; quebra de freezer não aparece antes e surpreende ao avançar para seu dia.
+3. No cenário controlado, quebra no dia 16 interrompe a ida à conta no dia 20; depois da decisão, a conta é alcançada normalmente.
+4. Não há evento fora dos 30 dias, duplicidade ou reroll por reload, consulta ou clique.
+5. Teste verifica ausência de vazamento antecipado pelo modelo público da UI, além do comportamento de revelação.
+
+VALIDAÇÃO PREVISTA
+1. Comparar o seletor existente com a integração usando entradas/random controlados; conferir condições, grupos, repetição e limites.
+2. Testar show anunciado, quebra oculta, múltiplos compromissos no mesmo dia, nenhum evento possível e retomada após revelação.
+
+OBSERVAÇÕES E LIMITES
+1. OpenMonth hoje distribui dias regularmente. A apresentação temporal pode mudar, mas as regras que determinam incidência são preservadas.
+2. Previsibilidade é metadado de apresentação/agendamento; não é nova probabilidade nem regra de elegibilidade.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-24.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-24/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-24 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

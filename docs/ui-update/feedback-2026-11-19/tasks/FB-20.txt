@@ -1,0 +1,56 @@
+FB-20 — Ajustar a DRE trimestral e a folha na mão do personagem
+Status: planejada | Prioridade: P2 | Tipo: interface e arte
+Área: DRE
+Dependências: FB-02
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-20 — Ajustar a DRE trimestral e a folha na mão do personagem
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: fix: align quarterly statements and illustration props
+Próxima tarefa: FB-22
+Feedbacks: F-39, F-40, F-41
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Corrigir espaçamentos, colunas e a composição da ilustração sem alterar os valores financeiros.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/QuarterlyResultView.cs
+Assets/Scripts/Game/Adapter/In/UI/QuarterlyResultPresentation.cs
+Assets/Editor/UI/QuarterlyResultUiMigration.cs
+Assets/Scripts/Game/Adapter/In/UI/MonthlyResultView.cs
+docs/art/layouts/dre-layout.json
+docs/monthly-simulation.md
+
+ESCOPO
+1. Aumentar/corrigir o padding do conteúdo trimestral e dos cabeçalhos.
+2. Alinhar os limites das colunas entre cabeçalho e todas as linhas; alinhar valores e decimais de modo consistente.
+3. Identificar a ilustração em que a folha não acompanha a mão e corrigir vínculo/posição ou encaminhar ajuste do asset correspondente.
+
+CRITÉRIOS DE ACEITE
+1. Tabela trimestral tem colunas contínuas, padding coerente e valores legíveis.
+2. A folha está visualmente apoiada na mão, sem deslocamento ou recorte incorreto.
+3. Totais, meses ausentes e agregações mantêm as regras vigentes.
+
+VALIDAÇÃO PREVISTA
+1. Conferir trimestre vazio/parcial/completo e valores longos/negativos; comparar dados antes e depois do ajuste visual.
+
+OBSERVAÇÕES E LIMITES
+1. O comentário “nada por enquanto” é tratado como manter o restante da DRE fora do escopo, preservando os três ajustes explicitamente listados.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-20.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-20/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-20 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

@@ -1,0 +1,52 @@
+FB-12 — Centralizar imagens e botões da loja e do carrinho
+Status: planejada | Prioridade: P2 | Tipo: interface
+Área: Equipamentos e carrinho
+Dependências: FB-02, FB-11
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-12 — Centralizar imagens e botões da loja e do carrinho
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: fix: center equipment artwork and action buttons
+Próxima tarefa: FB-13
+Feedbacks: F-21, F-25, F-26
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Corrigir a composição visual dos cards e das ações da loja.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/EquipmentScreenView.cs
+Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs
+Assets/Scripts/Game/Adapter/In/UI/EquipmentCartLineView.cs
+Assets/Editor/UI/EquipmentUiMigration.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+
+ESCOPO
+1. Centralizar as imagens dentro de suas áreas, conferindo pivôs, padding transparente e preserveAspect.
+2. Centralizar botões e rótulos, aplicar espaçamentos consistentes e remover outlines decorativos dos botões.
+3. Conferir a borda única no catálogo, item selecionado e linhas do carrinho.
+
+CRITÉRIOS DE ACEITE
+1. Ícones parecem centralizados visualmente e não são distorcidos ou cortados.
+2. Botões e rótulos têm centros coerentes; não há outline decorativo nem bordas duplicadas.
+3. Estado adquirido/desabilitado e foco continuam claros.
+
+VALIDAÇÃO PREVISTA
+1. Conferir catálogo completo e carrinho vazio/cheio nas resoluções de referência.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-12.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-12/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-12 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

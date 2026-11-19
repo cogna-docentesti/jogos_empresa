@@ -1,0 +1,54 @@
+FB-02 — Corrigir a borda dupla dos controles e modais compartilhados
+Status: planejada | Prioridade: P1 | Tipo: correção
+Área: Global; restaurante; banco; equipamentos; calendário
+Dependências: nenhuma
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-02 — Corrigir a borda dupla dos controles e modais compartilhados
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: fix: remove duplicate borders from shared UI controls
+Próxima tarefa: FB-03
+Feedbacks: F-10, F-20, F-21, F-26, F-47
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Eliminar a sobreposição de bordas sem perder os estados de seleção e foco.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs
+Assets/Scripts/Game/Adapter/In/UI/SharedUiStyles.cs
+Assets/Scripts/Game/Adapter/In/UI/Theme/SharedUiSkin.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+Assets/Prefabs/SharedUI
+
+ESCOPO
+1. Reproduzir o defeito e identificar se vem do sprite, Image pai/filho, outline, foco ou aplicação duplicada do skin.
+2. Corrigir a composição compartilhada e os overrides locais de restaurante, banco, equipamentos/carrinho e decisões do mês.
+3. Manter um indicador claro de selecionado, hover, pressionado e desabilitado; preservar foco de teclado por outro recurso visual quando o outline for retirado.
+
+CRITÉRIOS DE ACEITE
+1. Há apenas uma borda intencional em cada controle/modal afetado, inclusive após selecionar, abrir novamente e voltar.
+2. Seleção e foco permanecem distinguíveis; os botões de equipamentos não exibem o outline decorativo solicitado para remoção.
+
+VALIDAÇÃO PREVISTA
+1. Comparar estados normal/selecionado/foco/desabilitado nos componentes existentes; verificar o modal do calendário quando FB-25 estiver integrado.
+
+OBSERVAÇÕES E LIMITES
+1. A revisão do modal futuro também integra o aceite de FB-25; esta tarefa pode entregar primeiro a correção compartilhada.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-02.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-02/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-02 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

@@ -1,0 +1,56 @@
+FB-03 — Restaurar o neon e ajustar a tela de mapa
+Status: planejada | Prioridade: P2 | Tipo: interface
+Área: Mapa
+Dependências: FB-01, FB-02
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-03 — Restaurar o neon e ajustar a tela de mapa
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: fix: restore map selection glow and spacing
+Próxima tarefa: FB-04
+Feedbacks: F-02, F-03, F-04, F-05, F-31
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Recuperar o destaque da localização selecionada e corrigir a organização do painel de informações.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/LocationMarkerV2.cs
+Assets/Scripts/Game/Adapter/In/UI/LocationScreenV2View.cs
+Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs
+Assets/Editor/UI/LocationUiMigration.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+docs/art/layouts/map-selection-compact.json
+
+ESCOPO
+1. Reaproveitar o glow existente e conferir vínculos, sprite, alpha, máscara e camadas na cena atual.
+2. Persistir o destaque no local selecionado e transferi-lo ao trocar a seleção; conferir mouse e toque.
+3. Centralizar botões, aplicar padding à lista de informações e remover a seção/campo “Canais” da interface.
+
+CRITÉRIOS DE ACEITE
+1. Selecionar um local acende o neon de forma evidente; trocar de local remove o destaque anterior.
+2. Botões ficam centralizados e a lista não encosta nas bordas.
+3. “Canais” não aparece e sua remoção não deixa um espaço vazio no painel.
+
+VALIDAÇÃO PREVISTA
+1. Selecionar as cinco localizações por mouse/toque, retornar à tela e verificar texto longo nas resoluções de referência.
+
+OBSERVAÇÕES E LIMITES
+1. A existência de glow no código é confirmada; a causa visual do feedback deve ser reproduzida na GameScene antes de alterar propriedades.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-03.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-03/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-03 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

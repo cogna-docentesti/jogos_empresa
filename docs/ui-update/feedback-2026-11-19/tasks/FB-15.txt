@@ -1,0 +1,58 @@
+FB-15 — Atualizar o hub: reputação, mapa e fachada escolhida
+Status: planejada | Prioridade: P1 | Tipo: interface e dados
+Área: Menu / hub
+Dependências: FB-01, FB-03
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-15 — Atualizar o hub: reputação, mapa e fachada escolhida
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: fix: align hub reputation and selected restaurant facade
+Próxima tarefa: FB-16
+Feedbacks: F-30, F-31, F-33
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Fazer o hub refletir a escolha do restaurante e alinhar seus indicadores.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/ConceptHudView.cs
+Assets/Scripts/Game/Adapter/In/UI/MenuHudView.cs
+Assets/Scripts/Game/Adapter/In/UI/HubMapView.cs
+Assets/Scripts/Game/Adapter/In/UI/SelectedEstablishmentView.cs
+Assets/Editor/UI/HubUiMigration.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+Assets/Resources/Restaurants
+
+ESCOPO
+1. Confirmar se as estrelinhas representam reputação; documentar a relação com o valor de sessão 0–100 e a escala visual usada.
+2. Alinhar rótulo, valor e estrelas; se houver preenchimento por faixas, explicitar a conversão em uma única fonte.
+3. Aplicar os ajustes do mapa também ao hub onde houver componentes equivalentes: destaque, alinhamento, padding e remoção de Canais.
+4. Trocar o estabelecimento central pela fachada correspondente ao restaurante salvo, inclusive na retomada.
+
+CRITÉRIOS DE ACEITE
+1. A reputação exibida corresponde à sessão e sua representação por estrelas é inequívoca.
+2. Lanches, Japonês e Francês exibem a fachada correspondente no centro do mapa.
+3. Ajustes compartilhados do mapa se mantêm no hub sem remover seus atalhos e destinos de gestão.
+
+VALIDAÇÃO PREVISTA
+1. Abrir o hub com cada restaurante e com reputações mínima/intermediária/máxima; conferir nova partida e reload.
+
+OBSERVAÇÕES E LIMITES
+1. Na inspeção estática, ConceptHudView apresenta a reputação da sessão em “/100”, e o gerador usa ICON_STAR. O preenchimento e significado de todas as estrelinhas ainda precisam ser confirmados visualmente.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-15.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-15/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-15 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

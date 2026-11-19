@@ -1,0 +1,53 @@
+FB-19 — Destacar a ação de decisão e apoiar os personagens no resumo
+Status: planejada | Prioridade: P2 | Tipo: interface e composição
+Área: Resumo / Meu Restaurante
+Dependências: FB-13, FB-14
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-19 — Destacar a ação de decisão e apoiar os personagens no resumo
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: fix: clarify restaurant review actions and staff placement
+Próxima tarefa: FB-20
+Feedbacks: F-37, F-38
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Remover o status “Pronto”, evidenciar a navegação para decisões e corrigir pessoas flutuando.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/EstablishmentReviewContent.cs
+Assets/Scripts/Game/Adapter/In/UI/EstablishmentSummaryView.cs
+Assets/Scripts/Game/Adapter/In/UI/SelectedEstablishmentView.cs
+Assets/Editor/UI/EstablishmentUiMigration.cs
+docs/art/layouts/establishment-review-layout.json
+
+ESCOPO
+1. Retirar o texto “Pronto” e reorganizar a hierarquia visual da ação que leva à tela de decisão correspondente.
+2. Usar rótulo orientado à ação, contraste e área de clique clara, preservando o destino correto.
+3. Ajustar posição, escala, base e recorte das imagens da equipe para parecerem apoiadas no cenário.
+4. Conferir o conjunto de personagens exibidos conforme funções do restaurante e composição disponível.
+
+CRITÉRIOS DE ACEITE
+1. A palavra “Pronto” não aparece e a ação para decisões é imediatamente identificável.
+2. O botão abre a tela esperada e volta ao resumo preservando o contexto.
+3. Nenhuma pessoa parece flutuar nem tem base/corpo cortados de forma incoerente.
+
+VALIDAÇÃO PREVISTA
+1. Conferir os três restaurantes, equipes vazias/parciais/completas e links de decisão nas resoluções de referência.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-19.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-19/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-19 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

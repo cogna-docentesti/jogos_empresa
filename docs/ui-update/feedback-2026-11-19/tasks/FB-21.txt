@@ -1,0 +1,69 @@
+FB-21 — Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos
+Status: planejada | Prioridade: P1 | Tipo: especificação
+Área: Calendário; produto e economia
+Dependências: nenhuma
+Modelo: gpt-6.2-astra | Raciocínio: xhigh
+Conversa: FB-21 — Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos
+Escolha do modelo: Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.
+Commit local em inglês: docs: define calendar commitments and payment reconciliation
+Próxima tarefa: FB-01
+Feedbacks: F-42, F-43, F-46
+Esclarecimentos do calendário: C-01, C-02, C-04, C-05, C-06, C-07
+
+OBJETIVO
+Especificar o calendário de 30 dias com avanço por compromissos, débito imediato de contas e eventos anunciados ou surpresa, preservando a incidência atual.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+docs/monthly-simulation.md
+Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs
+Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs
+Assets/Scripts/Game/Domain/Enums/GameState.cs
+Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs
+Assets/Resources/Events
+
+ESCOPO
+1. Documentar o contrato hub → calendário com 30 dias visíveis → Avançar ao próximo compromisso → débito de conta ou popup de evento → retomar → fechamento → DRE.
+2. Definir o estado de dia atual, destino, compromissos no mesmo dia, interrupção oculta, decisão pendente, retorno e retomada; todos os 30 dias permanecem visíveis independentemente dos compromissos.
+3. Mapear as contas existentes e suas datas configuráveis: origem de valores, ID de ocorrência, débito automático ao alcançar o dia e pagamento persistido uma única vez.
+4. Definir conciliação: caixa inicial do mês, pagamentos antecipados/ledger, receitas e efeitos no fechamento. O motor não pode debitar novamente contas já pagas nem perder os custos na DRE.
+5. Classificar os 20 eventos existentes como previsíveis ou imprevisíveis em metadados independentes da incidência; justificar cada classificação. Show é anunciado; quebra de freezer fica oculta até o avanço.
+6. Preservar exatamente as regras do MonthlyEventSelector e o contexto de elegibilidade aplicável, sem alterar pesos, alvo/mínimo/máximo, condições, exclusões e repetição. A distribuição dos dias usa aleatoriedade separada da seleção.
+7. Definir datas/ordem dos compromissos, transações de pagamento, comportamento do caixa insuficiente conforme as regras existentes, migração de saves/planos e momento das decisões do mês.
+
+CRITÉRIOS DE ACEITE
+1. Contrato funcional descreve grade de 30 dias, próximo compromisso, débitos, popup de decisão e fim do mês.
+2. Cada conta tem fonte de valor, regra de data e ID idempotente. O valor é debitado ao alcançar o compromisso e aparece uma única vez na DRE.
+3. Existe matriz dos 20 eventos com previsibilidade, sem alterar as regras de incidência. A interface não revela data, marcador ou contagem dos imprevistos.
+4. O cenário de avançar rumo a uma conta no dia 20 e ser interrompido por quebra oculta no dia 16 é descrito do início ao fechamento, incluindo reload.
+5. Campanha de três meses, DRE aguardando Continuar, relatório final e falência permanecem definidos, sem nova regra econômica implícita.
+
+VALIDAÇÃO PREVISTA
+1. Confrontar o contrato com MonthlyEventSelector, MonthlyEventDecisionService, MonthlySimulationEngine e os 20 EventData.
+2. Revisar os cenários de conta paga, retry/reload, dois compromissos no mesmo dia, show anunciado, quebra oculta e fechamento sem dupla cobrança.
+
+OBSERVAÇÕES E LIMITES
+1. Os esclarecimentos do usuário fecham duas decisões antes abertas: são 30 dias visíveis e as contas debitam efetivamente no compromisso.
+2. O exemplo dia 16/dia 20 é cenário de teste, não impõe vencimento universal.
+3. A visibilidade antecipada é somente de contas e eventos previsíveis; imprevistos não devem vazar por ícones, textos, tooltips, foco ou quantidades.
+4. A incidência atual do seletor usa por padrão alvo 4, mínimo 3, máximo 5, com as validações do código; manter os valores e o comportamento existentes.
+5. Datas de eventos influenciam duração no motor. Documentar a distribuição sem modificar as regras que determinam quais eventos incidem.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-21.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-21/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-21 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

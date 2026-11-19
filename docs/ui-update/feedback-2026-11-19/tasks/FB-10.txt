@@ -1,0 +1,54 @@
+FB-10 — Simplificar a tela de bancos e retirar scroll
+Status: planejada | Prioridade: P2 | Tipo: interface
+Área: Bancos
+Dependências: FB-01, FB-02
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-10 — Simplificar a tela de bancos e retirar scroll
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: fix: simplify bank selection layout
+Próxima tarefa: FB-11
+Feedbacks: F-17, F-18, F-19, F-20
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Exibir as quatro opções bancárias com uma seleção clara e sem elementos redundantes.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/FinancialScreenView.cs
+Assets/Scripts/Game/Adapter/In/UI/BankCardView.cs
+Assets/Scripts/Game/Adapter/In/UI/ContextualHelp.cs
+Assets/Scripts/Game/Adapter/In/Controllers/FinancialScreenController.cs
+Assets/Editor/UI/FinancialUiMigration.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+
+ESCOPO
+1. Remover o botão “?” e o texto “Selecione uma das quatro opções”.
+2. Retirar a rolagem e reorganizar as quatro opções para manter custos e ação de confirmação acessíveis.
+3. Aplicar a correção de borda dupla e conferir seleção única.
+4. Preservar o tutorial contextual existente como entrada de orientação, sem criar um novo botão de ajuda nesta tarefa.
+
+CRITÉRIOS DE ACEITE
+1. As quatro opções e a ação principal cabem em 1280×720 sem scroll nem corte.
+2. O botão “?” e a instrução removida não reaparecem ao revisitar.
+3. Selecionar um banco produz uma única moldura e a confirmação mantém o banco correto.
+
+VALIDAÇÃO PREVISTA
+1. Conferir as quatro opções, tutorial e retorno de equipamentos; manter as regras financeiras atuais.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-10.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-10/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-10 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

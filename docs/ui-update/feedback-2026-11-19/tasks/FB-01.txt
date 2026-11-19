@@ -1,0 +1,51 @@
+FB-01 — Remover a contagem de passos de todos os cabeçalhos
+Status: planejada | Prioridade: P2 | Tipo: interface
+Área: Global
+Dependências: nenhuma
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-01 — Remover a contagem de passos de todos os cabeçalhos
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: fix: remove step counters from all screen headers
+Próxima tarefa: FB-02
+Feedbacks: F-01
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Retirar a informação “Passo X de Y” de todas as telas, preservando títulos e navegação.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Editor/UI/ConceptUiRevision.cs
+Assets/Editor/UI/IdentificationPanelBuilder.cs
+Assets/Editor/UI/RestaurantUiMigration.cs
+Assets/Editor/UI/MenuPricingUiMigration.cs
+docs/ui-update/visual-contract.json
+
+ESCOPO
+1. Inventariar cabeçalhos das sete etapas de abertura, contextos de consulta e textos montados em runtime.
+2. Remover a contagem na cena, prefabs e geradores/migrations que possam recriá-la; redistribuir o espaço do header.
+3. Atualizar o contrato visual vigente para esta revisão, distinguindo-o dos registros históricos que ainda mostram passos.
+
+CRITÉRIOS DE ACEITE
+1. Nenhum cabeçalho visível exibe contagem de passos em abertura, retorno ou consulta.
+2. Nome da tela, ações e navegação continuam legíveis e alinhados; reexecutar o gerador afetado não restaura a contagem.
+
+VALIDAÇÃO PREVISTA
+1. Inspecionar as sete etapas e suas revisitas em 1280×720 e 1920×1080; conferir referências de textos em código.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-01.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-01/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-01 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

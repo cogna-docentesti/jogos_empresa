@@ -1,0 +1,64 @@
+FB-23 — Criar o calendário com 30 dias visíveis e avanço animado
+Status: planejada | Prioridade: P1 | Tipo: interface nova
+Área: Calendário; UI e arte
+Dependências: FB-02, FB-22
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-23 — Criar o calendário com 30 dias visíveis e avanço animado
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: feat: add a thirty-day calendar with animated progression
+Próxima tarefa: FB-25
+Feedbacks: F-42, F-43, F-44, F-45
+Esclarecimentos do calendário: C-01, C-02, C-05, C-06
+
+OBJETIVO
+Exibir o mês inteiro e movimentar o jogador de compromisso em compromisso, com eventos anunciados e imprevistos sem pistas antecipadas.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scenes/GameScene.unity
+Assets/Scripts/Game/Adapter/In/UI/Navigation/PanelId.cs
+Assets/Scripts/Game/Adapter/In/UI/Navigation/PanelRegistry.cs
+Assets/Scripts/Game/Adapter/In/UI/Navigation/MenuNavigator.cs
+Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs
+docs/art/tokens.json
+docs/ui-update/visual-contract.json
+
+ESCOPO
+1. Criar grade/tabuleiro com os 30 dias visíveis, posição atual e composição coerente com os concepts e os componentes existentes.
+2. Mostrar contas com dia/estado de pagamento e eventos previsíveis com antecedência; não renderizar ícone, data, título, quantidade ou casa destacada de imprevistos ainda não revelados.
+3. Incluir Avançar, leitura dos compromissos, retorno ao hub e marco de fechamento no dia 30.
+4. Animar pelas casas até o destino autorizado pelo domínio; revelar o imprevisto somente ao alcançá-lo durante Avançar e parar para decisão.
+5. Mostrar feedback do débito das contas e bloquear repetição de avanço durante movimento, transação ou popup.
+6. Reutilizar painéis, cards, estados e ícones de calendário, pin, aluguel, folha, empréstimo e eventos. Criar assets adicionais apenas se a composição final demonstrar necessidade, com fontes/PNG/QA nas pastas do projeto.
+
+CRITÉRIOS DE ACEITE
+1. Os 30 dias estão visíveis sem precisar navegar entre páginas ou rolar para descobrir parte do mês.
+2. Contas e eventos previsíveis aparecem antes da chegada; imprevistos não têm qualquer sinalização antecipada.
+3. Avançar percorre as casas e para no primeiro compromisso real; conta mostra o débito, evento abre o popup pela integração.
+4. A tela funciona em 1280×720 e demais viewports, com dia atual, conta paga e avanço claramente legíveis.
+5. A UI usa a projeção autorizada do domínio e não calcula sorteio, débito ou incidência por conta própria.
+
+VALIDAÇÃO PREVISTA
+1. Capturar os 30 dias com show futuro visível e quebra futura invisível; conferir novamente após revelação.
+2. Verificar animação, clique repetido, feedback de débito, retorno/reload e resoluções de referência.
+
+OBSERVAÇÕES E LIMITES
+1. A arte existente inclui icon_calendar, icon_pin, icon_rent, icon_payroll e imagens por evento. A grade e as casas podem ser componentes nativos; não há justificativa para gerar novas ilustrações antes do layout real.
+2. Se faltar um componente final, produzir na própria tarefa: PNG em Assets/Art/new/calendar, fonte em art-source/editable/calendar e registros em docs/art. Preservar arte já validada.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-23.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-23/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-23 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

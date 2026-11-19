@@ -1,0 +1,62 @@
+FB-22 — Implementar compromissos, débitos e persistência do calendário
+Status: planejada | Prioridade: P1 | Tipo: funcionalidade
+Área: Calendário; domínio e persistência
+Dependências: FB-21
+Modelo: gpt-6.2-astra | Raciocínio: xhigh
+Conversa: FB-22 — Implementar compromissos, débitos e persistência do calendário
+Escolha do modelo: Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.
+Commit local em inglês: feat: persist calendar commitments and debit scheduled bills
+Próxima tarefa: FB-24
+Feedbacks: F-42, F-43, F-45
+Esclarecimentos do calendário: C-02, C-04
+
+OBJETIVO
+Avançar até o próximo compromisso e debitar contas com pagamento persistido, preservando posição e decisões na retomada.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs
+Assets/Scripts/Game/Infrastructure/Database/Tables/GameSessionEntity.cs
+Assets/Scripts/Game/Infrastructure/Database/DatabaseInitializer.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs
+Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs
+Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs
+
+ESCOPO
+1. Modelar mês de 30 dias, dia atual, compromisso/destino, contas, eventos, metadados de previsibilidade, revelação e decisão pendente.
+2. Criar compromissos de contas com valores reais e datas conforme FB-21; ao alcançar o dia, debitar automaticamente do caixa em transação e registrar o pagamento.
+3. Manter um ledger idempotente por sessão/mês/conta/ocorrência, com informações para conciliar o caixa e a DRE no fechamento.
+4. Persistir posição, pagamentos, eventos reservados, estado revelado e pendência; reload não refaz débito nem sorteio.
+5. Processar todos os compromissos do dia na ordem especificada, impedir avanço com decisão pendente e tratar fim do mês/migração.
+6. Expor uma projeção de UI que contenha somente contas, eventos previsíveis e imprevistos já revelados; não transmitir detalhes ocultos ao renderizador.
+
+CRITÉRIOS DE ACEITE
+1. Avançar para no próximo dia com compromisso, considerando também imprevistos ainda ocultos da UI.
+2. Contas debitam efetivamente o valor correto ao alcançar o dia e registram pagamento uma única vez.
+3. Reload antes/depois de compromisso restaura caixa, dia, pagamento e decisão corretos; falha transacional não deixa estado parcial.
+4. Há suporte a vários compromissos no mesmo dia e a fim do mês no dia 30.
+5. Consultas não revelam imprevistos e fornecem os dados de reconciliação ao fechamento.
+
+VALIDAÇÃO PREVISTA
+1. Testar pagamento e caixa com retry/reload/falha transacional, duas contas no mesmo dia e conta junto de evento.
+2. Conferir o ledger contra os valores reais de aluguel, folha e empréstimo; validar a migração de planos e saves.
+
+OBSERVAÇÕES E LIMITES
+1. O débito em cada compromisso é requisito confirmado, substituindo a proposta anterior de liquidar tudo em um único ponto. A conciliação transacional deve impedir a cobrança repetida no fechamento.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-22.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-22/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-22 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

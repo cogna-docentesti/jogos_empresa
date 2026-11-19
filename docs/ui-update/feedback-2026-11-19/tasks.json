@@ -1,0 +1,2372 @@
+{
+  "schema_version": 1,
+  "project": "Jogos de Empresa Cogna",
+  "created_at": "2026-11-19",
+  "title": "Feedbacks de interface e novo calendário mensal",
+  "status": "planejado",
+  "implementation_performed": false,
+  "method": "Inspeção estática de código, catálogos e documentação; sem execução ou alteração do jogo.",
+  "historical_backlog": "docs/ui-update/tasks.json",
+  "task_count": 28,
+  "planned_task_count": 27,
+  "deferred_task_count": 1,
+  "feedback_count": 47,
+  "first_task": "FB-21",
+  "execution_order": [
+    "FB-21",
+    "FB-01",
+    "FB-02",
+    "FB-03",
+    "FB-04",
+    "FB-05",
+    "FB-06",
+    "FB-08",
+    "FB-07",
+    "FB-09",
+    "FB-10",
+    "FB-11",
+    "FB-12",
+    "FB-13",
+    "FB-14",
+    "FB-15",
+    "FB-16",
+    "FB-19",
+    "FB-20",
+    "FB-22",
+    "FB-24",
+    "FB-23",
+    "FB-25",
+    "FB-26",
+    "FB-17",
+    "FB-18",
+    "FB-27"
+  ],
+  "deferred_tasks": [
+    "FB-28"
+  ],
+  "priorities": {
+    "P1": "Regra, fluxo, integridade de dados ou dependência central.",
+    "P2": "Apresentação, alinhamento e clareza.",
+    "P3": "Futuro explicitamente adiado."
+  },
+  "execution_waves": [
+    {
+      "wave": 1,
+      "title": "Contrato do calendário e correções compartilhadas",
+      "tasks": [
+        "FB-21",
+        "FB-01",
+        "FB-02",
+        "FB-03",
+        "FB-04",
+        "FB-05",
+        "FB-06",
+        "FB-08",
+        "FB-07",
+        "FB-09",
+        "FB-10",
+        "FB-11",
+        "FB-12"
+      ]
+    },
+    {
+      "wave": 2,
+      "title": "Equipe, hub, resumo e DRE",
+      "tasks": [
+        "FB-13",
+        "FB-14",
+        "FB-15",
+        "FB-16",
+        "FB-19",
+        "FB-20"
+      ]
+    },
+    {
+      "wave": 3,
+      "title": "Calendário, decisões, fechamento e histórico",
+      "tasks": [
+        "FB-22",
+        "FB-24",
+        "FB-23",
+        "FB-25",
+        "FB-26",
+        "FB-17",
+        "FB-18"
+      ]
+    },
+    {
+      "wave": 4,
+      "title": "Validação de ponta a ponta",
+      "tasks": [
+        "FB-27"
+      ]
+    }
+  ],
+  "common_contract": [
+    "Planejamento aprovado para execução sequencial pelo usuário em 19/11/2026. O status de cada tarefa registra a execução real; autorização não equivale a implementação ou QA.",
+    "Os registros UI-01 a UI-20 e FONT-01 a FONT-10 permanecem históricos. O novo feedback prevalece sobre exigências antigas de contagem de passos, equipe incompleta e acesso direto a Fechar mês.",
+    "Trabalhar na GameScene e nos componentes existentes. Verificar a cena antes de alterar hierarquias; atualizar geradores/migrations pertinentes para não reintroduzir o defeito.",
+    "Preservar IDs, GUIDs, referências, dados salvos e enums existentes; mudanças de schema precisam de migração e retomada definida.",
+    "Para telas sem scroll, reorganizar o conteúdo para caber; não ocultar informação essencial nem apenas recortar a viewport. No cardápio, manter e melhorar o scroll da lista.",
+    "Reutilizar arte aprovada. Produzir assets adicionais quando realmente necessários à tarefa, em Assets/Art/new, com fontes em art-source/editable e registros/QA em docs/art; nunca usar arte como fonte de regra econômica.",
+    "Contas debitam ao chegar ao compromisso e têm pagamento persistido/idempotente; o fechamento reconcilia esses pagamentos sem debitar novamente. Consultas, reaberturas e retry não podem cobrar ou sortear outra vez.",
+    "Registrar QA e screenshots reais apenas durante execução. Caminhos de evidência deste plano são destinos previstos, ainda inexistentes.",
+    "Uma conversa nova por tarefa ativa, com o nome, modelo e raciocínio definidos neste JSON. Concluir, validar e fazer commit local em inglês antes de criar a conversa da próxima tarefa. Esta execução automática sequencial foi explicitamente autorizada pelo usuário.",
+    "O calendário mostra os 30 dias, contas e eventos previsíveis. Eventos imprevisíveis não deixam sinais antecipados na interface e aparecem somente durante Avançar.",
+    "Preservar integralmente as regras existentes de incidência dos eventos. Metadados de previsibilidade e distribuição dos dias não alteram seleção, pesos, condições, limites, exclusões ou repetição.",
+    "Não incluir output/windows-distribution/ nem alterações alheias no commit. Inspecionar status e staged diff; não usar git add indiscriminado."
+  ],
+  "analysis": [
+    {
+      "finding": "Contagem de passos aparece em múltiplos geradores e textos de contexto.",
+      "evidence": [
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "Assets/Editor/UI/RestaurantUiMigration.cs",
+        "Assets/Editor/UI/MenuPricingUiMigration.cs"
+      ],
+      "implication": "Remover só o objeto da cena não resolve a origem; FB-01 cobre fontes e reaplicação."
+    },
+    {
+      "finding": "LocationMarkerV2 já implementa glow, sprites ativo/inativo e transições de alpha.",
+      "evidence": [
+        "Assets/Scripts/Game/Adapter/In/UI/LocationMarkerV2.cs"
+      ],
+      "implication": "FB-03 começa por reproduzir e religar/ajustar a composição existente; não presume ausência do efeito."
+    },
+    {
+      "finding": "A compatibilidade atual é um painel escondido/expandido por ConceptDetailsToggle e tem scroll.",
+      "evidence": [
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/ConceptDetailsToggle.cs"
+      ],
+      "implication": "FB-05 e FB-06 substituem esse padrão pelo modal com navegação entre restaurantes."
+    },
+    {
+      "finding": "O cardápio usa Slider com wholeNumbers=false e mantém o texto Incluído no cardápio no gerador.",
+      "evidence": [
+        "Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs",
+        "Assets/Editor/UI/MenuPricingUiMigration.cs"
+      ],
+      "implication": "FB-08 e FB-09 cobrem texto, deltas discretos e preservação da persistência."
+    },
+    {
+      "finding": "A loja já guarda posse/carrinho por conjuntos de IDs e há bloqueios de itens adquiridos.",
+      "evidence": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/EquipmentScreenController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs"
+      ],
+      "implication": "FB-11 investiga o defeito observado e simplifica a apresentação de quantidade 0/1."
+    },
+    {
+      "finding": "A equipe carrega as cinco funções, informa capacidade/qualidade e habilita confirmação mesmo incompleta.",
+      "evidence": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/TeamRoleCardView.cs"
+      ],
+      "implication": "FB-13 revisa pertinência/efeitos; FB-14 é mudança explícita da regra de avanço."
+    },
+    {
+      "finding": "Reputação textual do ConceptHudView vem da sessão e usa escala 0–100; o gerador usa ICON_STAR.",
+      "evidence": [
+        "Assets/Scripts/Game/Adapter/In/UI/ConceptHudView.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs"
+      ],
+      "implication": "FB-15 confirma o significado e a representação visual das estrelas em vez de presumir conversão."
+    },
+    {
+      "finding": "Eventos já são reservados por sessão/mês e têm dia salvo, mas OpenMonth distribui os dias regularmente.",
+      "evidence": [
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs"
+      ],
+      "implication": "FB-22/24 reaproveitam reserva/persistência e acrescentam posição, avanço e dias aleatórios."
+    },
+    {
+      "finding": "O motor considera o dia/duração dos eventos e liquida aluguel, salários, custos e empréstimo no fechamento.",
+      "evidence": [
+        "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+        "docs/monthly-simulation.md"
+      ],
+      "implication": "FB-21/22/26 introduzem pagamentos no compromisso com ledger e reconciliação, evitando duplo débito. Datas de eventos exigem atenção à duração; a incidência fica inalterada."
+    },
+    {
+      "finding": "Não foi localizada fonte separada de análise de balanceamento por nome ou planilha; há regras em código/catálogos e monthly-simulation.md.",
+      "evidence": [
+        "docs/monthly-simulation.md",
+        "Assets/Resources/Restaurants",
+        "Assets/Resources/Roles"
+      ],
+      "implication": "FB-04/13 precisam registrar a fonte usada e distinguir regra atual de regra homologada."
+    },
+    {
+      "finding": "O usuário confirmou 30 dias visíveis, débito real no compromisso e visibilidade distinta de eventos previsíveis/imprevisíveis.",
+      "evidence": [
+        "Esclarecimentos do usuário de 19/11/2026 registrados em calendar_clarification_original."
+      ],
+      "implication": "FB-21 a FB-26 e o QA foram atualizados; não há mais alternativa de contas apenas informativas."
+    },
+    {
+      "finding": "O catálogo EventData não tem atualmente um campo de previsibilidade; o seletor tem regras existentes independentes da UI.",
+      "evidence": [
+        "Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs"
+      ],
+      "implication": "Adicionar metadado de anúncio sem alterar pesos, filtros, limites ou repetição."
+    }
+  ],
+  "assumptions_and_decisions": [
+    {
+      "id": "A-01",
+      "topic": "Alpha 80%",
+      "proposal": "Aplicar alpha 0,80 ao fundo/scrim do popup e manter o conteúdo opaco.",
+      "owner_task": "FB-05",
+      "status": "interpretação de planejamento"
+    },
+    {
+      "id": "A-02",
+      "topic": "Profissionais",
+      "proposal": "Filtrar por pertinência comprovada, mantendo funções compartilhadas justificadas; não ocultar toda função apenas por não ser obrigatória.",
+      "owner_task": "FB-13",
+      "status": "depende da matriz"
+    },
+    {
+      "id": "A-03",
+      "topic": "Mínimo da equipe",
+      "proposal": "Impedir confirmar/avançar sem satisfazer requiredRoles do restaurante.",
+      "owner_task": "FB-14",
+      "status": "solicitado pelo usuário"
+    },
+    {
+      "id": "A-06",
+      "topic": "Venda de usados",
+      "proposal": "Manter fora deste lote.",
+      "owner_task": "FB-28",
+      "status": "adiada pelo usuário"
+    },
+    {
+      "id": "A-04",
+      "topic": "Pagamento das contas",
+      "proposal": "Debitar efetivamente ao alcançar o compromisso, persistir pagamento e conciliar no fechamento sem novo débito.",
+      "owner_task": "FB-21",
+      "status": "confirmado pelo usuário"
+    },
+    {
+      "id": "A-05",
+      "topic": "Visibilidade e incidência dos eventos",
+      "proposal": "Previsíveis anunciados antes; imprevistos ocultos até Avançar. Preservar integralmente as regras existentes de incidência.",
+      "owner_task": "FB-24",
+      "status": "confirmado pelo usuário"
+    },
+    {
+      "id": "A-07",
+      "topic": "Calendário de 30 dias",
+      "proposal": "Todos os 30 dias visíveis; avançar ao próximo dia com compromisso, incluindo interrupção oculta.",
+      "owner_task": "FB-23",
+      "status": "confirmado pelo usuário"
+    }
+  ],
+  "feedback": [
+    {
+      "id": "F-01",
+      "screen": "Global",
+      "original_text": "remover \"passo x de y\" do header não teremos mais essa informação",
+      "task_ids": [
+        "FB-01"
+      ]
+    },
+    {
+      "id": "F-02",
+      "screen": "Tela Mapa",
+      "original_text": "voltar efeito neon que tinha antes, ao selecionar o local tinha um efeito de destaque vamos voltar com ele",
+      "task_ids": [
+        "FB-03"
+      ]
+    },
+    {
+      "id": "F-03",
+      "screen": "Tela Mapa",
+      "original_text": "centralizar botão que estão desalinhados",
+      "task_ids": [
+        "FB-03"
+      ]
+    },
+    {
+      "id": "F-04",
+      "screen": "Tela Mapa",
+      "original_text": "colocar padding lista de informações",
+      "task_ids": [
+        "FB-03"
+      ]
+    },
+    {
+      "id": "F-05",
+      "screen": "Tela Mapa",
+      "original_text": "remover canais",
+      "task_ids": [
+        "FB-03"
+      ]
+    },
+    {
+      "id": "F-06",
+      "screen": "Tela Restaurante",
+      "original_text": "ver compatibilidade tem que ser um popup (alpha com 80%), com x para fechar",
+      "task_ids": [
+        "FB-05"
+      ]
+    },
+    {
+      "id": "F-07",
+      "screen": "Tela Restaurante",
+      "original_text": "3 botões com os restaurantes quando abrir popup de compatibilidade para conseguir transitar entre os tipos de restaurantes no popup também, pode ser com uma miniatura do restaurante",
+      "task_ids": [
+        "FB-05"
+      ]
+    },
+    {
+      "id": "F-08",
+      "screen": "Tela Restaurante",
+      "original_text": "remover scroll",
+      "task_ids": [
+        "FB-06"
+      ]
+    },
+    {
+      "id": "F-09",
+      "screen": "Tela Restaurante",
+      "original_text": "paddings nos cards",
+      "task_ids": [
+        "FB-06"
+      ]
+    },
+    {
+      "id": "F-10",
+      "screen": "Tela Restaurante",
+      "original_text": "dois selects (duas bordas) - bug",
+      "task_ids": [
+        "FB-02",
+        "FB-06"
+      ]
+    },
+    {
+      "id": "F-11",
+      "screen": "Tela Restaurante",
+      "original_text": "centralizar o botão",
+      "task_ids": [
+        "FB-06"
+      ]
+    },
+    {
+      "id": "F-12",
+      "screen": "Tela Restaurante",
+      "original_text": "conferir compatibilidade - se esta certa",
+      "task_ids": [
+        "FB-04"
+      ]
+    },
+    {
+      "id": "F-13",
+      "screen": "Tela Restaurante",
+      "original_text": "colocar as comidas como cardápio ou como selo etc. talvez precisa criar novo asset para isso, pois atualmente tem apenas um icone da comida na tela",
+      "task_ids": [
+        "FB-07"
+      ]
+    },
+    {
+      "id": "F-14",
+      "screen": "Tela Cardápio",
+      "original_text": "remover texto incluído no cardápio",
+      "task_ids": [
+        "FB-08"
+      ]
+    },
+    {
+      "id": "F-15",
+      "screen": "Tela Cardápio",
+      "original_text": "verificar quais são premium, simples, especial, pois os icones paressem trocados",
+      "task_ids": [
+        "FB-08"
+      ]
+    },
+    {
+      "id": "F-16",
+      "screen": "Tela Cardápio",
+      "original_text": "melhorar scroll e remover granularidade do preço (colocar a granulidade da sweuinte forma, colocar 4 botões em baixo (-1, -0.5, +0.5, +1) acredito que ficar melhor que um scroll",
+      "task_ids": [
+        "FB-09"
+      ]
+    },
+    {
+      "id": "F-17",
+      "screen": "Tela Bancos",
+      "original_text": "remover botão ?, pois será o tutorial",
+      "task_ids": [
+        "FB-10"
+      ]
+    },
+    {
+      "id": "F-18",
+      "screen": "Tela Bancos",
+      "original_text": "remover \"seleciona uma das quatro opções\"",
+      "task_ids": [
+        "FB-10"
+      ]
+    },
+    {
+      "id": "F-19",
+      "screen": "Tela Bancos",
+      "original_text": "remover o scroll",
+      "task_ids": [
+        "FB-10"
+      ]
+    },
+    {
+      "id": "F-20",
+      "screen": "Tela Bancos",
+      "original_text": "resolver problema duas bordas",
+      "task_ids": [
+        "FB-02",
+        "FB-10"
+      ]
+    },
+    {
+      "id": "F-21",
+      "screen": "Tela Equipamentos e Carrinho",
+      "original_text": "problema de duas bordas",
+      "task_ids": [
+        "FB-02",
+        "FB-12"
+      ]
+    },
+    {
+      "id": "F-22",
+      "screen": "Tela Equipamentos e Carrinho",
+      "original_text": "deixar não selecionável o que for comprado basico",
+      "task_ids": [
+        "FB-11"
+      ]
+    },
+    {
+      "id": "F-23",
+      "screen": "Tela Equipamentos e Carrinho",
+      "original_text": "mudar a quantidade (deixar só adionar ou remover do carrinho já que atualmente só se pode comprar 1)",
+      "task_ids": [
+        "FB-11"
+      ]
+    },
+    {
+      "id": "F-24",
+      "screen": "Tela Equipamentos e Carrinho",
+      "original_text": "depois iremos colocar a opção de vender o usado",
+      "task_ids": [
+        "FB-28"
+      ]
+    },
+    {
+      "id": "F-25",
+      "screen": "Tela Equipamentos e Carrinho",
+      "original_text": "icons (imagens) não estão centralizados",
+      "task_ids": [
+        "FB-12"
+      ]
+    },
+    {
+      "id": "F-26",
+      "screen": "Tela Equipamentos e Carrinho",
+      "original_text": "botões não estão centralizados e remover outline",
+      "task_ids": [
+        "FB-02",
+        "FB-12"
+      ]
+    },
+    {
+      "id": "F-27",
+      "screen": "Tela Equipe",
+      "original_text": "profissionais não são todos do restaurante",
+      "task_ids": [
+        "FB-13"
+      ]
+    },
+    {
+      "id": "F-28",
+      "screen": "Tela Equipe",
+      "original_text": "está aparecendo informações da influência de contratar (confirmar/atualizar com o que faz sentido de acordo com a análise do balanceamento)",
+      "task_ids": [
+        "FB-13"
+      ]
+    },
+    {
+      "id": "F-29",
+      "screen": "Tela Equipe",
+      "original_text": "permitir não passar enquanto não tiver o mínimo",
+      "task_ids": [
+        "FB-14"
+      ]
+    },
+    {
+      "id": "F-30",
+      "screen": "Tela Menu",
+      "original_text": "alinhar reputação com as estrelinhas (verificar se as estrelinhas são a reputação)",
+      "task_ids": [
+        "FB-15"
+      ]
+    },
+    {
+      "id": "F-31",
+      "screen": "Tela Menu",
+      "original_text": "atualizar as mesmas coisas do mapa",
+      "task_ids": [
+        "FB-03",
+        "FB-15"
+      ]
+    },
+    {
+      "id": "F-32",
+      "screen": "Tela Menu",
+      "original_text": "melhorar popup de saída do jogo",
+      "task_ids": [
+        "FB-16"
+      ]
+    },
+    {
+      "id": "F-33",
+      "screen": "Tela Menu",
+      "original_text": "estabelecimento do meio deve refletir com o tipo de restaurante escolhido",
+      "task_ids": [
+        "FB-15"
+      ]
+    },
+    {
+      "id": "F-34",
+      "screen": "Tela Menu",
+      "original_text": "no lugar de fechar mês, colocar o botão calendário, crie um botão boninito de calendário",
+      "task_ids": [
+        "FB-17"
+      ]
+    },
+    {
+      "id": "F-35",
+      "screen": "Tela de Eventos e Histórico",
+      "original_text": "a tela de eventos e histórico serve para ver os eventos que já aconteceram e quais foram as decisões tomadas",
+      "task_ids": [
+        "FB-18"
+      ]
+    },
+    {
+      "id": "F-36",
+      "screen": "Tela de Eventos e Histórico",
+      "original_text": "os eventos em si aparecerão no calendário (esporadicamente)",
+      "task_ids": [
+        "FB-18",
+        "FB-24",
+        "FB-25"
+      ]
+    },
+    {
+      "id": "F-37",
+      "screen": "Tela Resumo (Meu Restaurante)",
+      "original_text": "remover a palavra \"pronto\" e deixar mais evidente o botão para ir para a tela da decisão",
+      "task_ids": [
+        "FB-19"
+      ]
+    },
+    {
+      "id": "F-38",
+      "screen": "Tela Resumo (Meu Restaurante)",
+      "original_text": "imagens da equipe, as pessoas nesta tela estão flutuando",
+      "task_ids": [
+        "FB-19"
+      ]
+    },
+    {
+      "id": "F-39",
+      "screen": "Tela DRE",
+      "original_text": "nada por enquanto (imagens arrumar - folha na mão da pessoa)",
+      "task_ids": [
+        "FB-20"
+      ]
+    },
+    {
+      "id": "F-40",
+      "screen": "Tela DRE",
+      "original_text": "padding no trimestral",
+      "task_ids": [
+        "FB-20"
+      ]
+    },
+    {
+      "id": "F-41",
+      "screen": "Tela DRE",
+      "original_text": "alinhamento das colunas da tabela trimestral",
+      "task_ids": [
+        "FB-20"
+      ]
+    },
+    {
+      "id": "F-42",
+      "screen": "Criando Tela Calendário (estilo jogo de tabuleiro)",
+      "original_text": "o fechamento do mês deve ficar no calendário, avançando de evento em evento",
+      "task_ids": [
+        "FB-21",
+        "FB-22",
+        "FB-23",
+        "FB-26"
+      ]
+    },
+    {
+      "id": "F-43",
+      "screen": "Criando Tela Calendário (estilo jogo de tabuleiro)",
+      "original_text": "contas do mês",
+      "task_ids": [
+        "FB-21",
+        "FB-22",
+        "FB-23",
+        "FB-26"
+      ]
+    },
+    {
+      "id": "F-44",
+      "screen": "Criando Tela Calendário (estilo jogo de tabuleiro)",
+      "original_text": "eventos",
+      "task_ids": [
+        "FB-23",
+        "FB-24",
+        "FB-25"
+      ]
+    },
+    {
+      "id": "F-45",
+      "screen": "Criando Tela Calendário (estilo jogo de tabuleiro)",
+      "original_text": "avançar e ir andando as casinhas (de evento em evento)",
+      "task_ids": [
+        "FB-22",
+        "FB-23"
+      ]
+    },
+    {
+      "id": "F-46",
+      "screen": "Criando Tela Calendário (estilo jogo de tabuleiro)",
+      "original_text": "quando avança ser randomico os eventos (tipo quebrar algo no dia 16 quando ele estava indo para o dia 20 de pagamento de aluguel)",
+      "task_ids": [
+        "FB-21",
+        "FB-24"
+      ]
+    },
+    {
+      "id": "F-47",
+      "screen": "Criando Tela Calendário (estilo jogo de tabuleiro)",
+      "original_text": "TELA DE DECISÕES DO MÊS -> aparecer por cima do calendário: arrumar borda dupla",
+      "task_ids": [
+        "FB-02",
+        "FB-25"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "FB-01",
+      "title": "Remover a contagem de passos de todos os cabeçalhos",
+      "area": "Global",
+      "kind": "interface",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [],
+      "objective": "Retirar a informação “Passo X de Y” de todas as telas, preservando títulos e navegação.",
+      "scope": [
+        "Inventariar cabeçalhos das sete etapas de abertura, contextos de consulta e textos montados em runtime.",
+        "Remover a contagem na cena, prefabs e geradores/migrations que possam recriá-la; redistribuir o espaço do header.",
+        "Atualizar o contrato visual vigente para esta revisão, distinguindo-o dos registros históricos que ainda mostram passos."
+      ],
+      "acceptance_criteria": [
+        "Nenhum cabeçalho visível exibe contagem de passos em abertura, retorno ou consulta.",
+        "Nome da tela, ações e navegação continuam legíveis e alinhados; reexecutar o gerador afetado não restaura a contagem."
+      ],
+      "validation": [
+        "Inspecionar as sete etapas e suas revisitas em 1280×720 e 1920×1080; conferir referências de textos em código."
+      ],
+      "references": [
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "Assets/Editor/UI/IdentificationPanelBuilder.cs",
+        "Assets/Editor/UI/RestaurantUiMigration.cs",
+        "Assets/Editor/UI/MenuPricingUiMigration.cs",
+        "docs/ui-update/visual-contract.json"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-01.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-01.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-01",
+      "feedback_ids": [
+        "F-01"
+      ],
+      "execution": {
+        "chat_title": "FB-01 — Remover a contagem de passos de todos os cabeçalhos",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "fix: remove step counters from all screen headers",
+        "next_task_id": "FB-02",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-02",
+      "title": "Corrigir a borda dupla dos controles e modais compartilhados",
+      "area": "Global; restaurante; banco; equipamentos; calendário",
+      "kind": "correção",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [],
+      "objective": "Eliminar a sobreposição de bordas sem perder os estados de seleção e foco.",
+      "scope": [
+        "Reproduzir o defeito e identificar se vem do sprite, Image pai/filho, outline, foco ou aplicação duplicada do skin.",
+        "Corrigir a composição compartilhada e os overrides locais de restaurante, banco, equipamentos/carrinho e decisões do mês.",
+        "Manter um indicador claro de selecionado, hover, pressionado e desabilitado; preservar foco de teclado por outro recurso visual quando o outline for retirado."
+      ],
+      "acceptance_criteria": [
+        "Há apenas uma borda intencional em cada controle/modal afetado, inclusive após selecionar, abrir novamente e voltar.",
+        "Seleção e foco permanecem distinguíveis; os botões de equipamentos não exibem o outline decorativo solicitado para remoção."
+      ],
+      "validation": [
+        "Comparar estados normal/selecionado/foco/desabilitado nos componentes existentes; verificar o modal do calendário quando FB-25 estiver integrado."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/SharedControlAppearance.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SharedUiStyles.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/Theme/SharedUiSkin.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "Assets/Prefabs/SharedUI"
+      ],
+      "notes": [
+        "A revisão do modal futuro também integra o aceite de FB-25; esta tarefa pode entregar primeiro a correção compartilhada."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-02.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-02.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-02",
+      "feedback_ids": [
+        "F-10",
+        "F-20",
+        "F-21",
+        "F-26",
+        "F-47"
+      ],
+      "execution": {
+        "chat_title": "FB-02 — Corrigir a borda dupla dos controles e modais compartilhados",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "fix: remove duplicate borders from shared UI controls",
+        "next_task_id": "FB-03",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-03",
+      "title": "Restaurar o neon e ajustar a tela de mapa",
+      "area": "Mapa",
+      "kind": "interface",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-01",
+        "FB-02"
+      ],
+      "objective": "Recuperar o destaque da localização selecionada e corrigir a organização do painel de informações.",
+      "scope": [
+        "Reaproveitar o glow existente e conferir vínculos, sprite, alpha, máscara e camadas na cena atual.",
+        "Persistir o destaque no local selecionado e transferi-lo ao trocar a seleção; conferir mouse e toque.",
+        "Centralizar botões, aplicar padding à lista de informações e remover a seção/campo “Canais” da interface."
+      ],
+      "acceptance_criteria": [
+        "Selecionar um local acende o neon de forma evidente; trocar de local remove o destaque anterior.",
+        "Botões ficam centralizados e a lista não encosta nas bordas.",
+        "“Canais” não aparece e sua remoção não deixa um espaço vazio no painel."
+      ],
+      "validation": [
+        "Selecionar as cinco localizações por mouse/toque, retornar à tela e verificar texto longo nas resoluções de referência."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/LocationMarkerV2.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/LocationScreenV2View.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs",
+        "Assets/Editor/UI/LocationUiMigration.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "docs/art/layouts/map-selection-compact.json"
+      ],
+      "notes": [
+        "A existência de glow no código é confirmada; a causa visual do feedback deve ser reproduzida na GameScene antes de alterar propriedades."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-03.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-03.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-03",
+      "feedback_ids": [
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-05",
+        "F-31"
+      ],
+      "execution": {
+        "chat_title": "FB-03 — Restaurar o neon e ajustar a tela de mapa",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "fix: restore map selection glow and spacing",
+        "next_task_id": "FB-04",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-04",
+      "title": "Auditar a compatibilidade exibida para cada restaurante",
+      "area": "Restaurante; regras",
+      "kind": "análise e correção",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [],
+      "objective": "Confirmar que a compatibilidade apresentada corresponde aos catálogos e ao cálculo aplicado no jogo.",
+      "scope": [
+        "Montar uma matriz dos três restaurantes × públicos × localizações, identificando permitido, bloqueado e pontuação de alinhamento.",
+        "Confrontar RestaurantData.allowedSegments/blockedSegments, AllowsSegment, regras de seleção e AlignmentEngine; distinguir restrição de escolha de pontuação.",
+        "Registrar divergências, fontes e correções necessárias; usar docs/monthly-simulation.md e a análise de balanceamento disponível no projeto."
+      ],
+      "acceptance_criteria": [
+        "Cada informação de compatibilidade tem uma fonte identificada e coincide com a validação de seleção correspondente.",
+        "Pontuação menor não é apresentada automaticamente como bloqueio se a regra não bloquear a combinação.",
+        "A matriz cobre os três restaurantes e deixa explícitas eventuais decisões de balanceamento ainda pendentes."
+      ],
+      "validation": [
+        "Verificar todas as combinações da matriz; acrescentar testes de regra somente onde houver correção de lógica."
+      ],
+      "references": [
+        "Assets/Scripts/Data/ScriptableObjects/Restaurants/RestaurantData.cs",
+        "Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/RestaurantScreenController.cs",
+        "Assets/Resources/Restaurants",
+        "docs/monthly-simulation.md"
+      ],
+      "notes": [
+        "Não foi localizada uma planilha/documento separado de balanceamento na busca por nomes e formatos do projeto. Não presumir que as regras atuais já tenham sido homologadas."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-04.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-04.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-04",
+      "feedback_ids": [
+        "F-12"
+      ],
+      "execution": {
+        "chat_title": "FB-04 — Auditar a compatibilidade exibida para cada restaurante",
+        "model": "gpt-6.2-astra",
+        "thinking": "high",
+        "rationale": "Auditoria de regras e fontes de balanceamento com múltiplos cálculos e catálogos.",
+        "commit_message": "fix: align restaurant compatibility with game rules",
+        "next_task_id": "FB-05",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-05",
+      "title": "Transformar a compatibilidade em popup com três restaurantes",
+      "area": "Restaurante",
+      "kind": "interface e interação",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02",
+        "FB-04"
+      ],
+      "objective": "Apresentar a compatibilidade em um modal que permita consultar os três restaurantes sem sair dele.",
+      "scope": [
+        "Substituir a expansão lateral atual por popup sobre a tela de restaurante, com camada de fundo alpha 0,80 e botão X.",
+        "Incluir três botões identificados por nome e, se couber, miniatura da fachada, mantendo visível o restaurante consultado.",
+        "Atualizar o conteúdo pela matriz de FB-04; consultar outro restaurante no popup não confirma uma troca na escolha principal.",
+        "Bloquear cliques na tela ao fundo, restaurar foco e manter o rascunho ao fechar."
+      ],
+      "acceptance_criteria": [
+        "“Ver compatibilidade” abre o modal; X fecha e devolve ao mesmo contexto.",
+        "Os três botões permitem alternar a consulta e atualizam todas as informações sem conteúdo residual.",
+        "Fundo do modal usa alpha 0,80; texto e controles do conteúdo permanecem opacos e legíveis.",
+        "A seleção principal só muda pela ação de seleção/confirmar prevista na tela."
+      ],
+      "validation": [
+        "Abrir, alternar os três tipos, fechar e reabrir; verificar rascunho, foco, input no fundo e conteúdo em 1280×720."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/RestaurantScreenView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/ConceptDetailsToggle.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs",
+        "Assets/Editor/UI/RestaurantUiMigration.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs"
+      ],
+      "notes": [
+        "Interpretação de planejamento para “alpha com 80%”: alpha da camada de fundo/scrim, não opacidade de texto e botões. Registrar no layout antes de implementar."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-05.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-05.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-05",
+      "feedback_ids": [
+        "F-06",
+        "F-07"
+      ],
+      "execution": {
+        "chat_title": "FB-05 — Transformar a compatibilidade em popup com três restaurantes",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "feat: add restaurant compatibility modal with restaurant tabs",
+        "next_task_id": "FB-06",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-06",
+      "title": "Ajustar layout e retirar a rolagem da tela de restaurante",
+      "area": "Restaurante",
+      "kind": "interface",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-01",
+        "FB-02",
+        "FB-05"
+      ],
+      "objective": "Fazer as escolhas e ações do restaurante caberem com paddings consistentes e sem scroll.",
+      "scope": [
+        "Remover a rolagem da tela principal e organizar as três opções e informações no espaço disponível.",
+        "Aplicar padding nos cards, centralizar o botão principal e conferir a borda única de cada seleção.",
+        "Conferir o popup em layout compacto, sem depender do antigo scroll de compatibilidade; usar troca de restaurante para organizar o conteúdo."
+      ],
+      "acceptance_criteria": [
+        "Escolhas, informações essenciais e ação principal cabem integralmente em 1280×720.",
+        "Cards têm margens internas consistentes, não há duas molduras de seleção e o botão fica centralizado.",
+        "Conteúdo não é simplesmente recortado ao remover ScrollRect/scrollbar."
+      ],
+      "validation": [
+        "Conferir os três restaurantes, descrições longas e popup nas resoluções de referência."
+      ],
+      "references": [
+        "Assets/Editor/UI/RestaurantUiMigration.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/RestaurantScreenView.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-06.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-06.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-06",
+      "feedback_ids": [
+        "F-08",
+        "F-09",
+        "F-10",
+        "F-11"
+      ],
+      "execution": {
+        "chat_title": "FB-06 — Ajustar layout e retirar a rolagem da tela de restaurante",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "fix: improve restaurant layout without scrolling",
+        "next_task_id": "FB-08",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-07",
+      "title": "Apresentar as comidas em composição de cardápio ou selos",
+      "area": "Restaurante; arte",
+      "kind": "design e integração",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-06",
+        "FB-08"
+      ],
+      "objective": "Dar contexto visual às comidas, substituindo a apresentação de ícones soltos na tela de restaurante.",
+      "scope": [
+        "Definir uma composição de pequeno cardápio ou selos com nome, imagem e hierarquia dos produtos.",
+        "Reutilizar as nove imagens existentes e o mapeamento revisado em FB-08; decidir se um novo suporte visual é necessário.",
+        "Se necessário, criar asset do suporte de cardápio/selo conforme manifesto de arte e integrá-lo sem embutir preços/textos dinâmicos na imagem."
+      ],
+      "acceptance_criteria": [
+        "Cada restaurante apresenta apenas suas comidas, com nomes legíveis e imagens corretas.",
+        "A composição funciona dentro do layout sem scroll de FB-06.",
+        "A decisão de reutilizar ou produzir asset está documentada; assets novos, se necessários, têm fonte, importação e vínculo registrados."
+      ],
+      "validation": [
+        "Comparar a composição dos três restaurantes e verificar legibilidade e proporção das comidas em 1280×720."
+      ],
+      "references": [
+        "Assets/Resources/Products",
+        "Assets/Resources/Restaurants",
+        "docs/art/manifest.json",
+        "docs/art/catalogos.json",
+        "Assets/Scripts/Game/Adapter/In/UI/RestaurantScreenView.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs"
+      ],
+      "notes": [
+        "Na execução autorizada, aplicar a skill de arte do projeto e produzir asset novo se a necessidade for confirmada."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-07.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-07.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-07",
+      "feedback_ids": [
+        "F-13"
+      ],
+      "execution": {
+        "chat_title": "FB-07 — Apresentar as comidas em composição de cardápio ou selos",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "feat: present restaurant dishes as a menu composition",
+        "next_task_id": "FB-09",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-08",
+      "title": "Revisar nomes, categorias e imagens dos produtos do cardápio",
+      "area": "Cardápio",
+      "kind": "auditoria e interface",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [],
+      "objective": "Remover o texto redundante e verificar os possíveis ícones trocados entre produtos simples, especiais e premium.",
+      "scope": [
+        "Retirar “Incluído no cardápio” dos cards e do gerador que recria esse texto.",
+        "Inventariar os nove ProductData por ID, nome, restaurante, sprite e referência no manifesto.",
+        "Conferir visualmente os produtos simples, completos/especiais, clássicos/executivos e premium; corrigir vínculos incorretos por ID.",
+        "Não inferir uma nova classificação econômica apenas pelo nome, pela ordem do array ou pela aparência do prato."
+      ],
+      "acceptance_criteria": [
+        "O texto “Incluído no cardápio” deixa de aparecer.",
+        "Os nove produtos possuem uma correspondência documentada entre ID, nome e imagem, sem troca entre restaurantes.",
+        "Categorias e nomes exibidos correspondem aos dados aprovados; preços e custos não mudam por causa da revisão visual."
+      ],
+      "validation": [
+        "Montar uma comparação dos nove produtos com seus nomes e validar as telas de restaurante e cardápio."
+      ],
+      "references": [
+        "Assets/Resources/Products",
+        "Assets/Resources/Restaurants",
+        "docs/art/catalogos.json",
+        "docs/art/manifest.json",
+        "Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs",
+        "Assets/Editor/UI/MenuPricingUiMigration.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-08.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-08.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-08",
+      "feedback_ids": [
+        "F-14",
+        "F-15"
+      ],
+      "execution": {
+        "chat_title": "FB-08 — Revisar nomes, categorias e imagens dos produtos do cardápio",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "fix: correct menu product artwork and remove redundant labels",
+        "next_task_id": "FB-07",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-09",
+      "title": "Trocar o slider de preço por quatro botões e melhorar a rolagem",
+      "area": "Cardápio",
+      "kind": "interação",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02",
+        "FB-08"
+      ],
+      "objective": "Permitir ajustes claros de preço em incrementos de R$ 0,50 e R$ 1,00.",
+      "scope": [
+        "Substituir o slider de preço por quatro botões abaixo do valor: −1, −0,5, +0,5 e +1.",
+        "Aplicar os deltas em reais, formatar o valor em pt-BR e respeitar minPrice/maxPrice sem acumular erros numéricos.",
+        "Definir o comportamento de um preço salvo fora do passo de R$ 0,50 sem arredondar silenciosamente o dado na leitura.",
+        "Melhorar o scroll da lista: roda, arraste/toque, máscaras e espaçamento; impedir que a roda altere o preço ao navegar.",
+        "Preservar o rascunho, confirmação e persistência atuais do cardápio."
+      ],
+      "acceptance_criteria": [
+        "Cada botão altera o preço pelo delta indicado quando o resultado é válido; ações que ultrapassam os limites ficam desabilitadas.",
+        "Não há slider contínuo de preço, e rolar a lista não altera valores.",
+        "Todos os produtos e botões são acessíveis sem sobreposição; confirmar e revisitar mantém os valores."
+      ],
+      "validation": [
+        "Verificar limites, cliques repetidos, preços com decimais, troca de restaurante e persistência; rodar testes de pricing afetados se a lógica mudar."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/MenuPricingScreenView.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/MenuPricingScreenController.cs",
+        "Assets/Scripts/Game/Domain/Helpers/MenuPricingHelper.cs",
+        "Assets/Editor/UI/MenuPricingUiMigration.cs",
+        "Assets/Prefabs/Card_ProductItem.prefab"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-09.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-09.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-09",
+      "feedback_ids": [
+        "F-16"
+      ],
+      "execution": {
+        "chat_title": "FB-09 — Trocar o slider de preço por quatro botões e melhorar a rolagem",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "feat: replace price sliders with fixed adjustment buttons",
+        "next_task_id": "FB-10",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-10",
+      "title": "Simplificar a tela de bancos e retirar scroll",
+      "area": "Bancos",
+      "kind": "interface",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-01",
+        "FB-02"
+      ],
+      "objective": "Exibir as quatro opções bancárias com uma seleção clara e sem elementos redundantes.",
+      "scope": [
+        "Remover o botão “?” e o texto “Selecione uma das quatro opções”.",
+        "Retirar a rolagem e reorganizar as quatro opções para manter custos e ação de confirmação acessíveis.",
+        "Aplicar a correção de borda dupla e conferir seleção única.",
+        "Preservar o tutorial contextual existente como entrada de orientação, sem criar um novo botão de ajuda nesta tarefa."
+      ],
+      "acceptance_criteria": [
+        "As quatro opções e a ação principal cabem em 1280×720 sem scroll nem corte.",
+        "O botão “?” e a instrução removida não reaparecem ao revisitar.",
+        "Selecionar um banco produz uma única moldura e a confirmação mantém o banco correto."
+      ],
+      "validation": [
+        "Conferir as quatro opções, tutorial e retorno de equipamentos; manter as regras financeiras atuais."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/FinancialScreenView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/BankCardView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/ContextualHelp.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/FinancialScreenController.cs",
+        "Assets/Editor/UI/FinancialUiMigration.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-10.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-10.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-10",
+      "feedback_ids": [
+        "F-17",
+        "F-18",
+        "F-19",
+        "F-20"
+      ],
+      "execution": {
+        "chat_title": "FB-10 — Simplificar a tela de bancos e retirar scroll",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "fix: simplify bank selection layout",
+        "next_task_id": "FB-11",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-11",
+      "title": "Bloquear equipamentos adquiridos e simplificar o carrinho para uma unidade",
+      "area": "Equipamentos e carrinho",
+      "kind": "correção e interação",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02"
+      ],
+      "objective": "Representar a compra única por equipamento com ações de adicionar/remover, sem seletor de quantidade.",
+      "scope": [
+        "Reproduzir a seleção de equipamento básico adquirido e conferir o estado persistido de posse.",
+        "Desabilitar seleção e adição de itens já adquiridos; manter “Adquirido” visível, inclusive após reload.",
+        "Substituir controles numéricos por “Adicionar ao carrinho” e “Remover do carrinho”; cada ID aparece no máximo uma vez.",
+        "Preservar pré-requisitos dos básicos, filtros por restaurante, total e confirmação de compra."
+      ],
+      "acceptance_criteria": [
+        "Básicos já comprados não podem ser selecionados para nova compra.",
+        "Todos os itens do carrinho têm uma unidade, sem duplicatas nem controles que sugiram quantidade maior.",
+        "Adicionar/remover altera o total corretamente e confirmar uma compra não permite cobrá-la de novo."
+      ],
+      "validation": [
+        "Comprar básicos, reabrir/recarregar, tentar nova seleção, adicionar/remover específicos e conferir totais."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/EquipmentScreenController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentCartLineView.cs",
+        "Assets/Scripts/Game/Domain/Helpers/EquipmentSelectionHelper.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentCatalogIndex.cs"
+      ],
+      "notes": [
+        "O código já contém bloqueios por posse e usa conjuntos de IDs; investigar a divergência visual/binding antes de criar outra regra.",
+        "“Básico comprado” não significa tornar todos os básicos gratuitos ou já possuídos. Venda de usados fica em FB-28."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-11.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-11.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-11",
+      "feedback_ids": [
+        "F-22",
+        "F-23"
+      ],
+      "execution": {
+        "chat_title": "FB-11 — Bloquear equipamentos adquiridos e simplificar o carrinho para uma unidade",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "fix: enforce single equipment purchases and simplify cart actions",
+        "next_task_id": "FB-12",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-12",
+      "title": "Centralizar imagens e botões da loja e do carrinho",
+      "area": "Equipamentos e carrinho",
+      "kind": "interface",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02",
+        "FB-11"
+      ],
+      "objective": "Corrigir a composição visual dos cards e das ações da loja.",
+      "scope": [
+        "Centralizar as imagens dentro de suas áreas, conferindo pivôs, padding transparente e preserveAspect.",
+        "Centralizar botões e rótulos, aplicar espaçamentos consistentes e remover outlines decorativos dos botões.",
+        "Conferir a borda única no catálogo, item selecionado e linhas do carrinho."
+      ],
+      "acceptance_criteria": [
+        "Ícones parecem centralizados visualmente e não são distorcidos ou cortados.",
+        "Botões e rótulos têm centros coerentes; não há outline decorativo nem bordas duplicadas.",
+        "Estado adquirido/desabilitado e foco continuam claros."
+      ],
+      "validation": [
+        "Conferir catálogo completo e carrinho vazio/cheio nas resoluções de referência."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentScreenView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EquipmentCartLineView.cs",
+        "Assets/Editor/UI/EquipmentUiMigration.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-12.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-12.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-12",
+      "feedback_ids": [
+        "F-21",
+        "F-25",
+        "F-26"
+      ],
+      "execution": {
+        "chat_title": "FB-12 — Centralizar imagens e botões da loja e do carrinho",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "fix: center equipment artwork and action buttons",
+        "next_task_id": "FB-13",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-13",
+      "title": "Filtrar profissionais por restaurante e revisar os efeitos da contratação",
+      "area": "Equipe; balanceamento",
+      "kind": "análise e correção",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [],
+      "objective": "Exibir profissionais pertinentes e explicar os efeitos reais de contratá-los.",
+      "scope": [
+        "Construir uma matriz de funções por restaurante: obrigatória, opcional compartilhada ou não aplicável; conferir também as imagens usadas.",
+        "Confrontar salários, capacidade, contribuição de qualidade e alinhamento dos cards com RoleData, RestaurantData e MonthlySimulationEngine.",
+        "Filtrar opções incompatíveis sem confundir função não obrigatória com função proibida; revisar a suposição fixa de cinco cards.",
+        "Documentar o tratamento de equipes salvas com funções que passem a ser ocultadas, sem demitir ou alterar caixa silenciosamente.",
+        "Atualizar a informação de influência/benefício conforme a fonte de balanceamento; não anunciar um efeito que o motor não aplica."
+      ],
+      "acceptance_criteria": [
+        "Cada restaurante mostra suas funções pertinentes e as compartilhadas justificadas pela matriz.",
+        "Textos e indicadores coincidem com os cálculos e usam unidades claras, como clientes/mês por pessoa.",
+        "Imagens correspondem às funções; qualquer decisão pendente de balanceamento fica registrada, sem benefício inventado."
+      ],
+      "validation": [
+        "Comparar os três restaurantes, contratar/remover funções e confrontar folha, capacidade, qualidade e alinhamento com o cálculo atual."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/TeamRoleCardView.cs",
+        "Assets/Resources/Roles",
+        "Assets/Resources/Restaurants",
+        "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+        "Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs",
+        "docs/monthly-simulation.md"
+      ],
+      "notes": [
+        "A tela atualmente carrega todas as cinco funções; o feedback requer revisar pertinência, não apenas reordená-las.",
+        "Confirmar efeitos com a análise de balanceamento disponível; não foi localizada uma fonte externa separada nesta inspeção."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-13.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-13.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-13",
+      "feedback_ids": [
+        "F-27",
+        "F-28"
+      ],
+      "execution": {
+        "chat_title": "FB-13 — Filtrar profissionais por restaurante e revisar os efeitos da contratação",
+        "model": "gpt-6.2-astra",
+        "thinking": "high",
+        "rationale": "Auditoria de regras e fontes de balanceamento com múltiplos cálculos e catálogos.",
+        "commit_message": "fix: show relevant staff and accurate hiring effects",
+        "next_task_id": "FB-14",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-14",
+      "title": "Impedir o avanço com equipe abaixo do mínimo",
+      "area": "Equipe; fluxo",
+      "kind": "regra e validação",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-13"
+      ],
+      "objective": "Bloquear a confirmação/continuação enquanto faltarem as quantidades mínimas de profissionais do restaurante.",
+      "scope": [
+        "Calcular pendências por roleId e quantidade a partir de RestaurantData.requiredRoles, agregando requisitos do mesmo ID.",
+        "Desabilitar o avanço e informar exatamente a função e quantidade faltante.",
+        "Validar também no serviço/fluxo, protegendo chamadas diretas e atalhos que contornem o botão.",
+        "Aplicar a validação ao confirmar decisões do mês e ao iniciar o calendário; permitir navegar para completar a contratação."
+      ],
+      "acceptance_criteria": [
+        "Equipe vazia ou abaixo de qualquer requisito não conclui a etapa nem inicia o mês.",
+        "Atender exatamente aos mínimos libera o avanço; reduzir uma quantidade volta a bloqueá-lo.",
+        "Voltar, revisar e contratar continuam disponíveis; a mensagem apresenta as faltas reais."
+      ],
+      "validation": [
+        "Testar mínimo−1, mínimo e mínimo+1 para os três restaurantes; verificar reload, revisitas e tentativa de avanço por chamadas de fluxo."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs",
+        "Assets/Resources/Restaurants",
+        "Assets/Scripts/Game/Domain/Service/GamesSessionService.cs",
+        "Assets/Scripts/Game/Infrastructure/InitialDecisionFlow.cs",
+        "Assets/Scripts/Game/Domain/Helpers/TeamSelectionHelper.cs"
+      ],
+      "notes": [
+        "Mudança de regra explicitamente solicitada: o código atual permite equipe incompleta e mantém Confirm habilitado. O novo feedback substitui a orientação histórica de preservar essa permissão."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-14.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-14.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-14",
+      "feedback_ids": [
+        "F-29"
+      ],
+      "execution": {
+        "chat_title": "FB-14 — Impedir o avanço com equipe abaixo do mínimo",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Validação de mínimo precisa cobrir UI, serviços e atalhos de navegação.",
+        "commit_message": "fix: require minimum staffing before advancing",
+        "next_task_id": "FB-15",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-15",
+      "title": "Atualizar o hub: reputação, mapa e fachada escolhida",
+      "area": "Menu / hub",
+      "kind": "interface e dados",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-01",
+        "FB-03"
+      ],
+      "objective": "Fazer o hub refletir a escolha do restaurante e alinhar seus indicadores.",
+      "scope": [
+        "Confirmar se as estrelinhas representam reputação; documentar a relação com o valor de sessão 0–100 e a escala visual usada.",
+        "Alinhar rótulo, valor e estrelas; se houver preenchimento por faixas, explicitar a conversão em uma única fonte.",
+        "Aplicar os ajustes do mapa também ao hub onde houver componentes equivalentes: destaque, alinhamento, padding e remoção de Canais.",
+        "Trocar o estabelecimento central pela fachada correspondente ao restaurante salvo, inclusive na retomada."
+      ],
+      "acceptance_criteria": [
+        "A reputação exibida corresponde à sessão e sua representação por estrelas é inequívoca.",
+        "Lanches, Japonês e Francês exibem a fachada correspondente no centro do mapa.",
+        "Ajustes compartilhados do mapa se mantêm no hub sem remover seus atalhos e destinos de gestão."
+      ],
+      "validation": [
+        "Abrir o hub com cada restaurante e com reputações mínima/intermediária/máxima; conferir nova partida e reload."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/ConceptHudView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/MenuHudView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/HubMapView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SelectedEstablishmentView.cs",
+        "Assets/Editor/UI/HubUiMigration.cs",
+        "Assets/Editor/UI/ConceptUiRevision.cs",
+        "Assets/Resources/Restaurants"
+      ],
+      "notes": [
+        "Na inspeção estática, ConceptHudView apresenta a reputação da sessão em “/100”, e o gerador usa ICON_STAR. O preenchimento e significado de todas as estrelinhas ainda precisam ser confirmados visualmente."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-15.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-15.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-15",
+      "feedback_ids": [
+        "F-30",
+        "F-31",
+        "F-33"
+      ],
+      "execution": {
+        "chat_title": "FB-15 — Atualizar o hub: reputação, mapa e fachada escolhida",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "fix: align hub reputation and selected restaurant facade",
+        "next_task_id": "FB-16",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-16",
+      "title": "Melhorar o popup de saída do jogo",
+      "area": "Menu / hub; saída",
+      "kind": "interface",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02"
+      ],
+      "objective": "Tornar a confirmação de saída clara e visualmente consistente.",
+      "scope": [
+        "Revisar tamanho, padding, bordas, contraste, título e hierarquia entre continuar jogando e sair.",
+        "Conferir fechamento pelo X/voltar, foco inicial e bloqueio do fundo.",
+        "Preservar o comportamento real de salvamento, erro e retry antes de encerrar."
+      ],
+      "acceptance_criteria": [
+        "Modal legível, sem borda dupla e com ações claramente distinguíveis.",
+        "Cancelar/X retorna à partida no mesmo contexto; sair executa o fluxo de gravação existente.",
+        "Falha ao salvar mantém a aplicação aberta e apresenta a ação de tentar novamente."
+      ],
+      "validation": [
+        "Verificar cancelar, X, confirmar e falha de gravação nas resoluções de referência; conferir limitações de encerramento já documentadas."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/ExitDialogController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs",
+        "Assets/Editor/UI/ExitDialogBuilder.cs",
+        "Assets/Editor/UI/DialogUiMigration.cs",
+        "docs/windows-shutdown.txt"
+      ],
+      "notes": [
+        "O escopo é a apresentação e o fluxo afetado. O histórico de crash nativo no encerramento não deve ser declarado resolvido apenas por melhorar este popup."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-16.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-16.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-16",
+      "feedback_ids": [
+        "F-32"
+      ],
+      "execution": {
+        "chat_title": "FB-16 — Melhorar o popup de saída do jogo",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "fix: improve exit confirmation dialog",
+        "next_task_id": "FB-19",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-17",
+      "title": "Substituir “Fechar mês” por um botão de calendário",
+      "area": "Menu / hub; arte e navegação",
+      "kind": "interface e integração",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-15",
+        "FB-23",
+        "FB-26"
+      ],
+      "objective": "Criar uma entrada visual de calendário no hub e direcionar o fechamento para essa tela.",
+      "scope": [
+        "Criar botão de calendário com ícone legível e acabamento/estados coerentes com o estilo aprovado.",
+        "Reutilizar icon_calendar, superfícies e estados existentes; produzir asset novo apenas se necessário e salvá-lo nas pastas de arte do projeto.",
+        "Substituir a ação Fechar mês do hub por Calendário e abrir/retomar a grade de 30 dias visíveis do mês ativo.",
+        "Remover acessos visíveis antigos que liquidem o mês diretamente pelo hub; observar o débito de contas já realizado no calendário."
+      ],
+      "acceptance_criteria": [
+        "O botão tem aparência clara de calendário e estados normal/hover/pressionado/desabilitado.",
+        "Clicar abre o calendário sem liquidar o mês nem sortear novamente eventos já reservados.",
+        "A revisita retoma o dia e a pendência salvos."
+      ],
+      "validation": [
+        "Verificar acesso por mouse/toque, navegação por teclado, revisita e retomada da sessão."
+      ],
+      "references": [
+        "Assets/Art/new/shared/icons/icon_calendar.png",
+        "art-source/editable/shared/icons/icon_calendar.svg",
+        "Assets/Scripts/Game/Adapter/In/UI/HubMapView.cs",
+        "Assets/Editor/UI/HubUiMigration.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-17.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-17.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-17",
+      "feedback_ids": [
+        "F-34"
+      ],
+      "execution": {
+        "chat_title": "FB-17 — Substituir “Fechar mês” por um botão de calendário",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "feat: open the monthly calendar from the hub",
+        "next_task_id": "FB-18",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-18",
+      "title": "Separar o histórico das ocorrências ativas do calendário",
+      "area": "Eventos e histórico",
+      "kind": "fluxo e interface",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-24",
+        "FB-25",
+        "FB-26"
+      ],
+      "objective": "Usar a tela de eventos e histórico somente para consultar ocorrências passadas e decisões já tomadas.",
+      "scope": [
+        "Exibir mês/dia, evento, opção escolhida e os efeitos registrados quando disponíveis.",
+        "Retirar da consulta ações que iniciem o sorteio mensal, decidam novamente ou fechem o mês.",
+        "Fazer as novas ocorrências abrirem esporadicamente durante o avanço do calendário.",
+        "Apresentar estado vazio e ordenar/identificar ocorrências por sessão e data, sem expor eventos futuros como já ocorridos."
+      ],
+      "acceptance_criteria": [
+        "Histórico contém apenas eventos ocorridos com a decisão registrada.",
+        "Consultar e fechar o histórico não muda caixa, reputação, dia, sorteio ou escolhas.",
+        "Uma ocorrência resolvida no calendário aparece uma única vez no histórico, inclusive após reload.",
+        "Eventos imprevisíveis não ocorridos não aparecem no histórico nem são expostos por consultas ao calendário; eventos anunciados futuros continuam separados do histórico de decisões."
+      ],
+      "validation": [
+        "Abrir histórico vazio, após uma decisão e após três meses; repetir consultas e conferir ausência de escritas econômicas."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/EventScreenController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EventScreenView.cs",
+        "Assets/Scripts/Game/Adapter/Out/Persistence/SessionEventHistoryRepository.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/SessionEventHistoryEntity.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-18.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-18.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-18",
+      "feedback_ids": [
+        "F-35",
+        "F-36"
+      ],
+      "execution": {
+        "chat_title": "FB-18 — Separar o histórico das ocorrências ativas do calendário",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "refactor: separate event history from active calendar decisions",
+        "next_task_id": "FB-27",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-19",
+      "title": "Destacar a ação de decisão e apoiar os personagens no resumo",
+      "area": "Resumo / Meu Restaurante",
+      "kind": "interface e composição",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-13",
+        "FB-14"
+      ],
+      "objective": "Remover o status “Pronto”, evidenciar a navegação para decisões e corrigir pessoas flutuando.",
+      "scope": [
+        "Retirar o texto “Pronto” e reorganizar a hierarquia visual da ação que leva à tela de decisão correspondente.",
+        "Usar rótulo orientado à ação, contraste e área de clique clara, preservando o destino correto.",
+        "Ajustar posição, escala, base e recorte das imagens da equipe para parecerem apoiadas no cenário.",
+        "Conferir o conjunto de personagens exibidos conforme funções do restaurante e composição disponível."
+      ],
+      "acceptance_criteria": [
+        "A palavra “Pronto” não aparece e a ação para decisões é imediatamente identificável.",
+        "O botão abre a tela esperada e volta ao resumo preservando o contexto.",
+        "Nenhuma pessoa parece flutuar nem tem base/corpo cortados de forma incoerente."
+      ],
+      "validation": [
+        "Conferir os três restaurantes, equipes vazias/parciais/completas e links de decisão nas resoluções de referência."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/EstablishmentReviewContent.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EstablishmentSummaryView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SelectedEstablishmentView.cs",
+        "Assets/Editor/UI/EstablishmentUiMigration.cs",
+        "docs/art/layouts/establishment-review-layout.json"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-19.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-19.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-19",
+      "feedback_ids": [
+        "F-37",
+        "F-38"
+      ],
+      "execution": {
+        "chat_title": "FB-19 — Destacar a ação de decisão e apoiar os personagens no resumo",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "fix: clarify restaurant review actions and staff placement",
+        "next_task_id": "FB-20",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-20",
+      "title": "Ajustar a DRE trimestral e a folha na mão do personagem",
+      "area": "DRE",
+      "kind": "interface e arte",
+      "priority": "P2",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02"
+      ],
+      "objective": "Corrigir espaçamentos, colunas e a composição da ilustração sem alterar os valores financeiros.",
+      "scope": [
+        "Aumentar/corrigir o padding do conteúdo trimestral e dos cabeçalhos.",
+        "Alinhar os limites das colunas entre cabeçalho e todas as linhas; alinhar valores e decimais de modo consistente.",
+        "Identificar a ilustração em que a folha não acompanha a mão e corrigir vínculo/posição ou encaminhar ajuste do asset correspondente."
+      ],
+      "acceptance_criteria": [
+        "Tabela trimestral tem colunas contínuas, padding coerente e valores legíveis.",
+        "A folha está visualmente apoiada na mão, sem deslocamento ou recorte incorreto.",
+        "Totais, meses ausentes e agregações mantêm as regras vigentes."
+      ],
+      "validation": [
+        "Conferir trimestre vazio/parcial/completo e valores longos/negativos; comparar dados antes e depois do ajuste visual."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/QuarterlyResultView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/QuarterlyResultPresentation.cs",
+        "Assets/Editor/UI/QuarterlyResultUiMigration.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/MonthlyResultView.cs",
+        "docs/art/layouts/dre-layout.json",
+        "docs/monthly-simulation.md"
+      ],
+      "notes": [
+        "O comentário “nada por enquanto” é tratado como manter o restante da DRE fora do escopo, preservando os três ajustes explicitamente listados."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-20.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-20.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-20",
+      "feedback_ids": [
+        "F-39",
+        "F-40",
+        "F-41"
+      ],
+      "execution": {
+        "chat_title": "FB-20 — Ajustar a DRE trimestral e a folha na mão do personagem",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "commit_message": "fix: align quarterly statements and illustration props",
+        "next_task_id": "FB-22",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": []
+    },
+    {
+      "id": "FB-21",
+      "title": "Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos",
+      "area": "Calendário; produto e economia",
+      "kind": "especificação",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [],
+      "objective": "Especificar o calendário de 30 dias com avanço por compromissos, débito imediato de contas e eventos anunciados ou surpresa, preservando a incidência atual.",
+      "scope": [
+        "Documentar o contrato hub → calendário com 30 dias visíveis → Avançar ao próximo compromisso → débito de conta ou popup de evento → retomar → fechamento → DRE.",
+        "Definir o estado de dia atual, destino, compromissos no mesmo dia, interrupção oculta, decisão pendente, retorno e retomada; todos os 30 dias permanecem visíveis independentemente dos compromissos.",
+        "Mapear as contas existentes e suas datas configuráveis: origem de valores, ID de ocorrência, débito automático ao alcançar o dia e pagamento persistido uma única vez.",
+        "Definir conciliação: caixa inicial do mês, pagamentos antecipados/ledger, receitas e efeitos no fechamento. O motor não pode debitar novamente contas já pagas nem perder os custos na DRE.",
+        "Classificar os 20 eventos existentes como previsíveis ou imprevisíveis em metadados independentes da incidência; justificar cada classificação. Show é anunciado; quebra de freezer fica oculta até o avanço.",
+        "Preservar exatamente as regras do MonthlyEventSelector e o contexto de elegibilidade aplicável, sem alterar pesos, alvo/mínimo/máximo, condições, exclusões e repetição. A distribuição dos dias usa aleatoriedade separada da seleção.",
+        "Definir datas/ordem dos compromissos, transações de pagamento, comportamento do caixa insuficiente conforme as regras existentes, migração de saves/planos e momento das decisões do mês."
+      ],
+      "acceptance_criteria": [
+        "Contrato funcional descreve grade de 30 dias, próximo compromisso, débitos, popup de decisão e fim do mês.",
+        "Cada conta tem fonte de valor, regra de data e ID idempotente. O valor é debitado ao alcançar o compromisso e aparece uma única vez na DRE.",
+        "Existe matriz dos 20 eventos com previsibilidade, sem alterar as regras de incidência. A interface não revela data, marcador ou contagem dos imprevistos.",
+        "O cenário de avançar rumo a uma conta no dia 20 e ser interrompido por quebra oculta no dia 16 é descrito do início ao fechamento, incluindo reload.",
+        "Campanha de três meses, DRE aguardando Continuar, relatório final e falência permanecem definidos, sem nova regra econômica implícita."
+      ],
+      "validation": [
+        "Confrontar o contrato com MonthlyEventSelector, MonthlyEventDecisionService, MonthlySimulationEngine e os 20 EventData.",
+        "Revisar os cenários de conta paga, retry/reload, dois compromissos no mesmo dia, show anunciado, quebra oculta e fechamento sem dupla cobrança."
+      ],
+      "references": [
+        "docs/monthly-simulation.md",
+        "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs",
+        "Assets/Scripts/Game/Domain/Enums/GameState.cs",
+        "Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs",
+        "Assets/Resources/Events"
+      ],
+      "notes": [
+        "Os esclarecimentos do usuário fecham duas decisões antes abertas: são 30 dias visíveis e as contas debitam efetivamente no compromisso.",
+        "O exemplo dia 16/dia 20 é cenário de teste, não impõe vencimento universal.",
+        "A visibilidade antecipada é somente de contas e eventos previsíveis; imprevistos não devem vazar por ícones, textos, tooltips, foco ou quantidades.",
+        "A incidência atual do seletor usa por padrão alvo 4, mínimo 3, máximo 5, com as validações do código; manter os valores e o comportamento existentes.",
+        "Datas de eventos influenciam duração no motor. Documentar a distribuição sem modificar as regras que determinam quais eventos incidem."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-21.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-21.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-21",
+      "feedback_ids": [
+        "F-42",
+        "F-43",
+        "F-46"
+      ],
+      "execution": {
+        "chat_title": "FB-21 — Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos",
+        "model": "gpt-6.2-astra",
+        "thinking": "xhigh",
+        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "commit_message": "docs: define calendar commitments and payment reconciliation",
+        "next_task_id": "FB-01",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-01",
+        "C-02",
+        "C-04",
+        "C-05",
+        "C-06",
+        "C-07"
+      ]
+    },
+    {
+      "id": "FB-22",
+      "title": "Implementar compromissos, débitos e persistência do calendário",
+      "area": "Calendário; domínio e persistência",
+      "kind": "funcionalidade",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-21"
+      ],
+      "objective": "Avançar até o próximo compromisso e debitar contas com pagamento persistido, preservando posição e decisões na retomada.",
+      "scope": [
+        "Modelar mês de 30 dias, dia atual, compromisso/destino, contas, eventos, metadados de previsibilidade, revelação e decisão pendente.",
+        "Criar compromissos de contas com valores reais e datas conforme FB-21; ao alcançar o dia, debitar automaticamente do caixa em transação e registrar o pagamento.",
+        "Manter um ledger idempotente por sessão/mês/conta/ocorrência, com informações para conciliar o caixa e a DRE no fechamento.",
+        "Persistir posição, pagamentos, eventos reservados, estado revelado e pendência; reload não refaz débito nem sorteio.",
+        "Processar todos os compromissos do dia na ordem especificada, impedir avanço com decisão pendente e tratar fim do mês/migração.",
+        "Expor uma projeção de UI que contenha somente contas, eventos previsíveis e imprevistos já revelados; não transmitir detalhes ocultos ao renderizador."
+      ],
+      "acceptance_criteria": [
+        "Avançar para no próximo dia com compromisso, considerando também imprevistos ainda ocultos da UI.",
+        "Contas debitam efetivamente o valor correto ao alcançar o dia e registram pagamento uma única vez.",
+        "Reload antes/depois de compromisso restaura caixa, dia, pagamento e decisão corretos; falha transacional não deixa estado parcial.",
+        "Há suporte a vários compromissos no mesmo dia e a fim do mês no dia 30.",
+        "Consultas não revelam imprevistos e fornecem os dados de reconciliação ao fechamento."
+      ],
+      "validation": [
+        "Testar pagamento e caixa com retry/reload/falha transacional, duas contas no mesmo dia e conta junto de evento.",
+        "Conferir o ledger contra os valores reais de aluguel, folha e empréstimo; validar a migração de planos e saves."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/GameSessionEntity.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/DatabaseInitializer.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs"
+      ],
+      "notes": [
+        "O débito em cada compromisso é requisito confirmado, substituindo a proposta anterior de liquidar tudo em um único ponto. A conciliação transacional deve impedir a cobrança repetida no fechamento."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-22.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-22.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-22",
+      "feedback_ids": [
+        "F-42",
+        "F-43",
+        "F-45"
+      ],
+      "execution": {
+        "chat_title": "FB-22 — Implementar compromissos, débitos e persistência do calendário",
+        "model": "gpt-6.2-astra",
+        "thinking": "xhigh",
+        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "commit_message": "feat: persist calendar commitments and debit scheduled bills",
+        "next_task_id": "FB-24",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-02",
+        "C-04"
+      ]
+    },
+    {
+      "id": "FB-23",
+      "title": "Criar o calendário com 30 dias visíveis e avanço animado",
+      "area": "Calendário; UI e arte",
+      "kind": "interface nova",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02",
+        "FB-22"
+      ],
+      "objective": "Exibir o mês inteiro e movimentar o jogador de compromisso em compromisso, com eventos anunciados e imprevistos sem pistas antecipadas.",
+      "scope": [
+        "Criar grade/tabuleiro com os 30 dias visíveis, posição atual e composição coerente com os concepts e os componentes existentes.",
+        "Mostrar contas com dia/estado de pagamento e eventos previsíveis com antecedência; não renderizar ícone, data, título, quantidade ou casa destacada de imprevistos ainda não revelados.",
+        "Incluir Avançar, leitura dos compromissos, retorno ao hub e marco de fechamento no dia 30.",
+        "Animar pelas casas até o destino autorizado pelo domínio; revelar o imprevisto somente ao alcançá-lo durante Avançar e parar para decisão.",
+        "Mostrar feedback do débito das contas e bloquear repetição de avanço durante movimento, transação ou popup.",
+        "Reutilizar painéis, cards, estados e ícones de calendário, pin, aluguel, folha, empréstimo e eventos. Criar assets adicionais apenas se a composição final demonstrar necessidade, com fontes/PNG/QA nas pastas do projeto."
+      ],
+      "acceptance_criteria": [
+        "Os 30 dias estão visíveis sem precisar navegar entre páginas ou rolar para descobrir parte do mês.",
+        "Contas e eventos previsíveis aparecem antes da chegada; imprevistos não têm qualquer sinalização antecipada.",
+        "Avançar percorre as casas e para no primeiro compromisso real; conta mostra o débito, evento abre o popup pela integração.",
+        "A tela funciona em 1280×720 e demais viewports, com dia atual, conta paga e avanço claramente legíveis.",
+        "A UI usa a projeção autorizada do domínio e não calcula sorteio, débito ou incidência por conta própria."
+      ],
+      "validation": [
+        "Capturar os 30 dias com show futuro visível e quebra futura invisível; conferir novamente após revelação.",
+        "Verificar animação, clique repetido, feedback de débito, retorno/reload e resoluções de referência."
+      ],
+      "references": [
+        "Assets/Scenes/GameScene.unity",
+        "Assets/Scripts/Game/Adapter/In/UI/Navigation/PanelId.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/Navigation/PanelRegistry.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/Navigation/MenuNavigator.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs",
+        "docs/art/tokens.json",
+        "docs/ui-update/visual-contract.json"
+      ],
+      "notes": [
+        "A arte existente inclui icon_calendar, icon_pin, icon_rent, icon_payroll e imagens por evento. A grade e as casas podem ser componentes nativos; não há justificativa para gerar novas ilustrações antes do layout real.",
+        "Se faltar um componente final, produzir na própria tarefa: PNG em Assets/Art/new/calendar, fonte em art-source/editable/calendar e registros em docs/art. Preservar arte já validada."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-23.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-23.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-23",
+      "feedback_ids": [
+        "F-42",
+        "F-43",
+        "F-44",
+        "F-45"
+      ],
+      "execution": {
+        "chat_title": "FB-23 — Criar o calendário com 30 dias visíveis e avanço animado",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "commit_message": "feat: add a thirty-day calendar with animated progression",
+        "next_task_id": "FB-25",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-01",
+        "C-02",
+        "C-05",
+        "C-06"
+      ]
+    },
+    {
+      "id": "FB-24",
+      "title": "Preservar a incidência e revelar eventos anunciados ou surpresa",
+      "area": "Calendário; eventos",
+      "kind": "funcionalidade",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-21",
+        "FB-22"
+      ],
+      "objective": "Agendar os eventos existentes e interromper o avanço, preservando integralmente sua incidência e separando visibilidade previsível de surpresa.",
+      "scope": [
+        "Manter MonthlyEventSelector e suas regras atuais: pesos, condições, compatibilidade, limites, exclusões e repetição. Não introduzir novo sorteio por clique ou por casa.",
+        "Adicionar metadados de previsibilidade aos 20 eventos conforme a matriz de FB-21, sem inferir previsibilidade pela polaridade nem usá-la como filtro de seleção.",
+        "Distribuir e persistir dias válidos 1–30 com fonte aleatória separada, sem perturbar a seleção de incidência; retomar o plano reservado sem reroll.",
+        "Mostrar previamente apenas eventos previsíveis; conservar o plano dos imprevistos em domínio/persistência, sem vazá-lo pela projeção da UI.",
+        "No avanço, considerar o primeiro compromisso entre contas, eventos anunciados e imprevistos ocultos; revelar o imprevisto ao alcançá-lo, abrir decisão e interromper movimento.",
+        "Após confirmar, retomar os compromissos seguintes, preservando datas e ocorrências. Não substituir opções ou efeitos existentes."
+      ],
+      "acceptance_criteria": [
+        "A mesma entrada e fonte de sorteio de incidência mantêm os eventos elegíveis/selecionados e os limites vigentes; a camada de previsibilidade não altera incidência.",
+        "Show previsto aparece antes; quebra de freezer não aparece antes e surpreende ao avançar para seu dia.",
+        "No cenário controlado, quebra no dia 16 interrompe a ida à conta no dia 20; depois da decisão, a conta é alcançada normalmente.",
+        "Não há evento fora dos 30 dias, duplicidade ou reroll por reload, consulta ou clique.",
+        "Teste verifica ausência de vazamento antecipado pelo modelo público da UI, além do comportamento de revelação."
+      ],
+      "validation": [
+        "Comparar o seletor existente com a integração usando entradas/random controlados; conferir condições, grupos, repetição e limites.",
+        "Testar show anunciado, quebra oculta, múltiplos compromissos no mesmo dia, nenhum evento possível e retomada após revelação."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventSelectionContext.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs",
+        "Assets/Editor/Tests/MonthlySimulationTests.cs",
+        "Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs",
+        "Assets/Resources/Events"
+      ],
+      "notes": [
+        "OpenMonth hoje distribui dias regularmente. A apresentação temporal pode mudar, mas as regras que determinam incidência são preservadas.",
+        "Previsibilidade é metadado de apresentação/agendamento; não é nova probabilidade nem regra de elegibilidade."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-24.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-24.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-24",
+      "feedback_ids": [
+        "F-36",
+        "F-44",
+        "F-46"
+      ],
+      "execution": {
+        "chat_title": "FB-24 — Preservar a incidência e revelar eventos anunciados ou surpresa",
+        "model": "gpt-6.2-astra",
+        "thinking": "xhigh",
+        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "commit_message": "feat: reveal scheduled and surprise events without changing incidence",
+        "next_task_id": "FB-23",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-02",
+        "C-03",
+        "C-05",
+        "C-06",
+        "C-07"
+      ]
+    },
+    {
+      "id": "FB-25",
+      "title": "Abrir decisões do mês e de eventos sobre o calendário",
+      "area": "Calendário; decisões",
+      "kind": "interface e interação",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-02",
+        "FB-14",
+        "FB-23",
+        "FB-24"
+      ],
+      "objective": "Exibir a decisão pertinente em uma camada acima do tabuleiro, sem perder a posição.",
+      "scope": [
+        "Apresentar a tela de decisões do mês sobre o calendário no ponto definido em FB-21 e corrigir sua borda dupla.",
+        "Usar a mesma hierarquia de camadas para decisões de eventos, distinguindo revisão mensal de escolha de ocorrência.",
+        "Bloquear avanço e input no tabuleiro enquanto uma decisão obrigatória estiver aberta.",
+        "Confirmar uma ocorrência uma única vez, registrar a escolha e devolver ao calendário no mesmo dia.",
+        "Definir fechar/cancelar conforme tipo: consulta pode fechar; decisão obrigatória não pode ser descartada para pular o evento.",
+        "Ao alcançar qualquer evento no avanço, abrir o popup com as opções existentes; manter show previsível anunciado antes e revelar quebra somente no momento da interrupção.",
+        "Uma conta alcançada é debitada pelo domínio, sem exibir um popup de decisão fictício de pagamento."
+      ],
+      "acceptance_criteria": [
+        "Modal fica acima do calendário, com uma única borda e conteúdo legível.",
+        "Confirmar registra a opção correta uma vez e libera a continuação quando não houver outras pendências.",
+        "A posição e o destino de movimento são preservados; revisitar/reload não pula decisão obrigatória.",
+        "Revisão mensal respeita os mínimos da equipe.",
+        "Evento previsível ou imprevisto alcançado abre as mesmas opções reais do catálogo; a confirmação mantém os efeitos existentes.",
+        "Não há popups antecipados nem sinais que denunciem um imprevisto futuro."
+      ],
+      "validation": [
+        "Verificar abrir/confirmar/cancelar onde permitido, X/voltar, foco, cliques no fundo, duplo clique e reload com decisão pendente."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/EventScreenController.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EventScreenView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/EventOptionCardView.cs",
+        "Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs"
+      ],
+      "notes": [],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-25.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-25.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-25",
+      "feedback_ids": [
+        "F-36",
+        "F-44",
+        "F-47"
+      ],
+      "execution": {
+        "chat_title": "FB-25 — Abrir decisões do mês e de eventos sobre o calendário",
+        "model": "gpt-6.2-sol",
+        "thinking": "high",
+        "rationale": "Integração de modais, avanço e persistência de decisões requer revisão de foco e retomada.",
+        "commit_message": "feat: present monthly and event decisions above the calendar",
+        "next_task_id": "FB-26",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-03",
+        "C-05"
+      ]
+    },
+    {
+      "id": "FB-26",
+      "title": "Mover o fechamento mensal para o fim do calendário",
+      "area": "Calendário; fechamento; DRE",
+      "kind": "integração",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-14",
+        "FB-22",
+        "FB-24",
+        "FB-25"
+      ],
+      "objective": "Fechar o mês ao terminar os compromissos do calendário de 30 dias e conciliar contas já debitadas sem nova cobrança.",
+      "scope": [
+        "Conectar o último marco do dia 30 ao fechamento existente e bloquear decisões obrigatórias pendentes.",
+        "Conciliar o ledger de contas pagas com o caixa inicial/final e as linhas da DRE. Aluguel, folha, empréstimo e demais contas pagas no calendário continuam sendo custo na DRE, mas não são debitados outra vez.",
+        "Aplicar receitas e demais efeitos no momento definido em FB-21; preservar efeitos dos eventos e as regras existentes de incidência.",
+        "Persistir o fechamento com idempotência e exibir a DRE mensal aguardando Continuar.",
+        "Iniciar o próximo mês somente depois do resumo, preservando campanha de três meses, relatório final e falência.",
+        "Proteger entradas antigas contra bypass do calendário, fechamento prematuro e repetição/retry."
+      ],
+      "acceptance_criteria": [
+        "O mês fecha pelo fluxo de calendário após os compromissos e decisões; os 30 dias são a referência de término.",
+        "Cada conta debitada no seu dia aparece uma vez na DRE e não volta a reduzir o caixa no fechamento.",
+        "DRE/caixa reconciliam abertura, débitos durante o mês, receitas e efeitos restantes, inclusive após erro/retry/reload.",
+        "DRE aguarda Continuar e segue ao próximo mês, relatório final ou falência sem reaplicação de efeitos."
+      ],
+      "validation": [
+        "Executar campanha de três meses e caminho de falência com ledger, contas e eventos em dados isolados.",
+        "Verificar a reconciliação antes/depois de cada pagamento e fechamento, incluindo crash/retry no commit."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs",
+        "Assets/Scripts/Game/Domain/Service/RoundService.cs",
+        "Assets/Scripts/Game/Domain/Service/GamesSessionService.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlySessionSettlement.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/MonthlyResultController.cs",
+        "docs/monthly-simulation.md"
+      ],
+      "notes": [
+        "O usuário confirmou débito real no dia da conta. Não manter a proposta anterior de contas apenas informativas.",
+        "Guardar o caixa de abertura e reconciliar pagamentos já feitos é obrigatório; não basta subtrair despesas do currentCash já reduzido.",
+        "Comparar previsão e fechamento com o mesmo plano/dias de eventos; as regras de incidência permanecem as existentes."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-26.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-26.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-26",
+      "feedback_ids": [
+        "F-42",
+        "F-43"
+      ],
+      "execution": {
+        "chat_title": "FB-26 — Mover o fechamento mensal para o fim do calendário",
+        "model": "gpt-6.2-astra",
+        "thinking": "xhigh",
+        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "commit_message": "feat: reconcile calendar payments during month-end settlement",
+        "next_task_id": "FB-17",
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-01",
+        "C-04"
+      ]
+    },
+    {
+      "id": "FB-27",
+      "title": "Validar o lote completo e registrar evidências",
+      "area": "Todas as telas",
+      "kind": "QA",
+      "priority": "P1",
+      "status": "planejada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-01",
+        "FB-02",
+        "FB-03",
+        "FB-04",
+        "FB-05",
+        "FB-06",
+        "FB-07",
+        "FB-08",
+        "FB-09",
+        "FB-10",
+        "FB-11",
+        "FB-12",
+        "FB-13",
+        "FB-14",
+        "FB-15",
+        "FB-16",
+        "FB-17",
+        "FB-18",
+        "FB-19",
+        "FB-20",
+        "FB-21",
+        "FB-22",
+        "FB-23",
+        "FB-24",
+        "FB-25",
+        "FB-26"
+      ],
+      "objective": "Homologar os feedbacks implementados e o novo ciclo do calendário com evidências verificáveis.",
+      "scope": [
+        "Revisar os 47 itens do feedback pela matriz de rastreabilidade; FB-28 permanece futuro.",
+        "Validar layout/input em 1280×720, 1366×768, 1600×1000, 1920×1080 e 2340×1080, concentrando inspeção detalhada nas telas alteradas.",
+        "Percorrer abertura, revisitas, popup, loja, equipe mínima, calendário, interrupções, histórico, DRE, final e falência.",
+        "Registrar screenshots reais e resultados dos testes necessários às regras alteradas; atualizar status por tarefa somente após aceite.",
+        "Verificar os sete esclarecimentos C-01 a C-07: 30 dias simultaneamente visíveis; débito no compromisso; decisões em popup; show anunciado; quebra oculta até Avançar; incidência inalterada; fechamento conciliado.",
+        "Conferir que cada tarefa teve conversa própria, modelo/raciocínio registrados e commit local em inglês antes da próxima."
+      ],
+      "acceptance_criteria": [
+        "Todos os critérios das tarefas ativas possuem evidência ou pendência explicitamente registrada.",
+        "Não há contagem de passos, borda dupla, corte por remoção de scroll, imagem trocada ou ação desalinhada nas telas afetadas.",
+        "Fluxo mensal, contas, histórico e retomada estão consistentes; não há duplicação de compra, evento ou liquidação.",
+        "O relatório distingue planejamento, implementação, validação e limites de plataforma.",
+        "O QA comprova tanto a ausência de pistas sobre imprevistos quanto a presença antecipada dos eventos previsíveis.",
+        "Contas debitadas durante o percurso não são debitadas novamente no fechamento; o comportamento do seletor de incidência permanece igual."
+      ],
+      "validation": [
+        "Rodar os testes existentes afetados e os novos testes significativos de regras/fluxo; realizar inspeção visual dos cenários alterados e smoke da campanha."
+      ],
+      "references": [
+        "docs/ui-update/feedback-2026-11-19/tasks.json",
+        "docs/ui-update/qa/UI-20.json",
+        "docs/ui-update/qa/FONT-10.json",
+        "Assets/Editor/Tests",
+        "Assets/Scenes/GameScene.unity",
+        "docs/ui-update/feedback-2026-11-19/EXECUCAO.txt"
+      ],
+      "notes": [
+        "Não repetir testes sem relação com mudanças ou afirmar execução em plataforma indisponível. Registrar execução e limites reais."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-27.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-27.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-27",
+      "feedback_ids": [],
+      "execution": {
+        "chat_title": "FB-27 — Validar o lote completo e registrar evidências",
+        "model": "gpt-6.2-astra",
+        "thinking": "high",
+        "rationale": "QA integrado da campanha, pagamentos, incidência, retomada e evidências visuais.",
+        "commit_message": "test: validate calendar flow and UI feedback acceptance",
+        "next_task_id": null,
+        "auto_start": true
+      },
+      "calendar_requirement_ids": [
+        "C-07"
+      ]
+    },
+    {
+      "id": "FB-28",
+      "title": "Futuro: permitir vender equipamentos usados",
+      "area": "Equipamentos; futuro",
+      "kind": "funcionalidade futura",
+      "priority": "P3",
+      "status": "adiada",
+      "implementation_performed": false,
+      "depends_on": [
+        "FB-11"
+      ],
+      "objective": "Registrar a intenção de venda de usados para uma etapa posterior, sem implementá-la neste lote.",
+      "scope": [
+        "Quando retomada, especificar valor de revenda, elegibilidade, confirmação, efeito sobre capacidade/requisitos e persistência.",
+        "Distinguir remover do carrinho de vender equipamento já adquirido.",
+        "Reavaliar dependências e balanceamento antes da execução futura."
+      ],
+      "acceptance_criteria": [
+        "Neste lote, remover atua somente sobre item ainda não comprado; não há botão de vender usado.",
+        "A tarefa permanece adiada e separada das 27 tarefas de execução."
+      ],
+      "validation": [
+        "Planejamento futuro: exigir cenários de revenda, equipamento obrigatório e prevenção de duplicidade quando houver autorização para implementar."
+      ],
+      "references": [
+        "Assets/Scripts/Game/Adapter/In/Controllers/EquipmentScreenController.cs",
+        "Assets/Scripts/Game/Domain/Helpers/EquipmentSelectionHelper.cs"
+      ],
+      "notes": [
+        "Adiada por pedido explícito: “depois iremos colocar a opção de vender o usado”. Não integra o aceite da entrega atual."
+      ],
+      "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-28.txt",
+      "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-28.json",
+      "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-28",
+      "feedback_ids": [
+        "F-24"
+      ],
+      "execution": {
+        "chat_title": "FB-28 — Futuro: permitir vender equipamentos usados",
+        "model": "gpt-6.2-astra",
+        "thinking": "high",
+        "rationale": "Configuração sugerida para a etapa futura; tarefa permanece adiada.",
+        "commit_message": "feat: support selling used equipment",
+        "next_task_id": null,
+        "auto_start": false
+      },
+      "calendar_requirement_ids": []
+    }
+  ],
+  "baseline": {
+    "git_head": "38ffcf17",
+    "date": "2026-11-19",
+    "scope": "Código, catálogos, documentação e backlog existentes; inspeção estática, sem validar defeitos visuais em Play Mode."
+  },
+  "updated_at": "2026-11-19",
+  "execution_authorized": true,
+  "execution_policy": {
+    "mode": "one_task_per_new_chat_sequential",
+    "project_id": "e2b363c4-28a5-45e4-a8ac-e16d01847f6d",
+    "workspace": "D:/Cogna/jogos_empresa",
+    "environment": "local",
+    "branch": "dev/new-screens",
+    "planning_commit_message": "docs: plan UI feedback fixes and calendar-driven monthly flow",
+    "task_commit_messages_language": "English",
+    "auto_continue_after_commit": true,
+    "max_concurrent_implementation_chats": 1,
+    "deferred_tasks_excluded": [
+      "FB-28"
+    ],
+    "instructions": "Executar a tarefa atual em uma conversa nova com seu título e configuração. Validar, atualizar o backlog e fazer commit local antes de criar a conversa sucessora. Não iniciar dependente sem aceite. Não fazer push."
+  },
+  "calendar_requirements": [
+    {
+      "id": "C-01",
+      "rule": "O fechamento do mês acontece no formato de calendário com todos os 30 dias visíveis.",
+      "tasks": [
+        "FB-21",
+        "FB-23",
+        "FB-26"
+      ]
+    },
+    {
+      "id": "C-02",
+      "rule": "Avançar percorre as casas e para no próximo dia com compromisso; compromissos são contas e eventos.",
+      "tasks": [
+        "FB-21",
+        "FB-22",
+        "FB-23",
+        "FB-24"
+      ]
+    },
+    {
+      "id": "C-03",
+      "rule": "Ao alcançar um evento, abrir um popup com as opções reais de decisão e aguardar a escolha.",
+      "tasks": [
+        "FB-24",
+        "FB-25"
+      ]
+    },
+    {
+      "id": "C-04",
+      "rule": "Ao alcançar uma conta, debitar efetivamente o valor do caixa, uma única vez, e registrar o pagamento.",
+      "tasks": [
+        "FB-21",
+        "FB-22",
+        "FB-26"
+      ]
+    },
+    {
+      "id": "C-05",
+      "rule": "Eventos imprevisíveis, como quebra de freezer, ficam ocultos até o jogador avançar e ser surpreendido; a interface não revela data, título, ícone, quantidade ou marcador antecipado.",
+      "tasks": [
+        "FB-21",
+        "FB-23",
+        "FB-24",
+        "FB-25"
+      ]
+    },
+    {
+      "id": "C-06",
+      "rule": "Eventos previsíveis, como show na cidade, aparecem no calendário com antecedência.",
+      "tasks": [
+        "FB-21",
+        "FB-23",
+        "FB-24"
+      ]
+    },
+    {
+      "id": "C-07",
+      "rule": "As regras de incidência de eventos existentes permanecem iguais: seletor, pesos, condições, compatibilidade, limites, exclusões e repetição. Visibilidade e agendamento não criam outro sorteio de incidência.",
+      "tasks": [
+        "FB-21",
+        "FB-24",
+        "FB-27"
+      ]
+    }
+  ],
+  "calendar_clarification_original": "o fechamento do mês deve ser no formato de calendário, os 30 dias são visíveis mas o jogador deve ir avançando de compromisso em compromisso. Os compromissos são: contas do mes, eventos (quebra de freezer, evento na cidade etc), ao clicar em avançar no calendário ele progride pro próximo dia do calendário que possui algum compromisso, se for um evento deve aparecer um pop up com as opções de decisão, se for conta deve debitar o valor. Eventos que não são previsíveis como \"quebra de freezer\" nao devem ser exibidos no calendário ate que o jogador clique em avançar e seja surpreendido, eventos como \"show na cidade\" devem ser exibidos com antecedência. As regras de incidência de eventos devem permanecer as mesmas q ja existem."
+}

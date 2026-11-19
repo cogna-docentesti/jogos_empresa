@@ -1,0 +1,56 @@
+FB-14 — Impedir o avanço com equipe abaixo do mínimo
+Status: planejada | Prioridade: P1 | Tipo: regra e validação
+Área: Equipe; fluxo
+Dependências: FB-13
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-14 — Impedir o avanço com equipe abaixo do mínimo
+Escolha do modelo: Validação de mínimo precisa cobrir UI, serviços e atalhos de navegação.
+Commit local em inglês: fix: require minimum staffing before advancing
+Próxima tarefa: FB-15
+Feedbacks: F-29
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Bloquear a confirmação/continuação enquanto faltarem as quantidades mínimas de profissionais do restaurante.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs
+Assets/Resources/Restaurants
+Assets/Scripts/Game/Domain/Service/GamesSessionService.cs
+Assets/Scripts/Game/Infrastructure/InitialDecisionFlow.cs
+Assets/Scripts/Game/Domain/Helpers/TeamSelectionHelper.cs
+
+ESCOPO
+1. Calcular pendências por roleId e quantidade a partir de RestaurantData.requiredRoles, agregando requisitos do mesmo ID.
+2. Desabilitar o avanço e informar exatamente a função e quantidade faltante.
+3. Validar também no serviço/fluxo, protegendo chamadas diretas e atalhos que contornem o botão.
+4. Aplicar a validação ao confirmar decisões do mês e ao iniciar o calendário; permitir navegar para completar a contratação.
+
+CRITÉRIOS DE ACEITE
+1. Equipe vazia ou abaixo de qualquer requisito não conclui a etapa nem inicia o mês.
+2. Atender exatamente aos mínimos libera o avanço; reduzir uma quantidade volta a bloqueá-lo.
+3. Voltar, revisar e contratar continuam disponíveis; a mensagem apresenta as faltas reais.
+
+VALIDAÇÃO PREVISTA
+1. Testar mínimo−1, mínimo e mínimo+1 para os três restaurantes; verificar reload, revisitas e tentativa de avanço por chamadas de fluxo.
+
+OBSERVAÇÕES E LIMITES
+1. Mudança de regra explicitamente solicitada: o código atual permite equipe incompleta e mantém Confirm habilitado. O novo feedback substitui a orientação histórica de preservar essa permissão.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-14.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-14/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-14 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

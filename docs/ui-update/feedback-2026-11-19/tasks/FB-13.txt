@@ -1,0 +1,60 @@
+FB-13 — Filtrar profissionais por restaurante e revisar os efeitos da contratação
+Status: planejada | Prioridade: P1 | Tipo: análise e correção
+Área: Equipe; balanceamento
+Dependências: nenhuma
+Modelo: gpt-6.2-astra | Raciocínio: high
+Conversa: FB-13 — Filtrar profissionais por restaurante e revisar os efeitos da contratação
+Escolha do modelo: Auditoria de regras e fontes de balanceamento com múltiplos cálculos e catálogos.
+Commit local em inglês: fix: show relevant staff and accurate hiring effects
+Próxima tarefa: FB-14
+Feedbacks: F-27, F-28
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Exibir profissionais pertinentes e explicar os efeitos reais de contratá-los.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs
+Assets/Scripts/Game/Adapter/In/UI/TeamRoleCardView.cs
+Assets/Resources/Roles
+Assets/Resources/Restaurants
+Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs
+Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs
+docs/monthly-simulation.md
+
+ESCOPO
+1. Construir uma matriz de funções por restaurante: obrigatória, opcional compartilhada ou não aplicável; conferir também as imagens usadas.
+2. Confrontar salários, capacidade, contribuição de qualidade e alinhamento dos cards com RoleData, RestaurantData e MonthlySimulationEngine.
+3. Filtrar opções incompatíveis sem confundir função não obrigatória com função proibida; revisar a suposição fixa de cinco cards.
+4. Documentar o tratamento de equipes salvas com funções que passem a ser ocultadas, sem demitir ou alterar caixa silenciosamente.
+5. Atualizar a informação de influência/benefício conforme a fonte de balanceamento; não anunciar um efeito que o motor não aplica.
+
+CRITÉRIOS DE ACEITE
+1. Cada restaurante mostra suas funções pertinentes e as compartilhadas justificadas pela matriz.
+2. Textos e indicadores coincidem com os cálculos e usam unidades claras, como clientes/mês por pessoa.
+3. Imagens correspondem às funções; qualquer decisão pendente de balanceamento fica registrada, sem benefício inventado.
+
+VALIDAÇÃO PREVISTA
+1. Comparar os três restaurantes, contratar/remover funções e confrontar folha, capacidade, qualidade e alinhamento com o cálculo atual.
+
+OBSERVAÇÕES E LIMITES
+1. A tela atualmente carrega todas as cinco funções; o feedback requer revisar pertinência, não apenas reordená-las.
+2. Confirmar efeitos com a análise de balanceamento disponível; não foi localizada uma fonte externa separada nesta inspeção.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-13.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-13/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-13 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

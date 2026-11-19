@@ -1,0 +1,54 @@
+FB-18 — Separar o histórico das ocorrências ativas do calendário
+Status: planejada | Prioridade: P1 | Tipo: fluxo e interface
+Área: Eventos e histórico
+Dependências: FB-24, FB-25, FB-26
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-18 — Separar o histórico das ocorrências ativas do calendário
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: refactor: separate event history from active calendar decisions
+Próxima tarefa: FB-27
+Feedbacks: F-35, F-36
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Usar a tela de eventos e histórico somente para consultar ocorrências passadas e decisões já tomadas.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/EventScreenController.cs
+Assets/Scripts/Game/Adapter/In/UI/EventScreenView.cs
+Assets/Scripts/Game/Adapter/Out/Persistence/SessionEventHistoryRepository.cs
+Assets/Scripts/Game/Infrastructure/Database/Tables/SessionEventHistoryEntity.cs
+Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs
+
+ESCOPO
+1. Exibir mês/dia, evento, opção escolhida e os efeitos registrados quando disponíveis.
+2. Retirar da consulta ações que iniciem o sorteio mensal, decidam novamente ou fechem o mês.
+3. Fazer as novas ocorrências abrirem esporadicamente durante o avanço do calendário.
+4. Apresentar estado vazio e ordenar/identificar ocorrências por sessão e data, sem expor eventos futuros como já ocorridos.
+
+CRITÉRIOS DE ACEITE
+1. Histórico contém apenas eventos ocorridos com a decisão registrada.
+2. Consultar e fechar o histórico não muda caixa, reputação, dia, sorteio ou escolhas.
+3. Uma ocorrência resolvida no calendário aparece uma única vez no histórico, inclusive após reload.
+4. Eventos imprevisíveis não ocorridos não aparecem no histórico nem são expostos por consultas ao calendário; eventos anunciados futuros continuam separados do histórico de decisões.
+
+VALIDAÇÃO PREVISTA
+1. Abrir histórico vazio, após uma decisão e após três meses; repetir consultas e conferir ausência de escritas econômicas.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-18.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-18/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-18 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

@@ -1,0 +1,55 @@
+FB-04 — Auditar a compatibilidade exibida para cada restaurante
+Status: planejada | Prioridade: P1 | Tipo: análise e correção
+Área: Restaurante; regras
+Dependências: nenhuma
+Modelo: gpt-6.2-astra | Raciocínio: high
+Conversa: FB-04 — Auditar a compatibilidade exibida para cada restaurante
+Escolha do modelo: Auditoria de regras e fontes de balanceamento com múltiplos cálculos e catálogos.
+Commit local em inglês: fix: align restaurant compatibility with game rules
+Próxima tarefa: FB-05
+Feedbacks: F-12
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Confirmar que a compatibilidade apresentada corresponde aos catálogos e ao cálculo aplicado no jogo.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Data/ScriptableObjects/Restaurants/RestaurantData.cs
+Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs
+Assets/Scripts/Game/Adapter/In/Controllers/RestaurantScreenController.cs
+Assets/Resources/Restaurants
+docs/monthly-simulation.md
+
+ESCOPO
+1. Montar uma matriz dos três restaurantes × públicos × localizações, identificando permitido, bloqueado e pontuação de alinhamento.
+2. Confrontar RestaurantData.allowedSegments/blockedSegments, AllowsSegment, regras de seleção e AlignmentEngine; distinguir restrição de escolha de pontuação.
+3. Registrar divergências, fontes e correções necessárias; usar docs/monthly-simulation.md e a análise de balanceamento disponível no projeto.
+
+CRITÉRIOS DE ACEITE
+1. Cada informação de compatibilidade tem uma fonte identificada e coincide com a validação de seleção correspondente.
+2. Pontuação menor não é apresentada automaticamente como bloqueio se a regra não bloquear a combinação.
+3. A matriz cobre os três restaurantes e deixa explícitas eventuais decisões de balanceamento ainda pendentes.
+
+VALIDAÇÃO PREVISTA
+1. Verificar todas as combinações da matriz; acrescentar testes de regra somente onde houver correção de lógica.
+
+OBSERVAÇÕES E LIMITES
+1. Não foi localizada uma planilha/documento separado de balanceamento na busca por nomes e formatos do projeto. Não presumir que as regras atuais já tenham sido homologadas.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-04.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-04/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-04 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

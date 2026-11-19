@@ -1,0 +1,54 @@
+FB-08 — Revisar nomes, categorias e imagens dos produtos do cardápio
+Status: planejada | Prioridade: P1 | Tipo: auditoria e interface
+Área: Cardápio
+Dependências: nenhuma
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-08 — Revisar nomes, categorias e imagens dos produtos do cardápio
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: fix: correct menu product artwork and remove redundant labels
+Próxima tarefa: FB-07
+Feedbacks: F-14, F-15
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Remover o texto redundante e verificar os possíveis ícones trocados entre produtos simples, especiais e premium.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Resources/Products
+Assets/Resources/Restaurants
+docs/art/catalogos.json
+docs/art/manifest.json
+Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs
+Assets/Editor/UI/MenuPricingUiMigration.cs
+
+ESCOPO
+1. Retirar “Incluído no cardápio” dos cards e do gerador que recria esse texto.
+2. Inventariar os nove ProductData por ID, nome, restaurante, sprite e referência no manifesto.
+3. Conferir visualmente os produtos simples, completos/especiais, clássicos/executivos e premium; corrigir vínculos incorretos por ID.
+4. Não inferir uma nova classificação econômica apenas pelo nome, pela ordem do array ou pela aparência do prato.
+
+CRITÉRIOS DE ACEITE
+1. O texto “Incluído no cardápio” deixa de aparecer.
+2. Os nove produtos possuem uma correspondência documentada entre ID, nome e imagem, sem troca entre restaurantes.
+3. Categorias e nomes exibidos correspondem aos dados aprovados; preços e custos não mudam por causa da revisão visual.
+
+VALIDAÇÃO PREVISTA
+1. Montar uma comparação dos nove produtos com seus nomes e validar as telas de restaurante e cardápio.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-08.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-08/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-08 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

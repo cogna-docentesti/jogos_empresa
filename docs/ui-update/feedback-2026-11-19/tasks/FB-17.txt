@@ -1,0 +1,53 @@
+FB-17 — Substituir “Fechar mês” por um botão de calendário
+Status: planejada | Prioridade: P1 | Tipo: interface e integração
+Área: Menu / hub; arte e navegação
+Dependências: FB-15, FB-23, FB-26
+Modelo: gpt-6.2-sol | Raciocínio: medium
+Conversa: FB-17 — Substituir “Fechar mês” por um botão de calendário
+Escolha do modelo: Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.
+Commit local em inglês: feat: open the monthly calendar from the hub
+Próxima tarefa: FB-18
+Feedbacks: F-34
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Criar uma entrada visual de calendário no hub e direcionar o fechamento para essa tela.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Art/new/shared/icons/icon_calendar.png
+art-source/editable/shared/icons/icon_calendar.svg
+Assets/Scripts/Game/Adapter/In/UI/HubMapView.cs
+Assets/Editor/UI/HubUiMigration.cs
+Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs
+
+ESCOPO
+1. Criar botão de calendário com ícone legível e acabamento/estados coerentes com o estilo aprovado.
+2. Reutilizar icon_calendar, superfícies e estados existentes; produzir asset novo apenas se necessário e salvá-lo nas pastas de arte do projeto.
+3. Substituir a ação Fechar mês do hub por Calendário e abrir/retomar a grade de 30 dias visíveis do mês ativo.
+4. Remover acessos visíveis antigos que liquidem o mês diretamente pelo hub; observar o débito de contas já realizado no calendário.
+
+CRITÉRIOS DE ACEITE
+1. O botão tem aparência clara de calendário e estados normal/hover/pressionado/desabilitado.
+2. Clicar abre o calendário sem liquidar o mês nem sortear novamente eventos já reservados.
+3. A revisita retoma o dia e a pendência salvos.
+
+VALIDAÇÃO PREVISTA
+1. Verificar acesso por mouse/toque, navegação por teclado, revisita e retomada da sessão.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-17.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-17/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-17 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

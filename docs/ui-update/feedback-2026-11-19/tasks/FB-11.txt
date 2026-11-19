@@ -1,0 +1,57 @@
+FB-11 — Bloquear equipamentos adquiridos e simplificar o carrinho para uma unidade
+Status: planejada | Prioridade: P1 | Tipo: correção e interação
+Área: Equipamentos e carrinho
+Dependências: FB-02
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-11 — Bloquear equipamentos adquiridos e simplificar o carrinho para uma unidade
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: fix: enforce single equipment purchases and simplify cart actions
+Próxima tarefa: FB-12
+Feedbacks: F-22, F-23
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Representar a compra única por equipamento com ações de adicionar/remover, sem seletor de quantidade.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/EquipmentScreenController.cs
+Assets/Scripts/Game/Adapter/In/UI/EquipmentCardView.cs
+Assets/Scripts/Game/Adapter/In/UI/EquipmentCartLineView.cs
+Assets/Scripts/Game/Domain/Helpers/EquipmentSelectionHelper.cs
+Assets/Scripts/Game/Adapter/In/UI/EquipmentCatalogIndex.cs
+
+ESCOPO
+1. Reproduzir a seleção de equipamento básico adquirido e conferir o estado persistido de posse.
+2. Desabilitar seleção e adição de itens já adquiridos; manter “Adquirido” visível, inclusive após reload.
+3. Substituir controles numéricos por “Adicionar ao carrinho” e “Remover do carrinho”; cada ID aparece no máximo uma vez.
+4. Preservar pré-requisitos dos básicos, filtros por restaurante, total e confirmação de compra.
+
+CRITÉRIOS DE ACEITE
+1. Básicos já comprados não podem ser selecionados para nova compra.
+2. Todos os itens do carrinho têm uma unidade, sem duplicatas nem controles que sugiram quantidade maior.
+3. Adicionar/remover altera o total corretamente e confirmar uma compra não permite cobrá-la de novo.
+
+VALIDAÇÃO PREVISTA
+1. Comprar básicos, reabrir/recarregar, tentar nova seleção, adicionar/remover específicos e conferir totais.
+
+OBSERVAÇÕES E LIMITES
+1. O código já contém bloqueios por posse e usa conjuntos de IDs; investigar a divergência visual/binding antes de criar outra regra.
+2. “Básico comprado” não significa tornar todos os básicos gratuitos ou já possuídos. Venda de usados fica em FB-28.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-11.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-11/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-11 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

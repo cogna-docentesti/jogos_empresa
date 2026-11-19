@@ -1,0 +1,51 @@
+FB-28 — Futuro: permitir vender equipamentos usados
+Status: adiada | Prioridade: P3 | Tipo: funcionalidade futura
+Área: Equipamentos; futuro
+Dependências: FB-11
+Modelo: gpt-6.2-astra | Raciocínio: high
+Conversa: FB-28 — Futuro: permitir vender equipamentos usados
+Escolha do modelo: Configuração sugerida para a etapa futura; tarefa permanece adiada.
+Commit local em inglês: feat: support selling used equipment
+Próxima tarefa: nenhuma
+Feedbacks: F-24
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Registrar a intenção de venda de usados para uma etapa posterior, sem implementá-la neste lote.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/Controllers/EquipmentScreenController.cs
+Assets/Scripts/Game/Domain/Helpers/EquipmentSelectionHelper.cs
+
+ESCOPO
+1. Quando retomada, especificar valor de revenda, elegibilidade, confirmação, efeito sobre capacidade/requisitos e persistência.
+2. Distinguir remover do carrinho de vender equipamento já adquirido.
+3. Reavaliar dependências e balanceamento antes da execução futura.
+
+CRITÉRIOS DE ACEITE
+1. Neste lote, remover atua somente sobre item ainda não comprado; não há botão de vender usado.
+2. A tarefa permanece adiada e separada das 27 tarefas de execução.
+
+VALIDAÇÃO PREVISTA
+1. Planejamento futuro: exigir cenários de revenda, equipamento obrigatório e prevenção de duplicidade quando houver autorização para implementar.
+
+OBSERVAÇÕES E LIMITES
+1. Adiada por pedido explícito: “depois iremos colocar a opção de vender o usado”. Não integra o aceite da entrega atual.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-28.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-28/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Tarefa adiada. Não implementar nem criar conversa de venda de usados neste lote.

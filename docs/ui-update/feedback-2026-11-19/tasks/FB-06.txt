@@ -1,0 +1,50 @@
+FB-06 — Ajustar layout e retirar a rolagem da tela de restaurante
+Status: planejada | Prioridade: P2 | Tipo: interface
+Área: Restaurante
+Dependências: FB-01, FB-02, FB-05
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-06 — Ajustar layout e retirar a rolagem da tela de restaurante
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: fix: improve restaurant layout without scrolling
+Próxima tarefa: FB-08
+Feedbacks: F-08, F-09, F-10, F-11
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Fazer as escolhas e ações do restaurante caberem com paddings consistentes e sem scroll.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Editor/UI/RestaurantUiMigration.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+Assets/Scripts/Game/Adapter/In/UI/RestaurantScreenView.cs
+
+ESCOPO
+1. Remover a rolagem da tela principal e organizar as três opções e informações no espaço disponível.
+2. Aplicar padding nos cards, centralizar o botão principal e conferir a borda única de cada seleção.
+3. Conferir o popup em layout compacto, sem depender do antigo scroll de compatibilidade; usar troca de restaurante para organizar o conteúdo.
+
+CRITÉRIOS DE ACEITE
+1. Escolhas, informações essenciais e ação principal cabem integralmente em 1280×720.
+2. Cards têm margens internas consistentes, não há duas molduras de seleção e o botão fica centralizado.
+3. Conteúdo não é simplesmente recortado ao remover ScrollRect/scrollbar.
+
+VALIDAÇÃO PREVISTA
+1. Conferir os três restaurantes, descrições longas e popup nas resoluções de referência.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-06.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-06/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-06 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.

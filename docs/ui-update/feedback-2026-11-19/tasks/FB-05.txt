@@ -1,0 +1,57 @@
+FB-05 — Transformar a compatibilidade em popup com três restaurantes
+Status: planejada | Prioridade: P1 | Tipo: interface e interação
+Área: Restaurante
+Dependências: FB-02, FB-04
+Modelo: gpt-6.2-sol | Raciocínio: high
+Conversa: FB-05 — Transformar a compatibilidade em popup com três restaurantes
+Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Commit local em inglês: feat: add restaurant compatibility modal with restaurant tabs
+Próxima tarefa: FB-06
+Feedbacks: F-06, F-07
+Esclarecimentos do calendário: não se aplica
+
+OBJETIVO
+Apresentar a compatibilidade em um modal que permita consultar os três restaurantes sem sair dele.
+
+LEITURAS COMUNS
+docs/ui-update/feedback-2026-11-19/COMECE-AQUI.txt
+docs/ui-update/feedback-2026-11-19/EXECUCAO.txt
+docs/ui-update/feedback-2026-11-19/ANALISE.txt
+docs/ui-update/feedback-2026-11-19/tasks.json
+docs/ui-update/visual-contract.json
+docs/art/manifest.json
+
+REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/RestaurantScreenView.cs
+Assets/Scripts/Game/Adapter/In/UI/ConceptDetailsToggle.cs
+Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs
+Assets/Editor/UI/RestaurantUiMigration.cs
+Assets/Editor/UI/ConceptUiRevision.cs
+
+ESCOPO
+1. Substituir a expansão lateral atual por popup sobre a tela de restaurante, com camada de fundo alpha 0,80 e botão X.
+2. Incluir três botões identificados por nome e, se couber, miniatura da fachada, mantendo visível o restaurante consultado.
+3. Atualizar o conteúdo pela matriz de FB-04; consultar outro restaurante no popup não confirma uma troca na escolha principal.
+4. Bloquear cliques na tela ao fundo, restaurar foco e manter o rascunho ao fechar.
+
+CRITÉRIOS DE ACEITE
+1. “Ver compatibilidade” abre o modal; X fecha e devolve ao mesmo contexto.
+2. Os três botões permitem alternar a consulta e atualizam todas as informações sem conteúdo residual.
+3. Fundo do modal usa alpha 0,80; texto e controles do conteúdo permanecem opacos e legíveis.
+4. A seleção principal só muda pela ação de seleção/confirmar prevista na tela.
+
+VALIDAÇÃO PREVISTA
+1. Abrir, alternar os três tipos, fechar e reabrir; verificar rascunho, foco, input no fundo e conteúdo em 1280×720.
+
+OBSERVAÇÕES E LIMITES
+1. Interpretação de planejamento para “alpha com 80%”: alpha da camada de fundo/scrim, não opacidade de texto e botões. Registrar no layout antes de implementar.
+
+ENTREGÁVEIS
+Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-05.json.
+Evidências reais em output/ui-update/feedback-2026-11-19/FB-05/.
+Atualizar tasks.json e regenerar documentos com:
+python tools/ui/render_feedback_plan.py
+Concluir a validação e fazer o commit local antes de iniciar a próxima conversa.
+
+EXECUÇÃO AUTORIZADA
+Execute somente FB-05 no projeto D:/Cogna/jogos_empresa. Leia esta especificação e docs/ui-update/feedback-2026-11-19/EXECUCAO.txt. A implementação e o commit local estão autorizados. Verifique as dependências, conclua e valide a tarefa, atualize o backlog e faça commit em inglês. Depois crie a conversa sucessora conforme o procedimento de EXECUCAO.txt; não implemente a tarefa seguinte nesta mesma conversa.
