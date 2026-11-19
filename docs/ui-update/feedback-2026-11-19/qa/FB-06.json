@@ -1,0 +1,59 @@
+{
+  "task_id": "FB-06",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "831de9f7",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": ["1280×720", "1366×768", "1920×1080"],
+  "method": "GameScene em Play Mode, com banco SQLite e chave de identificação PlayerPrefs isolados. O ensaio usou raycasts e eventos do uGUI para clicar, navegar, confirmar e tentar rolar. As imagens foram capturadas da Game View. Cinco testes de Edit Mode de UI06RestaurantTests passaram.",
+  "before": "Cada card tinha um ScrollRect ativo. A altura do conteúdo excedia a do viewport nos três cards. A roda do mouse movia o conteúdo e a confirmação ficava à direita.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Nas três resoluções, todos os cards, classes, botões e textos de custo e ticket ficaram visíveis e dentro da tela. Lanches, Japonês e Francês foram selecionados pelo caminho normal."
+    },
+    {
+      "criterion": 2,
+      "result": "Os cards têm 24 px de margem interna no quadro de referência de 1920×1080. O preenchimento e o visto indicaram uma única escolha, e a camada de borda adicional ficou desativada. O botão Confirmar restaurante ficou no centro do rodapé."
+    },
+    {
+      "criterion": 3,
+      "result": "O layout reserva a altura medida dos textos e permite que a fachada ceda espaço. Um título de duas linhas e uma descrição de quatro linhas couberam junto com custo e ticket nos três cards em 1280×720. A mesma cópia de teste passou nas outras duas resoluções. Os detalhes estão sem máscara, ScrollRect ou barra de rolagem, e a roda do mouse não deslocou o conteúdo."
+    }
+  ],
+  "additional_checks": [
+    "A rotina de layout foi aplicada duas vezes à cena. O diff final conserva os controles existentes e se limita à composição de restaurante. Os objetos serializados do popup da FB-05 foram preservados.",
+    "O popup alternou os três restaurantes nas três resoluções, sem rolagem. As 45 combinações conferidas em 1280×720 coincidiram com o AlignmentEngine e com a disponibilidade do catálogo.",
+    "O modal bloqueou a tela ao fundo e devolveu o foco ao fechar. Alternar a consulta preservou o rascunho e a escolha. Confirmar avançou ao cardápio, e voltar restaurou a tela com o modal fechado. O percurso até esse retorno gravou zero sessões no SQLite.",
+    "A consulta pelo hub usou a área e a classe da sessão e preservou os dados confirmados."
+  ],
+  "limitations": [
+    "QA restrito à Game View do Unity Editor. Builds de distribuição e testes em dispositivo ficaram fora do ensaio.",
+    "O texto longo foi aplicado temporariamente aos cards em Play Mode. A descrição de produção vem do catálogo.",
+    "O Editor instalado foi 6000.3.28f1. A versão 6000.3.21f1 e os arquivos de dependências versionados foram restaurados depois do ensaio."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-06",
+    "before": "before.json",
+    "after": "after.json",
+    "matrix_rows": 45,
+    "screenshots": [
+      "before-1280x720.png",
+      "after-rest_lanches-1280x720.png",
+      "after-rest_japones-1280x720.png",
+      "after-rest_frances-1280x720.png",
+      "after-rest_lanches-1366x768.png",
+      "after-rest_lanches-1920x1080.png",
+      "after-long-copy-1280x720.png",
+      "after-closed-1280x720.png",
+      "after-lanches-1280x720.png",
+      "after-japones-1280x720.png",
+      "after-frances-1280x720.png",
+      "after-modal-1920x1080.png",
+      "after-review-1280x720.png"
+    ]
+  }
+}

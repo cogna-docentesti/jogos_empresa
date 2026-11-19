@@ -52,11 +52,13 @@ public static class UI06RestaurantValidation
         foreach(var t in View.GetComponentsInChildren<TMP_Text>())
         { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && t.font == Game.Adapter.In.UI.Theme.GameTypography.Resolve(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>().Role).Font && !t.enableAutoSizing,"Native type "+t.name); if(t.isTextOverflowing)overflowing.Add(t.name+" rect="+t.rectTransform.rect.size+" preferred="+t.preferredWidth+","+t.preferredHeight); }
         Expect(overflowing.Count==0,"Overflow "+string.Join("; ",overflowing));
-        foreach(var s in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>())
+        Expect(View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>().Length == 0, "D2 has an active ScrollRect");
+        foreach (var field in CardFields)
         {
-            var bounds=(RectTransform)s.transform; var corners=new Vector3[4]; s.verticalScrollbar.handleRect.GetWorldCorners(corners);
-            var allowed=bounds.rect; allowed.xMin-=.1f; allowed.yMin-=.1f; allowed.xMax+=.1f; allowed.yMax+=.1f;
-            foreach(var c in corners) Expect(allowed.Contains(bounds.InverseTransformPoint(c)),"Scrollbar escaped "+s.name);
+            var details = Button(field).transform.Find("CardDetails");
+            var copy = (RectTransform)details.Find("Copy");
+            var metrics = (RectTransform)details.Find("Metrics");
+            Expect(copy.rect.height <= copy.anchoredPosition.y - metrics.anchoredPosition.y - 4, "Copy overlaps cost in " + field);
         }
     }
     private static void Selection(RestaurantType type,Segment segment)
@@ -74,7 +76,7 @@ public static class UI06RestaurantValidation
             Expect(img.sprite.name==(!data.AllowsSegment(s)?"radio_disabled":s==segment?"radio_on":"radio_off"),"Radio state");
         }
         foreach(var f in CardFields)
-        { var facade=Button(f).transform.Find("Facade").GetComponent<UnityEngine.UI.Image>(); Expect(facade.color==Color.white && facade.preserveAspect && facade.sprite!=null,"Tint/aspect "+f); }
+        { var facade=Button(f).transform.Find("CardDetails/Artwork/Facade").GetComponent<UnityEngine.UI.Image>(); Expect(facade.color==Color.white && facade.preserveAspect && facade.sprite!=null,"Tint/aspect "+f); }
         Expect(Button("confirmButton").interactable,"Confirmation disabled"); Fits(); NoPersistence();
     }
     private static void MenuMatches(RestaurantType type,bool edited=false)
@@ -103,10 +105,10 @@ public static class UI06RestaurantValidation
             ExecuteEvents.Execute(marker.gameObject,p,ExecuteEvents.pointerClickHandler);
             Field<UnityEngine.UI.Button>(location,"confirmButton").onClick.Invoke();
         });
-        Add("Default D2 selection, full scene services and step number",()=>{
+        Add("Default D2 selection, full scene services and screen title",()=>{
             Selection(RestaurantType.PODRAO,Segment.LOW);
             Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length==1,"EventSystem count");
-            Expect(View.transform.Find("DecisionHeader/Step").GetComponent<TMP_Text>().text.Contains("3 DE 7"),"Wrong step");
+            Expect(View.transform.Find("DecisionHeader/ConceptSubtitle").GetComponent<TMP_Text>().text == "RESTAURANTE","Wrong screen title");
         });
         foreach(var size in UiValidationContext.Resolutions)
         {
@@ -210,17 +212,14 @@ public static class UI06RestaurantValidation
             var size=sizeValue; string suffix=size.x+"x"+size.y;
             Add("Set long copy viewport "+suffix,()=>UI01Validation.SetGameView(size.x,size.y));
             Add("Prepare isolated long native copy "+suffix,()=>{
-                View.SetRestaurantCardData(RestaurantType.PODRAO,"Restaurante de lanches com nome longo para aferir leitura",string.Join(" ",Enumerable.Repeat("Descrição extensa da proposta com atendimento e experiência do público.",12)));
-                foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>()) scroll.verticalNormalizedPosition=1;
+                View.SetRestaurantCardData(RestaurantType.PODRAO, "Restaurante de lanches com nome longo para aferir leitura",
+                    "Lanches e refeições rápidas para quem circula pelo bairro durante a semana. Atendimento no balcão e opções variadas para o almoço, o fim da tarde e os intervalos entre compromissos.");
             });
-            Add("Long copy grows within masks, fixed facade and actions "+suffix,()=>{
-                Fits(); var card=Button("cardPodrao").transform.Find("CardDetails").GetComponent<UnityEngine.UI.ScrollRect>();
-                Expect(card.content.rect.height>card.viewport.rect.height,"Long card did not grow"); Capture("long-copy-top-"+suffix);
-                foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>()) scroll.verticalNormalizedPosition=0;
-            });
-            Add("Bottom scroll reveals native costs "+suffix,()=>{
-                Fits(); Capture("long-copy-bottom-"+suffix); var scroll=Button("cardPodrao").transform.Find("CardDetails").GetComponent<UnityEngine.UI.ScrollRect>();
-                var before=scroll.verticalNormalizedPosition; ExecuteEvents.Execute(scroll.gameObject,new PointerEventData(EventSystem.current){scrollDelta=Vector2.up},ExecuteEvents.scrollHandler); Expect(scroll.verticalNormalizedPosition>before,"Wheel did not scroll");
+            Add("Multiline copy, costs and actions fit without scrolling "+suffix,()=>{
+                Fits();
+                var details = Button("cardPodrao").transform.Find("CardDetails");
+                Expect(details.Find("Copy/RestaurantDesc").GetComponent<TMP_Text>().textInfo.lineCount >= 3, "Fixture did not wrap");
+                Capture("long-copy-"+suffix);
                 Call(Controller,"PopulateView"); Call(Controller,"ResetFromSession"); Call(Controller,"UpdateCoherencePanel");
             });
         }

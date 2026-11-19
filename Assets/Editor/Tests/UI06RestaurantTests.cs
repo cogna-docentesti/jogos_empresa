@@ -24,7 +24,7 @@ public sealed class UI06RestaurantTests
         Assert.AreEqual(1,view.GetComponentsInChildren<RestaurantScreenController>(true).Count(c=>c.gameObject.activeSelf));
         Assert.AreEqual(Vector2.zero,((RectTransform)view.transform).anchorMin); Assert.AreEqual(Vector2.one,((RectTransform)view.transform).anchorMax);
         foreach(var n in new[]{"Header","MainArea","SidePanel","Footer"}) Assert.IsFalse(view.transform.Find(n).gameObject.activeSelf,n);
-        Assert.That(view.transform.Find("DecisionHeader/Step").GetComponent<TMPro.TMP_Text>().text,Does.Contain("3 DE 7"));
+        Assert.AreEqual("RESTAURANTE", view.transform.Find("DecisionHeader/ConceptSubtitle").GetComponent<TMPro.TMP_Text>().text);
     }
     [Test] public void FacadesAreWholeNeutralSingleSpritesAndCatalogEconomicsRemainUnchanged()
     {
@@ -35,7 +35,7 @@ public sealed class UI06RestaurantTests
         var fields=new[]{"cardPodrao","cardJapones","cardFrances"};
         for(int i=0;i<3;i++)
         {
-            Assert.AreEqual(3,data[i].products.Length); var image=Field<UnityEngine.UI.Button>(fields[i]).transform.Find("Facade").GetComponent<UnityEngine.UI.Image>();
+            Assert.AreEqual(3,data[i].products.Length); var image=Field<UnityEngine.UI.Button>(fields[i]).transform.Find("CardDetails/Artwork/Facade").GetComponent<UnityEngine.UI.Image>();
             Assert.AreSame(data[i].facade,image.sprite); Assert.AreEqual(Color.white,image.color); Assert.IsTrue(image.preserveAspect);
             Assert.AreEqual(new Rect(0,0,1448,1086),image.sprite.rect); Assert.AreEqual(UnityEngine.UI.Image.Type.Simple,image.type);
             var importer=(TextureImporter)AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(image.sprite)); Assert.AreEqual(SpriteImportMode.Single,importer.spriteImportMode);
@@ -61,15 +61,26 @@ public sealed class UI06RestaurantTests
             Assert.IsNotNull(b.transform.Find("SegmentLabel").GetComponent<TMPro.TMP_Text>());
         }
     }
-    [Test] public void LongCopyIsMaskedLayoutDrivenAndActionsStayOutsideScrolls()
+    [Test] public void RestaurantCardsHavePaddedUnmaskedDetailsAndCenteredConfirmation()
     {
-        var scrolls=view.GetComponentsInChildren<UnityEngine.UI.ScrollRect>(true).Where(s=>s.name=="CardDetails" || s.name=="Compatibility").ToArray(); Assert.AreEqual(4,scrolls.Length);
-        foreach(var s in scrolls)
+        foreach (var field in new[] { "cardPodrao", "cardJapones", "cardFrances" })
         {
-            Assert.IsNotNull(s.viewport.GetComponent<UnityEngine.UI.Mask>()); Assert.IsNotNull(s.content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>());
-            Assert.AreEqual(UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize,s.content.GetComponent<UnityEngine.UI.ContentSizeFitter>().verticalFit);
-            Assert.AreEqual(Vector2.zero,s.verticalScrollbar.handleRect.sizeDelta); Assert.IsFalse(s.horizontal);
-            Assert.IsFalse(Field<UnityEngine.UI.Button>("confirmButton").transform.IsChildOf(s.transform));
+            var card = (RectTransform)Field<UnityEngine.UI.Button>(field).transform;
+            var details = (RectTransform)card.Find("CardDetails");
+            Assert.IsEmpty(card.GetComponentsInChildren<UnityEngine.UI.ScrollRect>(true));
+            Assert.IsEmpty(details.GetComponentsInChildren<UnityEngine.UI.Mask>(true));
+            Assert.IsNull(details.Find("Viewport"));
+            Assert.IsNull(details.Find("Scrollbar"));
+            Assert.AreEqual(24, details.anchoredPosition.x);
+            Assert.AreEqual(48, card.rect.width - details.rect.width);
+            Assert.IsNotNull(details.Find("Copy").GetComponent<UnityEngine.UI.VerticalLayoutGroup>());
+            Assert.IsNotNull(details.Find("Metrics/MonthlyCost").GetComponent<TMPro.TMP_Text>());
+            Assert.IsNotNull(details.Find("Metrics/TicketRange").GetComponent<TMPro.TMP_Text>());
         }
+        var confirm = (RectTransform)Field<UnityEngine.UI.Button>("confirmButton").transform;
+        Assert.AreSame(view.transform.Find("DecisionFooter"), confirm.parent);
+        Assert.AreEqual(new Vector2(.5f, .5f), confirm.anchorMin);
+        Assert.AreEqual(confirm.anchorMin, confirm.anchorMax);
+        Assert.AreEqual(Vector2.zero, confirm.anchoredPosition);
     }
 }

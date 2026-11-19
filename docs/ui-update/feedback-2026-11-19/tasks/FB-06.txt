@@ -1,5 +1,5 @@
 FB-06 — Ajustar layout e retirar a rolagem da tela de restaurante
-Status: planejada | Prioridade: P2 | Tipo: interface
+Status: concluída | Prioridade: P2 | Tipo: interface
 Área: Restaurante
 Dependências: FB-01, FB-02, FB-05
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -38,6 +38,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Conferir os três restaurantes, descrições longas e popup nas resoluções de referência.
+
+OBSERVAÇÕES E LIMITES
+1. A GameScene confirmou os três cards com margem interna de 24 px, textos completos e confirmação centralizada em 1280×720, 1366×768 e 1920×1080.
+2. O popup por restaurante, o rascunho e as 45 combinações de compatibilidade passaram na regressão. O registro de QA inclui as capturas da Game View e os limites do ensaio.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-06.json.

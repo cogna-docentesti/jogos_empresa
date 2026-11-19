@@ -950,8 +950,8 @@
       "area": "Restaurante",
       "kind": "interface",
       "priority": "P2",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-01",
         "FB-02",
@@ -976,7 +976,10 @@
         "Assets/Editor/UI/ConceptUiRevision.cs",
         "Assets/Scripts/Game/Adapter/In/UI/RestaurantScreenView.cs"
       ],
-      "notes": [],
+      "notes": [
+        "A GameScene confirmou os três cards com margem interna de 24 px, textos completos e confirmação centralizada em 1280×720, 1366×768 e 1920×1080.",
+        "O popup por restaurante, o rascunho e as 45 combinações de compatibilidade passaram na regressão. O registro de QA inclui as capturas da Game View e os limites do ensaio."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-06.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-06.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-06",

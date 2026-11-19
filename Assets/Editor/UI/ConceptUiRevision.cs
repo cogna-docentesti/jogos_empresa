@@ -137,30 +137,15 @@ namespace Game.EditorTools
             string[] cards={"Card_Podrao","Card_Japones","Card_Frances"};
             for(int i=0;i<3;i++)
             {
-                var c=Find(p,cards[i]);Place(c,24+i*632,116,608,666);
+                var c=Find(p,cards[i]);
                 Off(c,"TypeIcon","OptionLabel","SelectionStatus");
-                Move(c,"Facade",16,16,576,432);Move(c,"SelectedCheck",544,20,44,44);
-                var type=i==0?RestaurantType.PODRAO:i==1?RestaurantType.JAPONES:RestaurantType.FRANCES;
-                Find(c,"Facade").GetComponent<UnityEngine.UI.Image>().sprite=Resources.LoadAll<RestaurantData>("Restaurants").Single(r=>r.type==type).facade;
-                ResizeScroll(c,"CardDetails",24,464,560,180);
-                var content=Find(c,"CardDetails").GetComponent<UnityEngine.UI.ScrollRect>().content;
-                Type(content,"RestaurantName",32);var lg=content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();lg.spacing=0;
-                foreach(var n in new[]{"RestaurantName","RestaurantDesc","CostLabel","MonthlyCost","TicketLabel","TicketRange"})
-                {
-                    var t=Find(content,n);TypographyToken size=n=="RestaurantName"?32:n.EndsWith("Label")?20:24;
-                    Type(content,n,size,n=="RestaurantName"||n=="MonthlyCost"||n=="TicketRange");Height(t,n=="RestaurantName"?40:n.EndsWith("Label")?24:28);
-                }
-                Picture(c,"FeaturedDish",i==0?"PRODUCT_LAN_COMBO_SIMPLES":i==1?"PRODUCT_JAP_SUSHI_EXECUTIVO":"PRODUCT_FRA_PRATO_EXECUTIVO",320,282,250,172);
+                var artwork=c.Find("CardDetails/Artwork")??c;
+                Picture(artwork,"FeaturedDish",i==0?"PRODUCT_LAN_COMBO_SIMPLES":i==1?"PRODUCT_JAP_SUSHI_EXECUTIVO":"PRODUCT_FRA_PRATO_EXECUTIVO",0,0,232,152);
             }
-            var side=Find(p,"DecisionSidebar");Place(side,24,800,1240,160);
-            Move(side,"Title",20,8,650,40);Type(side,"Title",28);Off(side,"Help");
-            string[] buttons={"Button_Low","Button_Medium","Button_Segment"};
-            for(int i=0;i<3;i++) {
-                Move(side,buttons[i],20+i*398,60,378,76);var b=Find(side,buttons[i]);
-                Move(b,"SegmentLabel",56,8,304,36);Move(b,"Availability",56,42,304,28);Move(b,"Radio",16,24,28,28);
-            }
-            RestaurantUiMigration.ApplyCompatibilityLayout(p, true);
-            var confirm=p.Find("DecisionFooter/Confirm")??Find(p,"Confirm");confirm.SetParent(p,false);Place(confirm,1312,860,560,84);
+            var side=Find(p,"DecisionSidebar");
+            Type(side,"Title",28);Off(side,"Help");
+            RestaurantUiMigration.ApplyCompatibilityLayout(p);
+            RestaurantUiMigration.ApplyDecisionLayout(p);
         }
         static void Menu()
         {
