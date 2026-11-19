@@ -1,0 +1,54 @@
+{
+  "task_id": "FB-04",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "f5a4c53a",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolution": "1280×720",
+  "matrix": "docs/ui-update/feedback-2026-11-19/MATRIZ-COMPATIBILIDADE.md",
+  "method": "Duas execuções da GameScene em Play Mode, com banco SQLite e chave PlayerPrefs isolados. Em cada execução, um verificador percorreu os catálogos carregados por Resources, forneceu cada área ao rascunho D1 e acionou os callbacks dos cards e das três classes de D2. Comparou os controles com AllowsSegment, tentou inclusive os callbacks desabilitados e verificou a seleção salva por TrySaveDraft. O cálculo de referência veio de AlignmentEngine.Calculate. Depois da correção também conferiu as duas barras, os textos ligados ao catálogo e a ida ao cardápio com retorno ao rascunho.",
+  "before": {
+    "allowed_cases_evaluated": 25,
+    "location_percentage_mismatches": 23,
+    "audience_percentage_mismatches": 20,
+    "comparison": "Percentual exibido versus pontos do critério divididos por 20. A contagem considera apenas as escolhas permitidas, para as quais a tela exibe o público tentado.",
+    "catalog_name_mismatch": "Área de serviços na antiga explicação para a Área Corporativa (marketing)."
+  },
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "As 45 tentativas coincidiram com as listas complementares do catálogo e a guarda da D2. Os dois valores, as duas barras e os textos refletiram a área e o público efetivamente selecionados em cada tentativa. As 20 tentativas bloqueadas conservaram o último público válido no rascunho."
+    },
+    {
+      "criterion": 2,
+      "result": "As 25 combinações permitidas mantiveram a confirmação habilitada, inclusive Francês com classe A na Área Educacional (6/20 na área). Francês com classe B permaneceu bloqueado nas cinco áreas embora o motor atribua 5/20 a esse público."
+    },
+    {
+      "criterion": 3,
+      "result": "A matriz identifica a permissão, os pontos de público, de localização e o subtotal para as 45 combinações. O cálculo do motor e a elegibilidade coincidiram antes e depois. A homologação pedagógica dos pesos segue pendente."
+    }
+  ],
+  "additional_checks": [
+    "Confirmação de Japonês com classe A na Área Corporativa abriu D3. Voltar a D2 restaurou os 12 pontos de área e 15 de público.",
+    "Com o local removido do rascunho, a D2 exibiu Sem seleção para a área e ocultou o preenchimento da barra."
+  ],
+  "limitations": [
+    "Validação no Editor instalado 6000.3.28f1. As capturas são da Game View. O ensaio percorreu os callbacks do uGUI e a gravação do rascunho em memória. A simulação mensal completa e builds de distribuição ficaram fora do ensaio.",
+    "A busca em arquivos versionados e a leitura de docs/monthly-simulation.md não identificaram uma especificação separada de balanceamento homologado para substituir as regras implementadas."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-04",
+    "before": "before.json",
+    "after": "after.json",
+    "screenshots": [
+      "after-frances-corporativa.png",
+      "after-japones-corporativa.png",
+      "after-lanches-comercio.png",
+      "before-frances-corporativa.png",
+      "before-lanches-comercio.png"
+    ]
+  }
+}

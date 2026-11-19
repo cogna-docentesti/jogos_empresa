@@ -8,7 +8,7 @@
   "method": "Planejamento inicial por inspeção estática de código, catálogos e documentação. O registro de cada tarefa detalha a validação executada.",
   "historical_backlog": "docs/ui-update/tasks.json",
   "task_count": 28,
-  "planned_task_count": 23,
+  "planned_task_count": 22,
   "deferred_task_count": 1,
   "feedback_count": 47,
   "first_task": "FB-21",
@@ -840,8 +840,8 @@
       "area": "Restaurante; regras",
       "kind": "análise e correção",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [],
       "objective": "Confirmar que a compatibilidade apresentada corresponde aos catálogos e ao cálculo aplicado no jogo.",
       "scope": [
@@ -862,10 +862,12 @@
         "Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs",
         "Assets/Scripts/Game/Adapter/In/Controllers/RestaurantScreenController.cs",
         "Assets/Resources/Restaurants",
-        "docs/monthly-simulation.md"
+        "docs/monthly-simulation.md",
+        "docs/ui-update/feedback-2026-11-19/MATRIZ-COMPATIBILIDADE.md"
       ],
       "notes": [
-        "Não foi localizada uma planilha/documento separado de balanceamento na busca por nomes e formatos do projeto. Não presumir que as regras atuais já tenham sido homologadas."
+        "Não foi localizada uma planilha/documento separado de balanceamento na busca por nomes e formatos do projeto. Não presumir que as regras atuais já tenham sido homologadas.",
+        "A matriz e o QA registram as 45 combinações. A D2 agora lê a pontuação de público e de localização diretamente do AlignmentEngine e apresenta os nomes dos catálogos. A seleção continua regida por AllowsSegment, com 25 combinações permitidas e 20 bloqueadas."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-04.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-04.json",

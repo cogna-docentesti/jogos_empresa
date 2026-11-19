@@ -118,8 +118,8 @@ public static class UI06RestaurantValidation
                 Add("Mouse selects "+type+" / "+segment+" at "+suffix,()=>{ Click(Button(CardFields[(int)type])); Click(Button(SegmentFields[(int)segment])); EventSystem.current.SetSelectedGameObject(null); });
                 Add("Rendered selection, compatibility and native values "+type+" / "+segment+" at "+suffix,()=>{
                     Expect(Screen.width==resolution.x && Screen.height==resolution.y,"Wrong viewport"); Selection(type,segment);
-                    var expected=type==RestaurantType.PODRAO?(segment==Segment.LOW?"95%":"70%"):type==RestaurantType.JAPONES?(segment==Segment.MEDIUM?"80%":"75%"):"95%";
-                    Expect(Field<TMP_Text>(View,"coh2Value").text.Contains(expected),"Compatibility score changed");
+                    int expected = AlignmentEngine.GetRestaurantTargetScore(type, segment);
+                    Expect(Field<TMP_Text>(View,"coh2Value").text == $"{expected} / 20 pontos","Compatibility score changed");
                     Capture(type.ToString().ToLowerInvariant()+"-"+segment.ToString().ToLowerInvariant()+"-"+suffix);
                     // Touch follows the same hit target without leaving hover behind.
                     Click(Button(SegmentFields[(int)segment]),11); Selection(type,segment);
@@ -143,7 +143,7 @@ public static class UI06RestaurantValidation
         });
         Add("D2 revisited with edited D1 and the same draft",()=>{
             Selection(RestaurantType.PODRAO,Segment.MEDIUM); Expect(PlayerSession.SelectedEstablishmentId=="university","Location edit lost");
-            Expect(Field<TMP_Text>(View,"coh1Value").text.Contains("95%"),"Compatibility did not refresh"); Capture("resumed-draft-1920x1080");
+            Expect(Field<TMP_Text>(View,"coh1Value").text == "18 / 20 pontos","Compatibility did not refresh"); Capture("resumed-draft-1920x1080");
         });
         foreach(var typeValue in new[]{RestaurantType.PODRAO,RestaurantType.JAPONES,RestaurantType.FRANCES})
         {
@@ -203,7 +203,7 @@ public static class UI06RestaurantValidation
             Add("Set long copy viewport "+suffix,()=>UI01Validation.SetGameView(size.x,size.y));
             Add("Prepare isolated long native copy "+suffix,()=>{
                 View.SetRestaurantCardData(RestaurantType.PODRAO,"Restaurante de lanches com nome longo para aferir leitura",string.Join(" ",Enumerable.Repeat("Descrição extensa da proposta com atendimento e experiência do público.",12)));
-                View.UpdateCoherence(.6f,string.Join(" ",Enumerable.Repeat("Texto longo de compatibilidade para aferir margens e rolagem.",12)),.8f,"Público compatível.");
+                View.UpdateCoherence(12,string.Join(" ",Enumerable.Repeat("Texto longo de compatibilidade para aferir margens e rolagem.",12)),16,"Público compatível.");
                 foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>()) scroll.verticalNormalizedPosition=1;
             });
             Add("Long copy grows within masks, fixed facade and actions "+suffix,()=>{

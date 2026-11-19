@@ -1,5 +1,5 @@
 FB-04 — Auditar a compatibilidade exibida para cada restaurante
-Status: planejada | Prioridade: P1 | Tipo: análise e correção
+Status: concluída | Prioridade: P1 | Tipo: análise e correção
 Área: Restaurante; regras
 Dependências: nenhuma
 Modelo: gpt-6.2-astra | Raciocínio: high
@@ -27,6 +27,7 @@ Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs
 Assets/Scripts/Game/Adapter/In/Controllers/RestaurantScreenController.cs
 Assets/Resources/Restaurants
 docs/monthly-simulation.md
+docs/ui-update/feedback-2026-11-19/MATRIZ-COMPATIBILIDADE.md
 
 ESCOPO
 1. Montar uma matriz dos três restaurantes × públicos × localizações, identificando permitido, bloqueado e pontuação de alinhamento.
@@ -43,6 +44,7 @@ VALIDAÇÃO PREVISTA
 
 OBSERVAÇÕES E LIMITES
 1. Não foi localizada uma planilha/documento separado de balanceamento na busca por nomes e formatos do projeto. Não presumir que as regras atuais já tenham sido homologadas.
+2. A matriz e o QA registram as 45 combinações. A D2 agora lê a pontuação de público e de localização diretamente do AlignmentEngine e apresenta os nomes dos catálogos. A seleção continua regida por AllowsSegment, com 25 combinações permitidas e 20 bloqueadas.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-04.json.

@@ -104,19 +104,31 @@ namespace Game.Adapter.In.UI
             RefreshSegments();
         }
         public void SetConfirmEnabled(bool enabled) { confirmButton.interactable=enabled; RebuildNavigation(); }
-        public void UpdateCoherence(float coh1,string tip1,float coh2,string tip2)
+        public void UpdateCoherence(int? locationScore, string locationTip, int? targetScore, string targetTip)
         {
-            ApplyCoherenceBar(coh1BarFill,coh1); ApplyCoherenceBar(coh2BarFill,coh2);
-            if(coh1Tip != null) coh1Tip.text=tip1;
-            if(coh2Tip != null) coh2Tip.text=tip2;
-            SetCoherenceValue(coh1Value,coh1); SetCoherenceValue(coh2Value,coh2);
+            SetCoherenceScore(coh1Value, coh1BarFill, locationScore);
+            SetCoherenceScore(coh2Value, coh2BarFill, targetScore);
+            if (coh1Tip != null) coh1Tip.text = locationTip;
+            if (coh2Tip != null) coh2Tip.text = targetTip;
         }
-        private static void SetCoherenceValue(TMP_Text text,float value)
+
+        private static void SetCoherenceScore(TMP_Text text, UnityEngine.UI.Image bar, int? score)
         {
-            if(text==null) return;
-            text.text=value<=0?"Sem seleção":$"{(value>=.7f?"Alta":value>=.4f?"Média":"Baixa")} · {Mathf.RoundToInt(value*100)}%";
-            text.color=value>=.7f?GamePalette.Money:value>=.4f?GamePalette.Plum:GamePalette.ErrorText;
+            if (text != null)
+            {
+                text.text = score.HasValue ? $"{score.Value} / {AlignmentEngine.MaxCriterionScore} pontos" : "Sem seleção";
+                text.color = GamePalette.Plum;
+            }
+            if (bar == null) return;
+
+            float fraction = score.GetValueOrDefault() / (float)AlignmentEngine.MaxCriterionScore;
+            bar.color = GamePalette.Money;
+            bar.rectTransform.anchorMin = Vector2.zero;
+            bar.rectTransform.anchorMax = new Vector2(fraction, 1f);
+            bar.rectTransform.offsetMin = bar.rectTransform.offsetMax = Vector2.zero;
+            bar.enabled = fraction > 0f;
         }
+
         private void RefreshSegments()
         {
             foreach(var segment in new[]{Segment.LOW,Segment.MEDIUM,Segment.HIGH})
@@ -147,12 +159,5 @@ namespace Game.Adapter.In.UI
         { Segment.MEDIUM=>btnMedium,Segment.HIGH=>btnHigh,_=>btnLow };
         private static void SetChildText(UnityEngine.UI.Button button,string name,string value)
         { var text=button.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(t=>t.name==name && t.gameObject.activeSelf); if(text!=null) text.text=value; }
-        private static void ApplyCoherenceBar(UnityEngine.UI.Image bar,float value)
-        {
-            if(bar==null) return;
-            value=Mathf.Clamp01(value); bar.color=value>=.7f?GamePalette.Money:value>=.4f?GamePalette.Warn:GamePalette.ErrorText;
-            bar.rectTransform.anchorMin=Vector2.zero; bar.rectTransform.anchorMax=new Vector2(value,1);
-            bar.rectTransform.offsetMin=bar.rectTransform.offsetMax=Vector2.zero; bar.enabled=value>0;
-        }
     }
 }

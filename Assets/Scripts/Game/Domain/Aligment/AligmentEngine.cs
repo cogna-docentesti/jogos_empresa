@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class AlignmentEngine
 {
+    public const int MaxCriterionScore = 20;
+
     public static AlignmentResult Calculate(
         RestaurantType restaurantType,
         Segment targetSegment,
@@ -41,13 +43,13 @@ public static class AlignmentEngine
         };
     }
 
-    private static int GetRestaurantTargetScore(RestaurantType restaurant, Segment target)
+    public static int GetRestaurantTargetScore(RestaurantType restaurant, Segment target)
     {
         return restaurant switch
         {
             RestaurantType.PODRAO => target switch
             {
-                Segment.LOW => 20,
+                Segment.LOW => MaxCriterionScore,
                 Segment.MEDIUM => 10,
                 Segment.HIGH => 0,
                 _ => 0
@@ -56,7 +58,7 @@ public static class AlignmentEngine
             RestaurantType.JAPONES => target switch
             {
                 Segment.LOW => 0,
-                Segment.MEDIUM => 20,
+                Segment.MEDIUM => MaxCriterionScore,
                 Segment.HIGH => 15,
                 _ => 0
             },
@@ -65,7 +67,7 @@ public static class AlignmentEngine
             {
                 Segment.LOW => 0,
                 Segment.MEDIUM => 5,
-                Segment.HIGH => 20,
+                Segment.HIGH => MaxCriterionScore,
                 _ => 0
             },
 
@@ -73,13 +75,13 @@ public static class AlignmentEngine
         };
     }
 
-    private static int GetRestaurantLocationScore(RestaurantType restaurant, LocationZone location)
+    public static int GetRestaurantLocationScore(RestaurantType restaurant, LocationZone location)
     {
         return restaurant switch
         {
             RestaurantType.PODRAO => location switch
             {
-                LocationZone.Comercio => 20,
+                LocationZone.Comercio => MaxCriterionScore,
                 LocationZone.Educacao => 18,
                 LocationZone.Servicos => 14,
                 LocationZone.Financas => 10,
@@ -89,7 +91,7 @@ public static class AlignmentEngine
 
             RestaurantType.JAPONES => location switch
             {
-                LocationZone.Financas => 20,
+                LocationZone.Financas => MaxCriterionScore,
                 LocationZone.Educacao => 15,
                 LocationZone.Comercio => 14,
                 LocationZone.Servicos => 12,
@@ -99,7 +101,7 @@ public static class AlignmentEngine
 
             RestaurantType.FRANCES => location switch
             {
-                LocationZone.Financas => 20,
+                LocationZone.Financas => MaxCriterionScore,
                 LocationZone.Residencial => 16,
                 LocationZone.Servicos => 12,
                 LocationZone.Comercio => 10,
