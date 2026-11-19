@@ -72,7 +72,6 @@ namespace Game.EditorTools
                 var q = Text(r, "Quantity", "0", 366, 276, 178, 68, GameTypography.Tokens.BodyStrong,true); q.alignment = TextAlignmentOptions.Center; Set(card, "quantityText", q);
                 Set(card, "addButton", Button(r, "Add", "+", 556, 276, 68, 68));
                 SharedUiStyles.Bind(control, SharedControlKind.Card);
-                var outline = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 648, 368); Stretch(outline.rectTransform); Set(card, "interactionOutline", outline); outline.enabled = false;
                 Font07Migration.Apply(new[] { go }, "Assets/Prefabs/TeamRoleCard.prefab");
                 PrefabUtility.SaveAsPrefabAsset(go, "Assets/Prefabs/TeamRoleCard.prefab");
             }

@@ -8,7 +8,7 @@
   "method": "Planejamento inicial por inspeção estática de código, catálogos e documentação. O registro de cada tarefa detalha a validação executada.",
   "historical_backlog": "docs/ui-update/tasks.json",
   "task_count": 28,
-  "planned_task_count": 25,
+  "planned_task_count": 24,
   "deferred_task_count": 1,
   "feedback_count": 47,
   "first_task": "FB-21",
@@ -725,8 +725,8 @@
       "area": "Global; restaurante; banco; equipamentos; calendário",
       "kind": "correção",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [],
       "objective": "Eliminar a sobreposição de bordas sem perder os estados de seleção e foco.",
       "scope": [
@@ -749,6 +749,7 @@
         "Assets/Prefabs/SharedUI"
       ],
       "notes": [
+        "A GameScene confirmou uma superfície por controle, seleção por preenchimento e foco por traço interno em 1280×720 e 1920×1080. O QA inclui retorno ao banco e ao restaurante, reabertura do carrinho e retorno do histórico à decisão mensal.",
         "A revisão do modal futuro também integra o aceite de FB-25; esta tarefa pode entregar primeiro a correção compartilhada."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-02.txt",

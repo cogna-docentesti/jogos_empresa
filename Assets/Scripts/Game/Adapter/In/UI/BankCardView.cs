@@ -27,7 +27,6 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Button selectButton;
         [SerializeField] private UnityEngine.UI.Image creditLineIcon;
         [SerializeField] private UnityEngine.UI.Image selectionMark;
-        [SerializeField] private UnityEngine.UI.Image interactionOutline;
         public CreditLineData CreditLine { get; private set; }
         public event Action<BankCardView> Selected;
         private void OnEnable() { ApplyTypography(); if (selectButton != null) selectButton.onClick.AddListener(OnSelected); }
@@ -59,13 +58,6 @@ namespace Game.Adapter.In.UI
         { GetComponent<SharedControlAppearance>()?.SetSelected(selected); if (selectionMark != null) selectionMark.enabled = selected; }
         private void LateUpdate()
         {
-            var appearance = GetComponent<SharedControlAppearance>();
-            if (interactionOutline != null && appearance != null)
-            {
-                bool pressed = appearance.CurrentState == "pressed";
-                interactionOutline.enabled = pressed || appearance.CurrentState == "hover";
-                var color = GamePalette.Primary; color.a = pressed ? .85f : .4f; interactionOutline.color = color;
-            }
             // Long catalog copy expands the row; scrolling keeps fixed actions reachable.
             if (nameText == null || descriptionText == null) return;
             if (((RectTransform)transform).rect.width < 500)

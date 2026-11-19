@@ -15,8 +15,9 @@ namespace Game.Adapter.In.UI
         [SerializeField] private SharedControlKind kind;
         [SerializeField] private UnityEngine.UI.Image surface;
         [SerializeField] private UnityEngine.UI.Image focusLayer;
-        [SerializeField] private UnityEngine.UI.Image selectionLayer;
-        [SerializeField] private UnityEngine.UI.Image disabledLayer;
+        // Older scenes and prefab instances still reference these decoration layers.
+        [SerializeField, HideInInspector] private UnityEngine.UI.Image selectionLayer;
+        [SerializeField, HideInInspector] private UnityEngine.UI.Image disabledLayer;
         [SerializeField] private TMP_Text[] labels = System.Array.Empty<TMP_Text>();
         [SerializeField] private UnityEngine.UI.Image[] icons = System.Array.Empty<UnityEngine.UI.Image>();
         private UnityEngine.UI.Selectable control;
@@ -29,10 +30,10 @@ namespace Game.Adapter.In.UI
         public string CurrentState { get; private set; }
 
         public void Configure(SharedControlKind role, UnityEngine.UI.Image image, UnityEngine.UI.Image focus,
-            UnityEngine.UI.Image selection, UnityEngine.UI.Image disabled, TMP_Text[] text, UnityEngine.UI.Image[] glyphs)
+            TMP_Text[] text, UnityEngine.UI.Image[] glyphs)
         {
-            kind=role; surface=image; focusLayer=focus; selectionLayer=selection; disabledLayer=disabled;
-            labels=text; icons=glyphs; Cache(); ApplyTypography(); Refresh();
+            kind=role; surface=image; focusLayer=focus;
+            labels=text; icons=glyphs; Cache(); PrepareLayers(); ApplyTypography(); Refresh();
         }
         private void ApplyTypography()
         {
@@ -48,8 +49,34 @@ namespace Game.Adapter.In.UI
             }
         }
         private void Cache() { if(control==null) control=GetComponent<UnityEngine.UI.Selectable>(); if(skin==null) skin=SharedUiSkin.Current; }
-        private void OnEnable() { hovered=pressed=false; Cache(); ApplyTypography(); Refresh(); }
-        private void OnDisable() { hovered=pressed=false; }
+        private void OnEnable() { hovered=pressed=false; Cache(); PrepareLayers(); ApplyTypography(); Refresh(); }
+        private void OnDisable()
+        {
+            hovered = pressed = false;
+            submitUntil = 0;
+            if (focusLayer != null) focusLayer.enabled = false;
+        }
+
+        private void PrepareLayers()
+        {
+            if (selectionLayer != null) selectionLayer.enabled = false;
+            if (disabledLayer != null) disabledLayer.enabled = false;
+            if (surface != null)
+                foreach (var outline in surface.GetComponents<UnityEngine.UI.Outline>()) outline.enabled = false;
+            if (focusLayer == null) return;
+
+            // Reuse the serialized focus Image as a short, non-interactive mark inside the surface.
+            focusLayer.sprite = null;
+            focusLayer.overrideSprite = null;
+            focusLayer.type = UnityEngine.UI.Image.Type.Simple;
+            focusLayer.raycastTarget = false;
+            var rect = focusLayer.rectTransform;
+            rect.anchorMin = rect.anchorMax = new Vector2(.5f, 0);
+            rect.pivot = new Vector2(.5f, 0);
+            rect.anchoredPosition = new Vector2(0, 7);
+            rect.sizeDelta = new Vector2(kind == SharedControlKind.Scrollbar ? 8 : 28, 5);
+            focusLayer.gameObject.SetActive(true);
+        }
         private void LateUpdate() => Refresh();
         public void SetSelected(bool value) { selected=value; Refresh(); }
         public void OnPointerEnter(PointerEventData e) { hovered=e.pointerId<0; Refresh(); }
@@ -81,17 +108,19 @@ namespace Game.Adapter.In.UI
             if(kind==SharedControlKind.Checkbox || kind==SharedControlKind.Radio || kind==SharedControlKind.Toggle)
                 state=!enabledState?"DISABLED":chosen?"ON":"OFF";
             if(kind==SharedControlKind.Pill) state=!enabledState?"DISABLED":chosen?"SELECTED":"NORMAL";
-            if(kind==SharedControlKind.Tab && chosen && enabledState && !down && !hovered) state="SELECTED";
+            if(kind==SharedControlKind.Tab && chosen && enabledState) state="SELECTED";
             Sprite sprite=kind==SharedControlKind.Slider ? skin.Get("UI_SLIDER_THUMB")
                 : kind==SharedControlKind.Scrollbar ? skin.Get("UI_SCROLLBAR_THUMB")
                 : kind==SharedControlKind.Card ? skin.Get("UI_CARD_NORMAL") : skin.Get(prefix+"_"+state);
             if(sprite!=null) { surface.overrideSprite=null; surface.sprite=sprite; }
-            surface.color=kind==SharedControlKind.Slider || kind==SharedControlKind.Scrollbar
-                ? (!enabledState?GamePalette.Gray:down?GamePalette.Plum:hovered?GamePalette.Primary:Color.white) : Color.white;
-            if(focusLayer!=null) { focusLayer.enabled=enabledState && focus; focusLayer.color=DarkSurface?GamePalette.Lavender:GamePalette.Primary; }
-            if(selectionLayer!=null) selectionLayer.enabled=chosen && enabledState;
-            if(disabledLayer!=null) disabledLayer.enabled=!enabledState;
-            Color textColor=!enabledState?GamePalette.Muted:DarkSurface?GamePalette.OnDark:GamePalette.Ink;
+            surface.color = SurfaceColor(enabledState, chosen, down);
+            if (focusLayer != null)
+            {
+                focusLayer.enabled = enabledState && focus;
+                focusLayer.color = DarkSurface || kind == SharedControlKind.Navigation ? GamePalette.OnDark : GamePalette.Plum;
+            }
+            bool dimLabel = !enabledState && (kind != SharedControlKind.Card || !chosen);
+            Color textColor = dimLabel ? GamePalette.Muted : DarkSurface ? GamePalette.OnDark : GamePalette.Ink;
             foreach(var label in labels) if(label!=null) label.color=textColor;
             foreach(var icon in icons) if(icon!=null) icon.color=textColor;
             if(kind==SharedControlKind.Navigation)
@@ -101,6 +130,28 @@ namespace Game.Adapter.In.UI
                 foreach(var icon in icons)if(icon!=null)icon.color=!enabledState?GamePalette.Muted:GamePalette.Lavender;
             }
         }
+
+        private Color SurfaceColor(bool interactable, bool chosen, bool down)
+        {
+            if (kind == SharedControlKind.Card)
+            {
+                var fill = chosen ? Color.Lerp(Color.white, GamePalette.Lavender, .75f) : Color.white;
+                if (!interactable) return Color.Lerp(fill, GamePalette.Gray, .23f);
+                if (down) return Color.Lerp(fill, GamePalette.Primary, .25f);
+                if (hovered) return Color.Lerp(fill, GamePalette.Primary, .12f);
+                return fill;
+            }
+
+            if (kind == SharedControlKind.Slider || kind == SharedControlKind.Scrollbar)
+                return !interactable ? GamePalette.Gray : down ? GamePalette.Plum : hovered ? GamePalette.Primary : Color.white;
+
+            if (interactable && (kind is SharedControlKind.Checkbox or SharedControlKind.Radio or SharedControlKind.Toggle
+                or SharedControlKind.Pill || kind == SharedControlKind.Tab && chosen))
+                return Color.Lerp(Color.white, GamePalette.Lavender, down ? .65f : hovered ? .35f : 0);
+
+            return Color.white;
+        }
+
         private bool DarkSurface => kind==SharedControlKind.Primary || kind==SharedControlKind.Danger
             || surface!=null && surface.sprite!=null && (surface.sprite.name=="pill_selected" || surface.sprite.name=="tab_selected" || surface.sprite.name=="tab_pressed");
         private void RevealInScroll()

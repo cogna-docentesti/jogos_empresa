@@ -29,9 +29,8 @@ namespace Game.Adapter.In.UI
             if (history)
             {
                 appearance.enabled = false; button.enabled = false;
-                foreach (var name in new[] { "SharedFocus", "SharedSelection", "SharedDisabled" })
-                    if (transform.Find(name) is var child && child != null) child.gameObject.SetActive(false);
-                foreach (var text in new[] { titleText, descriptionText, effectsText }) text.color = Theme.GamePalette.Ink;
+                button.targetGraphic.color = Color.white;
+                foreach (var text in new[] { titleText, descriptionText, effectsText }) text.color = GamePalette.Ink;
             }
             Reflow();
         }

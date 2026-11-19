@@ -172,8 +172,6 @@ namespace Game.EditorTools
                 var plus = Button(r, "Add", "+", 556, 228, 68, 68); Set(card, "buyButton", plus); Set(card, "buyButtonText", plus.transform.Find("Label").GetComponent<TMP_Text>());
                 var quantity = Text(r, "Quantity", "0", 366, 228, 178, 68, GameTypography.Tokens.BodyStrong,true); quantity.alignment = TextAlignmentOptions.Center; Set(card, "quantityText", quantity);
                 var b = Ensure<UnityEngine.UI.Button>(r); SharedUiStyles.Bind(b, SharedControlKind.Card);
-                foreach (var n in new[] { "SharedFocus", "SharedSelection", "SharedDisabled" }) { var t = root.transform.Find(n); t.gameObject.SetActive(true); Ensure<UnityEngine.UI.LayoutElement>(t).ignoreLayout = true; }
-                var outline = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 648, 360); Stretch(outline.rectTransform); Set(card, "interactionOutline", outline); outline.enabled = false;
                 Font07Migration.Apply(new[] { root }, path); PrefabUtility.SaveAsPrefabAsset(root, path);
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }

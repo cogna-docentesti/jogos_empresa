@@ -17,7 +17,6 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Button confirmButton, backButton;
         private Segment? selectedSegment;
         private static readonly CultureInfo Br = CultureInfo.GetCultureInfo("pt-BR");
-        private (SharedControlAppearance appearance, UnityEngine.UI.Image tint)[] feedback;
 
         private void OnEnable() => ApplyTypography();
         public void ApplyTypography()
@@ -36,26 +35,6 @@ namespace Game.Adapter.In.UI
                     if (layout == null) continue;
                     layout.preferredHeight = -1; // Let TMP's native preferred height grow the existing scroll content.
                 }
-            }
-        }
-
-        private void Awake()
-        {
-            feedback=new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh}
-                .Where(b=>b!=null).Select(b=>(b.GetComponent<SharedControlAppearance>(),
-                    b.transform.Find("InteractionTint")?.GetComponent<UnityEngine.UI.Image>())).ToArray();
-        }
-        private void LateUpdate()
-        {
-            // Card masters have no hover/pressed variant. Add a local surface cue while
-            // the shared component continues to own focus, selection and disabled states.
-            if(feedback==null) return;
-            foreach(var item in feedback)
-            {
-                if(item.appearance==null || item.tint==null) continue;
-                item.appearance.Refresh();
-                float alpha=item.appearance.CurrentState=="pressed"?.65f:item.appearance.CurrentState=="hover"?.32f:0;
-                item.tint.color=new Color(1,1,1,alpha);
             }
         }
 

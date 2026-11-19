@@ -42,32 +42,27 @@ namespace Game.Adapter.In.UI
                 var graphic=hit.GetComponent<UnityEngine.UI.Image>() ?? hit.gameObject.AddComponent<UnityEngine.UI.Image>();
                 graphic.color=Color.clear; graphic.sprite=null; graphic.raycastTarget=true;
             }
-            var focus=Layer(control.transform,"SharedFocus","UI_CARD_SELECTED_OUTLINE",-4);
-            UnityEngine.UI.Image selection=null,disabled=null;
-            if(kind==SharedControlKind.Card)
-            {
-                selection=Layer(control.transform,"SharedSelection","UI_CARD_SELECTED_OUTLINE",0);
-                disabled=Layer(control.transform,"SharedDisabled","UI_CARD_DISABLED_OVERLAY",0);
-                disabled.transform.SetAsFirstSibling();
-            }
+            var focus = FocusImage(control.transform);
             var labels=control.GetComponentsInChildren<TMP_Text>(true).Where(t=>t.GetComponentInParent<UnityEngine.UI.Selectable>(true)==control).ToArray();
             var icons=control.GetComponentsInChildren<UnityEngine.UI.Image>(true).Where(i=>i.sprite!=null && i.sprite.name.StartsWith("icon_") && i.GetComponentInParent<UnityEngine.UI.Selectable>(true)==control).ToArray();
             foreach(var t in labels) t.raycastTarget=false;
             foreach(var i in icons) { i.raycastTarget=false; i.preserveAspect=true; i.type=UnityEngine.UI.Image.Type.Simple; }
             var appearance=control.GetComponent<SharedControlAppearance>() ?? control.gameObject.AddComponent<SharedControlAppearance>();
-            appearance.Configure(kind,image,focus,selection,disabled,labels,icons);
+            appearance.Configure(kind,image,focus,labels,icons);
             if(control is UnityEngine.UI.Toggle toggle && toggle.graphic!=null) toggle.graphic.enabled=false;
             return appearance;
         }
 
-        private static UnityEngine.UI.Image Layer(Transform parent,string name,string sprite,float inset)
+        private static UnityEngine.UI.Image FocusImage(Transform parent)
         {
-            var existing=parent.Find(name);
-            var child=existing!=null?existing.gameObject:new GameObject(name,typeof(RectTransform));
-            child.transform.SetParent(parent,false);
-            var rect=(RectTransform)child.transform; rect.anchorMin=Vector2.zero; rect.anchorMax=Vector2.one;
-            rect.offsetMin=new Vector2(inset,inset); rect.offsetMax=new Vector2(-inset,-inset);
-            var image=Surface(child,sprite); image.enabled=false;
+            var existing = parent.Find("SharedFocus");
+            var child = existing != null ? existing.gameObject : new GameObject("SharedFocus", typeof(RectTransform));
+            child.transform.SetParent(parent, false);
+            child.transform.SetAsLastSibling();
+            var layout = child.GetComponent<UnityEngine.UI.LayoutElement>() ?? child.AddComponent<UnityEngine.UI.LayoutElement>();
+            layout.ignoreLayout = true;
+            var image = child.GetComponent<UnityEngine.UI.Image>() ?? child.AddComponent<UnityEngine.UI.Image>();
+            image.enabled = false;
             return image;
         }
     }

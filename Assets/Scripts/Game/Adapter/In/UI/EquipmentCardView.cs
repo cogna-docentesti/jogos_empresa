@@ -22,7 +22,6 @@ namespace Game.Adapter.In.UI
         [SerializeField] private GameObject premiumIndicator, selectionBorder, ownedIndicator;
         [SerializeField] private UnityEngine.UI.Button buyButton, removeButton;
         [SerializeField] private TextMeshProUGUI buyButtonText;
-        [SerializeField] private UnityEngine.UI.Image interactionOutline;
         public EquipmentData Equipment { get; private set; }
         public bool IsOwned { get; private set; }
         public bool IsInCart { get; private set; }
@@ -80,12 +79,6 @@ namespace Game.Adapter.In.UI
         }
         private void LateUpdate()
         {
-            var state = GetComponent<SharedControlAppearance>();
-            if (interactionOutline != null && state != null)
-            {
-                interactionOutline.enabled = state.CurrentState == "hover" || state.CurrentState == "pressed";
-                interactionOutline.color = Theme.GamePalette.WithAlpha(Theme.GamePalette.Primary, state.CurrentState == "pressed" ? .85f : .4f);
-            }
             if (nameText == null || descriptionText == null || quantityText == null) return;
             if (((RectTransform)transform).rect.width < 500)
             {

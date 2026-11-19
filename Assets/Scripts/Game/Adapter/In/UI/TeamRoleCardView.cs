@@ -15,7 +15,7 @@ namespace Game.Adapter.In.UI
             GameTypography.KeepSize(requirementText,TypographyRole.Caption);
             GameTypography.KeepSize(quantityText,TypographyRole.Table);
         }
-        [SerializeField] private UnityEngine.UI.Image portrait, environment, interactionOutline;
+        [SerializeField] private UnityEngine.UI.Image portrait, environment;
         [SerializeField] private TextMeshProUGUI nameText, salaryText, capacityText, requirementText, quantityText;
         [SerializeField] private UnityEngine.UI.Button addButton, removeButton;
         public RoleData Role { get; private set; }
@@ -51,9 +51,6 @@ namespace Game.Adapter.In.UI
         }
         private void LateUpdate()
         {
-            var state = GetComponent<SharedControlAppearance>();
-            if (interactionOutline != null && state != null)
-            { interactionOutline.enabled = state.CurrentState == "hover" || state.CurrentState == "pressed"; interactionOutline.color = Theme.GamePalette.WithAlpha(Theme.GamePalette.Primary, state.CurrentState == "pressed" ? .85f : .4f); }
             if (nameText == null || addButton == null) return;
             if (((RectTransform)transform).rect.width < 500)
             {

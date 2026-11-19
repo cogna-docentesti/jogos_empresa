@@ -1,5 +1,5 @@
 FB-02 — Corrigir a borda dupla dos controles e modais compartilhados
-Status: planejada | Prioridade: P1 | Tipo: correção
+Status: concluída | Prioridade: P1 | Tipo: correção
 Área: Global; restaurante; banco; equipamentos; calendário
 Dependências: nenhuma
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -41,7 +41,8 @@ VALIDAÇÃO PREVISTA
 1. Comparar estados normal/selecionado/foco/desabilitado nos componentes existentes; verificar o modal do calendário quando FB-25 estiver integrado.
 
 OBSERVAÇÕES E LIMITES
-1. A revisão do modal futuro também integra o aceite de FB-25; esta tarefa pode entregar primeiro a correção compartilhada.
+1. A GameScene confirmou uma superfície por controle, seleção por preenchimento e foco por traço interno em 1280×720 e 1920×1080. O QA inclui retorno ao banco e ao restaurante, reabertura do carrinho e retorno do histórico à decisão mensal.
+2. A revisão do modal futuro também integra o aceite de FB-25; esta tarefa pode entregar primeiro a correção compartilhada.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-02.json.

@@ -153,7 +153,7 @@ namespace Game.EditorTools
                 var state=Text(button.transform,"State","Pendente",822,20,134,36,GameTypography.Tokens.Label,true);Ignore(state);
                 var next=Image(button.transform,"Next","ICON_NEXT",940,66,28,28);next.color=GamePalette.Primary;Ignore(next);
                 var focus=button.transform.Find("SharedFocus").GetComponent<UnityEngine.UI.Image>();Ignore(focus);
-                button.GetComponent<SharedControlAppearance>().Configure(SharedControlKind.Secondary,button.GetComponent<UnityEngine.UI.Image>(),focus,null,null,new[]{title,detail},new[]{next});
+                button.GetComponent<SharedControlAppearance>().Configure(SharedControlKind.Secondary,button.GetComponent<UnityEngine.UI.Image>(),focus,new[]{title,detail},new[]{next});
                 var d=decisions.GetArrayElementAtIndex(i);d.FindPropertyRelative("button").objectReferenceValue=button;d.FindPropertyRelative("check").objectReferenceValue=check;d.FindPropertyRelative("tick").objectReferenceValue=tick;d.FindPropertyRelative("title").objectReferenceValue=title;d.FindPropertyRelative("detail").objectReferenceValue=detail;d.FindPropertyRelative("state").objectReferenceValue=state;d.FindPropertyRelative("destination").enumValueIndex=(int)destinations[i];
             }
             so.ApplyModifiedPropertiesWithoutUndo();

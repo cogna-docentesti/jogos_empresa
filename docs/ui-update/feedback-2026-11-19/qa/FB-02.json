@@ -1,0 +1,38 @@
+{
+  "task_id": "FB-02",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "f93c04dc",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": ["1280×720", "1920×1080"],
+  "method": "Play Mode na GameScene com SQLite e chave PlayerPrefs isolados. O roteiro percorreu os callbacks dos botões reais e enviou eventos de ponteiro, navegação e submit pelo EventSystem do uGUI. As capturas vêm da Game View. A auditoria registrou o sprite, a cor, o foco e as camadas ativas em cada estado capturado.",
+  "root_cause": [
+    "A linha de base mostrou o sprite com borda, o contorno de seleção no mesmo card e um segundo contorno maior no foco. Os cards de evento exibiam a mesma sobreposição.",
+    "Restaurante adicionava outro painel com contorno ao pressionar. Banco e equipamentos ativavam contornos locais no hover e no pressionamento. O botão Fechar do carrinho sobrepunha um contorno de foco ao próprio sprite. O painel do carrinho já usava uma única superfície modal."
+  ],
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Zero camadas de contorno legado nos controles amostrados após a correção. A escolha de restaurante permaneceu ao voltar da localização e a opção do banco reapareceu ao voltar dos equipamentos. O carrinho vazio e reaberto renderizaram uma única superfície modal. A decisão do evento permaneceu ao voltar do histórico e a consulta após confirmação manteve o realce sem reabilitar a escolha. A reaplicação do vínculo compartilhado duas vezes no card de restaurante reaproveitou o mesmo objeto de foco."
+    },
+    {
+      "criterion": 2,
+      "result": "A seleção mudou o preenchimento e o foco apareceu como um traço interno, inclusive em card com foco sem seleção. Foram capturados estados normal, hover, pressionado e desabilitado. Depois de adicionar um equipamento, os botões mantiveram seus estados sem contorno decorativo adicional. O carrinho conteve a navegação por teclado, restaurou o foco ao fechar e permitiu concluir a compra e avançar à equipe. O card da equipe usou a mesma composição compartilhada durante hover."
+    }
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-02",
+    "before": "before.json",
+    "after": "after.json",
+    "before_screenshots": 12,
+    "after_screenshots": 27,
+    "play_mode_errors_after": 0
+  },
+  "limitations": [
+    "A validação visual ocorreu no Editor instalado 6000.3.28f1. A versão versionada 6000.3.21f1 e o lockfile foram restaurados após a execução.",
+    "O fluxo de decisão existente foi verificado. O popup sobre o calendário terá validação na integração da FB-25."
+  ]
+}

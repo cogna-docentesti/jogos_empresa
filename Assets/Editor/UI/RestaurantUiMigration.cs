@@ -63,12 +63,6 @@ namespace Game.EditorTools
             foreach(var e in b.GetComponents<UnityEngine.UI.Shadow>()) e.enabled=false;
             var layout=b.GetComponent<UnityEngine.UI.LayoutGroup>(); if(layout!=null) layout.enabled=false;
         }
-        private static void InteractionTint(UnityEngine.UI.Button button)
-        {
-            var r=(RectTransform)button.transform;
-            var image=Image(r,"InteractionTint","UI_PANEL_LAVENDER",2,2,r.rect.width-4,r.rect.height-4);
-            image.color=Color.clear; image.transform.SetAsFirstSibling();
-        }
         private static UnityEngine.UI.Button Action(RestaurantScreenView v,string field,Transform p,string name,string label,float x,float w,SharedControlKind kind)
         {
             var b=Get(v,field); b.transform.SetParent(p,false); b.name=name; RetireChildren(b);
@@ -118,7 +112,7 @@ namespace Game.EditorTools
                 Flow(info.content,"TicketLabel","Ticket de referência",GameTypography.Tokens.Label);
                 var ticket=Flow(info.content,"TicketRange","—",GameTypography.Tokens.BodyStrong,true); ticket.alignment=TextAlignmentOptions.MidlineRight;
                 Text(r,"SelectionStatus","Selecionar restaurante",24,660,362,36,GameTypography.Tokens.Caption,true).alignment=TextAlignmentOptions.Center;
-                SharedUiStyles.Bind(b,SharedControlKind.Card); InteractionTint(b); view.SetRestaurantCardData(restaurant);
+                SharedUiStyles.Bind(b,SharedControlKind.Card); view.SetRestaurantCardData(restaurant);
             }
             Set(view,"hintText",Text(panel,"SelectionHint","Escolha seu restaurante e público.",24,918,1280,42,GameTypography.Tokens.Body));
             var side=Image(panel,"DecisionSidebar","UI_PANEL_IVORY",1328,112,568,848);
@@ -135,7 +129,6 @@ namespace Game.EditorTools
                 Text(r,"SegmentLabel","Classe "+(i==0?"C":i==1?"B":"A"),48,12,108,40,GameTypography.Tokens.Button,true);
                 Text(r,"Availability","Disponível",8,60,152,32,GameTypography.Tokens.Caption).alignment=TextAlignmentOptions.Center;
                 SharedUiStyles.Bind(b,SharedControlKind.Card);
-                InteractionTint(b);
             }
             var details=Scroll(side.transform,"Compatibility",24,284,520,540);
             Flow(details.content,"Title","Compatibilidade",GameTypography.Tokens.SectionTitle,true);

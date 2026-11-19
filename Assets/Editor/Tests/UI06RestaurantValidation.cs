@@ -169,10 +169,31 @@ public static class UI06RestaurantValidation
             foreach(var item in UnityEngine.Object.FindObjectsByType<ProductPricingItemView>(FindObjectsSortMode.None)) Expect(Mathf.Approximately(item.SelectedPrice,item.Product.ClampPrice(item.Product.price)),"Old menu leaked");
             Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<MenuPricingScreenView>(),"backButton").onClick.Invoke();
         });
+        Color hoverTint = Color.white;
         Add("Prepare hover",()=>{Click(Button("cardPodrao")); ExecuteEvents.Execute(Button("cardJapones").gameObject,Pointer(Button("cardJapones")),ExecuteEvents.pointerEnterHandler);});
-        Add("Hover state uses shared appearance",()=>{Expect(Button("cardJapones").GetComponent<SharedControlAppearance>().CurrentState=="hover" && Mathf.Approximately(Button("cardJapones").transform.Find("InteractionTint").GetComponent<UnityEngine.UI.Image>().color.a,.32f),"Hover"); Capture("hover-1920x1080"); ExecuteEvents.Execute(Button("cardJapones").gameObject,Pointer(Button("cardJapones")),ExecuteEvents.pointerDownHandler);});
-        Add("Pressed state uses shared appearance",()=>{Expect(Button("cardJapones").GetComponent<SharedControlAppearance>().CurrentState=="pressed" && Mathf.Approximately(Button("cardJapones").transform.Find("InteractionTint").GetComponent<UnityEngine.UI.Image>().color.a,.65f),"Pressed"); Capture("pressed-1920x1080"); ExecuteEvents.Execute(Button("cardJapones").gameObject,Pointer(Button("cardJapones")),ExecuteEvents.pointerUpHandler); ExecuteEvents.Execute(Button("cardJapones").gameObject,Pointer(Button("cardJapones")),ExecuteEvents.pointerExitHandler); Button("cardJapones").Select();});
-        Add("Keyboard focus is distinct from chosen restaurant",()=>{Expect(Button("cardJapones").GetComponent<SharedControlAppearance>().CurrentState=="focus" && Button("cardJapones").transform.Find("InteractionTint").GetComponent<UnityEngine.UI.Image>().color.a==0,"Focus"); Expect(Button("cardPodrao").GetComponent<SharedControlAppearance>().IsSelected,"Focus changed selection"); Capture("focus-1920x1080"); InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState(Key.Enter));});
+        Add("Hover tints the card surface",()=>{
+            var card = Button("cardJapones");
+            hoverTint = card.image.color;
+            Expect(card.GetComponent<SharedControlAppearance>().CurrentState == "hover" && hoverTint != Color.white, "Hover");
+            Capture("hover-1920x1080");
+            ExecuteEvents.Execute(card.gameObject, Pointer(card), ExecuteEvents.pointerDownHandler);
+        });
+        Add("Pressed state has a distinct card tint",()=>{
+            var card = Button("cardJapones");
+            Expect(card.GetComponent<SharedControlAppearance>().CurrentState == "pressed" && card.image.color != hoverTint && card.image.color != Color.white, "Pressed");
+            Capture("pressed-1920x1080");
+            ExecuteEvents.Execute(card.gameObject, Pointer(card), ExecuteEvents.pointerUpHandler);
+            ExecuteEvents.Execute(card.gameObject, Pointer(card), ExecuteEvents.pointerExitHandler);
+            card.Select();
+        });
+        Add("Keyboard focus is distinct from chosen restaurant",()=>{
+            var card = Button("cardJapones");
+            var mark = card.transform.Find("SharedFocus").GetComponent<UnityEngine.UI.Image>();
+            Expect(card.GetComponent<SharedControlAppearance>().CurrentState == "focus" && card.image.color == Color.white && mark.enabled && mark.sprite == null, "Focus");
+            Expect(Button("cardPodrao").GetComponent<SharedControlAppearance>().IsSelected, "Focus changed selection");
+            Capture("focus-1920x1080");
+            InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Enter));
+        });
         Add("Enter selects focused restaurant",()=>{InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState()); Expect(Button("cardJapones").GetComponent<SharedControlAppearance>().IsSelected,"Enter selection"); Button("btnHigh").Select();});
         Add("Arrow traversal skips unavailable public",()=>{ExecuteEvents.Execute(Button("btnHigh").gameObject,new AxisEventData(EventSystem.current){moveDir=MoveDirection.Right,moveVector=Vector2.right},ExecuteEvents.moveHandler); Expect(EventSystem.current.currentSelectedGameObject==Button("backButton").gameObject,"Navigation unavailable segment"); InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState(Key.Tab));});
         Add("Tab reaches confirm action",()=>{InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState()); Expect(EventSystem.current.currentSelectedGameObject==Button("confirmButton").gameObject,"Tab"); EventSystem.current.SetSelectedGameObject(null);});

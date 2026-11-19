@@ -104,10 +104,11 @@ public static class UI03SharedComponentsValidation
             Click(view.transform.Find("ControlsPanel/Tab").GetComponent<UnityEngine.UI.Button>());
             Click(view.transform.Find("ControlsPanel/Pill").GetComponent<UnityEngine.UI.Button>());
         });
-        Add("Selections use native controls and separate outlines",()=>{
+        Add("Selections use native controls and a tinted card surface",()=>{
             Expect(A(view.selectCard).IsSelected,"Card selection");
             Expect(view.checkbox.image.sprite.name=="checkbox_on" && view.radio.image.sprite.name=="radio_on" && view.toggle.image.sprite.name=="toggle_on","Control selection");
-            Expect(view.selectCard.transform.Find("SharedSelection").GetComponent<UnityEngine.UI.Image>().enabled,"Selection outline");
+            Expect(view.selectCard.image.sprite == SharedUiSkin.Current.Get("UI_CARD_NORMAL") && view.selectCard.image.color != Color.white,"Selected surface");
+            Expect(view.selectCard.transform.Find("SharedSelection")?.GetComponent<UnityEngine.UI.Image>().enabled != true,"Legacy selection outline");
             Capture("composition-selected-1920x1080");
             view.primary.Select(); InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState(Key.Tab));
         });

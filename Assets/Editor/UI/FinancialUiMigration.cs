@@ -129,11 +129,7 @@ namespace Game.EditorTools
                 Set(card, "installmentText", Text(r, "Installment", "", 816, 154, 484, 52, GameTypography.Tokens.Label, true));
                 Set(card, "selectionMark", Picture(r, "SelectionMark", "UI_RADIO_ON", 1280, 24, 28, 28));
                 SharedUiStyles.Bind(button, SharedControlKind.Card);
-                foreach (var n in new[] { "SharedFocus", "SharedSelection", "SharedDisabled" }) { root.transform.Find(n).gameObject.SetActive(true); Ignore(root.transform.Find(n)); }
-                root.transform.Find("SelectionMark").SetAsLastSibling(); PrefabUtility.SaveAsPrefabAsset(root, path);
-                var interaction = Picture(r, "InteractionOutline", "UI_CARD_SELECTED_OUTLINE", 0, 0, 1332, 212);
-                interaction.rectTransform.anchorMin = Vector2.zero; interaction.rectTransform.anchorMax = Vector2.one; interaction.rectTransform.offsetMin = interaction.rectTransform.offsetMax = Vector2.zero;
-                Set(card, "interactionOutline", interaction); interaction.enabled = false;
+                root.transform.Find("SelectionMark").SetAsLastSibling();
                 Font07Migration.Apply(new[] { root }, path); PrefabUtility.SaveAsPrefabAsset(root, path);
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }
