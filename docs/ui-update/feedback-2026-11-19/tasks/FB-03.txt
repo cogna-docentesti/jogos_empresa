@@ -1,5 +1,5 @@
 FB-03 — Restaurar o neon e ajustar a tela de mapa
-Status: planejada | Prioridade: P2 | Tipo: interface
+Status: concluída | Prioridade: P2 | Tipo: interface
 Área: Mapa
 Dependências: FB-01, FB-02
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -22,12 +22,14 @@ docs/ui-update/visual-contract.json
 docs/art/manifest.json
 
 REFERÊNCIAS ESPECÍFICAS
+Assets/Scripts/Game/Adapter/In/UI/MapMenuNode.cs
 Assets/Scripts/Game/Adapter/In/UI/LocationMarkerV2.cs
 Assets/Scripts/Game/Adapter/In/UI/LocationScreenV2View.cs
 Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs
 Assets/Editor/UI/LocationUiMigration.cs
 Assets/Editor/UI/ConceptUiRevision.cs
 docs/art/layouts/map-selection-compact.json
+Assets/Editor/UI/HubUiMigration.cs
 
 ESCOPO
 1. Reaproveitar o glow existente e conferir vínculos, sprite, alpha, máscara e camadas na cena atual.
@@ -43,7 +45,8 @@ VALIDAÇÃO PREVISTA
 1. Selecionar as cinco localizações por mouse/toque, retornar à tela e verificar texto longo nas resoluções de referência.
 
 OBSERVAÇÕES E LIMITES
-1. A existência de glow no código é confirmada; a causa visual do feedback deve ser reproduzida na GameScene antes de alterar propriedades.
+1. A GameScene reutiliza os glows ativos da LocationSkinV2 no MapMenuNode. Apenas a localização escolhida recebe o halo na abertura, no hub e na consulta.
+2. O QA confirmou as cinco áreas por clique e toque simulado em 1280×720, 1366×768 e 1920×1080. A lista termina no fator de preço, tem padding interno e mantém a rolagem com texto longo. As duas ações dividem o centro do rodapé.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-03.json.

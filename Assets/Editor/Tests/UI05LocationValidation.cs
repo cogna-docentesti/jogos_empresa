@@ -198,7 +198,7 @@ public static class UI05LocationValidation
             Add("Long copy fixture remains within the scroll viewport "+suffix,()=>{
                 Click(View.Zones[0].marker,-1); var e=original.Establishments.First(x=>x.Id==View.SelectedId);
                 View.ShowLocationDetails("Área Educacional com um nome extenso para aferir quebra de linha",e.Segment,
-                    string.Join(" ",Enumerable.Repeat(e.Description,5)),e.RentCost,e.InitialPhysicalCapacity,e.BaseDailyDemand,e.ReferencePriceFactor,e.CompetitionLevel,"Salão · Entrega · Retirada com atendimento agendado");
+                    string.Join(" ",Enumerable.Repeat(e.Description,5)),e.RentCost,e.InitialPhysicalCapacity,e.BaseDailyDemand,e.ReferencePriceFactor,e.CompetitionLevel);
             });
             Add("Long copy top and scrollable bounds "+suffix,()=>{
                 TextFits(); ScrollbarFits(); var scroll=Field<UnityEngine.UI.ScrollRect>(View,"detailScroll");

@@ -189,8 +189,7 @@ namespace Game.Adapter.In.Controllers
                 e.InitialPhysicalCapacity,
                 e.BaseDailyDemand,
                 e.ReferencePriceFactor,
-                e.CompetitionLevel,
-                e.Channels);
+                e.CompetitionLevel);
             view.SetConfirmEnabled(true);
         }
 

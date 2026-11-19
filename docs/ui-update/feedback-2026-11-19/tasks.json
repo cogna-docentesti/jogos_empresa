@@ -8,7 +8,7 @@
   "method": "Planejamento inicial por inspeção estática de código, catálogos e documentação. O registro de cada tarefa detalha a validação executada.",
   "historical_backlog": "docs/ui-update/tasks.json",
   "task_count": 28,
-  "planned_task_count": 24,
+  "planned_task_count": 23,
   "deferred_task_count": 1,
   "feedback_count": 47,
   "first_task": "FB-21",
@@ -779,8 +779,8 @@
       "area": "Mapa",
       "kind": "interface",
       "priority": "P2",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-01",
         "FB-02"
@@ -800,15 +800,18 @@
         "Selecionar as cinco localizações por mouse/toque, retornar à tela e verificar texto longo nas resoluções de referência."
       ],
       "references": [
+        "Assets/Scripts/Game/Adapter/In/UI/MapMenuNode.cs",
         "Assets/Scripts/Game/Adapter/In/UI/LocationMarkerV2.cs",
         "Assets/Scripts/Game/Adapter/In/UI/LocationScreenV2View.cs",
         "Assets/Scripts/Game/Adapter/In/Controllers/LocationScreenController.cs",
         "Assets/Editor/UI/LocationUiMigration.cs",
         "Assets/Editor/UI/ConceptUiRevision.cs",
-        "docs/art/layouts/map-selection-compact.json"
+        "docs/art/layouts/map-selection-compact.json",
+        "Assets/Editor/UI/HubUiMigration.cs"
       ],
       "notes": [
-        "A existência de glow no código é confirmada; a causa visual do feedback deve ser reproduzida na GameScene antes de alterar propriedades."
+        "A GameScene reutiliza os glows ativos da LocationSkinV2 no MapMenuNode. Apenas a localização escolhida recebe o halo na abertura, no hub e na consulta.",
+        "O QA confirmou as cinco áreas por clique e toque simulado em 1280×720, 1366×768 e 1920×1080. A lista termina no fator de preço, tem padding interno e mantém a rolagem com texto longo. As duas ações dividem o centro do rodapé."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-03.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-03.json",

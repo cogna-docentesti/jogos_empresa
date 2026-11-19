@@ -67,6 +67,31 @@ namespace Game.EditorTools
             return button;
         }
 
+        internal static void BindSelectionGlows(RectTransform master)
+        {
+            var skin = Resources.Load<LocationSkinV2>("LocationSkinV2");
+            var nodes = master.GetComponentsInChildren<MapMenuNode>(true);
+            var firstMarker = nodes.OrderBy(node => node.transform.parent.GetSiblingIndex()).First().transform.parent;
+            foreach (var node in nodes.Where(node => !string.IsNullOrEmpty(node.LocationId)))
+            {
+                var sprite = skin?.For(node.LocationId)?.glowActive;
+                if (sprite == null)
+                    throw new InvalidOperationException("Missing location selection glow: " + node.LocationId);
+
+                var pin = (RectTransform)node.transform.Find("MapPin");
+                var center = master.InverseTransformPoint(pin.TransformPoint(pin.rect.center));
+                const float width = 156f, height = 110f;
+                var glow = Image(master, "SelectionGlow_" + node.LocationId, null,
+                    center.x - master.rect.xMin - width / 2,
+                    master.rect.yMax - center.y - height / 2 + 5f, width, height);
+                glow.sprite = sprite;
+                glow.rectTransform.SetAsLastSibling();
+                glow.rectTransform.SetSiblingIndex(firstMarker.GetSiblingIndex());
+                Set(node, "selectionGlow", glow);
+                node.SetSelected(node.IsSelected);
+            }
+        }
+
         [MenuItem("Tools/Jogos de Empresa/UI-04/Migrate hub in GameScene")]
         public static void Apply()
         {
@@ -139,6 +164,7 @@ namespace Game.EditorTools
                     new[]{Sprite("UI_MAP_LABEL_NORMAL"),Sprite("UI_MAP_LABEL_SELECTED"),Sprite("UI_MAP_LABEL_DISABLED")});
                 root.SetAsLastSibling(); nodes.Add(node);
             }
+            BindSelectionGlows(master);
             if(panel.Find("MapLayer")!=null) panel.Find("MapLayer").gameObject.SetActive(false);
             for(int i=0;i<nodes.Count;i++)
             {

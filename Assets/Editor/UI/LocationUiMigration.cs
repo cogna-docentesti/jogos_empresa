@@ -63,6 +63,57 @@ namespace Game.EditorTools
             var t=Text(b.transform,"Label",label,16,8,w-32,52,GameTypography.Tokens.Button,true);
             t.alignment=TextAlignmentOptions.Center; SharedUiStyles.Bind(b,kind); return b;
         }
+
+        internal static void ApplyDetailAndActionLayout(Transform panel)
+        {
+            var sidebar = panel.Find("DecisionSidebar");
+            var empty = (RectTransform)sidebar.Find("Empty");
+            empty.anchorMin = empty.anchorMax = empty.pivot = new Vector2(.5f, 1f);
+            empty.anchoredPosition = new Vector2(0f, -24f);
+
+            var scroll = sidebar.Find("Details").GetComponent<UnityEngine.UI.ScrollRect>();
+            var content = scroll.content;
+            content.anchorMin = new Vector2(0f, 1f);
+            content.anchorMax = Vector2.one;
+            content.sizeDelta = new Vector2(0f, content.sizeDelta.y);
+            content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>().padding = new RectOffset(16, 16, 16, 16);
+            foreach (var name in new[] { "ChannelsLabel", "Channels" })
+            {
+                var channel = content.Find(name);
+                if (channel != null) UnityEngine.Object.DestroyImmediate(channel.gameObject);
+            }
+            foreach (var name in new[] { "Rent", "Demand", "Capacity", "Competition", "Price" })
+            {
+                var row = content.Find(name);
+                Node(row, "Label", 52f, 6f, 172f, 36f);
+                var value = (RectTransform)row.Find("Value");
+                value.anchorMin = new Vector2(0f, 1f);
+                value.anchorMax = Vector2.one;
+                value.offsetMin = new Vector2(228f, -42f);
+                value.offsetMax = new Vector2(-12f, -6f);
+            }
+
+            var footer = panel.Find("DecisionFooter");
+            var confirm = (RectTransform)(footer.Find("Confirm") ?? sidebar.Find("Confirm"));
+            confirm.SetParent(footer, false);
+            AlignAction((RectTransform)footer.Find("Back"), -1f);
+            AlignAction(confirm, 1f);
+            Node(footer, "DraftHint", 256f, 24f, 332f, 48f);
+        }
+
+        private static void AlignAction(RectTransform action, float direction)
+        {
+            const float width = 344f, gap = 20f;
+            action.anchorMin = action.anchorMax = action.pivot = new Vector2(.5f, .5f);
+            action.sizeDelta = new Vector2(width, 76f);
+            action.anchoredPosition = new Vector2(direction * (width + gap) / 2f, 0f);
+            var label = (RectTransform)action.Find("Label");
+            label.anchorMin = Vector2.zero;
+            label.anchorMax = Vector2.one;
+            label.offsetMin = new Vector2(16f, 8f);
+            label.offsetMax = new Vector2(-16f, -8f);
+        }
+
         [MenuItem("Tools/Jogos de Empresa/UI-05/Migrate location in GameScene")]
         public static void Apply()
         {
@@ -113,6 +164,7 @@ namespace Game.EditorTools
                 so.FindProperty(ids[i]+"Button").objectReferenceValue=b;
                 so.FindProperty(ids[i]+"Area").objectReferenceValue=null;
             }
+            HubUiMigration.BindSelectionGlows(master);
             so.ApplyModifiedPropertiesWithoutUndo();
             var restaurants=so.FindProperty("restaurants"); restaurants.arraySize=3;
             var restIds=new[]{"FRANCES","JAPONES","LANCHES"}; var types=new[]{RestaurantType.FRANCES,RestaurantType.JAPONES,RestaurantType.PODRAO};
@@ -148,7 +200,7 @@ namespace Game.EditorTools
             Ensure<UnityEngine.UI.Mask>(viewport).showMaskGraphic=false;
             var content=Node(viewport.transform,"Content",0,0,496,800);
             var layout=Ensure<UnityEngine.UI.VerticalLayoutGroup>(content);
-            layout.spacing=8; layout.padding=new RectOffset(0,0,0,8); layout.childControlWidth=true; layout.childControlHeight=true;
+            layout.spacing=8; layout.childControlWidth=true; layout.childControlHeight=true;
             layout.childForceExpandHeight=false; layout.childForceExpandWidth=true;
             var fit=Ensure<UnityEngine.UI.ContentSizeFitter>(content); fit.horizontalFit=UnityEngine.UI.ContentSizeFitter.FitMode.Unconstrained;
             fit.verticalFit=UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
@@ -162,8 +214,6 @@ namespace Game.EditorTools
             var capacity=Row(content,"Capacity","Capacidade inicial","ICON_TEAM");
             var competition=Row(content,"Competition","Concorrência","ICON_COMMERCE");
             var price=Row(content,"Price","Fator de preço","ICON_CASH");
-            var channelsTitle=FlowText(content,"ChannelsLabel","CANAIS",GameTypography.Tokens.Caption,true); channelsTitle.color=GamePalette.Muted;
-            var channels=FlowText(content,"Channels","Não informados",GameTypography.Tokens.Label);
             var track=Image(scrollRoot,"Scrollbar","UI_SCROLLBAR_TRACK",508,0,12,800);
             var sliding=Node(track.transform,"SlidingArea",0,0,12,800);
             var handle=Image(sliding,"Handle","UI_SCROLLBAR_THUMB",0,0,12,80,true);
@@ -175,6 +225,9 @@ namespace Game.EditorTools
             scroll.verticalScrollbar=scrollbar; scroll.verticalScrollbarVisibility=UnityEngine.UI.ScrollRect.ScrollbarVisibility.AutoHide;
             var footer=Image(panel,"DecisionFooter","UI_NAVBAR_PLUM",0,984,1920,96);
             var back=Action(footer.transform,"Back","Voltar à identificação",SharedControlKind.Secondary,24,332);
+            var existingConfirm = side.transform.Find("Confirm");
+            if (existingConfirm != null && footer.transform.Find("Confirm") == null)
+                existingConfirm.SetParent(footer.transform, false);
             var confirm=Action(footer.transform,"Confirm","Confirmar localização",SharedControlKind.Primary,1500,396);
             Text(footer.transform,"DraftHint","Escolha em rascunho",388,24,448,48,GameTypography.Tokens.Label,false,GamePalette.OnDark);
             Set(view,"regionText",region); Set(view,"hintText",hint); Set(view,"emptyStatePanel",empty.gameObject);
@@ -182,8 +235,9 @@ namespace Game.EditorTools
             Set(view,"detailZoneNameText",title); Set(view,"detailZoneSegmentText",segment); Set(view,"detailSegmentText",null);
             Set(view,"detailZoneDescriptionText",description); Set(view,"detailRentText",rent); Set(view,"detailDemandaText",demand);
             Set(view,"detailCapacidadeText",capacity); Set(view,"detailConcorrenciaText",competition); Set(view,"referencePriceText",price);
-            Set(view,"channelsText",channels); Set(view,"zoneVignette",vignette); Set(view,"detailScroll",scroll);
+            Set(view,"zoneVignette",vignette); Set(view,"detailScroll",scroll);
             Set(view,"confirmButton",confirm); Set(view,"backButton",back);
+            ApplyDetailAndActionLayout(panel);
             var controls=ids.Select(id=>nodes.Single(n=>n.LocationId==id).GetComponent<UnityEngine.UI.Button>()).Concat(new[]{back,confirm}).ToArray();
             for(int i=0;i<controls.Length;i++)
             {

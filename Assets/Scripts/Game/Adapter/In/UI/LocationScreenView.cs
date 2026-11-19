@@ -27,7 +27,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private LocationAreaComponent bankArea, storeArea, marketingArea, universityArea, condominiumArea;
         [SerializeField] private ZonePresentation[] zones = Array.Empty<ZonePresentation>();
         [SerializeField] private UnityEngine.UI.Image zoneVignette;
-        [SerializeField] private TextMeshProUGUI referencePriceText, channelsText, emptyMessage;
+        [SerializeField] private TextMeshProUGUI referencePriceText, emptyMessage;
         [SerializeField] private UnityEngine.UI.ScrollRect detailScroll;
         [SerializeField] private HubMapView.Restaurant[] restaurants = Array.Empty<HubMapView.Restaurant>();
         [SerializeField] private UnityEngine.UI.Image centerOverlay;
@@ -107,7 +107,7 @@ namespace Game.Adapter.In.UI
         public void HoverEnterArea(string id) => Area(id)?.OnHoverEnter();
         public void HoverExitArea(string id) => Area(id)?.OnHoverExit();
         public void ShowLocationDetails(string name,string segment,string description,int rent,int initialPhysicalCapacity,
-            int baseDailyDemand,float referencePriceFactor,string competition,string channels)
+            int baseDailyDemand,float referencePriceFactor,string competition)
         {
             if(infoPanel != null) infoPanel.SetActive(false);
             emptyStatePanel.SetActive(false); detailsPanel.SetActive(true);
@@ -120,7 +120,6 @@ namespace Game.Adapter.In.UI
             detailDemandaText.text=baseDailyDemand+" pedidos/dia";
             detailConcorrenciaText.text=competition;
             if(referencePriceText != null) referencePriceText.text=referencePriceFactor.ToString("0.00",Br)+"×";
-            if(channelsText != null) channelsText.text=string.IsNullOrWhiteSpace(channels) || channels=="-" ? "Não informados" : channels;
         }
     }
 }

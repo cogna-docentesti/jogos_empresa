@@ -14,6 +14,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private string locationId;
         [SerializeField] private PanelId destination;
         [SerializeField] private UnityEngine.UI.Image pin, label, tip, icon, focus;
+        [SerializeField] private UnityEngine.UI.Image selectionGlow;
         [SerializeField] private TMP_Text caption;
         [SerializeField] private Sprite[] pinStates, labelStates;
         private UnityEngine.UI.Button button;
@@ -34,7 +35,13 @@ namespace Game.Adapter.In.UI
         private void OnEnable() { hovered=pressed=false; Refresh(); }
         private void OnDisable() { hovered=pressed=false; }
         private void LateUpdate() => Refresh();
-        public void SetSelected(bool value) { selected=value; Refresh(); }
+        public void SetSelected(bool value)
+        {
+            selected = value;
+            if (selectionGlow != null)
+                selectionGlow.enabled = selected;
+            Refresh();
+        }
         public void OnPointerEnter(PointerEventData e) { hovered=e.pointerId<0; Refresh(); }
         public void OnPointerExit(PointerEventData e) { hovered=false; Refresh(); }
         public void OnPointerDown(PointerEventData e) { pressed=e.button==PointerEventData.InputButton.Left; Refresh(); }

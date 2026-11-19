@@ -125,12 +125,11 @@ namespace Game.EditorTools
         {
             var p=Find(canvas,"Panel_Location");Header(p,"DecisionHeader");Map(p);
             Move(p,"DecisionSidebar",1368,96,544,880);
-            ResizeScroll(p,"DecisionSidebar/Details",20,16,504,730);
+            ResizeScroll(p,"DecisionSidebar/Details",20,16,504,848);
             var c=Find(p,"DecisionSidebar/Details").GetComponent<UnityEngine.UI.ScrollRect>().content;
             Height(Find(c,"Vignette"),248);Type(c,"ZoneTitle",36);
             Find(c,"ZoneTitle").SetAsFirstSibling();Find(c,"Vignette").SetSiblingIndex(1);
-            // Footer children are positioned relative to the footer.
-            var b=p.Find("DecisionFooter/Confirm")??Find(p,"DecisionSidebar/Confirm");b.SetParent(Find(p,"DecisionSidebar"),false);b.name="Confirm";Place(b,24,770,496,76);
+            LocationUiMigration.ApplyDetailAndActionLayout(p);
         }
         static void Restaurant()
         {

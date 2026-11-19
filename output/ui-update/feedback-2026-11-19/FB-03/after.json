@@ -1,0 +1,1594 @@
+{
+  "engine": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "completed": true,
+  "errors": [],
+  "runs": [
+    {
+      "name": "viewport-1280-1366",
+      "observation": "Os ciclos em 1280×720 e 1366×768 terminaram. O roteiro parou posteriormente no toque Educacional em 1920×1080.",
+      "checks": 20
+    },
+    {
+      "name": "viewport-1920",
+      "observation": "O ciclo em 1920×1080 terminou. A rodada seguinte, em 1280×720, recebeu um evento de um segundo ponteiro durante um toque e interrompeu o roteiro.",
+      "checks": 10
+    },
+    {
+      "name": "navigation",
+      "observation": "A rodada final verificou o rodapé corrigido nas três resoluções, o retorno pelas duas telas, o mapa do hub e a localização em consulta.",
+      "checks": 19
+    }
+  ],
+  "checks": [
+    {
+      "id": "university",
+      "pointer": "mouse",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "bank",
+      "pointer": "mouse",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "store",
+      "pointer": "mouse",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "condominium",
+      "pointer": "mouse",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "marketing",
+      "pointer": "mouse",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "store",
+      "pointer": "touch",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "marketing",
+      "pointer": "touch",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "condominium",
+      "pointer": "touch",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "bank",
+      "pointer": "touch",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "university",
+      "pointer": "touch",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "university",
+      "pointer": "mouse",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "bank",
+      "pointer": "mouse",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "store",
+      "pointer": "mouse",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "condominium",
+      "pointer": "mouse",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "marketing",
+      "pointer": "mouse",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "store",
+      "pointer": "touch",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "marketing",
+      "pointer": "touch",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "condominium",
+      "pointer": "touch",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "bank",
+      "pointer": "touch",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "university",
+      "pointer": "touch",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "viewport-1280-1366"
+    },
+    {
+      "id": "university",
+      "pointer": "mouse",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "bank",
+      "pointer": "mouse",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "store",
+      "pointer": "mouse",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "condominium",
+      "pointer": "mouse",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "marketing",
+      "pointer": "mouse",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "store",
+      "pointer": "touch",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "marketing",
+      "pointer": "touch",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "condominium",
+      "pointer": "touch",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "bank",
+      "pointer": "touch",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "university",
+      "pointer": "touch",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "viewport-1920"
+    },
+    {
+      "id": "university",
+      "pointer": "layout",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "bank",
+      "pointer": "layout",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "store",
+      "pointer": "layout",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "condominium",
+      "pointer": "layout",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "marketing",
+      "pointer": "layout",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "university",
+      "pointer": "layout",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "bank",
+      "pointer": "layout",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "store",
+      "pointer": "layout",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "condominium",
+      "pointer": "layout",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "marketing",
+      "pointer": "layout",
+      "width": 1280,
+      "height": 720,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "university",
+      "pointer": "layout",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "bank",
+      "pointer": "layout",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "bank",
+          "sprite": "selection_bank",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_bank",
+        "sprite": "glow-financeira-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 17
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "store",
+      "pointer": "layout",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "store",
+          "sprite": "selection_store",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_store",
+        "sprite": "glow-comercial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 18
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "condominium",
+      "pointer": "layout",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "condominium",
+          "sprite": "selection_condominium",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_condominium",
+        "sprite": "glow-residencial-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 19
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "marketing",
+      "pointer": "layout",
+      "width": 1366,
+      "height": 768,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "marketing",
+          "sprite": "selection_marketing",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_marketing",
+        "sprite": "glow-corporativa-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 20
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "university",
+      "pointer": "return from restaurant",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "university",
+      "pointer": "return from identification",
+      "width": 1920,
+      "height": 1080,
+      "channels": false,
+      "padding": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "offsets": [
+        -182.0,
+        182.0
+      ],
+      "enabledOverlays": [
+        {
+          "id": "university",
+          "sprite": "selection_university",
+          "enabled": true,
+          "alpha": 1.0
+        }
+      ],
+      "enabledGlow": {
+        "name": "SelectionGlow_university",
+        "sprite": "glow-educacional-active",
+        "alpha": 1.0,
+        "culled": false,
+        "order": 16
+      },
+      "run": "navigation"
+    },
+    {
+      "id": "bank",
+      "pointer": "hub",
+      "width": 1920,
+      "height": 1080,
+      "glow": "glow-financeira-active",
+      "run": "navigation"
+    },
+    {
+      "id": "bank",
+      "pointer": "read-only",
+      "width": 1920,
+      "height": 1080,
+      "glow": "glow-financeira-active",
+      "nonOverlappingHint": true,
+      "hint": "Localização confirmada · consulta",
+      "run": "navigation"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "task_id": "FB-03",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "f0533ebd",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280×720",
+    "1366×768",
+    "1920×1080"
+  ],
+  "method": "Play Mode na GameScene com SQLite e chave PlayerPrefs isolados. Os cliques passaram pelo raycast e pelos eventos do uGUI sobre os polígonos. Os toques foram injetados em um Touchscreen do Input System e processados pelo módulo de entrada da cena sobre os rótulos. As capturas mostram a Game View. O hub e a consulta usaram uma sessão ativa de teste em memória. O relatório reúne ciclos completos por resolução e uma rodada de navegação.",
+  "root_cause": [
+    "O marcador ativo era MapMenuNode. Ao escolher uma área, a cena acendia o pino e o polígono violeta. Os sprites de neon estavam ligados à apresentação antiga, desativada na GameScene.",
+    "O botão de confirmação ficava no painel lateral e o botão de voltar ficava à esquerda no rodapé. A lista tinha zero padding lateral e o campo Canais prolongava seu conteúdo."
+  ],
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Em cada resolução, foi possível escolher as cinco áreas com clique e toque e acender o sprite da área correspondente. A auditoria encontrou um único glow ativo por seleção, com alpha 1, atrás dos pinos, visível sob a máscara e sem interceptar o raycast. O destaque reapareceu ao retornar da identificação e do restaurante. O mapa do hub e a localização em consulta exibiram o glow da área confirmada."
+    },
+    {
+      "criterion": 2,
+      "result": "Voltar e Confirmar têm a mesma altura e formam um grupo de ações centralizado no rodapé. Os dois alvos responderam ao raycast. Na consulta, o aviso ficou à direita do botão Voltar do hub com separação entre suas áreas. A descrição e os indicadores respeitaram os 16 px de padding no quadro de referência. Com título e descrição alongados, a lista continuou rolável até o fator de preço e as ações permaneceram visíveis."
+    },
+    {
+      "criterion": 3,
+      "result": "A hierarquia de detalhes termina no fator de preço. O layout recalcula a altura após excluir as duas linhas de Canais. A rolagem longa termina com 16 px de margem sob a última linha."
+    }
+  ],
+  "limitations": [
+    "O toque foi simulado pelo Input System no Editor. O ensaio usou Unity 6000.3.28f1, a versão instalada. A versão do projeto e o lockfile foram restaurados após a execução."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-03",
+    "before": "before.json",
+    "after": "after.json",
+    "before_screenshots": 3,
+    "after_screenshots": 17,
+    "mouse_selections": 15,
+    "touch_selections": 15,
+    "play_mode_errors_after": 0
+  }
+}
