@@ -26,6 +26,7 @@ namespace Game.Adapter.In.UI
         public EquipmentData Equipment { get; private set; }
         public bool IsOwned { get; private set; }
         public bool IsInCart { get; private set; }
+        public RectTransform AddAction => buyButton != null ? (RectTransform)buyButton.transform : null;
         private bool available;
         public event Action<EquipmentCardView> SelectionRequested;
         public float RequiredHeight { get; private set; } = 360;
@@ -78,7 +79,8 @@ namespace Game.Adapter.In.UI
             if (statusText != null) statusText.text = IsOwned ? "Adquirido" : !GameSessionState.HasActiveSession ? "Sessão indisponível"
                 : !available ? "Requer os 8 básicos" : IsInCart ? "No carrinho" : "Disponível";
         }
-        private void LateUpdate()
+        private void LateUpdate() => RefreshLayout();
+        public void RefreshLayout()
         {
             var state = GetComponent<SharedControlAppearance>();
             if (interactionOutline != null && state != null)

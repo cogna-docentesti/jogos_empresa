@@ -25,6 +25,10 @@ namespace Game.Adapter.In.UI
         [SerializeField] private GameObject emptyTeam, catalogError;
         private readonly List<TeamRoleCardView> cards = new();
         private TextMeshProUGUI footerText;
+        public UnityEngine.UI.ScrollRect TutorialScroll => catalogScroll;
+        public RectTransform PayrollHighlight => payrollText.rectTransform;
+        public RectTransform RequirementsHighlight => requirementsText.rectTransform;
+        public RectTransform ConfirmHighlight => (RectTransform)confirmButton.transform;
 
         public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && catalogScroll != null
             && confirmButton != null && roleVisuals.Length == 5 && roleVisuals.All(v => v != null
