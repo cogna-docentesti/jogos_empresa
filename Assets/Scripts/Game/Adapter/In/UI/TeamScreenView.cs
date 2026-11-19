@@ -44,7 +44,7 @@ namespace Game.Adapter.In.UI
         }
         public void SetContext(bool setup, string restaurant)
         {
-            stepText.text = setup ? "PASSO 7 DE 7  •  EQUIPE" : "GESTÃO DE EQUIPE";
+            stepText.text = setup ? "EQUIPE" : "GESTÃO DE EQUIPE";
             contextText.text = restaurant;
             confirmLabel.text = setup ? "Confirmar equipe e abrir hub" : "Concluir visita";
             if (catalogScroll != null) { catalogScroll.StopMovement(); catalogScroll.verticalNormalizedPosition = 1; }

@@ -131,7 +131,7 @@ namespace Game.EditorTools
             var bg=Image(panel,"DecisionBackground",null,0,0,1920,1080);bg.color=GamePalette.Surface;bg.transform.SetAsFirstSibling();
             var header=Image(panel,"DecisionHeader","UI_TOPBAR_VIOLET",0,0,1920,88);
             Set(view,"titleText",Text(header.transform,"Title","Cardápio e preços",24,14,1050,60,GameTypography.Tokens.ScreenTitle,true,GamePalette.OnDark));
-            var step=Text(header.transform,"Step","PASSO 4 DE 7 · CARDÁPIO",1160,24,736,40,GameTypography.Tokens.Label,true,GamePalette.OnDark);step.alignment=TextAlignmentOptions.MidlineRight;Set(view,"stepText",step);
+            var step=Text(header.transform,"Step","CARDÁPIO",1160,24,736,40,GameTypography.Tokens.Label,true,GamePalette.OnDark);step.alignment=TextAlignmentOptions.MidlineRight;Set(view,"stepText",step);
             Set(view,"restaurantText",Text(panel,"Restaurant","Defina o preço de cada produto",24,112,1280,48,GameTypography.Tokens.SectionTitle,true));
             var products=Scroll(panel,"Products",24,176,1280,736);Set(view,"productsScrollRect",products);Set(view,"productItemsContainer",products.content);
             var so=new SerializedObject(view);so.FindProperty("productItemHeight").floatValue=228;so.FindProperty("productItemSpacing").floatValue=16;so.ApplyModifiedPropertiesWithoutUndo();

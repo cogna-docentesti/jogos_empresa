@@ -65,14 +65,14 @@ namespace Game.EditorTools
             Off(h,"Brand","Title","GameTitle","GameSubtitle","Step","Context","Period","Round","RegionText","TopBar");
             Picture(h,"ConceptMark","ICON_COMMERCE",24,16,54,54).color=GamePalette.OnDark;
             Label(h,"ConceptBrand","Jogos de Empresa",100,12,480,64,new TypographyToken(TypographyRole.Brand,44),true,GamePalette.OnDark);
-            Label(h,"ConceptSubtitle","GESTÃO DE RESTAURANTES",600,22,400,44,new TypographyToken(TypographyRole.Caption,22),false,GamePalette.OnDark);
+            string screenTitle=path=="IdentificationHeader"?"IDENTIFICAÇÃO":p.name switch {
+                "Panel_Location"=>"LOCALIZAÇÃO","Panel_Restaurant"=>"RESTAURANTE",
+                "Panel_MenuPricing"=>"CARDÁPIO","Panel_Financial"=>"BANCO",
+                "Panel_Equipment"=>"EQUIPAMENTOS","Panel_Team"=>"EQUIPE",_=>string.Empty};
+            var context=Label(h,"ConceptSubtitle",string.IsNullOrEmpty(screenTitle)?"GESTÃO DE RESTAURANTES":screenTitle,
+                600,22,456,44,new TypographyToken(TypographyRole.Caption,22),false,GamePalette.OnDark);
             var hud=Ensure<ConceptHudView>(h);
-            Set(hud,"context",Find(h,"ConceptSubtitle").GetComponent<TMP_Text>());
-            string setup=PathOf(p).Contains("Panel_Identification")?"PASSO 1 DE 7 · IDENTIFICAÇÃO":p.name switch {
-                "Panel_Location"=>"PASSO 2 DE 7 · LOCALIZAÇÃO","Panel_Restaurant"=>"PASSO 3 DE 7 · RESTAURANTE",
-                "Panel_MenuPricing"=>"PASSO 4 DE 7 · CARDÁPIO","Panel_Financial"=>"PASSO 5 DE 7 · BANCO",
-                "Panel_Equipment"=>"PASSO 6 DE 7 · EQUIPAMENTOS","Panel_Team"=>"PASSO 7 DE 7 · EQUIPE",_=>null};
-            var contextSo=new SerializedObject(hud);contextSo.FindProperty("setupContext").stringValue=setup;contextSo.ApplyModifiedPropertiesWithoutUndo();
+            Set(hud,"context",context);
             string[] names={"Month","Cash","Score"};string[] icons={"ICON_CALENDAR","ICON_CASH","ICON_STAR"};
             float[] xx={1080,1314,1600};float[] ww={220,272,144};string[] fields={"month","cash","score"};
             for(int i=0;i<3;i++)

@@ -154,7 +154,7 @@ namespace Game.Adapter.In.UI
             ApplyTypography();
             if (stepText != null)
             {
-                stepText.text = review ? "GESTÃO · REVISÃO DO CARDÁPIO" : "PASSO 4 DE 7 · CARDÁPIO";
+                stepText.text = review ? "GESTÃO · REVISÃO DO CARDÁPIO" : "CARDÁPIO";
                 stepText.rectTransform.anchoredPosition = new Vector2(review ? 680 : 1160, -24);
                 stepText.rectTransform.sizeDelta = new Vector2(review ? 750 : 736, 40);
             }

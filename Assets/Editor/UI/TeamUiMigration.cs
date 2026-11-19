@@ -92,7 +92,7 @@ namespace Game.EditorTools
             var view = Ensure<TeamScreenView>(panel); Set(Ensure<TeamScreenController>(panel), "view", view);
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88); Retire(header.transform);
             Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "stepText", Text(header.transform, "Context", "PASSO 7 DE 7  •  EQUIPE", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "stepText", Text(header.transform, "Context", "EQUIPE", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
             Text(panel, "TitleText", "Equipe e RH", 24, 112, 1000, 56, GameTypography.Tokens.ScreenTitle, true);
             Set(view, "contextText", Text(panel, "ContextText", "", 24, 172, 1000, 32, GameTypography.Tokens.Body));
             Set(view, "hintText", Text(panel, "Guidance", "", 1056, 116, 840, 88, GameTypography.Tokens.Body));

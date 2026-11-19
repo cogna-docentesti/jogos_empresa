@@ -54,7 +54,7 @@ namespace Game.Adapter.In.UI
         }
         public void SetContext(bool setup, string restaurant)
         {
-            if (stepText != null) stepText.text = setup ? "PASSO 6 DE 7  •  EQUIPAMENTOS" : "LOJA DE EQUIPAMENTOS";
+            if (stepText != null) stepText.text = setup ? "EQUIPAMENTOS" : "LOJA DE EQUIPAMENTOS";
             if (contextText != null) contextText.text = GameSessionState.HasSession ? restaurant + "  •  Uma unidade por equipamento" : "Sessão indisponível";
             if (bankBackButton != null) bankBackButton.gameObject.SetActive(setup);
             if (confirmLabel != null) confirmLabel.text = setup ? "Continuar para equipe" : "Concluir visita";

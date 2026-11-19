@@ -254,7 +254,7 @@ namespace Game.EditorTools
             Solid(bar, Hex(LocationMockupTokens.HexChrome), raycast: true);
 
             BuildCrest(bar);
-            BuildStepLabel(bar);
+            BuildScreenName(bar);
 
             var title = Node(bar, "Title");
             At(title, new Vector2(0.5f, 1f), new Vector2(0.5f, 0.5f), 1200f, 90f, 0f, -60f);
@@ -294,23 +294,15 @@ namespace Game.EditorTools
 
             var pin = Node(crest, "Icon");
             Stretch(pin, 27f, 27f, 27f, 27f);
-            Pic(pin, Icon("Location"), Hex(LocationMockupTokens.HexGoldStep));
+            Pic(pin, Icon("Location"), Hex(LocationMockupTokens.HexGoldLocationIcon));
         }
 
-        private static void BuildStepLabel(RectTransform bar)
+        private static void BuildScreenName(RectTransform bar)
         {
-            var step = Node(bar, "StepLabel");
-            At(step, new Vector2(0f, 1f), new Vector2(0f, 0.5f), 700f, 40f, 180f, -65f);
-
-            // No mockup so "ETAPA 1 DE 4" e dourado; o separador e a palavra
-            // LOCALIZACAO sao brancos. Duas cores numa linha so = rich text.
-            string text = "<color=" + LocationMockupTokens.HexGoldStep + ">ETAPA 1 DE 4</color>"
-                        + "  <color=" + LocationMockupTokens.HexInk + ">\u00B7  LOCALIZA\u00C7\u00C3O</color>";
-
-            var label = Label(step, text, LocationMockupTokens.FontStep, FontStyles.Bold,
-                              Hex(LocationMockupTokens.HexInk), TextAlignmentOptions.MidlineLeft);
-            label.richText         = true;
-            label.characterSpacing = 6f;
+            var name = Node(bar, "ScreenName");
+            At(name, new Vector2(0f, 1f), new Vector2(0f, 0.5f), 260f, 40f, 180f, -65f);
+            Label(name, "LOCALIZA\u00C7\u00C3O", LocationMockupTokens.FontScreenName, FontStyles.Bold,
+                  Hex(LocationMockupTokens.HexInk), TextAlignmentOptions.MidlineLeft);
         }
 
         private static void BuildOrnament(RectTransform bar, string name, int side)

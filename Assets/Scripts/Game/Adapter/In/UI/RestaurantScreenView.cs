@@ -72,7 +72,7 @@ namespace Game.Adapter.In.UI
                 foreach(var card in new[]{cardPodrao,cardJapones,cardFrances})
                     if(card.transform.Find("SelectedCheck")?.gameObject.activeSelf!=true)SetChildText(card,"SelectionStatus","Consulta");
             }
-            var step=transform.Find("DecisionHeader/Step")?.GetComponent<TMP_Text>();if(step!=null)step.text=review?"REVISÃO · RESTAURANTE E PÚBLICO":"PASSO 3 DE 7 · RESTAURANTE";
+            var step=transform.Find("DecisionHeader/Step")?.GetComponent<TMP_Text>();if(step!=null)step.text=review?"REVISÃO · RESTAURANTE E PÚBLICO":"RESTAURANTE";
             var choice=transform.Find("ChoiceTitle")?.GetComponent<TMP_Text>();if(choice!=null)choice.text=review?"Proposta confirmada":"Qual é a sua proposta?";
             var title=transform.Find("DecisionSidebar/Title")?.GetComponent<TMP_Text>();if(title!=null)title.text=review?"Público confirmado":"Quem você vai atender?";
             var help=transform.Find("DecisionSidebar/Help")?.GetComponent<TMP_Text>();if(help!=null)help.text=review?"Consulte a classe definida para o seu restaurante.":"Escolha uma classe disponível para o restaurante selecionado.";

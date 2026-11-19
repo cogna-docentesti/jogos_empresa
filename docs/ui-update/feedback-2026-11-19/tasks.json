@@ -4,11 +4,11 @@
   "created_at": "2026-11-19",
   "title": "Feedbacks de interface e novo calendário mensal",
   "status": "em execução",
-  "implementation_performed": false,
-  "method": "Inspeção estática de código, catálogos e documentação; sem execução ou alteração do jogo.",
+  "implementation_performed": true,
+  "method": "Planejamento inicial por inspeção estática de código, catálogos e documentação. O registro de cada tarefa detalha a validação executada.",
   "historical_backlog": "docs/ui-update/tasks.json",
   "task_count": 28,
-  "planned_task_count": 26,
+  "planned_task_count": 25,
   "deferred_task_count": 1,
   "feedback_count": 47,
   "first_task": "FB-21",
@@ -675,8 +675,8 @@
       "area": "Global",
       "kind": "interface",
       "priority": "P2",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [],
       "objective": "Retirar a informação “Passo X de Y” de todas as telas, preservando títulos e navegação.",
       "scope": [
@@ -698,7 +698,10 @@
         "Assets/Editor/UI/MenuPricingUiMigration.cs",
         "docs/ui-update/visual-contract.json"
       ],
-      "notes": [],
+      "notes": [
+        "A abertura, o retorno à identificação e as consultas foram verificados na GameScene em 1280×720 e 1920×1080, com capturas reais do Editor.",
+        "A rotina de cabeçalho do gerador compartilhado foi reaplicada duas vezes por tela. A auditoria estática confirmou os demais geradores e a preservação dos IDs e referências."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-01.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-01.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-01",

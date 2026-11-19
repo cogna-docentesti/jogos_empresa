@@ -91,7 +91,7 @@ namespace Game.Adapter.In.UI
         public void SetStep(int current, int total, string screenName)
         {
             if (stepLabel != null)
-                stepLabel.text = $"ETAPA {current} DE {total}  \u00B7  {screenName.ToUpperInvariant()}";
+                stepLabel.text = screenName.ToUpperInvariant();
         }
 
         public void SetTitle(string title, string subtitle)

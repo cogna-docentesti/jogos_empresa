@@ -80,7 +80,7 @@ namespace Game.EditorTools
             var view = panel.GetComponent<FinancialScreenView>();
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88); Retire(header.transform);
             Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 700, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "stepText", Text(header.transform, "Context", "PASSO 5 DE 7  •  BANCO E CAPITAL", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "stepText", Text(header.transform, "Context", "BANCO E CAPITAL", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
             Set(view, "titleText", Text(panel, "TitleText", "Banco CogCred", 24, 112, 740, 64, GameTypography.Tokens.ScreenTitle, true));
             Text(panel, "CapitalLabel", "Capital inicial", 1000, 112, 400, 32, GameTypography.Tokens.Label);
             Set(view, "capitalValueText", Text(panel, "CapitalValue", "Indisponível", 1000, 148, 400, 48, GameTypography.Tokens.SectionTitle, true));

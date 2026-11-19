@@ -93,7 +93,7 @@ namespace Game.EditorTools
             var bg=Image(panel,"DecisionBackground",null,0,0,1920,1080); bg.color=GamePalette.Surface; bg.transform.SetAsFirstSibling();
             var header=Image(panel,"DecisionHeader","UI_TOPBAR_VIOLET",0,0,1920,88);
             Text(header.transform,"Title","Restaurante e público",24,14,1050,60,GameTypography.Tokens.ScreenTitle,true,GamePalette.OnDark);
-            Text(header.transform,"Step","PASSO 3 DE 7 · RESTAURANTE",1210,24,686,40,GameTypography.Tokens.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
+            Text(header.transform,"Step","RESTAURANTE",1210,24,686,40,GameTypography.Tokens.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
             Text(panel,"ChoiceTitle","Qual é a sua proposta?",24,112,1280,48,GameTypography.Tokens.SectionTitle,true);
             var data=Resources.LoadAll<RestaurantData>("Restaurants");
             var types=new[]{RestaurantType.PODRAO,RestaurantType.JAPONES,RestaurantType.FRANCES};

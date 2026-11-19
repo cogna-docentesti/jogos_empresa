@@ -96,7 +96,7 @@ namespace Game.EditorTools
             Paint(header, "hud/bars/topbar_violet.png", false);
             Label(header, "GameTitle", "Jogos de Empresa", 40, 18, 410, 52, new TypographyToken(TypographyRole.Brand,36), Ivory, true);
             Label(header, "GameSubtitle", "Gestão de restaurantes", 470, 28, 510, 36, 24, Ivory);
-            Label(header, "Step", "PASSO 1 DE 7  ·  Identificação", 1230, 28, 630, 36, new TypographyToken(TypographyRole.Navigation,24), Ivory, true);
+            Label(header, "Step", "IDENTIFICAÇÃO", 1230, 28, 630, 36, new TypographyToken(TypographyRole.Navigation,24), Ivory, true);
 
             var form = design.Find("Popup") as RectTransform;
             Place(form, 1180, 184, 650, 772);
@@ -146,21 +146,11 @@ namespace Game.EditorTools
             }
             Navigation(name, ra, button); Navigation(ra, button, name); Navigation(button, name, ra);
 
-            // Keep existing indicators in place; only their numbering changes in UI-01.
-            foreach (var text in canvas.GetComponentsInChildren<TMP_Text>(true))
-                if (text.name == "StepsText" && text.text.Contains("de 6"))
-                {
-                    var match = System.Text.RegularExpressions.Regex.Match(text.text, @"Etapa (\d) de 6");
-                    if (match.Success) text.text = "Passo " + (int.Parse(match.Groups[1].Value) + 1) + " de 7";
-                }
             var listener = UnityEngine.Object.FindFirstObjectByType<UIStateListener>();
             var listenerSO = new SerializedObject(listener);
             listenerSO.FindProperty("identificationPanel").objectReferenceValue = panel.gameObject;
             listenerSO.FindProperty("initialTeamPanel").objectReferenceValue = canvas.transform.Find("Panel_Team").gameObject;
             listenerSO.ApplyModifiedPropertiesWithoutUndo();
-            var team = canvas.transform.Find("Panel_Team");
-            if (!team.GetComponentsInChildren<TMP_Text>(true).Any(t => t.name == "StepsText"))
-                Label(team, "StepsText", "Passo 7 de 7", 24, 16, 300, 40, 24, Ivory);
             // Only the identification should be visible before services pick the entry state.
             foreach (var child in canvas.transform.Cast<Transform>())
                 if (child.name.StartsWith("Panel_")) child.gameObject.SetActive(child == panel);

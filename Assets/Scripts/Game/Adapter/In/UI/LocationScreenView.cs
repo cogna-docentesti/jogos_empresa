@@ -47,7 +47,7 @@ namespace Game.Adapter.In.UI
         {
             confirmButton.gameObject.SetActive(!review);backButton.gameObject.SetActive(!review);
             if(review){confirmButton.interactable=false;foreach(var button in new[]{bankButton,storeButton,marketingButton,universityButton,condominiumButton})button.interactable=false;}
-            var step=transform.Find("DecisionHeader/Step")?.GetComponent<TMP_Text>();if(step!=null)step.text=review?"REVISÃO · LOCALIZAÇÃO":"PASSO 2 DE 7 · LOCALIZAÇÃO";
+            var step=transform.Find("DecisionHeader/Step")?.GetComponent<TMP_Text>();if(step!=null)step.text=review?"REVISÃO · LOCALIZAÇÃO":"LOCALIZAÇÃO";
             var title=transform.Find("DecisionHeader/Title")?.GetComponent<TMP_Text>();if(title!=null)title.text=review?"Localização confirmada":"Escolha sua localização";
             var legend=transform.Find("AvailableLegendLabel")?.GetComponent<TMP_Text>();if(legend!=null)legend.text=review?"Outras áreas":"Disponível";
             var footer=transform.Find("DecisionFooter/DraftHint")?.GetComponent<TMP_Text>();if(footer!=null)footer.text=review?"Localização confirmada · consulta":"Escolha em rascunho";

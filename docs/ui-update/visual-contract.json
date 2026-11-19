@@ -8,7 +8,13 @@
     "evidence": "output/ui-update/concept-revision/index.html",
     "note": "Geometrias descritas nas tarefas e QAs anteriores são históricas; o quadro uniforme 1920x1080 e as regras de negócio permanecem."
   },
-  "date": "2026-10-18",
+  "header_revision": {
+    "task": "FB-01",
+    "date": "2026-11-19",
+    "rule": "Os cabeçalhos apresentam o nome da tela ou seu contexto de gestão e consulta, sem contagem de passos na abertura ou no retorno. As ações, a navegação e os indicadores do mês permanecem no cabeçalho conforme a tela.",
+    "historical_records": "As referências a contagens de passos em UI-01 a UI-20, FONT-01 a FONT-10 e capturas anteriores documentam a interface da época."
+  },
+  "date": "2026-11-19",
   "status": "Tipografia FONT-01 a FONT-10 homologada no escopo documentado: cinco viewports do Editor e renderização/fluxo no Windows Player. Encerramento nativo Windows falha e não está homologado. APK Android gerado; aparelho não testado.",
   "source_of_truth": [
     "docs/art/tokens.json",
@@ -332,7 +338,7 @@
     ],
     "scaler": "Scale With Screen Size, referência 1920x1080, Screen Match Mode Expand. A escala do Canvas usa o menor fator entre largura e altura, evitando um canvas menor que o quadro autoral em 16:10; scalers secundários herdados permanecem desativados.",
     "safe_area": "Screen.safeArea é convertida para coordenadas do Canvas e aplicada uma vez ao quadro comum. A escala uniforme é o menor fator entre largura/1920 e altura/1080 da área disponível. SafeAreaFitter nos filhos diretos do Canvas é desativado pelo enquadramento central; fitters aninhados específicos são preservados. QA distingue a simulação no Editor de execução em aparelho Android.",
-    "migration_notes": "Dimensões de controles e cards preservadas na migração dos scalers; cabeçalhos/caixas de texto baixos corrigidos. Alturas de cabeçalhos legados são exceções temporárias por tela; 88px segue o padrão de novas composições. Botão Confirmar do Banco separado de Menu. UI-09: cabeçalho do Banco corrigido para 88 px; passo 5 somente na abertura e gestão nas revisitas. UI-20: Expand e quadro comum substituem match Height=1 como contrato efetivo; espaços excedentes usam ameixa. Nenhum dado econômico, tamanho autoral ou PNG foi alterado.",
+    "migration_notes": "Dimensões de controles e cards preservadas na migração dos scalers; cabeçalhos/caixas de texto baixos corrigidos. Alturas de cabeçalhos legados são exceções temporárias por tela; 88px segue o padrão de novas composições. Botão Confirmar do Banco separado de Menu. UI-09: cabeçalho do Banco corrigido para 88 px. FB-01: título do Banco na abertura e nas revisitas, com os indicadores do mês no HUD. UI-20: Expand e quadro comum substituem match Height=1 como contrato efetivo; espaços excedentes usam ameixa. Nenhum dado econômico, tamanho autoral ou PNG foi alterado.",
     "production_frame": "ProductionCanvasLayout preserva as hierarquias e interpreta anchors/offsets originais no quadro autoral 1920x1080. Painéis, HUD, histórico, feedback e Sair compartilham uma transformação uniforme, centrada na área segura. Em proporções diferentes de 16:9, o espaço excedente fica com GamePalette.Background (ameixa), sem cortar a coluna direita nem separar controles globais do rodapé."
   },
   "mandatory_review_on_every_screen": [
@@ -357,7 +363,7 @@
   ],
   "logic_constraints": [
     "Manter os valores numéricos existentes de GameState e PanelId; adicionar novos sem renumerar os atuais.",
-    "Identificação é passo 1; manter nomes D1-D6 como IDs/códigos históricos para não quebrar vínculos.",
+    "Identificação abre a campanha. Preservar os nomes D1-D6 como IDs históricos vinculados ao fluxo.",
     "Identificação permanece em PlayerPrefs; decisões iniciais continuam rascunho até confirmar o cardápio e persistir no SQLite.",
     "Campanha permanece com 3 meses; não alterar economia, IDs, salários, custos, juros ou regras de simulação para adaptar telas.",
     "Config_Review continua técnico; telas de eventos/resultados que exigem leitura/ação aguardam o usuário.",

@@ -38,13 +38,6 @@ namespace Game.EditorTools
                     HeaderText(header,"TitleText",32,12,800,60,TextAlignmentOptions.MidlineLeft);
                     HeaderText(header,"RegionText",32,12,800,60,TextAlignmentOptions.MidlineLeft);
                     HeaderText(header,"HintText",32,84,1800,60,TextAlignmentOptions.TopLeft);
-                    var steps=header.Find("StepsText") as RectTransform;
-                    if(steps!=null)
-                    {
-                        steps.anchorMin=steps.anchorMax=new Vector2(1,1); steps.pivot=new Vector2(1,1);
-                        steps.anchoredPosition=new Vector2(-32,-24); steps.sizeDelta=new Vector2(420,32);
-                        steps.GetComponent<TMP_Text>().alignment=TextAlignmentOptions.MidlineRight;
-                    }
                 }
             }
             var canvas=scene.GetRootGameObjects().First(g=>g.name=="Canvas");

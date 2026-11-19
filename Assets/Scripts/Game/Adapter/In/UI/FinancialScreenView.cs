@@ -23,7 +23,7 @@ namespace Game.Adapter.In.UI
         {
             if (stepText != null) stepText.text = management
                 ? GameSessionState.HasSession ? $"GESTÃO FINANCEIRA  •  MÊS {GameSessionState.Current.currentRound} DE 3" : "GESTÃO FINANCEIRA  •  SESSÃO INDISPONÍVEL"
-                : "PASSO 5 DE 7  •  BANCO E CAPITAL";
+                : "BANCO E CAPITAL";
         }
         public void SetInitialCapital(float? value) { if (capitalValueText != null) capitalValueText.text = value.HasValue ? Money(value.Value) : "Indisponível"; }
         public void SetCash(float? value) { if (cashValueText != null) cashValueText.text = value.HasValue ? Money(value.Value) : "Indisponível"; }

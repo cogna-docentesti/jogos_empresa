@@ -140,7 +140,7 @@ namespace Game.EditorTools
             var view = panel.GetComponent<EquipmentScreenView>();
             var header = Picture(panel, "Header", "UI_TOPBAR_VIOLET", 0, 0, 1920, 88); Retire(header.transform);
             Text(header.transform, "Brand", "Jogos de Empresa", 24, 18, 800, 60, GameTypography.Tokens.BrandTitle, true, GamePalette.OnDark);
-            Set(view, "stepText", Text(header.transform, "Context", "PASSO 6 DE 7  •  EQUIPAMENTOS", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
+            Set(view, "stepText", Text(header.transform, "Context", "EQUIPAMENTOS", 1040, 28, 856, 40, GameTypography.Tokens.Body, false, GamePalette.OnDark));
             Text(panel, "TitleText", "Loja de equipamentos", 24, 112, 1000, 56, GameTypography.Tokens.ScreenTitle, true);
             Set(view, "contextText", Text(panel, "ContextText", "Selecione os equipamentos do seu restaurante.", 24, 172, 1000, 32, GameTypography.Tokens.Body));
             var body = Node(panel, "MainArea_Equipment", 24, 216, 1872, 752); Body(body, view);

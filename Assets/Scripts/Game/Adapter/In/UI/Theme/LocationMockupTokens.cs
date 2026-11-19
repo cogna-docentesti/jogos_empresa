@@ -44,7 +44,7 @@ namespace Game.Adapter.In.UI.Theme
         //  DOURADO
         // =====================================================
 
-        public const string HexGoldStep     = GamePalette.HexOnPrimary; // "ETAPA 1 DE 4"
+        public const string HexGoldLocationIcon     = GamePalette.HexOnPrimary;
         public const string HexGoldText     = GamePalette.HexOnPrimary; // texto e icone do MENU
         public const string HexGoldValue    = GamePalette.HexOnWarn; // valores Alto / Medio
         public const string HexGoldBorder   = GamePalette.HexLavender; // contorno do MENU
@@ -159,7 +159,7 @@ namespace Game.Adapter.In.UI.Theme
         public static TypographyToken FontBody => new TypographyToken(TypographyRole.Body, GameTypography.Body); // subtitulo da tela, descricao
         public static TypographyToken FontZoneSubtitle => new TypographyToken(TypographyRole.Label, GameTypography.Label);
         public static TypographyToken FontMarkerSub => new TypographyToken(TypographyRole.Caption, GameTypography.Caption);
-        public static TypographyToken FontStep => new TypographyToken(TypographyRole.Navigation, GameTypography.Caption); // "ETAPA 1 DE 4"
+        public static TypographyToken FontScreenName => new TypographyToken(TypographyRole.Navigation, GameTypography.Caption);
 
         // =====================================================
         //  9-SLICE

@@ -10,7 +10,6 @@ namespace Game.Adapter.In.UI
     {
         [SerializeField] TMP_Text month, cash, score, revenue, result, reputation;
         [SerializeField] TMP_Text context;
-        [SerializeField] string setupContext;
         [SerializeField] UnityEngine.UI.Image facade;
         float next;
         void OnEnable() { ApplyTypography(); next = 0; Refresh(); }
@@ -24,12 +23,6 @@ namespace Game.Adapter.In.UI
         void Refresh()
         {
             var s = EstablishmentSummaryService.Build();
-            if(context!=null)
-            {
-                var state=GameManager.Instance?.StateMachine?.CurrentState;
-                bool setup=state==GameState.Config_Identification||state==GameState.Config_Location||state==GameState.Config_Restaurant||state==GameState.Config_TargetSegment||state==GameState.Initial_Capital||state==GameState.Initial_Equipment||state==GameState.Initial_Team;
-                context.text=setup&&!string.IsNullOrEmpty(setupContext)?setupContext:"GESTÃO DE RESTAURANTES";
-            }
             if(month != null) month.text = s.HasSession ? $"Mês {s.Round} de 3" : "Abertura";
             if(cash != null) { cash.text = s.HasSession ? EstablishmentSummaryService.Brl(s.Cash) : "A confirmar"; cash.color=s.Cash<0?Theme.GamePalette.Parse(Theme.GamePalette.HexNegativeOnDark):Theme.GamePalette.OnDark; }
             if(score != null) score.text = s.HasScore ? s.Score.ToString() : "—";

@@ -1,5 +1,5 @@
 FB-01 — Remover a contagem de passos de todos os cabeçalhos
-Status: planejada | Prioridade: P2 | Tipo: interface
+Status: concluída | Prioridade: P2 | Tipo: interface
 Área: Global
 Dependências: nenhuma
 Modelo: gpt-6.2-sol | Raciocínio: medium
@@ -39,6 +39,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Inspecionar as sete etapas e suas revisitas em 1280×720 e 1920×1080; conferir referências de textos em código.
+
+OBSERVAÇÕES E LIMITES
+1. A abertura, o retorno à identificação e as consultas foram verificados na GameScene em 1280×720 e 1920×1080, com capturas reais do Editor.
+2. A rotina de cabeçalho do gerador compartilhado foi reaplicada duas vezes por tela. A auditoria estática confirmou os demais geradores e a preservação dos IDs e referências.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-01.json.

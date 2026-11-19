@@ -126,7 +126,7 @@ namespace Game.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo(); master.Find("OVERLAY_CENTER").GetComponent<UnityEngine.UI.Image>().enabled=false;
             var bar=Image(panel,"DecisionHeader","UI_TOPBAR_VIOLET",0,0,1920,88);
             Text(bar.transform,"Title","Escolha sua localização",24,14,1000,60,GameTypography.Tokens.ScreenTitle,true,GamePalette.OnDark);
-            Text(bar.transform,"Step","PASSO 2 DE 7 · LOCALIZAÇÃO",1210,24,686,40,GameTypography.Tokens.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
+            Text(bar.transform,"Step","LOCALIZAÇÃO",1210,24,686,40,GameTypography.Tokens.Label,true,GamePalette.OnDark).alignment=TextAlignmentOptions.MidlineRight;
             var region=Text(panel,"Region","Localização",24,112,1240,48,GameTypography.Tokens.SectionTitle,true);
             var hint=Text(panel,"SelectionHint","Selecione uma área no mapa para continuar.",24,918,1280,42,GameTypography.Tokens.Body);
             Image(panel,"AvailableLegend","UI_PIN_NORMAL",822,118,32,32);

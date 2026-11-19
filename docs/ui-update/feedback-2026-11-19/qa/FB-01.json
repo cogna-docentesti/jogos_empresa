@@ -1,0 +1,38 @@
+{
+  "task_id": "FB-01",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "87f71c4a",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280×720",
+    "1920×1080"
+  ],
+  "method": "Play Mode no checkout Cogna, com banco SQLite e chave PlayerPrefs isolados. A abertura percorreu os controles reais. As consultas passaram pelo MenuNavigator e voltaram ao hub. Capturas da Game View, com revisão visual dos cabeçalhos.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "A linha de base mostrou a contagem em Identificação e Localização. Após a mudança, 40 capturas cobriram as sete telas da abertura, a volta à Identificação, o hub e 11 consultas em duas resoluções. A inspeção de TMP em todos os estados capturados encontrou zero contagens de passos."
+    },
+    {
+      "criterion": 2,
+      "result": "Os sete títulos foram verificados em runtime, com a caixa de texto ao lado da marca e dos indicadores. Os controles da abertura e o retorno ao hub funcionaram nas duas resoluções. A rotina de geração do cabeçalho compartilhado foi reaplicada duas vezes em cada painel, preservou o objeto do título e produziu zero contagens. A auditoria dos demais geradores, textos de runtime, cena e prefabs também encontrou zero contagens."
+    }
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-01",
+    "baseline": "baseline.json",
+    "runtime": "runtime.json",
+    "regeneration": "regeneration.json",
+    "source_audit": "source-audit.json",
+    "before_screenshots": 2,
+    "after_screenshots": 40
+  },
+  "limitations": [
+    "O QA usou o Editor 6000.3.28f1, disponível neste computador. A versão 6000.3.21f1 e o lockfile do repositório foram restaurados.",
+    "A reaplicação em memória executou a rotina de cabeçalho de ConceptUiRevision. Os demais geradores passaram por inspeção de código. A validação visual foi em Play Mode no Editor."
+  ]
+}
