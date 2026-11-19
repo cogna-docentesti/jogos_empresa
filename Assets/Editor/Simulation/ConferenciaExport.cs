@@ -25,7 +25,7 @@ using UnityEngine;
 
 public static class ConferenciaExport
 {
-    public const int BlockHeight = 190, DayHeaderOffset = 100, MonthValuesOffset = 135;
+    public const int BlockHeight = 210, DayHeaderOffset = 100, MonthValuesOffset = 135;
     private static readonly CultureInfo PtBr = new CultureInfo("pt-BR");
 
     // ------------------------------------------------------------------ cenários (cenarios.json)
@@ -323,7 +323,17 @@ public static class ConferenciaExport
             values.Add(("pedidos", rep.Orders)); values.Add(("perdidos_fracao", rep.LostRatio)); values.Add(("nps_medio", rep.NpsAverage));
             values.Add(("cmv_receita", rep.CmvRatio)); values.Add(("ticket_medio", rep.AvgTicket)); values.Add(("liquidez", rep.CurrentLiquidity));
             values.Add(("pontuacao", rep.Score)); values.Add(("classificacao", rep.Classification));
+            // tela de resultado do mês do layout novo (RoundResultEntity no modelo de caixa, gravado em float)
+            var screen = RoundResultMapper.From(rep, sim.State.Cash, run.Sim.Setup.SessionId, null, 0);
+            values.Add(("tela_receita", (double)screen.grossRevenue)); values.Add(("tela_insumos", (double)screen.supplyCost));
+            values.Add(("tela_aluguel", (double)screen.rent)); values.Add(("tela_folha", (double)screen.salaries));
+            values.Add(("tela_despesas_operacionais", (double)screen.utilities)); values.Add(("tela_13", (double)screen.thirteenthSalary));
+            values.Add(("tela_parcela", (double)screen.loanPayment)); values.Add(("tela_principal", (double)screen.loanPrincipalPayment));
+            values.Add(("tela_saidas", (double)screen.TotalCosts)); values.Add(("tela_eventos", (double)screen.eventCashImpact));
+            values.Add(("tela_resultado", (double)screen.netResult)); values.Add(("tela_caixa_inicio", (double)screen.openingCash));
+            values.Add(("tela_caixa_fim", (double)screen.closingCash));
             values.Add(("divergencias_no_unity", run.Checks.Count(x => !x.Ok)));
+            if (MonthValuesOffset + values.Count > BlockHeight) throw new InvalidOperationException("Valores do mês não cabem no bloco.");
             for (int i = 0; i < values.Count; i++) { Put(r0 + MonthValuesOffset + i, 1, values[i].Item1); Put(r0 + MonthValuesOffset + i, 2, values[i].Item2); }
         }
 

@@ -1,4 +1,4 @@
-"""Gera Conferencia_Motor.xlsx a partir dos CSVs do exportador (Game > Simulação > Exportar conferência).
+"""Monta Conferencia_Motor.xlsx a partir dos CSVs do exportador (Game > Simulação > Exportar conferência).
 
 Uso: python build_xlsx.py <pasta_com_csvs> <saida.xlsx>
 
@@ -15,7 +15,7 @@ from openpyxl.formatting.rule import FormulaRule
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter as L
 
-BLOCK, DAY_HDR, MONTH_VALS = 190, 100, 135        # layout do ConferenciaExport.cs
+BLOCK, DAY_HDR, MONTH_VALS = 210, 100, 135        # layout do ConferenciaExport.cs
 CONF_TOP, CONF_BLOCK = 3, 112                       # aba de conferência: mês m começa em 3 + 112*(m-1)
 FONT = "Arial"
 BLUE = Font(name=FONT, color="0000FF", size=10)
@@ -30,6 +30,7 @@ HELP_FILL = PatternFill("solid", fgColor="F2F2F2")
 RED_FILL = PatternFill("solid", fgColor="F8CBAD")
 GREEN_FILL = PatternFill("solid", fgColor="C6EFCE")
 THIN = Side(style="thin", color="BFBFBF")
+SCREEN_EXTRA = 0.02                                 # a tela grava em float: até 2 centavos de arredondamento
 
 
 def read_csv(path):
@@ -147,17 +148,18 @@ HELPER_LABELS = {
 
 
 def build(csv_folder, out_path):
-    files = sorted(glob.glob(os.path.join(csv_folder, "C*_*.csv")))
+    files = sorted(glob.glob(os.path.join(csv_folder, "C*_*.csv"))) + sorted(glob.glob(os.path.join(csv_folder, "P*_*.csv")))
     wb = Workbook()
     how = wb.active
     how.title = "Como usar"
     summary = wb.create_sheet("Resumo")
     scenarios = []
-    for n, path in enumerate(files, start=1):
+    for path in files:
         grid = read_csv(path)
+        n = os.path.basename(path).split("_")[0]            # C1..C4 = cenários; P1 = partida jogada no Play
         name = str(grid.get((1, 5), os.path.basename(path)))
-        dados = wb.create_sheet(f"C{n} Dados")
-        conf = wb.create_sheet(f"C{n} Conferência")
+        dados = wb.create_sheet(f"{n} Dados")
+        conf = wb.create_sheet(f"{n} Conferência")
         months = sorted({int(grid[(r, 2)]) for (r, c) in grid if c == 1 and grid[(r, c)] == "MÊS"})
         write_dados(dados, grid)
         info = write_conferencia(conf, dados.title, grid, months)
@@ -193,7 +195,7 @@ def write_conferencia(ws, dados, grid, months):
     # mapas do layout a partir do mês 1
     params = {grid[(r, 1)]: r - 1 for (r, c) in grid if c == 1 and 1 < r < 1 + 96 and isinstance(grid[(r, 1)], str)}
     daycols = {grid[(1 + DAY_HDR, c)]: c for (r, c) in grid if r == 1 + DAY_HDR}
-    month_keys = {grid[(r, 1)]: r - 1 for (r, c) in grid if c == 1 and 1 + MONTH_VALS <= r < 1 + MONTH_VALS + 60}
+    month_keys = {grid[(r, 1)]: r - 1 for (r, c) in grid if c == 1 and 1 + MONTH_VALS <= r < 1 + BLOCK}
 
     check_col = {}
     col = 3
@@ -419,8 +421,54 @@ def write_conferencia(ws, dados, grid, months):
         ws.conditional_formatting.add(f"D{mt + 2}:D{last_item}",
                                       FormulaRule(formula=[f'AND(ISNUMBER(D{mt + 2}),ABS(D{mt + 2})>{tol})'], fill=RED_FILL))
 
-        checks_count = f'IF({flag}=1,{len(CHECKS) * 30 + len(items)},0)'
-        div_count = (f'SUM(B{first}:B{last})+COUNTIF(D{mt + 2}:D{last_item},">"&{tol})+COUNTIF(D{mt + 2}:D{last_item},"<"&-{tol})')
+        # tela "DRE mensal • resultado de caixa" do layout novo (RoundResultEntity), recalculada do fluxo de caixa
+        st = last_item + 2
+        sh = ws.cell(row=st, column=1, value="Tela de resultado do mês (layout novo) · modelo de caixa, gravada em float")
+        sh.font, sh.fill = HEAD_FONT, HEAD_FILL
+        for j in range(2, 6):
+            ws.cell(row=st, column=j).fill = HEAD_FILL
+        ws.cell(row=st, column=4, value=f"tolerância + {SCREEN_EXTRA}").font = HEAD_FONT
+        screen = [
+            ("t_receita", "Tela · Receita de vendas", "tela_receita", "{c_vendas}", "vendas recebidas no mês"),
+            ("t_insumos", "Tela · Insumos", "tela_insumos", "-{c_forn}", "pago a fornecedores (à vista e parcelas vencidas)"),
+            ("t_aluguel", "Tela · Aluguel", "tela_aluguel", "-{c_alug}", ""),
+            ("t_folha", "Tela · Folha de pagamento", "tela_folha", "-{c_sal}", ""),
+            ("t_desp", "Tela · Despesas operacionais", "tela_despesas_operacionais",
+             "-({c_contas}+{c_imp}+{c_mkt}+{c_man}+{c_jur})-" + P("juros_emprestimo"),
+             "contas + impostos + marketing/fidelização/treinamento + manutenção + juros do cheque e tarifas"),
+            ("t_13", "Tela · 13º salário", "tela_13", "0", "o motor não tem 13º no trimestre"),
+            ("t_parcela", "Tela · Parcela de empréstimo", "tela_parcela", P("juros_emprestimo") + "+" + P("amortizacao"), "juros + amortização pagos"),
+            ("t_principal", "Tela · Principal da parcela", "tela_principal", P("amortizacao"), ""),
+            ("t_saidas", "Tela · Saídas do mês", "tela_saidas", "{t_insumos}+{t_aluguel}+{t_folha}+{t_desp}+{t_13}+{t_parcela}", "soma das saídas"),
+            ("t_eventos", "Tela · Impacto dos eventos", "tela_eventos", "{c_ev}+{c_outras}", "reações (saída) e ganhos (entrada)"),
+            ("t_resultado", "Tela · Resultado do mês", "tela_resultado", "{t_receita}-{t_saidas}+{t_eventos}", "receita − saídas + eventos"),
+            ("t_inicio", "Tela · Caixa no início do mês", "tela_caixa_inicio", P("caixa_inicio"), ""),
+            ("t_fim", "Tela · Caixa no fechamento", "tela_caixa_fim", "{t_inicio}+{t_resultado}", "início + resultado"),
+        ]
+        for idx, it in enumerate(screen):
+            R[it[0]] = f"C{st + 1 + idx}"
+        for idx, (key, label, motor_key, formula, explain) in enumerate(screen):
+            row = st + 1 + idx
+            f = formula
+            for k2, ref in sorted(R.items(), key=lambda kv: -len(kv[0])):
+                f = f.replace("{" + k2 + "}", ref)
+            assert "{" not in f, f
+            ws.cell(row=row, column=1, value=label).font = BLACK
+            mc = ws.cell(row=row, column=2, value=f"={q}!$B${r0 + month_keys[motor_key]}")
+            mc.font, mc.number_format = GREEN, "#,##0.00"
+            pc = ws.cell(row=row, column=3, value=f'=IF({flag}=1,{f},"")')
+            pc.font, pc.number_format = BLACK, "#,##0.00"
+            dc = ws.cell(row=row, column=4, value=f'=IF({flag}=1,C{row}-B{row},"")')
+            dc.font, dc.number_format = BLACK, "0.000000"
+            ws.cell(row=row, column=5, value=explain).font = Font(name=FONT, size=9, italic=True)
+        last_screen = st + len(screen)
+        stol = f"({tol}+{SCREEN_EXTRA})"
+        ws.conditional_formatting.add(f"D{st + 1}:D{last_screen}",
+                                      FormulaRule(formula=[f'AND(ISNUMBER(D{st + 1}),ABS(D{st + 1})>{stol})'], fill=RED_FILL))
+
+        checks_count = f'IF({flag}=1,{len(CHECKS) * 30 + len(items) + len(screen)},0)'
+        div_count = (f'SUM(B{first}:B{last})+COUNTIF(D{mt + 2}:D{last_item},">"&{tol})+COUNTIF(D{mt + 2}:D{last_item},"<"&-{tol})'
+                     f'+COUNTIF(D{st + 1}:D{last_screen},">"&{stol})+COUNTIF(D{st + 1}:D{last_screen},"<"&-{stol})')
         ws.cell(row=top, column=4, value=f"={checks_count}").font = BLACK
         ws.cell(row=top, column=6, value=f"={div_count}").font = BLACK
         ws.cell(row=top, column=8, value=f'=IF({flag}=0,"sem dados",IF(F{top}=0,"OK","DIVERGE"))').font = BOLD
@@ -456,7 +504,7 @@ def write_summary(ws, scenarios):
     row = 7
     for n, name, conf, dados, info in scenarios:
         for m, top, lucro, score in info:
-            ws.cell(row=row, column=1, value=f"C{n}").font = BLACK
+            ws.cell(row=row, column=1, value=n).font = BLACK
             ws.cell(row=row, column=2, value=name).font = BLACK
             ws.cell(row=row, column=3, value=m).font = BLACK
             ws.cell(row=row, column=4, value=f"='{conf}'!D{top}").font = GREEN
@@ -497,18 +545,25 @@ def write_how(ws, scenarios):
         ("3. Abra o CSV no Excel (ponto e vírgula, vírgula decimal), selecione tudo (Ctrl+A), copie e cole na célula A1 da aba \"Cn Dados\" correspondente.", None),
         ("4. A aba de conferência e o Resumo recalculam sozinhos. Nada nas abas de conferência precisa ser editado.", None),
         ("", None),
+        ("Como conferir uma partida jogada no Play (aba P1)", BOLD),
+        ("1. Jogue um ou mais meses no Play.  2. No Unity: Game > Simulação > Conferir partida jogada (game.db) e exportar CSV.", None),
+        ("3. O menu reproduz os meses com as mesmas decisões e reações, confere tudo e compara com o que ficou gravado.", None),
+        ("4. Cole o arquivo P1_Partida_jogada_no_Play.csv na aba \"P1 Dados\", como nos cenários.", None),
+        ("", None),
         ("O que é entrada e o que é conferido", BOLD),
         ("Entradas (não recalculadas): sorteios do dia (ruído da demanda, eventos), equipe presente após faltas, moral, efeitos de eventos ativos,", None),
         ("disponibilidade dos equipamentos (falhas), caixa antes da operação e custos das reações escolhidas.", None),
         ("Conferidas: encaixe de mercado, os 8 fatores da demanda, demanda, produtividade, as 3 frentes de capacidade, compra e estoque,", None),
         ("pedidos atendidos e perdidos, receita, CMV, perdas, ocupação, tempo, erros, NPS, reputação, satisfação, juros e caixa do dia,", None),
         ("e no fechamento: DRE, fluxo de caixa, balanço (diferença zero), indicadores, pontuação e classificação.", None),
+        ("Também a tela \"DRE mensal • resultado de caixa\" do layout novo: cada linha que o jogador vê, recalculada do fluxo de caixa.", None),
+        ("Essa tela grava valores em float (precisão de centavos), por isso as linhas \"Tela\" aceitam 2 centavos a mais de diferença.", None),
         ("As cadeias entre dias (reputação, satisfação, memória de demanda, estoque) usam os valores da própria planilha, não os do motor.", None),
         ("", None),
         ("Cenários desta planilha", BOLD),
     ]
     for n, name, conf, dados, info in scenarios:
-        lines.append((f"C{n}: {name}  ({len(info)} meses)", None))
+        lines.append((f"{n}: {name}  ({len(info)} {'mês' if len(info) == 1 else 'meses'})", None))
     for i, (text, font) in enumerate(lines, start=1):
         c = ws.cell(row=i, column=1, value=text)
         c.font = font or Font(name=FONT, size=10)

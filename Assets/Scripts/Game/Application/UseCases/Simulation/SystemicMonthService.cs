@@ -14,6 +14,7 @@ namespace Game.Application.UseCases.Simulation
         private SimulationCatalog _catalog;
         private string _sessionId;
         private MonthSimulation _month;
+        private SimulationState _startState;          // cópia do estado do dia 1, gravada com o mês
         private MonthCommit _pendingCommit;           // guardado para tentar de novo sem recalcular
 
         public SystemicMonthService(ISimulationGateway gateway)
@@ -68,6 +69,7 @@ namespace Game.Application.UseCases.Simulation
             if (active.SetupErrors.Count > 0) throw new InvalidOperationException(string.Join(" ", active.SetupErrors));
             _sessionId = sessionId;
             _pendingCommit = null;
+            _startState = active.State.Clone();
             _month = new MonthSimulation(_catalog, active.Setup, active.State, active.Policies);
             return _month;
         }
@@ -94,6 +96,7 @@ namespace Game.Application.UseCases.Simulation
                 DaysSimulated = month.DayResults.Count,
                 Report = outcome.Report,
                 NextState = outcome.NextState,
+                StartState = _startState,
                 Events = outcome.Report.Events,
                 CashAfterClose = outcome.NextState.Cash,
                 Bankrupt = outcome.Report.Bankrupt,

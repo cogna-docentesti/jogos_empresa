@@ -39,6 +39,9 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Saved event decisions for the campaign.</summary>
         EventHistory = 10,
         MonthlyResults = 11,
-        QuarterlyResults = 12
+        QuarterlyResults = 12,
+
+        /// <summary>Planejamento do mes do motor sistemico (politicas). Aberto pelo hub.</summary>
+        Planning = 13
     }
 }

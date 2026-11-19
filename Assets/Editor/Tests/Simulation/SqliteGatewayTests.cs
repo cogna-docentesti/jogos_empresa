@@ -88,15 +88,42 @@ public class SqliteGatewayTests
         Assert.AreEqual(3, _db.Table<SimulationMonthEntity>().Count());
         Assert.Greater(_db.Table<SessionEventHistoryEntity>().Count(), 0);
 
-        var first = _db.Table<RoundResultEntity>().ToList().OrderBy(r => r.round).First();
+        var rounds = _db.Table<RoundResultEntity>().ToList().OrderBy(r => r.round).ToList();
+        var first = rounds[0];
         Assert.Greater(first.grossRevenue, 0);
         Assert.Greater(first.customers, 0);
         Assert.Greater(first.loanPayment, 0);
+        Assert.AreEqual(65000 + 50000 - 27300, first.openingCash, 0.05, "caixa inicial do mês 1");
 
-        var reports = _gateway.LoadReports(SessionId);
+        // As telas do layout novo leem o RoundResultEntity no modelo de caixa: as identidades têm de fechar.
+        var monthReports = _gateway.LoadReports(SessionId);
+        for (int i = 0; i < rounds.Count; i++)
+        {
+            var r = rounds[i];
+            var rep = monthReports[i];
+            Assert.AreEqual(r.closingCash, r.openingCash + r.netResult, 0.05, $"mês {r.round}: início + resultado = fechamento");
+            Assert.AreEqual(r.netResult, r.grossRevenue - r.TotalCosts + r.eventCashImpact, 0.05, $"mês {r.round}: receita - saídas + eventos = resultado");
+            Assert.AreEqual(rep.CashResult, r.netResult, 0.05, $"mês {r.round}: resultado da tela = variação do caixa do motor");
+            Assert.AreEqual(0f, r.otherOperatingCosts, "tudo o que é despesa operacional aparece numa linha visível da tela");
+            Assert.LessOrEqual(r.loanPrincipalPayment, r.loanPayment + 0.01f);
+            Assert.AreEqual(r.reputationAtEnd - r.reputationAtStart, r.reputationDelta);
+            if (i > 0) Assert.AreEqual(rounds[i - 1].closingCash, r.openingCash, 0.05, $"mês {r.round}: abre com o caixa do fechamento anterior");
+        }
+        Assert.AreEqual(rounds.Last().roundResultId, saved.pendingSummaryResultId, "marca o resultado como ainda não lido");
+        Assert.AreEqual(saved.pendingSummaryResultId, GameSessionState.Current.pendingSummaryResultId);
+
+        var reports = monthReports;
         Assert.AreEqual(3, reports.Count, "relatórios voltam do reportJson (JsonUtility)");
         Assert.AreEqual(new[] { 1, 2, 3 }, reports.Select(r => r.Month).ToArray());
         Assert.IsFalse(_service.SavePolicies(SessionId, new MonthPolicies()).Ok, "partida encerrada recusa políticas");
+
+        // o menu "Conferir partida jogada" reproduz os 3 meses gravados e confere tudo
+        string folder = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "conferencia_jogada_teste");
+        var provider = new UnitySimulationCatalogProvider(_config);
+        var catalog = provider.Build();                                   // Build preenche os mapas zona -> região e cargo -> papel
+        string summary = ConferenciaJogada.Run(_db, catalog, provider, folder, SessionId);
+        StringAssert.Contains("3 mês(es)", summary);
+        StringAssert.Contains(", 0 divergências", summary);
     }
 
     [Test]

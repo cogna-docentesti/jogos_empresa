@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Adapter.Out.Simulation;
 using Game.Domain.Simulation;
 
 public sealed class CheckLine
@@ -13,7 +14,8 @@ public sealed class CheckLine
     public string Item;
     public int Day;                       // 0 = fechamento do mês
     public double Motor, Expected;
-    public bool Ok => Math.Abs(Motor - Expected) <= Math.Max(1e-6, 1e-7 * Math.Abs(Expected)) + 0.005;
+    public double ExtraTolerance;         // 0,02 nas linhas da tela de resultado: a tabela grava float (centavos)
+    public bool Ok => Math.Abs(Motor - Expected) <= Math.Max(1e-6, 1e-7 * Math.Abs(Expected)) + 0.005 + ExtraTolerance;
     public override string ToString() => $"{(Day == 0 ? "mês" : "dia " + Day)} · {Item}: motor {Motor:0.######} esperado {Expected:0.######}";
 }
 
@@ -228,6 +230,26 @@ public static class Conferencia
         C("Caixa · Resultado do mês", 0, report.CashResult, cashResult);
         double cashEndMonth = sim.CashAtStart + cashResult;
         C("Caixa no fim do mês", 0, sim.State.Cash, cashEndMonth);
+
+        // tela de resultado do mês do layout novo (RoundResultEntity, modelo de caixa), recalculada das contas acima
+        var screen = RoundResultMapper.From(report, sim.State.Cash, sim.Setup.SessionId, null, 0);
+        void T(string item, double motor, double expected) => checks.Add(new CheckLine { Item = "Tela · " + item, Day = 0, Motor = motor, Expected = expected, ExtraTolerance = 0.02 });
+        double screenOperating = utilities + taxes + marketing + training + maintenancePolicy + repairs + overdraftTotal + fees;
+        double screenLoan = tr.LoanInterest + tr.LoanAmortization;
+        double screenOut = cashPurchases + tr.SupplierInstallmentsPaid + rent + payroll + screenOperating + screenLoan;
+        T("Receita de vendas", screen.grossRevenue, grossRevenue);
+        T("Insumos", screen.supplyCost, cashPurchases + tr.SupplierInstallmentsPaid);
+        T("Aluguel", screen.rent, rent);
+        T("Folha de pagamento", screen.salaries, payroll);
+        T("Despesas operacionais", screen.utilities, screenOperating);
+        T("13º salário", screen.thirteenthSalary, 0);
+        T("Parcela de empréstimo", screen.loanPayment, screenLoan);
+        T("Principal da parcela", screen.loanPrincipalPayment, tr.LoanAmortization);
+        T("Saídas do mês", screen.TotalCosts, screenOut);
+        T("Impacto dos eventos", screen.eventCashImpact, otherIncome - otherReactions);
+        T("Resultado do mês", screen.netResult, grossRevenue - screenOut + otherIncome - otherReactions);
+        T("Caixa no início do mês", screen.openingCash, sim.CashAtStart);
+        T("Caixa no fechamento", screen.closingCash, cashEndMonth);
 
         // balanço reconstruído a partir do estado inicial
         double inventoryEnd = sim.DayResults.Last().InventoryEnd;

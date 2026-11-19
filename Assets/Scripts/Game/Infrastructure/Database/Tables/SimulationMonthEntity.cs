@@ -9,5 +9,6 @@ public class SimulationMonthEntity
     public int month { get; set; }
     public string reportJson { get; set; }          // MonthReport
     public string configVersion { get; set; }
+    public string startStateJson { get; set; }      // SimulationState do dia 1 (para reproduzir e conferir o mês); vazio em meses antigos
     public long closedAt { get; set; }
 }

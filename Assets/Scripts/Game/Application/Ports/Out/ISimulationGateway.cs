@@ -47,6 +47,7 @@ namespace Game.Application.Ports.Out
         public int DaysSimulated;
         public MonthReport Report;
         public SimulationState NextState;
+        public SimulationState StartState;          // estado entregue ao dia 1 (reprodução e conferência)
         public List<EventRecord> Events;
         public double CashAfterClose;
         public bool Bankrupt;

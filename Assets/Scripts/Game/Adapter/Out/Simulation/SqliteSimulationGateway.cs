@@ -105,12 +105,14 @@ namespace Game.Adapter.Out.Simulation
                     foreach (var e in c.Events)
                         _db.InsertOrReplace(ToHistory(c, e, i++, daysPerMonth, catalog, now));
 
-                    _db.InsertOrReplace(ToRoundResult(c, session, now));
+                    var roundResult = ToRoundResult(c, session, now);
+                    _db.InsertOrReplace(roundResult);
 
                     _db.InsertOrReplace(new SimulationMonthEntity
                     {
                         id = monthId, sessionId = c.SessionId, month = c.Month,
-                        reportJson = JsonUtility.ToJson(c.Report), configVersion = c.ConfigVersion, closedAt = now
+                        reportJson = JsonUtility.ToJson(c.Report), configVersion = c.ConfigVersion, closedAt = now,
+                        startStateJson = c.StartState != null ? JsonUtility.ToJson(c.StartState) : null
                     });
 
                     var stateRow = _db.Table<SimulationStateEntity>().FirstOrDefault(x => x.sessionId == c.SessionId)
@@ -127,6 +129,8 @@ namespace Game.Adapter.Out.Simulation
                     updated.reputationScore = (int)Math.Round(c.NextState.Reputation);
                     updated.consecutiveNegativeRounds = c.NextState.ConsecutiveLossMonths;
                     updated.teamJson = TeamJsonFrom(c.NextState);                       // demissões aceitas no mês
+                    updated.pendingSummaryResultId = roundResult.roundResultId;          // a tela de resultado ainda não foi lida
+                    updated.finalSummaryAcknowledged = false;
                     if (c.MatchFinished)
                     {
                         updated.status = c.Bankrupt ? GameSessionStatus.BANKRUPT : GameSessionStatus.COMPLETED;
@@ -180,6 +184,8 @@ namespace Game.Adapter.Out.Simulation
             current.teamJson = saved.teamJson;
             current.status = saved.status;
             current.completedAt = saved.completedAt;
+            current.pendingSummaryResultId = saved.pendingSummaryResultId;
+            current.finalSummaryAcknowledged = saved.finalSummaryAcknowledged;
         }
 
         private static double Line(List<NamedValue> lines, string name) => lines.FirstOrDefault(l => l.Name == name)?.Value ?? 0;
@@ -204,43 +210,66 @@ namespace Game.Adapter.Out.Simulation
             };
         }
 
-        /// Resumo no formato que as telas antigas (resumo mensal, export) já leem.
         private static RoundResultEntity ToRoundResult(MonthCommit c, GameSessionEntity session, long now)
+            => RoundResultMapper.From(c.Report, c.CashAfterClose, c.SessionId, session, now);
+    }
+
+    /// RoundResultEntity (tabela que as telas do layout novo leem) a partir do relatório do motor.
+    /// Usado pelo gateway no Commit e pela exportação da conferência (planilha).
+    public static class RoundResultMapper
+    {
+        /// Resumo no formato que as telas do layout novo leem (MonthlyResultPresentation, trimestral, relatório final).
+        /// Essas telas usam o MODELO DE CAIXA: caixa inicial + resultado do mês = caixa final, e
+        /// resultado do mês = receita - saídas (TotalCosts, que inclui a parcela) + impacto dos eventos.
+        /// Por isso cada campo recebe a linha do FLUXO DE CAIXA do motor, não a da DRE (competência).
+        ///   grossRevenue        vendas recebidas no mês
+        ///   supplyCost          pagamentos a fornecedores (à vista e parcelas)
+        ///   rent, salaries      aluguel e folha pagos
+        ///   utilities           contas de consumo + impostos + marketing/fidelização/treinamento + manutenção
+        ///                       + juros do cheque especial e tarifas (tudo o que a tela chama de despesas operacionais)
+        ///   loanPayment         juros + amortização do empréstimo pagos no mês
+        ///   eventCashImpact     reações a eventos (saída) e outras entradas, com sinal
+        public static RoundResultEntity From(MonthReport r, double cashAfterClose, string sessionId, GameSessionEntity session, long now)
         {
-            var r = c.Report;
-            var dre = r.Dre;
             var cash = r.CashFlow;
-            double interest = -Line(cash, nameof(CashLine.Interest));
-            double amortization = -Line(cash, nameof(CashLine.Amortization));
+            double Line(string name) => cash.FirstOrDefault(l => l.Name == name)?.Value ?? 0;
+            double Out(CashLine line) => -Line(line.ToString());             // saídas vêm negativas no fluxo
+            double principal = Out(CashLine.Amortization);
+            double allInterest = Out(CashLine.Interest);
+            double loanInterest = Math.Min(Math.Max(0, r.LoanInterestPaid), allInterest);
+            double operating = Out(CashLine.Bills) + Out(CashLine.Taxes) + Out(CashLine.Marketing)
+                             + Out(CashLine.Maintenance) + (allInterest - loanInterest);
+            int repStart = (int)Math.Round(r.ReputationStart), repEnd = (int)Math.Round(r.ReputationEnd);
             return new RoundResultEntity
             {
-                roundResultId = c.SessionId + ":" + c.Month,
-                sessionId = c.SessionId,
-                round = c.Month,
-                grossRevenue = (float)Line(dre, nameof(DreLine.GrossRevenue)),
-                supplyCost = (float)Line(dre, nameof(DreLine.Cmv)),
-                rent = (float)Line(dre, nameof(DreLine.Rent)),
-                salaries = (float)Line(dre, nameof(DreLine.Payroll)),
-                utilities = (float)Line(dre, nameof(DreLine.Utilities)),
-                loanPayment = (float)(interest + amortization),
-                loanPrincipalPayment = (float)amortization,
-                eventCashImpact = (float)(Line(cash, nameof(CashLine.Events)) + Line(cash, nameof(CashLine.OtherInflows))),
-                otherOperatingCosts = (float)(Line(dre, nameof(DreLine.Marketing)) + Line(dre, nameof(DreLine.MaintenanceAndLosses))
-                                            + Line(dre, nameof(DreLine.Depreciation)) + Line(dre, nameof(DreLine.Taxes))),
-                netResult = (float)r.NetIncome,
-                openingCash = (float)(c.CashAfterClose - r.CashResult),
-                closingCash = (float)c.CashAfterClose,
+                roundResultId = sessionId + ":" + r.Month,
+                sessionId = sessionId,
+                round = r.Month,
+                grossRevenue = (float)Line(nameof(CashLine.Sales)),
+                supplyCost = (float)Out(CashLine.Suppliers),
+                rent = (float)Out(CashLine.Rent),
+                salaries = (float)Out(CashLine.Salaries),
+                utilities = (float)operating,
+                thirteenthSalary = 0,
+                loanPayment = (float)(loanInterest + principal),
+                loanPrincipalPayment = (float)principal,
+                otherOperatingCosts = 0,
+                eventCashImpact = (float)(Line(nameof(CashLine.Events)) + Line(nameof(CashLine.OtherInflows))),
+                netResult = (float)r.CashResult,
+                openingCash = (float)(cashAfterClose - r.CashResult),
+                closingCash = (float)cashAfterClose,
                 createdAt = now,
                 customers = (int)Math.Round(r.Orders),
-                reputationAtStart = (int)Math.Round(r.ReputationStart),
-                reputationAtEnd = (int)Math.Round(r.ReputationEnd),
+                reputationAtStart = repStart,
+                reputationAtEnd = repEnd,
+                reputationDelta = repEnd - repStart,
                 baseDemand = (int)Math.Round(r.BaseDemandPerDay * r.Days.Count),
                 potentialDemand = (int)Math.Round(r.Days.Sum(d => d.Demand)),
                 serviceCapacity = (int)Math.Round(r.Days.Sum(d => d.Capacity)),
                 averageTicket = (float)r.AvgTicket,
-                alignmentScore = session.alignmentScore,
-                alignmentClassification = session.alignmentClassification,
-                coherenceFactor = session.alignmentFactor
+                alignmentScore = session?.alignmentScore ?? 0,
+                alignmentClassification = session?.alignmentClassification,
+                coherenceFactor = session?.alignmentFactor ?? 0
             };
         }
     }

@@ -44,6 +44,9 @@ namespace Game.Domain.Simulation
         public List<NamedValue> CashFlow = new List<NamedValue>();
         public List<NamedValue> Balance = new List<NamedValue>();
         public double NetIncome, CashResult, BalanceDifference;
+        public double LoanInterestPaid, LoanPrincipalPaid;
+        public bool HasPolicies;                             // falso em relatórios gravados antes deste campo
+        public MonthPolicies Policies;                       // políticas que valeram no mês   // parcela do empréstimo paga em caixa no mês (sem cheque especial)
         public double Orders, LostRatio, NpsAverage, CmvRatio, CurrentLiquidity, AvgTicket;
         public double ReputationStart, ReputationEnd, BaseDemandPerDay;
         public int Score;
@@ -91,6 +94,10 @@ namespace Game.Domain.Simulation
                 r.CashFlow.Add(new NamedValue(line.ToString(), books.Total(line)));
             r.NetIncome = books.NetIncome;
             r.CashResult = books.CashResult;
+            r.HasPolicies = true;
+            r.Policies = sim.Policies.Clone();
+            r.LoanInterestPaid = sim.Trace.LoanInterest;
+            r.LoanPrincipalPaid = sim.Trace.LoanAmortization;
 
             double equipmentNet = s.Equipment.Sum(u => u.BookValue);
             double cashAsset = Math.Max(0, s.Cash), overdraft = Math.Max(0, -s.Cash);

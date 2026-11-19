@@ -1,9 +1,13 @@
 // Assets/Scripts/Game/Adapter/In/Controllers/SystemicRoundFlow.cs
 // Raiz de composição e ligação com a GameStateMachine do projeto.
 // 1. Cria as peças (provedor de catálogo -> gateway SQLite -> serviço) uma vez, no Awake.
-// 2. Planejamento confirmado -> grava políticas -> Management_Hub -> Round_Start -> Round_Sales -> começa o mês.
-// 3. Mês fechado -> Round_Costs -> Round_Event -> Round_Summary (o UIStateListener mostra o resumo).
-// 4. Botão Continuar do resumo -> Management_Hub, FinalReport ou GameOver_Bankruptcy.
+// 2. Hub > "Planejar mês" (OpenPlanning) abre o Panel_Planning pelo MenuNavigator.
+// 3. Planejamento confirmado -> grava políticas -> Round_Start -> Round_Sales -> mostra o Panel_MonthSimulation.
+//    Round_Start/Sales/Costs são estados técnicos no UIStateListener do layout novo (não mostram painel),
+//    por isso a tela do mês é apresentada aqui, com UIStateListener.PresentScreen.
+// 4. Mês gravado -> Round_Costs -> Round_Event -> Round_Summary: o UIStateListener mostra o Panel_MonthlyResult
+//    do layout novo, que lê o RoundResultEntity gravado pelo gateway. O Continuar dele chama
+//    GameSessionService.ContinueAfterSummary (hub, relatório final ou falência).
 // Não muda a GameStateMachine: usa as transições que já existem.
 using System.Collections.Generic;
 using Game.Adapter.Out.Simulation;
@@ -19,6 +23,8 @@ namespace Game.Adapter.In.Controllers
         [SerializeField] private SimulationConfigAsset simulationConfig;
         [SerializeField] private MonthSimulationController monthController;
         [SerializeField] private ManagementPoliciesView planningView;
+        [Tooltip("Panel_MonthSimulation: apresentado ao entrar no mês e escondido ao gravar ou abandonar")]
+        [SerializeField] private GameObject monthPanel;
 
         private SystemicMonthService _service;
 
@@ -76,6 +82,13 @@ namespace Game.Adapter.In.Controllers
         }
 
         // ------------------------------------------------------------ planejamento (Panel_Planning)
+        /// Botão do hub (Panel_Menu/EventActions/CloseMonth, texto "Planejar mês").
+        public void OpenPlanning()
+        {
+            if (_service == null) { Debug.LogError("[Simulação] O simulador não foi iniciado (veja o erro do Awake)."); return; }
+            Game.Adapter.In.UI.Navigation.MenuNavigator.Instance?.Open(Game.Adapter.In.UI.Navigation.PanelId.Planning);
+        }
+
         private void OnPlanningOpened() => planningView.Bind(SessionId != null ? _service.Planning(SessionId) : null);
 
         private void OnSavePolicies(MonthPolicies policies)
@@ -95,6 +108,7 @@ namespace Game.Adapter.In.Controllers
             var result = _service.SavePolicies(SessionId, policies);
             if (!result.Ok) { planningView.ShowSaveResult(false, result.Message); return; }
             if (!EnterMonth()) { planningView.ShowSaveResult(false, "O mês só pode começar a partir do hub."); return; }
+            UIStateListener.PresentScreen(monthPanel);                          // esconde o hub e o planejamento
             monthController.StartMonth(SessionId);
         }
 
@@ -114,15 +128,23 @@ namespace Game.Adapter.In.Controllers
             LastReport = report;
             var machine = Machine;
             if (machine == null || machine.CurrentState != GameState.Round_Sales) return;
+            HideMonthPanel();
             machine.TryChangeState(GameState.Round_Costs);
-            machine.TryChangeState(GameState.Round_Event);
-            machine.TryChangeState(GameState.Round_Summary);                    // o painel do resumo lê LastReport
+            machine.TryChangeState(GameState.Round_Event);                      // passagem técnica (o painel de eventos some no passo seguinte)
+            machine.TryChangeState(GameState.Round_Summary);                    // Panel_MonthlyResult lê o RoundResultEntity
         }
 
         /// Meses fechados da partida (relatório final e falência).
         public IReadOnlyList<MonthReport> MatchReports() => _service != null && SessionId != null ? _service.Reports(SessionId) : null;
 
-        /// Botão Continuar do resumo do mês.
+        private void HideMonthPanel()
+        {
+            if (monthPanel == null) return;
+            UIStateListener.DismissScreen(monthPanel);
+            monthPanel.SetActive(false);
+        }
+
+        /// Continuar do resumo antigo (MonthSummaryView). O layout novo usa o MonthlyResultController.
         public void LeaveSummary()
         {
             var machine = Machine;
@@ -140,6 +162,7 @@ namespace Game.Adapter.In.Controllers
             if (machine == null || !MonthInProgress) return;
             monthController.Stop();
             _service.Abandon();
+            HideMonthPanel();
             Debug.Log("[Simulação] Mês abandonado antes do fechamento. Nada foi gravado.");
             machine.ForceState(GameState.Management_Hub);
         }
