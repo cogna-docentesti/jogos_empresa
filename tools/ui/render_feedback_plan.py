@@ -111,7 +111,7 @@ def render(root):
         'FEEDBACKS DE INTERFACE E CALENDÁRIO — COGNA\nAtualizado em 19/11/2026\n\n'
         'Índice: INDICE.html. Fonte canônica: tasks.json. Execução: EXECUCAO.txt.\n'
         'Análise: ANALISE.txt. Origem: RASTREABILIDADE.txt. Tarefas: tasks/FB-XX.txt.\n\n'
-        f'{len(tasks)} tarefas: {len(active)} no lote e {statuses["adiada"]} adiada; {completed} concluídas.\n'
+        f'{len(tasks)} tarefas: {len(active)} no lote e {statuses["adiada"]} adiada; {completed} {"concluída" if completed == 1 else "concluídas"}.\n'
         f'{len(data["feedback"])} feedbacks originais e {len(calendar)} esclarecimentos do calendário.\n'
         'O usuário autorizou uma conversa por tarefa, commit local em inglês e continuação sequencial.\n'
         'FB-28 (venda de usados) permanece fora da execução.\n\n'

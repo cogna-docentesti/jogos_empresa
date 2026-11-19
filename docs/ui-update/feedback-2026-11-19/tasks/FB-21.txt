@@ -1,5 +1,5 @@
 FB-21 — Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos
-Status: planejada | Prioridade: P1 | Tipo: especificação
+Status: concluída | Prioridade: P1 | Tipo: especificação
 Área: Calendário; produto e economia
 Dependências: nenhuma
 Modelo: gpt-6.2-astra | Raciocínio: xhigh
@@ -22,6 +22,8 @@ docs/ui-update/visual-contract.json
 docs/art/manifest.json
 
 REFERÊNCIAS ESPECÍFICAS
+docs/ui-update/feedback-2026-11-19/CONTRATO-CALENDARIO.md
+docs/ui-update/feedback-2026-11-19/qa/FB-21.json
 docs/monthly-simulation.md
 Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs
 Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs
@@ -57,6 +59,7 @@ OBSERVAÇÕES E LIMITES
 3. A visibilidade antecipada é somente de contas e eventos previsíveis; imprevistos não devem vazar por ícones, textos, tooltips, foco ou quantidades.
 4. A incidência atual do seletor usa por padrão alvo 4, mínimo 3, máximo 5, com as validações do código; manter os valores e o comportamento existentes.
 5. Datas de eventos influenciam duração no motor. Documentar a distribuição sem modificar as regras que determinam quais eventos incidem.
+6. Entrega documental concluída. QA confrontou os 20 IDs e títulos, as 60 opções do catálogo e os cálculos de conciliação. A implementação no jogo pertence às tarefas seguintes.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-21.json.

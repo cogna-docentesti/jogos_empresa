@@ -4,7 +4,7 @@ Atualizado em 19/11/2026
 Índice: INDICE.html. Fonte canônica: tasks.json. Execução: EXECUCAO.txt.
 Análise: ANALISE.txt. Origem: RASTREABILIDADE.txt. Tarefas: tasks/FB-XX.txt.
 
-28 tarefas: 27 no lote e 1 adiada; 0 concluídas.
+28 tarefas: 27 no lote e 1 adiada; 1 concluída.
 47 feedbacks originais e 7 esclarecimentos do calendário.
 O usuário autorizou uma conversa por tarefa, commit local em inglês e continuação sequencial.
 FB-28 (venda de usados) permanece fora da execução.
@@ -26,7 +26,7 @@ REGRAS COMUNS
 5. Para telas sem scroll, reorganizar o conteúdo para caber; não ocultar informação essencial nem apenas recortar a viewport. No cardápio, manter e melhorar o scroll da lista.
 6. Reutilizar arte aprovada. Produzir assets adicionais quando realmente necessários à tarefa, em Assets/Art/new, com fontes em art-source/editable e registros/QA em docs/art; nunca usar arte como fonte de regra econômica.
 7. Contas debitam ao chegar ao compromisso e têm pagamento persistido/idempotente; o fechamento reconcilia esses pagamentos sem debitar novamente. Consultas, reaberturas e retry não podem cobrar ou sortear outra vez.
-8. Registrar QA e screenshots reais apenas durante execução. Caminhos de evidência deste plano são destinos previstos, ainda inexistentes.
+8. Registrar QA e screenshots reais durante a execução de cada tarefa, conforme o tipo de entrega. O registro de QA identifica as evidências já produzidas.
 9. Uma conversa nova por tarefa ativa, com o nome, modelo e raciocínio definidos neste JSON. Concluir, validar e fazer commit local em inglês antes de criar a conversa da próxima tarefa. Esta execução automática sequencial foi explicitamente autorizada pelo usuário.
 10. O calendário mostra os 30 dias, contas e eventos previsíveis. Eventos imprevisíveis não deixam sinais antecipados na interface e aparecem somente durante Avançar.
 11. Preservar integralmente as regras existentes de incidência dos eventos. Metadados de previsibilidade e distribuição dos dias não alteram seleção, pesos, condições, limites, exclusões ou repetição.
@@ -56,7 +56,7 @@ FB-17 | planejada | gpt-6.2-sol / medium | Substituir “Fechar mês” por um b
 FB-18 | planejada | gpt-6.2-sol / high | Separar o histórico das ocorrências ativas do calendário
 FB-19 | planejada | gpt-6.2-sol / medium | Destacar a ação de decisão e apoiar os personagens no resumo
 FB-20 | planejada | gpt-6.2-sol / medium | Ajustar a DRE trimestral e a folha na mão do personagem
-FB-21 | planejada | gpt-6.2-astra / xhigh | Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos
+FB-21 | concluída | gpt-6.2-astra / xhigh | Definir o calendário de 30 dias, pagamentos e visibilidade dos eventos
 FB-22 | planejada | gpt-6.2-astra / xhigh | Implementar compromissos, débitos e persistência do calendário
 FB-23 | planejada | gpt-6.2-sol / high | Criar o calendário com 30 dias visíveis e avanço animado
 FB-24 | planejada | gpt-6.2-astra / xhigh | Preservar a incidência e revelar eventos anunciados ou surpresa

@@ -89,6 +89,10 @@ A-07 — Calendário de 30 dias
 Todos os 30 dias visíveis; avançar ao próximo dia com compromisso, incluindo interrupção oculta.
 Estado: confirmado pelo usuário; responsável: FB-23
 
+A-08 — Contrato funcional do calendário
+Para implementar ou validar o calendário, consultar docs/ui-update/feedback-2026-11-19/CONTRATO-CALENDARIO.md. O contrato fixa a revisão mensal, a matriz por ID, as datas configuráveis, a ordem no dia, a retomada e a conciliação das quatro contas.
+Estado: definido e conferido na FB-21; responsável: FB-21
+
 FLUXO
 Hub → Calendário com 30 dias visíveis → Avançar ao próximo compromisso → Conta: debitar e registrar / Evento: abrir decisão → Continuar → Fim do mês → Fechamento conciliado sem dupla cobrança → DRE aguardando Continuar.
 Shows e demais eventos previsíveis são anunciados antes. Quebras e demais imprevistos não têm qualquer marcador antecipado. As regras atuais de incidência permanecem iguais.

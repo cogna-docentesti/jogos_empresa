@@ -3,12 +3,12 @@
   "project": "Jogos de Empresa Cogna",
   "created_at": "2026-11-19",
   "title": "Feedbacks de interface e novo calendário mensal",
-  "status": "planejado",
+  "status": "em execução",
   "implementation_performed": false,
   "method": "Inspeção estática de código, catálogos e documentação; sem execução ou alteração do jogo.",
   "historical_backlog": "docs/ui-update/tasks.json",
   "task_count": 28,
-  "planned_task_count": 27,
+  "planned_task_count": 26,
   "deferred_task_count": 1,
   "feedback_count": 47,
   "first_task": "FB-21",
@@ -110,7 +110,7 @@
     "Para telas sem scroll, reorganizar o conteúdo para caber; não ocultar informação essencial nem apenas recortar a viewport. No cardápio, manter e melhorar o scroll da lista.",
     "Reutilizar arte aprovada. Produzir assets adicionais quando realmente necessários à tarefa, em Assets/Art/new, com fontes em art-source/editable e registros/QA em docs/art; nunca usar arte como fonte de regra econômica.",
     "Contas debitam ao chegar ao compromisso e têm pagamento persistido/idempotente; o fechamento reconcilia esses pagamentos sem debitar novamente. Consultas, reaberturas e retry não podem cobrar ou sortear outra vez.",
-    "Registrar QA e screenshots reais apenas durante execução. Caminhos de evidência deste plano são destinos previstos, ainda inexistentes.",
+    "Registrar QA e screenshots reais durante a execução de cada tarefa, conforme o tipo de entrega. O registro de QA identifica as evidências já produzidas.",
     "Uma conversa nova por tarefa ativa, com o nome, modelo e raciocínio definidos neste JSON. Concluir, validar e fazer commit local em inglês antes de criar a conversa da próxima tarefa. Esta execução automática sequencial foi explicitamente autorizada pelo usuário.",
     "O calendário mostra os 30 dias, contas e eventos previsíveis. Eventos imprevisíveis não deixam sinais antecipados na interface e aparecem somente durante Avançar.",
     "Preservar integralmente as regras existentes de incidência dos eventos. Metadados de previsibilidade e distribuição dos dias não alteram seleção, pesos, condições, limites, exclusões ou repetição.",
@@ -263,6 +263,13 @@
       "proposal": "Todos os 30 dias visíveis; avançar ao próximo dia com compromisso, incluindo interrupção oculta.",
       "owner_task": "FB-23",
       "status": "confirmado pelo usuário"
+    },
+    {
+      "id": "A-08",
+      "topic": "Contrato funcional do calendário",
+      "proposal": "Para implementar ou validar o calendário, consultar docs/ui-update/feedback-2026-11-19/CONTRATO-CALENDARIO.md. O contrato fixa a revisão mensal, a matriz por ID, as datas configuráveis, a ordem no dia, a retomada e a conciliação das quatro contas.",
+      "owner_task": "FB-21",
+      "status": "definido e conferido na FB-21"
     }
   ],
   "feedback": [
@@ -1743,7 +1750,7 @@
       "area": "Calendário; produto e economia",
       "kind": "especificação",
       "priority": "P1",
-      "status": "planejada",
+      "status": "concluída",
       "implementation_performed": false,
       "depends_on": [],
       "objective": "Especificar o calendário de 30 dias com avanço por compromissos, débito imediato de contas e eventos anunciados ou surpresa, preservando a incidência atual.",
@@ -1768,6 +1775,8 @@
         "Revisar os cenários de conta paga, retry/reload, dois compromissos no mesmo dia, show anunciado, quebra oculta e fechamento sem dupla cobrança."
       ],
       "references": [
+        "docs/ui-update/feedback-2026-11-19/CONTRATO-CALENDARIO.md",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-21.json",
         "docs/monthly-simulation.md",
         "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
         "Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs",
@@ -1782,7 +1791,8 @@
         "O exemplo dia 16/dia 20 é cenário de teste, não impõe vencimento universal.",
         "A visibilidade antecipada é somente de contas e eventos previsíveis; imprevistos não devem vazar por ícones, textos, tooltips, foco ou quantidades.",
         "A incidência atual do seletor usa por padrão alvo 4, mínimo 3, máximo 5, com as validações do código; manter os valores e o comportamento existentes.",
-        "Datas de eventos influenciam duração no motor. Documentar a distribuição sem modificar as regras que determinam quais eventos incidem."
+        "Datas de eventos influenciam duração no motor. Documentar a distribuição sem modificar as regras que determinam quais eventos incidem.",
+        "Entrega documental concluída. QA confrontou os 20 IDs e títulos, as 60 opções do catálogo e os cálculos de conciliação. A implementação no jogo pertence às tarefas seguintes."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-21.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-21.json",

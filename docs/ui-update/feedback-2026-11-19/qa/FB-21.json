@@ -1,0 +1,73 @@
+{
+  "task_id": "FB-21",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "6c576e28",
+  "status": "concluída",
+  "implementation_performed": false,
+  "deliverable": "docs/ui-update/feedback-2026-11-19/CONTRATO-CALENDARIO.md",
+  "method": "Inspeção do fluxo C# e dos catálogos serializados, revisão dos cenários do contrato e conferência aritmética reproduzível.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "A tabela de estados acompanha revisão, primeira casa, destino público, parada privada, confirmação por ocorrência, dia 30 e DRE. A revisão do contrato incluiu dia 1, dia 30 com pendência e o caso em que o único destino público restante é o marco final.",
+      "sources": [
+        "Assets/Scripts/Game/Domain/Enums/GameState.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs",
+        "Assets/Scripts/Game/Adapter/In/Controllers/EventScreenController.cs"
+      ]
+    },
+    {
+      "criterion": 2,
+      "result": "Rastreadas as quatro contas aos campos de origem e às linhas da DRE. Conferidos o cálculo com recibos, a ordem em uma colisão de contas, a amortização única e o encerramento do empréstimo. Com os valores da fixture KnownMonthlyStatementUsesSelectedPricesAndCatalogCosts, pagar 4.600 antes do fechamento conserva o saldo esperado de 11.520.",
+      "sources": [
+        "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+        "Assets/Scripts/Game/Domain/Service/LoanService.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/RoundResultEntity.cs",
+        "Assets/Editor/Tests/MonthlySimulationTests.cs"
+      ]
+    },
+    {
+      "criterion": 3,
+      "result": "Comparação da matriz com todos os assets passou para 20 IDs e títulos únicos, 20 justificativas e 60 opções no catálogo. A matriz anuncia local_festival e new_competitor. Os demais 18 começam ocultos. A revisão estática conferiu o contexto, os filtros, pesos, grupos, limites e repetição do seletor e o uso de uma fonte independente para os dias. A comparação entre planos só distintos por uma surpresa é o critério de privacidade da projeção.",
+      "sources": [
+        "Assets/Resources/Events",
+        "Assets/Scripts/Data/ScriptableObjects/Event/EventData.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventSelector.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventSelectionContext.cs",
+        "Assets/Scripts/Game/Domain/Helpers/EventConditionEvaluator.cs",
+        "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs"
+      ]
+    },
+    {
+      "criterion": 4,
+      "result": "O percurso documenta a quebra oculta no dia 16 antes do aluguel do dia 20. Foram revisadas a retomada antes e depois da escolha, a perda de resposta após o pagamento, a chegada conjunta da folha e outro evento, e a falha antes ou depois do commit final. Com caixa inicial de 12.000, contas de 14.400, eventos de −4.000 e receita/insumos ilustrativos, as duas expressões de caixa final dão 13.600.",
+      "sources": [
+        "Assets/Resources/Events/freezer_breakdown.asset",
+        "Assets/Resources/Events/local_festival.asset",
+        "Assets/Scripts/Game/Infrastructure/Database/Tables/MonthlyEventPlanEntity.cs",
+        "Assets/Scripts/Game/Adapter/Out/Persistence/SessionEventHistoryRepository.cs",
+        "Assets/Scripts/Game/Domain/Service/RoundService.cs"
+      ]
+    },
+    {
+      "criterion": 5,
+      "result": "Revisadas as rotas de resultado pendente e Continuar para meses 1–3, a precedência de BANKRUPT após três prejuízos e o reset do contador após resultado zero ou positivo. A migração cobre meses abertos, planos vazios ou com escolhas, histórico sem plano, resultados salvos e campanhas encerradas.",
+      "sources": [
+        "Assets/Scripts/Game/Domain/Service/MonthlySessionSettlement.cs",
+        "Assets/Scripts/Game/Domain/Service/GamesSessionService.cs",
+        "Assets/Scripts/Game/Infrastructure/Database/DatabaseInitializer.cs",
+        "docs/monthly-simulation.md"
+      ]
+    }
+  ],
+  "reproduce": {
+    "command": "python -X utf8 output/ui-update/feedback-2026-11-19/FB-21/conferir.py",
+    "dependency": "PyYAML 6.0.2 usado para ler os assets Unity",
+    "output": "output/ui-update/feedback-2026-11-19/FB-21/conferencia.json"
+  },
+  "limitations": [
+    "Aceite da especificação. Os valores conferidos são cálculos sobre arquivos e entradas controladas. Nenhum teste C# ou sessão de Play Mode foi executado nesta tarefa.",
+    "Animação, invisibilidade em tela, gravação SQLite, migração real e recuperação de falhas serão verificadas nas tarefas de implementação do calendário."
+  ]
+}
