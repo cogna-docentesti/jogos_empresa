@@ -892,8 +892,8 @@
       "area": "Restaurante",
       "kind": "interface e interação",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-02",
         "FB-04"
@@ -922,7 +922,9 @@
         "Assets/Editor/UI/ConceptUiRevision.cs"
       ],
       "notes": [
-        "Interpretação de planejamento para “alpha com 80%”: alpha da camada de fundo/scrim, não opacidade de texto e botões. Registrar no layout antes de implementar."
+        "A camada de fundo usa alpha 0,80. O painel, o texto e os botões são opacos.",
+        "O popup abre no restaurante escolhido na tela principal. Ao trocar a consulta, a área e a classe atuais seguem como referência para a pontuação e a disponibilidade.",
+        "QA em 1280×720 na GameScene conferiu as 45 combinações da FB-04, o bloqueio do fundo, a restauração de foco, o rascunho e a consulta pelo hub."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-05.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-05.json",

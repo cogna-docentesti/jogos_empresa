@@ -1,5 +1,5 @@
 FB-05 — Transformar a compatibilidade em popup com três restaurantes
-Status: planejada | Prioridade: P1 | Tipo: interface e interação
+Status: concluída | Prioridade: P1 | Tipo: interface e interação
 Área: Restaurante
 Dependências: FB-02, FB-04
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -44,7 +44,9 @@ VALIDAÇÃO PREVISTA
 1. Abrir, alternar os três tipos, fechar e reabrir; verificar rascunho, foco, input no fundo e conteúdo em 1280×720.
 
 OBSERVAÇÕES E LIMITES
-1. Interpretação de planejamento para “alpha com 80%”: alpha da camada de fundo/scrim, não opacidade de texto e botões. Registrar no layout antes de implementar.
+1. A camada de fundo usa alpha 0,80. O painel, o texto e os botões são opacos.
+2. O popup abre no restaurante escolhido na tela principal. Ao trocar a consulta, a área e a classe atuais seguem como referência para a pontuação e a disponibilidade.
+3. QA em 1280×720 na GameScene conferiu as 45 combinações da FB-04, o bloqueio do fundo, a restauração de foco, o rascunho e a consulta pelo hub.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-05.json.

@@ -12,7 +12,11 @@ namespace Game.EditorTools
     /// <summary>UI-06 keeps the D2 controller, selectable instances and panel registry references.</summary>
     public static class RestaurantUiMigration
     {
-        private static T Ensure<T>(Component c) where T:Component => c.GetComponent<T>() ?? c.gameObject.AddComponent<T>();
+        private static T Ensure<T>(Component target) where T : Component
+        {
+            var component = target.GetComponent<T>();
+            return component != null ? component : target.gameObject.AddComponent<T>();
+        }
         private static RectTransform Node(Transform p,string name,float x,float y,float w,float h)
         {
             var r=p.Find(name) as RectTransform;
@@ -35,7 +39,6 @@ namespace Game.EditorTools
         }
         private static TextMeshProUGUI Flow(Transform p,string name,string value,TypographyToken size,bool bold=false)
             => Text(p,name,value,0,0,480,32,size,bold);
-        private static void Height(Component c,float h) { var e=Ensure<UnityEngine.UI.LayoutElement>(c); e.preferredHeight=h; e.flexibleHeight=0; }
         private static UnityEngine.UI.ScrollRect Scroll(Transform p,string name,float x,float y,float w,float h)
         {
             var root=Node(p,name,x,y,w,h); var scroll=Ensure<UnityEngine.UI.ScrollRect>(root);
@@ -72,6 +75,110 @@ namespace Game.EditorTools
             Image(r,"ActionIcon",field=="backButton"?"ICON_BACK":"ICON_NEXT",14,18,32,32);
             SharedUiStyles.Bind(b,kind); return b;
         }
+
+        internal static void ApplyCompatibilityLayout(Transform panel, bool conceptLayout)
+        {
+            var view = panel.GetComponent<RestaurantScreenView>();
+            var sidebar = panel.Find("DecisionSidebar");
+            var legacy = sidebar.Find("Compatibility");
+            if (legacy != null) legacy.gameObject.SetActive(false);
+
+            var trigger = conceptLayout
+                ? Node(sidebar, "CompatibilityToggle", 884, 4, 336, 52)
+                : Node(sidebar, "CompatibilityToggle", 24, 284, 520, 68);
+            var lateralToggle = trigger.GetComponent<ConceptDetailsToggle>();
+            if (lateralToggle != null) UnityEngine.Object.DestroyImmediate(lateralToggle);
+            var open = Ensure<UnityEngine.UI.Button>(trigger);
+            open.targetGraphic = Ensure<UnityEngine.UI.Image>(trigger);
+            Text(trigger, "Label", "Ver compatibilidade", 12, 0, trigger.rect.width - 24, trigger.rect.height,
+                new TypographyToken(TypographyRole.Button, 22), true).alignment = TextAlignmentOptions.Center;
+            SharedUiStyles.Bind(open, SharedControlKind.Secondary);
+
+            var root = Node(panel, "CompatibilityModal", 0, 0, 1920, 1080);
+            root.SetAsLastSibling();
+            Stretch(root);
+            var canvas = Ensure<Canvas>(root);
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 1001;
+            Ensure<UnityEngine.UI.GraphicRaycaster>(root);
+            var focus = Ensure<SharedModalFocus>(root);
+            var backdrop = Image(root, "Backdrop", null, 0, 0, 1920, 1080, true);
+            backdrop.color = new Color(0f, 0f, 0f, .80f);
+            backdrop.transform.SetAsFirstSibling();
+            Stretch(backdrop.rectTransform);
+
+            var dialog = Image(root, "Dialog", "UI_MODAL_SURFACE", 0, 0, 1080, 552, true).rectTransform;
+            dialog.anchorMin = dialog.anchorMax = dialog.pivot = new Vector2(.5f, .5f);
+            dialog.anchoredPosition = Vector2.zero;
+            Text(dialog, "Title", "Compatibilidade", 48, 26, 888, 64,
+                GameTypography.Tokens.ScreenTitle, true).raycastTarget = false;
+
+            var restaurantTypes = new[] { RestaurantType.PODRAO, RestaurantType.JAPONES, RestaurantType.FRANCES };
+            var restaurants = Resources.LoadAll<RestaurantData>("Restaurants");
+            var tabs = new UnityEngine.UI.Button[restaurantTypes.Length];
+            for (int i = 0; i < restaurantTypes.Length; i++)
+            {
+                var type = restaurantTypes[i];
+                var data = restaurants.FirstOrDefault(r => r.type == type);
+                var tab = Node(dialog, type.ToString(), 48 + i * 336, 108, 312, 132);
+                tabs[i] = Ensure<UnityEngine.UI.Button>(tab);
+                tabs[i].targetGraphic = Ensure<UnityEngine.UI.Image>(tab);
+                var facade = Image(tab, "Facade", null, 14, 18, 128, 96);
+                facade.sprite = data?.facade;
+                facade.preserveAspect = true;
+                facade.enabled = facade.sprite != null;
+                Text(tab, "Label", data != null ? data.displayName : "Indisponível", 150, 24, 142, 84,
+                    new TypographyToken(TypographyRole.Navigation, 28), true);
+                SharedUiStyles.Bind(tabs[i], SharedControlKind.Tab);
+            }
+
+            CompatibilitySection(view, dialog, "Location", "Localização", 48, "coh1");
+            CompatibilitySection(view, dialog, "Audience", "Público", 552, "coh2");
+            var closeRoot = Node(dialog, "Fechar compatibilidade", 964, 24, 68, 68);
+            var close = Ensure<UnityEngine.UI.Button>(closeRoot);
+            close.targetGraphic = Ensure<UnityEngine.UI.Image>(closeRoot);
+            Image(closeRoot, "Icon", "ICON_CLOSE", 17, 17, 34, 34);
+            SharedUiStyles.Bind(close, SharedControlKind.Icon);
+            focus.Configure(tabs[0], close);
+
+            Set(view, "compatibilityModal", focus);
+            Set(view, "compatibilityButton", open);
+            Set(view, "compatibilityCloseButton", close);
+            var serializedView = new SerializedObject(view);
+            var tabRefs = serializedView.FindProperty("compatibilityTabs");
+            tabRefs.arraySize = tabs.Length;
+            for (int i = 0; i < tabs.Length; i++)
+                tabRefs.GetArrayElementAtIndex(i).objectReferenceValue = tabs[i];
+            serializedView.ApplyModifiedPropertiesWithoutUndo();
+            root.gameObject.SetActive(false);
+        }
+
+        private static void Stretch(RectTransform rect)
+        {
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = rect.offsetMax = Vector2.zero;
+        }
+
+        private static void CompatibilitySection(RestaurantScreenView view, Transform dialog,
+            string name, string title, float x, string field)
+        {
+            var section = Image(dialog, name, "UI_PANEL_IVORY", x, 268, 480, 236).rectTransform;
+            Text(section, "Title", title, 24, 18, 432, 48, GameTypography.Tokens.SectionTitle, true).raycastTarget = false;
+            var tip = Text(section, "Context", "", 24, 73, 432, 62, GameTypography.Tokens.Body);
+            tip.alignment = TextAlignmentOptions.TopLeft;
+            tip.raycastTarget = false;
+            Set(view, field + "Tip", tip);
+            var value = Text(section, "Score", "Sem seleção", 24, 143, 432, 38, GameTypography.Tokens.BodyStrong, true);
+            value.raycastTarget = false;
+            Set(view, field + "Value", value);
+            var track = Image(section, "Track", null, 24, 192, 432, 12);
+            track.color = GamePalette.SurfaceAlt;
+            var fill = Image(track.transform, "Fill", null, 0, 0, 432, 12);
+            fill.color = GamePalette.Money;
+            Set(view, field + "BarFill", fill);
+        }
+
         [MenuItem("Tools/Jogos de Empresa/UI-06/Migrate restaurant in GameScene")]
         public static void Apply()
         {
@@ -112,7 +219,7 @@ namespace Game.EditorTools
                 Flow(info.content,"TicketLabel","Ticket de referência",GameTypography.Tokens.Label);
                 var ticket=Flow(info.content,"TicketRange","—",GameTypography.Tokens.BodyStrong,true); ticket.alignment=TextAlignmentOptions.MidlineRight;
                 Text(r,"SelectionStatus","Selecionar restaurante",24,660,362,36,GameTypography.Tokens.Caption,true).alignment=TextAlignmentOptions.Center;
-                SharedUiStyles.Bind(b,SharedControlKind.Card); view.SetRestaurantCardData(restaurant);
+                SharedUiStyles.Bind(b,SharedControlKind.Card);
             }
             Set(view,"hintText",Text(panel,"SelectionHint","Escolha seu restaurante e público.",24,918,1280,42,GameTypography.Tokens.Body));
             var side=Image(panel,"DecisionSidebar","UI_PANEL_IVORY",1328,112,568,848);
@@ -130,16 +237,9 @@ namespace Game.EditorTools
                 Text(r,"Availability","Disponível",8,60,152,32,GameTypography.Tokens.Caption).alignment=TextAlignmentOptions.Center;
                 SharedUiStyles.Bind(b,SharedControlKind.Card);
             }
-            var details=Scroll(side.transform,"Compatibility",24,284,520,540);
-            Flow(details.content,"Title","Compatibilidade",GameTypography.Tokens.SectionTitle,true);
-            for(int i=1;i<=2;i++)
-            {
-                Flow(details.content,"Label"+i,i==1?"Restaurante e localização":"Restaurante e público",GameTypography.Tokens.Label,true);
-                var value=Flow(details.content,"Value"+i,"Sem seleção",GameTypography.Tokens.BodyStrong,true); Set(view,"coh"+i+"Value",value);
-                var track=Image(details.content,"Bar"+i,"UI_PANEL_LAVENDER",0,0,496,12); Height(track,12);
-                var fill=Image(track.transform,"Fill",null,0,0,496,12); fill.color=GamePalette.Money; Set(view,"coh"+i+"BarFill",fill);
-                Set(view,"coh"+i+"Tip",Flow(details.content,"Tip"+i,"Selecione um restaurante.",GameTypography.Tokens.Body));
-            }
+            ApplyCompatibilityLayout(panel, false);
+            foreach (var restaurant in data)
+                view.SetRestaurantCardData(restaurant);
             var footer=Image(panel,"DecisionFooter","UI_NAVBAR_PLUM",0,984,1920,96);
             Action(view,"backButton",footer.transform,"Back","Voltar à localização",24,332,SharedControlKind.Secondary);
             Action(view,"confirmButton",footer.transform,"Confirm","Confirmar restaurante",1500,396,SharedControlKind.Primary);

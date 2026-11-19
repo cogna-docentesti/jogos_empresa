@@ -36,12 +36,13 @@ namespace Game.Adapter.In.Controllers
             BindActions();
             ResetFromSession();
             UpdateSegmentAvailability();
-            UpdateCoherencePanel();
             view.SetReviewMode(_review);
         }
 
         private void OnDisable()
         {
+            view.CloseCompatibility();
+            view.BindCompatibility(null, null);
             view.BindCardPodrao(null);
             view.BindCardJapones(null);
             view.BindCardFrances(null);
@@ -79,6 +80,7 @@ namespace Game.Adapter.In.Controllers
 
         private void PopulateView()
         {
+            view.SetCompatibilityAvailable(_restaurantsByType.Count > 0);
             foreach (var type in new[] { RestaurantType.PODRAO, RestaurantType.JAPONES, RestaurantType.FRANCES })
                 view.SetRestaurantAvailability(type, _restaurantsByType.ContainsKey(type));
             foreach (var pair in _restaurantsByType)
@@ -102,6 +104,7 @@ namespace Game.Adapter.In.Controllers
             view.BindBtnHigh(() => OnSegmentSelected(Segment.HIGH));
             view.BindConfirm(OnConfirm);
             view.BindBack(OnBack);
+            view.BindCompatibility(OnCompatibilityRequested, OnCompatibilityTabSelected);
         }
 
         /// <summary>
@@ -138,11 +141,12 @@ namespace Game.Adapter.In.Controllers
             view.SelectSegmentButton(_selectedSegment);
             UpdateConfirmState();
             UpdateHint();
+            UpdateCoherencePanel();
         }
 
         private void OnRestaurantSelected(RestaurantType type)
         {
-            if (_review) return;
+            if (_review || view.IsCompatibilityOpen) return;
             if (!_restaurantsByType.ContainsKey(type)) return;
             _selectedRestaurant = type;
 
@@ -161,7 +165,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnSegmentSelected(Segment segment)
         {
-            if (_review) return;
+            if (_review || view.IsCompatibilityOpen) return;
             if (!_selectedRestaurant.HasValue || !IsSegmentAllowed(_selectedRestaurant.Value, segment))
             {
                 view.SetHint("Esta classe social não está disponível para o restaurante selecionado.");
@@ -213,34 +217,54 @@ namespace Game.Adapter.In.Controllers
             view.SetConfirmEnabled(canConfirm);
         }
 
+        private void OnCompatibilityRequested()
+        {
+            if (view.IsCompatibilityOpen || !_selectedRestaurant.HasValue) return;
+
+            UpdateCoherencePanel();
+            view.OpenCompatibility();
+        }
+
+        private void OnCompatibilityTabSelected(RestaurantType type)
+        {
+            if (view.IsCompatibilityOpen && _restaurantsByType.TryGetValue(type, out var restaurant))
+                ShowCompatibility(restaurant);
+        }
+
         private void UpdateCoherencePanel()
         {
-            if (!_selectedRestaurant.HasValue)
-            {
+            if (_selectedRestaurant.HasValue && _restaurantsByType.TryGetValue(_selectedRestaurant.Value, out var restaurant))
+                ShowCompatibility(restaurant);
+            else
                 view.UpdateCoherence(null, "Selecione um restaurante.", null, "Selecione um restaurante.");
-                return;
-            }
+        }
 
-            var restaurant = _restaurantsByType[_selectedRestaurant.Value];
-            LocationZone? zone = _review ? GameSessionState.Current.locationZone : PlayerSession.SelectedZone;
+        private void ShowCompatibility(RestaurantData restaurant)
+        {
+            LocationZone? zone = _review ? GameSessionState.Current?.locationZone : PlayerSession.SelectedZone;
             int? locationScore = null;
-            string locationTip = "Selecione uma localização.";
+            string locationTip = "Escolha uma localização para consultar.";
             if (zone.HasValue && _locationsByZone.TryGetValue(zone.Value, out var location))
             {
                 locationScore = AlignmentEngine.GetRestaurantLocationScore(restaurant.type, zone.Value);
-                locationTip = $"{restaurant.displayName} pode operar na {location.displayName}.";
+                locationTip = location.displayName;
             }
 
-            int? targetScore = _selectedSegment.HasValue
-                ? AlignmentEngine.GetRestaurantTargetScore(restaurant.type, _selectedSegment.Value)
-                : null;
-            string targetTip = "Nenhuma classe disponível para este restaurante.";
-            if (_selectedSegment.HasValue && restaurant.allowedSegments is { Length: > 0 })
+            int? targetScore = null;
+            string targetTip = "Escolha uma classe para consultar.";
+            if (_selectedSegment is Segment segment)
             {
-                string allowed = string.Join(" e ", restaurant.allowedSegments.Select(GetSegmentName));
-                targetTip = $"Pontuação da {GetSegmentName(_selectedSegment.Value)}. {restaurant.displayName} pode atender {allowed}.";
+                targetScore = AlignmentEngine.GetRestaurantTargetScore(restaurant.type, segment);
+                string availability = restaurant.AllowsSegment(segment) ? "disponível" : "indisponível";
+                targetTip = $"{GetSegmentName(segment)} · {availability}";
             }
 
+            string allowed = restaurant.allowedSegments is { Length: > 0 }
+                ? "Público permitido · " + string.Join(" e ", restaurant.allowedSegments.Select(GetSegmentName))
+                : "Nenhuma classe disponível";
+            targetTip += "\n" + allowed;
+
+            view.SelectCompatibilityTab(restaurant.type);
             view.UpdateCoherence(locationScore, locationTip, targetScore, targetTip);
         }
 
@@ -294,7 +318,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnConfirm()
         {
-            if (_review) return;
+            if (_review || view.IsCompatibilityOpen) return;
             if (!TrySaveDraft())
                 return;
 
@@ -304,7 +328,7 @@ namespace Game.Adapter.In.Controllers
 
         private void OnBack()
         {
-            if (_review) return;
+            if (_review || view.IsCompatibilityOpen) return;
             // Voltar nao apaga a escolha: o jogador esta voltando para trocar a
             // localizacao, nao para desistir. O que esta na tela vai para o
             // rascunho e sera reaplicado quando ele avancar de novo.

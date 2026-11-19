@@ -1,0 +1,54 @@
+{
+  "task_id": "FB-05",
+  "date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "00b84015",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolution": "1280×720",
+  "method": "Duas execuções da GameScene em Play Mode, com banco SQLite e chave de identificação PlayerPrefs isolados. O ensaio usou os raycasts e eventos de ponteiro, movimento, confirmação e cancelamento do uGUI. A matriz cruzou cinco áreas, três classes e três restaurantes. As capturas são da Game View.",
+  "before": "Ver compatibilidade expandia um painel lateral que cobria o card Francês. A tela de fundo recebia cliques e a expansão não assumia o foco.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Ver compatibilidade abriu por clique e por confirmação via teclado. O X e o cancelamento do modal devolveram o foco ao botão de abertura. Ao reabrir, o popup mostrou primeiro o restaurante escolhido na tela principal."
+    },
+    {
+      "criterion": 2,
+      "result": "Os três botões exibiram nome e fachada do catálogo, com destaque no restaurante consultado. As 45 combinações exibiram disponibilidade, contexto, pontuação e barras correspondentes. Os 45 resultados coincidiram com o catálogo, com o AlignmentEngine e com a evidência da FB-04, incluindo os 5/20 pontos do Francês com classe B indisponível."
+    },
+    {
+      "criterion": 3,
+      "result": "A camada de fundo teve alpha 0,80 e interceptou os raycasts sobre o card e a confirmação da tela principal. Superfície, controles e textos do modal tiveram alpha 1,0. Os textos couberam sem overflow em todos os casos da matriz."
+    },
+    {
+      "criterion": 4,
+      "result": "A consulta manteve Lanches e classe B na tela principal e preservou o rascunho anterior em memória. Só Confirmar restaurante enviou Lanches e classe B ao cardápio. O retorno restaurou a D2 com o popup fechado e sem novas linhas de sessão no SQLite."
+    }
+  ],
+  "additional_checks": [
+    "As setas percorreram os três restaurantes e o X em ciclo dentro do popup. Ao fechar, a navegação da tela foi retomada.",
+    "Na consulta pelo hub, o popup usou a área e a classe confirmadas da sessão. Alternar o restaurante consultado preservou esses dados e fechar o popup liberou a navegação do hub."
+  ],
+  "limitations": [
+    "QA executado no Editor instalado 6000.3.28f1, na Game View a 1280×720. Builds de distribuição e testes em dispositivo ficaram fora do ensaio.",
+    "A consulta pelo hub partiu de uma sessão de teste em memória. O ensaio cobriu a interação do popup, a conferência da matriz e o retorno entre D2 e D3."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-05",
+    "before": "before.json",
+    "after": "after.json",
+    "matrix_rows": 45,
+    "matrix_reference": "output/ui-update/feedback-2026-11-19/FB-04/after.json",
+    "screenshots": [
+      "before-lateral-1280x720.png",
+      "after-closed-1280x720.png",
+      "after-lanches-1280x720.png",
+      "after-japones-1280x720.png",
+      "after-frances-1280x720.png",
+      "after-review-1280x720.png"
+    ]
+  }
+}

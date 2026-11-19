@@ -239,12 +239,16 @@ public static class Font06Validation
                     int before=Writes;var c=Root.Find("Panel_Review").GetComponent<EstablishmentReviewContent>();c.Bind(EstablishmentSummaryService.Build());
                     Expect(Writes==before,"Review binding wrote SQLite");Capture("review-"+r.ToString().ToLowerInvariant());MenuNavigator.Instance.Open(PanelId.Restaurant);
                 });
-                Add("Restaurant query and expandable compatibility "+r,()=>{
+                Add("Restaurant query and compatibility modal "+r,()=>{
                     var p=Root.Find("Panel_Restaurant");var view=p.GetComponent<RestaurantScreenView>();int before=Writes;view.ApplyTypography();
                     Expect(Writes==before,"Restaurant typography wrote SQLite");
                     var toggle=p.Find("DecisionSidebar/CompatibilityToggle").GetComponent<Button>();toggle.onClick.Invoke();
                 });
-                Add("Compatibility content "+r,()=>{Capture("restaurant-"+r.ToString().ToLowerInvariant()+"-compatibility");MenuNavigator.Instance.Open(PanelId.MenuPricing);});
+                Add("Compatibility content "+r,()=>{
+                    Capture("restaurant-"+r.ToString().ToLowerInvariant()+"-compatibility");
+                    Game.Adapter.In.UI.SharedModalFocus.Active.Cancel();
+                    MenuNavigator.Instance.Open(PanelId.MenuPricing);
+                });
                 Add("Read-only menu clones "+r,()=>{
                     var p=Root.Find("Panel_MenuPricing");var items=p.GetComponentsInChildren<ProductPricingItemView>();Expect(items.Length==3,"Duplicate menu clones");
                     int before=Writes;foreach(var item in items){item.Setup(item.Product,item.SelectedPrice);item.SetReadOnly(true);}Expect(Writes==before,"Product rebind wrote SQLite");

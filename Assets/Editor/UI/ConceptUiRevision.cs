@@ -159,12 +159,7 @@ namespace Game.EditorTools
                 Move(side,buttons[i],20+i*398,60,378,76);var b=Find(side,buttons[i]);
                 Move(b,"SegmentLabel",56,8,304,36);Move(b,"Availability",56,42,304,28);Move(b,"Radio",16,24,28,28);
             }
-            // Compatibility remains accessible below the choices, using its existing scroll.
-            ResizeScroll(side,"Compatibility",1264,-684,608,844);
-            var compat=Find(side,"Compatibility");compat.gameObject.SetActive(false);
-            var surface=Ensure<UnityEngine.UI.Image>(compat);surface.sprite=AssetDatabase.LoadAssetAtPath<Sprite>(art["UI_PANEL_IVORY"]);surface.type=UnityEngine.UI.Image.Type.Sliced;surface.color=Color.white;
-            var toggle=Node(side,"CompatibilityToggle",884,8,336,44);var button=Ensure<UnityEngine.UI.Button>(toggle);button.targetGraphic=Ensure<UnityEngine.UI.Image>(toggle);
-            Label(toggle,"Label","Ver compatibilidade",12,0,312,44,22,true);SharedUiStyles.Bind(button,SharedControlKind.Secondary);Set(Ensure<ConceptDetailsToggle>(toggle),"details",compat.gameObject);
+            RestaurantUiMigration.ApplyCompatibilityLayout(p, true);
             var confirm=p.Find("DecisionFooter/Confirm")??Find(p,"Confirm");confirm.SetParent(p,false);Place(confirm,1312,860,560,84);
         }
         static void Menu()

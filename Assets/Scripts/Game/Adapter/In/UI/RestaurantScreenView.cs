@@ -15,15 +15,19 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Image coh1BarFill, coh2BarFill;
         [SerializeField] private TextMeshProUGUI coh1Tip, coh2Tip, coh1Value, coh2Value;
         [SerializeField] private UnityEngine.UI.Button confirmButton, backButton;
+        [SerializeField] private SharedModalFocus compatibilityModal;
+        [SerializeField] private UnityEngine.UI.Button compatibilityButton, compatibilityCloseButton;
+        [SerializeField] private UnityEngine.UI.Button[] compatibilityTabs;
+        private static readonly RestaurantType[] RestaurantTypes = { RestaurantType.PODRAO, RestaurantType.JAPONES, RestaurantType.FRANCES };
         private Segment? selectedSegment;
         private static readonly CultureInfo Br = CultureInfo.GetCultureInfo("pt-BR");
+        public bool IsCompatibilityOpen => compatibilityModal.gameObject.activeInHierarchy;
 
         private void OnEnable() => ApplyTypography();
         public void ApplyTypography()
         {
             foreach (var binding in GetComponentsInChildren<TypographyRoleBinding>(true)) binding.Reapply();
             GameTypography.KeepSize(hintText, TypographyRole.Body);
-            foreach (var t in new[] { coh1Tip, coh2Tip, coh1Value, coh2Value }) GameTypography.KeepSize(t, TypographyRole.Body);
             foreach (var card in new[] { cardPodrao, cardJapones, cardFrances })
             {
                 var content = card != null ? card.transform.Find("CardDetails/Viewport/Content") : null;
@@ -56,6 +60,7 @@ namespace Game.Adapter.In.UI
             var title=transform.Find("DecisionSidebar/Title")?.GetComponent<TMP_Text>();if(title!=null)title.text=review?"Público confirmado":"Quem você vai atender?";
             var help=transform.Find("DecisionSidebar/Help")?.GetComponent<TMP_Text>();if(help!=null)help.text=review?"Consulte a classe definida para o seu restaurante.":"Escolha uma classe disponível para o restaurante selecionado.";
             var footer=transform.Find("DecisionFooter/DraftHint")?.GetComponent<TMP_Text>();if(footer!=null)footer.text=review?"Escolhas confirmadas · consulta":"Escolha em rascunho";
+            RebuildNavigation();
         }
         public void BindCardPodrao(UnityEngine.Events.UnityAction action) => Bind(cardPodrao,action);
         public void BindCardJapones(UnityEngine.Events.UnityAction action) => Bind(cardJapones,action);
@@ -65,19 +70,56 @@ namespace Game.Adapter.In.UI
         public void BindBtnHigh(UnityEngine.Events.UnityAction action) => Bind(btnHigh,action);
         public void BindConfirm(UnityEngine.Events.UnityAction action) => Bind(confirmButton,action);
         public void BindBack(UnityEngine.Events.UnityAction action) => Bind(backButton,action);
+        public void BindCompatibility(UnityEngine.Events.UnityAction open, System.Action<RestaurantType> consult)
+        {
+            Bind(compatibilityButton, open);
+            Bind(compatibilityCloseButton, open != null ? CloseCompatibility : null);
+            for (int i = 0; i < RestaurantTypes.Length; i++)
+            {
+                var type = RestaurantTypes[i];
+                Bind(compatibilityTabs[i], consult != null ? () => consult(type) : null);
+            }
+        }
+
+        public void OpenCompatibility()
+        {
+            compatibilityButton.Select();
+            compatibilityModal.gameObject.SetActive(true);
+        }
+
+        public void CloseCompatibility() => compatibilityModal.gameObject.SetActive(false);
+
+        public void SelectCompatibilityTab(RestaurantType type)
+        {
+            compatibilityModal.Configure(GetCompatibilityTab(type), compatibilityCloseButton);
+            for (int i = 0; i < RestaurantTypes.Length; i++)
+                compatibilityTabs[i].GetComponent<SharedControlAppearance>().SetSelected(RestaurantTypes[i] == type);
+        }
+
+        public void SetCompatibilityAvailable(bool available) => compatibilityButton.interactable = available;
+
         public void SetRestaurantAvailability(RestaurantType type,bool available)
         {
             GetRestaurantCard(type).interactable=available;
             SetChildText(GetRestaurantCard(type),"SelectionStatus",available?"Selecionar restaurante":"Indisponível");
+            var tab = GetCompatibilityTab(type);
+            tab.interactable = available;
+            if (!available)
+            {
+                SetChildText(tab, "Label", "Indisponível");
+                SetFacade(tab, null);
+            }
         }
         public void SetRestaurantCardData(RestaurantData data)
         {
             SetRestaurantCardData(data.type,data.displayName,data.description);
             var card=GetRestaurantCard(data.type);
-            var image=card.transform.Find("Facade")?.GetComponent<UnityEngine.UI.Image>();
-            if(image != null) { image.sprite=data.facade; image.color=Color.white; image.preserveAspect=true; image.enabled=data.facade != null; }
+            SetFacade(card, data.facade);
             SetChildText(card,"MonthlyCost","R$ "+data.baseMonthlyCost.ToString("N0",Br));
             SetChildText(card,"TicketRange","R$ "+data.ticketMin.ToString("N0",Br)+" a R$ "+data.ticketMax.ToString("N0",Br));
+            var tab = GetCompatibilityTab(data.type);
+            SetChildText(tab, "Label", data.displayName);
+            SetFacade(tab, data.facade);
         }
         public void SetRestaurantCardData(RestaurantType type,string displayName,string description)
         {
@@ -87,7 +129,7 @@ namespace Game.Adapter.In.UI
         public void SetSegmentButtonData(Segment segment,string displayName) => SetChildText(GetSegmentButton(segment),"SegmentLabel",displayName);
         public void SelectRestaurantCard(RestaurantType? selected)
         {
-            foreach(var type in new[]{RestaurantType.PODRAO,RestaurantType.JAPONES,RestaurantType.FRANCES})
+            foreach(var type in RestaurantTypes)
             {
                 var card=GetRestaurantCard(type); bool chosen=selected==type && card.interactable;
                 card.GetComponent<SharedControlAppearance>()?.SetSelected(chosen);
@@ -143,7 +185,8 @@ namespace Game.Adapter.In.UI
         }
         private void RebuildNavigation()
         {
-            var controls=new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh,backButton,confirmButton}.Where(b=>b!=null && b.interactable).ToArray();
+            var controls=new[]{cardPodrao,cardJapones,cardFrances,btnLow,btnMedium,btnHigh,compatibilityButton,backButton,confirmButton}
+                .Where(b=>b!=null && b.interactable && b.gameObject.activeSelf).ToArray();
             for(int i=0;i<controls.Length;i++)
             {
                 var nav=new UnityEngine.UI.Navigation{mode=UnityEngine.UI.Navigation.Mode.Explicit};
@@ -153,6 +196,16 @@ namespace Game.Adapter.In.UI
         }
         private static void Bind(UnityEngine.UI.Button button,UnityEngine.Events.UnityAction action)
         { button.onClick.RemoveAllListeners(); if(action!=null) button.onClick.AddListener(action); }
+        private UnityEngine.UI.Button GetCompatibilityTab(RestaurantType type) => compatibilityTabs[System.Array.IndexOf(RestaurantTypes, type)];
+        private static void SetFacade(UnityEngine.UI.Button button, Sprite facade)
+        {
+            var image = button.transform.Find("Facade")?.GetComponent<UnityEngine.UI.Image>();
+            if (image == null) return;
+            image.sprite = facade;
+            image.color = Color.white;
+            image.preserveAspect = true;
+            image.enabled = facade != null;
+        }
         private UnityEngine.UI.Button GetRestaurantCard(RestaurantType type) => type switch
         { RestaurantType.JAPONES=>cardJapones,RestaurantType.FRANCES=>cardFrances,_=>cardPodrao };
         private UnityEngine.UI.Button GetSegmentButton(Segment segment) => segment switch

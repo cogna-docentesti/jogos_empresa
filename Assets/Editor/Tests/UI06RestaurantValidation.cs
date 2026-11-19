@@ -195,7 +195,15 @@ public static class UI06RestaurantValidation
             InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Enter));
         });
         Add("Enter selects focused restaurant",()=>{InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState()); Expect(Button("cardJapones").GetComponent<SharedControlAppearance>().IsSelected,"Enter selection"); Button("btnHigh").Select();});
-        Add("Arrow traversal skips unavailable public",()=>{ExecuteEvents.Execute(Button("btnHigh").gameObject,new AxisEventData(EventSystem.current){moveDir=MoveDirection.Right,moveVector=Vector2.right},ExecuteEvents.moveHandler); Expect(EventSystem.current.currentSelectedGameObject==Button("backButton").gameObject,"Navigation unavailable segment"); InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState(Key.Tab));});
+        Add("Arrow traversal reaches compatibility and skips unavailable public",()=>{
+            var compatibility = Button("compatibilityButton");
+            var move = new AxisEventData(EventSystem.current) { moveDir=MoveDirection.Right, moveVector=Vector2.right };
+            ExecuteEvents.Execute(Button("btnHigh").gameObject, move, ExecuteEvents.moveHandler);
+            Expect(EventSystem.current.currentSelectedGameObject == compatibility.gameObject, "Navigation skipped compatibility");
+            ExecuteEvents.Execute(compatibility.gameObject, move, ExecuteEvents.moveHandler);
+            Expect(EventSystem.current.currentSelectedGameObject == Button("backButton").gameObject, "Navigation unavailable segment");
+            InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState(Key.Tab));
+        });
         Add("Tab reaches confirm action",()=>{InputSystem.QueueStateEvent(Keyboard.current,new KeyboardState()); Expect(EventSystem.current.currentSelectedGameObject==Button("confirmButton").gameObject,"Tab"); EventSystem.current.SetSelectedGameObject(null);});
         foreach(var sizeValue in new[]{new Vector2Int(1920,1080),new Vector2Int(1280,720)})
         {
@@ -203,7 +211,6 @@ public static class UI06RestaurantValidation
             Add("Set long copy viewport "+suffix,()=>UI01Validation.SetGameView(size.x,size.y));
             Add("Prepare isolated long native copy "+suffix,()=>{
                 View.SetRestaurantCardData(RestaurantType.PODRAO,"Restaurante de lanches com nome longo para aferir leitura",string.Join(" ",Enumerable.Repeat("Descrição extensa da proposta com atendimento e experiência do público.",12)));
-                View.UpdateCoherence(12,string.Join(" ",Enumerable.Repeat("Texto longo de compatibilidade para aferir margens e rolagem.",12)),16,"Público compatível.");
                 foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>()) scroll.verticalNormalizedPosition=1;
             });
             Add("Long copy grows within masks, fixed facade and actions "+suffix,()=>{
@@ -211,7 +218,7 @@ public static class UI06RestaurantValidation
                 Expect(card.content.rect.height>card.viewport.rect.height,"Long card did not grow"); Capture("long-copy-top-"+suffix);
                 foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>()) scroll.verticalNormalizedPosition=0;
             });
-            Add("Bottom scroll reveals native costs and last compatibility message "+suffix,()=>{
+            Add("Bottom scroll reveals native costs "+suffix,()=>{
                 Fits(); Capture("long-copy-bottom-"+suffix); var scroll=Button("cardPodrao").transform.Find("CardDetails").GetComponent<UnityEngine.UI.ScrollRect>();
                 var before=scroll.verticalNormalizedPosition; ExecuteEvents.Execute(scroll.gameObject,new PointerEventData(EventSystem.current){scrollDelta=Vector2.up},ExecuteEvents.scrollHandler); Expect(scroll.verticalNormalizedPosition>before,"Wheel did not scroll");
                 Call(Controller,"PopulateView"); Call(Controller,"ResetFromSession"); Call(Controller,"UpdateCoherencePanel");

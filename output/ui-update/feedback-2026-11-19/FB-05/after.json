@@ -1,0 +1,414 @@
+{
+  "completed": true,
+  "error": null,
+  "checks": [
+    "Isolated opening",
+    "Real D1 opens D2",
+    "Game View at 1280x720",
+    "Legacy lateral scroll remains inactive",
+    "Arrows reach the compatibility trigger",
+    "Open starts on main restaurant and focuses inside modal",
+    "Scrim receives pointer input at alpha 0.80",
+    "Dialog surface uses alpha 1.0",
+    "Opaque control PODRAO",
+    "Opaque control JAPONES",
+    "Opaque control FRANCES",
+    "Opaque control Fechar compatibilidade",
+    "Scrim intercepts pointer above background restaurant card",
+    "Scrim intercepts pointer above background confirmation",
+    "Visible choice remains Lanches / Classe B",
+    "Saved draft remains Lanches / Classe C while consulting",
+    "Rendered Lanches with catalog facade, score bars and exact audience status",
+    "Arrow navigation stays on three restaurant tabs and X",
+    "Arrow reaches Japonês within the modal",
+    "Rendered Japonês with catalog facade, score bars and exact audience status",
+    "Rendered Francês with catalog facade, score bars and exact audience status",
+    "Visible choice remains Lanches / Classe B",
+    "Saved draft remains Lanches / Classe C while consulting",
+    "X closes and restores trigger focus",
+    "Visible choice remains Lanches / Classe B",
+    "Saved draft remains Lanches / Classe C while consulting",
+    "Reopen returns to main choice rather than previous consultation",
+    "Rendered Lanches with catalog facade, score bars and exact audience status",
+    "Modal cancel consumes the action and restores focus",
+    "Visible choice remains Lanches / Classe B",
+    "Saved draft remains Lanches / Classe C while consulting",
+    "Only main confirmation saves Lanches / Classe B to D3",
+    "Return from D3 restores D2 with the modal closed",
+    "All 45 modal combinations matched engine and catalog",
+    "D2 modal, confirmation and D3 return produce no SQLite writes",
+    "Hub opens actual read-only D2 with compatibility available",
+    "Rendered Japonês with catalog facade, score bars and exact audience status",
+    "Rendered Francês with catalog facade, score bars and exact audience status",
+    "Review modal restores focus",
+    "Review does not edit the session",
+    "Hub navigation resumes after closing compatibility"
+  ],
+  "matrix": [
+    {
+      "restaurant": "PODRAO",
+      "segment": "LOW",
+      "zone": "Financas",
+      "allowed": true,
+      "locationScore": 10,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "LOW",
+      "zone": "Financas",
+      "allowed": false,
+      "locationScore": 20,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "LOW",
+      "zone": "Financas",
+      "allowed": false,
+      "locationScore": 20,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "MEDIUM",
+      "zone": "Financas",
+      "allowed": true,
+      "locationScore": 10,
+      "targetScore": 10
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "MEDIUM",
+      "zone": "Financas",
+      "allowed": true,
+      "locationScore": 20,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "MEDIUM",
+      "zone": "Financas",
+      "allowed": false,
+      "locationScore": 20,
+      "targetScore": 5
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "HIGH",
+      "zone": "Financas",
+      "allowed": false,
+      "locationScore": 10,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "HIGH",
+      "zone": "Financas",
+      "allowed": true,
+      "locationScore": 20,
+      "targetScore": 15
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "HIGH",
+      "zone": "Financas",
+      "allowed": true,
+      "locationScore": 20,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "LOW",
+      "zone": "Residencial",
+      "allowed": true,
+      "locationScore": 8,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "LOW",
+      "zone": "Residencial",
+      "allowed": false,
+      "locationScore": 10,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "LOW",
+      "zone": "Residencial",
+      "allowed": false,
+      "locationScore": 16,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "MEDIUM",
+      "zone": "Residencial",
+      "allowed": true,
+      "locationScore": 8,
+      "targetScore": 10
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "MEDIUM",
+      "zone": "Residencial",
+      "allowed": true,
+      "locationScore": 10,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "MEDIUM",
+      "zone": "Residencial",
+      "allowed": false,
+      "locationScore": 16,
+      "targetScore": 5
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "HIGH",
+      "zone": "Residencial",
+      "allowed": false,
+      "locationScore": 8,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "HIGH",
+      "zone": "Residencial",
+      "allowed": true,
+      "locationScore": 10,
+      "targetScore": 15
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "HIGH",
+      "zone": "Residencial",
+      "allowed": true,
+      "locationScore": 16,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "LOW",
+      "zone": "Servicos",
+      "allowed": true,
+      "locationScore": 14,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "LOW",
+      "zone": "Servicos",
+      "allowed": false,
+      "locationScore": 12,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "LOW",
+      "zone": "Servicos",
+      "allowed": false,
+      "locationScore": 12,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "MEDIUM",
+      "zone": "Servicos",
+      "allowed": true,
+      "locationScore": 14,
+      "targetScore": 10
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "MEDIUM",
+      "zone": "Servicos",
+      "allowed": true,
+      "locationScore": 12,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "MEDIUM",
+      "zone": "Servicos",
+      "allowed": false,
+      "locationScore": 12,
+      "targetScore": 5
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "HIGH",
+      "zone": "Servicos",
+      "allowed": false,
+      "locationScore": 14,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "HIGH",
+      "zone": "Servicos",
+      "allowed": true,
+      "locationScore": 12,
+      "targetScore": 15
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "HIGH",
+      "zone": "Servicos",
+      "allowed": true,
+      "locationScore": 12,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "LOW",
+      "zone": "Comercio",
+      "allowed": true,
+      "locationScore": 20,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "LOW",
+      "zone": "Comercio",
+      "allowed": false,
+      "locationScore": 14,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "LOW",
+      "zone": "Comercio",
+      "allowed": false,
+      "locationScore": 10,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "MEDIUM",
+      "zone": "Comercio",
+      "allowed": true,
+      "locationScore": 20,
+      "targetScore": 10
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "MEDIUM",
+      "zone": "Comercio",
+      "allowed": true,
+      "locationScore": 14,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "MEDIUM",
+      "zone": "Comercio",
+      "allowed": false,
+      "locationScore": 10,
+      "targetScore": 5
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "HIGH",
+      "zone": "Comercio",
+      "allowed": false,
+      "locationScore": 20,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "HIGH",
+      "zone": "Comercio",
+      "allowed": true,
+      "locationScore": 14,
+      "targetScore": 15
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "HIGH",
+      "zone": "Comercio",
+      "allowed": true,
+      "locationScore": 10,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "LOW",
+      "zone": "Educacao",
+      "allowed": true,
+      "locationScore": 18,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "LOW",
+      "zone": "Educacao",
+      "allowed": false,
+      "locationScore": 15,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "LOW",
+      "zone": "Educacao",
+      "allowed": false,
+      "locationScore": 6,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "MEDIUM",
+      "zone": "Educacao",
+      "allowed": true,
+      "locationScore": 18,
+      "targetScore": 10
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "MEDIUM",
+      "zone": "Educacao",
+      "allowed": true,
+      "locationScore": 15,
+      "targetScore": 20
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "MEDIUM",
+      "zone": "Educacao",
+      "allowed": false,
+      "locationScore": 6,
+      "targetScore": 5
+    },
+    {
+      "restaurant": "PODRAO",
+      "segment": "HIGH",
+      "zone": "Educacao",
+      "allowed": false,
+      "locationScore": 18,
+      "targetScore": 0
+    },
+    {
+      "restaurant": "JAPONES",
+      "segment": "HIGH",
+      "zone": "Educacao",
+      "allowed": true,
+      "locationScore": 15,
+      "targetScore": 15
+    },
+    {
+      "restaurant": "FRANCES",
+      "segment": "HIGH",
+      "zone": "Educacao",
+      "allowed": true,
+      "locationScore": 6,
+      "targetScore": 20
+    }
+  ],
+  "frame": 2197,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "width": 1280,
+  "height": 720
+}
