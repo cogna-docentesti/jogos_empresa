@@ -49,6 +49,8 @@ public class DatabaseInitializer : MonoBehaviour
             db.CreateTable<RoundResultEntity>();
             db.CreateTable<SessionEventHistoryEntity>();
             db.CreateTable<LocationEntity>();          // E-06: localizacoes da D1
+            db.CreateTable<SimulationStateEntity>();   // simulador: estado e politicas do mes
+            db.CreateTable<SimulationMonthEntity>();   // simulador: relatorio de cada mes fechado
 
             IsReady = true;
         }

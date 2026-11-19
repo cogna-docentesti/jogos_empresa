@@ -1,0 +1,1376 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5318cf9459da14a80bdc744ec7dd71, type: 3}
+  m_Name: SimulationConfig
+  m_EditorClassIdentifier: Assembly-CSharp::SimulationConfigAsset
+  configVersion: gdd-2026-11
+  constants:
+    DaysPerMonth: 30
+    MonthsPerMatch: 3
+    TaxRate: 0.08
+    PayrollCharges: 1.35
+    FitReference: 0.45
+    TargetSegmentBonus: 1.15
+    OtherSegmentPenalty: 0.95
+    CityReachFlow: 2
+    LoyaltyBaseStrength: 0.3
+    SatisfactionMemory: 0.2
+    RenegotiationFee: 0.01
+    NoiseSigma: 0.12
+    BrandRecallCarry: 0.85
+    ReputationLagPerDay: 0.035
+    MoraleTarget: 65
+    MoraleDriftPerDay: 0.1
+    OverloadMoralePenalty: 20
+    AbsencePerPersonDay: 0.017
+    ManagerAbsenceHr: 0.6
+    ResignationPerPersonMonth: 0.03
+    ManagerRiskHr: 0.85
+    ManagerProductivity: 0.04
+    ManagerPremiumNps: 5
+    MaxExperienceBonus: 0.06
+    OverdraftLimit: 15000
+    OverdraftMonthlyRate: 0.08
+    CashDiscountRate: 0.02
+    MaxEventsPerDay: 2
+    MaxDecisionEventsPerDay: 1
+    GraceDaysWithoutNegative: 2
+    AntiStreakK: 0.35
+    AntiStreakFloor: 0.35
+    HazardFloorFactor: 0.15
+    StoppedReminderEveryDays: 10
+    EnergyBase: 600
+    EnergyPerKwh: 0.95
+    EnergyPerOrder: 1.2
+    WaterBase: 600
+    WaterPerOrder: 0.6
+    CleaningBase: 500
+    CleaningPerOrder: 0.4
+    AdminFees: 300
+    MarketingDay: 1
+    RentDay: 5
+    SupplierInstallmentDay: 5
+    EnergyDay: 8
+    MaintenanceDay: 15
+    LoanDay: 20
+    WaterDay: 22
+    SalaryDay: 27
+    TaxDay: 29
+    MonthSeasonality:
+    - 1
+    - 1
+    - 1
+  competitionPressureLow: 0.8
+  competitionPressureMedium: 1
+  competitionPressureHigh: 1.25
+  segments:
+  - segment: 0
+    referenceSpend: 45
+    sensitivity: 1.15
+    cityShare: 0.35
+  - segment: 1
+    referenceSpend: 95
+    sensitivity: 1
+    cityShare: 0.53
+  - segment: 2
+    referenceSpend: 210
+    sensitivity: 0.85
+    cityShare: 0.12
+  regions:
+  - locationId: bank
+    mixLow: 0.15
+    mixMedium: 0.4
+    mixHigh: 0.45
+    weekdayProfile:
+    - 1.15
+    - 1.15
+    - 1.15
+    - 1.15
+    - 1
+    - 0.7
+    - 0.55
+    regionalIndex: 1
+  - locationId: store
+    mixLow: 0.3
+    mixMedium: 0.5
+    mixHigh: 0.2
+    weekdayProfile:
+    - 0.95
+    - 0.95
+    - 1
+    - 1
+    - 1.1
+    - 1.2
+    - 0.8
+    regionalIndex: 1
+  - locationId: marketing
+    mixLow: 0.25
+    mixMedium: 0.43
+    mixHigh: 0.32
+    weekdayProfile:
+    - 1.15
+    - 1.15
+    - 1.15
+    - 1.15
+    - 1
+    - 0.6
+    - 0.5
+    regionalIndex: 1
+  - locationId: university
+    mixLow: 0.58
+    mixMedium: 0.34
+    mixHigh: 0.08
+    weekdayProfile:
+    - 1.1
+    - 1.1
+    - 1.1
+    - 1.1
+    - 1
+    - 0.7
+    - 0.6
+    regionalIndex: 1
+  - locationId: condominium
+    mixLow: 0.3
+    mixMedium: 0.55
+    mixHigh: 0.15
+    weekdayProfile:
+    - 0.9
+    - 0.9
+    - 0.9
+    - 0.95
+    - 1.1
+    - 1.3
+    - 1.1
+    regionalIndex: 1
+  restaurants:
+  - type: 0
+    initialCapital: 65000
+    specialistRole: 2
+    attendantCapacityPerDay: 35
+    baseServiceMinutes: 15
+    perishabilityPerDay: 0.012
+    attractivenessLow: 1
+    attractivenessMedium: 0.8
+    attractivenessHigh: 0.45
+    cmvMin: 0.3
+    cmvMax: 0.38
+    isPremium: 0
+  - type: 1
+    initialCapital: 69000
+    specialistRole: 4
+    attendantCapacityPerDay: 30
+    baseServiceMinutes: 25
+    perishabilityPerDay: 0.035
+    attractivenessLow: 0.55
+    attractivenessMedium: 1
+    attractivenessHigh: 0.9
+    cmvMin: 0.33
+    cmvMax: 0.42
+    isPremium: 1
+  - type: 2
+    initialCapital: 72000
+    specialistRole: 3
+    attendantCapacityPerDay: 25
+    baseServiceMinutes: 40
+    perishabilityPerDay: 0.022
+    attractivenessLow: 0.25
+    attractivenessMedium: 0.6
+    attractivenessHigh: 1
+    cmvMin: 0.32
+    cmvMax: 0.41
+    isPremium: 1
+  products: []
+  roles:
+  - role: 0
+    kitchenCapacityPerDay: 0
+  - role: 2
+    kitchenCapacityPerDay: 50
+  - role: 4
+    kitchenCapacityPerDay: 45
+  - role: 3
+    kitchenCapacityPerDay: 35
+  - role: 5
+    kitchenCapacityPerDay: 0
+  equipmentProfiles:
+  - equipmentId: bancada_inox_preparo
+    category: 3
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 0
+  - equipmentId: conjunto_panelas_industriais
+    category: 3
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 0
+  - equipmentId: fogao_industrial_6_bocas
+    category: 1
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 0
+  - equipmentId: freezer_horizontal
+    category: 0
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 120
+  - equipmentId: geladeira_comercial_dupla
+    category: 0
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 150
+  - equipmentId: mobiliario_basico
+    category: 4
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 0
+  - equipmentId: pia_industrial_inox
+    category: 3
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 0
+  - equipmentId: sistema_pdv_computador
+    category: 2
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 15
+  - equipmentId: chapa_profissional_podrao
+    category: 1
+    level: 1
+    kitchenCapacityBonus: 8
+    diningCapacityBonus: 0
+    kwhPerMonth: 60
+  - equipmentId: fritadeira_eletrica_dupla_podrao
+    category: 1
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 50
+  - equipmentId: balcao_refrigerado_sushi
+    category: 0
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 180
+  - equipmentId: facas_especiais_japones
+    category: 3
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 0
+  - equipmentId: panela_eletrica_arroz
+    category: 1
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 30
+  - equipmentId: adega_climatizada
+    category: 0
+    level: 1
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 0
+    kwhPerMonth: 90
+  - equipmentId: forno_combinado_inteligente
+    category: 1
+    level: 2
+    kitchenCapacityBonus: 8
+    diningCapacityBonus: 0
+    kwhPerMonth: 200
+  - equipmentId: mobiliario_luxo
+    category: 4
+    level: 2
+    kitchenCapacityBonus: 0
+    diningCapacityBonus: 5
+    kwhPerMonth: 0
+  levels:
+  - level: 0
+    hazardRatio: 1.9
+    energyFactor: 1.3
+    lifeMonths: 36
+    repairFraction: 0.25
+    qualityDelta: -0.04
+    stockLossFactor: 1.3
+  - level: 1
+    hazardRatio: 1
+    energyFactor: 1
+    lifeMonths: 60
+    repairFraction: 0.2
+    qualityDelta: 0
+    stockLossFactor: 1
+  - level: 2
+    hazardRatio: 0.5
+    energyFactor: 0.78
+    lifeMonths: 96
+    repairFraction: 0.15
+    qualityDelta: 0.06
+    stockLossFactor: 0.7
+  categories:
+  - category: 0
+    failuresPerMonth: 0.07
+    kitchenFactorWhenDown: 0.8
+    serviceFactorWhenDown: 1
+    diningFactorWhenDown: 1
+    stockLossOnFailure: 0.2
+    failureEventId: freezer_breakdown
+  - category: 1
+    failuresPerMonth: 0.05
+    kitchenFactorWhenDown: 0.45
+    serviceFactorWhenDown: 1
+    diningFactorWhenDown: 1
+    stockLossOnFailure: 0
+    failureEventId: kitchen_equipment_failure
+  - category: 2
+    failuresPerMonth: 0.04
+    kitchenFactorWhenDown: 1
+    serviceFactorWhenDown: 0.85
+    diningFactorWhenDown: 1
+    stockLossOnFailure: 0
+    failureEventId: payment_system_failure
+  - category: 3
+    failuresPerMonth: 0.004
+    kitchenFactorWhenDown: 0.9
+    serviceFactorWhenDown: 1
+    diningFactorWhenDown: 1
+    stockLossOnFailure: 0
+    failureEventId: 
+  - category: 4
+    failuresPerMonth: 0.003
+    kitchenFactorWhenDown: 1
+    serviceFactorWhenDown: 1
+    diningFactorWhenDown: 0.8
+    stockLossOnFailure: 0
+    failureEventId: 
+  policies:
+  - policyId: marketing
+    optionId: none
+    label: "Sem divulga\xE7\xE3o"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: marketing
+    optionId: low
+    label: Marketing baixo
+    fixedMonthlyCost: 1500
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: marketing.maxGain
+      value: 0.05
+    - key: marketing.reach
+      value: 0.03
+    - key: marketing.investment
+      value: 0.35
+  - policyId: marketing
+    optionId: medium
+    label: "Marketing m\xE9dio"
+    fixedMonthlyCost: 4000
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: marketing.maxGain
+      value: 0.15
+    - key: marketing.reach
+      value: 0.08
+    - key: marketing.investment
+      value: 0.35
+  - policyId: marketing
+    optionId: high
+    label: Marketing alto
+    fixedMonthlyCost: 8000
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: marketing.maxGain
+      value: 0.3
+    - key: marketing.reach
+      value: 0.18
+    - key: marketing.investment
+      value: 0.35
+  - policyId: loyalty
+    optionId: none
+    label: Sem programa
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: loyalty
+    optionId: program
+    label: Programa de fidelidade
+    fixedMonthlyCost: 900
+    costPerOrder: 0.5
+    assetValueRate: 0
+    levers:
+    - key: loyalty.strength
+      value: 0.4
+  - policyId: supplier
+    optionId: economy
+    label: "Fornecedor econ\xF4mico"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: supplies.cost.factor
+      value: 0.92
+    - key: quality
+      value: -0.07
+    - key: event.supplier_delay.hr
+      value: 1.8
+  - policyId: supplier
+    optionId: standard
+    label: "Fornecedor padr\xE3o"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: supplier
+    optionId: premium
+    label: Fornecedor premium
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: supplies.cost.factor
+      value: 1.12
+    - key: quality
+      value: 0.1
+    - key: event.supplier_delay.hr
+      value: 0.5
+  - policyId: supplierPayment
+    optionId: cash
+    label: "\xC0 vista (2% de desconto)"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: supplierPayment
+    optionId: installments
+    label: Duas parcelas
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: supplier.installments
+      value: 1
+  - policyId: maintenance
+    optionId: corrective
+    label: Somente corretiva
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: maintenance
+    optionId: preventive
+    label: "Manuten\xE7\xE3o preventiva"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0.012
+    levers:
+    - key: failure.hr
+      value: 0.55
+    - key: maintenance.preventive
+      value: 1
+  - policyId: maintenance
+    optionId: intensive
+    label: "Manuten\xE7\xE3o intensiva"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0.025
+    levers:
+    - key: failure.hr
+      value: 0.4
+    - key: maintenance.preventive
+      value: 1
+  - policyId: stock
+    optionId: low
+    label: Estoque baixo (2 dias)
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: stock.coverDays
+      value: 2
+  - policyId: stock
+    optionId: medium
+    label: "Estoque m\xE9dio (4 dias)"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: stock.coverDays
+      value: 4
+  - policyId: stock
+    optionId: high
+    label: Estoque alto (6 dias)
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: stock.coverDays
+      value: 6
+  - policyId: pay
+    optionId: below
+    label: "Remunera\xE7\xE3o 10% abaixo"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: payroll.factor
+      value: 0.9
+    - key: morale
+      value: -12
+    - key: resignation.hr
+      value: 1.8
+  - policyId: pay
+    optionId: market
+    label: "Remunera\xE7\xE3o de mercado"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: pay
+    optionId: above
+    label: "Remunera\xE7\xE3o 10% acima"
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: payroll.factor
+      value: 1.1
+    - key: morale
+      value: 10
+    - key: resignation.hr
+      value: 0.6
+  - policyId: training
+    optionId: none
+    label: Sem treinamento
+    fixedMonthlyCost: 0
+    costPerOrder: 0
+    assetValueRate: 0
+    levers: []
+  - policyId: training
+    optionId: basic
+    label: "Treinamento b\xE1sico"
+    fixedMonthlyCost: 700
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: errors.factor
+      value: 0.75
+    - key: productivity
+      value: 0.04
+  - policyId: training
+    optionId: advanced
+    label: "Treinamento avan\xE7ado"
+    fixedMonthlyCost: 1800
+    costPerOrder: 0
+    assetValueRate: 0
+    levers:
+    - key: errors.factor
+      value: 0.55
+    - key: productivity
+      value: 0.08
+  events:
+  - id: freezer_breakdown
+    title: "Problema na refrigera\xE7\xE3o"
+    category: Equipamento
+    group: 
+    scope: 2
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1.5
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: repair
+      label: Consertar
+      costKind: 2
+      costValue: 1
+      costExtra: 300
+      repairsUnit: 1
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: emergency
+      label: Reparo emergencial
+      costKind: 2
+      costValue: 0.4
+      costExtra: 150
+      repairsUnit: 1
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: postpone
+      label: Adiar o conserto
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: kitchen_equipment_failure
+    title: Equipamento de cozinha quebrou
+    category: Equipamento
+    group: 
+    scope: 2
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1.5
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: repair
+      label: Consertar
+      costKind: 2
+      costValue: 1
+      costExtra: 300
+      repairsUnit: 1
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: emergency
+      label: Reparo emergencial
+      costKind: 2
+      costValue: 0.4
+      costExtra: 150
+      repairsUnit: 1
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: postpone
+      label: Adiar o conserto
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: payment_system_failure
+    title: Falha no sistema de pagamento
+    category: Equipamento
+    group: 
+    scope: 2
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: support
+      label: Suporte emergencial
+      costKind: 1
+      costValue: 400
+      costExtra: 0
+      repairsUnit: 1
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: alternative
+      label: Pagamentos alternativos
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: capacity.service.factor
+        value: 1.1
+        duration: 3
+        days: 0
+    - id: wait
+      label: Aguardar
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: equipment_still_down
+    title: Equipamento continua parado
+    category: Equipamento
+    group: 
+    scope: 0
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 0
+    isNegative: 0
+    requiresDecision: 1
+    deterministic: 1
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: repair
+      label: Consertar
+      costKind: 2
+      costValue: 1
+      costExtra: 300
+      repairsUnit: 1
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: postpone
+      label: Continuar adiando
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: cash_shortfall
+    title: Caixa insuficiente para a parcela
+    category: Financeiro
+    group: 
+    scope: 0
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 1
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: overdraft
+      label: Usar cheque especial
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 1
+      renegotiates: 0
+      effects: []
+    - id: renegotiate
+      label: Renegociar
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 1
+      effects: []
+  - id: staff_absent
+    title: "Funcion\xE1rio ausente"
+    category: Equipe
+    group: 
+    scope: 1
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 0.5
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: substitute
+      label: "Substituto tempor\xE1rio"
+      costKind: 1
+      costValue: 350
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 1
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: reduced
+      label: Trabalhar com equipe reduzida
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: staff_resigned
+    title: "Funcion\xE1rio pediu demiss\xE3o"
+    category: Equipe
+    group: 
+    scope: 1
+    baseRatePerMonth: 0
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: hire
+      label: Contratar substituto
+      costKind: 5
+      costValue: 0.5
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 1
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: leave
+      label: Deixar a vaga aberta
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: supplier_delay
+    title: Atraso do fornecedor
+    category: Fornecedor
+    group: SUPPLIER
+    scope: 0
+    baseRatePerMonth: 1.2
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 3
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 2
+    automaticEffects: []
+    reactions:
+    - id: emergency
+      label: Fornecedor emergencial
+      costKind: 1
+      costValue: 500
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: supplies.cost.factor
+        value: 1.15
+        duration: 0
+        days: 2
+    - id: reduce_menu
+      label: "Reduzir card\xE1pio"
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: supplies.delivery.factor
+        value: 0
+        duration: 0
+        days: 2
+      - key: demand.factor
+        value: 0.92
+        duration: 0
+        days: 2
+    - id: use_stock
+      label: Usar o estoque
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: supplies.delivery.factor
+        value: 0
+        duration: 0
+        days: 2
+  - id: quality_complaint
+    title: "Reclama\xE7\xE3o sobre a qualidade"
+    category: "Reputa\xE7\xE3o"
+    group: SOCIAL_REPUTATION
+    scope: 0
+    baseRatePerMonth: 0.45
+    covariates:
+    - variable: quality
+      reference: 0.5
+      beta: -4
+    - variable: errors.rate
+      reference: 0.04
+      beta: 10
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 5
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: refund
+      label: Reembolsar
+      costKind: 1
+      costValue: 250
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: apologize
+      label: Pedir desculpas
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: nps.unresolvedNegative
+        value: 1
+        duration: 0
+        days: 1
+    - id: ignore
+      label: Ignorar
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: nps.unresolvedNegative
+        value: 1
+        duration: 0
+        days: 3
+  - id: negative_review
+    title: "Avalia\xE7\xE3o negativa nas redes"
+    category: "Reputa\xE7\xE3o"
+    group: SOCIAL_REPUTATION
+    scope: 0
+    baseRatePerMonth: 0.25
+    covariates:
+    - variable: satisfaction
+      reference: 60
+      beta: -0.05
+    - variable: wait.factor
+      reference: 1
+      beta: 0.8
+    - variable: lost.ratio
+      reference: 0.05
+      beta: 5
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 5
+    maxPerMatch: 0
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: compensate
+      label: Compensar o cliente
+      costKind: 1
+      costValue: 300
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: reply
+      label: Responder publicamente
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: ignore
+      label: Ignorar
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: nps.unresolvedNegative
+        value: 1
+        duration: 0
+        days: 3
+      - key: demand.factor
+        value: 0.95
+        duration: 0
+        days: 5
+  - id: excessive_food_waste
+    title: "Desperd\xEDcio acima do esperado"
+    category: "Opera\xE7\xE3o"
+    group: 
+    scope: 0
+    baseRatePerMonth: 3
+    covariates: []
+    conditions:
+    - variable: waste.ratio
+      op: '>='
+      value: 0.07
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 7
+    maxPerMatch: 0
+    repeats: 1
+    severity: 0.5
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: adjust
+      label: Ajustar o planejamento
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: stock.coverDays
+        value: -1
+        duration: 1
+        days: 0
+    - id: promo
+      label: "Promo\xE7\xE3o"
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: demand.factor
+        value: 1.08
+        duration: 0
+        days: 3
+      - key: quality
+        value: -0.02
+        duration: 0
+        days: 3
+    - id: keep
+      label: Manter
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+  - id: heavy_rain
+    title: Chuva forte
+    category: Mercado
+    group: DEMAND_SPIKE
+    scope: 0
+    baseRatePerMonth: 1.8
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 0.5
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: normal
+      label: "Opera\xE7\xE3o normal"
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: demand.factor
+        value: 0.7
+        duration: 0
+        days: 1
+    - id: delivery
+      label: Pedidos externos
+      costKind: 1
+      costValue: 300
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: demand.factor
+        value: 0.9
+        duration: 0
+        days: 1
+  - id: new_competitor
+    title: "Novo concorrente na regi\xE3o"
+    category: Mercado
+    group: COMPETITION
+    scope: 0
+    baseRatePerMonth: 0.15
+    covariates:
+    - variable: prev.margin
+      reference: 0.1
+      beta: 3
+    - variable: competition.pressure
+      reference: 1
+      beta: -1
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 1
+    repeats: 1
+    severity: 1
+    isNegative: 1
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects:
+    - key: competition.pressure
+      value: 0.25
+      duration: 2
+      days: 0
+    reactions:
+    - id: keep
+      label: Manter
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []
+    - id: ads
+      label: "Divulga\xE7\xE3o"
+      costKind: 1
+      costValue: 1500
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: demand.factor
+        value: 1.05
+        duration: 1
+        days: 0
+    - id: loyalty
+      label: "Fideliza\xE7\xE3o"
+      costKind: 1
+      costValue: 800
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: loyalty.strength
+        value: 0.2
+        duration: 1
+        days: 0
+  - id: lunch_demand_peak
+    title: "Pico de demanda no almo\xE7o"
+    category: Mercado
+    group: DEMAND_SPIKE
+    scope: 0
+    baseRatePerMonth: 0.5
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 0
+    isNegative: 0
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: current
+      label: Capacidade atual
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: demand.factor
+        value: 1.15
+        duration: 0
+        days: 1
+    - id: reinforce
+      label: "Refor\xE7o"
+      costKind: 1
+      costValue: 400
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: demand.factor
+        value: 1.15
+        duration: 0
+        days: 1
+      - key: capacity.service.factor
+        value: 1.2
+        duration: 0
+        days: 1
+  - id: supplier_discount
+    title: Desconto do fornecedor
+    category: Fornecedor
+    group: SUPPLIER
+    scope: 0
+    baseRatePerMonth: 0.3
+    covariates: []
+    conditions: []
+    onlyRestaurants: 
+    onlyRegions: []
+    minIntervalDays: 0
+    maxPerMatch: 0
+    repeats: 1
+    severity: 0
+    isNegative: 0
+    requiresDecision: 1
+    deterministic: 0
+    activeDays: 1
+    automaticEffects: []
+    reactions:
+    - id: take
+      label: Aproveitar o desconto
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects:
+      - key: supplies.cost.factor
+        value: 0.9
+        duration: 0
+        days: 5
+    - id: skip
+      label: "N\xE3o aproveitar"
+      costKind: 0
+      costValue: 0
+      costExtra: 0
+      repairsUnit: 0
+      keepsStaff: 0
+      usesOverdraft: 0
+      renegotiates: 0
+      effects: []

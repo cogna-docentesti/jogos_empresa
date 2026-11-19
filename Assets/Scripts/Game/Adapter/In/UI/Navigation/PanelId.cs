@@ -34,6 +34,9 @@ namespace Game.Adapter.In.UI.Navigation
         Restaurant = 8,
 
         /// <summary>Revisao das escolhas.</summary>
-        Review = 9
+        Review = 9,
+
+        /// <summary>Planejamento do mes (politicas do simulador).</summary>
+        Planning = 10
     }
 }

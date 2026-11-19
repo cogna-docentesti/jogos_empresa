@@ -53,6 +53,10 @@ namespace Game.Adapter.In.UI.Navigation
             if (navigator != null && navigator.Current == PanelId.Menu)
                 return false;
 
+            // O planejamento do mes tem VOLTAR proprio e usa o canto de baixo para o CONFIRMAR.
+            if (navigator != null && navigator.Current == PanelId.Planning)
+                return false;
+
             // 2. Antes de existir uma empresa, nao ha hub para visitar.
             var stateMachine = GameManager.Instance != null ? GameManager.Instance.StateMachine : null;
 
@@ -65,6 +69,14 @@ namespace Game.Adapter.In.UI.Navigation
                 case GameState.MainMenu:
                 case GameState.FinalReport:
                 case GameState.GameOver_Bankruptcy:
+                    return false;
+
+                // Mes simulado rodando ou no resumo: o hub so volta pelo botao Continuar.
+                case GameState.Round_Start:
+                case GameState.Round_Sales:
+                case GameState.Round_Costs:
+                case GameState.Round_Event:
+                case GameState.Round_Summary:
                     return false;
 
                 case GameState.Config_Location:
