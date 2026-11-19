@@ -89,6 +89,11 @@ public class GameSessionEntity
     public int? initialSetupResumeState { get; set; }
     public string pendingSummaryResultId { get; set; }
 
+    // Presentation metadata only; versioning preserves completed tutorials across revisions.
+    public int equipmentTutorialStep { get; set; }
+    public int equipmentTutorialVersion { get; set; }
+    public int teamTutorialStep { get; set; }
+
     /// <summary>Creates a detached copy for transactional settlement.</summary>
     public GameSessionEntity Copy() => (GameSessionEntity)MemberwiseClone();
 }

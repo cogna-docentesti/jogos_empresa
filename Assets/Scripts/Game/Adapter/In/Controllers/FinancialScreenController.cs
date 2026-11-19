@@ -14,7 +14,7 @@ namespace Game.Adapter.In.Controllers
         private bool _selectionLocked;
         private static bool Management => MenuNavigator.Instance != null && MenuNavigator.Instance.Current == PanelId.Financial;
         private void OnEnable()
-        { if (view == null) view = GetComponent<FinancialScreenView>(); view?.BindConfirm(OnConfirm); PopulateCreditLines(); InitialTutorialView.Configure(transform, InitialTutorialView.IsInitial(GameState.Initial_Capital)); }
+        { if (view == null) view = GetComponent<FinancialScreenView>(); view?.BindConfirm(OnConfirm); PopulateCreditLines(); }
         private void OnDisable()
         { view?.BindConfirm(null); foreach (var card in _cards) if (card != null) card.Selected -= OnCardSelected; }
         private void PopulateCreditLines()

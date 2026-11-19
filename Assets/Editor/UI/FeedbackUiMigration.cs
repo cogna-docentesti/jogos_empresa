@@ -52,16 +52,6 @@ namespace Game.EditorTools
             r.pivot = new Vector2(.5f, .5f); r.anchoredPosition = new Vector2(x + size / 2, -y - size / 2);
             Ensure<UiMotion>(r).Configure((UiMotion.Motion)index);
         }
-        private static void Help(Transform p, GameState state, string id, string message, Transform hint, UnityEngine.UI.ScrollRect scroll, bool bank = false)
-        {
-            var host = Ensure<ContextualHelp>(p); var surface = Picture(p, "ContextualHelp", "UI_TOOLTIP_SURFACE", bank ? 24 : 1056, bank ? 744 : 108, bank ? 480 : 840, bank ? 216 : 96);
-            Motion(surface.transform, id, 16, 16, 64);
-            Text(surface.transform, "Message", message, 96, 12, bank ? 360 : 584, bank ? 108 : 76);
-            var dismiss = Button(surface.transform, "Dismiss", "Entendi", bank ? 96 : 696, bank ? 136 : 16, bank ? 360 : 128, 64);
-            Set(host, "panel", surface.gameObject); Set(host, "regularHint", hint?.gameObject); Set(host, "dismiss", dismiss);
-            if (scroll != null && !bank) Ensure<HelpScrollInput>(scroll).help = host;
-            var so = new SerializedObject(host); so.FindProperty("stage").intValue = (int)state; so.ApplyModifiedPropertiesWithoutUndo(); surface.gameObject.SetActive(false);
-        }
         private static void Loading(Transform equipment)
         {
             var loader = Ensure<SharedLoading>(equipment); var input = Ensure<CanvasGroup>(equipment); Set(loader, "input", input);
@@ -90,7 +80,6 @@ namespace Game.EditorTools
         {
             Loading(equipment);
             var catalog = (UnityEngine.UI.ScrollRect)new SerializedObject(equipment.GetComponent<EquipmentScreenView>()).FindProperty("catalogScroll").objectReferenceValue;
-            Help(equipment, GameState.Initial_Equipment, "TUTORIAL_DRAG", "Arraste ou role o catálogo. Use + para adicionar; Tab e Enter também funcionam.", equipment.Find("Guidance"), catalog);
         }
         [MenuItem("Tools/Jogos de Empresa/UI-17/Integrate contextual feedback")]
         public static void Apply()
@@ -114,7 +103,6 @@ namespace Game.EditorTools
             var menuAction = (RectTransform)canvas.Find("MenuAccess/Button");
             menuAction.anchoredPosition = new Vector2(menuAction.anchoredPosition.x, Mathf.Max(menuAction.anchoredPosition.y, -998));
             var bank = canvas.Find("Panel_Financial");
-            Help(bank, GameState.Initial_Capital, "TUTORIAL_TAP", "Selecione uma opção e confira as condições. Você também pode continuar sem crédito.", null, bank.Find("CreditOptionsScroll").GetComponent<UnityEngine.UI.ScrollRect>(), true);
             var help = Button(bank, "CreditHelp", "?", 832, 112, 68, 68);
             var tip = Picture(bank, "CreditTooltip", "UI_TOOLTIP_SURFACE", 24, 208, 480, 224);
             Text(tip.transform, "Message", "O crédito entra no caixa. As parcelas incluem amortização e juros e são pagas no fechamento mensal.\nToque novamente em ? para fechar.", 24, 16, 432, 192);
@@ -123,7 +111,6 @@ namespace Game.EditorTools
             try { Equipment(prefab.transform); PrefabUtility.SaveAsPrefabAsset(prefab, "Assets/Prefabs/Panel_Equipment.prefab"); } finally { PrefabUtility.UnloadPrefabContents(prefab); }
             Equipment(canvas.Find("Panel_Equipment"));
             var team = canvas.Find("Panel_Team");
-            Help(team, GameState.Initial_Team, "TUTORIAL_FOCUS_RING", "Use Tab para focar e Enter para ativar + e −. Toque ou clique para ajustar a equipe.", team.Find("Guidance"), null);
             Toast(canvas); AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
     }

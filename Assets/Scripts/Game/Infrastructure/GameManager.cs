@@ -134,7 +134,9 @@ public class GameManager : MonoBehaviour
                 resumeDestination = (GameState)session.initialSetupResumeState.Value;
             else
             {
-                resumeDestination = ResumeOperationalSetup(session);
+                // Old saves without a setup marker must not be sent back into preparation
+                // by inferring progress from their equipment, team or financing.
+                resumeDestination = GameState.Management_Hub;
                 var db = DatabaseInitializer.DatabaseService.Connection;
                 db.CreateTable<MonthlyEventPlanEntity>();
                 if (db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound) != null)

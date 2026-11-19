@@ -9,41 +9,6 @@ using UnityEditor.SceneManagement;
 
 public class InitialTutorialTests
 {
-    [Test]
-    public void UIs_salvas_na_cena_tem_referencias_e_nao_criam_objetos_ao_alternar_modo()
-    {
-        var scene = EditorSceneManager.OpenScene("Assets/Scenes/GameScene.unity", OpenSceneMode.Additive);
-        try
-        {
-            var registry = Object.FindObjectsByType<PanelRegistry>(FindObjectsInactive.Include, FindObjectsSortMode.None).First(r => r.gameObject.scene == scene);
-            var listener = Object.FindObjectsByType<UIStateListener>(FindObjectsInactive.Include, FindObjectsSortMode.None).First(r => r.gameObject.scene == scene);
-            var serializedListener = new SerializedObject(listener);
-            Assert.AreEqual(registry.Resolve(PanelId.Team), serializedListener.FindProperty("initialTeamPanel").objectReferenceValue);
-            Assert.AreEqual(registry.Resolve(PanelId.EquipmentStore), serializedListener.FindProperty("initialEquipmentPanel").objectReferenceValue);
-            Assert.AreEqual(registry.Resolve(PanelId.Financial), serializedListener.FindProperty("initialCapitalPanel").objectReferenceValue);
-            foreach (var id in new[] { PanelId.Financial, PanelId.EquipmentStore, PanelId.Team })
-            {
-                var panel = registry.Resolve(id);
-                var count = panel.GetComponentsInChildren<Transform>(true).Length;
-                var tutorial = panel.GetComponentInChildren<InitialTutorialView>(true);
-                Assert.IsNotNull(tutorial, "Tutorial salvo: " + id);
-                Assert.IsNotNull(tutorial.transform.Find("Sheet/MenuIcon").GetComponent<UnityEngine.UI.Image>().sprite);
-                InitialTutorialView.Configure(panel.transform, true);
-                Assert.IsTrue(tutorial.gameObject.activeSelf);
-                tutorial.Dismiss();
-                Assert.IsFalse(tutorial.gameObject.activeSelf);
-                InitialTutorialView.Configure(panel.transform, false);
-                Assert.AreEqual(count, panel.GetComponentsInChildren<Transform>(true).Length);
-            }
-            var team = new SerializedObject(registry.Resolve(PanelId.Team).GetComponent<TeamScreenController>());
-            Assert.AreEqual(Resources.LoadAll<RoleData>("Roles").Length, team.FindProperty("roleCards").arraySize);
-            var store = new SerializedObject(registry.Resolve(PanelId.EquipmentStore).GetComponent<EquipmentScreenView>());
-            Assert.GreaterOrEqual(store.FindProperty("preparedCards").arraySize, Resources.LoadAll<EquipmentData>("Equipments").Length);
-            Assert.IsNotNull(store.FindProperty("cartModal").objectReferenceValue);
-        }
-        finally { EditorSceneManager.CloseScene(scene, true); }
-    }
-
     [TestCase(RestaurantType.PODRAO, 65000)]
     [TestCase(RestaurantType.JAPONES, 69000)]
     [TestCase(RestaurantType.FRANCES, 72000)]

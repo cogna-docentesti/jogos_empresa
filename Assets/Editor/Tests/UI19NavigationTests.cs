@@ -5,6 +5,11 @@ using Game.Infrastructure.Session;
 using NUnit.Framework;
 using SQLite4Unity3d;
 using UnityEngine;
+using Game.Adapter.In.Controllers;
+using Game.Adapter.In.UI;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public sealed class UI19NavigationTests
 {
@@ -44,6 +49,100 @@ public sealed class UI19NavigationTests
         Assert.IsTrue(GameSessionState.Persist()); PlayerSession.SaveIdentification("Participante salvo", "123456", "Empresa salva"); return s;
     }
     private void Prepare() => typeof(GameManager).GetMethod("PrepareSession", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(manager, new object[] { "ui19-user", "qa" });
+
+    [Test]
+    public void EquipmentExplanationProgressDoesNotChangePurchasesOrCash()
+    {
+        var s = Seed(); s.initialSetupResumeState = (int)GameState.Initial_Equipment;
+        s.equipmentTutorialStep = 3; GameSessionState.Save();
+        var snapshot = Newtonsoft.Json.JsonConvert.SerializeObject(s);
+        GameSessionState.Clear(); Prepare();
+        Assert.AreEqual(GameState.Initial_Equipment, States.CurrentState);
+        Assert.AreEqual(3, GameSessionState.Current.equipmentTutorialStep);
+        Assert.AreEqual(snapshot, Newtonsoft.Json.JsonConvert.SerializeObject(GameSessionState.Current));
+    }
+
+    [Test]
+    public void EquipmentTutorialBuysOnceAndWaitsForTheLastExplanationBeforeTeam()
+    {
+        var s = Seed(); s.initialSetupResumeState = (int)GameState.Initial_Equipment; GameSessionState.Save();
+        States.ForceState(GameState.Initial_Equipment);
+        var scope = new GameObject("Equipment tutorial integration test", typeof(RectTransform), typeof(Canvas));
+        var preview = EditorSceneManager.NewPreviewScene();
+        SceneManager.MoveGameObjectToScene(scope, preview);
+        scope.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+        scope.GetComponent<RectTransform>().sizeDelta = new Vector2(1920, 1080);
+        scope.SetActive(false);
+        try
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Panel_Equipment.prefab");
+            var panel = UnityEngine.Object.Instantiate(prefab, scope.transform);
+            var controller = panel.GetComponent<EquipmentScreenController>();
+            var loader = panel.GetComponent<SharedLoading>();
+            if (loader != null) UnityEngine.Object.DestroyImmediate(loader);
+            scope.SetActive(true);
+            void Call(string method) => typeof(EquipmentScreenController).GetMethod(method,
+                BindingFlags.NonPublic | BindingFlags.Instance).Invoke(controller, null);
+            Call("OnEnable");
+            var storeView = panel.GetComponent<EquipmentScreenView>();
+            typeof(EquipmentScreenView).GetMethod("Awake", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(storeView, null);
+            float cash = s.currentCash;
+            float kitCost = Resources.LoadAll<EquipmentData>("Equipments").Where(e => e.category == EquipmentCategory.BASIC).Sum(e => Mathf.Max(0, e.cost));
+            Call("NextTutorialStep"); Assert.AreEqual(1, s.equipmentTutorialStep);
+            EquipmentTutorialTests.Capture(scope, preview, 1920, 1080, 1);
+            Call("NextTutorialStep"); Assert.AreEqual(1, s.equipmentTutorialStep, "The tutorial cannot add a product for the player.");
+            var kitCard = panel.GetComponentsInChildren<EquipmentCardView>(true).Single(c => c.Equipment?.id == "__tutorial_basic_kit");
+            var guide = panel.GetComponentInChildren<EquipmentTutorial>(true);
+            var explanationBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(scope.transform, guide.transform.Find("Card"));
+            var viewportCorners = new Vector3[4]; storeView.TutorialScroll.viewport.GetWorldCorners(viewportCorners);
+            float productsBottom = scope.transform.InverseTransformPoint(viewportCorners[0]).y;
+            Assert.LessOrEqual(explanationBounds.max.y, productsBottom - 8, "The explanation needs its own band below the product viewport.");
+            Assert.IsFalse(guide.GetComponent<UnityEngine.UI.Image>().enabled, "Hands-on steps must not dim the store.");
+            Assert.IsTrue(guide.GetComponentsInChildren<UnityEngine.UI.Image>(true)
+                .Where(i => i.name.StartsWith("Shade")).All(i => i.color.a == 0), "Input masks must be visually transparent.");
+            Assert.IsTrue(guide.transform.Find("ActionHighlight").gameObject.activeSelf, "Highlight the real add action.");
+            Assert.IsFalse(guide.transform.Find("Card/Actions").gameObject.activeSelf, "No tutorial action can replace the store button.");
+            typeof(EquipmentCardView).GetMethod("OnEnable", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(kitCard, null);
+            kitCard.AddAction.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            Assert.AreEqual(2, s.equipmentTutorialStep);
+            EquipmentTutorialTests.Capture(scope, preview, 1920, 1080, 2);
+            Assert.AreEqual(cash, s.currentCash, "Adding to cart does not debit cash.");
+            Call("NextTutorialStep"); Assert.AreEqual(2, s.equipmentTutorialStep, "Only the real cart action advances.");
+            storeView.CartAction.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            Assert.AreEqual(3, s.equipmentTutorialStep);
+            Assert.IsTrue(guide.GetComponent<Canvas>().overrideSorting, "The explanation must stay above the cart.");
+            EquipmentTutorialTests.Capture(scope, preview, 1920, 1080, 3);
+            Call("CompleteCartPurchase"); Assert.AreEqual(cash, s.currentCash, "The revisit explanation precedes checkout.");
+            Call("NextTutorialStep"); Assert.AreEqual(4, s.equipmentTutorialStep);
+            EquipmentTutorialTests.Capture(scope, preview, 1920, 1080, 4, storeView.TutorialScroll.viewport);
+            Call("NextTutorialStep"); Assert.AreEqual(4, s.equipmentTutorialStep, "Checkout uses the store UI.");
+            storeView.CheckoutAction.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            Assert.AreEqual(cash - kitCost, s.currentCash);
+            Assert.AreEqual(5, s.equipmentTutorialStep);
+            EquipmentTutorialTests.Capture(scope, preview, 1920, 1080, 5);
+            Assert.AreEqual(GameState.Initial_Equipment, States.CurrentState, "The last explanation precedes Team.");
+            Call("CompleteCartPurchase"); Assert.AreEqual(cash - kitCost, s.currentCash, "A second callback must not charge again.");
+            Call("NextTutorialStep");
+            Assert.AreEqual(6, s.equipmentTutorialStep);
+            Assert.AreEqual(GameState.Initial_Equipment, States.CurrentState, "Finishing the explanation leaves the store available to explore.");
+            Call("OnContinue"); Assert.AreEqual(GameState.Initial_Team, States.CurrentState);
+            Assert.AreEqual(6, db.Find<GameSessionEntity>(s.sessionId).equipmentTutorialStep);
+        }
+        finally
+        {
+            // This fixture runs in EditMode; dispose its transient kit before runtime OnDestroy.
+            var controller = scope.GetComponentInChildren<EquipmentScreenController>(true);
+            if (controller != null)
+            {
+                var kitField = typeof(EquipmentScreenController).GetField("tutorialKit", BindingFlags.NonPublic | BindingFlags.Instance);
+                var kit = kitField.GetValue(controller) as EquipmentData;
+                if (kit != null) UnityEngine.Object.DestroyImmediate(kit);
+                kitField.SetValue(controller, null);
+            }
+            UnityEngine.Object.DestroyImmediate(scope);
+            EditorSceneManager.ClosePreviewScene(preview);
+        }
+    }
     [TestCase(GameState.Initial_Capital)] [TestCase(GameState.Initial_Equipment)] [TestCase(GameState.Initial_Team)]
     public void ReloadResumesEachSavedOperationalStep(GameState step)
     {

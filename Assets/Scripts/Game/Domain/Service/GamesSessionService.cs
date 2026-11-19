@@ -372,7 +372,7 @@ public class GameSessionService
         GameSessionState.SetTeamJson(updatedJson);
     }
 
-    public void SetTeamMemberQuantity(RoleData role, int quantity)
+    public void SetTeamMemberQuantity(RoleData role, int quantity, bool save = true)
     {
         if (!GameSessionState.HasSession || role == null || string.IsNullOrWhiteSpace(role.id))
             return;
@@ -382,7 +382,7 @@ public class GameSessionService
         TeamSelectionHelper.SetMemberQuantity(currentData, role.id, quantity);
 
         string updatedJson = TeamSelectionHelper.ToJson(currentData);
-        GameSessionState.SetTeamJson(updatedJson);
+        GameSessionState.SetTeamJson(updatedJson, save);
     }
 
     public int GetTeamMemberQuantity(RoleData role)

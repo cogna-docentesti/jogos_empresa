@@ -327,7 +327,7 @@ public class RoundFlowDebugTest : MonoBehaviour
             string label = "Save rodada " + sample[0] + ", resultado max " + sample[1] + ", historico " + sample[2];
             check(GameSessionState.HasIncompatibleSave == incompatible, label + ": classificacao correta");
             var expectedEntry = incompatible ? GameState.MainMenu
-                : Game.Infrastructure.Session.PlayerSession.HasValidIdentification ? GameManager.ResumeOperationalSetup(GameSessionState.Current)
+                : Game.Infrastructure.Session.PlayerSession.HasValidIdentification ? GameState.Management_Hub
                 : InitialDecisionFlow.Identification;
             check(GameManager.Instance.StateMachine.CurrentState == expectedEntry,
                 label + ": encaminhamento correto");
