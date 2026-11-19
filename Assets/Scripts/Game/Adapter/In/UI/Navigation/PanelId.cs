@@ -36,7 +36,9 @@ namespace Game.Adapter.In.UI.Navigation
         /// <summary>Revisao das escolhas.</summary>
         Review = 9,
 
-        /// <summary>Planejamento do mes (politicas do simulador).</summary>
-        Planning = 10
+        /// <summary>Saved event decisions for the campaign.</summary>
+        EventHistory = 10,
+        MonthlyResults = 11,
+        QuarterlyResults = 12
     }
 }

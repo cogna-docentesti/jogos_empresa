@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UI01Validation.RequireIsolatedStorage(); if(GameManager.Instance.StateMachine.CurrentState!=GameState.Management_Hub) throw new System.Exception(\"Complete save did not resume hub\"); var screenshot=UI01Validation.Capture(\"resume-complete-save-1920x1080\"); return new {state=GameManager.Instance.StateMachine.CurrentState.ToString(),rows=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count(),screen=new[]{UnityEngine.Screen.width,UnityEngine.Screen.height},screenshot};",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "state": "Management_Hub",
+        "rows": 1,
+        "screen": [
+          1920,
+          1080
+        ],
+        "screenshot": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\UI-01\\resume-complete-save-1920x1080.png"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

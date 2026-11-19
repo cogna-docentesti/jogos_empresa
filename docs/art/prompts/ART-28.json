@@ -1,0 +1,768 @@
+{
+  "task_id": "ART-28",
+  "date": "2026-10-15",
+  "status": "validado",
+  "tool": "image_gen.imagegen",
+  "model": null,
+  "model_note": "Specific model identifier is not exposed by the integrated tool.",
+  "distinct_asset_generations": 6,
+  "revision_generations": 1,
+  "generations": [
+    {
+      "key": "env",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE separate opaque restaurant office background layer for the approved Cogna business game, ART-28 DRE_ENVIRONMENT.\nInput image 1 is the approved monthly DRE concept. Use ONLY the illustration at its upper right for the office architecture, perspective, palette and adult editorial cartoon rendering. Do not reproduce the complete UI.\nPrimary request: an empty small restaurant office seen from the front, warm ivory walls, a broad window on the LEFT with a glimpse of an exterior purple restaurant awning with absolutely no lettering, pale blue sky and green foliage; on the right, a modest rear bookcase with plain unlettered book spines and a leafy potted plant. Leave the middle and lower foreground open so separate seated character and desk layers can be added later. No front desk, no person, no chair, no foreground props. No framed poster.\nComposition/framing: 4:3 landscape, desired 1024x768. Full bleed rectangular environment, no frame or rounded corners. Frontal eye-level camera, a slight view down toward the future desk; upright verticals. Window and awning read clearly behind the future seated woman.\nStyle: polished adult editorial cartoon matching the approved concept, clean dark-plum contours, broad restrained cel-shaded planes, subtle material texture. Warm soft daylight from upper left.\nPalette: ivory #F5F0E8, plum #24113D, violet #6D28D9, lavender #B99AE8, warm wood and restrained green.\nBackdrop: fully opaque, fill every pixel.\nText: none. No words, letters, numbers, labels, signs, slogans, logos, watermarks, paper, calculator, coffee cup, laptop, charts, axes, tables, data or UI. One background asset only.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-e1d649da-6629-4ce4-b228-63707a523b18.png",
+      "asset_id": "DRE_ENVIRONMENT",
+      "selected": false,
+      "transparent_background": false,
+      "source_path": "art-source/editable/ART-28/generations/env.png",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGB",
+      "sha256": "af1e2eef24dfeb18cd161320c83b1f5970098e0effd26ddf1664b8d413ca7c22",
+      "input_images": [
+        {
+          "role": "approved concept",
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ]
+    },
+    {
+      "key": "env_revision",
+      "prompt": "Use case: precise-object-edit\nEdit target: the attached restaurant office background. Make ONLY two corrections while preserving its 4:3 framing, architecture, awning, plants, bookcase, palette, contours and warm upper-left light.\n1. Remove EVERY tiny human figure visible through the left window. Keep the outdoor restaurant terrace empty of people.\n2. Remove the broad brown foreground tabletop/surface across the bottom approximately 17 percent of the image, including its horizontal back edge. Extend the SAME perspective wooden floor naturally all the way to the bottom edge instead. This is an empty OFFICE BACKGROUND layer; there must be NO foreground desk, table or counter at all.\nEverything else remains unchanged. Desired 1024x768, full bleed fully opaque image. No person anywhere inside or outside, no chair, no front furniture, no text, letters, numbers, logos, paper, calculator, cup, UI, charts or data. ONE background layer only.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-73d29b31-9b7e-48e5-bbbe-7bd634fa5f21.png",
+      "asset_id": "DRE_ENVIRONMENT",
+      "selected": true,
+      "transparent_background": false,
+      "source_path": "art-source/editable/ART-28/generations/env_revision.png",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGB",
+      "sha256": "cd673fbb48ec48504c2a89bd25d88598e73d39fb9af0f3fa233783b3a4843f0a",
+      "input_images": [
+        {
+          "role": "edit target",
+          "path": "art-source/editable/ART-28/generations/env.png",
+          "sha256": "af1e2eef24dfeb18cd161320c83b1f5970098e0effd26ddf1664b8d413ca7c22"
+        }
+      ]
+    },
+    {
+      "key": "desk",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE separate transparent foreground desk sprite for Cogna monthly DRE ART-28 DRE_DESK.\nInput image: approved monthly concept, ONLY the warm wooden desk in the upper-right illustration is a style/material reference.\nSubject: one clean empty wooden analysis desk, viewed straight from the front with a modest view down onto its broad trapezoidal tabletop. Warm honey wood, dark-plum clean contours, restrained adult editorial cel shading, soft warm upper-left light. Two simple dark wooden legs and a plain front apron. Tabletop back edge is horizontal at about 20 percent of the image height, front edge at about 45 percent. Tabletop takes most of the width. Broad open empty tabletop for separate report, calculator and cup.\nComposition: very wide 2:1 landscape, desired 1024x512. The entire desk including all four corners and leg ends must fit within the image, about 4 percent clear transparent margin at left/right and 8 percent at top/bottom. Symmetric frontal camera, little side rotation, same perspective/light as the concept. Tabletop plain wood only.\nBackground: TRUE RGBA transparency, alpha zero outside the desk and between its legs. No drop shadow, glow, floor, wall, scenery or checkerboard.\nAbsolutely no people, hands, chairs, paper, laptop, cup, calculator, plants, books, objects, labels, letters, numbers, symbols, charts, UI, logo or watermark. ONE desk only, a reusable independent scene layer, not a composite card.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-c6f713db-ebf6-43e2-b45e-02b913704657.png",
+      "asset_id": "DRE_DESK",
+      "selected": true,
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/desk.png",
+      "source_size_px": [
+        1774,
+        887
+      ],
+      "source_mode": "RGBA",
+      "sha256": "36f071e8efc797e90d9ad7b8e1eb23b80732776c00612f26ac3baa11c2d6219c",
+      "input_images": [
+        {
+          "role": "approved concept",
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ]
+    },
+    {
+      "key": "ch01",
+      "prompt": "Use case: identity-preserve\nAsset type: ONE independent transparent character sprite, CH01_DRE for Cogna monthly DRE ART-28.\nInput image 1 is the CANONICAL IDENTITY MASTER of CH01. Preserve EXACTLY her facial structure, warm medium brown skin, dark brown eyes, short side-parted wavy dark brown bob ABOVE shoulders, gold hoop earrings, slim adult proportions, lilac button-up shirt with sleeves rolled to forearms, graphite trousers and black belt.\nInput image 2 is the approved monthly DRE concept. Use only the upper-right illustration as the seated analytical pose / adult editorial style reference. Never reproduce its UI or text.\nPrimary request: CH01 seated, seen from the front in a subtle three-quarter turn, calmly analyzing a separate report that will be added later. Head gently inclined and eyes looking down toward image RIGHT. Her right elbow (image LEFT) is bent, with that hand resting lightly near her chin. Her other forearm (image RIGHT) extends gently forward at lower chest height; its hand has natural bent fingers and a visible thumb forming a loose pinch, as if gripping the RIGHT edge of an INVISIBLE upright report sheet. This grip hand is at about 74 percent image width, 60 percent image height, around waist height. There is EMPTY transparent space immediately to the LEFT of this grip hand for the later paper. Both hands complete, natural anatomy, five fingers per hand.\nFraming: portrait 3:4, desired 768x1024. Seated upper-body figure from crown to upper thighs, not a standing pose. Show the torso, belt and the beginning of graphite thighs bending forward in a seated posture. Clean intentional lower cutoff at mid-thigh, later hidden behind a separate desk. Entire crown, hair, shoulders, elbows and hands inside the frame. About 10 percent transparent margin on all four sides.\nStyle: preserve the master clean dark-plum contours and broad restrained cel shading, polished adult editorial cartoon, warm upper-left daylight. Natural thoughtful small closed-mouth smile.\nBackground: TRUE RGBA TRANSPARENCY, alpha zero outside the person and in gaps. The reference master glow is NOT part of the person: do not reproduce any halo or glow.\nNo paper, clipboard, pen, laptop, props, desk, chair, furniture, floor, environment, shadow cloud, vignette, checkerboard, UI, text, numbers, charts, labels, logo or watermark. One exact CH01 only.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-5c4a71b8-0d35-4539-a57d-8cccb547f31a.png",
+      "asset_id": "CH01_DRE",
+      "selected": true,
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/ch01.png",
+      "source_size_px": [
+        1086,
+        1448
+      ],
+      "source_mode": "RGBA",
+      "sha256": "4e5ed20834e87e9b0bf1f72dac32f84959efc9fc2ff2b9fc7fff1b08702dc679",
+      "input_images": [
+        {
+          "role": "canonical identity master",
+          "path": "Assets/Art/new/characters/CH01/ch01_canonical.png",
+          "sha256": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+        },
+        {
+          "role": "approved style and pose concept",
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ]
+    },
+    {
+      "key": "calculator",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated transparent calculator prop sprite, DRE_PROP_CALCULATOR, Cogna monthly DRE ART-28.\nReference image is the approved monthly DRE concept, use ONLY the calculator on the desk in the upper-right illustration for style, scale and perspective.\nSubject: a single modest graphite desktop calculator, squat rectangular body, blank dark display, neat rows of plain unmarked slightly rounded rectangular keys. One subtle violet key is acceptable within the approved palette. ALL key caps and screen MUST be completely blank without any numbers, letters, mathematical symbols, marks or text.\nComposition: square, desired 256x256. Calculator in three-quarter top view, looking slightly down from front-left as on a frontal desk, gently turned so the long front edge slopes subtly down to the right. Entire calculator inside frame with approximately 10 percent transparent margin. A compact readable silhouette at 96x96.\nStyle: polished adult editorial cartoon like the concept, clean dark-plum outlines, broad restrained cel shading, graphite/plum casing, ivory-gray blank keys, muted violet accent. Warm soft upper-left light, shaded front-right side.\nBackground: TRUE RGBA transparency, alpha zero outside the calculator. No table, floor, floating shadow cloud, glow, backdrop, checkerboard, other objects, hand, labels, logos, watermarks, charts or UI. ONE calculator only.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-7cf9bb97-6807-41ea-9235-1c6137c5b21a.png",
+      "asset_id": "DRE_PROP_CALCULATOR",
+      "selected": true,
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/calculator.png",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "sha256": "1f1da112894855c6921c27c1049ca0d906e8c307299a3a042b9de54db2956c2e",
+      "input_images": [
+        {
+          "role": "approved concept",
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ]
+    },
+    {
+      "key": "cup",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated transparent coffee cup prop sprite DRE_PROP_COFFEE_CUP, Cogna monthly DRE ART-28.\nReference image is the approved monthly DRE concept. Use ONLY the coffee mug on the desk in the upper-right illustration as a style/perspective reference; remove ALL printed words and marks.\nSubject: a single simple ivory ceramic coffee mug with subtle lavender shaded planes, a rounded handle on image RIGHT and a small visible ellipse of dark coffee inside. No saucer, no spoon, no steam, no spill. Plain completely unprinted ceramic.\nComposition: square, desired 256x256, centered with 12 percent clear transparent margin. Frontal view with a modest view down onto the open elliptical rim, suitable for a desk seen from the front. Complete handle, rim and base visible. Compact recognizable silhouette at 96x96.\nStyle: approved polished adult editorial cartoon, clean dark-plum contours, broad restrained cel shading, ivory #F5F0E8 and lavender #B99AE8, soft warm upper-left daylight, shade to lower right.\nBackground: TRUE RGBA transparency, alpha zero outside the mug and through handle opening. No cast shadow cloud, glow, table, floor, checkerboard, scenery, other object or person.\nNo letters, words, slogans, numbers, data, symbols, logos, watermarks, UI or charts. ONE cup only.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-39be3e26-a99d-45ea-97b2-0059aded3091.png",
+      "asset_id": "DRE_PROP_COFFEE_CUP",
+      "selected": true,
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/cup.png",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "sha256": "c5f0844b4b9728989e787cf6299ec4995d535832c06da91514ac5f68f1220a4a",
+      "input_images": [
+        {
+          "role": "approved concept",
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ]
+    },
+    {
+      "key": "paper",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated transparent blank report paper prop sprite DRE_PROP_REPORT_BLANK, Cogna monthly DRE ART-28.\nReference image is the approved monthly DRE concept; use ONLY the single report sheet held by the woman in the upper-right illustration for paper perspective and rendering. The delivered sheet is COMPLETELY BLANK.\nSubject: one off-white portrait rectangular sheet of paper, held upright in a slight backward tilt, seen from front-left. A subtle parallelogram: top edge nearly horizontal but tilts up slightly to the right; bottom corners slightly left of top corners, matching the sheet held in the reference. Clean crisp outline with very slight thickness, no folds, no rolled corners, no clip, no clipboard, no hands. Soft ivory body, subtle lavender-gray shade on the lower-right edge, warm upper-left highlight.\nComposition: square desired 256x256, one portrait sheet centered with about 10 percent clear transparent breathing room. At display 96x96 the sheet should be roughly 65 pixels wide and 78 pixels tall. Keep the sheet mostly vertical, suitable to hold by its RIGHT edge near its lower half. Entire sheet including all corners visible.\nStyle: approved polished adult editorial cartoon, clean fine dark-plum contour and restrained cel-shaded planes, matching the concept desk props.\nBackground: TRUE RGBA TRANSPARENCY, alpha zero outside the sheet. No shadow cloud, glow, surface, person, furniture or checkerboard.\nNo text whatsoever: no lines, writing, letters, numbers, graph, bars, pie chart, axes, table, icons, data, signature, logo, watermark or UI. The whole paper face is unprinted and blank. ONE independent sheet only.",
+      "origin_path": "C:\\Users\\Pichau\\.codex\\generated_images\\01a13faf-680d-76c0-80b6-03e9a12c7d38\\exec-96bddaea-2de0-410d-8994-362cc4bd174d.png",
+      "asset_id": "DRE_PROP_REPORT_BLANK",
+      "selected": true,
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/paper.png",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "sha256": "064b085bfb9a227097b992c17153763c26d3e6d92bd37a7a5c07ce92cf000e84",
+      "input_images": [
+        {
+          "role": "approved concept",
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "DRE_ENVIRONMENT",
+      "path": "dre/monthly/office_background.png",
+      "output_path": "Assets/Art/new/dre/monthly/office_background.png",
+      "status": "validado",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: precise-object-edit\nEdit target: the attached restaurant office background. Make ONLY two corrections while preserving its 4:3 framing, architecture, awning, plants, bookcase, palette, contours and warm upper-left light.\n1. Remove EVERY tiny human figure visible through the left window. Keep the outdoor restaurant terrace empty of people.\n2. Remove the broad brown foreground tabletop/surface across the bottom approximately 17 percent of the image, including its horizontal back edge. Extend the SAME perspective wooden floor naturally all the way to the bottom edge instead. This is an empty OFFICE BACKGROUND layer; there must be NO foreground desk, table or counter at all.\nEverything else remains unchanged. Desired 1024x768, full bleed fully opaque image. No person anywhere inside or outside, no chair, no front furniture, no text, letters, numbers, logos, paper, calculator, cup, UI, charts or data. ONE background layer only.",
+      "transparent_background": false,
+      "source_path": "art-source/editable/ART-28/generations/env_revision.png",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGB",
+      "source_sha256": "cd673fbb48ec48504c2a89bd25d88598e73d39fb9af0f3fa233783b3a4843f0a",
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "mode": "RGBA",
+      "sha256": "160fd42b874b16be32f61df03b6fae0321bc75999eaefab35df99ce95f7a99e9",
+      "display_size_px": [
+        560,
+        420
+      ],
+      "display_fit": "cover",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1448,
+          1086
+        ],
+        "resampled_frame_px": [
+          1024,
+          768
+        ],
+        "uniform_scale": 0.7071823204419889,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "measurements": {
+        "alpha_extrema": [
+          255,
+          255
+        ],
+        "transparent_fraction": 0,
+        "opaque_fraction": 1,
+        "alpha_bbox_ltrb_px": [
+          0,
+          0,
+          1024,
+          768
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          0,
+          0,
+          1024,
+          768
+        ],
+        "outer_edge_alpha_max": 255
+      },
+      "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+      "native_preview": "art-source/previews/ART-28/DRE_ENVIRONMENT-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-28/DRE_ENVIRONMENT-display-light-dark.png",
+      "visual_notes": "Janela com toldo roxo sem letreiro, escritório frontal, luz superior esquerda, sem pessoas internas/externas, mesa frontal, dados ou UI. Livros e plantas posteriores são ambientação fixa."
+    },
+    {
+      "id": "DRE_DESK",
+      "path": "dre/props/desk_foreground.png",
+      "output_path": "Assets/Art/new/dre/props/desk_foreground.png",
+      "status": "validado",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: stylized-concept\nAsset type: ONE separate transparent foreground desk sprite for Cogna monthly DRE ART-28 DRE_DESK.\nInput image: approved monthly concept, ONLY the warm wooden desk in the upper-right illustration is a style/material reference.\nSubject: one clean empty wooden analysis desk, viewed straight from the front with a modest view down onto its broad trapezoidal tabletop. Warm honey wood, dark-plum clean contours, restrained adult editorial cel shading, soft warm upper-left light. Two simple dark wooden legs and a plain front apron. Tabletop back edge is horizontal at about 20 percent of the image height, front edge at about 45 percent. Tabletop takes most of the width. Broad open empty tabletop for separate report, calculator and cup.\nComposition: very wide 2:1 landscape, desired 1024x512. The entire desk including all four corners and leg ends must fit within the image, about 4 percent clear transparent margin at left/right and 8 percent at top/bottom. Symmetric frontal camera, little side rotation, same perspective/light as the concept. Tabletop plain wood only.\nBackground: TRUE RGBA transparency, alpha zero outside the desk and between its legs. No drop shadow, glow, floor, wall, scenery or checkerboard.\nAbsolutely no people, hands, chairs, paper, laptop, cup, calculator, plants, books, objects, labels, letters, numbers, symbols, charts, UI, logo or watermark. ONE desk only, a reusable independent scene layer, not a composite card.",
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/desk.png",
+      "source_size_px": [
+        1774,
+        887
+      ],
+      "source_mode": "RGBA",
+      "source_sha256": "36f071e8efc797e90d9ad7b8e1eb23b80732776c00612f26ac3baa11c2d6219c",
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "actual_size_px": [
+        1024,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "29e9c3644a3dec89d9b5b9ff472031432f09b4170a07014e3fbcea6a5f2b55f0",
+      "display_size_px": [
+        560,
+        280
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1774,
+          887
+        ],
+        "resampled_frame_px": [
+          1024,
+          512
+        ],
+        "uniform_scale": 0.5772266065388951,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5888423919677734,
+        "opaque_fraction": 0.00262451171875,
+        "alpha_bbox_ltrb_px": [
+          17,
+          9,
+          1007,
+          469
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          20,
+          81,
+          1004,
+          457
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+      "native_preview": "art-source/previews/ART-28/DRE_DESK-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-28/DRE_DESK-display-light-dark.png",
+      "visual_notes": "Mesa vazia completa, pernas e tampo independentes, sem pessoa ou props incorporados. Contornos limpos nos fundos claro/escuro."
+    },
+    {
+      "id": "CH01_DRE",
+      "path": "characters/CH01/ch01_analyzing.png",
+      "output_path": "Assets/Art/new/characters/CH01/ch01_analyzing.png",
+      "status": "validado",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: identity-preserve\nAsset type: ONE independent transparent character sprite, CH01_DRE for Cogna monthly DRE ART-28.\nInput image 1 is the CANONICAL IDENTITY MASTER of CH01. Preserve EXACTLY her facial structure, warm medium brown skin, dark brown eyes, short side-parted wavy dark brown bob ABOVE shoulders, gold hoop earrings, slim adult proportions, lilac button-up shirt with sleeves rolled to forearms, graphite trousers and black belt.\nInput image 2 is the approved monthly DRE concept. Use only the upper-right illustration as the seated analytical pose / adult editorial style reference. Never reproduce its UI or text.\nPrimary request: CH01 seated, seen from the front in a subtle three-quarter turn, calmly analyzing a separate report that will be added later. Head gently inclined and eyes looking down toward image RIGHT. Her right elbow (image LEFT) is bent, with that hand resting lightly near her chin. Her other forearm (image RIGHT) extends gently forward at lower chest height; its hand has natural bent fingers and a visible thumb forming a loose pinch, as if gripping the RIGHT edge of an INVISIBLE upright report sheet. This grip hand is at about 74 percent image width, 60 percent image height, around waist height. There is EMPTY transparent space immediately to the LEFT of this grip hand for the later paper. Both hands complete, natural anatomy, five fingers per hand.\nFraming: portrait 3:4, desired 768x1024. Seated upper-body figure from crown to upper thighs, not a standing pose. Show the torso, belt and the beginning of graphite thighs bending forward in a seated posture. Clean intentional lower cutoff at mid-thigh, later hidden behind a separate desk. Entire crown, hair, shoulders, elbows and hands inside the frame. About 10 percent transparent margin on all four sides.\nStyle: preserve the master clean dark-plum contours and broad restrained cel shading, polished adult editorial cartoon, warm upper-left daylight. Natural thoughtful small closed-mouth smile.\nBackground: TRUE RGBA TRANSPARENCY, alpha zero outside the person and in gaps. The reference master glow is NOT part of the person: do not reproduce any halo or glow.\nNo paper, clipboard, pen, laptop, props, desk, chair, furniture, floor, environment, shadow cloud, vignette, checkerboard, UI, text, numbers, charts, labels, logo or watermark. One exact CH01 only.",
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/ch01.png",
+      "source_size_px": [
+        1086,
+        1448
+      ],
+      "source_mode": "RGBA",
+      "source_sha256": "4e5ed20834e87e9b0bf1f72dac32f84959efc9fc2ff2b9fc7fff1b08702dc679",
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png",
+        "Assets/Art/new/characters/CH01/ch01_canonical.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5",
+        "Assets/Art/new/characters/CH01/ch01_canonical.png": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+      },
+      "actual_size_px": [
+        768,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "301830497a39a2f99a37ef9e019b1c1c2b2bb1f0b6f2f7c6ea7038b10a1e4c5a",
+      "display_size_px": [
+        360,
+        480
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1086,
+          1448
+        ],
+        "resampled_frame_px": [
+          614,
+          819
+        ],
+        "uniform_scale": 0.565377532228361,
+        "transparent_padding_ltrb_px": [
+          77,
+          102,
+          77,
+          103
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6952845255533854,
+        "opaque_fraction": 0.0024668375651041665,
+        "alpha_bbox_ltrb_px": [
+          110,
+          112,
+          680,
+          921
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          141,
+          158,
+          677,
+          894
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+      "canonical_identity": {
+        "path": "Assets/Art/new/characters/CH01/ch01_canonical.png",
+        "sha256": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+      },
+      "native_preview": "art-source/previews/ART-28/CH01_DRE-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-28/CH01_DRE-display-light-dark.png",
+      "visual_notes": "Identidade comparada ao master: rosto, pele, olhos, bob curto ondulado, risca lateral, argolas douradas e camisa lilás preservados. Pose sentada, mãos legíveis; corte intencional nas coxas oculto pela mesa. Sem papel ou móveis incorporados."
+    },
+    {
+      "id": "DRE_PROP_CALCULATOR",
+      "path": "dre/props/calculator.png",
+      "output_path": "Assets/Art/new/dre/props/calculator.png",
+      "status": "validado",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated transparent calculator prop sprite, DRE_PROP_CALCULATOR, Cogna monthly DRE ART-28.\nReference image is the approved monthly DRE concept, use ONLY the calculator on the desk in the upper-right illustration for style, scale and perspective.\nSubject: a single modest graphite desktop calculator, squat rectangular body, blank dark display, neat rows of plain unmarked slightly rounded rectangular keys. One subtle violet key is acceptable within the approved palette. ALL key caps and screen MUST be completely blank without any numbers, letters, mathematical symbols, marks or text.\nComposition: square, desired 256x256. Calculator in three-quarter top view, looking slightly down from front-left as on a frontal desk, gently turned so the long front edge slopes subtly down to the right. Entire calculator inside frame with approximately 10 percent transparent margin. A compact readable silhouette at 96x96.\nStyle: polished adult editorial cartoon like the concept, clean dark-plum outlines, broad restrained cel shading, graphite/plum casing, ivory-gray blank keys, muted violet accent. Warm soft upper-left light, shaded front-right side.\nBackground: TRUE RGBA transparency, alpha zero outside the calculator. No table, floor, floating shadow cloud, glow, backdrop, checkerboard, other objects, hand, labels, logos, watermarks, charts or UI. ONE calculator only.",
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/calculator.png",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "source_sha256": "1f1da112894855c6921c27c1049ca0d906e8c307299a3a042b9de54db2956c2e",
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "25ee5c340807e9262946341ae3a53688fc90be8beeca664c877bc7502f94c6ff",
+      "display_size_px": [
+        96,
+        96
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          256,
+          256
+        ],
+        "uniform_scale": 0.20414673046251994,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5574951171875,
+        "opaque_fraction": 0.0080413818359375,
+        "alpha_bbox_ltrb_px": [
+          7,
+          31,
+          252,
+          247
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          9,
+          51,
+          249,
+          217
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+      "native_preview": "art-source/previews/ART-28/DRE_PROP_CALCULATOR-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-28/DRE_PROP_CALCULATOR-display-light-dark.png",
+      "visual_notes": "Calculadora legível a 96x96, teclas e visor completamente sem números/símbolos, perspectiva compatível com o tampo."
+    },
+    {
+      "id": "DRE_PROP_COFFEE_CUP",
+      "path": "dre/props/coffee_cup.png",
+      "output_path": "Assets/Art/new/dre/props/coffee_cup.png",
+      "status": "validado",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated transparent coffee cup prop sprite DRE_PROP_COFFEE_CUP, Cogna monthly DRE ART-28.\nReference image is the approved monthly DRE concept. Use ONLY the coffee mug on the desk in the upper-right illustration as a style/perspective reference; remove ALL printed words and marks.\nSubject: a single simple ivory ceramic coffee mug with subtle lavender shaded planes, a rounded handle on image RIGHT and a small visible ellipse of dark coffee inside. No saucer, no spoon, no steam, no spill. Plain completely unprinted ceramic.\nComposition: square, desired 256x256, centered with 12 percent clear transparent margin. Frontal view with a modest view down onto the open elliptical rim, suitable for a desk seen from the front. Complete handle, rim and base visible. Compact recognizable silhouette at 96x96.\nStyle: approved polished adult editorial cartoon, clean dark-plum contours, broad restrained cel shading, ivory #F5F0E8 and lavender #B99AE8, soft warm upper-left daylight, shade to lower right.\nBackground: TRUE RGBA transparency, alpha zero outside the mug and through handle opening. No cast shadow cloud, glow, table, floor, checkerboard, scenery, other object or person.\nNo letters, words, slogans, numbers, data, symbols, logos, watermarks, UI or charts. ONE cup only.",
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/cup.png",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "source_sha256": "c5f0844b4b9728989e787cf6299ec4995d535832c06da91514ac5f68f1220a4a",
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c5870bfc14bc1e5b582a787fc82e929248ed948a7b5b39faf61143743eb1a322",
+      "display_size_px": [
+        96,
+        96
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          256,
+          256
+        ],
+        "uniform_scale": 0.20414673046251994,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.605926513671875,
+        "opaque_fraction": 0.0096588134765625,
+        "alpha_bbox_ltrb_px": [
+          15,
+          40,
+          238,
+          221
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          47,
+          50,
+          235,
+          218
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+      "native_preview": "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-display-light-dark.png",
+      "visual_notes": "Xícara marfim sem estampa, café visível, alça direita com vão transparente, base assentada sobre o tampo na prova."
+    },
+    {
+      "id": "DRE_PROP_REPORT_BLANK",
+      "path": "dre/props/report_blank.png",
+      "output_path": "Assets/Art/new/dre/props/report_blank.png",
+      "status": "validado",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated transparent blank report paper prop sprite DRE_PROP_REPORT_BLANK, Cogna monthly DRE ART-28.\nReference image is the approved monthly DRE concept; use ONLY the single report sheet held by the woman in the upper-right illustration for paper perspective and rendering. The delivered sheet is COMPLETELY BLANK.\nSubject: one off-white portrait rectangular sheet of paper, held upright in a slight backward tilt, seen from front-left. A subtle parallelogram: top edge nearly horizontal but tilts up slightly to the right; bottom corners slightly left of top corners, matching the sheet held in the reference. Clean crisp outline with very slight thickness, no folds, no rolled corners, no clip, no clipboard, no hands. Soft ivory body, subtle lavender-gray shade on the lower-right edge, warm upper-left highlight.\nComposition: square desired 256x256, one portrait sheet centered with about 10 percent clear transparent breathing room. At display 96x96 the sheet should be roughly 65 pixels wide and 78 pixels tall. Keep the sheet mostly vertical, suitable to hold by its RIGHT edge near its lower half. Entire sheet including all corners visible.\nStyle: approved polished adult editorial cartoon, clean fine dark-plum contour and restrained cel-shaded planes, matching the concept desk props.\nBackground: TRUE RGBA TRANSPARENCY, alpha zero outside the sheet. No shadow cloud, glow, surface, person, furniture or checkerboard.\nNo text whatsoever: no lines, writing, letters, numbers, graph, bars, pie chart, axes, table, icons, data, signature, logo, watermark or UI. The whole paper face is unprinted and blank. ONE independent sheet only.",
+      "transparent_background": true,
+      "source_path": "art-source/editable/ART-28/generations/paper.png",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "source_sha256": "064b085bfb9a227097b992c17153763c26d3e6d92bd37a7a5c07ce92cf000e84",
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "35c1ab74351405cded6be808d975643cc9d2e212946e031d0e556ed3e4aaae25",
+      "display_size_px": [
+        96,
+        96
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          256,
+          256
+        ],
+        "uniform_scale": 0.20414673046251994,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5030364990234375,
+        "opaque_fraction": 0.0095367431640625,
+        "alpha_bbox_ltrb_px": [
+          18,
+          21,
+          235,
+          236
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          40,
+          24,
+          213,
+          232
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+      "native_preview": "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-display-light-dark.png",
+      "visual_notes": "Folha em branco sem linhas/gráficos/dados; contorno completo, borda direita coincide com a mão; dedos ocultam a borda pelo z-order."
+    }
+  ],
+  "producer_source": "art-source/editable/ART-28/export-art28.cjs",
+  "integration_performed": false,
+  "preview_source": "art-source/editable/ART-28/preview-art28.cjs",
+  "delivery_preview": "art-source/previews/ART-28/ART-28-layer-proof.png",
+  "visual_review_files": [
+    "art-source/previews/ART-28/DRE_ENVIRONMENT-native-light-dark.png",
+    "art-source/previews/ART-28/DRE_ENVIRONMENT-display-light-dark.png",
+    "art-source/previews/ART-28/DRE_DESK-native-light-dark.png",
+    "art-source/previews/ART-28/DRE_DESK-display-light-dark.png",
+    "art-source/previews/ART-28/CH01_DRE-native-light-dark.png",
+    "art-source/previews/ART-28/CH01_DRE-display-light-dark.png",
+    "art-source/previews/ART-28/DRE_PROP_CALCULATOR-native-light-dark.png",
+    "art-source/previews/ART-28/DRE_PROP_CALCULATOR-display-light-dark.png",
+    "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-native-light-dark.png",
+    "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-display-light-dark.png",
+    "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-native-light-dark.png",
+    "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-display-light-dark.png",
+    "art-source/previews/ART-28/ART-28-layer-proof.png",
+    "art-source/previews/ART-28/ART-28-contact-sheet.png",
+    "art-source/previews/ART-28/ART-28-identity-comparison.png"
+  ],
+  "qa_record": "docs/art/qa/ART-28.json",
+  "contract": "docs/art/layouts/dre-layout.json",
+  "scope_resolution": "Somente ART-28; autorização da fila é usada apenas para encadear a próxima conversa após o commit.",
+  "reference_policy": "Originals and approved references were inspected before generation. Seven original ImageGen results are preserved byte-for-byte under art-source/editable/ART-28/generations; the first environment is rejected, its corrected revision selected."
+}

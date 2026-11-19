@@ -8,15 +8,11 @@ namespace Game.Adapter.In.Controllers
     {
         [SerializeField] private SelectedEstablishmentView view;
 
-        private void Start()
+        private void Awake() { if (view == null) view = GetComponent<SelectedEstablishmentView>(); }
+        private void OnEnable() => Refresh();
+        public void Refresh()
         {
-            if (string.IsNullOrWhiteSpace(PlayerSession.SelectedEstablishmentName))
-            {
-                view.SetSelectedText("Nenhum estabelecimento foi selecionado.");
-                return;
-            }
-
-            view.SetSelectedText($"{PlayerSession.SelectedEstablishmentName} selecionado.");
+            view?.Bind(Game.Domain.Service.EstablishmentSummaryService.Build());
         }
     }
 }

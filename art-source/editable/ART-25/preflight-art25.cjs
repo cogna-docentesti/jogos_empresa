@@ -1,0 +1,16 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'../../..'),tid='ART-25';
+const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+const walk=p=>fs.existsSync(path.join(root,p))?fs.readdirSync(path.join(root,p),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(p+'/'+e.name):[p+'/'+e.name]):[];
+const m=read('docs/art/manifest.json'),task=m.tasks.find(t=>t.id===tid),g=read('art-source/editable/ART-25/generations.json');
+if(task.status!=='planejado'||task.asset_ids.length!==6||g.assets.length!==6)throw Error('Unexpected scope/status');
+for(const a of m.assets.filter(a=>a.task_id===tid))if(a.status!=='planejado'||fs.existsSync(path.join(root,m.asset_root,a.path)))throw Error('Existing art must be preserved: '+a.id);
+const all=new Set(['Assets/Art/new','art-source','docs/art','ProjectSettings','Packages'].flatMap(walk));
+for(const p of walk('Assets'))if(/\.(cs|prefab|unity|asset)$/.test(p))all.add(p);
+const exempt=p=>p==='docs/art/manifest.json'||p==='docs/art/tasks.json'||p.includes('/ART-25/')||/\/ART-25[.-]/.test(p);
+const protectedFiles=Object.fromEntries([...all].filter(p=>!exempt(p)).sort().map(p=>[p,sha(p)]));
+const snapshot={task_id:tid,date:'2026-10-15',scope_resolution:g.scope_resolution,protected_files:protectedFiles,other_assets:m.assets.filter(a=>a.task_id!==tid),other_tasks:m.tasks.filter(t=>t.id!==tid),other_index:read('docs/art/tasks.json').filter(t=>t.id!==tid),manifest_other_fields:Object.fromEntries(Object.entries(m).filter(([k])=>!['assets','tasks'].includes(k)))};
+fs.mkdirSync(path.join(root,'docs/art/qa'),{recursive:true});
+fs.writeFileSync(path.join(root,'docs/art/qa/ART-25-scope-baseline.json'),JSON.stringify(snapshot,null,2)+'\n');
+console.log(JSON.stringify({task:tid,assets:task.asset_ids,protected_file_count:Object.keys(protectedFiles).length,dependencies:task.dependencies}));

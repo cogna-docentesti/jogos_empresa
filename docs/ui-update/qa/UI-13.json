@@ -1,0 +1,101 @@
+{
+  "task_id": "UI-13",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "805716f51e29e868e6c4aea7b373fe41f893cc6b",
+  "unity_version": "6000.3.20f1",
+  "pending_acceptance": [],
+  "implementation": [
+    "Panel_MonthlyResult real na GameScene: seis camadas ART-28 completas, tint neutro, escala uniforme e RectMask2D 560x420 no ponto 1320,120, com ordem/pivots contratuais. Papel atrás dos dedos; mesa à frente da personagem; props sem cruzar tabela/gráfico.",
+    "Tabela TMP de 22 linhas: receita, insumos, aluguel, folha, operação, 13º, parcela, total de saídas, evento assinado, resultado, caixa inicial/final, detalhes do principal/juros já incluídos e indicadores persistidos. Coluna de total, cabeçalhos e linhas semânticas; scroll/máscara e altura dinâmica para textos longos.",
+    "Resumo com resultado, caixa e clientes; gráfico nativo de receita, saídas, eventos e resultado com escala comum, saída à esquerda do zero e valores reais. Nenhum dado de preview é usado no produto.",
+    "Round_Summary espera Continuar. ContinueAfterSummary valida estado e ID do último resultado salvo, segue o destino existente e não grava nem calcula novamente. IsAwaitingContinue/Continued expostos para UI-19. O aguardo de todas as escolhas de evento da UI-12 permanece.",
+    "Consulta pelo hub em PanelId.MonthlyResults=11, sem renumerar IDs anteriores, com atualização por query em cada visita. Estados vazio/erro/retry usam EMPTY_RESULTS e ausência explícita; Continuar indisponível no resumo sem dado válido. Globals reservados e raycasts verificados.",
+    "Classificações HIGH/ADEQUATE/FRAGILE/CRITICAL traduzidas apenas na apresentação para Alto/Adequado/Frágil/Crítico; score, enum e string persistida preservados. Demais dados desta tela são números/valores formatados em português."
+  ],
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "screenshots": 61,
+    "inspection": "61 capturas reais revisadas em 11 pranchas e amostras nativas. Capturas reais revisadas em pranchas e amostras nativas. Positivo/negativo/zero, caixa negativo, empréstimo real com evento negativo, vazio/erro, consulta/reload, texto longo, todos os estados e mês três. Composição comparada à prova ART-28 e ao concept mensal.",
+    "typography": "Inter Tight, títulos 44/32, KPI 42, corpo/botões 24, tabela 22 e legenda 20. Sem autosize/fallback novo.",
+    "loading": "Consulta SQLite síncrona; nenhuma simulação de loading ou dados de preenchimento.",
+    "review_boards": "output/ui-update/UI-13/visual-review-boards.json"
+  },
+  "validation": {
+    "editmode": {
+      "path": "output/ui-update/UI-13/editmode-regression.json",
+      "total": 294,
+      "passed": 294,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-13/playmode.json",
+      "checks": 110,
+      "passed": 110,
+      "failures": 0
+    },
+    "screenshots": "output/ui-update/UI-13/screenshots.json",
+    "capture_frames": "output/ui-update/UI-13/capture-frames.json",
+    "runtime": "output/ui-update/UI-13/runtime.json",
+    "console": "output/ui-update/UI-13/playmode-console.json",
+    "art_audit": "output/ui-update/UI-13/art-audit.json",
+    "scene_diff": "output/ui-update/UI-13/scene-diff-audit.json",
+    "file_audit": "output/ui-update/UI-13/file-audit.json",
+    "console_audit": "output/ui-update/UI-13/console-audit.json",
+    "console_errors": 1,
+    "application_errors": 0,
+    "console_warnings": 0,
+    "persisted_results": "output/ui-update/UI-13/persisted-results.json"
+  },
+  "economic_validation": [
+    "Resultado conhecido 10800 de receita, 4680 insumos, 4000 folha, 500 aluguel, 100 operação, parcela 330 (300 principal + 30 juros), total 9610; impactos -2500/0/+2500 comparados à apresentação após round-trip no SQLite isolado. Sem mutação ou nova linha em leituras repetidas.",
+    "Fixtures Play Mode calculadas e persistidas pelo MonthlySimulationEngine/RoundService reais: todos os textos da tabela e barras conferidos contra o resultado salvo; consulta/reload/Continuar sem novo débito. Casos positivo/zero usam snapshots de efeito sintéticos, apenas no banco isolado de QA; nunca geram dados no produto.",
+    "Empréstimo contratado pelo LoanService com catálogo real e opção real de evento monetário negativo: principal incluído uma vez na parcela; juros/detalhes e total comparados ao resultado persistido.",
+    "Fechar mês real: zero resultados antes das quatro confirmações, um resultado após a última, resumo persistente até ação explícita; continuação para hub e consulta após reload.",
+    "Campanha de três meses e precedência de falência preservadas. Mês três COMPLETED/BANKRUPT ainda fica legível antes da ação; apenas o destino final existente foi conferido."
+  ],
+  "invariants": {
+    "pngs_preserved": 277,
+    "guids_preserved": 277,
+    "single": 277,
+    "manifest_hashes_verified": 272,
+    "game_state_values_unchanged": true,
+    "panel_existing_values_unchanged": true,
+    "campaign_months": 3,
+    "economy_catalogs_unchanged": true,
+    "first_insert": "D3 preservado pelos testes de regressão. Fixtures Play Mode persistem dados isolados e não pretendem comprovar o percurso de abertura.",
+    "isolated_databases": [
+      "D:/Cogna/jogos_empresa/Temp/ui13-validation.db",
+      "D:/Cogna/jogos_empresa/Temp/ui13-saved-scene.db"
+    ],
+    "playerprefs": "Somente Cogna.UI13.Validation e Cogna.UI13.SavedScene; keys removidas ao encerrar. Identificação e partida reais não acessadas."
+  },
+  "resolved_during_validation": [
+    "Testes de fluxo antigos atualizados para exigir acknowledgement explícito do resumo; fixture de falência usa a API pública. Harness da UI-12 atualizado para continuar após ler o resumo antes de abrir seu histórico.",
+    "Tradução de classificação solicitada na revisão aplicada na apresentação e capturas renovadas.",
+    "Formatação monetária promove o float persistido para double somente ao formatar; os centavos acima de R$ 100 mil são preservados. Três testes e novas capturas do empréstimo conferem o caso.",
+    "Atalho DRE reposicionado dentro da lateral do hub; somente o atalho de estabelecimento mudou de y=712 para y=678. Progresso e trilha preservados, sem sobreposição nas três resoluções.",
+    "Ponte Pipeline registrou um timeout de dispatch ao iniciar o último Run; a chamada executou integralmente. Um erro de ferramenta, zero erros da aplicação e zero avisos no console amostrado."
+  ],
+  "scope_limits": [
+    "Somente UI-13. UI-14 a UI-20 não executadas. As telas FinalReport/Bankruptcy e a orquestração geral continuam nas tarefas próprias."
+  ],
+  "commit_message": "feat(ui): implement persistent monthly cash results (UI-13)",
+  "cleanup": "Cena reaberta e validada após normalização: seis blocos existentes intencionais, 625 novos e 5956 blocos baseline preservados byte a byte. Hash da cena final igual ao da cena validada. PNG/metadados, fonte fallback e Packages restaurados ao baseline após fechar o Editor. Pipeline temporário não integra o commit."
+}

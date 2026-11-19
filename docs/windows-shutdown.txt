@@ -1,0 +1,68 @@
+Falha nativa ao encerrar o Player Windows — 18/10/2026
+
+Causa e correção
+O Unity 6000.3.20f1 falha na limpeza nativa depois de um cliente Windows UI
+Automation consultar a janela. O defeito oficial UUM-146676 foi corrigido no
+6000.3.21f1, o patch seguinte da mesma linha LTS:
+https://unity.com/releases/editor/whats-new/6000.3.21f1
+
+ProjectSettings/ProjectVersion.txt passa a fixar 6000.3.21f1. O preprocessor
+WindowsShutdownVersionCheck impede gerar Players Windows na linha 6000.3 com
+patch anterior a 21, inclusive se o Editor antigo continuar aberto.
+
+Reprodução confirmada no mesmo executável anterior
+- Sem consulta de UI Automation: fechar a janela retorna 0.
+- Após AutomationElement.FromHandle e consulta dos filhos: fechar a janela
+  retorna 3221225477 (0xc0000005).
+- O log confirma que GameManager fechou o banco antes da falha nativa.
+- Evidências: output/windows-shutdown/baseline-6000.3.20-*/result.json.
+
+Validação concluída
+O Editor oficial 6000.3.21f1 foi instalado em D:/UnityEditors/6000.3.21f1.
+O MD5 do instalador foi conferido contra o manifesto oficial de download:
+0b7e4574fd3acc06b5306ed6cc72078a.
+
+Os quatro modos de saída passaram tanto em Development quanto em release QA:
+8/8 processos retornaram 0 após a consulta de acessibilidade. Todos reabriram
+o SQLite com integrity_check=ok e os valores esperados ao salvar/descartar.
+A suíte existente de campanha também passou: 211 + 43 verificações,
+79 capturas, nenhuma falha e código de saída 0, após consulta de UI Automation.
+
+Build final: Builds/Windows/JogosDeEmpresa.exe.
+O build comum foi gerado sem erros ou avisos, sem Development/QA e sem os probes
+ou variáveis de armazenamento QA na assembly final. Seu UnityPlayer.dll é
+byte a byte idêntico ao runtime oficial validado no release QA.
+Os cenários de persistência usaram exclusivamente os builds QA isolados.
+Relatório consolidado e hashes: output/windows-shutdown/report.json.
+
+O primeiro probe tentou criar outra sessão após o rascunho inicial do jogo.
+Esse erro de preparação do teste foi corrigido antes dos oito casos finais;
+o registro inicial foi preservado e não conta como resultado de encerramento.
+
+Regressão preparada
+Assets/Editor/Tests/WindowsShutdownValidation.cs compila o perfil Windows
+existente. COGNA_SHUTDOWN_BUILD_OUTPUT seleciona um diretório novo para o build.
+BuildQa produz Player release com FONT10_QA_PLAYER; BuildDevelopmentQa produz
+Development Player; BuildRelease produz release comum, sem instrumentação QA.
+
+O probe WindowsShutdownPlayerValidation só é compilado em Development/QA,
+permanece inativo sem --windows-shutdown-qa e exige banco descartável e chave
+de identificação com prefixo Cogna.Shutdown.QA. Nenhum banco pessoal é usado.
+
+Com o build QA pronto, executar a partir da raiz, com diretórios novos:
+python tools/ui/test_windows_shutdown.py --exe CAMINHO/JogosDeEmpresa.exe --out output/windows-shutdown/fixed-window-close --mode window-close
+python tools/ui/test_windows_shutdown.py --exe CAMINHO/JogosDeEmpresa.exe --out output/windows-shutdown/fixed-application-quit --mode application-quit
+python tools/ui/test_windows_shutdown.py --exe CAMINHO/JogosDeEmpresa.exe --out output/windows-shutdown/fixed-save --mode save
+python tools/ui/test_windows_shutdown.py --exe CAMINHO/JogosDeEmpresa.exe --out output/windows-shutdown/fixed-discard --mode discard
+
+Cada caso consulta o provider de acessibilidade e exige exit code 0 e passagem
+por OnApplicationQuit. O SQLite é reaberto após a saída, passa por integrity_check
+e precisa conter 1129 para salvar/X/Application.Quit ou 1000 para descartar.
+Esses checks falham se o processo cair, mesmo depois de salvar corretamente.
+
+As alterações locais anteriores e a sessão aberta no Editor foram preservadas.
+O Editor aberto continua no 6000.3.20f1: reabra com o 6000.3.21f1 instalado antes
+de recompilar. Nenhuma configuração de acessibilidade do Windows foi desativada.
+Builds/WindowsShutdownValidation/Project contém uma cópia de trabalho para a
+validação do patch sem fechar a sessão atual do usuário.
+Os relatórios anteriores FONT-10 continuam como evidência histórica da falha.

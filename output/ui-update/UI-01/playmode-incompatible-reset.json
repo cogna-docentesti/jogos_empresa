@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UI01Validation.RequireIsolatedStorage(); var path=UI01Validation.Capture(\"incompatible-save-confirmation-1920x1080\"); var view=UnityEngine.Object.FindObjectsByType<Game.Adapter.In.UI.EstablishmentSummaryView>(UnityEngine.FindObjectsInactive.Include,UnityEngine.FindObjectsSortMode.None).First(); var f=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic; var warning=(UnityEngine.GameObject)view.GetType().GetField(\"resetWarning\",f).GetValue(view); if(!warning.activeInHierarchy) throw new System.Exception(\"Incompatible warning invisible\"); var before=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count(); var button=(UnityEngine.UI.Button)view.GetType().GetField(\"confirmResetButton\",f).GetValue(view); button.onClick.Invoke(); if(GameManager.Instance.StateMachine.CurrentState!=InitialDecisionFlow.Identification || GameSessionState.HasIncompatibleSave || warning.activeSelf) throw new System.Exception(\"Reset did not return to identification\"); return new { beforeConfirmationRows=before, afterConfirmationRows=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count(),state=GameManager.Instance.StateMachine.CurrentState.ToString(),emptyIdentification=!Game.Infrastructure.Session.PlayerSession.HasIdentification, screenshot=path };",
+      "timeout": "30000"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "beforeConfirmationRows": 1,
+        "afterConfirmationRows": 0,
+        "state": "Config_Identification",
+        "emptyIdentification": true,
+        "screenshot": "D:\\Cogna\\jogos_empresa\\output\\ui-update\\UI-01\\incompatible-save-confirmation-1920x1080.png"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

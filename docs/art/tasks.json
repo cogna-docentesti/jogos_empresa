@@ -1,0 +1,1038 @@
+[
+  {
+    "id": "ART-01",
+    "title": "Fixar os quatro personagens já aprovados",
+    "dependencies": [],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Uma identidade por arquivo, sem prancha coletiva como sprite final. Os masters canônicos são a referência das próximas poses.",
+    "asset_ids": [
+      "CH01_CANONICAL",
+      "CH02_CANONICAL",
+      "CH03_CANONICAL",
+      "CH04_CANONICAL"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-01 — Fixar os quatro personagens já aprovados. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-01.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+  },
+  {
+    "id": "ART-02",
+    "title": "Fixar chef e profissional de sushi",
+    "dependencies": [
+      "ART-01"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "São as duas funções confirmadas ainda sem pessoa definida nos concepts; aparência inicial registrada no manifesto após QA.",
+    "asset_ids": [
+      "CH05_CANONICAL",
+      "CH06_CANONICAL"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-02 — Fixar chef e profissional de sushi. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-02.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+  },
+  {
+    "id": "ART-03",
+    "title": "Barras, painéis e bases compartilhadas",
+    "dependencies": [],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Geometria determinística com fonte vetorial/editável; exportar cada PNG separado. Não gerar uma tela completa.",
+    "asset_ids": [
+      "UI_TOPBAR_VIOLET",
+      "UI_NAVBAR_PLUM",
+      "UI_PANEL_IVORY",
+      "UI_PANEL_LAVENDER",
+      "UI_PANEL_PLUM",
+      "UI_PANEL_SHADOW",
+      "UI_CARD_NORMAL",
+      "UI_CARD_SELECTED_OUTLINE",
+      "UI_CARD_DISABLED_OVERLAY",
+      "UI_MODAL_SURFACE",
+      "UI_TOOLTIP_SURFACE",
+      "UI_SCRIM",
+      "UI_BADGE_CIRCLE",
+      "BRAND_COGNA_LOGO"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-03 — Barras, painéis e bases compartilhadas. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-03.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-03.json"
+  },
+  {
+    "id": "ART-04",
+    "title": "Botões sem texto e seus estados",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "",
+    "asset_ids": [
+      "UI_PRIMARY_VIOLET_NORMAL",
+      "UI_PRIMARY_VIOLET_HOVER",
+      "UI_PRIMARY_VIOLET_PRESSED",
+      "UI_PRIMARY_VIOLET_DISABLED",
+      "UI_SECONDARY_IVORY_NORMAL",
+      "UI_SECONDARY_IVORY_HOVER",
+      "UI_SECONDARY_IVORY_PRESSED",
+      "UI_SECONDARY_IVORY_DISABLED",
+      "UI_DANGER_CORAL_NORMAL",
+      "UI_DANGER_CORAL_HOVER",
+      "UI_DANGER_CORAL_PRESSED",
+      "UI_DANGER_CORAL_DISABLED",
+      "UI_ACCENT_AMBER_NORMAL",
+      "UI_ACCENT_AMBER_HOVER",
+      "UI_ACCENT_AMBER_PRESSED",
+      "UI_ACCENT_AMBER_DISABLED",
+      "UI_ICON_BUTTON_NORMAL",
+      "UI_ICON_BUTTON_HOVER",
+      "UI_ICON_BUTTON_PRESSED",
+      "UI_ICON_BUTTON_DISABLED"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-04 — Botões sem texto e seus estados. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-04.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-04.json"
+  },
+  {
+    "id": "ART-05",
+    "title": "Controles, campos e seleção",
+    "dependencies": [
+      "ART-03",
+      "ART-04"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "",
+    "asset_ids": [
+      "UI_INPUT_NORMAL",
+      "UI_INPUT_FOCUS",
+      "UI_INPUT_INVALID",
+      "UI_INPUT_DISABLED",
+      "UI_TAB_NORMAL",
+      "UI_TAB_SELECTED",
+      "UI_TAB_HOVER",
+      "UI_TAB_PRESSED",
+      "UI_TAB_DISABLED",
+      "UI_RADIO_OFF",
+      "UI_RADIO_ON",
+      "UI_RADIO_DISABLED",
+      "UI_CHECKBOX_OFF",
+      "UI_CHECKBOX_ON",
+      "UI_CHECKBOX_DISABLED",
+      "UI_TOGGLE_OFF",
+      "UI_TOGGLE_ON",
+      "UI_TOGGLE_DISABLED",
+      "UI_SLIDER_TRACK",
+      "UI_SLIDER_FILL",
+      "UI_SLIDER_THUMB",
+      "UI_STEPPER_BASE",
+      "UI_SCROLLBAR_TRACK",
+      "UI_SCROLLBAR_THUMB"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-05 — Controles, campos e seleção. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-05.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-05.json"
+  },
+  {
+    "id": "ART-06",
+    "title": "Ícones de navegação e HUD",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um master branco tintável por símbolo, sem fundo/badge/sombra/texto. SVG editável é adequado à geometria simples; PNG final separado. Não criar cópia do mesmo ícone por tela/cor.",
+    "asset_ids": [
+      "ICON_HOME",
+      "ICON_RESTAURANT",
+      "ICON_PIN",
+      "ICON_UNIVERSITY",
+      "ICON_BANK",
+      "ICON_COMMERCE",
+      "ICON_RESIDENTIAL",
+      "ICON_CORPORATE",
+      "ICON_TEAM",
+      "ICON_MENU_FOOD",
+      "ICON_EQUIPMENT",
+      "ICON_DOCUMENT",
+      "ICON_CALENDAR",
+      "ICON_STAR",
+      "ICON_CASH",
+      "ICON_CHART_BARS",
+      "ICON_SETTINGS",
+      "ICON_CART"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-06 — Ícones de navegação e HUD. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-06.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-06.json"
+  },
+  {
+    "id": "ART-07",
+    "title": "Ícones financeiros e indicadores",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um master branco tintável por símbolo, sem fundo/badge/sombra/texto. SVG editável é adequado à geometria simples; PNG final separado. Não criar cópia do mesmo ícone por tela/cor.",
+    "asset_ids": [
+      "ICON_REVENUE",
+      "ICON_TREND_UP",
+      "ICON_TREND_DOWN",
+      "ICON_CLIENTS",
+      "ICON_CLIENT",
+      "ICON_COHERENCE",
+      "ICON_REPUTATION",
+      "ICON_RENT",
+      "ICON_CAPACITY",
+      "ICON_COMPETITION",
+      "ICON_INPUT_COSTS",
+      "ICON_UTILITIES",
+      "ICON_PAYROLL",
+      "ICON_INTEREST",
+      "ICON_TERM",
+      "ICON_LOAN_PRINCIPAL",
+      "ICON_INVENTORY",
+      "ICON_CREDIT_CONTRACT"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-07 — Ícones financeiros e indicadores. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-07.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-07.json"
+  },
+  {
+    "id": "ART-08",
+    "title": "Ícones de ações, status e categorias",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um master branco tintável por símbolo, sem fundo/badge/sombra/texto. SVG editável é adequado à geometria simples; PNG final separado. Não criar cópia do mesmo ícone por tela/cor.",
+    "asset_ids": [
+      "ICON_BACK",
+      "ICON_NEXT",
+      "ICON_CHEVRON_UP",
+      "ICON_CHEVRON_DOWN",
+      "ICON_CLOSE",
+      "ICON_MENU",
+      "ICON_PLUS",
+      "ICON_MINUS",
+      "ICON_CHECK",
+      "ICON_LOCK",
+      "ICON_ALERT",
+      "ICON_INFO",
+      "ICON_HELP",
+      "ICON_SAVE",
+      "ICON_EXIT",
+      "ICON_RESET",
+      "ICON_DOWNLOAD",
+      "ICON_PLAY",
+      "ICON_PAUSE",
+      "ICON_FILTER",
+      "ICON_EDIT",
+      "ICON_TRASH",
+      "ICON_SYNC",
+      "ICON_OFFLINE",
+      "ICON_CLOCK",
+      "ICON_SEARCH",
+      "ICON_SOUND_ON",
+      "ICON_SOUND_OFF",
+      "ICON_FULLSCREEN",
+      "ICON_KITCHEN",
+      "ICON_REFRIGERATION",
+      "ICON_SERVICE",
+      "ICON_FURNITURE"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-08 — Ícones de ações, status e categorias. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-08.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-08.json"
+  },
+  {
+    "id": "ART-09",
+    "title": "Indicadores do HUD e componentes da DRE",
+    "dependencies": [
+      "ART-03",
+      "ART-05"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "",
+    "asset_ids": [
+      "UI_HUD_PILL",
+      "UI_KPI_TILE",
+      "UI_PROGRESS_TRACK",
+      "UI_PROGRESS_FILL",
+      "UI_NAV_UNDERLINE",
+      "UI_PILL_NORMAL",
+      "UI_PILL_SELECTED",
+      "UI_PILL_DISABLED",
+      "UI_TOAST_NEUTRAL",
+      "UI_TOAST_SUCCESS",
+      "UI_TOAST_WARNING",
+      "UI_TABLE_HEADER",
+      "UI_TABLE_ROW_NEUTRAL",
+      "UI_TABLE_ROW_SUBTOTAL",
+      "UI_TABLE_ROW_POSITIVE",
+      "UI_TABLE_ROW_NEGATIVE",
+      "UI_TABLE_TOTAL_COLUMN",
+      "UI_CHART_PANEL"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-09 — Indicadores do HUD e componentes da DRE. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-09.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-09.json"
+  },
+  {
+    "id": "ART-10",
+    "title": "Geografia e contrato de coordenadas do mapa",
+    "dependencies": [],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Definir no map-layout.json posições/polígonos das cinco zonas e da implantação central. Base sem prédios interativos, nomes, pinos, brilhos ou HUD. Composição aprovada difere da cena atual; registrar remapeamento necessário, sem modificar a cena.",
+    "asset_ids": [
+      "MAP_BASE"
+    ],
+    "auxiliary_deliverables": [
+      {
+        "path": "docs/art/layouts/map-layout.json",
+        "schema": "docs/art/schemas/map-layout.schema.json",
+        "required_fields": [
+          "master_size_px",
+          "coordinate_origin",
+          "camera",
+          "display_transform",
+          "zones",
+          "layers",
+          "hit_areas",
+          "central_site_bounds_px"
+        ]
+      }
+    ],
+    "request_prompt": "Use $cogna-artista para executar somente ART-10 — Geografia e contrato de coordenadas do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-10.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-10.json"
+  },
+  {
+    "id": "ART-11",
+    "title": "Construções e bairros do mapa",
+    "dependencies": [
+      "ART-10"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Cinco construções/bairros em PNGs compactos transparentes; posições exatas no master pelo map-layout.json e map-landmarks-compact.json. Originais full-frame preservados como variantes.",
+    "asset_ids": [
+      "MAP_BANK",
+      "MAP_CONDOMINIUM",
+      "MAP_MARKETING",
+      "MAP_STORE",
+      "MAP_UNIVERSITY"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-11 — Construções e bairros do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-11.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-11-compact.json",
+    "delivery_record": "docs/art/ART-11-entregas.md"
+  },
+  {
+    "id": "ART-12",
+    "title": "Restaurantes centrais e camada frontal do mapa",
+    "dependencies": [
+      "ART-10",
+      "ART-11"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Três variantes de restaurante central com mesma implantação e porta, mais foreground; quatro PNGs compactos transparentes, coordenadas em map-restaurants-compact.json.",
+    "asset_ids": [
+      "MAP_REST_FRANCES",
+      "MAP_REST_JAPONES",
+      "MAP_REST_LANCHES",
+      "MAP_FOREGROUND"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-12 — Restaurantes centrais e camada frontal do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-12.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-12.json",
+    "delivery_record": "docs/art/ART-12-entregas.md"
+  },
+  {
+    "id": "ART-13",
+    "title": "Marcadores, realces e rótulos vazios do mapa",
+    "dependencies": [
+      "ART-10",
+      "ART-11",
+      "ART-06"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Seis realces compactos dos polígonos e sete componentes de pino/rótulo em SVG e PNG; estados com geometria comum, sem conteúdo ou sombras embutidos.",
+    "asset_ids": [
+      "OVERLAY_BANK",
+      "OVERLAY_CONDOMINIUM",
+      "OVERLAY_MARKETING",
+      "OVERLAY_STORE",
+      "OVERLAY_UNIVERSITY",
+      "UI_PIN_NORMAL",
+      "UI_MAP_LABEL_NORMAL",
+      "UI_PIN_SELECTED",
+      "UI_MAP_LABEL_SELECTED",
+      "UI_PIN_DISABLED",
+      "UI_MAP_LABEL_DISABLED",
+      "UI_MAP_LABEL_TIP",
+      "OVERLAY_CENTER"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-13 — Marcadores, realces e rótulos vazios do mapa. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-13.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-13.json",
+    "delivery_record": "docs/art/ART-13-entregas.md"
+  },
+  {
+    "id": "ART-14",
+    "title": "Arte da identificação",
+    "dependencies": [
+      "ART-01",
+      "ART-03",
+      "ART-04",
+      "ART-05"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Somente cenário, ornamentos e pessoa separados; título, Nome, RA, erro e Cadastrar são TMP. Identificação não deve mostrar caixa/score/mês antes da sessão.",
+    "asset_ids": [
+      "ID_ENVIRONMENT",
+      "ID_ORNAMENT_LEFT",
+      "ID_ORNAMENT_RIGHT",
+      "CH01_WELCOME"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-14 — Arte da identificação. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-14.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-14.json",
+    "delivery_record": "docs/art/ART-14-entregas.md"
+  },
+  {
+    "id": "ART-15",
+    "title": "Fachadas dos três restaurantes",
+    "dependencies": [
+      "ART-12"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Fachada isolada por tipo, não card rasterizado; pode ser reaproveitada no estabelecimento. Referência estilística comum, arquitetura compatível com variante do mapa.",
+    "asset_ids": [
+      "FACADE_REST_FRANCES",
+      "FACADE_REST_JAPONES",
+      "FACADE_REST_LANCHES"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-15 — Fachadas dos três restaurantes. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-15.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-15.json",
+    "production_record": "docs/art/prompts/ART-15.json",
+    "delivery_preview": "art-source/previews/ART-15/ART-15-contact-sheet.png"
+  },
+  {
+    "id": "ART-16",
+    "title": "Cinco vinhetas de localização",
+    "dependencies": [
+      "ART-11"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Vinhetas sem rótulos. Miolo do cenário opaco com exterior/recorte alfa; pessoas e UI não incorporadas.",
+    "asset_ids": [
+      "VIGNETTE_BANK",
+      "VIGNETTE_CONDOMINIUM",
+      "VIGNETTE_MARKETING",
+      "VIGNETTE_STORE",
+      "VIGNETTE_UNIVERSITY"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-16 — Cinco vinhetas de localização. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-16.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-16.json",
+    "production_record": "docs/art/prompts/ART-16.json",
+    "delivery_preview": "art-source/previews/ART-16/ART-16-contact-sheet.png"
+  },
+  {
+    "id": "ART-17",
+    "title": "Produtos de lanches",
+    "dependencies": [
+      "ART-15"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.",
+    "asset_ids": [
+      "PRODUCT_LAN_COMBO_COMPLETO",
+      "PRODUCT_LAN_COMBO_ESPECIAL",
+      "PRODUCT_LAN_COMBO_SIMPLES"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-17 — Produtos de lanches. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-17.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-17.json",
+    "delivery_preview": "art-source/previews/ART-17/ART-17-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-17.json"
+  },
+  {
+    "id": "ART-18",
+    "title": "Produtos japoneses",
+    "dependencies": [
+      "ART-15"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.",
+    "asset_ids": [
+      "PRODUCT_JAP_COMBINADO_MEDIO",
+      "PRODUCT_JAP_COMBINADO_PREMIUM",
+      "PRODUCT_JAP_SUSHI_EXECUTIVO"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-18 — Produtos japoneses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-18.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-18.json",
+    "delivery_preview": "art-source/previews/ART-18/ART-18-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-18.json"
+  },
+  {
+    "id": "ART-19",
+    "title": "Produtos franceses",
+    "dependencies": [
+      "ART-15"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.",
+    "asset_ids": [
+      "PRODUCT_FRA_MENU_CLASSICO",
+      "PRODUCT_FRA_MENU_PREMIUM",
+      "PRODUCT_FRA_PRATO_EXECUTIVO"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-19 — Produtos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-19.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-19.json",
+    "delivery_preview": "art-source/previews/ART-19/ART-19-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-19.json"
+  },
+  {
+    "id": "ART-20",
+    "title": "Equipamentos básicos de cozinha",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
+    "asset_ids": [
+      "EQUIPMENT_BANCADA_INOX_PREPARO",
+      "EQUIPMENT_CONJUNTO_PANELAS_INDUSTRIAIS",
+      "EQUIPMENT_FOGAO_INDUSTRIAL_6_BOCAS",
+      "EQUIPMENT_PIA_INDUSTRIAL_INOX"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-20 — Equipamentos básicos de cozinha. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-20.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-20.json",
+    "delivery_preview": "art-source/previews/ART-20/ART-20-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-20.json"
+  },
+  {
+    "id": "ART-21",
+    "title": "Equipamentos básicos de estrutura",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
+    "asset_ids": [
+      "EQUIPMENT_FREEZER_HORIZONTAL",
+      "EQUIPMENT_GELADEIRA_COMERCIAL_DUPLA",
+      "EQUIPMENT_MOBILIARIO_BASICO",
+      "EQUIPMENT_SISTEMA_PDV_COMPUTADOR"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-21 — Equipamentos básicos de estrutura. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-21.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-21.json",
+    "delivery_preview": "art-source/previews/ART-21/ART-21-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-21.json"
+  },
+  {
+    "id": "ART-22",
+    "title": "Equipamentos de lanches",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
+    "asset_ids": [
+      "EQUIPMENT_CHAPA_PROFISSIONAL_PODRAO",
+      "EQUIPMENT_FRITADEIRA_ELETRICA_DUPLA_PODRAO"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-22 — Equipamentos de lanches. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-22.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-22.json",
+    "delivery_preview": "art-source/previews/ART-22/ART-22-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-22.json"
+  },
+  {
+    "id": "ART-23",
+    "title": "Equipamentos japoneses",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
+    "asset_ids": [
+      "EQUIPMENT_BALCAO_REFRIGERADO_SUSHI",
+      "EQUIPMENT_FACAS_ESPECIAIS_JAPONES",
+      "EQUIPMENT_PANELA_ELETRICA_ARROZ"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-23 — Equipamentos japoneses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-23.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-23.json",
+    "delivery_preview": "art-source/previews/ART-23/ART-23-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-23.json"
+  },
+  {
+    "id": "ART-24",
+    "title": "Equipamentos franceses",
+    "dependencies": [
+      "ART-03"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Um PNG por equipamento. Não embutir adquirido/bloqueado/premium, preço, moldura ou carrinho; são overlays de UI. Preservar IDs do catálogo, inclusive nomes herdados podrao.",
+    "asset_ids": [
+      "EQUIPMENT_ADEGA_CLIMATIZADA",
+      "EQUIPMENT_FORNO_COMBINADO_INTELIGENTE",
+      "EQUIPMENT_MOBILIARIO_LUXO"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-24 — Equipamentos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-24.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-24.json",
+    "delivery_preview": "art-source/previews/ART-24/ART-24-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-24.json"
+  },
+  {
+    "id": "ART-25",
+    "title": "Financeiro e quatro opções de crédito",
+    "dependencies": [
+      "ART-01",
+      "ART-04",
+      "ART-06",
+      "ART-07"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Quatro opções reais, não as três do concept. Cenário, pessoa e objetos separados; taxas/parcelas/limites em TMP.",
+    "asset_ids": [
+      "BANK_ENVIRONMENT",
+      "CH01_BANK",
+      "CREDIT_CREDITO_DE_INVESTIMENTO",
+      "CREDIT_CREDITO_EMPRESARIAL_PADRAO",
+      "CREDIT_SEM_CREDITO",
+      "CREDIT_MICROCREDITO_EMPRESARIAL"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-25 — Financeiro e quatro opções de crédito. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-25.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-25.json",
+    "delivery_preview": "art-source/previews/ART-25/ART-25-contact-sheet.png",
+    "qa_record": "docs/art/qa/ART-25.json"
+  },
+  {
+    "id": "ART-26",
+    "title": "Retratos de equipe e ambientes de trabalho",
+    "dependencies": [
+      "ART-01",
+      "ART-02"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Cinco funções do catálogo. Retrato e fundo são arquivos distintos. Usar master canônico, não criar um novo rosto para cada função ou tela.",
+    "asset_ids": [
+      "PORTRAIT_ATTENDANT",
+      "PORTRAIT_GRILL_COOK",
+      "PORTRAIT_HEAD_CHEF",
+      "PORTRAIT_MANAGER",
+      "PORTRAIT_SUSHI_CHEF",
+      "TEAM_ENV_SERVICE_COUNTER",
+      "TEAM_ENV_GRILL_KITCHEN",
+      "TEAM_ENV_MANAGEMENT_OFFICE",
+      "TEAM_ENV_FRENCH_KITCHEN",
+      "TEAM_ENV_SUSHI_COUNTER"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-26 — Retratos de equipe e ambientes de trabalho. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-26.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-26.json"
+  },
+  {
+    "id": "ART-27",
+    "title": "Prova de montagem do estabelecimento e revisão",
+    "dependencies": [
+      "ART-03",
+      "ART-06",
+      "ART-07",
+      "ART-09",
+      "ART-15",
+      "ART-26"
+    ],
+    "scope": "validacao",
+    "status": "validado",
+    "note": "Não cria sprites duplicados. Produzir preview 1920x1080 em art-source/previews reutilizando fachada, KPIs, checklist, ícones e personagens. Não alterar cena/prefab. Registrar quais arquivos cada tela consome.",
+    "asset_ids": [],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-27 — Prova de montagem do estabelecimento e revisão. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-27.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-27.json",
+    "preview_record": "art-source/previews/ART-27/ART-27-overview.png",
+    "consumption_record": "docs/art/qa/ART-27-consumption.json",
+    "layout_record": "docs/art/layouts/establishment-review-layout.json"
+  },
+  {
+    "id": "ART-28",
+    "title": "Ilustração em camadas da DRE mensal",
+    "dependencies": [
+      "ART-01",
+      "ART-09"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Tabela, números, títulos, eixos e barras de gráfico são UI/dados. Mesa, personagem e objetos independentes; definir pontos de encaixe no dre-layout.json para evitar membros/props desalinhados.",
+    "asset_ids": [
+      "DRE_ENVIRONMENT",
+      "DRE_DESK",
+      "CH01_DRE",
+      "DRE_PROP_CALCULATOR",
+      "DRE_PROP_COFFEE_CUP",
+      "DRE_PROP_REPORT_BLANK"
+    ],
+    "auxiliary_deliverables": [
+      {
+        "path": "docs/art/layouts/dre-layout.json",
+        "schema": "docs/art/schemas/dre-layout.schema.json",
+        "required_fields": [
+          "canvas_px",
+          "coordinate_origin",
+          "camera",
+          "layers",
+          "anchors",
+          "occlusion_masks"
+        ]
+      }
+    ],
+    "request_prompt": "Use $cogna-artista para executar somente ART-28 — Ilustração em camadas da DRE mensal. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-28.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+  },
+  {
+    "id": "ART-29",
+    "title": "Personagens da DRE trimestral",
+    "dependencies": [
+      "ART-01",
+      "ART-28"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Reaproveitar cenário/mesa/props mensais. Duas pessoas em dois PNGs, nenhuma conversa em imagem única. Tabela comparativa e gráficos por UI.",
+    "asset_ids": [
+      "CH01_DISCUSSING",
+      "CH04_DISCUSSING"
+    ],
+    "auxiliary_deliverables": [
+      {
+        "path": "docs/art/layouts/dre-layout.json",
+        "schema": "docs/art/schemas/dre-layout.schema.json",
+        "required_fields": [
+          "canvas_px",
+          "coordinate_origin",
+          "camera",
+          "layers",
+          "anchors",
+          "occlusion_masks"
+        ]
+      }
+    ],
+    "request_prompt": "Use $cogna-artista para executar somente ART-29 — Personagens da DRE trimestral. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-29.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+  },
+  {
+    "id": "ART-30",
+    "title": "Eventos de fornecedores e estoque",
+    "dependencies": [
+      "ART-01",
+      "ART-02",
+      "ART-15",
+      "ART-20",
+      "ART-21",
+      "ART-22",
+      "ART-23",
+      "ART-24"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Cinco vinhetas independentes com alfa. Preferir situação/objetos isolados; não introduzir pessoas canônicas sem referenciar o master. Opções, efeitos e título em UI. O catálogo atual tem três opções; não fixar duas no raster.",
+    "asset_ids": [
+      "EVENT_BULK_PURCHASE_OPPORTUNITY",
+      "EVENT_SUPPLIER_DISCOUNT",
+      "EVENT_SUPPLIER_DELAY",
+      "EVENT_INGREDIENT_PRICE_INCREASE",
+      "EVENT_EXCESSIVE_FOOD_WASTE"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-30 — Eventos de fornecedores e estoque. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-30.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-30.json",
+    "qa_record": "docs/art/qa/ART-30.json",
+    "delivery_preview": "art-source/previews/ART-30/ART-30-contact-sheet.png"
+  },
+  {
+    "id": "ART-31",
+    "title": "Eventos de demanda e concorrência",
+    "dependencies": [
+      "ART-01",
+      "ART-02",
+      "ART-15",
+      "ART-20",
+      "ART-21",
+      "ART-22",
+      "ART-23",
+      "ART-24"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Cinco vinhetas independentes com alfa. Preferir situação/objetos isolados; não introduzir pessoas canônicas sem referenciar o master. Opções, efeitos e título em UI. O catálogo atual tem três opções; não fixar duas no raster.",
+    "asset_ids": [
+      "EVENT_EXTRA_LOCAL_DEMAND",
+      "EVENT_LUNCH_DEMAND_PEAK",
+      "EVENT_CORPORATE_ORDER",
+      "EVENT_COMPETITOR_TEMPORARY_CLOSURE",
+      "EVENT_NEW_COMPETITOR"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-31 — Eventos de demanda e concorrência. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-31.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-31.json",
+    "qa_record": "docs/art/qa/ART-31.json",
+    "delivery_preview": "art-source/previews/ART-31/ART-31-contact-sheet.png"
+  },
+  {
+    "id": "ART-32",
+    "title": "Eventos da operação e equipe",
+    "dependencies": [
+      "ART-01",
+      "ART-02",
+      "ART-15",
+      "ART-20",
+      "ART-21",
+      "ART-22",
+      "ART-23",
+      "ART-24"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Cinco vinhetas independentes com alfa. Preferir situação/objetos isolados; não introduzir pessoas canônicas sem referenciar o master. Opções, efeitos e título em UI. O catálogo atual tem três opções; não fixar duas no raster.",
+    "asset_ids": [
+      "EVENT_FREEZER_BREAKDOWN",
+      "EVENT_HEALTH_INSPECTION",
+      "EVENT_INSUFFICIENT_TEAM",
+      "EVENT_TEAM_PRODUCTIVITY_BOOST",
+      "EVENT_PAYMENT_SYSTEM_FAILURE"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-32 — Eventos da operação e equipe. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-32.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-32.json",
+    "qa_record": "docs/art/qa/ART-32.json",
+    "delivery_preview": "art-source/previews/ART-32/ART-32-contact-sheet.png"
+  },
+  {
+    "id": "ART-33",
+    "title": "Eventos de comunicação e contexto urbano",
+    "dependencies": [
+      "ART-01",
+      "ART-02",
+      "ART-15",
+      "ART-20",
+      "ART-21",
+      "ART-22",
+      "ART-23",
+      "ART-24"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Cinco vinhetas independentes com alfa. Preferir situação/objetos isolados; não introduzir pessoas canônicas sem referenciar o master. Opções, efeitos e título em UI. O catálogo atual tem três opções; não fixar duas no raster.",
+    "asset_ids": [
+      "EVENT_INFLUENCER_MENTION",
+      "EVENT_POSITIVE_ONLINE_REVIEW",
+      "EVENT_NEGATIVE_REVIEW",
+      "EVENT_LOCAL_FESTIVAL",
+      "EVENT_HEAVY_RAIN"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-33 — Eventos de comunicação e contexto urbano. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-33.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-33.json",
+    "qa_record": "docs/art/qa/ART-33.json",
+    "delivery_preview": "art-source/previews/ART-33/ART-33-contact-sheet.png"
+  },
+  {
+    "id": "ART-34",
+    "title": "Conclusão, dificuldade e estados vazios",
+    "dependencies": [
+      "ART-01",
+      "ART-15",
+      "ART-28"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Concluir sem confete/troféu infantil; dificuldade sem dramatização. Reutilizar componentes comuns dos modais de reset, salvar/sair, saldo insuficiente, carrinho e fechamento.",
+    "asset_ids": [
+      "REPORT_CONCLUSION",
+      "BANKRUPTCY_OVERLAY",
+      "EMPTY_CART",
+      "EMPTY_TEAM",
+      "EMPTY_RESULTS",
+      "CH01_CONCERNED"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-34 — Conclusão, dificuldade e estados vazios. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-34.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "production_record": "docs/art/prompts/ART-34.json",
+    "qa_record": "docs/art/qa/ART-34.json",
+    "delivery_preview": "art-source/previews/ART-34/ART-34-canvas-light.png"
+  },
+  {
+    "id": "ART-35",
+    "title": "Loading e pistas de tutorial",
+    "dependencies": [
+      "ART-04",
+      "ART-05",
+      "ART-08"
+    ],
+    "scope": "nucleo",
+    "status": "validado",
+    "note": "Spinner gira por UI; não gerar uma sprite sheet. Tutorial utiliza CH01 e componentes comuns. Ícone e texto continuam separados.",
+    "asset_ids": [
+      "UI_SPINNER",
+      "TUTORIAL_TAP",
+      "TUTORIAL_DRAG",
+      "TUTORIAL_FOCUS_RING"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-35 — Loading e pistas de tutorial. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-35.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-35.json"
+  },
+  {
+    "id": "ART-36",
+    "title": "Validação final e mapa de integração",
+    "dependencies": [
+      "ART-01",
+      "ART-02",
+      "ART-03",
+      "ART-04",
+      "ART-05",
+      "ART-06",
+      "ART-07",
+      "ART-08",
+      "ART-09",
+      "ART-10",
+      "ART-11",
+      "ART-12",
+      "ART-13",
+      "ART-14",
+      "ART-15",
+      "ART-16",
+      "ART-17",
+      "ART-18",
+      "ART-19",
+      "ART-20",
+      "ART-21",
+      "ART-22",
+      "ART-23",
+      "ART-24",
+      "ART-25",
+      "ART-26",
+      "ART-27",
+      "ART-28",
+      "ART-29",
+      "ART-30",
+      "ART-31",
+      "ART-32",
+      "ART-33",
+      "ART-34",
+      "ART-35"
+    ],
+    "scope": "validacao",
+    "status": "validado",
+    "note": "Sem gerar arte nova ou aplicar às cenas. Conferir arquivos, alfa, dimensões, bounds, estados sem saltos, identidade canônica, alinhamento do mapa, leitura a 100% e escala móvel. Produzir previews separados 1920x1080 e atualizar integração/status reais; não confundir referências aprovadas com sprites finais.",
+    "asset_ids": [],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-36 — Validação final e mapa de integração. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-36.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-36.json",
+    "production_record": "docs/art/prompts/ART-36.json",
+    "delivery_preview": "art-source/previews/ART-36/ART-36-map-map_rest_frances-dark.png",
+    "integration_map": "docs/art/qa/ART-36-integration-map.json",
+    "validation_asset_count": 265,
+    "new_sprite_count": 0
+  },
+  {
+    "id": "ART-37",
+    "title": "Complementos de BMC e relatório documental",
+    "dependencies": [
+      "ART-06",
+      "ART-07",
+      "ART-09"
+    ],
+    "scope": "documental",
+    "status": "validado",
+    "note": "Previsto em arq.pdf, ainda sem tela/modelo final implementados. Criar somente os símbolos que não existem no kit. Nove blocos do BMC, balanço e fluxo de caixa são layout/texto/dados, não nove screenshots rasterizados. Rótulos e período ficam dinâmicos, aceitando 3 ou 12 meses.",
+    "asset_ids": [
+      "ICON_PARTNERS",
+      "ICON_VALUE_PROPOSITION",
+      "ICON_CUSTOMER_RELATIONSHIP",
+      "ICON_SALES_CHANNELS"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-37 — Complementos de BMC e relatório documental. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-37.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-37.json"
+  },
+  {
+    "id": "ART-38",
+    "title": "Apoio visual para debriefing e justificativas",
+    "dependencies": [
+      "ART-01",
+      "ART-04",
+      "ART-05",
+      "ART-28"
+    ],
+    "scope": "documental",
+    "status": "validado",
+    "note": "Previsto no relatório técnico; não há UI atual. Produzir apenas pose de apoio; formulários, respostas, feedback e status offline reutilizam componentes. Nenhum serviço/API, backend ou painel docente será criado neste lote.",
+    "asset_ids": [
+      "CH01_GUIDING"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-38 — Apoio visual para debriefing e justificativas. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-38.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-38.json"
+  },
+  {
+    "id": "ART-39",
+    "title": "Função garçom se entrar no catálogo",
+    "dependencies": [
+      "ART-01",
+      "ART-02",
+      "ART-26"
+    ],
+    "scope": "condicional",
+    "status": "validado",
+    "note": "GARCOM existe no enum, mas não há RoleData correspondente. Só produzir este lote quando solicitado para essa extensão. Não adicionar role nem alterar balanceamento automaticamente.",
+    "asset_ids": [
+      "CH07_CANONICAL",
+      "PORTRAIT_WAITER"
+    ],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-39 — Função garçom se entrar no catálogo. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-39.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.",
+    "qa_record": "docs/art/qa/ART-39.json",
+    "authorization": "Explicitly authorized ART-39 CH07 art extension; no game role or catalog additions."
+  },
+  {
+    "id": "ART-40",
+    "title": "Materiais de loja e painel docente sob demanda",
+    "dependencies": [
+      "ART-36"
+    ],
+    "scope": "opcional",
+    "status": "planejado",
+    "note": "Fora do pacote obrigatório do jogo atual. Ícone de aplicativo, capturas de loja e painel docente exigem briefing/tamanhos próprios quando solicitados. Não inventar logotipo Cogna, redes sociais, layouts de marketing ou novos assets sem esse pedido.",
+    "asset_ids": [],
+    "auxiliary_deliverables": [],
+    "request_prompt": "Use $cogna-artista para executar somente ART-40 — Materiais de loja e painel docente sob demanda. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-40.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+  }
+]

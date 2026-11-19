@@ -1,0 +1,43 @@
+ART-29 — Personagens da DRE trimestral
+Escopo: nucleo
+Pré-requisitos: ART-01, ART-28
+
+Reaproveitar cenário/mesa/props mensais. Duas pessoas em dois PNGs, nenhuma conversa em imagem única. Tabela comparativa e gráficos por UI.
+
+COMANDO PARA O CODEX
+Use $cogna-artista para executar somente ART-29 — Personagens da DRE trimestral. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-29.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.
+
+LEITURAS
+docs/art/manifest.json, tokens.json, characters.json e sources.json
+Referências em art-source/references/concepts; masters canônicos em Assets/Art/new/characters/CHxx após ART-01/02.
+
+ENTREGÁVEIS
+Caminhos dos PNGs relativos a Assets/Art/new. Referências, fontes editáveis e contratos relativos à raiz do projeto, conforme o manifesto.
+CH01_DISCUSSING | characters/CH01/ch01_discussing.png
+Export 768x1024 px | display 360x480 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+CH01 sentado em conversa profissional sobre relatório, identidade e roupa iguais ao master; sem outra pessoa, fundo, mesa, papel, caneca, props ou dados incorporados. Usar os props independentes do ART-28. Definir posições relativas no dre-layout.json.
+Fonte: concept aprovado / especificação de produção
+Personagens: CH01
+
+CH04_DISCUSSING | characters/CH04/ch04_discussing.png
+Export 768x1024 px | display 360x480 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+CH04 sentado em conversa profissional sobre relatório, identidade e roupa iguais ao master; sem outra pessoa, fundo, mesa, papel, caneca, props ou dados incorporados. Usar os props independentes do ART-28. Definir posições relativas no dre-layout.json.
+Fonte: concept aprovado / especificação de produção
+Personagens: CH04
+
+
+CONTRATO DE MONTAGEM OBRIGATÓRIO
+docs/art/layouts/dre-layout.json
+Schema: docs/art/schemas/dre-layout.schema.json
+Campos: canvas_px, coordinate_origin, camera, layers, anchors, occlusion_masks
+Câmera/orientação/luz iguais à referência. Posições em pixels com origem no alto à esquerda; escala uniforme, ordem de camadas e pivot explícitos.
+Mapa: cinco IDs de zona com polígonos de seleção/hit-area, labels e implantação central. DRE: pontos de encaixe de mão, mesa e papel; máscaras de oclusão quando necessárias. ART-29 atualiza posições da conversa mantendo os mesmos props e registrando âncoras do mentor.
+CRITÉRIOS DE ENTREGA
+Cada PNG separado e no caminho do manifesto; nada permanece apenas em pasta de geração.
+Alfa real nos recortes e dimensões exatas verificadas; não fingir export correto quando divergir.
+Nomes e IDs preservados; sem texto, UI ou gráfico incorporado às ilustrações.
+Validar tecnicamente com o helper do agente e inspecionar visualmente estilo/identidade.
+Atualizar status somente após arquivos reais e QA. Registrar prompts em docs/art/prompts/ART-29.json e preview de QA em art-source/previews.
+Não mudar o jogo; não produzir outros lotes automaticamente.
+display_size_px é caixa de layout: preserveAspect/contain nos recortes, sem esticar. Componentes 9-slice usam bordas preservadas. Fontes SVG/código editáveis precisam existir no source_editable especificado quando production_method=vector_or_code.
+Validador: python tools/art/validate_assets.py --task ART-29

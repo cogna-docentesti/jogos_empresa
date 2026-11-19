@@ -1,0 +1,1434 @@
+{
+  "task_id": "ART-09",
+  "date": "2026-10-14",
+  "status": "validado",
+  "scope": "Somente os 18 indicadores do HUD e componentes da DRE do ART-09, separados e vazios conforme manifesto.",
+  "tool": "SVG editável e rasterização determinística sharp/librsvg",
+  "model": null,
+  "model_note": "Nenhum modelo generativo necessário para componentes geométricos exatos.",
+  "producer_source": "art-source/editable/ART-09/build-art09.cjs",
+  "geometry_source": "art-source/editable/ART-09/designs.cjs",
+  "renderer_versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "palette": {
+    "violet": "#6D28D9",
+    "plum": "#24113D",
+    "lavender": "#B99AE8",
+    "ivory": "#F5F0E8",
+    "ink": "#30243C",
+    "teal": "#26776A",
+    "coral": "#C55457",
+    "amber": "#E7B65A"
+  },
+  "assets": [
+    {
+      "id": "UI_HUD_PILL",
+      "name": "Pílula do HUD",
+      "family": "hud",
+      "state": null,
+      "part": "pill",
+      "output_path": "Assets/Art/new/hud/indicators/hud_pill.png",
+      "source_editable": "art-source/editable/hud/indicators/hud_pill.svg",
+      "source_sha256": "7b33a5b977459e0e0c540f350f8ce324e308504cd12e7c40cfc7e2bf0c69857b",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_HUD_PILL: Pílula do HUD, superfície isolada de UI Cogna.\nBase violeta profunda para indicadores da barra superior do hub; sem conteúdo. Cantos de 22 px dentro das bordas 24 px.\nPreenchimento uniforme #5b22b2; contorno interno #8248dd de 1 px; raio externo 22 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 280×60; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "f0ed414bcc6362fc4325638077a568a1c5e26ce5e68ce08a01a182713f511197",
+      "design": {
+        "name": "Pílula do HUD",
+        "family": "hud",
+        "part": "pill",
+        "radius": 22,
+        "fill": "#5b22b2",
+        "stroke": "#8248dd",
+        "border": 1,
+        "note": "Base violeta profunda para indicadores da barra superior do hub; sem conteúdo. Cantos de 22 px dentro das bordas 24 px."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_KPI_TILE",
+      "name": "Base de KPI",
+      "family": "kpi",
+      "state": null,
+      "part": "tile",
+      "output_path": "Assets/Art/new/hud/indicators/kpi_tile.png",
+      "source_editable": "art-source/editable/hud/indicators/kpi_tile.svg",
+      "source_sha256": "f8b6b8a3223ebdb811a578676b576717f5ab2fbe405cbf25aaec460e20cee827",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_KPI_TILE: Base de KPI, superfície isolada de UI Cogna.\nSuperfície clara de KPI conforme cards de receita/resultado/clientes das DREs, sem dados, ícone ou gráfico.\nPreenchimento uniforme #fcfaf7; contorno interno #ddd8d3 de 1 px; raio externo 14 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 400×112; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "908a53ab9ba655fa0547aa5fd84f4724e7582619dc50dafb6b7b7edc83a0d945",
+      "design": {
+        "name": "Base de KPI",
+        "family": "kpi",
+        "part": "tile",
+        "radius": 14,
+        "fill": "#fcfaf7",
+        "stroke": "#ddd8d3",
+        "border": 1,
+        "note": "Superfície clara de KPI conforme cards de receita/resultado/clientes das DREs, sem dados, ícone ou gráfico."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PROGRESS_TRACK",
+      "name": "Trilho de progresso",
+      "family": "progress",
+      "state": null,
+      "part": "track",
+      "output_path": "Assets/Art/new/hud/progress/progress_track.png",
+      "source_editable": "art-source/editable/hud/progress/progress_track.svg",
+      "source_sha256": "8f6885116c3dcdf0110359ffd65f2f8ecabf1325d31786528f00381e2af85e5a",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_PROGRESS_TRACK: Trilho de progresso, superfície isolada de UI Cogna.\nTrilho cinza-lavanda uniforme. Raio 5 px dentro das faixas 6 px; display 480×16, sem divisões, etapa ou percentual incorporado.\nPreenchimento uniforme #cfc8c9; sem contorno; raio externo 5 px.\nPNG RGBA 8-bit sRGB exatamente 128×64; display 480×16; 9-slice l,b,r,t [6, 6, 6, 6]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        64
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "8f7a2df0245f7a29780d476933bb1629fe19fde97157fe1786c4d0eefcc8e2c8",
+      "design": {
+        "name": "Trilho de progresso",
+        "family": "progress",
+        "part": "track",
+        "radius": 5,
+        "fill": "#cfc8c9",
+        "stroke": null,
+        "border": 0,
+        "note": "Trilho cinza-lavanda uniforme. Raio 5 px dentro das faixas 6 px; display 480×16, sem divisões, etapa ou percentual incorporado."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PROGRESS_FILL",
+      "name": "Preenchimento de progresso",
+      "family": "progress",
+      "state": null,
+      "part": "fill",
+      "output_path": "Assets/Art/new/hud/progress/progress_fill.png",
+      "source_editable": "art-source/editable/hud/progress/progress_fill.svg",
+      "source_sha256": "bea7bd8d1b2bde28805a7387ae127241e2b0936a2eb4d7ed861372962dfef051",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_PROGRESS_FILL: Preenchimento de progresso, superfície isolada de UI Cogna.\nPreenchimento violeta independente, com a mesma silhueta do trilho. Largura dinâmica, sem etapas ou percentual fixados na arte.\nPreenchimento uniforme #6D28D9; sem contorno; raio externo 5 px.\nPNG RGBA 8-bit sRGB exatamente 128×64; display 480×16; 9-slice l,b,r,t [6, 6, 6, 6]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        64
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "2d1a32a764e6a1338bbf3d4efcd2ab28221f5918d104d156f33f000f853879d6",
+      "design": {
+        "name": "Preenchimento de progresso",
+        "family": "progress",
+        "part": "fill",
+        "radius": 5,
+        "fill": "#6D28D9",
+        "stroke": null,
+        "border": 0,
+        "note": "Preenchimento violeta independente, com a mesma silhueta do trilho. Largura dinâmica, sem etapas ou percentual fixados na arte."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_NAV_UNDERLINE",
+      "name": "Sublinhado da navegação",
+      "family": "nav",
+      "state": null,
+      "part": "underline",
+      "output_path": "Assets/Art/new/hud/progress/nav_underline.png",
+      "source_editable": "art-source/editable/hud/progress/nav_underline.svg",
+      "source_sha256": "e20b444a0d3530f44a1eed700883962f653372aa6da801c453b29a34692a24f3",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_NAV_UNDERLINE: Sublinhado da navegação, superfície isolada de UI Cogna.\nLinha lavanda para navegação ativa; quatro cantos transparentes de 1×1 px, formando extremidades em degrau de um pixel na exibição de 4 px. Nenhum texto ou ícone.\nPreenchimento uniforme #B99AE8; sem contorno; quatro pixels de canto totalmente transparentes.\nPNG RGBA 8-bit sRGB exatamente 128×16; display 240×4; 9-slice l,b,r,t [1, 1, 1, 1]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        16
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "55527fd5a8aa8aee623c39b5f1264fc5425a8712109fbd25e8d15c65dc155391",
+      "design": {
+        "name": "Sublinhado da navegação",
+        "family": "nav",
+        "part": "underline",
+        "shape": "pixel_caps",
+        "radius": 0,
+        "fill": "#B99AE8",
+        "stroke": null,
+        "border": 0,
+        "note": "Linha lavanda para navegação ativa; quatro cantos transparentes de 1×1 px, formando extremidades em degrau de um pixel na exibição de 4 px. Nenhum texto ou ícone."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PILL_NORMAL",
+      "name": "Pílula normal",
+      "family": "pill",
+      "state": "normal",
+      "part": null,
+      "output_path": "Assets/Art/new/shared/components/badges/pill_normal.png",
+      "source_editable": "art-source/editable/shared/components/badges/pill_normal.svg",
+      "source_sha256": "4fb858df50ce2f90a21d70a37c35a7017506c8e68e3acc22033b98b87d826a03",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_PILL_NORMAL: Pílula normal, superfície isolada de UI Cogna.\nPílula de seleção neutra lavanda clara. Mesma geometria e alfa dos estados selecionado/desabilitado, sem marcador.\nPreenchimento uniforme #ebe2e8; contorno interno #d7c5e8 de 1 px; raio externo 22 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 180×52; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "85f951fc4f308bd8025843aaea5062f368b5c2440dc4282a7dc8bcf2492f1c48",
+      "design": {
+        "name": "Pílula normal",
+        "family": "pill",
+        "state": "normal",
+        "radius": 22,
+        "fill": "#ebe2e8",
+        "stroke": "#d7c5e8",
+        "border": 1,
+        "note": "Pílula de seleção neutra lavanda clara. Mesma geometria e alfa dos estados selecionado/desabilitado, sem marcador."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PILL_SELECTED",
+      "name": "Pílula selecionada",
+      "family": "pill",
+      "state": "selected",
+      "part": null,
+      "output_path": "Assets/Art/new/shared/components/badges/pill_selected.png",
+      "source_editable": "art-source/editable/shared/components/badges/pill_selected.svg",
+      "source_sha256": "30606b6395749585b72828e3cf7cee3e01a7337907789b8463a74fc852cf32a2",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_PILL_SELECTED: Pílula selecionada, superfície isolada de UI Cogna.\nPílula selecionada violeta, coerente com a seleção aprovada e com o kit ART-05; sem check incorporado.\nPreenchimento uniforme #6D28D9; contorno interno #8f5be0 de 1 px; raio externo 22 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 180×52; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "e4c7a14c752760fbb3b44b1e185d043e5448719290a97e6514c2f679e38fc91a",
+      "design": {
+        "name": "Pílula selecionada",
+        "family": "pill",
+        "state": "selected",
+        "radius": 22,
+        "fill": "#6D28D9",
+        "stroke": "#8f5be0",
+        "border": 1,
+        "note": "Pílula selecionada violeta, coerente com a seleção aprovada e com o kit ART-05; sem check incorporado."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_PILL_DISABLED",
+      "name": "Pílula desabilitada",
+      "family": "pill",
+      "state": "disabled",
+      "part": null,
+      "output_path": "Assets/Art/new/shared/components/badges/pill_disabled.png",
+      "source_editable": "art-source/editable/shared/components/badges/pill_disabled.svg",
+      "source_sha256": "d1a6c26d4334cf5c4402d73d2e0ef029401694e9549381658774365ea63a8137",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_PILL_DISABLED: Pílula desabilitada, superfície isolada de UI Cogna.\nPílula desabilitada com fundo dessaturado e contorno discreto; sem deslocar bounds ou pivot.\nPreenchimento uniforme #e7e2dc; contorno interno #dbd5d2 de 1 px; raio externo 22 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 180×52; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "7b6c7f525a98d847cf8b34db60fcd8bf58074a93e826a803a0c50d352fff635d",
+      "design": {
+        "name": "Pílula desabilitada",
+        "family": "pill",
+        "state": "disabled",
+        "radius": 22,
+        "fill": "#e7e2dc",
+        "stroke": "#dbd5d2",
+        "border": 1,
+        "note": "Pílula desabilitada com fundo dessaturado e contorno discreto; sem deslocar bounds ou pivot."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TOAST_NEUTRAL",
+      "name": "Aviso neutro",
+      "family": "toast",
+      "state": "neutral",
+      "part": null,
+      "output_path": "Assets/Art/new/shared/components/feedback/toast_neutral.png",
+      "source_editable": "art-source/editable/shared/components/feedback/toast_neutral.svg",
+      "source_sha256": "29d37e3c931191f341c0d0d6795fff4157e30231ca1d5b5e0b348a9fa7b2f23f",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TOAST_NEUTRAL: Aviso neutro, superfície isolada de UI Cogna.\nSuperfície de aviso neutro clara, com contorno lavanda; mensagem, botão de fechar e ícone permanecem separados.\nPreenchimento uniforme #fcfbf8; contorno interno #d1bce8 de 2 px; raio externo 16 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 680×88; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "9b7a7e7c2a6866bbf5208faec1919b5ff156e1964c185a600cbdd5a7c9518e78",
+      "design": {
+        "name": "Aviso neutro",
+        "family": "toast",
+        "state": "neutral",
+        "radius": 16,
+        "fill": "#fcfbf8",
+        "stroke": "#d1bce8",
+        "border": 2,
+        "note": "Superfície de aviso neutro clara, com contorno lavanda; mensagem, botão de fechar e ícone permanecem separados."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TOAST_SUCCESS",
+      "name": "Aviso de sucesso",
+      "family": "toast",
+      "state": "success",
+      "part": null,
+      "output_path": "Assets/Art/new/shared/components/feedback/toast_success.png",
+      "source_editable": "art-source/editable/shared/components/feedback/toast_success.svg",
+      "source_sha256": "34d136e1b81be70c2e068c5023ec6de71c569bd31e6a8f9b483179b42b6d2e87",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TOAST_SUCCESS: Aviso de sucesso, superfície isolada de UI Cogna.\nSuperfície de sucesso em verde muito claro e contorno teal; sem símbolo de confirmação ou mensagem.\nPreenchimento uniforme #dae0d8; contorno interno #26776A de 2 px; raio externo 16 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 680×88; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "903189305414cbb5013035c362c076d69b38781f9fd863c38f8effc493eb8afd",
+      "design": {
+        "name": "Aviso de sucesso",
+        "family": "toast",
+        "state": "success",
+        "radius": 16,
+        "fill": "#dae0d8",
+        "stroke": "#26776A",
+        "border": 2,
+        "note": "Superfície de sucesso em verde muito claro e contorno teal; sem símbolo de confirmação ou mensagem."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TOAST_WARNING",
+      "name": "Aviso de atenção",
+      "family": "toast",
+      "state": "warning",
+      "part": null,
+      "output_path": "Assets/Art/new/shared/components/feedback/toast_warning.png",
+      "source_editable": "art-source/editable/shared/components/feedback/toast_warning.svg",
+      "source_sha256": "b73a63fe822ad6bc8917525ec9f9b34091768a8b5118ee7f4b8fd08be65a1cde",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TOAST_WARNING: Aviso de atenção, superfície isolada de UI Cogna.\nSuperfície de atenção em âmbar claro e contorno ocre derivado do token amber; sem triângulo ou mensagem.\nPreenchimento uniforme #f2e2c6; contorno interno #cca056 de 2 px; raio externo 16 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 680×88; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "32d0c079e4f4e08f0774103621d3c15f24c7af3af5c3a9aaf6cfeff2b6d6b455",
+      "design": {
+        "name": "Aviso de atenção",
+        "family": "toast",
+        "state": "warning",
+        "radius": 16,
+        "fill": "#f2e2c6",
+        "stroke": "#cca056",
+        "border": 2,
+        "note": "Superfície de atenção em âmbar claro e contorno ocre derivado do token amber; sem triângulo ou mensagem."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TABLE_HEADER",
+      "name": "Cabeçalho da DRE",
+      "family": "table_header",
+      "state": null,
+      "part": "header",
+      "output_path": "Assets/Art/new/dre/components/table_header.png",
+      "source_editable": "art-source/editable/dre/components/table_header.svg",
+      "source_sha256": "1d9dcf8cfc0c2bbe720ec945010716a7b43cfe7f2721144080f98ac2556f0bd2",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TABLE_HEADER: Cabeçalho da DRE, superfície isolada de UI Cogna.\nFaixa de cabeçalho lavanda clara conforme DRE trimestral; sem colunas, períodos, rótulos ou valores.\nPreenchimento uniforme #e0d2e8; contorno interno #d7c5e8 de 1 px; raio externo 8 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 1240×52; 9-slice l,b,r,t [16, 16, 16, 16]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "ccbc1dc4c014c9a54b916ca62a9a4d701acbf39ef004fd0001a43967f5f91a59",
+      "design": {
+        "name": "Cabeçalho da DRE",
+        "family": "table_header",
+        "part": "header",
+        "radius": 8,
+        "fill": "#e0d2e8",
+        "stroke": "#d7c5e8",
+        "border": 1,
+        "note": "Faixa de cabeçalho lavanda clara conforme DRE trimestral; sem colunas, períodos, rótulos ou valores."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TABLE_ROW_NEUTRAL",
+      "name": "Linha neutra da DRE",
+      "family": "table_row",
+      "state": "neutral",
+      "part": null,
+      "output_path": "Assets/Art/new/dre/components/table_row_neutral.png",
+      "source_editable": "art-source/editable/dre/components/table_row_neutral.svg",
+      "source_sha256": "39c0e2d49add6a1cc989ab169e377689cc63875597bc9fe7f66e5335c6e491f4",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TABLE_ROW_NEUTRAL: Linha neutra da DRE, superfície isolada de UI Cogna.\nLinha de tabela clara neutra, com contorno discreto; nenhuma conta, separador vertical ou valor incorporado.\nPreenchimento uniforme #fbf9f6; contorno interno #ddd8d3 de 1 px; raio externo 6 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 1240×48; 9-slice l,b,r,t [16, 16, 16, 16]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "eb537c647f2de306d83c888e044fdcdbf06dc2e5c60d357b5ca62197e449acd1",
+      "design": {
+        "name": "Linha neutra da DRE",
+        "family": "table_row",
+        "state": "neutral",
+        "radius": 6,
+        "fill": "#fbf9f6",
+        "stroke": "#ddd8d3",
+        "border": 1,
+        "note": "Linha de tabela clara neutra, com contorno discreto; nenhuma conta, separador vertical ou valor incorporado."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TABLE_ROW_SUBTOTAL",
+      "name": "Subtotal da DRE",
+      "family": "table_row",
+      "state": "subtotal",
+      "part": null,
+      "output_path": "Assets/Art/new/dre/components/table_row_subtotal.png",
+      "source_editable": "art-source/editable/dre/components/table_row_subtotal.svg",
+      "source_sha256": "1e76badbcd76b66f45255cee843069fc9a6aad44138be406ae212cfbb31a5a71",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TABLE_ROW_SUBTOTAL: Subtotal da DRE, superfície isolada de UI Cogna.\nLinha de subtotal lavanda, como os resultados bruto/operacional do concept mensal; geometria compartilhada com as demais linhas.\nPreenchimento uniforme #decfe8; contorno interno #d7c5e8 de 1 px; raio externo 6 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 1240×48; 9-slice l,b,r,t [16, 16, 16, 16]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "2d044fb397020c19659fc1cc9d2b96bd0e0e0724d60133eebbb5c0c970f78bf8",
+      "design": {
+        "name": "Subtotal da DRE",
+        "family": "table_row",
+        "state": "subtotal",
+        "radius": 6,
+        "fill": "#decfe8",
+        "stroke": "#d7c5e8",
+        "border": 1,
+        "note": "Linha de subtotal lavanda, como os resultados bruto/operacional do concept mensal; geometria compartilhada com as demais linhas."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TABLE_ROW_POSITIVE",
+      "name": "Resultado positivo da DRE",
+      "family": "table_row",
+      "state": "positive",
+      "part": null,
+      "output_path": "Assets/Art/new/dre/components/table_row_positive.png",
+      "source_editable": "art-source/editable/dre/components/table_row_positive.svg",
+      "source_sha256": "7eefc29ba7bf9cffd13d67f7a20646dbc543ff815bb46a66e7f75fe6de60fc81",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TABLE_ROW_POSITIVE: Resultado positivo da DRE, superfície isolada de UI Cogna.\nLinha de resultado positivo em teal claro, conforme resultado mensal e acumulado dos concepts; sem sinal ou valor incorporado.\nPreenchimento uniforme #d0dad1; contorno interno #bbcec5 de 1 px; raio externo 6 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 1240×48; 9-slice l,b,r,t [16, 16, 16, 16]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "3cdacae551cec2775c606a9c00bcce0d8b5e4ba520d78f84c6923da393496b8b",
+      "design": {
+        "name": "Resultado positivo da DRE",
+        "family": "table_row",
+        "state": "positive",
+        "radius": 6,
+        "fill": "#d0dad1",
+        "stroke": "#bbcec5",
+        "border": 1,
+        "note": "Linha de resultado positivo em teal claro, conforme resultado mensal e acumulado dos concepts; sem sinal ou valor incorporado."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TABLE_ROW_NEGATIVE",
+      "name": "Resultado negativo da DRE",
+      "family": "table_row",
+      "state": "negative",
+      "part": null,
+      "output_path": "Assets/Art/new/dre/components/table_row_negative.png",
+      "source_editable": "art-source/editable/dre/components/table_row_negative.svg",
+      "source_sha256": "f8b2687ee5144e698c429d0aac0d083886695c2f623a6c74fc47b56d78e8f895",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TABLE_ROW_NEGATIVE: Resultado negativo da DRE, superfície isolada de UI Cogna.\nExtensão semântica do token coral para linha de resultado negativo; mesmos bounds/pivot/alfa da linha positiva, sem valor ou sinal.\nPreenchimento uniforme #edd7d1; contorno interno #e8c4bf de 1 px; raio externo 6 px.\nPNG RGBA 8-bit sRGB exatamente 256×128; display 1240×48; 9-slice l,b,r,t [16, 16, 16, 16]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "852b328d44593af34253fa2fc4c966bec1353da6f35a6cf9be6259281c34b5e1",
+      "design": {
+        "name": "Resultado negativo da DRE",
+        "family": "table_row",
+        "state": "negative",
+        "radius": 6,
+        "fill": "#edd7d1",
+        "stroke": "#e8c4bf",
+        "border": 1,
+        "note": "Extensão semântica do token coral para linha de resultado negativo; mesmos bounds/pivot/alfa da linha positiva, sem valor ou sinal."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_TABLE_TOTAL_COLUMN",
+      "name": "Coluna de total da DRE",
+      "family": "table_total",
+      "state": null,
+      "part": "column",
+      "output_path": "Assets/Art/new/dre/components/table_total_column.png",
+      "source_editable": "art-source/editable/dre/components/table_total_column.svg",
+      "source_sha256": "517629ee196173148bc6ba2d46233d187e8b7dff557e5d156f00725ae5924b8e",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_TABLE_TOTAL_COLUMN: Coluna de total da DRE, superfície isolada de UI Cogna.\nDestaque vertical lavanda para coluna total, conforme DRE trimestral; sem células, divisórias, números ou rótulo.\nPreenchimento uniforme #dbcae8; contorno interno #d1bce8 de 1 px; raio externo 10 px.\nPNG RGBA 8-bit sRGB exatamente 128×256; display 180×600; 9-slice l,b,r,t [16, 16, 16, 16]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        128,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "2057e855e19321c13c77297e042e27eb9f6420fc93b0b3ff48f7bd2771298d61",
+      "design": {
+        "name": "Coluna de total da DRE",
+        "family": "table_total",
+        "part": "column",
+        "radius": 10,
+        "fill": "#dbcae8",
+        "stroke": "#d1bce8",
+        "border": 1,
+        "note": "Destaque vertical lavanda para coluna total, conforme DRE trimestral; sem células, divisórias, números ou rótulo."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "status": "validado"
+    },
+    {
+      "id": "UI_CHART_PANEL",
+      "name": "Superfície do gráfico",
+      "family": "chart",
+      "state": null,
+      "part": "panel",
+      "output_path": "Assets/Art/new/dre/components/chart_panel.png",
+      "source_editable": "art-source/editable/dre/components/chart_panel.svg",
+      "source_sha256": "062fea11fa54bd0be2dd652a66b6b5dc44c0bf1888bad474a2f7dbb39bb7b842",
+      "origin": "Geometria SVG original; manifesto, tokens e concepts aprovados, coerentes com ART-03/05.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        },
+        {
+          "path": "art-source/references/concepts/03-gestao.png",
+          "sha256": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+        },
+        {
+          "path": "art-source/references/concepts/04-dre-mensal.png",
+          "sha256": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+        },
+        {
+          "path": "art-source/references/concepts/05-dre-trimestral.png",
+          "sha256": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+          "sha256": "8171ffcd9b9a37f04738b5176170d7f8c4feb39107f1f48f9ed701e4edbb8323"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/panels/panel_lavender.png",
+          "sha256": "77942010e1c029d228b88f9376eb08b213f62ab418236decb23e0367e7b27637"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/tab_selected.png",
+          "sha256": "b9101bbd568365aad6577ab558419edcbc10a5f075d25a0fd057a287f78e7ebf"
+        },
+        {
+          "path": "Assets/Art/new/shared/components/controls/slider_track.png",
+          "sha256": "18747b6364185ac87d5822bdbef4c1ecc654ef3c93a32c0e1bc1cb0f957d76d0"
+        }
+      ],
+      "final_prompt": "Produzir somente UI_CHART_PANEL: Superfície do gráfico, superfície isolada de UI Cogna.\nPainel claro para área de gráfico nativo, coerente com a DRE; export vazio, sem barras, eixos, legenda ou dados.\nPreenchimento uniforme #fcfbf8; contorno interno #d7c5e8 de 1 px; raio externo 16 px.\nPNG RGBA 8-bit sRGB exatamente 256×256; display 560×300; 9-slice l,b,r,t [24, 24, 24, 24]; pivot [0.5, 0.5].\nFonte SVG editável; cores derivadas dos tokens e acabamento plano coerente com concepts e ART-03/05. Não usar gradiente no centro expansível.\nCentro opaco, alfa verdadeiro nos cantos; preservar bounds, alfa e pivot entre estados. Preservar cantos e espessura de contorno ao expandir por 9-slice.\nSem texto, labels, números, valores, datas, percentuais, ícones, gráficos, eixos, marcadores, divisórias de conteúdo, sombras, halos, logos ou checkerboard incorporados. Conteúdo dinâmico fica em camadas independentes.",
+      "tool": "deterministic SVG + sharp/librsvg",
+      "model": null,
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "483288d7f336e57691cfb7a4779f0d7551e69a9ae93b9c23d84f0c27bf34d5db",
+      "design": {
+        "name": "Superfície do gráfico",
+        "family": "chart",
+        "part": "panel",
+        "radius": 16,
+        "fill": "#fcfbf8",
+        "stroke": "#d7c5e8",
+        "border": 1,
+        "note": "Painel claro para área de gráfico nativo, coerente com a DRE; export vazio, sem barras, eixos, legenda ou dados."
+      },
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "status": "validado"
+    }
+  ],
+  "assembly_notes": {
+    "hud": "Ícones e labels são camadas nativas independentes sobre UI_HUD_PILL e UI_KPI_TILE.",
+    "progress": "Track e fill separados; largura do fill dinâmica. Ocultar em zero; entre zero e 12 px, usar clipping nativo para preservar os caps. O preview usa zero/metade/cheio sem gravar valores no asset.",
+    "navigation": "UI_NAV_UNDERLINE lavanda é separado da barra e dos ícones; display de 240×4 com cantos de um pixel preservados.",
+    "pills": "Normal/selected/disabled compartilham a mesma silhueta, bounds, pivot e bordas; conteúdo separado.",
+    "toasts": "Neutral/success/warning compartilham geometria; mensagens e símbolos são camadas independentes.",
+    "dre": "Rows são fundos de linhas independentes. Total column é um destaque vertical separado; montar sob conteúdo nativo e revisar a ordem das camadas. Não há contas, colunas, totais ou gráficos rasterizados.",
+    "chart": "UI_CHART_PANEL é apenas superfície vazia; dados, eixos e barras devem ser desenhados nativamente na integração posterior.",
+    "integration_performed": false
+  },
+  "qa_record": "docs/art/qa/ART-09.json"
+}

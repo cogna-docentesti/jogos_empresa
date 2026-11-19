@@ -44,6 +44,7 @@ namespace Game.Adapter.In.UI.Navigation
 
         private bool Evaluate()
         {
+            if(!MenuNavigator.HubAvailable) return false;
             // 1. Em cima do proprio mapa o botao nao faz sentido.
             if (menuPanel != null && menuPanel.activeInHierarchy)
                 return false;

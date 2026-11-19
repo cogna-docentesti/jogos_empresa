@@ -1,0 +1,595 @@
+{
+  "task_id": "ART-30",
+  "title": "Eventos de fornecedores e estoque",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Specific model identifier is not exposed by the integrated tool.",
+    "mode": "built-in",
+    "distinct_asset_generations": 5,
+    "revision_generations": 0,
+    "one_independent_asset_per_generation": true,
+    "prompts_record": "docs/art/prompts/ART-30.json",
+    "original_generations": "art-source/editable/ART-30/generations",
+    "export_and_preview_source": "art-source/editable/ART-30/produce_art30.py",
+    "review_record_source": "art-source/editable/ART-30/finalize_art30.py"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 5,
+    "report": "docs/art/qa/ART-30-technical.json",
+    "plan_report": "docs/art/qa/ART-30-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-30-prerequisites.json",
+    "scope_report": "docs/art/qa/ART-30-scope-audit.json",
+    "format": "PNG RGBA 8-bit sRGB",
+    "all_export_size_px": [
+      768,
+      512
+    ],
+    "all_source_size_px": [
+      1536,
+      1024
+    ],
+    "full_source_resampled_size_px": [
+      720,
+      480
+    ],
+    "transparent_offset_px": [
+      24,
+      16
+    ],
+    "true_alpha": true,
+    "outer_edge_alpha_max": 0,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "import_metadatas": "Single Sprite, 100 PPU, Bilinear, mipmaps off, sRGB, alpha transparency on, FullRect, no compression, max texture 1024. Editor not executed.",
+    "resolved_export_issue": {
+      "initial_issue": "Direct full-frame 768x512 reduction left faint nonzero alpha on the lower edge of supplier_delay. Export was interrupted before marking any asset generated.",
+      "resolution": "Uniformly reduced all full 1536x1024 source frames to 720x480 and centered them with transparent padding [24,16] in final 768x512 canvases. No crop, repainting, alpha cleanup or extra illustration generation.",
+      "resolved": true
+    }
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": "Todos os cinco arquivos inspecionados em previews nativos 768x512 e em contact sheet original, uma caixa 640x426 por fundo. Contain mantém proporção e desenha 639x426 dentro da caixa.",
+    "inspected_previews": [
+      "art-source/previews/ART-30/bulk_purchase_opportunity-native-light-dark.png",
+      "art-source/previews/ART-30/bulk_purchase_opportunity-display-light-dark.png",
+      "art-source/previews/ART-30/supplier_discount-native-light-dark.png",
+      "art-source/previews/ART-30/supplier_discount-display-light-dark.png",
+      "art-source/previews/ART-30/supplier_delay-native-light-dark.png",
+      "art-source/previews/ART-30/supplier_delay-display-light-dark.png",
+      "art-source/previews/ART-30/ingredient_price_increase-native-light-dark.png",
+      "art-source/previews/ART-30/ingredient_price_increase-display-light-dark.png",
+      "art-source/previews/ART-30/excessive_food_waste-native-light-dark.png",
+      "art-source/previews/ART-30/excessive_food_waste-display-light-dark.png",
+      "art-source/previews/ART-30/ART-30-contact-sheet.png"
+    ],
+    "checks": [
+      "Cinco vinhetas independentes, um PNG por evento, no estilo cartoon adulto dos concepts 01-hub e 03-gestao; contorno ameixa, volumes simples e luz superior esquerda coerentes.",
+      "Silhueta, perspectiva, materiais, contornos, sombras e leitura das cinco situações conferidos. Sem cortes de objetos, checkerboard, fundo retangular ou halo amplo. Pequenas sombras de contato são mantidas.",
+      "Sem pessoas, rostos ou mãos; QA de identidade não se aplica. Masters canônicos e todos os pré-requisitos preservados.",
+      "Sem título, opções, efeitos, preço, texto, dígitos, símbolos monetários, marcas, logo, gráfico, moldura ou UI. Etiqueta vazia e relógio sem números são props físicos.",
+      "Não há rasterização das três opções do catálogo. IDs, paths, títulos e regras dos EventData permanecem intactos.",
+      "Fontes RGBA originais preservadas em cópias integrais com hashes; export apenas por redução uniforme e padding transparente.",
+      "Previews com fundos e legendas existem somente fora de Assets/Art/new; PNGs finais são recortes sem essas legendas."
+    ]
+  },
+  "assets": [
+    {
+      "id": "EVENT_BULK_PURCHASE_OPPORTUNITY",
+      "path": "Assets/Art/new/events/illustrations/bulk_purchase_opportunity.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "3f1ddafbd6fa0c592b48447e8aa1447398cf763d4472254c197526bd721b3ab1",
+      "source_path": "art-source/editable/ART-30/generations/bulk_purchase_opportunity.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "525914cc61541dedfaa420236fbc7c52b138a7350b6441a048290fe594794503",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/bulk_purchase_opportunity.asset",
+      "catalog_source_sha256": "d9ff6766c8e4e73ae0d84e91c0386dab75e75ecb04070220e54e6e4c02b8879c",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          53,
+          44,
+          729,
+          484
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          56,
+          48,
+          726,
+          481
+        ],
+        "transparent_fraction": 0.4697316487630208,
+        "opaque_fraction": 0.0038935343424479165,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-30/produce_art30.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Pallet com múltiplas caixas, dois caixotes de hortaliças frescas, dois sacos e moedas lisas; quantidade e abastecimento favorável distinguem a compra em volume.",
+      "inspected_previews": [
+        "art-source/previews/ART-30/bulk_purchase_opportunity-native-light-dark.png",
+        "art-source/previews/ART-30/bulk_purchase_opportunity-display-light-dark.png"
+      ]
+    },
+    {
+      "id": "EVENT_SUPPLIER_DISCOUNT",
+      "path": "Assets/Art/new/events/illustrations/supplier_discount.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "a6c83802848aa7b19e46134cff3eeac9c602b9adf1a0e9059537c10908e6d081",
+      "source_path": "art-source/editable/ART-30/generations/supplier_discount.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "d527fe9c39e0bdfa16b45cb4e642b73e6d52852e6abdf40e56e4fec4d11efe1d",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/supplier_discount.asset",
+      "catalog_source_sha256": "0e5ea97afe4ec2d3ccf1b856033c5ab84601ff05ca43f8e1c35100148c9714f2",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          70,
+          38,
+          699,
+          471
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          95,
+          41,
+          696,
+          465
+        ],
+        "transparent_fraction": 0.5539143880208334,
+        "opaque_fraction": 0.0036417643229166665,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-30/produce_art30.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Um caixote compacto, saco de ingrediente, duas moedas lisas e etiqueta física lilás totalmente vazia, presa por cordão; transação simples distinta do pallet em volume.",
+      "inspected_previews": [
+        "art-source/previews/ART-30/supplier_discount-native-light-dark.png",
+        "art-source/previews/ART-30/supplier_discount-display-light-dark.png"
+      ]
+    },
+    {
+      "id": "EVENT_SUPPLIER_DELAY",
+      "path": "Assets/Art/new/events/illustrations/supplier_delay.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "a61d66ab31eb917aed955c7e7f113c37bf0ec7d2fd32f0b8733089e67215e72e",
+      "source_path": "art-source/editable/ART-30/generations/supplier_delay.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "4f1aa4723ad3279e9376a8eccb7729096a9056d0f4dc7b77c9aaa3e95980e71c",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/supplier_delay.asset",
+      "catalog_source_sha256": "3bf6bc3fa3e6ded8833742cdec958da14633f2f6e9c6dffba4dfbe615f13e409",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          39,
+          18,
+          742,
+          496
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          42,
+          21,
+          730,
+          489
+        ],
+        "transparent_fraction": 0.5823516845703125,
+        "opaque_fraction": 0.005994160970052083,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-30/produce_art30.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Carrinho parado com caixa fechada, caixote quase vazio com um tomate e relógio físico sem números; espera e escassez legíveis sem pessoa ou UI.",
+      "inspected_previews": [
+        "art-source/previews/ART-30/supplier_delay-native-light-dark.png",
+        "art-source/previews/ART-30/supplier_delay-display-light-dark.png"
+      ]
+    },
+    {
+      "id": "EVENT_INGREDIENT_PRICE_INCREASE",
+      "path": "Assets/Art/new/events/illustrations/ingredient_price_increase.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "36f73cd48fb8ae339b82e7d25cf41f5c3ce791b426c5409f02680e7e0fb68252",
+      "source_path": "art-source/editable/ART-30/generations/ingredient_price_increase.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "a25e506c72a86eb0713f382414f7bcda11e44740a6919ab54eac1e218cfc5cc4",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/ingredient_price_increase.asset",
+      "catalog_source_sha256": "df7eeea5dbea9a861dcefd9d1c05663e03c95163a2ae57ff0b30974fcbe05b7e",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          47,
+          29,
+          727,
+          484
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          63,
+          32,
+          702,
+          463
+        ],
+        "transparent_fraction": 0.6470718383789062,
+        "opaque_fraction": 0.0061187744140625,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-30/produce_art30.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Balança física de base ameixa, pratos suspensos e corrente coerentes; moedas no prato mais baixo contrapõem ingredientes no prato elevado. Sem gráfico ou valor rasterizado.",
+      "inspected_previews": [
+        "art-source/previews/ART-30/ingredient_price_increase-native-light-dark.png",
+        "art-source/previews/ART-30/ingredient_price_increase-display-light-dark.png"
+      ]
+    },
+    {
+      "id": "EVENT_EXCESSIVE_FOOD_WASTE",
+      "path": "Assets/Art/new/events/illustrations/excessive_food_waste.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "b7e4e9e9fe5837e5b66ce4ff85c8a8407d27f63c51a1afbcd3b068f20ec0dbba",
+      "source_path": "art-source/editable/ART-30/generations/excessive_food_waste.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "0bdc5985250ec6540ed33c9d20c896b7dfc1e75d57733d9ad32d1589cc2901b2",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/excessive_food_waste.asset",
+      "catalog_source_sha256": "174f87889bce3509d6acca437552bfd2c5dd72bba58385d3c7ce50cc21a06e7a",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          51,
+          30,
+          739,
+          476
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          53,
+          34,
+          720,
+          473
+        ],
+        "transparent_fraction": 0.47083791097005206,
+        "opaque_fraction": 0.0035502115885416665,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-30/produce_art30.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Caixotes em excesso, hortaliças murchas e tomates enrugados, recipiente grafite com tampa apoiada; desperdício legível sem insetos ou sujeira repulsiva.",
+      "inspected_previews": [
+        "art-source/previews/ART-30/excessive_food_waste-native-light-dark.png",
+        "art-source/previews/ART-30/excessive_food_waste-display-light-dark.png"
+      ]
+    }
+  ],
+  "scope": {
+    "base_commit": "11d6b7a8924810a0374f3a6c6e8b0e509881300b",
+    "task_only": "ART-30",
+    "unity_executed": false,
+    "gameplay_changed": false,
+    "scene_integration_performed": false,
+    "push_performed": false
+  },
+  "pending": [],
+  "integration_note": "Aplicação nas cenas e teste dentro do Unity pertencem à integração posterior, fora deste lote autorizado."
+}

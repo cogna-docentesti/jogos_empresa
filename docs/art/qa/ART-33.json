@@ -1,0 +1,678 @@
+{
+  "task_id": "ART-33",
+  "title": "Eventos de comunicação e contexto urbano",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex — revisão técnica e inspeção visual individual dos exports e provas",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Specific model identifier is not exposed by the integrated tool.",
+    "mode": "built-in",
+    "distinct_asset_generations": 5,
+    "revision_generations": 0,
+    "one_independent_asset_per_generation": true,
+    "prompts_record": "docs/art/prompts/ART-33.json",
+    "original_generations": "art-source/editable/ART-33/generations",
+    "export_and_preview_source": "art-source/editable/ART-33/produce_art33.py",
+    "review_record_source": "art-source/editable/ART-33/record_review_art33.py"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 5,
+    "report": "docs/art/qa/ART-33-technical.json",
+    "plan_report": "docs/art/qa/ART-33-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-33-prerequisites.json",
+    "scope_report": "docs/art/qa/ART-33-scope-audit.json",
+    "format": "PNG RGBA 8-bit sRGB",
+    "all_export_size_px": [
+      768,
+      512
+    ],
+    "all_source_size_px": [
+      1536,
+      1024
+    ],
+    "true_alpha": true,
+    "outer_edge_alpha_max": 0,
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "export": {
+      "operation": "Uniform full-frame reduction from 1536x1024 to 720x480; centered on transparent 768x512 at [24,16].",
+      "visual_edits": false,
+      "illustration_and_transparency_origin": "Integrated imagegen; original RGBA sources preserved byte-for-byte.",
+      "display_fit": "Contain: 639x426 inside 640x426 slot; no independent axis scaling."
+    }
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": "Cinco previews nativos 768x512 e cinco de display 640x426 inspecionados individualmente em resolução original; dois canvases 1920x1080 em resolução original. Contact sheet inspecionada na resolução exibida reduzida.",
+    "inspected_previews": [
+      "art-source/previews/ART-33/influencer_mention-native-light-dark.png",
+      "art-source/previews/ART-33/influencer_mention-display-light-dark.png",
+      "art-source/previews/ART-33/positive_online_review-native-light-dark.png",
+      "art-source/previews/ART-33/positive_online_review-display-light-dark.png",
+      "art-source/previews/ART-33/negative_review-native-light-dark.png",
+      "art-source/previews/ART-33/negative_review-display-light-dark.png",
+      "art-source/previews/ART-33/local_festival-native-light-dark.png",
+      "art-source/previews/ART-33/local_festival-display-light-dark.png",
+      "art-source/previews/ART-33/heavy_rain-native-light-dark.png",
+      "art-source/previews/ART-33/heavy_rain-display-light-dark.png",
+      "art-source/previews/ART-33/ART-33-contact-sheet.png",
+      "art-source/previews/ART-33/ART-33-canvas-light.png",
+      "art-source/previews/ART-33/ART-33-canvas-dark.png"
+    ],
+    "canvas_proofs_are_scene_integration": false,
+    "checks": [
+      "Cartoon adulto, roxo Cogna, contornos ameixa e luz coerentes com os concepts.",
+      "Alfa verdadeiro e recortes limpos nos dois fundos, sem checkerboard ou fundo opaco incorporado. Sombras locais preservadas.",
+      "Cinco situações distintas legíveis por objetos e ambiente; observações individuais por asset.",
+      "Sem pessoas, rostos, mãos ou nova identidade. Todos os masters dos pré-requisitos preservados por hash.",
+      "Sem palavras, números, títulos, opções, efeitos, logos, gráficos ou UI. Telas e placas vazias.",
+      "Festival e chuva referenciam fachada real aprovada; caminho e SHA256 registrados.",
+      "Estrelas são objetos físicos editoriais, sem escala, nota ou quantidade de avaliação dinâmica.",
+      "Fontes RGBA preservadas; export apenas por redução uniforme e padding."
+    ]
+  },
+  "assets": [
+    {
+      "id": "EVENT_INFLUENCER_MENTION",
+      "path": "Assets/Art/new/events/illustrations/influencer_mention.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "5987a1efdb8b564f5726b79898a532d891c1f195e442c83a5696e00ba6bbb48e",
+      "source_path": "art-source/editable/ART-33/generations/influencer_mention.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "5f689bd02888d43a5efbde886d802e8b77082867143dab69687940c9c3fa4f00",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/influencer_mention.asset",
+      "catalog_source_sha256": "24e20c853b85309dc7085e36aea19bb87d5dfa42191554031546574bd247bf40",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          59,
+          25,
+          736,
+          489
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          61,
+          28,
+          733,
+          473
+        ],
+        "transparent_fraction": 0.568450927734375,
+        "opaque_fraction": 0.007428487141927083,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-33/produce_art33.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Celular com tela vazia no ring light, microfone, lanche e megafone comunicam divulgação gastronômica. Silhuetas completas, suporte e tripé plausíveis. Pequenos traços editoriais de ênfase sonora acompanham os objetos; são marcas de ilustração, sem interface ou conteúdo de postagem.",
+      "inspected_previews": [
+        "art-source/previews/ART-33/influencer_mention-native-light-dark.png",
+        "art-source/previews/ART-33/influencer_mention-display-light-dark.png",
+        "art-source/previews/ART-33/ART-33-contact-sheet.png",
+        "art-source/previews/ART-33/ART-33-canvas-light.png",
+        "art-source/previews/ART-33/ART-33-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-33/influencer_mention-display-light-dark.png",
+      "display_review_note": "Individual native and 640x426 light/dark rows inspected at original resolution. Contact sheet also inspected at the displayed reduced resolution.",
+      "prompt_adherence_note": "Small editorial emphasis strokes remain despite the prompt avoid clause. They were visually reviewed as illustration marks and do not add UI, text or event options."
+    },
+    {
+      "id": "EVENT_POSITIVE_ONLINE_REVIEW",
+      "path": "Assets/Art/new/events/illustrations/positive_online_review.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "75c5bf802d699e9995434332b18625adbf2f01bbb9dcdd9c5f8b3bec9392f52a",
+      "source_path": "art-source/editable/ART-33/generations/positive_online_review.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "3534b990a2e9321f572ba0d375433f9c4acedfa738eea89a147c7a3b575193c9",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/positive_online_review.asset",
+      "catalog_source_sha256": "32bc7eeadce87545884142fb11129048ab49a07dd34bfa0682e898518e80ac65",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          37,
+          25,
+          736,
+          485
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          40,
+          29,
+          734,
+          481
+        ],
+        "transparent_fraction": 0.4664255777994792,
+        "opaque_fraction": 0.005610148111979167,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-33/produce_art33.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Celular sem conteúdo, troféu físico de estrela dourada, prato bem apresentado e manjericão sugerem elogio e boa reputação. Uma estrela escultórica isolada, sem escala de avaliação, nota ou valor.",
+      "inspected_previews": [
+        "art-source/previews/ART-33/positive_online_review-native-light-dark.png",
+        "art-source/previews/ART-33/positive_online_review-display-light-dark.png",
+        "art-source/previews/ART-33/ART-33-contact-sheet.png",
+        "art-source/previews/ART-33/ART-33-canvas-light.png",
+        "art-source/previews/ART-33/ART-33-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-33/positive_online_review-display-light-dark.png",
+      "display_review_note": "Individual native and 640x426 light/dark rows inspected at original resolution. Contact sheet also inspected at the displayed reduced resolution."
+    },
+    {
+      "id": "EVENT_NEGATIVE_REVIEW",
+      "path": "Assets/Art/new/events/illustrations/negative_review.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "b56933ababab3e2458e1dc25d15398720591e88271417c2f6f5af586d73637c5",
+      "source_path": "art-source/editable/ART-33/generations/negative_review.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "8d41928e78af332530b80603f3a1b4c52b5cb848bf377f78b169641595c834f4",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd"
+      },
+      "catalog_source": "Assets/Resources/Events/negative_review.asset",
+      "catalog_source_sha256": "438bdb6d536f04712da310803451a3ca4861f9c64c1a5b022d369ced8b87d1e4",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          34,
+          36,
+          738,
+          496
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          36,
+          39,
+          725,
+          444
+        ],
+        "transparent_fraction": 0.6152191162109375,
+        "opaque_fraction": 0.0029347737630208335,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-33/produce_art33.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Celular sem conteúdo, estrela cerâmica coral quebrada, prato usado e papel amassado sem escrita sugerem crítica e reputação afetada. Fratura e fragmentos legíveis no display; sem fixar teor ou valor da avaliação.",
+      "inspected_previews": [
+        "art-source/previews/ART-33/negative_review-native-light-dark.png",
+        "art-source/previews/ART-33/negative_review-display-light-dark.png",
+        "art-source/previews/ART-33/ART-33-contact-sheet.png",
+        "art-source/previews/ART-33/ART-33-canvas-light.png",
+        "art-source/previews/ART-33/ART-33-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-33/negative_review-display-light-dark.png",
+      "display_review_note": "Individual native and 640x426 light/dark rows inspected at original resolution. Contact sheet also inspected at the displayed reduced resolution."
+    },
+    {
+      "id": "EVENT_LOCAL_FESTIVAL",
+      "path": "Assets/Art/new/events/illustrations/local_festival.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "84cb3d604032684feb78e12cd89358fab4b06fd953e4fe88b8e76af619acf715",
+      "source_path": "art-source/editable/ART-33/generations/local_festival.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "3cb995a7cd3581ea585b8399ec376a18d3473420988f65a29b1120a7c8249066",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/restaurant/facades/rest_lanches.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/restaurant/facades/rest_lanches.png": "6208671b9d6929da37d3273288fc4fd50ee8196ab9bec07acbbc88b61cfa0427"
+      },
+      "catalog_source": "Assets/Resources/Events/local_festival.asset",
+      "catalog_source_sha256": "09ab47cdcd4862cb4380450821d5822682c6d9c8204651c973f4205fb5ddb758",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          29,
+          52,
+          741,
+          484
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          31,
+          79,
+          738,
+          457
+        ],
+        "transparent_fraction": 0.4823710123697917,
+        "opaque_fraction": 0.00533294677734375,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-33/produce_art33.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Fachada mantém cobertura plana, ventilador, testeira e toldos roxos, caixilhos ameixa, paredes claras e interior âmbar do master aprovado. Palco vazio, caixas de som, microfone, bandeirolas e lâmpadas comunicam festival. Calçada recortada e mobiliário coerentes, sem rostos ou multidão incorporada.",
+      "inspected_previews": [
+        "art-source/previews/ART-33/local_festival-native-light-dark.png",
+        "art-source/previews/ART-33/local_festival-display-light-dark.png",
+        "art-source/previews/ART-33/ART-33-contact-sheet.png",
+        "art-source/previews/ART-33/ART-33-canvas-light.png",
+        "art-source/previews/ART-33/ART-33-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-33/local_festival-display-light-dark.png",
+      "display_review_note": "Individual native and 640x426 light/dark rows inspected at original resolution. Contact sheet also inspected at the displayed reduced resolution."
+    },
+    {
+      "id": "EVENT_HEAVY_RAIN",
+      "path": "Assets/Art/new/events/illustrations/heavy_rain.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "cdc0ba146e4e384af90fea2a1f59d69c57418ce2b3eec02412a307105fb6e5dd",
+      "source_path": "art-source/editable/ART-33/generations/heavy_rain.png",
+      "source_size_px": [
+        1536,
+        1024
+      ],
+      "source_sha256": "099307d6530c7c9e5cfc43b69e80b1d63493461977766f73916e3496c6102e08",
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "references": [
+        "art-source/references/concepts/01-hub.png",
+        "art-source/references/concepts/03-gestao.png",
+        "Assets/Art/new/restaurant/facades/rest_lanches.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/01-hub.png": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8",
+        "art-source/references/concepts/03-gestao.png": "d83cdfb9f2b7b9cb5d557d1227c88d1d38aad28a0b0a3281fec0f79e2c66d2cd",
+        "Assets/Art/new/restaurant/facades/rest_lanches.png": "6208671b9d6929da37d3273288fc4fd50ee8196ab9bec07acbbc88b61cfa0427"
+      },
+      "catalog_source": "Assets/Resources/Events/heavy_rain.asset",
+      "catalog_source_sha256": "ade61f0c038342d0e439c831821a43b5d4a8fcc2162001cedcb738f7974490db",
+      "character_ids": [],
+      "identity_qa": "not_applicable_no_people",
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox_ltrb_px": [
+          24,
+          25,
+          729,
+          486
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          48,
+          58,
+          722,
+          473
+        ],
+        "transparent_fraction": 0.42458852132161456,
+        "opaque_fraction": 0.0032831827799479165,
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "Pillow",
+        "operation": "Uniform Lanczos reduction of the full source frame, preserving generated RGBA; centered transparent safety padding. No crop, repaint, background removal, alpha cleanup or independent x/y scaling.",
+        "source_size_px": [
+          1536,
+          1024
+        ],
+        "resampled_size_px": [
+          720,
+          480
+        ],
+        "transparent_offset_px": [
+          24,
+          16
+        ],
+        "output_size_px": [
+          768,
+          512
+        ],
+        "producer_source": "art-source/editable/ART-33/produce_art33.py"
+      },
+      "display_size_px": [
+        640,
+        426
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "visual_observation": "Fachada reconhecível a partir do master, chuva inclinada, gotas no toldo, poças e reflexos no piso. Mesas e cadeiras vazias e guarda-sol fechado sugerem menor movimento. Alfa entre traços de chuva e fora da calçada; sem retângulo de céu. A chuva permanece legível nos dois fundos.",
+      "inspected_previews": [
+        "art-source/previews/ART-33/heavy_rain-native-light-dark.png",
+        "art-source/previews/ART-33/heavy_rain-display-light-dark.png",
+        "art-source/previews/ART-33/ART-33-contact-sheet.png",
+        "art-source/previews/ART-33/ART-33-canvas-light.png",
+        "art-source/previews/ART-33/ART-33-canvas-dark.png"
+      ],
+      "display_proof": "art-source/previews/ART-33/heavy_rain-display-light-dark.png",
+      "display_review_note": "Individual native and 640x426 light/dark rows inspected at original resolution. Contact sheet also inspected at the displayed reduced resolution."
+    }
+  ],
+  "scope": {
+    "task_id": "ART-33",
+    "passed": true,
+    "base_commit": "510ad8cef65ea792578ad7b2d375db6ca9663bc9",
+    "branch": "dev/new-screens",
+    "initial_head_verified": true,
+    "initial_tree_clean": true,
+    "changed_manifest_asset_ids": [
+      "EVENT_INFLUENCER_MENTION",
+      "EVENT_POSITIVE_ONLINE_REVIEW",
+      "EVENT_NEGATIVE_REVIEW",
+      "EVENT_LOCAL_FESTIVAL",
+      "EVENT_HEAVY_RAIN"
+    ],
+    "changed_manifest_task_ids": [
+      "ART-33"
+    ],
+    "unrelated_manifest_records_preserved": true,
+    "source_and_catalog_reference_hashes_verified": true,
+    "current_lot_only": true,
+    "unrelated_changed_paths": [],
+    "recorded_before_commit": true,
+    "reviewed_paths": [
+      "Assets/Art/new/events/illustrations/heavy_rain.png",
+      "Assets/Art/new/events/illustrations/heavy_rain.png.meta",
+      "Assets/Art/new/events/illustrations/influencer_mention.png",
+      "Assets/Art/new/events/illustrations/influencer_mention.png.meta",
+      "Assets/Art/new/events/illustrations/local_festival.png",
+      "Assets/Art/new/events/illustrations/local_festival.png.meta",
+      "Assets/Art/new/events/illustrations/negative_review.png",
+      "Assets/Art/new/events/illustrations/negative_review.png.meta",
+      "Assets/Art/new/events/illustrations/positive_online_review.png",
+      "Assets/Art/new/events/illustrations/positive_online_review.png.meta",
+      "art-source/editable/ART-33/generations/heavy_rain.png",
+      "art-source/editable/ART-33/generations/influencer_mention.png",
+      "art-source/editable/ART-33/generations/local_festival.png",
+      "art-source/editable/ART-33/generations/negative_review.png",
+      "art-source/editable/ART-33/generations/positive_online_review.png",
+      "art-source/editable/ART-33/produce_art33.py",
+      "art-source/editable/ART-33/record_review_art33.py",
+      "art-source/previews/ART-33/ART-33-canvas-dark.png",
+      "art-source/previews/ART-33/ART-33-canvas-light.png",
+      "art-source/previews/ART-33/ART-33-contact-sheet.png",
+      "art-source/previews/ART-33/heavy_rain-display-light-dark.png",
+      "art-source/previews/ART-33/heavy_rain-native-light-dark.png",
+      "art-source/previews/ART-33/influencer-initial-light-dark.png",
+      "art-source/previews/ART-33/influencer_mention-display-light-dark.png",
+      "art-source/previews/ART-33/influencer_mention-native-light-dark.png",
+      "art-source/previews/ART-33/local_festival-display-light-dark.png",
+      "art-source/previews/ART-33/local_festival-native-light-dark.png",
+      "art-source/previews/ART-33/negative_review-display-light-dark.png",
+      "art-source/previews/ART-33/negative_review-native-light-dark.png",
+      "art-source/previews/ART-33/positive_online_review-display-light-dark.png",
+      "art-source/previews/ART-33/positive_online_review-native-light-dark.png",
+      "docs/art/manifest.json",
+      "docs/art/prompts/ART-33.json",
+      "docs/art/qa/ART-33-plan-validation.json",
+      "docs/art/qa/ART-33-prerequisites.json",
+      "docs/art/qa/ART-33-scope-audit.json",
+      "docs/art/qa/ART-33-technical.json",
+      "docs/art/qa/ART-33.json",
+      "docs/art/tasks.json"
+    ]
+  },
+  "pending": [],
+  "commit_reference": "Recorded in the serial queue history after commit creation.",
+  "integration_note": "Unity não foi executado por esta conversa; sem alterações de gameplay, cenas, catálogos ou pacotes e sem push."
+}

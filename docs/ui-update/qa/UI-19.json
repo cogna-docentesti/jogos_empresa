@@ -1,0 +1,139 @@
+{
+  "task_id": "UI-19",
+  "date": "2026-10-17",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "3c402e6f85a089ce48730334fe0229cee6fda391",
+  "commit_message": "feat(ui): unify navigation ownership and persistent flow resumption (UI-19)",
+  "pending_acceptance": [],
+  "implementation": [
+    "Matriz de todos os 18 GameState e 12 destinos reais do PanelRegistry; passagens técnicas explícitas sem exigir painéis fictícios.",
+    "UIStateListener centraliza a visibilidade das telas de fluxo, hub e consultas. MenuNavigator guarda histórico/foco; modais têm dono próprio e bloqueiam navegação atrás deles. Transição encerra apresentação modal sem executar suas ações.",
+    "A decisão mensal agora é apresentada em Round_Event antes da liquidação. O plano e as escolhas persistidos são reutilizados na retomada, incluindo após reabrir GameScene.",
+    "Metadados aditivos e nullable preservam o passo Banco/Equipamentos/Equipe e o resumo não reconhecido dos meses 1/2. A atualização do resultado e do marcador de resumo é transacional.",
+    "Continuar só reconhece o resultado salvo e entrega o próximo destino; falha conserva resumo e oferece feedback/retry. Retomar/consultar não debita caixa, sorteia outro plano nem repete o cálculo.",
+    "Retornos de resultados finais e falência usam o mesmo dono de visibilidade, preservam mês solicitado e foco; novo jogo preserva os relatórios anteriores.",
+    "Retorno ao Banco também persiste sua origem; falha no avanço da loja mantém a compra já gravada e oferece nova tentativa sem nova compra.",
+    "Newtonsoft Json 3.2.2 passa a ser dependência direta de runtime, resolvida pelo Client API da Unity. O código já existente dependia da biblioteca fornecida transitivamente pelo Pipeline temporário; a mesma versão foi mantida e o Pipeline foi removido.",
+    "A retomada adiada permanece pendente enquanto um modal está aberto; cancelar entrega a tela ao evento, sem deixar o fluxo parado."
+  ],
+  "state_matrix": "docs/ui-update/qa/UI-19-state-matrix.json",
+  "validation": {
+    "editmode": {
+      "path": "output/ui-update/UI-19/editmode-regression.json",
+      "total": 375,
+      "passed": 375,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "campaigns": {
+      "path": "output/ui-update/UI-19/playmode.json",
+      "checks": 633,
+      "passed": 633,
+      "failures": 0,
+      "campaigns": 6,
+      "months_settled": 18,
+      "behavior": "Uma conclusão e uma falência por resolução. Percurso real completo, quatro escolhas de eventos por mês, resumo aguardando, retomada, consultas aninhadas, novo jogo e relatórios preservados. Sem efeitos sintéticos para obter os desfechos."
+    },
+    "supplemental": {
+      "path": "output/ui-update/UI-19/playmode-supplemental.json",
+      "checks": 129,
+      "passed": 129,
+      "failures": 0,
+      "behavior": "Erros/vazio/retry, falha SQLite no reconhecimento, controles em seis estados, modal bloqueando hub, entrega de controle ao fluxo, loading e cancelamento, Sair cancelado em cadastro/evento/resumo, reset isolado e reabertura real da GameScene durante evento/resumo."
+    },
+    "restarts": "output/ui-update/UI-19/restarts.json",
+    "legacy_migration": "output/ui-update/UI-19/legacy-migration.json",
+    "storage": "output/ui-update/UI-19/storage-audit.json",
+    "screenshots": "output/ui-update/UI-19/screenshots.json",
+    "runtime_bindings": "output/ui-update/UI-19/runtime-bindings.json",
+    "runtime_bindings_supplemental": "output/ui-update/UI-19/runtime-bindings-supplemental.json",
+    "editor": "output/ui-update/UI-19/editor-inventory.json",
+    "final_editor": "output/ui-update/UI-19/final-editor-audit.json",
+    "frame_advancement": "output/ui-update/UI-19/frame-advancement.json",
+    "console": [
+      "output/ui-update/UI-19/campaign-console.json",
+      "output/ui-update/UI-19/supplemental-console.json",
+      "output/ui-update/UI-19/restart-console.json"
+    ],
+    "invariants": "output/ui-update/UI-19/invariants.json",
+    "art": "output/ui-update/UI-19/art-audit.json",
+    "console_audit": "output/ui-update/UI-19/console-audit.json",
+    "runtime_package": "output/ui-update/UI-19/runtime-package.json",
+    "state_handlers": "output/ui-update/UI-19/state-handlers.json",
+    "bankruptcy_scroll_proof": "output/ui-update/UI-19/capture-frames-navigation-audit.json",
+    "final_compiler": "output/ui-update/UI-19/final-compiler.json",
+    "console_summary": {
+      "game_errors": 0,
+      "game_warnings": 0,
+      "campaign_console": "campaign-console.json",
+      "supplemental_console": "supplemental-console.json",
+      "tool_timeouts": 1,
+      "tool_timeout": "Pipeline /api/exec limit of 5000 ms immediately after the summary Play Mode restart. Snapshot execution completed; frame advancement confirmed and capture renewed at frame 2656 with a 15000 ms eval limit.",
+      "restart_console": "restart-console.json",
+      "capture_renewed": true
+    },
+    "deferred_resume_modal": "output/ui-update/UI-19/resume-modal.json"
+  },
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "screenshots": 242,
+    "boards": "output/ui-update/UI-19/review-boards.json",
+    "inspection": "Pranchas e amostras nativas revisadas: identificação longa, sete passos, todos os destinos do hub, eventos/espera, resumos/comparativos, conclusão/falência e modais. Meses inferiores da falência são consultados depois de rolar a viewport real; controles fora da máscara não são tratados como acionáveis.",
+    "typography": "Inter Tight, pesos/tamanhos e cores das dependências preservados. Textos nativos, valores salvos e imagens inteiras. Scroll, máscaras, camadas e estados de controles conferidos nos fluxos reais.",
+    "new_art_batches": 0,
+    "boards_reviewed": 16,
+    "native_samples_reviewed": [
+      "hub e identificação longa",
+      "DRE mensal e revisão em 1280x720",
+      "falência e comparativo em 1280x720",
+      "falência rolada com mês 3 e Sair separados"
+    ]
+  },
+  "storage_isolation": {
+    "database": "D:/Cogna/jogos_empresa/Temp/ui19-campaigns.db",
+    "initial_tool_database": "D:/Cogna/jogos_empresa/Temp/ui19-validation.db",
+    "identification_key": "Cogna.UI19.Campaigns",
+    "legacy_database": "D:/Cogna/jogos_empresa/Temp/ui19-legacy-migration.db",
+    "unit_tests": "SQLite em memória e bancos temporários das suítes existentes; chaves Cogna.UI19.Tests.<GUID>.",
+    "player_data": "Overrides definidos no processo do Editor antes de Play Mode. A partida/cadastro reais não foram abertos nem apagados."
+  },
+  "invariants": {
+    "pngs_preserved": 277,
+    "guids_preserved": 277,
+    "single": 277,
+    "serialized_enums_unchanged": true,
+    "economic_catalogs_unchanged": true,
+    "campaign_months": 3,
+    "first_insert_at_d3": true,
+    "no_new_documentary_model": true
+  },
+  "resolved_during_validation": [
+    "As premissas antigas de espera de eventos e resumo já estavam parcialmente corrigidas nas dependências; foram preservadas e integradas, sem reimplementar a simulação.",
+    "Bateria de crédito antiga pulava o reconhecimento do resumo; passou a confirmar cada resultado antes do próximo mês. Harness UI-12 atualiza o estado esperado para Round_Event.",
+    "Roteiro real ajustado aos atalhos aninhados de Meu estabelecimento e ao caminho EventActions/CloseMonth.",
+    "Tentativa inicial de clicar o mês 3 abaixo da máscara da falência encontrou o Sair no rodapé. O roteiro final rola até os registros e valida raycasts; as três resoluções passaram.",
+    "Captura de erro de banco exige restabelecer a conexão isolada antes da captura protegida, mantendo a tela de erro até o retry. A guarda de isolamento permanece ativa.",
+    "A reabertura sem Pipeline revelou a dependência Newtonsoft não declarada no código anterior. O UPM promoveu a mesma versão 3.2.2 para dependência direta; auditoria final repetida sem Pipeline.",
+    "Regressão adicional da abertura de Sair antes do primeiro Update de retomada: pendência preservada durante o modal, evento real aberto após cancelar, caixa R$ 65.000 e zero liquidações preservados. Verificado no Editor sem Pipeline."
+  ],
+  "cleanup": "Pipeline e instalador temporários retirados; permanece somente a dependência real com.unity.nuget.newtonsoft-json@3.2.2 já usada pelo código. Metadados de arte/fontes incidentais restaurados. Cena e prefabs existentes preservados porque referências reais já eram válidas; verificação final no Editor sem a ferramenta temporária, além do audit de arquivos.",
+  "scope_limits": [
+    "Somente UI-19. UI-20 permanece planejada.",
+    "Sem branches/worktrees, push, arquivamento ou mensagens/conversas adicionais."
+  ]
+}

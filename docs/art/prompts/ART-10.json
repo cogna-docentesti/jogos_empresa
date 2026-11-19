@@ -1,0 +1,167 @@
+{
+  "task_id": "ART-10",
+  "date": "2026-10-14",
+  "status": "validado",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "model": null,
+  "model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+  "scope": "Somente MAP_BASE e map-layout.json. Cinco IDs de localidades e implantação central; nenhum controle do ART-05 ou construção/realce dos lotes futuros.",
+  "assets": [
+    {
+      "id": "MAP_BASE",
+      "output_path": "Assets/Art/new/location/map/map_base.png",
+      "origin": "Ilustração original gerada pela ferramenta integrada ImageGen com referência ao concept aprovado do hub; revisão de vegetação baixa pela mesma ferramenta.",
+      "references": [
+        {
+          "path": "art-source/references/concepts/01-hub.png",
+          "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+        }
+      ],
+      "requested_size_px": [
+        1920,
+        1080
+      ],
+      "actual_size_px": [
+        1920,
+        1080
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "sha256": "9d0df1c72c2ba94620a8bfa7ad4179755e59b10ae54a11f8c9fc329a0accc71a",
+      "transparent_background": true,
+      "final_prompt": "Use case: precise-object-edit.\nEdit target: esta camada MAP_BASE isolada, não um concept de interface.\nFaça um único ajuste de produção: substitua TODAS as árvores de copa alta por vegetação BAIXA, pequenos arbustos arredondados e canteiros desenhados com volume baixo, no mesmo estilo cartoon editorial 2D adulto. Nenhuma árvore alta deve permanecer em margens, ruas, bordas ou lotes. Os arbustos devem ficar ao lado de calçadas e limites, nunca no interior livre dos seis lotes.\nPreserve rigidamente a geometria do mapa: curso e margens do rio, posição das duas pontes, ruas, cruzamentos, calçadas e polígonos dos seis terrenos. Não mover nem redesenhar essa implantação. Preserve a mesma câmera, luz quente superior esquerda, paleta, textura desenhada e contornos ameixa limpos; preserve as estruturas das pontes. Mantenha as cinco regiões superior esquerda, superior central, superior direita, inferior esquerda residencial subdividida e inferior direita, e o lote do restaurante no centro. Não adicionar ou desenhar construções.\nPNG RGBA com transparência REAL já existente fora da geografia; manter terreno/água/pavimento opacos. Canvas desejado EXATAMENTE 1920x1080, 16:9, com escala uniforme da composição caso necessário, sem esticar e sem cortar novos elementos. Preservar alfa, sem halos, fundo sólido, checkerboard ou sombra externa. Não incorporar texto, rótulos, números, UI, HUD, prédios, pinos, ícones, pessoas, veículos ou realces. Um único arquivo, sem sprite sheet.",
+      "attempts": [
+        {
+          "prompt": "Use case: stylized-concept.\nAsset type: MAP_BASE, camada de geografia urbana 2D editorial para Jogos de Empresa Cogna; um único arquivo de arte importável.\nInput image 1: concept aprovado 01-hub, referência de câmera, composição, desenho e acabamento. Use somente a geografia do MAPA À ESQUERDA; ignore absolutamente o HUD, o painel de restaurante à direita, os rótulos, os brilhos e os prédios.\nPrimary request: crie SOMENTE a base geográfica da mesma cidade, pronta para receber construções em camadas separadas. Terreno, ruas, calçadas marfim, rio azul desenhado, duas pontes urbanas e vegetação BAIXA nas margens. Não reproduzir a interface.\nComposition/framing: canvas horizontal EXATAMENTE 1920x1080 pixels, proporção 16:9. Visão urbana elevada oblíqua/isométrica editorial, olhando a cidade de frente/sudeste para noroeste; vias diagonais e quarteirões em perspectiva, sem ponto de fuga exagerado. Preservar orientação e ângulo do mapa do concept, adaptando o enquadramento para 16:9.\nO rio faz uma curva diagonal da borda superior à esquerda, descendo até a borda esquerda inferior/média, como no concept. Duas pontes atravessam o rio, uma superior central-esquerda e outra inferior esquerda, com estrutura baixa e legível, sem grandes torres que ocluam terrenos. O centro e a direita da cidade são interligados por ruas.\nReservar seis implantações MUITO CLARAS e amplas, vazias e desobstruídas, com piso/lawn discreto uniforme sem marcação de seleção: universidade no quadrante superior esquerdo do rio; banco no superior central à direita do rio; comércio no superior direito; bairro residencial no inferior esquerdo abaixo do rio; corporativo no inferior direito; restaurante no centro ligeiramente à direita. Os cinco bairros e o terreno central não se sobrepõem. O lote do restaurante deve ser rodeado por calçada com entrada voltada para baixo/direita. Deixe área suficiente para futuramente inserir edifícios grandes em todos os locais. Nenhuma árvore, ponte, mobiliário ou prop ocupa o interior desses lotes. Bairro residencial pode ter subdivisões de jardim vazias que receberão casas depois.\nStyle/medium: cartoon editorial adulto 2D exatamente do concept; contornos ameixa/grafite limpos e orgânicos de espessura coerente, cores chapadas com sombreamento cel suave, pintura desenhada do rio e pavimento, acabamento profissional. Não fazer render 3D, miniatura de brinquedo, chibi ou blocos geométricos provisórios. Vegetação baixa, arbustos e pequenos canteiros bem desenhados, suficiente para continuidade visual sem cobrir os lotes.\nLighting/mood: mesma luz quente suave vinda do alto à esquerda; sombras locais discretas para baixo/direita, sem sombra externa do mapa.\nColor palette: marfim #F5F0E8 nos passeios, asfalto cinza com subtom violeta, contornos #30243C e #24113D, água azul como a referência, verdes naturais e teal #26776A na vegetação. Reservar o roxo forte Cogna para futuras camadas UI; não pintar lotes em cores de seleção.\nTransparency: PNG RGBA com transparência REAL somente fora do recorte do território. O terreno, pavimento e água são opacos no miolo. A geografia ocupa quase todo o canvas, com margem externa transparente estreita de aproximadamente 24px e bordas naturais que permitem encaixe em outras telas; não criar uma ilha flutuante com espessura, pedestal, moldura ou borda UI. Alfa zero fora da arte, antialias limpo, sem fundo colorido/branco, halo ou checkerboard desenhado.\nConstraints: sem qualquer construção/edifício/casa/restaurante/banco/universidade/loja/torre corporativa. Todas essas construções serão assets independentes futuros. Sem pessoas, veículos, postes altos, placas, pinos, nomes, letras, números, palavras, símbolos, logos, brilhos de seleção, HUD, painel, card, menu ou marca-d'água. Marcas viárias discretas são permitidas; não incluir dados do concept. Um único mapa-base, não uma sprite sheet, não múltiplos assets ou variações.",
+          "input_paths": [
+            "D:/Cogna/jogos_empresa/art-source/references/concepts/01-hub.png"
+          ],
+          "generated_file": "C:/Users/Pichau/.codex/generated_images/01a13c43-dcdb-78b0-b50c-624dd5a2c15b/exec-d0067cb9-4b63-417d-afdf-2952fc5e7163.png",
+          "actual_size_px": [
+            1672,
+            941
+          ],
+          "sha256": "5d02e3f141b447cc3d722ec70fe68a7267890835d334daa4afc84cf3ab27d204",
+          "transparent_background": true,
+          "selected": false,
+          "review": "Geografia e seis implantações aprovadas em revisão do agente; vegetação alta foi revisada para cumprir o brief.",
+          "mode": "RGBA",
+          "input_hashes": [
+            {
+              "path": "D:/Cogna/jogos_empresa/art-source/references/concepts/01-hub.png",
+              "sha256": "d5a7086f945d9d4e9d1b9b1699203cfda6b4b409bd2a15e16c14f667b5402fe8"
+            }
+          ]
+        },
+        {
+          "prompt": "Use case: precise-object-edit.\nEdit target: esta camada MAP_BASE isolada, não um concept de interface.\nFaça um único ajuste de produção: substitua TODAS as árvores de copa alta por vegetação BAIXA, pequenos arbustos arredondados e canteiros desenhados com volume baixo, no mesmo estilo cartoon editorial 2D adulto. Nenhuma árvore alta deve permanecer em margens, ruas, bordas ou lotes. Os arbustos devem ficar ao lado de calçadas e limites, nunca no interior livre dos seis lotes.\nPreserve rigidamente a geometria do mapa: curso e margens do rio, posição das duas pontes, ruas, cruzamentos, calçadas e polígonos dos seis terrenos. Não mover nem redesenhar essa implantação. Preserve a mesma câmera, luz quente superior esquerda, paleta, textura desenhada e contornos ameixa limpos; preserve as estruturas das pontes. Mantenha as cinco regiões superior esquerda, superior central, superior direita, inferior esquerda residencial subdividida e inferior direita, e o lote do restaurante no centro. Não adicionar ou desenhar construções.\nPNG RGBA com transparência REAL já existente fora da geografia; manter terreno/água/pavimento opacos. Canvas desejado EXATAMENTE 1920x1080, 16:9, com escala uniforme da composição caso necessário, sem esticar e sem cortar novos elementos. Preservar alfa, sem halos, fundo sólido, checkerboard ou sombra externa. Não incorporar texto, rótulos, números, UI, HUD, prédios, pinos, ícones, pessoas, veículos ou realces. Um único arquivo, sem sprite sheet.",
+          "input_paths": [
+            "C:/Users/Pichau/.codex/generated_images/01a13c43-dcdb-78b0-b50c-624dd5a2c15b/exec-d0067cb9-4b63-417d-afdf-2952fc5e7163.png"
+          ],
+          "transparent_background": true,
+          "generated_file": "C:/Users/Pichau/.codex/generated_images/01a13c43-dcdb-78b0-b50c-624dd5a2c15b/exec-53373976-ff29-43e7-a184-f810e2fbcc09.png",
+          "actual_size_px": [
+            1672,
+            941
+          ],
+          "selected": true,
+          "review": "Vegetação baixa e seis implantações livres; arte selecionada para export técnico do master.",
+          "sha256": "012479c87e769a3610f649fe273dc6605c314e9d9df96165c0798f6b861ba5ab",
+          "mode": "RGBA",
+          "input_hashes": [
+            {
+              "path": "C:/Users/Pichau/.codex/generated_images/01a13c43-dcdb-78b0-b50c-624dd5a2c15b/exec-d0067cb9-4b63-417d-afdf-2952fc5e7163.png",
+              "sha256": "5d02e3f141b447cc3d722ec70fe68a7267890835d334daa4afc84cf3ab27d204"
+            }
+          ]
+        }
+      ],
+      "technical_export": {
+        "task_id": "ART-10",
+        "input_path": "C:/Users/Pichau/.codex/generated_images/01a13c43-dcdb-78b0-b50c-624dd5a2c15b/exec-53373976-ff29-43e7-a184-f810e2fbcc09.png",
+        "input_sha256": "012479c87e769a3610f649fe273dc6605c314e9d9df96165c0798f6b861ba5ab",
+        "input_size_px": [
+          1672,
+          941
+        ],
+        "output_path": "Assets/Art/new/location/map/map_base.png",
+        "output_sha256": "9d0df1c72c2ba94620a8bfa7ad4179755e59b10ae54a11f8c9fc329a0accc71a",
+        "output_size_px": [
+          1920,
+          1080
+        ],
+        "mode": "RGBA",
+        "color_space": "sRGB",
+        "depth": "8-bit",
+        "operation": "Technical uniform contain export only; no painting, masking, background removal or nonuniform stretch.",
+        "uniform_scale": 1.1477151965993624,
+        "nominal_padding_px": [
+          0.5100956429330381,
+          0
+        ],
+        "raster_rounding_note": "Sharp rounds scaled dimensions and pads the remaining pixel. The final master is the coordinate authority.",
+        "alpha_preserved": true,
+        "art_created_by": "image_gen.imagegen",
+        "renderer_versions": {
+          "aom": "3.15.1",
+          "archive": "3.8.9",
+          "cairo": "1.18.6",
+          "cgif": "0.5.4",
+          "exif": "0.6.26",
+          "expat": "2.8.5",
+          "ffi": "3.8.0",
+          "fontconfig": "2.18.3",
+          "freetype": "2.14.3",
+          "fribidi": "1.0.17",
+          "glib": "2.90.0",
+          "harfbuzz": "14.5.0",
+          "heif": "1.23.5",
+          "highway": "1.4.0",
+          "imagequant": "2.4.1",
+          "lcms": "2.19.1",
+          "mozjpeg": "0826579",
+          "pango": "1.58.2",
+          "pixman": "0.46.4",
+          "png": "1.6.58",
+          "proxy-libintl": "0.5",
+          "rsvg": "2.63.2",
+          "tiff": "4.7.2",
+          "uhdr": "2.0.2",
+          "vips": "8.18.7",
+          "webp": "1.6.0",
+          "xml2": "2.15.4",
+          "zlib-ng": "2.3.3",
+          "sharp": "0.35.5"
+        }
+      },
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "model_note": "O identificador do modelo não é exposto pela ferramenta integrada.",
+      "status": "validado",
+      "coordinate_contract": "docs/art/layouts/map-layout.json",
+      "coordinate_contract_sha256": "9fa8e5e174504952b5b6f5d833de31de5434b76629b6229cb9a5333bd4884810",
+      "source_editable": null,
+      "source_note": "Arte raster generativa; sem fonte vetorial fictícia. Prompts e script de export técnico são preservados.",
+      "pivot": [
+        0,
+        1
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "alpha_note": "Alfa original preservado: os interiores dos seis lotes ficam entre 250 e 254 (98 a 99,6% de opacidade). Não foram artificialmente fixados em 255."
+    }
+  ],
+  "auxiliary_deliverables": [
+    "docs/art/layouts/map-layout.json"
+  ],
+  "producer_source": "art-source/editable/ART-10/record-art10.py",
+  "export_source": "art-source/editable/ART-10/export-map.cjs",
+  "preview_source": "art-source/editable/qa/ART-10-preview.py",
+  "integration_performed": false,
+  "qa_record": "docs/art/qa/ART-10.json"
+}

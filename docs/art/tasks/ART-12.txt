@@ -1,0 +1,43 @@
+ART-12 — Restaurantes centrais e camada frontal do mapa (PNG compacto)
+Escopo: núcleo
+Pré-requisitos: ART-10, ART-11
+
+Três variantes de restaurante central com mesma implantação e porta, mais foreground; quatro PNGs compactos transparentes, coordenadas em map-restaurants-compact.json.
+A especificação full-frame foi substituída por recortes e coordenadas, conforme pedido do usuário. Master, câmera, zonas, porta e hit-areas permanecem os mesmos.
+
+COMANDO PARA O CODEX
+Use $cogna-artista para executar somente ART-12, seguindo manifesto e concepts aprovados. Produzir os três restaurantes centrais e o foreground com alfa real, PNGs compactos separados, mesma porta/implantação/escala e coordenadas registradas. Não integrar cenas.
+
+LEITURAS
+docs/art/manifest.json, tokens.json, characters.json, sources.json
+docs/art/layouts/map-layout.json
+docs/art/layouts/map-restaurants-compact.json
+art-source/references/concepts/01-hub.png e 02-abertura.png
+
+ENTREGÁVEIS
+MAP_REST_LANCHES | location/restaurants/map_rest_lanches.png
+Export 320x259 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1036, 418] | escala 1
+
+MAP_REST_FRANCES | location/restaurants/map_rest_frances.png
+Export 316x247 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1040, 418] | escala 1
+
+MAP_REST_JAPONES | location/restaurants/map_rest_japones.png
+Export 314x271 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1042, 418] | escala 1
+
+MAP_FOREGROUND | location/map/map_foreground.png
+Export 135x95 px | alfa recorte | pivot [0,1] | bordas [0,0,0,0]
+Posição top-left no master: [1088, 588] | escala 1
+
+ENCAIXE
+Master 1920x1080, origem top_left_y_down. Restaurantes mutuamente exclusivos na ordem 70; foreground na ordem 90. Porta comum [1280,642], referência de chão [1172,657].
+Transformação de exibição compartilhada: escala 2/3, offset absoluto de canvas [24,176], viewport [24,112,1280,848]. Não esticar cada sprite para a viewport.
+Conservar câmera, silhueta estrutural, porta e footprint entre variantes; diferenças de decoração/interior. Sem texto, nomes, logos, pessoas ou UI incorporada.
+
+CRITÉRIOS
+Cada PNG no manifesto, RGBA sRGB com alfa real, dimensões e SHA256 reais. Revisão sobre fundos marfim/ameixa e montagem de cada variante com ART-10/ART-11 e foreground.
+Preservar alfa gerado. Recorte técnico inclui todo pixel com alfa não zero mais margem de 2 px. Registrar fontes e prompt exato. Nada de outros lotes ou integração.
+python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-12
+python art-source/editable/qa/ART-12-preview.py

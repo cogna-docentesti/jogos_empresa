@@ -3,12 +3,53 @@ using UnityEngine;
 
 public class UIStateListener : MonoBehaviour
 {
-    [Header("ConfiguraÁ„o inicial")]
+    public static UIStateListener Instance { get; private set; }
+    public GameObject CurrentPanel { get; private set; }
+    private GameStateMachine subscribedMachine;
+    private void Awake() { Instance = this; }
+
+    // These states are synchronous handoffs, never user-facing screens.
+    public static bool IsTechnicalState(GameState state) => state == GameState.Bootstrap
+        || state == GameState.MainMenu || state == GameState.Config_Review
+        || state == GameState.Round_Start || state == GameState.Round_Sales || state == GameState.Round_Costs;
+
+    /// <summary>The sole writer of screen visibility. Navigation and report consultations delegate here.</summary>
+    public static void PresentScreen(GameObject target)
+    {
+        if (Instance == null) { if (target != null) target.SetActive(true); return; }
+        Instance.Present(target);
+    }
+
+    public static void DismissScreen(GameObject target)
+    {
+        if (Instance != null && Instance.CurrentPanel == target) Instance.Present(null);
+        else if (target != null) target.SetActive(false);
+    }
+
+    private void Present(GameObject target)
+    {
+        foreach (var panel in AllPanels())
+            if (panel != null && panel != target && panel.activeSelf) panel.SetActive(false);
+        var registry = GetComponentInChildren<Game.Adapter.In.UI.Navigation.PanelRegistry>(true)
+            ?? FindFirstObjectByType<Game.Adapter.In.UI.Navigation.PanelRegistry>();
+        if (registry != null)
+            foreach (var binding in registry.Bindings)
+                if (binding.root != null && binding.root != target && binding.root.activeSelf) binding.root.SetActive(false);
+        CurrentPanel = target;
+        if (target != null && !target.activeSelf) target.SetActive(true);
+    }
+
+    private GameObject[] AllPanels() => new[] { identificationPanel, configLocationPanel, configRestaurantPanel,
+        configTargetSegmentPanel, initialEquipmentPanel, initialTeamPanel, initialCapitalPanel, managementHubPanel,
+        roundStartPanel, roundSalesPanel, roundCostsPanel, roundEventPanel, roundSummaryPanel, finalReportPanel, bankruptcyPanel };
+
+    [Header("Configura√ß√£o inicial")]
+    [SerializeField] private GameObject identificationPanel;
     [SerializeField] private GameObject configLocationPanel;
     [SerializeField] private GameObject configRestaurantPanel;
     [SerializeField] private GameObject configTargetSegmentPanel;
 
-    [Header("ConfiguraÁ„o operacional inicial")]
+    [Header("Configura√ß√£o operacional inicial")]
     [SerializeField] private GameObject initialEquipmentPanel;
     [SerializeField] private GameObject initialTeamPanel;
     [SerializeField] private GameObject initialCapitalPanel;
@@ -31,26 +72,29 @@ public class UIStateListener : MonoBehaviour
     {
         if (GameManager.Instance == null || GameManager.Instance.StateMachine == null)
         {
-            Debug.LogError("GameManager ou StateMachine n„o encontrados.");
+            Debug.LogError("GameManager ou StateMachine n√£o encontrados.");
             return;
         }
 
-        GameManager.Instance.StateMachine.OnStateChanged += HandleStateChanged;
+        subscribedMachine = GameManager.Instance.StateMachine;
+        subscribedMachine.OnStateChanged += HandleStateChanged;
 
         HandleStateChanged(GameManager.Instance.StateMachine.CurrentState);
     }
 
     private void OnDestroy()
     {
-        if (GameManager.Instance == null || GameManager.Instance.StateMachine == null)
-            return;
-
-        GameManager.Instance.StateMachine.OnStateChanged -= HandleStateChanged;
+        if (subscribedMachine != null) subscribedMachine.OnStateChanged -= HandleStateChanged;
+        if (Instance == this) Instance = null;
     }
 
     private void HandleStateChanged(GameState state)
     {
-        HideAllPanels();
+        Game.Adapter.In.UI.SharedModalFocus.CloseForNavigation();
+        if (IsTechnicalState(state) && !GameSessionState.HasIncompatibleSave) return;
+        if (state != GameState.Management_Hub)
+            Game.Adapter.In.UI.Navigation.MenuNavigator.Instance?.CloseAll();
+        Present(null);
         var views = FindObjectsByType<Game.Adapter.In.UI.EstablishmentSummaryView>(
             FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -72,6 +116,10 @@ public class UIStateListener : MonoBehaviour
 
         switch (state)
         {
+            case GameState.Config_Identification:
+                Show(identificationPanel);
+                break;
+
             case GameState.Config_Location:
                 Show(configLocationPanel);
                 break;
@@ -98,19 +146,9 @@ public class UIStateListener : MonoBehaviour
                 break;
 
             case GameState.Management_Hub:
-                Show(managementHubPanel);
-                break;
-
-            case GameState.Round_Start:
-                Show(roundStartPanel);
-                break;
-
-            case GameState.Round_Sales:
-                Show(roundSalesPanel);
-                break;
-
-            case GameState.Round_Costs:
-                Show(roundCostsPanel);
+                if(Game.Adapter.In.UI.Navigation.MenuNavigator.Instance!=null)
+                    Game.Adapter.In.UI.Navigation.MenuNavigator.Instance.OpenRoot();
+                else Show(managementHubPanel);
                 break;
 
             case GameState.Round_Event:
@@ -131,36 +169,9 @@ public class UIStateListener : MonoBehaviour
         }
     }
 
-    private void HideAllPanels()
-    {
-        SetActive(configLocationPanel, false);
-        SetActive(configRestaurantPanel, false);
-        SetActive(configTargetSegmentPanel, false);
-
-        SetActive(initialEquipmentPanel, false);
-        SetActive(initialTeamPanel, false);
-        SetActive(initialCapitalPanel, false);
-
-        SetActive(managementHubPanel, false);
-
-        SetActive(roundStartPanel, false);
-        SetActive(roundSalesPanel, false);
-        SetActive(roundCostsPanel, false);
-        SetActive(roundEventPanel, false);
-        SetActive(roundSummaryPanel, false);
-
-        SetActive(finalReportPanel, false);
-        SetActive(bankruptcyPanel, false);
-    }
-
     private void Show(GameObject panel)
     {
-        SetActive(panel, true);
-    }
-
-    private void SetActive(GameObject target, bool active)
-    {
-        if (target != null)
-            target.SetActive(active);
+        if (panel == null) Debug.LogError("[UIStateListener] Missing required panel for " + subscribedMachine?.CurrentState);
+        PresentScreen(panel);
     }
 }

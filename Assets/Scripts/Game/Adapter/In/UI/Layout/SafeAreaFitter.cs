@@ -33,6 +33,7 @@ namespace Game.Adapter.In.UI.Layout
 
         private Rect _lastSafeArea;
         private Vector2Int _lastResolution;
+        private Vector3 _lastScale;
 
         private void OnEnable()
         {
@@ -71,20 +72,23 @@ namespace Game.Adapter.In.UI.Layout
 
         private void Apply(bool force)
         {
+            Apply(Screen.safeArea, new Vector2Int(Screen.width, Screen.height), force);
+        }
+
+        private void Apply(Rect safeArea, Vector2Int resolution, bool force)
+        {
             if (_rect == null || !_captured)
                 Capture();
 
             if (_rect == null)
                 return;
 
-            var safeArea   = Screen.safeArea;
-            var resolution = new Vector2Int(Screen.width, Screen.height);
-
-            if (!force && safeArea == _lastSafeArea && resolution == _lastResolution)
+            if (!force && safeArea == _lastSafeArea && resolution == _lastResolution && _lastScale == transform.lossyScale)
                 return;
 
             _lastSafeArea   = safeArea;
             _lastResolution = resolution;
+            _lastScale = transform.lossyScale;
 
             if (resolution.x <= 0 || resolution.y <= 0)
                 return;
@@ -95,25 +99,22 @@ namespace Game.Adapter.In.UI.Layout
             float rightPx  = resolution.x - safeArea.xMax;
             float topPx    = resolution.y - safeArea.yMax;
 
-            // ...convertido para unidades de canvas.
-            float scaleX = 1f;
-            float scaleY = 1f;
-
-            if (_rootCanvas != null)
+            // Offsets live in the PARENT's units, which may include a design-frame scale.
+            // Root canvas units alone would under-inset nested, uniformly scaled content.
+            var parent = _rect.parent as RectTransform;
+            var camera = _rootCanvas != null && _rootCanvas.renderMode != RenderMode.ScreenSpaceOverlay
+                ? _rootCanvas.worldCamera : null;
+            float scaleX = 1f, scaleY = 1f;
+            if (parent != null
+                && RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, Vector2.zero, camera, out var origin)
+                && RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, Vector2.one, camera, out var pixel))
             {
-                var canvasRect = _rootCanvas.transform as RectTransform;
-
-                if (canvasRect != null && canvasRect.rect.width > 0f && canvasRect.rect.height > 0f)
-                {
-                    scaleX = canvasRect.rect.width  / resolution.x;
-                    scaleY = canvasRect.rect.height / resolution.y;
-                }
+                scaleX = Mathf.Abs(pixel.x-origin.x); scaleY = Mathf.Abs(pixel.y-origin.y);
             }
-
-            float left   = applyLeft   ? leftPx   * scaleX : 0f;
-            float right  = applyRight  ? rightPx  * scaleX : 0f;
-            float bottom = applyBottom ? bottomPx * scaleY : 0f;
-            float top    = applyTop    ? topPx    * scaleY : 0f;
+            float left = applyLeft ? leftPx * scaleX : 0;
+            float right = applyRight ? rightPx * scaleX : 0;
+            float bottom = applyBottom ? bottomPx * scaleY : 0;
+            float top = applyTop ? topPx * scaleY : 0;
 
             _rect.offsetMin = new Vector2(_baseOffsetMin.x + left,  _baseOffsetMin.y + bottom);
             _rect.offsetMax = new Vector2(_baseOffsetMax.x - right, _baseOffsetMax.y - top);

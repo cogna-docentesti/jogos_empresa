@@ -1,0 +1,601 @@
+{
+  "task_id": "ART-28",
+  "title": "Ilustração em camadas da DRE mensal",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Specific model identifier is not exposed by the integrated tool.",
+    "distinct_asset_generations": 6,
+    "revision_generations": 1,
+    "prompts_record": "docs/art/prompts/ART-28.json",
+    "source_directory": "art-source/editable/ART-28/generations",
+    "export_source": "art-source/editable/ART-28/export-art28.cjs",
+    "preview_source": "art-source/editable/ART-28/preview-art28.cjs"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 6,
+    "report": "docs/art/qa/ART-28-technical.json",
+    "plan_report": "docs/art/qa/ART-28-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-28-prerequisites.json",
+    "schema_and_alignment_report": "docs/art/qa/ART-28-contract-validation.json",
+    "scope_report": "docs/art/qa/ART-28-scope-audit.json"
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": "Seis arquivos em tamanho nativo e nas caixas de exibição do manifesto; também montagem 560x420 e comparação CH01/master. Contact sheet é visão geral reduzida; previews display-light-dark têm os tamanhos exatos.",
+    "inspected_previews": [
+      "art-source/previews/ART-28/DRE_ENVIRONMENT-native-light-dark.png",
+      "art-source/previews/ART-28/DRE_ENVIRONMENT-display-light-dark.png",
+      "art-source/previews/ART-28/DRE_DESK-native-light-dark.png",
+      "art-source/previews/ART-28/DRE_DESK-display-light-dark.png",
+      "art-source/previews/ART-28/CH01_DRE-native-light-dark.png",
+      "art-source/previews/ART-28/CH01_DRE-display-light-dark.png",
+      "art-source/previews/ART-28/DRE_PROP_CALCULATOR-native-light-dark.png",
+      "art-source/previews/ART-28/DRE_PROP_CALCULATOR-display-light-dark.png",
+      "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-native-light-dark.png",
+      "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-display-light-dark.png",
+      "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-native-light-dark.png",
+      "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-display-light-dark.png",
+      "art-source/previews/ART-28/ART-28-layer-proof.png",
+      "art-source/previews/ART-28/ART-28-contact-sheet.png",
+      "art-source/previews/ART-28/ART-28-identity-comparison.png"
+    ],
+    "checks": [
+      "Seis assets individualizados; nenhum sprite sheet, card, tabela, texto, dado, número ou gráfico incorporado.",
+      "Alfa verdadeiro nos cinco recortes, sem checkerboard, halo amplo ou cenário incorporado. O fundo é RGBA completamente opaco. Antialias e alfa retornados pelo ImageGen preservados.",
+      "Identidade CH01 comparada ao master canônico de hash d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45. Rosto, pele, olhos, cabelo, figurino e argolas preservados; mãos, postura, silhueta e contornos inspecionados.",
+      "Fontes geradas têm dimensões diferentes das finais, registradas por arquivo. Redução uniforme via sharp/libvips; CH01 recebeu padding transparente para cumprir a margem de 10%. Sem crop, stretch x/y, pintura ou limpeza de alfa por script.",
+      "Primeiro ambiente reprovado por pessoas ao longe e mesa frontal incorporada. Revisão ImageGen removeu ambos. Original e revisão preservados com prompts exatos e hashes.",
+      "Montagem usa exatamente as escalas/pivots/posições do contrato: papel atrás dos dedos de CH01, mesa à frente da parte inferior sentada, xícara e calculadora sobre o tampo. Z-order suficiente; não são necessárias máscaras.",
+      "Viewport 560x420 recorta intencionalmente pernas da mesa e parte inferior da pose; PNGs finais completos permanecem separados. Prova anterior à mesa expõe essa separação.",
+      "Luz suave do alto à esquerda e perspectiva frontal com visão moderada do tampo consistentes entre cenário, pessoa, mesa e props."
+    ]
+  },
+  "composition": {
+    "contract": "docs/art/layouts/dre-layout.json",
+    "schema": "docs/art/schemas/dre-layout.schema.json",
+    "canvas_px": [
+      1920,
+      1080
+    ],
+    "viewport_px": [
+      1320,
+      120,
+      560,
+      420
+    ],
+    "paper_hand_distance_px": 0,
+    "occlusion_masks_required": false,
+    "proof": "art-source/previews/ART-28/ART-28-layer-proof.png"
+  },
+  "assets": [
+    {
+      "id": "DRE_ENVIRONMENT",
+      "path": "Assets/Art/new/dre/monthly/office_background.png",
+      "status": "validado",
+      "actual_size_px": [
+        1024,
+        768
+      ],
+      "mode": "RGBA",
+      "sha256": "160fd42b874b16be32f61df03b6fae0321bc75999eaefab35df99ce95f7a99e9",
+      "source_path": "art-source/editable/ART-28/generations/env_revision.png",
+      "source_sha256": "cd673fbb48ec48504c2a89bd25d88598e73d39fb9af0f3fa233783b3a4843f0a",
+      "source_size_px": [
+        1448,
+        1086
+      ],
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          255,
+          255
+        ],
+        "transparent_fraction": 0,
+        "opaque_fraction": 1,
+        "alpha_bbox_ltrb_px": [
+          0,
+          0,
+          1024,
+          768
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          0,
+          0,
+          1024,
+          768
+        ],
+        "outer_edge_alpha_max": 255
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1448,
+          1086
+        ],
+        "resampled_frame_px": [
+          1024,
+          768
+        ],
+        "uniform_scale": 0.7071823204419889,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": "not_applicable",
+      "notes": "Janela com toldo roxo sem letreiro, escritório frontal, luz superior esquerda, sem pessoas internas/externas, mesa frontal, dados ou UI. Livros e plantas posteriores são ambientação fixa."
+    },
+    {
+      "id": "DRE_DESK",
+      "path": "Assets/Art/new/dre/props/desk_foreground.png",
+      "status": "validado",
+      "actual_size_px": [
+        1024,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "29e9c3644a3dec89d9b5b9ff472031432f09b4170a07014e3fbcea6a5f2b55f0",
+      "source_path": "art-source/editable/ART-28/generations/desk.png",
+      "source_sha256": "36f071e8efc797e90d9ad7b8e1eb23b80732776c00612f26ac3baa11c2d6219c",
+      "source_size_px": [
+        1774,
+        887
+      ],
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5888423919677734,
+        "opaque_fraction": 0.00262451171875,
+        "alpha_bbox_ltrb_px": [
+          17,
+          9,
+          1007,
+          469
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          20,
+          81,
+          1004,
+          457
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1774,
+          887
+        ],
+        "resampled_frame_px": [
+          1024,
+          512
+        ],
+        "uniform_scale": 0.5772266065388951,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": "not_applicable",
+      "notes": "Mesa vazia completa, pernas e tampo independentes, sem pessoa ou props incorporados. Contornos limpos nos fundos claro/escuro."
+    },
+    {
+      "id": "CH01_DRE",
+      "path": "Assets/Art/new/characters/CH01/ch01_analyzing.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "301830497a39a2f99a37ef9e019b1c1c2b2bb1f0b6f2f7c6ea7038b10a1e4c5a",
+      "source_path": "art-source/editable/ART-28/generations/ch01.png",
+      "source_sha256": "4e5ed20834e87e9b0bf1f72dac32f84959efc9fc2ff2b9fc7fff1b08702dc679",
+      "source_size_px": [
+        1086,
+        1448
+      ],
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png",
+        "Assets/Art/new/characters/CH01/ch01_canonical.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5",
+        "Assets/Art/new/characters/CH01/ch01_canonical.png": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6952845255533854,
+        "opaque_fraction": 0.0024668375651041665,
+        "alpha_bbox_ltrb_px": [
+          110,
+          112,
+          680,
+          921
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          141,
+          158,
+          677,
+          894
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1086,
+          1448
+        ],
+        "resampled_frame_px": [
+          614,
+          819
+        ],
+        "uniform_scale": 0.565377532228361,
+        "transparent_padding_ltrb_px": [
+          77,
+          102,
+          77,
+          103
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Identidade comparada ao master: rosto, pele, olhos, bob curto ondulado, risca lateral, argolas douradas e camisa lilás preservados. Pose sentada, mãos legíveis; corte intencional nas coxas oculto pela mesa. Sem papel ou móveis incorporados."
+    },
+    {
+      "id": "DRE_PROP_CALCULATOR",
+      "path": "Assets/Art/new/dre/props/calculator.png",
+      "status": "validado",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "25ee5c340807e9262946341ae3a53688fc90be8beeca664c877bc7502f94c6ff",
+      "source_path": "art-source/editable/ART-28/generations/calculator.png",
+      "source_sha256": "1f1da112894855c6921c27c1049ca0d906e8c307299a3a042b9de54db2956c2e",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5574951171875,
+        "opaque_fraction": 0.0080413818359375,
+        "alpha_bbox_ltrb_px": [
+          7,
+          31,
+          252,
+          247
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          9,
+          51,
+          249,
+          217
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          256,
+          256
+        ],
+        "uniform_scale": 0.20414673046251994,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": "not_applicable",
+      "notes": "Calculadora legível a 96x96, teclas e visor completamente sem números/símbolos, perspectiva compatível com o tampo."
+    },
+    {
+      "id": "DRE_PROP_COFFEE_CUP",
+      "path": "Assets/Art/new/dre/props/coffee_cup.png",
+      "status": "validado",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "c5870bfc14bc1e5b582a787fc82e929248ed948a7b5b39faf61143743eb1a322",
+      "source_path": "art-source/editable/ART-28/generations/cup.png",
+      "source_sha256": "c5f0844b4b9728989e787cf6299ec4995d535832c06da91514ac5f68f1220a4a",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.605926513671875,
+        "opaque_fraction": 0.0096588134765625,
+        "alpha_bbox_ltrb_px": [
+          15,
+          40,
+          238,
+          221
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          47,
+          50,
+          235,
+          218
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          256,
+          256
+        ],
+        "uniform_scale": 0.20414673046251994,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": "not_applicable",
+      "notes": "Xícara marfim sem estampa, café visível, alça direita com vão transparente, base assentada sobre o tampo na prova."
+    },
+    {
+      "id": "DRE_PROP_REPORT_BLANK",
+      "path": "Assets/Art/new/dre/props/report_blank.png",
+      "status": "validado",
+      "actual_size_px": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "sha256": "35c1ab74351405cded6be808d975643cc9d2e212946e031d0e556ed3e4aaae25",
+      "source_path": "art-source/editable/ART-28/generations/paper.png",
+      "source_sha256": "064b085bfb9a227097b992c17153763c26d3e6d92bd37a7a5c07ce92cf000e84",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "references": [
+        "art-source/references/concepts/04-dre-mensal.png"
+      ],
+      "reference_sha256": {
+        "art-source/references/concepts/04-dre-mensal.png": "4c7c9f7e85a705233df96a3ea79696844215a6f3d1e4f8283d2ecfa804e670b5"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5030364990234375,
+        "opaque_fraction": 0.0095367431640625,
+        "alpha_bbox_ltrb_px": [
+          18,
+          21,
+          235,
+          236
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          40,
+          24,
+          213,
+          232
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction, transparent frame padding for CH01, RGB to RGBA for opaque background. No painting, alpha cleanup, recolor or cropping.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          256,
+          256
+        ],
+        "uniform_scale": 0.20414673046251994,
+        "transparent_padding_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": "not_applicable",
+      "notes": "Folha em branco sem linhas/gráficos/dados; contorno completo, borda direita coincide com a mão; dedos ocultam a borda pelo z-order."
+    }
+  ],
+  "previews": [
+    {
+      "path": "art-source/previews/ART-28/DRE_ENVIRONMENT-native-light-dark.png",
+      "sha256": "3767a63c7befab4bbc024ff4091aa06933ee047e77b63736860172d72960c67e",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_ENVIRONMENT-display-light-dark.png",
+      "sha256": "6ce95d1da8089568fe60e4789cafb7ef92ad7ddff01966f000d2a0d886f1244a",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_DESK-native-light-dark.png",
+      "sha256": "39d984173e7546b52bfb36c7de666556bba96cf8d3c48b6767fd61322cb17d56",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_DESK-display-light-dark.png",
+      "sha256": "e4f264bb20fc83a96cbf61ef59fdb099e58612eda1e6a9ad44e776dbaf95d872",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/CH01_DRE-native-light-dark.png",
+      "sha256": "bbdf22c3fb5b9c07d90333a9d08a023f6a295764326b676fadabc01ba33e2d36",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/CH01_DRE-display-light-dark.png",
+      "sha256": "7673b784d62f5a74cab011ea1daae4eb5aee80088f63de3f7c1b04081e43254b",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_PROP_CALCULATOR-native-light-dark.png",
+      "sha256": "a3dd73ac4c6ac9cee26373cb656ee8e2706d520d9ee28ead7447e9804a50105e",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_PROP_CALCULATOR-display-light-dark.png",
+      "sha256": "0d4464c5ef224d27cbb14853042a806e9223d4d6f3a86fb0d383c88ac4f2bc3b",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-native-light-dark.png",
+      "sha256": "8e3a2b46580b78eb52ac8dfc0883847ff29e3596a0859cd95ef7d764ea4abac7",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_PROP_COFFEE_CUP-display-light-dark.png",
+      "sha256": "3eb79c98b6b4d9b0cebd3f942ef52ab179dc70a77c4b4f6029988ef26513f113",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-native-light-dark.png",
+      "sha256": "7406c86e908148870fb76ba234c03ae92038a67bf3cc2d558776a1879758b39d",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/DRE_PROP_REPORT_BLANK-display-light-dark.png",
+      "sha256": "c899f99706f232a164dd8bef2037966dfba4d08e7daea9cf6101c07b21eedcfb",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/ART-28-layer-proof.png",
+      "sha256": "026757d416ae97ad6771aefdcc9405809892832fc3230898c1dd64df5df5403f",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/ART-28-contact-sheet.png",
+      "sha256": "550006c9cf907dfc10eef3c736aa243c54ace62d1145de37ed43d715e9a946b8",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-28/ART-28-identity-comparison.png",
+      "sha256": "27e6a49a9084393bb09cac779ec926ef576c33b0348ba8327b8deca64023f18d",
+      "preview_only": true
+    }
+  ],
+  "pending": [],
+  "future_integration": "Integração em cenas fora deste lote. ART-29 acrescentará montagem trimestral e âncoras do mentor sem regenerar estes props.",
+  "integration_performed": false
+}

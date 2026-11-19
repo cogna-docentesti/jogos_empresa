@@ -1,0 +1,436 @@
+{
+  "task_id": "ART-16",
+  "date": "2026-10-14",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "scope_resolution": "Executado ART-16 — Cinco vinhetas de localização, seguindo o número do lote e o manifesto, como na resolução explícita do ART-15. O trecho repetido sobre controles corresponde ao ART-05, preservado.",
+  "technical": {
+    "passed": true,
+    "asset_count": 5,
+    "report": "docs/art/qa/ART-16-technical.json",
+    "plan_report": "docs/art/qa/ART-16-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-16-prerequisites.json"
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "native_size_px": [
+      960,
+      540
+    ],
+    "display_box_px": [
+      520,
+      292
+    ],
+    "display_fit": "contain/preserveAspect, escala uniforme min(520/960,292/540), com arredondamento inteiro do raster e sem esticar eixos",
+    "contact_sheet": "art-source/previews/ART-16/ART-16-contact-sheet.png",
+    "architecture_comparison": "art-source/previews/ART-16/ART-16-architecture-comparison.png",
+    "inspected_previews": [
+      "art-source/previews/ART-16/VIGNETTE_BANK-display-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_BANK-native-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_CONDOMINIUM-display-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_CONDOMINIUM-native-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_MARKETING-display-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_MARKETING-native-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_STORE-display-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_STORE-native-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_UNIVERSITY-display-light-dark.png",
+      "art-source/previews/ART-16/VIGNETTE_UNIVERSITY-native-light-dark.png"
+    ],
+    "checks": [
+      "Cada vinheta é um PNG individual com um ambiente conectado e exterior transparente, sem card, moldura ou fundo retangular incorporado.",
+      "Silhuetas completas: telhados, cúpula, árvores, fachadas e piso conferidos em tamanho nativo e na caixa 520×292 sobre marfim e ameixa.",
+      "Comparação com os cinco sprites principais de ART-11 confirma cores, materiais, tipologia, proporções e silhuetas arquitetônicas reconhecíveis. As vinhetas têm composição própria e não alteram as coordenadas do mapa.",
+      "Banco e universidade conservam entradas e escadarias livres; conjunto corporativo conserva hierarquia de alturas e conexão entre blocos.",
+      "Bairro residencial contém seis casas em um único ambiente com jardins e via; não é uma prancha de sprites separados.",
+      "Calçadas, árvores e jardins dão contexto ambiental, com sombras locais contidas na área da vinheta e sem sombra externa destacada.",
+      "Nenhuma pessoa, palavra, número, rótulo, pin, ícone, logo, gráfico, preço, veículo ou elemento de interface incorporado aos PNGs.",
+      "Cartoon editorial adulto, contornos ameixa, luz superior esquerda, edifícios marfim, vidro azul, vegetação verde/teal e terracota/coral conforme os concepts e construções canônicas.",
+      "Transparência real e bordas externas alfa zero; ausência de checkerboard, halo aparente ou fragmentos visíveis fora do ambiente.",
+      "Fontes originais 1672×941 preservadas; redução uniforme para 912×513 e padding transparente [24,13,24,14] até 960×540. Não houve crop, pintura, limpeza de alfa por código ou deformação independente de eixos."
+    ],
+    "alpha_notes": [
+      "A geração entrega o miolo visualmente sólido, com alfa predominantemente 252–254 e alguns pixels 255. O alfa original foi preservado, sem forçar opacidade por código.",
+      "Resíduos esparsos de alfa muito baixo ampliam o bounding box total da geração; permanecem preservados e não são perceptíveis nos fundos de QA."
+    ],
+    "model_note": "Modelo específico não exposto pela ferramenta integrada; registrado como null."
+  },
+  "assets": [
+    {
+      "id": "VIGNETTE_BANK",
+      "name": "Área Financeira",
+      "path": "Assets/Art/new/location/illustrations/vignette_bank.png",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "bytes": 582458,
+      "sha256": "08eaa244c63d5997d86b6721ee6759d0aaec91100580fc38c09ae9999af939f9",
+      "srgb_profile": "sRGB",
+      "technical": true,
+      "visual": true,
+      "notes": "Banco de dois pavimentos em marfim, três faixas envidraçadas azuis e entrada central com escadaria, jardineiras e calçada arborizada.",
+      "source_path": "art-source/references/generations/ART-16/vignette_bank-source-01.png",
+      "source_sha256": "ca17c19a29bae9ebc3d8d016258f9adfa3731432ffd61a0147c47c3870872774",
+      "source_size_px": [
+        1672,
+        941
+      ],
+      "canonical_map_asset": {
+        "id": "MAP_BANK",
+        "path": "Assets/Art/new/location/landmarks/compact/map_bank.png",
+        "sha256": "d63f2a9bc644c66f83a285f4c7a944380b33921910db7c95486bb03788da95ce"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4136033950617284,
+        "fully_opaque_fraction": 0.0026697530864197533,
+        "alpha_250_or_more_fraction": 0.5641975308641975,
+        "semitransparent_fraction": 0.5837268518518518,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            245887
+          ],
+          [
+            254,
+            22055
+          ],
+          [
+            252,
+            19131
+          ],
+          [
+            251,
+            2505
+          ]
+        ],
+        "alpha_bbox_xywh": [
+          24,
+          34,
+          880,
+          492
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          59,
+          37,
+          843,
+          478
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "display_preview": "art-source/previews/ART-16/VIGNETTE_BANK-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-16/VIGNETTE_BANK-native-light-dark.png"
+    },
+    {
+      "id": "VIGNETTE_CONDOMINIUM",
+      "name": "Área Residencial",
+      "path": "Assets/Art/new/location/illustrations/vignette_condominium.png",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "bytes": 665698,
+      "sha256": "77d974772a6feed0a895ded5a84d19e334a668c3991cbcd2a4e17b4947c07166",
+      "srgb_profile": "sRGB",
+      "technical": true,
+      "visual": true,
+      "notes": "Seis casas de dois pavimentos, paredes claras, telhados terracota e portas/janelas azuis, integradas por jardins, caminhos e uma via residencial curva.",
+      "source_path": "art-source/references/generations/ART-16/vignette_condominium-source-01.png",
+      "source_sha256": "5b0a660ae88e54945710de1c7f81d720bf1e76061ce0faf144d0077cbe1d8399",
+      "source_size_px": [
+        1672,
+        941
+      ],
+      "canonical_map_asset": {
+        "id": "MAP_CONDOMINIUM",
+        "path": "Assets/Art/new/location/landmarks/compact/map_condominium.png",
+        "sha256": "dc20b4a6f5be465fcde3c72fbb770fb101d7a12068a84f46217677d4fcf7fb81"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4522472993827161,
+        "fully_opaque_fraction": 0.001253858024691358,
+        "alpha_250_or_more_fraction": 0.5197608024691358,
+        "semitransparent_fraction": 0.5464988425925926,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            224876
+          ],
+          [
+            252,
+            37993
+          ],
+          [
+            1,
+            3253
+          ],
+          [
+            251,
+            3044
+          ]
+        ],
+        "alpha_bbox_xywh": [
+          24,
+          24,
+          905,
+          502
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          34,
+          62,
+          892,
+          429
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "display_preview": "art-source/previews/ART-16/VIGNETTE_CONDOMINIUM-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-16/VIGNETTE_CONDOMINIUM-native-light-dark.png"
+    },
+    {
+      "id": "VIGNETTE_MARKETING",
+      "name": "Área Corporativa",
+      "path": "Assets/Art/new/location/illustrations/vignette_marketing.png",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "bytes": 546693,
+      "sha256": "a544782a5457d3eaa35f5138bf7fdfa31ac0db1cb5daf0e60cbfb23a47848ea0",
+      "srgb_profile": "sRGB",
+      "technical": true,
+      "visual": true,
+      "notes": "Conjunto de escritórios com torre alta ao fundo e dois blocos frontais menores, vidro azul, estrutura marfim e praça conectada entre as entradas.",
+      "source_path": "art-source/references/generations/ART-16/vignette_marketing-source-01.png",
+      "source_sha256": "38bd4ee3a7f2b51d4ffc0c3bf4899ec0d884c8aa8785a401db2308be0285475e",
+      "source_size_px": [
+        1672,
+        941
+      ],
+      "canonical_map_asset": {
+        "id": "MAP_MARKETING",
+        "path": "Assets/Art/new/location/landmarks/compact/map_marketing.png",
+        "sha256": "e904c3f2db8a302bd91ef7126aa5636d5dbb251c0ec3acc766e5e1e0d0fa684d"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.46595871913580245,
+        "fully_opaque_fraction": 0.0024421296296296296,
+        "alpha_250_or_more_fraction": 0.514789737654321,
+        "semitransparent_fraction": 0.5315991512345679,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            239269
+          ],
+          [
+            254,
+            13704
+          ],
+          [
+            252,
+            9850
+          ],
+          [
+            1,
+            2063
+          ]
+        ],
+        "alpha_bbox_xywh": [
+          24,
+          22,
+          878,
+          496
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          59,
+          34,
+          841,
+          481
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "display_preview": "art-source/previews/ART-16/VIGNETTE_MARKETING-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-16/VIGNETTE_MARKETING-native-light-dark.png"
+    },
+    {
+      "id": "VIGNETTE_STORE",
+      "name": "Área Comercial",
+      "path": "Assets/Art/new/location/illustrations/vignette_store.png",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "bytes": 572637,
+      "sha256": "3aa304b0d380c1624db739182a37946bd19ce0f924e360fe03161699d83dfefd",
+      "srgb_profile": "sRGB",
+      "technical": true,
+      "visual": true,
+      "notes": "Comércio de dois pavimentos, térreo coral, andar superior marfim, vitrines azuis e entrada central, com passeio público e arborização lateral.",
+      "source_path": "art-source/references/generations/ART-16/vignette_store-source-01.png",
+      "source_sha256": "5c63896b92050f0ee5ac98f60b5cecc0e88473b5e1deec478bdcdbf9a7713ed1",
+      "source_size_px": [
+        1672,
+        941
+      ],
+      "canonical_map_asset": {
+        "id": "MAP_STORE",
+        "path": "Assets/Art/new/location/landmarks/compact/map_store.png",
+        "sha256": "2bafb4bc33de10ca342159fd7941e19506d395843c1dda4187d1881a86c95fa4"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4183989197530864,
+        "fully_opaque_fraction": 0.0023939043209876545,
+        "alpha_250_or_more_fraction": 0.5605208333333334,
+        "semitransparent_fraction": 0.579207175925926,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            228637
+          ],
+          [
+            254,
+            41526
+          ],
+          [
+            252,
+            15342
+          ],
+          [
+            251,
+            2335
+          ]
+        ],
+        "alpha_bbox_xywh": [
+          24,
+          34,
+          897,
+          475
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          49,
+          53,
+          869,
+          451
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "display_preview": "art-source/previews/ART-16/VIGNETTE_STORE-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-16/VIGNETTE_STORE-native-light-dark.png"
+    },
+    {
+      "id": "VIGNETTE_UNIVERSITY",
+      "name": "Área Educacional",
+      "path": "Assets/Art/new/location/illustrations/vignette_university.png",
+      "actual_size_px": [
+        960,
+        540
+      ],
+      "bytes": 608036,
+      "sha256": "6d0b75dc5b22b39d89f17f2407b4520e44dd8632c2824b2f9260cf5835a82d8d",
+      "srgb_profile": "sRGB",
+      "technical": true,
+      "visual": true,
+      "notes": "Universidade com cúpula azul, cupulim, alas laterais de telhados terracota, pórtico de colunas, escadaria e jardins laterais; composição acadêmica preservada.",
+      "source_path": "art-source/references/generations/ART-16/vignette_university-source-01.png",
+      "source_sha256": "82878421d4a0264636181aab244bfa99cb2c973c61926c15d6745ad8d5d10c7f",
+      "source_size_px": [
+        1672,
+        941
+      ],
+      "canonical_map_asset": {
+        "id": "MAP_UNIVERSITY",
+        "path": "Assets/Art/new/location/landmarks/compact/map_university.png",
+        "sha256": "ef67d0bc70b94341d4819993bf0be8aac543619fa650a81deb373aa9a51aff79"
+      },
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.48119212962962965,
+        "fully_opaque_fraction": 0.001888503086419753,
+        "alpha_250_or_more_fraction": 0.49235725308641975,
+        "semitransparent_fraction": 0.5169193672839506,
+        "dominant_nonzero_alpha": [
+          [
+            253,
+            200564
+          ],
+          [
+            252,
+            33850
+          ],
+          [
+            254,
+            14284
+          ],
+          [
+            251,
+            3655
+          ]
+        ],
+        "alpha_bbox_xywh": [
+          42,
+          22,
+          881,
+          497
+        ],
+        "visible_bbox_alpha_128_xywh": [
+          45,
+          26,
+          875,
+          490
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "display_preview": "art-source/previews/ART-16/VIGNETTE_UNIVERSITY-display-light-dark.png",
+      "native_preview": "art-source/previews/ART-16/VIGNETTE_UNIVERSITY-native-light-dark.png"
+    }
+  ],
+  "total_bytes": 2975522,
+  "integration_proposal": {
+    "textureType": "Sprite (2D and UI)",
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "nine_slice_lbrt_px": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "display_box_px": [
+      520,
+      292
+    ],
+    "fit": "contain/preserveAspect",
+    "maxTextureSize": 1024,
+    "sRGBTexture": true,
+    "alphaIsTransparency": true,
+    "filterMode": "Bilinear",
+    "generateMipmaps": false,
+    "compression": "Sem compressão na QA; revisar na integração por plataforma."
+  },
+  "pending": [],
+  "integration_performed": false
+}

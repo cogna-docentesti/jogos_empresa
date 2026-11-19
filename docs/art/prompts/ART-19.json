@@ -1,0 +1,376 @@
+{
+  "task_id": "ART-19",
+  "date": "2026-10-14",
+  "status": "validado",
+  "tool": "image_gen.imagegen",
+  "model": null,
+  "model_note": "Specific model identifier not exposed by integrated tool.",
+  "scope_resolution": "Follow ART-19 French products in the manifest, continuing the prior clarification about numbered product batches; ART-05 controls remain preserved.",
+  "producer_source": "art-source/editable/ART-19/export-art19.cjs",
+  "assets": [
+    {
+      "id": "PRODUCT_FRA_MENU_CLASSICO",
+      "name": "Menu clássico",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated French food product illustration for the approved Cogna business game, PRODUCT_FRA_MENU_CLASSICO.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT and dish motif reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and French-food finish reference only. Image 3 is the finished Japanese nigiri from ART-18, shared food rendering, light and ceramic plate material reference only: never copy its sushi, seaweed, rice or fish into the French dishes. Never copy source backgrounds, outer rings, UI, text, checkerboard, emblems or cutlery.\nPrimary request: ONE cooked escargot in its large warm cream-and-tan spiral shell, resting on ONE shallow oval dark blue-teal ceramic plate with a thin warm ivory rim. Preserve the current catalog motif, not multiple new portions. The whole spiral shell is visible, curved tip receding toward the upper right; the shell opening faces the lower left and viewer. Inside the opening show a small cooked snail portion in golden melted garlic-herb butter flecked with finely grouped green parsley. The spiral has restrained light tan bands and soft warm highlights, not photographic stripes. A small parsley sprig and one modest lemon wedge sit naturally on the plate at the left of the shell. No live snail body, head, eyes, antennae or animal face: this is a cooked served French dish. No fork, escargot tongs, second snail, bread, bowl or other course. Keep the plate low and elegant, one plate only.\nComposition/camera: one compact plated French food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and a readable front edge, viewed slightly from above; not a flat overhead diagram. Center the entire food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, shell, tray, vegetable fan, handle or garnish. Designed for final export 512x512 and contain display 250x250 with clearly separated broad ingredient shapes. Plausible adult food proportions and coherent shallow perspective. Local shadows only where food touches its serving surface.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its French restaurant plate illustration. Use Image 3 only for the established finished food rendering, edge clarity, upper-left light and elegant dark blue-teal ceramic material, never its sushi content. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with restrained warm highlights. Food has natural appetizing color: golden ivory butter, warm beige shell, browned cooked food, tomato coral, olive green zucchini, aubergine plum, warm cream ceramic or honey-colored wood. Avoid heavy black comic outlines, exaggerated childish portions, plastic 3D gloss, photographic texture, painterly grain, blurry edges, wet overgloss and noisy microtexture. Purple only as natural aubergine color and subtle shadow accent. Soft warm upper-left light with small contact shadows confined to the plate/tray.\nTransparency: genuine RGBA cutout with alpha zero outside the entire plated meal silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, table, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow, mist or steam. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage of separated stickers, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, badges, logos, heraldic emblems, watermarks, interface, icons, frame, border, outer black ring or checkered fabric/paper. No utensils, wine glasses, beverages, napkin, decorative props, floating ingredients or scattered crumbs outside the serving surface. Food and garnish remain on one connected plate or serving tray. Do not copy source backgrounds, checkerboard, text, cutlery or symbols. Preserve the primary catalog food motif assigned to this ID rather than changing game data or interpreting generic product names as complete recipes.",
+      "visual_composition_proposal": "Escargot cozido em concha espiral bege com manteiga de ervas, ramo de salsa e pequeno gomo de limão, sobre prato oval azul-petróleo com filete marfim. Motivo do sprite french_img_1 preservado; garfo excluído da proposta visual.",
+      "references": [
+        "Assets/Art/Sprites/RestaurantScene/french_img_1.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png"
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "model_note": "Specific model identifier is not exposed by the integrated tool.",
+      "transparent_background": true,
+      "source_path": "art-source/references/generations/ART-19/fra_menu_classico-source-01.png",
+      "production_method": "imagegen",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13d2a-ea8d-75d2-8280-43102f1313f3 as C:\\Users\\Pichau\\.codex\\generated_images\\01a13d2a-ea8d-75d2-8280-43102f1313f3\\exec-b7c2c5ca-e9a6-45fa-941e-790185d0e117.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "source_sha256": "4b8f258f45cad7f39639c8abe38ba00aca74efa457629271f634a4ade4cdcf05",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "reference_sha256": {
+        "Assets/Art/Sprites/RestaurantScene/french_img_1.png": "f1a1ae3fe5463e61e8dd658cccaa02dc7c6b9a26a1b6dc5fc3fb168080981960",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png": "0c0479424bd267f0b547b1cefe0da1bc61d1c11f89a9d25d67d9c570f6cc8b9e"
+      },
+      "output_path": "Assets/Art/new/menu_pricing/products/fra/fra_menu_classico.png",
+      "path": "menu_pricing/products/fra/fra_menu_classico.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "output_bytes": 169586,
+      "sha256": "ef18da68b99bef93a7cd3670afb909b5f3b2bf57cd83cac57547de4859ea572e",
+      "source_editable": null,
+      "producer_source": "art-source/editable/ART-19/export-art19.cjs",
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform reduction of the complete generated frame, followed by transparent padding. No crop, alpha cleanup, painting, masks, recolor or axis stretching.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          410,
+          410
+        ],
+        "uniform_scale": 0.3269537480063796,
+        "transparent_padding_ltrb_px": [
+          51,
+          51,
+          51,
+          51
+        ]
+      },
+      "display_size_px": [
+        250,
+        250
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7130012512207031,
+        "fully_opaque_fraction": 0.0026092529296875,
+        "alpha_250_or_more_fraction": 0.2765846252441406,
+        "semitransparent_fraction": 0.2843894958496094,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 63271
+          },
+          {
+            "alpha": 252,
+            "count": 5303
+          },
+          {
+            "alpha": 254,
+            "count": 2370
+          },
+          {
+            "alpha": 255,
+            "count": 684
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          56,
+          123,
+          455,
+          450
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          59,
+          126,
+          453,
+          402
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "status": "validado",
+      "native_preview": "art-source/previews/ART-19/PRODUCT_FRA_MENU_CLASSICO-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-19/PRODUCT_FRA_MENU_CLASSICO-display-light-dark.png",
+      "qa_record": "docs/art/qa/ART-19.json"
+    },
+    {
+      "id": "PRODUCT_FRA_MENU_PREMIUM",
+      "name": "Menu premium",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated French food product illustration for the approved Cogna business game, PRODUCT_FRA_MENU_PREMIUM.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT and dish motif reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and French-food finish reference only. Image 3 is the finished Japanese nigiri from ART-18, shared food rendering, light and ceramic plate material reference only: never copy its sushi, seaweed, rice or fish into the French dishes. Never copy source backgrounds, outer rings, UI, text, checkerboard, emblems or cutlery.\nImage 4 is the completed classic French product from this batch: use only its ceramic plate material, contour and light, never copy its escargot, shell, parsley or lemon into the ratatouille.\nPrimary request: ONE neatly plated ratatouille vegetable arrangement on ONE shallow oval dark blue-teal ceramic plate with a thin warm ivory rim. Preserve the primary motif of the current catalog sprite: a low tidy circular overlapping fan/spiral of alternating tomato slices, pale-green zucchini rounds and aubergine slices with natural dark plum skins, gathered around a modest central herb sprig. Vegetables look softly roasted, with golden olive-oil sheen and a few finely grouped green herb flecks. Small garlic slices near the center, and one tiny golden herb-butter accent near the upper center. Use adult plausible portions with clean individual slices readable at 250x250, no excessively tall tower, no scattered raw ingredients, no exaggerated mound. A restrained warm sauce under the vegetables stays within the plate. No meat, fish, escargot, fork, extra bowl or additional course. Use the same elegant plate material and rendering as the classic French product.\nComposition/camera: one compact plated French food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and a readable front edge, viewed slightly from above; not a flat overhead diagram. Center the entire food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, shell, tray, vegetable fan, handle or garnish. Designed for final export 512x512 and contain display 250x250 with clearly separated broad ingredient shapes. Plausible adult food proportions and coherent shallow perspective. Local shadows only where food touches its serving surface.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its French restaurant plate illustration. Use Image 3 only for the established finished food rendering, edge clarity, upper-left light and elegant dark blue-teal ceramic material, never its sushi content. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with restrained warm highlights. Food has natural appetizing color: golden ivory butter, warm beige shell, browned cooked food, tomato coral, olive green zucchini, aubergine plum, warm cream ceramic or honey-colored wood. Avoid heavy black comic outlines, exaggerated childish portions, plastic 3D gloss, photographic texture, painterly grain, blurry edges, wet overgloss and noisy microtexture. Purple only as natural aubergine color and subtle shadow accent. Soft warm upper-left light with small contact shadows confined to the plate/tray.\nTransparency: genuine RGBA cutout with alpha zero outside the entire plated meal silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, table, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow, mist or steam. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage of separated stickers, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, badges, logos, heraldic emblems, watermarks, interface, icons, frame, border, outer black ring or checkered fabric/paper. No utensils, wine glasses, beverages, napkin, decorative props, floating ingredients or scattered crumbs outside the serving surface. Food and garnish remain on one connected plate or serving tray. Do not copy source backgrounds, checkerboard, text, cutlery or symbols. Preserve the primary catalog food motif assigned to this ID rather than changing game data or interpreting generic product names as complete recipes.",
+      "visual_composition_proposal": "Ratatouille em leque circular de tomate, abobrinha e berinjela, com ervas, pequenas lâminas de alho e toque dourado de manteiga/molho, em prato oval azul-petróleo. Motivo do sprite french_img_2 preservado; talher excluído da proposta visual.",
+      "references": [
+        "Assets/Art/Sprites/RestaurantScene/french_img_2.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png",
+        "art-source/references/generations/ART-19/fra_menu_classico-source-01.png"
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "model_note": "Specific model identifier is not exposed by the integrated tool.",
+      "transparent_background": true,
+      "source_path": "art-source/references/generations/ART-19/fra_menu_premium-source-01.png",
+      "production_method": "imagegen",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13d2a-ea8d-75d2-8280-43102f1313f3 as C:\\Users\\Pichau\\.codex\\generated_images\\01a13d2a-ea8d-75d2-8280-43102f1313f3\\exec-271ee82e-89b7-4128-9b29-63480bcac7d4.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "source_sha256": "0d284e99f631442e0864ef7373bc6c0c236aa9b645bcf0cc49f9e3b6247da0bb",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "reference_sha256": {
+        "Assets/Art/Sprites/RestaurantScene/french_img_2.png": "e1b226b7f93457b64368f15e814183a79be3c09b9a113f3c6dc8d04d88e2ef08",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png": "0c0479424bd267f0b547b1cefe0da1bc61d1c11f89a9d25d67d9c570f6cc8b9e",
+        "art-source/references/generations/ART-19/fra_menu_classico-source-01.png": "4b8f258f45cad7f39639c8abe38ba00aca74efa457629271f634a4ade4cdcf05"
+      },
+      "output_path": "Assets/Art/new/menu_pricing/products/fra/fra_menu_premium.png",
+      "path": "menu_pricing/products/fra/fra_menu_premium.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "output_bytes": 184811,
+      "sha256": "0b1aaec29c1732a89975e3e02f752f4bb35d330dbd34451c3693199fc41a1754",
+      "source_editable": null,
+      "producer_source": "art-source/editable/ART-19/export-art19.cjs",
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform reduction of the complete generated frame, followed by transparent padding. No crop, alpha cleanup, painting, masks, recolor or axis stretching.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          410,
+          410
+        ],
+        "uniform_scale": 0.3269537480063796,
+        "transparent_padding_ltrb_px": [
+          51,
+          51,
+          51,
+          51
+        ]
+      },
+      "display_size_px": [
+        250,
+        250
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7325553894042969,
+        "fully_opaque_fraction": 0.00235748291015625,
+        "alpha_250_or_more_fraction": 0.2570152282714844,
+        "semitransparent_fraction": 0.2650871276855469,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 58939
+          },
+          {
+            "alpha": 252,
+            "count": 6875
+          },
+          {
+            "alpha": 255,
+            "count": 618
+          },
+          {
+            "alpha": 3,
+            "count": 373
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          56,
+          64,
+          456,
+          445
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          59,
+          153,
+          453,
+          397
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "status": "validado",
+      "native_preview": "art-source/previews/ART-19/PRODUCT_FRA_MENU_PREMIUM-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-19/PRODUCT_FRA_MENU_PREMIUM-display-light-dark.png",
+      "qa_record": "docs/art/qa/ART-19.json"
+    },
+    {
+      "id": "PRODUCT_FRA_PRATO_EXECUTIVO",
+      "name": "Prato executivo",
+      "prompt": "Use case: stylized-concept\nAsset type: ONE isolated French food product illustration for the approved Cogna business game, PRODUCT_FRA_PRATO_EXECUTIVO.\nInput images: Image 1 is the current catalog sprite, primary food CONTENT and dish motif reference only. Image 2 is the approved Cogna opening concept, adult editorial cartoon style and French-food finish reference only. Image 3 is the finished Japanese nigiri from ART-18, shared food rendering, light and ceramic plate material reference only: never copy its sushi, seaweed, rice or fish into the French dishes. Never copy source backgrounds, outer rings, UI, text, checkerboard, emblems or cutlery.\nPrimary request: ONE coherent French tasting-meal arrangement on ONE shallow round honey-colored wooden serving tray with a restrained low rim, viewed as a three-quarter ellipse. This ID uses the current catalog motif of a varied French food selection, even though its generic name is Prato executivo. Simplify the busy catalog image into SIX compact dishes all resting on the same tray: back left, an ivory ramekin of golden-white beans with one browned duck/chicken leg; back right, an ivory bowl of rich brown beef stew with a few clear mushroom slices; center, an ivory shallow bowl of orange seafood stew with a pink shrimp, two dark mussels and a golden fish portion; front left, a small low oval plate of tomato/zucchini/aubergine ratatouille fan; front right, one small round golden quiche tart with a plain crimped pastry rim and tiny herb garnish; front center, a small ivory handled ramekin of onion soup with a golden melted-cheese toast. Arrange dishes in loose tidy staggered rows with coherent perspective and clear spacing; each dish remains completely readable and its container is fully on the tray. Keep the complete tray a single connected meal-group silhouette. Do not add a bread basket, butter disc, truffles, wine, utensils, napkin, logos, decorative emblems or lettering from the reference. No free-floating plates and no separate dish stickers. Broad warm food shapes should remain legible at 250x250, with less tiny detail than in the source.\nComposition/camera: one compact plated French food product, completely inside a SQUARE 1:1 canvas, desired 1024x1024 source. Three-quarter food illustration with visible top surfaces and a readable front edge, viewed slightly from above; not a flat overhead diagram. Center the entire food and serving surface, approximately 80 percent of canvas width and height, leaving at least 10 percent genuinely transparent margin on every side. No cropped plate, shell, tray, vegetable fan, handle or garnish. Designed for final export 512x512 and contain display 250x250 with clearly separated broad ingredient shapes. Plausible adult food proportions and coherent shallow perspective. Local shadows only where food touches its serving surface.\nStyle/medium: polished hand-drawn adult editorial cartoon from the approved Cogna opening concept, especially its French restaurant plate illustration. Use Image 3 only for the established finished food rendering, edge clarity, upper-left light and elegant dark blue-teal ceramic material, never its sushi content. Confident clean muted dark-plum/brown contours, controlled cel shading, broad near-flat color regions with restrained warm highlights. Food has natural appetizing color: golden ivory butter, warm beige shell, browned cooked food, tomato coral, olive green zucchini, aubergine plum, warm cream ceramic or honey-colored wood. Avoid heavy black comic outlines, exaggerated childish portions, plastic 3D gloss, photographic texture, painterly grain, blurry edges, wet overgloss and noisy microtexture. Purple only as natural aubergine color and subtle shadow accent. Soft warm upper-left light with small contact shadows confined to the plate/tray.\nTransparency: genuine RGBA cutout with alpha zero outside the entire plated meal silhouette, clean antialiased edges. Opaque food and serving-surface interiors. No backdrop, table, floor, ground patch, outside cast shadow, wide drop shadow, halo, glow, mist or steam. No fake transparency checkerboard. No shadow outside the plate or tray silhouette.\nConstraints: exactly ONE finished product sprite, never a sprite sheet, collage of separated stickers, multiple views or UI card. No people, hands, labels, lettering, words, numbers, prices, badges, logos, heraldic emblems, watermarks, interface, icons, frame, border, outer black ring or checkered fabric/paper. No utensils, wine glasses, beverages, napkin, decorative props, floating ingredients or scattered crumbs outside the serving surface. Food and garnish remain on one connected plate or serving tray. Do not copy source backgrounds, checkerboard, text, cutlery or symbols. Preserve the primary catalog food motif assigned to this ID rather than changing game data or interpreting generic product names as complete recipes.",
+      "visual_composition_proposal": "Seleção de seis pratos franceses em bandeja redonda de madeira: cassoulet com coxa, ensopado de carne e cogumelos, caldo de frutos do mar, ratatouille, quiche e sopa de cebola gratinada. Proposta simplificada do sprite french_img_3, sem bebida, cesta de pães, manteiga com símbolo, trufas, toalha ou talheres; quantidades visuais não alteram dados do jogo.",
+      "references": [
+        "Assets/Art/Sprites/RestaurantScene/french_img_3.png",
+        "art-source/references/concepts/02-abertura.png",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png"
+      ],
+      "tool": "image_gen.imagegen",
+      "model": null,
+      "model_note": "Specific model identifier is not exposed by the integrated tool.",
+      "transparent_background": true,
+      "source_path": "art-source/references/generations/ART-19/fra_prato_executivo-source-01.png",
+      "production_method": "imagegen",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\Pichau\\.codex\\generated_images\\01a13d2a-ea8d-75d2-8280-43102f1313f3 as C:\\Users\\Pichau\\.codex\\generated_images\\01a13d2a-ea8d-75d2-8280-43102f1313f3\\exec-ef4a69ea-b39c-4228-833c-d9e097dad480.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "source_sha256": "3c8766b4a48e287d51ba2f348e8315cc8a56eabe44a4579c77c3aa8a792b4fd2",
+      "source_size_px": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "reference_sha256": {
+        "Assets/Art/Sprites/RestaurantScene/french_img_3.png": "a384400a42db23e90f755aabfb31037200c1e7fdb3e0273945b9306a66d01a2c",
+        "art-source/references/concepts/02-abertura.png": "66a0bbe801dff1435f22671949d1cd6155485edb3bf598555c23d6ae930c21c5",
+        "Assets/Art/new/menu_pricing/products/jap/jap_combinado_medio.png": "0c0479424bd267f0b547b1cefe0da1bc61d1c11f89a9d25d67d9c570f6cc8b9e"
+      },
+      "output_path": "Assets/Art/new/menu_pricing/products/fra/fra_prato_executivo.png",
+      "path": "menu_pricing/products/fra/fra_prato_executivo.png",
+      "actual_size_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "color_space": "sRGB",
+      "output_bytes": 272633,
+      "sha256": "2751ee4d31d0e306e60e33c1ecf202d01b6e4b03db92041db735bf15ad7e4856",
+      "source_editable": null,
+      "producer_source": "art-source/editable/ART-19/export-art19.cjs",
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform reduction of the complete generated frame, followed by transparent padding. No crop, alpha cleanup, painting, masks, recolor or axis stretching.",
+        "source_frame_px": [
+          1254,
+          1254
+        ],
+        "resampled_frame_px": [
+          410,
+          410
+        ],
+        "uniform_scale": 0.3269537480063796,
+        "transparent_padding_ltrb_px": [
+          51,
+          51,
+          51,
+          51
+        ]
+      },
+      "display_size_px": [
+        250,
+        250
+      ],
+      "display_fit": "contain",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measurements": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5987930297851562,
+        "fully_opaque_fraction": 0.0032501220703125,
+        "alpha_250_or_more_fraction": 0.38846588134765625,
+        "semitransparent_fraction": 0.39795684814453125,
+        "dominant_nonzero_alpha": [
+          {
+            "alpha": 253,
+            "count": 87375
+          },
+          {
+            "alpha": 252,
+            "count": 12526
+          },
+          {
+            "alpha": 255,
+            "count": 852
+          },
+          {
+            "alpha": 3,
+            "count": 451
+          }
+        ],
+        "alpha_bbox_ltrb": [
+          56,
+          95,
+          456,
+          450
+        ],
+        "visible_bbox_alpha128_ltrb": [
+          59,
+          98,
+          453,
+          426
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "status": "validado",
+      "native_preview": "art-source/previews/ART-19/PRODUCT_FRA_PRATO_EXECUTIVO-native-light-dark.png",
+      "display_preview": "art-source/previews/ART-19/PRODUCT_FRA_PRATO_EXECUTIVO-display-light-dark.png",
+      "qa_record": "docs/art/qa/ART-19.json"
+    }
+  ],
+  "delivery_preview": "art-source/previews/ART-19/ART-19-contact-sheet.png",
+  "qa_record": "docs/art/qa/ART-19.json"
+}

@@ -2,6 +2,21 @@
 
 The game settles a quarter of three monthly rounds. `MonthlySimulationEngine` calculates a statement without changing any input, accessing SQLite, or drawing random events. `RoundService` commits that statement and the updated session in one SQLite transaction. The in-memory session changes only after the transaction succeeds.
 
+## Quarterly comparison (UI-14)
+
+`QuarterlyResultController` queries `RoundResultRepository.GetBySessionId` for the current campaign on every visit. The hub opens `PanelId.QuarterlyResults = 12`; the monthly result's **Comparar trimestre** action also opens the comparison while `Round_Summary` waits, including after month three. **Voltar** restores that monthly summary and its focus, or the hub's navigation history. Reading, retrying, scrolling and returning never settle or save a month.
+
+`QuarterlyResultPresentation` keeps three explicit month slots. Missing months show **Não salvo** in both the table and chart; partial totals include only saved records. Duplicated months, records from another campaign, months outside 1–3 and nonfinite saved amounts produce an error state. No saved rows produces the empty state.
+
+The aggregate column states its rule on every row:
+
+- Revenue, outflows, signed events, cash results, loan details, customers and demand sum the saved months. Monthly capacity sums the available service slots across those months.
+- Opening cash uses the first saved month's opening; closing cash uses the last saved month's closing. Reputations use those same opening/closing endpoints. Gaps remain visible and are never filled with invented balances.
+- Ticket uses the saved monthly ticket weighted by saved customers. With no customers it shows **Sem clientes**. Alignment score and coherence use simple monthly means; classification uses the last saved label, translated only for display. Reputation deltas sum the saved monthly changes.
+- Variation is the last available month's value minus the first available month's value, in the metric's own units, with explicit month labels. It requires two saved months; classification has no numerical variation. No percentage growth is implied when the baseline is zero or negative.
+
+Monetary aggregates sum the displayed cent values of the persisted floats, using `double` only in this read-only presentation. This avoids adding binary approximation residues above R$ 100,000. Nothing is written back. Loan principal and interest remain details already included once in `loanPayment`; signed event cash is added once by the existing settlement, never reapplied by the report. The quarter chart shows each saved `netResult` on a shared signed scale.
+
 ## Entry points
 
 ```csharp
@@ -13,12 +28,18 @@ var forecast = MonthlySimulationEngine.Calculate(context);
 // Add MonthlySettlementController to a scene object and select CloseMonth.
 // The controller exposes LastResult and MonthSettled after a successful commit.
 
+// GameScene UI-12: CloseMonth first opens EventScreenController.OpenMonth.
+// It reserves the existing selector's draw, waits for every choice, then settles.
+
 // Low-level settlement: explicit months make retries idempotent.
 var result = new RoundService().ProcessRound(expectedMonth: 1);
 
 // Ordered persisted statements.
 var history = new RoundResultRepository(DatabaseInitializer.DatabaseService.Connection)
     .GetBySessionId(GameSessionState.Current.sessionId);
+
+// UI-13: acknowledge the saved statement only after the player reads it.
+service.ContinueAfterSummary(savedResult.roundResultId);
 ```
 
 For a forecast including recorded events, pass `SessionEventHistoryRepository.GetBySessionAndRound(...)` as the second argument of `MonthlySimulationCatalog.Load`. `EstablishmentSummaryService.Build` already does this. For a completed session, the summary uses its last saved statement.
@@ -62,6 +83,32 @@ repository.RecordFromOption(session.sessionId, session.currentRound, day: 16,
 The event repository rejects new records for a settled month or a persisted session that is no longer in the requested active month.
 
 This engine consumes recorded choices. It does not draw events, create an event decision screen, generate the final report, or add cloud synchronization.
+
+### Event UI lifecycle (UI-12)
+
+The GameScene hub has **Fechar mês** and **Eventos e histórico** actions. `MonthlySettlementController.CloseMonth()` starts the month and holds `Round_Sales` while `EventScreenController.OpenMonth(onCompleted)` presents the selected events. It does not settle before the choices. A pending decision rejects `Close()` and additional settlement requests. Only the last confirmation releases the callback and lets the existing `ProcessCurrentRound()` settlement run. The later, brief `Round_Event` transition is retained for compatibility and has a panel reference, but is no longer the player's only interaction opportunity. The remaining round/result orchestration is outside UI-12.
+
+`MonthlyEventDecisionService.OpenMonth` passes the real restaurant, equipment, session history, monthly counts and exclusion groups to `MonthlyEventSelector`. Its default four-event draw is stored once in `MonthlyEventPlanEntity`, keyed by session/month, so reopening or reloading cannot reroll it. New event days are spread evenly through the configured operating days: four events in a 30-day month occur on days 6, 12, 18 and 24. Fewer eligible events remain fewer events; the UI does not force invalid candidates. Restart removes these reservations together with the existing session/history in the same transaction.
+
+`OpenDecision(EventData, month, day, onCompleted)` is the explicit presentation entry point for a future orchestrator. `IsAwaitingChoice`, `ChoiceConfirmed`, `Closed` and `Close()` expose the waiting/confirmation lifecycle. Every catalog option is presented, with native text for its real effects and duration. The twenty illustrations are serialized by existing event ID in `EventScreenView`; they do not alter the economic catalog. History shows persisted choice/effect snapshots, including an empty state, and can be consulted without releasing a pending decision.
+
+Confirmation is transactional and idempotent by session/month/event/day. Retrying the same choice returns its existing row, including after settlement; trying a different choice for the same occurrence fails. It calls `SessionEventHistoryRepository.RecordFromOption` only for a new occurrence. It never calls `AddCash` or `SetReputation`. The sixty shipped options are verified against forecast/settlement parity and repeat settlement in isolated SQLite tests.
+
+## Monthly result UI lifecycle (UI-13)
+
+`ProcessCurrentRound()` commits through `RoundService` and enters `Round_Summary`, where it now waits. `MonthlyResultController` reads the latest saved statement for the current session, including completed/bankrupt sessions. Its `Continue()` action calls `GameSessionService.ContinueAfterSummary(resultId)`. That method checks the summary state and saved ID, then follows the existing hub, final-report or bankruptcy destination without recalculation or economic writes. Finished campaigns persist only the presentation acknowledgement in `finalSummaryAcknowledged`. Repeated acknowledgement cannot settle a month or apply an event again. `IsAwaitingContinue` and `Continued` expose this presentation lifecycle for UI-19; the other orchestration stages remain in their own tasks.
+
+The hub shortcut opens `PanelId.MonthlyResults = 11` as a read-only consultation. Every visit queries SQLite again. Missing results use `EMPTY_RESULTS` with an explicit absence message; query failures provide retry. No forecast or sample values substitute for a saved result. The cash table uses the existing `TotalCosts`, signed event impact, stored result and opening/closing cash. Loan principal and interest are shown as details already included in the installment. The native chart uses a common absolute scale with outflows to the left of zero. ART-28 layers share the exact viewport, pivot positions, uniform scales and order from `docs/art/layouts/dre-layout.json`.
+
+## Bankruptcy UI lifecycle (UI-16)
+
+`UIStateListener.bankruptcyPanel` opens `Panel_Bankruptcy` only at `GameOver_Bankruptcy`, after the monthly summary's explicit acknowledgement. `BankruptcyController` queries the saved session and its `RoundResultEntity` history on every visit. `BankruptcyPresentation` explains the recorded ending and confirms the three-loss sequence only when all three saved results are negative. Missing or inconsistent history remains explicit; absent indicators are never invented as zero. This projection never determines or changes the session's status. `MonthlySessionSettlement` and its existing three-consecutive-loss rule remain unchanged, including BANKRUPT precedence over COMPLETED in month three and the reset of the counter on a zero or positive result. Negative cash alone does not cause bankruptcy.
+
+Each saved month, the last saved month and the quarterly comparison are read-only consultations. Return restores the source and its keyboard focus, including monthly → quarterly → same month → bankruptcy. Menu remains unavailable outside the hub; Sair uses the existing exit dialog. Business difficulty and CH01 concerned are separate complete, proportionally fitted images; explanations and indicators are native TMP text.
+
+Reload selects the latest finished campaign for the same user without replacing an active or incompatible save. A bankrupt campaign resumes the monthly summary before acknowledgement and its bankruptcy panel afterwards. The existing `finalSummaryAcknowledged` and `finalReportArchived` booleans now cover both ending types; no economic field or enum is added. An archived latest ending never resurrects an earlier conclusion.
+
+New game requires confirmation and uses `StartNewCampaignPreservingReport`, extended to BANKRUPT. It marks only automatic resumption as archived, preserves the session, results, event snapshots and event plans, clears the draft through `PlayerSession.Clear`, then opens identification in the same GameScene. A replacement stays in memory until D3. A failed archive leaves the current campaign intact and offers retry/cancel. Entering bankruptcy never deletes records, and this action does not invoke the destructive legacy `RestartSession` workflow.
 
 ## Catalog and balance configuration
 

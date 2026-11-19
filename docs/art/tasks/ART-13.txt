@@ -1,0 +1,99 @@
+ART-13 — Marcadores, realces e rótulos vazios do mapa
+Escopo: núcleo
+Pré-requisitos: ART-10, ART-11, ART-06
+
+Seis realces compactos dos polígonos e sete componentes de pino/rótulo em SVG e PNG; estados com geometria comum, sem conteúdo ou sombras embutidos.
+COMANDO PARA O CODEX
+Use $cogna-artista para executar somente ART-13. Produzir SVGs editáveis e PNGs separados dos seis realces geométricos e dos sete componentes, conforme manifesto e concepts. Realces compactos com coordenadas exatas no master. Não implementar UI nem integrar cenas.
+
+LEITURAS
+docs/art/manifest.json, tokens.json, characters.json, sources.json
+docs/art/layouts/map-layout.json
+docs/art/layouts/map-selection-compact.json
+art-source/references/concepts/01-hub.png e 02-abertura.png
+
+ENTREGÁVEIS
+OVERLAY_BANK | location/overlays/selection_bank.png
+Export 293x149 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0, 1]
+Posição top-left no master: [945,240] | escala 1
+Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.
+SVG: art-source/editable/location/overlays/selection_bank.svg
+
+OVERLAY_CONDOMINIUM | location/overlays/selection_condominium.png
+Export 619x364 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0, 1]
+Posição top-left no master: [305,645] | escala 1
+Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.
+SVG: art-source/editable/location/overlays/selection_condominium.svg
+
+OVERLAY_MARKETING | location/overlays/selection_marketing.png
+Export 507x322 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0, 1]
+Posição top-left no master: [1330,673] | escala 1
+Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.
+SVG: art-source/editable/location/overlays/selection_marketing.svg
+
+OVERLAY_STORE | location/overlays/selection_store.png
+Export 472x248 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0, 1]
+Posição top-left no master: [1368,247] | escala 1
+Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.
+SVG: art-source/editable/location/overlays/selection_store.svg
+
+OVERLAY_UNIVERSITY | location/overlays/selection_university.png
+Export 529x265 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0, 1]
+Posição top-left no master: [123,125] | escala 1
+Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.
+SVG: art-source/editable/location/overlays/selection_university.svg
+
+UI_PIN_NORMAL | location/markers/pin_normal.png
+Export 256x256 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0.5, 0.5]
+Display nominal: 80x80 px
+Pino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.
+SVG: art-source/editable/location/markers/pin_normal.svg
+
+UI_MAP_LABEL_NORMAL | location/markers/map_label_normal.png
+Export 256x128 px | alfa recorte | bordas [24, 24, 24, 24] | pivot [0.5, 0.5]
+Display nominal: 260x76 px
+Rótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.
+SVG: art-source/editable/location/markers/map_label_normal.svg
+
+UI_PIN_SELECTED | location/markers/pin_selected.png
+Export 256x256 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0.5, 0.5]
+Display nominal: 80x80 px
+Pino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.
+SVG: art-source/editable/location/markers/pin_selected.svg
+
+UI_MAP_LABEL_SELECTED | location/markers/map_label_selected.png
+Export 256x128 px | alfa recorte | bordas [24, 24, 24, 24] | pivot [0.5, 0.5]
+Display nominal: 260x76 px
+Rótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.
+SVG: art-source/editable/location/markers/map_label_selected.svg
+
+UI_PIN_DISABLED | location/markers/pin_disabled.png
+Export 256x256 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0.5, 0.5]
+Display nominal: 80x80 px
+Pino de localização com silhueta estável, centro vazio para ícone ART-06 independente, sem sombra.
+SVG: art-source/editable/location/markers/pin_disabled.svg
+
+UI_MAP_LABEL_DISABLED | location/markers/map_label_disabled.png
+Export 256x128 px | alfa recorte | bordas [24, 24, 24, 24] | pivot [0.5, 0.5]
+Display nominal: 260x76 px
+Rótulo vazio com 9-slice de 24 px; cantos estáveis, área central plana e fundo/contorno independentes do conteúdo.
+SVG: art-source/editable/location/markers/map_label_disabled.svg
+
+UI_MAP_LABEL_TIP | location/markers/map_label_tip.png
+Export 64x64 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0.5, 0.5]
+Display nominal: 20x20 px
+Ponteira separada branca tintável, sem contorno para encaixar sob a base e assumir a cor de cada estado.
+SVG: art-source/editable/location/markers/map_label_tip.svg
+
+OVERLAY_CENTER | location/overlays/selection_center.png
+Export 412x219 px | alfa recorte | bordas [0, 0, 0, 0] | pivot [0, 1]
+Posição top-left no master: [961,494] | escala 1
+Polígono canônico do mapa; realce violeta translúcido e contorno interno sem bloom, gradiente ou sombra.
+SVG: art-source/editable/location/overlays/selection_center.svg
+
+CRITÉRIOS
+PNG RGBA sRGB com alfa real, sem textos, ícones, logos, construção, sombra ou bloom. Pinos e rótulos preservam máscara alfa, bounds e pivot entre estados. Ponteira branca é tintável e separada.
+Realces derivados dos polígonos canônicos, sem invade vias, com contorno interno; sem escala independente por eixo. Compartilhar transformação do mapa e preservar layers anteriores.
+Revisar sobre marfim/ameixa, no tamanho de exibição, em 9-slice e na montagem conjunta. Registrar prompts, fontes, hashes, medidas e QA; validar apenas após inspeção.
+python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-13
+python art-source/editable/qa/ART-13-preview.py

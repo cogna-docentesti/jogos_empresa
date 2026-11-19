@@ -1,0 +1,84 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 1.44,
+      "summary": {
+        "total": 8,
+        "passed": 7,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "UI04HubTests.EveryCompactLayerUsesItsAuthoritativeBoundsAndOrder",
+          "Status": "Passed",
+          "Duration": 0.390719,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.EveryEnabledGraphicRaycastIsAnExplicitHitAreaOrButton",
+          "Status": "Failed",
+          "Duration": 0.1205107,
+          "Message": "  HitArea\r\n  Expected: True\r\n  But was:  False\r\n",
+          "StackTrace": "at UI04HubTests.EveryEnabledGraphicRaycastIsAnExplicitHitAreaOrButton () [0x00041] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\UI04HubTests.cs:87\r\n"
+        },
+        {
+          "FullName": "UI04HubTests.ExistingDestinationsAndNativePanelReferencesArePreserved",
+          "Status": "Passed",
+          "Duration": 0.1264498,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.HudAndHubAreScopedToTheMenuAndPreviewStaysOff",
+          "Status": "Passed",
+          "Duration": 0.1181887,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1920,1080)",
+          "Status": "Passed",
+          "Duration": 0.1188228,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1366,768)",
+          "Status": "Passed",
+          "Duration": 0.113464,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonRaycastsFollowTheSameAffineTransformAtEachResolution(1280,720)",
+          "Status": "Passed",
+          "Duration": 0.1142636,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "UI04HubTests.PolygonsAndMarkersShareTheMasterWithNoIndependentScaling",
+          "Status": "Passed",
+          "Duration": 0.123009,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "D:\\Cogna\\jogos_empresa"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

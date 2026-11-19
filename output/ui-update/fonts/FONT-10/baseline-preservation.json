@@ -1,0 +1,2747 @@
+{
+  "passed": true,
+  "files_checked": 10796,
+  "changed_owned": [
+    "Assets/Editor/Tests/UI12EventValidation.cs",
+    "Assets/Editor/Tests/UI13MonthlyResultTests.cs",
+    "Assets/Editor/Tests/UI14QuarterlyResultTests.cs",
+    "Assets/Editor/Tests/UI18DialogTests.cs",
+    "Assets/Scripts/Game/Infrastructure/Database/DatabaseService.cs",
+    "Assets/Scripts/Game/Infrastructure/Session/PlayerSession.cs",
+    "docs/art/tokens.json",
+    "docs/ui-update/COMECE-AQUI.txt",
+    "docs/ui-update/font-assets.json",
+    "docs/ui-update/font-contract.json",
+    "docs/ui-update/font-coverage.json",
+    "docs/ui-update/font-tasks/FONT-10-validacao-final.md",
+    "docs/ui-update/font-tasks/README.md",
+    "docs/ui-update/tasks.json",
+    "docs/ui-update/visual-contract.json"
+  ],
+  "unexpected_changes": [],
+  "missing": [],
+  "fonts_checked": 453,
+  "font_files_unchanged": true,
+  "font_files": [
+    {
+      "path": "Assets/Resources/UI/ConceptFontSet.asset",
+      "baseline": "3205ba11d338a1325faf5ea47325e464ca756c76dde0fc0aa005418aa8882a2f",
+      "current": "3205ba11d338a1325faf5ea47325e464ca756c76dde0fc0aa005418aa8882a2f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras.meta",
+      "baseline": "eadcfae35577e48a4affae82aaecacd86eeceff92e08054af55e8cb76efafeed",
+      "current": "eadcfae35577e48a4affae82aaecacd86eeceff92e08054af55e8cb76efafeed",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts.meta",
+      "baseline": "0efdf1fdce6dac7f20bab973541cf37e717c746f30fa0d2298f8cd112693fb3d",
+      "current": "0efdf1fdce6dac7f20bab973541cf37e717c746f30fa0d2298f8cd112693fb3d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Anton OFL.txt",
+      "baseline": "2d2d50dedc217f2e0ac0ac86fbfdb8924e4a53522753e0f8f16f2a7b8c8e419a",
+      "current": "2d2d50dedc217f2e0ac0ac86fbfdb8924e4a53522753e0f8f16f2a7b8c8e419a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Anton OFL.txt.meta",
+      "baseline": "47a494c87b973482148234c23b310f298defac693e4e1277ecfb48367b0e3f63",
+      "current": "47a494c87b973482148234c23b310f298defac693e4e1277ecfb48367b0e3f63",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Anton.ttf",
+      "baseline": "d86f6a6f364ab85b0ab275f770355d9847bbe5feff040b55bb392e825c50b4bc",
+      "current": "d86f6a6f364ab85b0ab275f770355d9847bbe5feff040b55bb392e825c50b4bc",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Anton.ttf.meta",
+      "baseline": "a090771210adb5b5064b237952a7ad7013b4cf690a2a1cf09630e57e45ecafeb",
+      "current": "a090771210adb5b5064b237952a7ad7013b4cf690a2a1cf09630e57e45ecafeb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers - OFL.txt",
+      "baseline": "18b29dd9aa5a7bcdf57d57332ba65ef0eb1f90c09dbf348b473b6611bab4d2d1",
+      "current": "18b29dd9aa5a7bcdf57d57332ba65ef0eb1f90c09dbf348b473b6611bab4d2d1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers - OFL.txt.meta",
+      "baseline": "0ecb4424d085696c2933f1ab10a6e9474f182e4cf57e4658a6f644e632f601db",
+      "current": "0ecb4424d085696c2933f1ab10a6e9474f182e4cf57e4658a6f644e632f601db",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers.ttf",
+      "baseline": "321ffd247939d12810b05472fb87e2bdac3fb8fcb430d1817b934b3ad55caf40",
+      "current": "321ffd247939d12810b05472fb87e2bdac3fb8fcb430d1817b934b3ad55caf40",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers.ttf.meta",
+      "baseline": "0028dcbed692b479d1844df8bb5eaa896f45dfc4f9a29717742648e4cdf209e4",
+      "current": "0028dcbed692b479d1844df8bb5eaa896f45dfc4f9a29717742648e4cdf209e4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Electronic Highway Sign.TTF",
+      "baseline": "09c9c0e13ed67bf202a61057afb0b6e4feb4241e74561624a2ed6cf03307ec3c",
+      "current": "09c9c0e13ed67bf202a61057afb0b6e4feb4241e74561624a2ed6cf03307ec3c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Electronic Highway Sign.TTF.meta",
+      "baseline": "f70ab232c237a461aea32f7a1ab0e642626803213ddac1f6c2e4c3e2db655e71",
+      "current": "f70ab232c237a461aea32f7a1ab0e642626803213ddac1f6c2e4c3e2db655e71",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold - OFL.txt",
+      "baseline": "36d79daa59517826275adb2e1615e49ac93528851c5516f5e7329bceaf0be792",
+      "current": "36d79daa59517826275adb2e1615e49ac93528851c5516f5e7329bceaf0be792",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold - OFL.txt.meta",
+      "baseline": "233f41496e5fa72c012b80a4479a34e54572c85fe1b31feb02005dc6d7611552",
+      "current": "233f41496e5fa72c012b80a4479a34e54572c85fe1b31feb02005dc6d7611552",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold.ttf",
+      "baseline": "fddd19f5a6d8e9f5ccf42fa3cb4542db815b05ba14c0b1cd00f484e6c1c431a1",
+      "current": "fddd19f5a6d8e9f5ccf42fa3cb4542db815b05ba14c0b1cd00f484e6c1c431a1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold.ttf.meta",
+      "baseline": "73b2adc7fea369bf73dc297b6cfc54b7675145b630fe19697a117104e279a1f7",
+      "current": "73b2adc7fea369bf73dc297b6cfc54b7675145b630fe19697a117104e279a1f7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold - AFL.txt",
+      "baseline": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e",
+      "current": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold - AFL.txt.meta",
+      "baseline": "b96de449515a36a899373c17b552f9a9e432335a2d8efe7af4d78047629b3635",
+      "current": "b96de449515a36a899373c17b552f9a9e432335a2d8efe7af4d78047629b3635",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold - License.txt",
+      "baseline": "ab24f8857874386232a4731efb012725eeff3dd9386ee9a97d8de6afd67ccfc5",
+      "current": "ab24f8857874386232a4731efb012725eeff3dd9386ee9a97d8de6afd67ccfc5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold - License.txt.meta",
+      "baseline": "a384649108b691f3a446e4ace6bdb044b6859dc4cf0cb1d230283c9d30b58c07",
+      "current": "a384649108b691f3a446e4ace6bdb044b6859dc4cf0cb1d230283c9d30b58c07",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold.ttf",
+      "baseline": "7d0b991ee3e0be7af01ad7ea8cd2beea6c00a25e679a0226b6737f079aafff86",
+      "current": "7d0b991ee3e0be7af01ad7ea8cd2beea6c00a25e679a0226b6737f079aafff86",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold.ttf.meta",
+      "baseline": "ed35033dcaf88f5767151be93d01a350a1307ab41fe0a32f2bb85f9448dfd246",
+      "current": "ed35033dcaf88f5767151be93d01a350a1307ab41fe0a32f2bb85f9448dfd246",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Unity - OFL.txt",
+      "baseline": "31428bd914e08ba6afbe412e4cb0e591e9ab62e692ed6e45bfd869f52ff99568",
+      "current": "31428bd914e08ba6afbe412e4cb0e591e9ab62e692ed6e45bfd869f52ff99568",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Unity - OFL.txt.meta",
+      "baseline": "0f640c5f28db5072b9b0696e35629e798e85287444fbea108e5fbc9345b7e749",
+      "current": "0f640c5f28db5072b9b0696e35629e798e85287444fbea108e5fbc9345b7e749",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Unity.ttf",
+      "baseline": "ce3de0bbc029e078b12675c8c4de0d0104763ee68d3695baee9d82fef8b1adde",
+      "current": "ce3de0bbc029e078b12675c8c4de0d0104763ee68d3695baee9d82fef8b1adde",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Fonts/Unity.ttf.meta",
+      "baseline": "9e566deceeefcf2b8e300912eede97fe25d09021610acb91265de6f47c1c124a",
+      "current": "9e566deceeefcf2b8e300912eede97fe25d09021610acb91265de6f47c1c124a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials.meta",
+      "baseline": "dab456ea25d7084707410327587366873ba93ffce216f9b82058cadf411f94aa",
+      "current": "dab456ea25d7084707410327587366873ba93ffce216f9b82058cadf411f94aa",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat",
+      "baseline": "b344b29b04ad40367a0ea28cfa57866d0f041ecbcfaf2fba098d7c420047a4bc",
+      "current": "b344b29b04ad40367a0ea28cfa57866d0f041ecbcfaf2fba098d7c420047a4bc",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat.meta",
+      "baseline": "f1e2bc03370e60c45ee16d0df1474e912131377a0c1aef8f5cc80118ee9368f4",
+      "current": "f1e2bc03370e60c45ee16d0df1474e912131377a0c1aef8f5cc80118ee9368f4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Crate - URP.mat",
+      "baseline": "f9e18673495a15a0cdca14528b5238f9be355f54f1d065e3ade488fddc27db69",
+      "current": "f9e18673495a15a0cdca14528b5238f9be355f54f1d065e3ade488fddc27db69",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Crate - URP.mat.meta",
+      "baseline": "14845eda8384ec251ec521babb83a8b98b65046d1cd1b823128049727ff78fbf",
+      "current": "14845eda8384ec251ec521babb83a8b98b65046d1cd1b823128049727ff78fbf",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Logo Scene.mat",
+      "baseline": "c9e9e044924566575344fbe1a84d1d648eae6d3b38bea60967c86e0f7e562a05",
+      "current": "c9e9e044924566575344fbe1a84d1d648eae6d3b38bea60967c86e0f7e562a05",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Logo Scene.mat.meta",
+      "baseline": "e8c15568a66a1dd889861ed9ee9fd51e48f59f7755c38d4e7d91f93884ef1519",
+      "current": "e8c15568a66a1dd889861ed9ee9fd51e48f59f7755c38d4e7d91f93884ef1519",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat",
+      "baseline": "770f91e9d143a81a55242cbce0a89f8a58fd8cb0f9d249e893e13ca83dc0640e",
+      "current": "770f91e9d143a81a55242cbce0a89f8a58fd8cb0f9d249e893e13ca83dc0640e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat.meta",
+      "baseline": "0a3a14f6289ac418474a70ad9860d96ad073b675d30e683b412d241a1f99a87e",
+      "current": "0a3a14f6289ac418474a70ad9860d96ad073b675d30e683b412d241a1f99a87e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Ground - URP.mat",
+      "baseline": "71a6dad9d2d52d7a8073096da9b263ae1d0b57987e1a62f56f29ba1522eaa61d",
+      "current": "71a6dad9d2d52d7a8073096da9b263ae1d0b57987e1a62f56f29ba1522eaa61d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Ground - URP.mat.meta",
+      "baseline": "7cd15b02c897bd5883e01e530e6ce95770a62e0c98761b7630e896e89ab9d18a",
+      "current": "7cd15b02c897bd5883e01e530e6ce95770a62e0c98761b7630e896e89ab9d18a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Small Crate_diffuse.mat",
+      "baseline": "3d65bf395742d05d0c4548eb3adcad2b1b7c94dca7fc13a09300a0a138e48bbc",
+      "current": "3d65bf395742d05d0c4548eb3adcad2b1b7c94dca7fc13a09300a0a138e48bbc",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Materials/Small Crate_diffuse.mat.meta",
+      "baseline": "d35d58a459f31f8b1367c5bd9f1354c939d2e81c70f024ee53ff505eb402412b",
+      "current": "d35d58a459f31f8b1367c5bd9f1354c939d2e81c70f024ee53ff505eb402412b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs.meta",
+      "baseline": "770545995b89588cfe45a2ec65379e25df66f113eb3a2cdc7d2097059e1e9903",
+      "current": "770545995b89588cfe45a2ec65379e25df66f113eb3a2cdc7d2097059e1e9903",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab",
+      "baseline": "27f93bedc3b20866e6d1ef8a1f45042a7e19d2b6dafc06b850c93f0c687de0e6",
+      "current": "27f93bedc3b20866e6d1ef8a1f45042a7e19d2b6dafc06b850c93f0c687de0e6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab.meta",
+      "baseline": "b3a7983e927fde3f37f36874def74b0631abe3790043e9e293ea6cd27f02de6e",
+      "current": "b3a7983e927fde3f37f36874def74b0631abe3790043e9e293ea6cd27f02de6e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab",
+      "baseline": "2125aaf2c843904e5aa311e578b21de72a678c7dae5aafaa8173c48deed9db76",
+      "current": "2125aaf2c843904e5aa311e578b21de72a678c7dae5aafaa8173c48deed9db76",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab.meta",
+      "baseline": "38ddce1da9d64f55a77da718f076615879f27b818e8a94c9c056da0ab439e1e5",
+      "current": "38ddce1da9d64f55a77da718f076615879f27b818e8a94c9c056da0ab439e1e5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab",
+      "baseline": "fc625aa0da6bfa13c5694ba07e8d2f1eeda33d01ed77c04c6677351ca20ae5be",
+      "current": "fc625aa0da6bfa13c5694ba07e8d2f1eeda33d01ed77c04c6677351ca20ae5be",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab.meta",
+      "baseline": "75c60321f2e7c7057053dfc8e760bf4a6b7778523250aacf06ad85cb7ae7ab63",
+      "current": "75c60321f2e7c7057053dfc8e760bf4a6b7778523250aacf06ad85cb7ae7ab63",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources.meta",
+      "baseline": "22df814aca7606f0ec314972b611fb71ef9294b98e5998632f6bf5d08d35e6e4",
+      "current": "22df814aca7606f0ec314972b611fb71ef9294b98e5998632f6bf5d08d35e6e4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets.meta",
+      "baseline": "7bc24b9f88e62482d3190e2e1ef48cff3ff7353c84cdc7776bf14c7bfc241281",
+      "current": "7bc24b9f88e62482d3190e2e1ef48cff3ff7353c84cdc7776bf14c7bfc241281",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Blue to Purple - Vertical.asset",
+      "baseline": "aeea13303c0702c4096cf0396bfc2b92bd9f49dc874d4effe63bcbacd343e646",
+      "current": "aeea13303c0702c4096cf0396bfc2b92bd9f49dc874d4effe63bcbacd343e646",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Blue to Purple - Vertical.asset.meta",
+      "baseline": "d6eaeca9c0797907775eac69f9028b2d8d1dda76ed201797bb16fcba1c300aef",
+      "current": "d6eaeca9c0797907775eac69f9028b2d8d1dda76ed201797bb16fcba1c300aef",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Dark to Light Green - Vertical.asset",
+      "baseline": "0f531c44a4b7f31fd0d7ef46c95e74b792b77028da5c466fd5874debc10b1b77",
+      "current": "0f531c44a4b7f31fd0d7ef46c95e74b792b77028da5c466fd5874debc10b1b77",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Dark to Light Green - Vertical.asset.meta",
+      "baseline": "bbebd92931f2126218dd3c5c70931e86ae03720c899f901b615dff0ddbfb0873",
+      "current": "bbebd92931f2126218dd3c5c70931e86ae03720c899f901b615dff0ddbfb0873",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Light to Dark Green - Vertical.asset",
+      "baseline": "0145ec18b2bf14c5afc686015ef26b69d324a56824de3be597a0e1fa0993576d",
+      "current": "0145ec18b2bf14c5afc686015ef26b69d324a56824de3be597a0e1fa0993576d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Light to Dark Green - Vertical.asset.meta",
+      "baseline": "67bdf48de596332e144ddcaaf444282c47910d9ad275564c79d7c60f73235ac4",
+      "current": "67bdf48de596332e144ddcaaf444282c47910d9ad275564c79d7c60f73235ac4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Yellow to Orange - Vertical.asset",
+      "baseline": "60054985ed078cad3c16ec3c7a2009ced1948d53bc85c10935e98129c9c277b7",
+      "current": "60054985ed078cad3c16ec3c7a2009ced1948d53bc85c10935e98129c9c277b7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Yellow to Orange - Vertical.asset.meta",
+      "baseline": "09b8cbdcedde5f0438cfdfd0f0d0021c42da80d79117e2f914232a4626adc700",
+      "current": "09b8cbdcedde5f0438cfdfd0f0d0021c42da80d79117e2f914232a4626adc700",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials.meta",
+      "baseline": "e1bc4f0cc675555e69ea59d3d7739e4e15f1a07cee36f8080b7409fac4b0f194",
+      "current": "e1bc4f0cc675555e69ea59d3d7739e4e15f1a07cee36f8080b7409fac4b0f194",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Drop Shadow.mat",
+      "baseline": "bde48785c50cef16ad54f6ad10539354cebc542a23d89366dd64227cecf3c78e",
+      "current": "bde48785c50cef16ad54f6ad10539354cebc542a23d89366dd64227cecf3c78e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Drop Shadow.mat.meta",
+      "baseline": "b5b360ea0fae9108437082ac4ffb7a2f66d89c808981253687e75b974c99b9a7",
+      "current": "b5b360ea0fae9108437082ac4ffb7a2f66d89c808981253687e75b974c99b9a7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Outline.mat",
+      "baseline": "917456155946eede431ad78c136769ec2c9af91c7892004c49d3c07042e34678",
+      "current": "917456155946eede431ad78c136769ec2c9af91c7892004c49d3c07042e34678",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Outline.mat.meta",
+      "baseline": "b48c3e20be233dd51ab67041bdafca0fcc4fc8b5a04eb439e99d41c45678609d",
+      "current": "b48c3e20be233dd51ab67041bdafca0fcc4fc8b5a04eb439e99d41c45678609d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Sunny Days.mat",
+      "baseline": "80e4c6e84fce0fde03a5998ed5910b61bef180794c441d1a0e036d235cc96cc1",
+      "current": "80e4c6e84fce0fde03a5998ed5910b61bef180794c441d1a0e036d235cc96cc1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Sunny Days.mat.meta",
+      "baseline": "f28c1519d118378d41386f1fad7ac87bf5079487e21558d294395ee8f4d28008",
+      "current": "f28c1519d118378d41386f1fad7ac87bf5079487e21558d294395ee8f4d28008",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asset",
+      "baseline": "4e99cc3c40a69a7c924089d0fb6ed9210c0811ae3bab795710cc9445ec221a0e",
+      "current": "4e99cc3c40a69a7c924089d0fb6ed9210c0811ae3bab795710cc9445ec221a0e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asset.meta",
+      "baseline": "c8033e18ff185169e77a24b9d74cdef2fcf45457a96b31cd989319f31503e3d8",
+      "current": "c8033e18ff185169e77a24b9d74cdef2fcf45457a96b31cd989319f31503e3d8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow - 2 Pass.mat",
+      "baseline": "0f85f499829e961c346d0cb87e0f356e8e134ebbb91bedf5e9d50b1b0e37a79b",
+      "current": "0f85f499829e961c346d0cb87e0f356e8e134ebbb91bedf5e9d50b1b0e37a79b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow - 2 Pass.mat.meta",
+      "baseline": "fca0ceb79d6d00a46900bf8d39eb2b4dfa9faf0df3cd0ae1e9e6ed001ad8bef7",
+      "current": "fca0ceb79d6d00a46900bf8d39eb2b4dfa9faf0df3cd0ae1e9e6ed001ad8bef7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow.mat",
+      "baseline": "82d468a12702973351407dbfd3d32d33ce11326a0c5891d5226d4094d5ed9c48",
+      "current": "82d468a12702973351407dbfd3d32d33ce11326a0c5891d5226d4094d5ed9c48",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow.mat.meta",
+      "baseline": "5a70f47393213f8f80a6286d5964a9a4333ade9deb018de90603c6331e7ab686",
+      "current": "5a70f47393213f8f80a6286d5964a9a4333ade9deb018de90603c6331e7ab686",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Outline.mat",
+      "baseline": "e4ec58e7666e97d21ce53809d09a4c66990afae2dc02b3d985b8acaee873f5d2",
+      "current": "e4ec58e7666e97d21ce53809d09a4c66990afae2dc02b3d985b8acaee873f5d2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Outline.mat.meta",
+      "baseline": "314b151beea7aa3775f2518360827044deff086271834716538927d4a2d7fd54",
+      "current": "314b151beea7aa3775f2518360827044deff086271834716538927d4a2d7fd54",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Glow.mat",
+      "baseline": "f5b941f485c4702bf2cfe7c1bf96baf9e3936b9a26f060af7722a837106eaac4",
+      "current": "f5b941f485c4702bf2cfe7c1bf96baf9e3936b9a26f060af7722a837106eaac4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Glow.mat.meta",
+      "baseline": "2ccdcef0d83501a7ea40f65b16960bd5ef849cd0b7c2b0c569c8c0b185be737c",
+      "current": "2ccdcef0d83501a7ea40f65b16960bd5ef849cd0b7c2b0c569c8c0b185be737c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Logo - URP.mat",
+      "baseline": "90b67a3490d83475743a8a29559c5d15817bc48727cd751902036af91ed6b370",
+      "current": "90b67a3490d83475743a8a29559c5d15817bc48727cd751902036af91ed6b370",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Logo - URP.mat.meta",
+      "baseline": "62f62f3fe92b822dc7fb6b4c37c8a480c189285ff2b2b73d7a9e05abc2dd40ac",
+      "current": "62f62f3fe92b822dc7fb6b4c37c8a480c189285ff2b2b73d7a9e05abc2dd40ac",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Logo.mat",
+      "baseline": "cc5da60afd0ff5de5cfe15e4e2252ecab80e8296f5184ee9936b0112d47b06f4",
+      "current": "cc5da60afd0ff5de5cfe15e4e2252ecab80e8296f5184ee9936b0112d47b06f4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Logo.mat.meta",
+      "baseline": "20fed8e5208e0e7e9f85b515fffed1653b72fd3f3217c9796f82541fddef0b4a",
+      "current": "20fed8e5208e0e7e9f85b515fffed1653b72fd3f3217c9796f82541fddef0b4a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset",
+      "baseline": "2b9d5cdc8b8aa4fee6647aed7379d2e0b2f4813d86e5b71ce6ca2cbc6ba91b27",
+      "current": "2b9d5cdc8b8aa4fee6647aed7379d2e0b2f4813d86e5b71ce6ca2cbc6ba91b27",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset.meta",
+      "baseline": "7e23c9b036e425426ad6a4b6fff86aacd9c96d1d12fb3fb069e0c12b483b5452",
+      "current": "7e23c9b036e425426ad6a4b6fff86aacd9c96d1d12fb3fb069e0c12b483b5452",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset",
+      "baseline": "bbe10f8523568536f3c0583e7c09dcaf18c9665046201bc6a0d6aac613197f6a",
+      "current": "bbe10f8523568536f3c0583e7c09dcaf18c9665046201bc6a0d6aac613197f6a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset.meta",
+      "baseline": "7b15d299f25821cf76f05c9934a6218ba9b23cd6107e3710950f5c942e7bb154",
+      "current": "7b15d299f25821cf76f05c9934a6218ba9b23cd6107e3710950f5c942e7bb154",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Metalic Green.mat",
+      "baseline": "2c5650ae16c1bfc7de819c407773149db90c179a0c41c56519e99563f6f0c91f",
+      "current": "2c5650ae16c1bfc7de819c407773149db90c179a0c41c56519e99563f6f0c91f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Metalic Green.mat.meta",
+      "baseline": "3b9dd94633e2f5fa9c1c852e657acaab339aebbe6b2ca5b15704e1daa6641132",
+      "current": "3b9dd94633e2f5fa9c1c852e657acaab339aebbe6b2ca5b15704e1daa6641132",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Overlay.mat",
+      "baseline": "760945f513bccda8ca17c47e46a7da50fd2f289e78fc58c9424b56805f94178c",
+      "current": "760945f513bccda8ca17c47e46a7da50fd2f289e78fc58c9424b56805f94178c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Overlay.mat.meta",
+      "baseline": "3f9a293a3dc0b822b480178d65367bb5040639e1d5af4646021fbcabac7c3e62",
+      "current": "3f9a293a3dc0b822b480178d65367bb5040639e1d5af4646021fbcabac7c3e62",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Soft Mask.mat",
+      "baseline": "97343cbdaad5b1319a7290e94fda92cde850778c4af0b8c62cb6493a1edae909",
+      "current": "97343cbdaad5b1319a7290e94fda92cde850778c4af0b8c62cb6493a1edae909",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Soft Mask.mat.meta",
+      "baseline": "94e2bc6c0e4e03aa5d3f847dafeb6fc5ac392cd860dcfdb7a16b147b19f6fec3",
+      "current": "94e2bc6c0e4e03aa5d3f847dafeb6fc5ac392cd860dcfdb7a16b147b19f6fec3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset",
+      "baseline": "4f0282b4a5b1c1f8893409069d223c235529d6d3d1b4857c40c6e3c6cd05f576",
+      "current": "4f0282b4a5b1c1f8893409069d223c235529d6d3d1b4857c40c6e3c6cd05f576",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset.meta",
+      "baseline": "6d0ec1eae7224151fbbcc39f100b796967a4b3d0b3d07e4cf585cdaf53bdb2e0",
+      "current": "6d0ec1eae7224151fbbcc39f100b796967a4b3d0b3d07e4cf585cdaf53bdb2e0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Drop Shadow.mat",
+      "baseline": "d23b0398c652ecae596f5aeb8e1a01a201bed316f409e6d13b7a7e407d0f6523",
+      "current": "d23b0398c652ecae596f5aeb8e1a01a201bed316f409e6d13b7a7e407d0f6523",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Drop Shadow.mat.meta",
+      "baseline": "26ecb9d2e9976122ec6b632cfa812eaa01cb07afea6d427426b01b1468a6c835",
+      "current": "26ecb9d2e9976122ec6b632cfa812eaa01cb07afea6d427426b01b1468a6c835",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - HDRP Unlit.mat",
+      "baseline": "fd2e13c9ffdc92c6092b13508015cb47f18a5e033736a5a5d405baf1682331b0",
+      "current": "fd2e13c9ffdc92c6092b13508015cb47f18a5e033736a5a5d405baf1682331b0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - HDRP Unlit.mat.meta",
+      "baseline": "87a005b8b579d0c402d03cb448ea454e329a963569442b8e7ef89a3a670e0e17",
+      "current": "87a005b8b579d0c402d03cb448ea454e329a963569442b8e7ef89a3a670e0e17",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Surface.mat",
+      "baseline": "c460b32edd53430bf17e29e96970c63fef9c68fdcd00c72b866136f98906737d",
+      "current": "c460b32edd53430bf17e29e96970c63fef9c68fdcd00c72b866136f98906737d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Surface.mat.meta",
+      "baseline": "d7c298c8c93231320f30359f411f3544c750e2b9742c8dbd290abdbae387d551",
+      "current": "d7c298c8c93231320f30359f411f3544c750e2b9742c8dbd290abdbae387d551",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - URP.mat",
+      "baseline": "18093fd3858d498785c0994b84c2caf14c38c0e581dc64e4d9efc1e793d18dc5",
+      "current": "18093fd3858d498785c0994b84c2caf14c38c0e581dc64e4d9efc1e793d18dc5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - URP.mat.meta",
+      "baseline": "f820a0e1abb36e87dc65136d4d458fafd4286a84a09005a5084775f790839135",
+      "current": "f820a0e1abb36e87dc65136d4d458fafd4286a84a09005a5084775f790839135",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset",
+      "baseline": "28fd5cc4c881da045dd295e30d60ad3539d9a61f4528c3c378beb11c2db16119",
+      "current": "28fd5cc4c881da045dd295e30d60ad3539d9a61f4528c3c378beb11c2db16119",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset.meta",
+      "baseline": "a361afe86a156859df5ee21ee72340918ed797605478023afbf5317c2764c4cf",
+      "current": "a361afe86a156859df5ee21ee72340918ed797605478023afbf5317c2764c4cf",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF - HDRP LIT - Bloom.mat",
+      "baseline": "d527a79546d98fc9e7d9f58d7f3114746c4dcdf017abaf93106956bbbcf5c90e",
+      "current": "d527a79546d98fc9e7d9f58d7f3114746c4dcdf017abaf93106956bbbcf5c90e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF - HDRP LIT - Bloom.mat.meta",
+      "baseline": "db7b35b82e8472b270d3a49d892cc6c0e5e701993de611b1387143aafa8a1740",
+      "current": "db7b35b82e8472b270d3a49d892cc6c0e5e701993de611b1387143aafa8a1740",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF - HDRP LIT - Outline.mat",
+      "baseline": "b32a417e97dcd0301cce9ce5b4dcadb6311e98df3196d74d09db091e0d9e2086",
+      "current": "b32a417e97dcd0301cce9ce5b4dcadb6311e98df3196d74d09db091e0d9e2086",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF - HDRP LIT - Outline.mat.meta",
+      "baseline": "d5320338844b7c8447b89145d71a2b48b2e2d1e6890503caf2bed0ee3d5ff772",
+      "current": "d5320338844b7c8447b89145d71a2b48b2e2d1e6890503caf2bed0ee3d5ff772",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF.asset",
+      "baseline": "552a8b7781a4baad6a2c4be8eb5e8628905ad9ccbefc0c96cc1da67929bb129b",
+      "current": "552a8b7781a4baad6a2c4be8eb5e8628905ad9ccbefc0c96cc1da67929bb129b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Unity SDF.asset.meta",
+      "baseline": "afbb52432c05b8237c86e8d92e23db28921a96513d37dbabff340f19976ede0f",
+      "current": "afbb52432c05b8237c86e8d92e23db28921a96513d37dbabff340f19976ede0f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets.meta",
+      "baseline": "ad730742d37ac6900aa7a953b1102c99f1f90681540f89d877604ead7fb4fb87",
+      "current": "ad730742d37ac6900aa7a953b1102c99f1f90681540f89d877604ead7fb4fb87",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/Default Sprite Asset.asset",
+      "baseline": "30fad27852d8991dd3078bb1d12ebed8bb0c563552525cce57c9726ab77828f4",
+      "current": "30fad27852d8991dd3078bb1d12ebed8bb0c563552525cce57c9726ab77828f4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/Default Sprite Asset.asset.meta",
+      "baseline": "6b1d9163e7e16fcb147bfaa62d6f47f04688c1e8a2a3ba59084d1e2afaa356a5",
+      "current": "6b1d9163e7e16fcb147bfaa62d6f47f04688c1e8a2a3ba59084d1e2afaa356a5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/DropCap Numbers.asset",
+      "baseline": "ffc7374228511698dafcee554394849bfb233b25b29089251dad2cfef7683590",
+      "current": "ffc7374228511698dafcee554394849bfb233b25b29089251dad2cfef7683590",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/DropCap Numbers.asset.meta",
+      "baseline": "2f561eb1007e8e2a3109369d482021fd523fe25a809a6a9d9d6ddc4732f18457",
+      "current": "2f561eb1007e8e2a3109369d482021fd523fe25a809a6a9d9d6ddc4732f18457",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes.meta",
+      "baseline": "e7ba28c033d02a2b202a12579b05f4861239427ba0c5a06be842b0de2f31a167",
+      "current": "e7ba28c033d02a2b202a12579b05f4861239427ba0c5a06be842b0de2f31a167",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/01-  Single Line TextMesh Pro.unity",
+      "baseline": "990d95ec0dd0546a45f31e5ddfc4428cf4abede22614a6935f89b719b8916c04",
+      "current": "990d95ec0dd0546a45f31e5ddfc4428cf4abede22614a6935f89b719b8916c04",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/01-  Single Line TextMesh Pro.unity.meta",
+      "baseline": "e0e8c5dbf080382d4cc0dbce11bebe3a8468317737a573ee643144a017c43cf3",
+      "current": "e0e8c5dbf080382d4cc0dbce11bebe3a8468317737a573ee643144a017c43cf3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/02 - Multi-line TextMesh Pro.unity",
+      "baseline": "ecb317d1d9f279c6996172493535a860bcb043324d032c207b3013e15afed23d",
+      "current": "ecb317d1d9f279c6996172493535a860bcb043324d032c207b3013e15afed23d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/02 - Multi-line TextMesh Pro.unity.meta",
+      "baseline": "db3c993aee3579c72dd92beeaf4338f5bb145e8df662ffc153c4afd2b0ad43fb",
+      "current": "db3c993aee3579c72dd92beeaf4338f5bb145e8df662ffc153c4afd2b0ad43fb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/03 - Line Justification.unity",
+      "baseline": "24d5223b77755d40fb0226a02af9704305a22fc1b8e1a144945ab902cd54b961",
+      "current": "24d5223b77755d40fb0226a02af9704305a22fc1b8e1a144945ab902cd54b961",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/03 - Line Justification.unity.meta",
+      "baseline": "3adaae3f7b42a115b3014e455c98235cdd6c6ac401a313504fae56e248b7dba9",
+      "current": "3adaae3f7b42a115b3014e455c98235cdd6c6ac401a313504fae56e248b7dba9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/04 - Word Wrapping.unity",
+      "baseline": "5479172b20839050247c4a89aa2ad411e93b4a0c78d3160e067367480a114694",
+      "current": "5479172b20839050247c4a89aa2ad411e93b4a0c78d3160e067367480a114694",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/04 - Word Wrapping.unity.meta",
+      "baseline": "17f10db46ed5dd366ee8f5b4fa44885980975ffd18b9e5701f360e3a8f5427de",
+      "current": "17f10db46ed5dd366ee8f5b4fa44885980975ffd18b9e5701f360e3a8f5427de",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/05 - Style Tags.unity",
+      "baseline": "0ac68c307895780fdc8ff4d5bf5ffdbbb8dd19146080caf5b20098be64c9bb65",
+      "current": "0ac68c307895780fdc8ff4d5bf5ffdbbb8dd19146080caf5b20098be64c9bb65",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/05 - Style Tags.unity.meta",
+      "baseline": "8c54d7c42584235a7850117a5a453bf694178e1d2b6dd914945abd5866d16f0a",
+      "current": "8c54d7c42584235a7850117a5a453bf694178e1d2b6dd914945abd5866d16f0a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/06 - Extra Rich Text Examples.unity",
+      "baseline": "7471483a64fce14ee88f8f2237a2c1908f8dc7027012c2671e990b0c3dada6b6",
+      "current": "7471483a64fce14ee88f8f2237a2c1908f8dc7027012c2671e990b0c3dada6b6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/06 - Extra Rich Text Examples.unity.meta",
+      "baseline": "c17f3c08de1a45ac86a6053ec27ff3cc83690e0f0b5dc76c5be29ff0b0aec9d0",
+      "current": "c17f3c08de1a45ac86a6053ec27ff3cc83690e0f0b5dc76c5be29ff0b0aec9d0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/07 - Superscript & Subscript Example.unity",
+      "baseline": "e04e775290f8786f797ffe9461138970eba8d3108bf44b0baef129d7d2e93192",
+      "current": "e04e775290f8786f797ffe9461138970eba8d3108bf44b0baef129d7d2e93192",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/07 - Superscript & Subscript Example.unity.meta",
+      "baseline": "9d877009e672b1d6ba89aa4020525d03bc6a52e593004261a7ef85df8267f8cd",
+      "current": "9d877009e672b1d6ba89aa4020525d03bc6a52e593004261a7ef85df8267f8cd",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/08 - Improved Text Alignment.unity",
+      "baseline": "52e65a7e373cf75ef63c32dfe3a3288112536bbbe1c1fbe5d0e0fd8800ccb051",
+      "current": "52e65a7e373cf75ef63c32dfe3a3288112536bbbe1c1fbe5d0e0fd8800ccb051",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/08 - Improved Text Alignment.unity.meta",
+      "baseline": "2ad88c6e65aedaa31af0b9852d3319a66028cac03a5b3ad2bf0cd0c74ea0098f",
+      "current": "2ad88c6e65aedaa31af0b9852d3319a66028cac03a5b3ad2bf0cd0c74ea0098f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/09 - Margin Tag Example.unity",
+      "baseline": "f3376e0fe78e22129df63d2cb5e46da21deaaa96d1b2be74f757db4c397af7a5",
+      "current": "f3376e0fe78e22129df63d2cb5e46da21deaaa96d1b2be74f757db4c397af7a5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/09 - Margin Tag Example.unity.meta",
+      "baseline": "a8f3d7371628067e6e41e75037ebfd4732c9142e2d6267f7d2bda9149a726d28",
+      "current": "a8f3d7371628067e6e41e75037ebfd4732c9142e2d6267f7d2bda9149a726d28",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/10 - Bullets & Numbered List Example.unity",
+      "baseline": "8121b1f2a9b7f73898c2cab8dfdfb5e371d5039d4b08af6d9af28739e18d17bf",
+      "current": "8121b1f2a9b7f73898c2cab8dfdfb5e371d5039d4b08af6d9af28739e18d17bf",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/10 - Bullets & Numbered List Example.unity.meta",
+      "baseline": "4bc5add79b8a0a982c453333765f1c4e0631c43bf999d48592f18b676c165bdb",
+      "current": "4bc5add79b8a0a982c453333765f1c4e0631c43bf999d48592f18b676c165bdb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/11 - The Style Tag.unity",
+      "baseline": "6bf4aca49c66dea4570d30f916b856475c8ce6b5926f2690907dcf1b71f22a4d",
+      "current": "6bf4aca49c66dea4570d30f916b856475c8ce6b5926f2690907dcf1b71f22a4d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/11 - The Style Tag.unity.meta",
+      "baseline": "c33c6c21dce958d1ccc318740d48415390bdf4d8724bf46e70cd3f764ab89ad2",
+      "current": "c33c6c21dce958d1ccc318740d48415390bdf4d8724bf46e70cd3f764ab89ad2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/12 - Link Example.unity",
+      "baseline": "ba9a1f2055ab72464389bc679c17c01c3b1ad18aadded232b5d3c9efdaf765a8",
+      "current": "ba9a1f2055ab72464389bc679c17c01c3b1ad18aadded232b5d3c9efdaf765a8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/12 - Link Example.unity.meta",
+      "baseline": "be2c994d0c40671b7ebb1913142374839a14642d9870d9c1b0b4df8614e2f95e",
+      "current": "be2c994d0c40671b7ebb1913142374839a14642d9870d9c1b0b4df8614e2f95e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/12a - Text Interactions.unity",
+      "baseline": "4c8fb7924fa9126c075b60cba7f46894a50c0c9c4b95204e0677c305b2b78e0d",
+      "current": "4c8fb7924fa9126c075b60cba7f46894a50c0c9c4b95204e0677c305b2b78e0d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/12a - Text Interactions.unity.meta",
+      "baseline": "fd7473a0d95aed7e6d8b8989603791f72a89e6b0372e1b5d458274a97da5a570",
+      "current": "fd7473a0d95aed7e6d8b8989603791f72a89e6b0372e1b5d458274a97da5a570",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/13 - Soft Hyphenation.unity",
+      "baseline": "6df43fe94862b2868d42bd5627c2512cf6583d6de9f11705f67b7cee78ef2927",
+      "current": "6df43fe94862b2868d42bd5627c2512cf6583d6de9f11705f67b7cee78ef2927",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/13 - Soft Hyphenation.unity.meta",
+      "baseline": "1143bd85921d569ae97dac0594d53ab1184974415fc0aa0a60a4a5a4bc8fc206",
+      "current": "1143bd85921d569ae97dac0594d53ab1184974415fc0aa0a60a4a5a4bc8fc206",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/14 - Multi Font & Sprites.unity",
+      "baseline": "c2baee844d8329325250db3e41f3de9fdf2d794a12680a17213c79b32e9d6fac",
+      "current": "c2baee844d8329325250db3e41f3de9fdf2d794a12680a17213c79b32e9d6fac",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/14 - Multi Font & Sprites.unity.meta",
+      "baseline": "cda3eb96e68cf9c057b1c3740982fe19ed084016445e10cec257cdd2340d1118",
+      "current": "cda3eb96e68cf9c057b1c3740982fe19ed084016445e10cec257cdd2340d1118",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/15 - Inline Graphics & Sprites.unity",
+      "baseline": "92449ad8abc858797cca21984cc4b887203245dbeeb7b70fbff4e81487b1f72e",
+      "current": "92449ad8abc858797cca21984cc4b887203245dbeeb7b70fbff4e81487b1f72e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/15 - Inline Graphics & Sprites.unity.meta",
+      "baseline": "a9be1010d50be11d2a99d81b1bf1d7aeb5c40d4b7eaac768f8ab23b9022301ef",
+      "current": "a9be1010d50be11d2a99d81b1bf1d7aeb5c40d4b7eaac768f8ab23b9022301ef",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/16 - Linked text overflow mode example.unity",
+      "baseline": "5cfefefd451fb0d5725efe8a07ff0d71ce4863fb5ea5ee592bfc6e7338718334",
+      "current": "5cfefefd451fb0d5725efe8a07ff0d71ce4863fb5ea5ee592bfc6e7338718334",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/16 - Linked text overflow mode example.unity.meta",
+      "baseline": "822841ff32a9a19cf452e73114715cd4eb2da5b5a88f6c3499c354ac1456ebeb",
+      "current": "822841ff32a9a19cf452e73114715cd4eb2da5b5a88f6c3499c354ac1456ebeb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/17 - Old Computer Terminal.unity",
+      "baseline": "77b148a5d2421daf4ac3da58eccfa5f8600c3b6b306f3eef8bd4194eb22f89cb",
+      "current": "77b148a5d2421daf4ac3da58eccfa5f8600c3b6b306f3eef8bd4194eb22f89cb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/17 - Old Computer Terminal.unity.meta",
+      "baseline": "c0c347f78fb3019f360fca774d0cf5a282417913a2cccd141c1de3a4c618456d",
+      "current": "c0c347f78fb3019f360fca774d0cf5a282417913a2cccd141c1de3a4c618456d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/18 - ScrollRect & Masking & Layout.unity",
+      "baseline": "dd3ab251a81fd477e13b122fd00f25f1ee57729b548320176f9eed5c807726e1",
+      "current": "dd3ab251a81fd477e13b122fd00f25f1ee57729b548320176f9eed5c807726e1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/18 - ScrollRect & Masking & Layout.unity.meta",
+      "baseline": "c436c31b892f1306f08622e3a1179d604621ea7b5c847aafd157466059d8bf65",
+      "current": "c436c31b892f1306f08622e3a1179d604621ea7b5c847aafd157466059d8bf65",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/19 - Masking Texture & Soft Mask.unity",
+      "baseline": "c68017bf6f85a99e8319c3bb2285b8cc3f7a5844f2df6e11da9bf87a2ded383f",
+      "current": "c68017bf6f85a99e8319c3bb2285b8cc3f7a5844f2df6e11da9bf87a2ded383f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/19 - Masking Texture & Soft Mask.unity.meta",
+      "baseline": "59965b8c34d8a5d8e020f085ca641b7c881092768b7187100475e6c86cf6e337",
+      "current": "59965b8c34d8a5d8e020f085ca641b7c881092768b7187100475e6c86cf6e337",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/20 - Input Field with Scrollbar.unity",
+      "baseline": "67689aebe2ac74bceb98833794dec7b998757d47c73b7a52697a89789bd381de",
+      "current": "67689aebe2ac74bceb98833794dec7b998757d47c73b7a52697a89789bd381de",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/20 - Input Field with Scrollbar.unity.meta",
+      "baseline": "325eeb5cc8c058accfd1796baf49afa6dcd4136a750e2ab6233513f2caaafde8",
+      "current": "325eeb5cc8c058accfd1796baf49afa6dcd4136a750e2ab6233513f2caaafde8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity",
+      "baseline": "341405b07656278a25afc2cefc3a8d15e567e0aca5e6073a70c1cfb1e3227f22",
+      "current": "341405b07656278a25afc2cefc3a8d15e567e0aca5e6073a70c1cfb1e3227f22",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity.meta",
+      "baseline": "f000c908447e0cccec516a8d7495c00299c07c5fec4aad672ba4c33234e48f50",
+      "current": "f000c908447e0cccec516a8d7495c00299c07c5fec4aad672ba4c33234e48f50",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/22 - Basic Scripting Example.unity",
+      "baseline": "f26ad8ac66ee822cfab6506bad035ad2103b939086b6a87051680f1d507e67cf",
+      "current": "f26ad8ac66ee822cfab6506bad035ad2103b939086b6a87051680f1d507e67cf",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/22 - Basic Scripting Example.unity.meta",
+      "baseline": "6f2e8a7cdb4f5d0a77f2a895d2f7290abf04669d88f79f5a6e4cbc355f408a66",
+      "current": "6f2e8a7cdb4f5d0a77f2a895d2f7290abf04669d88f79f5a6e4cbc355f408a66",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/23 - Animating Vertex Attributes.unity",
+      "baseline": "e39df0d0a9e4aec4b5e78f94a7f4a3106e65794999ddbcecee7ca2dc1245e09c",
+      "current": "e39df0d0a9e4aec4b5e78f94a7f4a3106e65794999ddbcecee7ca2dc1245e09c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/23 - Animating Vertex Attributes.unity.meta",
+      "baseline": "27adac726cbfeb782763c826fccdf2276235192d717690880914e1df276aef86",
+      "current": "27adac726cbfeb782763c826fccdf2276235192d717690880914e1df276aef86",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example URP.unity",
+      "baseline": "f6817fbf603a2d98e205138a1bd7803f54ea52421a2f6f4f749686abf4c91724",
+      "current": "f6817fbf603a2d98e205138a1bd7803f54ea52421a2f6f4f749686abf4c91724",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example URP.unity.meta",
+      "baseline": "775edafcbc8bfcc5eae6b37209100be6d3fc096f41a2abb3b76b26b65019749f",
+      "current": "775edafcbc8bfcc5eae6b37209100be6d3fc096f41a2abb3b76b26b65019749f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example.unity",
+      "baseline": "7476164776cfa629185b7fd0db26f463507e98c3d9fe9a546b6fc89b8362dcf4",
+      "current": "7476164776cfa629185b7fd0db26f463507e98c3d9fe9a546b6fc89b8362dcf4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example.unity.meta",
+      "baseline": "847eab6d58049fc88b120b0e6bbca8bceb0137e41c7ead7ca9e7b31c22ea63fd",
+      "current": "847eab6d58049fc88b120b0e6bbca8bceb0137e41c7ead7ca9e7b31c22ea63fd",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/25 - Sunny Days Example.unity",
+      "baseline": "4aaa54006079b8a78bee719dd1d620b40abb3a2842a735406f44291a46595c41",
+      "current": "4aaa54006079b8a78bee719dd1d620b40abb3a2842a735406f44291a46595c41",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/25 - Sunny Days Example.unity.meta",
+      "baseline": "3255b94a7a8fd3493b7dd0c60d479f7745a0095eb91fd06c4cd62281aaa46cf9",
+      "current": "3255b94a7a8fd3493b7dd0c60d479f7745a0095eb91fd06c4cd62281aaa46cf9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/26 - Dropdown Placeholder Example.unity",
+      "baseline": "be1a5f115ee3a2e5293a5d8ea95dc1bfb1553e954126f24865426e2402669593",
+      "current": "be1a5f115ee3a2e5293a5d8ea95dc1bfb1553e954126f24865426e2402669593",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/26 - Dropdown Placeholder Example.unity.meta",
+      "baseline": "6eccfd323cf62fc7dcaf05c5a0798f8c86fd7425eb8d26bcd7b2bcaa16ed8ce2",
+      "current": "6eccfd323cf62fc7dcaf05c5a0798f8c86fd7425eb8d26bcd7b2bcaa16ed8ce2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/27 - Double Pass Shader Example.unity",
+      "baseline": "acdc4a5f5d05781e476ed9dd96b37f496a788dfb31dbcce6545d295032f9d4b7",
+      "current": "acdc4a5f5d05781e476ed9dd96b37f496a788dfb31dbcce6545d295032f9d4b7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/27 - Double Pass Shader Example.unity.meta",
+      "baseline": "eb3966ea8397d4dd119ccc944c888ebf8a37935a79b16a9ee76aefde56915a7c",
+      "current": "eb3966ea8397d4dd119ccc944c888ebf8a37935a79b16a9ee76aefde56915a7c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example.meta",
+      "baseline": "7cb53f3b3ea9b5ff60d7aad8bf664368abb78e7d0e766d30bfffd1be3ee2c194",
+      "current": "7cb53f3b3ea9b5ff60d7aad8bf664368abb78e7d0e766d30bfffd1be3ee2c194",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example.unity",
+      "baseline": "9bb4f03e1589bedf437e18df9cbbf80ca0e36a8315d225451847213a61a1f51d",
+      "current": "9bb4f03e1589bedf437e18df9cbbf80ca0e36a8315d225451847213a61a1f51d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example.unity.meta",
+      "baseline": "9c95b34034c9ae24dc073a93e7a4b0fb4bbebe892a5b2de0ead9eb0f811e3213",
+      "current": "9c95b34034c9ae24dc073a93e7a4b0fb4bbebe892a5b2de0ead9eb0f811e3213",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example/Sky and Fog Volume Profile.asset",
+      "baseline": "cd5960d8794372f7509e6c88781ec6e58adf712fa9b0bf8b6d11b1b76b414333",
+      "current": "cd5960d8794372f7509e6c88781ec6e58adf712fa9b0bf8b6d11b1b76b414333",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example/Sky and Fog Volume Profile.asset.meta",
+      "baseline": "38350a0dbeadaa09e6b2cadf173a87c0f7ec2012484495d84e14ce0479d6f8c9",
+      "current": "38350a0dbeadaa09e6b2cadf173a87c0f7ec2012484495d84e14ce0479d6f8c9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/Benchmark (Floating Text).unity",
+      "baseline": "7c8678dbf5e23edf5ce76553894d8c164ad9acffbb41a51baaf3ff55887c667a",
+      "current": "7c8678dbf5e23edf5ce76553894d8c164ad9acffbb41a51baaf3ff55887c667a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scenes/Benchmark (Floating Text).unity.meta",
+      "baseline": "f732578e6d687749e0b69ea845ae61123110acfa44685bd9a67a2e407c7f2883",
+      "current": "f732578e6d687749e0b69ea845ae61123110acfa44685bd9a67a2e407c7f2883",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts.meta",
+      "baseline": "a66212561dd183a284696723bc354daa735c26eb7e1b426b8ba64c7ef39f3059",
+      "current": "a66212561dd183a284696723bc354daa735c26eb7e1b426b8ba64c7ef39f3059",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs",
+      "baseline": "998dea76bd30266335175f6abe4130c82adb8a6c4457d180a0ec410d55d4b3d6",
+      "current": "998dea76bd30266335175f6abe4130c82adb8a6c4457d180a0ec410d55d4b3d6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs.meta",
+      "baseline": "b5a5f2d161fcf4cf76ad6fdcf14255a80e035378350bd8230ab7910434d4193d",
+      "current": "b5a5f2d161fcf4cf76ad6fdcf14255a80e035378350bd8230ab7910434d4193d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs",
+      "baseline": "0ad01c7d86c6103f9977d859549af2af1379e572d2ec6d58f9471b7b0f1de5a3",
+      "current": "0ad01c7d86c6103f9977d859549af2af1379e572d2ec6d58f9471b7b0f1de5a3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs.meta",
+      "baseline": "9f720f8dfccce4ccb2f5065f876e214973b7f41d74b9263838757b2b9931e1f8",
+      "current": "9f720f8dfccce4ccb2f5065f876e214973b7f41d74b9263838757b2b9931e1f8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs",
+      "baseline": "1c0baed620b2f6c8725f112fa5f2252044eaa95effe99038aebd64de74673963",
+      "current": "1c0baed620b2f6c8725f112fa5f2252044eaa95effe99038aebd64de74673963",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs.meta",
+      "baseline": "b6899da74fba0bd88ab9e393f9dbd78d6ff17348903a36e1feb9944fb1c42808",
+      "current": "b6899da74fba0bd88ab9e393f9dbd78d6ff17348903a36e1feb9944fb1c42808",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs",
+      "baseline": "a56cc95f9203f642d07c72026491043b49f31fab89420cd3a4e34652dfa47a8c",
+      "current": "a56cc95f9203f642d07c72026491043b49f31fab89420cd3a4e34652dfa47a8c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs.meta",
+      "baseline": "fea08e0ca90e38d37ad8a4b0dcd465d56140d40717f4fded0bb43fb4b6b0d05b",
+      "current": "fea08e0ca90e38d37ad8a4b0dcd465d56140d40717f4fded0bb43fb4b6b0d05b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs",
+      "baseline": "d3ede5e806ea23d1bd68b077b0d5c57667f04d630095e12befa20c5d4c758531",
+      "current": "d3ede5e806ea23d1bd68b077b0d5c57667f04d630095e12befa20c5d4c758531",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs.meta",
+      "baseline": "a4ddc5dfafaa1bab5ade3409884bb183c912b7227be29d13555f1458a9b48204",
+      "current": "a4ddc5dfafaa1bab5ade3409884bb183c912b7227be29d13555f1458a9b48204",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs",
+      "baseline": "907922faeb2a8889662e779b4a3be0044a13d6485a0c49c007c5d6f693f6fd8d",
+      "current": "907922faeb2a8889662e779b4a3be0044a13d6485a0c49c007c5d6f693f6fd8d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs.meta",
+      "baseline": "53e3045212388d6242a1dee7c0f3a9a833e24578cfd14f29032bef69d8b369e4",
+      "current": "53e3045212388d6242a1dee7c0f3a9a833e24578cfd14f29032bef69d8b369e4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs",
+      "baseline": "9aff51d0bf3dc3a31a30a738667818f98b18d76683e2544c152dcc73bd0c7ba3",
+      "current": "9aff51d0bf3dc3a31a30a738667818f98b18d76683e2544c152dcc73bd0c7ba3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs.meta",
+      "baseline": "2609282b9076c1198bbd29bde1abcf1d727a91fccf2f7559bfab449d73fa4aba",
+      "current": "2609282b9076c1198bbd29bde1abcf1d727a91fccf2f7559bfab449d73fa4aba",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/DropdownSample.cs",
+      "baseline": "89f7702e409ef6cd795fab824b24bd48b98401e9f74240c13e06a95ccc08158f",
+      "current": "89f7702e409ef6cd795fab824b24bd48b98401e9f74240c13e06a95ccc08158f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/DropdownSample.cs.meta",
+      "baseline": "d715ba5bd33c598ad4ce9144486a087e6ce8928e7f3b8b7bd523892b904d9568",
+      "current": "d715ba5bd33c598ad4ce9144486a087e6ce8928e7f3b8b7bd523892b904d9568",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs",
+      "baseline": "5e1a229404d5a5ed0fbe6b7481f0337f2fc1fe8352a1cb70477de2c0af81fffa",
+      "current": "5e1a229404d5a5ed0fbe6b7481f0337f2fc1fe8352a1cb70477de2c0af81fffa",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs.meta",
+      "baseline": "28aba07bf6e79f41860bc58aa87d5ca3a065141549f310db87599499213a5521",
+      "current": "28aba07bf6e79f41860bc58aa87d5ca3a065141549f310db87599499213a5521",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs",
+      "baseline": "8232ee2ec26ad598481e65b616722fcf126aa394fea35cfb5fb2d6574c7f3586",
+      "current": "8232ee2ec26ad598481e65b616722fcf126aa394fea35cfb5fb2d6574c7f3586",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs.meta",
+      "baseline": "6e68138de91547485febeaab69c18a0bf62d8f3b7d599ba56b43162b4fe7cdf2",
+      "current": "6e68138de91547485febeaab69c18a0bf62d8f3b7d599ba56b43162b4fe7cdf2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/ShaderPropAnimator.cs",
+      "baseline": "7258b6c0032cbf8294200681873dfb0cc3cdf3077f9413e911f076e98cfaa110",
+      "current": "7258b6c0032cbf8294200681873dfb0cc3cdf3077f9413e911f076e98cfaa110",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/ShaderPropAnimator.cs.meta",
+      "baseline": "a53541f484a5c39cbe51e2e67addca6688e25de8941240153ed1994a21f0c99a",
+      "current": "a53541f484a5c39cbe51e2e67addca6688e25de8941240153ed1994a21f0c99a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/SimpleScript.cs",
+      "baseline": "9c933e22d1fda885ab05b43c8732cf66d1a15cfe3cb695e29c62e809f925171a",
+      "current": "9c933e22d1fda885ab05b43c8732cf66d1a15cfe3cb695e29c62e809f925171a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/SimpleScript.cs.meta",
+      "baseline": "287b8c3810cd5940177db820e350fceb7a02c21b326d2f5ca2f69677d166630b",
+      "current": "287b8c3810cd5940177db820e350fceb7a02c21b326d2f5ca2f69677d166630b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs",
+      "baseline": "bba0def6229dc39be9abf191e58851cc00bbca046dfd5d2cf112fec3789d3ec2",
+      "current": "bba0def6229dc39be9abf191e58851cc00bbca046dfd5d2cf112fec3789d3ec2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs.meta",
+      "baseline": "2db0caf23502642bfd65a64eee53e5b666d0f7a6702b65a46b6fad118c6c3910",
+      "current": "2db0caf23502642bfd65a64eee53e5b666d0f7a6702b65a46b6fad118c6c3910",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_DigitValidator.cs",
+      "baseline": "9c62de4076d80230fa9b37af89c51cc5c1432e0868ce22db50101bbc7c61e520",
+      "current": "9c62de4076d80230fa9b37af89c51cc5c1432e0868ce22db50101bbc7c61e520",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_DigitValidator.cs.meta",
+      "baseline": "5b30a78025f1db5973300011f559bfb447d65333451845de29b4879a3011595e",
+      "current": "5b30a78025f1db5973300011f559bfb447d65333451845de29b4879a3011595e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs",
+      "baseline": "4adf8032f66749939a2d1b35758854ca8185f3e045a9172da31e1b3496d6125d",
+      "current": "4adf8032f66749939a2d1b35758854ca8185f3e045a9172da31e1b3496d6125d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs.meta",
+      "baseline": "f7a924d50b18d967688a31c4469cef19e71945b6c5f291fc4410c9c26e87e2bc",
+      "current": "f7a924d50b18d967688a31c4469cef19e71945b6c5f291fc4410c9c26e87e2bc",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs",
+      "baseline": "408f5639575385ac9c209bd87967f44f8e31f920a6c9afa524331bcc58416e76",
+      "current": "408f5639575385ac9c209bd87967f44f8e31f920a6c9afa524331bcc58416e76",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs.meta",
+      "baseline": "d2c1dcf8261a81d09fe2ec376fd26410b562c7d9dd6f8345050081cba4975344",
+      "current": "d2c1dcf8261a81d09fe2ec376fd26410b562c7d9dd6f8345050081cba4975344",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs",
+      "baseline": "f100ed955a203117cfd33c8513e55c0d78cfd04e38e701906701edf08b4230c4",
+      "current": "f100ed955a203117cfd33c8513e55c0d78cfd04e38e701906701edf08b4230c4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs.meta",
+      "baseline": "3ab1b18a3f7149a2c810e22f8a2b4054543bae510d5b7fe374b62258e4a1a3e8",
+      "current": "3ab1b18a3f7149a2c810e22f8a2b4054543bae510d5b7fe374b62258e4a1a3e8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs",
+      "baseline": "adcf5eef17e10547976e9570985e600cea831643e6125b626631582e4e547f3b",
+      "current": "adcf5eef17e10547976e9570985e600cea831643e6125b626631582e4e547f3b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs.meta",
+      "baseline": "c268e7cffdb144a9353f6c77f34876f6bd5dd792a5a7c58f5befddb8e59d9fa5",
+      "current": "c268e7cffdb144a9353f6c77f34876f6bd5dd792a5a7c58f5befddb8e59d9fa5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs",
+      "baseline": "3e036670c0141a3ec67f4259698e34f32228ddc96763065da5f8f7bdeebf8546",
+      "current": "3e036670c0141a3ec67f4259698e34f32228ddc96763065da5f8f7bdeebf8546",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs.meta",
+      "baseline": "bae6f5cb3385929bf93af742a4c2bf6c71af978042b4aef8bc7972f8c47bf7eb",
+      "current": "bae6f5cb3385929bf93af742a4c2bf6c71af978042b4aef8bc7972f8c47bf7eb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs",
+      "baseline": "0617870c1b903820eefeeef09a951dc56d9b16bfd75793fd0643891ee5fdd11d",
+      "current": "0617870c1b903820eefeeef09a951dc56d9b16bfd75793fd0643891ee5fdd11d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs.meta",
+      "baseline": "fd67dbc127fa77eda6cba77554b034605585e27ff367893125ab0a1116ad653c",
+      "current": "fd67dbc127fa77eda6cba77554b034605585e27ff367893125ab0a1116ad653c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs",
+      "baseline": "b0da872056634d738957e518bbaeeab7349aed638e6790bb3ef7a93adf082944",
+      "current": "b0da872056634d738957e518bbaeeab7349aed638e6790bb3ef7a93adf082944",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs.meta",
+      "baseline": "053931d636f6652744a5eafa292a9b311a83761a67b62422a5d11e0e5d132c53",
+      "current": "053931d636f6652744a5eafa292a9b311a83761a67b62422a5d11e0e5d132c53",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs",
+      "baseline": "90bbb06adceaa66e8123c633326e6682397009156fe997ef17d3a340164fc029",
+      "current": "90bbb06adceaa66e8123c633326e6682397009156fe997ef17d3a340164fc029",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs.meta",
+      "baseline": "416a600727e67f87066fc3dec35eaac1117509bc11206070d3ed170d35917cb2",
+      "current": "416a600727e67f87066fc3dec35eaac1117509bc11206070d3ed170d35917cb2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs",
+      "baseline": "8859e500f2e3ad42d9d453d2162ea73642fabd09f8062e60475c50fa2341e752",
+      "current": "8859e500f2e3ad42d9d453d2162ea73642fabd09f8062e60475c50fa2341e752",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs.meta",
+      "baseline": "a747934f3763b89468615ea59be602032147b52a5c055a5b68399fb9321be958",
+      "current": "a747934f3763b89468615ea59be602032147b52a5c055a5b68399fb9321be958",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs",
+      "baseline": "80b7dfd7560715caaaeca1b449634cce4b7487c39c71a58b63e18be4994cf6c8",
+      "current": "80b7dfd7560715caaaeca1b449634cce4b7487c39c71a58b63e18be4994cf6c8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs.meta",
+      "baseline": "d864750729865d73457c743d823102d3f78846dcfb6b813fdb3d159410dced31",
+      "current": "d864750729865d73457c743d823102d3f78846dcfb6b813fdb3d159410dced31",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs",
+      "baseline": "d96105cd1cca75a14cdd95833627ee0c8fed6b9b09cd4037a7571a230076915e",
+      "current": "d96105cd1cca75a14cdd95833627ee0c8fed6b9b09cd4037a7571a230076915e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs.meta",
+      "baseline": "06ee76a4f3ef485b035a31d75ca2561374f2a70ad856901806b2f41e2f3f07ce",
+      "current": "06ee76a4f3ef485b035a31d75ca2561374f2a70ad856901806b2f41e2f3f07ce",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs",
+      "baseline": "391a52b353f2aeff13bf4da77bf07a217b4af0c213f0fdce006b054d13497213",
+      "current": "391a52b353f2aeff13bf4da77bf07a217b4af0c213f0fdce006b054d13497213",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs.meta",
+      "baseline": "4a2bda1b1de71a8f841cc11297c012b1de2d4026d86d05e93b9d5618a5859de2",
+      "current": "4a2bda1b1de71a8f841cc11297c012b1de2d4026d86d05e93b9d5618a5859de2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs",
+      "baseline": "441b685176c8c6489e236da5a591f26f73492395b3c2a8c2986f97ba434d44ec",
+      "current": "441b685176c8c6489e236da5a591f26f73492395b3c2a8c2986f97ba434d44ec",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs.meta",
+      "baseline": "1b36c2aa3bbd135c29e7d5eae1120c2804b257f9beb4b1d19b33b9b1fa66b4f5",
+      "current": "1b36c2aa3bbd135c29e7d5eae1120c2804b257f9beb4b1d19b33b9b1fa66b4f5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs",
+      "baseline": "b868c62f876e92818c8b6f0a215abf8162059a509661ffaa609f580c23f99211",
+      "current": "b868c62f876e92818c8b6f0a215abf8162059a509661ffaa609f580c23f99211",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs.meta",
+      "baseline": "c5bf0999ce13c8d493e2b47bf8122227835a49e743dd02a8376b295d014f228e",
+      "current": "c5bf0999ce13c8d493e2b47bf8122227835a49e743dd02a8376b295d014f228e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs",
+      "baseline": "fd8c8af9f8982cb3507800e70f8497b5a081a70c8391c066d6c6bb3c612f33da",
+      "current": "fd8c8af9f8982cb3507800e70f8497b5a081a70c8391c066d6c6bb3c612f33da",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs.meta",
+      "baseline": "9512cba0597ba6f85d327bad94fa220632921a8207e08e3ade71bc3e4efe6f1a",
+      "current": "9512cba0597ba6f85d327bad94fa220632921a8207e08e3ade71bc3e4efe6f1a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs",
+      "baseline": "945ccb91d2eb3042d235ce0c5ce49250cc2a4f70c45fdfdfbbacddb63e4d4f13",
+      "current": "945ccb91d2eb3042d235ce0c5ce49250cc2a4f70c45fdfdfbbacddb63e4d4f13",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs.meta",
+      "baseline": "81db7f6ab33f739c1aa33ef6bf101e4db8b77dfb47ec00a8f77864921f8e8d0a",
+      "current": "81db7f6ab33f739c1aa33ef6bf101e4db8b77dfb47ec00a8f77864921f8e8d0a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs",
+      "baseline": "e7c100c9a978359968d1e22f192bdf49741fd87c2f3f46195e86f9413998f995",
+      "current": "e7c100c9a978359968d1e22f192bdf49741fd87c2f3f46195e86f9413998f995",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs.meta",
+      "baseline": "ce62339cf19c85e8dd748ca224d6273fb32546c529e8a9bf155a098188944a71",
+      "current": "ce62339cf19c85e8dd748ca224d6273fb32546c529e8a9bf155a098188944a71",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs",
+      "baseline": "9d884e810c94a4824b78b3da58801df126e748f51bbb906b103f7e60b9e69cb6",
+      "current": "9d884e810c94a4824b78b3da58801df126e748f51bbb906b103f7e60b9e69cb6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs.meta",
+      "baseline": "7d0d9c9c53dd6db1f5a8520883afc810286737f744d17b340b759f2b1b22e4fc",
+      "current": "7d0d9c9c53dd6db1f5a8520883afc810286737f744d17b340b759f2b1b22e4fc",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs",
+      "baseline": "9678f251636b802d553192773550b2383b83ae196638a904b7eeec065a9fbd5f",
+      "current": "9678f251636b802d553192773550b2383b83ae196638a904b7eeec065a9fbd5f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs.meta",
+      "baseline": "663fe1e96693f4485fec624a5f23c4c699a174296eccd810c498ad018987f63a",
+      "current": "663fe1e96693f4485fec624a5f23c4c699a174296eccd810c498ad018987f63a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs",
+      "baseline": "89cca285cff0a515721dcf257dcfc9c5c508547724a470e79a1b8828ae7c2f4c",
+      "current": "89cca285cff0a515721dcf257dcfc9c5c508547724a470e79a1b8828ae7c2f4c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs.meta",
+      "baseline": "bbf69161fc81df2b36de02139c4bd15a2bedd46c95242132e824e61af97f1b17",
+      "current": "bbf69161fc81df2b36de02139c4bd15a2bedd46c95242132e824e61af97f1b17",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Sprites.meta",
+      "baseline": "4defd88b4f99a5a5949241a1ebbc6103ebb409131c77c53c911705af21ac2f81",
+      "current": "4defd88b4f99a5a5949241a1ebbc6103ebb409131c77c53c911705af21ac2f81",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Sprites/Default Sprites.png",
+      "baseline": "f0ed23200980b5dfc4115a3ea99d26706d06a00f4946e4ccc01b83950456201b",
+      "current": "f0ed23200980b5dfc4115a3ea99d26706d06a00f4946e4ccc01b83950456201b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Sprites/Default Sprites.png.meta",
+      "baseline": "63c4fcd8cbd9f5b576c5455f1214ce193f9f4d920ad4da5ce48723f0364a0460",
+      "current": "63c4fcd8cbd9f5b576c5455f1214ce193f9f4d920ad4da5ce48723f0364a0460",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Sprites/DropCap Numbers.psd",
+      "baseline": "a8da6e26a9dd8789a9d55d80636e4955ddd2c8ce5388cb0344eef52029eca106",
+      "current": "a8da6e26a9dd8789a9d55d80636e4955ddd2c8ce5388cb0344eef52029eca106",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Sprites/DropCap Numbers.psd.meta",
+      "baseline": "d842e05900cc26ceefa74def18b26aad03140a4d30315b0053d7e40b92bcf048",
+      "current": "d842e05900cc26ceefa74def18b26aad03140a4d30315b0053d7e40b92bcf048",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures.meta",
+      "baseline": "0a7f965c8fa6644fda35b4427e7d5b1d75558c7a3d9180af25cb803093253e5f",
+      "current": "0a7f965c8fa6644fda35b4427e7d5b1d75558c7a3d9180af25cb803093253e5f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Brushed Metal 3.jpg",
+      "baseline": "7d21ed4aeaed1db486303adb34f3687f2ec9bdac1167cbb1d4cb9bc0974cfdb8",
+      "current": "7d21ed4aeaed1db486303adb34f3687f2ec9bdac1167cbb1d4cb9bc0974cfdb8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Brushed Metal 3.jpg.meta",
+      "baseline": "55cccbde732f5b7498c3317eb7dc3f32c1c36cf861e9b46206ba84908f5e9d40",
+      "current": "55cccbde732f5b7498c3317eb7dc3f32c1c36cf861e9b46206ba84908f5e9d40",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Floor Cement.jpg",
+      "baseline": "d9c5332cbdaeacae60a48e31ebdd565cb93545605193ba7d5aa4e2f5ac92d6d5",
+      "current": "d9c5332cbdaeacae60a48e31ebdd565cb93545605193ba7d5aa4e2f5ac92d6d5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Floor Cement.jpg.meta",
+      "baseline": "e19cb557458f18fce8979b14895e0e9763f9ba41c9fd152e08c4556c50300797",
+      "current": "e19cb557458f18fce8979b14895e0e9763f9ba41c9fd152e08c4556c50300797",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Floor Tiles 1 - diffuse.jpg",
+      "baseline": "17cac82ba5118e5f057461eb8f5c85126c57a7186a41f62c95cca6203ff4d245",
+      "current": "17cac82ba5118e5f057461eb8f5c85126c57a7186a41f62c95cca6203ff4d245",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Floor Tiles 1 - diffuse.jpg.meta",
+      "baseline": "64ec4239243bf2e4671c8cb9671dc546b78a23489adddb66d4ae4c9194791570",
+      "current": "64ec4239243bf2e4671c8cb9671dc546b78a23489adddb66d4ae4c9194791570",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Fruit Jelly (B&W).jpg",
+      "baseline": "dcdb715f73dda61219860185eccc1a6bd81fbeacc171d7bf2a5f766f8eea8e0c",
+      "current": "dcdb715f73dda61219860185eccc1a6bd81fbeacc171d7bf2a5f766f8eea8e0c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Fruit Jelly (B&W).jpg.meta",
+      "baseline": "4708df2b68d71930a636b4572833057b24f189c00d22e250717cb6b6fd8ab339",
+      "current": "4708df2b68d71930a636b4572833057b24f189c00d22e250717cb6b6fd8ab339",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Diagonal (Color).jpg",
+      "baseline": "51735b2a99f9d6baae14b01cf2e01fa1aeef69c9a95553b73bdea5a8957a19a7",
+      "current": "51735b2a99f9d6baae14b01cf2e01fa1aeef69c9a95553b73bdea5a8957a19a7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Diagonal (Color).jpg.meta",
+      "baseline": "b15839bbc738d9beccd5855e2881bb7f5b1a7f7dcb6531b86f5f8090d9264c9e",
+      "current": "b15839bbc738d9beccd5855e2881bb7f5b1a7f7dcb6531b86f5f8090d9264c9e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Horizontal (Color).jpg",
+      "baseline": "b2099f0fd08520b82fefb8e4e37dfdaefd283cf4aedb074d11dcfdd9841f24f1",
+      "current": "b2099f0fd08520b82fefb8e4e37dfdaefd283cf4aedb074d11dcfdd9841f24f1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Horizontal (Color).jpg.meta",
+      "baseline": "afa32aae513ba37c309106fa3d593d5380edc91649cf183c3df192462a0b17fa",
+      "current": "afa32aae513ba37c309106fa3d593d5380edc91649cf183c3df192462a0b17fa",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Vertical (Color).jpg",
+      "baseline": "d9d7ab2c8d016b29574b13607e0579983d13b3377a6a3a330b945c5f07adc059",
+      "current": "d9d7ab2c8d016b29574b13607e0579983d13b3377a6a3a330b945c5f07adc059",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Vertical (Color).jpg.meta",
+      "baseline": "c43c4989626439df99111d0aeef3a65822177454dc19d055a65b93f0a25df5ff",
+      "current": "c43c4989626439df99111d0aeef3a65822177454dc19d055a65b93f0a25df5ff",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Mask Zig-n-Zag.psd",
+      "baseline": "62c198307c982df2e7fecc53cfb5d932ffad8f1056f046448619c6f314dac249",
+      "current": "62c198307c982df2e7fecc53cfb5d932ffad8f1056f046448619c6f314dac249",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Mask Zig-n-Zag.psd.meta",
+      "baseline": "848aad14dd7ad0716bfbc099de87cae7bbad35b1b65f933d773fbcbb80635ee0",
+      "current": "848aad14dd7ad0716bfbc099de87cae7bbad35b1b65f933d773fbcbb80635ee0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_diffuse.jpg",
+      "baseline": "79d17105e2a4ba39880b0092d6792d985c380789047fd0459e1af099ccf8521d",
+      "current": "79d17105e2a4ba39880b0092d6792d985c380789047fd0459e1af099ccf8521d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_diffuse.jpg.meta",
+      "baseline": "206b178340899e879f8a33a652c25313d1926df954fb8337f6133ece31af7d9d",
+      "current": "206b178340899e879f8a33a652c25313d1926df954fb8337f6133ece31af7d9d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_normal.jpg",
+      "baseline": "432295d5fef530c8927b80cfb1b33ee58d1b6060237df82a0cc460e784074460",
+      "current": "432295d5fef530c8927b80cfb1b33ee58d1b6060237df82a0cc460e784074460",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_normal.jpg.meta",
+      "baseline": "3893c1076e288fc8b9ebb7ad2b15b024555d215f19fec148565c35630e3c5275",
+      "current": "3893c1076e288fc8b9ebb7ad2b15b024555d215f19fec148565c35630e3c5275",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg",
+      "baseline": "ab6536daf74188dfc075d65f5d85aca9efeaead7f03b905514e53076d854f365",
+      "current": "ab6536daf74188dfc075d65f5d85aca9efeaead7f03b905514e53076d854f365",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta",
+      "baseline": "11ff8bf04f7e58e4404b520c821aa114b06c4b7ed8b7a9ca1e1f7d2ae74ddf3a",
+      "current": "11ff8bf04f7e58e4404b520c821aa114b06c4b7ed8b7a9ca1e1f7d2ae74ddf3a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text Image 1.png",
+      "baseline": "a1cee03c0ad0d42b302819e32c87651c946583a1f9c755b421a6a438f593bb67",
+      "current": "a1cee03c0ad0d42b302819e32c87651c946583a1f9c755b421a6a438f593bb67",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text Image 1.png.meta",
+      "baseline": "5c1a392b69549cd120898edd439e99e4309a1c4ece1df15c4f04002e1baefea1",
+      "current": "5c1a392b69549cd120898edd439e99e4309a1c4ece1df15c4f04002e1baefea1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text UI Screenshot.png",
+      "baseline": "6085a191a9981df78a26f7218bc051fd113430674b545f0889dd757e87df0941",
+      "current": "6085a191a9981df78a26f7218bc051fd113430674b545f0889dd757e87df0941",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text UI Screenshot.png.meta",
+      "baseline": "5594c8d86dbb459b4cdca8483446a4d112430661b1b25e021f7e78189d102c6e",
+      "current": "5594c8d86dbb459b4cdca8483446a4d112430661b1b25e021f7e78189d102c6e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Circle.psd",
+      "baseline": "9146c89277cda5a0a4c5b00e7c9ff089b3486af113c09a5a3bfaefd103ed7e01",
+      "current": "9146c89277cda5a0a4c5b00e7c9ff089b3486af113c09a5a3bfaefd103ed7e01",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Circle.psd.meta",
+      "baseline": "56e94ecdf09fe49d288b412307ea0f2535fd33ede2603d6fb9709e858b9834be",
+      "current": "56e94ecdf09fe49d288b412307ea0f2535fd33ede2603d6fb9709e858b9834be",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Diagonal.psd",
+      "baseline": "9dd31b2053ce4f178d014a87e70ad1d829229aaf486aa9607c7ba8370b1f631e",
+      "current": "9dd31b2053ce4f178d014a87e70ad1d829229aaf486aa9607c7ba8370b1f631e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Diagonal.psd.meta",
+      "baseline": "7eaceffbcfa1c40d8f8251a5fbdca9fda57894ec67e6d4724bcec4d0d7f9fc17",
+      "current": "7eaceffbcfa1c40d8f8251a5fbdca9fda57894ec67e6d4724bcec4d0d7f9fc17",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Double.psd",
+      "baseline": "6cdbce6a3732ce075694a0b18630847b9df8c96ce73cbbbe7154a5dfb2660f23",
+      "current": "6cdbce6a3732ce075694a0b18630847b9df8c96ce73cbbbe7154a5dfb2660f23",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Double.psd.meta",
+      "baseline": "452c6642a22878477e94dea905f5f8cebeaf090dc1543ce772421a5142853f65",
+      "current": "452c6642a22878477e94dea905f5f8cebeaf090dc1543ce772421a5142853f65",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Quad.psd",
+      "baseline": "e014157602c4e690f54c01f221b15d2c428f8131dce86ce0fc21ba5c6ad9495d",
+      "current": "e014157602c4e690f54c01f221b15d2c428f8131dce86ce0fc21ba5c6ad9495d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Quad.psd.meta",
+      "baseline": "00044382fe5f4e3eb55226c64293180a754e87e21c55426ebce603594ceb5a86",
+      "current": "00044382fe5f4e3eb55226c64293180a754e87e21c55426ebce603594ceb5a86",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts.meta",
+      "baseline": "8c596298d518c27d3f42a08e9849e679a66d62b8e79823a6d3b48525290ed647",
+      "current": "8c596298d518c27d3f42a08e9849e679a66d62b8e79823a6d3b48525290ed647",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept.meta",
+      "baseline": "0df2771b88bd7b9718d20e3948f96eeb9027f87255f48dd900620123b79919b6",
+      "current": "0df2771b88bd7b9718d20e3948f96eeb9027f87255f48dd900620123b79919b6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/CREDITS.txt",
+      "baseline": "79a7b810c245dbd14491b1d5a7529e5ad595b285d58f3716bcb8843693a2b4b5",
+      "current": "79a7b810c245dbd14491b1d5a7529e5ad595b285d58f3716bcb8843693a2b4b5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/CREDITS.txt.meta",
+      "baseline": "94062bafc8d2f96843fd41f1914e67ec6b179e85931e0d50807c0711568f297a",
+      "current": "94062bafc8d2f96843fd41f1914e67ec6b179e85931e0d50807c0711568f297a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/FALLBACKS.md",
+      "baseline": "e56bc3f23f3afbedd374f7e6c500331a4df81005c24f52ec5b407abc66a0c049",
+      "current": "e56bc3f23f3afbedd374f7e6c500331a4df81005c24f52ec5b407abc66a0c049",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/FALLBACKS.md.meta",
+      "baseline": "15a29ab99156bd10f40a49ec4a26a31a46673049494bec7035a54be0263e28d3",
+      "current": "15a29ab99156bd10f40a49ec4a26a31a46673049494bec7035a54be0263e28d3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF.meta",
+      "baseline": "bb52bf40d7852895fd826c823ae00ee24bd0028e368a6e52e22f88fdc5e5a6fa",
+      "current": "bb52bf40d7852895fd826c823ae00ee24bd0028e368a6e52e22f88fdc5e5a6fa",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset",
+      "baseline": "86fdaebcad91c1564f4fe9a14d8da45cfd730c6d5d241bf5fc03eafccc4086de",
+      "current": "86fdaebcad91c1564f4fe9a14d8da45cfd730c6d5d241bf5fc03eafccc4086de",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Bold.asset.meta",
+      "baseline": "9c5051496baf63866b0a131721f6c68cfc4fa2c89f6202d9d6985d8f0eed9608",
+      "current": "9c5051496baf63866b0a131721f6c68cfc4fa2c89f6202d9d6985d8f0eed9608",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset",
+      "baseline": "fbb7e562bd5240a040fd9e2c9229d5fea541484a5e8d6864841aee98a816530b",
+      "current": "fbb7e562bd5240a040fd9e2c9229d5fea541484a5e8d6864841aee98a816530b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSans-Regular.asset.meta",
+      "baseline": "32574c90e92f1b45750713ccf326c09c608851aecdde8ee9abc154baba190761",
+      "current": "32574c90e92f1b45750713ccf326c09c608851aecdde8ee9abc154baba190761",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset",
+      "baseline": "807bf3234a3fd512ff59b2660efb4f5a197654a2369882f2d7fd333e8d0619db",
+      "current": "807bf3234a3fd512ff59b2660efb4f5a197654a2369882f2d7fd333e8d0619db",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/NotoSansMath-Arrows.asset.meta",
+      "baseline": "c55158c23c0231d4e6bea296774c3cc14e8a763b4301c2df5c09f6b8efbd682c",
+      "current": "c55158c23c0231d4e6bea296774c3cc14e8a763b4301c2df5c09f6b8efbd682c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset",
+      "baseline": "0376b758e12dd9584ba0fdd908f4aa3c822fd9f02dbbac678dadc036f1869b26",
+      "current": "0376b758e12dd9584ba0fdd908f4aa3c822fd9f02dbbac678dadc036f1869b26",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Bold.asset.meta",
+      "baseline": "f9d21d4c762b355bdf0105f9d51c1df6d01ed314207a2e1cb587570e8730748a",
+      "current": "f9d21d4c762b355bdf0105f9d51c1df6d01ed314207a2e1cb587570e8730748a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset",
+      "baseline": "887a368c460aafd039a305599794629ddf749e84663bcc41d508c809ab0a1792",
+      "current": "887a368c460aafd039a305599794629ddf749e84663bcc41d508c809ab0a1792",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/Roboto-Regular.asset.meta",
+      "baseline": "6110ecaeae9d7e5efe7f5c2592cee8ee07a7495eabdf53a623374efcb258f91a",
+      "current": "6110ecaeae9d7e5efe7f5c2592cee8ee07a7495eabdf53a623374efcb258f91a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset",
+      "baseline": "6b79daeb2b25142a7f2cd02f4285dffc1c78cbac41e7cd919ca5cc9a71904dbe",
+      "current": "6b79daeb2b25142a7f2cd02f4285dffc1c78cbac41e7cd919ca5cc9a71904dbe",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Bold.asset.meta",
+      "baseline": "32e2742a279f9be282db9dac7f646523430fe0eaf06b481c62180da2636a17b7",
+      "current": "32e2742a279f9be282db9dac7f646523430fe0eaf06b481c62180da2636a17b7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset",
+      "baseline": "eb551c645fea32c7ffdcca08f68ec837b726a79639cb5ad905459f6961cb1f41",
+      "current": "eb551c645fea32c7ffdcca08f68ec837b726a79639cb5ad905459f6961cb1f41",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Medium.asset.meta",
+      "baseline": "c7603517a1cd000a8db77f16674dd40fd1385e0d908b65da80304de4c0ab4348",
+      "current": "c7603517a1cd000a8db77f16674dd40fd1385e0d908b65da80304de4c0ab4348",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset",
+      "baseline": "6a8b3e65247fcd44cbe638f1e2e104cd9e73a0180a53653b78e2b1696788eeed",
+      "current": "6a8b3e65247fcd44cbe638f1e2e104cd9e73a0180a53653b78e2b1696788eeed",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-Regular.asset.meta",
+      "baseline": "b35bbc90e5b3bec637134da4802c7aa5593a8cee3340d32bcab0619886dbd944",
+      "current": "b35bbc90e5b3bec637134da4802c7aa5593a8cee3340d32bcab0619886dbd944",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset",
+      "baseline": "b7842bc37ef43f1b219991c94a67767b5de9bda092d141945df27ee9a4a92d3b",
+      "current": "b7842bc37ef43f1b219991c94a67767b5de9bda092d141945df27ee9a4a92d3b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/SDF/RobotoCondensed-SemiBold.asset.meta",
+      "baseline": "1d928eb4f8b9b4b063337b81afad1e0cea08fd334671fd5e2eafcd9630c78b0a",
+      "current": "1d928eb4f8b9b4b063337b81afad1e0cea08fd334671fd5e2eafcd9630c78b0a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources.meta",
+      "baseline": "9a74190df847521197568a611ea49d719940a7fa568385d6e4c89820c9f38998",
+      "current": "9a74190df847521197568a611ea49d719940a7fa568385d6e4c89820c9f38998",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans.meta",
+      "baseline": "c9f42c33d5418cfa12d77b40452b90e9f38b8c7217ce5ccd9ff7779b1cd85a20",
+      "current": "c9f42c33d5418cfa12d77b40452b90e9f38b8c7217ce5ccd9ff7779b1cd85a20",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans/METADATA.pb",
+      "baseline": "9fd9566184e9833ae3a33b8950e2782a8abb1f0a9d6fb2c51b3fb615f2d78cfe",
+      "current": "9fd9566184e9833ae3a33b8950e2782a8abb1f0a9d6fb2c51b3fb615f2d78cfe",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans/METADATA.pb.meta",
+      "baseline": "937620638d634ecc23717a09991f77ddb1ffde285ce6a1f9e66fdc9e713c0599",
+      "current": "937620638d634ecc23717a09991f77ddb1ffde285ce6a1f9e66fdc9e713c0599",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans/NotoSans[wdth,wght].ttf",
+      "baseline": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+      "current": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans/NotoSans[wdth,wght].ttf.meta",
+      "baseline": "fe47c0aff4c79e803c848699b2e46aa41538442788d07623f14a25955792a61e",
+      "current": "fe47c0aff4c79e803c848699b2e46aa41538442788d07623f14a25955792a61e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans/OFL.txt",
+      "baseline": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "current": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSans/OFL.txt.meta",
+      "baseline": "7263b914006d19c68ece523247fafaf818622b11c08951f276fe1ceabcad3c83",
+      "current": "7263b914006d19c68ece523247fafaf818622b11c08951f276fe1ceabcad3c83",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath.meta",
+      "baseline": "a2ac72a47082c3f72d1de005807b4d05c52d8f5e4cc2d0f8eb86c9759ce82c59",
+      "current": "a2ac72a47082c3f72d1de005807b4d05c52d8f5e4cc2d0f8eb86c9759ce82c59",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath/METADATA.pb",
+      "baseline": "5777a705992926c49447e115840d5609c648251435451a781c1e30faf05770b2",
+      "current": "5777a705992926c49447e115840d5609c648251435451a781c1e30faf05770b2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath/METADATA.pb.meta",
+      "baseline": "8d6a89ad500383ad33bfcd517b2d175426ccf8e1374d845f78799083ab985608",
+      "current": "8d6a89ad500383ad33bfcd517b2d175426ccf8e1374d845f78799083ab985608",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath/NotoSansMath-Regular.ttf",
+      "baseline": "3f495fe933c06786e4d5f6d86b8ee70b6753a68ee3b9d87528726de0f6e2c47d",
+      "current": "3f495fe933c06786e4d5f6d86b8ee70b6753a68ee3b9d87528726de0f6e2c47d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath/NotoSansMath-Regular.ttf.meta",
+      "baseline": "1b152ec3af459e3a7fd67f0283c931315c52cc025f36f84c98d94bbdf2a4865d",
+      "current": "1b152ec3af459e3a7fd67f0283c931315c52cc025f36f84c98d94bbdf2a4865d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath/OFL.txt",
+      "baseline": "403a95275b469061b7d4371c328e0ada3bc7d63328abe2e88aad5cd243b2fe21",
+      "current": "403a95275b469061b7d4371c328e0ada3bc7d63328abe2e88aad5cd243b2fe21",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/NotoSansMath/OFL.txt.meta",
+      "baseline": "f17c830d8d73b7dddd448c7594b92271601cb3b4774ffe99a02b8d50c1a06a0a",
+      "current": "f17c830d8d73b7dddd448c7594b92271601cb3b4774ffe99a02b8d50c1a06a0a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto.meta",
+      "baseline": "0a7dff1cdbace10421d7fd9e9e54f914bbea878daf3879fa7aa14af461199b17",
+      "current": "0a7dff1cdbace10421d7fd9e9e54f914bbea878daf3879fa7aa14af461199b17",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/METADATA.pb.txt",
+      "baseline": "6fef19da54fb62d152f0c7b21710e6849950db7ecf852ea29511c593dad462f0",
+      "current": "6fef19da54fb62d152f0c7b21710e6849950db7ecf852ea29511c593dad462f0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/METADATA.pb.txt.meta",
+      "baseline": "9cbc6ca9b22f9a019f76e4f7c013ca9c3162bdfe249333269859843e95226c4f",
+      "current": "9cbc6ca9b22f9a019f76e4f7c013ca9c3162bdfe249333269859843e95226c4f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/OFL.txt",
+      "baseline": "061402327a96aadb0bfb694a960ed289ecd38d383e396243831ab81feb109c41",
+      "current": "061402327a96aadb0bfb694a960ed289ecd38d383e396243831ab81feb109c41",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/OFL.txt.meta",
+      "baseline": "890ac5b238a1c771d7bff53943f636d4ce05a269005dbdc266a75f22489e9795",
+      "current": "890ac5b238a1c771d7bff53943f636d4ce05a269005dbdc266a75f22489e9795",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/Roboto[wdth,wght].ttf",
+      "baseline": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134",
+      "current": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/Roboto[wdth,wght].ttf.meta",
+      "baseline": "4df97cfa5b94de426fece665f5cbd41b226d48809e4c313738d9b9063b42fa7d",
+      "current": "4df97cfa5b94de426fece665f5cbd41b226d48809e4c313738d9b9063b42fa7d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/upstream_info.md",
+      "baseline": "ea3d037225a3863e06b79ecaac6bd6190aee3896855ddf1029bbdbeef022873f",
+      "current": "ea3d037225a3863e06b79ecaac6bd6190aee3896855ddf1029bbdbeef022873f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/Roboto/upstream_info.md.meta",
+      "baseline": "b8f296322bd2a52d75d528b15851912c640a7cef2da6a4d9d2dd2b60e95dc540",
+      "current": "b8f296322bd2a52d75d528b15851912c640a7cef2da6a4d9d2dd2b60e95dc540",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed.meta",
+      "baseline": "842a46eb0baccb09dfef8d947bd17871bd3e70f3477e6e0ed7afebe2ab624ac4",
+      "current": "842a46eb0baccb09dfef8d947bd17871bd3e70f3477e6e0ed7afebe2ab624ac4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/METADATA.pb.txt",
+      "baseline": "2661545ea47047600f634d2b2485b9794758c1088b2dac15024ebc6c20fc1f47",
+      "current": "2661545ea47047600f634d2b2485b9794758c1088b2dac15024ebc6c20fc1f47",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/METADATA.pb.txt.meta",
+      "baseline": "66d4e5bd0f847221f406f97d9601cba23c63dea62bb09d2d248af9990a005823",
+      "current": "66d4e5bd0f847221f406f97d9601cba23c63dea62bb09d2d248af9990a005823",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/OFL.txt",
+      "baseline": "0e4cc6ece88573545be2ed25835363662a6182ba4a4c1b5c8feda52add30e8a6",
+      "current": "0e4cc6ece88573545be2ed25835363662a6182ba4a4c1b5c8feda52add30e8a6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/OFL.txt.meta",
+      "baseline": "22aacfad3a7c85d654eb839386db19663530975ae33797fc92108b52555b76fa",
+      "current": "22aacfad3a7c85d654eb839386db19663530975ae33797fc92108b52555b76fa",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/RobotoCondensed[wght].ttf",
+      "baseline": "dace262afcee68a5276f200d8026c57221735c0118ab5fda8c2c0d3dc409a8d0",
+      "current": "dace262afcee68a5276f200d8026c57221735c0118ab5fda8c2c0d3dc409a8d0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/RobotoCondensed[wght].ttf.meta",
+      "baseline": "2a34dd20ed1a9b68e69a3abe837af61193b491d3baf4a84bdc58dbfe48e7429f",
+      "current": "2a34dd20ed1a9b68e69a3abe837af61193b491d3baf4a84bdc58dbfe48e7429f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/upstream_info.md",
+      "baseline": "46c5509ee467194e500f3a29791ddcf79cf9cdceddae5b77e7f98f6dced32498",
+      "current": "46c5509ee467194e500f3a29791ddcf79cf9cdceddae5b77e7f98f6dced32498",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Sources/RobotoCondensed/upstream_info.md.meta",
+      "baseline": "89abbf9078c079e544379a814cfb881fbcab41a44aff0f769eee696d6bf7774a",
+      "current": "89abbf9078c079e544379a814cfb881fbcab41a44aff0f769eee696d6bf7774a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static.meta",
+      "baseline": "33d49c0cba77ce92d60a6f3e515cc2d31a6fa101fdca6f530f60eb79031dca00",
+      "current": "33d49c0cba77ce92d60a6f3e515cc2d31a6fa101fdca6f530f60eb79031dca00",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/NotoSans-Bold.ttf",
+      "baseline": "0b98c6ceea753e5141f37b6320a76d08e7afb2af9961ee1f08fff35f8edd0af8",
+      "current": "0b98c6ceea753e5141f37b6320a76d08e7afb2af9961ee1f08fff35f8edd0af8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/NotoSans-Bold.ttf.meta",
+      "baseline": "e1f0c1955fc4d750a50007f03112ff14a351969b841d012c9f2a72847219bdfa",
+      "current": "e1f0c1955fc4d750a50007f03112ff14a351969b841d012c9f2a72847219bdfa",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/NotoSans-Regular.ttf",
+      "baseline": "aa104eece91f24d8274b718f69573d398fbf21e7bd9a73630b0e1734f2b798be",
+      "current": "aa104eece91f24d8274b718f69573d398fbf21e7bd9a73630b0e1734f2b798be",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/NotoSans-Regular.ttf.meta",
+      "baseline": "770df34aa7cfcde65004c397e3d7d76ccd4ac8de330f0d9dd4fc4b168909f40b",
+      "current": "770df34aa7cfcde65004c397e3d7d76ccd4ac8de330f0d9dd4fc4b168909f40b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/Roboto-Bold.ttf",
+      "baseline": "062ce42ce7cf71167b3629461b1d3c37960121b1d171abc8db9150ccdc87cc29",
+      "current": "062ce42ce7cf71167b3629461b1d3c37960121b1d171abc8db9150ccdc87cc29",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/Roboto-Bold.ttf.meta",
+      "baseline": "343d6c2681e982c0c4962ac79123f4c166f3dacce3b5869858f0722266078e5d",
+      "current": "343d6c2681e982c0c4962ac79123f4c166f3dacce3b5869858f0722266078e5d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/Roboto-Regular.ttf",
+      "baseline": "1e8de96a0019f63ea1ee9a305bcf4a844da87265e50c643fc446f9c82a035e80",
+      "current": "1e8de96a0019f63ea1ee9a305bcf4a844da87265e50c643fc446f9c82a035e80",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/Roboto-Regular.ttf.meta",
+      "baseline": "abfba93ca499cf49f2c28224c430f05a50d16ddfff32707b13e56cc8911ff300",
+      "current": "abfba93ca499cf49f2c28224c430f05a50d16ddfff32707b13e56cc8911ff300",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-Bold.ttf",
+      "baseline": "5c051f9d03dacdf28f0f645d460cffaf6bfacf607330782d6d73f74db01e27a3",
+      "current": "5c051f9d03dacdf28f0f645d460cffaf6bfacf607330782d6d73f74db01e27a3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-Bold.ttf.meta",
+      "baseline": "7b78807cbb76db1c109909db5315a8444346ebb2d5f1e0cd11113264527267d7",
+      "current": "7b78807cbb76db1c109909db5315a8444346ebb2d5f1e0cd11113264527267d7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-Medium.ttf",
+      "baseline": "fe637f40ab77922ce2e4fab38ca1948d265cd64e1a600e4d7d404d1a58a8a2da",
+      "current": "fe637f40ab77922ce2e4fab38ca1948d265cd64e1a600e4d7d404d1a58a8a2da",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-Medium.ttf.meta",
+      "baseline": "171845c27642d1e5a52db63754742185240df71f92691491101bfc8ff4b75d32",
+      "current": "171845c27642d1e5a52db63754742185240df71f92691491101bfc8ff4b75d32",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-Regular.ttf",
+      "baseline": "0b3f5be2bbb5c8f6b45abb6a7da8f912bc383f2d88a98f18ebcfc963244fdb50",
+      "current": "0b3f5be2bbb5c8f6b45abb6a7da8f912bc383f2d88a98f18ebcfc963244fdb50",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-Regular.ttf.meta",
+      "baseline": "fb574467bbe84a8bfea7091f09ebf746831ddbf912caf91f676411bd7ffd27a7",
+      "current": "fb574467bbe84a8bfea7091f09ebf746831ddbf912caf91f676411bd7ffd27a7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-SemiBold.ttf",
+      "baseline": "88c3c0e800121d6ac40413389ce6325cbb2471ec49af055df8a4374e6eea5ed5",
+      "current": "88c3c0e800121d6ac40413389ce6325cbb2471ec49af055df8a4374e6eea5ed5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Concept/Static/RobotoCondensed-SemiBold.ttf.meta",
+      "baseline": "9547026828c610c85c7df9004cd130da08d30235d58d306160faab13a1d54e37",
+      "current": "9547026828c610c85c7df9004cd130da08d30235d58d306160faab13a1d54e37",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Inter-Italic-VariableFont_opsz,wght.ttf",
+      "baseline": "6136f73372fedc37b80fd1a8ec3e21734073ff17376f3672718f186779672e7a",
+      "current": "6136f73372fedc37b80fd1a8ec3e21734073ff17376f3672718f186779672e7a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Inter-Italic-VariableFont_opsz,wght.ttf.meta",
+      "baseline": "1cb9948914afeea7feb5de02fea7b8208156e0a4e622505e695f47e54fda8fee",
+      "current": "1cb9948914afeea7feb5de02fea7b8208156e0a4e622505e695f47e54fda8fee",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Inter-VariableFont_opsz,wght.ttf",
+      "baseline": "0be2399ea925f1f83ff974764761da9860ec50742ed29a5d4c1ffd0c5c7ac3a8",
+      "current": "0be2399ea925f1f83ff974764761da9860ec50742ed29a5d4c1ffd0c5c7ac3a8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/Inter-VariableFont_opsz,wght.ttf.meta",
+      "baseline": "acfbef2295e5935e72d128825e2aa705f79ec8f33a91e3dfe271a0e109fb7c94",
+      "current": "acfbef2295e5935e72d128825e2aa705f79ec8f33a91e3dfe271a0e109fb7c94",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-Italic-VariableFont_wght.ttf",
+      "baseline": "6bfc259bb39a54944919f99c62339b30c4029082576af867ae331954f217ac2e",
+      "current": "6bfc259bb39a54944919f99c62339b30c4029082576af867ae331954f217ac2e",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-Italic-VariableFont_wght.ttf.meta",
+      "baseline": "e034a61348e1c84366c8042b7cee8983fd93881201186939d9cdb6c9953053b9",
+      "current": "e034a61348e1c84366c8042b7cee8983fd93881201186939d9cdb6c9953053b9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-Italic.asset",
+      "baseline": "878265b0169c35a1f6ae9eab1c2ed5bbb608144fbfc26c3b20b22b9de0bef857",
+      "current": "878265b0169c35a1f6ae9eab1c2ed5bbb608144fbfc26c3b20b22b9de0bef857",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-Italic.asset.meta",
+      "baseline": "0cb518a3a4a8bf8b9c13cedb669f26c4aa3c3352f7da2b2ca356a6e731cc1986",
+      "current": "0cb518a3a4a8bf8b9c13cedb669f26c4aa3c3352f7da2b2ca356a6e731cc1986",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset",
+      "baseline": "263594c069c738ad3111735464015d64469505176fadb463a8539df9be950542",
+      "current": "263594c069c738ad3111735464015d64469505176fadb463a8539df9be950542",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-Variable.asset.meta",
+      "baseline": "966e05eb2e0f4517b1041dfb84b693a8216d0b1a64e3684a33cbec5bba7c7a56",
+      "current": "966e05eb2e0f4517b1041dfb84b693a8216d0b1a64e3684a33cbec5bba7c7a56",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-VariableFont_wght.ttf",
+      "baseline": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "current": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/InterTight-VariableFont_wght.ttf.meta",
+      "baseline": "38166f30826e85523e8b64bfd6341fb7236031978e4cf9d6272d44b74d93c5b1",
+      "current": "38166f30826e85523e8b64bfd6341fb7236031978e4cf9d6272d44b74d93c5b1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt",
+      "baseline": "a130e89b7b2326b599c4b2bbd873eaae63feda407541a2899cb8acb306723de6",
+      "current": "a130e89b7b2326b599c4b2bbd873eaae63feda407541a2899cb8acb306723de6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt.meta",
+      "baseline": "1b8062370a3bb2be74a46b0ae08688c87cd207cad602fcc77a750cafb106c9af",
+      "current": "1b8062370a3bb2be74a46b0ae08688c87cd207cad602fcc77a750cafb106c9af",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/LiberationSans.ttf",
+      "baseline": "e5b0af421ea2bfbc1ac8d251d647268087ae82786234c57f757d1f0b90fa8b49",
+      "current": "e5b0af421ea2bfbc1ac8d251d647268087ae82786234c57f757d1f0b90fa8b49",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta",
+      "baseline": "58603424f5d1f468af3f0c031c288cc9eaa96cb3fb82a0429b16a204a18a5012",
+      "current": "58603424f5d1f468af3f0c031c288cc9eaa96cb3fb82a0429b16a204a18a5012",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources.meta",
+      "baseline": "4bc87da5a85b45fb3252482a603b56e3d34b2174973c527940b225e0b6d9f062",
+      "current": "4bc87da5a85b45fb3252482a603b56e3d34b2174973c527940b225e0b6d9f062",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials.meta",
+      "baseline": "124f26d6401f350502d4ea38e1b27353dfbd9905ebf50a1b813cd695c2c4eefe",
+      "current": "124f26d6401f350502d4ea38e1b27353dfbd9905ebf50a1b813cd695c2c4eefe",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat",
+      "baseline": "73f941d7702c761483bb184fad6e262648032969f0f310344155758b8fad764f",
+      "current": "73f941d7702c761483bb184fad6e262648032969f0f310344155758b8fad764f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat.meta",
+      "baseline": "fa0b8ba96378d1fed663d2206054a5e48139892e3d1c6a6ece97808a6869d70d",
+      "current": "fa0b8ba96378d1fed663d2206054a5e48139892e3d1c6a6ece97808a6869d70d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset",
+      "baseline": "26d875f8900d5f44ada60211751cd3b88f370d89e9f1148bfb11bd04ce39e892",
+      "current": "26d875f8900d5f44ada60211751cd3b88f370d89e9f1148bfb11bd04ce39e892",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset.meta",
+      "baseline": "0a7cce8a8d21c28bc719e5842c3fb8a3de8eac864a577160d7413d1df08d79d1",
+      "current": "0a7cce8a8d21c28bc719e5842c3fb8a3de8eac864a577160d7413d1df08d79d1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat",
+      "baseline": "4a07f16fcfa697f984d78b7acc005985fe45a256b4bf8b7907faea08075b4961",
+      "current": "4a07f16fcfa697f984d78b7acc005985fe45a256b4bf8b7907faea08075b4961",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat.meta",
+      "baseline": "cb8f2abe533ef11a46ab112cf8dbefb44cb01fa4b7262060a3c480862824d1fb",
+      "current": "cb8f2abe533ef11a46ab112cf8dbefb44cb01fa4b7262060a3c480862824d1fb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+      "baseline": "28a3a09663553a508188df2450a57aaec7a1848de99fa44e3a7f4283edb961c4",
+      "current": "28a3a09663553a508188df2450a57aaec7a1848de99fa44e3a7f4283edb961c4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset.meta",
+      "baseline": "eef709d8a9d8b4c781c532712a61aa28f3ef123b902f6b5a8903f0ea61845b50",
+      "current": "eef709d8a9d8b4c781c532712a61aa28f3ef123b902f6b5a8903f0ea61845b50",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt",
+      "baseline": "3a73e5ffe2510756dd3c2e982fdc1218b4be82c6e21abde88070d6860e1bc8e6",
+      "current": "3a73e5ffe2510756dd3c2e982fdc1218b4be82c6e21abde88070d6860e1bc8e6",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt.meta",
+      "baseline": "64ef1da1e73f25ba842200e26d43908685c4b9be66856d47103a26c1cae94fa9",
+      "current": "64ef1da1e73f25ba842200e26d43908685c4b9be66856d47103a26c1cae94fa9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt",
+      "baseline": "62d3f4d5f64aaf885692d2d13a8313f6918e6e4c5aeb3990a43f614652bfd89c",
+      "current": "62d3f4d5f64aaf885692d2d13a8313f6918e6e4c5aeb3990a43f614652bfd89c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt.meta",
+      "baseline": "92a36fb59ae49c6974d4ef75b41ffe4c1612110c4b49ed7af5539dcb35e86e8f",
+      "current": "92a36fb59ae49c6974d4ef75b41ffe4c1612110c4b49ed7af5539dcb35e86e8f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Sprite Assets.meta",
+      "baseline": "7f0b98e06db610fb684666d25abf31846c89ee28a778463b893ab85c3dbba13d",
+      "current": "7f0b98e06db610fb684666d25abf31846c89ee28a778463b893ab85c3dbba13d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset",
+      "baseline": "73802f0c67f6e13bf226fcad8511477acd5ea1e2263387003fe561d3211664f9",
+      "current": "73802f0c67f6e13bf226fcad8511477acd5ea1e2263387003fe561d3211664f9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta",
+      "baseline": "d14793d1f1c86e8f372f44a1cc053d1867aae32231f6bd2b179ca923d5ee69cb",
+      "current": "d14793d1f1c86e8f372f44a1cc053d1867aae32231f6bd2b179ca923d5ee69cb",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Style Sheets.meta",
+      "baseline": "9029980ffd3af688190a28cb7f0397a82efe9bd3a8861ed40dfc9018e76d5933",
+      "current": "9029980ffd3af688190a28cb7f0397a82efe9bd3a8861ed40dfc9018e76d5933",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset",
+      "baseline": "49c813b42ff25580e3934554e3550e7bdb78bcfb2c3562bf1191f0d42f4da141",
+      "current": "49c813b42ff25580e3934554e3550e7bdb78bcfb2c3562bf1191f0d42f4da141",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset.meta",
+      "baseline": "b652bfc488ebea2ac241cc440ad73c4a9af993c265c800fe0f7cc4917286d0b0",
+      "current": "b652bfc488ebea2ac241cc440ad73c4a9af993c265c800fe0f7cc4917286d0b0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/TMP Settings.asset",
+      "baseline": "15f180067afc4e40914e8a85a7e585211d9b151070ada8c1582d6fcd5c8a787c",
+      "current": "15f180067afc4e40914e8a85a7e585211d9b151070ada8c1582d6fcd5c8a787c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Resources/TMP Settings.asset.meta",
+      "baseline": "7e88f07fd05c1c4f829c55d8d7660d7ac572e906a5d7152857ef12a574d13375",
+      "current": "7e88f07fd05c1c4f829c55d8d7660d7ac572e906a5d7152857ef12a574d13375",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders.meta",
+      "baseline": "6fc503950579b274e6745f9f18698f6b23d61ae9e3b8f208f023586c609d9d98",
+      "current": "6fc503950579b274e6745f9f18698f6b23d61ae9e3b8f208f023586c609d9d98",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl",
+      "baseline": "aa8b32660f8bfd9c1166d94539034437bb0332db6062122d074cd8645fbb98f4",
+      "current": "aa8b32660f8bfd9c1166d94539034437bb0332db6062122d074cd8645fbb98f4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl.meta",
+      "baseline": "b35c24e7cc242687d24e1b99a0e921259defd305f2c73873173871b62f4c748f",
+      "current": "b35c24e7cc242687d24e1b99a0e921259defd305f2c73873173871b62f4c748f",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader",
+      "baseline": "4fde41f9b01df2f31d54c5ddfa7703ca63ec89bba6615ea439c63e76f84f7b4b",
+      "current": "4fde41f9b01df2f31d54c5ddfa7703ca63ec89bba6615ea439c63e76f84f7b4b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader.meta",
+      "baseline": "41009354edccdb35431e595694e97cda8592094bebf607896161c769b66b3591",
+      "current": "41009354edccdb35431e595694e97cda8592094bebf607896161c769b66b3591",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader",
+      "baseline": "d90e395a82303e7c048fe708f8cc76d2c4b304d723c942e8c1c85c30a28acdff",
+      "current": "d90e395a82303e7c048fe708f8cc76d2c4b304d723c942e8c1c85c30a28acdff",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader.meta",
+      "baseline": "162e6113de4ff13e40bb6bc51f46542f5fc338c65facf395264db261e5d59847",
+      "current": "162e6113de4ff13e40bb6bc51f46542f5fc338c65facf395264db261e5d59847",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader",
+      "baseline": "1d88cbc0fd9f6d1189e6883b6a41433397a8d7fa2c6c267664af89f87687f050",
+      "current": "1d88cbc0fd9f6d1189e6883b6a41433397a8d7fa2c6c267664af89f87687f050",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader.meta",
+      "baseline": "5278837021cc26fc254d06fdd87012bcc7d1e0521bfe068fbf24ef5481c9eff7",
+      "current": "5278837021cc26fc254d06fdd87012bcc7d1e0521bfe068fbf24ef5481c9eff7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader",
+      "baseline": "09602d3dd3834e7495fa233ee09a32c0af2e072db6f832b882c2b72014c56d6d",
+      "current": "09602d3dd3834e7495fa233ee09a32c0af2e072db6f832b882c2b72014c56d6d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader.meta",
+      "baseline": "1288285d5a6a95bb5405cc789d7f44139772e3ab9c8ec5fe9a919b3878055682",
+      "current": "1288285d5a6a95bb5405cc789d7f44139772e3ab9c8ec5fe9a919b3878055682",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader",
+      "baseline": "02651d722125000a33ef3eedb32773038f878f6d8563b3e2b45af1e38859cdf4",
+      "current": "02651d722125000a33ef3eedb32773038f878f6d8563b3e2b45af1e38859cdf4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader.meta",
+      "baseline": "12bfe855479eca270552d907ee15b8ce54f2276f15af3127bfc592706d4075a7",
+      "current": "12bfe855479eca270552d907ee15b8ce54f2276f15af3127bfc592706d4075a7",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph",
+      "baseline": "5d6bc7a7e8c31cf498e54c9828435815f18e044b898139eb9b491f08461f80a1",
+      "current": "5d6bc7a7e8c31cf498e54c9828435815f18e044b898139eb9b491f08461f80a1",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph.meta",
+      "baseline": "a8b46dd48416668b865839947e4f9079b3677e9da00befc5f7fc9fb7fd4b0306",
+      "current": "a8b46dd48416668b865839947e4f9079b3677e9da00befc5f7fc9fb7fd4b0306",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph",
+      "baseline": "2506122540a83f3fbd7fecc073ca4eb6ed43a58a9d8b59caa135e66580b0c956",
+      "current": "2506122540a83f3fbd7fecc073ca4eb6ed43a58a9d8b59caa135e66580b0c956",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph.meta",
+      "baseline": "a1e19eef571b0f72337600d9758b51749b68a91ce3b25ede90a679c56e73dc7b",
+      "current": "a1e19eef571b0f72337600d9758b51749b68a91ce3b25ede90a679c56e73dc7b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader",
+      "baseline": "b3eae5be517f376299ed9152d78fbd6879e2c9a8f35a4b9a133b65bb9254ce18",
+      "current": "b3eae5be517f376299ed9152d78fbd6879e2c9a8f35a4b9a133b65bb9254ce18",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader.meta",
+      "baseline": "c4adca1c50f7380adf32fddcf1f37614d0c7829500e42c6247021a391f3d595c",
+      "current": "c4adca1c50f7380adf32fddcf1f37614d0c7829500e42c6247021a391f3d595c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader",
+      "baseline": "2ab40b8067e36d4b6f262bb3485203788b6b0e9c7521bae69cc47b2a05fb2b0a",
+      "current": "2ab40b8067e36d4b6f262bb3485203788b6b0e9c7521bae69cc47b2a05fb2b0a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader.meta",
+      "baseline": "2a3232392e8d038fd478b3f1704b66362b5e763afb50b3f16ac899c888de73ed",
+      "current": "2a3232392e8d038fd478b3f1704b66362b5e763afb50b3f16ac899c888de73ed",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader",
+      "baseline": "c8de13a7886eddfc4f6994ea40b4042721f1238eee89a0ff4c29e32d33faefa2",
+      "current": "c8de13a7886eddfc4f6994ea40b4042721f1238eee89a0ff4c29e32d33faefa2",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader.meta",
+      "baseline": "3e5f543ae95f82c5ed5738585d6dbf54008a98ae9a627d39b0dce9eb3ddb8374",
+      "current": "3e5f543ae95f82c5ed5738585d6dbf54008a98ae9a627d39b0dce9eb3ddb8374",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader",
+      "baseline": "58f1ba5a662fc0f432e4bcdea9e1656a80352c5613f3339d4a8d3dab0003aeb8",
+      "current": "58f1ba5a662fc0f432e4bcdea9e1656a80352c5613f3339d4a8d3dab0003aeb8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader.meta",
+      "baseline": "80f392cea8fca4c1f5d50a334a40f87afc5cacbf1f2ff432a8992a601b39c007",
+      "current": "80f392cea8fca4c1f5d50a334a40f87afc5cacbf1f2ff432a8992a601b39c007",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader",
+      "baseline": "ea5bb3f5540de2fba59704d7f31382cf884595980e0b99c05a083873b9e26e3b",
+      "current": "ea5bb3f5540de2fba59704d7f31382cf884595980e0b99c05a083873b9e26e3b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta",
+      "baseline": "58eff2947dcabefbe4161ed7496b9be052221801758589fa4af452e09632b71c",
+      "current": "58eff2947dcabefbe4161ed7496b9be052221801758589fa4af452e09632b71c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader",
+      "baseline": "0c2db2ea36e79e533e52ab847bc39bebab06285246955a4b2ff6ea546ee7a1b3",
+      "current": "0c2db2ea36e79e533e52ab847bc39bebab06285246955a4b2ff6ea546ee7a1b3",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader.meta",
+      "baseline": "507add334f0f385e78c2760b73b8cbb4d1bd60347d8bba1dcb38911302924b49",
+      "current": "507add334f0f385e78c2760b73b8cbb4d1bd60347d8bba1dcb38911302924b49",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader",
+      "baseline": "f10ece0fce4433a45f601fd84b79b74ae82b275910be8d9aa7c09390aa58a668",
+      "current": "f10ece0fce4433a45f601fd84b79b74ae82b275910be8d9aa7c09390aa58a668",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader.meta",
+      "baseline": "d849ca253d0f8e0124e5a192f921eef2ea411e78c1bf5bac71c28bb7fec59604",
+      "current": "d849ca253d0f8e0124e5a192f921eef2ea411e78c1bf5bac71c28bb7fec59604",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph",
+      "baseline": "d7816ac9c8e4c6bfb579b3101c1826c46f333279c96f69f5734160fc8f68e80a",
+      "current": "d7816ac9c8e4c6bfb579b3101c1826c46f333279c96f69f5734160fc8f68e80a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph.meta",
+      "baseline": "3ae03e3081c0353a098954d842ddd5760dfffa17af6bc8963ce3b60801e6b249",
+      "current": "3ae03e3081c0353a098954d842ddd5760dfffa17af6bc8963ce3b60801e6b249",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph",
+      "baseline": "73c1cc198de82cb5b7522618d29ffc47a307f0dfb5cb34ab9c86bf9a84d26e4d",
+      "current": "73c1cc198de82cb5b7522618d29ffc47a307f0dfb5cb34ab9c86bf9a84d26e4d",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph.meta",
+      "baseline": "6bfd35c29cd78389fb93663f4bc1bb9b1402e0a0d35b67a86094671c72d796af",
+      "current": "6bfd35c29cd78389fb93663f4bc1bb9b1402e0a0d35b67a86094671c72d796af",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF.shader",
+      "baseline": "142c6e313f6731976cad18cfb5b283b3942cce97dd6345ac4fe5a7cf572e7fd5",
+      "current": "142c6e313f6731976cad18cfb5b283b3942cce97dd6345ac4fe5a7cf572e7fd5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_SDF.shader.meta",
+      "baseline": "e77b8946de1f5eb76f2e1dd47ccaadc84ff67d30904b8f5bcb998203cdd61396",
+      "current": "e77b8946de1f5eb76f2e1dd47ccaadc84ff67d30904b8f5bcb998203cdd61396",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Sprite.shader",
+      "baseline": "b8606378647fc693029a0ad8ea7c3d162e1bfe1ff54f2f53f4ab158c9ddb6199",
+      "current": "b8606378647fc693029a0ad8ea7c3d162e1bfe1ff54f2f53f4ab158c9ddb6199",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMP_Sprite.shader.meta",
+      "baseline": "16f167e5dcf135fea9c31def18a5f639f9614bcf15d9f3a48986475858c9d7c0",
+      "current": "16f167e5dcf135fea9c31def18a5f639f9614bcf15d9f3a48986475858c9d7c0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro.cginc",
+      "baseline": "7b5e42e957e80ddac2c42cd49d15dc48c50b97a0e263248be8a074d1b3c79543",
+      "current": "7b5e42e957e80ddac2c42cd49d15dc48c50b97a0e263248be8a074d1b3c79543",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro.cginc.meta",
+      "baseline": "eb95df25958b25d82e30b5a6c543d368209b4a9af73105282537323f132c9cb8",
+      "current": "eb95df25958b25d82e30b5a6c543d368209b4a9af73105282537323f132c9cb8",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc",
+      "baseline": "e3d42e5e7c32dad5b41ffb4f03d4e7d9382924aff35d470f46e31d291230385a",
+      "current": "e3d42e5e7c32dad5b41ffb4f03d4e7d9382924aff35d470f46e31d291230385a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc.meta",
+      "baseline": "71adfbbc6aa5e2b27d3ab1317d6ef31b9cb4353dec581490d70de4eebe34db7c",
+      "current": "71adfbbc6aa5e2b27d3ab1317d6ef31b9cb4353dec581490d70de4eebe34db7c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc",
+      "baseline": "18d4fa11c9b205459b6bc217b703c5fdea9875d7a022f6394a0dd18ac3cd0be4",
+      "current": "18d4fa11c9b205459b6bc217b703c5fdea9875d7a022f6394a0dd18ac3cd0be4",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta",
+      "baseline": "4a35e4e340b3fcf0d84abc3635db52dd4c34bead8e5cd547255ec39f09c9cbf5",
+      "current": "4a35e4e340b3fcf0d84abc3635db52dd4c34bead8e5cd547255ec39f09c9cbf5",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc",
+      "baseline": "3441f62bfb1f6f186118296f5cfd73e84f84776d0551b5195f18542e459b8f4b",
+      "current": "3441f62bfb1f6f186118296f5cfd73e84f84776d0551b5195f18542e459b8f4b",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc.meta",
+      "baseline": "f155b9d0f2c80151af8c99b9c32835f178b71d150e208af7d1716648e4ca10d9",
+      "current": "f155b9d0f2c80151af8c99b9c32835f178b71d150e208af7d1716648e4ca10d9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites.meta",
+      "baseline": "a12889276c3ed48211e92ec2c7c6ff5a1c41cd6e8a7fa2b06883a4bdebbea9e9",
+      "current": "a12889276c3ed48211e92ec2c7c6ff5a1c41cd6e8a7fa2b06883a4bdebbea9e9",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt",
+      "baseline": "095907d2631301d08dbff9388fc0c278904fd86e18ba76bb0d401a790ade8f83",
+      "current": "095907d2631301d08dbff9388fc0c278904fd86e18ba76bb0d401a790ade8f83",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta",
+      "baseline": "938914dbae57244fc250929bd4d8914e5680d3477a9965b5d8eb9e893299c5cc",
+      "current": "938914dbae57244fc250929bd4d8914e5680d3477a9965b5d8eb9e893299c5cc",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites/EmojiOne.json",
+      "baseline": "fa35c4a1b7cfc12e872bcba7d0d20702077a5478472b87d619b2c72bf5bb48d0",
+      "current": "fa35c4a1b7cfc12e872bcba7d0d20702077a5478472b87d619b2c72bf5bb48d0",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites/EmojiOne.json.meta",
+      "baseline": "d44b132c16ac22869dccc075d43857436c654625d58431ac5ed4e211c682953c",
+      "current": "d44b132c16ac22869dccc075d43857436c654625d58431ac5ed4e211c682953c",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites/EmojiOne.png",
+      "baseline": "a87b965a701de3dc31d7401e542b1fc946587f912c51d7a26e46ade9f098bd1a",
+      "current": "a87b965a701de3dc31d7401e542b1fc946587f912c51d7a26e46ade9f098bd1a",
+      "unchanged": true
+    },
+    {
+      "path": "Assets/TextMesh Pro/Sprites/EmojiOne.png.meta",
+      "baseline": "950c4c4ebc21a770ba3dbf7b9821d958f6dda4094af59a66ada23f397d1e4e5b",
+      "current": "950c4c4ebc21a770ba3dbf7b9821d958f6dda4094af59a66ada23f397d1e4e5b",
+      "unchanged": true
+    }
+  ],
+  "mutable_metadata_excluded": "output/ui-update/fonts/orchestration",
+  "new_recovery_files": "Assets/_Recovery and task recovery copies retained locally, excluded from commit."
+}

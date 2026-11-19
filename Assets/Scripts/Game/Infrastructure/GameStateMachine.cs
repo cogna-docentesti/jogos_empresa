@@ -20,6 +20,7 @@ public class GameStateMachine
 
             { GameState.MainMenu, new List<GameState>
                 {
+                    GameState.Config_Identification,
                     GameState.Config_Location,
                     GameState.Management_Hub
                 }
@@ -29,8 +30,10 @@ public class GameStateMachine
             // D1 Config_Location -> D2 Config_Restaurant -> D3 Config_TargetSegment (Cardapio).
             // Cada uma aceita avancar e voltar para a anterior. Nada aqui grava no
             // banco; o unico Save do fluxo acontece no confirm da D3.
-            // O Voltar da D1 nao e um estado: ele troca de cena para a identificacao.
-            { GameState.Config_Location, new List<GameState> { GameState.Config_Restaurant } },
+            { GameState.Config_Identification, new List<GameState>
+                { GameState.Config_Location, GameState.Management_Hub } },
+            { GameState.Config_Location, new List<GameState>
+                { GameState.Config_Identification, GameState.Config_Restaurant } },
             { GameState.Config_Restaurant, new List<GameState>
                 {
                     GameState.Config_TargetSegment,

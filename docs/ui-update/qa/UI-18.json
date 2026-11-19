@@ -1,0 +1,190 @@
+{
+  "task_id": "UI-18",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "7e4aa505aa9e33691320d2f48daaf136a3e24b6f",
+  "unity_version": "6000.3.20f1",
+  "commit_message": "feat(ui): unify dialogs and guard exit persistence (UI-18)",
+  "pending_acceptance": [],
+  "implementation": [
+    "Sair migrado in-place para superfície modal marfim, cabeçalho ameixa, scrim e Inter Tight. Cancelar secundário, Sair sem salvar em perigo e Salvar e sair primário; ícones e estados do kit. Componentes/Button e referências existentes preservados.",
+    "SharedModalFocus centraliza Canvas/raycaster, foco inicial após ativar filhos, Tab/Shift+Tab, ciclo de setas, Escape e restauração de foco disponível. Modal acima de loading/HUD; tooltip/toast fechados e feedback/interação atrás do modal bloqueados.",
+    "TrySave reconhece falha de conexão/SQLite. TryShutdown só fecha o banco depois da gravação escolhida e marca encerramento após sucesso. Falha mantém memória, registro anterior e diálogo aberto; oferece retry, cancelar e descarte explícito sem anunciar sucesso.",
+    "Reset/incompatibilidade usam referências explícitas para título/corpo/erro. Reset apaga somente a campanha confirmada e cadastro, volta à identificação na mesma GameScene e não insere antes da D3. Callback repetido no mesmo frame não reinicia o rascunho novamente.",
+    "Incompatibilidade exige Apagar e reiniciar ou Sair sem reiniciar. Abrir e Escape preservam os dados; Escape mantém a decisão explícita em tela. A saída secundária encerra sem regravar nem apagar a sessão anterior.",
+    "Carrinho e novos jogos da conclusão/falência já tinham o kit; receberam configuração modal/foco/cancelamento e ícones. Novo jogo continua preservando o relatório, resultados e eventos anteriores.",
+    "Entrada legada do menu de criação de Sair agora executa migração idempotente in-place. Nenhum texto/número de preview é usado como dado de produção."
+  ],
+  "production_dialog_inventory": [
+    {
+      "surface": "Sair / salvar",
+      "path": "Canvas/ExitUI/ExitDialog/DialogPanel",
+      "before": "legado navy e texto de baixo contraste",
+      "after": "kit completo; ações condicionais ao progresso e erro/retry de gravação"
+    },
+    {
+      "surface": "Reset destrutivo",
+      "path": "Canvas/Panel_Establishment/PanelReset",
+      "before": "kit parcial UI-08 com layout/foco próprios",
+      "after": "kit completo; erro local; host Canvas reutilizável"
+    },
+    {
+      "surface": "Save incompatível",
+      "path": "mesmo PanelReset hospedado no Canvas",
+      "before": "substituição heurística de textos e ação única",
+      "after": "ações explícitas e cópia nativa; nada apagado ao abrir"
+    },
+    {
+      "surface": "Carrinho / confirmação de compra",
+      "path": "Canvas/Panel_Equipment/CartModal; Assets/Prefabs/Panel_Equipment.prefab",
+      "before": "kit UI-10/17",
+      "after": "kit preservado, foco Fechar e camada modal comum"
+    },
+    {
+      "surface": "Novo jogo após conclusão",
+      "path": "Canvas/Panel_FinalReport/NewGameDialog",
+      "before": "kit UI-15",
+      "after": "scrim/ícone/foco comuns; histórico mantido"
+    },
+    {
+      "surface": "Novo jogo após falência",
+      "path": "Canvas/Panel_Bankruptcy/NewGameDialog",
+      "before": "kit UI-16",
+      "after": "scrim/ícone/foco comuns; histórico mantido"
+    }
+  ],
+  "inventory_other_surfaces": "Cardápio, crédito, equipe e escolha de eventos usam confirmações/validações dos painéis existentes em texto nativo. Fechar mês continua aguardando UI-12, sem outro diálogo ou alteração do cálculo. Toast/tooltip/loading são auxiliares UI-17. SharedComponentsPreview/Modal é opt-in de QA; cenas antigas/demos não são produção.",
+  "validation": {
+    "editmode": {
+      "path": "output/ui-update/UI-18/editmode-regression.json",
+      "Total": 358,
+      "Passed": 358,
+      "Failed": 0,
+      "Skipped": 0,
+      "Inconclusive": 0
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-18/playmode.json",
+      "checks": 148,
+      "passed": 148,
+      "failures": 0
+    },
+    "keyboard_loading": {
+      "path": "output/ui-update/UI-18/keyboard-flow.json",
+      "checks": 8,
+      "passed": 8,
+      "behavior": "Escape abre durante Resources.LoadAsync, fecha e restaura controle disponível/input. Enter ativa Cancelar sem alterar sessão. Tab/Shift+Tab/setas também verificados no roteiro principal."
+    },
+    "control_states": {
+      "path": "output/ui-update/UI-18/control-state-checks.json",
+      "checks": 90,
+      "passed": 90,
+      "captures": 30,
+      "roles": [
+        "primary",
+        "secondary",
+        "danger"
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "selected",
+        "disabled",
+        "focus"
+      ]
+    },
+    "actual_exits": {
+      "path": "output/ui-update/UI-18/actual-exits.json",
+      "cases": 9,
+      "passed": 9,
+      "modes": [
+        "draft",
+        "saved",
+        "save",
+        "discard",
+        "failure-retry",
+        "incompatible",
+        "completed",
+        "bankrupt",
+        "loading-discard"
+      ],
+      "behavior": "Todos encerraram realmente Play Mode. Trigger SQLite confirma uma gravação para salvar/retry e zero ao descartar. Callback/Shutdown repetidos não gravam novamente. Loading-discard sai com operação real pendente."
+    },
+    "total_gameplay_checks": 156,
+    "screenshots": "output/ui-update/UI-18/screenshots.json",
+    "capture_frames": "output/ui-update/UI-18/capture-frames.json",
+    "state_frames": "output/ui-update/UI-18/control-states.json",
+    "frame_advancement": "output/ui-update/UI-18/frame-advancement.json",
+    "runtime_inventory": "output/ui-update/UI-18/runtime-inventory.json",
+    "final_scene": "output/ui-update/UI-18/final-scene.json",
+    "scene_diff": "output/ui-update/UI-18/scene-diff-audit.json",
+    "art_audit": "output/ui-update/UI-18/art-audit.json",
+    "file_audit": "output/ui-update/UI-18/file-audit.json",
+    "console": {
+      "playmode": "output/ui-update/UI-18/playmode-console.json",
+      "actual_exits": "output/ui-update/UI-18/actual-exit-console.json",
+      "keyboard": "output/ui-update/UI-18/keyboard-console.json",
+      "final_scene": "output/ui-update/UI-18/final-scene-console.json",
+      "game_errors": 0,
+      "expected_reset_failure_warnings": 3,
+      "note": "Três warnings provocados pelos triggers de falha de reset, um por resolução. Reabertura final somente contém o aviso preexistente de depreciação do Input Manager; zero erros."
+    }
+  },
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "screenshots": 96,
+    "review_boards": 7,
+    "inspection": "Capturas reais após frames/resolução renderizada. Todas as pranchas e amostras nativas 1280x720 inspecionadas: Sair, reset/erro, incompatibilidade, carrinho vazio, novos jogos, texto longo e estados de botões. Sem overflow, controles fora da tela ou sobreposição Sair/Menu/Voltar.",
+    "typography": "Inter Tight; títulos 32 (carrinho 44), corpo/botões 24, erro reset 22; sem autosize. Superfícies 9-slice e ícones inteiros.",
+    "contrast": "output/ui-update/UI-18/contrast.json",
+    "contrast_note": "Pixels reais: corpo 12,929:1; cabeçalho 15,142:1; erro 5,886:1. Estados de botão medidos separadamente, preservando o coral/rótulo bold aprovados no kit.",
+    "layers": "Scrim estendido sem preserveAspect; Canvas modal 1001 acima de fundo/loading. Raycasts e foco verificados."
+  },
+  "storage_isolation": {
+    "database": "D:/Cogna/jogos_empresa/Temp/ui18-validation.db",
+    "identification_key": "Cogna.UI18.Validation",
+    "final_scene_database": "D:/Cogna/jogos_empresa/Temp/ui18-final-scene.db",
+    "final_scene_key": "Cogna.UI18.FinalScene",
+    "unit_tests": "Bancos Temp/ui18-tests-<GUID>.db e chaves Cogna.UI18.Tests.<GUID>. RequireIsolatedStorage em todos os helpers Play Mode.",
+    "real_data": "A partida/cadastro reais não foram abertos nem resetados. Overrides definidos no processo do Editor antes do primeiro Play Mode."
+  },
+  "invariants": {
+    "pngs_preserved": 277,
+    "guids_preserved": 277,
+    "single": 277,
+    "manifest_hashes_dimensions_verified": 272,
+    "enums_unchanged": true,
+    "catalogs_economy_unchanged": true,
+    "campaign_months": 3,
+    "first_insert_at_d3": true,
+    "same_game_scene_after_reset": true,
+    "original_scene_ids_preserved": true,
+    "missing_scripts": 0
+  },
+  "resolved_during_validation": [
+    "Foco inicial reforçado após ativação dos filhos e abertura; Cancelar é a seleção segura.",
+    "Reset fecha o modal antes de desativar a origem e não reparenta durante OnDisable. Repetição final com zero erros de jogo.",
+    "Harness aguarda frames entre abrir modal e acionar seus controles; teclado de teste usa device isolado e player loop explícito.",
+    "Migração idempotente encontra títulos já hospedados no cabeçalho e reativa ícones existentes."
+  ],
+  "cleanup": "Editor fechado durante a retirada de reordenação/whitespace e 12 derivas mínimas de floats incidentais. Todos os 8892 IDs anteriores da cena preservados, com 50 blocos adicionados; prefab preserva 538 e adiciona quatro. Metadados/fontes incidentais e Pipeline temporário retirados. Cena normalizada reaberta no Editor correto, sem scripts ausentes nem referências nulas nos 12 destinos de navegação.",
+  "scope_limits": [
+    "Somente UI-18; UI-19 e UI-20 não executadas.",
+    "Sem branch/worktree novo, push, arquivamento ou mensagens/conversas adicionais."
+  ]
+}

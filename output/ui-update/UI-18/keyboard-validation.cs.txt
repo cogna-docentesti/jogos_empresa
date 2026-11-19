@@ -1,0 +1,27 @@
+UI01Validation.RequireIsolatedStorage();
+var root=UnityEngine.GameObject.Find("Canvas").transform;
+var exit=root.Find("ExitUI").GetComponent<Game.Adapter.In.UI.ExitDialogController>();
+var store=root.Find("Panel_Equipment");var loader=store.GetComponent<Game.Adapter.In.UI.SharedLoading>();
+var keyboard=UnityEngine.InputSystem.InputSystem.AddDevice<UnityEngine.InputSystem.Keyboard>("UI18KeyboardFlow");keyboard.MakeCurrent();
+var flags=System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic;
+typeof(UI18DialogValidation).GetMethod("Active",flags).Invoke(null,null);
+var session=GameSessionState.Current;var json=Newtonsoft.Json.JsonConvert.SerializeObject(session);
+Game.Adapter.In.UI.Navigation.MenuNavigator.Instance.Open(Game.Adapter.In.UI.Navigation.PanelId.EquipmentStore);
+var steps=new System.Collections.Generic.Queue<(string,System.Action)>();var records=new System.Collections.Generic.List<object>();bool passed=true;
+System.Action<UnityEngine.InputSystem.Key[]> press=keys=>UnityEngine.InputSystem.InputSystem.QueueStateEvent(keyboard,new UnityEngine.InputSystem.LowLevel.KeyboardState(keys));
+System.Action<bool,string> check=(ok,message)=>{if(!ok)throw new System.Exception(message);};
+steps.Enqueue(("Start real load with keyboard focus",()=>{store.GetComponent<Game.Adapter.In.Controllers.EquipmentScreenController>().BeginCatalogLoad();check(loader.IsBusy,"No pending load");press(new[]{UnityEngine.InputSystem.Key.Escape});}));
+steps.Enqueue(("Escape opens exit over loading",()=>{press(System.Array.Empty<UnityEngine.InputSystem.Key>());check(exit.IsOpen&&Game.Adapter.In.UI.SharedModalFocus.Active!=null,"Exit did not remain open");check(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name=="CancelButton","Unsafe initial focus");}));
+steps.Enqueue(("Escape close key",()=>press(new[]{UnityEngine.InputSystem.Key.Escape})));
+steps.Enqueue(("Escape restores active input after loading",()=>{press(System.Array.Empty<UnityEngine.InputSystem.Key>());check(!exit.IsOpen&&!loader.IsBusy&&store.GetComponent<UnityEngine.CanvasGroup>().interactable,"Input remained locked");var s=UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject?.GetComponent<UnityEngine.UI.Selectable>();check(s!=null&&s.IsActive()&&s.IsInteractable(),"Focus was not restored to an available control");check(json==Newtonsoft.Json.JsonConvert.SerializeObject(GameSessionState.Current),"Cancellation changed session");}));
+steps.Enqueue(("Reopen by Escape",()=>press(new[]{UnityEngine.InputSystem.Key.Escape})));
+steps.Enqueue(("Initial cancel before native Enter",()=>{press(System.Array.Empty<UnityEngine.InputSystem.Key>());check(exit.IsOpen&&UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name=="CancelButton","Reopen focus");}));
+steps.Enqueue(("Native Enter activates safe cancel",()=>press(new[]{UnityEngine.InputSystem.Key.Enter})));
+steps.Enqueue(("Enter cancel preserves data",()=>{press(System.Array.Empty<UnityEngine.InputSystem.Key>());check(!exit.IsOpen&&Game.Adapter.In.UI.SharedModalFocus.Active==null,"Enter did not cancel");check(json==Newtonsoft.Json.JsonConvert.SerializeObject(GameSessionState.Current),"Submit changed session");}));
+int last=UnityEngine.Time.frameCount;double next=UnityEditor.EditorApplication.timeSinceStartup+.3;
+UnityEditor.EditorApplication.CallbackFunction tick=null;tick=()=>{
+ if(UnityEngine.Time.frameCount<=last||UnityEditor.EditorApplication.timeSinceStartup<next){UnityEditor.EditorApplication.QueuePlayerLoopUpdate();return;}
+ if(steps.Count==0){UnityEditor.EditorApplication.update-=tick;UnityEngine.InputSystem.InputSystem.RemoveDevice(keyboard);System.IO.File.WriteAllText("output/ui-update/UI-18/keyboard-flow.json",Newtonsoft.Json.JsonConvert.SerializeObject(new{passed,checks=records},Newtonsoft.Json.Formatting.Indented));return;}
+ var step=steps.Dequeue();try{step.Item2();records.Add(new{name=step.Item1,passed=true,frame=UnityEngine.Time.frameCount});}catch(System.Exception e){passed=false;records.Add(new{name=step.Item1,passed=false,frame=UnityEngine.Time.frameCount,error=e.ToString()});steps.Clear();}
+ last=UnityEngine.Time.frameCount;next=UnityEditor.EditorApplication.timeSinceStartup+.3;UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+};UnityEditor.EditorApplication.update+=tick;return "keyboard flow started";

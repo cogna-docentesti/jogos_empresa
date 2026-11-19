@@ -81,6 +81,14 @@ public class GameSessionEntity
 
     public long syncedAt { get; set; }
 
+    // Presentation resume metadata only. Existing saves default to unread/unarchived.
+    public bool finalSummaryAcknowledged { get; set; }
+    public bool finalReportArchived { get; set; }
+
+    // Nullable presentation metadata: older saves retain their existing resume behavior.
+    public int? initialSetupResumeState { get; set; }
+    public string pendingSummaryResultId { get; set; }
+
     /// <summary>Creates a detached copy for transactional settlement.</summary>
     public GameSessionEntity Copy() => (GameSessionEntity)MemberwiseClone();
 }

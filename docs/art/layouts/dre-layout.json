@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "task_id": "ART-28",
+  "status": "validado",
+  "canvas_px": [
+    1920,
+    1080
+  ],
+  "coordinate_origin": "top_left_y_down",
+  "camera": {
+    "orientation_description": "Frontal, com leve visão descendente sobre a mesa; CH01 sentada em pequeno giro de três quartos, conforme o quadrante ilustrado do concept mensal.",
+    "light_direction_description": "Luz quente difusa do alto à esquerda; sombras para baixo à direita.",
+    "projection": "editorial frontal perspective"
+  },
+  "monthly_viewport_px": [
+    1320,
+    120,
+    560,
+    420
+  ],
+  "position_semantics": "position_px is the exported sprite pivot in canvas pixels. Native top-left = position_px - native_size * scale * pivot. Pivot components use top-left coordinates. Scale is one uniform number.",
+  "clip_rect_px": [
+    1320,
+    120,
+    560,
+    420
+  ],
+  "clip_policy": "All monthly illustration layers are clipped by the same viewport. Lower desk legs and seated thighs intentionally extend below its lower edge; complete PNGs remain separate and unchanged.",
+  "layers": [
+    {
+      "asset_id": "DRE_ENVIRONMENT",
+      "position_px": [
+        1600,
+        330
+      ],
+      "scale": 0.546875,
+      "order": 0,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "asset_id": "DRE_PROP_REPORT_BLANK",
+      "position_px": [
+        1665.40625,
+        327.8125
+      ],
+      "scale": 0.375,
+      "order": 10,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "asset_id": "CH01_DRE",
+      "position_px": [
+        1580,
+        316
+      ],
+      "scale": 0.46875,
+      "order": 20,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "asset_id": "DRE_DESK",
+      "position_px": [
+        1600,
+        490
+      ],
+      "scale": 0.546875,
+      "order": 30,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "asset_id": "DRE_PROP_COFFEE_CUP",
+      "position_px": [
+        1440,
+        441
+      ],
+      "scale": 0.375,
+      "order": 40,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "asset_id": "DRE_PROP_CALCULATOR",
+      "position_px": [
+        1800,
+        438
+      ],
+      "scale": 0.375,
+      "order": 50,
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "anchors": {
+    "ch01_hand": [
+      1695.78125,
+      343.1875
+    ],
+    "paper_grip": [
+      1695.78125,
+      343.1875
+    ],
+    "desk_front_edge": [
+      1600,
+      481.796875
+    ],
+    "desk_back_edge": [
+      1600,
+      394.296875
+    ],
+    "ch01_chin_hand": [
+      1549.53125,
+      254.125
+    ],
+    "cup_base": [
+      1440,
+      474.75
+    ],
+    "calculator_base": [
+      1800,
+      471.375
+    ]
+  },
+  "anchor_definitions": {
+    "ch01_hand": {
+      "asset_id": "CH01_DRE",
+      "native_px": [
+        631,
+        570
+      ],
+      "purpose": "Contato da borda direita da folha com a mão estendida; dedos da pessoa desenhados sobre a folha."
+    },
+    "paper_grip": {
+      "asset_id": "DRE_PROP_REPORT_BLANK",
+      "native_px": [
+        209,
+        169
+      ],
+      "purpose": "Borda direita na metade inferior da folha; coincide exatamente com ch01_hand."
+    },
+    "desk_front_edge": {
+      "asset_id": "DRE_DESK",
+      "native_px": [
+        512,
+        241
+      ],
+      "purpose": "Borda frontal do tampo; pernas/coxas ficam ocultas pela mesa e pelo viewport."
+    },
+    "desk_back_edge": {
+      "asset_id": "DRE_DESK",
+      "native_px": [
+        512,
+        81
+      ],
+      "purpose": "Referência de profundidade do tampo atrás dos props."
+    }
+  },
+  "occlusion_masks": [],
+  "occlusion_strategy": "Z-order suffices: paper behind CH01 makes her existing fingers occlude the paper edge; desk above CH01 hides lower torso and thighs. No bitmap extraction or alpha painting. Viewport clipping is specified separately.",
+  "display_rules": "Background cover at matching 4:3 ratio with no crop. Other layers contain/preserveAspect using uniform scale. The monthly image is 560x420 within a 1920x1080 canvas. No UI, text, numbers, axes or chart bars are baked into these assets.",
+  "reference": "art-source/references/concepts/04-dre-mensal.png",
+  "proof_source": "art-source/editable/ART-28/preview-art28.cjs",
+  "proof": "art-source/previews/ART-28/ART-28-layer-proof.png",
+  "future_art29": "ART-29 may add quarterly placements and mentor anchors while preserving these monthly placements and shared prop files. No mentor anchor is fabricated in ART-28.",
+  "integration_performed": true,
+  "quarterly": {
+    "task_id": "ART-29",
+    "status": "validado",
+    "canvas_px": [
+      1920,
+      1080
+    ],
+    "coordinate_origin": "top_left_y_down",
+    "camera": {
+      "orientation_description": "Frontal with slight descending desk view; CH01 on left looks right and CH04 on right looks left, following approved quarterly conversation.",
+      "light_direction_description": "Luz quente difusa do alto à esquerda; sombras para baixo à direita.",
+      "projection": "editorial frontal perspective"
+    },
+    "viewport_px": [
+      1320,
+      120,
+      560,
+      420
+    ],
+    "clip_rect_px": [
+      1320,
+      120,
+      560,
+      420
+    ],
+    "layers": [
+      {
+        "asset_id": "DRE_ENVIRONMENT",
+        "position_px": [
+          1600,
+          330
+        ],
+        "scale": 0.546875,
+        "order": 0,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "asset_id": "DRE_PROP_REPORT_BLANK",
+        "position_px": [
+          1552.4375,
+          301.5625
+        ],
+        "scale": 0.375,
+        "order": 10,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "asset_id": "CH01_DISCUSSING",
+        "position_px": [
+          1460,
+          316
+        ],
+        "scale": 0.46875,
+        "order": 20,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "asset_id": "CH04_DISCUSSING",
+        "position_px": [
+          1710,
+          296
+        ],
+        "scale": 0.46875,
+        "order": 21,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "asset_id": "DRE_DESK",
+        "position_px": [
+          1600,
+          490
+        ],
+        "scale": 0.546875,
+        "order": 30,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "asset_id": "DRE_PROP_COFFEE_CUP",
+        "position_px": [
+          1440,
+          441
+        ],
+        "scale": 0.375,
+        "order": 40,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "asset_id": "DRE_PROP_CALCULATOR",
+        "position_px": [
+          1800,
+          438
+        ],
+        "scale": 0.375,
+        "order": 50,
+        "pivot": [
+          0.5,
+          0.5
+        ]
+      }
+    ],
+    "anchors": {
+      "ch01_hand": [
+        1582.8125,
+        316.9375
+      ],
+      "paper_grip": [
+        1582.8125,
+        316.9375
+      ],
+      "ch04_gesture_hand": [
+        1760.625,
+        314.75
+      ],
+      "ch04_rest_hand": [
+        1724.53125,
+        391.625
+      ],
+      "desk_front_edge": [
+        1600,
+        481.796875
+      ],
+      "desk_back_edge": [
+        1600,
+        394.296875
+      ]
+    },
+    "anchor_definitions": {
+      "ch01_hand": {
+        "asset_id": "CH01_DISCUSSING",
+        "native_px": [
+          646,
+          514
+        ],
+        "purpose": "Right edge of independent report meets empty pinch grip; fingers render in front of paper."
+      },
+      "paper_grip": {
+        "asset_id": "DRE_PROP_REPORT_BLANK",
+        "native_px": [
+          209,
+          169
+        ],
+        "purpose": "Same exact canvas point as ch01_hand."
+      },
+      "ch04_gesture_hand": {
+        "asset_id": "CH04_DISCUSSING",
+        "native_px": [
+          492,
+          552
+        ],
+        "purpose": "Open explanatory hand above desk."
+      },
+      "ch04_rest_hand": {
+        "asset_id": "CH04_DISCUSSING",
+        "native_px": [
+          415,
+          716
+        ],
+        "purpose": "Lower hand contour meets the rear tabletop edge with complete fingers visible."
+      },
+      "desk_front_edge": {
+        "asset_id": "DRE_DESK",
+        "native_px": [
+          512,
+          241
+        ],
+        "purpose": "Desk above seated thighs; shared untouched ART-28 prop."
+      },
+      "desk_back_edge": {
+        "asset_id": "DRE_DESK",
+        "native_px": [
+          512,
+          81
+        ],
+        "purpose": "Rear tabletop depth guide."
+      }
+    },
+    "occlusion_masks": [],
+    "occlusion_strategy": "Paper behind CH01 fingers; both people behind desk so seated thighs and lower torso are hidden by tabletop. Same viewport clips lower desk legs. No bitmap masks or modifications.",
+    "display_rules": "Uniform scale only, contain/preserveAspect. Complete PNGs remain separate. Viewport crop only in composed QA.",
+    "reference": "art-source/references/concepts/05-dre-trimestral.png",
+    "shared_assets_unchanged": [
+      "DRE_ENVIRONMENT",
+      "DRE_DESK",
+      "DRE_PROP_REPORT_BLANK",
+      "DRE_PROP_COFFEE_CUP",
+      "DRE_PROP_CALCULATOR"
+    ],
+    "proof_source": "art-source/editable/ART-29/preview-art29.cjs",
+    "proof": "art-source/previews/ART-29/ART-29-layer-proof.png",
+    "integration_performed": true,
+    "integration_task": "UI-14",
+    "integration_evidence": "docs/ui-update/qa/UI-14.json"
+  },
+  "updated_by_tasks": [
+    "ART-28",
+    "ART-29"
+  ],
+  "integration_task": "UI-13",
+  "integration_evidence": "docs/ui-update/qa/UI-13.json"
+}

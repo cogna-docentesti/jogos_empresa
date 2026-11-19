@@ -5,7 +5,7 @@ using Game.Application.Ports.Out;
 using Game.Infrastructure;
 using Game.Infrastructure.Session;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Game.Adapter.In.UI.Navigation;
 
 namespace Game.Adapter.In.Controllers
 {
@@ -23,15 +23,14 @@ namespace Game.Adapter.In.Controllers
     {
         [SerializeField] private Game.Adapter.In.UI.LocationScreenView view;
 
-        // D1 e a primeira decisao. Voltar daqui leva para o cadastro do aluno,
-        // que e outra cena. Avancar leva para a D2, que e outro estado.
-        private const string PreviousScene = SceneNames.Identification;
+        // D1 is step 2; identification is another panel in the same scene.
         private const GameState NextState  = InitialDecisionFlow.Restaurant;
 
         private ILocationRepository _repository;
         private LocationScreenData  _data;
         private Establishment       _selectedEstablishment;
         private bool                _initialized;
+        private static bool ReviewContext => MenuNavigator.HubAvailable && MenuNavigator.Instance != null && MenuNavigator.Instance.Current == PanelId.Location;
 
         // ── Ciclo de vida ─────────────────────────────────────────────────
 
@@ -132,6 +131,7 @@ namespace Game.Adapter.In.Controllers
             _selectedEstablishment = null;
             Render();
             RestorePreviousSelection();
+            view.SetReviewMode(ReviewContext);
         }
 
         private void Render()
@@ -139,6 +139,8 @@ namespace Game.Adapter.In.Controllers
             view.SetRegionName(_data.RegionName);
             view.SetHint("Selecione uma área no mapa para continuar.");
             view.ShowEmptyState();
+            if (_data == null || _data.Establishments.Count == 0)
+                view.ShowUnavailableState();
 
             view.SetBankVisible(IsAvailable("bank"));
             view.SetUniversityVisible(IsAvailable("university"));
@@ -149,10 +151,10 @@ namespace Game.Adapter.In.Controllers
 
         private void RestorePreviousSelection()
         {
-            if (!PlayerSession.HasLocation)
+            if (!ReviewContext && !PlayerSession.HasLocation)
                 return;
 
-            string id = PlayerSession.SelectedEstablishmentId;
+            string id = ReviewContext ? LocationZoneMap.ToId(GameSessionState.Current.locationZone) : PlayerSession.SelectedEstablishmentId;
 
             if (!LocationZoneMap.IsKnownId(id))
                 id = LocationZoneMap.ToId(PlayerSession.SelectedZone.Value);
@@ -172,8 +174,9 @@ namespace Game.Adapter.In.Controllers
 
         private void OnLocationSelected(string id)
         {
+            if (ReviewContext && id != LocationZoneMap.ToId(GameSessionState.Current.locationZone)) return;
             var e = _data.Establishments.FirstOrDefault(x => x.Id == id);
-            if (e == null) return;
+            if (e == null || !e.IsUnlocked) return;
 
             _selectedEstablishment = e;
             view.SelectArea(id);
@@ -188,11 +191,13 @@ namespace Game.Adapter.In.Controllers
                 e.ReferencePriceFactor,
                 e.CompetitionLevel,
                 e.Channels);
+            view.SetConfirmEnabled(true);
         }
 
         private void OnConfirm()
         {
-            if (_selectedEstablishment == null) return;
+            if (ReviewContext) return;
+            if (_selectedEstablishment == null || !_selectedEstablishment.IsUnlocked) return;
 
             SaveDraft();
 
@@ -202,15 +207,14 @@ namespace Game.Adapter.In.Controllers
 
         private void OnBack()
         {
+            if (ReviewContext) return;
             // Guarda o que esta na tela antes de sair: quando o jogador voltar
             // da identificacao, a area escolhida continua marcada.
             if (_selectedEstablishment != null)
                 SaveDraft();
 
-            // Sem este pedido a tela de identificacao veria o cadastro salvo e
-            // pularia direto de volta para o jogo.
             PlayerSession.RequestIdentificationEdit();
-            SceneManager.LoadScene(PreviousScene);
+            InitialDecisionFlow.GoTo(InitialDecisionFlow.Identification);
         }
 
         private void SaveDraft()

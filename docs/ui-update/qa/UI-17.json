@@ -1,0 +1,149 @@
+{
+  "task_id": "UI-17",
+  "date": "2026-10-16",
+  "status": "concluído",
+  "branch": "dev/new-screens",
+  "baseline": "711bb5397891add3b1abf7fcdafce444992fba01",
+  "unity_version": "6000.3.20f1",
+  "pending_acceptance": [],
+  "commit_message": "feat(ui): add contextual guidance and operation feedback (UI-17)",
+  "implementation": [
+    "Quatro componentes/prefabs independentes para spinner, tap, drag e focus_ring. UiMotion anima rotação, posição ou escala com tempo não escalado, sem recorte ou sprite sheet. Arte inteira, Single, preserveAspect, tint branco e sem raycast; base ameixa separada garante contraste e pivot central mantém o spinner contido.",
+    "Ajuda contextual opcional Banco → Equipamentos → RH na própria GameScene. Seleção, rolagem real, compra, contratação, confirmação ou Entendi ocultam a ajuda. Compreensão é lembrada por sessão; ações já salvas e o contexto de consulta suprimem a ajuda em revisitas/reload. Nenhuma nova condição de crédito, compra ou equipe mínima.",
+    "EquipmentCatalogIndex contém somente os 16 endereços Resources originais. Carregamento real por Resources.LoadAsync; nenhuma espera artificial. SharedLoading bloqueia apenas o painel durante a operação, oferece Cancelar e libera input/foco em sucesso, erro, cancelamento e desativação. Cancelamento invalida a continuação; falha permite retry.",
+    "Tooltip nativo do banco para mouse, foco, teclado e toque, com fechamento no segundo toque/Enter, cancelamento ou perda de foco. Toast compartilhado usa superfícies de sucesso/aviso/neutra para erro, prefixos semânticos e contraste adequado; fecha por botão, expira com tempo de leitura e permanece enquanto seu botão está focado. Mensagens refletem ações reais.",
+    "EMPTY_CART, EMPTY_TEAM e EMPTY_RESULTS conferidos em todos os consumidores serializados e fluxos ativos. Catálogo indisponível não exibe contagem zero nem nomes internos; caixa/total/saldo ficam Indisponível enquanto não há consulta válida. Vazio de equipe continua confirmável pela regra existente; relatórios sem registros explicam quando os resultados serão produzidos.",
+    "Menu preserva seu callback e fica inteiramente no rodapé nas revisitas. Menu, Voltar, Sair/cancelar e ações dos painéis foram acionados por raycast. Diálogo Sair legado mantém seu desenho para UI-18.",
+    "Retry limpa o aviso/erro da tentativa anterior. Quantidades de equipe sem contexto válido usam —, mantendo quantidades reais conhecidas nas consultas bloqueadas."
+  ],
+  "field_sources": {
+    "loading": "Resources.LoadAsync<EquipmentCatalogIndex> e Resources.LoadAsync<EquipmentData>, com os mesmos 16 assets Resources/Equipments. Índice não contém preço, ID ou regra econômica.",
+    "guidance": "GameState inicial, sessionId, creditLineId, equipamento salvo e quantidades reais de equipe; não altera GameSessionEntity/PlayerPrefs para armazenar tutorial.",
+    "cart": "EquipmentScreenController/cartEquipmentIds, custos originais EquipmentData e GameSessionState.Current.currentCash. Só o vazio conhecido tem total zero; indisponibilidade fica explícita.",
+    "team": "TeamSelectionHelper e RoleData originais; folha/capacidade/alinhamento existentes preservados.",
+    "results": "MonthlyResultController, QuarterlyResultController e FinalReportController consultam os registros SQLite existentes. Nenhuma ausência vira previsão ou zero."
+  },
+  "empty_consumers": {
+    "EMPTY_CART": {
+      "serialized": [
+        "Assets/Prefabs/MainArea_Equipment.prefab",
+        "Assets/Prefabs/Panel_Equipment.prefab"
+      ],
+      "runtime": [
+        "Resumo lateral da loja",
+        "Modal de revisão do carrinho"
+      ],
+      "behavior": "Adicione itens no catálogo ou feche para voltar; checkout vazio indisponível. Durante falha/loading os dados ausentes são Indisponível."
+    },
+    "EMPTY_TEAM": {
+      "serialized": [
+        "Assets/Scenes/GameScene.unity"
+      ],
+      "runtime": [
+        "Resumo lateral de RH"
+      ],
+      "behavior": "Equipe realmente vazia oferece + e explica a folha mensal. Sessão indisponível não exibe o vazio como se fosse uma equipe válida. Contadores desconhecidos usam —, com explicação nativa, em vez de zero."
+    },
+    "EMPTY_RESULTS": {
+      "serialized": [
+        "Assets/Scenes/GameScene.unity"
+      ],
+      "runtime": [
+        "DRE mensal",
+        "DRE trimestral",
+        "Relatório final"
+      ],
+      "behavior": "Explicação correspondente ao fechamento/campanha e retorno; falha de consulta oferece retry. Não há números fictícios."
+    }
+  },
+  "visual_review": {
+    "resolutions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "screenshots": 92,
+    "review_boards": 16,
+    "inspection": "Capturas reais da Game View após avanço de frames e resolução renderizada; pranchas e amostras nativas revisadas. Ajuda/tooltip, loading e retry, vazios, compra/contratação, revisitas, toasts e navegação. Estados normal, hover, pressed, selected, disabled e focus; textos nativos longos e máscaras/scroll.",
+    "typography": "Inter Tight e tema UI-02/03; corpo/botões 24, legenda de toast 20; sem autosize. Superfícies 9-slice apropriadas e ilustrações completas.",
+    "spinner": "Dois frames distintos no loading real, sprite spinner visível e anel centrado em base ameixa; ângulos/pivot/camadas registrados em spinner-motion.json.",
+    "gestures": "Tap, drag e focus_ring visíveis em seus contextos reais, com dois registros de transformação por gesto em gesture-motion.json.",
+    "scoped_limit": "Sair legado abre e cancela; o redesign de contraste pertence expressamente à UI-18."
+  },
+  "validation": {
+    "editmode": {
+      "path": "output/ui-update/UI-17/editmode-regression.json",
+      "total": 347,
+      "passed": 347,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode": {
+      "path": "output/ui-update/UI-17/playmode.json",
+      "checks": 133,
+      "passed": 133,
+      "failures": 0
+    },
+    "screenshots": "output/ui-update/UI-17/screenshots.json",
+    "capture_frames": "output/ui-update/UI-17/capture-frames.json",
+    "spinner_motion": "output/ui-update/UI-17/spinner-motion.json",
+    "gesture_motion": "output/ui-update/UI-17/gesture-motion.json",
+    "frame_advancement": "output/ui-update/UI-17/frame-advancement.json",
+    "runtime": "output/ui-update/UI-17/runtime.json",
+    "console": "output/ui-update/UI-17/playmode-console.json",
+    "art_audit": "output/ui-update/UI-17/art-audit.json",
+    "scene_audit": "output/ui-update/UI-17/scene-diff-audit.json",
+    "final_scene": "output/ui-update/UI-17/final-scene.json",
+    "file_audit": "output/ui-update/UI-17/file-audit.json",
+    "cancel_input": {
+      "path": "output/ui-update/UI-17/cancel-input.json",
+      "checks": 2,
+      "passed": 2,
+      "keyboard": true,
+      "touch": true,
+      "saved_campaign_unchanged": true
+    },
+    "total_playmode_checks": 135,
+    "console_errors": 0,
+    "console_warnings": 0
+  },
+  "persistence_validation": [
+    "347 regressões Edit Mode preservam identificação/rascunho/primeiro INSERT na D3, catálogos, economia, eventos, fechamento, espera de resumos, relatórios/falência e novo jogo com histórico.",
+    "133 verificações Play Mode nas três resoluções: seleção sem crédito, compra real com caixa conferido no SQLite, contratação/remoção por ID, equipe vazia confirmável, revisitas e vazios de resultados.",
+    "Falha por endereço Resources inexistente somente na fixture, cancelamento durante solicitação real, retry bem-sucedido, desativação e reentrada. Input/foco e ausência de continuação tardia conferidos.",
+    "Bancos Temp/ui17-validation.db e Temp/ui17-final-scene.db; chaves Cogna.UI17.Validation e Cogna.UI17.FinalScene. RequireIsolatedStorage impede execução em armazenamento real. Partida real não foi usada."
+  ],
+  "invariants": {
+    "pngs_preserved": 277,
+    "guids_preserved": 277,
+    "single": 277,
+    "manifest_hashes_dimensions_verified": 272,
+    "enums_unchanged": true,
+    "economy_catalogs_unchanged": true,
+    "campaign_months": 3,
+    "seven_initial_steps_and_first_insert_at_d3_preserved": true
+  },
+  "resolved_during_validation": [
+    "Propagação do prefab ajustada para evitar duplicação de loaders/guias; instância final contém um de cada.",
+    "Tooltip corrigido para fechar no segundo toque mesmo com seleção do Button.",
+    "Loader aceita a ordem de Awake/OnEnable entre componentes irmãos e restaura foco/entrada.",
+    "Bases escuras colocadas atrás dos gestos; pivot dos quatro componentes centralizado. Spinner confirmado visível e girando em frames distintos.",
+    "Resumo em loading/erro mostra indisponibilidade em vez de zeros. Harness seleciona controles visíveis por hierarquia/ID.",
+    "Suíte assíncrona ainda ativa ao entrar em Play Mode gerou erros do executor; a regressão final usa término síncrono confirmado de 347 testes antes da rodada Play Mode, com console limpo. O probe de toque aguarda a UI reativada renderizar antes de efetuar raycast."
+  ],
+  "cleanup": "Reordenação/whitespace e deriva mínima de floats retirados com Editor fechado. Cena reaberta e validada: zero scripts ausentes e vínculos válidos. Onze blocos stripped sem referências foram removidos pela Unity ao propagar o prefab; nenhuma referência pendente. Pipeline temporário, fontes/metadados/configurações incidentais removidos antes do commit.",
+  "scope_limits": [
+    "Somente UI-17. UI-18 não iniciada; diálogo Sair legado preservado para sua tarefa.",
+    "Não foram criadas cenas de demonstração, decisões obrigatórias, funções econômicas, sprites ou novas regras de campanha."
+  ]
+}

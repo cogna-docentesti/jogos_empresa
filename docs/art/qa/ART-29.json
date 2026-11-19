@@ -1,0 +1,284 @@
+{
+  "task_id": "ART-29",
+  "title": "Personagens da DRE trimestral",
+  "date": "2026-10-15",
+  "status": "validado",
+  "reviewer": "Codex — inspeção visual e técnica",
+  "production": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "The integrated tool does not expose a specific model identifier.",
+    "distinct_asset_generations": 2,
+    "revision_generations": 1,
+    "prompts_record": "docs/art/prompts/ART-29.json",
+    "source_directory": "art-source/editable/ART-29/generations",
+    "export_source": "art-source/editable/ART-29/export-art29.cjs",
+    "preview_source": "art-source/editable/ART-29/preview-art29.cjs"
+  },
+  "technical": {
+    "passed": true,
+    "asset_count": 2,
+    "report": "docs/art/qa/ART-29-technical.json",
+    "plan_report": "docs/art/qa/ART-29-plan-validation.json",
+    "prerequisite_report": "docs/art/qa/ART-29-prerequisites.json",
+    "schema_and_alignment_report": "docs/art/qa/ART-29-contract-validation.json",
+    "scope_report": "docs/art/qa/ART-29-scope-audit.json"
+  },
+  "visual": {
+    "passed": true,
+    "backgrounds": [
+      "#F5F0E8",
+      "#24113D"
+    ],
+    "scales": "Dois assets em tamanho nativo 768x1024 e exibição 360x480, cada um sobre fundos claro e escuro. Prova conjunta 560x420, posicionamento no canvas 1920x1080 e comparação dos dois personagens aos masters.",
+    "inspected_previews": [
+      "art-source/previews/ART-29/CH01_DISCUSSING-native-light-dark.png",
+      "art-source/previews/ART-29/CH01_DISCUSSING-display-light-dark.png",
+      "art-source/previews/ART-29/CH04_DISCUSSING-native-light-dark.png",
+      "art-source/previews/ART-29/CH04_DISCUSSING-display-light-dark.png",
+      "art-source/previews/ART-29/ART-29-layer-proof.png",
+      "art-source/previews/ART-29/ART-29-identity-comparison.png",
+      "art-source/previews/ART-29/ART-29-canvas-proof.png",
+      "art-source/previews/ART-29/ART-29-monthly-regression.png"
+    ],
+    "checks": [
+      "Uma pessoa por PNG; sem conversa achatada, props incorporados, texto, números, dados, gráficos, tabela ou UI.",
+      "Identidades CH01 e CH04 comparadas aos masters canônicos com hashes preservados. Rostos, pele, olhos, cabelos, acessórios, figurinos e proporções adultos mantidos.",
+      "Mãos, dedos, expressão, silhueta, contornos, perspectiva e luz superior esquerda inspecionados em fundos claro/escuro e na montagem.",
+      "Alfa verdadeiro, sem checkerboard, cenário ou halo amplo incorporado. Alfa original do ImageGen preservado, com antialias visível em ambos os fundos.",
+      "As fontes retornaram 1086x1448; export técnico uniforme com padding transparente entrega 768x1024 exatos e pelo menos 10% de margem. Sem crop do arquivo final ou esticamento x/y.",
+      "Primeira pose CH04 reprovada na montagem por mão baixa e coxas acima do tampo; revisão pelo ImageGen mantém identidade, eleva o antebraço e baixa as coxas. Original, revisão, prompts e hashes preservados.",
+      "Papel independente fica atrás da pinça de CH01; mesa fica acima das duas pessoas e oculta a parte inferior. Mãos completas visíveis; âncoras explícitas do mentor. Z-order basta, sem máscara adicional.",
+      "Cenário, mesa, folha, xícara e calculadora da ART-28 reutilizados sem alteração de PNGs ou metadados. Contrato mensal original preservado; prova mensal idêntica em bytes e pixels.",
+      "Montagens achatadas existem somente nos previews de QA. Os sprites finais permanecem separados e nenhuma integração no Unity foi executada."
+    ]
+  },
+  "composition": {
+    "contract": "docs/art/layouts/dre-layout.json",
+    "contract_view": "quarterly",
+    "schema": "docs/art/schemas/dre-layout.schema.json",
+    "canvas_px": [
+      1920,
+      1080
+    ],
+    "viewport_px": [
+      1320,
+      120,
+      560,
+      420
+    ],
+    "paper_hand_distance_px": 0,
+    "mentor_hand_to_desk_back_edge_y_distance_px": 2.671875,
+    "occlusion_masks_required": false,
+    "monthly_contract_preserved": true,
+    "monthly_composite_png_and_pixels_identical": true,
+    "proof": "art-source/previews/ART-29/ART-29-layer-proof.png"
+  },
+  "assets": [
+    {
+      "id": "CH01_DISCUSSING",
+      "path": "Assets/Art/new/characters/CH01/ch01_discussing.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "84f8fc4126cd7f8011ec33db074db8d3b10254ad4c79a84e39f778fb0af1bec9",
+      "source_path": "art-source/editable/ART-29/generations/ch01_discussing.png",
+      "source_sha256": "147592b65d0c3f1a2fe03260761ab24a9b258f7c027d2ac848940d93265e02ab",
+      "source_size_px": [
+        1086,
+        1448
+      ],
+      "canonical_identity": {
+        "path": "Assets/Art/new/characters/CH01/ch01_canonical.png",
+        "sha256": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45"
+      },
+      "references": [
+        "Assets/Art/new/characters/CH01/ch01_canonical.png",
+        "art-source/references/concepts/05-dre-trimestral.png"
+      ],
+      "reference_sha256": {
+        "Assets/Art/new/characters/CH01/ch01_canonical.png": "d908027ce00f769f51c6added13e0155be6bf7d5b990d17440b425f06fb13c45",
+        "art-source/references/concepts/05-dre-trimestral.png": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7160542805989584,
+        "opaque_fraction": 0.0021985371907552085,
+        "alpha_bbox_ltrb_px": [
+          77,
+          138,
+          672,
+          921
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          137,
+          158,
+          668,
+          865
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction of complete source frame and transparent padding only. No crop, repaint, recolor, alpha cleanup or independent x/y scaling.",
+        "source_frame_px": [
+          1086,
+          1448
+        ],
+        "resampled_frame_px": [
+          614,
+          819
+        ],
+        "uniform_scale": 0.565377532228361,
+        "transparent_padding_ltrb_px": [
+          77,
+          102,
+          77,
+          103
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Identidade comparada ao master: rosto adulto, pele, olhos castanhos, bob ondulado curto com risca lateral, argolas douradas e camisa lilás preservados. Pose sentada, olhar para a direita, mão junto ao queixo e pinça vazia; mãos legíveis e contorno limpo em fundos claro/escuro. Papel e móveis permanecem sprites independentes."
+    },
+    {
+      "id": "CH04_DISCUSSING",
+      "path": "Assets/Art/new/characters/CH04/ch04_discussing.png",
+      "status": "validado",
+      "actual_size_px": [
+        768,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "5436791d0c45c134dbd2cd29149329923d64e8f7240158f0fc1f59400e699891",
+      "source_path": "art-source/editable/ART-29/generations/ch04_discussing_revision.png",
+      "source_sha256": "dc04553bbaac2dd192b63942b5da276ee37547a42235ff19085e76d5259704cf",
+      "source_size_px": [
+        1086,
+        1448
+      ],
+      "canonical_identity": {
+        "path": "Assets/Art/new/characters/CH04/ch04_canonical.png",
+        "sha256": "26f89dcdbdc43877d3ce35dbbb22aced31deda785f99199b00b3965620ec8853"
+      },
+      "references": [
+        "art-source/editable/ART-29/generations/ch04_discussing.png",
+        "Assets/Art/new/characters/CH04/ch04_canonical.png",
+        "art-source/references/concepts/05-dre-trimestral.png"
+      ],
+      "reference_sha256": {
+        "art-source/editable/ART-29/generations/ch04_discussing.png": "2cc40bdc633997088f5fa79f72f3e1f9848912431acaa04a5a16ec9e9b64ee27",
+        "Assets/Art/new/characters/CH04/ch04_canonical.png": "26f89dcdbdc43877d3ce35dbbb22aced31deda785f99199b00b3965620ec8853",
+        "art-source/references/concepts/05-dre-trimestral.png": "a70a0f45cd23a097f8e6ebe559ae8ba45c378d6fb978ccf52e27ee63d058baee"
+      },
+      "alpha": {
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6857096354166666,
+        "opaque_fraction": 0.00231170654296875,
+        "alpha_bbox_ltrb_px": [
+          127,
+          175,
+          667,
+          911
+        ],
+        "visible_bbox_alpha128_ltrb_px": [
+          146,
+          177,
+          665,
+          906
+        ],
+        "outer_edge_alpha_max": 0
+      },
+      "technical_export": {
+        "tool": "sharp/libvips",
+        "operation": "Uniform Lanczos reduction of complete source frame and transparent padding only. No crop, repaint, recolor, alpha cleanup or independent x/y scaling.",
+        "source_frame_px": [
+          1086,
+          1448
+        ],
+        "resampled_frame_px": [
+          614,
+          819
+        ],
+        "uniform_scale": 0.565377532228361,
+        "transparent_padding_ltrb_px": [
+          77,
+          102,
+          77,
+          103
+        ],
+        "crop_ltrb_px": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "technical": true,
+      "visual": true,
+      "identity": true,
+      "notes": "Identidade comparada ao master: rosto adulto, pele, cabelo castanho ondulado, barba curta, óculos de armação escura, suéter azul-marinho e gola lilás preservados. Pose sentada voltada à esquerda, gesto explicativo e mão de apoio completos. Revisão elevou o antebraço e baixou as coxas; o tampo oculta a parte inferior sem cortar os dedos."
+    }
+  ],
+  "previews": [
+    {
+      "path": "art-source/previews/ART-29/CH01_DISCUSSING-native-light-dark.png",
+      "sha256": "a572e01be0e2cf7e84aa183e4ac5da207b697e8ad16300c5208a6e37f3407c66",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/CH01_DISCUSSING-display-light-dark.png",
+      "sha256": "ab8d5ce6b4fa45cceeb4ef9534b6bf9f5f230fd22b5d66284509d1bbbb2f8f01",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/CH04_DISCUSSING-native-light-dark.png",
+      "sha256": "4100c20ad4e8d5ca8ecdfa66bf3c76cfaedbef98f748e64355e6d5364cc1bec5",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/CH04_DISCUSSING-display-light-dark.png",
+      "sha256": "2092f92089b3187d625a1c452350dbf4005d83aa61fc41af229c7ac2fd9d3278",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/ART-29-layer-proof.png",
+      "sha256": "d1131bd458d793658cd4b2263a6db84d32be9de4038fe522ee4feea4762eb6f6",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/ART-29-identity-comparison.png",
+      "sha256": "da5a6be749014969b51383a05ecc81c65959e908c083415a848e5f89f73fa9d9",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/ART-29-canvas-proof.png",
+      "sha256": "075f0ba532e82d2e64a73d567345f47e4b1e2fe38e3fd8bceedfeffa8d752846",
+      "preview_only": true
+    },
+    {
+      "path": "art-source/previews/ART-29/ART-29-monthly-regression.png",
+      "sha256": "44ab38da623c4178a3d70f9e59f06b55bd44b7a042c04d92494304181be0b985",
+      "preview_only": true
+    }
+  ],
+  "pending": [],
+  "future_integration": "Aplicação de sprites e dados dinâmicos em cenas está fora do lote. Consumir quarterly para o trimestre; os campos mensais anteriores permanecem na raiz.",
+  "integration_performed": false
+}

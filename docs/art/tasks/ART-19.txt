@@ -1,0 +1,42 @@
+ART-19 — Produtos franceses
+Escopo: nucleo
+Pré-requisitos: ART-15
+
+Três sprites independentes. Consultar o sprite atual indicado no catálogo como conteúdo e os concepts como estilo. Nomes não especificam receita completa: registrar a composição visual proposta, sem mudar dados do jogo.
+
+COMANDO PARA O CODEX
+Use $cogna-artista para executar somente ART-19 — Produtos franceses. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-19.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes.
+
+LEITURAS
+docs/art/manifest.json, tokens.json, characters.json e sources.json
+Referências em art-source/references/concepts; masters canônicos em Assets/Art/new/characters/CHxx após ART-01/02.
+
+ENTREGÁVEIS
+Caminhos dos PNGs relativos a Assets/Art/new. Referências, fontes editáveis e contratos relativos à raiz do projeto, conforme o manifesto.
+PRODUCT_FRA_MENU_CLASSICO | menu_pricing/products/fra/fra_menu_classico.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Produto Menu classico; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.
+Fonte: Assets/Resources/Products/PROD_FRA_MenuClassico.asset
+Personagens: nenhum
+
+PRODUCT_FRA_MENU_PREMIUM | menu_pricing/products/fra/fra_menu_premium.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Produto Menu premium; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.
+Fonte: Assets/Resources/Products/PROD_FRA_MenuPremium.asset
+Personagens: nenhum
+
+PRODUCT_FRA_PRATO_EXECUTIVO | menu_pricing/products/fra/fra_prato_executivo.png
+Export 512x512 px | display 250x250 px | alfa recorte | 9-slice l,b,r,t [0, 0, 0, 0] | pivot [0.5, 0.5]
+Produto Prato executivo; desenho adulto apetitoso, prato/bandeja em três quartos, sem nome/preço ou sombra larga. Usar o sprite existente como referência de composição e distinguir os níveis simples/médio/premium.
+Fonte: Assets/Resources/Products/PROD_FRA_PratoExecutivo.asset
+Personagens: nenhum
+
+CRITÉRIOS DE ENTREGA
+Cada PNG separado e no caminho do manifesto; nada permanece apenas em pasta de geração.
+Alfa real nos recortes e dimensões exatas verificadas; não fingir export correto quando divergir.
+Nomes e IDs preservados; sem texto, UI ou gráfico incorporado às ilustrações.
+Validar tecnicamente com o helper do agente e inspecionar visualmente estilo/identidade.
+Atualizar status somente após arquivos reais e QA. Registrar prompts em docs/art/prompts/ART-19.json e preview de QA em art-source/previews.
+Não mudar o jogo; não produzir outros lotes automaticamente.
+display_size_px é caixa de layout: preserveAspect/contain nos recortes, sem esticar. Componentes 9-slice usam bordas preservadas. Fontes SVG/código editáveis precisam existir no source_editable especificado quando production_method=vector_or_code.
+Validador: python tools/art/validate_assets.py --task ART-19

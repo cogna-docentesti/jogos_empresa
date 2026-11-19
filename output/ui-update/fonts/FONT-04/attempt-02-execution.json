@@ -1,0 +1,41 @@
+{
+  "task": "FONT-04",
+  "passed": false,
+  "failures": [
+    "Font04TypographyTests.RoleBindingsSurviveSavingAndReopeningAnAdditiveScene(): System.IO.IOException: Win32 IO returned 1224. Path: D:\\Cogna\\jogos_empresa\\Assets\\TextMesh Pro\\Fonts\\InterTight-Variable.asset\r\n  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <41d29b352f6a475ab1bf7c6628b82790>:0 \r\n  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share) [0x00000] in <41d29b352f6a475ab1bf7c6628b82790>:0 \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n  at System.IO.File.InternalWriteAllBytes (System.String path, System.Byte[] bytes) [0x00000] in <41d29b352f6a475ab1bf7c6628b82790>:0 \r\n  at System.IO.File.WriteAllBytes (System.String path, System.Byte[] bytes) [0x00039] in <41d29b352f6a475ab1bf7c6628b82790>:0 \r\n  at Font04TypographyTests.RoleBindingsSurviveSavingAndReopeningAnAdditiveScene () [0x0025a] in D:\\Cogna\\jogos_empresa\\Assets\\Editor\\Tests\\Font04TypographyTests.cs:112 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <41d29b352f6a475ab1bf7c6628b82790>:0 "
+  ],
+  "unity": "6000.3.20f1",
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "before": {
+    "scenes": [
+      {
+        "path": "Assets/Scenes/GameScene.unity",
+        "isDirty": true,
+        "rootCount": 7
+      }
+    ],
+    "texts": 1052,
+    "fingerprint": "a2f7dfaf2a3aa653a1797b874d4fb38785411b98c6a550ede28c8f6bc40de755",
+    "unsavedRestaurant": 1
+  },
+  "after": {
+    "scenes": [
+      {
+        "path": "Assets/Scenes/GameScene.unity",
+        "isDirty": true,
+        "rootCount": 7
+      }
+    ],
+    "texts": 1052,
+    "fingerprint": "a2f7dfaf2a3aa653a1797b874d4fb38785411b98c6a550ede28c8f6bc40de755",
+    "unsavedRestaurant": 1
+  },
+  "scenePreserved": true,
+  "productionSceneSaved": false,
+  "playerDefault": "Roboto-Regular",
+  "viewport": [
+    1920,
+    1080
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "task": "FONT-09",
+  "passed": true,
+  "reference": "art-source/references/concepts/03-gestao.png",
+  "reference_limit": "The five approved concepts contain no dedicated event, dialog or help screen. Comparison uses the common hierarchy, header, body and action typography; it does not invent a matching event concept.",
+  "reviewed_current_files": [
+    "events/catalog-freezer_breakdown-1920x1080.png",
+    "events/catalog-freezer_breakdown-1280x720.png",
+    "events/catalog-freezer_breakdown-1600x1000.png",
+    "feedback/catalog-loading-1280x720.png",
+    "dialogs/exit-long-text-1280x720.png",
+    "dialogs/reset-error-1600x1000.png",
+    "long-help-1920x1080.png",
+    "long-toast-1280x720.png",
+    "history-populated-bottom-1600x1000.png"
+  ],
+  "findings": [
+    "Real Condensed Bold headings and SemiBold action labels remain distinct from Roboto Regular explanations and real Roboto Bold screen titles/values.",
+    "20 real events and 60 options retain readable effects, accents, currency and duration. Native wrapping and the existing scroll masks preserve access to all content.",
+    "16:10 uses the existing common frame and plum letterbox. No individual text scale, global size reduction, autosize or truncation was added.",
+    "Long help grows upward in its lower column and keeps the dismiss action below the body. Tooltip and toast surfaces contain their full native text.",
+    "Dialog long body, error message, scrim and focus ring remain readable; their original action sizes and layout are retained.",
+    "The partially clipped first history row in the bottom capture is the expected viewport scroll position, rather than text truncation. The top capture records its full beginning."
+  ],
+  "automated_complement": "339 current captures include per-text face, role, neutral shared material, size, rect, preferred height and line baselines; all active scoped text is checked for overflow. Real raycasts, tab order, cancellation, scroll hierarchy and persistence are checked by the three runtime suites and focused reentry checks."
+}
