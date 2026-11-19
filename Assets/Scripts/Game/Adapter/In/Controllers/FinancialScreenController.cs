@@ -12,11 +12,20 @@ namespace Game.Adapter.In.Controllers
         private readonly List<BankCardView> _cards = new();
         private CreditLineData _selectedCreditLine;
         private bool _selectionLocked;
+        private LoanTutorial _tutorial;
         private static bool Management => MenuNavigator.Instance != null && MenuNavigator.Instance.Current == PanelId.Financial;
         private void OnEnable()
-        { if (view == null) view = GetComponent<FinancialScreenView>(); view?.BindConfirm(OnConfirm); PopulateCreditLines(); }
+        { if (view == null) view = GetComponent<FinancialScreenView>(); view?.BindConfirm(OnConfirm); PopulateCreditLines(); PresentTutorial(); }
         private void OnDisable()
-        { view?.BindConfirm(null); foreach (var card in _cards) if (card != null) card.Selected -= OnCardSelected; }
+        { view?.BindConfirm(null); foreach (var card in _cards) if (card != null) card.Selected -= OnCardSelected; _tutorial?.Hide(); }
+        private void PresentTutorial()
+        {
+            var session = GameSessionState.Current;
+            if (session == null || GameManager.Instance?.StateMachine?.CurrentState != GameState.Initial_Capital
+                || LoanTutorial.WasCompleted(session.sessionId)) return;
+            if (_tutorial == null) _tutorial = LoanTutorial.Create(transform, session.sessionId);
+            if (!_tutorial.IsVisible) _tutorial.Show();
+        }
         private void PopulateCreditLines()
         {
             foreach (var card in _cards) if (card != null) card.Selected -= OnCardSelected;
