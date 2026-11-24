@@ -51,10 +51,64 @@ public sealed class UI07MenuPricingTests
             item.RestoreDraftInput("inválido");Assert.IsFalse(item.IsPriceValid);Assert.AreEqual(p.price,item.SelectedPrice);Assert.AreEqual("inválido",item.DraftInput);
             item.RestoreDraftInput(p.maxPrice.ToString(System.Globalization.CultureInfo.InvariantCulture));Assert.IsTrue(item.IsPriceValid);Assert.AreEqual(p.maxPrice,item.SelectedPrice);
             Assert.IsFalse(Field<UnityEngine.UI.Button>(item,"increaseButton").interactable);
-            item.SetReadOnly(true);Field<UnityEngine.UI.Button>(item,"decreaseButton").onClick.Invoke();Field<UnityEngine.UI.Slider>(item,"priceSlider").value=p.minPrice;
-            Assert.AreEqual(p.maxPrice,item.SelectedPrice);Assert.AreEqual(p.maxPrice,Field<UnityEngine.UI.Slider>(item,"priceSlider").value);
+            item.SetReadOnly(true);
+            foreach (var button in item.GetComponentsInChildren<UnityEngine.UI.Button>())
+            {
+                Assert.IsFalse(button.interactable, button.name);
+                button.onClick.Invoke();
+            }
+            Assert.AreEqual(p.maxPrice,item.SelectedPrice);
         }
         finally{Object.DestroyImmediate(instance);}
+    }
+    [Test]
+    public void AdjustmentsPreserveOffGridPricesAndRejectOutOfRangeDeltas()
+    {
+        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Card_ProductItem.prefab");
+        var instance = Object.Instantiate(prefab);
+        try
+        {
+            var item = instance.GetComponent<ProductPricingItemView>();
+            var product = Resources.LoadAll<ProductData>("Products").Single(p => p.id == "LAN_COMBO_SIMPLES");
+            item.Setup(product, 42.37f);
+            var decrease = Field<UnityEngine.UI.Button>(item, "decreaseButton");
+            var decreaseHalf = Field<UnityEngine.UI.Button>(item, "decreaseHalfButton");
+            var increaseHalf = Field<UnityEngine.UI.Button>(item, "increaseHalfButton");
+            var increase = Field<UnityEngine.UI.Button>(item, "increaseButton");
+            Assert.IsEmpty(item.GetComponentsInChildren<UnityEngine.UI.Slider>(true));
+            Assert.AreEqual(42.37f, item.SelectedPrice);
+            foreach (var (button, expected) in new[] {
+                (decrease, 41.37f), (decreaseHalf, 40.87f), (increaseHalf, 41.37f), (increase, 42.37f)
+            })
+            {
+                button.onClick.Invoke();
+                Assert.AreEqual(expected, item.SelectedPrice);
+            }
+            for (int click = 0; click < 50; click++)
+            {
+                increaseHalf.onClick.Invoke();
+                decreaseHalf.onClick.Invoke();
+            }
+            Assert.AreEqual(42.37f, item.SelectedPrice);
+            Assert.AreEqual("42,37", item.DraftInput);
+
+            item.RestoreDraftInput("35,50");
+            Assert.IsFalse(decrease.interactable);
+            Assert.IsTrue(decreaseHalf.interactable);
+            decrease.onClick.Invoke();
+            Assert.AreEqual(35.50f, item.SelectedPrice);
+            decreaseHalf.onClick.Invoke();
+            Assert.AreEqual(product.minPrice, item.SelectedPrice);
+            Assert.IsFalse(decreaseHalf.interactable);
+
+            item.RestoreDraftInput("51.25");
+            Assert.IsFalse(increase.interactable);
+            Assert.IsTrue(increaseHalf.interactable);
+            increaseHalf.onClick.Invoke();
+            Assert.AreEqual(51.75f, item.SelectedPrice);
+            Assert.IsFalse(increaseHalf.interactable);
+        }
+        finally { Object.DestroyImmediate(instance); }
     }
     [Test] public void CurrencyUsesBrazilianDecimalsAndThousands()
     {Assert.AreEqual("R$ 1.234,50",ProductPricingItemView.Money(1234.5f));Assert.AreEqual("R$ 1.234.567,50",ProductPricingItemView.Money(1234567.5f));}

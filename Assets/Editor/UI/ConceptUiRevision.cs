@@ -150,6 +150,8 @@ namespace Game.EditorTools
             var p=Find(canvas,"Panel_MenuPricing");Header(p,"DecisionHeader");
             Move(p,"Restaurant",32,112,1264,54);Type(p,"Restaurant",30);
             ResizeScroll(p,"Products",24,184,1280,744);
+            MenuPricingUiMigration.ApplyProductScroll(p.GetComponent<MenuPricingScreenView>(),
+                Find(p,"Products").GetComponent<UnityEngine.UI.ScrollRect>());
             Move(p,"DecisionSidebar",1328,112,568,848);
             // Keep the native strategy controls, but give the compact summary room to breathe.
             var s=Find(p,"DecisionSidebar/Strategy").GetComponent<UnityEngine.UI.ScrollRect>();

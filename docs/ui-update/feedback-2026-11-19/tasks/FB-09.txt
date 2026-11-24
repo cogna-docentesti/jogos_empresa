@@ -1,5 +1,5 @@
 FB-09 — Trocar o slider de preço por quatro botões e melhorar a rolagem
-Status: planejada | Prioridade: P1 | Tipo: interação
+Status: concluída | Prioridade: P1 | Tipo: interação
 Área: Cardápio
 Dependências: FB-02, FB-08
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -43,6 +43,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Verificar limites, cliques repetidos, preços com decimais, troca de restaurante e persistência; rodar testes de pricing afetados se a lógica mudar.
+
+OBSERVAÇÕES E LIMITES
+1. Os botões aplicam ±R$ 0,50 e ±R$ 1,00 ao valor atual. Preços salvos fora dos múltiplos de R$ 0,50 conservam seus centavos, e ajustes que ultrapassam a faixa ficam desabilitados. O campo mantém a digitação com vírgula ou ponto.
+2. A GameScene foi conferida em 1280×720, 1366×768 e 1920×1080. Passaram 118 verificações em Play Mode e 23 testes de Edit Mode, cobrindo rolagem, rascunho, confirmação SQLite e revisão no hub. O toque foi emulado no Unity Editor.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-09.json.

@@ -164,7 +164,7 @@ namespace Game.Adapter.In.UI
                 : "Os três produtos fazem parte do cardápio. Ajuste cada preço dentro da faixa permitida.";
             if (inputHelpText != null) inputHelpText.text = review
                 ? "Consulte os preços salvos. Voltar retorna à tela anterior; Menu abre o mapa de gestão."
-                : "Digite com vírgula ou ponto. Os botões ajustam R$ 1,00 por vez; o controle deslizante permite ajustes finos.";
+                : "Digite com vírgula ou ponto ou use os botões para ajustar R$ 0,50 ou R$ 1,00.";
             if (confirmButton != null) confirmButton.gameObject.SetActive(!review);
             if (backButton != null)
             {
@@ -296,6 +296,7 @@ namespace Game.Adapter.In.UI
 
             if (productsScrollRect != null)
             {
+                productsScrollRect.StopMovement();
                 productsScrollRect.content = containerRect;
                 productsScrollRect.horizontal = false;
                 productsScrollRect.vertical = true;

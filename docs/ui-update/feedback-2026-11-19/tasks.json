@@ -1115,8 +1115,8 @@
       "area": "Cardápio",
       "kind": "interação",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-02",
         "FB-08"
@@ -1145,7 +1145,10 @@
         "Assets/Editor/UI/MenuPricingUiMigration.cs",
         "Assets/Prefabs/Card_ProductItem.prefab"
       ],
-      "notes": [],
+      "notes": [
+        "Os botões aplicam ±R$ 0,50 e ±R$ 1,00 ao valor atual. Preços salvos fora dos múltiplos de R$ 0,50 conservam seus centavos, e ajustes que ultrapassam a faixa ficam desabilitados. O campo mantém a digitação com vírgula ou ponto.",
+        "A GameScene foi conferida em 1280×720, 1366×768 e 1920×1080. Passaram 118 verificações em Play Mode e 23 testes de Edit Mode, cobrindo rolagem, rascunho, confirmação SQLite e revisão no hub. O toque foi emulado no Unity Editor."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-09.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-09.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-09",

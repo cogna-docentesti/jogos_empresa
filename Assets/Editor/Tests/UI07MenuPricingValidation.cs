@@ -13,6 +13,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using Button = UnityEngine.UI.Button;
+using ScrollRect = UnityEngine.UI.ScrollRect;
 
 public static class UI07MenuPricingValidation
 {
@@ -24,15 +26,27 @@ public static class UI07MenuPricingValidation
     private static MenuPricingScreenController Controller=>View.GetComponent<MenuPricingScreenController>();
     private static ProductPricingItemView[] Items=>View.GetComponentsInChildren<ProductPricingItemView>().ToArray();
     private static GameState State=>GameManager.Instance.StateMachine.CurrentState;
+    private static ScrollRect ProductScroll => Field<ScrollRect>(View, "productsScrollRect");
+    private static Touchscreen touchDevice;
     private static T Field<T>(object o,string n)=>(T)o.GetType().GetField(n,BindingFlags.NonPublic|BindingFlags.Instance).GetValue(o);
     private static void Call(object o,string n,params object[] args)=>o.GetType().GetMethod(n,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(o,args);
     private static UnityEngine.UI.Button Action(string n)=>Field<UnityEngine.UI.Button>(View,n);
+    private static Button[] Adjustments(ProductPricingItemView item) => new[] {
+        Field<Button>(item, "decreaseButton"), Field<Button>(item, "decreaseHalfButton"),
+        Field<Button>(item, "increaseHalfButton"), Field<Button>(item, "increaseButton")
+    };
     private static void Expect(bool v,string message){if(!v)throw new InvalidOperationException(message);}
     private static void Add(string n,Action a)=>steps.Enqueue((n,a));
     private static void Capture(string n)
     { var path=UI01Validation.Capture(UiValidationContext.CaptureName("UI-07",n)); UiValidationContext.OnCapture?.Invoke(n,path); }
     private static PointerEventData Pointer(UnityEngine.UI.Selectable b,int id=-1)
     {var target=b.transform.Find("MarkerTouchTarget");var r=(RectTransform)(target!=null?target:b.transform);return new PointerEventData(EventSystem.current){position=RectTransformUtility.WorldToScreenPoint(null,r.TransformPoint(r.rect.center)),pointerId=id,button=PointerEventData.InputButton.Left};}
+    private static GameObject Hit(PointerEventData pointer)
+    {
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, results);
+        return results.Count == 0 ? null : results[0].gameObject;
+    }
     private static void Click(UnityEngine.UI.Button b,int id=-1)
     {
         Expect(b.IsActive() && b.interactable,"Inactive control "+b.name);var p=Pointer(b,id);var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(p,hits);
@@ -55,7 +69,9 @@ public static class UI07MenuPricingValidation
         }
         foreach(var scroll in View.GetComponentsInChildren<UnityEngine.UI.ScrollRect>())
         {
-            Expect(scroll.viewport.GetComponent<UnityEngine.UI.Mask>()!=null,"Missing mask");
+            Expect(scroll == ProductScroll
+                ? scroll.viewport.GetComponent<UnityEngine.UI.RectMask2D>() != null
+                : scroll.viewport.GetComponent<UnityEngine.UI.Mask>() != null, "Missing mask");
             Expect(scroll.verticalScrollbar.handleRect.sizeDelta==Vector2.zero,"Handle size");
             Expect(!Action("backButton").transform.IsChildOf(scroll.transform),"Back inside scroll");
         }
@@ -65,6 +81,7 @@ public static class UI07MenuPricingValidation
         var data=Resources.LoadAll<RestaurantData>("Restaurants").Single(r=>r.type==type);
         Expect(State==InitialDecisionFlow.Menu && Items.Length==3,"Wrong screen/products");
         Expect(Items.Select(i=>i.Product.id).SequenceEqual(data.products.Select(p=>p.id)),"Wrong product order/IDs");
+        var labels = new[] { "−1", "−0,5", "+0,5", "+1" };
         foreach(var i in Items)
         {
             Expect(i.IsPriceValid && i.Product.IsPriceInRange(i.SelectedPrice),"Invalid price");
@@ -72,6 +89,22 @@ public static class UI07MenuPricingValidation
             Expect(image.color==Color.white && image.preserveAspect && image.type==UnityEngine.UI.Image.Type.Simple,"Distorted/tinted image");
             Expect(Field<TMP_Text>(i,"productNameText").text==i.Product.displayName,"Wrong product name");
             Expect(Field<TMP_InputField>(i,"priceInput").text.EndsWith(",00") || Field<TMP_InputField>(i,"priceInput").text.Contains(","),"Decimal format");
+            Expect(i.GetComponentsInChildren<UnityEngine.UI.Slider>(true).Length == 0, "Continuous price control");
+            var adjust = Adjustments(i);
+            Expect(adjust.Select(b => b.GetComponentInChildren<TMP_Text>().text).SequenceEqual(labels), "Adjustment labels");
+            var price = (RectTransform)Field<TMP_InputField>(i, "priceInput").transform;
+            var card = (RectTransform)i.transform;
+            var previousRight = card.rect.xMin;
+            foreach (var button in adjust)
+            {
+                var corners = new Vector3[4];
+                ((RectTransform)button.transform).GetWorldCorners(corners);
+                var lower = card.InverseTransformPoint(corners[0]);
+                var upper = card.InverseTransformPoint(corners[2]);
+                Expect(lower.x >= previousRight && lower.y >= card.rect.yMin && upper.x <= card.rect.xMax &&
+                    upper.y < card.InverseTransformPoint(price.TransformPoint(price.rect.min)).y, "Adjustment layout");
+                previousRight = upper.x;
+            }
         }
         Fits();NoPersistence();
     }
@@ -90,7 +123,7 @@ public static class UI07MenuPricingValidation
             Field<TMP_InputField>(form,"studentNameInput").text="Aluna Teste UI07";Field<TMP_InputField>(form,"raInput").text="123456";form.Register();NoPersistence();
         });
         Add("Location choice stays in memory",()=>{var v=UnityEngine.Object.FindFirstObjectByType<LocationScreenView>();var marker=v.Zones.Single(z=>z.id=="bank").marker;ExecuteEvents.Execute(marker.gameObject,new PointerEventData(EventSystem.current){pointerId=4},ExecuteEvents.pointerClickHandler);Click(Field<UnityEngine.UI.Button>(v,"confirmButton"));NoPersistence();});
-        Add("Restaurant choice enters step four",()=>Choose(RestaurantType.PODRAO));
+        Add("Restaurant choice opens pricing",()=>Choose(RestaurantType.PODRAO));
         foreach(var sizeValue in UiValidationContext.Resolutions)
         {
             var size=sizeValue;var suffix=size.x+"x"+size.y;
@@ -100,25 +133,95 @@ public static class UI07MenuPricingValidation
                 var type=typeValue;
                 Add("Back from D3 to D2 "+type+" "+suffix,()=>Click(Action("backButton")));
                 Add("Select matching restaurant "+type+" "+suffix,()=>Choose(type));
-                Add("Rendered whole products, prices and step four "+type+" "+suffix,()=>{
+                Add("Rendered products, prices and adjustment controls "+type+" "+suffix,()=>{
                     Expect(Screen.width==size.x && Screen.height==size.y,"Wrong evidence resolution");Matches(type);
-                    Expect(Field<TMP_Text>(View,"stepText").text.Contains("4 DE 7"),"Wrong onboarding step");
+                    Expect(Field<TMP_Text>(View,"stepText").text == "CARDÁPIO","Wrong menu heading");
                     EventSystem.current.SetSelectedGameObject(null);Capture(type.ToString().ToLowerInvariant()+"-"+suffix);
                 });
                 foreach(int indexValue in new[]{0,1,2})
                 {
                     int index=indexValue;
                     Add("Inclusive limits, decimals and increments "+type+" product "+index+" "+suffix,()=>{
-                        var i=Items[index];var input=Field<TMP_InputField>(i,"priceInput");var slider=Field<UnityEngine.UI.Slider>(i,"priceSlider");
+                        var i=Items[index];var input=Field<TMP_InputField>(i,"priceInput");
+                        var adjust = Adjustments(i);
                         input.text=i.Product.minPrice.ToString("F2",System.Globalization.CultureInfo.InvariantCulture);Expect(i.IsPriceValid && Mathf.Approximately(i.SelectedPrice,i.Product.minPrice),"Minimum");Expect(!Field<UnityEngine.UI.Button>(i,"decreaseButton").interactable,"Minimum decrement enabled");
+                        Expect(!adjust[1].interactable, "Minimum half decrement enabled");
+                        adjust[2].onClick.Invoke();Expect(i.SelectedPrice==i.Product.minPrice+.5f && !adjust[0].interactable && adjust[1].interactable,"Half increment at minimum");
+                        adjust[1].onClick.Invoke();Expect(i.SelectedPrice==i.Product.minPrice,"Half decrement to minimum");
                         Field<UnityEngine.UI.Button>(i,"increaseButton").onClick.Invoke();Expect(Mathf.Approximately(i.SelectedPrice,i.Product.minPrice+1),"Increment");
                         input.text=i.Product.maxPrice.ToString("F2",System.Globalization.CultureInfo.InvariantCulture).Replace('.',',');Expect(i.IsPriceValid && Mathf.Approximately(i.SelectedPrice,i.Product.maxPrice),"Maximum");Expect(!Field<UnityEngine.UI.Button>(i,"increaseButton").interactable,"Maximum increment enabled");
+                        Expect(!adjust[2].interactable, "Maximum half increment enabled");
+                        adjust[1].onClick.Invoke();Expect(i.SelectedPrice==i.Product.maxPrice-.5f && !adjust[3].interactable && adjust[2].interactable,"Half decrement at maximum");
+                        adjust[2].onClick.Invoke();Expect(i.SelectedPrice==i.Product.maxPrice,"Half increment to maximum");
                         Field<UnityEngine.UI.Button>(i,"decreaseButton").onClick.Invoke();Expect(Mathf.Approximately(i.SelectedPrice,i.Product.maxPrice-1),"Decrement");
-                        slider.value=i.Product.price+.37f;Expect(Mathf.Approximately(i.SelectedPrice,i.Product.price+.37f),"Slider precision");NoPersistence();
+                        input.text = i.Product.price + ",37";
+                        adjust[2].onClick.Invoke();
+                        Expect(i.SelectedPrice == (float)(i.Product.price + .87m), $"Off-grid increment: {i.SelectedPrice:R}");
+                        adjust[1].onClick.Invoke();
+                        Expect(i.SelectedPrice == (float)(i.Product.price + .37m), $"Off-grid round trip: {i.SelectedPrice:R}");
+                        NoPersistence();
                     });
                 }
             }
         }
+        Add("Set scroll evidence viewport",()=>UI01Validation.SetGameView(1280,720));
+        Vector2 touchStart = default;
+        float[] touchPrices = null;
+        Add("Start touch drag over an enabled price adjustment", () => {
+            var button = Adjustments(Items[1])[2];
+            var pointer = Pointer(button);
+            Expect(button.interactable && Hit(pointer)?.GetComponentInParent<Button>() == button, "Touch start hit");
+            touchStart = pointer.position;
+            touchPrices = Items.Select(i => i.SelectedPrice).ToArray();
+            touchDevice = InputSystem.AddDevice<Touchscreen>();
+            QueueTouch(UnityEngine.InputSystem.TouchPhase.Began, touchStart);
+        });
+        Add("Move touch past the drag threshold", () =>
+            QueueTouch(UnityEngine.InputSystem.TouchPhase.Moved, touchStart + Vector2.up * 20));
+        Add("Drag touch up to reveal the last product", () =>
+            QueueTouch(UnityEngine.InputSystem.TouchPhase.Moved, touchStart + Vector2.up * 160));
+        Add("Release the touch", () =>
+            QueueTouch(UnityEngine.InputSystem.TouchPhase.Ended, touchStart + Vector2.up * 160));
+        Add("Touch drag scrolls the list without firing the adjustment", () => {
+            Expect(ProductScroll.verticalNormalizedPosition <= .01f, "Touch did not scroll to the last product");
+            Expect(Items.Select(i => i.SelectedPrice).SequenceEqual(touchPrices), "Touch drag changed a price");
+            Capture("price-touch-scroll-1280x720");
+            NoPersistence();
+        });
+        Add("Wheel on the price controls scrolls the list without changing prices",()=>{
+            Canvas.ForceUpdateCanvases();
+            var scroll = ProductScroll;
+            scroll.StopMovement();
+            scroll.verticalNormalizedPosition = 1;
+            var prices = Items.Select(i => i.SelectedPrice).ToArray();
+            var lastButton = Adjustments(Items[2])[3];
+            Expect(Hit(Pointer(lastButton))?.GetComponentInParent<Button>() != lastButton, "Clipped control receives clicks");
+            foreach (var control in new UnityEngine.UI.Selectable[] {
+                Adjustments(Items[0])[2], Field<TMP_InputField>(Items[0], "priceInput")
+            })
+            {
+                var pointer = Pointer(control);
+                pointer.scrollDelta = Vector2.down;
+                var position = scroll.verticalNormalizedPosition;
+                var hit = Hit(pointer);
+                Expect(hit != null && hit.GetComponentInParent<UnityEngine.UI.Selectable>() == control, "Wheel start hit");
+                ExecuteEvents.ExecuteHierarchy(hit, pointer, ExecuteEvents.scrollHandler);
+                Expect(scroll.verticalNormalizedPosition < position, "Wheel did not scroll over " + control.name);
+            }
+            Expect(Items.Select(i => i.SelectedPrice).SequenceEqual(prices), "Wheel changed a price");
+            NoPersistence();
+        });
+        Add("Bottom of scrolled list offers all four buttons on the last card",()=>{
+            Expect(ProductScroll.verticalNormalizedPosition <= .001f, "Wheel did not reach last product");
+            EventSystem.current.SetSelectedGameObject(null);
+            Capture("price-scroll-bottom-1280x720");
+            var item = Items[2];
+            var price = item.SelectedPrice;
+            foreach (var button in Adjustments(item)) Click(button);
+            Expect(price == item.SelectedPrice, "Bottom buttons changed the expected total");
+            NoPersistence();
+            ProductScroll.verticalNormalizedPosition = 1;
+        });
         Add("Set interaction viewport",()=>UI01Validation.SetGameView(1920,1080));
         foreach(var amountValue in new[]{0f,.35f,1f})
         {
@@ -175,12 +278,25 @@ public static class UI07MenuPricingValidation
             Expect(!Action("confirmButton").interactable && Field<TMP_Text>(View,"hintText").text.Contains("indisponível"),"Empty feedback");Action("confirmButton").onClick.Invoke();NoPersistence();Fits();Capture("unavailable-1280x720");Click(Action("backButton"));
         });
         Add("Final real restaurant selection",()=>Choose(RestaurantType.JAPONES));
-        Add("Final price entry before unique confirmation",()=>{Matches(RestaurantType.JAPONES);foreach(var i in Items)Field<TMP_InputField>(i,"priceInput").text=(i.Product.price+.25f).ToString("F2",System.Globalization.CultureInfo.InvariantCulture);});
+        Add("Final price entry before unique confirmation",()=>{
+            Matches(RestaurantType.JAPONES);
+            foreach (var i in Items)
+            {
+                Field<TMP_InputField>(i,"priceInput").text=i.Product.price+",25";
+                Adjustments(i)[2].onClick.Invoke();
+            }
+            Click(Action("backButton"));
+        });
+        Add("Reopen restaurant with valid off-grid adjustments",()=>Choose(RestaurantType.JAPONES));
+        Add("Adjusted draft prices survive Back and reentry",()=>{
+            Expect(Items.All(i=>i.SelectedPrice==i.Product.price+.75f),"Adjusted draft price lost");
+            NoPersistence();
+        });
         Add("Confirm D3 is first session write",()=>{NoPersistence();Click(Action("confirmButton"));});
         Add("One session, same scene and next panel Banco",()=>{
             var rows=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().ToList();Expect(rows.Count==1 && GameSessionState.IsPersisted,"Unique persistence");Expect(State==InitialDecisionFlow.AfterCommit,"Next state is not Banco");
             Expect(rows[0].restaurantType==RestaurantType.JAPONES && rows[0].locationZone==LocationZone.Financas && rows[0].studentName=="Aluna Teste UI07","Persisted decisions");
-            Expect(MenuPricingHelper.FromJson(rows[0].menuPricingJson).items.All(p=>Resources.LoadAll<ProductData>("Products").Any(d=>d.id==p.productId && Mathf.Approximately(p.selectedPrice,d.price+.25f))),"Persisted prices");
+            Expect(MenuPricingHelper.FromJson(rows[0].menuPricingJson).items.All(p=>Resources.LoadAll<ProductData>("Products").Any(d=>d.id==p.productId && p.selectedPrice==d.price+.75f)),"Persisted prices");
             Expect(UnityEngine.SceneManagement.SceneManager.GetActiveScene().handle==sceneHandle,"Scene changed");confirmedJson=rows[0].menuPricingJson;sessionId=rows[0].sessionId;Capture("confirmed-next-bank-1280x720");
             Action("confirmButton").onClick.Invoke();Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==1,"Duplicate callback");
             GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team);GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub);
@@ -194,7 +310,7 @@ public static class UI07MenuPricingValidation
             Add("Review keeps saved prices, context and disabled editors "+suffix,()=>{
                 Fits();Expect(State==GameState.Management_Hub && MenuNavigator.Instance.Current==PanelId.MenuPricing,"Review context");Expect(!Action("confirmButton").gameObject.activeSelf && !Action("backButton").gameObject.activeSelf && UnityEngine.GameObject.Find("Canvas/HubHistory/Back")!=null,"Review actions");
                 Expect(Field<TMP_Text>(View,"stepText").text.Contains("REVISÃO"),"Review title");Expect(Field<TMP_Text>(View,"strategyHelpText").text.Contains("confirmados") && Field<TMP_Text>(View,"inputHelpText").text.Contains("Consulte") && !Field<TMP_Text>(View,"inputHelpText").text.Contains("Digite"),"Review instructions");
-                foreach(var i in Items){Expect(!Field<TMP_InputField>(i,"priceInput").interactable && !Field<UnityEngine.UI.Slider>(i,"priceSlider").interactable,"Editable review");Expect(Mathf.Approximately(i.SelectedPrice,i.Product.price+.25f),"Saved price changed");}
+                foreach(var i in Items){Expect(!Field<TMP_InputField>(i,"priceInput").interactable && Adjustments(i).All(b => !b.interactable),"Editable review");Expect(Mathf.Approximately(i.SelectedPrice,i.Product.price+.75f),"Saved price changed");}
                 Capture("hub-review-"+suffix);
             });
         }
@@ -203,15 +319,18 @@ public static class UI07MenuPricingValidation
             Expect(MenuNavigator.Instance.Current==PanelId.Menu && State==GameState.Management_Hub,"Hub return");Expect(EventSystem.current.currentSelectedGameObject==hubOrigin,"Hub focus not restored");var row=DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Single();Expect(row.sessionId==sessionId && row.menuPricingJson==confirmedJson,"Review mutated session");
             MenuNavigator.Instance.Open(PanelId.MenuPricing);
         });
-        Add("Review reentry is stable",()=>{Expect(Items.Length==3 && Items.All(i=>Mathf.Approximately(i.SelectedPrice,i.Product.price+.25f)),"Reentry");Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==1,"Review insert");
+        Add("Review reentry is stable",()=>{Expect(Items.Length==3 && Items.All(i=>Mathf.Approximately(i.SelectedPrice,i.Product.price+.75f)),"Reentry");Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==1,"Review insert");
             File.WriteAllText(UiValidationContext.FileFor("UI-07","runtime-scene.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,frame=Time.frameCount,managerId,databaseId,sessionRows=1,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,menuJson=confirmedJson,state=State.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));
         });
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
     }
+    private static void QueueTouch(UnityEngine.InputSystem.TouchPhase phase, Vector2 position)
+        => InputSystem.QueueStateEvent(touchDevice, new TouchState { touchId = 1, phase = phase, position = position });
+
     private static void Tick()
     {
         if(EditorApplication.timeSinceStartup<next)return;
-        if(!EditorApplication.isPlaying || steps.Count==0){report.completed=steps.Count==0 && report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-07","playmode-menu-pricing.json"),JsonUtility.ToJson(report,true));return;}
+        if(!EditorApplication.isPlaying || steps.Count==0){if(touchDevice != null){InputSystem.RemoveDevice(touchDevice);touchDevice=null;}report.completed=steps.Count==0 && report.failures==0;EditorApplication.update-=Tick;File.WriteAllText(UiValidationContext.FileFor("UI-07","playmode-menu-pricing.json"),JsonUtility.ToJson(report,true));return;}
         var step=steps.Dequeue();var check=new Check{name=step.Item1,frame=Time.frameCount};
         try{step.Item2();check.passed=true;}catch(Exception e){check.detail=e.ToString();report.failures++;steps.Clear();Debug.LogError("[UI-07 QA] "+check.name+": "+e.Message);}
         report.checks.Add(check);EditorApplication.QueuePlayerLoopUpdate();EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint();next=EditorApplication.timeSinceStartup+.5;

@@ -1,0 +1,85 @@
+{
+  "task_id": "FB-09",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "77f39f48a03065f5e98eb621adf96dc83b38260c",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280×720",
+    "1366×768",
+    "1920×1080"
+  ],
+  "method": "Game View em Play Mode com SQLite e identificação em PlayerPrefs isolados. Foram usados raycasts do EventSystem para os controles e um Touchscreen virtual do Input System para o arraste. As capturas são quadros renderizados pelo Unity.",
+  "before": "O slider contínuo alterou R$ 42,00 para R$ 42,37 em um ajuste. O catálogo original ocupava 724 unidades de uma viewport de 744 no quadro autoral.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Os quatro botões aplicam −R$ 1,00, −R$ 0,50, +R$ 0,50 ou +R$ 1,00. Cada ação fica desabilitada quando o resultado sair dos limites do produto. Os testes cobriram mínimos, máximos, valores próximos dos limites, os dois separadores decimais aceitos pelo campo e 50 pares de cliques de ida e volta em R$ 42,37."
+    },
+    {
+      "criterion": 2,
+      "result": "O prefab e os cards instanciados têm quatro botões e zero sliders de preço. A roda sobre um botão ou sobre o campo de preço deslocou a lista sem alterar valores. Um arraste com toque emulado iniciado sobre um botão revelou o último produto sem disparar ajuste."
+    },
+    {
+      "criterion": 3,
+      "result": "Os nove produtos foram conferidos nas três resoluções. Os botões estão abaixo do valor, em uma linha sem sobreposição. A máscara bloqueia cliques fora da viewport, e o último card recebe os quatro cliques após rolar. A troca de restaurante restaura os valores do catálogo. Voltar ao mesmo restaurante conserva o rascunho e a digitação inválida pendente. Confirmar gravou uma linha com R$ 90,75, R$ 130,75 e R$ 175,75. A revisão e sua reabertura preservaram esses valores com os ajustes desabilitados."
+    }
+  ],
+  "legacy_price_behavior": "Preços dentro da faixa conservam a precisão disponível no save. A leitura e a reabertura do rascunho mantêm o valor carregado. Um ajuste parte desse valor. Por exemplo, +R$ 0,50 transforma R$ 42,37 em R$ 42,87. Preços ajustados e confirmados são exibidos em pt-BR. Durante a digitação, o campo aceita vírgula ou ponto e formata o texto ao concluir a edição.",
+  "additional_checks": [
+    "O rascunho permaneceu em memória até a confirmação. Uma segunda chamada e as revisitas mantiveram a mesma linha e os mesmos preços no SQLite.",
+    "Teclado, foco no último produto, hover, pressionado, seleção, validação de texto e expansão de card com nome extenso foram exercitados na Game View.",
+    "Duas execuções consecutivas da migração produziram a mesma cena e o mesmo prefab. A cena versionada reteve as 12 mudanças serializadas do cardápio e foi reaberta para o ensaio final.",
+    "Foram reutilizados os sprites aprovados na FB-08 e os estados compartilhados de botão. As referências locais da cena e do prefab foram conferidas."
+  ],
+  "edit_mode": {
+    "suite": "UI07MenuPricingTests",
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "editmode.xml"
+  },
+  "play_mode": {
+    "passed": 118,
+    "failed": 0,
+    "console_errors": 0,
+    "evidence": "playmode-menu-pricing.json"
+  },
+  "limitations": [
+    "Validação no Unity Editor para Windows. O toque foi emulado e o ensaio de nome extenso usou massa de teste de Play Mode.",
+    "O QA usou o Unity instalado 6000.3.28f1. Os arquivos versionados de versão do Editor, pacotes e bridge retomaram seu conteúdo anterior após o QA.",
+    "O Unity detectou corrupção em Library. O cache anterior foi preservado em D:/Cogna/jogos_empresa.Library-FB09-baseline e o projeto foi aberto com um cache novo."
+  ],
+  "ugui_reference": [
+    "Button",
+    "Scroll Rect",
+    "RectMask2D",
+    "Vertical Layout Group",
+    "Content Size Fitter"
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-09",
+    "reports": [
+      "before.json",
+      "migration.json",
+      "editmode.xml",
+      "playmode-menu-pricing.json",
+      "playmode-console.json",
+      "runtime-scene.json"
+    ],
+    "screenshots": [
+      "before-cardapio-1280x720.png",
+      "podrao-1280x720.png",
+      "japones-1366x768.png",
+      "frances-1920x1080.png",
+      "price-scroll-bottom-1280x720.png",
+      "minimum-disabled-1920x1080.png",
+      "long-copy-top-1280x720.png",
+      "last-product-focus-1280x720.png",
+      "hub-review-1280x720.png"
+    ]
+  }
+}

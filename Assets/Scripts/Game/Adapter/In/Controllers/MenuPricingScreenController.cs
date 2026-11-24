@@ -289,14 +289,17 @@ namespace Game.Adapter.In.Controllers
                 var pricing = BuildPricing(requireValidPrices: false);
                 if (pricing != null)
                     PlayerSession.SetMenu(_currentRestaurant.type, pricing);
-                foreach (var item in _items) _draftInputs[item.Product.id] = item.DraftInput;
+                // Valid prices already live in the draft at their original precision.
+                _draftInputs.Clear();
+                foreach (var item in _items)
+                    if (!item.IsPriceValid) _draftInputs[item.Product.id] = item.DraftInput;
             }
 
             InitialDecisionFlow.GoTo(InitialDecisionFlow.Restaurant);
         }
 
         /// <summary>
-        /// Monta o MenuPricingData com o que esta nos sliders.
+        /// Monta o MenuPricingData com o último preço válido de cada produto.
         /// Devolve null se requireValidPrices e algum preco estiver fora da faixa.
         /// </summary>
         private MenuPricingData BuildPricing(bool requireValidPrices)

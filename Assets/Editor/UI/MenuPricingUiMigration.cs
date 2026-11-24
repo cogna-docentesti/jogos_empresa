@@ -11,6 +11,9 @@ namespace Game.EditorTools
 {
     public static class MenuPricingUiMigration
     {
+        private const float ProductCardHeight = 264;
+        private const float ProductCardSpacing = 20;
+
         private static T Ensure<T>(Component c) where T:Component => c.GetComponent<T>() ?? c.gameObject.AddComponent<T>();
         private static RectTransform Node(Transform p,string name,float x,float y,float w,float h)
         {
@@ -69,39 +72,75 @@ namespace Game.EditorTools
             => Text(p,name,value,0,0,512,32,size,bold);
         private static void Height(Component c,float h){var e=Ensure<UnityEngine.UI.LayoutElement>(c); e.minHeight=e.preferredHeight=h;e.flexibleHeight=0;}
 
-        private static void ProductPrefab()
+        internal static void ApplyProductScroll(MenuPricingScreenView view, UnityEngine.UI.ScrollRect scroll)
+        {
+            var size = ((RectTransform)scroll.transform).rect.size;
+            var viewport = Node(scroll.transform, "Viewport", 4, 4, size.x - 36, size.y - 8);
+            var stencilMask = viewport.GetComponent<UnityEngine.UI.Mask>();
+            if (stencilMask != null) UnityEngine.Object.DestroyImmediate(stencilMask);
+            Ensure<UnityEngine.UI.RectMask2D>(viewport);
+            var hitArea = viewport.GetComponent<UnityEngine.UI.Image>();
+            hitArea.color = Color.clear;
+            hitArea.raycastTarget = true;
+
+            var track = Node(scroll.transform, "Scrollbar", size.x - 28, 4, 24, size.y - 8);
+            track.GetComponent<UnityEngine.UI.Image>().raycastTarget = true;
+            Node(track, "SlidingArea", 0, 0, 24, size.y - 8);
+            scroll.scrollSensitivity = 64;
+            scroll.inertia = true;
+            scroll.decelerationRate = 0.08f;
+
+            var layout = scroll.content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();
+            layout.spacing = ProductCardSpacing;
+            layout.padding = new RectOffset(8, 8, 12, 12);
+            var serialized = new SerializedObject(view);
+            serialized.FindProperty("productItemHeight").floatValue = ProductCardHeight;
+            serialized.FindProperty("productItemSpacing").floatValue = ProductCardSpacing;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        internal static void ProductPrefab()
         {
             const string path="Assets/Prefabs/Card_ProductItem.prefab";
             var root=PrefabUtility.LoadPrefabContents(path);
             try
             {
                 var item=root.GetComponent<ProductPricingItemView>(); var rect=(RectTransform)root.transform;
-                var slider=Get<UnityEngine.UI.Slider>(item,"priceSlider"); var picture=Get<UnityEngine.UI.Image>(item,"productImage");
-                Retire(rect); rect.sizeDelta=new Vector2(1250,228); SharedUiStyles.Surface(root,"UI_CARD_NORMAL");
-                picture.transform.SetParent(rect,false); Node(rect,picture.name,12,4,228,220); picture.raycastTarget=false; picture.preserveAspect=true; picture.type=UnityEngine.UI.Image.Type.Simple;
+                var slider = rect.GetComponentInChildren<UnityEngine.UI.Slider>(true);
+                if (slider != null) UnityEngine.Object.DestroyImmediate(slider.gameObject);
+                var stepperBase = rect.Find("StepperBase");
+                if (stepperBase != null) UnityEngine.Object.DestroyImmediate(stepperBase.gameObject);
+                var picture=Get<UnityEngine.UI.Image>(item,"productImage");
+                Retire(rect); rect.sizeDelta=new Vector2(1250,ProductCardHeight); SharedUiStyles.Surface(root,"UI_CARD_NORMAL");
+                picture.transform.SetParent(rect,false); Node(rect,picture.name,12,14,228,228); picture.raycastTarget=false; picture.preserveAspect=true; picture.type=UnityEngine.UI.Image.Type.Simple;
                 Set(item,"productNameText",Text(rect,"ProductName","Produto",280,28,420,116,GameTypography.Tokens.SectionTitle,true));
                 Set(item,"editingText",Text(rect,"EditingStatus",string.Empty,280,176,420,36,GameTypography.Tokens.Caption));
-                Text(rect,"PriceLabel","Preço de venda",744,8,456,32,GameTypography.Tokens.Label,true);
-                Image(rect,"StepperBase","UI_STEPPER_BASE",740,44,472,76);
-                Set(item,"decreaseButton",Button(rect,"Decrease","−",744,48,68,68,SharedControlKind.Secondary));
-                Text(rect,"Currency","R$",828,56,48,52,GameTypography.Tokens.BodyStrong,true);
-                var inputRect=Node(rect,"PriceInput",880,48,240,68); var input=Ensure<TMP_InputField>(inputRect); input.targetGraphic=Ensure<UnityEngine.UI.Image>(inputRect);
-                var viewport=Node(inputRect,"TextArea",14,8,212,52); Ensure<UnityEngine.UI.RectMask2D>(viewport);
-                var value=Text(viewport,"Value","0,00",0,0,212,52,GameTypography.Tokens.Input,true); value.alignment=TextAlignmentOptions.MidlineRight;
+                Text(rect,"PriceLabel","Preço de venda",744,12,460,32,GameTypography.Tokens.Label,true);
+                Text(rect,"Currency","R$",744,56,48,52,GameTypography.Tokens.BodyStrong,true);
+                var inputRect=Node(rect,"PriceInput",800,48,404,68); var input=Ensure<TMP_InputField>(inputRect); input.targetGraphic=Ensure<UnityEngine.UI.Image>(inputRect);
+                var viewport=Node(inputRect,"TextArea",14,8,376,52); Ensure<UnityEngine.UI.RectMask2D>(viewport);
+                var value=Text(viewport,"Value","0,00",0,0,376,52,GameTypography.Tokens.Input,true);
                 value.textWrappingMode=TextWrappingModes.NoWrap; value.overflowMode=TextOverflowModes.Masking;
                 input.textViewport=viewport; input.textComponent=value; input.contentType=TMP_InputField.ContentType.Standard; input.lineType=TMP_InputField.LineType.SingleLine;
                 input.characterLimit=16; input.keyboardType=TouchScreenKeyboardType.DecimalPad; input.customCaretColor=true; input.caretColor=GamePalette.Ink; input.selectionColor=GamePalette.Lavender;
                 SharedUiStyles.Bind(input,SharedControlKind.Input); Set(item,"priceInput",input);
-                Set(item,"increaseButton",Button(rect,"Increase","+",1136,48,68,68,SharedControlKind.Secondary));
-                slider.transform.SetParent(rect,false); Node(rect,slider.name,760,130,424,36); slider.interactable=true;
-                foreach(var graphic in slider.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))graphic.raycastTarget=false;
-                var bg=slider.transform.Find("Background").GetComponent<UnityEngine.UI.Image>(); bg.sprite=SharedUiSkin.Current.Get("UI_SLIDER_TRACK"); bg.type=UnityEngine.UI.Image.Type.Sliced; bg.color=Color.white;
-                var fill=slider.fillRect.GetComponent<UnityEngine.UI.Image>(); fill.sprite=SharedUiSkin.Current.Get("UI_SLIDER_FILL");fill.color=Color.white;
-                SharedUiStyles.Bind(slider,SharedControlKind.Slider); slider.targetGraphic.raycastTarget=true;
-                Set(item,"minPriceText",Text(rect,"MinPrice","Mín.",744,170,228,32,GameTypography.Tokens.Caption));
-                var max=Text(rect,"MaxPrice","Máx.",976,170,228,32,GameTypography.Tokens.Caption);max.alignment=TextAlignmentOptions.MidlineRight;Set(item,"maxPriceText",max);
-                Set(item,"errorText",Text(rect,"PriceError","",744,200,460,30,GameTypography.Tokens.Caption,false,GamePalette.ErrorText));
-                var outline=Image(rect,"EditingOutline","UI_CARD_SELECTED_OUTLINE",0,0,1250,228);outline.rectTransform.anchorMin=Vector2.zero;outline.rectTransform.anchorMax=Vector2.one;outline.rectTransform.offsetMin=outline.rectTransform.offsetMax=Vector2.zero;outline.color=GamePalette.Primary;outline.enabled=false;Set(item,"editingOutline",outline);
+                var adjustments = new[] {
+                    (field: "decreaseButton", name: "Decrease", label: "−1"),
+                    (field: "decreaseHalfButton", name: "DecreaseHalf", label: "−0,5"),
+                    (field: "increaseHalfButton", name: "IncreaseHalf", label: "+0,5"),
+                    (field: "increaseButton", name: "Increase", label: "+1")
+                };
+                for (int index = 0; index < adjustments.Length; index++)
+                {
+                    var (field, name, label) = adjustments[index];
+                    var button = Button(rect, name, label, 744 + index * 117, 124, 109, 68, SharedControlKind.Secondary);
+                    button.transform.SetAsLastSibling();
+                    Set(item, field, button);
+                }
+                Set(item,"minPriceText",Text(rect,"MinPrice","Mín.",744,196,228,30,GameTypography.Tokens.Caption));
+                var max=Text(rect,"MaxPrice","Máx.",976,196,228,30,GameTypography.Tokens.Caption);max.alignment=TextAlignmentOptions.MidlineRight;Set(item,"maxPriceText",max);
+                Set(item,"errorText",Text(rect,"PriceError","",744,228,460,26,GameTypography.Tokens.Caption,false,GamePalette.ErrorText));
+                var outline=Image(rect,"EditingOutline","UI_CARD_SELECTED_OUTLINE",0,0,1250,ProductCardHeight);outline.rectTransform.anchorMin=Vector2.zero;outline.rectTransform.anchorMax=Vector2.one;outline.rectTransform.offsetMin=outline.rectTransform.offsetMax=Vector2.zero;outline.color=GamePalette.Primary;outline.enabled=false;Set(item,"editingOutline",outline);
                 // The old display is retained for serialized compatibility, but the input is the visible value.
                 Get<TextMeshProUGUI>(item,"selectedPriceText").gameObject.SetActive(false);
                 Font06Migration.Apply(new[] { root }, path);
@@ -134,7 +173,7 @@ namespace Game.EditorTools
             var step=Text(header.transform,"Step","CARDÁPIO",1160,24,736,40,GameTypography.Tokens.Label,true,GamePalette.OnDark);step.alignment=TextAlignmentOptions.MidlineRight;Set(view,"stepText",step);
             Set(view,"restaurantText",Text(panel,"Restaurant","Defina o preço de cada produto",24,112,1280,48,GameTypography.Tokens.SectionTitle,true));
             var products=Scroll(panel,"Products",24,176,1280,736);Set(view,"productsScrollRect",products);Set(view,"productItemsContainer",products.content);
-            var so=new SerializedObject(view);so.FindProperty("productItemHeight").floatValue=228;so.FindProperty("productItemSpacing").floatValue=16;so.ApplyModifiedPropertiesWithoutUndo();
+            ApplyProductScroll(view, products);
             Set(view,"hintText",Text(panel,"ValidationHint","Confira os três preços e confirme suas decisões.",24,928,1280,40,GameTypography.Tokens.Body));
             var side=Image(panel,"DecisionSidebar","UI_PANEL_IVORY",1328,112,568,848);
             var details=Scroll(side.transform,"Strategy",24,24,520,800);
@@ -152,7 +191,7 @@ namespace Game.EditorTools
                 prices[i]=Flow(details.content,"SummaryPrice"+i,"R$ 0,00",GameTypography.Tokens.BodyStrong,true);prices[i].alignment=TextAlignmentOptions.MidlineRight;
             }
             Array(view,"summaryNames",names);Array(view,"summaryPrices",prices);
-            Set(view,"inputHelpText",Flow(details.content,"EditHelp","Digite com vírgula ou ponto. Os botões ajustam R$ 1,00 por vez; o controle deslizante permite ajustes finos.",GameTypography.Tokens.Caption));
+            Set(view,"inputHelpText",Flow(details.content,"EditHelp","Digite com vírgula ou ponto ou use os botões para ajustar R$ 0,50 ou R$ 1,00.",GameTypography.Tokens.Caption));
             var footer=Image(panel,"DecisionFooter","UI_NAVBAR_PLUM",0,984,1920,96);
             var back=Button(footer.transform,"Back","Voltar ao restaurante",24,14,340,68,SharedControlKind.Secondary,Get<UnityEngine.UI.Button>(view,"backButton"));Set(view,"backButton",back);
             var confirm=Button(footer.transform,"Confirm","Confirmar decisões",1516,14,380,68,SharedControlKind.Primary,Get<UnityEngine.UI.Button>(view,"confirmButton"));Set(view,"confirmButton",confirm);

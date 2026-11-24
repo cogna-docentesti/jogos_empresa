@@ -12,12 +12,13 @@ namespace Game.Adapter.In.UI
     {
         [SerializeField] private TextMeshProUGUI productNameText;
         [SerializeField] private UnityEngine.UI.Image productImage;
-        [SerializeField] private UnityEngine.UI.Slider priceSlider;
         [SerializeField] private TextMeshProUGUI selectedPriceText;
         [SerializeField] private TextMeshProUGUI minPriceText;
         [SerializeField] private TextMeshProUGUI maxPriceText;
         [SerializeField] private TMP_InputField priceInput;
         [SerializeField] private UnityEngine.UI.Button decreaseButton;
+        [SerializeField] private UnityEngine.UI.Button decreaseHalfButton;
+        [SerializeField] private UnityEngine.UI.Button increaseHalfButton;
         [SerializeField] private UnityEngine.UI.Button increaseButton;
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private UnityEngine.UI.Image editingOutline;
@@ -61,15 +62,6 @@ namespace Game.Adapter.In.UI
             }
             if (minPriceText != null) minPriceText.text = "Mín. " + Money(product.minPrice);
             if (maxPriceText != null) maxPriceText.text = "Máx. " + Money(product.maxPrice);
-            if (priceSlider != null)
-            {
-                priceSlider.onValueChanged.RemoveListener(OnSliderChanged);
-                priceSlider.minValue = product.minPrice;
-                priceSlider.maxValue = product.maxPrice;
-                priceSlider.wholeNumbers = false;
-                priceSlider.SetValueWithoutNotify(_price);
-                priceSlider.onValueChanged.AddListener(OnSliderChanged);
-            }
             if (priceInput != null)
             {
                 priceInput.onValueChanged.RemoveListener(OnInputChanged);
@@ -78,8 +70,10 @@ namespace Game.Adapter.In.UI
                 priceInput.onValueChanged.AddListener(OnInputChanged);
                 priceInput.onEndEdit.AddListener(OnInputEndEdit);
             }
-            Bind(decreaseButton, Decrease);
-            Bind(increaseButton, Increase);
+            Bind(decreaseButton, () => AdjustPrice(-1m));
+            Bind(decreaseHalfButton, () => AdjustPrice(-0.50m));
+            Bind(increaseHalfButton, () => AdjustPrice(0.50m));
+            Bind(increaseButton, () => AdjustPrice(1m));
             FitProductName();
             Refresh();
         }
@@ -118,7 +112,6 @@ namespace Game.Adapter.In.UI
         {
             _readOnly = value;
             if (priceInput != null) { priceInput.readOnly = value; priceInput.interactable = !value; }
-            if (priceSlider != null) priceSlider.interactable = !value;
             Refresh();
         }
         public void RestoreDraftInput(string value)
@@ -131,11 +124,7 @@ namespace Game.Adapter.In.UI
         {
             if (_readOnly) return;
             IsPriceValid = TryParsePrice(value, _product, out float parsed);
-            if (IsPriceValid)
-            {
-                _price = parsed;
-                priceSlider?.SetValueWithoutNotify(_price);
-            }
+            if (IsPriceValid) _price = parsed;
             Refresh();
             PriceChanged?.Invoke(this);
         }
@@ -143,18 +132,24 @@ namespace Game.Adapter.In.UI
         {
             if (IsPriceValid && priceInput != null) priceInput.SetTextWithoutNotify(Number(_price));
         }
-        private void OnSliderChanged(float value)
+        private bool TryGetAdjustedPrice(decimal delta, out float price)
         {
-            if (_readOnly) { priceSlider.SetValueWithoutNotify(_price); return; }
-            SetPrice(value);
+            price = _price;
+            if (_readOnly || _product == null || !decimal.TryParse(_price.ToString("R", CultureInfo.InvariantCulture),
+                    NumberStyles.Float, CultureInfo.InvariantCulture, out var current))
+                return false;
+
+            // Add the delta to the saved amount, including any cents outside the half-real grid.
+            price = (float)(current + delta);
+            return price != _price && _product.IsPriceInRange(price);
         }
-        private void Decrease() { if (!_readOnly) SetPrice(_price - 1f); }
-        private void Increase() { if (!_readOnly) SetPrice(_price + 1f); }
-        private void SetPrice(float value)
+
+        private void AdjustPrice(decimal delta)
         {
-            _price = _product.ClampPrice((float)Math.Round(value, 2, MidpointRounding.AwayFromZero));
-            IsPriceValid = _product.IsPriceInRange(_price);
-            priceSlider?.SetValueWithoutNotify(_price);
+            if (!TryGetAdjustedPrice(delta, out var price)) return;
+
+            _price = price;
+            IsPriceValid = true;
             priceInput?.SetTextWithoutNotify(Number(_price));
             Refresh();
             PriceChanged?.Invoke(this);
@@ -162,8 +157,10 @@ namespace Game.Adapter.In.UI
         private void Refresh()
         {
             if (selectedPriceText != null) selectedPriceText.text = Money(_price);
-            if (decreaseButton != null) decreaseButton.interactable = !_readOnly && (!IsPriceValid || _price > _product.minPrice);
-            if (increaseButton != null) increaseButton.interactable = !_readOnly && (!IsPriceValid || _price < _product.maxPrice);
+            SetAdjustmentEnabled(decreaseButton, -1m);
+            SetAdjustmentEnabled(decreaseHalfButton, -0.50m);
+            SetAdjustmentEnabled(increaseHalfButton, 0.50m);
+            SetAdjustmentEnabled(increaseButton, 1m);
             if (errorText != null)
             {
                 errorText.text = IsPriceValid ? "" : "Use a faixa permitida e até 2 decimais.";
@@ -172,6 +169,12 @@ namespace Game.Adapter.In.UI
             if (priceInput != null && priceInput.TryGetComponent<SharedControlAppearance>(out var appearance))
             { appearance.IsInvalid = !IsPriceValid; appearance.Refresh(); }
         }
+
+        private void SetAdjustmentEnabled(UnityEngine.UI.Button button, decimal delta)
+        {
+            if (button != null) button.interactable = TryGetAdjustedPrice(delta, out _);
+        }
+
         private void LateUpdate()
         {
             var current = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
