@@ -40,6 +40,7 @@ namespace Game.Adapter.In.Controllers
         }
         public void OpenMonth(Action onCompleted)
         {
+            if (!GameSessionService.HasMinimumTeam(GameSessionState.Current)) return;
             if (IsAwaitingChoice && !failed && sessionId == GameSessionState.Current?.sessionId
                 && month == GameSessionState.Current?.currentRound) { UIStateListener.PresentScreen(gameObject); Render(); return; }
             completed = onCompleted; monthFlow = true; failed = false;

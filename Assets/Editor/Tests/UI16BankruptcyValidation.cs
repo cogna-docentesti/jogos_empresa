@@ -53,14 +53,13 @@ public static class UI16BankruptcyValidation
     }
     private static void Complete(bool negativeCashOnly = false)
     {
-        var s = Fixture(); s.teamJson = "{}"; s.currentCash = negativeCashOnly ? -1000000 : 1000; GameSessionState.Persist();
+        var s = Fixture();
+        GameSessionState.SetCash(negativeCashOnly ? -1000000 : 1000);
         for (int month = 1; month <= 3; month++)
         {
-            if (negativeCashOnly && month == 2)
-            {
-                var forecast = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(GameSessionState.Current));
-                new SessionEventHistoryRepository(Db).RecordFromOption(sessionId, month, 6, Resources.LoadAll<EventData>("Events").First(), new EventOption { id = "ui16-fixture", title = "Escolha exclusiva de validação isolada", effects = new EventEffectData { cashDelta = -forecast.netResult } });
-            }
+            var forecast = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(GameSessionState.Current));
+            float target = negativeCashOnly && month == 2 ? 0 : -5000;
+            new SessionEventHistoryRepository(Db).RecordFromOption(sessionId, month, 6, Resources.LoadAll<EventData>("Events").First(), new EventOption { id = "ui16-fixture", title = "Escolha exclusiva de validação isolada", effects = new EventEffectData { cashDelta = target - forecast.netResult } });
             Expect(new RoundService().ProcessRound(month) != null, "Actual settlement");
             if (month < 3) Expect(s.status == GameSessionStatus.IN_PROGRESS, "No early bankruptcy despite negative cash");
         }

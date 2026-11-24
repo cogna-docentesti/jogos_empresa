@@ -37,10 +37,17 @@ public sealed class UI19NavigationTests
         typeof(DatabaseInitializer).GetProperty("DatabaseService").SetValue(null, priorDb);
         PlayerPrefs.DeleteKey(key); PlayerPrefs.Save(); Environment.SetEnvironmentVariable("COGNA_TEST_IDENTIFICATION_KEY", priorKey);
     }
-    private GameSessionEntity Seed()
+    private GameSessionEntity Seed(bool staffed = false)
     {
         var s = Service.CreateNewSession(); var r = Resources.LoadAll<RestaurantData>("Restaurants").First(x => x.type == RestaurantType.PODRAO);
         s.menuPricingJson = MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(r.products)); s.currentCash = 41234.56f; s.reputationScore = 63;
+        if (staffed)
+        {
+            var team = new TeamSelectionData();
+            foreach (var requirement in r.requiredRoles)
+                TeamSelectionHelper.AddMember(team, requirement.roleId, requirement.quantity);
+            s.teamJson = TeamSelectionHelper.ToJson(team);
+        }
         Assert.IsTrue(GameSessionState.Persist()); PlayerSession.SaveIdentification("Participante salvo", "123456", "Empresa salva"); return s;
     }
     private void Prepare() => typeof(GameManager).GetMethod("PrepareSession", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(manager, new object[] { "ui19-user", "qa" });
@@ -64,7 +71,7 @@ public sealed class UI19NavigationTests
     [TestCase(GameState.Initial_Team, GameState.Management_Hub)]
     public void SetupHandoffPersistsOnlyItsScreenAndRejectsADoubleCallback(GameState from, GameState to)
     {
-        var s = Seed(); States.ForceState(from); var cash = s.currentCash;
+        var s = Seed(staffed: to == GameState.Management_Hub); States.ForceState(from); var cash = s.currentCash;
         Assert.IsTrue(Service.ContinueInitialSetup(to)); Assert.IsFalse(Service.ContinueInitialSetup(to));
         Assert.AreEqual((int)to, db.Find<GameSessionEntity>(s.sessionId).initialSetupResumeState); Assert.AreEqual(cash, s.currentCash); Assert.AreEqual(1, db.Table<GameSessionEntity>().Count());
     }
@@ -93,13 +100,26 @@ public sealed class UI19NavigationTests
     }
     [Test] public void SavedEventPlanResumesItsDecisionWithoutRedrawingOrSettling()
     {
-        var s = Seed(); string entries = "{\"entries\":[{\"eventId\":\"saved\",\"day\":6}]}";
+        var s = Seed(staffed: true); string entries = "{\"entries\":[{\"eventId\":\"saved\",\"day\":6}]}";
         db.Insert(new MonthlyEventPlanEntity { planId = s.sessionId + ":1", sessionId = s.sessionId, month = 1, entriesJson = entries });
         Prepare(); Assert.AreEqual(GameState.Round_Event, States.CurrentState); Assert.IsTrue(new MonthlyEventDecisionService(db).HasUnconfirmedChoices(GameSessionState.Current));
         Assert.IsNull(Service.ProcessCurrentRound()); Assert.AreEqual(0, db.Table<RoundResultEntity>().Count()); Assert.AreEqual(entries, db.Table<MonthlyEventPlanEntity>().First().entriesJson);
     }
     [Test] public void PendingSummaryPreventsStartingTheNextMonth()
-    { var s = Seed(); s.pendingSummaryResultId = "unread"; States.ForceState(GameState.Management_Hub); Service.StartRound(); Assert.AreEqual(GameState.Management_Hub, States.CurrentState); Assert.AreEqual(0, db.Table<RoundResultEntity>().Count()); }
+    { var s = Seed(staffed: true); s.pendingSummaryResultId = "unread"; States.ForceState(GameState.Management_Hub); Service.StartRound(); Assert.AreEqual(GameState.Management_Hub, States.CurrentState); Assert.AreEqual(0, db.Table<RoundResultEntity>().Count()); }
+    [Test] public void IncompleteTeamBlocksSetupHandoffButAllowsReturningToEquipment()
+    {
+        var session = Seed();
+        session.initialSetupResumeState = (int)GameState.Initial_Team;
+        GameSessionState.Save();
+        States.ForceState(GameState.Initial_Team);
+        Assert.IsFalse(Service.ContinueInitialSetup(GameState.Management_Hub));
+        Assert.IsFalse(InitialDecisionFlow.GoTo(GameState.Management_Hub));
+        Assert.AreEqual((int)GameState.Initial_Team, db.Find<GameSessionEntity>(session.sessionId).initialSetupResumeState);
+        Assert.IsTrue(Service.ContinueInitialSetup(GameState.Initial_Equipment));
+        Prepare();
+        Assert.AreEqual(GameState.Initial_Equipment, States.CurrentState);
+    }
     [Test] public void TechnicalStatesAndSerializedEnumsRemainExplicitAndStable()
     {
         var technical = new[] { GameState.Bootstrap, GameState.MainMenu, GameState.Config_Review, GameState.Round_Start, GameState.Round_Sales, GameState.Round_Costs };

@@ -234,7 +234,7 @@
       "topic": "Mínimo da equipe",
       "proposal": "Impedir confirmar/avançar sem satisfazer requiredRoles do restaurante.",
       "owner_task": "FB-14",
-      "status": "solicitado pelo usuário"
+      "status": "implementada na FB-14"
     },
     {
       "id": "A-06",
@@ -1401,8 +1401,8 @@
       "area": "Equipe; fluxo",
       "kind": "regra e validação",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-13"
       ],
@@ -1429,7 +1429,9 @@
         "Assets/Scripts/Game/Domain/Helpers/TeamSelectionHelper.cs"
       ],
       "notes": [
-        "Mudança de regra explicitamente solicitada: o código atual permite equipe incompleta e mantém Confirm habilitado. O novo feedback substitui a orientação histórica de preservar essa permissão."
+        "A confirmação e a entrada no mês exigem os mínimos agregados por função. A tela Equipe informa a quantidade faltante por função e mantém Voltar e os controles de contratação disponíveis.",
+        "Se a equipe estiver abaixo do mínimo, a ação Fechar mês do hub abre Equipe. Um plano já reservado permanece gravado e pode ser retomado após completar as contratações.",
+        "Foram registradas 37 verificações em Play Mode para os três restaurantes, com SQLite isolado, recarga, revisitas e tentativas por chamadas diretas."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-14.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-14.json",

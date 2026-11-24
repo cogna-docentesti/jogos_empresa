@@ -240,8 +240,9 @@ public class GameSessionService
     {
         if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted) return false;
         var session = GameSessionState.Current;
-        var teamData = TeamSelectionHelper.FromJson(session.teamJson);
         var restaurantData = GetRestaurantData(session.restaurantType);
+        if (!TeamSelectionHelper.HasMinimumStaff(restaurantData, session.teamJson)) return false;
+        var teamData = TeamSelectionHelper.FromJson(session.teamJson);
         var menuPricing = MenuPricingHelper.FromJson(session.menuPricingJson);
 
         AlignmentResult alignment = AlignmentEngine.Calculate(
@@ -280,7 +281,10 @@ public class GameSessionService
         return sm.TryChangeState(next);
     }
 
-    private RestaurantData GetRestaurantData(RestaurantType restaurantType)
+    public static bool HasMinimumTeam(GameSessionEntity session) =>
+        session != null && TeamSelectionHelper.HasMinimumStaff(GetRestaurantData(session.restaurantType), session.teamJson);
+
+    private static RestaurantData GetRestaurantData(RestaurantType restaurantType)
     {
         return Resources.LoadAll<RestaurantData>("Restaurants")
             .FirstOrDefault(restaurant => restaurant != null && restaurant.type == restaurantType);
@@ -422,17 +426,21 @@ public class GameSessionService
         if (session.currentRound < 1 || session.currentRound > 3)
             return;
 
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Round_Start);
-
-        GameManager.Instance.StateMachine
-            .TryChangeState(GameState.Round_Sales);
+        var states = GameManager.Instance.StateMachine;
+        if (states.TryChangeState(GameState.Round_Start))
+            states.TryChangeState(GameState.Round_Sales);
     }
 
     /// <summary>Technical preparation ends at the visible event decision; calculation still waits.</summary>
     public bool BeginEventDecisions()
     {
-        var sm = GameManager.Instance?.StateMachine;
+        if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted
+            || !HasMinimumTeam(GameSessionState.Current)) return false;
+        return EnterEventState(GameManager.Instance?.StateMachine);
+    }
+
+    private static bool EnterEventState(GameStateMachine sm)
+    {
         if (sm?.CurrentState != GameState.Round_Sales) return sm?.CurrentState == GameState.Round_Event;
         return sm.TryChangeState(GameState.Round_Costs) && sm.TryChangeState(GameState.Round_Event);
     }
@@ -441,6 +449,7 @@ public class GameSessionService
     {
         if (!GameSessionState.HasActiveSession || GameManager.Instance?.StateMachine == null)
             return null;
+        if (!HasMinimumTeam(GameSessionState.Current)) return null;
 
         var sm = GameManager.Instance.StateMachine;
 
@@ -465,7 +474,7 @@ public class GameSessionService
             return null;
         }
 
-        if (sm.CurrentState == GameState.Round_Sales) BeginEventDecisions();
+        if (sm.CurrentState == GameState.Round_Sales) EnterEventState(sm);
         sm.TryChangeState(GameState.Round_Summary);
 
         return result;

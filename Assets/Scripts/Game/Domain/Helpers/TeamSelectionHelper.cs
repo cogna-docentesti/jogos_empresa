@@ -1,9 +1,47 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public static class TeamSelectionHelper
 {
+    public static Dictionary<string, int> GetMinimums(RestaurantData restaurant)
+    {
+        return (restaurant.requiredRoles ?? Array.Empty<RoleRequirement>())
+            .Where(requirement => requirement.quantity > 0)
+            .GroupBy(requirement => requirement.roleId)
+            .ToDictionary(group => group.Key, group => group.Sum(requirement => requirement.quantity));
+    }
+
+    public static Dictionary<string, int> GetShortfalls(TeamSelectionData team, IReadOnlyDictionary<string, int> minimums)
+    {
+        var shortfalls = new Dictionary<string, int>();
+        foreach (var minimum in minimums)
+        {
+            int missing = minimum.Value - Math.Max(0, GetMemberQuantity(team, minimum.Key));
+            if (missing > 0)
+                shortfalls.Add(minimum.Key, missing);
+        }
+        return shortfalls;
+    }
+
+    public static bool HasMinimumStaff(RestaurantData restaurant, string teamJson)
+    {
+        if (restaurant == null || (restaurant.requiredRoles?.Any(requirement => requirement == null
+            || string.IsNullOrWhiteSpace(requirement.roleId) || requirement.quantity < 0) ?? false))
+            return false;
+
+        try
+        {
+            var team = FromJson(teamJson);
+            return team.members.All(member => member != null && !string.IsNullOrWhiteSpace(member.roleId) && member.quantity >= 0)
+                && team.members.Select(member => member.roleId).Distinct().Count() == team.members.Count
+                && GetShortfalls(team, GetMinimums(restaurant)).Count == 0;
+        }
+        catch (ArgumentException) { return false; }
+        catch (OverflowException) { return false; }
+    }
+
     public static TeamSelectionData FromJson(string json)
     {
         if (string.IsNullOrWhiteSpace(json))

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Adapter.In.UI.Navigation
 {
-    /// <summary>History action above revisitable panels; initial setup keeps its own footer.</summary>
+    /// <summary>History action above revisitable panels and return from the initial team screen.</summary>
     public sealed class HubBackButton : MonoBehaviour
     {
         [SerializeField] private GameObject buttonRoot;
@@ -41,8 +41,9 @@ namespace Game.Adapter.In.UI.Navigation
         }
         private void Update()
         {
-            bool visible=MenuNavigator.HubAvailable && MenuNavigator.Instance!=null
-                && MenuNavigator.Instance.Current!=PanelId.None && MenuNavigator.Instance.Current!=PanelId.Menu;
+            bool visible=GameManager.Instance?.StateMachine?.CurrentState == GameState.Initial_Team
+                || (MenuNavigator.HubAvailable && MenuNavigator.Instance!=null
+                    && MenuNavigator.Instance.Current!=PanelId.None && MenuNavigator.Instance.Current!=PanelId.Menu);
             if(buttonRoot!=null && buttonRoot.activeSelf!=visible) buttonRoot.SetActive(visible);
             bool events=(eventPanel!=null && eventPanel.activeInHierarchy) || (monthlyResultPanel!=null && monthlyResultPanel.activeInHierarchy) || (quarterlyResultPanel!=null && quarterlyResultPanel.activeInHierarchy) || (finalReportPanel!=null && finalReportPanel.activeInHierarchy) || (bankruptcyPanel!=null && bankruptcyPanel.activeInHierarchy);
             if(eventMenuAccess!=null && positionedForEvents!=events)

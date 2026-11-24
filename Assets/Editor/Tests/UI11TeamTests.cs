@@ -82,6 +82,28 @@ public sealed class UI11TeamTests
     }
     [Test] public void AlignmentSaveCannotCreateFirstInsertBeforeD3()
     { GameSessionState.Set(new GameSessionEntity{status=GameSessionStatus.IN_PROGRESS}); Assert.IsFalse(new GameSessionService("u","p").SaveTeamAlignment(Resources.LoadAll<RoleData>("Roles").ToList())); Assert.IsFalse(GameSessionState.IsPersisted); }
+
+    [Test] public void RepeatedRoleRequirementsAddUpToOneMinimum()
+    {
+        var restaurant = ScriptableObject.CreateInstance<RestaurantData>();
+        try
+        {
+            restaurant.requiredRoles = new[]
+            {
+                new RoleRequirement { roleId = "attendant", quantity = 1 },
+                new RoleRequirement { roleId = "attendant", quantity = 2 }
+            };
+            var team = new TeamSelectionData();
+            TeamSelectionHelper.AddMember(team, "attendant", 2);
+            var minimums = TeamSelectionHelper.GetMinimums(restaurant);
+            Assert.AreEqual(3, minimums["attendant"]);
+            Assert.AreEqual(1, TeamSelectionHelper.GetShortfalls(team, minimums)["attendant"]);
+            Assert.IsFalse(TeamSelectionHelper.HasMinimumStaff(restaurant, TeamSelectionHelper.ToJson(team)));
+            TeamSelectionHelper.AddMember(team, "attendant");
+            Assert.IsTrue(TeamSelectionHelper.HasMinimumStaff(restaurant, TeamSelectionHelper.ToJson(team)));
+        }
+        finally { Object.DestroyImmediate(restaurant); }
+    }
     [Test] public void LongNamesExpandWithoutReducingTypeSize()
     {
         var c=Card("attendant"); var text=Field<TMP_Text>(c,"nameText"); text.text=string.Join(" ",Enumerable.Repeat("Função com descrição muito extensa",4));

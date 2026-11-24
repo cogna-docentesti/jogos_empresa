@@ -299,6 +299,7 @@ public static class UI07MenuPricingValidation
             Expect(MenuPricingHelper.FromJson(rows[0].menuPricingJson).items.All(p=>Resources.LoadAll<ProductData>("Products").Any(d=>d.id==p.productId && p.selectedPrice==d.price+.75f)),"Persisted prices");
             Expect(UnityEngine.SceneManagement.SceneManager.GetActiveScene().handle==sceneHandle,"Scene changed");confirmedJson=rows[0].menuPricingJson;sessionId=rows[0].sessionId;Capture("confirmed-next-bank-1280x720");
             Action("confirmButton").onClick.Invoke();Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==1,"Duplicate callback");
+            UiValidationContext.SetMinimumTeam();
             GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Equipment);GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team);GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub);
         });
         Add("Hub root renders before map interaction",()=>{Expect(State==GameState.Management_Hub,"Hub state");MenuNavigator.Instance.OpenRoot();});

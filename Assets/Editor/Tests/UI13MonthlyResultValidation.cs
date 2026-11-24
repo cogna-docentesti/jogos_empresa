@@ -40,10 +40,10 @@ public static class UI13MonthlyResultValidation
     private static void SavedCase(string kind)
     {
         var s=Fixture();
-        if(kind=="negative") { s.teamJson=TeamSelectionHelper.ToJson(new TeamSelectionData());s.currentCash=1000;GameSessionState.Persist(); }
+        if(kind=="negative") GameSessionState.SetCash(1000);
         // Deterministic signed snapshots are isolated QA inputs, processed by the real engine and transaction.
         var forecast=MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(s));
-        float delta=kind=="zero"?-forecast.netResult:kind=="positive"?Mathf.Abs(forecast.netResult)+5000:0;
+        float delta=kind=="zero"?-forecast.netResult:kind=="positive"?Mathf.Abs(forecast.netResult)+5000:-forecast.netResult-5000;
         if(delta!=0) new SessionEventHistoryRepository(Db).RecordFromOption(s.sessionId,1,6,
             Resources.LoadAll<EventData>("Events")[0],new EventOption {id="isolated-ui13",title="Isolated validation",effects=new EventEffectData {cashDelta=delta}});
         expected=new RoundService().ProcessRound(1);Expect(expected!=null,"RoundService result");
@@ -148,10 +148,13 @@ public static class UI13MonthlyResultValidation
     private static SQLite4Unity3d.SQLiteConnection isolatedDb;
     private static void FinalCase(bool loss)
     {
-        var s=Fixture();if(loss){s.teamJson=TeamSelectionHelper.ToJson(new TeamSelectionData());GameSessionState.Persist();}
+        var s=Fixture();
         for(int month=1;month<=3;month++)
         {
-            if(!loss) {s=GameSessionState.Current;var forecast=MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(s));new SessionEventHistoryRepository(Db).RecordFromOption(s.sessionId,month,6,Resources.LoadAll<EventData>("Events")[0],new EventOption {id="isolated-ui13",title="Isolated validation",effects=new EventEffectData {cashDelta=Mathf.Abs(forecast.netResult)+5000}});}
+            s=GameSessionState.Current;
+            var forecast=MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(s));
+            float delta=loss?-forecast.netResult-5000:Mathf.Abs(forecast.netResult)+5000;
+            new SessionEventHistoryRepository(Db).RecordFromOption(s.sessionId,month,6,Resources.LoadAll<EventData>("Events")[0],new EventOption {id="isolated-ui13",title="Isolated validation",effects=new EventEffectData {cashDelta=delta}});
             expected=new RoundService().ProcessRound(month);
         }
         Expect(GameSessionState.Current.status==(loss?GameSessionStatus.BANKRUPT:GameSessionStatus.COMPLETED),"Final financial status");

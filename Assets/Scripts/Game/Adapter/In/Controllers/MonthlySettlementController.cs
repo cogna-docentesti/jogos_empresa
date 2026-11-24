@@ -1,4 +1,6 @@
 using System;
+using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Navigation;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,7 +37,7 @@ namespace Game.Adapter.In.Controllers
         private void Update()
         {
             if (!resumePending) return;
-            if (Game.Adapter.In.UI.SharedModalFocus.Active != null) return;
+            if (SharedModalFocus.Active != null) return;
             resumePending = false;
             if (subscribedMachine?.CurrentState == GameState.Round_Event) CloseMonth();
         }
@@ -44,8 +46,15 @@ namespace Game.Adapter.In.Controllers
         {
             if (awaitingEvents || !GameSessionState.HasActiveSession || !GameSessionState.IsPersisted) return;
             var state = GameManager.Instance?.StateMachine;
-            if (Game.Adapter.In.UI.SharedModalFocus.Active != null || state == null || (state.CurrentState != GameState.Management_Hub
+            if (SharedModalFocus.Active != null || state == null || (state.CurrentState != GameState.Management_Hub
                 && state.CurrentState != GameState.Round_Sales && state.CurrentState != GameState.Round_Event)) return;
+            if (!GameSessionService.HasMinimumTeam(GameSessionState.Current))
+            {
+                if (state.CurrentState == GameState.Management_Hub)
+                    MenuNavigator.Instance?.Open(PanelId.Team);
+                FeedbackToast.Show("Complete os mínimos da equipe para iniciar o mês.", FeedbackKind.Warning);
+                return;
+            }
             var events = FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             if (events.Length != 1) { onSettlementFailed.Invoke(); return; }
             awaitingEvents = true;

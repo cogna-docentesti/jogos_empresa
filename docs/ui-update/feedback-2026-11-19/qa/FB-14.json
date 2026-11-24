@@ -1,0 +1,66 @@
+{
+  "task_id": "FB-14",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "b520d2a9fb8e43b18385fdca1cd980d9a591f6f8",
+  "status": "concluída",
+  "implementation_performed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "screen": "1280×720",
+  "framework": "uGUI e TextMesh Pro da GameScene.",
+  "baseline_observed": "O botão Confirmar equipe e abrir hub estava ativo com zero profissionais em Lanches.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Nos três restaurantes, a equipe vazia e a falta de qualquer função bloquearam a confirmação, o início do mês e os atalhos por serviço e máquina de estados. As tentativas mantiveram o caixa e o mês, sem gravar plano, ocorrência ou resultado mensal."
+    },
+    {
+      "criterion": 2,
+      "result": "Em cada restaurante, foram exercitados mínimo menos um para cada função isoladamente, mínimo exato e mínimo mais um nas duas funções. Atender ao mínimo abriu o hub e o fluxo mensal. Reduzir o especialista depois de confirmar voltou a bloquear. Um teste de Edit Mode comprovou a soma de requisitos com o mesmo roleId."
+    },
+    {
+      "criterion": 3,
+      "result": "Voltar na abertura levou a Equipamentos, persistiu a etapa e preservou as contratações para a revisita. Voltar no hub retornou à tela de revisão anterior. O botão Fechar mês levou à Equipe quando havia pendências. A lista exibiu o nome da função, a quantidade contratada, o mínimo e a falta exata."
+    }
+  ],
+  "monthly_resume": "Uma partida com plano reservado e equipe abaixo do mínimo retornou ao hub ao recarregar. Após contratar a quantidade faltante, o mesmo plano foi reapresentado com o JSON original do SQLite.",
+  "play_mode": {
+    "method": "GameScene no Editor Windows com banco SQLite e identificação isolados. Os botões reais foram acionados por submit do EventSystem. O ensaio também tentou invocações diretas de botão, fluxo e serviços, e conferiu o estado gravado após recarga. Os PNGs foram extraídos do render da Game View.",
+    "checked_states": 37,
+    "errors": [],
+    "evidence": "after.json"
+  },
+  "docs_read": [
+    "uGUI Button",
+    "TextMesh Pro Documentation"
+  ],
+  "limitations": [
+    "Editor Windows 6000.3.28f1, com o projeto versionado em 6000.3.21f1. A inspeção visual usou 1280×720. O teste exercitou a entrada mensal disponível na GameScene, que abre as decisões de eventos."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-14",
+    "baseline": "before.json",
+    "screenshots": [
+      "before-empty-team.png",
+      "after-lanches-empty.png",
+      "after-lanches-minimum.png",
+      "after-japones-empty.png",
+      "after-japones-minimum.png",
+      "after-japones-month-blocked.png",
+      "after-frances-empty.png",
+      "after-frances-minimum.png"
+    ]
+  },
+  "edit_mode": {
+    "passed": 402,
+    "failed": 0,
+    "evidence": "editmode.xml",
+    "method": "Suíte completa. O executor preparou uma cena salva para o teste de tipografia que cria uma cena aditiva. Os testes rodaram sem filtros.",
+    "staffing_cases": [
+      "Soma de requisitos duplicados por roleId.",
+      "Bloqueio de atalhos da abertura e recarga após voltar para Equipamentos.",
+      "Preservação do plano mensal reaberto e do resumo de encerramento da campanha."
+    ]
+  }
+}

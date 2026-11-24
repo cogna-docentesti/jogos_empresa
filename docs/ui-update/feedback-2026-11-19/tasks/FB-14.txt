@@ -1,5 +1,5 @@
 FB-14 — Impedir o avanço com equipe abaixo do mínimo
-Status: planejada | Prioridade: P1 | Tipo: regra e validação
+Status: concluída | Prioridade: P1 | Tipo: regra e validação
 Área: Equipe; fluxo
 Dependências: FB-13
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -43,7 +43,9 @@ VALIDAÇÃO PREVISTA
 1. Testar mínimo−1, mínimo e mínimo+1 para os três restaurantes; verificar reload, revisitas e tentativa de avanço por chamadas de fluxo.
 
 OBSERVAÇÕES E LIMITES
-1. Mudança de regra explicitamente solicitada: o código atual permite equipe incompleta e mantém Confirm habilitado. O novo feedback substitui a orientação histórica de preservar essa permissão.
+1. A confirmação e a entrada no mês exigem os mínimos agregados por função. A tela Equipe informa a quantidade faltante por função e mantém Voltar e os controles de contratação disponíveis.
+2. Se a equipe estiver abaixo do mínimo, a ação Fechar mês do hub abre Equipe. Um plano já reservado permanece gravado e pode ser retomado após completar as contratações.
+3. Foram registradas 37 verificações em Play Mode para os três restaurantes, com SQLite isolado, recarga, revisitas e tentativas por chamadas diretas.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-14.json.

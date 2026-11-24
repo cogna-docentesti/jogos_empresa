@@ -1,0 +1,675 @@
+{
+  "passed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "width": 1280,
+  "height": 720,
+  "checks": [
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "empty",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  0/2  ·  Faltam 2",
+        "Chapeiro  0/1  ·  Falta 1"
+      ],
+      "team": [],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "attendant minimum minus one after back, reload and revisit",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  1/2  ·  Falta 1",
+        "Chapeiro  1/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 1
+        },
+        {
+          "roleId": "grill_cook",
+          "quantity": 1
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "exact minimum",
+      "state": "Initial_Team",
+      "confirmEnabled": true,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chapeiro  1/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        },
+        {
+          "roleId": "grill_cook",
+          "quantity": 1
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "minimum plus one for both roles",
+      "state": "Initial_Team",
+      "confirmEnabled": true,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  3/2",
+        "Chapeiro  2/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 3
+        },
+        {
+          "roleId": "grill_cook",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "specialist minimum minus one after reload",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chapeiro  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "hub revisit after reducing specialist",
+      "state": "Management_Hub",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chapeiro  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "month bypasses rejected",
+      "state": "Management_Hub",
+      "panel": "Team",
+      "cash": 65000.0,
+      "round": 1,
+      "plans": 0,
+      "results": 0,
+      "eventHistory": 0
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "returned from blocked monthly action",
+      "state": "Management_Hub",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chapeiro  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "stage": "exact minimum opens existing monthly flow",
+      "state": "Round_Event",
+      "awaitingChoice": true,
+      "plan": {
+        "entries": [
+          {
+            "eventId": "lunch_demand_peak",
+            "day": 6
+          },
+          {
+            "eventId": "bulk_purchase_opportunity",
+            "day": 12
+          },
+          {
+            "eventId": "influencer_mention",
+            "day": 18
+          },
+          {
+            "eventId": "new_competitor",
+            "day": 24
+          }
+        ]
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "empty",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  0/2  ·  Faltam 2",
+        "Profissional de sushi  0/1  ·  Falta 1"
+      ],
+      "team": [],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "attendant minimum minus one after back, reload and revisit",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  1/2  ·  Falta 1",
+        "Profissional de sushi  1/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 1
+        },
+        {
+          "roleId": "sushi_chef",
+          "quantity": 1
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "exact minimum",
+      "state": "Initial_Team",
+      "confirmEnabled": true,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Profissional de sushi  1/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        },
+        {
+          "roleId": "sushi_chef",
+          "quantity": 1
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "minimum plus one for both roles",
+      "state": "Initial_Team",
+      "confirmEnabled": true,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  3/2",
+        "Profissional de sushi  2/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 3
+        },
+        {
+          "roleId": "sushi_chef",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "specialist minimum minus one after reload",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Profissional de sushi  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "hub revisit after reducing specialist",
+      "state": "Management_Hub",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Profissional de sushi  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "month bypasses rejected",
+      "state": "Management_Hub",
+      "panel": "Team",
+      "cash": 65000.0,
+      "round": 1,
+      "plans": 0,
+      "results": 0,
+      "eventHistory": 0
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "returned from blocked monthly action",
+      "state": "Management_Hub",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Profissional de sushi  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "exact minimum opens existing monthly flow",
+      "state": "Round_Event",
+      "awaitingChoice": true,
+      "plan": {
+        "entries": [
+          {
+            "eventId": "lunch_demand_peak",
+            "day": 6
+          },
+          {
+            "eventId": "negative_review",
+            "day": 12
+          },
+          {
+            "eventId": "freezer_breakdown",
+            "day": 18
+          },
+          {
+            "eventId": "excessive_food_waste",
+            "day": 24
+          }
+        ]
+      }
+    },
+    {
+      "restaurant": "REST_JAPONES",
+      "stage": "legacy reserved plan resumes after staffing recovery",
+      "preserved": true
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "empty",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  0/2  ·  Faltam 2",
+        "Chef de cozinha  0/1  ·  Falta 1"
+      ],
+      "team": [],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "attendant minimum minus one after back, reload and revisit",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  1/2  ·  Falta 1",
+        "Chef de cozinha  1/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 1
+        },
+        {
+          "roleId": "head_chef",
+          "quantity": 1
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "exact minimum",
+      "state": "Initial_Team",
+      "confirmEnabled": true,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chef de cozinha  1/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        },
+        {
+          "roleId": "head_chef",
+          "quantity": 1
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "minimum plus one for both roles",
+      "state": "Initial_Team",
+      "confirmEnabled": true,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  3/2",
+        "Chef de cozinha  2/1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 3
+        },
+        {
+          "roleId": "head_chef",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "specialist minimum minus one after reload",
+      "state": "Initial_Team",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chef de cozinha  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "setup bypasses rejected",
+      "state": "Initial_Team"
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "hub revisit after reducing specialist",
+      "state": "Management_Hub",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chef de cozinha  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "month bypasses rejected",
+      "state": "Management_Hub",
+      "panel": "Team",
+      "cash": 65000.0,
+      "round": 1,
+      "plans": 0,
+      "results": 0,
+      "eventHistory": 0
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "returned from blocked monthly action",
+      "state": "Management_Hub",
+      "confirmEnabled": false,
+      "backEnabled": true,
+      "requirements": [
+        "Atendente  2/2",
+        "Chef de cozinha  0/1  ·  Falta 1"
+      ],
+      "team": [
+        {
+          "roleId": "attendant",
+          "quantity": 2
+        }
+      ],
+      "cash": 65000.0,
+      "requirementsBox": {
+        "width": 448.0,
+        "height": 80.0,
+        "isTextOverflowing": false
+      }
+    },
+    {
+      "restaurant": "REST_FRANCES",
+      "stage": "exact minimum opens existing monthly flow",
+      "state": "Round_Event",
+      "awaitingChoice": true,
+      "plan": {
+        "entries": [
+          {
+            "eventId": "extra_local_demand",
+            "day": 6
+          },
+          {
+            "eventId": "positive_online_review",
+            "day": 12
+          },
+          {
+            "eventId": "new_competitor",
+            "day": 18
+          },
+          {
+            "eventId": "team_productivity_boost",
+            "day": 24
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

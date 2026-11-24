@@ -45,6 +45,14 @@ namespace Game.Adapter.In.UI.Navigation
 
         private void Execute()
         {
+            if (action == NavAction.Back && GameManager.Instance?.StateMachine?.CurrentState == GameState.Initial_Team)
+            {
+                var session = GameSessionState.Current;
+                if (session != null && SharedModalFocus.Active == null)
+                    new GameSessionService(session.userId, session.professorId).ContinueInitialSetup(GameState.Initial_Equipment);
+                return;
+            }
+
             var nav = MenuNavigator.Instance;
 
             if (nav == null)

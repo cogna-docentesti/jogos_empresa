@@ -29,6 +29,10 @@ public sealed class UI12EventTests
         session.restaurantType = restaurant.type; session.locationZone = LocationZone.Comercio; session.targetSegment = Segment.LOW;
         session.currentCash = session.initialCapital = 65000; session.reputationScore = 50;
         session.menuPricingJson = MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(restaurant.products));
+        var team = new TeamSelectionData();
+        foreach (var requirement in restaurant.requiredRoles)
+            TeamSelectionHelper.AddMember(team, requirement.roleId, requirement.quantity);
+        session.teamJson = TeamSelectionHelper.ToJson(team);
         Assert.IsTrue(GameSessionState.Persist()); service = new MonthlyEventDecisionService(db, new MonthlyEventSelector(() => .15));
     }
     [TearDown] public void Cleanup()

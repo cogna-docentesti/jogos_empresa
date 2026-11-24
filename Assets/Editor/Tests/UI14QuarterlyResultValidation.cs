@@ -40,12 +40,12 @@ public static class UI14QuarterlyResultValidation
     private static void SavedCase(int months,string kind="positive")
     {
         var s=Fixture();
-        if(kind=="negative") {s.teamJson=TeamSelectionHelper.ToJson(new TeamSelectionData());s.currentCash=1000;GameSessionState.Persist();}
+        if(kind=="negative") GameSessionState.SetCash(1000);
         if(kind=="positive") {var line=Resources.LoadAll<CreditLineData>("CreditLines").Where(l=>l.maxAmount>0).OrderBy(l=>l.maxAmount).First();Expect(LoanService.TryContract(line),"Real loan");}
         for(int month=1;month<=months;month++)
         {
             s=GameSessionState.Current;var forecast=MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(s));
-            float delta=kind=="zero"?-forecast.netResult:kind=="positive"?Mathf.Abs(forecast.netResult)+5000*month:0;
+            float delta=kind=="zero"?-forecast.netResult:kind=="positive"?Mathf.Abs(forecast.netResult)+5000*month:-forecast.netResult-5000*month;
             if(delta!=0)new SessionEventHistoryRepository(Db).RecordFromOption(sessionId,month,6,Resources.LoadAll<EventData>("Events")[0],new EventOption {id="isolated-ui14",title="Isolated validation",effects=new EventEffectData {cashDelta=delta}});
             Expect(new RoundService().ProcessRound(month)!=null,"Actual settlement "+month);
         }

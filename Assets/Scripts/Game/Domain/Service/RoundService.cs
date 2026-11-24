@@ -66,7 +66,12 @@ public class RoundService
                         throw new InvalidOperationException("Monthly results must be consecutive.");
 
                 var history = new SessionEventHistoryRepository(_db).GetBySessionAndRound(session.sessionId, expectedMonth);
-                result = MonthlySimulationEngine.Calculate(_contextFactory(session.Copy(), history));
+                var context = _contextFactory(session.Copy(), history);
+                if (!TeamSelectionHelper.HasMinimumStaff(context.Restaurant, stored.teamJson)
+                    || (stored.teamJson != session.teamJson && !TeamSelectionHelper.HasMinimumStaff(context.Restaurant, session.teamJson)))
+                    return;
+
+                result = MonthlySimulationEngine.Calculate(context);
                 result.roundResultId = Guid.NewGuid().ToString();
                 result.createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                 next = MonthlySessionSettlement.Apply(session, result, result.createdAt);
@@ -76,6 +81,7 @@ public class RoundService
                     throw new InvalidOperationException("The monthly session update was not persisted.");
             });
 
+            if (result == null) return null;
             GameSessionState.AcceptMonthlySettlement(next);
             Debug.Log($"[RoundService] Month {result.round} settled: customers={result.customers}, revenue={result.grossRevenue:F2}, cash={result.closingCash:F2}, reputation={result.reputationAtEnd}.");
             return result;

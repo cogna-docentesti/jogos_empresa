@@ -136,7 +136,8 @@ public class GameManager : MonoBehaviour
             {
                 var db = DatabaseInitializer.DatabaseService.Connection;
                 db.CreateTable<MonthlyEventPlanEntity>();
-                if (db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound) != null)
+                if (db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound) != null
+                    && GameSessionService.HasMinimumTeam(session))
                     resumeDestination = GameState.Round_Event;
             }
         }

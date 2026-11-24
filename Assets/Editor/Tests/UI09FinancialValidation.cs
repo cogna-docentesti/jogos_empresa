@@ -159,7 +159,7 @@ public static class UI09FinancialValidation
             Add("Returning loan is selected and all changes locked " + id, () => { Fits(); Expect(Cards.All(c => !Button(c).interactable) && Card(id).GetComponent<SharedControlAppearance>().IsSelected, "Locked selection"); Capture(id + "-contracted-1280x720"); SameSession(); Click(Confirm); });
             Add("Continuing existing contract never adds money twice " + id, () => { Expect(GameSessionState.Current.currentCash == 65000 + LoanService.FindLine(id).maxAmount, "Cash duplicated"); Click(EquipmentBack); });
         }
-        Add("Reach hub through existing setup states", () => { Click(Confirm); GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team); GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub); });
+        Add("Reach hub through existing setup states", () => { Click(Confirm); UiValidationContext.SetMinimumTeam(); GameManager.Instance.StateMachine.TryChangeState(GameState.Initial_Team); GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub); });
         foreach (var size in UiValidationContext.Resolutions)
         {
             var s = size; var suffix = s.x + "x" + s.y;

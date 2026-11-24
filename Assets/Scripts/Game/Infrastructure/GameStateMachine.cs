@@ -55,7 +55,7 @@ public class GameStateMachine
                     GameState.Initial_Team
                 }
             },
-            { GameState.Initial_Team, new List<GameState> { GameState.Management_Hub } },
+            { GameState.Initial_Team, new List<GameState> { GameState.Initial_Equipment, GameState.Management_Hub } },
 
             { GameState.Management_Hub, new List<GameState>
                 {
@@ -91,8 +91,17 @@ public class GameStateMachine
 
     public bool CanTransitionTo(GameState nextState)
     {
-        return allowedTransitions.ContainsKey(CurrentState)
-            && allowedTransitions[CurrentState].Contains(nextState);
+        if (!allowedTransitions.TryGetValue(CurrentState, out var destinations) || !destinations.Contains(nextState))
+            return false;
+
+        bool startsOperation = (CurrentState == GameState.Initial_Team && nextState == GameState.Management_Hub)
+            || nextState == GameState.Round_Start;
+        if (startsOperation && !GameSessionState.HasActiveSession)
+            return false;
+
+        bool requiresStaff = startsOperation || nextState == GameState.Round_Sales
+            || nextState == GameState.Round_Costs || nextState == GameState.Round_Event;
+        return !requiresStaff || (GameSessionState.IsPersisted && GameSessionService.HasMinimumTeam(GameSessionState.Current));
     }
 
     public bool TryChangeState(GameState nextState)

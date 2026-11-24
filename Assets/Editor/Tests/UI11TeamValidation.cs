@@ -94,7 +94,7 @@ public static class UI11TeamValidation
         Expect(Field<TMP_Text>(View,"payrollText").text==FinancialScreenView.Money((float)salary),"Payroll");
         Expect(Field<TMP_Text>(View,"capacityText").text==$"{capacity:N0} clientes/mês","Capacity");
         Expect(Field<TMP_Text>(View,"alignmentText").text==$"{a.totalScore}/80  •  Equipe {a.restaurantTeamScore}/20"&&a.restaurantTeamScore==(stage==2?20:5),"Alignment");
-        Expect(Confirm.interactable&&Cards.Select(c=>c.Role.id).OrderBy(id=>id).SequenceEqual(Restaurant.requiredRoles.Select(r=>r.roleId).Append("manager").OrderBy(id=>id)),"Catalog/confirmation preserves rules");
+        Expect(Confirm.interactable==(stage==2)&&Cards.Select(c=>c.Role.id).OrderBy(id=>id).SequenceEqual(Restaurant.requiredRoles.Select(r=>r.roleId).Append("manager").OrderBy(id=>id)),"Catalog and minimum staffing");
         Expect(Field<GameObject>(View,"emptyTeam").activeSelf==(stage==0),"Pending empty");
     }
     private static void Change(string id,int quantity,string name)
@@ -124,7 +124,7 @@ public static class UI11TeamValidation
                 Add("Prepare empty "+tag,()=>{UI01Validation.SetGameView(viewport.x,viewport.y);Fixture(type);});
                 Add("Empty zero/pending/minus disabled "+tag,()=>{Expect(Screen.width==viewport.x&&Screen.height==viewport.y,"Resolution");SameSession();VerifyTotals(0);Expect(Cards.All(c=>!Field<UnityEngine.UI.Button>(c,"removeButton").interactable&&c.Quantity==0),"Zero controls");Capture("empty-"+tag);});
                 Change("attendant",1,tag);
-                Add("Incomplete team keeps original confirmation rule "+tag,()=>{VerifyTotals(1);Capture("incomplete-"+tag);});
+                Add("Incomplete team disables confirmation "+tag,()=>{VerifyTotals(1);Capture("incomplete-"+tag);});
                 Change("attendant",2,tag);
                 string specialist=type==RestaurantType.PODRAO?"grill_cook":type==RestaurantType.JAPONES?"sushi_chef":"head_chef";
                 Change(specialist,1,tag);
@@ -138,15 +138,16 @@ public static class UI11TeamValidation
             Add("Hover "+res,()=>{var b=Field<UnityEngine.UI.Button>(Card("attendant"),"addButton");Expect(b.GetComponent<SharedControlAppearance>().CurrentState=="hover","Hover");Capture("hover-"+res);ExecuteEvents.Execute(b.gameObject,Pointer(b),ExecuteEvents.pointerDownHandler);});
             Add("Pressed "+res,()=>{var b=Field<UnityEngine.UI.Button>(Card("attendant"),"addButton");Expect(b.GetComponent<SharedControlAppearance>().CurrentState=="pressed","Pressed");Capture("pressed-"+res);ExecuteEvents.Execute(b.gameObject,Pointer(b),ExecuteEvents.pointerUpHandler);ExecuteEvents.Execute(b.gameObject,Pointer(b),ExecuteEvents.pointerExitHandler);b.Select();});
             Add("Keyboard focus "+res,()=>{var b=Field<UnityEngine.UI.Button>(Card("attendant"),"addButton");Expect(b.GetComponent<SharedControlAppearance>().CurrentState=="focus","Focus");Capture("focus-"+res);ExecuteEvents.Execute(b.gameObject,new BaseEventData(EventSystem.current),ExecuteEvents.submitHandler);});
-            Add("Keyboard submit adds one and selected state "+res,()=>{Expect(Card("attendant").Quantity==1&&Card("attendant").GetComponent<SharedControlAppearance>().IsSelected,"Submit/selected");Capture("selected-"+res);Click(Confirm);});
+            Add("Keyboard submit adds one and selected state "+res,()=>{Expect(Card("attendant").Quantity==1&&Card("attendant").GetComponent<SharedControlAppearance>().IsSelected,"Submit/selected");Capture("selected-"+res);});
             Add("Prepare empty confirmation "+res,()=>Fixture(RestaurantType.PODRAO));
-            Add("Empty team may confirm without new hiring gate "+res,()=>{Click(Confirm);Expect(MenuNavigator.Instance.Current==PanelId.Menu,"Empty confirmation");});
+            Add("Empty team stays in setup "+res,()=>{Expect(!Confirm.interactable,"Empty team should disable confirmation");Confirm.onClick.Invoke();Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Team,"Empty confirmation");});
             Add("Prepare incomplete confirmation "+res,()=>Fixture(RestaurantType.FRANCES,1));
-            Add("Incomplete team may confirm without new hiring gate "+res,()=>{Click(Confirm);Expect(MenuNavigator.Instance.Current==PanelId.Menu,"Incomplete confirmation");});
+            Add("Incomplete team stays in setup "+res,()=>{Expect(!Confirm.interactable,"Incomplete team should disable confirmation");Confirm.onClick.Invoke();Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Team,"Incomplete confirmation");});
         }
+        Add("Open legacy hub with an incomplete team",()=>GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub));
         Add("Open RH from actual hub node",()=>{var node=UnityEngine.Object.FindObjectsByType<MapMenuNode>(FindObjectsSortMode.None).Single(n=>n.Destination==PanelId.Team);origin=node.gameObject;node.GetComponent<UnityEngine.UI.Button>().Select();Click(node.GetComponent<UnityEngine.UI.Button>());});
         Change("attendant",2,"hub quantity");
-        Add("Return to originating hub node",()=>Click(Confirm));
+        Add("Return to originating hub node with an incomplete team",()=>Click(Root.Find("HubHistory/Back").GetComponent<UnityEngine.UI.Button>()));
         Add("Hub focus restored and no extra debit",()=>{Expect(MenuNavigator.Instance.Current==PanelId.Menu&&EventSystem.current.currentSelectedGameObject==origin&&GameSessionState.Current.currentCash==65000,"Hub focus/economy");MenuNavigator.Instance.Open(PanelId.Establishment);});
         Add("Establishment reflects hired staff and opens RH",()=>{var summary=Game.Domain.Service.EstablishmentSummaryService.Build();Expect(summary.TeamCount==2&&summary.TeamDetails.Contains("Atendente"),"Establishment refresh");var content=UnityEngine.Object.FindFirstObjectByType<EstablishmentReviewContent>();var b=Field<EstablishmentReviewContent.DecisionVisual[]>(content,"decisions")[5].button;origin=b.gameObject;b.Select();Click(b);});
         Change("head_chef",1,"nested complete");

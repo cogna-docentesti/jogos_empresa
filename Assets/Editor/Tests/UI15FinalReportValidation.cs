@@ -43,16 +43,14 @@ public static class UI15FinalReportValidation
     }
     private static void Complete(bool negative = false)
     {
-        var s = Fixture();
-        if (negative) { s.teamJson = "{}"; s.currentCash = 1000; GameSessionState.Persist(); }
+        Fixture();
+        if (negative) GameSessionState.SetCash(1000);
         for (int month = 1; month <= 3; month++)
         {
-            if (!negative)
-            {
-                var forecast = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(GameSessionState.Current));
-                var item = Resources.LoadAll<EventData>("Events").First();
-                new SessionEventHistoryRepository(Db).RecordFromOption(sessionId, month, 6, item, new EventOption { id = "ui15-fixture", title = "Escolha da fixture isolada", description = "Snapshot exclusivo de validação, sem origem em previews.", effects = new EventEffectData { cashDelta = Mathf.Abs(forecast.netResult) + 5000 * month } });
-            }
+            var forecast = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(GameSessionState.Current));
+            var item = Resources.LoadAll<EventData>("Events").First();
+            float delta = negative ? -forecast.netResult - 5000 * month : Mathf.Abs(forecast.netResult) + 5000 * month;
+            new SessionEventHistoryRepository(Db).RecordFromOption(sessionId, month, 6, item, new EventOption { id = "ui15-fixture", title = "Escolha da fixture isolada", description = "Snapshot exclusivo de validação, sem origem em previews.", effects = new EventEffectData { cashDelta = delta } });
             if (GameSessionState.Current.status == GameSessionStatus.IN_PROGRESS) Expect(new RoundService().ProcessRound(month) != null, "Actual settlement");
         }
         Expect(GameSessionState.Current.status == (negative ? GameSessionStatus.BANKRUPT : GameSessionStatus.COMPLETED), "Final status");

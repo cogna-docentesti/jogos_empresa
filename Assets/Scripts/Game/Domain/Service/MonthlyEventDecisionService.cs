@@ -23,7 +23,10 @@ public sealed class MonthlyEventDecisionService
         Plan plan = null;
         db.RunInTransaction(() =>
         {
-            RequireActiveMonth(session.sessionId, session.currentRound);
+            var stored = RequireActiveMonth(session.sessionId, session.currentRound);
+            if (!GameSessionService.HasMinimumTeam(stored)
+                || (stored.teamJson != session.teamJson && !GameSessionService.HasMinimumTeam(session)))
+                throw new InvalidOperationException("The month requires the restaurant's minimum staffing.");
             string key = session.sessionId + ":" + session.currentRound;
             var saved = db.Find<MonthlyEventPlanEntity>(key);
             if (saved != null)
@@ -75,12 +78,13 @@ public sealed class MonthlyEventDecisionService
         return record;
     }
 
-    private void RequireActiveMonth(string sessionId, int month)
+    private GameSessionEntity RequireActiveMonth(string sessionId, int month)
     {
         var stored = new GameSessionRepository(db).GetById(sessionId);
         if (stored == null || stored.status != GameSessionStatus.IN_PROGRESS || stored.currentRound != month || month < 1 || month > 3
             || new RoundResultRepository(db).GetBySessionAndRound(sessionId, month) != null)
             throw new InvalidOperationException("Events require a persisted, unsettled active month.");
+        return stored;
     }
 
     public bool HasUnconfirmedChoices(GameSessionEntity session)

@@ -14,6 +14,7 @@ namespace Game.Adapter.In.Controllers
         private List<RoleData> roles = new();
         private RestaurantData restaurant;
         private TeamSelectionData team;
+        private Dictionary<string, int> minimums;
         private bool ready;
         private GameSessionService Service => new(GameSessionState.Current.userId, GameSessionState.Current.professorId);
         private void OnEnable()
@@ -41,14 +42,16 @@ namespace Game.Adapter.In.Controllers
                     && requirements.All(req => req != null && req.quantity >= 0 && roles.Any(r => r.id == req.roleId))
                     && team.members.All(m => m != null && m.quantity >= 0 && roles.Any(r => r.id == m.roleId))
                     && team.members.Select(m => m.roleId).Distinct().Count() == team.members.Count;
+                if (ready)
+                    minimums = restaurant != null ? TeamSelectionHelper.GetMinimums(restaurant) : new Dictionary<string, int>();
             }
-            catch (Exception) { team = new TeamSelectionData(); }
+            catch (Exception) { team = new TeamSelectionData(); ready = false; }
             if (ready)
             {
                 var catalog = roles.Select(role => new
                 {
                     Role = role,
-                    Minimum = requirements.Where(req => req.roleId == role.id).Sum(req => req.quantity),
+                    Minimum = minimums.TryGetValue(role.id, out int minimum) ? minimum : 0,
                     Hired = TeamSelectionHelper.GetMemberQuantity(team, role.id)
                 }).Where(entry => restaurant == null || entry.Minimum > 0 || entry.Role.sharedAcrossRestaurants || entry.Hired > 0)
                   .OrderByDescending(entry => entry.Minimum > 0).ThenByDescending(entry => entry.Role.sharedAcrossRestaurants)
@@ -96,32 +99,45 @@ namespace Game.Adapter.In.Controllers
             long count = team.members.Sum(m => (long)m.quantity);
             double payroll = team.members.Sum(m => (double)roles.Single(r => r.id == m.roleId).salary * m.quantity);
             long capacity = team.members.Sum(m => (long)roles.Single(r => r.id == m.roleId).maxClientsSupported * m.quantity);
-            var requirements = (restaurant.requiredRoles ?? Array.Empty<RoleRequirement>()).Where(r => r != null && r.quantity > 0).ToArray();
-            bool complete = requirements.All(r => TeamSelectionHelper.GetMemberQuantity(team, r.roleId) >= r.quantity);
-            string detail = string.Join("\n", requirements.Select(r => $"{TeamRoleCardView.Label(roles.FirstOrDefault(role => role.id == r.roleId))}: {TeamSelectionHelper.GetMemberQuantity(team, r.roleId)}/{r.quantity}"));
+            var shortfalls = TeamSelectionHelper.GetShortfalls(team, minimums);
+            bool complete = shortfalls.Count == 0;
+            string detail = string.Join("\n", minimums.Select(minimum =>
+            {
+                string label = TeamRoleCardView.Label(roles.Single(role => role.id == minimum.Key));
+                int hired = TeamSelectionHelper.GetMemberQuantity(team, minimum.Key);
+                string missing = shortfalls.TryGetValue(minimum.Key, out int quantity)
+                    ? quantity == 1 ? "  ·  Falta 1" : $"  ·  Faltam {quantity}"
+                    : "";
+                return $"{label}  {hired}/{minimum.Value}{missing}";
+            }));
             view.SetSummary(count, payroll, capacity, alignment, detail, true);
-            view.SetHint(count == 0 ? "Equipe vazia. Use + para contratar. A folha será cobrada no fechamento mensal."
-                : !complete ? "Equipe incompleta. Os mínimos afetam a capacidade de atendimento e o alinhamento."
-                : "Mínimos atendidos. Contratações adicionais mantêm a nota de alinhamento da equipe.", !complete);
-            // Existing rules allow incomplete teams, with lower alignment/capacity. Do not add a new hiring gate.
-            view.SetConfirmEnabled(true);
+            view.SetHint(complete ? "Mínimos atendidos." : "Use + para completar os mínimos da equipe.", !complete);
+            view.SetConfirmEnabled(complete);
         }
         private void Confirm()
         {
             if (!isActiveAndEnabled || !Available) return;
             try
             {
+                team = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);
+                if (TeamSelectionHelper.GetShortfalls(team, minimums).Count > 0)
+                {
+                    Refresh();
+                    return;
+                }
                 if (!Service.SaveTeamAlignment(roles)) { view.SetHint("Não foi possível salvar a equipe. Tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Tente novamente.", FeedbackKind.Error); return; }
                 GetComponent<ContextualHelp>()?.Complete();
-                bool empty = !team.members.Any(m => m.quantity > 0);
-                FeedbackToast.Show(empty ? "Equipe vazia confirmada. A capacidade e o alinhamento refletem essa escolha." : "Equipe confirmada. Salários serão cobrados no fechamento mensal.", empty ? FeedbackKind.Warning : FeedbackKind.Success);
                 var machine = GameManager.Instance?.StateMachine;
                 if (machine?.CurrentState == GameState.Initial_Team)
                 {
                     if (!Service.ContinueInitialSetup(GameState.Management_Hub))
+                    {
                         view.SetHint("Não foi possível avançar. Tente novamente; sua equipe foi preservada.", true);
+                        return;
+                    }
                 }
                 else MenuNavigator.Instance?.Back();
+                FeedbackToast.Show("Equipe confirmada. Salários serão cobrados no fechamento mensal.", FeedbackKind.Success);
             }
             catch (Exception) { view.SetHint("Não foi possível confirmar a equipe. Confira os dados e tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Confira os dados e tente novamente.", FeedbackKind.Error); }
         }
