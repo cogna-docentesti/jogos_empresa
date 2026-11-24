@@ -1,0 +1,62 @@
+{
+  "task_id": "FB-08",
+  "date": "2026-11-24",
+  "play_mode_date": "2026-11-19",
+  "branch": "dev/new-screens",
+  "baseline": "993dcf94",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": ["1280×720", "1366×768", "1920×1080"],
+  "method": "GameScene em Play Mode com SQLite e identificação PlayerPrefs isolados. O percurso abriu o cardápio pela seleção de cada restaurante e voltou à seleção entre os ensaios. Os registros conferem o texto e o sprite carregado por ID. As capturas vêm da Game View.",
+  "before": "Em Lanches, os três cards de preços exibiam ‘Incluído no cardápio’ em repouso.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Os três cardápios exibiram o campo de status vazio em repouso nas três resoluções. O prefab também inicia com o campo vazio, e o gerador usa o mesmo padrão. O card com foco exibiu ‘Em edição’, e os três cards do cardápio consultado pelo hub exibiram ‘Preço salvo’."
+    },
+    {
+      "criterion": 2,
+      "result": "Os nove ProductData correspondem aos nove registros aprovados do manifesto pelo ID do catálogo, caminho da fonte, GUID e SHA-256 do sprite. As referências de cada RestaurantData coincidem com o catálogo e com os três produtos carregados em cena. A comparação visual confirmou a imagem aprovada de cada produto."
+    },
+    {
+      "criterion": 3,
+      "result": "Os nomes exibidos e a ordem por restaurante seguem o catálogo. A aparência dos pratos não estabeleceu categorias econômicas. Os ProductData preservaram preços de referência, limites e proporções de custo. No banco isolado, a confirmação gravou uma sessão e a consulta manteve o valor de teste de R$ 90,25 associado a JAP_SUSHI_EXECUTIVO."
+    }
+  ],
+  "catalog_findings": [
+    "Combo completo tem bebida e sobremesa além de hambúrguer e fritas. Combo especial tem hambúrguer e fritas. As artes atuais reproduzem os respectivos motivos do catálogo.",
+    "No Japonês e no Francês, as artes dos executivos representam bandejas variadas. Os motivos dos produtos premium são temaki e ratatouille, respectivamente, conforme as referências aprovadas. A auditoria confirmou os nove vínculos existentes."
+  ],
+  "edit_mode": {
+    "suite": "UI07MenuPricingTests",
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "editmode.xml"
+  },
+  "limitations": [
+    "A validação visual ocorreu no Unity Editor. O gerador foi revisado no código e compilado, com verificação do valor serializado do prefab. A migração completa e builds de distribuição ficaram fora do ensaio.",
+    "O Editor instalado usado no QA foi 6000.3.28f1. Os arquivos versionados de versão, pacotes e bridge foram restaurados após os ensaios."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-08",
+    "before": "before.json",
+    "after": "after.json",
+    "inventory": "inventario-produtos.json",
+    "comparison": "comparacao-produtos.png",
+    "screenshots": [
+      "before-cardapio-lanches-1280x720.png",
+      "after-restaurante-lanches-1280x720.png",
+      "after-restaurante-japones-1280x720.png",
+      "after-restaurante-frances-1280x720.png",
+      "after-cardapio-lanches-1280x720.png",
+      "after-cardapio-japones-1280x720.png",
+      "after-cardapio-frances-1280x720.png",
+      "after-cardapio-frances-1920x1080.png",
+      "after-cardapio-em-edicao-1920x1080.png",
+      "after-cardapio-preco-salvo-1920x1080.png"
+    ]
+  }
+}

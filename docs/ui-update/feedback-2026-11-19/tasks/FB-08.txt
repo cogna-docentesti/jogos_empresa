@@ -1,5 +1,5 @@
 FB-08 — Revisar nomes, categorias e imagens dos produtos do cardápio
-Status: planejada | Prioridade: P1 | Tipo: auditoria e interface
+Status: concluída | Prioridade: P1 | Tipo: auditoria e interface
 Área: Cardápio
 Dependências: nenhuma
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -42,6 +42,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Montar uma comparação dos nove produtos com seus nomes e validar as telas de restaurante e cardápio.
+
+OBSERVAÇÕES E LIMITES
+1. O texto padrão saiu dos cards, do prefab e do gerador. A GameScene confirmou os três cardápios em 1280×720, 1366×768 e 1920×1080 e preservou o feedback de edição e revisão.
+2. O inventário confirma os nove vínculos por ID e restaurante com as ilustrações aprovadas. Nomes, sprites, faixas de preço e custos seguem o catálogo. Os 22 testes de Edit Mode passaram.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-08.json.

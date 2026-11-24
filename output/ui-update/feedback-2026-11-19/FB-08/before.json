@@ -1,0 +1,68 @@
+{
+  "phase": "before",
+  "passed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "checks": [
+    {
+      "name": "Identificação com armazenamento isolado",
+      "passed": true,
+      "frame": 5
+    },
+    {
+      "name": "Seleção de ponto comercial",
+      "passed": true,
+      "frame": 42
+    },
+    {
+      "name": "Lanches confirmado",
+      "passed": true,
+      "frame": 77
+    },
+    {
+      "restaurant": "REST_LANCHES",
+      "width": 1280,
+      "height": 720,
+      "review": false,
+      "frame": 86,
+      "products": [
+        {
+          "id": "LAN_COMBO_SIMPLES",
+          "name": "Combo simples",
+          "sprite": "Assets/Art/new/menu_pricing/products/lan/lan_combo_simples.png",
+          "status": "Incluído no cardápio",
+          "selection": 42.0,
+          "minPrice": 35.0,
+          "maxPrice": 52.0,
+          "inputCostRatio": 0.333333343
+        },
+        {
+          "id": "LAN_COMBO_COMPLETO",
+          "name": "Combo completo",
+          "sprite": "Assets/Art/new/menu_pricing/products/lan/lan_combo_completo.png",
+          "status": "Incluído no cardápio",
+          "selection": 58.0,
+          "minPrice": 47.5,
+          "maxPrice": 70.0,
+          "inputCostRatio": 0.3275862
+        },
+        {
+          "id": "LAN_COMBO_ESPECIAL",
+          "name": "Combo especial",
+          "sprite": "Assets/Art/new/menu_pricing/products/lan/lan_combo_especial.png",
+          "status": "Incluído no cardápio",
+          "selection": 80.0,
+          "minPrice": 67.5,
+          "maxPrice": 95.0,
+          "inputCostRatio": 0.3375
+        }
+      ]
+    },
+    {
+      "name": "Mensagem reproduzida nos três cards",
+      "passed": true,
+      "frame": 86
+    }
+  ],
+  "errors": []
+}

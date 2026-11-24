@@ -177,7 +177,7 @@ namespace Game.Adapter.In.UI
             var current = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
             bool editing = !_readOnly && current != null && current.transform.IsChildOf(transform);
             if (editingOutline != null) editingOutline.enabled = editing;
-            if (editingText != null) editingText.text = _readOnly ? "Preço salvo" : editing ? "Em edição" : "Incluído no cardápio";
+            if (editingText != null) editingText.text = _readOnly ? "Preço salvo" : editing ? "Em edição" : string.Empty;
         }
     }
 }

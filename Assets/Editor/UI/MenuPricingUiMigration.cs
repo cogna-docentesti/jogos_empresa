@@ -80,7 +80,7 @@ namespace Game.EditorTools
                 Retire(rect); rect.sizeDelta=new Vector2(1250,228); SharedUiStyles.Surface(root,"UI_CARD_NORMAL");
                 picture.transform.SetParent(rect,false); Node(rect,picture.name,12,4,228,220); picture.raycastTarget=false; picture.preserveAspect=true; picture.type=UnityEngine.UI.Image.Type.Simple;
                 Set(item,"productNameText",Text(rect,"ProductName","Produto",280,28,420,116,GameTypography.Tokens.SectionTitle,true));
-                Set(item,"editingText",Text(rect,"EditingStatus","Incluído no cardápio",280,176,420,36,GameTypography.Tokens.Caption));
+                Set(item,"editingText",Text(rect,"EditingStatus",string.Empty,280,176,420,36,GameTypography.Tokens.Caption));
                 Text(rect,"PriceLabel","Preço de venda",744,8,456,32,GameTypography.Tokens.Label,true);
                 Image(rect,"StepperBase","UI_STEPPER_BASE",740,44,472,76);
                 Set(item,"decreaseButton",Button(rect,"Decrease","−",744,48,68,68,SharedControlKind.Secondary));

@@ -1060,8 +1060,8 @@
       "area": "Cardápio",
       "kind": "auditoria e interface",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [],
       "objective": "Remover o texto redundante e verificar os possíveis ícones trocados entre produtos simples, especiais e premium.",
       "scope": [
@@ -1086,7 +1086,10 @@
         "Assets/Scripts/Game/Adapter/In/UI/ProductPricingItemView.cs",
         "Assets/Editor/UI/MenuPricingUiMigration.cs"
       ],
-      "notes": [],
+      "notes": [
+        "O texto padrão saiu dos cards, do prefab e do gerador. A GameScene confirmou os três cardápios em 1280×720, 1366×768 e 1920×1080 e preservou o feedback de edição e revisão.",
+        "O inventário confirma os nove vínculos por ID e restaurante com as ilustrações aprovadas. Nomes, sprites, faixas de preço e custos seguem o catálogo. Os 22 testes de Edit Mode passaram."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-08.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-08.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-08",
@@ -2309,7 +2312,7 @@
     "date": "2026-11-19",
     "scope": "Código, catálogos, documentação e backlog existentes; inspeção estática, sem validar defeitos visuais em Play Mode."
   },
-  "updated_at": "2026-11-19",
+  "updated_at": "2026-11-24",
   "execution_authorized": true,
   "execution_policy": {
     "mode": "one_task_per_new_chat_sequential",
