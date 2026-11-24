@@ -22,21 +22,22 @@ namespace Game.Adapter.In.UI
         public int Quantity { get; private set; }
         public float RequiredHeight { get; private set; } = 360;
         public event Action<TeamRoleCardView, int> QuantityRequested;
+        public bool RemovalOnly { get; private set; }
         private bool available;
         private int required;
         private void OnEnable() { ApplyTypography(); addButton?.onClick.AddListener(Add); removeButton?.onClick.AddListener(Remove); }
         private void OnDisable() { addButton?.onClick.RemoveListener(Add); removeButton?.onClick.RemoveListener(Remove); }
-        private void Add() { if (available && Quantity < int.MaxValue) QuantityRequested?.Invoke(this, Quantity + 1); }
+        private void Add() { if (available && !RemovalOnly && Quantity < int.MaxValue) QuantityRequested?.Invoke(this, Quantity + 1); }
         private void Remove() { if (available && Quantity > 0) QuantityRequested?.Invoke(this, Quantity - 1); }
-        public void Setup(RoleData role, Sprite face, Sprite setting, int minimum)
+        public void Setup(RoleData role, Sprite face, Sprite setting, int minimum, bool removalOnly = false)
         {
             ApplyTypography();
-            Role = role; required = minimum;
+            Role = role; required = minimum; RemovalOnly = removalOnly;
             foreach (var pair in new[] { (portrait, face), (environment, setting) })
             { pair.Item1.sprite = pair.Item2; pair.Item1.color = Color.white; pair.Item1.preserveAspect = true; pair.Item1.type = UnityEngine.UI.Image.Type.Simple; pair.Item1.raycastTarget = false; }
             nameText.text = Label(role);
             salaryText.text = FinancialScreenView.Money(role.salary) + " / mês";
-            capacityText.text = $"{role.maxClientsSupported:N0} clientes/mês por pessoa\nQualidade +{role.qualityContribution:P0} por pessoa";
+            capacityText.text = $"{role.maxClientsSupported:N0} clientes/mês por pessoa\nQualidade: +{role.qualityContribution * 100f:0.##} pontos por pessoa";
         }
         public static string Label(RoleData role) => role == null ? "Função indisponível" : role.id switch
         { "attendant" => "Atendente", "grill_cook" => "Chapeiro", "head_chef" => "Chef de cozinha", "manager" => "Gerente", "sushi_chef" => "Profissional de sushi", _ => role.displayName };
@@ -44,10 +45,11 @@ namespace Game.Adapter.In.UI
         {
             Quantity = quantity; available = enabled;
             quantityText.text = known ? quantity.ToString() : "—";
-            addButton.interactable = enabled && quantity < int.MaxValue; removeButton.interactable = enabled && quantity > 0;
+            addButton.interactable = enabled && !RemovalOnly && quantity < int.MaxValue; removeButton.interactable = enabled && quantity > 0;
             GetComponent<UnityEngine.UI.Button>().interactable = enabled;
             GetComponent<SharedControlAppearance>()?.SetSelected(quantity > 0);
-            requirementText.text = !known ? "Quantidade indisponível." : required > 0 ? $"Mínimo do restaurante: {required}  •  Atual: {quantity}" : "Função adicional";
+            requirementText.text = !known ? "Quantidade indisponível." : RemovalOnly ? "Equipe anterior • Apenas remoção"
+                : required > 0 ? $"Mínimo do restaurante: {required}  •  Atual: {quantity}" : "Função opcional";
         }
         private void LateUpdate()
         {

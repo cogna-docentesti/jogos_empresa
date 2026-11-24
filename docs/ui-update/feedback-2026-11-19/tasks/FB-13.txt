@@ -1,5 +1,5 @@
 FB-13 — Filtrar profissionais por restaurante e revisar os efeitos da contratação
-Status: planejada | Prioridade: P1 | Tipo: análise e correção
+Status: concluída | Prioridade: P1 | Tipo: análise e correção
 Área: Equipe; balanceamento
 Dependências: nenhuma
 Modelo: gpt-6.2-astra | Raciocínio: high
@@ -46,8 +46,9 @@ VALIDAÇÃO PREVISTA
 1. Comparar os três restaurantes, contratar/remover funções e confrontar folha, capacidade, qualidade e alinhamento com o cálculo atual.
 
 OBSERVAÇÕES E LIMITES
-1. A tela atualmente carrega todas as cinco funções; o feedback requer revisar pertinência, não apenas reordená-las.
-2. Confirmar efeitos com a análise de balanceamento disponível; não foi localizada uma fonte externa separada nesta inspeção.
+1. Cada restaurante oferece seus dois cargos obrigatórios e o gerente opcional. A matriz e os efeitos por pessoa estão em docs/monthly-simulation.md.
+2. Profissionais de outro restaurante em saves anteriores continuam na equipe e na folha. Seu card permite remoção voluntária até a quantidade chegar a zero.
+3. GameScene validada em 25 estados com SQLite isolado e cálculo mensal para os três restaurantes. 40 testes de Edit Mode passaram.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-13.json.

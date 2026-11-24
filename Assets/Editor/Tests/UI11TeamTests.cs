@@ -10,12 +10,12 @@ public sealed class UI11TeamTests
 {
     private GameObject instance;
     private static T Field<T>(object o, string n) => (T)o.GetType().GetField(n, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(o);
-    private TeamRoleCardView Card(string id)
+    private TeamRoleCardView Card(string id, bool removalOnly = false)
     {
         instance = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/TeamRoleCard.prefab"));
         var card = instance.GetComponent<TeamRoleCardView>();
         typeof(TeamRoleCardView).GetMethod("OnEnable", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(card, null);
-        card.Setup(Resources.LoadAll<RoleData>("Roles").Single(r => r.id == id), AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/new/team/portraits/" + id + ".png"), null, 0);
+        card.Setup(Resources.LoadAll<RoleData>("Roles").Single(r => r.id == id), AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/new/team/portraits/" + id + ".png"), null, 0, removalOnly);
         card.SetQuantity(0, true); return card;
     }
     [TearDown] public void Clean() { if (instance != null) Object.DestroyImmediate(instance); GameSessionState.Clear(); }
@@ -42,6 +42,19 @@ public sealed class UI11TeamTests
         Field<UnityEngine.UI.Button>(c,"removeButton").onClick.Invoke(); Assert.AreEqual(2,quantity);
         Field<UnityEngine.UI.Button>(c,"addButton").onClick.Invoke(); Assert.AreEqual(4,quantity);
     }
+    [Test] public void SavedSpecialistOutsideTheCatalogCanOnlyBeRemoved()
+    {
+        var card = Card("sushi_chef", removalOnly: true);
+        card.SetQuantity(2, true);
+        int requested = -1;
+        card.QuantityRequested += (_, quantity) => requested = quantity;
+        var add = Field<UnityEngine.UI.Button>(card, "addButton");
+        Assert.IsFalse(add.interactable);
+        add.onClick.Invoke();
+        Assert.AreEqual(-1, requested);
+        Field<UnityEngine.UI.Button>(card, "removeButton").onClick.Invoke();
+        Assert.AreEqual(1, requested);
+    }
     [Test] public void UnavailableControlsCannotChangeQuantity()
     {
         var c=Card("manager"); c.SetQuantity(2,false); int count=0; c.QuantityRequested+=(_,_)=>count++;
@@ -62,7 +75,7 @@ public sealed class UI11TeamTests
     }
     [Test] public void NoWaiterRoleIsCreatedAndJsonRoundTripKeepsQuantities()
     {
-        var roles=Resources.LoadAll<RoleData>("Roles"); Assert.AreEqual(5,roles.Length); Assert.IsFalse(roles.Any(r=>r.id=="waiter"));
+        var roles=Resources.LoadAll<RoleData>("Roles"); Assert.IsFalse(roles.Any(r=>r.id=="waiter"));
         var team=new TeamSelectionData(); TeamSelectionHelper.SetMemberQuantity(team,"attendant",4); TeamSelectionHelper.SetMemberQuantity(team,"manager",1);
         team=TeamSelectionHelper.FromJson(TeamSelectionHelper.ToJson(team)); Assert.AreEqual(4,TeamSelectionHelper.GetMemberQuantity(team,"attendant"));
         TeamSelectionHelper.SetMemberQuantity(team,"manager",0); Assert.AreEqual(1,team.members.Count);

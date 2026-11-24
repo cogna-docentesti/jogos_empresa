@@ -9,6 +9,7 @@ public class RoleData : ScriptableObject
 
     [Header("Classificação")]
     public RoleType roleType;
+    public bool sharedAcrossRestaurants;
 
     [Header("Financeiro")]
     public int salary;

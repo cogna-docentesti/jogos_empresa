@@ -114,7 +114,23 @@ New game requires confirmation and uses `StartNewCampaignPreservingReport`, exte
 
 `Assets/Resources/MonthlySimulation/DefaultSettings.asset` controls operating days, price elasticity and bounds, reputation demand bounds, service threshold, reputation gain/penalty, and quality scaling. Create assets through **Create > Game Data > Monthly Simulation Settings**, but the runtime loader expects the default asset at that exact Resources path.
 
-New role assets live in `Resources/Roles`: attendant (2,200 / 900 monthly clients), grill_cook (2,500 / 750), sushi_chef (4,500 / 600), head_chef (8,000 / 450), manager (5,000 / 0). These are initial balance values, not an empirical calibration. Default required teams have two attendants and one restaurant specialist. Utilities are 1,500 for Lanches and Japones, and 2,000 for Frances. The existing location demand, capacity, rents, menu prices, and product input ratios are preserved. Equipment data loads from the existing **Equipments** folder.
+The hiring screen offers roles with a positive minimum in `RestaurantData.requiredRoles` and roles marked `RoleData.sharedAcrossRestaurants`. The shipped catalog is:
+
+| Role | Lanches | Japonês | Francês | BRL/person/month | Clients/person/month | Quality points/person (out of 100) |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| Atendente (`attendant`) | Minimum 2 | Minimum 2 | Minimum 2 | 2,200 | 900 | 2 |
+| Chapeiro (`grill_cook`) | Minimum 1 | — | — | 2,500 | 750 | 5 |
+| Profissional de sushi (`sushi_chef`) | — | Minimum 1 | — | 4,500 | 600 | 10 |
+| Chef de cozinha (`head_chef`) | — | — | Minimum 1 | 8,000 | 450 | 15 |
+| Gerente (`manager`) | Optional | Optional | Optional | 5,000 | 0 | 10 |
+
+A dash excludes the role from new hires. Management is shared across all three operations. The manager contributes to payroll and quality. The alignment engine awards 5/20 for an incomplete required team and 20/20 once all minima are met. Additional hires can raise team capacity or quality according to the table. The capacity shown on the hiring screen is the sum of staff support before the operating limits described above.
+
+For display, one quality point is 0.01 in the simulation. Staff and compatible equipment contributions add together. With satisfactory service, the engine caps their sum at 1, multiplies by the configured reputation scale, and rounds to the nearest whole point, with midpoints rounded away from zero. These are the shipped balance values.
+
+A previously hired specialist outside the restaurant's catalog keeps their stored quantity and economic effects. RH shows that role with removal enabled. Removing the last person hides the card and prevents rehiring. Opening RH leaves the saved roster and cash intact.
+
+Utilities are 1,500 for Lanches and Japones, and 2,000 for Frances. The existing location demand, capacity, rents, menu prices, and product input ratios are preserved. Equipment data loads from the existing **Equipments** folder.
 
 ## Persistence and failure handling
 

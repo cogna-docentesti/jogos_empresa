@@ -1,0 +1,126 @@
+{
+  "task_id": "FB-13",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "297b6834fc42e646ee630680b57d0c8fbe1e2dd2",
+  "status": "concluída",
+  "implementation_performed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "screen": "1280×720",
+  "framework": "uGUI e TextMesh Pro da GameScene.",
+  "baseline_observed": "Em Lanches, o catálogo incluía os cinco cargos, entre eles chef de cozinha e profissional de sushi. O texto de qualidade aparecia como porcentagem por pessoa.",
+  "hiring_matrix": {
+    "Lanches": {
+      "minimum": {
+        "attendant": 2,
+        "grill_cook": 1
+      },
+      "optional": [
+        "manager"
+      ],
+      "inapplicable": [
+        "head_chef",
+        "sushi_chef"
+      ]
+    },
+    "Japonês": {
+      "minimum": {
+        "attendant": 2,
+        "sushi_chef": 1
+      },
+      "optional": [
+        "manager"
+      ],
+      "inapplicable": [
+        "head_chef",
+        "grill_cook"
+      ]
+    },
+    "Francês": {
+      "minimum": {
+        "attendant": 2,
+        "head_chef": 1
+      },
+      "optional": [
+        "manager"
+      ],
+      "inapplicable": [
+        "grill_cook",
+        "sushi_chef"
+      ]
+    }
+  },
+  "sources": [
+    "Assets/Resources/Roles",
+    "Assets/Resources/Restaurants",
+    "Assets/Resources/MonthlySimulation/DefaultSettings.asset",
+    "Assets/Scripts/Game/Domain/Service/MonthlySimulationEngine.cs",
+    "Assets/Scripts/Game/Domain/Aligment/AligmentEngine.cs",
+    "docs/monthly-simulation.md",
+    "docs/art/manifest.json"
+  ],
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Em cada modelo, o catálogo em Play Mode exibiu atendente, especialista local e gerente. O mínimo vem de RestaurantData e a função de gestão é compartilhada por metadado do cargo. O catálogo apresentado acompanha as funções aplicáveis."
+    },
+    {
+      "criterion": 2,
+      "result": "Comparação em sessões isoladas entre textos, assets e cálculo mensal. Folha por pessoa em reais/mês, suporte da equipe em clientes/mês e qualidade em pontos de 0 a 100. A capacidade operacional considerou o limite físico e a cobertura dos mínimos. A nota da equipe foi 5/20 abaixo do mínimo e 20/20 ao completá-lo. O gerente elevou a folha em R$ 5.000 e a qualidade em 10 pontos, com acréscimo zero de clientes/mês. O bônus de reputação depende do atendimento, da soma limitada da qualidade e do arredondamento."
+    },
+    {
+      "criterion": 3,
+      "result": "Conferidos os retratos e ambientes das cinco funções na GameScene pelo nome dos sprites e pelas capturas. A matriz usa os requisitos e os valores do catálogo em produção. A calibração pedagógica externa dos valores permanece sem fonte separada identificada."
+    }
+  ],
+  "visuals": {
+    "portrait_directory": "Assets/Art/new/team/portraits",
+    "environment_directory": "Assets/Art/new/team/backgrounds",
+    "portrait_to_environment": {
+      "attendant": "service_counter",
+      "grill_cook": "grill_kitchen",
+      "head_chef": "french_kitchen",
+      "manager": "management_office",
+      "sushi_chef": "sushi_counter"
+    },
+    "docs_read": [
+      "uGUI Button",
+      "TextMesh Pro Documentation"
+    ]
+  },
+  "legacy": "Em Lanches, duas pessoas de sushi de um save anterior permaneceram na folha, capacidade e qualidade. A soma da folha era R$ 9.000/mês. O card impediu aumentar a quantidade. A remoção voluntária de uma pessoa persistiu após recarga do SQLite. A remoção da última retirou o card. Caixa observado de R$ 65.000 durante todo o cenário.",
+  "play_mode": {
+    "method": "GameScene no Editor Windows com banco e identificação isolados. Fixtures abriram a tela real. Alterações de quantidade acionaram os botões por submit do EventSystem. Cada estado foi confrontado com o registro no SQLite e uma chamada sem gravação ao MonthlySimulationEngine. Reputações iniciais 50 e 10 exercitaram os dois resultados da meta de atendimento. Os PNGs vieram do render da Game View.",
+    "checked_states": 25,
+    "errors": [],
+    "evidence": "after.json"
+  },
+  "edit_mode": {
+    "suites": [
+      "UI11TeamTests",
+      "MonthlySimulationTests"
+    ],
+    "passed": 40,
+    "failed": 0,
+    "evidence": "editmode.xml"
+  },
+  "limitations": [
+    "Editor Windows 6000.3.28f1. O projeto declara 6000.3.21f1. Capturas e controles verificados em 1280×720. O ensaio comparou cálculos do mês a partir das equipes salvas, sem avançar o calendário."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-13",
+    "baseline": "before.json",
+    "screenshots": [
+      "after-frances-manager.png",
+      "after-frances-minimum.png",
+      "after-japones-manager.png",
+      "after-japones-minimum.png",
+      "after-legacy.png",
+      "after-podrao-manager.png",
+      "after-podrao-minimum.png",
+      "before-lanches-bottom.png",
+      "before-lanches.png"
+    ]
+  }
+}

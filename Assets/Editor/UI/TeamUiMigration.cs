@@ -124,7 +124,7 @@ namespace Game.EditorTools
             Set(view, "requirementsText", Text(summary.transform, "Requirements", "", 24, 538, 448, 80, GameTypography.Tokens.Label));
             var empty = Picture(summary.transform, "EmptyTeam", "EMPTY_TEAM", 164, 616, 168, 112); Set(view, "emptyTeam", empty.gameObject);
             var footer = Picture(panel, "BottomBar", "UI_NAVBAR_PLUM", 0, 984, 1920, 96); Retire(footer.transform);
-            Text(footer.transform, "Note", "Use + e − para ajustar as contratações.", 304, 26, 848, 44, GameTypography.Tokens.Body, false, GamePalette.OnDark);
+            Text(footer.transform, "Note", "Qualidade (até 100) pode elevar a reputação por bom atendimento.", 304, 26, 848, 44, GameTypography.Tokens.Body, false, GamePalette.OnDark);
             var confirm = Button(footer.transform, "Confirm", "Confirmar equipe e abrir hub", 1128, 14, 480, 68); Set(view, "confirmButton", confirm); Set(view, "confirmLabel", confirm.GetComponentInChildren<TextMeshProUGUI>());
             var so = new SerializedObject(view); var visuals = so.FindProperty("roleVisuals");
             var ids = new[] { "attendant", "grill_cook", "head_chef", "manager", "sushi_chef" };

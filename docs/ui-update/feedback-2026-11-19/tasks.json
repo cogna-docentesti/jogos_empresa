@@ -225,9 +225,9 @@
     {
       "id": "A-02",
       "topic": "Profissionais",
-      "proposal": "Filtrar por pertinência comprovada, mantendo funções compartilhadas justificadas; não ocultar toda função apenas por não ser obrigatória.",
+      "proposal": "Oferecer os cargos exigidos pelo restaurante e o gerente opcional compartilhado. Especialistas legados conservam quantidade e efeitos, com remoção voluntária.",
       "owner_task": "FB-13",
-      "status": "depende da matriz"
+      "status": "resolvida na FB-13"
     },
     {
       "id": "A-03",
@@ -1344,8 +1344,8 @@
       "area": "Equipe; balanceamento",
       "kind": "análise e correção",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [],
       "objective": "Exibir profissionais pertinentes e explicar os efeitos reais de contratá-los.",
       "scope": [
@@ -1373,8 +1373,9 @@
         "docs/monthly-simulation.md"
       ],
       "notes": [
-        "A tela atualmente carrega todas as cinco funções; o feedback requer revisar pertinência, não apenas reordená-las.",
-        "Confirmar efeitos com a análise de balanceamento disponível; não foi localizada uma fonte externa separada nesta inspeção."
+        "Cada restaurante oferece seus dois cargos obrigatórios e o gerente opcional. A matriz e os efeitos por pessoa estão em docs/monthly-simulation.md.",
+        "Profissionais de outro restaurante em saves anteriores continuam na equipe e na folha. Seu card permite remoção voluntária até a quantidade chegar a zero.",
+        "GameScene validada em 25 estados com SQLite isolado e cálculo mensal para os três restaurantes. 40 testes de Edit Mode passaram."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-13.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-13.json",

@@ -30,33 +30,56 @@ namespace Game.Adapter.In.Controllers
             if (view == null) return;
             restaurant = GameSessionState.HasSession ? Resources.LoadAll<RestaurantData>("Restaurants").FirstOrDefault(r => r != null && r.type == GameSessionState.Current.restaurantType) : null;
             view.SetContext(GameManager.Instance?.StateMachine?.CurrentState == GameState.Initial_Team, restaurant != null ? restaurant.displayName : "Restaurante indisponível");
-            roles = Resources.LoadAll<RoleData>("Roles").Where(r => r != null)
-                .OrderBy(r => r.id=="attendant"?0:restaurant?.requiredRoles?.Any(req=>req!=null&&req.roleId==r.id)==true?1:r.id=="manager"?2:3)
-                .ThenBy(r=>r.roleType).ToList();
+            roles = Resources.LoadAll<RoleData>("Roles").Where(r => r != null).OrderBy(r => r.roleType).ToList();
+            var requirements = restaurant?.requiredRoles ?? Array.Empty<RoleRequirement>();
             try
             {
                 team = GameSessionState.HasSession ? TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson) : new TeamSelectionData();
-                ready = view.HasRequiredReferences() && roles.Count == 5 && roles.Select(r => r.id).Distinct().Count() == roles.Count
-                    && roles.All(r => !string.IsNullOrWhiteSpace(r.id) && r.salary >= 0 && r.maxClientsSupported >= 0 && view.HasVisual(r.id))
+                ready = view.HasRequiredReferences() && roles.Count > 0 && roles.Select(r => r.id).Distinct().Count() == roles.Count
+                    && roles.All(r => !string.IsNullOrWhiteSpace(r.id) && r.salary >= 0 && r.maxClientsSupported >= 0
+                        && r.qualityContribution >= 0f && r.qualityContribution <= 1f)
+                    && requirements.All(req => req != null && req.quantity >= 0 && roles.Any(r => r.id == req.roleId))
                     && team.members.All(m => m != null && m.quantity >= 0 && roles.Any(r => r.id == m.roleId))
                     && team.members.Select(m => m.roleId).Distinct().Count() == team.members.Count;
             }
             catch (Exception) { team = new TeamSelectionData(); }
-            if (ready) foreach (var role in roles)
+            if (ready)
             {
-                int required = restaurant?.requiredRoles?.Where(r => r != null && r.roleId == role.id).Sum(r => r.quantity) ?? 0;
-                var card = view.CreateCard(role, required); card.QuantityRequested += SetQuantity; cards.Add(card);
+                var catalog = roles.Select(role => new
+                {
+                    Role = role,
+                    Minimum = requirements.Where(req => req.roleId == role.id).Sum(req => req.quantity),
+                    Hired = TeamSelectionHelper.GetMemberQuantity(team, role.id)
+                }).Where(entry => restaurant == null || entry.Minimum > 0 || entry.Role.sharedAcrossRestaurants || entry.Hired > 0)
+                  .OrderByDescending(entry => entry.Minimum > 0).ThenByDescending(entry => entry.Role.sharedAcrossRestaurants)
+                  .ToList();
+
+                ready = catalog.Count > 0 && catalog.All(entry => view.HasVisual(entry.Role.id));
+                if (ready) foreach (var entry in catalog)
+                {
+                    bool removalOnly = restaurant != null && entry.Minimum == 0 && !entry.Role.sharedAcrossRestaurants;
+                    var card = view.CreateCard(entry.Role, entry.Minimum, removalOnly);
+                    card.QuantityRequested += SetQuantity;
+                    cards.Add(card);
+                }
             }
             Refresh();
-            GetComponent<ContextualHelp>()?.Refresh(Available, team.members.Any(m => m.quantity > 0));
+            GetComponent<ContextualHelp>()?.Refresh(Available, team.members.Any(m => m != null && m.quantity > 0));
         }
         private bool Available => ready && restaurant != null && GameSessionState.HasActiveSession && GameSessionState.IsPersisted;
         private void SetQuantity(TeamRoleCardView card, int quantity)
         {
             if (!isActiveAndEnabled || !Available || card?.Role == null || quantity < 0) return;
+            if (card.RemovalOnly && quantity >= card.Quantity) return;
             Service.SetTeamMemberQuantity(card.Role, quantity);
             GetComponent<ContextualHelp>()?.Complete();
-            team = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson); Refresh();
+            if (card.RemovalOnly && quantity == 0)
+            {
+                Populate();
+                return;
+            }
+            team = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);
+            Refresh();
         }
         private void Refresh()
         {
@@ -70,7 +93,7 @@ namespace Game.Adapter.In.Controllers
             }
             var alignment = AlignmentEngine.Calculate(GameSessionState.Current.restaurantType, GameSessionState.Current.targetSegment,
                 GameSessionState.Current.locationZone, restaurant, MenuPricingHelper.FromJson(GameSessionState.Current.menuPricingJson), team, roles);
-            int count = team.members.Sum(m => m.quantity);
+            long count = team.members.Sum(m => (long)m.quantity);
             double payroll = team.members.Sum(m => (double)roles.Single(r => r.id == m.roleId).salary * m.quantity);
             long capacity = team.members.Sum(m => (long)roles.Single(r => r.id == m.roleId).maxClientsSupported * m.quantity);
             var requirements = (restaurant.requiredRoles ?? Array.Empty<RoleRequirement>()).Where(r => r != null && r.quantity > 0).ToArray();
@@ -78,8 +101,8 @@ namespace Game.Adapter.In.Controllers
             string detail = string.Join("\n", requirements.Select(r => $"{TeamRoleCardView.Label(roles.FirstOrDefault(role => role.id == r.roleId))}: {TeamSelectionHelper.GetMemberQuantity(team, r.roleId)}/{r.quantity}"));
             view.SetSummary(count, payroll, capacity, alignment, detail, true);
             view.SetHint(count == 0 ? "Equipe vazia. Use + para contratar. A folha será cobrada no fechamento mensal."
-                : !complete ? "Equipe incompleta. Confira os mínimos do restaurante; eles afetam a capacidade e o alinhamento."
-                : "Equipe atende aos mínimos. Alterações salvas; salários entram no fechamento mensal.", !complete);
+                : !complete ? "Equipe incompleta. Os mínimos afetam a capacidade de atendimento e o alinhamento."
+                : "Mínimos atendidos. Contratações adicionais mantêm a nota de alinhamento da equipe.", !complete);
             // Existing rules allow incomplete teams, with lower alignment/capacity. Do not add a new hiring gate.
             view.SetConfirmEnabled(true);
         }
@@ -90,7 +113,8 @@ namespace Game.Adapter.In.Controllers
             {
                 if (!Service.SaveTeamAlignment(roles)) { view.SetHint("Não foi possível salvar a equipe. Tente novamente.", true); FeedbackToast.Show("A equipe não foi confirmada. Tente novamente.", FeedbackKind.Error); return; }
                 GetComponent<ContextualHelp>()?.Complete();
-                FeedbackToast.Show(team.members.Sum(m => m.quantity) == 0 ? "Equipe vazia confirmada. A capacidade e o alinhamento refletem essa escolha." : "Equipe confirmada. Salários serão cobrados no fechamento mensal.", team.members.Sum(m => m.quantity) == 0 ? FeedbackKind.Warning : FeedbackKind.Success);
+                bool empty = !team.members.Any(m => m.quantity > 0);
+                FeedbackToast.Show(empty ? "Equipe vazia confirmada. A capacidade e o alinhamento refletem essa escolha." : "Equipe confirmada. Salários serão cobrados no fechamento mensal.", empty ? FeedbackKind.Warning : FeedbackKind.Success);
                 var machine = GameManager.Instance?.StateMachine;
                 if (machine?.CurrentState == GameState.Initial_Team)
                 {

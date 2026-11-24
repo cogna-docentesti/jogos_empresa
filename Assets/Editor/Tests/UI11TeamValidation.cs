@@ -94,7 +94,7 @@ public static class UI11TeamValidation
         Expect(Field<TMP_Text>(View,"payrollText").text==FinancialScreenView.Money((float)salary),"Payroll");
         Expect(Field<TMP_Text>(View,"capacityText").text==$"{capacity:N0} clientes/mês","Capacity");
         Expect(Field<TMP_Text>(View,"alignmentText").text==$"{a.totalScore}/80  •  Equipe {a.restaurantTeamScore}/20"&&a.restaurantTeamScore==(stage==2?20:5),"Alignment");
-        Expect(Confirm.interactable&&Cards.Length==5&&Cards.All(c=>c.Role.id!="waiter"),"Catalog/confirmation preserves rules");
+        Expect(Confirm.interactable&&Cards.Select(c=>c.Role.id).OrderBy(id=>id).SequenceEqual(Restaurant.requiredRoles.Select(r=>r.roleId).Append("manager").OrderBy(id=>id)),"Catalog/confirmation preserves rules");
         Expect(Field<GameObject>(View,"emptyTeam").activeSelf==(stage==0),"Pending empty");
     }
     private static void Change(string id,int quantity,string name)
@@ -129,7 +129,7 @@ public static class UI11TeamValidation
                 string specialist=type==RestaurantType.PODRAO?"grill_cook":type==RestaurantType.JAPONES?"sushi_chef":"head_chef";
                 Change(specialist,1,tag);
                 Add("Complete team calculation and selected card "+tag,()=>{VerifyTotals(2);Capture("valid-"+tag);Scroll.verticalNormalizedPosition=0;EventSystem.current.SetSelectedGameObject(null);});
-                Add("All five roles and whole environments "+tag,()=>{Capture("catalog-bottom-"+tag);Click(Confirm);});
+                Add("Restaurant roles and whole environments "+tag,()=>{Capture("catalog-bottom-"+tag);Click(Confirm);});
                 Add("Confirmation reaches hub with no blank panel "+tag,()=>{SameSession();Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Management_Hub&&MenuNavigator.Instance.Current==PanelId.Menu&&Root.Find("Panel_Menu").gameObject.activeInHierarchy&&!View.gameObject.activeInHierarchy,"Hub destination");Expect(GameSessionState.Current.currentCash==65000,"Hiring debit");var hud=UnityEngine.Object.FindFirstObjectByType<MenuHudView>();var summary=Game.Domain.Service.EstablishmentSummaryService.Build();Expect(Field<TMP_Text>(hud,"scoreValue").text==summary.Score.ToString()&&Field<TMP_Text>(hud,"cashValue").text==FinancialScreenView.Money(summary.Cash),"HUD refresh");Capture("hub-"+tag,false);Call(Controller,"Confirm");GameSessionState.LoadActiveSession(GameSessionState.Current.userId);MenuNavigator.Instance.Open(PanelId.Team);});
                 Add("SQLite quantities survive revisit "+tag,()=>{VerifyTotals(2);Expect(!Field<TMP_Text>(View,"stepText").text.Contains("PASSO"),"Hub context");Capture("revisit-"+tag);Click(Confirm);});
             }
@@ -168,7 +168,7 @@ public static class UI11TeamValidation
         {
             int currentMonth=month;
             Add("Open hiring month "+currentMonth,()=>{GameSessionState.Current.currentRound=currentMonth;GameSessionState.Save();MenuNavigator.Instance.Open(PanelId.Team);});
-            Add("Month "+currentMonth+" preserves hiring and quantities",()=>{Expect(Cards.Length==5&&Card("attendant").Quantity==2&&Card("head_chef").Quantity==1&&Confirm.interactable,"Month hiring");Capture("month-"+currentMonth+"-1280x720");Click(Confirm);SameSession();});
+            Add("Month "+currentMonth+" preserves hiring and quantities",()=>{Expect(Cards.Length==3&&Card("attendant").Quantity==2&&Card("head_chef").Quantity==1&&Confirm.interactable,"Month hiring");Capture("month-"+currentMonth+"-1280x720");Click(Confirm);SameSession();});
         }
         Add("Final services and runtime evidence",()=>{File.WriteAllText(UiValidationContext.FileFor("UI-11","runtime.json"),Newtonsoft.Json.JsonConvert.SerializeObject(new{project=UnityEngine.Application.dataPath,unity=UnityEngine.Application.unityVersion,frame=Time.frameCount,sessionId,managerId,databaseId,sceneHandle,database=DatabaseInitializer.DatabaseService.Connection.DatabasePath,state=GameManager.Instance.StateMachine.CurrentState.ToString(),panel=MenuNavigator.Instance.Current.ToString()},Newtonsoft.Json.Formatting.Indented));});
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;
@@ -184,9 +184,9 @@ public static class UI11TeamValidation
         {
             var viewport=size;string res=size.x+"x"+size.y;
             Add("Prepare saved viewport "+res,()=>{UI01Validation.SetGameView(viewport.x,viewport.y);Fixture(RestaurantType.FRANCES,2);});
-            Add("Saved scene renders complete team "+res,()=>{Expect(Screen.width==viewport.x&&Screen.height==viewport.y,"Resolution");VerifyTotals(2);Expect(Field<TMP_Text>(View,"footerText").text=="Use + e − para ajustar as contratações.","Available footer guidance");Capture("saved-scene-"+res);Click(Confirm);});
+            Add("Saved scene renders complete team "+res,()=>{Expect(Screen.width==viewport.x&&Screen.height==viewport.y,"Resolution");VerifyTotals(2);Expect(Field<TMP_Text>(View,"footerText").text=="Qualidade (até 100) pode elevar a reputação por bom atendimento.","Available footer guidance");Capture("saved-scene-"+res);Click(Confirm);});
             Add("Saved scene confirmation reaches hub "+res,()=>{Expect(MenuNavigator.Instance.Current==PanelId.Menu&&Root.Find("Panel_Menu").gameObject.activeInHierarchy,"Saved hub");MenuNavigator.Instance.Open(PanelId.Team);});
-            Add("Saved revisit and missing-session fixture "+res,()=>{VerifyTotals(2);Expect(Field<TMP_Text>(View,"footerText").text=="Use + e − para ajustar as contratações.","Revisit footer guidance");savedSession=GameSessionState.Current;GameSessionState.Clear();Call(Controller,"Populate");});
+            Add("Saved revisit and missing-session fixture "+res,()=>{VerifyTotals(2);Expect(Field<TMP_Text>(View,"footerText").text=="Qualidade (até 100) pode elevar a reputação por bom atendimento.","Revisit footer guidance");savedSession=GameSessionState.Current;GameSessionState.Clear();Call(Controller,"Populate");});
             Add("Unavailable session has no text overlay on disabled cards "+res,()=>{Expect(!Confirm.interactable&&!Field<GameObject>(View,"catalogError").activeSelf&&Field<TMP_Text>(View,"payrollText").text=="Indisponível"&&Cards.All(c=>!Field<UnityEngine.UI.Button>(c,"addButton").interactable),"Unavailable presentation");Expect(Field<TMP_Text>(View,"hintText").text=="Sessão indisponível. As contratações estão bloqueadas."&&Field<TMP_Text>(View,"footerText").text=="Contratações indisponíveis no momento.","Unavailable guidance must not suggest blocked controls or hidden navigation");Capture("session-unavailable-"+res);GameSessionState.Set(savedSession);GameSessionState.Persist();GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub);});
         }
         next=EditorApplication.timeSinceStartup+.5;EditorApplication.update-=Tick;EditorApplication.update+=Tick;

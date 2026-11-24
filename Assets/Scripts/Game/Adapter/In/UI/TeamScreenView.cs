@@ -27,15 +27,14 @@ namespace Game.Adapter.In.UI
         private TextMeshProUGUI footerText;
 
         public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && catalogScroll != null
-            && confirmButton != null && roleVisuals.Length == 5 && roleVisuals.All(v => v != null
-                && !string.IsNullOrWhiteSpace(v.roleId) && v.portrait != null && v.environment != null)
-            && roleVisuals.Select(v => v.roleId).Distinct().Count() == 5;
-        public bool HasVisual(string id) => roleVisuals.Any(v => v != null && v.roleId == id && v.portrait != null && v.environment != null);
-        public TeamRoleCardView CreateCard(RoleData role, int required)
+            && confirmButton != null && roleVisuals != null;
+        public bool HasVisual(string id) => roleVisuals.Count(v => v != null && v.roleId == id) == 1
+            && roleVisuals.Any(v => v != null && v.roleId == id && v.portrait != null && v.environment != null);
+        public TeamRoleCardView CreateCard(RoleData role, int required, bool removalOnly)
         {
             var card = Instantiate(cardPrefab, cardContainer); card.gameObject.SetActive(true); cards.Add(card);
-            var visual = roleVisuals.Single(v => v.roleId == role.id);
-            card.Setup(role, visual.portrait, visual.environment, required); return card;
+            var visual = roleVisuals.Single(v => v != null && v.roleId == role.id);
+            card.Setup(role, visual.portrait, visual.environment, required, removalOnly); return card;
         }
         public void ClearCards()
         {
@@ -49,11 +48,11 @@ namespace Game.Adapter.In.UI
             confirmLabel.text = setup ? "Confirmar equipe e abrir hub" : "Concluir visita";
             if (catalogScroll != null) { catalogScroll.StopMovement(); catalogScroll.verticalNormalizedPosition = 1; }
         }
-        public void SetSummary(int count, double payroll, long capacity, AlignmentResult alignment, string requirements, bool available)
+        public void SetSummary(long count, double payroll, long capacity, AlignmentResult alignment, string requirements, bool available)
         {
             if (footerText == null) footerText = transform.Find("BottomBar/Note")?.GetComponent<TextMeshProUGUI>();
             if (footerText != null) footerText.text = available
-                ? "Use + e − para ajustar as contratações." : "Contratações indisponíveis no momento.";
+                ? "Qualidade (até 100) pode elevar a reputação por bom atendimento." : "Contratações indisponíveis no momento.";
             countText.text = available ? $"{count} pessoa(s)" : "Indisponível";
             payrollText.text = available ? Game.Domain.Service.EstablishmentSummaryService.Brl((float)payroll) : "Indisponível";
             capacityText.text = available ? $"{capacity:N0} clientes/mês" : "Indisponível";
