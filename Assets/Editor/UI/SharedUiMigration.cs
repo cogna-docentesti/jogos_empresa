@@ -72,12 +72,6 @@ namespace Game.EditorTools
                     price.rectTransform.pivot=new Vector2(.5f,1); price.rectTransform.anchoredPosition=new Vector2(0,-356);
                     price.rectTransform.sizeDelta=new Vector2(268,36);
                 }
-                var buy=fields.FindProperty("buyButton").objectReferenceValue as UnityEngine.UI.Button;
-                if(buy!=null)
-                {
-                    var r=(RectTransform)buy.transform; r.anchorMin=r.anchorMax=new Vector2(.5f,0); r.pivot=new Vector2(.5f,0);
-                    r.anchoredPosition=new Vector2(0,16); r.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,68);
-                }
             }
             if(root.GetComponent<UnityEngine.UI.Image>()!=null)
             {

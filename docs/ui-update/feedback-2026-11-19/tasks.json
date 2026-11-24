@@ -1231,8 +1231,8 @@
       "area": "Equipamentos e carrinho",
       "kind": "correção e interação",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-02"
       ],
@@ -1260,7 +1260,9 @@
       ],
       "notes": [
         "O código já contém bloqueios por posse e usa conjuntos de IDs; investigar a divergência visual/binding antes de criar outra regra.",
-        "“Básico comprado” não significa tornar todos os básicos gratuitos ou já possuídos. Venda de usados fica em FB-28."
+        "“Básico comprado” não significa tornar todos os básicos gratuitos ou já possuídos. Venda de usados fica em FB-28.",
+        "Cards adquiridos exibem Adquirido com a seleção bloqueada. O catálogo alterna entre adicionar e remover, e o carrinho mostra uma linha por ID com somente a ação de remoção.",
+        "QA no Unity Editor em 1280×720, com 125 verificações de Play Mode e 24 testes de Edit Mode aprovados. A validação incluiu recarga do SQLite, remoção de pré-requisito, cobrança única e recuperação de falha de gravação."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-11.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-11.json",

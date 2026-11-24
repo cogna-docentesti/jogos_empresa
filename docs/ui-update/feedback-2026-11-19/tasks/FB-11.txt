@@ -1,5 +1,5 @@
 FB-11 — Bloquear equipamentos adquiridos e simplificar o carrinho para uma unidade
-Status: planejada | Prioridade: P1 | Tipo: correção e interação
+Status: concluída | Prioridade: P1 | Tipo: correção e interação
 Área: Equipamentos e carrinho
 Dependências: FB-02
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -45,6 +45,8 @@ VALIDAÇÃO PREVISTA
 OBSERVAÇÕES E LIMITES
 1. O código já contém bloqueios por posse e usa conjuntos de IDs; investigar a divergência visual/binding antes de criar outra regra.
 2. “Básico comprado” não significa tornar todos os básicos gratuitos ou já possuídos. Venda de usados fica em FB-28.
+3. Cards adquiridos exibem Adquirido com a seleção bloqueada. O catálogo alterna entre adicionar e remover, e o carrinho mostra uma linha por ID com somente a ação de remoção.
+4. QA no Unity Editor em 1280×720, com 125 verificações de Play Mode e 24 testes de Edit Mode aprovados. A validação incluiu recarga do SQLite, remoção de pré-requisito, cobrança única e recuperação de falha de gravação.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-11.json.

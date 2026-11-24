@@ -269,7 +269,7 @@ public static class UI03SharedComponentsValidation
                 var corners=new Vector3[4]; caption.rectTransform.GetWorldCorners(corners);
                 foreach(var corner in corners) Expect(((RectTransform)card.transform).rect.Contains(card.transform.InverseTransformPoint(corner)),"Equipment caption outside the card mask bounds");
             }
-            ClickField(cards.First(),"buyButton");
+            ClickField(cards.First(),"cartActionButton");
         });
         Add("Cart selection updates the shared outline and opens the runtime modal",()=>{
             var equipment=Find<EquipmentScreenView>(); Expect(equipment.GetComponentsInChildren<EquipmentCardView>().Any(c=>c.IsInCart&&A(c).IsSelected),"Equipment cart selection");

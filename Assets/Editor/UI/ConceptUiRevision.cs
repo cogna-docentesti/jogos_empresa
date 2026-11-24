@@ -180,7 +180,7 @@ namespace Game.EditorTools
                 Move(r,"CategoryChip",24,100,370,36);Move(r,"CategoryChip/Label",8,0,354,36);
                 Move(r,"EquipmentArtwork",24,136,370,260);Move(r,"EquipmentPrice",24,408,370,44);Type(r,"EquipmentPrice",30);
                 Move(r,"Description",24,456,370,60);Type(r,"Description",21,false);
-                Move(r,"Status",24,526,370,36);Move(r,"Remove",24,588,68,68);Move(r,"Quantity",100,588,214,68);Move(r,"Add",326,588,68,68);
+                Move(r,"Status",24,526,370,36);EquipmentUiMigration.ApplyCardAction(r,24,588,370);
             });
             p=Find(canvas,"Panel_Team");Header(p,"Header");Off(p,"ContextText","Guidance");
             Move(p,"TitleText",32,108,1100,64);Find(p,"TitleText").GetComponent<TMP_Text>().text="Contrate sua equipe";

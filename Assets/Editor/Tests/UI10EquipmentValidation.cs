@@ -26,6 +26,7 @@ public static class UI10EquipmentValidation
     private static EquipmentScreenController Controller => View.GetComponent<EquipmentScreenController>();
     private static EquipmentCardView[] Cards => Field<List<EquipmentCardView>>(Controller,"cards").Where(c=>c!=null&&c.Equipment!=null).ToArray();
     private static EquipmentCardView Card(string id) => Cards.Single(c=>c.Equipment.id==id);
+    private static UnityEngine.UI.Button CartAction(EquipmentCardView card) => Field<UnityEngine.UI.Button>(card,"cartActionButton");
     private static UnityEngine.UI.Button Confirm => Field<UnityEngine.UI.Button>(View,"confirmButton");
     private static UnityEngine.UI.ScrollRect Scroll => Field<UnityEngine.UI.ScrollRect>(View,"catalogScroll");
     private static T Field<T>(object o,string f) => (T)o.GetType().GetField(f,BindingFlags.NonPublic|BindingFlags.Instance).GetValue(o);
@@ -71,7 +72,17 @@ public static class UI10EquipmentValidation
         foreach(var card in Cards)
         { var art=Field<UnityEngine.UI.Image>(card,"equipmentImage"); Expect(art.sprite==card.Equipment.icon && art.color==Color.white && art.preserveAspect && art.type==UnityEngine.UI.Image.Type.Simple,"Artwork "+card.Equipment.id); }
         foreach(var n in new[]{"TitleText","ContextText","Guidance","Header","BottomBar"})
-        { var r=View.transform.Find(n) as RectTransform; var corners=new Vector3[4]; r.GetWorldCorners(corners); foreach(var c in corners) { var p=RectTransformUtility.WorldToScreenPoint(null,c); Expect(p.x>=-.5 && p.y>=-.5 && p.x<=Screen.width+.5 && p.y<=Screen.height+.5,"Outside viewport "+n); } }
+        {
+            var rect=(RectTransform)View.transform.Find(n);
+            if(!rect.gameObject.activeInHierarchy) continue;
+            var corners=new Vector3[4]; rect.GetWorldCorners(corners);
+            foreach(var corner in corners)
+            {
+                var point=RectTransformUtility.WorldToScreenPoint(null,corner);
+                Expect(point.x>=-.5 && point.y>=-.5 && point.x<=Screen.width+.5 && point.y<=Screen.height+.5,
+                    $"Outside viewport {n}: {point} at {Screen.width}x{Screen.height}");
+            }
+        }
         Expect(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length==1,"EventSystem count");
     }
     private static EquipmentData[] Basics => Resources.LoadAll<EquipmentData>("Equipments").Where(e=>e.category==EquipmentCategory.BASIC).OrderBy(e=>e.cost).ThenBy(e=>e.displayName).ToArray();
@@ -85,7 +96,13 @@ public static class UI10EquipmentValidation
     private static void SelectItem(string id,string tag,bool capture=false)
     {
         Add("Focus whole card "+id+" "+tag,()=>Card(id).GetComponent<UnityEngine.UI.Button>().Select());
-        Add("Add one unit through raycast "+id+" "+tag,()=>{ if(capture) Capture("art-"+id+"-"+tag); Click(Field<UnityEngine.UI.Button>(Card(id),"buyButton")); Expect(Card(id).IsInCart,"Item missing from cart"); });
+        Add("Add one unit through raycast "+id+" "+tag,()=>{
+            var card=Card(id);
+            if(capture) Capture("art-"+id+"-"+tag);
+            Expect(Field<TMP_Text>(card,"cartActionLabel").text=="Adicionar ao carrinho","Add action label");
+            Click(CartAction(card));
+            Expect(card.IsInCart && Field<TMP_Text>(card,"cartActionLabel").text=="Remover do carrinho","Item missing from cart or wrong action");
+        });
     }
     [MenuItem("Tools/Jogos de Empresa/UI-10/Validate equipment store in isolated Play Mode")]
     public static void Run()
@@ -97,13 +114,19 @@ public static class UI10EquipmentValidation
         Add("D1 remains draft",()=>{ var v=UnityEngine.Object.FindFirstObjectByType<LocationScreenView>(); ExecuteEvents.Execute(v.Zones.Single(z=>z.id=="bank").marker.gameObject,new PointerEventData(EventSystem.current){pointerId=4},ExecuteEvents.pointerClickHandler); Click(Field<UnityEngine.UI.Button>(v,"confirmButton")); Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==0,"D1 insert"); });
         Add("D2 remains draft",()=>{ var v=UnityEngine.Object.FindFirstObjectByType<RestaurantScreenView>(); Click(Field<UnityEngine.UI.Button>(v,"cardPodrao")); Click(Field<UnityEngine.UI.Button>(v,"confirmButton")); Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count()==0,"D2 insert"); });
         Add("D3 first insert reaches Banco through technical review",()=>{ Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<MenuPricingScreenView>(),"confirmButton")); Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Capital,"D3 destination"); sessionId=GameSessionState.Current.sessionId; SameSession(); });
-        Add("Select original no-credit choice",()=>{ var c=UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(c=>c.CreditLine.id=="sem_credito"); Click(Field<UnityEngine.UI.Button>(c,"selectButton")); });
+        Add("Select original no-credit choice",()=>{ var bank=UnityEngine.Object.FindFirstObjectByType<FinancialScreenView>(); var help=bank.GetComponent<ContextualHelp>(); if(help.IsVisible) Click(Field<UnityEngine.UI.Button>(help,"dismiss")); var c=bank.GetComponentsInChildren<BankCardView>().Single(c=>c.CreditLine.id=="sem_credito"); Click(Field<UnityEngine.UI.Button>(c,"selectButton")); });
         Add("Banco confirms into step 6",()=>Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<FinancialScreenView>(),"confirmButton")));
+        Add("Catalog guidance describes add and remove actions",()=>{
+            var help=View.GetComponent<ContextualHelp>();
+            Expect(help.IsVisible && help.transform.Find("ContextualHelp/Message").GetComponent<TMP_Text>().text.Contains("adicionar ou remover"),"Obsolete catalog guidance");
+            Capture("catalog-guidance-"+Screen.width+"x"+Screen.height);
+            Click(Field<UnityEngine.UI.Button>(help,"dismiss"));
+        });
         foreach(var size in UiValidationContext.Resolutions)
         {
             var s=size; string tag=s.x+"x"+s.y;
-            Add("Prepare setup viewport "+tag,()=>{ UI01Validation.SetGameView(s.x,s.y); Fixture(RestaurantType.PODRAO); });
-            Add("Rendered setup and whole title "+tag,()=>{ SameSession(); Expect(Screen.width==s.x&&Screen.height==s.y,"Resolution"); Expect(Field<TMP_Text>(View,"stepText").text.Contains("6 DE 7"),"Step"); Expect(Cards.Length==10,"Podrao compatibility"); Capture("setup-normal-"+tag); });
+            Add("Prepare setup viewport "+tag,()=>{ if(Screen.width!=s.x||Screen.height!=s.y) UI01Validation.SetGameView(s.x,s.y); Fixture(RestaurantType.PODRAO); });
+            Add("Rendered setup and whole title "+tag,()=>{ SameSession(); Expect(Screen.width==s.x&&Screen.height==s.y,"The Game View must render at the evidence resolution."); Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Equipment,"Step"); Expect(Cards.Length==10,"Podrao compatibility"); Capture("setup-normal-"+tag); });
             Add("Acknowledge catalog guidance before filters "+tag,()=>{ var help=View.GetComponent<ContextualHelp>(); if(help!=null&&help.IsVisible)Click(Field<UnityEngine.UI.Button>(help,"dismiss")); Filter(EquipmentFilter.Basic); });
             Add("Basic filter "+tag,()=>{ Expect(Cards.Count(c=>c.gameObject.activeSelf)==8,"Basic count"); Capture("filter-basic-"+tag); Filter(EquipmentFilter.Specific); });
             Add("Specific prerequisites and disabled state "+tag,()=>{ Expect(Cards.Count(c=>c.gameObject.activeSelf)==2 && Cards.Where(c=>c.gameObject.activeSelf).All(c=>!c.GetComponent<UnityEngine.UI.Button>().interactable),"Specific lock"); Capture("filter-specific-blocked-"+tag); Filter(EquipmentFilter.Owned); });
@@ -112,8 +135,26 @@ public static class UI10EquipmentValidation
             foreach(var e in Basics) { string id=e.id; SelectItem(id,tag,true); }
             Add("All basics unlock specific controls "+tag,()=>{ Expect(Cards.Where(c=>c.Equipment.category==EquipmentCategory.SPECIFIC).All(c=>c.GetComponent<UnityEngine.UI.Button>().interactable),"Specific unlock"); Filter(EquipmentFilter.Specific); });
             SelectItem("chapa_profissional_podrao",tag,true); SelectItem("fritadeira_eletrica_dupla_podrao",tag,true);
-            Add("Selected state and total "+tag,()=>{ Expect(Cards.All(c=>c.IsInCart),"Selected count"); Expect(Field<TMP_Text>(View,"cartTotalValueText").text==FinancialScreenView.Money(27300),"Cart total"); Capture("cart-selected-"+tag); Click(Field<UnityEngine.UI.Button>(View,"cartButton")); });
-            Add("Populated cart and whole rows "+tag,()=>{ Expect(View.GetComponentsInChildren<EquipmentCartLineView>().Length==10,"Cart rows"); Expect(Field<UnityEngine.UI.Button>(View,"checkoutButton").interactable,"Affordable checkout"); Capture("cart-filled-"+tag); var lines=Field<RectTransform>(View,"cartLines"); lines.GetComponentInParent<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition=0; });
+            Add("Remove and restore a specific item in the catalog "+tag,()=>{
+                var card=Card("fritadeira_eletrica_dupla_podrao");
+                Click(CartAction(card));
+                Expect(!card.IsInCart && Field<TMP_Text>(View,"cartTotalValueText").text==FinancialScreenView.Money(25500),"Catalog removal total");
+                Click(CartAction(card));
+            });
+            Add("Selected state and total "+tag,()=>{ Expect(Cards.All(c=>c.IsInCart),"Selected count"); Expect(Field<TMP_Text>(View,"cartTotalValueText").text==FinancialScreenView.Money(27300) && !Field<TMP_Text>(View,"summaryItemsText").text.Contains("1 ×"),"Cart total and summary"); Capture("cart-selected-"+tag); Click(Field<UnityEngine.UI.Button>(View,"cartButton")); });
+            Add("Populated cart with one removal action per unique item "+tag,()=>{
+                var rows=View.GetComponentsInChildren<EquipmentCartLineView>();
+                Expect(rows.Length==10 && rows.Select(row=>row.Equipment.id).Distinct().Count()==10,"Cart rows and unique IDs");
+                foreach(var row in rows)
+                {
+                    var actions=row.GetComponentsInChildren<UnityEngine.UI.Button>();
+                    Expect(actions.Length==1 && actions[0].GetComponentInChildren<TMP_Text>().text=="Remover do carrinho"
+                        && row.transform.Find("Quantity")==null && row.transform.Find("Maximum")==null,"Quantity controls still present");
+                }
+                Expect(Field<UnityEngine.UI.Button>(View,"checkoutButton").interactable,"Affordable checkout");
+                Capture("cart-filled-"+tag);
+                Field<RectTransform>(View,"cartLines").GetComponentInParent<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition=0;
+            });
             Add("Last cart rows scroll without hiding total "+tag,()=>{ Capture("cart-bottom-"+tag); Click(Field<UnityEngine.UI.Button>(View,"closeCartButton")); Click(Field<UnityEngine.UI.Button>(View,"bankBackButton")); });
             Add("Back returns to Banco without purchasing "+tag,()=>{ Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Capital && GameSessionState.Current.currentCash==65000 && EquipmentSelectionHelper.GetIds(EquipmentSelectionHelper.FromJson(GameSessionState.Current.equipmentJson)).Count==0,"Back purchased"); Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<FinancialScreenView>(),"confirmButton")); });
             Add("Banco returns with empty cart without duplicate credit "+tag,()=>{ Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Equipment && Cards.All(c=>!c.IsInCart)&&GameSessionState.Current.currentCash==65000,"Bank return duplicate"); SameSession(); });
@@ -125,7 +166,7 @@ public static class UI10EquipmentValidation
                 Add("Three available specific items "+restaurantTag,()=>{ Expect(Cards.Length==11&&Cards.Count(c=>c.gameObject.activeSelf)==3,"Specific restaurant filter"); Capture("specific-top-"+restaurantTag); });
                 var ids=Resources.LoadAll<EquipmentData>("Equipments").Where(e=>e.category==EquipmentCategory.SPECIFIC&&e.applicableTypes.Contains(restaurant)).OrderBy(e=>e.cost).ToArray();
                 foreach(var item in ids) SelectItem(item.id,restaurantTag,true);
-                Add("Acquired items filter preserves quantity and lock "+restaurantTag,()=>Filter(EquipmentFilter.Owned));
+                Add("Acquired items filter preserves ownership lock "+restaurantTag,()=>Filter(EquipmentFilter.Owned));
                 Add("Acquired state rendered "+restaurantTag,()=>{ Expect(Cards.Count(c=>c.gameObject.activeSelf)==8&&Cards.Where(c=>c.gameObject.activeSelf).All(c=>c.IsOwned&&!c.GetComponent<UnityEngine.UI.Button>().interactable),"Owned state"); Capture("filter-owned-"+restaurantTag); });
             }
         }
@@ -134,9 +175,36 @@ public static class UI10EquipmentValidation
         SelectItem("chapa_profissional_podrao","purchase"); SelectItem("fritadeira_eletrica_dupla_podrao","purchase");
         Add("Open cart for removal",()=>Click(Field<UnityEngine.UI.Button>(View,"cartButton")));
         Add("Remove a basic through cart control",()=>{ var line=View.GetComponentsInChildren<EquipmentCartLineView>().Single(l=>l.Equipment.id=="conjunto_panelas_industriais"); Click(Field<UnityEngine.UI.Button>(line,"removeButton")); });
-        Add("Dependent specifics removed and total recalculated",()=>{ Expect(View.GetComponentsInChildren<EquipmentCartLineView>().Length==7,"Prerequisite removal"); Expect(Field<TMP_Text>(View,"cartTotalText").text==FinancialScreenView.Money(22800)&&GameSessionState.Current.currentCash==65000,"Removal total"); Capture("cart-prerequisite-removal-1280x720"); Click(Field<UnityEngine.UI.Button>(View,"checkoutButton")); });
-        Add("Checkout debits once and advances to Team step 7",()=>{ SameSession(); Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Team,"Team destination"); var ids=EquipmentSelectionHelper.GetIds(EquipmentSelectionHelper.FromJson(GameSessionState.Current.equipmentJson)); Expect(ids.Count==7&&ids.Distinct().Count()==7&&GameSessionState.Current.currentCash==42200,"Purchase economy"); Call(Controller,"CompleteCartPurchase"); Expect(GameSessionState.Current.currentCash==42200,"Duplicate checkout debit"); GameManager.Instance.StateMachine.ForceState(GameState.Initial_Equipment); });
-        Add("Owned items persist on return to equipment",()=>{ Expect(Cards.Count(c=>c.IsOwned)==7,"Owned revisit"); Click(Field<UnityEngine.UI.Button>(View,"bankBackButton")); });
+        Add("Dependent specifics removed and total recalculated",()=>{ Expect(View.GetComponentsInChildren<EquipmentCartLineView>().Length==7,"Prerequisite removal"); Expect(Field<TMP_Text>(View,"cartTotalText").text==FinancialScreenView.Money(22800)&&GameSessionState.Current.currentCash==65000,"Removal total"); Capture("cart-prerequisite-removal-1280x720"); });
+        Add("Failed SQLite write preserves cash, ownership and the retryable cart",()=>{
+            var db=DatabaseInitializer.DatabaseService.Connection;
+            db.Execute("CREATE TEMP TRIGGER FailEquipmentCheckout BEFORE INSERT ON GameSessionEntity BEGIN SELECT RAISE(ABORT, 'FB-11 QA'); END");
+            var checkout=Field<UnityEngine.UI.Button>(View,"checkoutButton");
+            var previousEquipment=GameSessionState.Current.equipmentJson;
+            try { Click(checkout); }
+            finally { db.Execute("DROP TRIGGER FailEquipmentCheckout"); }
+            var row=db.Table<GameSessionEntity>().Single();
+            Expect(GameSessionState.Current.currentCash==65000 && row.currentCash==65000
+                && GameSessionState.Current.equipmentJson==previousEquipment && row.equipmentJson==previousEquipment
+                && View.CartIsOpen && checkout.IsInteractable() && View.GetComponentsInChildren<EquipmentCartLineView>().Length==7,"Failed checkout changed state");
+        });
+        Add("Retry the purchase after restoring SQLite writes",()=>Click(Field<UnityEngine.UI.Button>(View,"checkoutButton")));
+        Add("Checkout debits once and advances to Team",()=>{ SameSession(); Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Team,"Team destination"); var ids=EquipmentSelectionHelper.GetIds(EquipmentSelectionHelper.FromJson(GameSessionState.Current.equipmentJson)); Expect(ids.Count==7&&ids.Distinct().Count()==7&&GameSessionState.Current.currentCash==42200,"Purchase economy"); Call(Controller,"CompleteCartPurchase"); Expect(GameSessionState.Current.currentCash==42200,"Duplicate checkout debit"); GameSessionState.LoadActiveSession(GameSessionState.Current.userId); GameManager.Instance.StateMachine.ForceState(GameState.Initial_Equipment); });
+        Add("Filter purchased basics after SQLite reload",()=>Filter(EquipmentFilter.Owned));
+        Add("Reloaded purchased basics reject selection and expose only acquired status",()=>{
+            var owned=Cards.Where(card=>card.gameObject.activeSelf).ToArray();
+            Expect(owned.Length==7 && owned.All(card=>card.IsOwned && !CartAction(card).gameObject.activeSelf
+                && !card.GetComponent<UnityEngine.UI.Button>().IsInteractable() && Field<TMP_Text>(card,"statusText").text=="Adquirido"),"Owned state after reload");
+            var card=owned[0]; var root=card.GetComponent<UnityEngine.UI.Button>();
+            var pointer=Pointer(root); var hits=new List<RaycastResult>(); EventSystem.current.RaycastAll(pointer,hits);
+            Expect(hits.Count>0 && hits[0].gameObject.GetComponentInParent<UnityEngine.UI.Button>()==root,"Acquired card pointer did not reach card");
+            ExecuteEvents.Execute(root.gameObject,pointer,ExecuteEvents.pointerClickHandler);
+            ExecuteEvents.Execute(root.gameObject,new BaseEventData(EventSystem.current),ExecuteEvents.submitHandler);
+            CartAction(card).onClick.Invoke();
+            Expect(Cards.All(item=>!item.IsInCart) && GameSessionState.Current.currentCash==42200,"Acquired item reached the cart");
+            Capture("basic-owned-after-reload-1920x1080");
+            Click(Field<UnityEngine.UI.Button>(View,"bankBackButton"));
+        });
         Add("Actual loan held across equipment return",()=>{ var s=GameSessionState.Current; s.creditLineId="microcredito_empresarial"; s.loanBalance=50000; s.currentCash=42200; GameSessionState.Save(); GameManager.Instance.StateMachine.ForceState(GameState.Initial_Capital); });
         Add("Bank contract continuation adds no money",()=>Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<FinancialScreenView>(),"confirmButton")));
         Add("No duplicate loan principal",()=>{ Expect(GameSessionState.Current.currentCash==42200&&GameSessionState.Current.loanBalance==50000,"Duplicate loan"); SameSession(); Fixture(RestaurantType.PODRAO,false,100); });
@@ -148,7 +216,7 @@ public static class UI10EquipmentValidation
         Add("Visit restores hub focus without mutations",()=>{ Expect(MenuNavigator.Instance.Current==PanelId.Menu&&EventSystem.current.currentSelectedGameObject==origin,"Hub focus"); Expect(snapshot==Newtonsoft.Json.JsonConvert.SerializeObject(GameSessionState.Current)&&draft==MenuPricingHelper.ToJson(PlayerSession.GetMenu()),"Visit mutation"); MenuNavigator.Instance.Open(PanelId.Establishment); });
         Add("Open store from originating establishment shortcut",()=>{ var content=UnityEngine.Object.FindFirstObjectByType<EstablishmentReviewContent>(); var button=Field<EstablishmentReviewContent.DecisionVisual[]>(content,"decisions")[4].button; origin=button.gameObject; button.Select(); Click(button); });
         Add("Choose new item in nested store",()=>{ Filter(EquipmentFilter.Specific); Card("chapa_profissional_podrao").GetComponent<UnityEngine.UI.Button>().Select(); });
-        Add("Add nested purchase",()=>{ Click(Field<UnityEngine.UI.Button>(Card("chapa_profissional_podrao"),"buyButton")); Click(Confirm); });
+        Add("Add nested purchase",()=>{ Click(CartAction(Card("chapa_profissional_podrao"))); Click(Confirm); });
         Add("Confirm nested purchase",()=>Click(Field<UnityEngine.UI.Button>(View,"checkoutButton")));
         Add("Nested checkout returns to establishment and preserves focus",()=>{ Expect(MenuNavigator.Instance.Current==PanelId.Establishment&&EventSystem.current.currentSelectedGameObject==origin,"Nested focus"); Expect(GameSessionState.Current.currentCash==63500&&EquipmentSelectionHelper.ContainsId(EquipmentSelectionHelper.FromJson(GameSessionState.Current.equipmentJson),"chapa_profissional_podrao"),"Nested economy"); SameSession(); MenuNavigator.Instance.OpenRoot(); GameSessionState.LoadActiveSession(GameSessionState.Current.userId); Expect(GameSessionState.Current.currentCash==63500,"Reload cash"); MenuNavigator.Instance.Open(PanelId.EquipmentStore); });
         Add("Select acquired filter after reloaded screen has rendered",()=>Filter(EquipmentFilter.Owned));
@@ -159,6 +227,20 @@ public static class UI10EquipmentValidation
         Add("Keyboard focus inside mask",()=>{ Expect(Card("fritadeira_eletrica_dupla_podrao").GetComponent<SharedControlAppearance>().CurrentState=="focus","Focus"); Capture("card-focus-1280x720"); ExecuteEvents.Execute(Card("fritadeira_eletrica_dupla_podrao").gameObject,new BaseEventData(EventSystem.current),ExecuteEvents.submitHandler); });
         Add("Keyboard submit updates one unit without purchase",()=>{ Expect(Card("fritadeira_eletrica_dupla_podrao").IsInCart&&GameSessionState.Current.currentCash==63500,"Submit"); Click(Field<UnityEngine.UI.Button>(View,"cartButton")); });
         Add("Modal focuses and traps controls",()=>{ var modal=Field<GameObject>(View,"cartModal"); Expect(EventSystem.current.currentSelectedGameObject.transform.IsChildOf(modal.transform),"Modal focus"); Capture("modal-focus-1280x720"); Click(Field<UnityEngine.UI.Button>(View,"closeCartButton")); });
+        Add("Open a cart whose selected item became owned",()=>{
+            const string id="fritadeira_eletrica_dupla_podrao";
+            var data=EquipmentSelectionHelper.FromJson(GameSessionState.Current.equipmentJson);
+            EquipmentSelectionHelper.AddUniqueIds(data,new[]{id});
+            GameSessionState.SetEquipmentJson(EquipmentSelectionHelper.ToJson(data));
+            Click(Field<UnityEngine.UI.Button>(View,"cartButton"));
+        });
+        Add("Checkout rechecks ownership before debiting a stale cart",()=>{
+            const string id="fritadeira_eletrica_dupla_podrao";
+            Click(Field<UnityEngine.UI.Button>(View,"checkoutButton"));
+            Expect(GameSessionState.Current.currentCash==63500 && Card(id).IsOwned && !Card(id).IsInCart
+                && !CartAction(Card(id)).gameObject.activeSelf && !Field<UnityEngine.UI.Button>(View,"checkoutButton").IsInteractable(),"Stale cart charged an acquired item");
+            Click(Field<UnityEngine.UI.Button>(View,"closeCartButton"));
+        });
         Add("Long name fixture",()=>{ longEquipment=Resources.LoadAll<EquipmentData>("Equipments").Single(e=>e.id=="mobiliario_basico"); oldName=longEquipment.displayName; longEquipment.displayName=string.Join(" ",Enumerable.Repeat("Mobiliário básico de restaurante com descrição extensa",3)); Call(Controller,"PopulateEquipments"); Call(Controller,"RefreshScreen"); Card("mobiliario_basico").GetComponent<UnityEngine.UI.Button>().interactable=true; Card("mobiliario_basico").GetComponent<UnityEngine.UI.Button>().Select(); });
         Add("Reveal complete long name after cells reflow",()=>{ EventSystem.current.SetSelectedGameObject(null); Card("mobiliario_basico").GetComponent<UnityEngine.UI.Button>().Select(); });
         Add("Long names reflow without shrinking",()=>{ Capture("long-name-1280x720"); longEquipment.displayName=oldName; longEquipment=null; Call(Controller,"PopulateEquipments"); Call(Controller,"RefreshScreen"); });

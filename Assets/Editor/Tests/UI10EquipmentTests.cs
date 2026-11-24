@@ -17,7 +17,9 @@ public sealed class UI10EquipmentTests
         instance = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Card_equipment.prefab"));
         var card = instance.GetComponent<EquipmentCardView>();
         typeof(EquipmentCardView).GetMethod("OnEnable",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(card,null);
-        card.Setup(Resources.LoadAll<EquipmentData>("Equipments").Single(e => e.id == id)); card.SetCartAvailable(true); return card;
+        card.Setup(Resources.LoadAll<EquipmentData>("Equipments").Single(e => e.id == id));
+        card.SetCartState(false, false, true);
+        return card;
     }
     [TearDown] public void Clean() { if (instance != null) Object.DestroyImmediate(instance); GameSessionState.Clear(); }
     [TestCase("bancada_inox_preparo",1500)][TestCase("conjunto_panelas_industriais",1200)]
@@ -43,23 +45,45 @@ public sealed class UI10EquipmentTests
         var visible=all.Where(e=>(bool)method.Invoke(null,new object[]{e,type})).ToArray(); Assert.AreEqual(count,visible.Length); Assert.AreEqual(8,visible.Count(e=>e.category==EquipmentCategory.BASIC));
         Assert.IsTrue(visible.Where(e=>e.category==EquipmentCategory.SPECIFIC).All(e=>e.applicableTypes.Contains(type)));
     }
-    [Test] public void QuantityIsZeroOrOneAndOwnedItemsCannotBePurchasedAgain()
+    [Test] public void CartActionChangesLabelAndDisappearsForOwnedItems()
     {
-        var c=Card("sistema_pdv_computador"); Assert.AreEqual("0",Field<TMP_Text>(c,"quantityText").text); int calls=0; c.SelectionRequested+=_=>calls++;
-        Field<UnityEngine.UI.Button>(c,"buyButton").onClick.Invoke(); Assert.AreEqual(1,calls);
-        c.SetInCart(true); Assert.AreEqual("1",Field<TMP_Text>(c,"quantityText").text); Assert.IsFalse(Field<UnityEngine.UI.Button>(c,"buyButton").interactable); Assert.IsTrue(Field<UnityEngine.UI.Button>(c,"removeButton").interactable);
-        c.SetOwned(true); c.SetInCart(true); Assert.IsFalse(c.IsInCart); Assert.IsTrue(c.IsOwned); Assert.AreEqual("1",Field<TMP_Text>(c,"quantityText").text);
-        Field<UnityEngine.UI.Button>(c,"buyButton").onClick.Invoke(); Assert.AreEqual(1,calls); Assert.AreEqual("Adquirido",Field<TMP_Text>(c,"statusText").text);
+        var card = Card("sistema_pdv_computador");
+        var root = card.GetComponent<UnityEngine.UI.Button>();
+        var action = Field<UnityEngine.UI.Button>(card, "cartActionButton");
+        var label = Field<TMP_Text>(card, "cartActionLabel");
+        bool inCart = false;
+        card.SelectionRequested += _ => { inCart = !inCart; card.SetCartState(false, inCart, true); };
+
+        Assert.AreEqual("Adicionar ao carrinho", label.text);
+        action.onClick.Invoke();
+        Assert.IsTrue(card.IsInCart);
+        Assert.AreEqual("Remover do carrinho", label.text);
+        action.onClick.Invoke();
+        Assert.IsFalse(card.IsInCart);
+        Assert.AreEqual("Adicionar ao carrinho", label.text);
+
+        card.SetCartState(true, true, true);
+        Assert.IsTrue(card.IsOwned);
+        Assert.IsFalse(card.IsInCart);
+        Assert.IsFalse(action.gameObject.activeSelf);
+        Assert.IsFalse(action.interactable);
+        Assert.IsFalse(root.interactable);
+        action.onClick.Invoke();
+        root.onClick.Invoke();
+        Assert.IsFalse(inCart);
+        Assert.AreEqual("Adquirido", Field<TMP_Text>(card, "statusText").text);
+        Assert.IsNull(card.transform.Find("Quantity"));
+        Assert.IsNull(card.transform.Find("Remove"));
     }
     [Test] public void BlockedSpecificsCannotRequestAcquisitionAndExplainPrerequisite()
     {
-        var c=Card("facas_especiais_japones"); c.SetCartAvailable(false); int calls=0; c.SelectionRequested+=_=>calls++;
-        Field<UnityEngine.UI.Button>(c,"buyButton").onClick.Invoke(); Assert.AreEqual(0,calls); Assert.IsFalse(c.GetComponent<UnityEngine.UI.Button>().interactable); Assert.That(Field<TMP_Text>(c,"statusText").text,Does.Contain("8 básicos"));
+        var c=Card("facas_especiais_japones"); c.SetCartState(false, false, false); int calls=0; c.SelectionRequested+=_=>calls++;
+        Field<UnityEngine.UI.Button>(c,"cartActionButton").onClick.Invoke(); Assert.AreEqual(0,calls); Assert.IsFalse(c.GetComponent<UnityEngine.UI.Button>().interactable); Assert.That(Field<TMP_Text>(c,"statusText").text,Does.Contain("8 básicos"));
     }
-    [Test] public void MissingSessionDisablesQuantityActionsWithoutChangingData()
+    [Test] public void MissingSessionDisablesCartActionWithoutChangingData()
     {
-        var c=Card("sistema_pdv_computador"); GameSessionState.Clear(); c.SetCartAvailable(false);
-        Assert.That(Field<TMP_Text>(c,"statusText").text,Does.Contain("indisponível")); Assert.IsFalse(Field<UnityEngine.UI.Button>(c,"buyButton").interactable);
+        var c=Card("sistema_pdv_computador"); GameSessionState.Clear(); c.SetCartState(false, false, false);
+        Assert.That(Field<TMP_Text>(c,"statusText").text,Does.Contain("indisponível")); Assert.IsFalse(Field<UnityEngine.UI.Button>(c,"cartActionButton").interactable);
     }
     [Test] public void LongCatalogNamesExpandCardInsteadOfShrinkingOrCroppingText()
     {

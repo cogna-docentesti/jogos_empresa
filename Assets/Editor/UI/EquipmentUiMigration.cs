@@ -168,29 +168,60 @@ namespace Game.EditorTools
                 var chip = Picture(r, "CategoryChip", "UI_PILL_NORMAL", 24, 280, 238, 32);
                 var label = Text(chip.transform, "Label", "BÁSICO", 8, 0, 222, 32, GameTypography.Tokens.Caption, true); label.alignment = TextAlignmentOptions.Center; Set(card, "categoryText", label);
                 Set(card, "statusText", Text(r, "Status", "Disponível", 24, 320, 250, 32, GameTypography.Tokens.Caption, true));
-                Set(card, "removeButton", Button(r, "Remove", "−", 286, 228, 68, 68, SharedControlKind.Secondary));
-                var plus = Button(r, "Add", "+", 556, 228, 68, 68); Set(card, "buyButton", plus); Set(card, "buyButtonText", plus.transform.Find("Label").GetComponent<TMP_Text>());
-                var quantity = Text(r, "Quantity", "0", 366, 228, 178, 68, GameTypography.Tokens.BodyStrong,true); quantity.alignment = TextAlignmentOptions.Center; Set(card, "quantityText", quantity);
+                ApplyCardAction(r, 286, 228, 338);
                 var b = Ensure<UnityEngine.UI.Button>(r); SharedUiStyles.Bind(b, SharedControlKind.Card);
                 Font07Migration.Apply(new[] { root }, path); PrefabUtility.SaveAsPrefabAsset(root, path);
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }
-            var line = new GameObject("EquipmentCartLine", typeof(RectTransform));
+            const string linePath = "Assets/Prefabs/EquipmentCartLine.prefab";
+            bool existingLine = System.IO.File.Exists(linePath);
+            var line = existingLine
+                ? PrefabUtility.LoadPrefabContents(linePath)
+                : new GameObject("EquipmentCartLine", typeof(RectTransform));
             try
             {
-                var r = (RectTransform)line.transform; r.sizeDelta = new Vector2(876, 144); var view = line.AddComponent<EquipmentCartLineView>();
-                SharedUiStyles.Surface(line, "UI_CARD_NORMAL"); var height = line.AddComponent<UnityEngine.UI.LayoutElement>(); height.preferredHeight = height.minHeight = 144;
+                var r = (RectTransform)line.transform; r.sizeDelta = new Vector2(876, 144); var view = Ensure<EquipmentCartLineView>(r);
+                SharedUiStyles.Surface(line, "UI_CARD_NORMAL"); var height = Ensure<UnityEngine.UI.LayoutElement>(r); height.preferredHeight = height.minHeight = 144;
                 Set(view, "artwork", Picture(r, "Artwork", "EQUIPMENT_SISTEMA_PDV_COMPUTADOR", 16, 16, 112, 112));
                 Set(view, "nameText", Text(r, "Name", "Equipamento", 140, 20, 454, 56, GameTypography.Tokens.BodyStrong,true));
                 Set(view, "priceText", Text(r, "Price", "R$ 0,00", 140, 84, 454, 40, GameTypography.Tokens.Body));
-                Set(view, "removeButton", Button(r, "Remove", "−", 612, 36, 68, 68, SharedControlKind.Secondary));
-                var q = Text(r, "Quantity", "1", 692, 36, 68, 68, GameTypography.Tokens.BodyStrong,true); q.alignment = TextAlignmentOptions.Center;
-                var plus = Button(r, "Maximum", "+", 772, 36, 68, 68); plus.interactable = false;
-                Font07Migration.Apply(new[] { line }, "Assets/Prefabs/EquipmentCartLine.prefab");
-                PrefabUtility.SaveAsPrefabAsset(line, "Assets/Prefabs/EquipmentCartLine.prefab");
+                ApplyCartLineAction(view);
+                Font07Migration.Apply(new[] { line }, linePath);
+                PrefabUtility.SaveAsPrefabAsset(line, linePath);
             }
-            finally { UnityEngine.Object.DestroyImmediate(line); }
+            finally
+            {
+                if (existingLine) PrefabUtility.UnloadPrefabContents(line);
+                else UnityEngine.Object.DestroyImmediate(line);
+            }
         }
+
+        internal static void ApplyCardAction(Transform root, float x, float y, float width)
+        {
+            var oldAdd = root.Find("Add");
+            if (oldAdd != null) oldAdd.name = "CartAction";
+            DeleteChild(root, "Remove");
+            DeleteChild(root, "Quantity");
+            var action = Button(root, "CartAction", "Adicionar ao carrinho", x, y, width, 68);
+            var view = root.GetComponent<EquipmentCardView>();
+            Set(view, "cartActionButton", action);
+            Set(view, "cartActionLabel", action.transform.Find("Label").GetComponent<TMP_Text>());
+        }
+
+        internal static void ApplyCartLineAction(EquipmentCartLineView view)
+        {
+            var root = view.transform;
+            DeleteChild(root, "Quantity");
+            DeleteChild(root, "Maximum");
+            Set(view, "removeButton", Button(root, "Remove", "Remover do carrinho", 612, 36, 228, 68, SharedControlKind.Secondary));
+        }
+
+        private static void DeleteChild(Transform parent, string name)
+        {
+            var child = parent.Find(name);
+            if (child != null) UnityEngine.Object.DestroyImmediate(child.gameObject);
+        }
+
         [MenuItem("Tools/Jogos de Empresa/UI-10/Migrate equipment store")]
         public static void Apply()
         {

@@ -90,7 +90,7 @@ namespace Game.EditorTools
         {
             Loading(equipment);
             var catalog = (UnityEngine.UI.ScrollRect)new SerializedObject(equipment.GetComponent<EquipmentScreenView>()).FindProperty("catalogScroll").objectReferenceValue;
-            Help(equipment, GameState.Initial_Equipment, "TUTORIAL_DRAG", "Arraste ou role o catálogo. Use + para adicionar; Tab e Enter também funcionam.", equipment.Find("Guidance"), catalog);
+            Help(equipment, GameState.Initial_Equipment, "TUTORIAL_DRAG", "Arraste ou role o catálogo. Use os botões para adicionar ou remover. Tab e Enter também funcionam.", equipment.Find("Guidance"), catalog);
         }
         [MenuItem("Tools/Jogos de Empresa/UI-17/Integrate contextual feedback")]
         public static void Apply()

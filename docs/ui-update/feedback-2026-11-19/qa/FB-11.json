@@ -1,0 +1,85 @@
+{
+  "task_id": "FB-11",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "49a45358e0c1ff48b0091f1f071730f25a9c4c95",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280×720"
+  ],
+  "method": "Play Mode na GameScene com SQLite e PlayerPrefs isolados. O EventSystem validou os cliques por raycast e os eventos de teclado. Os PNGs foram renderizados pelo Game View.",
+  "before": "A compra do Conjunto de Panelas Industriais debitou R$ 1.200,00 e a posse voltou do SQLite. O card já bloqueava a seleção, mas exibia Adquirido ao lado dos controles desabilitados e da quantidade 1. O catálogo e o modal exibiam controles numéricos.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Após comprar sete básicos e recarregar o SQLite, o filtro Adquiridos exibiu os sete com Adquirido e sem ação de carrinho. Clique, submit e a invocação direta do callback não incluíram nenhum deles no carrinho."
+    },
+    {
+      "criterion": 2,
+      "result": "O catálogo alternou entre Adicionar ao carrinho e Remover do carrinho. O modal mostrou uma linha por ID, com uma única ação de remoção. A lista do resumo apresentou o nome e o preço de cada item."
+    },
+    {
+      "criterion": 3,
+      "result": "A remoção e reinclusão de um específico alteraram o total entre R$ 25.500,00 e R$ 27.300,00. Remover um básico usado como pré-requisito reduziu o carrinho a sete itens e R$ 22.800,00. O checkout persistiu os sete IDs com saldo de R$ 42.200,00. Uma nova confirmação e uma tentativa com item já adquirido num carrinho desatualizado preservaram o saldo."
+    }
+  ],
+  "additional_checks": [
+    "Os catálogos dos restaurantes de lanches, japonês e francês exibiram os específicos compatíveis. Os oito básicos em posse ou no carrinho continuaram sendo o pré-requisito.",
+    "Uma falha de escrita SQLite induzida manteve posse, caixa e carrinho. A mesma compra foi concluída uma única vez depois que a escrita voltou a funcionar.",
+    "A loja manteve o bloqueio de saldo insuficiente, a confirmação e a volta à tela de origem. O tutorial contextual passou a explicar as ações de adicionar e remover.",
+    "Os dois prefabs de ação foram gravados duas vezes pela migração com saída idêntica na segunda aplicação."
+  ],
+  "edit_mode": {
+    "suite": "UI10EquipmentTests",
+    "passed": 24,
+    "failed": 0,
+    "evidence": "editmode.xml"
+  },
+  "play_mode": {
+    "suite": "UI10EquipmentValidation",
+    "passed": 125,
+    "failed": 0,
+    "console_errors": 0,
+    "evidence": "playmode-equipment.json"
+  },
+  "limitations": [
+    "QA no Unity Editor para Windows. O Unity 6000.3.28f1 estava instalado na máquina e foi usado para a validação. Depois do teste, a versão declarada pelo projeto foi restaurada para 6000.3.21f1."
+  ],
+  "ugui_reference": [
+    "Basic Layout",
+    "Rect Transform",
+    "Button",
+    "Event System",
+    "Graphic Raycaster"
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-11",
+    "reports": [
+      "before.json",
+      "migration.json",
+      "editmode.xml",
+      "playmode-equipment.json",
+      "playmode-console.json",
+      "capture-frames.json",
+      "runtime.json"
+    ],
+    "screenshots": [
+      "basic-owned-after-reload-1280x720.png",
+      "before-cart-quantity-1280x720.png",
+      "before-catalog-quantity-1280x720.png",
+      "before-owned-after-reload-1280x720.png",
+      "cart-filled-1280x720.png",
+      "cart-insufficient-1280x720.png",
+      "cart-prerequisite-removal-1280x720.png",
+      "cart-selected-1280x720.png",
+      "catalog-guidance-1280x720.png",
+      "filter-specific-blocked-1280x720.png",
+      "modal-focus-1280x720.png",
+      "persisted-owned-1280x720.png",
+      "setup-normal-1280x720.png"
+    ]
+  }
+}

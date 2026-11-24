@@ -181,8 +181,8 @@ namespace Game.Adapter.In.Controllers
         private void RemoveFromCart(string id)
         {
             if (!cartEquipmentIds.Remove(id)) return;
-            RemoveInvalidSpecificItemsFromCart(); RefreshScreen(); OpenCart();
-            view.SetHint(cartEquipmentIds.Count == 0 ? "Seu carrinho está vazio." : $"{cartEquipmentIds.Count} unidade(s) no carrinho.");
+            RemoveInvalidSpecificItemsFromCart();
+            RefreshCartAfterChange();
         }
 
         private void ReturnToBank()
@@ -215,17 +215,21 @@ namespace Game.Adapter.In.Controllers
                 return;
             }
 
-            if (!cartEquipmentIds.Add(equipment.id))
-            {
-                cartEquipmentIds.Remove(equipment.id);
-                RemoveInvalidSpecificItemsFromCart();
-            }
             GetComponent<ContextualHelp>()?.Complete();
+            if (cartEquipmentIds.Add(equipment.id))
+                RefreshCartAfterChange();
+            else
+                RemoveFromCart(equipment.id);
+        }
 
+        private void RefreshCartAfterChange()
+        {
             view.SetHint(cartEquipmentIds.Count == 0
                 ? "Seu carrinho está vazio."
-                : $"{cartEquipmentIds.Count} item(ns) no carrinho.");
+                : cartEquipmentIds.Count == 1 ? "1 item no carrinho." : $"{cartEquipmentIds.Count} itens no carrinho.");
             RefreshScreen();
+            if (view.CartIsOpen)
+                OpenCart();
         }
 
         private void RefreshScreen()
@@ -240,15 +244,15 @@ namespace Game.Adapter.In.Controllers
                 if (card == null || card.Equipment == null)
                     continue;
 
-                card.SetOwned(Owns(card.Equipment));
-                card.SetInCart(cartEquipmentIds.Contains(card.Equipment.id));
                 bool prerequisiteMet = card.Equipment.category == EquipmentCategory.BASIC
                     || hasAllBasicEquipmentsSelected;
-                card.SetCartAvailable(ready && GameSessionState.HasActiveSession && prerequisiteMet);
+                card.SetCartState(Owns(card.Equipment), cartEquipmentIds.Contains(card.Equipment.id),
+                    ready && GameSessionState.HasActiveSession && prerequisiteMet);
             }
 
-            float cartTotal = GetCartTotal();
-            view.SetCartSummary(AvailableCash, CartItems(), GameSessionState.HasActiveSession && ready);
+            var items = CartItems();
+            float cartTotal = GetCartTotal(items);
+            view.SetCartSummary(AvailableCash, items, GameSessionState.HasActiveSession && ready);
             view.SetConfirmEnabled(GameSessionState.HasActiveSession && ready);
 
             if (!GameSessionState.HasActiveSession)
@@ -284,33 +288,51 @@ namespace Game.Adapter.In.Controllers
                     && card.Equipment != null
                     && cartEquipmentIds.Contains(card.Equipment.id))
                 .Select(card => card.Equipment)
+                .GroupBy(equipment => equipment.id)
+                .Select(group => group.First())
                 .ToList();
 
         private void CompleteCartPurchase()
         {
             if (!isActiveAndEnabled || !ready || !GameSessionState.HasActiveSession) return;
-            float cartTotal = GetCartTotal();
-            if (cartEquipmentIds.Count == 0 || cartTotal > AvailableCash
-                || !HasAllBasicEquipmentsSelected() && CartItems().Any(e => e.category == EquipmentCategory.SPECIFIC))
+            LoadOwnedEquipmentIds();
+            if (cartEquipmentIds.RemoveWhere(ownedEquipmentIds.Contains) > 0)
+            {
+                RefreshCartAfterChange();
+                return;
+            }
+
+            var items = CartItems();
+            float cartTotal = GetCartTotal(items);
+            if (items.Count == 0 || cartTotal > AvailableCash
+                || !HasAllBasicEquipmentsSelected() && items.Any(e => e.category == EquipmentCategory.SPECIFIC))
             {
                 OpenCart();
                 return;
             }
 
-            int purchasedCount = cartEquipmentIds.Count;
-            foreach (string equipmentId in cartEquipmentIds)
-                ownedEquipmentIds.Add(equipmentId);
-
             var data = new EquipmentSelectionData
             {
                 equipmentIds = ownedEquipmentIds.ToList()
             };
+            EquipmentSelectionHelper.AddUniqueIds(data, items.Select(equipment => equipment.id));
 
+            string previousEquipment = GameSessionState.Current.equipmentJson;
+            float previousCash = AvailableCash;
             GameSessionState.SetEquipmentJson(EquipmentSelectionHelper.ToJson(data), false);
-            GameSessionState.SetCash(AvailableCash - cartTotal, false);
-            GameSessionState.Save();
+            GameSessionState.SetCash(previousCash - cartTotal, false);
+            if (!GameSessionState.TrySave(out string error))
+            {
+                GameSessionState.SetEquipmentJson(previousEquipment, false);
+                GameSessionState.SetCash(previousCash, false);
+                FeedbackToast.Show(error, FeedbackKind.Error);
+                return;
+            }
+
+            ownedEquipmentIds.UnionWith(data.equipmentIds);
             cartEquipmentIds.Clear();
             view.HideCart();
+            int purchasedCount = items.Count;
             view.SetHint($"Compra concluída: {purchasedCount} item(ns) adquirido(s).");
             FeedbackToast.Show($"Compra concluída: {purchasedCount} equipamento(s) adquirido(s).", FeedbackKind.Success);
             RefreshScreen();
@@ -359,14 +381,8 @@ namespace Game.Adapter.In.Controllers
                 Owns(equipment) || cartEquipmentIds.Contains(equipment.id));
         }
 
-        private float GetCartTotal()
-        {
-            return cards
-                .Where(card => card != null
-                    && card.Equipment != null
-                    && cartEquipmentIds.Contains(card.Equipment.id))
-                .Sum(card => Mathf.Max(0, card.Equipment.cost));
-        }
+        private static float GetCartTotal(IEnumerable<EquipmentData> items) =>
+            items.Sum(equipment => Mathf.Max(0, equipment.cost));
 
         private void RemoveInvalidSpecificItemsFromCart()
         {

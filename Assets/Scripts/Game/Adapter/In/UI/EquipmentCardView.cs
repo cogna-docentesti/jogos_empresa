@@ -14,14 +14,15 @@ namespace Game.Adapter.In.UI
             GameTypography.KeepSize(categoryText,TypographyRole.Label);
             GameTypography.KeepSize(descriptionText,TypographyRole.Body);
             GameTypography.KeepSize(statusText,TypographyRole.Caption);
-            GameTypography.KeepSize(quantityText,TypographyRole.Table);
-            GameTypography.KeepSize(buyButtonText,TypographyRole.Button);
+            GameTypography.KeepSize(cartActionLabel,TypographyRole.Button);
         }
         [SerializeField] private UnityEngine.UI.Image equipmentImage;
-        [SerializeField] private TextMeshProUGUI nameText, priceText, categoryText, descriptionText, statusText, quantityText;
+        [SerializeField] private TextMeshProUGUI nameText, priceText, categoryText, descriptionText, statusText;
         [SerializeField] private GameObject premiumIndicator, selectionBorder, ownedIndicator;
-        [SerializeField] private UnityEngine.UI.Button buyButton, removeButton;
-        [SerializeField] private TextMeshProUGUI buyButtonText;
+        [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("buyButton")]
+        private UnityEngine.UI.Button cartActionButton;
+        [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("buyButtonText")]
+        private TextMeshProUGUI cartActionLabel;
         public EquipmentData Equipment { get; private set; }
         public bool IsOwned { get; private set; }
         public bool IsInCart { get; private set; }
@@ -31,16 +32,14 @@ namespace Game.Adapter.In.UI
         private void OnEnable()
         {
             ApplyTypography();
-            buyButton?.onClick.AddListener(Add); removeButton?.onClick.AddListener(Remove);
+            cartActionButton?.onClick.AddListener(Toggle);
             GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(Toggle);
         }
         private void OnDisable()
         {
-            buyButton?.onClick.RemoveListener(Add); removeButton?.onClick.RemoveListener(Remove);
+            cartActionButton?.onClick.RemoveListener(Toggle);
             GetComponent<UnityEngine.UI.Button>()?.onClick.RemoveListener(Toggle);
         }
-        private void Add() { if (!IsInCart) Toggle(); }
-        private void Remove() { if (IsInCart) Toggle(); }
         private void Toggle() { if (available && !IsOwned) SelectionRequested?.Invoke(this); }
         public void Setup(EquipmentData equipment, bool owned = false)
         {
@@ -59,27 +58,29 @@ namespace Game.Adapter.In.UI
                 if (equipment.qualityBonus != 0 || equipment.capacityBonus != 0)
                     descriptionText.text += $"\nQualidade +{equipment.qualityBonus:P0} • Capacidade +{equipment.capacityBonus}";
             }
-            SetOwned(owned); SetInCart(false);
+            SetCartState(owned, false, false);
         }
-        public void SetOwned(bool owned) { IsOwned = owned; Refresh(); }
-        public void SetInCart(bool inCart) { IsInCart = !IsOwned && inCart; Refresh(); }
-        public void SetCartAvailable(bool value) { available = value; Refresh(); }
-        private void Refresh()
+        public void SetCartState(bool owned, bool inCart, bool canUseCart)
         {
-            GetComponent<SharedControlAppearance>()?.SetSelected(IsInCart);
+            IsOwned = owned;
+            IsInCart = !owned && inCart;
+            available = canUseCart;
             var root = GetComponent<UnityEngine.UI.Button>(); if (root != null) root.interactable = available && !IsOwned;
+            GetComponent<SharedControlAppearance>()?.SetSelected(IsInCart);
             if (selectionBorder != null) selectionBorder.SetActive(false);
             if (ownedIndicator != null) ownedIndicator.SetActive(false);
-            if (buyButton != null) { buyButton.gameObject.SetActive(true); buyButton.interactable = available && !IsOwned && !IsInCart; }
-            if (removeButton != null) removeButton.interactable = available && !IsOwned && IsInCart;
-            if (buyButtonText != null) buyButtonText.text = "+";
-            if (quantityText != null) quantityText.text = IsInCart || IsOwned ? "1" : "0";
+            if (cartActionButton != null)
+            {
+                cartActionButton.interactable = available && !IsOwned;
+                cartActionButton.gameObject.SetActive(!IsOwned);
+            }
+            if (cartActionLabel != null) cartActionLabel.text = IsInCart ? "Remover do carrinho" : "Adicionar ao carrinho";
             if (statusText != null) statusText.text = IsOwned ? "Adquirido" : !GameSessionState.HasActiveSession ? "Sessão indisponível"
                 : !available ? "Requer os 8 básicos" : IsInCart ? "No carrinho" : "Disponível";
         }
         private void LateUpdate()
         {
-            if (nameText == null || descriptionText == null || quantityText == null) return;
+            if (nameText == null || descriptionText == null || cartActionButton == null) return;
             if (((RectTransform)transform).rect.width < 500)
             {
                 float nameH = Mathf.Max(64, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
@@ -93,9 +94,7 @@ namespace Game.Adapter.In.UI
                 descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, descH);
                 statusText.rectTransform.anchoredPosition = new Vector2(24, -portraitY - 54 - descH);
                 portraitY += 104 + descH;
-                removeButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(24, -portraitY);
-                quantityText.rectTransform.anchoredPosition = new Vector2(100, -portraitY);
-                buyButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(326, -portraitY);
+                cartActionButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(24, -portraitY);
                 RequiredHeight = portraitY + 92;
                 return;
             }
@@ -108,9 +107,7 @@ namespace Game.Adapter.In.UI
             descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, descriptionHeight);
             y += 48 + descriptionHeight + 16;
             RequiredHeight = Mathf.Max(360, y + 68 + 24);
-            buyButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(556, -y);
-            removeButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(286, -y);
-            quantityText.rectTransform.anchoredPosition = new Vector2(366, -y);
+            cartActionButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(286, -y);
         }
     }
 }

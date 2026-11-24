@@ -78,7 +78,7 @@ namespace Game.Adapter.In.UI
             if (summaryItemsText != null)
             {
                 summaryItemsText.gameObject.SetActive(items.Count > 0);
-                summaryItemsText.text = string.Join("\n\n", items.Select(e => $"1 × {e.displayName}\n{FinancialScreenView.Money(e.cost)}"));
+                summaryItemsText.text = string.Join("\n\n", items.Select(e => $"{e.displayName}\n{FinancialScreenView.Money(e.cost)}"));
             }
             if (cartButton != null)
             {
@@ -151,7 +151,7 @@ namespace Game.Adapter.In.UI
             cartRemainingText.text = FinancialScreenView.Money(availableCash - total);
             cartRemainingText.color = total > availableCash ? GamePalette.ErrorText : GamePalette.Ink;
             cartStatusText.text = items.Count == 0 ? "Adicione equipamentos no catálogo." : total > availableCash
-                ? "Saldo insuficiente. Remova itens para concluir." : $"{items.Count} unidade(s). Confira os itens e o total.";
+                ? "Saldo insuficiente. Remova itens para concluir." : "Confira os equipamentos e o total.";
             cartStatusText.color = total > availableCash ? GamePalette.ErrorText : GamePalette.Muted;
             cartEmpty.SetActive(items.Count == 0);
             checkoutButton.interactable = items.Count > 0 && total <= availableCash && GameSessionState.HasActiveSession;
