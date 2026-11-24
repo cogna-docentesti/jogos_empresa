@@ -53,7 +53,7 @@ namespace Game.Adapter.In.Controllers
             view.SetFooterHint(!active ? "Consulta indisponível nesta sessão."
                 : _selectionLocked ? Management ? "Confira o contrato e conclua a consulta." : "Confira o contrato e continue."
                 : session.currentRound == 3 ? "Consulte as condições e volte ao concluir."
-                : "Selecione, confira e confirme.");
+                : "");
             view.SetConfirmLabel(_selectionLocked ? Management ? "Concluir consulta" : "Continuar para equipamentos"
                 : _selectedCreditLine?.maxAmount <= 0 ? Management ? "Manter sem crédito" : "Continuar sem crédito" : "Confirmar crédito");
             if (!active) { view.SetHint("Sessão indisponível para alterações.", true); view.SetSummary("Nenhuma contratação pode ser confirmada."); return; }
@@ -66,9 +66,9 @@ namespace Game.Adapter.In.Controllers
             }
             bool lastMonth = !LoanService.CanContract && session.currentRound == 3;
             view.SetHint(lastMonth ? LoanService.LastMonthMessage : _selectedCreditLine == null
-                ? "Selecione uma das quatro opções. Confira os valores antes de confirmar."
-                : $"Selecionado: {_selectedCreditLine.displayName}. Confira os valores antes de confirmar.");
-            view.SetSummary(_selectedCreditLine == null ? "Nenhuma opção selecionada. A confirmação fica disponível após a seleção."
+                ? "Nenhuma opção selecionada."
+                : $"Selecionado: {_selectedCreditLine.displayName}");
+            view.SetSummary(_selectedCreditLine == null ? ""
                 : _selectedCreditLine.maxAmount <= 0 ? "Sem empréstimo: seu caixa será mantido, sem juros e sem parcelas."
                 : $"Entrada no caixa: {FinancialScreenView.Money(_selectedCreditLine.maxAmount)}  •  Primeira parcela: {FinancialScreenView.Money(LoanService.Installment(_selectedCreditLine.maxAmount, _selectedCreditLine, session.currentRound))}\nAmortização do saldo + juros mensais; as parcelas seguintes acompanham o saldo devedor.");
         }

@@ -116,10 +116,7 @@ public static class UI17FeedbackValidation
             Add("Guide selected", () => { Capture("guide-selected"); Dismiss(Help(Bank)).GetComponent<SharedControlAppearance>().SetSelected(false); Dismiss(Help(Bank)).interactable=false; });
             Add("Guide disabled", () => { Capture("guide-disabled"); Dismiss(Help(Bank)).interactable=true; });
             Add("Dismiss by keyboard", () => { Submit(Dismiss(Help(Bank))); Expect(!Help(Bank).IsVisible,"Guide dismissed"); });
-            Add("Tooltip keyboard", () => { Bank.Find("CreditHelp").GetComponent<UnityEngine.UI.Button>().Select(); });
-            Add("Tooltip visible", () => { Expect(Bank.Find("CreditTooltip").gameObject.activeSelf,"Keyboard tooltip"); Capture("tooltip-keyboard"); ExecuteEvents.Execute(Bank.Find("CreditHelp").gameObject,new BaseEventData(EventSystem.current),ExecuteEvents.cancelHandler); EventSystem.current.SetSelectedGameObject(null); });
-            Add("Tooltip touch", () => Click(Bank.Find("CreditHelp").GetComponent<UnityEngine.UI.Button>(),true));
-            Add("Tooltip touch visible", () => { Expect(Bank.Find("CreditTooltip").gameObject.activeSelf,"Touch tooltip"); Capture("tooltip-touch"); Click(Bank.Find("CreditHelp").GetComponent<UnityEngine.UI.Button>(),true); Expect(!Bank.Find("CreditTooltip").gameObject.activeSelf,"Touch toggle closed"); });
+            Add("Bank uses contextual guidance alone", () => Expect(Bank.Find("CreditHelp") == null && Bank.Find("CreditTooltip") == null, "Redundant bank help"));
             Add("Choose no loan", () => Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(x=>x.CreditLine.id=="sem_credito"),"selectButton"),true));
             Add("Continue to equipment", () => { loadingCaptured=false; Click(Field<UnityEngine.UI.Button>(Bank.GetComponent<FinancialScreenView>(),"confirmButton")); });
             Add("Loaded input released", () => { Expect(!Loader.IsBusy && Equipment.GetComponent<CanvasGroup>().interactable,"Input released on success"); Expect(GameManager.Instance.StateMachine.CurrentState==GameState.Initial_Equipment,"Real step six"); Expect(Help(Equipment).IsVisible,"Drag guide"); Capture("equipment-first"); });

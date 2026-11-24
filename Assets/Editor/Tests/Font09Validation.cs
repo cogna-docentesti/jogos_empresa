@@ -224,7 +224,7 @@ public static class Font09Validation
             Expect(t.transform.localScale==Vector3.one,"Condensed by scale: "+PathOf(t.transform));
             Expect(!t.text.Contains("<b>")&&!t.text.Contains("<font-weight"),"Inline cumulative bold: "+PathOf(t.transform));
             var pathOfText=PathOf(t.transform);
-            if(pathOfText.EndsWith("/CreditTooltip/Message") || pathOfText.Contains("/ContextualHelp/Message") || pathOfText.EndsWith("/Feedback/Toast/Message"))
+            if(pathOfText.Contains("/ContextualHelp/Message") || pathOfText.EndsWith("/Feedback/Toast/Message"))
             {
                 var surface=(RectTransform)t.transform.parent;
                 var corners=new Vector3[4];t.rectTransform.GetWorldCorners(corners);
@@ -269,13 +269,8 @@ public static class Font09Validation
         {
             var s=size;
             Add("Focused viewport "+s,()=>{resolution=s.x+"x"+s.y;UI01Validation.SetGameView(s.x,s.y);});
-            Add("Long tooltip and isolated session",()=>{
-                typeof(UI17FeedbackValidation).GetMethod("Fixture",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,null);
-                var panel=Root.Find("Panel_Financial/CreditTooltip");
-                panel.Find("Message").GetComponent<TMP_Text>().text="O crédito entra no caixa. "+string.Join(" ",Enumerable.Repeat("As parcelas incluem amortização e juros e são pagas no fechamento mensal. Confira as condições antes de confirmar sua escolha.",4));
-                Root.Find("Panel_Financial/CreditHelp").GetComponent<Button>().Select();
-            });
-            Add("Long tooltip remains readable",()=>{Capture("long-tooltip");Root.Find("Panel_Financial/CreditHelp").GetComponent<SharedTooltip>().Dismiss();});
+            Add("Isolated bank tutorial session", () =>
+                typeof(UI17FeedbackValidation).GetMethod("Fixture", BindingFlags.Static | BindingFlags.NonPublic).Invoke(null, null));
             Add("Long help body",()=>{
                 var help=Root.Find("Panel_Financial").GetComponent<ContextualHelp>();
                 Root.Find("Panel_Financial/ContextualHelp/Message").GetComponent<TMP_Text>().text=string.Join(" ",Enumerable.Repeat("Selecione uma opção e confira as condições. Você também pode continuar sem crédito; revise o valor das parcelas antes de confirmar.",3));

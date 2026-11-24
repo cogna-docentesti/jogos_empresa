@@ -114,11 +114,7 @@ namespace Game.EditorTools
             var menuAction = (RectTransform)canvas.Find("MenuAccess/Button");
             menuAction.anchoredPosition = new Vector2(menuAction.anchoredPosition.x, Mathf.Max(menuAction.anchoredPosition.y, -998));
             var bank = canvas.Find("Panel_Financial");
-            Help(bank, GameState.Initial_Capital, "TUTORIAL_TAP", "Selecione uma opção e confira as condições. Você também pode continuar sem crédito.", null, bank.Find("CreditOptionsScroll").GetComponent<UnityEngine.UI.ScrollRect>(), true);
-            var help = Button(bank, "CreditHelp", "?", 832, 112, 68, 68);
-            var tip = Picture(bank, "CreditTooltip", "UI_TOOLTIP_SURFACE", 24, 208, 480, 224);
-            Text(tip.transform, "Message", "O crédito entra no caixa. As parcelas incluem amortização e juros e são pagas no fechamento mensal.\nToque novamente em ? para fechar.", 24, 16, 432, 192);
-            Ensure<SharedTooltip>(help).panel = tip.gameObject; tip.gameObject.SetActive(false);
+            Help(bank, GameState.Initial_Capital, "TUTORIAL_TAP", "Selecione uma opção e confira as condições. Você também pode continuar sem crédito.", null, null, true);
             var prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/Panel_Equipment.prefab");
             try { Equipment(prefab.transform); PrefabUtility.SaveAsPrefabAsset(prefab, "Assets/Prefabs/Panel_Equipment.prefab"); } finally { PrefabUtility.UnloadPrefabContents(prefab); }
             Equipment(canvas.Find("Panel_Equipment"));

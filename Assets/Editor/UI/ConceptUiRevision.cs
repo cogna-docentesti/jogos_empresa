@@ -207,20 +207,7 @@ namespace Game.EditorTools
             Move(p,"TitleText",672,108,700,64);Find(p,"TitleText").GetComponent<TMP_Text>().text="Opções de crédito";
             Move(p,"CapitalLabel",1380,108,220,32);Move(p,"CapitalValue",1380,144,220,42);Type(p,"CapitalValue",28);
             Move(p,"CashLabel",1632,108,264,32);Move(p,"CashValue",1632,144,264,42);Type(p,"CashValue",28);
-            Move(p,"CreditHelp",600,112,52,52);
-            ResizeScroll(p,"CreditOptionsScroll",664,208,1232,624);
-            var c=Find(p,"CreditOptionsScroll").GetComponent<UnityEngine.UI.ScrollRect>().content;
-            var oldLayout=c.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();if(oldLayout!=null)UnityEngine.Object.DestroyImmediate(oldLayout);
-            var grid=Ensure<UnityEngine.UI.GridLayoutGroup>(c);grid.constraint=UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=4;
-            grid.cellSize=new Vector2(290,660);grid.spacing=new Vector2(12,16);grid.padding=new RectOffset(4,4,4,4);
-            Move(p,"CreditDetails",664,852,1232,116);Move(p,"CreditDetails/Availability",20,8,1192,40);Move(p,"CreditDetails/Summary",20,52,1192,56);
-            Prefab("Assets/Prefabs/Card_loan.prefab",r=>{
-                ((RectTransform)r).sizeDelta=new Vector2(290,660);
-                Move(r,"CreditArtwork",54,24,182,152);Move(r,"Name",16,190,258,60);Type(r,"Name",28);
-                Move(r,"Principal",16,262,258,42);Type(r,"Principal",27);
-                foreach(var n in new[]{"Interest","Term","Installment","Description","Availability"}) {Move(r,n,16,320,258,n=="Installment"||n=="Availability"?64:80);Type(r,n,20,false);}
-                Move(r,"SelectionMark",240,14,34,34);
-            });
+            FinancialUiMigration.ApplyBankLayout(p);
         }
         static void Hub()
         {

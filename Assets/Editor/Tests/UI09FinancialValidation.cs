@@ -29,7 +29,6 @@ public static class UI09FinancialValidation
     private static FinancialScreenView View => CanvasRoot.Find("Panel_Financial").GetComponent<FinancialScreenView>();
     private static BankCardView[] Cards => View.GetComponentsInChildren<BankCardView>();
     private static UnityEngine.UI.Button Confirm => Field<UnityEngine.UI.Button>(View, "confirmButton");
-    private static UnityEngine.UI.ScrollRect Scroll => Field<UnityEngine.UI.ScrollRect>(View, "cardsScrollRect");
     private static UnityEngine.UI.Button Back => CanvasRoot.Find("HubHistory/Back").GetComponent<UnityEngine.UI.Button>();
     private static UnityEngine.UI.Button EquipmentBack => Field<UnityEngine.UI.Button>(CanvasRoot.Find("Panel_Equipment").GetComponent<EquipmentScreenView>(), "bankBackButton");
     private static BankCardView Card(string id) => Cards.Single(c => c.CreditLine.id == id);
@@ -49,17 +48,29 @@ public static class UI09FinancialValidation
     private static void Fits()
     {
         Canvas.ForceUpdateCanvases();
-        foreach (var t in View.GetComponentsInChildren<TMP_Text>())
-        { t.ForceMeshUpdate(); Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Typography " + t.name); Expect(!t.isTextOverflowing, "Overflow " + t.name + ": " + t.text); }
-        Expect(Scroll.viewport.GetComponent<UnityEngine.UI.Mask>() != null && Scroll.content.parent == Scroll.viewport && Scroll.vertical && !Scroll.horizontal, "Scroll hierarchy");
-        Expect(Scroll.verticalScrollbar.handleRect.sizeDelta == Vector2.zero, "Scrollbar handle dimensions");
+        Expect(View.GetComponentInChildren<UnityEngine.UI.ScrollRect>(true) == null, "Unexpected scroll view");
+        Expect(View.transform.Find("CreditHelp") == null && View.transform.Find("CreditTooltip") == null, "Redundant help");
         Expect(Cards.Length == 4, "Missing or duplicate options");
-        var grid = Scroll.content.GetComponent<UnityEngine.UI.GridLayoutGroup>();
-        if (grid != null) foreach (var card in Cards)
-            Expect(grid.cellSize.y + .5f >= card.GetComponent<UnityEngine.UI.LayoutElement>().preferredHeight,
-                "Native card content extends beyond the scrollable grid cell: " + card.CreditLine.id);
-        var guidance = Field<TMP_Text>(View, "footerHintText").text;
-        Expect(guidance.Contains("Selecione") == (GameSessionState.HasActiveSession && !LoanService.HasLoan(GameSessionState.Current) && GameSessionState.Current.currentRound < 3), "Footer instruction does not match availability");
+        Expect(Cards.Count(c => c.GetComponent<SharedControlAppearance>().IsSelected) <= 1, "Multiple selected cards");
+        foreach (var t in View.GetComponentsInChildren<TMP_Text>())
+        {
+            t.ForceMeshUpdate();
+            Expect(t.GetComponent<Game.Adapter.In.UI.Theme.TypographyRoleBinding>() != null && !t.enableAutoSizing, "Typography " + t.name);
+            bool stressCopy = longLine != null && t.GetComponentInParent<BankCardView>()?.CreditLine == longLine
+                && (t.name == "Name" || t.name == "Description");
+            Expect(stressCopy || (!t.isTextOverflowing && !t.isTextTruncated), "Overflow " + t.name + ": " + t.text);
+            Expect(!t.text.Contains("Selecione uma das quatro opções"), "Redundant instruction");
+        }
+        foreach (var button in Cards.Select(Button).Append(Confirm))
+        {
+            var corners = new Vector3[4];
+            button.targetGraphic.rectTransform.GetWorldCorners(corners);
+            foreach (var corner in corners)
+            {
+                var point = RectTransformUtility.WorldToScreenPoint(null, corner);
+                Expect(point.x >= -1 && point.x <= Screen.width + 1 && point.y >= -1 && point.y <= Screen.height + 1, "Control clipped: " + button.name);
+            }
+        }
         foreach (var c in Cards)
         { var i = Field<UnityEngine.UI.Image>(c, "creditLineIcon"); Expect(i.sprite == c.CreditLine.icon && i.color == Color.white && i.preserveAspect && i.type == UnityEngine.UI.Image.Type.Simple, "Artwork binding/tint/contain " + c.CreditLine.id); }
         foreach (var name in new[] { "BankEnvironment", "BankAdvisor" })
@@ -103,28 +114,42 @@ public static class UI09FinancialValidation
         Add("Choose D1 without persistence", () => { var v = UnityEngine.Object.FindFirstObjectByType<LocationScreenView>(); ExecuteEvents.Execute(v.Zones.Single(z => z.id == "bank").marker.gameObject, new PointerEventData(EventSystem.current) { pointerId = 4 }, ExecuteEvents.pointerClickHandler); Click(Field<UnityEngine.UI.Button>(v, "confirmButton")); Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count() == 0, "Inserted in D1"); });
         Add("Choose D2 without persistence", () => { var v = UnityEngine.Object.FindFirstObjectByType<RestaurantScreenView>(); Click(Field<UnityEngine.UI.Button>(v, "cardPodrao")); Click(Field<UnityEngine.UI.Button>(v, "confirmButton")); Expect(DatabaseInitializer.DatabaseService.Connection.Table<GameSessionEntity>().Count() == 0, "Inserted in D2"); });
         Add("D3 makes first INSERT through technical review to Banco", () => { Click(Field<UnityEngine.UI.Button>(UnityEngine.Object.FindFirstObjectByType<MenuPricingScreenView>(), "confirmButton")); Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Initial_Capital, "D3 destination"); sessionId = GameSessionState.Current.sessionId; SameSession(); });
+        Add("First visit shows contextual tutorial without a help button", () =>
+        {
+            Fits();
+            var help = View.GetComponent<ContextualHelp>();
+            Expect(help.IsVisible, "Initial tutorial");
+            Capture("contextual-tutorial-1280x720");
+            Click(Field<UnityEngine.UI.Button>(help, "dismiss"));
+            Expect(!help.IsVisible, "Tutorial dismissal");
+        });
         foreach (var size in UiValidationContext.Resolutions)
         {
             var s = size; string suffix = s.x + "x" + s.y;
             Add("Viewport and clean setup " + suffix, () => { UI01Validation.SetGameView(s.x, s.y); Fixture(1); ReopenSetup(); EventSystem.current.SetSelectedGameObject(null); });
-            Add("Rendered setup, four options and disabled confirmation " + suffix, () => { Fits(); SameSession(); Expect(Screen.width == s.x && Screen.height == s.y && Field<TMP_Text>(View, "stepText").text.Contains("5 DE 7"), "Resolution/step"); Expect(!Confirm.interactable, "Unselected confirmation"); Capture("setup-normal-" + suffix); });
+            Add("Rendered setup, four options and disabled confirmation " + suffix, () => { Fits(); SameSession(); Expect(Screen.width == s.x && Screen.height == s.y && Field<TMP_Text>(View, "stepText").text == "BANCO E CAPITAL", "Resolution/header"); Expect(!Confirm.interactable, "Unselected confirmation"); Capture("setup-normal-" + suffix); });
             foreach (var option in new[] { "sem_credito", "microcredito_empresarial", "credito_empresarial_padrao", "credito_de_investimento" })
             {
                 string id = option;
-                Add("Focus reveals " + id + " " + suffix, () => Button(Card(id)).Select());
+                Add("Focus " + id + " " + suffix, () => Button(Card(id)).Select());
                 Add("Select actual option " + id + " " + suffix, () => { Click(Button(Card(id))); Expect(Confirm.interactable, "Selected confirmation"); });
-                Add("Rendered selection and real values " + id + " " + suffix, () => { Fits(); Expect(Card(id).GetComponent<SharedControlAppearance>().IsSelected && Field<UnityEngine.UI.Image>(Card(id), "selectionMark").enabled, "Selection mark"); Expect(Field<TMP_Text>(Card(id), "interestRateText").text.Contains(id == "sem_credito" ? "Sem juros" : (Card(id).CreditLine.monthlyInterestRate * 100).ToString("0")), "Interest"); Capture(id + "-selected-" + suffix); SameSession(); });
+                Add("Rendered selection and real values " + id + " " + suffix, () => { Fits(); Expect(Cards.Single(c => c.GetComponent<SharedControlAppearance>().IsSelected) == Card(id), "Selected bank");
+                    var appearance = Card(id).GetComponent<SharedControlAppearance>();
+                    var surface = Button(Card(id)).targetGraphic as UnityEngine.UI.Image;
+                    Expect(surface.sprite.name == "card_normal" && surface.color != Color.white
+                        && Card(id).transform.Find("SelectionMark") == null
+                        && !Card(id).GetComponentsInChildren<UnityEngine.UI.Outline>().Any(outline => outline.enabled), "Single selected surface"); Expect(Field<TMP_Text>(Card(id), "interestRateText").text.Contains(id == "sem_credito" ? "Sem juros" : (Card(id).CreditLine.monthlyInterestRate * 100).ToString("0")), "Interest"); Capture(id + "-selected-" + suffix); SameSession(); });
             }
         }
         Add("Recreate bank cards before hover", () => { Fixture(1); ReopenSetup(); EventSystem.current.SetSelectedGameObject(null); });
         Add("Prepare shared card hover", () => { EventSystem.current.SetSelectedGameObject(null); ExecuteEvents.Execute(Button(Card("sem_credito")).gameObject, Pointer(Button(Card("sem_credito"))), ExecuteEvents.pointerEnterHandler); });
-        Add("Rendered shared hover outline", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "hover" && Field<UnityEngine.UI.Image>(c, "interactionOutline").enabled, "Hover state: " + c.GetComponent<SharedControlAppearance>().CurrentState + "; outline=" + Field<UnityEngine.UI.Image>(c, "interactionOutline").enabled); Capture("card-hover-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerDownHandler); });
-        Add("Rendered shared pressed outline", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "pressed", "Pressed state"); Capture("card-pressed-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerUpHandler); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerExitHandler); Button(Card("credito_de_investimento")).Select(); });
-        Add("Keyboard focus reveals last masked row", () => { Expect(Card("credito_de_investimento").GetComponent<SharedControlAppearance>().CurrentState == "focus", "Focus state"); Fits(); Capture("card-focus-1280x720"); ExecuteEvents.Execute(Button(Card("credito_de_investimento")).gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler); });
+        Add("Rendered shared hover state", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "hover", "Hover state: " + c.GetComponent<SharedControlAppearance>().CurrentState); Capture("card-hover-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerDownHandler); });
+        Add("Rendered shared pressed state", () => { var c = Card("sem_credito"); Expect(c.GetComponent<SharedControlAppearance>().CurrentState == "pressed", "Pressed state"); Capture("card-pressed-1280x720"); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerUpHandler); ExecuteEvents.Execute(Button(c).gameObject, Pointer(Button(c)), ExecuteEvents.pointerExitHandler); Button(Card("credito_de_investimento")).Select(); });
+        Add("Keyboard focus reaches last unmasked card", () => { Expect(Card("credito_de_investimento").GetComponent<SharedControlAppearance>().CurrentState == "focus", "Focus state"); Fits(); Capture("card-focus-1280x720"); ExecuteEvents.Execute(Button(Card("credito_de_investimento")).gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler); });
         Add("Keyboard submit selects without contracting", () => { Expect(Confirm.interactable && GameSessionState.Current.loanBalance == 0, "Submit contracted before confirmation"); Button(Card("sem_credito")).Select(); });
         Add("Choose Sem crédito", () => { Click(Button(Card("sem_credito"))); Click(Confirm); });
         Add("Sem crédito reaches Equipamentos without adding money", () => { Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Initial_Equipment && GameSessionState.Current.creditLineId == "sem_credito" && GameSessionState.Current.loanBalance == 0 && GameSessionState.Current.currentCash == 65000, "Sem crédito changed economy"); Capture("equipment-return-1280x720"); Click(EquipmentBack); });
-        Add("Equipment return restores Sem crédito and step five", () => { Fits(); Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Initial_Capital && Card("sem_credito").GetComponent<SharedControlAppearance>().IsSelected, "Equipment return"); Capture("bank-return-no-credit-1280x720"); SameSession(); });
+        Add("Equipment return restores Sem crédito", () => { Fits(); Expect(!View.GetComponent<ContextualHelp>().IsVisible, "Dismissed tutorial returned"); Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Initial_Capital && Card("sem_credito").GetComponent<SharedControlAppearance>().IsSelected, "Equipment return"); Capture("bank-return-no-credit-1280x720"); SameSession(); });
         foreach (string option in new[] { "microcredito_empresarial", "credito_empresarial_padrao", "credito_de_investimento" })
         {
             string id = option;
@@ -157,8 +182,10 @@ public static class UI09FinancialValidation
         Add("Month three Sem crédito remains valid and preserves cash", () => { History(); Expect(GameSessionState.Current.currentCash == 65000 && GameSessionState.Current.creditLineId == "sem_credito", "No credit month three"); Fixture(1); OpenBank(); Button(Card("microcredito_empresarial")).Select(); });
         Add("Prepare stale selection between selection and confirm", () => { Click(Button(Card("microcredito_empresarial"))); GameSessionState.Current.currentRound = 3; Click(Confirm); });
         Add("Failed contract gives actual error and never advances or credits cash", () => { Expect(MenuNavigator.Instance.Current == PanelId.Financial && !Confirm.interactable && GameSessionState.Current.loanBalance == 0 && Field<TMP_Text>(View, "hintText").text == LoanService.LastMonthMessage, "Stale contract guard"); Fits(); Capture("contract-error-1280x720"); Click(Back); });
-        Add("History after failed contract", () => { History(); Fixture(1); OpenBank(); longLine = LoanService.FindLine("microcredito_empresarial"); oldName = longLine.displayName; oldDescription = longLine.cardDescription; longLine.displayName = "Microcrédito Empresarial com um nome extenso para conferir a leitura completa"; longLine.cardDescription = string.Join(" ", Enumerable.Repeat("Descrição longa de catálogo para conferir quebra de linha e rolagem sem perder valores ou controles.", 4)); Call(View.GetComponent<FinancialScreenController>(), "PopulateCreditLines"); Button(Card(longLine.id)).Select(); });
-        Add("Long names and descriptions expand and remain reachable", () => { Fits(); Capture("long-copy-1280x720"); longLine.displayName = oldName; longLine.cardDescription = oldDescription; longLine = null; Click(Back); });
+        Add("History after failed contract", () => { History(); Fixture(1); OpenBank(); longLine = LoanService.FindLine("microcredito_empresarial"); oldName = longLine.displayName; oldDescription = longLine.cardDescription; longLine.displayName = "Microcrédito Empresarial com um nome extenso para conferir a leitura completa"; longLine.cardDescription = string.Join(" ", Enumerable.Repeat("Descrição longa de catálogo para conferir o limite visual sem ocultar valores ou controles.", 4)); Call(View.GetComponent<FinancialScreenController>(), "PopulateCreditLines"); Button(Card(longLine.id)).Select(); });
+        Add("Long catalog copy is bounded and costs stay accessible", () => { Fits(); var c = Card(longLine.id);
+            Expect(Field<TMP_Text>(c, "nameText").isTextTruncated && Field<TMP_Text>(c, "descriptionText").isTextTruncated, "Long copy did not respect card bounds");
+            Expect(!Field<TMP_Text>(c, "installmentText").isTextTruncated, "Installment truncated"); Capture("long-copy-1280x720"); longLine.displayName = oldName; longLine.cardDescription = oldDescription; longLine = null; Click(Back); });
         Add("Prepare nested history from establishment", () => { Fixture(2, "sem_credito"); MenuNavigator.Instance.Open(PanelId.Establishment); });
         Add("Nested bank shortcut preserves originating focus", () => { var content = UnityEngine.Object.FindFirstObjectByType<EstablishmentReviewContent>(); var b = Field<EstablishmentReviewContent.DecisionVisual[]>(content, "decisions")[3].button; b.Select(); snapshot = Newtonsoft.Json.JsonConvert.SerializeObject(GameSessionState.Current); draft = MenuPricingHelper.ToJson(PlayerSession.GetMenu()); origin = b.gameObject; });
         Add("Open nested bank and return through history", () => { Click(origin.GetComponent<UnityEngine.UI.Button>()); Expect(MenuNavigator.Instance.Current == PanelId.Financial, "Nested bank"); });

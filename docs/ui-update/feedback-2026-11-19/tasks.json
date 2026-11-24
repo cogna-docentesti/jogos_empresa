@@ -1172,8 +1172,8 @@
       "area": "Bancos",
       "kind": "interface",
       "priority": "P2",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-01",
         "FB-02"
@@ -1201,7 +1201,10 @@
         "Assets/Editor/UI/FinancialUiMigration.cs",
         "Assets/Editor/UI/ConceptUiRevision.cs"
       ],
-      "notes": [],
+      "notes": [
+        "As quatro opções usam um grid fixo sem rolagem. A seleção é indicada pelo card destacado. O tutorial contextual continua disponível na primeira visita.",
+        "Validação no Unity Editor em 1280×720, 1366×768 e 1920×1080, com 130 verificações de Play Mode e 10 testes de Edit Mode aprovados. A confirmação e o retorno de Equipamentos conservaram a opção correta."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-10.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-10.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-10",

@@ -1,0 +1,93 @@
+{
+  "task_id": "FB-10",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "b7c2194d989759c602ec9f9b09509e76e830a915",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280×720",
+    "1366×768",
+    "1920×1080"
+  ],
+  "method": "Game View em Play Mode com SQLite e identificação em PlayerPrefs isolados. A suíte usa raycast do EventSystem para os cliques e eventos de foco e submit para o teclado. Os PNGs são quadros renderizados pelo Unity.",
+  "before": "A área visível tinha 624 unidades de altura para 668 de conteúdo. Apareciam a barra de rolagem, o botão ?, o texto com as quatro opções e o marcador circular sobre o card selecionado.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Os quatro cards, os custos e a confirmação cabem integralmente em 1280×720. Também foram conferidos em 1366×768 e 1920×1080. A lista usa um grid fixo sem ScrollRect, máscara de rolagem ou scrollbar."
+    },
+    {
+      "criterion": 2,
+      "result": "A primeira visita abriu o tutorial, que foi dispensado pelo botão Entendi. O retorno a partir de Equipamentos restaurou a opção escolhida e manteve o tutorial dispensado. O botão ?, o tooltip associado e a instrução das quatro opções ficaram ausentes nas revisitas."
+    },
+    {
+      "criterion": 3,
+      "result": "Cada opção pôde ser selecionada e apenas um card recebeu o destaque. O estado usa a moldura do próprio card, com preenchimento lilás, e um traço interno para o foco. O fluxo confirmou as quatro opções e preservou o ID correto ao voltar de Equipamentos."
+    }
+  ],
+  "additional_checks": [
+    "A confirmação sem empréstimo manteve o caixa. Cada contrato positivo registrou o ID, o valor e o saldo no SQLite e acrescentou o crédito uma única vez.",
+    "Foram exercitados foco e submit pelo teclado, estados de hover e pressionado, contexto de gestão e os limites dos meses 2 e 3. A UI preservou os valores e as regras vigentes de contratação.",
+    "A reaplicação do layout na cena e no prefab já migrados produziu as mesmas saídas em duas gravações consecutivas. A cena final foi reaberta para executar a suíte de Play Mode."
+  ],
+  "edit_mode": {
+    "suite": "UI09FinancialTests",
+    "passed": 10,
+    "failed": 0,
+    "evidence": "editmode.xml"
+  },
+  "play_mode": {
+    "suite": "UI09FinancialValidation",
+    "passed": 130,
+    "failed": 0,
+    "console_errors": 0,
+    "evidence": "playmode-financial.json"
+  },
+  "limitations": [
+    "O QA foi feito no Unity Editor para Windows. Foi usado o Unity 6000.3.28f1 disponível na máquina, com a versão declarada pelo projeto restaurada após o teste.",
+    "O ensaio de cópia longa usou texto sintético. Nomes e descrições acima do espaço disponível recebem reticências para manter valores e controles visíveis. O texto integral dos quatro produtos vigentes coube em todas as resoluções testadas."
+  ],
+  "ugui_reference": [
+    "Basic Layout",
+    "Rect Transform",
+    "Auto Layout",
+    "Grid Layout Group",
+    "Scroll Rect",
+    "Canvas Scaler",
+    "Button",
+    "Event System",
+    "Graphic Raycaster"
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-10",
+    "reports": [
+      "before.json",
+      "migration.json",
+      "editmode.xml",
+      "playmode-financial.json",
+      "playmode-console.json",
+      "runtime.json"
+    ],
+    "screenshots": [
+      "bank-return-no-credit-1280x720.png",
+      "before-scroll-1280x720.png",
+      "before-selected-1280x720.png",
+      "card-focus-1280x720.png",
+      "contextual-tutorial-1280x720.png",
+      "credito_de_investimento-contracted-1280x720.png",
+      "credito_de_investimento-selected-1280x720.png",
+      "credito_empresarial_padrao-selected-1280x720.png",
+      "credito_empresarial_padrao-selected-1366x768.png",
+      "equipment-return-1280x720.png",
+      "long-copy-1280x720.png",
+      "microcredito_empresarial-selected-1280x720.png",
+      "month3-existing-contract-1280x720.png",
+      "sem_credito-selected-1280x720.png",
+      "setup-normal-1280x720.png",
+      "setup-normal-1920x1080.png"
+    ]
+  }
+}

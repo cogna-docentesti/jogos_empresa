@@ -26,7 +26,6 @@ namespace Game.Adapter.In.UI
         [SerializeField] private TextMeshProUGUI availabilityText;
         [SerializeField] private UnityEngine.UI.Button selectButton;
         [SerializeField] private UnityEngine.UI.Image creditLineIcon;
-        [SerializeField] private UnityEngine.UI.Image selectionMark;
         public CreditLineData CreditLine { get; private set; }
         public event Action<BankCardView> Selected;
         private void OnEnable() { ApplyTypography(); if (selectButton != null) selectButton.onClick.AddListener(OnSelected); }
@@ -54,38 +53,6 @@ namespace Game.Adapter.In.UI
                 : available ? "Disponível para contratação" : "Indisponível no mês atual";
             SetSelected(false);
         }
-        public void SetSelected(bool selected)
-        { GetComponent<SharedControlAppearance>()?.SetSelected(selected); if (selectionMark != null) selectionMark.enabled = selected; }
-        private void LateUpdate()
-        {
-            // Long catalog copy expands the row; scrolling keeps fixed actions reachable.
-            if (nameText == null || descriptionText == null) return;
-            if (((RectTransform)transform).rect.width < 500)
-            {
-                float h = Mathf.Max(60, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
-                nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);
-                float y = 190 + h + 12;
-                maxAmountText.rectTransform.anchoredPosition = new Vector2(16, -y);
-                interestRateText.rectTransform.anchoredPosition = new Vector2(16, -y - 50);
-                termText.rectTransform.anchoredPosition = new Vector2(16, -y - 86);
-                installmentText.rectTransform.anchoredPosition = new Vector2(16, -y - 132);
-                descriptionText.rectTransform.anchoredPosition = new Vector2(16, -y - 202);
-                float dh = Mathf.Max(64, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
-                descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, dh);
-                availabilityText.rectTransform.anchoredPosition = new Vector2(16, -y - 214 - dh);
-                var le = GetComponent<UnityEngine.UI.LayoutElement>();
-                le.preferredHeight = Mathf.Max(640, y + 282 + dh);
-                return;
-            }
-            float nameHeight = Mathf.Max(40, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
-            float descriptionHeight = Mathf.Max(60, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
-            nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, nameHeight);
-            descriptionText.rectTransform.anchoredPosition = new Vector2(168, -24 - nameHeight - 8);
-            descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, descriptionHeight);
-            availabilityText.rectTransform.anchoredPosition = new Vector2(168, -24 - nameHeight - 8 - descriptionHeight - 8);
-            var layout = GetComponent<UnityEngine.UI.LayoutElement>();
-            float height = Mathf.Max(212, 24 + nameHeight + 8 + descriptionHeight + 8 + 36 + 24);
-            if (!Mathf.Approximately(layout.preferredHeight, height)) layout.preferredHeight = height;
-        }
+        public void SetSelected(bool selected) => GetComponent<SharedControlAppearance>()?.SetSelected(selected);
     }
 }
