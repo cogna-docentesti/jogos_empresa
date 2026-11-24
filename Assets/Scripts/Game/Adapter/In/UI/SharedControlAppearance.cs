@@ -13,6 +13,7 @@ namespace Game.Adapter.In.UI
         IPointerDownHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler, ISubmitHandler
     {
         [SerializeField] private SharedControlKind kind;
+        [SerializeField] private bool borderlessButton;
         [SerializeField] private UnityEngine.UI.Image surface;
         [SerializeField] private UnityEngine.UI.Image focusLayer;
         // Older scenes and prefab instances still reference these decoration layers.
@@ -77,6 +78,13 @@ namespace Game.Adapter.In.UI
             rect.sizeDelta = new Vector2(kind == SharedControlKind.Scrollbar ? 8 : 28, 5);
             focusLayer.gameObject.SetActive(true);
         }
+
+        public void UseBorderlessButtonSurface()
+        {
+            borderlessButton = true;
+            Refresh();
+        }
+
         private void LateUpdate() => Refresh();
         public void SetSelected(bool value) { selected=value; Refresh(); }
         public void OnPointerEnter(PointerEventData e) { hovered=e.pointerId<0; Refresh(); }
@@ -112,15 +120,25 @@ namespace Game.Adapter.In.UI
             Sprite sprite=kind==SharedControlKind.Slider ? skin.Get("UI_SLIDER_THUMB")
                 : kind==SharedControlKind.Scrollbar ? skin.Get("UI_SCROLLBAR_THUMB")
                 : kind==SharedControlKind.Card ? skin.Get("UI_CARD_NORMAL") : skin.Get(prefix+"_"+state);
+            bool darkFill = enabledState && (kind == SharedControlKind.Primary || kind == SharedControlKind.Pill && chosen);
+            if (borderlessButton)
+            {
+                // Reuse the solid, rounded 9-slices from the progress control.
+                sprite = skin.Get(darkFill ? "UI_PROGRESS_FILL" : "UI_PROGRESS_TRACK");
+                if (surface.pixelsPerUnitMultiplier != .5f) surface.pixelsPerUnitMultiplier = .5f;
+            }
             if(sprite!=null) { surface.overrideSprite=null; surface.sprite=sprite; }
-            surface.color = SurfaceColor(enabledState, chosen, down);
+            bool darkSurface = borderlessButton ? darkFill : DarkSurface;
+            surface.color = borderlessButton
+                ? BorderlessButtonTint(enabledState, down)
+                : SurfaceColor(enabledState, chosen, down);
             if (focusLayer != null)
             {
                 focusLayer.enabled = enabledState && focus;
-                focusLayer.color = DarkSurface || kind == SharedControlKind.Navigation ? GamePalette.OnDark : GamePalette.Plum;
+                focusLayer.color = darkSurface || kind == SharedControlKind.Navigation ? GamePalette.OnDark : GamePalette.Plum;
             }
             bool dimLabel = !enabledState && (kind != SharedControlKind.Card || !chosen);
-            Color textColor = dimLabel ? GamePalette.Muted : DarkSurface ? GamePalette.OnDark : GamePalette.Ink;
+            Color textColor = dimLabel ? GamePalette.Muted : darkSurface ? GamePalette.OnDark : GamePalette.Ink;
             foreach(var label in labels) if(label!=null) label.color=textColor;
             foreach(var icon in icons) if(icon!=null) icon.color=textColor;
             if(kind==SharedControlKind.Navigation)
@@ -129,6 +147,13 @@ namespace Game.Adapter.In.UI
                 foreach(var label in labels)if(label!=null)label.color=!enabledState?GamePalette.Muted:chosen?GamePalette.OnDark:GamePalette.Lavender;
                 foreach(var icon in icons)if(icon!=null)icon.color=!enabledState?GamePalette.Muted:GamePalette.Lavender;
             }
+        }
+
+        private Color BorderlessButtonTint(bool interactable, bool down)
+        {
+            if (!interactable) return Color.Lerp(Color.white, GamePalette.SurfaceAlt, .50f);
+            if (down) return Color.Lerp(Color.white, GamePalette.Plum, .25f);
+            return hovered ? Color.Lerp(Color.white, GamePalette.Plum, .10f) : Color.white;
         }
 
         private Color SurfaceColor(bool interactable, bool chosen, bool down)

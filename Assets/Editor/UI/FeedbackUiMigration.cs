@@ -70,9 +70,11 @@ namespace Game.EditorTools
             Motion(panel.transform, "UI_SPINNER", 40, 40, 48);
             Text(panel.transform, "Message", "Carregando o catálogo de equipamentos…\nVocê pode cancelar esta consulta.", 112, 36, 784, 92);
             var cancel = Button(panel.transform, "Cancel", "Cancelar carregamento", 264, 164, 416, 68);
+            EquipmentUiMigration.ApplyButtonAlignment(cancel);
             Set(loader, "overlay", panel.gameObject); Set(loader, "cancel", cancel); panel.gameObject.SetActive(false);
             var catalog = (UnityEngine.UI.ScrollRect)new SerializedObject(equipment.GetComponent<EquipmentScreenView>()).FindProperty("catalogScroll").objectReferenceValue;
             var retry = Button(catalog.transform.parent, "RetryCatalog", "Tentar novamente", 416, 400, 496, 68);
+            EquipmentUiMigration.ApplyButtonAlignment(retry);
             Set(equipment.GetComponent<EquipmentScreenView>(), "retryCatalogButton", retry); retry.gameObject.SetActive(false);
         }
         private static void Toast(Transform canvas)
@@ -91,6 +93,7 @@ namespace Game.EditorTools
             Loading(equipment);
             var catalog = (UnityEngine.UI.ScrollRect)new SerializedObject(equipment.GetComponent<EquipmentScreenView>()).FindProperty("catalogScroll").objectReferenceValue;
             Help(equipment, GameState.Initial_Equipment, "TUTORIAL_DRAG", "Arraste ou role o catálogo. Use os botões para adicionar ou remover. Tab e Enter também funcionam.", equipment.Find("Guidance"), catalog);
+            EquipmentUiMigration.ApplyButtonAlignment(equipment.Find("ContextualHelp/Dismiss").GetComponent<UnityEngine.UI.Button>());
         }
         [MenuItem("Tools/Jogos de Empresa/UI-17/Integrate contextual feedback")]
         public static void Apply()

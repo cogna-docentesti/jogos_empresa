@@ -27,6 +27,7 @@ namespace Game.Adapter.In.UI
         public bool IsOwned { get; private set; }
         public bool IsInCart { get; private set; }
         private bool available;
+        public const float PortraitActionBottomInset = 48;
         public event Action<EquipmentCardView> SelectionRequested;
         public float RequiredHeight { get; private set; } = 360;
         private void OnEnable()
@@ -86,16 +87,16 @@ namespace Game.Adapter.In.UI
                 float nameH = Mathf.Max(64, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);
                 nameText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, nameH);
                 float artY = 24 + nameH + 48;
-                equipmentImage.rectTransform.anchoredPosition = new Vector2(24, -artY);
-                float portraitY = artY + 274;
+                var artwork = equipmentImage.rectTransform;
+                artwork.anchoredPosition = new Vector2(0, -artY - artwork.rect.height * .5f);
+                float portraitY = artY + artwork.rect.height + 14;
                 priceText.rectTransform.anchoredPosition = new Vector2(24, -portraitY);
                 descriptionText.rectTransform.anchoredPosition = new Vector2(24, -portraitY - 48);
                 float descH = Mathf.Max(54, descriptionText.GetPreferredValues(descriptionText.text, descriptionText.rectTransform.rect.width, float.PositiveInfinity).y);
                 descriptionText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, descH);
                 statusText.rectTransform.anchoredPosition = new Vector2(24, -portraitY - 54 - descH);
-                portraitY += 104 + descH;
-                cartActionButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(24, -portraitY);
-                RequiredHeight = portraitY + 92;
+                float actionTop = portraitY + 104 + descH;
+                RequiredHeight = actionTop + ((RectTransform)cartActionButton.transform).rect.height + PortraitActionBottomInset;
                 return;
             }
             float nameHeight = Mathf.Max(72, nameText.GetPreferredValues(nameText.text, nameText.rectTransform.rect.width, float.PositiveInfinity).y);

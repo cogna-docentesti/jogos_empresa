@@ -50,7 +50,82 @@ namespace Game.EditorTools
         {
             var r = Node(p, n, x, y, w, h); Retire(r); var b = Ensure<UnityEngine.UI.Button>(r); b.targetGraphic = Ensure<UnityEngine.UI.Image>(r);
             var t = Text(r, "Label", label, 12, 8, w - 24, h - 16, GameTypography.Tokens.Button, true); t.alignment = TextAlignmentOptions.Center;
-            SharedUiStyles.Bind(b, kind); r.Find("SharedFocus").gameObject.SetActive(true); return b;
+            SharedUiStyles.Bind(b, kind); ApplyButtonAlignment(b); return b;
+        }
+
+        internal static void ApplyButtonAlignment(UnityEngine.UI.Button button)
+        {
+            var label = button.transform.Find("Label").GetComponent<TMP_Text>();
+            var rect = label.rectTransform;
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = new Vector2(12, 8);
+            rect.offsetMax = new Vector2(-12, -8);
+            label.alignment = TextAlignmentOptions.Center;
+            label.margin = Vector4.zero;
+            button.GetComponent<SharedControlAppearance>().UseBorderlessButtonSurface();
+        }
+
+        private static void CenterArtwork(Transform parent, string name)
+        {
+            var rect = (RectTransform)parent.Find(name);
+            var pivot = new Vector2(.5f, .5f);
+            rect.anchoredPosition += Vector2.Scale(rect.rect.size, pivot - rect.pivot);
+            rect.pivot = pivot;
+        }
+
+        private static void AlignEmptyArtwork(Transform artwork)
+        {
+            var rect = (RectTransform)artwork;
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(.5f, 1);
+            rect.anchoredPosition = Vector2.zero;
+        }
+
+        internal static void ApplyBodyAlignment(Transform body)
+        {
+            for (int i = 0; i < 4; i++)
+                ApplyButtonAlignment(body.Find("Filter" + i).GetComponent<UnityEngine.UI.Button>());
+            ApplyButtonAlignment(body.Find("Summary/ReviewCart").GetComponent<UnityEngine.UI.Button>());
+            AlignEmptyArtwork(body.Find("Summary/Empty/Artwork"));
+        }
+
+        internal static void ApplyScreenAlignment(Transform panel)
+        {
+            var body = panel.Find("MainArea_Equipment");
+            ApplyBodyAlignment(body);
+
+            foreach (string path in new[] { "BottomBar/ReturnToBank", "BottomBar/ConfirmButton",
+                "CartModal/CartPanel/Close", "CartModal/CartPanel/Totals/Checkout",
+                "MainArea_Equipment/RetryCatalog", "CatalogLoading/Cancel", "ContextualHelp/Dismiss" })
+            {
+                var control = panel.Find(path);
+                if (control != null) ApplyButtonAlignment(control.GetComponent<UnityEngine.UI.Button>());
+            }
+
+            var cart = panel.Find("CartModal/CartPanel");
+            AlignEmptyArtwork(cart.Find("Empty/Artwork"));
+            var empty = (RectTransform)cart.Find("Empty");
+            var items = (RectTransform)cart.Find("ItemsScroll");
+            var viewport = items.GetComponent<UnityEngine.UI.ScrollRect>().viewport;
+            empty.anchoredPosition = new Vector2(
+                items.anchoredPosition.x + viewport.anchoredPosition.x + (viewport.rect.width - empty.rect.width) / 2,
+                empty.anchoredPosition.y);
+        }
+
+        internal static void ApplyPortraitCardAlignment(Transform card)
+        {
+            CenterArtwork(card, "EquipmentArtwork");
+            var artwork = (RectTransform)card.Find("EquipmentArtwork");
+            artwork.anchorMin = artwork.anchorMax = new Vector2(.5f, 1);
+            artwork.anchoredPosition = new Vector2(0, artwork.anchoredPosition.y);
+
+            var action = (RectTransform)card.Find("CartAction");
+            float height = action.rect.height;
+            action.anchorMin = Vector2.zero;
+            action.anchorMax = Vector2.right;
+            action.offsetMin = new Vector2(24, EquipmentCardView.PortraitActionBottomInset);
+            action.offsetMax = new Vector2(-24, EquipmentCardView.PortraitActionBottomInset + height);
+            ApplyButtonAlignment(action.GetComponent<UnityEngine.UI.Button>());
         }
         private static void Stretch(RectTransform r) { r.anchorMin = Vector2.zero; r.anchorMax = Vector2.one; r.offsetMin = r.offsetMax = Vector2.zero; }
         private static UnityEngine.UI.ScrollRect Scroll(Transform p, string name, float x, float y, float w, float h, bool grid = false)
@@ -80,6 +155,7 @@ namespace Game.EditorTools
         private static void Empty(Transform p, string n, float x, float y, float w, float h, string message)
         {
             var r = Node(p, n, x, y, w, h); Picture(r, "Artwork", "EMPTY_CART", (w - 360) / 2, 0, 360, 240);
+            AlignEmptyArtwork(r.Find("Artwork"));
             var label = Text(r, "Message", message, 16, 248, w - 32, 72, GameTypography.Tokens.Body); label.alignment = TextAlignmentOptions.Center;
         }
         private static void Body(RectTransform body, EquipmentScreenView view)
@@ -119,7 +195,7 @@ namespace Game.EditorTools
             Text(panel.transform, "Title", "Revise seu carrinho", 32, 24, 1100, 64, GameTypography.Tokens.ScreenTitle, true);
             var close = Button(panel.transform, "Close", "Fechar", 1200, 24, 208, 68, SharedControlKind.Secondary);
             var items = Scroll(panel.transform, "ItemsScroll", 24, 112, 912, 696);
-            Empty(panel.transform, "Empty", 120, 264, 712, 324, "Nenhum item no carrinho.\nVolte ao catálogo para escolher.");
+            Empty(panel.transform, "Empty", 112, 264, 712, 324, "Nenhum item no carrinho.\nVolte ao catálogo para escolher.");
             var detail = Picture(panel.transform, "Totals", "UI_PANEL_IVORY", 960, 112, 456, 696);
             Text(detail.transform, "CashLabel", "Caixa disponível", 24, 24, 408, 32, GameTypography.Tokens.Label);
             Set(view, "cartCashText", Text(detail.transform, "Cash", "", 24, 64, 408, 52, GameTypography.Tokens.SectionTitle, true));
@@ -162,6 +238,7 @@ namespace Game.EditorTools
             {
                 Retire(root.transform); var r = (RectTransform)root.transform; r.sizeDelta = new Vector2(648, 360); var card = root.GetComponent<EquipmentCardView>();
                 Set(card, "equipmentImage", Picture(r, "EquipmentArtwork", "EQUIPMENT_SISTEMA_PDV_COMPUTADOR", 24, 24, 250, 250));
+                CenterArtwork(r, "EquipmentArtwork");
                 Set(card, "nameText", Text(r, "EquipmentName", "Nome do equipamento", 286, 24, 338, 72, GameTypography.Tokens.BodyStrong,true));
                 Set(card, "priceText", Text(r, "EquipmentPrice", "R$ 0,00", 286, 108, 338, 40, GameTypography.Tokens.SectionTitle, true));
                 Set(card, "descriptionText", Text(r, "Description", "Para todos os restaurantes", 286, 156, 338, 56, GameTypography.Tokens.Body));
@@ -213,7 +290,16 @@ namespace Game.EditorTools
             var root = view.transform;
             DeleteChild(root, "Quantity");
             DeleteChild(root, "Maximum");
-            Set(view, "removeButton", Button(root, "Remove", "Remover do carrinho", 612, 36, 228, 68, SharedControlKind.Secondary));
+            var remove = Button(root, "Remove", "Remover do carrinho", 0, 0, 248, 68, SharedControlKind.Secondary);
+            var rect = (RectTransform)remove.transform;
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(1, .5f);
+            rect.anchoredPosition = new Vector2(-20, 0);
+            Set(view, "removeButton", remove);
+
+            var artwork = (RectTransform)root.Find("Artwork");
+            CenterArtwork(root, "Artwork");
+            artwork.anchorMin = artwork.anchorMax = new Vector2(0, .5f);
+            artwork.anchoredPosition = new Vector2(artwork.anchoredPosition.x, 0);
         }
 
         private static void DeleteChild(Transform parent, string name)

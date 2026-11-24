@@ -174,6 +174,7 @@ namespace Game.EditorTools
             Move(summary,"Empty",32,264,432,256);Move(summary,"Empty/Artwork",116,0,200,134);
             Move(summary,"Empty/Message",0,150,432,90);
             ResizeScroll(summary,"SummaryScroll",24,200,448,278);
+            EquipmentUiMigration.ApplyScreenAlignment(p);
             Prefab("Assets/Prefabs/Card_equipment.prefab",r=>{
                 ((RectTransform)r).sizeDelta=new Vector2(418,704);
                 Move(r,"EquipmentName",24,24,370,64);Type(r,"EquipmentName",28);
@@ -181,6 +182,7 @@ namespace Game.EditorTools
                 Move(r,"EquipmentArtwork",24,136,370,260);Move(r,"EquipmentPrice",24,408,370,44);Type(r,"EquipmentPrice",30);
                 Move(r,"Description",24,456,370,60);Type(r,"Description",21,false);
                 Move(r,"Status",24,526,370,36);EquipmentUiMigration.ApplyCardAction(r,24,588,370);
+                EquipmentUiMigration.ApplyPortraitCardAlignment(r);
             });
             p=Find(canvas,"Panel_Team");Header(p,"Header");Off(p,"ContextText","Guidance");
             Move(p,"TitleText",32,108,1100,64);Find(p,"TitleText").GetComponent<TMP_Text>().text="Contrate sua equipe";

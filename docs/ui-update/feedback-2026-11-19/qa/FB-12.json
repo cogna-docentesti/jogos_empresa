@@ -1,0 +1,113 @@
+{
+  "task_id": "FB-12",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "8dc1ee5fc2dd6285129f8f57bd9ae69b494a8036",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280×720",
+    "1366×768",
+    "1600×1000",
+    "1920×1080",
+    "2340×1080"
+  ],
+  "method": "Play Mode na GameScene com SQLite e PlayerPrefs isolados. Eventos de ponteiro foram disparados por raycast e o foco foi verificado pelo EventSystem. Os PNGs foram capturados do render real da Game View. A auditoria mede RectTransforms e os limites alfa dos PNGs de origem.",
+  "before": "No catálogo em 1280×720, a arte dos três primeiros cards ficava cerca de 36 px à esquerda dos centros dos cards. Os botões da loja e do carrinho tinham um contorno incorporado no sprite.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "O pivô dos cards centraliza a área de ajuste proporcional. A arte ficou a até 0,5 px do centro dos três cards medidos na captura real. As 16 imagens do catálogo mantiveram o sprite correspondente e preserveAspect. A arte do carrinho vazio fica acima do rótulo, no centro da sua coluna. As miniaturas ficam centralizadas verticalmente nas linhas."
+    },
+    {
+      "criterion": 2,
+      "result": "As ações do catálogo se alinham pela base e seus rótulos têm margens simétricas. O botão de remoção fica no centro vertical da linha. O estado selecionado usa o preenchimento do card e cada linha e card usa uma única superfície. Os botões usam os sprites sólidos do controle de progresso e mantêm um único marcador quando focados."
+    },
+    {
+      "criterion": 3,
+      "result": "O filtro de adquiridos, os específicos bloqueados, a finalização desabilitada e o foco no catálogo e no modal foram verificados. A suíte também percorreu compra, remoção e recarga do SQLite."
+    }
+  ],
+  "edit_mode": {
+    "suites": [
+      "UI10EquipmentTests",
+      "UI03SharedComponentsTests"
+    ],
+    "passed": 39,
+    "failed": 0,
+    "evidence": "editmode.xml"
+  },
+  "play_mode": {
+    "suite": "UI10EquipmentValidation",
+    "passed": 349,
+    "failed": 0,
+    "console_errors": 0,
+    "evidence": "playmode-equipment.json"
+  },
+  "limitations": [
+    "Validação no Unity Editor para Windows. A máquina disponibilizava o Unity 6000.3.28f1. A versão declarada do projeto é 6000.3.21f1.",
+    "Os testes de layout usaram cinco resoluções. Os testes finais de foco, hover e pressionamento usaram 1280×720."
+  ],
+  "ugui_reference": [
+    "Basic Layout",
+    "Rect Transform",
+    "Button",
+    "Canvas Scaler",
+    "Vertical Layout Group",
+    "Event System",
+    "Graphic Raycaster"
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-12",
+    "reports": [
+      "migration.json",
+      "artwork-alpha-bounds.json",
+      "catalog-centers-1280x720.json",
+      "layout-audits.json",
+      "editmode.xml",
+      "playmode-equipment.json",
+      "playmode-console.json",
+      "capture-frames.json",
+      "runtime.json",
+      "baseline/capture-frames.json"
+    ],
+    "screenshots": [
+      "setup-normal-1280x720.png",
+      "cart-selected-1280x720.png",
+      "cart-empty-1280x720.png",
+      "cart-filled-1280x720.png",
+      "cart-bottom-1280x720.png",
+      "setup-normal-1366x768.png",
+      "cart-selected-1366x768.png",
+      "cart-empty-1366x768.png",
+      "cart-filled-1366x768.png",
+      "cart-bottom-1366x768.png",
+      "setup-normal-1600x1000.png",
+      "cart-selected-1600x1000.png",
+      "cart-empty-1600x1000.png",
+      "cart-filled-1600x1000.png",
+      "cart-bottom-1600x1000.png",
+      "setup-normal-1920x1080.png",
+      "cart-selected-1920x1080.png",
+      "cart-empty-1920x1080.png",
+      "cart-filled-1920x1080.png",
+      "cart-bottom-1920x1080.png",
+      "setup-normal-2340x1080.png",
+      "cart-selected-2340x1080.png",
+      "cart-empty-2340x1080.png",
+      "cart-filled-2340x1080.png",
+      "cart-bottom-2340x1080.png",
+      "filter-owned-frances-1280x720.png",
+      "filter-specific-blocked-1280x720.png",
+      "specific-top-japones-1280x720.png",
+      "specific-top-frances-1280x720.png",
+      "card-focus-1280x720.png",
+      "modal-focus-1280x720.png",
+      "baseline/setup-normal-1280x720.png",
+      "baseline/cart-empty-1280x720.png",
+      "baseline/cart-filled-1280x720.png"
+    ]
+  }
+}

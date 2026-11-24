@@ -1288,8 +1288,8 @@
       "area": "Equipamentos e carrinho",
       "kind": "interface",
       "priority": "P2",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-02",
         "FB-11"
@@ -1315,7 +1315,10 @@
         "Assets/Editor/UI/EquipmentUiMigration.cs",
         "Assets/Editor/UI/ConceptUiRevision.cs"
       ],
-      "notes": [],
+      "notes": [
+        "Pivôs da arte centralizados, ações alinhadas e contornos decorativos retirados dos botões da loja e do carrinho. A seleção usa preenchimento e o teclado conserva o marcador de foco.",
+        "QA na GameScene em cinco resoluções, com 349 verificações de Play Mode e 39 testes de Edit Mode aprovados."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-12.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-12.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-12",
