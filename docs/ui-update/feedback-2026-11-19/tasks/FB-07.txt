@@ -1,5 +1,5 @@
 FB-07 — Apresentar as comidas em composição de cardápio ou selos
-Status: planejada | Prioridade: P2 | Tipo: design e integração
+Status: concluída | Prioridade: P2 | Tipo: design e integração
 Área: Restaurante; arte
 Dependências: FB-06, FB-08
 Modelo: gpt-6.2-sol | Raciocínio: high
@@ -43,7 +43,8 @@ VALIDAÇÃO PREVISTA
 1. Comparar a composição dos três restaurantes e verificar legibilidade e proporção das comidas em 1280×720.
 
 OBSERVAÇÕES E LIMITES
-1. Na execução autorizada, aplicar a skill de arte do projeto e produzir asset novo se a necessidade for confirmada.
+1. Cada card passou a exibir os três pratos do restaurante em uma faixa com o painel marfim aprovado e os sprites e nomes do catálogo conferido na FB-08. A composição reutiliza os assets existentes.
+2. A GameScene foi validada em 1280×720, 1366×768 e 1920×1080, com os nove pratos legíveis, os cards sem rolagem e o fluxo de seleção e compatibilidade preservado. Passaram 33 verificações em Play Mode e 27 testes em Edit Mode.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-07.json.

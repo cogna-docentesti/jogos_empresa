@@ -1,0 +1,66 @@
+{
+  "task_id": "FB-07",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "d4798e674ca597cc4c7c389c97e21b1ec568fb80",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": ["1280×720", "1366×768", "1920×1080"],
+  "method": "GameScene em Play Mode com SQLite e chave PlayerPrefs isolados. Foram executadas 33 verificações, incluindo geometria, conteúdo, seleção via raycast, navegação e popup. A coleta terminou com zero erros em Play Mode e zero sessões gravadas. As imagens foram capturadas da Game View.",
+  "before": "Cada fachada tinha um único prato sobreposto, sem nome ou agrupamento de cardápio.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Lanches, Japonês e Francês exibem três pratos cada, na ordem de RestaurantData.products. Os nove nomes, IDs e GUIDs dos sprites em execução correspondem ao inventário da FB-08. As ilustrações são centralizadas e mantêm sua proporção. Em 1280×720, Combinado premium ocupa duas linhas e todos os nomes cabem nas respectivas células."
+    },
+    {
+      "criterion": 2,
+      "result": "Os três cards cabem nas três resoluções com fachada, nome, descrição, cardápio, custo e ticket. A roda sobre a faixa não desloca o conteúdo. Em 1280×720, o ensaio com título de duas linhas e descrição de quatro linhas também coube, com a fachada reduzida."
+    },
+    {
+      "criterion": 3,
+      "result": "A faixa usa o painel compartilhado UI_PANEL_IVORY do manifesto e os nove sprites aprovados em ART-17, ART-18 e ART-19. O suporte existente atendeu ao layout. Os nomes são componentes TextMesh Pro preenchidos pelo catálogo, e o preview dispensa preço por prato."
+    }
+  ],
+  "art": {
+    "reference": "art-source/references/concepts/02-abertura.png",
+    "support": "Assets/Art/new/shared/components/panels/panel_ivory.png",
+    "support_manifest_id": "UI_PANEL_IVORY",
+    "inventory": "output/ui-update/feedback-2026-11-19/FB-08/inventario-produtos.json",
+    "new_assets": [],
+    "validation": "Os nove SHA-256 coincidem com o inventário. O validador de arte aprovou os três lotes de produtos. Os ProductData, RestaurantData, sprites e metadados de importação conservaram os vínculos e valores do catálogo."
+  },
+  "additional_checks": [
+    "Clicar sobre a ilustração selecionou o card correspondente. Em 1280×720, Confirmar restaurante abriu a tela de preços com os três IDs corretos, e Voltar restaurou a seleção com o popup fechado.",
+    "O popup de compatibilidade bloqueou cliques sobre o cardápio ao fundo. Suas três abas exibiram as pontuações do AlignmentEngine para a área e classe do ensaio. Fechar devolveu o foco ao botão e conservou restaurante e público selecionados.",
+    "Duas aplicações consecutivas do layout serializaram a cena de forma idêntica. A revisão dos objetos serializados limitou a edição aos detalhes dos três cards, e a cena resultante foi reaberta no ensaio final de Play Mode."
+  ],
+  "edit_mode": {
+    "suites": { "UI06RestaurantTests": 5, "UI07MenuPricingTests": 22 },
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "editmode.xml"
+  },
+  "limitations": [
+    "Validação restrita à Game View e ao Edit Mode do Unity Editor.",
+    "O texto ampliado é uma massa de teste aplicada temporariamente em Play Mode.",
+    "O Editor instalado usado no QA foi 6000.3.28f1. A versão 6000.3.21f1 e os registros versionados de pacotes e bridge foram restaurados ao final."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-07",
+    "before": "before.json",
+    "play_mode": "playmode.json",
+    "screenshots": [
+      "before-restaurante-1280x720.png",
+      "after-restaurante-lanches-1280x720.png",
+      "after-restaurante-japones-1280x720.png",
+      "after-restaurante-frances-1280x720.png",
+      "after-restaurante-frances-1920x1080.png",
+      "after-compatibilidade-1280x720.png",
+      "after-texto-longo-1280x720.png"
+    ]
+  }
+}

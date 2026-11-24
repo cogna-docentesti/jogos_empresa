@@ -104,6 +104,7 @@ namespace Game.Adapter.In.UI
             SetRestaurantCardData(data.type,data.displayName,data.description);
             var card=GetRestaurantCard(data.type);
             SetFacade(card.transform.Find("CardDetails/Artwork"), data.facade);
+            SetMenuProducts(card.transform.Find("CardDetails/MenuPreview"), data.products);
             SetChildText(card,"MonthlyCost","R$ "+data.baseMonthlyCost.ToString("N0",Br));
             SetChildText(card,"TicketRange","R$ "+data.ticketMin.ToString("N0",Br)+" a R$ "+data.ticketMax.ToString("N0",Br));
             var tab = GetCompatibilityTab(data.type);
@@ -195,6 +196,30 @@ namespace Game.Adapter.In.UI
             image.preserveAspect = true;
             image.enabled = facade != null;
         }
+
+        private static void SetMenuProducts(Transform menu, ProductData[] products)
+        {
+            if (menu == null) return;
+
+            var row = menu.Find("Products");
+            int count = products?.Length ?? 0;
+            bool hasProducts = false;
+            for (int i = 0; i < row.childCount; i++)
+            {
+                var slot = row.GetChild(i);
+                var product = i < count ? products[i] : null;
+                slot.gameObject.SetActive(product != null);
+                if (product == null) continue;
+
+                hasProducts = true;
+                slot.Find("Name").GetComponent<TMP_Text>().text = product.displayName;
+                var image = slot.Find("Artwork").GetComponent<UnityEngine.UI.Image>();
+                image.sprite = product.productSprite;
+                image.enabled = image.sprite != null;
+            }
+            menu.gameObject.SetActive(hasProducts);
+        }
+
         private UnityEngine.UI.Button GetRestaurantCard(RestaurantType type) => type switch
         { RestaurantType.JAPONES=>cardJapones,RestaurantType.FRANCES=>cardFrances,_=>cardPodrao };
         private UnityEngine.UI.Button GetSegmentButton(Segment segment) => segment switch

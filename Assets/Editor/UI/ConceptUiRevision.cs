@@ -135,12 +135,10 @@ namespace Game.EditorTools
         {
             var p=Find(canvas,"Panel_Restaurant");Header(p,"DecisionHeader");Off(p,"ChoiceTitle","SelectionHint");
             string[] cards={"Card_Podrao","Card_Japones","Card_Frances"};
-            for(int i=0;i<3;i++)
+            foreach(var card in cards)
             {
-                var c=Find(p,cards[i]);
+                var c=Find(p,card);
                 Off(c,"TypeIcon","OptionLabel","SelectionStatus");
-                var artwork=c.Find("CardDetails/Artwork")??c;
-                Picture(artwork,"FeaturedDish",i==0?"PRODUCT_LAN_COMBO_SIMPLES":i==1?"PRODUCT_JAP_SUSHI_EXECUTIVO":"PRODUCT_FRA_PRATO_EXECUTIVO",0,0,232,152);
             }
             var side=Find(p,"DecisionSidebar");
             Type(side,"Title",28);Off(side,"Help");

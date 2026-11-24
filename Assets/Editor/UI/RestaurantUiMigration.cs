@@ -69,20 +69,18 @@ namespace Game.EditorTools
             var artwork = Node(details, "Artwork", 0, 0, DetailWidth, 420);
             artwork.SetAsFirstSibling();
             var artLayout = Ensure<UnityEngine.UI.LayoutElement>(artwork);
-            artLayout.minHeight = artLayout.preferredHeight = 240;
+            // Give the measured copy its preferred height before expanding the facade.
+            artLayout.minHeight = artLayout.preferredHeight = 96;
             artLayout.flexibleHeight = 1;
             MoveChild(card, artwork, "Facade");
             var facade = Image(artwork, "Facade", null, 0, 0, DetailWidth, 420);
             facade.sprite = data.facade;
             facade.preserveAspect = true;
+            facade.rectTransform.pivot = new Vector2(.5f, .5f);
             Stretch(facade.rectTransform);
             MoveChild(card, artwork, "FeaturedDish");
-            if (artwork.Find("FeaturedDish") is RectTransform dish)
-            {
-                dish.anchorMin = dish.anchorMax = dish.pivot = new Vector2(1, 0);
-                dish.anchoredPosition = new Vector2(-16, 0);
-                dish.sizeDelta = new Vector2(232, 152);
-            }
+            var featuredDish = artwork.Find("FeaturedDish");
+            if (featuredDish != null) UnityEngine.Object.DestroyImmediate(featuredDish.gameObject);
 
             var copy = Node(details, "Copy", 0, 0, DetailWidth, 0);
             Stack(copy, 4);
@@ -129,6 +127,51 @@ namespace Game.EditorTools
             }
             MetricRow(metrics, 0, "CostLabel", "Custo fixo / mês", "MonthlyCost");
             MetricRow(metrics, 34, "TicketLabel", "Ticket de referência", "TicketRange");
+            LayoutMenu(details, copy.GetSiblingIndex() + 1, data.products);
+        }
+
+        private static void LayoutMenu(RectTransform details, int siblingIndex, ProductData[] products)
+        {
+            const float height = 208;
+            const float padding = 12;
+            const float gap = 8;
+            const float rowWidth = DetailWidth - 2 * padding;
+            const float artHeight = 98;
+            const float nameHeight = 64;
+            const float rowHeight = artHeight + nameHeight;
+
+            var menu = Image(details, "MenuPreview", "UI_PANEL_IVORY", 0, 0, DetailWidth, height).rectTransform;
+            menu.SetSiblingIndex(siblingIndex);
+            var layout = Ensure<UnityEngine.UI.LayoutElement>(menu);
+            layout.minHeight = layout.preferredHeight = height;
+            Text(menu, "MenuTitle", "Cardápio", padding, 6, rowWidth, 34,
+                new TypographyToken(TypographyRole.SectionTitle, 26));
+
+            var row = Node(menu, "Products", padding, 39, rowWidth, rowHeight);
+            int count = products?.Length ?? 0;
+            for (int i = row.childCount - 1; i >= count; i--)
+                UnityEngine.Object.DestroyImmediate(row.GetChild(i).gameObject);
+
+            for (int i = 0; i < count; i++)
+            {
+                float width = (rowWidth - (count - 1) * gap) / count;
+                var product = products[i];
+                var slot = Node(row, $"Product{i + 1}", i * (width + gap), 0, width, rowHeight);
+                var thumbnail = Image(slot, "Artwork", null, 0, 0, width, artHeight);
+                var thumbnailRect = thumbnail.rectTransform;
+                thumbnailRect.anchorMin = thumbnailRect.anchorMax = new Vector2(.5f, 1);
+                thumbnailRect.pivot = new Vector2(.5f, .5f);
+                thumbnailRect.anchoredPosition = new Vector2(0, -artHeight / 2);
+                thumbnail.sprite = product != null ? product.productSprite : null;
+                thumbnail.preserveAspect = true;
+                thumbnail.enabled = thumbnail.sprite != null;
+
+                var label = Text(slot, "Name", product != null ? product.displayName : string.Empty, 0, artHeight, width, nameHeight,
+                    new TypographyToken(TypographyRole.Label, 24));
+                label.alignment = TextAlignmentOptions.Top;
+                slot.gameObject.SetActive(product != null);
+            }
+            menu.gameObject.SetActive(products != null && products.Any(product => product != null));
         }
 
         private static void MoveChild(Transform source, Transform destination, string name)

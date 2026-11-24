@@ -1006,8 +1006,8 @@
       "area": "Restaurante; arte",
       "kind": "design e integração",
       "priority": "P2",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-06",
         "FB-08"
@@ -1035,7 +1035,8 @@
         "Assets/Editor/UI/ConceptUiRevision.cs"
       ],
       "notes": [
-        "Na execução autorizada, aplicar a skill de arte do projeto e produzir asset novo se a necessidade for confirmada."
+        "Cada card passou a exibir os três pratos do restaurante em uma faixa com o painel marfim aprovado e os sprites e nomes do catálogo conferido na FB-08. A composição reutiliza os assets existentes.",
+        "A GameScene foi validada em 1280×720, 1366×768 e 1920×1080, com os nove pratos legíveis, os cards sem rolagem e o fluxo de seleção e compatibilidade preservado. Passaram 33 verificações em Play Mode e 27 testes em Edit Mode."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-07.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-07.json",
