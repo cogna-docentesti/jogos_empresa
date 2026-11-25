@@ -164,7 +164,7 @@ namespace Game.EditorTools
                 so.FindProperty(ids[i]+"Button").objectReferenceValue=b;
                 so.FindProperty(ids[i]+"Area").objectReferenceValue=null;
             }
-            HubUiMigration.BindSelectionGlows(master);
+            HubUiMigration.BindSelectionLandmarks(master);
             so.ApplyModifiedPropertiesWithoutUndo();
             var restaurants=so.FindProperty("restaurants"); restaurants.arraySize=3;
             var restIds=new[]{"FRANCES","JAPONES","LANCHES"}; var types=new[]{RestaurantType.FRANCES,RestaurantType.JAPONES,RestaurantType.PODRAO};

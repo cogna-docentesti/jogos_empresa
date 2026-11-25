@@ -3,6 +3,7 @@ using Game.Adapter.In.UI.Theme;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 namespace Game.Adapter.In.UI
 {
@@ -11,13 +12,16 @@ namespace Game.Adapter.In.UI
     public sealed class MapMenuNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         IPointerDownHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler
     {
+        private static readonly Color HighlightedLandmarkTint = new Color(.84f, .58f, 1f);
+
         [SerializeField] private string locationId;
         [SerializeField] private PanelId destination;
         [SerializeField] private UnityEngine.UI.Image pin, label, tip, icon, focus;
-        [SerializeField] private UnityEngine.UI.Image selectionGlow;
+        [SerializeField] private UnityEngine.UI.Image landmark;
         [SerializeField] private TMP_Text caption;
         [SerializeField] private Sprite[] pinStates, labelStates;
         private UnityEngine.UI.Button button;
+        private Color? landmarkNormalColor;
         private bool selected, hovered, pressed;
         public string LocationId => locationId;
         public PanelId Destination => destination;
@@ -33,16 +37,25 @@ namespace Game.Adapter.In.UI
             Refresh();
         }
         private void OnEnable() { hovered=pressed=false; Refresh(); }
-        private void OnDisable() { hovered=pressed=false; }
+        private void OnDisable()
+        {
+            hovered = pressed = false;
+            if (landmark != null && landmarkNormalColor.HasValue)
+                landmark.color = landmarkNormalColor.Value;
+        }
         private void LateUpdate() => Refresh();
         public void SetSelected(bool value)
         {
             selected = value;
-            if (selectionGlow != null)
-                selectionGlow.enabled = selected;
             Refresh();
         }
-        public void OnPointerEnter(PointerEventData e) { hovered=e.pointerId<0; Refresh(); }
+        public void OnPointerEnter(PointerEventData e)
+        {
+            hovered = e is ExtendedPointerEventData pointer
+                ? pointer.pointerType == UIPointerType.MouseOrPen
+                : e.pointerId < 0;
+            Refresh();
+        }
         public void OnPointerExit(PointerEventData e) { hovered=false; Refresh(); }
         public void OnPointerDown(PointerEventData e) { pressed=e.button==PointerEventData.InputButton.Left; Refresh(); }
         public void OnPointerUp(PointerEventData e) { pressed=false; Refresh(); }
@@ -59,6 +72,13 @@ namespace Game.Adapter.In.UI
             int state=!enabledState?2:highlighted?1:0;
             if(pin!=null && pinStates!=null && pinStates.Length==3) { pin.sprite=pinStates[state]; pin.color=Color.white; }
             if(label!=null && labelStates!=null && labelStates.Length==3) { label.sprite=labelStates[state]; label.color=Color.white; }
+            if (landmark != null)
+            {
+                landmarkNormalColor ??= landmark.color;
+                landmark.color = isActiveAndEnabled && state == 1
+                    ? landmarkNormalColor.Value * HighlightedLandmarkTint
+                    : landmarkNormalColor.Value;
+            }
             var content=!enabledState?GamePalette.Parse("#a69ea3"):highlighted?Color.white:GamePalette.Plum;
             if(icon!=null) icon.color=content;
             if(caption!=null) caption.color=content;

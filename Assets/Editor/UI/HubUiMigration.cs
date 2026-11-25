@@ -67,28 +67,21 @@ namespace Game.EditorTools
             return button;
         }
 
-        internal static void BindSelectionGlows(RectTransform master)
+        internal static void BindSelectionLandmarks(RectTransform master)
         {
-            var skin = Resources.Load<LocationSkinV2>("LocationSkinV2");
-            var nodes = master.GetComponentsInChildren<MapMenuNode>(true);
-            var firstMarker = nodes.OrderBy(node => node.transform.parent.GetSiblingIndex()).First().transform.parent;
-            foreach (var node in nodes.Where(node => !string.IsNullOrEmpty(node.LocationId)))
+            foreach (var node in master.GetComponentsInChildren<MapMenuNode>(true))
             {
-                var sprite = skin?.For(node.LocationId)?.glowActive;
-                if (sprite == null)
-                    throw new InvalidOperationException("Missing location selection glow: " + node.LocationId);
+                if (string.IsNullOrEmpty(node.LocationId))
+                    continue;
 
-                var pin = (RectTransform)node.transform.Find("MapPin");
-                var center = master.InverseTransformPoint(pin.TransformPoint(pin.rect.center));
-                const float width = 156f, height = 110f;
-                var glow = Image(master, "SelectionGlow_" + node.LocationId, null,
-                    center.x - master.rect.xMin - width / 2,
-                    master.rect.yMax - center.y - height / 2 + 5f, width, height);
-                glow.sprite = sprite;
-                glow.rectTransform.SetAsLastSibling();
-                glow.rectTransform.SetSiblingIndex(firstMarker.GetSiblingIndex());
-                Set(node, "selectionGlow", glow);
-                node.SetSelected(node.IsSelected);
+                var landmark = master.Find("MAP_" + node.LocationId.ToUpperInvariant())?.GetComponent<UnityEngine.UI.Image>();
+                if (landmark == null)
+                    throw new InvalidOperationException("Missing map landmark: " + node.LocationId);
+                Set(node, "landmark", landmark);
+
+                var oldGlow = master.Find("SelectionGlow_" + node.LocationId);
+                if (oldGlow != null)
+                    UnityEngine.Object.DestroyImmediate(oldGlow.gameObject);
             }
         }
 
@@ -164,7 +157,7 @@ namespace Game.EditorTools
                     new[]{Sprite("UI_MAP_LABEL_NORMAL"),Sprite("UI_MAP_LABEL_SELECTED"),Sprite("UI_MAP_LABEL_DISABLED")});
                 root.SetAsLastSibling(); nodes.Add(node);
             }
-            BindSelectionGlows(master);
+            BindSelectionLandmarks(master);
             if(panel.Find("MapLayer")!=null) panel.Find("MapLayer").gameObject.SetActive(false);
             for(int i=0;i<nodes.Count;i++)
             {
