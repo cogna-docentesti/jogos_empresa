@@ -1,5 +1,5 @@
 FB-26 — Mover o fechamento mensal para o fim do calendário
-Status: planejada | Prioridade: P1 | Tipo: integração
+Status: concluída | Prioridade: P1 | Tipo: integração
 Área: Calendário; fechamento; DRE
 Dependências: FB-14, FB-22, FB-24, FB-25
 Modelo: gpt-6.2-sol | Raciocínio: medium
@@ -52,6 +52,8 @@ OBSERVAÇÕES E LIMITES
 1. O usuário confirmou débito real no dia da conta. Não manter a proposta anterior de contas apenas informativas.
 2. Guardar o caixa de abertura e reconciliar pagamentos já feitos é obrigatório; não basta subtrair despesas do currentCash já reduzido.
 3. Comparar previsão e fechamento com o mesmo plano/dias de eventos; as regras de incidência permanecem as existentes.
+4. 184 testes Edit Mode passaram. Duas campanhas isoladas completaram três meses em GameScene e passaram pelo relatório final e pela falência.
+5. Falhas SQLite injetadas no fechamento e na confirmação da DRE preservaram os pagamentos e permitiram retomar. Saves antigos com próximo mês já gravado continuam compatíveis.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-26.json.

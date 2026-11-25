@@ -32,9 +32,11 @@ namespace Game.Adapter.In.Controllers
                 var db = DatabaseInitializer.DatabaseService?.Connection;
                 if (db == null) throw new InvalidOperationException("Banco de dados indisponível. Tente consultar novamente.");
                 var repository = new RoundResultRepository(db);
+                var pendingId = IsAwaitingContinue ? session.pendingSummaryResultId : null;
                 var saved = requestedMonth.HasValue ? repository.GetBySessionAndRound(session.sessionId, requestedMonth.Value)
-                    : repository.GetLastRoundBySessionId(session.sessionId);
-                if (saved == null) { view.State("empty", "Seu primeiro resultado ainda não está disponível", "A DRE será exibida após o fechamento do mês e a confirmação das decisões de evento.", IsAwaitingContinue); return; }
+                    : string.IsNullOrEmpty(pendingId) ? repository.GetLastRoundBySessionId(session.sessionId)
+                    : db.Find<RoundResultEntity>(pendingId);
+                if (saved == null || saved.sessionId != session.sessionId) { view.State("empty", "Seu primeiro resultado ainda não está disponível", "A DRE será exibida após o fechamento do mês e a confirmação das decisões de evento.", IsAwaitingContinue); return; }
                 view.Show(saved, IsAwaitingContinue); Result = saved;
             }
             catch (Exception)

@@ -108,7 +108,7 @@ namespace Game.Adapter.In.Controllers
             {
                 busy = true;
                 UpdateControls();
-                if (!settlement.CompleteCalendar())
+                if (!settlement.CompleteCalendar(sessionId, month))
                 {
                     busy = false;
                     view.Status("Não foi possível fechar o mês. Tente novamente.");

@@ -1,9 +1,8 @@
 using System;
-using Game.Adapter.In.Controllers;
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>Preview, settle and inspect the real active session during Play Mode.</summary>
+/// <summary>Preview and inspect the active session during Play Mode.</summary>
 public sealed class MonthlySimulationWindow : EditorWindow
 {
     private RoundResultEntity _preview;
@@ -16,7 +15,7 @@ public sealed class MonthlySimulationWindow : EditorWindow
     private void OnGUI()
     {
         EditorGUILayout.LabelField("Monthly Simulation", EditorStyles.boldLabel);
-        EditorGUILayout.HelpBox("Preview is read-only. Settle Current Month saves the active player's month and advances the quarter.", MessageType.Info);
+        EditorGUILayout.HelpBox("Preview is read-only. Close the month through the calendar in the Game view.", MessageType.Info);
         if (!Application.isPlaying || !GameSessionState.HasSession)
         {
             EditorGUILayout.LabelField("Enter Play Mode and finish the initial decisions first.");
@@ -31,17 +30,13 @@ public sealed class MonthlySimulationWindow : EditorWindow
             {
                 var db = DatabaseInitializer.DatabaseService?.Connection;
                 var history = new SessionEventHistoryRepository(db).GetBySessionAndRound(session.sessionId, session.currentRound);
-                _preview = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(session, history));
-            });
-            if (GUILayout.Button("Settle Current Month")) Run(() =>
-            {
-                _preview = MonthlySettlementController.SettleCurrentMonth();
-                if (_preview == null) throw new InvalidOperationException("Settlement is unavailable. Open the management hub and check the Console.");
+                _preview = new MonthlyCalendarService(db).Forecast(session.sessionId, session.currentRound)
+                    ?? MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(session, history));
             });
         }
         if (!string.IsNullOrWhiteSpace(_error)) EditorGUILayout.HelpBox(_error, MessageType.Error);
         _scroll = EditorGUILayout.BeginScrollView(_scroll);
-        if (_preview != null) DrawResult("Preview / Last Settlement", _preview);
+        if (_preview != null) DrawResult("Preview", _preview);
         var connection = DatabaseInitializer.DatabaseService?.Connection;
         if (connection != null)
             foreach (var result in new RoundResultRepository(connection).GetBySessionId(session.sessionId))

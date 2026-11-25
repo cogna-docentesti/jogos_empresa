@@ -487,7 +487,7 @@ public static class GameSessionState
 
     public static void AdvanceRound(bool save = true)
     {
-        if (!HasActiveSession || !CanEditMonthlyDecisions)
+        if (!HasActiveSession || IsPersisted || !CanEditMonthlyDecisions)
             return;
 
         if (Current.currentRound < 1 || Current.currentRound >= 3)

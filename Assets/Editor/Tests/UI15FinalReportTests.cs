@@ -39,9 +39,11 @@ public sealed class UI15FinalReportTests
     [TestCase(false, GameState.Round_Summary)] [TestCase(true, GameState.FinalReport)]
     public void CompletedCampaignReloadRespectsSummaryAcknowledgement(bool acknowledged, GameState expected)
     { Seed(acknowledged: acknowledged); Prepare(); Assert.AreEqual(expected, manager.StateMachine.CurrentState); Assert.IsTrue(GameSessionState.IsPersisted); Assert.AreEqual(3, db.Table<RoundResultEntity>().Count()); }
-    [Test] public void ExplicitContinueAcknowledgesOnlyTheSavedFinalSummary()
+    [TestCase(false)] [TestCase(true)] public void ExplicitContinueAcknowledgesOnlyTheSavedFinalSummary(bool legacyNull)
     {
-        Seed(); Prepare(); var service = new GameSessionService("ui15-user", "qa"); Assert.IsFalse(service.ContinueAfterSummary("foreign"));
+        Seed();
+        if (legacyNull) db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = NULL WHERE sessionId = 'completed'");
+        Prepare(); var service = new GameSessionService("ui15-user", "qa"); Assert.IsFalse(service.ContinueAfterSummary("foreign"));
         Assert.IsFalse(db.Find<GameSessionEntity>("completed").finalSummaryAcknowledged);
         Assert.IsTrue(service.ContinueAfterSummary("completed3")); Assert.IsTrue(db.Find<GameSessionEntity>("completed").finalSummaryAcknowledged);
         Assert.AreEqual(GameState.FinalReport, manager.StateMachine.CurrentState); Assert.IsFalse(service.ContinueAfterSummary("completed3"));

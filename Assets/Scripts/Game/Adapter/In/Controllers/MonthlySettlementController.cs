@@ -74,13 +74,14 @@ namespace Game.Adapter.In.Controllers
             if (!service.BeginEventDecisions()) onSettlementFailed.Invoke();
         }
 
-        internal bool CompleteCalendar()
+        internal bool CompleteCalendar(string sessionId, int month)
         {
-            if (settling) return false;
+            var session = GameSessionState.Current;
+            if (settling || session == null || session.sessionId != sessionId || session.currentRound != month) return false;
             settling = true;
             try
             {
-                LastResult = SettleCurrentMonth();
+                LastResult = SettleCurrentMonth(month);
                 if (LastResult == null) { onSettlementFailed.Invoke(); return false; }
                 MonthSettled?.Invoke(LastResult);
                 onMonthSettled.Invoke();
@@ -89,18 +90,21 @@ namespace Game.Adapter.In.Controllers
             finally { settling = false; }
         }
 
-        public static RoundResultEntity SettleCurrentMonth()
+        public static RoundResultEntity SettleCurrentMonth() =>
+            SettleCurrentMonth(GameSessionState.Current?.currentRound ?? 0);
+
+        private static RoundResultEntity SettleCurrentMonth(int month)
         {
-            if (!UnityEngine.Application.isPlaying || !GameSessionState.HasActiveSession
+            if (!UnityEngine.Application.isPlaying || !GameSessionState.HasSession
                 || !GameSessionState.IsPersisted || GameManager.Instance?.StateMachine == null)
                 return null;
             foreach (var screen in FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
                 if (screen.IsAwaitingChoice) return null;
             var session = GameSessionState.Current;
             var state = GameManager.Instance.StateMachine.CurrentState;
-            if (state != GameState.Round_Sales && state != GameState.Round_Event)
+            if (state != GameState.Round_Event)
                 return null;
-            return new GameSessionService(session.userId, session.professorId).ProcessCurrentRound();
+            return new GameSessionService(session.userId, session.professorId).ProcessCurrentRound(month);
         }
     }
 }

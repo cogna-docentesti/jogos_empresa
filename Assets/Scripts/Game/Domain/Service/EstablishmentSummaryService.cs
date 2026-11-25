@@ -42,7 +42,13 @@ namespace Game.Domain.Service
                     var db = ReferenceEquals(session, GameSessionState.Current) && GameSessionState.IsPersisted
                         ? DatabaseInitializer.DatabaseService?.Connection : null;
                     RoundResultEntity estimate;
-                    if (session.status != GameSessionStatus.IN_PROGRESS)
+                    if (!string.IsNullOrEmpty(session.pendingSummaryResultId))
+                    {
+                        estimate = db?.Find<RoundResultEntity>(session.pendingSummaryResultId);
+                        if (estimate?.sessionId != session.sessionId) estimate = null;
+                        s.IsLastResult = estimate != null;
+                    }
+                    else if (session.status != GameSessionStatus.IN_PROGRESS)
                     {
                         estimate = db != null ? new RoundResultRepository(db).GetLastRoundBySessionId(session.sessionId) : null;
                         s.IsLastResult = estimate != null;

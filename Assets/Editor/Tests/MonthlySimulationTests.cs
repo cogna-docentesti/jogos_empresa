@@ -262,9 +262,11 @@ public class MonthlySimulationTests
         var retry = service.ProcessRound(1);
         Assert.AreEqual(first.roundResultId, retry.roundResultId);
         Assert.AreEqual(1, _db.Table<RoundResultEntity>().Count());
-        Assert.AreEqual(2, _context.Session.currentRound);
+        Assert.AreEqual(1, _context.Session.currentRound);
         Assert.AreEqual(cash, _context.Session.currentCash);
         var stored = new GameSessionRepository(_db).GetById(_context.Session.sessionId);
+        Assert.AreEqual(1, stored.currentRound);
+        Assert.AreEqual(first.roundResultId, stored.pendingSummaryResultId);
         Assert.AreEqual(first.closingCash, stored.currentCash);
         Assert.AreEqual(first.reputationAtEnd, stored.reputationScore);
         Assert.IsFalse(GameSessionState.HasUnsavedChanges);
@@ -274,6 +276,9 @@ public class MonthlySimulationTests
     public void DatabaseFailureRollsBackResultAndPreservesMemoryAndAllowsRetry()
     {
         CompleteCalendar();
+        string id = _context.Session.sessionId;
+        var calendar = new MonthlyCalendarService(_db);
+        var before = calendar.Read(id, 1);
         float cash = _context.Session.currentCash;
         _db.Execute("CREATE TRIGGER reject_month BEFORE UPDATE ON GameSessionEntity BEGIN SELECT RAISE(ABORT, 'Injected settlement failure'); END");
         Assert.Throws<SQLiteException>(() => Service().ProcessRound(1));
@@ -282,8 +287,15 @@ public class MonthlySimulationTests
         Assert.AreEqual(cash, _context.Session.currentCash);
         Assert.AreEqual(50, _context.Session.reputationScore);
         Assert.AreEqual(cash, _db.Table<GameSessionEntity>().Single().currentCash);
+        Assert.IsNull(_db.Table<GameSessionEntity>().Single().pendingSummaryResultId);
+        Assert.AreEqual(before.Revision, calendar.Read(id, 1).Revision);
+        Assert.IsTrue(calendar.Read(id, 1).ReadyToClose);
+        GameSessionState.Clear();
+        GameSessionState.LoadActiveSession("monthly_test");
         _db.Execute("DROP TRIGGER reject_month");
-        Assert.IsNotNull(Service().ProcessRound(1));
+        var result = Service().ProcessRound(1);
+        Assert.AreEqual(result.roundResultId, Service().ProcessRound(1).roundResultId);
+        Assert.AreEqual(result.roundResultId, calendar.Read(id, 1).ResultId);
     }
 
     [Test]
@@ -346,14 +358,20 @@ public class MonthlySimulationTests
                 Assert.AreEqual(GameState.Round_Sales, states.CurrentState);
                 Assert.IsNull(service.ProcessCurrentRound());
                 CalendarTestFlow.Complete(_db);
+                Assert.IsNull(service.ProcessCurrentRound());
+                Assert.IsTrue(service.BeginEventDecisions());
+                Assert.IsFalse(states.CanTransitionTo(GameState.Round_Summary));
                 var result = service.ProcessCurrentRound();
                 Assert.IsNotNull(result);
                 Assert.AreEqual(GameState.Round_Summary, states.CurrentState);
+                Assert.AreEqual(month, GameSessionState.Current.currentRound);
+                Assert.IsFalse(states.CanTransitionTo(GameState.Management_Hub));
                 var cash = GameSessionState.Current.currentCash;
                 Assert.IsFalse(service.ContinueAfterSummary("wrong-result"));
                 Assert.AreEqual(GameState.Round_Summary, states.CurrentState);
                 Assert.IsTrue(service.ContinueAfterSummary(result.roundResultId));
                 Assert.AreEqual(month < 3 ? GameState.Management_Hub : GameState.FinalReport, states.CurrentState);
+                Assert.AreEqual(Math.Min(month + 1, 3), GameSessionState.Current.currentRound);
                 Assert.IsFalse(service.ContinueAfterSummary(result.roundResultId));
                 Assert.AreEqual(cash, GameSessionState.Current.currentCash);
             }
@@ -385,10 +403,12 @@ public class MonthlySimulationTests
         var first = Settle(Service(), 1);
         GameSessionState.Clear();
         GameSessionState.LoadActiveSession("monthly_test");
-        Assert.AreEqual(2, GameSessionState.Current.currentRound);
+        Assert.AreEqual(1, GameSessionState.Current.currentRound);
+        Assert.AreEqual(first.roundResultId, GameSessionState.Current.pendingSummaryResultId);
         Assert.AreEqual(first.closingCash, GameSessionState.Current.currentCash);
         Assert.AreEqual(first.reputationAtEnd, GameSessionState.Current.reputationScore);
         _context.Session = GameSessionState.Current;
+        AcknowledgeTestSummary();
         Assert.Greater(Calculate().potentialDemand, first.potentialDemand);
     }
 
@@ -571,6 +591,7 @@ public class MonthlySimulationTests
         Assert.IsNull(Service().ProcessRound(1));
         decisions.Confirm(id, 1, 30, festival, festival.options[0]);
         Assert.True(calendar.Read(id, 1).ReadyToClose);
+        var forecast = calendar.Forecast(id, 1);
         var row = _db.Find<MonthlyEventPlanEntity>(id + ":1");
         var incorrect = Newtonsoft.Json.Linq.JObject.Parse(row.calendarJson);
         ((Newtonsoft.Json.Linq.JObject)incorrect["ledger"][id + ":1:rent:1"])["type"] = "utilities";
@@ -582,6 +603,10 @@ public class MonthlySimulationTests
         Assert.AreEqual(7000f, result.rent);
         Assert.AreEqual(4000f, result.salaries);
         Assert.AreEqual(10000f, result.openingCash);
+        Assert.AreEqual(forecast.grossRevenue, result.grossRevenue);
+        Assert.AreEqual(forecast.eventCashImpact, result.eventCashImpact);
+        Assert.AreEqual(forecast.netResult, result.netResult);
+        Assert.AreEqual(-1100f + result.grossRevenue - result.supplyCost + result.eventCashImpact, result.closingCash, .005f);
         Assert.AreEqual(result.openingCash + result.netResult, result.closingCash, .005f);
         Assert.AreEqual(result.closingCash, GameSessionState.Current.currentCash);
         Assert.AreEqual(result.roundResultId, calendar.Read(id, 1).ResultId);
@@ -710,7 +735,11 @@ public class MonthlySimulationTests
 
     private void AcknowledgeTestSummary()
     {
-        GameSessionState.Current.pendingSummaryResultId = null;
+        var session = GameSessionState.Current;
+        if (string.IsNullOrEmpty(session.pendingSummaryResultId)) return;
+        Assert.AreEqual(GameSessionStatus.IN_PROGRESS, session.status);
+        session.currentRound++;
+        session.pendingSummaryResultId = null;
         GameSessionState.Save();
     }
 

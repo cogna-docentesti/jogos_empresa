@@ -1,0 +1,44 @@
+{
+  "task_id": "FB-26",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "e33c8c9afd98a0b822a7ab7d58460eddff36fbaf",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "GameScene em Play Mode com SQLite e cadastro isolados. Cliques pelo EventSystem nos controles da cena, duas campanhas de três meses, capturas do Game View e testes de regressão em Edit Mode.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "O último evento obrigatório aguardou escolha no dia 30 em todos os seis meses. As entradas antigas de fechamento foram rejeitadas enquanto a escolha estava pendente. Depois da confirmação, Fechar mês abriu a DRE persistida."
+    },
+    {
+      "criterion": 2,
+      "result": "Nos seis meses, conferimos os 24 recibos de aluguel, despesas operacionais, folha e empréstimo contra o caixa antes e depois de cada débito. Cada conta correspondeu à sua linha na DRE. O principal foi baixado uma vez por parcela e a dívida chegou a zero em ambas as campanhas."
+    },
+    {
+      "criterion": 3,
+      "result": "Em cada mês, o fechamento coincidiu com a projeção do plano e com a soma do caixa após os débitos, das receitas, dos insumos e do efeito dos eventos. No primeiro fechamento, a falha injetada no UPDATE final reverteu a DRE, o marcador e o fechamento do calendário, preservando os quatro recibos. Recarga e retry produziram uma única DRE, com o mesmo ID nas chamadas repetidas."
+    },
+    {
+      "criterion": 4,
+      "result": "A recarga voltou à DRE do próprio mês. Uma falha no UPDATE de Continuar preservou o mês e o marcador. A confirmação repetida manteve os valores econômicos. Os meses 1 e 2 voltaram ao hub, e o mês 3 abriu relatório final ou falência conforme o resultado. Os testes cobriram saves anteriores com mês já avançado e fechamento final sem marcador."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-26",
+  "evidence": [
+    "01-dia-30-decisao-1280x720.png",
+    "02-dia-30-pronto-1280x720.png",
+    "03-dre-retomada-1440x900.png",
+    "04-relatorio-final-1440x900.png",
+    "05-falencia-1440x900.png",
+    "editmode.json",
+    "game-scene.txt"
+  ],
+  "limitations": [
+    "A falha no fechamento foi injetada no SQLite antes do commit e seguida de recarga da sessão. O processo do Editor permaneceu aberto.",
+    "Os dias de evento foram controlados por reservas de teste para exercitar o limite do dia 30. A regressão de incidência rodou no Edit Mode e reaproveitou a cobertura funcional da FB-24.",
+    "A validação visual ocorreu no Editor em 1280×720 e 1440×900."
+  ]
+}

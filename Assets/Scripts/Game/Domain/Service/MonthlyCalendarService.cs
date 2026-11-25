@@ -321,6 +321,14 @@ public sealed class MonthlyCalendarService
         && plan.pendingId == null && plan.events.All(e => e.decided)
         && plan.ledger.Count == plan.bills.Count;
 
+    public RoundResultEntity Forecast(string sessionId, int month)
+    {
+        var row = Find(db, sessionId, month);
+        if (!HasCalendar(row)) return null;
+        var history = new SessionEventHistoryRepository(db).GetBySessionAndRound(sessionId, month);
+        return Forecast(row, history);
+    }
+
     internal static RoundResultEntity Forecast(MonthlyEventPlanEntity row, IReadOnlyList<SessionEventHistoryEntity> history)
     {
         var plan = Load(row);
@@ -360,6 +368,10 @@ public sealed class MonthlyCalendarService
         }
         if (expenses.Values.Any(amount => amount != 0))
             throw new InvalidOperationException("A monthly expense has no receipt.");
+        // The full result includes the bills for the statement. Apply only the remaining
+        // cash movement to the post-payment balance represented by the receipt chain.
+        long paid = Cents(opening.currentCash) - cash;
+        result.closingCash = Money(cash + Cents(result.netResult) + paid);
         return result;
     }
 

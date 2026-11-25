@@ -61,6 +61,8 @@ public class RoundService
                 settlementBase.currentCash = opening.currentCash;
                 settlementBase.loanBalance = opening.loanBalance;
                 next = MonthlySessionSettlement.Apply(settlementBase, result, result.createdAt);
+                // Keep the settled month current until its statement is acknowledged.
+                next.currentRound = expectedMonth;
                 next.calendarMonthLocked = 0;
                 next.pendingSummaryResultId = result.roundResultId;
                 results.Insert(result);

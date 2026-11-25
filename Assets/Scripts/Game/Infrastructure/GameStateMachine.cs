@@ -94,6 +94,19 @@ public class GameStateMachine
         if (!allowedTransitions.TryGetValue(CurrentState, out var destinations) || !destinations.Contains(nextState))
             return false;
 
+        var session = GameSessionState.Current;
+        bool awaitingSummary = !string.IsNullOrEmpty(session?.pendingSummaryResultId);
+        if (nextState == GameState.Round_Summary) return awaitingSummary;
+        if (awaitingSummary && (nextState == GameState.Round_Start || nextState == GameState.Management_Hub))
+            return false;
+        if (CurrentState == GameState.Round_Summary)
+        {
+            if (awaitingSummary || session == null) return false;
+            if (nextState == GameState.Management_Hub) return session.status == GameSessionStatus.IN_PROGRESS;
+            return session.finalSummaryAcknowledged && (nextState == GameState.FinalReport
+                ? session.status == GameSessionStatus.COMPLETED : session.status == GameSessionStatus.BANKRUPT);
+        }
+
         bool startsOperation = (CurrentState == GameState.Initial_Team && nextState == GameState.Management_Hub)
             || nextState == GameState.Round_Start;
         if (startsOperation && !GameSessionState.HasActiveSession)

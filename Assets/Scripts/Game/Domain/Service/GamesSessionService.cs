@@ -431,11 +431,11 @@ public class GameSessionService
             states.TryChangeState(GameState.Round_Sales);
     }
 
-    /// <summary>Technical preparation ends at the visible event decision; calculation still waits.</summary>
+    /// <summary>Enters the calendar after the monthly review has reserved its plan.</summary>
     public bool BeginEventDecisions()
     {
         if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted
-            || (GameSessionState.Current.calendarMonthLocked == 0 && !HasMinimumTeam(GameSessionState.Current))) return false;
+            || GameSessionState.Current.calendarMonthLocked != GameSessionState.Current.currentRound) return false;
         return EnterEventState(GameManager.Instance?.StateMachine);
     }
 
@@ -445,23 +445,21 @@ public class GameSessionService
         return sm.TryChangeState(GameState.Round_Costs) && sm.TryChangeState(GameState.Round_Event);
     }
 
-    public RoundResultEntity ProcessCurrentRound()
+    public RoundResultEntity ProcessCurrentRound() =>
+        ProcessCurrentRound(GameSessionState.Current?.currentRound ?? 0);
+
+    internal RoundResultEntity ProcessCurrentRound(int expectedMonth)
     {
-        if (!GameSessionState.HasActiveSession || GameManager.Instance?.StateMachine == null)
+        var session = GameSessionState.Current;
+        var sm = GameManager.Instance?.StateMachine;
+        if (session == null || sm?.CurrentState != GameState.Round_Event || session.currentRound != expectedMonth
+            || (session.status != GameSessionStatus.IN_PROGRESS && string.IsNullOrEmpty(session.pendingSummaryResultId)))
             return null;
-
-        var sm = GameManager.Instance.StateMachine;
-
-        if (sm.CurrentState != GameState.Round_Sales && sm.CurrentState != GameState.Round_Event)
-        {
-            Debug.LogWarning("[GameSessionService] The month is not in the sales state.");
-            return null;
-        }
 
         RoundResultEntity result;
         try
         {
-            result = new RoundService().ProcessRound(GameSessionState.Current.currentRound);
+            result = new RoundService().ProcessRound(expectedMonth);
             if (result == null) return null;
         }
         catch (Exception exception)
@@ -470,10 +468,8 @@ public class GameSessionService
             return null;
         }
 
-        if (sm.CurrentState == GameState.Round_Sales) EnterEventState(sm);
-        sm.TryChangeState(GameState.Round_Summary);
-
-        return result;
+        return session.pendingSummaryResultId == result.roundResultId && sm.TryChangeState(GameState.Round_Summary)
+            ? result : null;
     }
 
     /// <summary>Presentation acknowledgement only. Never calculates or persists the month again.</summary>
@@ -482,33 +478,37 @@ public class GameSessionService
         var session = GameSessionState.Current;
         var sm = GameManager.Instance?.StateMachine;
         var db = DatabaseInitializer.DatabaseService?.Connection;
-        if (session == null || sm?.CurrentState != GameState.Round_Summary || db == null) return false;
+        if (session == null || sm?.CurrentState != GameState.Round_Summary || db == null
+            || string.IsNullOrEmpty(resultId)) return false;
         var saved = new RoundResultRepository(db).GetLastRoundBySessionId(session.sessionId);
         if (saved == null || saved.roundResultId != resultId) return false;
 
-        if (session.status == GameSessionStatus.BANKRUPT)
+        var pendingId = session.pendingSummaryResultId;
+        if (session.status == GameSessionStatus.IN_PROGRESS)
         {
-            if (!sm.CanTransitionTo(GameState.GameOver_Bankruptcy)) return false;
-            if (db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = ?, pendingSummaryResultId = NULL WHERE sessionId = ? AND status = ?",
-                true, session.sessionId, GameSessionStatus.BANKRUPT) != 1) return false;
-            session.finalSummaryAcknowledged = true;
+            int nextMonth = saved.round + 1;
+            // Older unread statements already stored the next month.
+            if (pendingId != resultId || saved.round < 1 || nextMonth > MonthlySimulationEngine.CycleMonths
+                || (session.currentRound != saved.round && session.currentRound != nextMonth)) return false;
+            if (db.Execute("UPDATE GameSessionEntity SET currentRound = ?, pendingSummaryResultId = NULL "
+                + "WHERE sessionId = ? AND status = ? AND currentRound = ? AND pendingSummaryResultId = ?",
+                nextMonth, session.sessionId, session.status, session.currentRound, resultId) != 1) return false;
+            session.currentRound = nextMonth;
             session.pendingSummaryResultId = null;
-            return sm.TryChangeState(GameState.GameOver_Bankruptcy);
+            return sm.TryChangeState(GameState.Management_Hub);
         }
 
-        if (session.status == GameSessionStatus.COMPLETED)
-        {
-            if (!sm.CanTransitionTo(GameState.FinalReport)) return false;
-            if (db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = ?, pendingSummaryResultId = NULL WHERE sessionId = ? AND status = ?",
-                true, session.sessionId, GameSessionStatus.COMPLETED) != 1) return false;
-            session.finalSummaryAcknowledged = true;
-            session.pendingSummaryResultId = null;
-            return sm.TryChangeState(GameState.FinalReport);
-        }
-
-        if (db.Execute("UPDATE GameSessionEntity SET pendingSummaryResultId = NULL WHERE sessionId = ?",
-            session.sessionId) != 1) return false;
+        if ((session.status != GameSessionStatus.COMPLETED && session.status != GameSessionStatus.BANKRUPT)
+            || session.finalSummaryAcknowledged || saved.round != session.currentRound
+            || (!string.IsNullOrEmpty(pendingId) && pendingId != resultId)) return false;
+        // Terminal saves made before the calendar can have an unread result without a marker.
+        if (db.Execute("UPDATE GameSessionEntity SET finalSummaryAcknowledged = ?, pendingSummaryResultId = NULL "
+            + "WHERE sessionId = ? AND status = ? AND currentRound = ? "
+            + "AND COALESCE(finalSummaryAcknowledged, 0) = 0 AND pendingSummaryResultId IS ?",
+            true, session.sessionId, session.status, session.currentRound, pendingId) != 1) return false;
+        session.finalSummaryAcknowledged = true;
         session.pendingSummaryResultId = null;
-        return sm.TryChangeState(GameState.Management_Hub);
+        return sm.TryChangeState(session.status == GameSessionStatus.BANKRUPT
+            ? GameState.GameOver_Bankruptcy : GameState.FinalReport);
     }
 }

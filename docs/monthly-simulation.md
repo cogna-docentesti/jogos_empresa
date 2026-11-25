@@ -28,8 +28,8 @@ var forecast = MonthlySimulationEngine.Calculate(context);
 // Add MonthlySettlementController to a scene object and select CloseMonth.
 // The controller exposes LastResult and MonthSettled after a successful commit.
 
-// GameScene UI-12: CloseMonth first opens EventScreenController.OpenMonth.
-// It reserves the existing selector's draw, waits for every choice, then settles.
+// CloseMonth opens the monthly review and calendar.
+// The player chooses Fechar mês on day 30 after clearing every commitment.
 
 // Low-level settlement: explicit months make retries idempotent.
 var result = new RoundService().ProcessRound(expectedMonth: 1);
@@ -42,11 +42,11 @@ var history = new RoundResultRepository(DatabaseInitializer.DatabaseService.Conn
 service.ContinueAfterSummary(savedResult.roundResultId);
 ```
 
-For a forecast including recorded events, pass `SessionEventHistoryRepository.GetBySessionAndRound(...)` as the second argument of `MonthlySimulationCatalog.Load`. `EstablishmentSummaryService.Build` already does this. For a completed session, the summary uses its last saved statement.
+For an open calendar, use `MonthlyCalendarService.Forecast(sessionId, month)` to calculate from the saved opening snapshot and recorded event days. Before a plan exists, pass `SessionEventHistoryRepository.GetBySessionAndRound(...)` to `MonthlySimulationCatalog.Load`. When a statement awaits acknowledgement, the establishment summary uses the saved result.
 
 The summary refreshes the alignment score from that calculation and displays `Unavailable` with a diagnostic if the forecast cannot be calculated, instead of presenting a fabricated zero estimate.
 
-In Play Mode, open **Game > Monthly Simulation** to preview the active month, settle it through the normal game flow, and inspect saved statements. Settlement changes the active player session. The window needs an initial configuration committed at D3 and a state of `Management_Hub` or `Round_Sales`.
+In Play Mode, open **Game > Monthly Simulation** to preview the active month and inspect saved statements. Use the calendar in the Game view to settle the month.
 
 ## Rules and units
 
@@ -86,9 +86,9 @@ This engine consumes recorded choices. It does not draw events, create an event 
 
 ### Event UI lifecycle (UI-12)
 
-The GameScene hub has **Fechar mês** and **Eventos e histórico** actions. `MonthlySettlementController.CloseMonth()` starts the month and holds `Round_Sales` while `EventScreenController.OpenMonth(onCompleted)` presents the selected events. It does not settle before the choices. A pending decision rejects `Close()` and additional settlement requests. Only the last confirmation releases the callback and lets the existing `ProcessCurrentRound()` settlement run. The later, brief `Round_Event` transition is retained for compatibility and has a panel reference, but is no longer the player's only interaction opportunity. The remaining round/result orchestration is outside UI-12.
+The GameScene hub opens the 30-day calendar through `MonthlySettlementController.CloseMonth()`. After the player confirms the review, `Round_Event` presents the calendar. **Avançar** stops at the next commitment. A bill debits cash upon arrival and persists a receipt. An event opens its decision over the day and blocks further movement until confirmed. The final calendar action becomes **Fechar mês** after all day-30 commitments clear.
 
-`MonthlyEventDecisionService.OpenMonth` passes the real restaurant, equipment, session history, monthly counts and exclusion groups to `MonthlyEventSelector`. Its default four-event draw is stored once in `MonthlyEventPlanEntity`, keyed by session/month, so reopening or reloading cannot reroll it. New event days are spread evenly through the configured operating days: four events in a 30-day month occur on days 6, 12, 18 and 24. Fewer eligible events remain fewer events; the UI does not force invalid candidates. Restart removes these reservations together with the existing session/history in the same transaction.
+`MonthlyCalendarService` reserves events through the existing `MonthlyEventSelector`, using the restaurant, equipment, history, limits and exclusions. The plan is saved once in `MonthlyEventPlanEntity`. Event days are assigned separately from incidence. Announced events appear in advance and surprises are revealed on arrival. Restart removes the reservations with the session and its history in the same transaction.
 
 `OpenDecision(EventData, month, day, onCompleted)` is the explicit presentation entry point for a future orchestrator. `IsAwaitingChoice`, `ChoiceConfirmed`, `Closed` and `Close()` expose the waiting/confirmation lifecycle. Every catalog option is presented, with native text for its real effects and duration. The twenty illustrations are serialized by existing event ID in `EventScreenView`; they do not alter the economic catalog. History shows persisted choice/effect snapshots, including an empty state, and can be consulted without releasing a pending decision.
 
@@ -96,7 +96,9 @@ Confirmation is transactional and idempotent by session/month/event/day. Retryin
 
 ## Monthly result UI lifecycle (UI-13)
 
-`ProcessCurrentRound()` commits through `RoundService` and enters `Round_Summary`, where it now waits. `MonthlyResultController` reads the latest saved statement for the current session, including completed/bankrupt sessions. Its `Continue()` action calls `GameSessionService.ContinueAfterSummary(resultId)`. That method checks the summary state and saved ID, then follows the existing hub, final-report or bankruptcy destination without recalculation or economic writes. Finished campaigns persist only the presentation acknowledgement in `finalSummaryAcknowledged`. Repeated acknowledgement cannot settle a month or apply an event again. `IsAwaitingContinue` and `Continued` expose this presentation lifecycle for UI-19; the other orchestration stages remain in their own tasks.
+`RoundService` requires a saved day-30 plan with every decision and receipt complete. It verifies the receipt chain against the saved balance and the DRE expense lines. Closing cash is the post-payment balance plus the parts of the monthly result still to apply. The statement, closed calendar and resulting session commit together. A retry by month returns the existing statement.
+
+`Round_Summary` loads the saved statement marked as unread. **Continuar** acknowledges that result and advances an active campaign to the next month in the same write. For terminal sessions it acknowledges the result and opens the final report or bankruptcy screen. Older unread saves with the next month already stored keep that month on acknowledgement. Continuing does not recalculate the month or change any financial values.
 
 The hub shortcut opens `PanelId.MonthlyResults = 11` as a read-only consultation. Every visit queries SQLite again. Missing results use `EMPTY_RESULTS` with an explicit absence message; query failures provide retry. No forecast or sample values substitute for a saved result. The cash table uses the existing `TotalCosts`, signed event impact, stored result and opening/closing cash. Loan principal and interest are shown as details already included in the installment. The native chart uses a common absolute scale with outflows to the left of zero. ART-28 layers share the exact viewport, pivot positions, uniform scales and order from `docs/art/layouts/dre-layout.json`.
 

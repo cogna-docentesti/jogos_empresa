@@ -82,21 +82,26 @@ public sealed class UI19NavigationTests
         Assert.Throws<SQLiteException>(() => Service.ContinueInitialSetup(GameState.Initial_Team)); Assert.AreEqual(GameState.Initial_Equipment, States.CurrentState);
         Assert.AreEqual((int)GameState.Initial_Equipment, s.initialSetupResumeState);
     }
-    [TestCase(1)] [TestCase(2)] public void ReloadWaitsAtUnreadSummaryAndContinueOnlyAcknowledgesItsSavedResult(int month)
+    [TestCase(1, false)] [TestCase(2, false)] [TestCase(1, true)] [TestCase(2, true)]
+    public void ReloadWaitsAtUnreadSummaryAndContinueOnlyAcknowledgesItsSavedResult(int month, bool legacy)
     {
-        var s = Seed(); s.currentRound = month + 1; s.pendingSummaryResultId = "result"; db.Update(s);
+        var s = Seed(); s.currentRound = legacy ? month + 1 : month; s.pendingSummaryResultId = "result"; db.Update(s);
         db.Insert(new RoundResultEntity { roundResultId = "result", sessionId = s.sessionId, round = month, closingCash = s.currentCash });
         Prepare(); Assert.AreEqual(GameState.Round_Summary, States.CurrentState); Assert.IsFalse(Service.ContinueAfterSummary("stale"));
         Assert.IsTrue(Service.ContinueAfterSummary("result")); Assert.IsFalse(Service.ContinueAfterSummary("result"));
         Assert.AreEqual(1, db.Table<RoundResultEntity>().Count()); Assert.AreEqual(s.currentCash, GameSessionState.Current.currentCash);
-        Assert.IsNull(db.Find<GameSessionEntity>(s.sessionId).pendingSummaryResultId); Prepare(); Assert.AreEqual(GameState.Management_Hub, States.CurrentState);
+        var stored = db.Find<GameSessionEntity>(s.sessionId);
+        Assert.AreEqual(month + 1, stored.currentRound); Assert.IsNull(stored.pendingSummaryResultId);
+        Prepare(); Assert.AreEqual(GameState.Management_Hub, States.CurrentState);
     }
     [Test] public void FailedSummaryAcknowledgementCannotEscapeOrRecalculate()
     {
-        var s = Seed(); s.pendingSummaryResultId = "result"; s.currentRound = 2; db.Update(s);
+        var s = Seed(); s.pendingSummaryResultId = "result"; db.Update(s);
         db.Insert(new RoundResultEntity { roundResultId = "result", sessionId = s.sessionId, round = 1 }); Prepare();
         db.Execute("CREATE TRIGGER reject_ack BEFORE UPDATE ON GameSessionEntity BEGIN SELECT RAISE(ABORT, 'isolated ack failure'); END");
         Assert.Throws<SQLiteException>(() => Service.ContinueAfterSummary("result")); Assert.AreEqual(GameState.Round_Summary, States.CurrentState); Assert.AreEqual("result", GameSessionState.Current.pendingSummaryResultId);
+        Assert.AreEqual(1, GameSessionState.Current.currentRound);
+        Assert.AreEqual(1, db.Find<GameSessionEntity>(s.sessionId).currentRound);
     }
     [Test] public void LegacyEventPlanReturnsToPreparationWithoutRedrawingOrSettling()
     {
