@@ -1,5 +1,5 @@
 FB-23 — Criar o calendário com 30 dias visíveis e avanço animado
-Status: planejada | Prioridade: P1 | Tipo: interface nova
+Status: concluída | Prioridade: P1 | Tipo: interface nova
 Área: Calendário; UI e arte
 Dependências: FB-02, FB-22
 Modelo: gpt-6.2-sol | Raciocínio: medium
@@ -52,6 +52,8 @@ VALIDAÇÃO PREVISTA
 OBSERVAÇÕES E LIMITES
 1. A arte existente inclui icon_calendar, icon_pin, icon_rent, icon_payroll e imagens por evento. A grade e as casas podem ser componentes nativos; não há justificativa para gerar novas ilustrações antes do layout real.
 2. Se faltar um componente final, produzir na própria tarefa: PNG em Assets/Art/new/calendar, fonte em art-source/editable/calendar e registros em docs/art. Preservar arte já validada.
+3. Entrega registrada em QA: grade sem rolagem em três resoluções, avanço casa a casa, recibos e retomada durante movimento e decisão.
+4. A entrada existente do hub abre o tabuleiro. A revisão do mês e a apresentação das decisões sobre a grade continuam na FB-25.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-23.json.

@@ -1,0 +1,53 @@
+{
+  "task_id": "FB-23",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "07fd49664355505dee92c8ca2853e2acfa29a732",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "GameScene em Play Mode, com SQLite e cadastro isolados, incidência e datas controladas, cliques pelo EventSystem e capturas do Game View. Testes de simulação mensal e eventos em Edit Mode.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "A grade 6×5 exibiu os dias 01 a 30 ao mesmo tempo, sem ScrollRect. As 30 casas ficaram dentro dos limites de cada resolução validada."
+    },
+    {
+      "criterion": 2,
+      "result": "O festival e o aluguel estavam visíveis no dia 20 na abertura. A casa 16 não tinha ícone nem texto, e seus detalhes eram iguais aos de um dia sem compromisso. A quebra foi exibida na chegada e abriu as três opções reais."
+    },
+    {
+      "criterion": 3,
+      "result": "A posição visual percorreu todos os dias de 1 a 10. Cinco cliques extras e o retorno durante o movimento não geraram outro comando. O dia 10 debitou R$ 1.500,00 uma vez, atualizou o caixa para R$ 10.500,00 e marcou a conta como paga. A quebra interrompeu o próximo percurso no dia 16. No dia 20 o aluguel foi debitado antes da decisão do festival. O dia 30 habilitou Fechar mês e abriu uma única DRE conciliada."
+    },
+    {
+      "criterion": 4,
+      "result": "As capturas em 1280×720, 1440×900 e 1920×1080 confirmam posição, saldo, pagamentos e controles legíveis. A composição usa o quadro uniforme da cena. O saldo passou a usar o painel ameixa após a revisão da primeira captura."
+    },
+    {
+      "criterion": 5,
+      "result": "A tela consome Read/Open, BeginAdvance e Step e exibe somente contas, recibos e eventos retornados na projeção. Voltar ao hub preservou a revisão salva do plano e o recibo do dia 10. Recarregar a cena durante o avanço retomou a partir da origem persistida. Recarregar a sessão com a quebra pendente apresentou a mesma decisão."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-23",
+  "evidence": [
+    "00-hub-antes-1280x720.png",
+    "01-salto-sem-calendario-1280x720.png",
+    "02-mes-aberto-1280x720.png",
+    "03-festival-e-aluguel-1280x720.png",
+    "04-avanco-em-curso-1280x720.png",
+    "05-debito-e-saldo-1280x720.png",
+    "06-surpresa-revelada-dia16-1280x720.png",
+    "07-decisao-quebra-1280x720.png",
+    "08-dias-e-pagamentos-1440x900.png",
+    "09-dias-e-pagamentos-1920x1080.png",
+    "10-marco-dia30-1920x1080.png",
+    "editmode.json",
+    "game-scene.txt"
+  ],
+  "limitations": [
+    "A entrada usa o comando e o texto existentes do hub. A revisão do mês e a camada de decisão sobre o tabuleiro pertencem à FB-25. A troca visual da entrada do hub pertence à FB-17.",
+    "As três resoluções foram verificadas no Editor. A interface de decisão já existente foi usada para confirmar os eventos."
+  ]
+}

@@ -1926,8 +1926,8 @@
       "area": "Calendário; UI e arte",
       "kind": "interface nova",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-02",
         "FB-22"
@@ -1963,7 +1963,9 @@
       ],
       "notes": [
         "A arte existente inclui icon_calendar, icon_pin, icon_rent, icon_payroll e imagens por evento. A grade e as casas podem ser componentes nativos; não há justificativa para gerar novas ilustrações antes do layout real.",
-        "Se faltar um componente final, produzir na própria tarefa: PNG em Assets/Art/new/calendar, fonte em art-source/editable/calendar e registros em docs/art. Preservar arte já validada."
+        "Se faltar um componente final, produzir na própria tarefa: PNG em Assets/Art/new/calendar, fonte em art-source/editable/calendar e registros em docs/art. Preservar arte já validada.",
+        "Entrega registrada em QA: grade sem rolagem em três resoluções, avanço casa a casa, recibos e retomada durante movimento e decisão.",
+        "A entrada existente do hub abre o tabuleiro. A revisão do mês e a apresentação das decisões sobre a grade continuam na FB-25."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-23.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-23.json",

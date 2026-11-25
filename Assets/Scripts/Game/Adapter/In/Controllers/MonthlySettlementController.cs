@@ -6,16 +6,16 @@ using UnityEngine.Events;
 
 namespace Game.Adapter.In.Controllers
 {
-    /// <summary>Optional bridge for a UI Button's OnClick event.</summary>
     public sealed class MonthlySettlementController : MonoBehaviour
     {
         [SerializeField] private UnityEvent onMonthSettled = new UnityEvent();
         [SerializeField] private UnityEvent onSettlementFailed = new UnityEvent();
+        [SerializeField] private MonthlyCalendarController calendar;
         public RoundResultEntity LastResult { get; private set; }
         public event Action<RoundResultEntity> MonthSettled;
-        private bool awaitingEvents;
-        private bool resumePending;
+        private bool settling, resumePending;
         private GameStateMachine subscribedMachine;
+
         private void Start()
         {
             subscribedMachine = GameManager.Instance?.StateMachine;
@@ -23,61 +23,64 @@ namespace Game.Adapter.In.Controllers
             subscribedMachine.OnStateChanged += Resume;
             Resume(subscribedMachine.CurrentState);
         }
+
         private void OnDestroy() { if (subscribedMachine != null) subscribedMachine.OnStateChanged -= Resume; }
+
         private void Resume(GameState state)
         {
             if (state == GameState.MainMenu || state == GameState.Config_Identification)
             {
-                awaitingEvents = false;
+                LastResult = null;
                 foreach (var screen in FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
                     screen.ReleasePresentation();
             }
-            resumePending = state == GameState.Round_Event && !awaitingEvents;
-        }
-        private void Update()
-        {
-            if (!resumePending) return;
-            if (SharedModalFocus.Active != null) return;
-            resumePending = false;
-            if (subscribedMachine?.CurrentState == GameState.Round_Event) CloseMonth();
+            resumePending = state == GameState.Round_Event;
         }
 
+        private void Update()
+        {
+            if (!resumePending || SharedModalFocus.Active != null) return;
+            resumePending = false;
+            var events = FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            if (calendar != null && events.Length == 1) calendar.Open(this, events[0]);
+            else onSettlementFailed.Invoke();
+        }
+
+        // The existing hub action now enters the calendar. Settlement is requested at day 30.
         public void CloseMonth()
         {
-            if (awaitingEvents || !GameSessionState.HasActiveSession || !GameSessionState.IsPersisted) return;
+            if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted || SharedModalFocus.Active != null)
+                return;
             var state = GameManager.Instance?.StateMachine;
-            if (SharedModalFocus.Active != null || state == null || (state.CurrentState != GameState.Management_Hub
-                && state.CurrentState != GameState.Round_Sales && state.CurrentState != GameState.Round_Event)) return;
-            if (GameSessionState.Current.calendarMonthLocked == 0 && !GameSessionService.HasMinimumTeam(GameSessionState.Current))
+            if (state?.CurrentState != GameState.Management_Hub && state?.CurrentState != GameState.Round_Sales)
+                return;
+            var session = GameSessionState.Current;
+            if (session.calendarMonthLocked == 0 && !GameSessionService.HasMinimumTeam(session))
             {
                 if (state.CurrentState == GameState.Management_Hub)
                     MenuNavigator.Instance?.Open(PanelId.Team);
                 FeedbackToast.Show("Complete os mínimos da equipe para iniciar o mês.", FeedbackKind.Warning);
                 return;
             }
-            var events = FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            if (events.Length != 1) { onSettlementFailed.Invoke(); return; }
-            awaitingEvents = true;
-            var service = new GameSessionService(GameSessionState.Current.userId, GameSessionState.Current.professorId);
-            if (state.CurrentState == GameState.Management_Hub)
-                service.StartRound();
-            if (!service.BeginEventDecisions()) { awaitingEvents = false; return; }
-            events[0].OpenMonth(CompleteSettlement);
+            LastResult = null;
+            var service = new GameSessionService(session.userId, session.professorId);
+            if (state.CurrentState == GameState.Management_Hub) service.StartRound();
+            service.BeginEventDecisions();
         }
 
-        private void CompleteSettlement()
+        internal bool CompleteCalendar()
         {
-            LastResult = SettleCurrentMonth();
-            awaitingEvents = false;
-            if (LastResult == null)
+            if (settling) return false;
+            settling = true;
+            try
             {
-                onSettlementFailed.Invoke();
-                var events = FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-                if (events.Length == 1) events[0].ShowSettlementFailure(CompleteSettlement);
-                return;
+                LastResult = SettleCurrentMonth();
+                if (LastResult == null) { onSettlementFailed.Invoke(); return false; }
+                MonthSettled?.Invoke(LastResult);
+                onMonthSettled.Invoke();
+                return true;
             }
-            MonthSettled?.Invoke(LastResult);
-            onMonthSettled.Invoke();
+            finally { settling = false; }
         }
 
         public static RoundResultEntity SettleCurrentMonth()
@@ -91,8 +94,7 @@ namespace Game.Adapter.In.Controllers
             var state = GameManager.Instance.StateMachine.CurrentState;
             if (state != GameState.Round_Sales && state != GameState.Round_Event)
                 return null;
-            var service = new GameSessionService(session.userId, session.professorId);
-            return service.ProcessCurrentRound();
+            return new GameSessionService(session.userId, session.professorId).ProcessCurrentRound();
         }
     }
 }

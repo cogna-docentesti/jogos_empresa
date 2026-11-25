@@ -120,6 +120,7 @@ namespace Game.EditorTools
             UnityEventTools.RemovePersistentListener(close.onClick, settlement.CloseMonth); UnityEventTools.AddPersistentListener(close.onClick, settlement.CloseMonth);
             var historyButton = Button(actions, "History", "Eventos e histórico", 296, 0, 272, 68, SharedControlKind.Secondary);
             var action = Ensure<PanelNavButton>(historyButton); action.EditorConfigure(PanelNavButton.NavAction.Open, PanelId.EventHistory);
+            MonthlyCalendarUiMigration.Wire(canvas, settlement);
             panel.gameObject.SetActive(false); AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
     }

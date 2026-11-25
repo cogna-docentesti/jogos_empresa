@@ -24,6 +24,17 @@ public static class UI12EventValidation
     private static Transform Root => GameObject.Find("Canvas").transform;
     private static EventScreenView View => Root.Find("Panel_Event").GetComponent<EventScreenView>();
     private static EventScreenController Controller => View.GetComponent<EventScreenController>();
+    private static UnityEngine.UI.Button CalendarAdvance => Root.Find("Panel_MonthlyCalendar/Footer/Advance")?.GetComponent<UnityEngine.UI.Button>();
+    private static MonthlyCalendarService.View CalendarPlan => new MonthlyCalendarService(Db).Read(activeId, 1);
+    private sealed class CalendarUpdatePending : Exception { }
+
+    private static void AdvanceUntil(Func<bool> arrived)
+    {
+        if (arrived()) return;
+        var advance = CalendarAdvance;
+        if (advance != null && advance.IsActive() && advance.IsInteractable()) Click(advance);
+        throw new CalendarUpdatePending();
+    }
     private static SQLite4Unity3d.SQLiteConnection Db => DatabaseInitializer.DatabaseService.Connection;
     private static T Field<T>(object o, string n) => (T)o.GetType().GetField(n, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(o);
     private static void Set(object o, string n, object v) => o.GetType().GetField(n, BindingFlags.Instance | BindingFlags.NonPublic).SetValue(o, v);
@@ -157,20 +168,43 @@ public static class UI12EventValidation
         }
         Add("Prepare actual monthly selector flow", () => { Fixture(); GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); monthCallbacks = 0; var settlement = Root.Find("UiNavigation").GetComponent<MonthlySettlementController>(); settlement.MonthSettled -= CountMonthlySettlement; settlement.MonthSettled += CountMonthlySettlement; });
         Add("Close month waits for player before settlement", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<UnityEngine.UI.Button>()); });
-        Add("Selector reservations and no financial mutation", () =>
+        Add("Calendar opens before advancement", () =>
         {
-            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event && Controller.IsAwaitingChoice, "Wait before settlement");
+            if (CalendarAdvance == null || !CalendarAdvance.IsInteractable()) throw new CalendarUpdatePending();
+            cash = GameSessionState.Current.currentCash;
+            reputation = GameSessionState.Current.reputationScore;
+            Expect(CalendarPlan.Day == 0 && CalendarPlan.Receipts.Count == 0, "Calendar opens without debits");
+        });
+        Add("Selector reservations and pending event", () =>
+        {
+            AdvanceUntil(() => Controller.IsAwaitingChoice);
+            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event, "Wait before settlement");
             Expect(MonthlySettlementController.SettleCurrentMonth() == null, "A pending choice cannot be bypassed by another settlement request");
             Expect(Db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == activeId).Count() == 1 && new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0, "Reserved without settlement");
-            cash = GameSessionState.Current.currentCash; reputation = GameSessionState.Current.reputationScore; Capture("monthly-await-1280x720");
-            Controller.gameObject.SetActive(false); Controller.OpenMonth(() => throw new Exception("Callback was replaced by reopening"));
+            Capture("monthly-await-1280x720");
+            var pending = new MonthlyCalendarService(Db).Read(activeId, 1).Pending;
+            Controller.gameObject.SetActive(false);
+            Controller.OpenDecision(Controller.CurrentEvent, 1, pending.Day, () => throw new Exception("Callback was replaced by reopening"), required: true);
         });
         for (int i = 0; i < 4; i++)
         {
             int n = i;
-            Add("Select monthly event " + n, () => { Expect(Controller.IsAwaitingChoice, "Pending monthly event"); View.Cards[n % 3].Button.Select(); });
-            Add("Confirm monthly event " + n, () => { Click(View.Cards[n % 3].Button); Click(View.ConfirmButton); if (n < 3) { Controller.Confirm(); Expect(new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0 && GameSessionState.Current.currentCash == cash && GameSessionState.Current.reputationScore == reputation, "No early settlement"); } });
+            Add("Select monthly event " + n, () => { AdvanceUntil(() => Controller.IsAwaitingChoice); View.Cards[n % 3].Button.Select(); });
+            Add("Confirm monthly event " + n, () =>
+            {
+                float cashBeforeChoice = GameSessionState.Current.currentCash;
+                Click(View.Cards[n % 3].Button);
+                Click(View.ConfirmButton);
+                Expect(new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0
+                    && GameSessionState.Current.currentCash == cashBeforeChoice
+                    && GameSessionState.Current.reputationScore == reputation, "No early settlement or choice effects");
+            });
         }
+        Add("Finish at the calendar closing milestone", () =>
+        {
+            AdvanceUntil(() => CalendarPlan.ReadyToClose);
+            Click(CalendarAdvance);
+        });
         Add("Monthly choices settle exactly once and reload", () =>
         {
             var histories = new SessionEventHistoryRepository(Db).GetBySessionAndRound(activeId, 1); var results = new RoundResultRepository(Db).GetBySessionId(activeId);
@@ -212,8 +246,9 @@ public static class UI12EventValidation
         if (Time.frameCount <= lastFrame) { EditorApplication.QueuePlayerLoopUpdate(); EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint(); return; }
         var step = steps.Dequeue(); var check = new Check { name = step.Item1, frame = Time.frameCount };
         try { step.Item2(); check.passed = true; retries = 0; }
-        catch (InvalidOperationException e) when (e.Message == "The Game View must render at the evidence resolution." && retries++ < 10)
-        { var pending = steps.ToArray(); steps.Clear(); steps.Enqueue(step); foreach (var rest in pending) steps.Enqueue(rest); next = EditorApplication.timeSinceStartup + 1; return; }
+        catch (Exception e) when ((e is InvalidOperationException && e.Message == "The Game View must render at the evidence resolution." && retries++ < 10)
+            || (e is CalendarUpdatePending && retries++ < 120))
+        { var pending = steps.ToArray(); steps.Clear(); steps.Enqueue(step); foreach (var rest in pending) steps.Enqueue(rest); next = EditorApplication.timeSinceStartup + (e is CalendarUpdatePending ? .25 : 1); EditorApplication.QueuePlayerLoopUpdate(); return; }
         catch (Exception e) { check.detail = e.ToString(); report.failures++; steps.Clear(); Debug.LogError("[UI-12 QA] " + check.name + ": " + e.Message); }
         report.checks.Add(check); lastFrame = Time.frameCount; EditorApplication.QueuePlayerLoopUpdate(); EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView")).Repaint(); next = EditorApplication.timeSinceStartup + .3;
     }

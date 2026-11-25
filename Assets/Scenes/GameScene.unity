@@ -40944,6 +40944,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.UI.Theme.TypographyRoleBinding
   role: 7
+--- !u!1 &304788313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304788314}
+  - component: {fileID: 304788316}
+  - component: {fileID: 304788315}
+  m_Layer: 0
+  m_Name: Panel_MonthlyCalendar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &304788314
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304788313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 378057122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &304788315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304788313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9276afe26b80d424eb9b83c2df8877a5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.Controllers.MonthlyCalendarController
+--- !u!114 &304788316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304788313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49eea56d6204124db3131dc21205565, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Adapter.In.UI.MonthlyCalendarView
 --- !u!1 &304893111
 GameObject:
   m_ObjectHideFlags: 0
@@ -51584,6 +51645,7 @@ RectTransform:
   - {fileID: 1480342788}
   - {fileID: 1701629899}
   - {fileID: 498547229}
+  - {fileID: 304788314}
   - {fileID: 612991208}
   - {fileID: 1223599034}
   - {fileID: 68632383}
@@ -66557,6 +66619,7 @@ MonoBehaviour:
   onSettlementFailed:
     m_PersistentCalls:
       m_Calls: []
+  calendar: {fileID: 304788315}
 --- !u!1 &499056985
 GameObject:
   m_ObjectHideFlags: 0
@@ -193416,6 +193479,7 @@ MonoBehaviour:
   roundSalesPanel: {fileID: 0}
   roundCostsPanel: {fileID: 0}
   roundEventPanel: {fileID: 612991207}
+  monthlyCalendarPanel: {fileID: 304788313}
   roundSummaryPanel: {fileID: 1223599029}
   finalReportPanel: {fileID: 436136183}
   bankruptcyPanel: {fileID: 1565225833}

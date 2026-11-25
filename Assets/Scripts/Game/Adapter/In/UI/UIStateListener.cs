@@ -41,7 +41,7 @@ public class UIStateListener : MonoBehaviour
 
     private GameObject[] AllPanels() => new[] { identificationPanel, configLocationPanel, configRestaurantPanel,
         configTargetSegmentPanel, initialEquipmentPanel, initialTeamPanel, initialCapitalPanel, managementHubPanel,
-        roundStartPanel, roundSalesPanel, roundCostsPanel, roundEventPanel, roundSummaryPanel, finalReportPanel, bankruptcyPanel };
+        roundStartPanel, roundSalesPanel, roundCostsPanel, roundEventPanel, monthlyCalendarPanel, roundSummaryPanel, finalReportPanel, bankruptcyPanel };
 
     [Header("Configuração inicial")]
     [SerializeField] private GameObject identificationPanel;
@@ -62,6 +62,7 @@ public class UIStateListener : MonoBehaviour
     [SerializeField] private GameObject roundSalesPanel;
     [SerializeField] private GameObject roundCostsPanel;
     [SerializeField] private GameObject roundEventPanel;
+    [SerializeField] private GameObject monthlyCalendarPanel;
     [SerializeField] private GameObject roundSummaryPanel;
 
     [Header("Fim")]
@@ -152,7 +153,7 @@ public class UIStateListener : MonoBehaviour
                 break;
 
             case GameState.Round_Event:
-                Show(roundEventPanel);
+                Show(monthlyCalendarPanel);
                 break;
 
             case GameState.Round_Summary:
