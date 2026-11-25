@@ -5,5 +5,5 @@ using UnityEditor;
 public static class ExitDialogBuilder
 {
     [MenuItem("Tools/Jogos de Empresa/Criar botao Sair e dialogo (E-05)")]
-    public static void Build() => DialogUiMigration.Apply();
+    public static void Build() => DialogUiMigration.ApplyExit();
 }

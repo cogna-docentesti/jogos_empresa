@@ -55,6 +55,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Button discardButton;
         [SerializeField] private TextMeshProUGUI discardLabel;
         [SerializeField] private Button saveExitButton;
+        [SerializeField] private Button closeButton;
 
         public ExitMode CurrentMode { get; private set; }
 
@@ -68,6 +69,7 @@ namespace Game.Adapter.In.UI
                 openButton.onClick.AddListener(Open);
 
             cancelButton?.onClick.AddListener(Close);
+            closeButton?.onClick.AddListener(Close);
             discardButton?.onClick.AddListener(() => Quit(save: false));
             saveExitButton?.onClick.AddListener(() => Quit(save: true));
 
@@ -131,7 +133,7 @@ namespace Game.Adapter.In.UI
                 case ExitMode.BeforeFirstSave:
                     SetBody(GameSessionState.HasIncompatibleSave
                         ? "A sessão anterior será mantida. Você poderá decidir sobre o reinício quando abrir o jogo novamente."
-                        : "As escolhas de localização, restaurante e cardápio ainda estão em rascunho. Elas só são salvas ao confirmar o cardápio.\n\nSe sair agora, essas escolhas serão perdidas. O cadastro já confirmado será mantido.");
+                        : "Localização, restaurante e cardápio só são salvos ao confirmar o cardápio. Se sair agora, você perde essas escolhas. O cadastro confirmado será mantido.");
                     SetDiscardLabel("Sair sem salvar");
                     SetVisible(saveExitButton, false);
                     break;
@@ -163,7 +165,9 @@ namespace Game.Adapter.In.UI
             {
                 _quitting = false;
                 if (titleText != null) titleText.text = save ? "Não foi possível salvar" : "Não foi possível sair";
-                SetBody("O jogo continua aberto e seu progresso permanece na memória.\n\nTente novamente ou cancele para continuar jogando. Se escolher Sair sem salvar, as alterações pendentes serão perdidas.");
+                SetBody(save
+                    ? "Seu progresso continua disponível nesta partida. Tente salvar novamente ou continue jogando. Sair sem salvar descarta as alterações pendentes."
+                    : "O jogo continua aberto. Tente sair novamente ou continue jogando.");
                 if (bodyText != null) bodyText.color = Theme.GamePalette.ErrorText;
                 if (saveExitButton != null && saveExitButton.gameObject.activeSelf)
                     saveExitButton.GetComponentInChildren<TMP_Text>(true).text = "Tentar salvar e sair";

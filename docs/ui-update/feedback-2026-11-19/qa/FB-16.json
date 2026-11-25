@@ -1,0 +1,63 @@
+{
+  "task_id": "FB-16",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "17d2bb4d0b8b629f3af46a9ba8441b3e10faf00c",
+  "status": "concluída",
+  "implementation_performed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "framework": "uGUI e TextMesh Pro",
+  "resolutions": [
+    "1280x720",
+    "1366x768",
+    "1920x1080"
+  ],
+  "baseline_observed": "O popup tinha uma faixa separada, espaço vazio entre o texto e as ações e nenhum X dentro do modal.",
+  "method": "Play Mode na GameScene com SQLite e PlayerPrefs isolados. Os botões reais foram acionados por eventos de ponteiro após verificação de raycast, e Escape foi enviado pelo Input System. As capturas vieram do render da Game View.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Uma superfície clara de 1120 × 368 no quadro de referência, com título em alto contraste e margens internas. O botão roxo Continuar jogando recebe o foco inicial. Sair sem salvar e Salvar e sair usam tratamentos distintos. Textos couberam e as ações tiveram ao menos 44 px de altura nas três resoluções."
+    },
+    {
+      "criterion": 2,
+      "result": "Continuar jogando, X e Escape devolveram o hub e restauraram o foco, preservando a sessão em memória sem escrita no SQLite. O fundo bloqueou o clique. Na confirmação direta a 1280×720, Salvar e sair gravou uma vez, fechou o banco e encerrou o Play Mode."
+    },
+    {
+      "criterion": 3,
+      "result": "Em todas as resoluções, um gatilho do SQLite recusou a gravação. O modal ficou aberto, o caixa gravado permaneceu igual e a alteração pendente foi preservada. Tentar salvar e sair, após remover a falha, gravou exatamente uma vez e encerrou o Play Mode. Reabertura do banco confirmou o valor e o integrity_check retornou ok."
+    }
+  ],
+  "docs_read": [
+    "uGUI Basic Layout",
+    "uGUI Rect Transform",
+    "Horizontal Layout Group",
+    "Graphic Raycaster",
+    "TextMesh Pro Documentation"
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-16",
+  "evidence": {
+    "baseline": "before-1280x720.png",
+    "screenshots": [
+      "pending-1280x720.png",
+      "pending-1366x768.png",
+      "pending-1920x1080.png",
+      "retry-1280x720.png",
+      "retry-1366x768.png",
+      "retry-1920x1080.png",
+      "saved-1280x720.png",
+      "saved-1366x768.png",
+      "saved-1920x1080.png"
+    ],
+    "play_mode_checks": [
+      "1280x720.json",
+      "1366x768.json",
+      "1920x1080.json",
+      "direct.json"
+    ]
+  },
+  "limitations": [
+    "QA no Unity Editor Windows 6000.3.28f1. O encerramento nativo do executável Windows e o botão Voltar físico em Android ficaram fora deste ensaio. O teste exercitou Escape, tratado pelo fluxo compartilhado de cancelamento."
+  ]
+}
