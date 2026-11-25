@@ -1,0 +1,69 @@
+{
+  "task_id": "FB-15",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "7f8b84e7b22a3e8e7cb613a4981c4feee103d9c0",
+  "status": "concluída",
+  "implementation_performed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "framework": "uGUI e TextMesh Pro da GameScene.",
+  "resolutions": [
+    "1280×720",
+    "1366×768",
+    "1920×1080"
+  ],
+  "baseline_observed": [
+    "No hub de Lanches, 50 / 100 correspondia à reputação salva. Uma estrela fixa acompanhava o rótulo e outra identificava a pontuação do cabeçalho. Nenhuma estrela mudava com o valor.",
+    "A cena já selecionava a fachada compacta de Lanches e o neon comercial. O rótulo Cardápio cobria parte da fachada central."
+  ],
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Nos três restaurantes, 0, 21, 50 e 100 pontos exibiram a mesma reputação da sessão. O preenchimento linear corresponde a 0, 1,05, 2,5 e 5 estrelas, respectivamente. Cada estrela inteira vale 20 pontos. Pontuação aparece com rótulo e ícone de barras. Rótulo, estrelas e valor de reputação cabem na mesma linha."
+    },
+    {
+      "criterion": 2,
+      "result": "O hub exibiu somente a variante central map_rest_lanches, map_rest_japones ou map_rest_frances, conforme a sessão. A imagem lateral correspondeu ao asset de fachada do mesmo RestaurantData. Em cada retomada, o fluxo carregou outra instância da mesma sessão do SQLite e recompôs tipo, localização e reputação."
+    },
+    {
+      "criterion": 3,
+      "result": "As cinco zonas ativaram um único neon correspondente, atrás dos pinos e sem interceptar o raycast. O rótulo Cardápio ficou fora da área da fachada central, com foco e área de toque alinhados. O hub ativo não apresentou Canais. Os seis marcadores, cinco botões da barra e quatro botões do resumo abriram seus destinos e retornaram ao hub."
+    }
+  ],
+  "play_mode": {
+    "method": "GameScene no Editor Windows, com SQLite e chave PlayerPrefs isolados. Cada fixture entrou no hub pelo botão real de confirmação da equipe. Os atalhos foram verificados por raycast e submit do EventSystem. Os PNGs vieram do render da Game View.",
+    "display_checks": 22,
+    "navigation_checks": 15,
+    "errors": [],
+    "evidence": "after.json"
+  },
+  "docs_read": [
+    "uGUI Basic Layout",
+    "uGUI Rect Transform",
+    "TextMesh Pro Documentation"
+  ],
+  "limitations": [
+    "O ensaio começou na confirmação da equipe com escolhas iniciais preparadas em cada fixture. As verificações de interface ocorreram no Editor Windows 6000.3.28f1, com o projeto versionado em 6000.3.21f1."
+  ],
+  "evidence": {
+    "directory": "output/ui-update/feedback-2026-11-19/FB-15",
+    "baseline": [
+      "before.json",
+      "before-lanches-50.png"
+    ],
+    "screenshots": [
+      "frances-1366x768.png",
+      "frances-1920x1080.png",
+      "frances-ao-vivo-0.png",
+      "frances-nova-50.png",
+      "frances-retomada-100.png",
+      "japones-ao-vivo-0.png",
+      "japones-nova-50.png",
+      "japones-retomada-100.png",
+      "lanches-ao-vivo-0.png",
+      "lanches-nova-50.png",
+      "lanches-retomada-100.png"
+    ]
+  }
+}

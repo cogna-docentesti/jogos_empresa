@@ -28,7 +28,7 @@ Implicação: FB-13 revisa pertinência/efeitos; FB-14 é mudança explícita da
 Fontes: Assets/Scripts/Game/Adapter/In/Controllers/TeamScreenController.cs; Assets/Scripts/Game/Adapter/In/UI/TeamRoleCardView.cs
 
 Reputação textual do ConceptHudView vem da sessão e usa escala 0–100; o gerador usa ICON_STAR.
-Implicação: FB-15 confirma o significado e a representação visual das estrelas em vez de presumir conversão.
+Implicação: FB-15 substituiu o ícone fixo da reputação por cinco estrelas proporcionais ao valor da sessão. O indicador de pontuação tem identificação própria.
 Fontes: Assets/Scripts/Game/Adapter/In/UI/ConceptHudView.cs; Assets/Editor/UI/ConceptUiRevision.cs
 
 Eventos já são reservados por sessão/mês e têm dia salvo, mas OpenMonth distribui os dias regularmente.

@@ -1,10 +1,10 @@
 FB-15 — Atualizar o hub: reputação, mapa e fachada escolhida
-Status: planejada | Prioridade: P1 | Tipo: interface e dados
+Status: concluída | Prioridade: P1 | Tipo: interface e dados
 Área: Menu / hub
 Dependências: FB-01, FB-03
-Modelo: gpt-6.2-sol | Raciocínio: high
+Modelo: gpt-6.2-sol | Raciocínio: medium
 Conversa: FB-15 — Atualizar o hub: reputação, mapa e fachada escolhida
-Escolha do modelo: Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.
+Escolha do modelo: Integração localizada entre o hub e a sessão, com validação visual e de retomada.
 Commit local em inglês: fix: align hub reputation and selected restaurant facade
 Próxima tarefa: FB-16
 Feedbacks: F-30, F-31, F-33
@@ -45,7 +45,9 @@ VALIDAÇÃO PREVISTA
 1. Abrir o hub com cada restaurante e com reputações mínima/intermediária/máxima; conferir nova partida e reload.
 
 OBSERVAÇÕES E LIMITES
-1. Na inspeção estática, ConceptHudView apresenta a reputação da sessão em “/100”, e o gerador usa ICON_STAR. O preenchimento e significado de todas as estrelinhas ainda precisam ser confirmados visualmente.
+1. O resumo do hub mostra a reputação da sessão de 0 a 100 e cinco estrelas com preenchimento linear. Uma estrela cheia equivale a 20 pontos. A pontuação do cabeçalho usa rótulo e ícone próprios.
+2. O mapa seleciona a fachada compacta pelo restaurante salvo, inclusive ao retomar. O rótulo Cardápio fica ao lado da fachada, com foco, toque e atalhos verificados em Play Mode.
+3. O QA registrou 37 verificações e capturas reais com SQLite isolado. As três fachadas e as três retomadas foram verificadas.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-15.json.

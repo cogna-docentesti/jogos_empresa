@@ -14,7 +14,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private Restaurant[] restaurants=Array.Empty<Restaurant>();
         [SerializeField] private UnityEngine.UI.Image centerOverlay;
         [SerializeField] private TMP_Text locationLabel, restaurantLabel;
-        private string lastSnapshot;
+        private (LocationZone? zone, RestaurantType? restaurant, bool available) lastSelection;
         public MapMenuNode[] Nodes => nodes;
 
         public void Configure(MapMenuNode[] markers, Zone[] areas, Restaurant[] variants,
@@ -23,27 +23,55 @@ namespace Game.Adapter.In.UI
         private void OnEnable() => Refresh();
         private void Update()
         {
-            var session=GameSessionState.Current;
-            string snapshot=$"{session?.locationZone}|{session?.restaurantType}|{MenuNavigator.HubAvailable}";
-            if(snapshot!=lastSnapshot) { lastSnapshot=snapshot; Refresh(); }
+            var selection = ReadSelection();
+            if (selection != lastSelection) ApplySelection(selection);
         }
-        public void Refresh()
+
+        private static (LocationZone? zone, RestaurantType? restaurant, bool available) ReadSelection()
         {
-            var session=GameSessionState.Current;
-            string id=session!=null?LocationZoneMap.ToId(session.locationZone):null;
-            foreach(var zone in zones) if(zone.overlay!=null) zone.overlay.enabled=id==zone.id;
-            foreach(var variant in restaurants) if(variant.image!=null) variant.image.enabled=session!=null && variant.type==session.restaurantType;
-            if(centerOverlay!=null) centerOverlay.enabled=session!=null;
-            foreach(var node in nodes)
+            var session = GameSessionState.IsPersisted ? GameSessionState.Current : null;
+            return (session?.locationZone, session?.restaurantType, MenuNavigator.HubAvailable);
+        }
+
+        public void Refresh() => ApplySelection(ReadSelection());
+
+        private void ApplySelection((LocationZone? zone, RestaurantType? restaurant, bool available) selection)
+        {
+            lastSelection = selection;
+            string id = selection.zone.HasValue ? LocationZoneMap.ToId(selection.zone.Value) : null;
+            foreach (var zone in zones)
+                if (zone.overlay != null) zone.overlay.enabled = id == zone.id;
+
+            bool hasFacade = false;
+            foreach (var variant in restaurants)
             {
-                if(node==null) continue;
-                node.GetComponent<UnityEngine.UI.Button>().interactable=MenuNavigator.HubAvailable;
-                node.SetSelected(node.LocationId==id);
+                if (variant.image == null) continue;
+                bool selected = variant.type == selection.restaurant;
+                variant.image.enabled = selected;
+                hasFacade |= selected;
             }
-            var location=Resources.Load<LocationData>("Locations/LOC_"+id);
-            if(locationLabel!=null) locationLabel.text=location!=null?location.displayName:"Localização pendente";
-            if(restaurantLabel!=null) restaurantLabel.text=session==null?"Restaurante pendente":session.restaurantType switch
-            { RestaurantType.FRANCES=>"Restaurante francês",RestaurantType.JAPONES=>"Restaurante japonês",_=>"Restaurante de lanches" };
+            if (centerOverlay != null) centerOverlay.enabled = hasFacade;
+
+            foreach (var node in nodes)
+            {
+                if (node == null) continue;
+                node.GetComponent<UnityEngine.UI.Button>().interactable = selection.available;
+                node.SetSelected(id != null && node.LocationId == id);
+            }
+
+            if (locationLabel != null)
+            {
+                var location = id != null ? Resources.Load<LocationData>("Locations/LOC_" + id) : null;
+                locationLabel.text = location != null ? location.displayName : "Localização pendente";
+            }
+            if (restaurantLabel != null)
+                restaurantLabel.text = selection.restaurant switch
+                {
+                    RestaurantType.FRANCES => "Restaurante francês",
+                    RestaurantType.JAPONES => "Restaurante japonês",
+                    RestaurantType.PODRAO => "Restaurante de lanches",
+                    _ => "Restaurante pendente"
+                };
         }
     }
 }

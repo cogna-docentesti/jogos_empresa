@@ -113,7 +113,7 @@ namespace Game.EditorTools
             {
                 string id=(string)layer["asset_id"]; var sprite=Sprite(id);
                 var image=Image(master,id,id,(float)layer["position_px"][0],(float)layer["position_px"][1],sprite.rect.width,sprite.rect.height);
-                image.transform.SetAsLastSibling(); image.enabled=!id.StartsWith("OVERLAY_") && (!id.StartsWith("MAP_REST_") || id=="MAP_REST_FRANCES");
+                image.transform.SetAsLastSibling(); image.enabled=!id.StartsWith("OVERLAY_") && !id.StartsWith("MAP_REST_");
                 layers[id]=image;
             }
             var selection=JObject.Parse(File.ReadAllText("docs/art/layouts/map-selection-compact.json"));

@@ -246,6 +246,61 @@ namespace Game.EditorTools
             var nav=Find(p,"HubNavbar");Off(nav,"NavMenu");
             string[] names={"NavEstablishment","NavFinancial","NavEquipmentStore","NavTeam","NavMenuPricing"};
             for(int i=0;i<names.Length;i++) {Move(nav,names[i],24+i*292,14,276,68);SharedUiStyles.Bind(Find(nav,names[i]).GetComponent<UnityEngine.UI.Button>(),SharedControlKind.Navigation);}
+            ApplyHubFeedback(p);
+        }
+
+        internal static void ApplyHubFeedback(Transform panel)
+        {
+            var score = Find(panel, "Header/ConceptScore");
+            Place(score, 1600, 18, 208, 52);
+            Picture(score, "Icon", "ICON_CHART_BARS", 12, 12, 28, 28).color = GamePalette.Lavender;
+            Label(score, "Caption", "Pontuação", 46, 5, 108, 42, GameTypography.Tokens.Label, color: GamePalette.OnDark);
+            Move(score, "Value", 156, 5, 40, 42);
+            Find(score, "Value").GetComponent<TMP_Text>().alignment = TextAlignmentOptions.MidlineRight;
+
+            var side = Find(panel, "HubSummary");
+            Off(side, "MetricIcon2");
+            Move(side, "MetricLabel2", 76, 648, 124, 44);
+            Move(side, "MetricValue2", 384, 648, 132, 44);
+            const int starSize = 32;
+            var stars = Node(side, "ReputationStars", 208, 654, starSize * ConceptHudView.ReputationStarCount, starSize);
+            var hud = side.GetComponent<ConceptHudView>();
+            Set(hud, "reputationStars", stars);
+            var serializedHud = new SerializedObject(hud);
+            var fills = serializedHud.FindProperty("reputationFills");
+            fills.arraySize = ConceptHudView.ReputationStarCount;
+            for (int i = 0; i < fills.arraySize; i++)
+            {
+                var track = Picture(stars, "Empty" + i, "ICON_STAR", i * starSize, 0, starSize, starSize);
+                var muted = GamePalette.Muted;
+                muted.a = .48f;
+                track.color = muted;
+                var fill = Picture(stars, "Fill" + i, "ICON_STAR", i * starSize, 0, starSize, starSize);
+                fill.color = GamePalette.Primary;
+                fill.type = UnityEngine.UI.Image.Type.Filled;
+                fill.fillMethod = UnityEngine.UI.Image.FillMethod.Horizontal;
+                fill.fillOrigin = (int)UnityEngine.UI.Image.OriginHorizontal.Left;
+                fill.fillAmount = 0;
+                fills.GetArrayElementAtIndex(i).objectReferenceValue = fill;
+            }
+            serializedHud.ApplyModifiedPropertiesWithoutUndo();
+
+            var master = Find(panel, "MapMaster");
+            foreach (Transform layer in master)
+                if (layer.name.StartsWith("MAP_REST_", StringComparison.Ordinal))
+                    layer.GetComponent<UnityEngine.UI.Image>().enabled = false;
+
+            // Clear the central facade while keeping the label, focus ring and hit area aligned.
+            var marker = Find(master, "Node_MenuPricing/Card");
+            foreach (var (name, x, width) in new[] {
+                ("MapLabel", 1380, 152), ("MapCaption", 1396, 120),
+                ("MapFocus", 1376, 160), ("MarkerTouchTarget", 1368, 280)
+            })
+            {
+                var rect = (RectTransform)Find(marker, name);
+                rect.anchoredPosition = new Vector2(x, rect.anchoredPosition.y);
+                rect.sizeDelta = new Vector2(width, rect.sizeDelta.y);
+            }
         }
         static void ImportStreetViews()
         {

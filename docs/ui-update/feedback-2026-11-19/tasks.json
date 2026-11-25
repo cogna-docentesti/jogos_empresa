@@ -171,7 +171,7 @@
         "Assets/Scripts/Game/Adapter/In/UI/ConceptHudView.cs",
         "Assets/Editor/UI/ConceptUiRevision.cs"
       ],
-      "implication": "FB-15 confirma o significado e a representação visual das estrelas em vez de presumir conversão."
+      "implication": "FB-15 substituiu o ícone fixo da reputação por cinco estrelas proporcionais ao valor da sessão. O indicador de pontuação tem identificação própria."
     },
     {
       "finding": "Eventos já são reservados por sessão/mês e têm dia salvo, mas OpenMonth distribui os dias regularmente.",
@@ -1456,8 +1456,8 @@
       "area": "Menu / hub",
       "kind": "interface e dados",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-01",
         "FB-03"
@@ -1487,7 +1487,9 @@
         "Assets/Resources/Restaurants"
       ],
       "notes": [
-        "Na inspeção estática, ConceptHudView apresenta a reputação da sessão em “/100”, e o gerador usa ICON_STAR. O preenchimento e significado de todas as estrelinhas ainda precisam ser confirmados visualmente."
+        "O resumo do hub mostra a reputação da sessão de 0 a 100 e cinco estrelas com preenchimento linear. Uma estrela cheia equivale a 20 pontos. A pontuação do cabeçalho usa rótulo e ícone próprios.",
+        "O mapa seleciona a fachada compacta pelo restaurante salvo, inclusive ao retomar. O rótulo Cardápio fica ao lado da fachada, com foco, toque e atalhos verificados em Play Mode.",
+        "O QA registrou 37 verificações e capturas reais com SQLite isolado. As três fachadas e as três retomadas foram verificadas."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-15.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-15.json",
@@ -1500,8 +1502,8 @@
       "execution": {
         "chat_title": "FB-15 — Atualizar o hub: reputação, mapa e fachada escolhida",
         "model": "gpt-6.2-sol",
-        "thinking": "high",
-        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "thinking": "medium",
+        "rationale": "Integração localizada entre o hub e a sessão, com validação visual e de retomada.",
         "commit_message": "fix: align hub reputation and selected restaurant facade",
         "next_task_id": "FB-16",
         "auto_start": true
@@ -1552,8 +1554,8 @@
       "execution": {
         "chat_title": "FB-16 — Melhorar o popup de saída do jogo",
         "model": "gpt-6.2-sol",
-        "thinking": "medium",
-        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "thinking": "low",
+        "rationale": "Ajustes localizados no popup e verificação do fluxo de saída existente.",
         "commit_message": "fix: improve exit confirmation dialog",
         "next_task_id": "FB-19",
         "auto_start": true
@@ -1605,8 +1607,8 @@
       "execution": {
         "chat_title": "FB-17 — Substituir “Fechar mês” por um botão de calendário",
         "model": "gpt-6.2-sol",
-        "thinking": "medium",
-        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "thinking": "low",
+        "rationale": "Troca localizada do botão do hub, com verificação da entrada no calendário.",
         "commit_message": "feat: open the monthly calendar from the hub",
         "next_task_id": "FB-18",
         "auto_start": true
@@ -1660,8 +1662,8 @@
       "execution": {
         "chat_title": "FB-18 — Separar o histórico das ocorrências ativas do calendário",
         "model": "gpt-6.2-sol",
-        "thinking": "high",
-        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "thinking": "medium",
+        "rationale": "As telas precisam distinguir ocorrências ativas e histórico com base nos dados gravados.",
         "commit_message": "refactor: separate event history from active calendar decisions",
         "next_task_id": "FB-27",
         "auto_start": true
@@ -1713,8 +1715,8 @@
       "execution": {
         "chat_title": "FB-19 — Destacar a ação de decisão e apoiar os personagens no resumo",
         "model": "gpt-6.2-sol",
-        "thinking": "medium",
-        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "thinking": "low",
+        "rationale": "Ajustes de destaque e apoio visual das ilustrações no resumo.",
         "commit_message": "fix: clarify restaurant review actions and staff placement",
         "next_task_id": "FB-20",
         "auto_start": true
@@ -1768,8 +1770,8 @@
       "execution": {
         "chat_title": "FB-20 — Ajustar a DRE trimestral e a folha na mão do personagem",
         "model": "gpt-6.2-sol",
-        "thinking": "medium",
-        "rationale": "Escopo visual localizado; raciocínio médio para ajustar composição, estados e referências sem alterar regras.",
+        "thinking": "low",
+        "rationale": "Ajustes localizados de composição na DRE trimestral, com checagem visual.",
         "commit_message": "fix: align quarterly statements and illustration props",
         "next_task_id": "FB-22",
         "auto_start": true
@@ -1904,9 +1906,9 @@
       ],
       "execution": {
         "chat_title": "FB-22 — Implementar compromissos, débitos e persistência do calendário",
-        "model": "gpt-6.2-astra",
-        "thinking": "xhigh",
-        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Compromissos e débitos exigem testar idempotência, persistência e retomada.",
         "commit_message": "feat: persist calendar commitments and debit scheduled bills",
         "next_task_id": "FB-24",
         "auto_start": true
@@ -1973,8 +1975,8 @@
       "execution": {
         "chat_title": "FB-23 — Criar o calendário com 30 dias visíveis e avanço animado",
         "model": "gpt-6.2-sol",
-        "thinking": "high",
-        "rationale": "Alteração de interface e integração uGUI com validação visual e preservação dos fluxos existentes.",
+        "thinking": "medium",
+        "rationale": "O calendário combina renderização dos 30 dias, avanço e estado recuperado.",
         "commit_message": "feat: add a thirty-day calendar with animated progression",
         "next_task_id": "FB-25",
         "auto_start": true
@@ -2041,9 +2043,9 @@
       ],
       "execution": {
         "chat_title": "FB-24 — Preservar a incidência e revelar eventos anunciados ou surpresa",
-        "model": "gpt-6.2-astra",
-        "thinking": "xhigh",
-        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "A previsão e a surpresa exigem confirmar visibilidade, persistência e incidência sem regressões.",
         "commit_message": "feat: reveal scheduled and surprise events without changing incidence",
         "next_task_id": "FB-23",
         "auto_start": true
@@ -2110,8 +2112,8 @@
       "execution": {
         "chat_title": "FB-25 — Abrir decisões do mês e de eventos sobre o calendário",
         "model": "gpt-6.2-sol",
-        "thinking": "high",
-        "rationale": "Integração de modais, avanço e persistência de decisões requer revisão de foco e retomada.",
+        "thinking": "medium",
+        "rationale": "Os popups precisam integrar decisões reais, persistência e retorno ao calendário.",
         "commit_message": "feat: present monthly and event decisions above the calendar",
         "next_task_id": "FB-26",
         "auto_start": true
@@ -2177,9 +2179,9 @@
       ],
       "execution": {
         "chat_title": "FB-26 — Mover o fechamento mensal para o fim do calendário",
-        "model": "gpt-6.2-astra",
-        "thinking": "xhigh",
-        "rationale": "Mudança de estado persistido e reconciliação econômica exige análise aprofundada de idempotência, migração e regras.",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "O fechamento precisa conciliar débitos persistidos e impedir dupla cobrança na retomada.",
         "commit_message": "feat: reconcile calendar payments during month-end settlement",
         "next_task_id": "FB-17",
         "auto_start": true
@@ -2262,9 +2264,9 @@
       "feedback_ids": [],
       "execution": {
         "chat_title": "FB-27 — Validar o lote completo e registrar evidências",
-        "model": "gpt-6.2-astra",
-        "thinking": "high",
-        "rationale": "QA integrado da campanha, pagamentos, incidência, retomada e evidências visuais.",
+        "model": "gpt-6.2-sol",
+        "thinking": "medium",
+        "rationale": "Consolidar as evidências do lote e repetir os testes essenciais conforme as lacunas de cobertura.",
         "commit_message": "test: validate calendar flow and UI feedback acceptance",
         "next_task_id": null,
         "auto_start": true
@@ -2342,7 +2344,24 @@
     "deferred_tasks_excluded": [
       "FB-28"
     ],
-    "instructions": "Executar a tarefa atual em uma conversa nova com seu título e configuração. Validar, atualizar o backlog e fazer commit local antes de criar a conversa sucessora. Não iniciar dependente sem aceite. Não fazer push."
+    "instructions": "Executar a tarefa atual em uma conversa nova com seu título e configuração. Validar, atualizar o backlog e fazer commit local antes de criar a conversa sucessora. Não iniciar dependente sem aceite. Não fazer push.",
+    "token_economy": {
+      "priority": "Economizar tokens e preservar a cota semanal durante a execução do lote.",
+      "default_model": "gpt-6.2-sol",
+      "automatic_thinking": [
+        "low",
+        "medium"
+      ],
+      "escalation": "Usar high no Sol somente se uma dificuldade concreta de regra ou persistência não tiver sido resolvida em medium. Registrar o motivo.",
+      "excluded_from_automatic_execution": [
+        "Astra",
+        "xhigh",
+        "max",
+        "ultra"
+      ],
+      "verification": "Usar buscas direcionadas e saídas compactas. Reaproveitar QA existente e repetir capturas ou campanhas aprovadas somente se a mudança exigir. Preservar os testes essenciais de pagamentos e persistência.",
+      "handoff": "Manter uma tarefa por conversa, um commit local em inglês por tarefa e uma passagem curta."
+    }
   },
   "calendar_requirements": [
     {
