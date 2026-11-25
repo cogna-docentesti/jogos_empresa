@@ -1,0 +1,60 @@
+{
+  "task_id": "FB-19",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "5f4f0af834d6e35992b4bc1cffbe4240d5a34d7e",
+  "status": "concluída",
+  "implementation_performed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "framework": "uGUI e TextMesh Pro",
+  "resolutions": [
+    "1280x720",
+    "1366x768",
+    "1920x1080",
+    "1600x1000"
+  ],
+  "baseline_observed": "O resumo exibia Pronto/Pendente na área reservada à ação, a seta ficava parcialmente cortada e havia espaço visível entre os retratos de meio corpo e a borda inferior dos cenários.",
+  "method": "Play Mode na GameScene com SQLite e PlayerPrefs isolados. A mesma sessão de teste foi configurada com os catálogos e as funções de Lanches, Japonês e Francês. Os cliques de abertura e retorno foram enviados após confirmar a área atingida pelo ponteiro. Evidências renderizadas pela Game View.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "As seis decisões têm a ação Abrir em violeta com texto e seta brancos. A linha inteira é clicável. Abrir descreve tanto as telas de consulta quanto as de gestão. O checklist continua sinalizando requisitos pelo ícone."
+    },
+    {
+      "criterion": 2,
+      "result": "Os atalhos abriram Localização, Restaurante, Cardápio e preços, Crédito, Equipamentos e Equipe. Voltar restaurou o resumo, a seleção do atalho e a sessão em memória. Revisar escolhas abriu a composição equivalente e o retorno também preservou a sessão."
+    },
+    {
+      "criterion": 3,
+      "result": "A base opaca dos cinco retratos de meio corpo acompanha a borda inferior visível do cenário. Cabeças, mãos e expressão ficaram visíveis. Em cada resolução foram conferidos os três restaurantes com 0, 1 e 3 funções contratadas. Equipes completas usam Atendente e Gerente mais Chapeiro, Profissional de sushi ou Chef de cozinha conforme o restaurante."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-19",
+  "evidence": {
+    "baseline": "before-1280x720.png",
+    "screenshots": [
+      "FRANCES-0-1280x720.png",
+      "FRANCES-1-1280x720.png",
+      "FRANCES-3-1280x720.png",
+      "FRANCES-3-1600x1000.png",
+      "FRANCES-3-1920x1080.png",
+      "JAPONES-0-1280x720.png",
+      "JAPONES-1-1280x720.png",
+      "JAPONES-3-1280x720.png",
+      "JAPONES-3-1366x768.png",
+      "PODRAO-0-1280x720.png",
+      "PODRAO-1-1280x720.png",
+      "PODRAO-3-1280x720.png"
+    ],
+    "play_mode_checks": [
+      "1280x720.json",
+      "1366x768.json",
+      "1920x1080.json",
+      "1600x1000.json"
+    ]
+  },
+  "limitations": [
+    "Ensaio executado no Unity Editor para Windows. A cobertura inclui as três resoluções históricas da UI-08 e 1600×1000. A tentativa em 2340×1080 ficou fora da cobertura porque a Game View não reportou a resolução solicitada."
+  ]
+}

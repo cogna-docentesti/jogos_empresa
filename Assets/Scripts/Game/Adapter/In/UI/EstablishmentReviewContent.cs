@@ -15,7 +15,7 @@ namespace Game.Adapter.In.UI
             public UnityEngine.UI.Button button;
             public UnityEngine.UI.Image check;
             public UnityEngine.UI.Image tick;
-            public TMP_Text title, detail, state;
+            public TMP_Text title, detail, action;
             public PanelId destination;
         }
         [Serializable] public sealed class MemberVisual
@@ -24,7 +24,12 @@ namespace Game.Adapter.In.UI
             public UnityEngine.UI.Image portrait, environment;
             public TMP_Text label;
         }
-        [Serializable] public sealed class RoleArtwork { public string id; public Sprite portrait, environment; }
+        [Serializable] public sealed class RoleArtwork
+        {
+            public string id;
+            public Sprite portrait, environment;
+            public float portraitBase;
+        }
         [SerializeField] private SelectedEstablishmentView selected;
         [SerializeField] private TMP_Text context, round, status, notice, cash, revenue, result, score, coherence;
         [SerializeField] private TMP_Text revenueTitle, resultTitle, menuDetails, equipmentDetails, teamDetails, teamEmpty;
@@ -47,7 +52,7 @@ namespace Game.Adapter.In.UI
             {
                 GameTypography.KeepSize(d.title, TypographyRole.SectionTitle);
                 GameTypography.KeepSize(d.detail, TypographyRole.Body);
-                GameTypography.KeepSize(d.state, TypographyRole.Label);
+                GameTypography.KeepSize(d.action, TypographyRole.Button);
             }
             foreach (var m in members) GameTypography.KeepSize(m.label, TypographyRole.Body);
         }
@@ -82,7 +87,6 @@ namespace Game.Adapter.In.UI
                 if (i >= s.Decisions.Length) { v.button.gameObject.SetActive(false); continue; }
                 var d = s.Decisions[i]; v.button.gameObject.SetActive(true);
                 Set(v.title, d.Label); Set(v.detail, d.Detail);
-                Set(v.state, d.Ready ? "Pronto" : "Pendente", d.Ready ? GamePalette.Money : GamePalette.Muted);
                 v.check.sprite = SharedUiSkin.Current.Get(d.Ready ? "UI_CHECKBOX_ON" : "UI_CHECKBOX_OFF");
                 if (v.tick != null) v.tick.enabled = d.Ready;
                 v.button.onClick.RemoveAllListeners();
@@ -99,6 +103,12 @@ namespace Game.Adapter.In.UI
                 var art = Array.Find(roleArtwork, a => a.id == member.RoleId);
                 v.portrait.sprite = art?.portrait; v.portrait.enabled = art?.portrait != null;
                 v.environment.sprite = art?.environment; v.environment.enabled = art?.environment != null;
+                if (v.portrait.enabled)
+                {
+                    var rect = v.portrait.rectTransform;
+                    // Let the portrait extend behind the bottom edge of its illustration by one pixel.
+                    rect.anchoredPosition = new Vector2(0, 1 + rect.rect.height * art.portraitBase);
+                }
                 Set(v.label, $"{member.Name}\n{member.Quantity} " + (member.Quantity == 1 ? "contratado" : "contratados"));
             }
             if (teamEmpty != null) teamEmpty.gameObject.SetActive(visible == 0);

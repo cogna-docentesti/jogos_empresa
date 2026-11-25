@@ -29,7 +29,7 @@ public static class UI08EstablishmentValidation
         {
             Expect(Field<SelectedEstablishmentView>(content,"selected")!=null,"Selected business reference");
             Expect(Field<EstablishmentReviewContent.DecisionVisual[]>(content,"decisions").Length==6,"Six saved decisions");
-            foreach(var d in Field<EstablishmentReviewContent.DecisionVisual[]>(content,"decisions"))Expect(d.button!=null && d.check!=null && d.tick!=null && d.detail!=null && d.state!=null,"Saved decision references");
+            foreach(var d in Field<EstablishmentReviewContent.DecisionVisual[]>(content,"decisions"))Expect(d.button!=null && d.check!=null && d.tick!=null && d.detail!=null && d.action!=null,"Saved decision references");
             var arts=Field<EstablishmentReviewContent.RoleArtwork[]>(content,"roleArtwork");Expect(arts.Length==5 && arts.All(a=>a.portrait!=null && a.environment!=null),"Five saved role artwork mappings");
         }
         Expect(canvas.GetComponentsInChildren<EstablishmentReviewContent>(true).Length==2,"Two saved compositions");
@@ -118,7 +118,7 @@ public static class UI08EstablishmentValidation
         Expect(Mathf.Approximately(Field<RectTransform>(Content,"scoreFill").anchorMax.x,s.ScoreProgress),"Score geometry");
         var members=Field<EstablishmentReviewContent.MemberVisual[]>(Content,"members");Expect(members.Count(m=>m.root.activeSelf)==s.Members.Length,"Team count/artwork");
         for(int i=0;i<s.Members.Length;i++)Expect(members[i].portrait.sprite!=null && members[i].environment.sprite!=null && members[i].label.text.Contains(s.Members[i].Quantity.ToString()),"Member layers/quantity");
-        var decisions=Field<EstablishmentReviewContent.DecisionVisual[]>(Content,"decisions");for(int i=0;i<6;i++)Expect(decisions[i].detail.text==s.Decisions[i].Detail && decisions[i].state.text==(s.Decisions[i].Ready?"Pronto":"Pendente"),"Checklist data "+i);
+        var decisions=Field<EstablishmentReviewContent.DecisionVisual[]>(Content,"decisions");for(int i=0;i<6;i++)Expect(decisions[i].detail.text==s.Decisions[i].Detail && decisions[i].action.text=="Abrir","Checklist data "+i);
         Fits();SingleSession();
     }
     public static void Run()

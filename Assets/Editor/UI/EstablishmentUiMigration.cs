@@ -121,14 +121,35 @@ namespace Game.EditorTools
             var so=new SerializedObject(skin);var members=so.FindProperty("members");members.arraySize=5;
             for(int i=0;i<5;i++)
             {
-                var card=Image(grid,"Member"+i,"UI_CARD_NORMAL",0,0,220,240);var env=Image(card.transform,"Environment",null,8,8,204,164);env.preserveAspect=true;
-                var portrait=Image(card.transform,"Portrait",null,8,8,204,164);portrait.preserveAspect=true;
-                foreach(var picture in new[]{env,portrait}){picture.rectTransform.pivot=new Vector2(.5f,.5f);picture.rectTransform.anchoredPosition=new Vector2(110,-90);}
+                var card=Image(grid,"Member"+i,"UI_CARD_NORMAL",0,0,220,240);
+                var stage=Node(card.transform,"Illustration",8,12,204,153);
+                Ensure<UnityEngine.UI.RectMask2D>(stage);
+                foreach(string layer in new[]{"Environment","Portrait"})
+                {
+                    var existing=card.transform.Find(layer);
+                    if(existing!=null)existing.SetParent(stage,false);
+                }
+                var env=Image(stage,"Environment",null,0,0,204,153);env.preserveAspect=true;
+                env.transform.SetAsFirstSibling();
+                var portrait=Image(stage,"Portrait",null,0,0,184,184);portrait.preserveAspect=true;
+                var portraitRect=portrait.rectTransform;
+                portraitRect.anchorMin=portraitRect.anchorMax=new Vector2(.5f,0);
+                portraitRect.pivot=new Vector2(.5f,1);
                 var label=Text(card.transform,"Name","",8,180,204,56,GameTypography.Tokens.Caption,true);label.alignment=TextAlignmentOptions.Center;
                 var item=members.GetArrayElementAtIndex(i);item.FindPropertyRelative("root").objectReferenceValue=card.gameObject;item.FindPropertyRelative("portrait").objectReferenceValue=portrait;item.FindPropertyRelative("environment").objectReferenceValue=env;item.FindPropertyRelative("label").objectReferenceValue=label;
             }
             var arts=so.FindProperty("roleArtwork");arts.arraySize=5;string[] roleIds={"attendant","grill_cook","head_chef","manager","sushi_chef"};string[] envIds={"SERVICE_COUNTER","GRILL_KITCHEN","FRENCH_KITCHEN","MANAGEMENT_OFFICE","SUSHI_COUNTER"};
-            for(int i=0;i<5;i++){var a=arts.GetArrayElementAtIndex(i);a.FindPropertyRelative("id").stringValue=roleIds[i];a.FindPropertyRelative("portrait").objectReferenceValue=Art("PORTRAIT_"+roleIds[i].ToUpperInvariant());a.FindPropertyRelative("environment").objectReferenceValue=Art("TEAM_ENV_"+envIds[i]);}so.ApplyModifiedPropertiesWithoutUndo();
+            // Lower alpha edge in each approved 512 px portrait, measured from the top.
+            int[] portraitBases={440,430,451,445,436};
+            for(int i=0;i<5;i++)
+            {
+                var a=arts.GetArrayElementAtIndex(i);
+                a.FindPropertyRelative("id").stringValue=roleIds[i];
+                a.FindPropertyRelative("portrait").objectReferenceValue=Art("PORTRAIT_"+roleIds[i].ToUpperInvariant());
+                a.FindPropertyRelative("environment").objectReferenceValue=Art("TEAM_ENV_"+envIds[i]);
+                a.FindPropertyRelative("portraitBase").floatValue=portraitBases[i]/512f;
+            }
+            so.ApplyModifiedPropertiesWithoutUndo();
             var rs=Scroll(right.transform,"ReviewScroll",24,24,1016,704);var rc=rs.content;
             var metrics=Node(rc,"Metrics");Height(metrics,248);var mg=Ensure<UnityEngine.UI.GridLayoutGroup>(metrics);mg.constraint=UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;mg.constraintCount=2;mg.cellSize=new Vector2(482,112);mg.spacing=new Vector2(24,24);
             string[] fields={"cash","revenue","result","score"};string[] names={"Caixa disponível","Receita prevista","Resultado previsto","Pontuação"};string[] icons={"ICON_CASH","ICON_REVENUE","ICON_TREND_UP","ICON_STAR"};
@@ -146,15 +167,21 @@ namespace Game.EditorTools
             for(int i=0;i<6;i++)
             {
                 var button=Button(rc,"Decision"+i,"",0,0,988,120,SharedControlKind.Secondary);button.transform.Find("Label").gameObject.SetActive(false);
-                var layout=Vertical(button,16,6);layout.padding.left=64;layout.padding.right=164;
+                var layout=Vertical(button,16,6);layout.padding.left=64;layout.padding.right=220;
                 var title=Flow(button.transform,"Title","Decisão",GameTypography.Tokens.Label,true);var detail=Flow(button.transform,"Detail","Pendente",GameTypography.Tokens.Label);
                 var check=Image(button.transform,"Check","UI_CHECKBOX_OFF",16,20,32,32);Ignore(check);
                 var tick=Image(button.transform,"Tick","ICON_CHECK",20,24,24,24);tick.color=GamePalette.OnDark;Ignore(tick);
-                var state=Text(button.transform,"State","Pendente",822,20,134,36,GameTypography.Tokens.Label,true);Ignore(state);
-                var next=Image(button.transform,"Next","ICON_NEXT",940,66,28,28);next.color=GamePalette.Primary;Ignore(next);
+                var actionSurface=Image(button.transform,"ActionSurface","UI_PRIMARY_VIOLET_NORMAL",0,0,188,64);Ignore(actionSurface);
+                AnchorAction(actionSurface.rectTransform,-16,0);
+                actionSurface.transform.SetAsFirstSibling();
+                var action=Text(button.transform,"State","Abrir",0,0,136,64,GameTypography.Tokens.Button,true,GamePalette.OnDark);Ignore(action);
+                action.alignment=TextAlignmentOptions.Center;
+                AnchorAction(action.rectTransform,-62,0);
+                var next=Image(button.transform,"Next","ICON_NEXT",0,0,24,24);next.color=GamePalette.OnDark;Ignore(next);
+                AnchorAction(next.rectTransform,-36,0);
                 var focus=button.transform.Find("SharedFocus").GetComponent<UnityEngine.UI.Image>();Ignore(focus);
-                button.GetComponent<SharedControlAppearance>().Configure(SharedControlKind.Secondary,button.GetComponent<UnityEngine.UI.Image>(),focus,new[]{title,detail},new[]{next});
-                var d=decisions.GetArrayElementAtIndex(i);d.FindPropertyRelative("button").objectReferenceValue=button;d.FindPropertyRelative("check").objectReferenceValue=check;d.FindPropertyRelative("tick").objectReferenceValue=tick;d.FindPropertyRelative("title").objectReferenceValue=title;d.FindPropertyRelative("detail").objectReferenceValue=detail;d.FindPropertyRelative("state").objectReferenceValue=state;d.FindPropertyRelative("destination").enumValueIndex=(int)destinations[i];
+                button.GetComponent<SharedControlAppearance>().Configure(SharedControlKind.Secondary,button.GetComponent<UnityEngine.UI.Image>(),focus,new[]{title,detail},Array.Empty<UnityEngine.UI.Image>());
+                var d=decisions.GetArrayElementAtIndex(i);d.FindPropertyRelative("button").objectReferenceValue=button;d.FindPropertyRelative("check").objectReferenceValue=check;d.FindPropertyRelative("tick").objectReferenceValue=tick;d.FindPropertyRelative("title").objectReferenceValue=title;d.FindPropertyRelative("detail").objectReferenceValue=detail;d.FindPropertyRelative("action").objectReferenceValue=action;d.FindPropertyRelative("destination").enumValueIndex=(int)destinations[i];
             }
             so.ApplyModifiedPropertiesWithoutUndo();
             Flow(rc,"MenuTitle","Cardápio e preços atuais",GameTypography.Tokens.SectionTitle,true);Set(skin,"menuDetails",Flow(rc,"MenuDetails","Nenhum preço definido.",GameTypography.Tokens.Body));
@@ -177,6 +204,12 @@ namespace Game.EditorTools
                 SharedUiStyles.Bind(confirm,SharedControlKind.Danger);warning.SetAsLastSibling();warning.gameObject.SetActive(false);
             }
             EditorUtility.SetDirty(skin);if(view!=null)EditorUtility.SetDirty(view);EditorUtility.SetDirty(controller);panel.gameObject.SetActive(false);
+        }
+
+        private static void AnchorAction(RectTransform rect,float x,float y)
+        {
+            rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(1,.5f);
+            rect.anchoredPosition=new Vector2(x,y);
         }
     }
 }
