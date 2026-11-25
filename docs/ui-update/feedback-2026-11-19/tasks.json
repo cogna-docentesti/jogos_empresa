@@ -1568,8 +1568,8 @@
       "area": "Menu / hub; arte e navegação",
       "kind": "interface e integração",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-15",
         "FB-23",
@@ -1597,7 +1597,10 @@
         "Assets/Editor/UI/HubUiMigration.cs",
         "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs"
       ],
-      "notes": [],
+      "notes": [
+        "O botão Calendário da GameScene reutiliza o ícone aprovado, os estados compartilhados e o objeto original do hub.",
+        "Play Mode confirmou abertura da revisão, revisita após o primeiro débito e retomada de decisão no dia 30. A DRE persistida aguardou Continuar."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-17.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-17.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-17",

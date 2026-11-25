@@ -242,7 +242,8 @@ namespace Game.EditorTools
                 var icon=b.Find("Icon");if(icon!=null)Place(icon,10,12,24,24);
             }
             Find(side,"QuarterlyResult/Label").GetComponent<TMP_Text>().text="Trimestre";
-            SharedUiStyles.Bind(Find(actions,"CloseMonth").GetComponent<UnityEngine.UI.Button>(),SharedControlKind.Accent);
+            EventUiMigration.ConfigureCalendarButton(Find(actions,"CloseMonth").GetComponent<UnityEngine.UI.Button>(),
+                Find(p.parent,"UiNavigation").GetComponent<Game.Adapter.In.Controllers.MonthlySettlementController>(),SharedControlKind.Accent);
             var nav=Find(p,"HubNavbar");Off(nav,"NavMenu");
             string[] names={"NavEstablishment","NavFinancial","NavEquipmentStore","NavTeam","NavMenuPricing"};
             for(int i=0;i<names.Length;i++) {Move(nav,names[i],24+i*292,14,276,68);SharedUiStyles.Bind(Find(nav,names[i]).GetComponent<UnityEngine.UI.Button>(),SharedControlKind.Navigation);}

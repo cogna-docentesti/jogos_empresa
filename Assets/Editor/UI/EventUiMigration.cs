@@ -46,6 +46,25 @@ namespace Game.EditorTools
             var t = Text(r, "Label", label, 16, 8, w - 32, h - 16, GameTypography.Tokens.Button, true); t.alignment = TextAlignmentOptions.Center; SharedUiStyles.Bind(b, kind); return b;
         }
         private static void Stretch(RectTransform r) { r.anchorMin = Vector2.zero; r.anchorMax = Vector2.one; r.offsetMin = r.offsetMax = Vector2.zero; }
+
+        internal static void ConfigureCalendarButton(UnityEngine.UI.Button button, MonthlySettlementController settlement, SharedControlKind kind)
+        {
+            const float contentWidth = 180;
+            var root = (RectTransform)button.transform;
+            var left = (root.rect.width - contentWidth) / 2;
+            Picture(root, "Icon", "ICON_CALENDAR", left, 14, 40, 40);
+            var label = root.Find("Label").GetComponent<TextMeshProUGUI>();
+            Node(root, "Label", left + 52, 8, 128, 52);
+            label.text = "Calendário";
+            label.alignment = TextAlignmentOptions.MidlineLeft;
+            label.textWrappingMode = TextWrappingModes.NoWrap;
+            SharedUiStyles.Bind(button, kind);
+
+            // Reuse the existing scene object and replace its old serialized action.
+            button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
+            UnityEventTools.AddPersistentListener(button.onClick, settlement.ShowCalendar);
+            EditorUtility.SetDirty(button);
+        }
         private static UnityEngine.UI.VerticalLayoutGroup Vertical(RectTransform r, int padding = 6)
         {
             var v = Ensure<UnityEngine.UI.VerticalLayoutGroup>(r); v.spacing = 16; v.padding = new RectOffset(padding, padding, padding, padding);
@@ -116,8 +135,9 @@ namespace Game.EditorTools
             canvas.GetComponentInChildren<HubBackButton>(true).ConfigureEvents(panel.gameObject, (RectTransform)canvas.Find("MenuAccess/Button"));
             panel.SetSiblingIndex(Mathf.Min(panel.GetSiblingIndex(), canvas.Find("MenuAccess").GetSiblingIndex()));
             var hub = canvas.Find("Panel_Menu"); var actions = Node(hub, "EventActions", 736, 100, 568, 68);
-            var close = Button(actions, "CloseMonth", "Fechar mês", 0, 0, 272, 68); var settlement = Ensure<MonthlySettlementController>(canvas.Find("UiNavigation"));
-            UnityEventTools.RemovePersistentListener(close.onClick, settlement.CloseMonth); UnityEventTools.AddPersistentListener(close.onClick, settlement.CloseMonth);
+            var calendarButton = Button(actions, "CloseMonth", "Calendário", 0, 0, 272, 68);
+            var settlement = Ensure<MonthlySettlementController>(canvas.Find("UiNavigation"));
+            ConfigureCalendarButton(calendarButton, settlement, SharedControlKind.Primary);
             var historyButton = Button(actions, "History", "Eventos e histórico", 296, 0, 272, 68, SharedControlKind.Secondary);
             var action = Ensure<PanelNavButton>(historyButton); action.EditorConfigure(PanelNavButton.NavAction.Open, PanelId.EventHistory);
             MonthlyCalendarUiMigration.Wire(canvas, settlement);

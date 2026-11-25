@@ -1,5 +1,5 @@
 FB-17 — Substituir “Fechar mês” por um botão de calendário
-Status: planejada | Prioridade: P1 | Tipo: interface e integração
+Status: concluída | Prioridade: P1 | Tipo: interface e integração
 Área: Menu / hub; arte e navegação
 Dependências: FB-15, FB-23, FB-26
 Modelo: gpt-6.2-sol | Raciocínio: low
@@ -41,6 +41,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Verificar acesso por mouse/toque, navegação por teclado, revisita e retomada da sessão.
+
+OBSERVAÇÕES E LIMITES
+1. O botão Calendário da GameScene reutiliza o ícone aprovado, os estados compartilhados e o objeto original do hub.
+2. Play Mode confirmou abertura da revisão, revisita após o primeiro débito e retomada de decisão no dia 30. A DRE persistida aguardou Continuar.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-17.json.

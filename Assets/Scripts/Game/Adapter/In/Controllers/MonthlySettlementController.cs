@@ -50,8 +50,10 @@ namespace Game.Adapter.In.Controllers
             else onSettlementFailed.Invoke();
         }
 
-        // The existing hub action now enters the calendar. Settlement is requested at day 30.
-        public void CloseMonth()
+        // Preserve callers serialized before the hub button was renamed.
+        public void CloseMonth() => ShowCalendar();
+
+        public void ShowCalendar()
         {
             if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted || SharedModalFocus.Active != null)
                 return;

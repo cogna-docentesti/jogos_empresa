@@ -1,0 +1,43 @@
+{
+  "task_id": "FB-17",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "9e555d21084d1176b3ce7dae5792a144327d2725",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "GameScene em Play Mode a 1280×720, com SQLite e cadastro isolados. Capturas reais do Game View e ações pelos controles da cena via EventSystem.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "O botão exibe o ícone de calendário aprovado e o rótulo Calendário. O teste capturou os estados normal, hover, pressionado, desabilitado e foco. O clique desabilitado não abriu o calendário."
+    },
+    {
+      "criterion": 2,
+      "result": "Mouse, toque simulado e navegação direcional seguida de submit abriram a revisão sobre a grade com os 30 dias. Antes de confirmar, o plano continuou inexistente, o caixa permaneceu igual e nenhuma DRE foi gerada."
+    },
+    {
+      "criterion": 3,
+      "result": "Após o débito do aluguel no dia 5, a entrada pelo hub manteve dia, revisão do plano, recibo, caixa persistido e a reserva. Recarregar a sessão com a quebra de freezer pendente no dia 30 reapresentou a mesma decisão. Resolver e fechar gerou uma única DRE e manteve o mês 1 aguardando Continuar."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-17",
+  "evidence": [
+    "baseline.png",
+    "dre-aguardando.png",
+    "game-scene.txt",
+    "hub-disabled.png",
+    "hub-focus.png",
+    "hub-hover.png",
+    "hub-normal.png",
+    "hub-pressed.png",
+    "pendencia-retomada.png",
+    "revisao.png",
+    "revisita.png"
+  ],
+  "limitations": [
+    "Toque e navegação de teclado foram enviados como eventos de UI, sem dispositivo físico.",
+    "A ocorrência do dia 30 foi fixada na base isolada para exercitar a retomada. Os testes de incidência e a conciliação dos quatro pagamentos foram realizados na FB-24 e FB-26."
+  ]
+}
