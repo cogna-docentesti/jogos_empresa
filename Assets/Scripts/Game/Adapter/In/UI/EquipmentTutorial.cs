@@ -116,8 +116,9 @@ namespace Game.Adapter.In.UI
             layout.childControlHeight = layout.childControlWidth = true;
             layout.childForceExpandHeight = false; layout.childForceExpandWidth = true;
             card.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-            progress = Text(card, "Progress", GameTypography.Tokens.Caption, true);
-            progress.color = GamePalette.Muted;
+            // contador "EQUIPE · 1 DE 5": face Medium e cor de texto (Caption regular em cinza ficava apagado)
+            progress = Text(card, "Progress", new TypographyToken(TypographyRole.Label, GameTypography.Label));
+            progress.color = GamePalette.Ink;
             heading = Text(card, "Heading", GameTypography.Tokens.SectionTitle, true);
             message = Text(card, "Message", GameTypography.Tokens.Body);
             var actions = Node(card, "Actions");

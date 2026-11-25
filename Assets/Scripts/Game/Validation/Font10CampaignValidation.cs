@@ -37,7 +37,7 @@ public static class CampaignValidation
     private static T Field<T>(object o, string n) => (T)o.GetType().GetField(n, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(o);
     private static T View<T>(string n) => Root.Find(n).GetComponent<T>();
     private static Button B(object o, string n) => Field<Button>(o, n);
-    private static MonthlySettlementController Settlement => Root.Find("UiNavigation").GetComponent<MonthlySettlementController>();
+    private static MonthlySettlementController Settlement => Root.Find("UiNavigation").GetComponent<MonthlySettlementController>();   // só no teste isolado do modal antigo
     private static EventScreenController Events => View<EventScreenController>("Panel_Event");
     private static MonthlyResultController Monthly => View<MonthlyResultController>("Panel_MonthlyResult");
     private static MonthlyResultView MonthlyView => Monthly.GetComponent<MonthlyResultView>();
@@ -48,7 +48,8 @@ public static class CampaignValidation
         session = GameSessionState.Current,
         results = new RoundResultRepository(Db).GetBySessionId(sessionId),
         events = new SessionEventHistoryRepository(Db).GetBySession(sessionId),
-        plans = Db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == sessionId).ToList()
+        plans = Db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == sessionId).ToList(),
+        months = Db.Table<SimulationMonthEntity>().Where(m => m.sessionId == sessionId).ToList().Select(m => m.month).ToList()
     });
     private static void Prepare()
     {
@@ -132,7 +133,7 @@ public static class CampaignValidation
         UI01Validation.RequireIsolatedStorage(); MenuNavigator.Instance.CloseAll(); GameSessionState.Clear(); PlayerSession.Clear();
         new GameSessionService("ui19-" + Guid.NewGuid(), "qa").CreateNewSession(); GameManager.Instance.BeginNewIdentification();
         sessionId = GameSessionState.Current.sessionId; settledCallbacks = continuedCallbacks = 0;
-        Settlement.MonthSettled -= OnSettled; Settlement.MonthSettled += OnSettled;
+        MotorMonthQA.Controller.MonthClosed -= OnSettled; MotorMonthQA.Controller.MonthClosed += OnSettled;
         Monthly.Continued -= OnContinued; Monthly.Continued += OnContinued;
     }
     private static Button HubShortcut(PanelId id)
@@ -156,9 +157,13 @@ public static class CampaignValidation
         });
         Add(campaign + " restaurant draft", () => { Screen(GameState.Config_Restaurant, "Panel_Restaurant"); var v = View<RestaurantScreenView>("Panel_Restaurant"); Click(B(v, "cardPodrao")); });
         Add(campaign + " restaurant confirm", () => { Capture(campaign + "-restaurant"); Click(B(View<RestaurantScreenView>("Panel_Restaurant"), "confirmButton")); });
-        Add(campaign + " menu first commit", () => { Screen(GameState.Config_TargetSegment, "Panel_MenuPricing"); Capture(campaign + "-menu"); Click(B(View<MenuPricingScreenView>("Panel_MenuPricing"), "confirmButton")); Expect(new GameSessionRepository(Db).GetById(sessionId) != null, "D3 did not insert"); });
-        Add(campaign + " bank resumes", () => { Screen(GameState.Initial_Capital, "Panel_Financial"); snapshot = EconomicSnapshot(); Prepare(); });
-        Add(campaign + " bank reload parity", () => { Screen(GameState.Initial_Capital, "Panel_Financial"); Expect(snapshot == EconomicSnapshot(), "Bank reload wrote economic data"); Capture(campaign + "-bank"); Click(B(UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(c => c.CreditLine.id == "sem_credito"), "selectButton")); Click(B(View<FinancialScreenView>("Panel_Financial"), "confirmButton")); });
+        Add(campaign + " menu first commit", () => { Screen(GameState.Config_TargetSegment, "Panel_MenuPricing");
+            if (campaign == "bankruptcy")
+                foreach (var item in Root.Find("Panel_MenuPricing").GetComponentsInChildren<ProductPricingItemView>())
+                    item.RestoreDraftInput(item.Product.minPrice.ToString("F2", System.Globalization.CultureInfo.InvariantCulture));
+            Capture(campaign + "-menu"); Click(B(View<MenuPricingScreenView>("Panel_MenuPricing"), "confirmButton")); Expect(new GameSessionRepository(Db).GetById(sessionId) != null, "D3 did not insert"); });
+        Add(campaign + " bank resumes", () => { Screen(GameState.Initial_Capital, "Panel_Financial"); MotorMonthQA.SkipSetupTutorials(); snapshot = EconomicSnapshot(); Prepare(); });
+        Add(campaign + " bank reload parity", () => { Screen(GameState.Initial_Capital, "Panel_Financial"); Expect(snapshot == EconomicSnapshot(), "Bank reload wrote economic data"); Capture(campaign + "-bank"); Click(B(UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(c => c.CreditLine.id == (campaign == "bankruptcy" ? "credito_de_investimento" : "sem_credito")), "selectButton")); Click(B(View<FinancialScreenView>("Panel_Financial"), "confirmButton")); });
         Add(campaign + " equipment resumes", () => { Screen(GameState.Initial_Equipment, "Panel_Equipment"); snapshot = EconomicSnapshot(); Prepare(); });
         Add(campaign + " equipment reload and bank back", () => { Screen(GameState.Initial_Equipment, "Panel_Equipment"); Expect(snapshot == EconomicSnapshot(), "Equipment reload mutated"); Click(B(View<EquipmentScreenView>("Panel_Equipment"), "bankBackButton")); });
         Add(campaign + " bank back persists its origin", () => { Screen(GameState.Initial_Capital, "Panel_Financial"); Prepare(); });
@@ -167,7 +172,7 @@ public static class CampaignValidation
         Add(campaign + " team resumes", () => { Screen(GameState.Initial_Team, "Panel_Team"); snapshot = EconomicSnapshot(); Prepare(); });
         Add(campaign + " team reload and real quantities", () => {
             Screen(GameState.Initial_Team, "Panel_Team"); Expect(snapshot == EconomicSnapshot(), "Team reload mutated");
-            if (campaign == "completion")
+            // as duas campanhas contratam a equipe mínima: sem ela o planejamento não deixa o mês começar (D6)
             {
                 var r = Resources.LoadAll<RestaurantData>("Restaurants").Single(x => x.type == RestaurantType.PODRAO);
                 var scroll = Field<UnityEngine.UI.ScrollRect>(View<TeamScreenView>("Panel_Team"), "catalogScroll");
@@ -191,7 +196,7 @@ public static class CampaignValidation
     {
         foreach (PanelId id in Enum.GetValues(typeof(PanelId)))
         {
-            if (id == PanelId.None || id == PanelId.Menu) continue; var destination = id;
+            if (id == PanelId.None || id == PanelId.Menu || id == PanelId.Planning) continue; var destination = id;   // Planejamento: coberto por Month()
             bool nested = id == PanelId.Location || id == PanelId.Restaurant || id == PanelId.Review;
             Add("Hub opens " + id, () => { snapshot = EconomicSnapshot(); focus = hubFocus = HubShortcut(nested ? PanelId.Establishment : destination).gameObject; Click(focus.GetComponent<Button>()); });
             if (nested)
@@ -221,35 +226,47 @@ public static class CampaignValidation
             Add("Hub back focus and no calculation " + id, () => { Screen(GameState.Management_Hub, "Panel_Menu"); Expect(EventSystem.current.currentSelectedGameObject == hubFocus, "Lost hub focus " + destination); Expect(snapshot == EconomicSnapshot(), "Read changed session " + destination); });
         }
     }
+    // Mês pelo motor novo: hub > Planejar mês > Confirmar e iniciar > popups > um único resultado gravado.
+    // Na campanha de falência, preços mínimos (D3) e o crédito de investimento (juros de 4% ao mês) fazem cada mês dar
+    // prejuízo líquido, e o caixa do empréstimo aguenta até o mês 3: três meses de prejuízo = falência no mês 3.
+    private static string firstEvent;
     private static void Month(int month)
     {
         string tag = mode + "-month-" + month;
-        Add(tag + " close using actual hub control", () => {
+        Add(tag + " hub opens planning", () => {
             tag = mode + "-month-" + month;
-            Screen(GameState.Management_Hub, "Panel_Menu"); Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<Button>());
+            Screen(GameState.Management_Hub, "Panel_Menu"); snapshot = EconomicSnapshot(); Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<Button>());
         });
-        Add(tag + " waits before settlement", () => {
-            Screen(GameState.Round_Event, "Panel_Event"); Expect(Events.IsAwaitingChoice && GameSessionState.Current.currentRound == month, "Did not wait for choice");
-            Expect(new RoundResultRepository(Db).GetBySessionId(sessionId).Count == month - 1, "Early settlement"); Capture(mode + "-month-" + month + "-event");
-            planSnapshot = Db.Find<MonthlyEventPlanEntity>(sessionId + ":" + month).entriesJson;
-            var v = Events.GetComponent<EventScreenView>(); Click(v.Cards[0].Button); Click(v.ConfirmButton);
+        Add(tag + " planning waits for the player", () => {
+            Expect(MenuNavigator.Instance.Current == PanelId.Planning && States.CurrentState == GameState.Management_Hub, "Planning did not open from the hub");
+            Expect(snapshot == EconomicSnapshot(), "Opening planning changed data");
+            Capture(tag + "-planning"); Click(MotorMonthQA.PlanningConfirm);
         });
-        Add(tag + " reload partial event decision", () => {
-            Expect(Events.IsAwaitingChoice, "Campaign expects multiple catalog events"); snapshot = EconomicSnapshot(); Prepare();
+        Add(tag + " month waits for the player", () => {
+            Expect(States.CurrentState == GameState.Round_Sales && MotorMonthQA.MonthPanel.activeInHierarchy, "Month did not start");
+            snapshot = EconomicSnapshot(); MotorMonthQA.AdvanceToPopupOrEnd(); firstEvent = MotorMonthQA.PopupTitle;
+            if (firstEvent == null) return;
+            Expect(new RoundResultRepository(Db).GetBySessionId(sessionId).Count == month - 1 && snapshot == EconomicSnapshot(), "A pending choice saved the month");
+            Capture(tag + "-event");
+            MotorMonthQA.Flow.AbandonMonth();
         });
-        Add(tag + " event reservation and choices survive reload", () => {
-            Screen(GameState.Round_Event, "Panel_Event"); Expect(Events.IsAwaitingChoice && snapshot == EconomicSnapshot(), "Event resume mutated");
-            Expect(Db.Find<MonthlyEventPlanEntity>(sessionId + ":" + month).entriesJson == planSnapshot, "Event redrawn");
+        Add(tag + " abandoned month saves nothing", () => {
+            if (firstEvent == null) return;
+            Screen(GameState.Management_Hub, "Panel_Menu"); Expect(snapshot == EconomicSnapshot(), "Abandon changed saved data");
+            Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<Button>());
         });
-        for (int i = 0; i < 3; i++) Add(tag + " confirm pending event " + i, () => {
-            Expect(Events.IsAwaitingChoice, "Missing expected remaining event"); var v = Events.GetComponent<EventScreenView>(); Click(v.Cards[0].Button); Click(v.ConfirmButton);
+        Add(tag + " restart from planning", () => { if (firstEvent != null) Click(MotorMonthQA.PlanningConfirm); });
+        Add(tag + " restarted month repeats the same event", () => {
+            if (firstEvent == null) return;
+            MotorMonthQA.AdvanceToPopupOrEnd(); Expect(MotorMonthQA.PopupTitle == firstEvent, "Restarted month drew different events");
         });
         Add(tag + " summary waits after one settlement", () => {
-            Screen(GameState.Round_Summary, "Panel_MonthlyResult"); Expect(!Events.IsAwaitingChoice, "Choice never closed");
+            if (States.CurrentState == GameState.Round_Sales) MotorMonthQA.RunToSummary(Click);
+            Screen(GameState.Round_Summary, "Panel_MonthlyResult");
             var results = new RoundResultRepository(Db).GetBySessionId(sessionId); Expect(results.Count == month, "Duplicate settlement");
             Expect(GameSessionState.Current.pendingSummaryResultId == Monthly.Result.roundResultId, "Unread marker");
             Expect(settledCallbacks == month, "Settlement callback repeated"); snapshot = EconomicSnapshot();
-            Settlement.CloseMonth(); Expect(snapshot == EconomicSnapshot(), "CloseMonth repeated settlement");
+            MotorMonthQA.Flow.AbandonMonth(); MotorMonthQA.Controller.SkipToEnd(); Expect(snapshot == EconomicSnapshot(), "Closed month settled again");
             Capture(mode + "-month-" + month + "-summary"); Prepare();
         });
         Add(tag + " summary reload parity and quarterly consultation", () => {
@@ -309,7 +326,7 @@ public static class CampaignValidation
         UI01Validation.RequireIsolatedStorage(); Expect(EditorApplication.isPlaying, "Use isolated Play Mode");
         evidenceSuffix = ""; report = new(); steps.Clear(); captures.Clear(); transitions.Clear(); inventories.Clear(); lastFrame = -1;
         Directory.CreateDirectory(UiValidationContext.DirectoryFor("UI-19"));
-        Settlement.MonthSettled -= OnSettled; Settlement.MonthSettled += OnSettled; Monthly.Continued -= OnContinued; Monthly.Continued += OnContinued;
+        MotorMonthQA.Controller.MonthClosed -= OnSettled; MotorMonthQA.Controller.MonthClosed += OnSettled; Monthly.Continued -= OnContinued; Monthly.Continued += OnContinued;
         States.OnStateChanged -= StateChanged; States.OnStateChanged += StateChanged;
         foreach (var size in UiValidationContext.Resolutions)
         {
@@ -320,7 +337,7 @@ public static class CampaignValidation
         }
         next = EditorApplication.timeSinceStartup + .3; EditorApplication.update -= Tick; EditorApplication.update += Tick;
     }
-    private static void OnSettled(RoundResultEntity r) => settledCallbacks++;
+    private static void OnSettled(Game.Domain.Simulation.MonthReport r) => settledCallbacks++;
     private static void OnContinued(RoundResultEntity r) => continuedCallbacks++;
     private static void StateChanged(GameState s) => transitions.Add(new { state = s.ToString(), id = (int)s, technical = UIStateListener.IsTechnicalState(s), frame = Time.frameCount, sessionId = GameSessionState.Current?.sessionId });
     private static void Tick()
@@ -338,7 +355,7 @@ public static class CampaignValidation
     private static void Finish()
     {
         report.completed = report.failures == 0; EditorApplication.update -= Tick;
-        States.OnStateChanged -= StateChanged; Settlement.MonthSettled -= OnSettled; Monthly.Continued -= OnContinued;
+        States.OnStateChanged -= StateChanged; MotorMonthQA.Controller.MonthClosed -= OnSettled; Monthly.Continued -= OnContinued;
         File.WriteAllText(UiValidationContext.FileFor("UI-19", "playmode") + evidenceSuffix + ".json", JsonUtility.ToJson(report, true));
         File.WriteAllText(UiValidationContext.FileFor("UI-19", "state-transitions") + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(transitions, Newtonsoft.Json.Formatting.Indented));
         File.WriteAllText(UiValidationContext.FileFor("UI-19", "runtime-bindings") + evidenceSuffix + ".json", Newtonsoft.Json.JsonConvert.SerializeObject(inventories, Newtonsoft.Json.Formatting.Indented));
@@ -361,6 +378,7 @@ public static class CampaignValidation
                 s.restaurantType = r.type; s.locationZone = LocationZone.Comercio; s.targetSegment = Segment.LOW; s.initialCapital = s.currentCash = 65000;
                 s.menuPricingJson = MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(r.products));
                 s.teamJson = TeamSelectionHelper.ToJson(new TeamSelectionData { members = r.requiredRoles.Select(x => new TeamSelectionItem { roleId = x.roleId, quantity = x.quantity }).ToList() });
+                s.equipmentJson = EquipmentSelectionHelper.ToJson(new EquipmentSelectionData { equipmentIds = r.requiredEquipmentIds.ToList() });
                 Expect(GameSessionState.Persist(), "Supplement fixture"); States.ForceState(GameState.Management_Hub);
             });
             Add("Empty monthly query", () => { Click(HubShortcut(PanelId.MonthlyResults)); });
@@ -375,13 +393,10 @@ public static class CampaignValidation
             Add("Flow takeover closes hub and modal", () => { Expect(SharedModalFocus.Active != null, "Cart modal missing"); snapshot = EconomicSnapshot(); States.ForceState(GameState.Config_Identification); });
             Add("Flow takeover is exclusive", () => { Screen(GameState.Config_Identification, "Panel_Identification"); Expect(SharedModalFocus.Active == null && snapshot == EconomicSnapshot(), "Takeover changed data or retained modal"); States.ForceState(GameState.Management_Hub); });
             Add("Close real month", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<Button>()); });
-            Add("Event exit preserves decisions", () => { Screen(GameState.Round_Event, "Panel_Event"); snapshot = EconomicSnapshot(); Click(B(View<ExitDialogController>("ExitUI"), "openButton")); });
-            Add("Exit above pending event", () => { Capture("supp-event-exit"); Click(B(View<ExitDialogController>("ExitUI"), "cancelButton")); Expect(snapshot == EconomicSnapshot() && Events.IsAwaitingChoice, "Event cancel mutated"); Settlement.CloseMonth(); });
-            Add("Event history does not release month", () => { Expect(snapshot == EconomicSnapshot(), "Duplicate CloseMonth"); Click(B(Events.GetComponent<EventScreenView>(), "historyButton")); });
-            Add("Pending history returns to decision", () => { Capture("supp-pending-history"); Events.Return(); Expect(Events.IsAwaitingChoice && snapshot == EconomicSnapshot(), "History settled"); });
-            Add("Reload pending event GameScene", () => UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene"));
-            Add("Pending event resumes in new scene", () => { Screen(GameState.Round_Event, "Panel_Event"); Expect(Events.IsAwaitingChoice && snapshot == EconomicSnapshot(), "Scene event resume changed data"); });
-            for (int i = 0; i < 4; i++) Add("Supplement event " + i, () => { var v = Events.GetComponent<EventScreenView>(); Click(v.Cards[0].Button); Click(v.ConfirmButton); });
+            Add("Start real month from planning", () => { Expect(MenuNavigator.Instance.Current == PanelId.Planning, "Planning did not open"); Click(MotorMonthQA.PlanningConfirm); });
+            Add("Month exit preserves decisions", () => { Expect(States.CurrentState == GameState.Round_Sales, "Month did not start"); MotorMonthQA.AdvanceToPopupOrEnd(); snapshot = EconomicSnapshot(); Click(B(View<ExitDialogController>("ExitUI"), "openButton")); });
+            Add("Exit above pending event", () => { Capture("supp-event-exit"); Click(B(View<ExitDialogController>("ExitUI"), "cancelButton")); Expect(snapshot == EconomicSnapshot(), "Exit cancel mutated"); });
+            Add("Month finishes once", () => { if (States.CurrentState == GameState.Round_Sales) MotorMonthQA.RunToSummary(Click); Expect(new RoundResultRepository(Db).GetBySessionId(sessionId).Count == 1, "Month settled more than once"); });
             Add("Reload unread summary GameScene", () => { Screen(GameState.Round_Summary, "Panel_MonthlyResult"); snapshot = EconomicSnapshot(); UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene"); });
             Add("Summary exit opens", () => { Screen(GameState.Round_Summary, "Panel_MonthlyResult"); Expect(snapshot == EconomicSnapshot(), "Scene summary resume recalculated"); Click(B(View<ExitDialogController>("ExitUI"), "openButton")); });
             Add("Exit cancellation preserves unread result", () => { Capture("supp-summary-exit"); Click(B(View<ExitDialogController>("ExitUI"), "cancelButton")); Expect(snapshot == EconomicSnapshot(), "Summary cancel mutated"); });

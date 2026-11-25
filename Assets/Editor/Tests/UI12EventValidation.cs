@@ -17,7 +17,7 @@ public static class UI12EventValidation
     [Serializable] private class Report { public bool completed; public int failures; public List<Check> checks = new(); }
     private static readonly Queue<(string, Action)> steps = new();
     private static readonly List<object> captures = new();
-    private static Report report; private static int lastFrame, retries, callbacks, monthCallbacks; private static double next;
+    private static Report report; private static int lastFrame, retries, callbacks; private static double next;
     private static EventData longData; private static EventOptionCardView savedPrefab; private static GameSessionEntity savedSession;
     private static GameObject origin; private static string activeId; private static float cash; private static int reputation;
     private static string reportPath, capturePrefix = "";
@@ -29,7 +29,6 @@ public static class UI12EventValidation
     private static void Set(object o, string n, object v) => o.GetType().GetField(n, BindingFlags.Instance | BindingFlags.NonPublic).SetValue(o, v);
     private static void Expect(bool condition, string message) { if (!condition) throw new InvalidOperationException(message); }
     private static void Add(string name, Action action) => steps.Enqueue((name, action));
-    private static void CountMonthlySettlement(RoundResultEntity _) => monthCallbacks++;
     private static void Fixture()
     {
         Expect(!Controller.IsAwaitingChoice, "Prior decision still pending"); GameSessionState.Clear();
@@ -152,41 +151,73 @@ public static class UI12EventValidation
             Add("Unavailable session has no fake figures " + res, () => { Expect(!View.ConfirmButton.gameObject.activeSelf && !Field<GameObject>(View, "decisionBody").activeSelf, "Unavailable session"); Capture("session-error-" + res); Controller.Close(); GameSessionState.Set(savedSession); GameSessionState.Persist(); });
             Add("Open history from actual hub action " + res, () => { GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); });
             Add("Hub layout and action " + res, () => { Capture("hub-actions-" + res, false); var b = Root.Find("Panel_Menu/HubSummary/History").GetComponent<UnityEngine.UI.Button>(); origin = b.gameObject; b.Select(); Click(b); });
-            Add("Empty hub history " + res, () => { Capture("history-empty-hub-" + res); Click(Field<UnityEngine.UI.Button>(View, "returnButton")); });
+            Add("Empty hub history " + res, () => {
+                var calendar = Root.Find("Panel_EventCalendar").GetComponent<EventCalendarScreen>();
+                Expect(MenuNavigator.Instance.Current == PanelId.EventHistory && calendar.gameObject.activeInHierarchy && calendar.MonthsPlayed == 0 && calendar.EventsShown == 0, "Empty event calendar");
+                Capture("history-empty-hub-" + res, false); Click(Root.Find("HubHistory/Back").GetComponent<UnityEngine.UI.Button>()); });
             Add("History returns focus to hub " + res, () => { Expect(MenuNavigator.Instance.Current == PanelId.Menu && EventSystem.current.currentSelectedGameObject == origin, "History focus restore"); });
         }
-        Add("Prepare actual monthly selector flow", () => { Fixture(); GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); monthCallbacks = 0; var settlement = Root.Find("UiNavigation").GetComponent<MonthlySettlementController>(); settlement.MonthSettled -= CountMonthlySettlement; settlement.MonthSettled += CountMonthlySettlement; });
-        Add("Close month waits for player before settlement", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<UnityEngine.UI.Button>()); });
-        Add("Selector reservations and no financial mutation", () =>
+        // Mês real pelo motor novo: o hub abre o planejamento, o mês roda com popups e grava um único resultado.
+        Add("Prepare actual monthly flow", () => { Fixture(); GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); });
+        Add("Hub opens planning without settlement", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<UnityEngine.UI.Button>()); });
+        Add("Planning waits for the player", () =>
         {
-            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event && Controller.IsAwaitingChoice, "Wait before settlement");
-            Expect(MonthlySettlementController.SettleCurrentMonth() == null, "A pending choice cannot be bypassed by another settlement request");
-            Expect(Db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == activeId).Count() == 1 && new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0, "Reserved without settlement");
-            cash = GameSessionState.Current.currentCash; reputation = GameSessionState.Current.reputationScore; Capture("monthly-await-1280x720");
-            Controller.gameObject.SetActive(false); Controller.OpenMonth(() => throw new Exception("Callback was replaced by reopening"));
+            Expect(MenuNavigator.Instance.Current == PanelId.Planning, "Planning panel did not open");
+            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Management_Hub, "Planning changed the game state");
+            Expect(new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0, "Month settled before being played");
+            cash = GameSessionState.Current.currentCash; reputation = GameSessionState.Current.reputationScore; Capture("monthly-planning-1280x720", false);
+            Click(MotorMonthQA.PlanningConfirm);
         });
-        for (int i = 0; i < 4; i++)
+        Add("Abandon asks for confirmation", () => { Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Sales, "Month did not start"); Click(MotorMonthQA.AbandonButton); });
+        Add("Abandon dialog pauses the month", () =>
         {
-            int n = i;
-            Add("Select monthly event " + n, () => { Expect(Controller.IsAwaitingChoice, "Pending monthly event"); View.Cards[n % 3].Button.Select(); });
-            Add("Confirm monthly event " + n, () => { Click(View.Cards[n % 3].Button); Click(View.ConfirmButton); if (n < 3) { Controller.Confirm(); Expect(new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0 && GameSessionState.Current.currentCash == cash && GameSessionState.Current.reputationScore == reputation, "No early settlement"); } });
-        }
+            Expect(MotorMonthQA.MonthView.AbandonConfirmOpen && MotorMonthQA.Speed == 0 && GameManager.Instance.StateMachine.CurrentState == GameState.Round_Sales, "Abandon without confirmation");
+            Capture("monthly-abandon-confirm-1280x720", false); Click(MotorMonthQA.AbandonCancel);
+        });
+        Add("Cancel keeps playing", () =>
+        {
+            Expect(!MotorMonthQA.MonthView.AbandonConfirmOpen && MotorMonthQA.Speed > 0 && GameManager.Instance.StateMachine.CurrentState == GameState.Round_Sales, "Cancel did not resume the month");
+            Click(MotorMonthQA.AbandonButton);
+        });
+        Add("Confirm abandon", () => Click(MotorMonthQA.AbandonConfirm));
+        Add("Abandon returns to hub without saving", () =>
+        {
+            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Management_Hub && new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0
+                && GameSessionState.Current.currentCash == cash, "Abandon saved data or left the month");
+            Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<UnityEngine.UI.Button>());
+        });
+        Add("Restart month from planning", () => Click(MotorMonthQA.PlanningConfirm));
+        Add("Month runs and waits for the player", () =>
+        {
+            Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Sales && MotorMonthQA.MonthPanel.activeInHierarchy, "Month did not start");
+            MotorMonthQA.AdvanceToPopupOrEnd();
+            if (MotorMonthQA.PopupOpen)
+            {
+                Expect(new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0, "A pending choice settled the month");
+                Expect(GameSessionState.Current.currentCash == cash && GameSessionState.Current.reputationScore == reputation, "Pending choice changed the saved session");
+                Capture("monthly-await-1280x720", false);
+            }
+        });
         Add("Monthly choices settle exactly once and reload", () =>
         {
-            var histories = new SessionEventHistoryRepository(Db).GetBySessionAndRound(activeId, 1); var results = new RoundResultRepository(Db).GetBySessionId(activeId);
-            Expect(histories.Count == 4 && results.Count == 1 && monthCallbacks == 1 && GameSessionState.Current.currentRound == 2, "One monthly settlement");
-            var first = results[0]; var state = GameSessionState.Current; var opening = state.Copy(); opening.currentRound = 1; opening.currentCash = cash; opening.reputationScore = reputation;
-            var expected = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(opening, histories));
-            Expect(first.closingCash == expected.closingCash && first.reputationAtEnd == expected.reputationAtEnd, "Event forecast parity");
-            float after = state.currentCash; int repAfter = state.reputationScore; Controller.Confirm(); new RoundService().ProcessRound(1);
-            Expect(GameSessionState.Current.currentCash == after && GameSessionState.Current.reputationScore == repAfter, "Repeat financial settlement");
+            MotorMonthQA.RunToSummary(Click);
+            var results = new RoundResultRepository(Db).GetBySessionId(activeId); var state = GameSessionState.Current;
+            Expect(results.Count == 1 && state.currentRound == 2 && state.pendingSummaryResultId == results[0].roundResultId, "One monthly settlement");
+            Expect(Math.Abs(results[0].openingCash - cash) < .01f && Math.Abs(results[0].closingCash - state.currentCash) < .01f, "Saved cash chain");
+            float after = state.currentCash; int repAfter = state.reputationScore;
+            MotorMonthQA.Flow.AbandonMonth(); MotorMonthQA.Controller.SkipToEnd();
+            Expect(new RoundResultRepository(Db).GetBySessionId(activeId).Count == 1 && GameSessionState.Current.currentCash == after && GameSessionState.Current.reputationScore == repAfter, "Repeat financial settlement");
             GameSessionState.LoadActiveSession(state.userId); Expect(GameSessionState.Current.sessionId == activeId && GameSessionState.Current.currentRound == 2, "SQLite reload");
             Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Summary, "Monthly result awaits acknowledgement");
             Root.Find("Panel_MonthlyResult").GetComponent<MonthlyResultController>().Continue();
             MenuNavigator.Instance.Open(PanelId.EventHistory);
         });
-        Add("Saved real monthly history", () => { Capture("history-month-one-1280x720"); View.HistoryScroll.verticalNormalizedPosition = 0; });
-        Add("History scroll bottom", () => { Capture("history-month-one-bottom-1280x720"); Click(Field<UnityEngine.UI.Button>(View, "returnButton")); });
+        Add("Saved real monthly history", () => {
+            var calendar = Root.Find("Panel_EventCalendar").GetComponent<EventCalendarScreen>();
+            int saved = new SessionEventHistoryRepository(Db).GetBySessionAndRound(activeId, 1).Count;
+            Expect(calendar.gameObject.activeInHierarchy && calendar.MonthsPlayed == 1 && calendar.SelectedMonth == 1 && calendar.EventsShown == saved, "Event calendar shows the saved month");
+            Capture("history-month-one-1280x720", false); });
+        Add("History returns to hub", () => { Click(Root.Find("HubHistory/Back").GetComponent<UnityEngine.UI.Button>()); Expect(MenuNavigator.Instance.Current == PanelId.Menu, "Calendar back"); });
         Add("Runtime evidence", () => File.WriteAllText(UiValidationContext.FileFor("UI-12","runtime.json"), Newtonsoft.Json.JsonConvert.SerializeObject(new { project = UnityEngine.Application.dataPath, unity = UnityEngine.Application.unityVersion, frame = Time.frameCount, database = Db.DatabasePath, sessions = Db.Table<GameSessionEntity>().Count(), session = activeId, month = GameSessionState.Current.currentRound, state = GameManager.Instance.StateMachine.CurrentState.ToString(), panel = MenuNavigator.Instance.Current.ToString() }, Newtonsoft.Json.Formatting.Indented)));
         next = EditorApplication.timeSinceStartup + .5; EditorApplication.update -= Tick; EditorApplication.update += Tick;
     }

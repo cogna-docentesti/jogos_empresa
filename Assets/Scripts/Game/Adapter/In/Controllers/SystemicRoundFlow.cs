@@ -27,6 +27,9 @@ namespace Game.Adapter.In.Controllers
         [SerializeField] private GameObject monthPanel;
 
         private SystemicMonthService _service;
+        private GameStateMachine _machine;
+        private bool _closingMonth;                    // a passagem Round_Costs -> Round_Event -> Round_Summary é nossa
+        private GameState? _redirect;                  // feito no Update, fora do evento da máquina
 
         private static GameStateMachine Machine => GameManager.Instance != null ? GameManager.Instance.StateMachine : null;
         private static string SessionId => GameSessionState.Current?.sessionId;
@@ -70,8 +73,37 @@ namespace Game.Adapter.In.Controllers
             }
         }
 
+        private void Start()
+        {
+            _machine = Machine;
+            if (_machine == null) return;
+            _machine.OnStateChanged += OnStateChanged;
+            OnStateChanged(_machine.CurrentState);
+        }
+
+        /// Round_Event fora do nosso fechamento só acontece com dados do motor antigo: um plano de eventos
+        /// (MonthlyEventPlanEntity) criado pelo botão "Fechar mês" antigo faz o GameManager retomar o jogo na tela
+        /// de eventos, que o motor novo não usa e que fica parada ("Escolha uma opção" sem opções).
+        /// Nesse caso o jogo volta para o resumo pendente ou para o hub.
+        private void OnStateChanged(GameState state)
+        {
+            if (state != GameState.Round_Event || _closingMonth || !enabled) return;
+            _redirect = string.IsNullOrEmpty(GameSessionState.Current?.pendingSummaryResultId)
+                ? GameState.Management_Hub : GameState.Round_Summary;
+            Debug.LogWarning("[Simulação] Round_Event sem mês do motor novo (plano de eventos do motor antigo). Voltando para " + _redirect + ".");
+        }
+
+        private void Update()
+        {
+            if (_redirect == null || _machine == null) return;
+            var target = _redirect.Value;
+            _redirect = null;
+            if (_machine.CurrentState == GameState.Round_Event) _machine.ForceState(target);
+        }
+
         private void OnDestroy()
         {
+            if (_machine != null) _machine.OnStateChanged -= OnStateChanged;
             if (monthController != null) monthController.MonthClosed -= OnMonthClosed;
             if (planningView != null)
             {
@@ -129,9 +161,14 @@ namespace Game.Adapter.In.Controllers
             var machine = Machine;
             if (machine == null || machine.CurrentState != GameState.Round_Sales) return;
             HideMonthPanel();
-            machine.TryChangeState(GameState.Round_Costs);
-            machine.TryChangeState(GameState.Round_Event);                      // passagem técnica (o painel de eventos some no passo seguinte)
-            machine.TryChangeState(GameState.Round_Summary);                    // Panel_MonthlyResult lê o RoundResultEntity
+            _closingMonth = true;
+            try
+            {
+                machine.TryChangeState(GameState.Round_Costs);
+                machine.TryChangeState(GameState.Round_Event);                  // passagem técnica (o painel de eventos some no passo seguinte)
+                machine.TryChangeState(GameState.Round_Summary);                // Panel_MonthlyResult lê o RoundResultEntity
+            }
+            finally { _closingMonth = false; }
         }
 
         /// Meses fechados da partida (relatório final e falência).
@@ -152,6 +189,13 @@ namespace Game.Adapter.In.Controllers
             if (LastReport.Bankrupt) machine.TryChangeState(GameState.GameOver_Bankruptcy);
             else if (LastReport.Month >= _service.MonthsPerMatch) machine.TryChangeState(GameState.FinalReport);
             else machine.TryChangeState(GameState.Management_Hub);
+        }
+
+        /// Botão ABANDONAR MÊS da tela do mês: pede confirmação antes de abandonar.
+        public void RequestAbandonMonth()
+        {
+            if (!MonthInProgress) return;
+            monthController.RequestAbandon(AbandonMonth);
         }
 
         /// Sair no meio do mês: nada foi gravado; ao voltar, o mês recomeça do dia 1 com os mesmos sorteios.

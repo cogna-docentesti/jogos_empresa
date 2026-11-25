@@ -8,14 +8,15 @@ using UnityEngine;
 public sealed class UI07MenuPricingTests
 {
     private static T Field<T>(object o,string n)=>(T)o.GetType().GetField(n,BindingFlags.Instance|BindingFlags.NonPublic).GetValue(o);
+    // Faixas de preço do commit ed13887 (ThayCGomes, "fix menu prices"); Sushi executivo com máximo 95 para o preço 90 caber na faixa.
     [Test] public void AllNineProductIdsMapToTheApprovedWholeImagesWithoutEconomicChanges()
     {
         var products=Resources.LoadAll<ProductData>("Products").OrderBy(p=>p.id).ToArray();
         var expectedIds=new[]{"FRA_MENU_CLASSICO","FRA_MENU_PREMIUM","FRA_PRATO_EXECUTIVO","JAP_COMBINADO_MEDIO","JAP_COMBINADO_PREMIUM","JAP_SUSHI_EXECUTIVO","LAN_COMBO_COMPLETO","LAN_COMBO_ESPECIAL","LAN_COMBO_SIMPLES"};
         CollectionAssert.AreEqual(expectedIds,products.Select(p=>p.id));
-        CollectionAssert.AreEqual(new[]{150,215,110,130,175,90,58,80,42},products.Select(p=>p.price));
-        CollectionAssert.AreEqual(new[]{122.5f,173.5f,84.5f,107,140,71,47.5f,67.5f,35},products.Select(p=>p.minPrice));
-        CollectionAssert.AreEqual(new[]{180f,260,130,160,210,110,70,95,52},products.Select(p=>p.maxPrice));
+        CollectionAssert.AreEqual(new[]{150,215,90,130,175,90,58,80,42},products.Select(p=>p.price));
+        CollectionAssert.AreEqual(new[]{55f,78,38,48,63,32,19,27,14},products.Select(p=>p.minPrice));
+        CollectionAssert.AreEqual(new[]{160f,225,102,135,180,95,60,85,45},products.Select(p=>p.maxPrice));
         for(int i=0;i<products.Length;i++)
         {
             var p=products[i];var path="Assets/Art/new/menu_pricing/products/"+p.id.Substring(0,3).ToLowerInvariant()+"/"+p.id.ToLowerInvariant()+".png";
@@ -37,9 +38,10 @@ public sealed class UI07MenuPricingTests
             Assert.AreEqual(price,parsed,.001f);
         }
     }
+    // LAN_COMBO_SIMPLES vai de R$ 14 a R$ 45: 13,99 e 45,01 ficam fora da faixa.
     [TestCase("")][TestCase(" ")][TestCase("NaN")][TestCase("Infinity")][TestCase("-42")][TestCase("+42")]
     [TestCase("42,123")][TestCase("42.123")][TestCase("4e1")][TestCase("R$ 42")][TestCase("1.000,00")]
-    [TestCase("34,99")][TestCase("52,01")][TestCase("9999999999999999")][TestCase("42,")]
+    [TestCase("13,99")][TestCase("45,01")][TestCase("9999999999999999")][TestCase("42,")]
     public void InvalidTextCannotBecomeAConfirmedPrice(string raw)
     {Assert.IsFalse(ProductPricingItemView.TryParsePrice(raw,Resources.LoadAll<ProductData>("Products").Single(p=>p.id=="LAN_COMBO_SIMPLES"),out _));}
     [Test] public void InvalidInputKeepsLastValidValueAndReadOnlyControlsCannotMutateIt()

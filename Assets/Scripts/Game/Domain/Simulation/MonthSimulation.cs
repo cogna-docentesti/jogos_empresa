@@ -114,6 +114,8 @@ namespace Game.Domain.Simulation
 
         private bool _dayOpened;
         private readonly List<EventOccurrence> _pending = new List<EventOccurrence>();
+        // registro de cada ocorrência: o mesmo evento pode sair duas vezes no dia (duas unidades paradas, por exemplo)
+        private readonly Dictionary<EventOccurrence, EventRecord> _records = new Dictionary<EventOccurrence, EventRecord>();
         private readonly HashSet<string> _absentToday = new HashSet<string>();
         private Observables _x;                                       // observáveis calculados ontem
 
@@ -246,7 +248,11 @@ namespace Game.Domain.Simulation
             ApplyEffects(r.Effects, occ);
 
             // 4. registro
-            var record = State.EventHistory.Last(e => e.EventId == occ.Definition.Id && e.AbsDay == AbsDay);
+            // a reação vai para o registro desta ocorrência (antes ia para o último registro do mesmo evento no dia,
+            // e a primeira de duas ocorrências iguais ficava sem reação gravada)
+            if (!_records.TryGetValue(occ, out var record))
+                record = State.EventHistory.Last(e => e.EventId == occ.Definition.Id && e.AbsDay == AbsDay);
+            _records.Remove(occ);
             record.ReactionId = r.Id;
             record.Cost = r.UsesOverdraft || r.Renegotiates ? 0 : option.Cost;
             occ.ChosenReactionId = r.Id;
@@ -401,10 +407,12 @@ namespace Game.Domain.Simulation
         private void Register(EventOccurrence occ)
         {
             Occurrences.Add(occ);
-            State.EventHistory.Add(new EventRecord
+            var record = new EventRecord
             {
                 EventId = occ.Definition.Id, AbsDay = AbsDay, Severity = occ.Definition.Severity, IsNegative = occ.Definition.IsNegative
-            });
+            };
+            State.EventHistory.Add(record);
+            _records[occ] = record;
             if (occ.Definition.Id == EventIds.StaffAbsent) _absentToday.Add(occ.StaffId);
             ApplyEffects(occ.Definition.AutomaticEffects, occ);          // efeito que acontece com ou sem decisão
             if (occ.RequiresDecision) _pending.Add(occ);

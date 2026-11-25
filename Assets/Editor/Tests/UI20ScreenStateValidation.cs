@@ -20,7 +20,7 @@ public static class UI20ScreenStateValidation
     static readonly List<object> checks=new(),captures=new();
     static Button target;
     static bool interactable;
-    static int frame;
+    static int frame, renderRetries;
     static double next;
     static string res, panel, snapshot, activeSessionId;
     static Transform Root=>GameObject.Find("Canvas").transform;
@@ -60,7 +60,7 @@ public static class UI20ScreenStateValidation
         Add("Native restaurant",()=>Click(Field<Button>(Root.Find("Panel_Restaurant").GetComponent<RestaurantScreenView>(),"cardPodrao")));
         Add("Native restaurant confirmation",()=>Click(Field<Button>(Root.Find("Panel_Restaurant").GetComponent<RestaurantScreenView>(),"confirmButton")));
         Add("Native D3 first persistence",()=>Click(Field<Button>(Root.Find("Panel_MenuPricing").GetComponent<MenuPricingScreenView>(),"confirmButton")));
-        Add("Native no-loan choice",()=>Click(Field<Button>(UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(c=>c.CreditLine.id=="sem_credito"),"selectButton")));
+        Add("Native no-loan choice",()=>{MotorMonthQA.SkipSetupTutorials(withMinimumTeam:true);/* tutoriais da configuração e equipe mínima: a suíte só confirma as telas */}); Add("Native no-loan click",()=>Click(Field<Button>(UnityEngine.Object.FindObjectsByType<BankCardView>(FindObjectsSortMode.None).Single(c=>c.CreditLine.id=="sem_credito"),"selectButton")));
         Add("Native bank confirmation",()=>Click(Field<Button>(Root.Find("Panel_Financial").GetComponent<FinancialScreenView>(),"confirmButton")));
         Add("Native equipment confirmation",()=>Click(Field<Button>(Root.Find("Panel_Equipment").GetComponent<EquipmentScreenView>(),"confirmButton")));
         Add("Native team confirmation",()=>Click(Field<Button>(Root.Find("Panel_Team").GetComponent<TeamScreenView>(),"confirmButton")));
@@ -69,7 +69,7 @@ public static class UI20ScreenStateValidation
         {
             var viewport=size;
             Add("Viewport",()=>{res=viewport.x+"x"+viewport.y;UI01Validation.SetGameView(viewport.x,viewport.y);});
-            var targets=new[]{"Panel_Identification","Panel_Location","Panel_Restaurant","Panel_MenuPricing","Panel_Financial","Panel_Equipment","Panel_Team","Panel_Menu","Panel_Establishment","Panel_Review","Panel_Event","Panel_MonthlyResult","Panel_QuarterlyResult","Panel_FinalReport","Panel_Bankruptcy"};
+            var targets=new[]{"Panel_Identification","Panel_Location","Panel_Restaurant","Panel_MenuPricing","Panel_Financial","Panel_Equipment","Panel_Team","Panel_Menu","Panel_Establishment","Panel_Review","Panel_EventCalendar","Panel_MonthlyResult","Panel_QuarterlyResult","Panel_FinalReport","Panel_Bankruptcy"};
             var requestedPanels=Environment.GetEnvironmentVariable("COGNA_CONCEPT_PANELS");
             if(!string.IsNullOrEmpty(requestedPanels))targets=targets.Where(t=>requestedPanels.Split(',').Contains(t)).ToArray();
             foreach(var name in targets)
@@ -126,7 +126,10 @@ public static class UI20ScreenStateValidation
         if(!EditorApplication.isPlaying||Time.frameCount<=frame||EditorApplication.timeSinceStartup<next)return;
         if(UnityEngine.Object.FindObjectsByType<SharedLoading>(FindObjectsSortMode.None).Any(l=>l.IsBusy)){EditorApplication.QueuePlayerLoopUpdate();return;}
         if(steps.Count==0){Finish(true,null);return;}
-        var step=steps.Dequeue();try{step.Item2();checks.Add(new{name=step.Item1,res,passed=true,frame=Time.frameCount});}
+        var step=steps.Dequeue();try{step.Item2();renderRetries=0;checks.Add(new{name=step.Item1,res,passed=true,frame=Time.frameCount});}
+        // A Game View às vezes leva alguns quadros para assumir a nova resolução: repete o passo (como a UI-12 faz).
+        catch(InvalidOperationException e) when(e.Message=="The Game View must render at the evidence resolution."&&renderRetries++<10)
+        {var pending=steps.ToArray();steps.Clear();steps.Enqueue(step);foreach(var rest in pending)steps.Enqueue(rest);next=EditorApplication.timeSinceStartup+1;EditorApplication.QueuePlayerLoopUpdate();return;}
         catch(Exception e){checks.Add(new{name=step.Item1,res,passed=false,error=e.ToString(),frame=Time.frameCount});Finish(false,e.ToString());return;}
         frame=Time.frameCount;next=EditorApplication.timeSinceStartup+.12;EditorApplication.QueuePlayerLoopUpdate();
     }

@@ -55,7 +55,12 @@ public class GameStateMachine
                     GameState.Initial_Team
                 }
             },
-            { GameState.Initial_Team, new List<GameState> { GameState.Management_Hub } },
+            { GameState.Initial_Team, new List<GameState>
+                {
+                    GameState.Management_Hub,
+                    GameState.Initial_Equipment      // Voltar da equipe para a loja
+                }
+            },
 
             { GameState.Management_Hub, new List<GameState>
                 {

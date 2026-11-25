@@ -46,13 +46,13 @@ public static class Font10Validation
         if(EditorApplication.isCompiling||EditorApplication.isUpdating||EditorApplication.timeSinceStartup<next)return;next=EditorApplication.timeSinceStartup+1;
         string p=Output+"/editor-request.txt";if(!File.Exists(p))return;string cmd=File.ReadAllText(p).Trim();
         if(EditorApplication.isPlayingOrWillChangePlaymode&&cmd!="status"&&cmd!="abort")return;File.Delete(p);
-        try{if(cmd=="audit")Audit();else if(cmd=="native-session-check")SaveNativeSession();else if(cmd=="validate"){SessionState.SetInt(Key+"NativeStartSuite",0);SessionState.SetInt(Key+"StartSuite",0);Begin();}else if(cmd=="resume"){SessionState.SetInt(Key+"NativeStartSuite",3);Begin();}else if(cmd=="stress"){SessionState.SetInt(Key+"StartSuite",6);Begin();}else if(cmd=="session-check")SessionCheck();else if(cmd=="status")Write("status",new{stage,suite,frame=Time.frameCount,playing=EditorApplication.isPlaying,restoring=SessionState.GetBool(Key+"Restoring",false)});else if(cmd=="abort")Finish("Explicit abort");else if(cmd=="windows")Build(false);else if(cmd=="windows-release")Build(false,true);else if(cmd=="android")Build(true);else throw new Exception("Unknown FONT-10 command");}
+        try{if(cmd=="audit")Audit();else if(cmd=="native-session-check")SaveNativeSession();else if(cmd=="validate"){SessionState.SetInt(Key+"NativeStartSuite",0);SessionState.SetInt(Key+"StartSuite",0);Begin();}else if(cmd=="resume"){SessionState.SetInt(Key+"NativeStartSuite",3);Begin();}else if(cmd.StartsWith("from-")){SessionState.SetInt(Key+"NativeStartSuite",0);SessionState.SetInt(Key+"StartSuite",int.Parse(cmd.Substring(5)));Begin();}/* from-N: começa na suíte N (0 campaigns ... 6 stress) */else if(cmd=="stress"){SessionState.SetInt(Key+"StartSuite",6);Begin();}else if(cmd=="session-check")SessionCheck();else if(cmd=="status")Write("status",new{stage,suite,frame=Time.frameCount,playing=EditorApplication.isPlaying,restoring=SessionState.GetBool(Key+"Restoring",false)});else if(cmd=="abort")Finish("Explicit abort");else if(cmd=="windows")Build(false);else if(cmd=="windows-release")Build(false,true);else if(cmd=="android")Build(true);else throw new Exception("Unknown FONT-10 command");}
         catch(Exception e){Write("request-error",new{cmd,error=e.ToString()});Debug.LogException(e);}
     }
     static void SaveNativeSession()
     {
         Require(!EditorApplication.isPlaying&&!EditorApplication.isPlayingOrWillChangePlaymode,"Use Edit mode");
-        var scene=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");Require(scene.isLoaded&&scene.rootCount==7,"Wait for the original scene");
+        var scene=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");Require(scene.isLoaded&&scene.rootCount>=7,"Wait for the original scene");
         EditorSceneManager.SaveScene(scene,Output+"/segment-01-live-session.unity",true);
         Write("segment-01-session",new{scene.isDirty,scene.rootCount,viewport=new[]{Screen.width,Screen.height},byteExact=File.ReadAllBytes(Output+"/segment-01-live-session.unity").SequenceEqual(File.ReadAllBytes(Output+"/live-session-before.unity"))});
     }
@@ -79,7 +79,7 @@ Write("environment",new{unity=Application.unityVersion,project=Application.dataP
     static void SessionCheck()
     {
         Require(!EditorApplication.isPlayingOrWillChangePlaymode,"Use Edit mode");
-        var scene=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");Require(scene.isLoaded&&scene.rootCount==7,"Original scene must remain open");
+        var scene=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");Require(scene.isLoaded&&scene.rootCount>=7,"Original scene must remain open");
         EditorSceneManager.MarkSceneDirty(scene);UI01Validation.SetGameView(873,491);
         var view=EditorWindow.GetWindow(typeof(Editor).Assembly.GetType("UnityEditor.GameView"));
         var zoomField=view.GetType().GetField("m_ZoomArea",BindingFlags.Instance|BindingFlags.NonPublic);
@@ -166,7 +166,7 @@ Write("environment",new{unity=Application.unityVersion,project=Application.dataP
     static void Restore()
     {
         var s=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity");
-        if(EditorApplication.isPlaying||EditorApplication.isPlayingOrWillChangePlaymode||!s.isLoaded||s.rootCount!=7){EditorApplication.QueuePlayerLoopUpdate();EditorApplication.delayCall+=Restore;return;}
+        if(EditorApplication.isPlaying||EditorApplication.isPlayingOrWillChangePlaymode||!s.isLoaded||s.rootCount<7){EditorApplication.QueuePlayerLoopUpdate();EditorApplication.delayCall+=Restore;return;}
         UI01Validation.SetGameView(SessionState.GetInt(Key+"Width",873),SessionState.GetInt(Key+"Height",491));
         restoreDue=EditorApplication.timeSinceStartup+1;EditorApplication.update-=FinishRestore;EditorApplication.update+=FinishRestore;
     }

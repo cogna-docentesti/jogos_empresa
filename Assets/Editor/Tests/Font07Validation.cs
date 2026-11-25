@@ -324,7 +324,7 @@ public static class Font07Validation
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode) {EditorApplication.delayCall+=Restore;return;}
         if(!SessionState.GetBool(Key+"Restoring",false))return;
-        var s=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity"); if(!s.IsValid()||s.rootCount!=7) {EditorApplication.delayCall+=Restore;return;}
+        var s=SceneManager.GetSceneByPath("Assets/Scenes/GameScene.unity"); if(!s.IsValid()||s.rootCount<7) {EditorApplication.delayCall+=Restore;return;}
         var viewport=JObject.Parse(File.ReadAllText(Output+"/session-geometry.json"))["viewport"];
         UI01Validation.SetGameView((int)viewport[0],(int)viewport[1]);due=EditorApplication.timeSinceStartup+1;
         EditorApplication.update-=FinishRestoring;EditorApplication.update+=FinishRestoring;

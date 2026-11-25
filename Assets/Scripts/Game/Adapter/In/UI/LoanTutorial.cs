@@ -102,8 +102,9 @@ namespace Game.Adapter.In.UI
             layout.childForceExpandHeight = false; layout.childForceExpandWidth = true;
             card.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
-            progress = Text(card, "Progress", GameTypography.Tokens.Caption, true);
-            progress.color = GamePalette.Muted;
+            // contador "BANCO · 1 DE 3": face Medium e cor de texto (Caption regular em cinza ficava apagado)
+            progress = Text(card, "Progress", new TypographyToken(TypographyRole.Label, GameTypography.Label));
+            progress.color = GamePalette.Ink;
             heading = Text(card, "Heading", GameTypography.Tokens.SectionTitle, true);
             message = Text(card, "Message", GameTypography.Tokens.Body);
             var actions = Node(card, "Actions");
@@ -127,10 +128,10 @@ namespace Game.Adapter.In.UI
 
         private void Render()
         {
-            progress.text = $"BANCO  Â·  {current + 1} DE {Titles.Length}";
+            progress.text = $"BANCO  \u00B7  {current + 1} DE {Titles.Length}";
             heading.text = Titles[current];
             message.text = Messages[current];
-            nextLabel.text = current == Titles.Length - 1 ? "Entendi, escolher opÃ§Ã£o" : "Continuar";
+            nextLabel.text = current == Titles.Length - 1 ? "Entendi, escolher op\u00E7\u00E3o" : "Continuar";
             LayoutRebuilder.ForceRebuildLayoutImmediate(card);
             Resize();
         }

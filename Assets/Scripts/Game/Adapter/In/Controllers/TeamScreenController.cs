@@ -39,12 +39,14 @@ namespace Game.Adapter.In.Controllers
         {
             if (view == null) view = GetComponent<TeamScreenView>();
             Populate(); view?.BindConfirm(Confirm);
+            view?.BindSetupBack(IsInitial ? new UnityEngine.Events.UnityAction(BackToEquipment) : null);
 
         }
         private void OnDisable()
         {
             if (tutorial != null) tutorial.Hide();
             view?.BindConfirm(null);
+            view?.BindSetupBack(null);
             foreach (var card in cards) if (card != null) card.QuantityRequested -= SetQuantity;
         }
         private void Populate()
@@ -178,6 +180,18 @@ namespace Game.Adapter.In.Controllers
             if (initial) PresentTutorial(step);
             else if (tutorial != null) tutorial.Hide();
         }
+        /// Passo 7 volta para a loja (passo 6) sem perder a equipe já escolhida.
+        private void BackToEquipment()
+        {
+            if (!isActiveAndEnabled || !IsInitial || !GameSessionState.HasActiveSession) return;
+            try
+            {
+                if (!Service.ContinueInitialSetup(GameState.Initial_Equipment))
+                    view.SetHint("Não foi possível voltar para a loja. Tente novamente; sua equipe foi preservada.", true);
+            }
+            catch (Exception) { view.SetHint("Não foi possível voltar para a loja. Tente novamente; sua equipe foi preservada.", true); }
+        }
+
         private void Confirm()
         {
             if (!isActiveAndEnabled || !Available || (IsInitial && CurrentTutorialStep(HasMinimum(restaurant, team, roles)) != ConfirmTeam)) return;

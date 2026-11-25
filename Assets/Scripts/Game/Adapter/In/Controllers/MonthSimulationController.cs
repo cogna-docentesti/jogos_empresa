@@ -3,6 +3,7 @@
 // abre o popup quando o motor pausa e avisa o fluxo quando o mês fecha.
 // Não tem regra de negócio: só traduz "tempo passou" e "botão clicado" em chamadas ao serviço.
 using System;
+using System.Linq;
 using Game.Application.UseCases.Simulation;
 using Game.Domain.Simulation;
 using UnityEngine;
@@ -50,6 +51,16 @@ namespace Game.Adapter.In.Controllers
             SetSpeed(0);
             _waitingDecision = false;
             popupView.Hide();
+            monthView.HideAbandonConfirm();
+        }
+
+        /// Botão ABANDONAR MÊS: pausa o tempo e pede confirmação. Cancelar volta à velocidade de antes.
+        public void RequestAbandon(Action abandon)
+        {
+            if (!IsRunning) return;
+            float before = _speed;
+            SetSpeed(0);
+            monthView.ShowAbandonConfirm(abandon, () => SetSpeed(before));
         }
 
         private void Update()
@@ -70,7 +81,8 @@ namespace Game.Adapter.In.Controllers
                 ShowNextDecision();
                 return;
             }
-            monthView.RenderDay(step.DayResult);
+            int day = step.DayResult.Day;
+            monthView.RenderDay(step.DayResult, _service.Current.Occurrences.Where(o => o.Day == day));
             if (_service.Current.IsFinished) FinishMonth();
         }
 
@@ -91,6 +103,7 @@ namespace Game.Adapter.In.Controllers
         private void ShowNextDecision()
         {
             var occurrence = _service.Current.PendingDecisions[0];
+            monthView.ShowPending(occurrence);
             popupView.Show(occurrence, _service.ReactionsFor(occurrence), OnReactionChosen);
         }
 
