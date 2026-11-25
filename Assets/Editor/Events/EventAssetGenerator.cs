@@ -234,6 +234,9 @@ namespace Game.EditorTools
             asset.polarity = definition.polarity;
             asset.triggerType = definition.triggerType;
             asset.exclusionGroup = definition.exclusionGroup;
+            asset.calendarVisibility = definition.id == "local_festival" || definition.id == "new_competitor"
+                ? EventVisibility.Announced
+                : EventVisibility.Surprise;
             asset.baseWeight = definition.baseWeight;
             asset.canRepeat = false;
             asset.applicableRestaurantTypes = Array.Empty<RestaurantType>();

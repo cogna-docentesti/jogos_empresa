@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Adapter.In.UI;
 using NUnit.Framework;
@@ -73,14 +74,46 @@ public sealed class UI12EventTests
     [Test] public void MonthlyDrawIsPersistedAndReopeningCannotReroll()
     {
         var context = MonthlySimulationCatalog.Load(session);
-        var plan = service.OpenMonth(session, Catalog, context.Restaurant, context.Equipment, 30);
-        Assert.AreEqual(4, plan.Count); Assert.AreEqual(4, plan.Select(p => p.eventId).Distinct().Count()); Assert.That(plan.Select(p => p.day), Is.EqualTo(new[] { 6, 12, 18, 24 }));
-        var selected = plan.Select(p => Catalog.Single(e => e.id == p.eventId)).ToArray();
+        var catalog = Catalog;
+        var rolls = new[] { .15, .90, .45 };
+        var prior = catalog.Single(e => e.id == "local_festival");
+        var previousMonth = catalog.Single(e => e.id == "new_competitor");
+        var history = new SessionEventHistoryRepository(db);
+        history.RecordFromOption(session.sessionId, 1, 12, previousMonth, previousMonth.options[0]);
+        session.currentRound = 2;
+        Assert.IsTrue(GameSessionState.Persist());
+        history.RecordFromOption(session.sessionId, 2, 11, prior, prior.options[0]);
+        var directRolls = new Queue<double>(rolls);
+        var expected = new MonthlyEventSelector(directRolls.Dequeue).SelectEventsForMonth(new MonthlyEventSelectionContext
+        {
+            Session = session, Month = 2, Restaurant = context.Restaurant, EventCatalog = catalog,
+            EquipmentCatalog = context.Equipment, OccurredEventIds = new[] { previousMonth.id, prior.id },
+            ReservedEventIds = new[] { prior.id }, UsedGroupsInMonth = new[] { prior.exclusionGroup },
+            AlreadySelectedCountInMonth = 1
+        });
+        Assert.IsTrue(expected.IsValid);
+        var integratedRolls = new Queue<double>(rolls);
+        var days = new Queue<int>(new[] { 30, 1, 1 });
+        var reservations = new MonthlyEventDecisionService(db, new MonthlyEventSelector(integratedRolls.Dequeue), (first, limit) =>
+        {
+            Assert.IsEmpty(integratedRolls);
+            Assert.AreEqual(1, first);
+            Assert.AreEqual(31, limit);
+            return days.Dequeue();
+        });
+        var plan = reservations.OpenMonth(session, catalog, context.Restaurant, context.Equipment, 30);
+        CollectionAssert.AreEqual(expected.Events.Select(e => e.id), plan.Select(e => e.eventId));
+        Assert.AreEqual(3, plan.Select(p => p.eventId).Distinct().Count());
+        CollectionAssert.AreEqual(new[] { 30, 1, 1 }, plan.Select(p => p.day));
+        Assert.IsEmpty(days);
+        var selected = plan.Select(p => catalog.Single(e => e.id == p.eventId)).ToArray();
+        Assert.IsFalse(selected.Any(e => e.id == previousMonth.id || e.exclusionGroup == prior.exclusionGroup));
         Assert.IsTrue(selected.All(e => e.applicableRestaurantTypes.Length == 0 || e.applicableRestaurantTypes.Contains(session.restaurantType)));
         foreach (var e in selected.Where(e => e.triggerType == EventTriggerType.CONDITIONAL)) Assert.IsTrue(EventConditionEvaluator.EvaluateAll(e.conditions, session, context.Restaurant, context.Equipment, out _));
-        service.Confirm(session.sessionId, 1, plan[0].day, selected[0], selected[0].options[0]);
-        var reopened = new MonthlyEventDecisionService(db, new MonthlyEventSelector(() => throw new Exception("Rerolled"))).OpenMonth(session, Catalog, context.Restaurant, context.Equipment, 30);
-        CollectionAssert.AreEqual(plan.Select(p => p.eventId), reopened.Select(p => p.eventId)); Assert.AreEqual(1, db.Table<MonthlyEventPlanEntity>().Count());
+        var reopened = new MonthlyEventDecisionService(db, new MonthlyEventSelector(() => throw new Exception("Rerolled incidence")),
+            (_, _) => throw new Exception("Rerolled day")).OpenMonth(session, catalog, context.Restaurant, context.Equipment, 30);
+        CollectionAssert.AreEqual(plan.Select(p => (p.eventId, p.day, p.visibility)), reopened.Select(p => (p.eventId, p.day, p.visibility)));
+        Assert.AreEqual(1, db.Table<MonthlyEventPlanEntity>().Count());
     }
     [Test] public void ConflictingAndStaleChoicesAreRejected()
     {

@@ -7,12 +7,26 @@ using UnityEngine;
 /// <summary>Reserves the existing selector's monthly draw and records choices without applying effects.</summary>
 public sealed class MonthlyEventDecisionService
 {
-    [Serializable] public sealed class Entry { public string eventId; public int day; }
+    [Serializable]
+    public sealed class Entry
+    {
+        public string eventId;
+        public int day;
+        // Zero marks legacy reservations created before visibility was saved.
+        public EventVisibility visibility;
+    }
     [Serializable] private sealed class Plan { public List<Entry> entries = new(); }
     private readonly SQLiteConnection db;
     private readonly MonthlyEventSelector selector;
-    public MonthlyEventDecisionService(SQLiteConnection connection, MonthlyEventSelector eventSelector = null)
-    { db = connection ?? throw new ArgumentNullException(nameof(connection)); selector = eventSelector ?? new MonthlyEventSelector(); }
+    private readonly Func<int, int, int> nextDay;
+
+    public MonthlyEventDecisionService(SQLiteConnection connection, MonthlyEventSelector eventSelector = null,
+        Func<int, int, int> nextDay = null)
+    {
+        db = connection ?? throw new ArgumentNullException(nameof(connection));
+        selector = eventSelector ?? new MonthlyEventSelector();
+        this.nextDay = nextDay ?? new System.Random(Guid.NewGuid().GetHashCode()).Next;
+    }
 
     public IReadOnlyList<Entry> OpenMonth(GameSessionEntity session, IReadOnlyList<EventData> catalog,
         RestaurantData restaurant, IReadOnlyList<EquipmentData> equipment, int operatingDays)
@@ -62,8 +76,19 @@ public sealed class MonthlyEventDecisionService
         });
         if (!selection.IsValid) throw new InvalidOperationException(string.Join(" ", selection.Diagnostics));
         var reserved = new Plan();
-        for (int i = 0; i < selection.Events.Count; i++)
-            reserved.entries.Add(new Entry { eventId = selection.Events[i].id, day = Math.Max(1, (i + 1) * operatingDays / (selection.Events.Count + 1)) });
+        int lastDay = Math.Min(operatingDays, MonthlyCalendarService.Days);
+        foreach (var data in selection.Events)
+        {
+            int day = nextDay(1, lastDay + 1);
+            if (day < 1 || day > lastDay)
+                throw new InvalidOperationException("The event day is outside the calendar.");
+            reserved.entries.Add(new Entry
+            {
+                eventId = data.id, day = day,
+                visibility = data.calendarVisibility == EventVisibility.Announced
+                    ? EventVisibility.Announced : EventVisibility.Surprise
+            });
+        }
         db.Insert(new MonthlyEventPlanEntity { planId = key, sessionId = session.sessionId, month = session.currentRound, entriesJson = JsonUtility.ToJson(reserved) });
         return reserved.entries.AsReadOnly();
     }

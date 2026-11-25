@@ -1996,8 +1996,8 @@
       "area": "Calendário; eventos",
       "kind": "funcionalidade",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-21",
         "FB-22"
@@ -2032,8 +2032,9 @@
         "Assets/Resources/Events"
       ],
       "notes": [
-        "OpenMonth hoje distribui dias regularmente. A apresentação temporal pode mudar, mas as regras que determinam incidência são preservadas.",
-        "Previsibilidade é metadado de apresentação/agendamento; não é nova probabilidade nem regra de elegibilidade."
+        "Novas reservas sorteiam os dias de 1 a 30 com uma fonte aleatória independente e permitem coincidências. Reservas antigas conservam suas datas.",
+        "A classificação do catálogo segue a matriz da FB-21 e fica gravada na reserva. A projeção pública só expõe eventos anunciados ou revelados.",
+        "Validação com 137 testes Edit Mode e ensaio da GameScene. A quebra interrompeu o percurso no dia 16 antes do aluguel no dia 20 e exigiu confirmação."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-24.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-24.json",

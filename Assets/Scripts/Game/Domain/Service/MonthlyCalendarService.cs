@@ -85,10 +85,11 @@ public sealed class MonthlyCalendarService
     private readonly Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> loadContext;
 
     public MonthlyCalendarService(SQLiteConnection connection, MonthlyEventSelector selector = null,
-        Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> contextFactory = null)
+        Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> contextFactory = null,
+        Func<int, int, int> nextEventDay = null)
     {
         db = connection ?? throw new ArgumentNullException(nameof(connection));
-        decisions = new MonthlyEventDecisionService(db, selector);
+        decisions = new MonthlyEventDecisionService(db, selector, nextEventDay);
         loadContext = contextFactory ?? MonthlySimulationCatalog.Load;
     }
 
@@ -228,17 +229,20 @@ public sealed class MonthlyCalendarService
             var recorded = history.SingleOrDefault(h => h.eventId == entry.eventId);
             if (recorded != null && recorded.day != entry.day)
                 throw new InvalidOperationException("A saved choice conflicts with its reserved event day.");
-            occurrences.Add(ImportEvent(entry.eventId, entry.day, recorded != null, catalog));
+            occurrences.Add(ImportEvent(entry.eventId, entry.day, recorded != null, catalog, entry.visibility));
         }
         foreach (var record in history)
             if (!occurrences.Any(e => e.id == record.eventId))
-                occurrences.Add(ImportEvent(record.eventId, record.day, true, catalog));
+                occurrences.Add(ImportEvent(record.eventId, record.day, true, catalog, EventVisibility.Unspecified));
         return occurrences.OrderBy(e => e.day).ThenBy(e => e.id, StringComparer.Ordinal).ToList();
     }
 
-    private static Occurrence ImportEvent(string id, int day, bool decided, IReadOnlyList<EventData> catalog)
+    private static Occurrence ImportEvent(string id, int day, bool decided, IReadOnlyList<EventData> catalog,
+        EventVisibility visibility)
     {
-        var options = decided ? null : catalog.SingleOrDefault(e => e != null && e.id == id)?.options;
+        var matches = catalog.Where(e => e != null && e.id == id);
+        var data = decided ? matches.FirstOrDefault() : matches.SingleOrDefault();
+        var options = decided ? null : data?.options;
         if (!decided && (options == null || options.Length == 0
             || options.Any(o => o == null || string.IsNullOrWhiteSpace(o.id) || o.effects == null)
             || options.Select(o => o.id).Distinct(StringComparer.Ordinal).Count() != options.Length))
@@ -246,7 +250,8 @@ public sealed class MonthlyCalendarService
         return new Occurrence
         {
             id = id, day = day, decided = decided, revealed = decided,
-            announced = id == "local_festival" || id == "new_competitor",
+            announced = (visibility == EventVisibility.Unspecified ? data?.calendarVisibility : visibility)
+                == EventVisibility.Announced,
             optionIds = options?.Select(o => o.id).ToArray()
         };
     }

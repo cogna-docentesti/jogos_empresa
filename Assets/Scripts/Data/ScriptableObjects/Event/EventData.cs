@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum EventVisibility
+{
+    Unspecified = 0,
+    Surprise = 1,
+    Announced = 2
+}
+
 [CreateAssetMenu(menuName = "Game Data/Event")]
 public class EventData : ScriptableObject
 {
@@ -17,6 +24,7 @@ public class EventData : ScriptableObject
     public EventPolarity polarity;
     public EventTriggerType triggerType;
     public EventExclusionGroup exclusionGroup = EventExclusionGroup.NONE;
+    public EventVisibility calendarVisibility = EventVisibility.Surprise;
 
     [Header("Probabilidade")]
     public float baseWeight = 1f;

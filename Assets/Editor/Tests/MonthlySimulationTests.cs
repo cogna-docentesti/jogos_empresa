@@ -407,6 +407,76 @@ public class MonthlySimulationTests
     }
 
     [Test]
+    public void NewCalendarRevealsSurpriseOnlyWhenReached()
+    {
+        var session = _context.Session;
+        _context.Settings.rentDueDay = _context.Settings.utilitiesDueDay = 20;
+        var catalog = Resources.LoadAll<EventData>("Events");
+        Assert.AreEqual(20, catalog.Length);
+        CollectionAssert.AreEquivalent(new[] { "local_festival", "new_competitor" },
+            catalog.Where(e => e.calendarVisibility == EventVisibility.Announced).Select(e => e.id));
+        Assert.AreEqual(18, catalog.Count(e => e.calendarVisibility == EventVisibility.Surprise));
+        var freezer = catalog.Single(e => e.id == "freezer_breakdown");
+        var festival = catalog.Single(e => e.id == "local_festival");
+        var control = session.Copy();
+        control.sessionId = Guid.NewGuid().ToString();
+        _db.Insert(control);
+        string id = session.sessionId;
+        var days = new Queue<int>(new[] { 16, 20, 20 });
+        var calendar = new MonthlyCalendarService(_db, new MonthlyEventSelector(() => 0), TestContext,
+            (_, _) => days.Dequeue());
+        var view = calendar.Open(id, 1, new[] { freezer, festival });
+        var withoutSurprise = calendar.Open(control.sessionId, 1, new[] { festival });
+        Assert.IsEmpty(days);
+        Assert.AreEqual(festival.id, view.Events.Single().EventId);
+        Assert.AreEqual(20, view.Events.Single().Day);
+        Assert.IsTrue(view.Events.Single().Announced);
+        Assert.AreEqual(PublicCalendarSnapshot(withoutSurprise), PublicCalendarSnapshot(view));
+        view = calendar.BeginAdvance(id, 1, view.Revision);
+        withoutSurprise = calendar.BeginAdvance(control.sessionId, 1, withoutSurprise.Revision);
+        Assert.AreEqual(20, view.DestinationDay);
+        Assert.AreEqual(PublicCalendarSnapshot(withoutSurprise), PublicCalendarSnapshot(view));
+        Assert.AreEqual(PublicCalendarSnapshot(withoutSurprise),
+            PublicCalendarSnapshot(calendar.Step(id, 1, view.Revision, 15)));
+        var reopened = new MonthlyCalendarService(_db, new MonthlyEventSelector(() => throw new Exception("Unexpected draw")),
+            TestContext, (_, _) => throw new Exception("Unexpected date"));
+        Assert.AreEqual(PublicCalendarSnapshot(view), PublicCalendarSnapshot(reopened.Open(id, 1, Array.Empty<EventData>())));
+        view = reopened.Step(id, 1, view.Revision, 16);
+        Assert.AreEqual(16, view.Day);
+        Assert.AreEqual(freezer.id, view.Pending.EventId);
+        Assert.IsFalse(view.Pending.Announced);
+        Assert.IsFalse(view.Moving);
+        Assert.IsEmpty(view.Receipts);
+        Assert.IsFalse(reopened.BeginAdvance(id, 1, view.Revision).Moving);
+        var history = new MonthlyEventDecisionService(_db).Confirm(id, 1, 16, freezer, freezer.options[0]);
+        Assert.AreEqual("repair_now", history.selectedChoiceId);
+        Assert.AreEqual(-3500f, history.cashChange);
+        view = reopened.BeginAdvance(id, 1, reopened.Read(id, 1).Revision);
+        view = reopened.Step(id, 1, view.Revision, 20);
+        Assert.AreEqual(festival.id, view.Pending.EventId);
+        CollectionAssert.AreEqual(new[] { "rent", "utilities" }, view.Receipts.Select(r => r.type));
+    }
+
+    private static string PublicCalendarSnapshot(MonthlyCalendarService.View view) =>
+        Newtonsoft.Json.JsonConvert.SerializeObject(view);
+
+    [Test]
+    public void CalendarWithNoEligibleEventsReservesAnEmptyPlan()
+    {
+        var later = Asset<EventData>();
+        later.id = "only_month_two";
+        later.minRound = 2;
+        var calendar = new MonthlyCalendarService(_db, new MonthlyEventSelector(() => throw new Exception("Unexpected draw")),
+            TestContext, (_, _) => throw new Exception("Unexpected date"));
+        string id = _context.Session.sessionId;
+        var view = calendar.Open(id, 1, new[] { later });
+        Assert.IsEmpty(view.Events);
+        Assert.IsNull(view.Pending);
+        Assert.AreEqual("{\"entries\":[]}", _db.Table<MonthlyEventPlanEntity>().Single().entriesJson);
+        Assert.AreEqual(view.Bills.Min(b => b.day), view.DestinationDay);
+    }
+
+    [Test]
     public void CalendarResumesMovementAndPaymentsWithoutExposingThePrivateStop()
     {
         var id = _context.Session.sessionId;

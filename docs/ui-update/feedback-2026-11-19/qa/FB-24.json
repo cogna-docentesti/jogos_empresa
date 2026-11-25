@@ -1,0 +1,41 @@
+{
+  "task_id": "FB-24",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "cd23fb762c31aa0d4fd7bdfed18dfb3081d083f8",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "Unity Test Runner em Edit Mode com SQLite isolado e ensaio da GameScene em Play Mode, com identificação, SQLite e sorteios controlados.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "A reserva recebeu a mesma sequência de incidência do seletor direto e retornou os mesmos IDs na mesma ordem. O histórico de outro mês, a reserva e o grupo usado no mês atual ocuparam os lugares esperados. O código do seletor e os campos de incidência e opções dos assets ficaram intactos."
+    },
+    {
+      "criterion": 2,
+      "result": "Os 20 assets correspondem à matriz da FB-21. Festival e novo concorrente são anunciados. A quebra permanece oculta até a chegada e abre as três opções reais na GameScene."
+    },
+    {
+      "criterion": 3,
+      "result": "A projeção indicou o dia 20 antes do movimento. A parada ocorreu no dia 16 e bloqueou novo avanço até a confirmação. A chegada posterior ao dia 20 debitou o aluguel e abriu o festival."
+    },
+    {
+      "criterion": 4,
+      "result": "Os sorteios controlados incluíram os dias 1 e 30 e uma colisão. Os IDs continuaram únicos. Reabertura, avanço repetido e reload conservaram reservas, decisões e débitos. A reserva sem eventos elegíveis persistiu vazia. Foram revisitadas as reservas legadas, inclusive datas inválidas."
+    },
+    {
+      "criterion": 5,
+      "result": "A projeção pública completa foi comparada com a de um plano equivalente sem a quebra. O resultado foi idêntico na abertura, no início do movimento e no passo anterior à chegada."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-24",
+  "evidence": [
+    "editmode.json",
+    "game-scene.txt"
+  ],
+  "limitations": [
+    "A GameScene ainda percorre os compromissos entre decisões pela ação de fechamento existente. A visualização da grade de 30 casas e a animação pertencem à FB-23. O ensaio desta tarefa registra o comportamento do popup existente, sem nova campanha visual."
+  ]
+}
