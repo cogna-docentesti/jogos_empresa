@@ -132,14 +132,8 @@ public class GameManager : MonoBehaviour
                 || session.initialSetupResumeState == (int)GameState.Initial_Equipment
                 || session.initialSetupResumeState == (int)GameState.Initial_Team)
                 resumeDestination = (GameState)session.initialSetupResumeState.Value;
-            else
-            {
-                var db = DatabaseInitializer.DatabaseService.Connection;
-                db.CreateTable<MonthlyEventPlanEntity>();
-                if (db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound) != null
-                    && GameSessionService.HasMinimumTeam(session))
-                    resumeDestination = GameState.Round_Event;
-            }
+            else if (session.calendarMonthLocked == session.currentRound)
+                resumeDestination = GameState.Round_Event;
         }
         else
         {

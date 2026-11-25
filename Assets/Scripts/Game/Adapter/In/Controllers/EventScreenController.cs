@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Game.Adapter.In.UI;
 using Game.Adapter.In.UI.Navigation;
@@ -13,10 +12,9 @@ namespace Game.Adapter.In.Controllers
         [SerializeField] private EventScreenView view;
         private EventData current;
         private string sessionId;
-        private int month, day, selected = -1, index;
+        private int month, day, selected = -1;
         private bool confirmed, recording, historyVisible, failed, monthFlow;
         private Action completed;
-        private readonly List<MonthlyEventDecisionService.Entry> entries = new();
         private EventData[] catalog;
         public bool IsAwaitingChoice { get; private set; }
         public EventData CurrentEvent => current;
@@ -24,6 +22,7 @@ namespace Game.Adapter.In.Controllers
         public event Action<SessionEventHistoryEntity> ChoiceConfirmed;
         public event Action Closed;
         private MonthlyEventDecisionService Service => new(DatabaseInitializer.DatabaseService?.Connection);
+        private MonthlyCalendarService Calendar => new(DatabaseInitializer.DatabaseService?.Connection);
         private SessionEventHistoryRepository History => new(DatabaseInitializer.DatabaseService.Connection);
         private void Awake() { view ??= GetComponent<EventScreenView>(); Bind(); }
         private void Bind() => view?.BindActions(Confirm, ShowHistory, Return);
@@ -31,7 +30,7 @@ namespace Game.Adapter.In.Controllers
         {
             completed = null; IsAwaitingChoice = false; current = null; sessionId = null;
             monthFlow = confirmed = recording = historyVisible = failed = false;
-            entries.Clear(); selected = -1; index = 0;
+            selected = -1;
         }
         private void OnEnable()
         {
@@ -40,7 +39,8 @@ namespace Game.Adapter.In.Controllers
         }
         public void OpenMonth(Action onCompleted)
         {
-            if (!GameSessionService.HasMinimumTeam(GameSessionState.Current)) return;
+            if (GameSessionState.Current?.calendarMonthLocked == 0
+                && !GameSessionService.HasMinimumTeam(GameSessionState.Current)) return;
             if (IsAwaitingChoice && !failed && sessionId == GameSessionState.Current?.sessionId
                 && month == GameSessionState.Current?.currentRound) { UIStateListener.PresentScreen(gameObject); Render(); return; }
             completed = onCompleted; monthFlow = true; failed = false;
@@ -51,26 +51,29 @@ namespace Game.Adapter.In.Controllers
                     throw new InvalidOperationException("Session/presentation unavailable.");
                 sessionId = session.sessionId; month = session.currentRound;
                 catalog = Resources.LoadAll<EventData>("Events");
-                var context = MonthlySimulationCatalog.Load(session);
-                var plan = Service.OpenMonth(session, catalog, context.Restaurant, context.Equipment, context.Settings.operatingDays);
-                var history = History.GetBySessionAndRound(sessionId, month);
-                entries.Clear(); entries.AddRange(plan.Where(e => !history.Any(h => h.eventId == e.eventId && h.day == e.day)));
-                index = 0;
-                if (entries.Count == 0) { Finish(); return; }
-                OpenNext();
+                var calendar = Calendar;
+                OpenNext(calendar, calendar.Open(sessionId, month, catalog));
             }
             catch (Exception)
             { failed = true; IsAwaitingChoice = true; UIStateListener.PresentScreen(gameObject); view.Error("Não foi possível carregar os eventos. Tente novamente para continuar o fechamento.", true); }
         }
-        private void OpenNext()
+        // The existing month action stays usable until the calendar screen supplies
+        // its own explicit Advance and animation controls.
+        private void OpenNext(MonthlyCalendarService calendar, MonthlyCalendarService.View plan)
         {
-            var entry = entries[index];
-            Present(catalog.Single(e => e.id == entry.eventId), month, entry.day);
+            while (plan.Pending == null && !plan.ReadyToClose)
+            {
+                if (!plan.Moving) plan = calendar.BeginAdvance(sessionId, month, plan.Revision);
+                if (!plan.Moving) throw new InvalidOperationException("The month cannot advance.");
+                plan = calendar.Step(sessionId, month, plan.Revision, plan.DestinationDay);
+            }
+            if (plan.Pending == null) { Finish(); return; }
+            Present(catalog.Single(e => e.id == plan.Pending.EventId), month, plan.Pending.Day);
         }
         public void OpenDecision(EventData data, int eventMonth, int eventDay, Action onCompleted = null)
         {
             if (IsAwaitingChoice) return;
-            monthFlow = false; entries.Clear(); index = 0; completed = onCompleted;
+            monthFlow = false; completed = onCompleted;
             sessionId = GameSessionState.Current?.sessionId;
             Present(data, eventMonth, eventDay);
         }
@@ -95,7 +98,7 @@ namespace Game.Adapter.In.Controllers
         private void Render()
         {
             historyVisible = false;
-            view.Decision(current, month, day, index, entries.Count, selected, !confirmed && !failed,
+            view.Decision(current, month, day, 0, 0, selected, !confirmed && !failed,
                 confirmed ? "Esta escolha já foi registrada. Os efeitos pertencem ao fechamento mensal." : "Leia as opções e selecione uma para confirmar.", Select);
         }
         public void Select(int choice)
@@ -112,7 +115,11 @@ namespace Game.Adapter.In.Controllers
                 if (GameSessionState.Current?.sessionId != sessionId || !GameSessionState.IsPersisted) throw new InvalidOperationException();
                 var record = Service.Confirm(sessionId, month, day, current, current.options[selected]);
                 confirmed = true; view.ConfirmButton.interactable = false; ChoiceConfirmed?.Invoke(record);
-                if (monthFlow && ++index < entries.Count) OpenNext();
+                if (monthFlow)
+                {
+                    var calendar = Calendar;
+                    OpenNext(calendar, calendar.Read(sessionId, month));
+                }
                 else Finish();
             }
             catch (Exception)

@@ -7,4 +7,5 @@ public sealed class MonthlyEventPlanEntity
     [Indexed] public string sessionId { get; set; }
     public int month { get; set; }
     public string entriesJson { get; set; }
+    public string calendarJson { get; set; }
 }

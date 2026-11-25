@@ -1,5 +1,5 @@
 FB-22 — Implementar compromissos, débitos e persistência do calendário
-Status: planejada | Prioridade: P1 | Tipo: funcionalidade
+Status: concluída | Prioridade: P1 | Tipo: funcionalidade
 Área: Calendário; domínio e persistência
 Dependências: FB-21
 Modelo: gpt-6.2-sol | Raciocínio: medium
@@ -50,6 +50,8 @@ VALIDAÇÃO PREVISTA
 
 OBSERVAÇÕES E LIMITES
 1. O débito em cada compromisso é requisito confirmado, substituindo a proposta anterior de liquidar tudo em um único ponto. A conciliação transacional deve impedir a cobrança repetida no fechamento.
+2. Validação no Unity com 135 testes Edit Mode aprovados e ensaio na GameScene. O caixa, os recibos, a posição, as escolhas e a DRE foram conferidos com SQLite isolado.
+3. A ação existente percorre os compromissos entre decisões. A distribuição aleatória dos dias pertence à FB-24 e a grade com avanço explícito pertence à FB-23.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-22.json.

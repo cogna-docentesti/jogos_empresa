@@ -12,7 +12,8 @@ public static class MonthlySessionSettlement
         var next = session.Copy();
         next.currentCash = result.closingCash;
         next.reputationScore = result.reputationAtEnd;
-        next.loanBalance = Math.Max(0f, session.loanBalance - result.loanPrincipalPayment);
+        next.loanBalance = (float)Math.Max(0m, Math.Round(
+            (decimal)session.loanBalance - (decimal)result.loanPrincipalPayment, 2, MidpointRounding.AwayFromZero));
         next.alignmentScore = result.alignmentScore;
         next.alignmentClassification = result.alignmentClassification;
         next.coherenceRating = result.alignmentClassification;

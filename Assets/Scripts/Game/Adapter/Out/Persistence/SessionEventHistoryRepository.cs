@@ -41,6 +41,11 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
     public SessionEventHistoryEntity Record(string sessionId, int round, int day,
         EventData eventData, EventOption option,
         float cashChange, int reputationChange, int clientsChange)
+        => Record(sessionId, round, day, eventData, option, cashChange, reputationChange, clientsChange, false);
+
+    private SessionEventHistoryEntity Record(string sessionId, int round, int day,
+        EventData eventData, EventOption option,
+        float cashChange, int reputationChange, int clientsChange, bool calendarChoice)
     {
         // Settled statements must keep their original event inputs.
         if (new RoundResultRepository(db).GetBySessionAndRound(sessionId, round) != null)
@@ -48,6 +53,8 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
         var session = new GameSessionRepository(db).GetById(sessionId);
         if (session != null && (session.status != GameSessionStatus.IN_PROGRESS || session.currentRound != round))
             throw new System.InvalidOperationException("Events must belong to the active session month.");
+        if (session?.calendarMonthLocked > 0 && !calendarChoice)
+            throw new System.InvalidOperationException("The calendar must confirm this event.");
 
         var item = new SessionEventHistoryEntity
         {
@@ -71,6 +78,9 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
         db.Insert(item);
         return item;
     }
+
+    internal SessionEventHistoryEntity RecordCalendarChoice(string sessionId, int round, int day, EventData data, EventOption option)
+        => Record(sessionId, round, day, data, option, option.effects.cashDelta, option.effects.reputationDelta, 0, true);
 
     /// <summary>
     /// Mesmo que Record, tirando caixa e reputacao direto dos efeitos da opcao

@@ -1860,8 +1860,8 @@
       "area": "Calendário; domínio e persistência",
       "kind": "funcionalidade",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-21"
       ],
@@ -1894,7 +1894,9 @@
         "Assets/Scripts/Game/Adapter/In/Controllers/MonthlySettlementController.cs"
       ],
       "notes": [
-        "O débito em cada compromisso é requisito confirmado, substituindo a proposta anterior de liquidar tudo em um único ponto. A conciliação transacional deve impedir a cobrança repetida no fechamento."
+        "O débito em cada compromisso é requisito confirmado, substituindo a proposta anterior de liquidar tudo em um único ponto. A conciliação transacional deve impedir a cobrança repetida no fechamento.",
+        "Validação no Unity com 135 testes Edit Mode aprovados e ensaio na GameScene. O caixa, os recibos, a posição, as escolhas e a DRE foram conferidos com SQLite isolado.",
+        "A ação existente percorre os compromissos entre decisões. A distribuição aleatória dos dias pertence à FB-24 e a grade com avanço explícito pertence à FB-23."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-22.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-22.json",

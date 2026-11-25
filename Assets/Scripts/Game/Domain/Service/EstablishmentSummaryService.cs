@@ -51,7 +51,9 @@ namespace Game.Domain.Service
                     {
                         var events = db != null ? new SessionEventHistoryRepository(db).GetBySessionAndRound(session.sessionId, session.currentRound)
                             : new List<SessionEventHistoryEntity>();
-                        estimate = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(session, events));
+                        estimate = db != null && session.calendarMonthLocked == session.currentRound
+                            ? MonthlyCalendarService.Forecast(MonthlyCalendarService.Find(db, session.sessionId, session.currentRound), events)
+                            : MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(session, events));
                     }
                     if (estimate != null)
                     {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using SQLite4Unity3d;
 using UnityEngine;
 
@@ -7,16 +6,12 @@ using UnityEngine;
 public class RoundService
 {
     private readonly SQLiteConnection _db;
-    private readonly Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> _contextFactory;
-    private bool _processing;
 
-    public RoundService() : this(DatabaseInitializer.DatabaseService?.Connection, MonthlySimulationCatalog.Load) { }
+    public RoundService() : this(DatabaseInitializer.DatabaseService?.Connection) { }
 
-    public RoundService(SQLiteConnection connection,
-        Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> contextFactory)
+    public RoundService(SQLiteConnection connection)
     {
         _db = connection;
-        _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
     }
 
     public RoundResultEntity ProcessRound()
@@ -28,35 +23,28 @@ public class RoundService
     public RoundResultEntity ProcessRound(int expectedMonth)
     {
         var session = GameSessionState.Current;
-        if (session == null || _db == null || !GameSessionState.IsPersisted || _processing)
-            return null;
-        if (expectedMonth < 1 || expectedMonth > MonthlySimulationEngine.CycleMonths)
+        if (session == null || _db == null || !GameSessionState.IsPersisted
+            || expectedMonth < 1 || expectedMonth > MonthlySimulationEngine.CycleMonths)
             return null;
 
-        var results = new RoundResultRepository(_db);
-        var existing = results.GetBySessionAndRound(session.sessionId, expectedMonth);
-        if (existing != null) return existing;
-        if (!GameSessionState.HasActiveSession || session.currentRound != expectedMonth)
-            return null;
-        if (_db.IsInTransaction)
+        RoundResultEntity result = null;
+        _db.RunInDatabaseLock(() =>
         {
-            Debug.LogWarning("[RoundService] Settlement requires its own database transaction.");
-            return null;
-        }
-
-        _processing = true;
-        try
-        {
-            RoundResultEntity result = null;
+            if (_db.IsInTransaction)
+                throw new InvalidOperationException("Settlement requires its own database transaction.");
+            var results = new RoundResultRepository(_db);
+            result = results.GetBySessionAndRound(session.sessionId, expectedMonth);
+            if (result != null) return;
             GameSessionEntity next = null;
             _db.RunInTransaction(() =>
             {
-                var sessions = new GameSessionRepository(_db);
-                var stored = sessions.GetById(session.sessionId);
-                if (stored == null || stored.status != GameSessionStatus.IN_PROGRESS || stored.currentRound != expectedMonth)
-                    throw new InvalidOperationException("The persisted session is missing or has already advanced.");
-                if (results.GetBySessionAndRound(session.sessionId, expectedMonth) != null)
-                    throw new InvalidOperationException("The month has already been settled.");
+                var stored = new GameSessionRepository(_db).GetById(session.sessionId);
+                if (stored == null || stored.status != GameSessionStatus.IN_PROGRESS || stored.currentRound != expectedMonth
+                    || !string.IsNullOrEmpty(stored.pendingSummaryResultId))
+                    return;
+                var calendar = MonthlyCalendarService.Find(_db, session.sessionId, expectedMonth);
+                if (!MonthlyCalendarService.HasCalendar(calendar) || !MonthlyCalendarService.IsReadyToClose(calendar))
+                    return;
 
                 var previous = results.GetBySessionId(session.sessionId);
                 if (previous.Count != expectedMonth - 1)
@@ -66,30 +54,27 @@ public class RoundService
                         throw new InvalidOperationException("Monthly results must be consecutive.");
 
                 var history = new SessionEventHistoryRepository(_db).GetBySessionAndRound(session.sessionId, expectedMonth);
-                var context = _contextFactory(session.Copy(), history);
-                if (!TeamSelectionHelper.HasMinimumStaff(context.Restaurant, stored.teamJson)
-                    || (stored.teamJson != session.teamJson && !TeamSelectionHelper.HasMinimumStaff(context.Restaurant, session.teamJson)))
-                    return;
-
-                result = MonthlySimulationEngine.Calculate(context);
+                result = MonthlyCalendarService.Reconcile(calendar, stored, history, out var opening);
                 result.roundResultId = Guid.NewGuid().ToString();
                 result.createdAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                next = MonthlySessionSettlement.Apply(session, result, result.createdAt);
+                var settlementBase = stored.Copy();
+                settlementBase.currentCash = opening.currentCash;
+                settlementBase.loanBalance = opening.loanBalance;
+                next = MonthlySessionSettlement.Apply(settlementBase, result, result.createdAt);
+                next.calendarMonthLocked = 0;
                 next.pendingSummaryResultId = result.roundResultId;
                 results.Insert(result);
+                MonthlyCalendarService.MarkClosed(_db, calendar, result.roundResultId);
                 if (_db.Update(next) != 1)
                     throw new InvalidOperationException("The monthly session update was not persisted.");
             });
 
-            if (result == null) return null;
-            GameSessionState.AcceptMonthlySettlement(next);
+            if (next == null) return;
+            if (GameSessionState.Current?.sessionId == next.sessionId)
+                GameSessionState.AcceptMonthlySettlement(next);
             Debug.Log($"[RoundService] Month {result.round} settled: customers={result.customers}, revenue={result.grossRevenue:F2}, cash={result.closingCash:F2}, reputation={result.reputationAtEnd}.");
-            return result;
-        }
-        finally
-        {
-            _processing = false;
-        }
+        });
+        return result;
     }
 
     // Retained for existing quarter-flow fixtures. Production uses the transaction above.

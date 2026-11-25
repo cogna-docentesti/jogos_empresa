@@ -48,7 +48,7 @@ namespace Game.Adapter.In.Controllers
             var state = GameManager.Instance?.StateMachine;
             if (SharedModalFocus.Active != null || state == null || (state.CurrentState != GameState.Management_Hub
                 && state.CurrentState != GameState.Round_Sales && state.CurrentState != GameState.Round_Event)) return;
-            if (!GameSessionService.HasMinimumTeam(GameSessionState.Current))
+            if (GameSessionState.Current.calendarMonthLocked == 0 && !GameSessionService.HasMinimumTeam(GameSessionState.Current))
             {
                 if (state.CurrentState == GameState.Management_Hub)
                     MenuNavigator.Instance?.Open(PanelId.Team);
@@ -89,10 +89,9 @@ namespace Game.Adapter.In.Controllers
                 if (screen.IsAwaitingChoice) return null;
             var session = GameSessionState.Current;
             var state = GameManager.Instance.StateMachine.CurrentState;
-            if (state != GameState.Management_Hub && state != GameState.Round_Sales && state != GameState.Round_Event)
+            if (state != GameState.Round_Sales && state != GameState.Round_Event)
                 return null;
             var service = new GameSessionService(session.userId, session.professorId);
-            if (state == GameState.Management_Hub) service.StartRound();
             return service.ProcessCurrentRound();
         }
     }

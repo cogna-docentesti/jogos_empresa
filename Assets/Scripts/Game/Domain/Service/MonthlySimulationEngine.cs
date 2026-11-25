@@ -10,6 +10,25 @@ public static class MonthlySimulationEngine
 
     public static RoundResultEntity Calculate(MonthlySimulationContext context)
     {
+        var opening = Prepare(context);
+        return Calculate(context.Session, opening, context.Events);
+    }
+
+    // The calendar fixes these inputs at opening so catalogue changes cannot change a reserved month.
+    [Serializable]
+    internal sealed class Opening
+    {
+        public int days, productCount;
+        public double baseDemand, demand, capacity, ticket, supplySum, quality;
+        public float rent, utilities, payroll, loanPrincipal, loanPayment;
+        public float satisfactoryServiceRatio, qualityReputationScale;
+        public int satisfactoryServiceGain, poorServicePenalty, alignmentScore;
+        public float alignmentFactor;
+        public string alignmentClassification;
+    }
+
+    internal static Opening Prepare(MonthlySimulationContext context)
+    {
         if (context == null) throw new ArgumentNullException(nameof(context));
         var session = context.Session;
         var restaurant = context.Restaurant;
@@ -128,7 +147,32 @@ public static class MonthlySimulationEngine
             baseDemand = Math.Min(baseDemand, restaurant.estimatedMonthlyCustomers);
         double monthlyDemand = baseDemand * alignment.alignmentFactor * priceFactor * reputationFactor;
 
-        var events = ReadEvents(context, settings.operatingDays);
+        float loanPrincipal = 0f, loanPayment = 0f;
+        if (session.loanBalance > 0f)
+        {
+            Require(context.CreditLine != null && context.CreditLine.id == session.creditLineId, "The active credit line is missing.");
+            NonNegative(context.CreditLine.monthlyInterestRate, "Monthly interest rate");
+            loanPrincipal = Money(session.currentRound == CycleMonths ? session.loanBalance
+                : LoanService.PrincipalPayment(session.loanBalance, session.currentRound));
+            loanPayment = Money(loanPrincipal + session.loanBalance * (double)context.CreditLine.monthlyInterestRate);
+        }
+        return new Opening
+        {
+            days = settings.operatingDays, baseDemand = baseDemand, demand = monthlyDemand, capacity = capacity, ticket = ticket,
+            supplySum = supplySum, productCount = productIds.Count, quality = quality,
+            rent = Money(location.rent), utilities = Money(restaurant.baseMonthlyCost), payroll = Money(salaries),
+            loanPrincipal = loanPrincipal, loanPayment = loanPayment,
+            satisfactoryServiceRatio = settings.satisfactoryServiceRatio, qualityReputationScale = settings.qualityReputationScale,
+            satisfactoryServiceGain = settings.satisfactoryServiceReputationGain, poorServicePenalty = settings.poorServiceReputationPenalty,
+            alignmentScore = alignment.totalScore, alignmentFactor = alignment.alignmentFactor,
+            alignmentClassification = alignment.classification.ToString()
+        };
+    }
+
+    internal static RoundResultEntity Calculate(GameSessionEntity session, Opening opening,
+        IReadOnlyList<SessionEventHistoryEntity> history)
+    {
+        var events = ReadEvents(session, history, opening.days);
         double potential = 0d, served = 0d, revenue = 0d, supplies = 0d;
         double cashImpact = 0d;
         long eventReputation = 0;
@@ -137,7 +181,7 @@ public static class MonthlySimulationEngine
             cashImpact += item.History.cashChange;
             eventReputation += item.History.reputationChange;
         }
-        for (int day = 1; day <= settings.operatingDays; day++)
+        for (int day = 1; day <= opening.days; day++)
         {
             double demandMultiplier = 1d, capacityMultiplier = 1d, stockMultiplier = 1d;
             double costMultiplier = 1d, ticketMultiplier = 1d, extraClients = 0d;
@@ -151,13 +195,13 @@ public static class MonthlySimulationEngine
                 costMultiplier *= item.Effect.ingredientCostMultiplier;
                 ticketMultiplier *= item.Effect.averageTicketMultiplier;
             }
-            double demand = Math.Max(0d, monthlyDemand / settings.operatingDays * demandMultiplier + extraClients);
-            double dailyCapacity = capacity / settings.operatingDays * capacityMultiplier * stockMultiplier;
+            double demand = Math.Max(0d, opening.demand / opening.days * demandMultiplier + extraClients);
+            double dailyCapacity = opening.capacity / opening.days * capacityMultiplier * stockMultiplier;
             double clients = Math.Min(demand, dailyCapacity);
             potential += demand;
             served += clients;
-            revenue += clients * ticket * ticketMultiplier;
-            supplies += clients * supplySum / productIds.Count * costMultiplier;
+            revenue += clients * opening.ticket * ticketMultiplier;
+            supplies += clients * opening.supplySum / opening.productCount * costMultiplier;
         }
 
         int customers = WholeCustomers(served);
@@ -165,42 +209,32 @@ public static class MonthlySimulationEngine
         double wholeCustomerRatio = served > 0d ? customers / served : 0d;
         float grossRevenue = Money(revenue * wholeCustomerRatio);
         float supplyCost = Money(supplies * wholeCustomerRatio);
-        float payroll = Money(salaries);
-        float loanPrincipal = 0f, loanPayment = 0f;
-        if (session.loanBalance > 0f)
-        {
-            Require(context.CreditLine != null && context.CreditLine.id == session.creditLineId, "The active credit line is missing.");
-            NonNegative(context.CreditLine.monthlyInterestRate, "Monthly interest rate");
-            loanPrincipal = session.currentRound == CycleMonths ? session.loanBalance
-                : Money(LoanService.PrincipalPayment(session.loanBalance, session.currentRound));
-            loanPayment = Money(loanPrincipal + session.loanBalance * (double)context.CreditLine.monthlyInterestRate);
-        }
         float eventCash = Money(cashImpact);
-        float net = Money((double)grossRevenue - supplyCost - location.rent - payroll - restaurant.baseMonthlyCost - loanPayment + eventCash);
+        float net = Money((double)grossRevenue - supplyCost - opening.rent - opening.payroll - opening.utilities - opening.loanPayment + eventCash);
         double serviceRatio = potential > 0d ? customers / potential : 0d;
-        long operationalReputation = potential > 0d && serviceRatio >= settings.satisfactoryServiceRatio
-            ? settings.satisfactoryServiceReputationGain + (long)Math.Round(Clamp(quality, 0d, 1d) * settings.qualityReputationScale, MidpointRounding.AwayFromZero)
-            : settings.poorServiceReputationPenalty;
+        long operationalReputation = potential > 0d && serviceRatio >= opening.satisfactoryServiceRatio
+            ? opening.satisfactoryServiceGain + (long)Math.Round(Clamp(opening.quality, 0d, 1d) * opening.qualityReputationScale, MidpointRounding.AwayFromZero)
+            : opening.poorServicePenalty;
         int reputationAtEnd = (int)Clamp(session.reputationScore + eventReputation + operationalReputation, 0d, 100d);
 
         return new RoundResultEntity
         {
             sessionId = session.sessionId, round = session.currentRound,
-            baseDemand = WholeCustomers(baseDemand), potentialDemand = WholeCustomers(potential),
-            serviceCapacity = WholeCustomers(capacity), customers = customers,
-            averageTicket = customers > 0 ? Money((double)grossRevenue / customers) : Money(ticket),
-            grossRevenue = grossRevenue, supplyCost = supplyCost, rent = location.rent,
-            salaries = payroll, utilities = restaurant.baseMonthlyCost,
-            loanPayment = loanPayment, loanPrincipalPayment = loanPrincipal,
+            baseDemand = WholeCustomers(opening.baseDemand), potentialDemand = WholeCustomers(potential),
+            serviceCapacity = WholeCustomers(opening.capacity), customers = customers,
+            averageTicket = customers > 0 ? Money((double)grossRevenue / customers) : Money(opening.ticket),
+            grossRevenue = grossRevenue, supplyCost = supplyCost, rent = opening.rent,
+            salaries = opening.payroll, utilities = opening.utilities,
+            loanPayment = opening.loanPayment, loanPrincipalPayment = opening.loanPrincipal,
             thirteenthSalary = 0f, eventCashImpact = eventCash,
             netResult = net, openingCash = session.currentCash, closingCash = Money((double)session.currentCash + net),
             reputationAtStart = session.reputationScore, reputationAtEnd = reputationAtEnd,
             reputationDelta = reputationAtEnd - session.reputationScore,
-            coherenceFactor = alignment.alignmentFactor,
+            coherenceFactor = opening.alignmentFactor,
             eventId = events.Count == 1 ? events[0].History.eventId : null,
             eventChoice = -1,
-            alignmentScore = alignment.totalScore,
-            alignmentClassification = alignment.classification.ToString()
+            alignmentScore = opening.alignmentScore,
+            alignmentClassification = opening.alignmentClassification
         };
     }
 
@@ -210,13 +244,13 @@ public static class MonthlySimulationEngine
         public EventEffectData Effect;
     }
 
-    private static List<RecordedEffect> ReadEvents(MonthlySimulationContext context, int days)
+    private static List<RecordedEffect> ReadEvents(GameSessionEntity session, IReadOnlyList<SessionEventHistoryEntity> records, int days)
     {
         var result = new List<RecordedEffect>();
         var ids = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var history in context.Events ?? Array.Empty<SessionEventHistoryEntity>())
+        foreach (var history in records ?? Array.Empty<SessionEventHistoryEntity>())
         {
-            Require(history != null && history.sessionId == context.Session.sessionId && history.round == context.Session.currentRound,
+            Require(history != null && history.sessionId == session.sessionId && history.round == session.currentRound,
                 "Event history belongs to another session or month.");
             Require(!string.IsNullOrWhiteSpace(history.historyId) && ids.Add(history.historyId), "Event history is missing an ID or duplicated.");
             Require(history.day >= 1 && history.day <= days, "An event day is outside the operating month.");

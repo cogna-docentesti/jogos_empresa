@@ -84,6 +84,7 @@ namespace Game.Adapter.In.Controllers
         private void ConfirmSelection()
         {
             if (_selectedCreditLine == null || !GameSessionState.HasActiveSession) return;
+            if (!GameSessionState.CanEditMonthlyDecisions) return;
             GetComponent<ContextualHelp>()?.Complete();
             bool contractedNow = false;
             if (!_selectionLocked)

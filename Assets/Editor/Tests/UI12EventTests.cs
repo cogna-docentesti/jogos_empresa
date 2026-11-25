@@ -21,7 +21,7 @@ public sealed class UI12EventTests
     [SetUp] public void Setup()
     {
         GameSessionState.Clear(); previous = DatabaseInitializer.DatabaseService;
-        db = new SQLiteConnection(":memory:"); db.CreateTable<GameSessionEntity>(); db.CreateTable<RoundResultEntity>(); db.CreateTable<SessionEventHistoryEntity>();
+        db = new SQLiteConnection(":memory:"); db.CreateTable<GameSessionEntity>(); db.CreateTable<RoundResultEntity>(); db.CreateTable<SessionEventHistoryEntity>(); db.CreateTable<MonthlyEventPlanEntity>();
         databaseObject = new GameObject("UI12IsolatedDatabase"); var database = databaseObject.AddComponent<DatabaseService>();
         typeof(DatabaseService).GetProperty("Connection").SetValue(database, db); typeof(DatabaseInitializer).GetProperty("DatabaseService").SetValue(null, database);
         session = new GameSessionService("ui12-test", "test-professor").CreateNewSession();
@@ -62,10 +62,11 @@ public sealed class UI12EventTests
         Assert.AreEqual(option.id, first.selectedChoiceId); Assert.AreEqual(option.effects.cashDelta, first.cashChange); Assert.AreEqual(option.effects.reputationDelta, first.reputationChange);
         Assert.AreEqual(JsonUtility.ToJson(option.effects), first.effectsJson); Assert.AreEqual(65000, GameSessionState.Current.currentCash); Assert.AreEqual(50, GameSessionState.Current.reputationScore);
         var forecast = MonthlySimulationEngine.Calculate(MonthlySimulationCatalog.Load(session, new[] { first }));
-        var settled = new RoundService(db, MonthlySimulationCatalog.Load).ProcessRound(1);
+        CalendarTestFlow.Complete(db);
+        var settled = new RoundService(db).ProcessRound(1);
         Assert.AreEqual(forecast.closingCash, settled.closingCash); Assert.AreEqual(forecast.reputationAtEnd, settled.reputationAtEnd);
         float cash = GameSessionState.Current.currentCash; int reputation = GameSessionState.Current.reputationScore;
-        Assert.AreEqual(settled.roundResultId, new RoundService(db, MonthlySimulationCatalog.Load).ProcessRound(1).roundResultId);
+        Assert.AreEqual(settled.roundResultId, new RoundService(db).ProcessRound(1).roundResultId);
         Assert.AreEqual(first.historyId, service.Confirm(session.sessionId, 1, 16, data, option).historyId);
         Assert.AreEqual(cash, GameSessionState.Current.currentCash); Assert.AreEqual(reputation, GameSessionState.Current.reputationScore);
     }

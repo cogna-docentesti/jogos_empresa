@@ -32,6 +32,8 @@ public static class GameSessionState
     /// LoadActiveSession ou ja passou pelo Persist() do confirm da D3.
     /// </summary>
     public static bool IsPersisted { get; private set; }
+    public static bool CanEditMonthlyDecisions => Current != null && Current.calendarMonthLocked == 0
+        && string.IsNullOrEmpty(Current.pendingSummaryResultId);
 
     /// <summary>
     /// True quando algo mudou na sessao em memoria e ainda nao foi gravado.
@@ -106,6 +108,7 @@ public static class GameSessionState
         Current.alignmentFactor = settled.alignmentFactor;
         Current.coherenceRating = settled.coherenceRating;
         Current.pendingSummaryResultId = settled.pendingSummaryResultId;
+        Current.calendarMonthLocked = settled.calendarMonthLocked;
         IsPersisted = true;
         HasUnsavedChanges = false;
     }
@@ -268,7 +271,7 @@ public static class GameSessionState
 
     private static bool IsLockedForSetup(string what)
     {
-        if (Current.currentRound <= 1)
+        if (Current.currentRound <= 1 && CanEditMonthlyDecisions)
             return false;
 
         Debug.LogWarning($"Não é possível alterar {what} após o início da campanha.");
@@ -337,7 +340,7 @@ public static class GameSessionState
 
     public static void SetSelectedPrice(float selectedPrice)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.selectedPrice = Mathf.Max(0f, selectedPrice);
@@ -346,7 +349,7 @@ public static class GameSessionState
 
     public static void SetMenuPricingJson(string json, bool save = false)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.menuPricingJson = string.IsNullOrWhiteSpace(json)
@@ -377,7 +380,7 @@ public static class GameSessionState
 
     public static void SetCash(float value, bool save = true)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.currentCash = value;
@@ -390,7 +393,7 @@ public static class GameSessionState
 
     public static void AddCash(float value, bool save = true)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.currentCash += value;
@@ -403,7 +406,7 @@ public static class GameSessionState
 
     public static void SetLoan(string creditLineId, float loanBalance, bool save = true)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.creditLineId = creditLineId;
@@ -417,7 +420,7 @@ public static class GameSessionState
 
     public static void SetReputation(int value, bool save = true)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.reputationScore = Mathf.Clamp(value, 0, 100);
@@ -430,7 +433,7 @@ public static class GameSessionState
 
     public static void SetTeamJson(string json, bool save = true)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.teamJson = json;
@@ -443,7 +446,7 @@ public static class GameSessionState
 
     public static void SetEquipmentJson(string json, bool save = true)
     {
-        if (Current == null)
+        if (!CanEditMonthlyDecisions)
             return;
 
         Current.equipmentJson = json;
@@ -472,7 +475,7 @@ public static class GameSessionState
 
     public static void SetAlignment(AlignmentResult result)
     {
-        if (Current == null || result == null)
+        if (!CanEditMonthlyDecisions || result == null)
             return;
 
         Current.alignmentScore = result.totalScore;
@@ -484,7 +487,7 @@ public static class GameSessionState
 
     public static void AdvanceRound(bool save = true)
     {
-        if (!HasActiveSession)
+        if (!HasActiveSession || !CanEditMonthlyDecisions)
             return;
 
         if (Current.currentRound < 1 || Current.currentRound >= 3)

@@ -98,11 +98,11 @@ public sealed class UI19NavigationTests
         db.Execute("CREATE TRIGGER reject_ack BEFORE UPDATE ON GameSessionEntity BEGIN SELECT RAISE(ABORT, 'isolated ack failure'); END");
         Assert.Throws<SQLiteException>(() => Service.ContinueAfterSummary("result")); Assert.AreEqual(GameState.Round_Summary, States.CurrentState); Assert.AreEqual("result", GameSessionState.Current.pendingSummaryResultId);
     }
-    [Test] public void SavedEventPlanResumesItsDecisionWithoutRedrawingOrSettling()
+    [Test] public void LegacyEventPlanReturnsToPreparationWithoutRedrawingOrSettling()
     {
         var s = Seed(staffed: true); string entries = "{\"entries\":[{\"eventId\":\"saved\",\"day\":6}]}";
         db.Insert(new MonthlyEventPlanEntity { planId = s.sessionId + ":1", sessionId = s.sessionId, month = 1, entriesJson = entries });
-        Prepare(); Assert.AreEqual(GameState.Round_Event, States.CurrentState); Assert.IsTrue(new MonthlyEventDecisionService(db).HasUnconfirmedChoices(GameSessionState.Current));
+        Prepare(); Assert.AreEqual(GameState.Management_Hub, States.CurrentState); Assert.IsNull(new MonthlyCalendarService(db).Read(s.sessionId, 1));
         Assert.IsNull(Service.ProcessCurrentRound()); Assert.AreEqual(0, db.Table<RoundResultEntity>().Count()); Assert.AreEqual(entries, db.Table<MonthlyEventPlanEntity>().First().entriesJson);
     }
     [Test] public void PendingSummaryPreventsStartingTheNextMonth()

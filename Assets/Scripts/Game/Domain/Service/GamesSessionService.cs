@@ -238,7 +238,7 @@ public class GameSessionService
     /// <summary>Same alignment calculation for setup and hub visits; does not navigate or debit payroll.</summary>
     public bool SaveTeamAlignment(List<RoleData> availableRoles)
     {
-        if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted) return false;
+        if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted || !GameSessionState.CanEditMonthlyDecisions) return false;
         var session = GameSessionState.Current;
         var restaurantData = GetRestaurantData(session.restaurantType);
         if (!TeamSelectionHelper.HasMinimumStaff(restaurantData, session.teamJson)) return false;
@@ -435,7 +435,7 @@ public class GameSessionService
     public bool BeginEventDecisions()
     {
         if (!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted
-            || !HasMinimumTeam(GameSessionState.Current)) return false;
+            || (GameSessionState.Current.calendarMonthLocked == 0 && !HasMinimumTeam(GameSessionState.Current))) return false;
         return EnterEventState(GameManager.Instance?.StateMachine);
     }
 
@@ -449,7 +449,6 @@ public class GameSessionService
     {
         if (!GameSessionState.HasActiveSession || GameManager.Instance?.StateMachine == null)
             return null;
-        if (!HasMinimumTeam(GameSessionState.Current)) return null;
 
         var sm = GameManager.Instance.StateMachine;
 
@@ -462,10 +461,7 @@ public class GameSessionService
         RoundResultEntity result;
         try
         {
-            if (!string.IsNullOrEmpty(GameSessionState.Current.pendingSummaryResultId)
-                || new MonthlyEventDecisionService(DatabaseInitializer.DatabaseService.Connection)
-                    .HasUnconfirmedChoices(GameSessionState.Current)) return null;
-            result = new RoundService().ProcessRound();
+            result = new RoundService().ProcessRound(GameSessionState.Current.currentRound);
             if (result == null) return null;
         }
         catch (Exception exception)

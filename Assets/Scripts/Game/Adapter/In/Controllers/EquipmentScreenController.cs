@@ -295,6 +295,7 @@ namespace Game.Adapter.In.Controllers
         private void CompleteCartPurchase()
         {
             if (!isActiveAndEnabled || !ready || !GameSessionState.HasActiveSession) return;
+            if (!GameSessionState.CanEditMonthlyDecisions) return;
             LoadOwnedEquipmentIds();
             if (cartEquipmentIds.RemoveWhere(ownedEquipmentIds.Contains) > 0)
             {

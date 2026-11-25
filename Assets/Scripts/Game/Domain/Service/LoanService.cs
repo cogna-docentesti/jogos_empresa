@@ -26,7 +26,7 @@ public static class LoanService
         return session != null && (session.loanBalance > 0f || FindLine(session.creditLineId)?.maxAmount > 0f);
     }
 
-    public static bool CanContract => GameSessionState.HasActiveSession
+    public static bool CanContract => GameSessionState.HasActiveSession && GameSessionState.CanEditMonthlyDecisions
         && ContractTerm(GameSessionState.Current.currentRound) > 0 && !HasLoan(GameSessionState.Current);
 
     public static bool TryContract(CreditLineData line)

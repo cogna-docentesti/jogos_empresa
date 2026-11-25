@@ -20,40 +20,52 @@ public sealed class MonthlyEventDecisionService
         if (session == null || catalog == null || operatingDays < 1 || operatingDays > 31)
             throw new InvalidOperationException("Event context is unavailable.");
         db.CreateTable<MonthlyEventPlanEntity>();
-        Plan plan = null;
+        IReadOnlyList<Entry> entries = null;
         db.RunInTransaction(() =>
         {
             var stored = RequireActiveMonth(session.sessionId, session.currentRound);
             if (!GameSessionService.HasMinimumTeam(stored)
                 || (stored.teamJson != session.teamJson && !GameSessionService.HasMinimumTeam(session)))
                 throw new InvalidOperationException("The month requires the restaurant's minimum staffing.");
-            string key = session.sessionId + ":" + session.currentRound;
-            var saved = db.Find<MonthlyEventPlanEntity>(key);
-            if (saved != null)
-            {
-                plan = JsonUtility.FromJson<Plan>(saved.entriesJson);
-                if (plan?.entries == null || plan.entries.Any(e => e == null || e.day < 1 || e.day > operatingDays || !catalog.Any(c => c != null && c.id == e.eventId))
-                    || plan.entries.Select(e => e.eventId).Distinct().Count() != plan.entries.Count)
-                    throw new InvalidOperationException("The saved event plan is invalid.");
-                return;
-            }
-            var history = new SessionEventHistoryRepository(db).GetBySession(session.sessionId);
-            var month = history.Where(h => h.round == session.currentRound).ToList();
-            var used = catalog.Where(e => e != null && month.Any(h => h.eventId == e.id)).Select(e => e.exclusionGroup);
-            var selection = selector.SelectEventsForMonth(new MonthlyEventSelectionContext
-            {
-                Session = session, Month = session.currentRound, Restaurant = restaurant,
-                EquipmentCatalog = equipment, EventCatalog = catalog,
-                OccurredEventIds = history.Select(h => h.eventId), ReservedEventIds = month.Select(h => h.eventId),
-                UsedGroupsInMonth = used, AlreadySelectedCountInMonth = month.Count
-            });
-            if (!selection.IsValid) throw new InvalidOperationException(string.Join(" ", selection.Diagnostics));
-            plan = new Plan();
-            for (int i = 0; i < selection.Events.Count; i++)
-                plan.entries.Add(new Entry { eventId = selection.Events[i].id, day = Math.Max(1, (i + 1) * operatingDays / (selection.Events.Count + 1)) });
-            db.Insert(new MonthlyEventPlanEntity { planId = key, sessionId = session.sessionId, month = session.currentRound, entriesJson = JsonUtility.ToJson(plan) });
+            if (stored.calendarMonthLocked != 0)
+                throw new InvalidOperationException("Read active commitments through the calendar projection.");
+            entries = Reserve(stored, catalog, restaurant, equipment, operatingDays);
         });
-        return plan.entries.AsReadOnly();
+        return entries;
+    }
+
+    internal static string PlanKey(string sessionId, int month) => sessionId + ":" + month;
+
+    // The caller owns the transaction so reservation and calendar opening commit together.
+    internal IReadOnlyList<Entry> Reserve(GameSessionEntity session, IReadOnlyList<EventData> catalog,
+        RestaurantData restaurant, IReadOnlyList<EquipmentData> equipment, int operatingDays)
+    {
+        string key = PlanKey(session.sessionId, session.currentRound);
+        var saved = db.Find<MonthlyEventPlanEntity>(key);
+        if (saved != null)
+        {
+            var plan = JsonUtility.FromJson<Plan>(saved.entriesJson);
+            if (plan?.entries == null || plan.entries.Any(e => e == null || e.day < 1 || e.day > operatingDays || string.IsNullOrWhiteSpace(e.eventId))
+                || plan.entries.Select(e => e.eventId).Distinct().Count() != plan.entries.Count)
+                throw new InvalidOperationException("The saved event plan is invalid.");
+            return plan.entries.AsReadOnly();
+        }
+        var history = new SessionEventHistoryRepository(db).GetBySession(session.sessionId);
+        var month = history.Where(h => h.round == session.currentRound).ToList();
+        var used = catalog.Where(e => e != null && month.Any(h => h.eventId == e.id)).Select(e => e.exclusionGroup);
+        var selection = selector.SelectEventsForMonth(new MonthlyEventSelectionContext
+        {
+            Session = session, Month = session.currentRound, Restaurant = restaurant,
+            EquipmentCatalog = equipment, EventCatalog = catalog,
+            OccurredEventIds = history.Select(h => h.eventId), ReservedEventIds = month.Select(h => h.eventId),
+            UsedGroupsInMonth = used, AlreadySelectedCountInMonth = month.Count
+        });
+        if (!selection.IsValid) throw new InvalidOperationException(string.Join(" ", selection.Diagnostics));
+        var reserved = new Plan();
+        for (int i = 0; i < selection.Events.Count; i++)
+            reserved.entries.Add(new Entry { eventId = selection.Events[i].id, day = Math.Max(1, (i + 1) * operatingDays / (selection.Events.Count + 1)) });
+        db.Insert(new MonthlyEventPlanEntity { planId = key, sessionId = session.sessionId, month = session.currentRound, entriesJson = JsonUtility.ToJson(reserved) });
+        return reserved.entries.AsReadOnly();
     }
 
     public SessionEventHistoryEntity Confirm(string sessionId, int month, int day, EventData data, EventOption option)
@@ -62,39 +74,38 @@ public sealed class MonthlyEventDecisionService
             !data.options.Contains(option) || string.IsNullOrWhiteSpace(option.id) || option.effects == null || day < 1 || day > 31)
             throw new InvalidOperationException("Event or choice is unavailable.");
         SessionEventHistoryEntity record = null;
-        db.RunInTransaction(() =>
+        db.RunInDatabaseLock(() =>
         {
-            // An occurrence is identified by session/month/event/day, including a retry after settlement.
-            var repository = new SessionEventHistoryRepository(db);
-            record = repository.GetBySessionAndRound(sessionId, month).SingleOrDefault(h => h.eventId == data.id && h.day == day);
-            if (record != null)
+            if (db.IsInTransaction) throw new InvalidOperationException("Event confirmation requires its own transaction.");
+            db.RunInTransaction(() =>
             {
-                if (record.selectedChoiceId != option.id) throw new InvalidOperationException("This occurrence has already been confirmed.");
-                return;
-            }
-            RequireActiveMonth(sessionId, month);
-            record = repository.RecordFromOption(sessionId, month, day, data, option);
+                // An occurrence is identified by session/month/event/day, including a retry after settlement.
+                var repository = new SessionEventHistoryRepository(db);
+                record = repository.GetBySessionAndRound(sessionId, month).SingleOrDefault(h => h.eventId == data.id && h.day == day);
+                if (record != null)
+                {
+                    if (record.selectedChoiceId != option.id) throw new InvalidOperationException("This occurrence has already been confirmed.");
+                    return;
+                }
+                var stored = RequireActiveMonth(sessionId, month);
+                if (stored.calendarMonthLocked != 0)
+                {
+                    record = MonthlyCalendarService.ConfirmPending(db, stored, day, data, option, repository);
+                    return;
+                }
+                record = repository.RecordFromOption(sessionId, month, day, data, option);
+            });
         });
         return record;
     }
 
-    private GameSessionEntity RequireActiveMonth(string sessionId, int month)
+    internal GameSessionEntity RequireActiveMonth(string sessionId, int month)
     {
         var stored = new GameSessionRepository(db).GetById(sessionId);
-        if (stored == null || stored.status != GameSessionStatus.IN_PROGRESS || stored.currentRound != month || month < 1 || month > 3
+        if (stored == null || stored.status != GameSessionStatus.IN_PROGRESS || stored.currentRound != month || !string.IsNullOrEmpty(stored.pendingSummaryResultId) || month < 1 || month > 3
             || new RoundResultRepository(db).GetBySessionAndRound(sessionId, month) != null)
             throw new InvalidOperationException("Events require a persisted, unsettled active month.");
         return stored;
     }
 
-    public bool HasUnconfirmedChoices(GameSessionEntity session)
-    {
-        db.CreateTable<MonthlyEventPlanEntity>();
-        var saved = db.Find<MonthlyEventPlanEntity>(session.sessionId + ":" + session.currentRound);
-        if (saved == null) return false;
-        var plan = JsonUtility.FromJson<Plan>(saved.entriesJson);
-        if (plan?.entries == null) throw new InvalidOperationException("The saved event plan is invalid.");
-        var history = new SessionEventHistoryRepository(db).GetBySessionAndRound(session.sessionId, session.currentRound);
-        return plan.entries.Any(e => !history.Any(h => h.eventId == e.eventId && h.day == e.day));
-    }
 }

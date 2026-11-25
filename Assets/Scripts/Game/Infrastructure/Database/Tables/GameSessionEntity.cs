@@ -88,6 +88,7 @@ public class GameSessionEntity
     // Nullable presentation metadata: older saves retain their existing resume behavior.
     public int? initialSetupResumeState { get; set; }
     public string pendingSummaryResultId { get; set; }
+    public int calendarMonthLocked { get; set; }
 
     /// <summary>Creates a detached copy for transactional settlement.</summary>
     public GameSessionEntity Copy() => (GameSessionEntity)MemberwiseClone();

@@ -21,6 +21,7 @@ public class MonthlySimulationTests
         _db = new SQLiteConnection(":memory:");
         _db.CreateTable<GameSessionEntity>();
         _db.CreateTable<RoundResultEntity>();
+        _db.CreateTable<MonthlyEventPlanEntity>();
         _db.CreateTable<SessionEventHistoryEntity>();
         _databaseObject = new GameObject("MonthlySimulationTestDatabase");
         var service = _databaseObject.AddComponent<DatabaseService>();
@@ -209,7 +210,7 @@ public class MonthlySimulationTests
     [Test]
     public void EventsCannotChangeAnAlreadySettledStatement()
     {
-        Service().ProcessRound(1);
+        Settle(Service(), 1);
         Assert.Throws<InvalidOperationException>(() => new SessionEventHistoryRepository(_db)
             .Record(_context.Session.sessionId, 1, 1, null, null, 999f, 10, 0));
         Assert.AreEqual(0, _db.Table<SessionEventHistoryEntity>().Count());
@@ -256,7 +257,7 @@ public class MonthlySimulationTests
     public void SettlementPersistsStatementAndSessionAndExplicitRetryIsIdempotent()
     {
         var service = Service();
-        var first = service.ProcessRound(1);
+        var first = Settle(service, 1);
         float cash = _context.Session.currentCash;
         var retry = service.ProcessRound(1);
         Assert.AreEqual(first.roundResultId, retry.roundResultId);
@@ -272,13 +273,15 @@ public class MonthlySimulationTests
     [Test]
     public void DatabaseFailureRollsBackResultAndPreservesMemoryAndAllowsRetry()
     {
+        CompleteCalendar();
+        float cash = _context.Session.currentCash;
         _db.Execute("CREATE TRIGGER reject_month BEFORE UPDATE ON GameSessionEntity BEGIN SELECT RAISE(ABORT, 'Injected settlement failure'); END");
         Assert.Throws<SQLiteException>(() => Service().ProcessRound(1));
         Assert.AreEqual(0, _db.Table<RoundResultEntity>().Count());
         Assert.AreEqual(1, _context.Session.currentRound);
-        Assert.AreEqual(10000f, _context.Session.currentCash);
+        Assert.AreEqual(cash, _context.Session.currentCash);
         Assert.AreEqual(50, _context.Session.reputationScore);
-        Assert.AreEqual(10000f, _db.Table<GameSessionEntity>().Single().currentCash);
+        Assert.AreEqual(cash, _db.Table<GameSessionEntity>().Single().currentCash);
         _db.Execute("DROP TRIGGER reject_month");
         Assert.IsNotNull(Service().ProcessRound(1));
     }
@@ -293,10 +296,10 @@ public class MonthlySimulationTests
         _context.Session.creditLineId = line.id;
         GameSessionState.Save();
         var service = Service();
-        var first = service.ProcessRound(1);
+        var first = Settle(service, 1);
         Assert.AreEqual(353.33f, first.loanPayment);
-        service.ProcessRound(2);
-        var last = service.ProcessRound(3);
+        Settle(service, 2);
+        var last = Settle(service, 3);
         Assert.AreEqual(GameSessionStatus.COMPLETED, _context.Session.status);
         Assert.AreEqual(0f, _context.Session.loanBalance);
         Assert.IsNotNull(_context.Session.completedAt);
@@ -310,15 +313,16 @@ public class MonthlySimulationTests
     public void MonthTwoLoanUsesTwoInstallmentsAndClearsTheRemainingBalance()
     {
         var service = Service();
-        service.ProcessRound(1);
+        Settle(service, 1);
+        AcknowledgeTestSummary();
         var line = Asset<CreditLineData>();
         line.id = "late_credit"; line.monthlyInterestRate = 0.02f;
         _context.CreditLine = line;
         _context.Session.loanBalance = 900f;
         _context.Session.creditLineId = line.id;
         GameSessionState.Save();
-        Assert.AreEqual(468f, service.ProcessRound(2).loanPayment);
-        Assert.AreEqual(459f, service.ProcessRound(3).loanPayment);
+        Assert.AreEqual(468f, Settle(service, 2).loanPayment);
+        Assert.AreEqual(459f, Settle(service, 3).loanPayment);
         Assert.AreEqual(0f, _context.Session.loanBalance);
     }
 
@@ -340,6 +344,8 @@ public class MonthlySimulationTests
             {
                 service.StartRound();
                 Assert.AreEqual(GameState.Round_Sales, states.CurrentState);
+                Assert.IsNull(service.ProcessCurrentRound());
+                CalendarTestFlow.Complete(_db);
                 var result = service.ProcessCurrentRound();
                 Assert.IsNotNull(result);
                 Assert.AreEqual(GameState.Round_Summary, states.CurrentState);
@@ -364,7 +370,7 @@ public class MonthlySimulationTests
     {
         _context.Location.rent = 20000;
         var service = Service();
-        service.ProcessRound(1); service.ProcessRound(2); service.ProcessRound(3);
+        Settle(service, 1); Settle(service, 2); Settle(service, 3);
         Assert.AreEqual(GameSessionStatus.BANKRUPT, _context.Session.status);
         Assert.AreEqual(3, _context.Session.consecutiveNegativeRounds);
         var session = _context.Session.Copy();
@@ -376,7 +382,7 @@ public class MonthlySimulationTests
     [Test]
     public void ReloadRestoresTheSettledMonthAndReputationForTheNextCalculation()
     {
-        var first = Service().ProcessRound(1);
+        var first = Settle(Service(), 1);
         GameSessionState.Clear();
         GameSessionState.LoadActiveSession("monthly_test");
         Assert.AreEqual(2, GameSessionState.Current.currentRound);
@@ -395,9 +401,195 @@ public class MonthlySimulationTests
         GameSessionState.Persist();
         _context.Session.currentRound = 2;
         GameSessionState.Save();
+        CompleteCalendar();
         Assert.Throws<InvalidOperationException>(() => Service().ProcessRound());
         Assert.AreEqual(0, _db.Table<RoundResultEntity>().Count());
     }
+
+    [Test]
+    public void CalendarResumesMovementAndPaymentsWithoutExposingThePrivateStop()
+    {
+        var id = _context.Session.sessionId;
+        _context.Settings.rentDueDay = _context.Settings.utilitiesDueDay = 20;
+        var catalog = Resources.LoadAll<EventData>("Events");
+        var freezer = catalog.Single(e => e.id == "freezer_breakdown");
+        var festival = catalog.Single(e => e.id == "local_festival");
+        SaveLegacyPlan("{\"entries\":[{\"eventId\":\"freezer_breakdown\",\"day\":16},{\"eventId\":\"local_festival\",\"day\":20}]}");
+        var calendar = new MonthlyCalendarService(_db, contextFactory: TestContext);
+        Assert.IsNull(calendar.Read(id, 1));
+        var view = calendar.Open(id, 1, catalog);
+        Assert.AreEqual(0, view.Day);
+        Assert.AreEqual(20, view.DestinationDay);
+        CollectionAssert.AreEqual(new[] { festival.id }, view.Events.Select(e => e.EventId));
+
+        view = calendar.BeginAdvance(id, 1, view.Revision);
+        int movementRevision = view.Revision;
+        GameSessionState.Clear();
+        GameSessionState.LoadActiveSession("monthly_test");
+        calendar = new MonthlyCalendarService(_db);
+        Assert.True(calendar.Read(id, 1).Moving);
+        Assert.AreEqual(20, calendar.Read(id, 1).DestinationDay);
+        Assert.AreEqual(0, calendar.Step(id, 1, movementRevision, 15).Day);
+        Assert.Throws<InvalidOperationException>(() => new MonthlyEventDecisionService(_db).Confirm(id, 1, 16, freezer, freezer.options[0]));
+        view = calendar.Step(id, 1, movementRevision, 16);
+        Assert.AreEqual(16, view.Day);
+        Assert.AreEqual(freezer.id, calendar.Read(id, 1).Pending.EventId);
+        Assert.False(calendar.BeginAdvance(id, 1, view.Revision).Moving);
+        GameSessionState.SetCash(999999);
+        Assert.AreEqual(10000f, GameSessionState.Current.currentCash);
+        var decisions = new MonthlyEventDecisionService(_db);
+        var record = decisions.Confirm(id, 1, 16, freezer, freezer.options[0]);
+        Assert.AreEqual(record.historyId, decisions.Confirm(id, 1, 16, freezer, freezer.options[0]).historyId);
+        Assert.Throws<InvalidOperationException>(() => decisions.Confirm(id, 1, 16, freezer, freezer.options[1]));
+        Assert.IsNull(calendar.Read(id, 1).Pending);
+
+        view = calendar.BeginAdvance(id, 1, calendar.Read(id, 1).Revision);
+        _db.Execute("CREATE TRIGGER reject_calendar_cash BEFORE UPDATE ON GameSessionEntity BEGIN SELECT RAISE(ABORT, 'Calendar failure'); END");
+        Assert.Throws<SQLiteException>(() => calendar.Step(id, 1, view.Revision, 20));
+        var afterFailure = calendar.Read(id, 1);
+        Assert.AreEqual(16, afterFailure.Day);
+        Assert.True(afterFailure.Moving);
+        Assert.IsEmpty(afterFailure.Receipts);
+        Assert.IsNull(afterFailure.Pending);
+        Assert.AreEqual(10000f, GameSessionState.Current.currentCash);
+        _db.Execute("DROP TRIGGER reject_calendar_cash");
+
+        var arrival = calendar.Step(id, 1, view.Revision, 20);
+        Assert.AreEqual(20, arrival.Day);
+        Assert.AreEqual(festival.id, arrival.Pending.EventId);
+        CollectionAssert.AreEqual(new[] { "rent", "utilities" }, arrival.Receipts.Select(r => r.type));
+        CollectionAssert.AreEqual(new long[] { 950000, 940000 }, arrival.Receipts.Select(r => r.cashAfterCents));
+        Assert.AreEqual(2, calendar.Step(id, 1, view.Revision, 20).Receipts.Count);
+        GameSessionState.Clear();
+        GameSessionState.LoadActiveSession("monthly_test");
+        Assert.AreEqual(9400f, GameSessionState.Current.currentCash);
+        Assert.AreEqual(festival.id, calendar.Read(id, 1).Pending.EventId);
+        Assert.IsNull(Service().ProcessRound(1));
+    }
+
+    [Test]
+    public void CalendarUsesFrozenEconomicsAndSettlesDayThirtyOnlyAfterItsLastDecision()
+    {
+        string id = _context.Session.sessionId;
+        _context.Settings.salariesDueDay = 30;
+        _context.Location.rent = 7000;
+        var catalog = Resources.LoadAll<EventData>("Events");
+        var freezer = catalog.Single(e => e.id == "freezer_breakdown");
+        var festival = catalog.Single(e => e.id == "local_festival");
+        SaveLegacyPlan("{\"entries\":[{\"eventId\":\"local_festival\",\"day\":30},{\"eventId\":\"freezer_breakdown\",\"day\":30}]}");
+        var calendar = new MonthlyCalendarService(_db, contextFactory: TestContext);
+        var view = calendar.Open(id, 1, catalog);
+        _context.Location.rent = 123;
+        _context.Roles[0].salary = 456;
+        _context.Settings.salariesDueDay = 4;
+        for (int i = 0; i < 3; i++)
+        {
+            view = calendar.BeginAdvance(id, 1, view.Revision);
+            view = calendar.Step(id, 1, view.Revision, view.DestinationDay);
+        }
+        Assert.AreEqual(30, view.Day);
+        Assert.AreEqual(-1100f, GameSessionState.Current.currentCash);
+        Assert.AreEqual(freezer.id, view.Pending.EventId);
+        var decisions = new MonthlyEventDecisionService(_db);
+        _db.Execute("CREATE TRIGGER reject_reveal BEFORE UPDATE ON MonthlyEventPlanEntity BEGIN SELECT RAISE(ABORT, 'Choice failure'); END");
+        Assert.Throws<SQLiteException>(() => decisions.Confirm(id, 1, 30, freezer, freezer.options[0]));
+        Assert.IsEmpty(new SessionEventHistoryRepository(_db).GetBySessionAndRound(id, 1));
+        Assert.AreEqual(freezer.id, calendar.Read(id, 1).Pending.EventId);
+        _db.Execute("DROP TRIGGER reject_reveal");
+        decisions.Confirm(id, 1, 30, freezer, freezer.options[0]);
+        Assert.AreEqual(festival.id, calendar.Read(id, 1).Pending.EventId);
+        Assert.IsNull(Service().ProcessRound(1));
+        decisions.Confirm(id, 1, 30, festival, festival.options[0]);
+        Assert.True(calendar.Read(id, 1).ReadyToClose);
+        var row = _db.Find<MonthlyEventPlanEntity>(id + ":1");
+        var incorrect = Newtonsoft.Json.Linq.JObject.Parse(row.calendarJson);
+        ((Newtonsoft.Json.Linq.JObject)incorrect["ledger"][id + ":1:rent:1"])["type"] = "utilities";
+        _db.Execute("UPDATE MonthlyEventPlanEntity SET calendarJson = ? WHERE planId = ?", incorrect.ToString(), row.planId);
+        Assert.Throws<InvalidOperationException>(() => Service().ProcessRound(1));
+        Assert.IsEmpty(_db.Table<RoundResultEntity>().ToList());
+        _db.Update(row);
+        var result = Service().ProcessRound(1);
+        Assert.AreEqual(7000f, result.rent);
+        Assert.AreEqual(4000f, result.salaries);
+        Assert.AreEqual(10000f, result.openingCash);
+        Assert.AreEqual(result.openingCash + result.netResult, result.closingCash, .005f);
+        Assert.AreEqual(result.closingCash, GameSessionState.Current.currentCash);
+        Assert.AreEqual(result.roundResultId, calendar.Read(id, 1).ResultId);
+        Assert.AreEqual(result.roundResultId, Service().ProcessRound(1).roundResultId);
+        Assert.Throws<InvalidOperationException>(() => calendar.Open(id, 2, catalog));
+    }
+
+    [Test]
+    public void CalendarImportsLegacyChoicesAndDoesNotReplaceAnEmptyReservation()
+    {
+        var session = _context.Session;
+        var data = Resources.LoadAll<EventData>("Events").Single(e => e.id == "freezer_breakdown");
+        var before = new MonthlyEventDecisionService(_db).Confirm(session.sessionId, 1, 1, data, data.options[0]);
+        const string empty = "{\"entries\":[]}";
+        SaveLegacyPlan(empty);
+        var calendar = new MonthlyCalendarService(_db, new MonthlyEventSelector(() => throw new Exception("Unexpected draw")), TestContext);
+        var view = calendar.Open(session.sessionId, 1, Array.Empty<EventData>());
+        Assert.AreEqual(data.id, view.Events.Single().EventId);
+        Assert.IsTrue(view.Events.Single().Decided);
+        Assert.AreEqual(5, view.DestinationDay);
+        Assert.AreEqual(before.historyId, new SessionEventHistoryRepository(_db).GetBySessionAndRound(session.sessionId, 1).Single().historyId);
+        Assert.AreEqual(empty, _db.Table<MonthlyEventPlanEntity>().Single().entriesJson);
+        Assert.AreEqual(0, new MonthlyCalendarService(_db).Open(session.sessionId, 1, Array.Empty<EventData>()).Day);
+    }
+
+    [Test]
+    public void CalendarRejectsInvalidLegacyPlanWithoutChangingIt()
+    {
+        const string invalid = "{\"entries\":[{\"eventId\":\"freezer_breakdown\",\"day\":31}]}";
+        SaveLegacyPlan(invalid);
+        var calendar = new MonthlyCalendarService(_db, contextFactory: TestContext);
+        Assert.Throws<InvalidOperationException>(() => calendar.Open(_context.Session.sessionId, 1, Array.Empty<EventData>()));
+        var saved = _db.Table<MonthlyEventPlanEntity>().Single();
+        Assert.AreEqual(invalid, saved.entriesJson);
+        Assert.IsNull(saved.calendarJson);
+        Assert.Zero(_context.Session.calendarMonthLocked);
+    }
+
+    [Test]
+    public void CalendarReceiptsUseShippedRentPayrollAndMicrocredit()
+    {
+        ConfigureShippedMenuAndTeam();
+        var session = _context.Session;
+        session.locationZone = LocationZone.Educacao;
+        session.currentRound = 2;
+        session.loanBalance = 50000;
+        session.creditLineId = "microcredito_empresarial";
+        session.currentCash = 12000;
+        GameSessionState.Save();
+        CalendarTestFlow.Complete(_db);
+
+        var view = new MonthlyCalendarService(_db).Read(session.sessionId, 2);
+        CollectionAssert.AreEqual(new[] { 5, 10, 25, 28 }, view.Receipts.Select(r => r.day));
+        CollectionAssert.AreEqual(new long[] { 600000, 150000, 690000, 2600000 }, view.Receipts.Select(r => r.amountCents));
+        var installment = view.Receipts.Last();
+        Assert.AreEqual(2500000, installment.principalCents);
+        Assert.AreEqual(100000, installment.interestCents);
+        Assert.AreEqual(25000, session.loanBalance);
+        Assert.AreEqual(-28400, session.currentCash);
+    }
+
+    [Test]
+    public void CalendarSchemaUpgradeKeepsPriorReservations()
+    {
+        using var legacy = new SQLiteConnection(":memory:");
+        legacy.Execute("CREATE TABLE MonthlyEventPlanEntity (planId TEXT PRIMARY KEY, sessionId TEXT, month INTEGER, entriesJson TEXT)");
+        legacy.Execute("INSERT INTO MonthlyEventPlanEntity VALUES ('legacy:1', 'legacy', 1, '{\"entries\":[]}')");
+        legacy.CreateTable<MonthlyEventPlanEntity>();
+        var plan = legacy.Find<MonthlyEventPlanEntity>("legacy:1");
+        Assert.AreEqual("{\"entries\":[]}", plan.entriesJson);
+        Assert.IsNull(plan.calendarJson);
+    }
+
+    private void SaveLegacyPlan(string entries) => _db.Insert(new MonthlyEventPlanEntity
+    {
+        planId = _context.Session.sessionId + ":" + _context.Session.currentRound,
+        sessionId = _context.Session.sessionId, month = _context.Session.currentRound, entriesJson = entries
+    });
 
     [Test]
     public void ShippedCatalogAndSummaryUseTheSameMonthlyEngine()
@@ -437,11 +629,29 @@ public class MonthlySimulationTests
         _context.Session.menuPricingJson = MenuPricingHelper.ToJson(MenuPricingHelper.FromProducts(restaurant.products));
         _context.Session.teamJson = "{\"members\":[{\"roleId\":\"attendant\",\"quantity\":2},{\"roleId\":\"grill_cook\",\"quantity\":1}]}";
     }
-    private RoundService Service() => new RoundService(_db, (session, events) => new MonthlySimulationContext
+    private RoundService Service() => new RoundService(_db);
+
+    private RoundResultEntity Settle(RoundService service, int month)
+    {
+        AcknowledgeTestSummary();
+        CompleteCalendar();
+        return service.ProcessRound(month);
+    }
+
+    private void AcknowledgeTestSummary()
+    {
+        GameSessionState.Current.pendingSummaryResultId = null;
+        GameSessionState.Save();
+    }
+
+    private void CompleteCalendar() => CalendarTestFlow.Complete(_db, TestContext);
+
+    private MonthlySimulationContext TestContext(GameSessionEntity session, IReadOnlyList<SessionEventHistoryEntity> events)
+        => new MonthlySimulationContext
     {
         Session = session, Restaurant = _context.Restaurant, Location = _context.Location, Roles = _context.Roles,
         Equipment = _context.Equipment, Settings = _context.Settings, CreditLine = _context.CreditLine, Events = events
-    });
+    };
     private T Asset<T>() where T : ScriptableObject
     {
         var asset = ScriptableObject.CreateInstance<T>(); _assets.Add(asset); return asset;
@@ -457,4 +667,23 @@ public class MonthlySimulationTests
         historyId = Guid.NewGuid().ToString(), sessionId = _context.Session.sessionId, round = _context.Session.currentRound,
         day = day, cashChange = cash, reputationChange = reputation
     };
+}
+
+
+internal static class CalendarTestFlow
+{
+    internal static void Complete(SQLiteConnection db,
+        Func<GameSessionEntity, IReadOnlyList<SessionEventHistoryEntity>, MonthlySimulationContext> contextFactory = null)
+    {
+        var session = GameSessionState.Current;
+        var calendar = new MonthlyCalendarService(db, contextFactory: contextFactory);
+        var view = calendar.Open(session.sessionId, session.currentRound, Array.Empty<EventData>());
+        while (!view.ReadyToClose)
+        {
+            Assert.IsNull(view.Pending);
+            view = calendar.BeginAdvance(session.sessionId, session.currentRound, view.Revision);
+            Assert.IsTrue(view.Moving);
+            view = calendar.Step(session.sessionId, session.currentRound, view.Revision, view.DestinationDay);
+        }
+    }
 }

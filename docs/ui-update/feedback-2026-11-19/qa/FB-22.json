@@ -1,0 +1,43 @@
+{
+  "task_id": "FB-22",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "a2c04bed4b0c76a942b92e24e587e3871ac8b5d4",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "Unity Test Runner em Edit Mode com SQLite isolado. Ensaio da GameScene em Play Mode com arquivo SQLite e identificação próprios, acionando os controladores de fechamento e de decisão existentes.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Com destino público no dia 20, o freezer permaneceu ausente da projeção até a chegada ao dia 16. O avanço ficou bloqueado até a confirmação da escolha."
+    },
+    {
+      "criterion": 2,
+      "result": "O catálogo real gerou R$ 6.000 de aluguel, R$ 1.500 de custos fixos, R$ 6.900 de folha e R$ 26.000 de parcela do microcrédito no mês 2. O recibo da parcela separou R$ 25.000 de principal e R$ 1.000 de juros."
+    },
+    {
+      "criterion": 3,
+      "result": "Reload em movimento preservou a origem e o destino público. Reload após chegada recuperou o caixa, os recibos e a decisão pendente. Falhas SQLite injetadas no débito, na escolha e no fechamento reverteram as transações. Retry repetido preservou o recibo, a escolha e a DRE originais."
+    },
+    {
+      "criterion": 4,
+      "result": "Duas contas foram debitadas na ordem esperada antes da decisão do mesmo dia. No dia 30, a folha foi paga antes de dois eventos ordenados por ID e a DRE só ficou disponível após a última escolha."
+    },
+    {
+      "criterion": 5,
+      "result": "A consulta expôs apenas contas e eventos anunciados ou revelados. O fechamento rejeitou recibo com tipo trocado mesmo com total intacto. A DRE manteve os valores da abertura após mudança de catálogo e o caixa final foi abertura mais resultado. O último mês zerou a dívida."
+    }
+  ],
+  "migration": "Foi verificada a adição da coluna de calendário sobre a tabela antiga, a leitura de reserva legada vazia, a manutenção do histórico mesmo sem o asset disponível e o bloqueio de plano com dia inválido sem modificar o registro.",
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-22",
+  "evidence": [
+    "editmode.json",
+    "game-scene.txt"
+  ],
+  "limitations": [
+    "O botão existente percorre os compromissos até a próxima decisão enquanto a grade e o controle de avanço da FB-23 ainda estão pendentes.",
+    "Novas reservas continuam com a distribuição de dias anterior nesta etapa. A FB-24 trata a distribuição aleatória e a validação dedicada da incidência."
+  ]
+}

@@ -4,6 +4,10 @@ using UnityEngine;
 public sealed class MonthlySimulationSettings : ScriptableObject
 {
     [Min(1)] public int operatingDays = 30;
+    [Range(1, 30)] public int rentDueDay = 5;
+    [Range(1, 30)] public int utilitiesDueDay = 10;
+    [Range(1, 30)] public int salariesDueDay = 25;
+    [Range(1, 30)] public int loanDueDay = 28;
     [Min(0f)] public float priceElasticity = 1f;
     [Min(0f)] public float minimumPriceDemandFactor = 0.5f;
     [Min(0f)] public float maximumPriceDemandFactor = 1.5f;
