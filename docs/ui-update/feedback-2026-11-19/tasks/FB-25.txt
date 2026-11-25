@@ -1,5 +1,5 @@
 FB-25 — Abrir decisões do mês e de eventos sobre o calendário
-Status: planejada | Prioridade: P1 | Tipo: interface e interação
+Status: concluída | Prioridade: P1 | Tipo: interface e interação
 Área: Calendário; decisões
 Dependências: FB-02, FB-14, FB-23, FB-24
 Modelo: gpt-6.2-sol | Raciocínio: medium
@@ -47,6 +47,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Verificar abrir/confirmar/cancelar onde permitido, X/voltar, foco, cliques no fundo, duplo clique e reload com decisão pendente.
+
+OBSERVAÇÕES E LIMITES
+1. A revisão usa as escolhas salvas e confirma a abertura antes de mostrar a agenda. A revisão e as decisões de ocorrência usam a mesma camada sobre o tabuleiro.
+2. Play Mode validado em três resoluções. A campanha completa e a conciliação final integram a FB-26.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-25.json.

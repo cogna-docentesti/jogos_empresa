@@ -13,6 +13,8 @@ namespace Game.Adapter.In.UI.Layout
         private RectTransform root;
         private Rect lastSafe;
         private Vector2 lastSize;
+        private Vector2 center;
+        private float scale;
         private static readonly Vector2 Design = new(1920, 1080);
         private void Awake()
         {
@@ -41,16 +43,25 @@ namespace Game.Adapter.In.UI.Layout
             RectTransformUtility.ScreenPointToLocalPointInRectangle(root, safeArea.min, null, out var min);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(root, safeArea.max, null, out var max);
             var available = max-min;
-            float scale = Mathf.Min(available.x/Design.x, available.y/Design.y);
-            var center = (min+max)*.5f;
+            scale = Mathf.Min(available.x/Design.x, available.y/Design.y);
+            center = (min+max)*.5f;
+            foreach (var item in items) Fit(item);
+        }
+
+        public void RestorePanel(RectTransform panel)
+        {
             foreach (var item in items)
-            {
-                if (item.rect == null) continue;
-                item.rect.anchorMin = item.rect.anchorMax = new Vector2(.5f,.5f);
-                item.rect.sizeDelta = item.size;
-                item.rect.anchoredPosition = center + item.position*scale;
-                item.rect.localScale = item.scale*scale;
-            }
+                if (item.rect == panel) { Fit(item); return; }
+        }
+
+        private void Fit(Item item)
+        {
+            // A panel hosted in a modal uses the calendar's already fitted coordinate system.
+            if (item.rect == null || item.rect.parent != root) return;
+            item.rect.anchorMin = item.rect.anchorMax = new Vector2(.5f,.5f);
+            item.rect.sizeDelta = item.size;
+            item.rect.anchoredPosition = center + item.position*scale;
+            item.rect.localScale = item.scale*scale;
         }
     }
 }

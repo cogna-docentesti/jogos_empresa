@@ -41,6 +41,10 @@ namespace Game.Adapter.In.UI
         private readonly Image[] detailIcons = new Image[DetailRows];
         private TMP_Text period, position, cash, detailsHeading, empty, status, advanceLabel;
         private Button advance, back;
+        private RectTransform modalSurface, review;
+        private SharedModalFocus modal;
+        private TMP_Text reviewPeriod, reviewTeam, reviewMenu, reviewResources, reviewStatus, eventDay;
+        private Button reviewConfirm, reviewBack, reviewClose;
         private int shownDay, selectedDay;
         private float pinShownAt;
         private Action onAdvance, onBack;
@@ -91,6 +95,89 @@ namespace Game.Adapter.In.UI
                 : plan.ReadyToClose ? "Dia 30 concluído. Feche o mês para ver a DRE."
                 : plan.Day == 0 ? "Avance até o primeiro compromisso." : "Avance até o próximo compromisso.");
         }
+
+        public void RenderPreparation(GameSessionEntity session)
+        {
+            period.text = $"MÊS {session.currentRound:D2}";
+            cash.text = session.currentCash.ToString("C", Currency);
+            for (int i = 0; i < agenda.Length; i++)
+            {
+                agenda[i].Clear();
+                RenderTile(tiles[i], agenda[i]);
+            }
+            ShowPosition(0);
+            SelectDay(0);
+            empty.text = "A agenda aparece após a confirmação.";
+            Status("Revise as decisões para iniciar o mês.");
+            SetControls(false, false, "Avançar");
+        }
+
+        public void ShowReview(GameSessionEntity session, Action confirm, Action cancel)
+        {
+            var restaurant = Resources.LoadAll<RestaurantData>("Restaurants").FirstOrDefault(r => r.type == session.restaurantType);
+            var roles = Resources.LoadAll<RoleData>("Roles");
+            bool valid = GameSessionService.HasMinimumTeam(session);
+            var team = TeamSelectionHelper.FromJson(session.teamJson);
+            var minimums = restaurant != null ? TeamSelectionHelper.GetMinimums(restaurant) : new Dictionary<string, int>();
+            var actual = team.members.Where(m => m != null).ToArray();
+            var roleIds = minimums.Keys.Concat(actual.Select(m => m.roleId)).Distinct();
+            reviewTeam.text = string.Join("\n", roleIds.Select(id =>
+            {
+                var role = roles.FirstOrDefault(r => r.id == id);
+                string name = role != null ? TeamRoleCardView.Label(role) : id;
+                int count = actual.FirstOrDefault(m => m.roleId == id)?.quantity ?? 0;
+                if (!minimums.TryGetValue(id, out int minimum)) return $"{name}  ·  {count}";
+                string missing = count < minimum ? $"  ·  Falta: {minimum - count}" : "";
+                return $"{name}  ·  {count}/{minimum}{missing}";
+            }));
+            if (string.IsNullOrEmpty(reviewTeam.text)) reviewTeam.text = "Equipe indisponível.";
+
+            var pricing = MenuPricingHelper.FromJson(session.menuPricingJson);
+            reviewMenu.text = restaurant?.products == null ? "Cardápio indisponível."
+                : string.Join("\n", restaurant.products.Where(p => p != null).Select(p =>
+                    $"{p.displayName}  ·  {(MenuPricingHelper.TryGetPrice(pricing, p.id, out float price) ? price.ToString("C", Currency) : "—")}"));
+            int equipment = EquipmentSelectionHelper.FromJson(session.equipmentJson).equipmentIds.Count;
+            reviewResources.text = $"Equipamentos adquiridos  ·  {equipment}\nCaixa  ·  {session.currentCash.ToString("C", Currency)}\n"
+                + $"Saldo devedor  ·  {session.loanBalance.ToString("C", Currency)}";
+            reviewPeriod.text = $"MÊS {session.currentRound:D2} DE 3";
+            reviewStatus.text = valid ? "Ao confirmar, as escolhas ficam fixas até o fechamento deste mês."
+                : "Complete os mínimos da equipe no hub para abrir o mês.";
+            reviewStatus.color = valid ? GamePalette.Ink : GamePalette.ErrorText;
+            reviewConfirm.interactable = valid;
+            reviewConfirm.onClick.RemoveAllListeners();
+            reviewConfirm.onClick.AddListener(() => confirm());
+            foreach (var button in new[] { reviewBack, reviewClose })
+            {
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => cancel());
+            }
+            modalSurface.sizeDelta = review.sizeDelta;
+            eventDay.gameObject.SetActive(false);
+            review.gameObject.SetActive(true);
+            modal.Configure(valid ? reviewConfirm : reviewBack, reviewBack);
+            modal.gameObject.SetActive(true);
+        }
+
+        public void ReviewError(string message)
+        {
+            reviewStatus.text = message;
+            reviewStatus.color = GamePalette.ErrorText;
+        }
+
+        public SharedModalFocus ShowEventModal(int month, int day, out RectTransform surface)
+        {
+            review.gameObject.SetActive(false);
+            modalSurface.sizeDelta = new Vector2(1624, 930);
+            eventDay.text = $"MÊS {month:D2}  ·  DIA {day:D2}";
+            eventDay.gameObject.SetActive(true);
+            modal.Configure(null, null, false);
+            modal.gameObject.SetActive(true);
+            surface = modalSurface;
+            return modal;
+        }
+
+        public bool Reviewing => modal.isActiveAndEnabled && review.gameObject.activeSelf;
+        public void CloseModal() => modal.gameObject.SetActive(false);
 
         private static void RenderTile(Tile tile, IReadOnlyList<Commitment> commitments)
         {
@@ -229,6 +316,49 @@ namespace Game.Adapter.In.UI
             status = Label(footer, "Status", "", 310, 10, 1190, 82, TypographyRole.Body, 28, GamePalette.OnDark);
             advance = ActionButton(footer, "Advance", "Avançar", 1528, 14, 356, SharedControlKind.Primary, onAdvance, out advanceLabel);
             SetControls(false, false, "Avançar");
+            BuildModal(frame);
+        }
+
+        private void BuildModal(RectTransform frame)
+        {
+            var layer = Node(frame, "CalendarDecisionModal", 0, 0, 0, 0);
+            layer.gameObject.SetActive(false);
+            layer.anchorMin = Vector2.zero;
+            layer.anchorMax = Vector2.one;
+            layer.offsetMin = layer.offsetMax = Vector2.zero;
+            var scrim = SharedUiStyles.Surface(layer.gameObject, "UI_SCRIM", true);
+            scrim.preserveAspect = false;
+            layer.gameObject.AddComponent<Canvas>();
+            layer.gameObject.AddComponent<GraphicRaycaster>();
+            modal = layer.gameObject.AddComponent<SharedModalFocus>();
+
+            modalSurface = Surface(layer, "Surface", "UI_MODAL_SURFACE", 0, 0, 0, 0);
+            modalSurface.anchorMin = modalSurface.anchorMax = modalSurface.pivot = new Vector2(.5f, .5f);
+            modalSurface.anchoredPosition = Vector2.zero;
+            eventDay = Label(modalSurface, "EventDay", "", 74, 66, 500, 40, TypographyRole.Label, 28, GamePalette.Primary);
+            review = Node(modalSurface, "MonthlyReview", 0, 0, 1256, 744);
+            reviewPeriod = Label(review, "Period", "", 48, 32, 500, 36, TypographyRole.Label, 24, GamePalette.Primary);
+            Label(review, "Title", "Decisões do mês", 48, 72, 1030, 64, TypographyRole.ScreenTitle, 48, GamePalette.Plum);
+            Label(review, "TeamHeading", "Equipe", 48, 169, 535, 52, TypographyRole.SectionTitle, 34, GamePalette.Plum);
+            reviewTeam = ReviewText("Team", 48, 225, 535, 215);
+            Label(review, "MenuHeading", "Cardápio", 630, 169, 578, 52, TypographyRole.SectionTitle, 34, GamePalette.Plum);
+            reviewMenu = ReviewText("Menu", 630, 225, 578, 145);
+            Label(review, "ResourcesHeading", "Equipamentos e crédito", 630, 385, 578, 52, TypographyRole.SectionTitle, 34, GamePalette.Plum);
+            reviewResources = ReviewText("Resources", 630, 441, 578, 110);
+            reviewStatus = ReviewText("Status", 48, 583, 1160, 49);
+            reviewBack = ActionButton(review, "Back", "Voltar ao hub", 48, 634, 310, SharedControlKind.Secondary, null, out _);
+            reviewConfirm = ActionButton(review, "Confirm", "Confirmar e abrir mês", 828, 634, 380, SharedControlKind.Primary, null, out _);
+            var close = Node(review, "Close", 1140, 32, 68, 68);
+            reviewClose = close.gameObject.AddComponent<Button>();
+            Icon(close, "Icon", "ICON_CLOSE", 18, 18, 32, GamePalette.Ink);
+            SharedUiStyles.Bind(reviewClose, SharedControlKind.Icon);
+        }
+
+        private TMP_Text ReviewText(string name, float x, float y, float width, float height)
+        {
+            var text = Label(review, name, "", x, y, width, height, TypographyRole.Body, 28, GamePalette.Ink);
+            text.alignment = TextAlignmentOptions.TopLeft;
+            return text;
         }
 
         private static Button ActionButton(RectTransform parent, string name, string value, float x, float y, float width,
@@ -239,7 +369,7 @@ namespace Game.Adapter.In.UI
             label = Label(root, "Label", value, 14, 0, width - 28, 74, TypographyRole.Button, 32, GamePalette.Ink);
             label.alignment = TextAlignmentOptions.Center;
             SharedUiStyles.Bind(button, kind);
-            button.onClick.AddListener(() => action());
+            if (action != null) button.onClick.AddListener(() => action());
             return button;
         }
 

@@ -1,0 +1,56 @@
+{
+  "task_id": "FB-25",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "4678592d63e10c630488182917ae783fce6ab143",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "GameScene em Play Mode com SQLite e cadastro isolados, datas controladas e cliques pelo EventSystem. Capturas reais do Game View em três resoluções. Testes de eventos e simulação mensal em Edit Mode.",
+  "baseline_evidence": "output/ui-update/feedback-2026-11-19/FB-23/07-decisao-quebra-1280x720.png",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Revisão e ocorrência usam o mesmo fundo modal e uma única superfície marfim sobre o calendário. As capturas confirmam a leitura das três opções da quebra em 1280×720 e do festival em 1920×1080 após mudar a resolução com o modal aberto."
+    },
+    {
+      "criterion": 2,
+      "result": "Duas invocações consecutivas de confirmação geraram um único registro com a opção escolhida. O calendário voltou ao dia 16 e o foco foi para Avançar. A abertura do mês resistiu a confirmação repetida e começou com revisão 1, no dia 0 e sem débitos."
+    },
+    {
+      "criterion": 3,
+      "result": "O destino público era o dia 20 antes da interrupção no dia 16. Cliques no fundo, Voltar, Cancelar e fechamento direto não dispensaram o evento. Cancelar a consulta ou usar Voltar ao evento manteve a pendência. Recarregar o SQLite e a GameScene recuperou o dia 16, o recibo anterior e a decisão pendente. Voltar ao hub e revisitar depois de confirmar conservou o mesmo dia."
+    },
+    {
+      "criterion": 4,
+      "result": "A revisão mostrou faltas por função e bloqueou a confirmação enquanto a equipe estava incompleta. X, Cancelar e Voltar ao hub saíram sem reservar ou travar o mês. Após persistir a equipe completa, a revisão habilitou e focou a confirmação."
+    },
+    {
+      "criterion": 5,
+      "result": "Quebra e festival abriram com os três títulos e descrições reais do catálogo. O histórico salvou as opções e os efeitos. A quebra não adiantou os efeitos econômicos. O dia 10 debitou R$ 1.500,00 sem popup. No dia 20, o domínio debitou R$ 6.000,00 de aluguel antes de abrir o festival."
+    },
+    {
+      "criterion": 6,
+      "result": "A primeira revisão exibiu somente a grade e os dados de gestão, sem plano gravado. Após abrir o mês, o festival foi anunciado e a casa 16 ficou sem título ou ícone de quebra até a chegada. Nenhum popup de evento apareceu antes da parada."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-25",
+  "evidence": [
+    "01-revisao-equipe-incompleta-1280x720.png",
+    "02-revisao-equipe-completa-1280x720.png",
+    "03-plano-aberto-sem-surpresa-1280x720.png",
+    "04-conta-debitada-sem-popup-1280x720.png",
+    "05-quebra-pendente-dia16-1280x720.png",
+    "06-consulta-durante-pendencia-1280x720.png",
+    "07-quebra-retomada-1440x900.png",
+    "08-retorno-ao-dia16-1440x900.png",
+    "09-festival-dia20-1920x1080.png",
+    "editmode.json",
+    "game-scene.txt"
+  ],
+  "limitations": [
+    "A verificação visual foi feita no Editor. A validação completa da campanha, do fechamento e da DRE pertence à FB-26.",
+    "O teste de Cancelar foi acionado pelo evento de navegação do EventSystem."
+  ]
+}

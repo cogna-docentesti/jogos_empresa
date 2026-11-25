@@ -15,6 +15,7 @@ namespace Game.Adapter.In.Controllers
         private int month, day, selected = -1;
         private bool confirmed, recording, historyVisible, failed, mandatory;
         private Action completed;
+        private SharedModalFocus calendarModal;
         public bool IsAwaitingChoice { get; private set; }
         public EventData CurrentEvent => current;
         public int SelectedOption => selected;
@@ -26,6 +27,7 @@ namespace Game.Adapter.In.Controllers
         private void Bind() => view?.BindActions(Confirm, ShowHistory, Return);
         public void ReleasePresentation()
         {
+            if (calendarModal != null) DismissDecision();
             completed = null; IsAwaitingChoice = false; current = null; sessionId = null;
             mandatory = confirmed = recording = historyVisible = failed = false;
             selected = -1;
@@ -33,8 +35,18 @@ namespace Game.Adapter.In.Controllers
         private void OnEnable()
         {
             view ??= GetComponent<EventScreenView>(); Bind();
-            if (MenuNavigator.HubAvailable && !IsAwaitingChoice) ShowHistory();
+            if (calendarModal == null && MenuNavigator.HubAvailable && !IsAwaitingChoice) ShowHistory();
         }
+        public void OpenCalendarDecision(EventData data, int eventMonth, int eventDay, SharedModalFocus modal,
+            RectTransform surface, Action onCompleted)
+        {
+            calendarModal = modal;
+            calendarModal.ClosingForNavigation += ReleasePresentation;
+            view ??= GetComponent<EventScreenView>();
+            view.MountInCalendar(surface);
+            OpenDecision(data, eventMonth, eventDay, onCompleted, required: true);
+        }
+
         public void OpenDecision(EventData data, int eventMonth, int eventDay, Action onCompleted = null, bool required = false)
         {
             if (IsAwaitingChoice)
@@ -42,7 +54,7 @@ namespace Game.Adapter.In.Controllers
                 if (mandatory && current == data && month == eventMonth && day == eventDay
                     && sessionId == GameSessionState.Current?.sessionId)
                 {
-                    UIStateListener.PresentScreen(gameObject);
+                    ShowDecision();
                     if (!failed) Render();
                 }
                 return;
@@ -55,7 +67,8 @@ namespace Game.Adapter.In.Controllers
         private void Present(EventData data, int eventMonth, int eventDay)
         {
             current = data; month = eventMonth; day = eventDay; selected = -1; confirmed = recording = failed = historyVisible = false;
-            IsAwaitingChoice = true; UIStateListener.PresentScreen(gameObject);
+            IsAwaitingChoice = true;
+            ShowDecision();
             try
             {
                 if (!view.Ready || current?.options == null || current.options.Length == 0 || view.Illustration(current.id) == null
@@ -69,13 +82,26 @@ namespace Game.Adapter.In.Controllers
                 Render();
             }
             catch (Exception)
-            { failed = true; IsAwaitingChoice = mandatory; view.Error("Evento ou sessão indisponível. Nenhuma escolha pode ser confirmada no momento.", mandatory); }
+            {
+                failed = true;
+                IsAwaitingChoice = mandatory;
+                view.Error("Evento ou sessão indisponível. Nenhuma escolha pode ser confirmada no momento.", mandatory);
+                calendarModal?.Configure(view.ReturnButton, null, false);
+            }
         }
+
+        private void ShowDecision()
+        {
+            if (calendarModal != null) gameObject.SetActive(true);
+            else UIStateListener.PresentScreen(gameObject);
+        }
+
         private void Render()
         {
             historyVisible = false;
             view.Decision(current, month, day, 0, 0, selected, !confirmed && !failed,
                 confirmed ? "Esta escolha já foi registrada. Os efeitos pertencem ao fechamento mensal." : "Leia as opções e selecione uma para confirmar.", Select);
+            calendarModal?.Configure(view.Cards.FirstOrDefault()?.Button, null, false);
         }
         public void Select(int choice)
         {
@@ -94,7 +120,11 @@ namespace Game.Adapter.In.Controllers
                 Finish();
             }
             catch (Exception)
-            { failed = true; view.Error("Não foi possível registrar a escolha. Tente novamente; uma confirmação anterior será preservada.", true); }
+            {
+                failed = true;
+                view.Error("Não foi possível registrar a escolha. Tente novamente; uma confirmação anterior será preservada.", true);
+                calendarModal?.Configure(view.ReturnButton, null, false);
+            }
             finally { recording = false; }
         }
         public void ShowHistory()
@@ -108,6 +138,7 @@ namespace Game.Adapter.In.Controllers
                 view.History(History.GetBySession(session.sessionId), session.currentRound, IsAwaitingChoice);
             }
             catch (Exception) { view.Error("Histórico indisponível. Não há dados de sessão para consultar.", false); }
+            calendarModal?.Configure(view.ReturnButton, view.ReturnButton);
         }
         public void Return()
         {
@@ -127,8 +158,21 @@ namespace Game.Adapter.In.Controllers
         }
         private void Finish()
         {
-            IsAwaitingChoice = false; UIStateListener.DismissScreen(gameObject);
-            var callback = completed; completed = null; Closed?.Invoke(); callback?.Invoke();
+            IsAwaitingChoice = false;
+            var callback = completed;
+            completed = null;
+            DismissDecision();
+            Closed?.Invoke();
+            callback?.Invoke();
+        }
+
+        private void DismissDecision()
+        {
+            if (calendarModal == null) { UIStateListener.DismissScreen(gameObject); return; }
+            calendarModal.ClosingForNavigation -= ReleasePresentation;
+            calendarModal = null;
+            gameObject.SetActive(false);
+            view.UnmountFromCalendar();
         }
     }
 }

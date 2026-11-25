@@ -1,6 +1,5 @@
 using System;
 using Game.Adapter.In.UI;
-using Game.Adapter.In.UI.Navigation;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,6 +40,11 @@ namespace Game.Adapter.In.Controllers
         {
             if (!resumePending || SharedModalFocus.Active != null) return;
             resumePending = false;
+            OpenCalendar();
+        }
+
+        private void OpenCalendar()
+        {
             var events = FindObjectsByType<EventScreenController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             if (calendar != null && events.Length == 1) calendar.Open(this, events[0]);
             else onSettlementFailed.Invoke();
@@ -55,17 +59,19 @@ namespace Game.Adapter.In.Controllers
             if (state?.CurrentState != GameState.Management_Hub && state?.CurrentState != GameState.Round_Sales)
                 return;
             var session = GameSessionState.Current;
-            if (session.calendarMonthLocked == 0 && !GameSessionService.HasMinimumTeam(session))
-            {
-                if (state.CurrentState == GameState.Management_Hub)
-                    MenuNavigator.Instance?.Open(PanelId.Team);
-                FeedbackToast.Show("Complete os mínimos da equipe para iniciar o mês.", FeedbackKind.Warning);
-                return;
-            }
+            if (!string.IsNullOrEmpty(session.pendingSummaryResultId)) return;
             LastResult = null;
+            if (session.calendarMonthLocked == 0) OpenCalendar();
+            else EnterCalendar();
+        }
+
+        internal void EnterCalendar()
+        {
+            var state = GameManager.Instance.StateMachine;
+            var session = GameSessionState.Current;
             var service = new GameSessionService(session.userId, session.professorId);
             if (state.CurrentState == GameState.Management_Hub) service.StartRound();
-            service.BeginEventDecisions();
+            if (!service.BeginEventDecisions()) onSettlementFailed.Invoke();
         }
 
         internal bool CompleteCalendar()

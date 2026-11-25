@@ -45,7 +45,7 @@ namespace Game.Adapter.In.UI.Navigation
                 || (MenuNavigator.HubAvailable && MenuNavigator.Instance!=null
                     && MenuNavigator.Instance.Current!=PanelId.None && MenuNavigator.Instance.Current!=PanelId.Menu);
             if(buttonRoot!=null && buttonRoot.activeSelf!=visible) buttonRoot.SetActive(visible);
-            bool events=(eventPanel!=null && eventPanel.activeInHierarchy) || (monthlyResultPanel!=null && monthlyResultPanel.activeInHierarchy) || (quarterlyResultPanel!=null && quarterlyResultPanel.activeInHierarchy) || (finalReportPanel!=null && finalReportPanel.activeInHierarchy) || (bankruptcyPanel!=null && bankruptcyPanel.activeInHierarchy);
+            bool events=(eventPanel!=null && eventPanel.activeInHierarchy && UIStateListener.Instance?.CurrentPanel == eventPanel) || (monthlyResultPanel!=null && monthlyResultPanel.activeInHierarchy) || (quarterlyResultPanel!=null && quarterlyResultPanel.activeInHierarchy) || (finalReportPanel!=null && finalReportPanel.activeInHierarchy) || (bankruptcyPanel!=null && bankruptcyPanel.activeInHierarchy);
             if(eventMenuAccess!=null && positionedForEvents!=events)
             {
                 positionedForEvents=events;

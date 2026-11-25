@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Game.Adapter.In.UI
         private static readonly List<SharedModalFocus> stack = new();
         public static SharedModalFocus Active => stack.LastOrDefault(m => m != null && m.isActiveAndEnabled);
         public static int LastCancelFrame { get; private set; } = -1;
+        public event Action ClosingForNavigation;
         private GameObject previous;
         private bool cancelling;
         private bool initializing;
@@ -23,7 +25,11 @@ namespace Game.Adapter.In.UI
         {
             // State handoff releases modal ownership; it does not invoke a destructive/cancel action.
             foreach (var modal in stack.ToArray())
-                if (modal != null && modal.gameObject.activeSelf) modal.gameObject.SetActive(false);
+            {
+                if (modal == null || !modal.gameObject.activeSelf) continue;
+                modal.ClosingForNavigation?.Invoke();
+                modal.gameObject.SetActive(false);
+            }
         }
 
         public void Configure(UnityEngine.UI.Selectable first, UnityEngine.UI.Button cancel, bool cancellable = true)

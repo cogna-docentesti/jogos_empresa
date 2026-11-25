@@ -22,7 +22,7 @@ public static class UI12EventValidation
     private static GameObject origin; private static string activeId; private static float cash; private static int reputation;
     private static string reportPath, capturePrefix = "";
     private static Transform Root => GameObject.Find("Canvas").transform;
-    private static EventScreenView View => Root.Find("Panel_Event").GetComponent<EventScreenView>();
+    private static EventScreenView View => Root.GetComponentInChildren<EventScreenView>(true);
     private static EventScreenController Controller => View.GetComponent<EventScreenController>();
     private static UnityEngine.UI.Button CalendarAdvance => Root.Find("Panel_MonthlyCalendar/Footer/Advance")?.GetComponent<UnityEngine.UI.Button>();
     private static MonthlyCalendarService.View CalendarPlan => new MonthlyCalendarService(Db).Read(activeId, 1);
@@ -168,6 +168,12 @@ public static class UI12EventValidation
         }
         Add("Prepare actual monthly selector flow", () => { Fixture(); GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub); monthCallbacks = 0; var settlement = Root.Find("UiNavigation").GetComponent<MonthlySettlementController>(); settlement.MonthSettled -= CountMonthlySettlement; settlement.MonthSettled += CountMonthlySettlement; });
         Add("Close month waits for player before settlement", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<UnityEngine.UI.Button>()); });
+        Add("Review confirms before creating the calendar plan", () =>
+        {
+            Expect(CalendarPlan == null && !CalendarAdvance.interactable, "Review must precede reservation");
+            var confirm = Root.Find("Panel_MonthlyCalendar/CalendarDecisionModal/Surface/MonthlyReview/Confirm");
+            Click(confirm.GetComponent<UnityEngine.UI.Button>());
+        });
         Add("Calendar opens before advancement", () =>
         {
             if (CalendarAdvance == null || !CalendarAdvance.IsInteractable()) throw new CalendarUpdatePending();
@@ -181,9 +187,10 @@ public static class UI12EventValidation
             Expect(GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event, "Wait before settlement");
             Expect(MonthlySettlementController.SettleCurrentMonth() == null, "A pending choice cannot be bypassed by another settlement request");
             Expect(Db.Table<MonthlyEventPlanEntity>().Where(p => p.sessionId == activeId).Count() == 1 && new RoundResultRepository(Db).GetBySessionId(activeId).Count == 0, "Reserved without settlement");
-            Capture("monthly-await-1280x720");
+            Expect(UIStateListener.Instance.CurrentPanel.name == "Panel_MonthlyCalendar"
+                && SharedModalFocus.Active != null && !CalendarAdvance.interactable, "Event remains above the calendar");
+            Capture("monthly-await-1280x720", false);
             var pending = new MonthlyCalendarService(Db).Read(activeId, 1).Pending;
-            Controller.gameObject.SetActive(false);
             Controller.OpenDecision(Controller.CurrentEvent, 1, pending.Day, () => throw new Exception("Callback was replaced by reopening"), required: true);
         });
         for (int i = 0; i < 4; i++)

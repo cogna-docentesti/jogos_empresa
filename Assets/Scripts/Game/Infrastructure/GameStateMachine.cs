@@ -72,7 +72,7 @@ public class GameStateMachine
                 }
             },
 
-            { GameState.Round_Sales, new List<GameState> { GameState.Round_Costs } },
+            { GameState.Round_Sales, new List<GameState> { GameState.Round_Costs, GameState.Management_Hub } },
             { GameState.Round_Costs, new List<GameState> { GameState.Round_Event } },
             { GameState.Round_Event, new List<GameState> { GameState.Round_Summary, GameState.Management_Hub } },
 

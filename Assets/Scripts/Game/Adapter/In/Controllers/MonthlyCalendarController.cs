@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Game.Adapter.In.UI;
+using Game.Adapter.In.UI.Navigation;
 using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
@@ -18,7 +19,7 @@ namespace Game.Adapter.In.Controllers
         private EventData[] catalog;
         private string sessionId;
         private int month;
-        private bool busy, reloadRequired;
+        private bool busy, reloadRequired, opening;
 
         private void Awake()
         {
@@ -44,7 +45,13 @@ namespace Game.Adapter.In.Controllers
                 month = session.currentRound;
                 catalog ??= Resources.LoadAll<EventData>("Events");
                 calendar = new MonthlyCalendarService(DatabaseInitializer.DatabaseService?.Connection);
-                plan = calendar.Read(sessionId, month) ?? calendar.Open(sessionId, month, catalog);
+                plan = calendar.Read(sessionId, month);
+                if (plan == null)
+                {
+                    view.RenderPreparation(session);
+                    view.ShowReview(session, ConfirmOpening, CancelReview);
+                    return;
+                }
                 view.Render(plan, catalog);
                 if (plan.Moving) StartCoroutine(Move());
                 else if (plan.Pending != null) PresentDecision();
@@ -57,9 +64,40 @@ namespace Game.Adapter.In.Controllers
             catch (Exception error) { Unavailable(error); }
         }
 
+        private bool IsCurrentMonth => GameSessionState.Current is { } session
+            && session.sessionId == sessionId && session.currentRound == month;
+
+        private void ConfirmOpening()
+        {
+            if (!view.Reviewing || opening || !IsCurrentMonth
+                || !GameSessionService.HasMinimumTeam(GameSessionState.Current)) return;
+
+            opening = true;
+            try
+            {
+                calendar.Open(sessionId, month, catalog);
+                view.CloseModal();
+                if (GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event) Load();
+                else settlement.EnterCalendar();
+            }
+            catch (Exception error)
+            {
+                Debug.LogException(error);
+                view.ReviewError("Não foi possível abrir o mês. Tente novamente.");
+            }
+            finally { opening = false; }
+        }
+
+        private void CancelReview()
+        {
+            if (!view.Reviewing || opening) return;
+            view.CloseModal();
+            ReturnToHub();
+        }
+
         private bool CanAct => isActiveAndEnabled && !busy && SharedModalFocus.Active == null
-            && GameManager.Instance?.StateMachine?.CurrentState == GameState.Round_Event
-            && GameSessionState.Current is { } session && session.sessionId == sessionId && session.currentRound == month;
+            && (GameManager.Instance?.StateMachine?.CurrentState == GameState.Round_Event || reloadRequired)
+            && IsCurrentMonth;
 
         private void Advance()
         {
@@ -135,15 +173,29 @@ namespace Game.Adapter.In.Controllers
             {
                 var occurrence = plan.Pending;
                 var data = catalog.Single(e => e.id == occurrence.EventId);
-                events.OpenDecision(data, month, occurrence.Day, () => Open(settlement, events), required: true);
+                var modal = view.ShowEventModal(month, occurrence.Day, out var surface);
+                events.OpenCalendarDecision(data, month, occurrence.Day, modal, surface, () =>
+                {
+                    view.CloseModal();
+                    Load();
+                });
             }
-            catch (Exception error) { Unavailable(error); }
+            catch (Exception error)
+            {
+                events.ReleasePresentation();
+                view.CloseModal();
+                Unavailable(error);
+            }
         }
 
         private void ReturnToHub()
         {
-            if (CanAct && (plan == null || (!plan.Moving && plan.Pending == null)))
-                GameManager.Instance.StateMachine.TryChangeState(GameState.Management_Hub);
+            if (!isActiveAndEnabled || busy || SharedModalFocus.Active != null || !IsCurrentMonth
+                || (plan != null && (plan.Moving || plan.Pending != null))) return;
+            var state = GameManager.Instance.StateMachine;
+            if (state.CurrentState == GameState.Management_Hub)
+                MenuNavigator.Instance.OpenRoot();
+            else state.TryChangeState(GameState.Management_Hub);
         }
 
         private void UpdateControls()

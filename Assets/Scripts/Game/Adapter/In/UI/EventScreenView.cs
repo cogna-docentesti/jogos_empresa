@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Adapter.In.UI.Layout;
 using TMPro;
 using UnityEngine;
 
@@ -18,12 +19,74 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Button confirmButton, historyButton, returnButton;
         private readonly List<EventOptionCardView> cards = new();
         private readonly List<EventOptionCardView> historyCards = new();
+        private RectTransform originalParent;
+        private Vector2 originalAnchorMin, originalAnchorMax, originalPivot, originalSize;
+        private Vector3 originalPosition, originalScale;
+        private int originalSibling;
+        private GameObject hiddenHeader;
+        private readonly List<UnityEngine.UI.Image> hiddenSurfaces = new();
         public IReadOnlyList<EventOptionCardView> Cards => cards;
         public UnityEngine.UI.Button ConfirmButton => confirmButton;
+        public UnityEngine.UI.Button ReturnButton => returnButton;
         public UnityEngine.UI.ScrollRect DecisionScroll => decisionScroll;
         public UnityEngine.UI.ScrollRect HistoryScroll => historyScroll;
         public bool Ready => cardPrefab != null && visuals != null && confirmButton != null;
         public Sprite Illustration(string id) => Array.Find(visuals, v => v.eventId == id)?.illustration;
+
+        public void MountInCalendar(RectTransform surface)
+        {
+            var rect = (RectTransform)transform;
+            originalParent = (RectTransform)rect.parent;
+            originalSibling = rect.GetSiblingIndex();
+            originalAnchorMin = rect.anchorMin;
+            originalAnchorMax = rect.anchorMax;
+            originalPivot = rect.pivot;
+            originalSize = rect.sizeDelta;
+            originalPosition = rect.anchoredPosition3D;
+            originalScale = rect.localScale;
+            rect.SetParent(surface, false);
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(.5f, .5f);
+            rect.sizeDelta = new Vector2(1920, 1080);
+            rect.anchoredPosition3D = Vector3.zero;
+            rect.localScale = Vector3.one * .8f;
+
+            // The common modal surface supplies the frame. Keep the artwork and controls.
+            var header = transform.Find("Header");
+            if (header != null && header.gameObject.activeSelf)
+            {
+                hiddenHeader = header.gameObject;
+                hiddenHeader.SetActive(false);
+            }
+            var illustrationSurface = illustration != null
+                ? illustration.transform.parent.GetComponent<UnityEngine.UI.Image>() : null;
+            foreach (var image in new[] { GetComponent<UnityEngine.UI.Image>(), illustrationSurface })
+            {
+                if (image == null || !image.enabled) continue;
+                image.enabled = false;
+                hiddenSurfaces.Add(image);
+            }
+        }
+
+        public void UnmountFromCalendar()
+        {
+            if (originalParent == null) return;
+            var rect = (RectTransform)transform;
+            rect.SetParent(originalParent, false);
+            rect.SetSiblingIndex(originalSibling);
+            rect.anchorMin = originalAnchorMin;
+            rect.anchorMax = originalAnchorMax;
+            rect.pivot = originalPivot;
+            rect.sizeDelta = originalSize;
+            rect.anchoredPosition3D = originalPosition;
+            rect.localScale = originalScale;
+            originalParent.GetComponent<ProductionCanvasLayout>()?.RestorePanel(rect);
+            originalParent = null;
+            if (hiddenHeader != null) hiddenHeader.SetActive(true);
+            hiddenHeader = null;
+            foreach (var image in hiddenSurfaces) image.enabled = true;
+            hiddenSurfaces.Clear();
+        }
+
         public void BindActions(Action confirm, Action history, Action back)
         {
             confirmButton.onClick.RemoveAllListeners(); confirmButton.onClick.AddListener(() => confirm());
@@ -33,7 +96,7 @@ namespace Game.Adapter.In.UI
         public void Decision(EventData data, int month, int day, int index, int count, int selected, bool editable, string guidance, Action<int> select)
         {
             decisionBody.SetActive(true); historyBody.SetActive(false);
-            screenTitle.text = editable ? "Decisões do mês" : "Evento confirmado";
+            screenTitle.text = editable ? "Decisão de evento" : "Evento confirmado";
             periodText.text = $"MÊS {month} DE 3  •  DIA {day}" + (count > 1 ? $"  •  EVENTO {index + 1} DE {count}" : "");
             titleText.text = data.title; descriptionText.text = data.description;
             conceptText.text = string.IsNullOrWhiteSpace(data.educationalConcept) ? "" : "Conceito: " + data.educationalConcept;

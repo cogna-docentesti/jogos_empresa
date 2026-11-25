@@ -2069,8 +2069,8 @@
       "area": "Calendário; decisões",
       "kind": "interface e interação",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-02",
         "FB-14",
@@ -2105,7 +2105,10 @@
         "Assets/Scripts/Game/Adapter/In/UI/SharedModalFocus.cs",
         "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs"
       ],
-      "notes": [],
+      "notes": [
+        "A revisão usa as escolhas salvas e confirma a abertura antes de mostrar a agenda. A revisão e as decisões de ocorrência usam a mesma camada sobre o tabuleiro.",
+        "Play Mode validado em três resoluções. A campanha completa e a conciliação final integram a FB-26."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-25.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-25.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-25",
