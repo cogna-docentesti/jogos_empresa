@@ -1,0 +1,47 @@
+{
+  "task_id": "FB-20",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "6ef3b7cdffc5d8440127550cf3700b7b0abd5c98",
+  "status": "concluída",
+  "implementation_performed": true,
+  "scene": "Assets/Scenes/GameScene.unity",
+  "unity": "6000.3.28f1",
+  "resolutions": [
+    "1280x720"
+  ],
+  "baseline_observed": "A última coluna encostava na borda das linhas. A folha trimestral cruzava o pulso e a mensal ficava atrás da base dos dedos.",
+  "method": "Play Mode na GameScene com SQLite e PlayerPrefs isolados. Os cenários de um e três meses passaram pelo fechamento real. O cenário de valores longos alterou os registros da base isolada e reabriu o demonstrativo. Foram comparados os textos das 25 linhas com os valores persistidos e verificados os limites esquerdo e direito das cinco células de cada linha contra o cabeçalho. As capturas são da Game View.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Cabeçalho e corpo usam as mesmas cinco colunas. O recuo interno é consistente, o agregado coincide com sua faixa e os valores monetários ficam em uma linha, com alinhamento à direita. Verificados exemplos de até −R$ 59.259.258,00 no agregado, no topo e no fim da rolagem."
+    },
+    {
+      "criterion": 2,
+      "result": "A borda direita da folha chega à pinça da mão nas ilustrações mensal e trimestral. Os dedos ficam à frente do papel, o canto inferior visível deixa de cruzar o pulso e a folha fica dentro da área da ilustração."
+    },
+    {
+      "criterion": 3,
+      "result": "Todos os textos de valores, agregados e variações conferiram com os dados da base isolada. No trimestre parcial, os dois meses ausentes exibiram “Não salvo” e a variação ficou indisponível. O trimestre vazio exibiu o estado de ausência de resultados. A consulta preservou a sessão e a quantidade de fechamentos."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-20",
+  "evidence": {
+    "baseline": [
+      "before-complete.png",
+      "before-monthly.png"
+    ],
+    "screenshots": [
+      "after-complete.png",
+      "after-monthly.png",
+      "after-partial.png",
+      "after-empty.png",
+      "after-long-negative.png",
+      "after-bottom.png"
+    ]
+  },
+  "limitations": [
+    "Validação visual no Unity Editor para Windows a 1280×720. Nos dados extremos do teste, o gráfico mantém a quebra de linha de seus rótulos monetários."
+  ]
+}

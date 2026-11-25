@@ -367,13 +367,8 @@ namespace Game.EditorTools
                     if(monthly){Height(row,48);Type(row,"Label",new TypographyToken(i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,24),i==7||i==9||i==11);Type(row,"Value",new TypographyToken(i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,24),i==7||i==9||i==11);Off(row,"TotalColumn");}
                     else {
                         Type(row,"Label",new TypographyToken(i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,22),i==7||i==9||i==11);Type(row,"Rule",new TypographyToken(TypographyRole.Caption,18),false);
-                        float[] xx={304,464,624,784,1008};float[] ww={160,160,160,224,224};
-                        for(int j=0;j<5;j++){
-                            Move(row,"Cell"+j,xx[j]+6,10,ww[j]-12,48);Type(row,"Cell"+j,new TypographyToken(j==3||i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,20),j==3||i==7||i==9||i==11);
-                            Move(loaded,"TableHeader/Column"+j,xx[j]+6,8,ww[j]-12,40);
-                        }
-                        Move(row,"AggregateColumn",784,0,224,54);
-                        var total=(RectTransform)Find(row,"AggregateColumn");total.anchorMin=new Vector2(0,0);total.anchorMax=new Vector2(0,1);total.offsetMin=new Vector2(784,0);total.offsetMax=new Vector2(1008,0);
+                        for(int j=0;j<5;j++)
+                            Type(row,"Cell"+j,new TypographyToken(j==3||i==7||i==9||i==11?TypographyRole.TableTotal:TypographyRole.Table,20),j==3||i==7||i==9||i==11);
                     }
                 }
                 if(monthly)
@@ -401,11 +396,46 @@ namespace Game.EditorTools
                 }
                 else
                 {
+                    ApplyQuarterlyTable(loaded);
                     var so=new SerializedObject(p.GetComponent<QuarterlyResultView>());so.FindProperty("verticalChart").boolValue=true;so.ApplyModifiedPropertiesWithoutUndo();
                     so.Update();so.FindProperty("compactRows").boolValue=true;so.ApplyModifiedPropertiesWithoutUndo();
                     Off(chart,"Zero","Note");
                     for(int j=0;j<3;j++){Move(chart,"BarValue"+j,34+j*166,80,176,36);Type(chart,"BarValue"+j,new TypographyToken(TypographyRole.TableTotal,22));Move(chart,"BarLabel"+j,64+j*166,346,116,30);}
                 }
+            }
+        }
+        private static void ApplyQuarterlyTable(Transform loaded)
+        {
+            const float labelPadding = 20;
+            const float columnPadding = 12;
+            float[] boundaries = { 284, 458, 632, 806, 1015, 1224 };
+            float labelWidth = boundaries[0] - labelPadding - columnPadding;
+            var header = Find(loaded, "TableHeader");
+            Place(header, 40, 336, boundaries[5], 60);
+            Move(header, "Label", labelPadding, 0, labelWidth, 60);
+            Find(header, "Label").GetComponent<TMP_Text>().alignment = TextAlignmentOptions.MidlineLeft;
+            var scroll = Find(loaded, "TableScroll").GetComponent<UnityEngine.UI.ScrollRect>();
+            scroll.content.GetComponent<UnityEngine.UI.VerticalLayoutGroup>().padding = new RectOffset(0, 0, 4, 12);
+            var view = loaded.parent.GetComponent<QuarterlyResultView>();
+            for (int column = 0; column < 5; column++)
+            {
+                float x = boundaries[column] + columnPadding;
+                float width = boundaries[column + 1] - boundaries[column] - 2 * columnPadding;
+                string columnName = "Column" + column;
+                Move(header, columnName, x, 0, width, 60);
+                Find(header, columnName).GetComponent<TMP_Text>().alignment = TextAlignmentOptions.MidlineRight;
+                foreach (var row in view.Rows)
+                    Place(row.cells[column].transform, x, 12, width, 48);
+            }
+            foreach (var row in view.Rows)
+            {
+                Place(row.label.transform, labelPadding, 12, labelWidth, 30);
+                Place(row.rule.transform, labelPadding, 46, labelWidth, 48);
+                var total = (RectTransform)Find(row.background.transform, "AggregateColumn");
+                total.anchorMin = Vector2.zero;
+                total.anchorMax = new Vector2(0, 1);
+                total.offsetMin = new Vector2(boundaries[3], 0);
+                total.offsetMax = new Vector2(boundaries[4], 0);
             }
         }
         static void Secondary()

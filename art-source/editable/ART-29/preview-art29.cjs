@@ -10,7 +10,8 @@ function layer(id,x,y,scale,order){return {asset_id:id,position_px:[x,y],scale,o
 function point(l,native){const r=records.find(r=>r.id===l.asset_id);return l.position_px.map((v,i)=>v+(native[i]-r.actual_size_px[i]*l.pivot[i])*l.scale);}
 function quarterly(){
  const woman=layer('CH01_DISCUSSING',1460,316,0.46875,20),mentor=layer('CH04_DISCUSSING',1710,296,0.46875,21);
- const handNative=[646,514],hand=point(woman,handNative),paperNative=[209,169],paper=layer('DRE_PROP_REPORT_BLANK',0,0,0.375,10);
+ const {ch01_hand,paper_grip}=c.quarterly.anchor_definitions;
+ const handNative=ch01_hand.native_px,hand=point(woman,handNative),paperNative=paper_grip.native_px,paper=layer('DRE_PROP_REPORT_BLANK',0,0,0.375,10);
  paper.position_px=hand.map((v,i)=>v-(paperNative[i]-128)*paper.scale);
  const layers=[layer('DRE_ENVIRONMENT',1600,330,0.546875,0),paper,woman,mentor,layer('DRE_DESK',1600,490,0.546875,30),layer('DRE_PROP_COFFEE_CUP',1440,441,0.375,40),layer('DRE_PROP_CALCULATOR',1800,438,0.375,50)];
  const desk=layers.find(l=>l.asset_id==='DRE_DESK');

@@ -32,6 +32,14 @@ namespace Game.Adapter.In.UI
             retryButton.onClick.RemoveAllListeners(); retryButton.onClick.AddListener(() => retry());
         }
         private static Color Semantic(double? value) => !value.HasValue || value == 0 ? GamePalette.Ink : value > 0 ? GamePalette.PositiveReportText : GamePalette.NegativeReportText;
+
+        private static float FitMoney(TMP_Text text, string value, float baseSize)
+        {
+            text.fontSize = baseSize;
+            float width = text.GetPreferredValues(value, Mathf.Infinity, Mathf.Infinity).x;
+            return width > 0 ? baseSize * Mathf.Min(1, (text.rectTransform.rect.width - 1) / width) : baseSize;
+        }
+
         public void Show(QuarterlyResultPresentation.Report data)
         {
             DisplayState = "loaded"; loadedBody.SetActive(true); stateBody.SetActive(false); retryButton.gameObject.SetActive(false);
@@ -39,6 +47,21 @@ namespace Game.Adapter.In.UI
             revenueValue.text = QuarterlyResultPresentation.Money(data.Revenue);
             resultValue.text = QuarterlyResultPresentation.Money(data.Net); resultValue.color = Semantic(data.Net);
             cashValue.text = QuarterlyResultPresentation.Money(data.Closing); cashValue.color = Semantic(data.Closing);
+            var tableCells = data.Rows.Select(row => row.Months.Concat(new[] { row.Aggregate, row.Change }).ToArray()).ToArray();
+            float moneySize = 20;
+            if (compactRows)
+            {
+                foreach (var kpi in new[] { revenueValue, resultValue, cashValue })
+                {
+                    kpi.textWrappingMode = TextWrappingModes.NoWrap;
+                    kpi.fontSize = FitMoney(kpi, kpi.text, 38);
+                }
+                // One size keeps the decimal digits aligned across monetary rows, including large balances.
+                for (int i = 0; i < rows.Length; i++)
+                    for (int c = 0; c < tableCells[i].Length; c++)
+                        if (data.Rows[i].Monetary && tableCells[i][c].Amount.HasValue)
+                            moneySize = Mathf.Min(moneySize, FitMoney(rows[i].cells[c], tableCells[i][c].Text, 20));
+            }
             note.text = $"Agregado de {data.Count}/3 meses salvos. Δ compara valores mensais (último − primeiro), sem percentual. Principal e juros já estão na parcela. As regras de cada agregado aparecem sob o rótulo.";
             if(compactRows)note.text=$"Somatório de {data.Count}/3 meses salvos. Caixa: primeiro saldo inicial e último saldo final. Δ: último − primeiro.";
             for (int m = 0; m < 3; m++) monthLabels[m].text = $"Mês {m + 1}" + (data.Months[m] == null ? "\nNão salvo" : "\nSalvo");
@@ -46,13 +69,15 @@ namespace Game.Adapter.In.UI
             for (int i = 0; i < rows.Length; i++)
             {
                 var row = rows[i]; var d = data.Rows[i]; row.label.text = d.Label; row.rule.text = d.Rule;
-                var cells = d.Months.Concat(new[] { d.Aggregate, d.Change }).ToArray();
+                var cells = tableCells[i];
                 float labelWidth=row.label.rectTransform.rect.width;
                 float labelHeight = row.label.GetPreferredValues(d.Label, labelWidth, 0).y;
                 row.label.rectTransform.sizeDelta = new Vector2(labelWidth, labelHeight);
-                row.rule.rectTransform.anchoredPosition = new Vector2(14, -12 - labelHeight - 6);
-                float ruleHeight = row.rule.GetPreferredValues(d.Rule, 282, 0).y;
-                row.rule.rectTransform.sizeDelta = new Vector2(282, ruleHeight);
+                var ruleRect = row.rule.rectTransform;
+                ruleRect.anchoredPosition = new Vector2(row.label.rectTransform.anchoredPosition.x,
+                    row.label.rectTransform.anchoredPosition.y - labelHeight - 6);
+                float ruleHeight = row.rule.GetPreferredValues(d.Rule, ruleRect.rect.width, 0).y;
+                ruleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ruleHeight);
                 float h = labelHeight + ruleHeight + 30;
                 bool showRule=!compactRows||i>=10;
                 row.rule.gameObject.SetActive(showRule);
@@ -60,6 +85,16 @@ namespace Game.Adapter.In.UI
                 for (int c = 0; c < cells.Length; c++)
                 {
                     row.cells[c].text = cells[c].Text; row.cells[c].color = d.Monetary ? Semantic(cells[c].Amount) : GamePalette.Ink;
+                    if (compactRows && d.Monetary && cells[c].Amount.HasValue)
+                    {
+                        row.cells[c].fontSize = moneySize;
+                        row.cells[c].textWrappingMode = TextWrappingModes.NoWrap;
+                    }
+                    else if (compactRows && d.Monetary)
+                    {
+                        row.cells[c].fontSize = 20;
+                        row.cells[c].textWrappingMode = TextWrappingModes.Normal;
+                    }
                     float cellHeight = Mathf.Max(28, row.cells[c].GetPreferredValues(cells[c].Text, row.cells[c].rectTransform.rect.width, 0).y + 4);
                     row.cells[c].rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cellHeight);
                     h = Mathf.Max(h, cellHeight + 24);
