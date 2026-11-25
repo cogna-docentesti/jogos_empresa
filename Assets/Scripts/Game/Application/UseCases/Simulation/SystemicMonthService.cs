@@ -70,7 +70,10 @@ namespace Game.Application.UseCases.Simulation
             _sessionId = sessionId;
             _pendingCommit = null;
             _startState = active.State.Clone();
-            _month = new MonthSimulation(_catalog, active.Setup, active.State, active.Policies);
+            var plan = active.EventPlan;
+            if (plan == null && !active.LegacyDailyEvents)
+                plan = new MonthSimulation(_catalog, active.Setup, active.State, active.Policies).ReserveMonthlyEvents();
+            _month = new MonthSimulation(_catalog, active.Setup, active.State, active.Policies, plan);
             return _month;
         }
 
@@ -85,7 +88,8 @@ namespace Game.Application.UseCases.Simulation
         {
             var month = Require();
             var outcome = MonthCloser.Close(month, _sessionId);
-            outcome.Report.Forecast = Forecaster.Run(_catalog, month.Setup, outcome.NextState, month.Policies);
+            outcome.Report.Forecast = Forecaster.Run(_catalog, month.Setup, outcome.NextState, month.Policies,
+                plannedEvents: month.EventPlan != null);
 
             int monthsPerMatch = _catalog.Constants.MonthsPerMatch;
             _pendingCommit = new MonthCommit

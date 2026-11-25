@@ -103,7 +103,7 @@ public static class ConferenciaJogada
                 notes.Add($"mês {row.month}: políticas não gravadas (mês antigo), encontradas pela reprodução dia a dia: " + Describe(policies));
             }
 
-            var sim = new MonthSimulation(cat, setup, start.Clone(), policies);
+            var sim = new MonthSimulation(cat, setup, start.Clone(), policies, stored.EventPlan);
             Replay(sim, stored, cat, 0, msg => notes.Add($"mês {row.month} {msg}"));
             var outcome = MonthCloser.Close(sim, sessionId);
             var report = outcome.Report;
@@ -195,7 +195,7 @@ public static class ConferenciaJogada
         {
             var candidate = new MonthPolicies();
             for (int i = 0; i < ids.Length; i++) candidate.Set(ids[i], options[i][index[i]]);
-            var sim = new MonthSimulation(cat, setup, start.Clone(), candidate);
+            var sim = new MonthSimulation(cat, setup, start.Clone(), candidate, stored.EventPlan);
             if (Replay(sim, stored, cat, 1, null)) return candidate;
             int k = 0;
             while (k < ids.Length && ++index[k] == options[k].Count) { index[k] = 0; k++; }

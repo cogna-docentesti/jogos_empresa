@@ -185,6 +185,50 @@ public sealed class SystemicCalendarTests
     }
 
     [Test]
+    public void FutureSurprisesAreReservedButOnlyAnnouncedEventsAppearInTheProjection()
+    {
+        foreach (var definition in gateway.Catalog.Events) definition.Announced = true;
+        calendar.Open(Id, 1);
+        Assert.IsNotNull(calendar.Current.EventPlan);
+        Assert.That(calendar.Current.EventPlan.Events.Count, Is.InRange(4, 5));
+        var announced = calendar.Project();
+        Assert.AreEqual(calendar.Current.EventPlan.Events.Count, announced.Events.Count);
+        Assert.IsTrue(announced.Events.All(e => e.Announced && e.Day > 0));
+        string frozen = JsonConvert.SerializeObject(calendar.Current.EventPlan);
+        calendar.Read(Id, 1);
+        Assert.AreEqual(frozen, JsonConvert.SerializeObject(calendar.Current.EventPlan));
+    }
+
+    [Test]
+    public void OldDailyJournalKeepsItsExactReplayAndIsNotRewrittenDuringUpgrade()
+    {
+        var raw = new MonthSimulation(gateway.Catalog, gateway.Opening.Setup, gateway.Opening.State, gateway.Opening.Policies);
+        var old = new SystemicCalendarService.Journal { catalog = gateway.Catalog, opening = gateway.Opening };
+        for (int i = 0; i < 12; i++)
+        {
+            if (raw.IsAwaitingDecision)
+            {
+                var occurrence = raw.PendingDecisions[0];
+                var choice = raw.ReactionOptions(occurrence).FirstOrDefault(o => o.Enabled && o.Cost == 0)
+                    ?? raw.ReactionOptions(occurrence).First(o => o.Enabled);
+                raw.Choose(occurrence.OccurrenceId, choice.Reaction.Id);
+                old.commands.Add(new SystemicCalendarService.Command { occurrence = occurrence.OccurrenceId, reaction = choice.Reaction.Id });
+            }
+            else { raw.AdvanceDay(); old.commands.Add(new SystemicCalendarService.Command()); }
+        }
+        string stored = JsonConvert.SerializeObject(old);
+        db.Insert(new SystemicCalendarEntity { id = Id + ":1", sessionId = Id, month = 1, revision = 13, journalJson = stored });
+        var session = db.Find<GameSessionEntity>(Id);
+        session.calendarMonthLocked = 1; session.currentCash = (float)raw.State.Cash; db.Update(session);
+        calendar.Open(Id, 1);
+        Assert.IsNull(calendar.Current.EventPlan);
+        Assert.AreEqual(raw.Day, calendar.Current.Day);
+        Assert.AreEqual(raw.State.Cash, calendar.Current.State.Cash, .00001);
+        Assert.AreEqual(stored, db.Find<SystemicCalendarEntity>(Id + ":1").journalJson);
+        Assert.AreEqual(session.currentCash, db.Find<GameSessionEntity>(Id).currentCash);
+    }
+
+    [Test]
     public void ExistingLegacyCampaignStartsAtItsCurrentMonthAndBalances()
     {
         var session = db.Find<GameSessionEntity>(Id);

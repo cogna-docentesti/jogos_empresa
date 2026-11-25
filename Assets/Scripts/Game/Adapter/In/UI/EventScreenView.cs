@@ -31,7 +31,12 @@ namespace Game.Adapter.In.UI
         public UnityEngine.UI.ScrollRect DecisionScroll => decisionScroll;
         public UnityEngine.UI.ScrollRect HistoryScroll => historyScroll;
         public bool Ready => cardPrefab != null && visuals != null && confirmButton != null;
-        public Sprite Illustration(string id) => Array.Find(visuals, v => v.eventId == id)?.illustration;
+        public Sprite Illustration(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return null;
+            var assigned = visuals == null ? null : Array.Find(visuals, v => v != null && v.eventId == id)?.illustration;
+            return assigned != null ? assigned : Theme.SharedUiSkin.Current?.Get("EVENT_" + id.ToUpperInvariant());
+        }
 
         public void MountInCalendar(RectTransform surface)
         {

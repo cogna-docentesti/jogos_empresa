@@ -156,6 +156,11 @@ namespace Game.Adapter.Out.Simulation
             {
                 var def = ToDomain(e);
                 var asset = legacyAssets.FirstOrDefault(a => a.id == e.id);
+                if (asset != null)
+                {
+                    def.Announced = asset.calendarVisibility == EventVisibility.Announced;
+                    def.MinMonth = asset.minRound; def.MaxMonth = asset.maxRound;
+                }
                 if (asset != null && !string.IsNullOrEmpty(asset.title)) def.Title = asset.title;   // texto do asset (admin)
                 cat.Events.Add(def);
             }
@@ -194,6 +199,7 @@ namespace Game.Adapter.Out.Simulation
             var def = new EventDefinition
             {
                 Id = ed.id, Title = ed.title, Category = "Legado", Scope = EventScope.Global,
+                Announced = ed.calendarVisibility == EventVisibility.Announced, MinMonth = ed.minRound, MaxMonth = ed.maxRound,
                 Group = ed.exclusionGroup == EventExclusionGroup.NONE ? null : ed.exclusionGroup.ToString(),
                 BaseRatePerMonth = ed.baseWeight * 0.3, IsNegative = negative, Severity = negative ? 1 : 0,
                 RequiresDecision = true, Repeats = ed.canRepeat, MaxPerMatch = ed.canRepeat ? int.MaxValue : 1,

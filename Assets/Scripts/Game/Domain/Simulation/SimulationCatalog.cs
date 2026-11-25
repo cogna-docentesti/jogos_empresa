@@ -164,6 +164,8 @@ namespace Game.Domain.Simulation
     {
         public string Id;
         public string Title;
+        public bool Announced;
+        public int MinMonth = 1, MaxMonth = 3;
         public string Category;                             // Equipamento, Equipe, Fornecedor, Mercado...
         public string Group;                                // mesmo grupo não fica ativo junto (null = sem grupo)
         public EventScope Scope;

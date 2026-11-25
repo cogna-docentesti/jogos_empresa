@@ -17,6 +17,7 @@ public sealed class SystemicCalendarService
 
     public sealed class Journal
     {
+        public int schemaVersion;
         public SimulationCatalog catalog;
         public ActiveMonthData opening;
         public List<Command> commands = new();
@@ -28,7 +29,12 @@ public sealed class SystemicCalendarService
         private readonly Journal journal;
         public FrozenGateway(ISimulationGateway storage, Journal journal) { this.storage = storage; this.journal = journal; }
         public SimulationCatalog LoadCatalog() => journal.catalog;
-        public ActiveMonthData LoadActiveMonth(string id) => Clone(journal.opening);
+        public ActiveMonthData LoadActiveMonth(string id)
+        {
+            var active = Clone(journal.opening);
+            active.LegacyDailyEvents = journal.schemaVersion == 0;
+            return active;
+        }
         public MonthPolicies LoadPolicies(string id, int month) => journal.opening.Policies.Clone();
         public void SavePolicies(string id, int month, MonthPolicies policies) => throw new InvalidOperationException("O mês está aberto.");
         public CommitResult Commit(MonthCommit commit) => storage.Commit(commit);
@@ -83,7 +89,15 @@ public sealed class SystemicCalendarService
             active.State.Month = active.Month = month;
             active.Cash = session.currentCash;
             if (month > 1) active.State.Reputation = session.reputationScore;
-            journal = Clone(new Journal { catalog = storage.LoadCatalog(), opening = active });
+            // Old-engine results may precede SimulationStateEntity. Carry their history into the draw too.
+            db.CreateTable<SessionEventHistoryEntity>();
+            foreach (var history in db.Table<SessionEventHistoryEntity>().Where(h => h.sessionId == sessionId).ToList())
+                if (!active.State.EventHistory.Any(h => h.EventId == history.eventId))
+                    active.State.EventHistory.Add(new EventRecord { EventId = history.eventId,
+                        AbsDay = Days.Abs(history.round, Math.Max(1, history.day)) });
+            active.LegacyDailyEvents = false;
+            active.EventPlan = new MonthSimulation(storage.LoadCatalog(), active.Setup, active.State, active.Policies).ReserveMonthlyEvents();
+            journal = Clone(new Journal { schemaVersion = 1, catalog = storage.LoadCatalog(), opening = active });
             if (journal.catalog.Constants.DaysPerMonth != MonthlyCalendarService.Days)
                 throw new InvalidOperationException("O calendário requer um mês de 30 dias.");
             row = new SystemicCalendarEntity { id = Key(sessionId, month), sessionId = sessionId, month = month, revision = 1 };
@@ -193,8 +207,13 @@ public sealed class SystemicCalendarService
         Bill("water", k.WaterDay, CashLine.Bills);
         Bill("salaries", k.SalaryDay, CashLine.Salaries);
         Bill("taxes", k.TaxDay, CashLine.Taxes);
-        var events = month.Occurrences.Select(e => new MonthlyCalendarService.VisibleEvent(e.OccurrenceId, e.Day, false,
-            !e.RequiresDecision || e.ChosenReactionId != null, e.Definition.Title)).ToArray();
+        var events = month.Occurrences.Select(e => new MonthlyCalendarService.VisibleEvent(e.OccurrenceId, e.Day,
+            month.EventPlan?.Events.Any(p => p.EventId == e.Definition.Id && p.Announced) == true,
+            !e.RequiresDecision || e.ChosenReactionId != null, e.Definition.Title)).ToList();
+        if (month.EventPlan != null)
+            foreach (var reservation in month.EventPlan.Events.Where(e => e.Announced && e.Day > month.Day))
+                events.Add(new MonthlyCalendarService.VisibleEvent(reservation.EventId, reservation.Day, true, false,
+                    month.Catalog.Event(reservation.EventId).Title));
         return new MonthlyCalendarService.View
         {
             Month = month.Month, Day = month.Day, Revision = Revision,

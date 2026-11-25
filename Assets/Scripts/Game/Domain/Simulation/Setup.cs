@@ -145,7 +145,7 @@ namespace Game.Domain.Simulation
         /// as mesmas políticas e a reação sem custo em todo evento. Não altera a partida real.
         /// </summary>
         public static ForecastResult Run(SimulationCatalog cat, SessionSetup setup, SimulationState afterClose,
-                                         MonthPolicies policies, int scenarios = 40)
+                                         MonthPolicies policies, int scenarios = 40, bool plannedEvents = false)
         {
             var k = cat.Constants;
             int closedMonth = afterClose.Month - 1;
@@ -162,7 +162,8 @@ namespace Game.Domain.Simulation
                 bool closed = false;
                 for (int m = 0; m < monthsToRun && !closed; m++)
                 {
-                    var sim = new MonthSimulation(cat, scenarioSetup, state, policies);
+                    var plan = plannedEvents ? new MonthSimulation(cat, scenarioSetup, state, policies).ReserveMonthlyEvents() : null;
+                    var sim = new MonthSimulation(cat, scenarioSetup, state, policies, plan);
                     Autopilot.RunToEnd(sim);
                     var outcome = MonthCloser.Close(sim);
                     state = outcome.NextState;

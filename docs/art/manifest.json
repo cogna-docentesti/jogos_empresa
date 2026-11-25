@@ -7,7 +7,11 @@
     "request_date": "2026-10-17",
     "record": "docs/ui-update/concept-art.json",
     "layout": "docs/ui-update/concept-layout.json",
-    "variants": ["FACADE_STREET_LANCHES", "FACADE_STREET_JAPONES", "FACADE_STREET_FRANCES"],
+    "variants": [
+      "FACADE_STREET_LANCHES",
+      "FACADE_STREET_JAPONES",
+      "FACADE_STREET_FRANCES"
+    ],
     "note": "Três variantes de rua para as interfaces; fachadas isométricas originais preservadas. Catálogos mantêm os mesmos IDs."
   },
   "phase": "produção por lotes; ART-01 a ART-36 validados; integração no jogo pendente",
@@ -29,7 +33,7 @@
     "Roles": 5,
     "CreditLines": 4,
     "Locations": 5,
-    "Events": 20
+    "Events": 26
   },
   "characters": [
     {
@@ -18688,6 +18692,352 @@
       },
       "canonical_asset": "Assets/Art/new/characters/CH07/ch07_canonical.png",
       "canonical_sha256": "33537deb524c4b469321d0ffe93b5c19564345d67b29b32f4b7db2b8e8ec1ccf"
+    },
+    {
+      "id": "EVENT_STAFF_ABSENT",
+      "task_id": "ART-41",
+      "path": "events/illustrations/staff_absent.png",
+      "name": "Funcionário ausente",
+      "kind": "evento",
+      "status": "validado",
+      "scope": "nucleo",
+      "export_size_px": [
+        1536,
+        1024
+      ],
+      "display_size_px": [
+        640,
+        426
+      ],
+      "alpha_policy": "recorte",
+      "format": "PNG RGBA 8-bit sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "padding_percent": 0,
+      "character_ids": [],
+      "catalog_id": "staff_absent",
+      "source": "Assets/Resources/Simulation/SimulationConfig.asset#events/staff_absent",
+      "references": [
+        "Assets/Art/new/events/illustrations/insufficient_team.png",
+        "Assets/Art/new/events/illustrations/freezer_breakdown.png"
+      ],
+      "brief": "Employee absent for one shift: a neatly folded lavender service shirt and graphite apron hanging unused on a single restaurant wall peg, a small analog clock with blank face and simple hands beside the peg, and one unattended stainless service station with two waiting plates and a silver service bell. A compact fragment of warm ivory tiled wall anchors the peg; subtle waiting-work implication. Make absence temporary, not resignation: no box of belongings, no exit arrow.",
+      "sha256": "3fcd333f8de06c35a3ff378170f51d4a3850116fde347550c6dbf8eafbfffd40",
+      "actual_size_px": [
+        1536,
+        1024
+      ],
+      "generation_prompt": "Use case: illustration-story. Create ONE standalone event-vignette sprite for the approved Cogna adult restaurant management game. The attached local images are STYLE REFERENCES ONLY, not edit targets. Match their polished adult editorial cartoon: fine dark-plum contours, believable three-quarter volumes viewed slightly from above, softly painted clean shading, warm light from upper left, violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, teal #26776A, restrained amber and coral accents. No people, hands or faces. Compact single isolated object scene, horizontal 3:2 composition, desired exact 768x512 pixels, all objects and close contact shadows completely inside frame with 7% clear padding. REAL TRANSPARENT ALPHA background. No rectangular backdrop, scene panel, halo, fog, checkerboard, text, letters, numbers, logos, price symbols, UI or labels. Readable when contained at 640x426. Do not copy the reference composition. Primary request: Employee absent for one shift: a neatly folded lavender service shirt and graphite apron hanging unused on a single restaurant wall peg, a small analog clock with blank face and simple hands beside the peg, and one unattended stainless service station with two waiting plates and a silver service bell. A compact fragment of warm ivory tiled wall anchors the peg; subtle waiting-work implication. Make absence temporary, not resignation: no box of belongings, no exit arrow.",
+      "source_editable": null,
+      "display_fit": "contain",
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-41/generations/staff_absent.png",
+      "source_image_sha256": "3fcd333f8de06c35a3ff378170f51d4a3850116fde347550c6dbf8eafbfffd40",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json"
+    },
+    {
+      "id": "EVENT_STAFF_RESIGNED",
+      "task_id": "ART-41",
+      "path": "events/illustrations/staff_resigned.png",
+      "name": "Funcionário pediu demissão",
+      "kind": "evento",
+      "status": "validado",
+      "scope": "nucleo",
+      "export_size_px": [
+        1536,
+        1024
+      ],
+      "display_size_px": [
+        640,
+        426
+      ],
+      "alpha_policy": "recorte",
+      "format": "PNG RGBA 8-bit sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "padding_percent": 0,
+      "character_ids": [],
+      "catalog_id": "staff_resigned",
+      "source": "Assets/Resources/Simulation/SimulationConfig.asset#events/staff_resigned",
+      "references": [
+        "Assets/Art/new/events/illustrations/insufficient_team.png",
+        "Assets/Art/new/events/illustrations/freezer_breakdown.png"
+      ],
+      "brief": "Employee resigned: a small unbranded cardboard box of personal work belongings beside an empty restaurant staff locker with the door open. A folded lavender uniform, graphite apron, plain water bottle and simple work shoes inside or beside the box suggest departure. One locker only, warm ivory and violet enamel with metal hardware, a blank hanger inside. Calm professional scene, no people, no farewell note, no signs.",
+      "sha256": "75073f3479719aab163e0da9254d4328b6acd418afcc3b45ae119d75b0587588",
+      "actual_size_px": [
+        1536,
+        1024
+      ],
+      "generation_prompt": "Use case: illustration-story. Create ONE standalone event-vignette sprite for the approved Cogna adult restaurant management game. The attached local images are STYLE REFERENCES ONLY, not edit targets. Match their polished adult editorial cartoon: fine dark-plum contours, believable three-quarter volumes viewed slightly from above, softly painted clean shading, warm light from upper left, violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, teal #26776A, restrained amber and coral accents. No people, hands or faces. Compact single isolated object scene, horizontal 3:2 composition, desired exact 768x512 pixels, all objects and close contact shadows completely inside frame with 7% clear padding. REAL TRANSPARENT ALPHA background. No rectangular backdrop, scene panel, halo, fog, checkerboard, text, letters, numbers, logos, price symbols, UI or labels. Readable when contained at 640x426. Do not copy the reference composition. Primary request: Employee resigned: a small unbranded cardboard box of personal work belongings beside an empty restaurant staff locker with the door open. A folded lavender uniform, graphite apron, plain water bottle and simple work shoes inside or beside the box suggest departure. One locker only, warm ivory and violet enamel with metal hardware, a blank hanger inside. Calm professional scene, no people, no farewell note, no signs.",
+      "source_editable": null,
+      "display_fit": "contain",
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-41/generations/staff_resigned.png",
+      "source_image_sha256": "75073f3479719aab163e0da9254d4328b6acd418afcc3b45ae119d75b0587588",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json"
+    },
+    {
+      "id": "EVENT_KITCHEN_EQUIPMENT_FAILURE",
+      "task_id": "ART-41",
+      "path": "events/illustrations/kitchen_equipment_failure.png",
+      "name": "Equipamento de cozinha quebrou",
+      "kind": "evento",
+      "status": "validado",
+      "scope": "nucleo",
+      "export_size_px": [
+        1536,
+        1024
+      ],
+      "display_size_px": [
+        640,
+        426
+      ],
+      "alpha_policy": "recorte",
+      "format": "PNG RGBA 8-bit sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "padding_percent": 0,
+      "character_ids": [],
+      "catalog_id": "kitchen_equipment_failure",
+      "source": "Assets/Resources/Simulation/SimulationConfig.asset#events/kitchen_equipment_failure",
+      "references": [
+        "Assets/Art/new/events/illustrations/freezer_breakdown.png"
+      ],
+      "brief": "A commercial six-burner stainless restaurant range with violet lower doors, one front knob visibly detached beside its socket, one burner visibly dark while a closed cooking pot waits on it; a compact open graphite-and-violet repair tool case with wrench and screwdriver rests beside the stove, and an unplugged cable lies on the floor. A clear plausible equipment breakdown, no dramatic fire, no smoke, no warning icons.",
+      "sha256": "a230d47a8c0f93852e3f91ed4cc064a1595c38d42036fe960d2c9dbece77b233",
+      "actual_size_px": [
+        1536,
+        1024
+      ],
+      "generation_prompt": "Use case: illustration-story. Create ONE standalone event-vignette sprite for the approved Cogna adult restaurant management game. The attached local images are STYLE REFERENCES ONLY, not edit targets. Match their polished adult editorial cartoon: fine dark-plum contours, believable three-quarter volumes viewed slightly from above, softly painted clean shading, warm light from upper left, violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, teal #26776A, restrained amber and coral accents. No people, hands or faces. Compact single isolated object scene, horizontal 3:2 composition, desired exact 768x512 pixels, all objects and close contact shadows completely inside frame with 7% clear padding. REAL TRANSPARENT ALPHA background. No rectangular backdrop, scene panel, halo, fog, checkerboard, text, letters, numbers, logos, price symbols, UI or labels. Readable when contained at 640x426. Do not copy the reference composition. Outside the silhouette and a tiny under-object contact shadow the canvas must be completely empty transparent alpha: absolutely NO glow, aura, gradient haze or surrounding soft background. Primary request: A commercial six-burner stainless restaurant range with violet lower doors, one front knob visibly detached beside its socket, one burner visibly dark while a closed cooking pot waits on it; a compact open graphite-and-violet repair tool case with wrench and screwdriver rests beside the stove, and an unplugged cable lies on the floor. A clear plausible equipment breakdown, no dramatic fire, no smoke, no warning icons.",
+      "source_editable": null,
+      "display_fit": "contain",
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-41/generations/kitchen_equipment_failure.png",
+      "source_image_sha256": "a230d47a8c0f93852e3f91ed4cc064a1595c38d42036fe960d2c9dbece77b233",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json"
+    },
+    {
+      "id": "EVENT_EQUIPMENT_STILL_DOWN",
+      "task_id": "ART-41",
+      "path": "events/illustrations/equipment_still_down.png",
+      "name": "Equipamento continua parado",
+      "kind": "evento",
+      "status": "validado",
+      "scope": "nucleo",
+      "export_size_px": [
+        1536,
+        1024
+      ],
+      "display_size_px": [
+        640,
+        426
+      ],
+      "alpha_policy": "recorte",
+      "format": "PNG RGBA 8-bit sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "padding_percent": 0,
+      "character_ids": [],
+      "catalog_id": "equipment_still_down",
+      "source": "Assets/Resources/Simulation/SimulationConfig.asset#events/equipment_still_down",
+      "references": [
+        "Assets/Art/new/events/illustrations/freezer_breakdown.png"
+      ],
+      "brief": "Equipment still out of service after several days: a single closed stainless commercial chest freezer, no ice or fresh-breakdown effects, with a broad folded dark graphite protective cloth draped over its lid; the unplugged cable is neatly coiled at its foot, and a small closed violet toolbox rests unused nearby. A simple dust line on top and a blank little hanging maintenance tag imply a repair postponed for days. Keep clearly distinct from a brand-new refrigerator failure. No padlock, chains, warning symbols or written tag.",
+      "sha256": "1ebb53f6ba4463dec6316feab87b591e066f5b9e1f805757148968ea945492b9",
+      "actual_size_px": [
+        1536,
+        1024
+      ],
+      "generation_prompt": "Use case: illustration-story. Create ONE standalone event-vignette sprite for the approved Cogna adult restaurant management game. The attached local images are STYLE REFERENCES ONLY, not edit targets. Match their polished adult editorial cartoon: fine dark-plum contours, believable three-quarter volumes viewed slightly from above, softly painted clean shading, warm light from upper left, violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, teal #26776A, restrained amber and coral accents. No people, hands or faces. Compact single isolated object scene, horizontal 3:2 composition, desired exact 768x512 pixels, all objects and close contact shadows completely inside frame with 7% clear padding. REAL TRANSPARENT ALPHA background. No rectangular backdrop, scene panel, halo, fog, checkerboard, text, letters, numbers, logos, price symbols, UI or labels. Readable when contained at 640x426. Do not copy the reference composition. Every pixel outside the subject silhouette and tiny close contact shadow must be alpha zero, no glow or aura. Primary request: Equipment still out of service after several days: a single closed stainless commercial chest freezer, no ice or fresh-breakdown effects, with a broad folded dark graphite protective cloth draped over its lid; the unplugged cable is neatly coiled at its foot, and a small closed violet toolbox rests unused nearby. A simple dust line on top and a blank little hanging maintenance tag imply a repair postponed for days. Keep clearly distinct from a brand-new refrigerator failure. No padlock, chains, warning symbols or written tag.",
+      "source_editable": null,
+      "display_fit": "contain",
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-41/generations/equipment_still_down.png",
+      "source_image_sha256": "1ebb53f6ba4463dec6316feab87b591e066f5b9e1f805757148968ea945492b9",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json"
+    },
+    {
+      "id": "EVENT_CASH_SHORTFALL",
+      "task_id": "ART-41",
+      "path": "events/illustrations/cash_shortfall.png",
+      "name": "Caixa insuficiente para a parcela",
+      "kind": "evento",
+      "status": "validado",
+      "scope": "nucleo",
+      "export_size_px": [
+        1536,
+        1024
+      ],
+      "display_size_px": [
+        640,
+        426
+      ],
+      "alpha_policy": "recorte",
+      "format": "PNG RGBA 8-bit sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "padding_percent": 0,
+      "character_ids": [],
+      "catalog_id": "cash_shortfall",
+      "source": "Assets/Resources/Simulation/SimulationConfig.asset#events/cash_shortfall",
+      "references": [
+        "Assets/Art/new/events/illustrations/insufficient_team.png",
+        "Assets/Art/new/events/illustrations/freezer_breakdown.png"
+      ],
+      "brief": "Restaurant cash shortfall for a loan installment: an open compact violet cash drawer with only three ordinary unmarked brass coins inside, next to a thick small stack of completely blank ivory payment papers held by a graphite clip and a simple ivory desktop calculator with a BLANK display and BLANK keys. The almost-empty cash drawer is the main focus. Clear financial pressure, calm professional treatment, no people, no graph, no bank logos, absolutely no currency symbols, lettering, words or numerals.",
+      "sha256": "115b7c581eaea59a5526dda019da96b2860e674088d029898cc29a22efa3a1f6",
+      "actual_size_px": [
+        1536,
+        1024
+      ],
+      "generation_prompt": "Use case: illustration-story. Create ONE standalone event-vignette sprite for the approved Cogna adult restaurant management game. The attached local images are STYLE REFERENCES ONLY, not edit targets. Match their polished adult editorial cartoon: fine dark-plum contours, believable three-quarter volumes viewed slightly from above, softly painted clean shading, warm light from upper left, violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, teal #26776A, restrained amber and coral accents. No people, hands or faces. Compact single isolated object scene, horizontal 3:2 composition, desired exact 768x512 pixels, all objects and close contact shadows completely inside frame with 7% clear padding. REAL TRANSPARENT ALPHA background. No rectangular backdrop, scene panel, halo, fog, checkerboard, text, letters, numbers, logos, price symbols, UI or labels. Readable when contained at 640x426. Do not copy the reference composition. Every pixel outside the subject silhouette and tiny close contact shadow must be alpha zero. Primary request: Restaurant cash shortfall for a loan installment: an open compact violet cash drawer with only three ordinary unmarked brass coins inside, next to a thick small stack of completely blank ivory payment papers held by a graphite clip and a simple ivory desktop calculator with a BLANK display and BLANK keys. The almost-empty cash drawer is the main focus. Clear financial pressure, calm professional treatment, no people, no graph, no bank logos, absolutely no currency symbols, lettering, words or numerals.",
+      "source_editable": null,
+      "display_fit": "contain",
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-41/generations/cash_shortfall.png",
+      "source_image_sha256": "115b7c581eaea59a5526dda019da96b2860e674088d029898cc29a22efa3a1f6",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json"
+    },
+    {
+      "id": "EVENT_QUALITY_COMPLAINT",
+      "task_id": "ART-41",
+      "path": "events/illustrations/quality_complaint.png",
+      "name": "Reclamação sobre a qualidade",
+      "kind": "evento",
+      "status": "validado",
+      "scope": "nucleo",
+      "export_size_px": [
+        1536,
+        1024
+      ],
+      "display_size_px": [
+        640,
+        426
+      ],
+      "alpha_policy": "recorte",
+      "format": "PNG RGBA 8-bit sRGB",
+      "nine_slice_lbrt_px": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "padding_percent": 0,
+      "character_ids": [],
+      "catalog_id": "quality_complaint",
+      "source": "Assets/Resources/Simulation/SimulationConfig.asset#events/quality_complaint",
+      "references": [
+        "Assets/Art/new/events/illustrations/insufficient_team.png",
+        "Assets/Art/new/events/illustrations/freezer_breakdown.png"
+      ],
+      "brief": "Restaurant food quality complaint: one ivory dinner plate on a compact stainless serving tray. The meal is visibly disappointing but believable: a very overcooked dark dry grilled fillet, a few limp olive-green vegetables and one poorly plated cold-looking side. Beside it lie a slightly used fork and knife neatly set down and a small crumpled ivory napkin. A violet service bell and a tiny plain ramekin sit at the far side of the tray. The meal should signal an unhappy customer's returned dish through food quality alone. No insects, disgusting gore, face emoticons, thumbs, speech bubbles, warning badges or written reviews.",
+      "sha256": "64616ed177829dacf7d905c0abca91ffcacd487aedd412f3f13d46c8370025bf",
+      "actual_size_px": [
+        1536,
+        1024
+      ],
+      "generation_prompt": "Use case: illustration-story. Create ONE standalone event-vignette sprite for the approved Cogna adult restaurant management game. The attached local images are STYLE REFERENCES ONLY, not edit targets. Match their polished adult editorial cartoon: fine dark-plum contours, believable three-quarter volumes viewed slightly from above, softly painted clean shading, warm light from upper left, violet #6D28D9, plum #24113D, lavender #B99AE8, warm ivory #F5F0E8, teal #26776A, restrained amber and coral accents. No people, hands or faces. Compact single isolated object scene, horizontal 3:2 composition, desired exact 768x512 pixels, all objects and close contact shadows completely inside frame with 7% clear padding. REAL TRANSPARENT ALPHA background. No rectangular backdrop, scene panel, halo, fog, checkerboard, text, letters, numbers, logos, price symbols, UI or labels. Readable when contained at 640x426. Do not copy the reference composition. Every pixel outside the subject silhouette and tiny close contact shadow must be alpha zero. Primary request: Restaurant food quality complaint: one ivory dinner plate on a compact stainless serving tray. The meal is visibly disappointing but believable: a very overcooked dark dry grilled fillet, a few limp olive-green vegetables and one poorly plated cold-looking side. Beside it lie a slightly used fork and knife neatly set down and a small crumpled ivory napkin. A violet service bell and a tiny plain ramekin sit at the far side of the tray. The meal should signal an unhappy customer's returned dish through food quality alone. No insects, disgusting gore, face emoticons, thumbs, speech bubbles, warning badges or written reviews.",
+      "source_editable": null,
+      "display_fit": "contain",
+      "qa": {
+        "technical": true,
+        "visual": true,
+        "identity": null
+      },
+      "production_method": "imagegen",
+      "generation_tool": "image_gen.imagegen",
+      "generation_model": null,
+      "source_image": "art-source/editable/ART-41/generations/quality_complaint.png",
+      "source_image_sha256": "64616ed177829dacf7d905c0abca91ffcacd487aedd412f3f13d46c8370025bf",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json"
     }
   ],
   "tasks": [
@@ -19726,6 +20076,29 @@
       "asset_ids": [],
       "auxiliary_deliverables": [],
       "request_prompt": "Use $cogna-artista para executar somente ART-40 — Materiais de loja e painel docente sob demanda. Leia D:/Cogna/jogos_empresa/docs/art/tasks/ART-40.txt e o manifesto. Produza apenas os arquivos deste lote em Assets/Art/new, separados, no estilo aprovado, com alfa e tamanhos especificados. Preserve as identidades dos personagens e registre prompts/QA. Não implemente UI nem execute os próximos lotes."
+    },
+    {
+      "id": "ART-41",
+      "title": "Complementos visuais dos eventos do motor sistêmico",
+      "dependencies": [
+        "ART-32"
+      ],
+      "scope": "nucleo",
+      "status": "validado",
+      "note": "Somente os seis eventos do motor novo sem arte; nenhum asset existente foi substituído.",
+      "asset_ids": [
+        "EVENT_STAFF_ABSENT",
+        "EVENT_STAFF_RESIGNED",
+        "EVENT_KITCHEN_EQUIPMENT_FAILURE",
+        "EVENT_EQUIPMENT_STILL_DOWN",
+        "EVENT_CASH_SHORTFALL",
+        "EVENT_QUALITY_COMPLAINT"
+      ],
+      "auxiliary_deliverables": [],
+      "request_prompt": "Revisar todos os eventos e gerar as imagens ausentes seguindo o modelo existente.",
+      "production_record": "docs/art/prompts/ART-41.json",
+      "qa_record": "docs/art/qa/ART-41.json",
+      "delivery_preview": "art-source/previews/ART-41/index.html"
     }
   ],
   "rules": [
@@ -19740,11 +20113,11 @@
     "Executar só a tarefa solicitada e suas peças listadas. Pré-requisitos indicam ordem de produção; não gerar lotes adicionais automaticamente."
   ],
   "counts": {
-    "assets_total": 272,
-    "assets_nucleo": 265,
+    "assets_total": 278,
+    "assets_nucleo": 271,
     "assets_documental": 5,
     "assets_condicional": 2,
-    "tasks_total": 40
+    "tasks_total": 41
   },
   "dynamic_ui_not_assets": [
     "Nomes, RA, labels e tooltips",

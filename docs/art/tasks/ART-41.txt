@@ -1,0 +1,18 @@
+ART-41 — Complementos visuais dos eventos do motor sistêmico
+Escopo: núcleo. Pedido de 25/11/2026: revisar todos os eventos e gerar a arte ausente no padrão existente.
+Referências: ART-32, em especial insufficient_team.png e freezer_breakdown.png.
+
+Entregáveis independentes em Assets/Art/new/events/illustrations:
+- staff_absent.png — Funcionário ausente
+- staff_resigned.png — Funcionário pediu demissão
+- kitchen_equipment_failure.png — Equipamento de cozinha quebrou
+- equipment_still_down.png — Equipamento continua parado
+- cash_shortfall.png — Caixa insuficiente para a parcela
+- quality_complaint.png — Reclamação sobre a qualidade
+
+PNG RGBA, alfa verdadeiro, sem texto, pessoas, UI ou números. Cartoon editorial adulto, contornos ameixa, violeta Cogna, marfim e luz quente superior esquerda. Não substituir as vinte vinhetas anteriores.
+Saída real da ferramenta integrada: 1536x1024. Preservar pixels e alfa originais; exibição contain/preserveAspect na caixa 640x426.
+Prompts e fontes: docs/art/prompts/ART-41.json e art-source/editable/ART-41/generations.
+QA: docs/art/qa/ART-41.json e art-source/previews/ART-41/index.html.
+Validação técnica: python tools/art/validate_assets.py --project D:/Cogna/jogos_empresa --task ART-41.
+Integração autorizada pelo relato de evento sem imagem: fallback no catálogo SharedUiSkin e sincronização editorial automática. Não alterar probabilidades, eventos salvos ou economia.

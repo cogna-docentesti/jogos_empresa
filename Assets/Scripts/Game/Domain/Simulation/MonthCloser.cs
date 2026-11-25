@@ -40,6 +40,7 @@ namespace Game.Domain.Simulation
         public string SessionId;
         public int Month;
         public string ConfigVersion;
+        public MonthlyEventPlan EventPlan;
         public List<NamedValue> Dre = new List<NamedValue>();
         public List<NamedValue> CashFlow = new List<NamedValue>();
         public List<NamedValue> Balance = new List<NamedValue>();
@@ -87,7 +88,7 @@ namespace Game.Domain.Simulation
                 books.Depreciate(day, u, u.PurchasePrice / cat.Levels[u.Level].LifeMonths);
 
             // 3. demonstrativos
-            var r = new MonthReport { SessionId = sessionId, Month = s.Month, ConfigVersion = cat.ConfigVersion };
+            var r = new MonthReport { SessionId = sessionId, Month = s.Month, ConfigVersion = cat.ConfigVersion, EventPlan = sim.EventPlan };
             foreach (DreLine line in Enum.GetValues(typeof(DreLine)))
                 r.Dre.Add(new NamedValue(line.ToString(), books.Total(line)));
             foreach (CashLine line in Enum.GetValues(typeof(CashLine)))

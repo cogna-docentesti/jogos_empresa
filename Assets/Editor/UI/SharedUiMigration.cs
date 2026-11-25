@@ -22,7 +22,7 @@ namespace Game.EditorTools
             SharedUiImportRules.ApplyManifest();
             var skin=AssetDatabase.LoadAssetAtPath<SharedUiSkin>("Assets/Resources/SharedUiSkin.asset");
             if(skin==null) { skin=ScriptableObject.CreateInstance<SharedUiSkin>(); AssetDatabase.CreateAsset(skin,"Assets/Resources/SharedUiSkin.asset"); }
-            skin.entries=SharedUiImportRules.Read().Where(r=>r.path.StartsWith("shared/")||r.path.StartsWith("hud/")||r.path.StartsWith("dre/components/"))
+            skin.entries=SharedUiImportRules.Read().Where(r=>r.path.StartsWith("shared/")||r.path.StartsWith("hud/")||r.path.StartsWith("dre/components/")||r.kind=="evento")
                 .Select(r=>new SharedUiSkin.Entry{id=r.id,sprite=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/new/"+r.path)}).ToArray();
             EditorUtility.SetDirty(skin); AssetDatabase.SaveAssets();
             foreach(string name in Templates)

@@ -31,6 +31,8 @@ namespace Game.Application.Ports.Out
         public SessionSetup Setup;
         public SimulationState State;          // estado no início do mês (dia 1); null quando há erro em D1 a D6
         public MonthPolicies Policies;
+        public MonthlyEventPlan EventPlan;
+        public bool LegacyDailyEvents;          // only for replaying existing pre-fix journals
         public int Month;
         public double Cash;
         public bool IsFinished;                // partida encerrada (mês 3 fechado ou falência)

@@ -111,6 +111,7 @@ namespace Game.Domain.Simulation
         public MonthTrace Trace { get; } = new MonthTrace();
         private double _failureLossToday;
         public List<EventOccurrence> Occurrences { get; } = new List<EventOccurrence>();
+        public MonthlyEventPlan EventPlan { get; }
 
         private bool _dayOpened;
         private readonly List<EventOccurrence> _pending = new List<EventOccurrence>();
@@ -129,7 +130,8 @@ namespace Game.Domain.Simulation
         public IReadOnlyList<EventOccurrence> PendingDecisions => _pending;
         public bool HasManager => State.Staff.Any(s => s.Role == RoleType.GERENTE);
 
-        public MonthSimulation(SimulationCatalog catalog, SessionSetup setup, SimulationState start, MonthPolicies policies)
+        public MonthSimulation(SimulationCatalog catalog, SessionSetup setup, SimulationState start, MonthPolicies policies,
+            MonthlyEventPlan eventPlan = null)
         {
             Catalog = catalog;
             Setup = setup;
@@ -139,6 +141,13 @@ namespace Game.Domain.Simulation
             _rest = catalog.Restaurants[setup.Restaurant];
 
             State = start.Clone();
+            EventPlan = eventPlan;
+            if (eventPlan != null && (eventPlan.Events == null || eventPlan.Events.Count > 5
+                || eventPlan.Events.Any(e => e == null)
+                || eventPlan.Events.Select(e => MonthlyEventPlanner.CanonicalId(e.EventId)).Distinct(StringComparer.Ordinal).Count() != eventPlan.Events.Count
+                || eventPlan.Events.Any(e => e.Day < 1 || e.Day > _k.DaysPerMonth || catalog.Event(e.EventId) == null
+                    || start.EventHistory.Any(h => MonthlyEventPlanner.CanonicalId(h.EventId) == MonthlyEventPlanner.CanonicalId(e.EventId)))))
+                throw new ArgumentException("O plano mensal contém eventos inválidos ou repetidos.");
             Books = new Accounting(State, _k);
             _rng = new DeterministicRandom(setup.Seed);
             _events = new EventEngine(catalog, _rng);
@@ -175,6 +184,62 @@ namespace Game.Domain.Simulation
             var result = RunOperations();
             _dayOpened = false;
             return new StepResult { Kind = StepKind.DayCompleted, Day = Day, DayResult = result };
+        }
+
+        /// <summary>One weighted draw before day 1, without replacement across the whole campaign.</summary>
+        public MonthlyEventPlan ReserveMonthlyEvents()
+        {
+            if (Day != 0) throw new InvalidOperationException("Reserve os eventos antes de iniciar o mês.");
+            var levers = BuildLevers(Days.Abs(Month, 1, _k.DaysPerMonth));
+            var ctx = NewEventContext(levers);
+            ctx.Day = Month == 1 ? _k.GraceDaysWithoutNegative + 1 : 1;
+            ctx.AbsDay = Days.Abs(Month, ctx.Day, _k.DaysPerMonth);
+            var candidates = new List<MonthlyEventCandidate>();
+            void Add(EventDefinition def, List<(string id, double weight)> targets, bool equipment)
+            {
+                double total = targets.Sum(t => t.weight);
+                if (total <= 0) return;
+                double cursor = _rng.Uniform(Month, 0, "monthly-target-" + def.Id) * total;
+                var chosen = targets.Last();
+                foreach (var target in targets) { if (cursor < target.weight) { chosen = target; break; } cursor -= target.weight; }
+                candidates.Add(new MonthlyEventCandidate { Definition = def, Weight = total,
+                    UnitId = equipment ? chosen.id : null, StaffId = equipment ? null : chosen.id });
+            }
+            foreach (var def in Catalog.Events)
+            {
+                if (Month < def.MinMonth || Month > def.MaxMonth || State.EventHistory.Any(h =>
+                    MonthlyEventPlanner.CanonicalId(h.EventId) == MonthlyEventPlanner.CanonicalId(def.Id))) continue;
+                // A real unpaid loan remains a financial decision, not a random narrative draw.
+                if (def.Id == EventIds.CashShortfall) continue;
+                if (def.Id == EventIds.EquipmentStillDown)
+                {
+                    Add(def, State.Equipment.Where(u => u.IsBroken).Select(u => (u.UnitId, 1.0)).ToList(), true);
+                    continue;
+                }
+                if (!_events.IsEligible(def, ctx)) continue;
+                if (def.Id == EventIds.StaffAbsent || def.Id == EventIds.StaffResigned)
+                {
+                    Add(def, State.Staff.Select(s => (s.StaffId, _k.DaysPerMonth * (def.Id == EventIds.StaffAbsent
+                        ? AbsenceProbability(s) : ResignationProbability(levers)))).ToList(), false);
+                }
+                else if (def.Scope == EventScope.PerEquipmentUnit)
+                {
+                    var targets = new List<(string, double)>();
+                    foreach (var unit in State.Equipment.Where(u => !u.IsBroken))
+                    {
+                        var category = Catalog.Categories[unit.Category];
+                        if (category.FailureEventId != def.Id) continue;
+                        var risk = ReliabilityModel.DailyHazard(category, Catalog.Levels[unit.Level], unit.AgeMonths,
+                            State.LastOccupancy, unit.FailureAbsDays.Count(d => d > ctx.AbsDay - 60),
+                            State.MonthsWithoutPreventive, levers.Factor(LeverKeys.FailureHr), HasManager ? _k.ManagerRiskHr : 1.0, _k);
+                        targets.Add((unit.UnitId, risk.Probability * _k.DaysPerMonth));
+                    }
+                    Add(def, targets, true);
+                }
+                else if (def.Scope == EventScope.Global)
+                    candidates.Add(new MonthlyEventCandidate { Definition = def, Weight = _events.DailyHazard(def, ctx) * _k.DaysPerMonth });
+            }
+            return MonthlyEventPlanner.Draw(Catalog, Month, _rng, candidates, State.EventHistory.Select(h => h.EventId), State.LoanBalance > .01);
         }
 
         /// <summary>Reações de um evento, com custo calculado e o motivo quando estão desabilitadas.</summary>
@@ -270,6 +335,14 @@ namespace Game.Domain.Simulation
 
             PayScheduledBills(levers, ctx, deterministic);     // calendário de contas (e "Caixa insuficiente")
 
+            if (EventPlan != null)
+            {
+                foreach (var occurrence in deterministic) Register(occurrence);
+                foreach (var reservation in EventPlan.Events.Where(e => e.Day == Day))
+                    RevealReservedEvent(reservation, ctx);
+                return;
+            }
+
             var drawn = new List<EventOccurrence>();
             DrawEquipmentFailures(levers, ctx, drawn, deterministic);
             drawn.AddRange(_events.DrawPerEmployee(ctx, EventIds.StaffAbsent, AbsenceProbability));
@@ -279,6 +352,38 @@ namespace Game.Domain.Simulation
             int usedSlots = deterministic.Count(o => o.RequiresDecision);
             foreach (var occ in deterministic.Concat(_events.ApplyDailyLimits(drawn, usedSlots)))
                 Register(occ);
+        }
+
+        private void RevealReservedEvent(MonthlyEventReservation reservation, EventContext ctx)
+        {
+            var definition = Catalog.Event(reservation.EventId);
+            var occurrence = _events.NewOccurrence(definition, ctx, 1, new List<(string, double)>());
+            if (reservation.StaffId != null)
+            {
+                var person = State.Staff.FirstOrDefault(s => s.StaffId == reservation.StaffId) ?? State.Staff.FirstOrDefault();
+                if (person == null) return;
+                occurrence.StaffId = person.StaffId;
+                occurrence.OccurrenceId += "-" + person.StaffId;
+            }
+            if (reservation.UnitId != null)
+            {
+                var unit = State.Equipment.First(u => u.UnitId == reservation.UnitId);
+                occurrence.UnitId = unit.UnitId;
+                occurrence.OccurrenceId += "-" + unit.UnitId;
+                if (definition.Id != EventIds.EquipmentStillDown && !unit.IsBroken)
+                {
+                    unit.IsBroken = true; unit.BrokenSinceAbsDay = AbsDay; unit.FailureAbsDays.Add(AbsDay);
+                    var category = Catalog.Categories[unit.Category];
+                    if (category.StockLossOnFailure > 0)
+                    {
+                        double before = State.InventoryValue;
+                        Books.Spoil(Day, State.InventoryValue * category.StockLossOnFailure * Catalog.Levels[unit.Level].StockLossFactor,
+                            "perda na falha: " + unit.ProfileId);
+                        _failureLossToday += before - State.InventoryValue;
+                    }
+                }
+            }
+            Register(occurrence);
         }
 
         private void PayScheduledBills(LeverSet levers, EventContext ctx, List<EventOccurrence> deterministic)
