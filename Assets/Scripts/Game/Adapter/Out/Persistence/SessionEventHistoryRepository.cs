@@ -23,6 +23,15 @@ public class SessionEventHistoryRepository : BaseRepository<SessionEventHistoryE
             .ToList();
     }
 
+    public List<SessionEventHistoryEntity> GetConfirmedBySession(string sessionId, int throughRound)
+    {
+        return GetBySession(sessionId)
+            .Where(x => x.round >= 1 && x.round <= throughRound && x.day >= 1 && x.day <= 31
+                && (!string.IsNullOrWhiteSpace(x.eventId) || !string.IsNullOrWhiteSpace(x.eventName))
+                && (!string.IsNullOrWhiteSpace(x.selectedChoiceId) || !string.IsNullOrWhiteSpace(x.selectedChoiceTitle)))
+            .ToList();
+    }
+
     public bool HasEventOccurred(string sessionId, string eventId)
     {
         return db.Table<SessionEventHistoryEntity>()

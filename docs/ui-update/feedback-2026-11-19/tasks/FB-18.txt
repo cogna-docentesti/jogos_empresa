@@ -1,5 +1,5 @@
 FB-18 — Separar o histórico das ocorrências ativas do calendário
-Status: planejada | Prioridade: P1 | Tipo: fluxo e interface
+Status: concluída | Prioridade: P1 | Tipo: fluxo e interface
 Área: Eventos e histórico
 Dependências: FB-24, FB-25, FB-26
 Modelo: gpt-6.2-sol | Raciocínio: medium
@@ -42,6 +42,10 @@ CRITÉRIOS DE ACEITE
 
 VALIDAÇÃO PREVISTA
 1. Abrir histórico vazio, após uma decisão e após três meses; repetir consultas e conferir ausência de escritas econômicas.
+
+OBSERVAÇÕES E LIMITES
+1. A consulta do hub exibe apenas decisões registradas na sessão, com mês, dia, evento, opção e efeitos salvos. O popup do calendário mantém somente os controles de decisão.
+2. Play Mode confirmou histórico vazio, uma decisão após recarga e quatro ocorrências em três meses. As consultas preservaram o estado e cada DRE aguardou Continuar.
 
 ENTREGÁVEIS
 Alterações limitadas à tarefa e QA em docs/ui-update/feedback-2026-11-19/qa/FB-18.json.

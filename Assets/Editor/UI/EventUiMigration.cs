@@ -113,7 +113,7 @@ namespace Game.EditorTools
             Set(view, "illustration", Picture(left.transform, "Illustration", "EVENT_BULK_PURCHASE_OPPORTUNITY", 16, 24, 608, 406));
             Text(left.transform, "ChoiceHeading", "Sua decisão faz diferença", 24, 462, 592, 48, GameTypography.Tokens.SectionTitle, true);
             Text(left.transform, "ChoiceNote", "Os efeitos de cada opção vêm do catálogo do jogo. Caixa e reputação são atualizados somente no fechamento mensal.", 24, 530, 592, 112, GameTypography.Tokens.Body);
-            Text(left.transform, "ChoiceHint", "Consulte o histórico a qualquer momento.", 24, 670, 592, 48, GameTypography.Tokens.Caption);
+            left.transform.Find("ChoiceHint")?.gameObject.SetActive(false);
             var scroll = Scroll(body, "DecisionScroll", 664, 0, 1208, 736); Set(view, "decisionScroll", scroll);
             Set(view, "titleText", Text(scroll.content, "EventTitle", "", 0, 0, 1150, 40, GameTypography.Tokens.SectionTitle, true));
             Set(view, "descriptionText", Text(scroll.content, "EventDescription", "", 0, 0, 1150, 60, GameTypography.Tokens.Body));
@@ -124,9 +124,9 @@ namespace Game.EditorTools
             Set(view, "cardPrefab", AssetDatabase.LoadAssetAtPath<EventOptionCardView>("Assets/Prefabs/EventOptionCard.prefab"));
             var footer = Picture(panel, "BottomBar", "UI_NAVBAR_PLUM", 0, 984, 1920, 96);
             Set(view, "footerText", Text(footer.transform, "Note", "", 304, 26, 660, 44, GameTypography.Tokens.Caption, false, GamePalette.OnDark));
-            Set(view, "historyButton", Button(footer.transform, "History", "Ver histórico", 968, 14, 252, 68, SharedControlKind.Secondary));
+            footer.transform.Find("History")?.gameObject.SetActive(false);
             Set(view, "confirmButton", Button(footer.transform, "Confirm", "Confirmar escolha", 1244, 14, 364, 68));
-            Set(view, "returnButton", Button(footer.transform, "Return", "Concluir consulta", 1244, 14, 364, 68, SharedControlKind.Secondary));
+            Set(view, "returnButton", Button(footer.transform, "Return", "Fechar histórico", 1244, 14, 364, 68, SharedControlKind.Secondary));
             var so = new SerializedObject(view); var visuals = so.FindProperty("visuals"); var events = Resources.LoadAll<EventData>("Events").OrderBy(e => e.id).ToArray(); visuals.arraySize = events.Length;
             for (int i = 0; i < events.Length; i++) { var v = visuals.GetArrayElementAtIndex(i); v.FindPropertyRelative("eventId").stringValue = events[i].id; v.FindPropertyRelative("illustration").objectReferenceValue = Art("EVENT_" + events[i].id.ToUpperInvariant()); }
             so.ApplyModifiedPropertiesWithoutUndo();
@@ -138,7 +138,7 @@ namespace Game.EditorTools
             var calendarButton = Button(actions, "CloseMonth", "Calendário", 0, 0, 272, 68);
             var settlement = Ensure<MonthlySettlementController>(canvas.Find("UiNavigation"));
             ConfigureCalendarButton(calendarButton, settlement, SharedControlKind.Primary);
-            var historyButton = Button(actions, "History", "Eventos e histórico", 296, 0, 272, 68, SharedControlKind.Secondary);
+            var historyButton = Button(actions, "History", "Histórico", 296, 0, 272, 68, SharedControlKind.Secondary);
             var action = Ensure<PanelNavButton>(historyButton); action.EditorConfigure(PanelNavButton.NavAction.Open, PanelId.EventHistory);
             MonthlyCalendarUiMigration.Wire(canvas, settlement);
             panel.gameObject.SetActive(false); AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);

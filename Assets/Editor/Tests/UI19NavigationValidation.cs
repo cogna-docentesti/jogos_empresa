@@ -373,8 +373,7 @@ public static class UI19NavigationValidation
             Add("Close real month", () => { Click(Root.Find("Panel_Menu/EventActions/CloseMonth").GetComponent<Button>()); });
             Add("Event exit preserves decisions", () => { Screen(GameState.Round_Event, "Panel_Event"); snapshot = EconomicSnapshot(); Click(B(View<ExitDialogController>("ExitUI"), "openButton")); });
             Add("Exit above pending event", () => { Capture("supp-event-exit"); Click(B(View<ExitDialogController>("ExitUI"), "cancelButton")); Expect(snapshot == EconomicSnapshot() && Events.IsAwaitingChoice, "Event cancel mutated"); Settlement.CloseMonth(); });
-            Add("Event history does not release month", () => { Expect(snapshot == EconomicSnapshot(), "Duplicate CloseMonth"); Click(B(Events.GetComponent<EventScreenView>(), "historyButton")); });
-            Add("Pending history returns to decision", () => { Capture("supp-pending-history"); Events.Return(); Expect(Events.IsAwaitingChoice && snapshot == EconomicSnapshot(), "History settled"); });
+            Add("Pending decision excludes history", () => { Expect(Events.IsAwaitingChoice && snapshot == EconomicSnapshot() && !Events.GetComponent<EventScreenView>().HistoryScroll.gameObject.activeInHierarchy, "Pending choice exposed history or changed economic data"); });
             Add("Reload pending event GameScene", () => UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene"));
             Add("Pending event resumes in new scene", () => { Screen(GameState.Round_Event, "Panel_Event"); Expect(Events.IsAwaitingChoice && snapshot == EconomicSnapshot(), "Scene event resume changed data"); });
             for (int i = 0; i < 4; i++) Add("Supplement event " + i, () => { var v = Events.GetComponent<EventScreenView>(); Click(v.Cards[0].Button); Click(v.ConfirmButton); });

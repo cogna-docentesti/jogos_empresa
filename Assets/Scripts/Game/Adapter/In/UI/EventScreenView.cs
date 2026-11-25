@@ -16,7 +16,7 @@ namespace Game.Adapter.In.UI
         [SerializeField] private RectTransform optionContainer, historyContainer;
         [SerializeField] private UnityEngine.UI.ScrollRect decisionScroll, historyScroll;
         [SerializeField] private EventOptionCardView cardPrefab;
-        [SerializeField] private UnityEngine.UI.Button confirmButton, historyButton, returnButton;
+        [SerializeField] private UnityEngine.UI.Button confirmButton, returnButton;
         private readonly List<EventOptionCardView> cards = new();
         private readonly List<EventOptionCardView> historyCards = new();
         private RectTransform originalParent;
@@ -87,10 +87,9 @@ namespace Game.Adapter.In.UI
             hiddenSurfaces.Clear();
         }
 
-        public void BindActions(Action confirm, Action history, Action back)
+        public void BindActions(Action confirm, Action back)
         {
             confirmButton.onClick.RemoveAllListeners(); confirmButton.onClick.AddListener(() => confirm());
-            historyButton.onClick.RemoveAllListeners(); historyButton.onClick.AddListener(() => history());
             returnButton.onClick.RemoveAllListeners(); returnButton.onClick.AddListener(() => back());
         }
         public void Decision(EventData data, int month, int day, int index, int count, int selected, bool editable, string guidance, Action<int> select)
@@ -109,7 +108,7 @@ namespace Game.Adapter.In.UI
                 card.Bind((selected == i ? (editable ? "Selecionada: " : "Confirmada: ") : "") + option.title, option.description, EventEffectText.Format(option.effects), () => select(choice), editable, selected == i);
             }
             confirmButton.gameObject.SetActive(editable); confirmButton.interactable = editable && selected >= 0;
-            historyButton.gameObject.SetActive(true); returnButton.gameObject.SetActive(!editable);
+            returnButton.gameObject.SetActive(!editable);
             returnButton.GetComponentInChildren<TMP_Text>().text = "Fechar consulta";
             Canvas.ForceUpdateCanvases(); decisionScroll.verticalNormalizedPosition = 1;
         }
@@ -119,31 +118,34 @@ namespace Game.Adapter.In.UI
             confirmButton.interactable = selected >= 0;
             guidanceText.text = "Opção selecionada. Confirme para registrar sua decisão.";
         }
-        public void History(IReadOnlyList<SessionEventHistoryEntity> history, int month, bool pending)
+        public void History(IReadOnlyList<SessionEventHistoryEntity> history, int month)
         {
             decisionBody.SetActive(false); historyBody.SetActive(true); Clear(historyCards);
             screenTitle.text = "Histórico de eventos"; periodText.text = $"CAMPANHA DE 3 MESES  •  MÊS ATUAL {month}";
-            guidanceText.text = pending ? "Consulta dos registros. Volte ao evento para concluir sua escolha." : "Escolhas confirmadas da sua campanha.";
+            guidanceText.text = "Decisões registradas nesta campanha.";
             foreach (var row in history)
             {
                 var card = Instantiate(cardPrefab, historyContainer); historyCards.Add(card);
-                card.Bind($"Mês {row.round} • Dia {row.day}  |  {row.eventName}", row.selectedChoiceTitle + "\n" + row.selectedChoiceText,
+                string eventName = string.IsNullOrWhiteSpace(row.eventName) ? row.eventId : row.eventName;
+                string choice = string.IsNullOrWhiteSpace(row.selectedChoiceTitle) ? row.selectedChoiceId : row.selectedChoiceTitle;
+                if (!string.IsNullOrWhiteSpace(row.selectedChoiceText)) choice += "\n" + row.selectedChoiceText;
+                card.Bind($"Mês {row.round} • Dia {row.day}  |  {eventName}", choice,
                     EventEffectText.History(row), null, false, false, true);
             }
             if (history.Count == 0)
             {
                 var card = Instantiate(cardPrefab, historyContainer); historyCards.Add(card);
-                card.Bind("Nenhum evento confirmado", "As escolhas aparecerão aqui após a confirmação de um evento.", "Os efeitos são aplicados uma única vez no fechamento do mês.", null, false, false, true);
+                card.Bind("Nenhum evento confirmado", "As escolhas confirmadas no calendário aparecerão aqui.", "", null, false, false, true);
             }
-            confirmButton.gameObject.SetActive(false); historyButton.gameObject.SetActive(false); returnButton.gameObject.SetActive(true);
-            returnButton.GetComponentInChildren<TMP_Text>().text = pending ? "Voltar ao evento" : "Concluir consulta";
-            footerText.text = pending ? "A escolha pendente continua aguardando confirmação." : "Histórico salvo da campanha.";
+            confirmButton.gameObject.SetActive(false); returnButton.gameObject.SetActive(true);
+            returnButton.GetComponentInChildren<TMP_Text>().text = "Fechar histórico";
+            footerText.text = "";
             Canvas.ForceUpdateCanvases(); historyScroll.verticalNormalizedPosition = 1;
         }
         public void Error(string message, bool pending)
         {
             screenTitle.text = "Eventos indisponíveis"; guidanceText.text = message; footerText.text = "Nenhuma nova escolha foi registrada.";
-            decisionBody.SetActive(false); historyBody.SetActive(false); confirmButton.gameObject.SetActive(false); historyButton.gameObject.SetActive(false);
+            decisionBody.SetActive(false); historyBody.SetActive(false); confirmButton.gameObject.SetActive(false);
             returnButton.gameObject.SetActive(true); returnButton.GetComponentInChildren<TMP_Text>().text = pending ? "Tentar novamente" : "Fechar consulta";
         }
         private static void Clear(List<EventOptionCardView> list)

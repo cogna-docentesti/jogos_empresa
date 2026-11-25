@@ -1624,8 +1624,8 @@
       "area": "Eventos e histórico",
       "kind": "fluxo e interface",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-24",
         "FB-25",
@@ -1654,7 +1654,10 @@
         "Assets/Scripts/Game/Infrastructure/Database/Tables/SessionEventHistoryEntity.cs",
         "Assets/Scripts/Game/Domain/Service/MonthlyEventDecisionService.cs"
       ],
-      "notes": [],
+      "notes": [
+        "A consulta do hub exibe apenas decisões registradas na sessão, com mês, dia, evento, opção e efeitos salvos. O popup do calendário mantém somente os controles de decisão.",
+        "Play Mode confirmou histórico vazio, uma decisão após recarga e quatro ocorrências em três meses. As consultas preservaram o estado e cada DRE aguardou Continuar."
+      ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-18.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-18.json",
       "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-18",

@@ -1,0 +1,43 @@
+{
+  "task_id": "FB-18",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "cffdb24e47025f9fb09ad26f6f6c04f29ae58aec",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "method": "GameScene em Play Mode a 1280×720, com SQLite e cadastro isolados. Ações pelos controles reais da cena via EventSystem e capturas do Game View.",
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "O histórico começou vazio e omitiu registros sem decisão, de outro mês futuro e de outra sessão. As quatro decisões confirmadas ao longo dos três meses apareceram em ordem cronológica, com mês, dia, evento, escolha e efeitos salvos."
+    },
+    {
+      "criterion": 2,
+      "result": "Abrir e fechar repetidamente o histórico preservou o estado em memória e a sessão persistida, inclusive caixa, reputação, dia, reservas, pagamentos, escolhas e DREs. A revisão continuou anterior à reserva. Os débitos foram conciliados com os recibos do calendário, e cada fechamento ocorreu no dia 30 com a DRE aguardando Continuar."
+    },
+    {
+      "criterion": 3,
+      "result": "A quebra do freezer gerou um único registro com a opção e os efeitos confirmados. Recarregar a sessão e voltar ao histórico manteve o mesmo identificador, o mesmo estado econômico e uma única entrada."
+    },
+    {
+      "criterion": 4,
+      "result": "Com o plano já reservado, o calendário anunciou o festival, enquanto a quebra do freezer permaneceu oculta até Avançar chegar ao dia 7. O histórico ficou vazio durante a reserva e continuou sem o festival até sua confirmação. O popup bloqueou o avanço e ofereceu apenas os controles da decisão."
+    }
+  ],
+  "evidence_directory": "output/ui-update/feedback-2026-11-19/FB-18",
+  "evidence": [
+    "baseline-historico-na-decisao.png",
+    "calendario-anuncio.png",
+    "decisao-calendario.png",
+    "game-scene.txt",
+    "historico-decisao.png",
+    "historico-tres-meses.png",
+    "historico-vazio.png"
+  ],
+  "limitations": [
+    "As reservas foram fixadas na base isolada para testar datas e visibilidades conhecidas. Incidência e pesos foram validados na FB-24.",
+    "A captura dos três meses foi feita depois da última decisão e antes da DRE do terceiro mês, enquanto o hub estava acessível. Os quatro registros foram conferidos novamente após o fechamento."
+  ]
+}

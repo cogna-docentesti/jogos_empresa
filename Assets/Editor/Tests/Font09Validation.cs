@@ -300,7 +300,7 @@ public static class Font09Validation
             });
             Add("Persisted history top and read only reentry",()=>{
                 Capture("history-populated-top");var controller=Root.Find("Panel_Event").GetComponent<EventScreenController>();
-                int before=Writes;controller.ShowHistory();Expect(before==Writes,"History consultation wrote SQLite");
+                int before=Writes;MenuNavigator.Instance.Back();MenuNavigator.Instance.Open(PanelId.EventHistory);Expect(before==Writes,"History consultation wrote SQLite");
                 controller.GetComponent<EventScreenView>().HistoryScroll.verticalNormalizedPosition=0;
             });
             Add("Persisted history bottom",()=>{Capture("history-populated-bottom");MenuNavigator.Instance.CloseAll();});

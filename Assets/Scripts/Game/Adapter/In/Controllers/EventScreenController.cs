@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Game.Adapter.In.Controllers
 {
-    /// <summary>Explicit open/wait/confirm/close contract for the monthly orchestrator.</summary>
+    /// <summary>Hosts the hub's read-only history and the calendar's decision popup.</summary>
     public sealed class EventScreenController : MonoBehaviour
     {
         [SerializeField] private EventScreenView view;
         private EventData current;
         private string sessionId;
         private int month, day, selected = -1;
-        private bool confirmed, recording, historyVisible, failed, mandatory;
+        private bool confirmed, recording, failed, mandatory;
         private Action completed;
         private SharedModalFocus calendarModal;
         public bool IsAwaitingChoice { get; private set; }
@@ -24,18 +24,20 @@ namespace Game.Adapter.In.Controllers
         private MonthlyEventDecisionService Service => new(DatabaseInitializer.DatabaseService?.Connection);
         private SessionEventHistoryRepository History => new(DatabaseInitializer.DatabaseService.Connection);
         private void Awake() { view ??= GetComponent<EventScreenView>(); Bind(); }
-        private void Bind() => view?.BindActions(Confirm, ShowHistory, Return);
+        private void Bind() => view?.BindActions(Confirm, Return);
         public void ReleasePresentation()
         {
             if (calendarModal != null) DismissDecision();
             completed = null; IsAwaitingChoice = false; current = null; sessionId = null;
-            mandatory = confirmed = recording = historyVisible = failed = false;
+            mandatory = confirmed = recording = failed = false;
             selected = -1;
         }
         private void OnEnable()
         {
             view ??= GetComponent<EventScreenView>(); Bind();
-            if (calendarModal == null && MenuNavigator.HubAvailable && !IsAwaitingChoice) ShowHistory();
+            if (calendarModal == null && MenuNavigator.HubAvailable
+                && MenuNavigator.Instance?.Current == PanelId.EventHistory && !IsAwaitingChoice)
+                ShowHistory();
         }
         public void OpenCalendarDecision(EventData data, int eventMonth, int eventDay, SharedModalFocus modal,
             RectTransform surface, Action onCompleted)
@@ -66,7 +68,7 @@ namespace Game.Adapter.In.Controllers
         }
         private void Present(EventData data, int eventMonth, int eventDay)
         {
-            current = data; month = eventMonth; day = eventDay; selected = -1; confirmed = recording = failed = historyVisible = false;
+            current = data; month = eventMonth; day = eventDay; selected = -1; confirmed = recording = failed = false;
             IsAwaitingChoice = true;
             ShowDecision();
             try
@@ -98,19 +100,18 @@ namespace Game.Adapter.In.Controllers
 
         private void Render()
         {
-            historyVisible = false;
             view.Decision(current, month, day, 0, 0, selected, !confirmed && !failed,
                 confirmed ? "Esta escolha já foi registrada. Os efeitos pertencem ao fechamento mensal." : "Leia as opções e selecione uma para confirmar.", Select);
             calendarModal?.Configure(view.Cards.FirstOrDefault()?.Button, null, false);
         }
         public void Select(int choice)
         {
-            if (!IsAwaitingChoice || confirmed || failed || historyVisible || current?.options == null || choice < 0 || choice >= current.options.Length) return;
+            if (!IsAwaitingChoice || confirmed || failed || current?.options == null || choice < 0 || choice >= current.options.Length) return;
             selected = choice; view.SelectOption(selected);
         }
         public void Confirm()
         {
-            if (!IsAwaitingChoice || confirmed || recording || failed || historyVisible || selected < 0 || current == null) return;
+            if (!IsAwaitingChoice || confirmed || recording || failed || selected < 0 || current == null) return;
             recording = true;
             try
             {
@@ -127,25 +128,22 @@ namespace Game.Adapter.In.Controllers
             }
             finally { recording = false; }
         }
-        public void ShowHistory()
+        private void ShowHistory()
         {
-            historyVisible = true;
             try
             {
                 if (GameSessionState.Current == null || !GameSessionState.IsPersisted || DatabaseInitializer.DatabaseService?.Connection == null)
                     throw new InvalidOperationException();
                 var session = GameSessionState.Current;
-                view.History(History.GetBySession(session.sessionId), session.currentRound, IsAwaitingChoice);
+                view.History(History.GetConfirmedBySession(session.sessionId, session.currentRound), session.currentRound);
             }
             catch (Exception) { view.Error("Histórico indisponível. Não há dados de sessão para consultar.", false); }
-            calendarModal?.Configure(view.ReturnButton, view.ReturnButton);
         }
         public void Return()
         {
             if (IsAwaitingChoice)
             {
                 if (failed) Present(current, month, day);
-                else Render();
                 return;
             }
             if (MenuNavigator.HubAvailable) MenuNavigator.Instance.Back();

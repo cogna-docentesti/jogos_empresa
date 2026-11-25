@@ -28,7 +28,16 @@ namespace Game.Adapter.In.UI
         public static string History(SessionEventHistoryEntity item)
         {
             if (!string.IsNullOrWhiteSpace(item.effectsJson))
-            { try { return Format(JsonUtility.FromJson<EventEffectData>(item.effectsJson)); } catch (ArgumentException) { return "Efeitos registrados indisponíveis."; } }
+            {
+                EventEffectData saved = null;
+                try { saved = JsonUtility.FromJson<EventEffectData>(item.effectsJson); }
+                catch (ArgumentException) { /* The direct deltas are still available. */ }
+                if (saved != null)
+                {
+                    string formatted = Format(saved);
+                    return item.clientsChange == 0 ? formatted : formatted + "  •  Clientes: " + item.clientsChange.ToString("+0;-0", Pt);
+                }
+            }
             return "Registro anterior • Caixa: " + FinancialScreenView.Money(item.cashChange) + " • Reputação: " + item.reputationChange + " • Clientes: " + item.clientsChange;
         }
     }
