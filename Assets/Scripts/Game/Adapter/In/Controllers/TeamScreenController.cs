@@ -16,13 +16,40 @@ namespace Game.Adapter.In.Controllers
         private TeamSelectionData team;
         private Dictionary<string, int> minimums;
         private bool ready;
+        private EquipmentTutorial tutorial;
+        private const int Intro = 0, FirstHire = 1, Payroll = 2, Minimums = 3, ConfirmTeam = 4;
+        private static readonly (string title, string body)[] TutorialCopy =
+        {
+            ("O que a equipe muda", "A equipe ajuda a definir quantos clientes seu restaurante consegue atender. Cada função contribui para a capacidade e a qualidade, e os equipamentos também influenciam o atendimento."),
+            ("Faça a primeira contratação", "Cada tipo de restaurante precisa de uma equipe diferente. Role os cartões se precisar e clique no + de uma das funções que ainda faltam."),
+            ("Confira a folha mensal", "Olhe como a folha mudou com a contratação. Esse valor será cobrado no fechamento de cada mês. Você pode voltar ao RH entre as rodadas para ajustar a equipe."),
+            ("Complete a equipe inicial", "No resumo destacado, confira quantas pessoas você já contratou e qual é o mínimo de cada função. Use o + nos cartões para completar o que falta."),
+            ("Confirme e abra o hub", "Sua equipe está pronta para começar. Confira a capacidade de atendimento e a folha mensal antes de abrir o hub.")
+        };
+        private bool IsInitial => GameManager.Instance?.StateMachine?.CurrentState == GameState.Initial_Team;
+
+        public static bool HasMinimum(RestaurantData restaurant, TeamSelectionData team, IEnumerable<RoleData> roles)
+        {
+            var ids = new HashSet<string>(roles.Where(r => r != null).Select(r => r.id));
+            return restaurant?.requiredRoles != null && restaurant.requiredRoles.Length > 0
+                && restaurant.requiredRoles.All(r => r != null && ids.Contains(r.roleId)
+                    && TeamSelectionHelper.GetMemberQuantity(team, r.roleId) >= r.quantity);
+        }
         private GameSessionService Service => new(GameSessionState.Current.userId, GameSessionState.Current.professorId);
         private void OnEnable()
         {
             if (view == null) view = GetComponent<TeamScreenView>();
             Populate(); view?.BindConfirm(Confirm);
+            view?.BindSetupBack(IsInitial ? new UnityEngine.Events.UnityAction(BackToEquipment) : null);
+
         }
-        private void OnDisable() { view?.BindConfirm(null); foreach (var card in cards) if (card != null) card.QuantityRequested -= SetQuantity; }
+        private void OnDisable()
+        {
+            if (tutorial != null) tutorial.Hide();
+            view?.BindConfirm(null);
+            view?.BindSetupBack(null);
+            foreach (var card in cards) if (card != null) card.QuantityRequested -= SetQuantity;
+        }
         private void Populate()
         {
             ready = false;
@@ -70,11 +97,72 @@ namespace Game.Adapter.In.Controllers
             GetComponent<ContextualHelp>()?.Refresh(Available, team.members.Any(m => m != null && m.quantity > 0));
         }
         private bool Available => ready && restaurant != null && GameSessionState.HasActiveSession && GameSessionState.IsPersisted;
+        private int CurrentTutorialStep(bool hasMinimum)
+        {
+            int saved = Mathf.Clamp(GameSessionState.Current.teamTutorialStep, Intro, Minimums);
+            if (saved == FirstHire && team.members.Any(member => member.quantity > 0)) return Payroll;
+            return saved >= Minimums ? (hasMinimum ? ConfirmTeam : Minimums) : saved;
+        }
+
+        private void PresentTutorial(int step)
+        {
+            if (tutorial == null)
+            {
+                tutorial = EquipmentTutorial.Create(view.transform, "TeamTutorial");
+                tutorial.NextRequested += AdvanceTutorial;
+            }
+            var highlights = step switch
+            {
+                FirstHire => cards.Where(card => card.NeedsHire).Select(card => card.AddHighlight).ToArray(),
+                Payroll => new[] { view.PayrollHighlight },
+                Minimums => new[] { view.RequirementsHighlight },
+                ConfirmTeam => new[] { view.ConfirmHighlight },
+                _ => Array.Empty<RectTransform>()
+            };
+            var copy = TutorialCopy[step];
+            tutorial.SetDock(view.TutorialScroll);
+            tutorial.ShowInline($"EQUIPE  ·  {step + 1} DE {TutorialCopy.Length}", copy.title, copy.body,
+                step == Intro || step == Payroll, highlights);
+        }
+
+        private void AdvanceTutorial()
+        {
+            if (!Available || !IsInitial) return;
+            int step = CurrentTutorialStep(HasMinimum(restaurant, team, roles));
+            if (step != Intro && step != Payroll) return;
+            var session = GameSessionState.Current;
+            int previous = session.teamTutorialStep;
+            session.teamTutorialStep = step + 1;
+            if (!GameSessionState.TrySave(out string error))
+            {
+                session.teamTutorialStep = previous;
+                FeedbackToast.Show(error, FeedbackKind.Error);
+                return;
+            }
+            Refresh();
+        }
+
         private void SetQuantity(TeamRoleCardView card, int quantity)
         {
             if (!isActiveAndEnabled || !Available || card?.Role == null || quantity < 0) return;
             if (card.RemovalOnly && quantity >= card.Quantity) return;
-            Service.SetTeamMemberQuantity(card.Role, quantity);
+            if (IsInitial)
+            {
+                int step = CurrentTutorialStep(HasMinimum(restaurant, team, roles));
+                if (step == Intro || step == Payroll) return;
+                var session = GameSessionState.Current;
+                string previousTeam = session.teamJson;
+                int previousStep = session.teamTutorialStep;
+                Service.SetTeamMemberQuantity(card.Role, quantity, save: false);
+                if (step == FirstHire && quantity > card.Quantity) session.teamTutorialStep = Payroll;
+                if (!GameSessionState.TrySave(out string error))
+                {
+                    GameSessionState.SetTeamJson(previousTeam, save: false);
+                    session.teamTutorialStep = previousStep;
+                    FeedbackToast.Show(error, FeedbackKind.Error); return;
+                }
+            }
+            else Service.SetTeamMemberQuantity(card.Role, quantity);
             GetComponent<ContextualHelp>()?.Complete();
             if (card.RemovalOnly && quantity == 0)
             {
@@ -87,9 +175,13 @@ namespace Game.Adapter.In.Controllers
         private void Refresh()
         {
             bool available = Available;
-            foreach (var card in cards) card.SetQuantity(TeamSelectionHelper.GetMemberQuantity(team, card.Role.id), available, ready && restaurant != null && GameSessionState.HasSession);
+            bool initial = available && IsInitial;
+            int step = initial ? CurrentTutorialStep(HasMinimum(restaurant, team, roles)) : Intro;
+            bool canEdit = available && (!initial || (step != Intro && step != Payroll));
+            foreach (var card in cards) card.SetQuantity(TeamSelectionHelper.GetMemberQuantity(team, card.Role.id), canEdit, ready && restaurant != null && GameSessionState.HasSession);
             if (!available)
             {
+                if (tutorial != null) tutorial.Hide();
                 view.SetSummary(0, 0, 0, null, "Confira a sessão, o restaurante e o catálogo de funções.", false);
                 view.SetHint(!GameSessionState.HasActiveSession || !GameSessionState.IsPersisted ? "Sessão indisponível. As contratações estão bloqueadas." : "Não foi possível carregar a equipe. Volte e tente novamente.", true);
                 view.SetConfirmEnabled(false); return;
@@ -113,10 +205,24 @@ namespace Game.Adapter.In.Controllers
             view.SetSummary(count, payroll, capacity, alignment, detail, true);
             view.SetHint(complete ? "Mínimos atendidos." : "Use + para completar os mínimos da equipe.", !complete);
             view.SetConfirmEnabled(complete);
+            if (initial) { view.SetConfirmEnabled(complete && step == ConfirmTeam); PresentTutorial(step); }
+            else tutorial?.Hide();
         }
+        /// Passo 7 volta para a loja (passo 6) sem perder a equipe já escolhida.
+        private void BackToEquipment()
+        {
+            if (!isActiveAndEnabled || !IsInitial || !GameSessionState.HasActiveSession) return;
+            try
+            {
+                if (!Service.ContinueInitialSetup(GameState.Initial_Equipment))
+                    view.SetHint("Não foi possível voltar para a loja. Tente novamente; sua equipe foi preservada.", true);
+            }
+            catch (Exception) { view.SetHint("Não foi possível voltar para a loja. Tente novamente; sua equipe foi preservada.", true); }
+        }
+
         private void Confirm()
         {
-            if (!isActiveAndEnabled || !Available) return;
+            if (!isActiveAndEnabled || !Available || (IsInitial && CurrentTutorialStep(HasMinimum(restaurant, team, roles)) != ConfirmTeam)) return;
             try
             {
                 team = TeamSelectionHelper.FromJson(GameSessionState.Current.teamJson);

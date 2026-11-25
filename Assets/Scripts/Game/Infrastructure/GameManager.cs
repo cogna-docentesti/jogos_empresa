@@ -151,6 +151,20 @@ public class GameManager : MonoBehaviour
     /// Uma sessao so e considerada "configurada" se o confirm da D3 ja
     /// aconteceu, e o sinal disso e ter cardapio gravado.
     /// </summary>
+    public static GameState ResumeOperationalSetup(GameSessionEntity session)
+    {
+        if (session.currentRound > 1 || session.status != GameSessionStatus.IN_PROGRESS)
+            return GameState.Management_Hub;
+        if (string.IsNullOrWhiteSpace(session.creditLineId)) return GameState.Initial_Capital;
+        var owned = EquipmentSelectionHelper.GetIds(EquipmentSelectionHelper.FromJson(session.equipmentJson));
+        var basic = System.Linq.Enumerable.Where(Resources.LoadAll<EquipmentData>("Equipments"), e => e.category == EquipmentCategory.BASIC);
+        if (System.Linq.Enumerable.Any(basic, e => !owned.Contains(e.id))) return GameState.Initial_Equipment;
+        var restaurant = System.Linq.Enumerable.FirstOrDefault(Resources.LoadAll<RestaurantData>("Restaurants"), r => r.type == session.restaurantType);
+        return Game.Adapter.In.Controllers.TeamScreenController.HasMinimum(restaurant,
+            TeamSelectionHelper.FromJson(session.teamJson), Resources.LoadAll<RoleData>("Roles"))
+            ? GameState.Management_Hub : GameState.Initial_Team;
+    }
+
     private static bool HasCommittedInitialDecisions(GameSessionEntity session)
     {
         if (session == null)

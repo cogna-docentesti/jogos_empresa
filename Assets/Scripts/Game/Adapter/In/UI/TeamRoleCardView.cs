@@ -20,6 +20,8 @@ namespace Game.Adapter.In.UI
         [SerializeField] private UnityEngine.UI.Button addButton, removeButton;
         public RoleData Role { get; private set; }
         public int Quantity { get; private set; }
+        public RectTransform AddHighlight => (RectTransform)addButton.transform;
+        public bool NeedsHire => Quantity < required;
         public float RequiredHeight { get; private set; } = 360;
         public event Action<TeamRoleCardView, int> QuantityRequested;
         public bool RemovalOnly { get; private set; }

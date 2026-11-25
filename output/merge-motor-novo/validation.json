@@ -1,0 +1,198 @@
+{
+  "passed": 36,
+  "failed": 0,
+  "tests": [
+    {
+      "test": "SystemicCalendarTests.ReloadReplaysTheSameDayCashAndPendingOccurrence",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "SystemicCalendarTests.StaleAdvanceDoesNotAdvanceOrDebitTwice",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "SystemicCalendarTests.ConfirmedReactionSurvivesReloadAndStaleConfirmationDoesNotRepeatIt",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "SystemicCalendarTests.StorageFailureRollsBackProgressAndCashAndCanRetry",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "SystemicCalendarTests.FinishedMonthMatchesEngineAndCommitsOnlyOnceAfterRetry",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "SystemicCalendarTests.JournalFreezesInputsAndDoesNotExposeFutureRandomEvents",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "SystemicCalendarTests.ExistingLegacyCampaignStartsAtItsCurrentMonthAndBalances",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "MarketAndModelTests.FrancesNaEducacional_TemMenosDaMetadeDoEncaixeDaFinanceira",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "MarketAndModelTests.PratoAcessivel_MelhoraOEncaixe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "MarketAndModelTests.LanchesNaFinanceira_EncaixeAcimaDe09",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "MarketAndModelTests.Aceitacao_Combo42_ClasseC_Educacional",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "MarketAndModelTests.FreezerIntermediarioNovo_Risco0233PorDia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "MarketAndModelTests.Erros_OcupacaoLimitadaA125",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "DeterminismTests.MesmaSemente_MesmoMes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "DeterminismTests.SairNoDia17EVoltar_RepeteOsDias1a16",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "DeterminismTests.SementeDiferente_MesDiferente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "FinanceTests.BalancoFecha_Padrao",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "FinanceTests.BalancoFecha_CreditoParceladoEconomico",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "FinanceTests.BalancoFecha_FrancesNaEducacional",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "FinanceTests.ReacaoComGanho_EntraComoOutraReceita",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ApplicationRulesTests.Politicas_TravadasComOMesRodando",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ApplicationRulesTests.Politicas_RecusadasAntesDeAPartidaExistir",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ApplicationRulesTests.CommitFalhou_RetryGravaSemRecalcular_EDuplicadoERecusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ApplicationRulesTests.Abandonar_LiberaAsPoliticasEORecomecoDoMes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ApplicationRulesTests.ValidacaoDaMontagem",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ConferenciaTests.Lanches_PoliticasPadrao_TresMeses",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ConferenciaTests.Frances_TodasAsPoliticasLigadas_TresMeses",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ConferenciaTests.Japones_FornecedorEconomico_EstoqueBaixo_TresMeses",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ConferenciaTests.Lanches_Sobrecarregado_UmAtendente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ConferenciaTests.Frances_NaEducacional_ChequeEspecial",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "ConferenciaTests.ContratacaoECompraNoHub_EntramNoMesSeguinte_ComConferencia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "IntegracaoHubTests.SemEquipe_PlanejamentoBloqueia_EBeginRecusa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "IntegracaoHubTests.UmAtendente_SoAviso_MesComeca",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "IntegracaoHubTests.Reconciliador_ContrataDesligaCompraEEmpresta",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "IntegracaoHubTests.Covariaveis_TemTeto",
+      "passed": true,
+      "error": null
+    },
+    {
+      "test": "EventRecordTests.DuasUnidadesParadasNoMesmoDia_CadaRegistroGuardaASuaReacao",
+      "passed": true,
+      "error": null
+    }
+  ],
+  "validationMode": "Compiled Unity project assemblies with dotnet; executed NUnit test methods for pure domain and SQLite calendar persistence outside the Unity Editor.",
+  "sourceBranch": "origin/feature/motor-novo",
+  "sourceCommit": "23dca90102aea7a7e33a2d38c3477d334b3e8da1",
+  "targetBranch": "dev/new-screens",
+  "targetBeforeMerge": "b6adb266c5a2b8de50f3512e2581b7e512f1ba5a",
+  "preservedAssets": [
+    "Assets/Scenes/GameScene.unity",
+    "Assets/Prefabs/Panel_Equipment.prefab"
+  ],
+  "compileCommand": "dotnet build Assembly-CSharp-Editor.csproj --no-restore -v quiet",
+  "visualPlayModeValidation": "Not run: the Unity Pipeline server did not become available; computer-use service also timed out.",
+  "scope": "Incoming replacement calendar and month screens removed. Original calendar/review/history retained; systemic engine is integrated through a durable command journal. Existing open legacy calendars finish with their frozen original economics."
+}

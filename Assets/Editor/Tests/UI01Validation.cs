@@ -14,7 +14,10 @@ public static class UI01Validation
         var sizesType = assembly.GetType("UnityEditor.GameViewSizes");
         var sizes = sizesType.GetProperty("instance",BindingFlags.Public|BindingFlags.Static|BindingFlags.FlattenHierarchy).GetValue(null);
         var groupType = assembly.GetType("UnityEditor.GameViewSizeGroupType");
-        var group = sizesType.GetMethod("GetGroup").Invoke(sizes,new[]{Enum.Parse(groupType,"Standalone")});
+        // grupo da plataforma ativa (Standalone, Android...): com o alvo em Android, o grupo Standalone não muda a Game View
+        var current = sizesType.GetProperty("currentGroupType",BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.Instance|BindingFlags.FlattenHierarchy)?.GetValue(sizes)
+                      ?? Enum.Parse(groupType,"Standalone");
+        var group = sizesType.GetMethod("GetGroup").Invoke(sizes,new[]{current});
         var sizeType = assembly.GetType("UnityEditor.GameViewSize");
         var kind = assembly.GetType("UnityEditor.GameViewSizeType");
         var size = Activator.CreateInstance(sizeType,BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance,null,

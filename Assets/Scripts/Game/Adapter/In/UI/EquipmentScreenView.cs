@@ -30,6 +30,29 @@ namespace Game.Adapter.In.UI
         private UnityAction checkoutAction;
         public event Action<EquipmentFilter> FilterRequested;
         public event Action<string> CartRemovalRequested;
+        public event Action CartClosed;
+        public RectTransform CartAction => cartButton != null ? (RectTransform)cartButton.transform : null;
+        public RectTransform CheckoutAction => checkoutButton != null ? (RectTransform)checkoutButton.transform : null;
+        public UnityEngine.UI.ScrollRect TutorialScroll => CartIsOpen && cartLines != null
+            ? cartLines.GetComponentInParent<UnityEngine.UI.ScrollRect>() : catalogScroll;
+        public void RevealAction(RectTransform action)
+        {
+            if (action == null) return;
+            Canvas.ForceUpdateCanvases();
+            foreach (var card in cards) if (card != null) card.RefreshLayout();
+            RefreshLayout();
+            if (cardContainer != null) UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(cardContainer);
+            Canvas.ForceUpdateCanvases();
+            var scroll = action.GetComponentInParent<UnityEngine.UI.ScrollRect>();
+            if (scroll == null || scroll.viewport == null || scroll.content == null) return;
+            Canvas.ForceUpdateCanvases();
+            var bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(scroll.viewport, action);
+            var visible = scroll.viewport.rect;
+            float delta = bounds.min.y < visible.yMin ? visible.yMin - bounds.min.y + 16
+                : bounds.max.y > visible.yMax ? visible.yMax - bounds.max.y - 16 : 0;
+            scroll.StopMovement();
+            scroll.content.anchoredPosition += new Vector2(0, delta);
+        }
         public bool CartIsOpen => cartModal != null && cartModal.activeSelf;
         private void Awake()
         {
@@ -100,7 +123,8 @@ namespace Game.Adapter.In.UI
             if (resultText != null) resultText.text = $"{count} equipamento(s)";
             if (catalogScroll != null) { catalogScroll.StopMovement(); catalogScroll.verticalNormalizedPosition = 1; }
         }
-        private void LateUpdate()
+        private void LateUpdate() => RefreshLayout();
+        public void RefreshLayout()
         {
             var grid = cardContainer != null ? cardContainer.GetComponent<UnityEngine.UI.GridLayoutGroup>() : null;
             if (grid == null) return;
@@ -162,7 +186,12 @@ namespace Game.Adapter.In.UI
             if (modalCanvas != null) modalCanvas.overrideSorting = true;
             if (opening) cartLines.GetComponentInParent<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition = 1;
         }
-        public void HideCart() { if (cartModal != null) cartModal.SetActive(false); }
+        public void HideCart()
+        {
+            bool wasOpen = CartIsOpen;
+            if (cartModal != null) cartModal.SetActive(false);
+            if (wasOpen) CartClosed?.Invoke();
+        }
         private static void Bind(UnityEngine.UI.Button button, UnityAction action)
         { if (button == null) return; button.onClick.RemoveAllListeners(); if (action != null) button.onClick.AddListener(action); }
     }

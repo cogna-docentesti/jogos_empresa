@@ -73,7 +73,11 @@ public class RoundResultEntity
     public int alignmentScore { get; set; }
     public string alignmentClassification { get; set; }
 
-    [Ignore] public float TotalCosts => supplyCost + rent + salaries + utilities + loanPayment + thirteenthSalary;
+    // Simulador sistemico: impostos sobre vendas, marketing, manutencao e outras despesas de caixa
+    // do mes. O motor mensal anterior nao tem essas linhas e grava 0, entao os totais antigos nao mudam.
+    public float otherOperatingCosts { get; set; }
+
+    [Ignore] public float TotalCosts => supplyCost + rent + salaries + utilities + loanPayment + thirteenthSalary + otherOperatingCosts;
 
     // ── Atalhos so de leitura para a DRE. [Ignore]: nao viram coluna. ──
 

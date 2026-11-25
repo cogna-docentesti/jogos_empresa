@@ -25,6 +25,10 @@ namespace Game.Adapter.In.UI
         [SerializeField] private GameObject emptyTeam, catalogError;
         private readonly List<TeamRoleCardView> cards = new();
         private TextMeshProUGUI footerText;
+        public UnityEngine.UI.ScrollRect TutorialScroll => catalogScroll;
+        public RectTransform PayrollHighlight => payrollText.rectTransform;
+        public RectTransform RequirementsHighlight => requirementsText.rectTransform;
+        public RectTransform ConfirmHighlight => (RectTransform)confirmButton.transform;
 
         public bool HasRequiredReferences() => cardPrefab != null && cardContainer != null && catalogScroll != null
             && confirmButton != null && roleVisuals != null;
@@ -63,6 +67,42 @@ namespace Game.Adapter.In.UI
         }
         public void SetHint(string value, bool warning = false) { if (hintText != null) { hintText.text = value; hintText.color = warning ? GamePalette.ErrorText : GamePalette.Ink; } }
         public void SetConfirmEnabled(bool value) { if (confirmButton != null) confirmButton.interactable = value; }
+
+        // Botão "Voltar à loja" do passo 7: criado em tempo de execução a partir do Confirm, no lugar da nota do rodapé.
+        private UnityEngine.UI.Button setupBackButton;
+        private Vector2? noteDefaultPosition, noteDefaultSize;
+        public void BindSetupBack(UnityAction action)
+        {
+            var note = transform.Find("BottomBar/Note") as RectTransform;
+            if (note != null && noteDefaultPosition == null) { noteDefaultPosition = note.anchoredPosition; noteDefaultSize = note.sizeDelta; }
+            if (action == null || confirmButton == null)
+            {
+                if (setupBackButton != null) { setupBackButton.onClick.RemoveAllListeners(); setupBackButton.gameObject.SetActive(false); }
+                if (note != null && noteDefaultPosition != null) { note.anchoredPosition = noteDefaultPosition.Value; note.sizeDelta = noteDefaultSize.Value; }
+                return;
+            }
+            if (setupBackButton == null)
+            {
+                var copy = Instantiate(confirmButton.gameObject, confirmButton.transform.parent);
+                copy.name = "SetupBack";
+                setupBackButton = copy.GetComponent<UnityEngine.UI.Button>();
+                setupBackButton.onClick.RemoveAllListeners();
+                var rect = (RectTransform)copy.transform;
+                rect.anchoredPosition = new Vector2(304, ((RectTransform)confirmButton.transform).anchoredPosition.y);
+                rect.sizeDelta = new Vector2(360, ((RectTransform)confirmButton.transform).sizeDelta.y);
+                foreach (var label in copy.GetComponentsInChildren<TextMeshProUGUI>(true)) label.text = "Voltar à loja";
+                SharedUiStyles.Bind(setupBackButton, SharedControlKind.Secondary);
+            }
+            setupBackButton.gameObject.SetActive(true);
+            setupBackButton.interactable = true;
+            setupBackButton.onClick.RemoveAllListeners();
+            setupBackButton.onClick.AddListener(action);
+            if (note != null && noteDefaultPosition != null)
+            {
+                note.anchoredPosition = new Vector2(304 + 360 + 32, noteDefaultPosition.Value.y);
+                note.sizeDelta = new Vector2(Mathf.Max(200, noteDefaultSize.Value.x - 392), noteDefaultSize.Value.y);
+            }
+        }
         public void BindConfirm(UnityAction action)
         { if (confirmButton == null) return; confirmButton.onClick.RemoveAllListeners(); if (action != null) confirmButton.onClick.AddListener(action); }
         private void LateUpdate()

@@ -376,7 +376,7 @@ public class GameSessionService
         GameSessionState.SetTeamJson(updatedJson);
     }
 
-    public void SetTeamMemberQuantity(RoleData role, int quantity)
+    public void SetTeamMemberQuantity(RoleData role, int quantity, bool save = true)
     {
         if (!GameSessionState.HasSession || role == null || string.IsNullOrWhiteSpace(role.id))
             return;
@@ -386,7 +386,7 @@ public class GameSessionService
         TeamSelectionHelper.SetMemberQuantity(currentData, role.id, quantity);
 
         string updatedJson = TeamSelectionHelper.ToJson(currentData);
-        GameSessionState.SetTeamJson(updatedJson);
+        GameSessionState.SetTeamJson(updatedJson, save);
     }
 
     public int GetTeamMemberQuantity(RoleData role)
@@ -459,6 +459,13 @@ public class GameSessionService
         RoundResultEntity result;
         try
         {
+            var db = DatabaseInitializer.DatabaseService?.Connection;
+            if (db != null)
+            {
+                db.CreateTable<SystemicCalendarEntity>();
+                if (db.Find<SystemicCalendarEntity>(session.sessionId + ":" + expectedMonth) != null)
+                    return null; // Only the calendar's systemic service may commit this month.
+            }
             result = new RoundService().ProcessRound(expectedMonth);
             if (result == null) return null;
         }

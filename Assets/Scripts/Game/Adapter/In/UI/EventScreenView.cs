@@ -118,6 +118,37 @@ namespace Game.Adapter.In.UI
             confirmButton.interactable = selected >= 0;
             guidanceText.text = "Opção selecionada. Confirme para registrar sua decisão.";
         }
+        public void SystemicDecision(Game.Domain.Simulation.EventOccurrence occurrence,
+            IReadOnlyList<Game.Domain.Simulation.ReactionOption> options, int selected, Action<int> select)
+        {
+            decisionBody.SetActive(true); historyBody.SetActive(false);
+            screenTitle.text = "Decisão de evento";
+            periodText.text = $"MÊS {occurrence.Month} DE 3  •  DIA {occurrence.Day}";
+            titleText.text = occurrence.Definition.Title;
+            var data = Array.Find(Resources.LoadAll<EventData>("Events"), e => e.id == occurrence.Definition.Id);
+            descriptionText.text = data != null ? data.description : "Escolha como seu restaurante vai responder a este acontecimento.";
+            conceptText.text = data != null && !string.IsNullOrWhiteSpace(data.educationalConcept) ? "Conceito: " + data.educationalConcept : "";
+            illustration.sprite = Illustration(occurrence.Definition.Id);
+            illustration.color = illustration.sprite != null ? Color.white : Color.clear;
+            illustration.preserveAspect = true;
+            guidanceText.text = "Leia as opções e selecione uma para confirmar.";
+            footerText.text = "A reação será aplicada a partir deste dia.";
+            Clear(cards);
+            for (int i = 0; i < options.Count; i++)
+            {
+                int choice = i; var option = options[i];
+                var card = Instantiate(cardPrefab, optionContainer); cards.Add(card);
+                string cost = option.Cost == 0 ? "Sem custo imediato" : option.Cost < 0
+                    ? $"Recebimento: {(-option.Cost).ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))}"
+                    : $"Custo: {option.Cost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))}";
+                card.Bind(option.Reaction.Label, option.Enabled ? cost : option.DisabledReason,
+                    "", () => select(choice), option.Enabled, selected == i);
+            }
+            confirmButton.gameObject.SetActive(true);
+            confirmButton.interactable = selected >= 0 && selected < options.Count && options[selected].Enabled;
+            returnButton.gameObject.SetActive(false);
+            Canvas.ForceUpdateCanvases(); decisionScroll.verticalNormalizedPosition = 1;
+        }
         public void History(IReadOnlyList<SessionEventHistoryEntity> history, int month)
         {
             decisionBody.SetActive(false); historyBody.SetActive(true); Clear(historyCards);

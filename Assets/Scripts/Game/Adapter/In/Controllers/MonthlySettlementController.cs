@@ -92,6 +92,19 @@ namespace Game.Adapter.In.Controllers
             finally { settling = false; }
         }
 
+        internal bool CompleteSystemicCalendar(SystemicCalendarService service)
+        {
+            if (settling || GameManager.Instance?.StateMachine?.CurrentState != GameState.Round_Event) return false;
+            settling = true;
+            try
+            {
+                LastResult = service.Finish();
+                if (LastResult == null || !GameManager.Instance.StateMachine.TryChangeState(GameState.Round_Summary)) return false;
+                MonthSettled?.Invoke(LastResult); onMonthSettled.Invoke(); return true;
+            }
+            finally { settling = false; }
+        }
+
         public static RoundResultEntity SettleCurrentMonth() =>
             SettleCurrentMonth(GameSessionState.Current?.currentRound ?? 0);
 

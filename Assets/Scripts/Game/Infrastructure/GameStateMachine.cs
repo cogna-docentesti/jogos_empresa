@@ -112,8 +112,9 @@ public class GameStateMachine
         if (startsOperation && !GameSessionState.HasActiveSession)
             return false;
 
-        bool requiresStaff = startsOperation || nextState == GameState.Round_Sales
-            || nextState == GameState.Round_Costs || nextState == GameState.Round_Event;
+        bool requiresStaff = (startsOperation || nextState == GameState.Round_Sales
+            || nextState == GameState.Round_Costs || nextState == GameState.Round_Event)
+            && session?.calendarMonthLocked == 0;
         return !requiresStaff || (GameSessionState.IsPersisted && GameSessionService.HasMinimumTeam(GameSessionState.Current));
     }
 

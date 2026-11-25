@@ -16,6 +16,7 @@ public sealed class MonthlyCalendarService
         public string type;
         public int day;
         public long amountCents, principalCents;
+        public bool estimated;
     }
 
     [Serializable]
@@ -32,13 +33,15 @@ public sealed class MonthlyCalendarService
         public int Day { get; }
         public bool Announced { get; }
         public bool Decided { get; }
+        public string Title { get; }
 
-        internal VisibleEvent(string eventId, int day, bool announced, bool decided)
+        internal VisibleEvent(string eventId, int day, bool announced, bool decided, string title = null)
         {
             EventId = eventId;
             Day = day;
             Announced = announced;
             Decided = decided;
+            Title = title;
         }
     }
 

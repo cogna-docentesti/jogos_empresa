@@ -71,7 +71,8 @@ public sealed class GameDatabaseViewer : EditorWindow
         {
             using (var db = new SQLiteConnection(DbPath, SQLiteOpenFlags.ReadOnly))
             {
-                foreach (var table in new[] { "GameSessionEntity", "RoundResultEntity", "SessionEventHistoryEntity", "LocationEntity" })
+                foreach (var table in new[] { "GameSessionEntity", "RoundResultEntity", "SessionEventHistoryEntity", "LocationEntity",
+                                           "SimulationStateEntity", "SimulationMonthEntity" })
                     _counts[table] = TableExists(db, table)
                         ? db.ExecuteScalar<int>($"select count(*) from \"{table}\"")
                         : -1;

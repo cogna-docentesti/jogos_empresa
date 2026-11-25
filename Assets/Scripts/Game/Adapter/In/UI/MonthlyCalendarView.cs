@@ -45,6 +45,9 @@ namespace Game.Adapter.In.UI
         private SharedModalFocus modal;
         private TMP_Text reviewPeriod, reviewTeam, reviewMenu, reviewResources, reviewStatus, eventDay;
         private Button reviewConfirm, reviewBack, reviewClose;
+        private Button policiesButton;
+        private RectTransform policiesPanel;
+        public Game.Domain.Simulation.MonthPolicies ChosenPolicies { get; private set; }
         private int shownDay, selectedDay;
         private float pinShownAt;
         private Action onAdvance, onBack;
@@ -65,7 +68,8 @@ namespace Game.Adapter.In.UI
             {
                 bool paid = plan.Receipts.Any(r => r.type == bill.type && r.day == bill.day);
                 var (name, icon) = BillPresentation(bill.type);
-                var state = paid ? $"Pago · {Money(bill.amountCents)}" : $"A pagar · {Money(bill.amountCents)}";
+                var state = paid ? $"Pago · {Money(bill.amountCents)}"
+                    : bill.estimated ? "Previsto · valor calculado no dia" : $"A pagar · {Money(bill.amountCents)}";
                 agenda[bill.day - 1].Add(new Commitment(name, state, paid ? "ICON_CHECK" : icon,
                     paid ? GamePalette.PositiveReportText : GamePalette.Ink));
             }
@@ -74,7 +78,7 @@ namespace Game.Adapter.In.UI
                 var data = catalog.FirstOrDefault(e => e.id == occurrence.EventId);
                 string state = occurrence.Decided ? "Decisão registrada"
                     : plan.Pending == occurrence ? "Decisão pendente" : "Evento anunciado";
-                agenda[occurrence.Day - 1].Add(new Commitment(data != null ? data.title : "Evento",
+                agenda[occurrence.Day - 1].Add(new Commitment(occurrence.Title ?? (data != null ? data.title : "Evento"),
                     state, occurrence.Decided ? "ICON_CHECK" : occurrence.Announced ? "ICON_STAR" : "ICON_ALERT",
                     occurrence.Decided ? GamePalette.PositiveReportText : GamePalette.Primary, isEvent: true));
             }
@@ -114,6 +118,9 @@ namespace Game.Adapter.In.UI
 
         public void ShowReview(GameSessionEntity session, Action confirm, Action cancel)
         {
+            if (policiesButton != null) policiesButton.gameObject.SetActive(false);
+            if (policiesPanel != null) policiesPanel.gameObject.SetActive(false);
+            ChosenPolicies = null;
             var restaurant = Resources.LoadAll<RestaurantData>("Restaurants").FirstOrDefault(r => r.type == session.restaurantType);
             var roles = Resources.LoadAll<RoleData>("Roles");
             bool valid = GameSessionService.HasMinimumTeam(session);
@@ -178,6 +185,72 @@ namespace Game.Adapter.In.UI
 
         public bool Reviewing => modal.isActiveAndEnabled && review.gameObject.activeSelf;
         public void CloseModal() => modal.gameObject.SetActive(false);
+
+        public void ConfigurePolicies(Game.Application.UseCases.Simulation.PlanningData data)
+        {
+            if (data == null) return;
+            ChosenPolicies = data.Current.Clone();
+            if (policiesButton == null)
+                policiesButton = ActionButton(review, "Policies", "Políticas do mês", 48, 480, 535,
+                    SharedControlKind.Secondary, null, out _);
+            policiesButton.gameObject.SetActive(true);
+            policiesButton.onClick.RemoveAllListeners();
+            policiesButton.onClick.AddListener(() => ShowPolicies(data));
+            if (!data.CanStart)
+            {
+                reviewConfirm.interactable = false;
+                ReviewError(string.Join(" ", data.Errors));
+            }
+        }
+
+        private void ShowPolicies(Game.Application.UseCases.Simulation.PlanningData data)
+        {
+            if (policiesPanel != null) Destroy(policiesPanel.gameObject);
+            policiesPanel = Node(modalSurface, "MonthlyPolicies", 0, 0, 1680, 950);
+            modalSurface.sizeDelta = policiesPanel.sizeDelta;
+            review.gameObject.SetActive(false);
+            Label(policiesPanel, "Title", "Políticas do mês", 48, 32, 1500, 64, TypographyRole.ScreenTitle, 44, GamePalette.Plum);
+            Label(policiesPanel, "Hint", "Escolha as opções antes de abrir o mês. Os custos entram nos cálculos do restaurante.",
+                48, 100, 1584, 40, TypographyRole.Body, 25, GamePalette.Ink);
+            string[] names = { "Marketing", "Fidelização", "Fornecedor", "Pagamento", "Manutenção", "Estoque", "Salários", "Treinamento" };
+            var ids = Game.Domain.Simulation.MonthPolicies.PolicyIds;
+            for (int i = 0; i < ids.Length; i++)
+            {
+                string id = ids[i];
+                if (!data.Options.TryGetValue(id, out var options) || options.Count == 0) continue;
+                float y = 160 + i * 80;
+                Label(policiesPanel, "Caption_" + id, names[i], 48, y, 288, 72, TypographyRole.Label, 27, GamePalette.Ink);
+                float width = (1260 - (options.Count - 1) * 12) / options.Count;
+                var buttons = new List<Button>();
+                foreach (var option in options)
+                {
+                    var choice = option;
+                    string cost = option.FixedMonthlyCost > 0
+                        ? option.FixedMonthlyCost.ToString("C", Currency) + "/mês"
+                        : option.AssetValueRate > 0 ? option.AssetValueRate.ToString("P0", Currency) + " dos equipamentos"
+                        : "Sem custo fixo";
+                    var button = ActionButton(policiesPanel, id + "_" + option.OptionId,
+                        option.Label + "\n<size=22>" + cost + "</size>", 350 + buttons.Count * (width + 12), y, width,
+                        SharedControlKind.Secondary, null, out var optionLabel);
+                    optionLabel.textWrappingMode = TextWrappingModes.Normal;
+                    buttons.Add(button);
+                    button.onClick.AddListener(() =>
+                    {
+                        ChosenPolicies.Set(id, choice.OptionId);
+                        for (int j = 0; j < buttons.Count; j++)
+                            buttons[j].GetComponent<SharedControlAppearance>().SetSelected(options[j].OptionId == choice.OptionId);
+                    });
+                    button.GetComponent<SharedControlAppearance>().SetSelected(option.OptionId == ChosenPolicies.Get(id));
+                }
+            }
+            var done = ActionButton(policiesPanel, "Done", "Voltar à revisão", 1220, 842, 400,
+                SharedControlKind.Primary, () =>
+                {
+                    policiesPanel.gameObject.SetActive(false); review.gameObject.SetActive(true);
+                    modalSurface.sizeDelta = review.sizeDelta; modal.Configure(reviewConfirm, reviewBack);
+                }, out _);
+            modal.Configure(done, done);
+        }
 
         private static void RenderTile(Tile tile, IReadOnlyList<Commitment> commitments)
         {
@@ -421,6 +494,10 @@ namespace Game.Adapter.In.UI
             "utilities" => ("Custos fixos", "ICON_UTILITIES"),
             "salaries" => ("Folha", "ICON_PAYROLL"),
             "loanPayment" => ("Empréstimo", "ICON_LOAN_PRINCIPAL"),
+            "marketing" => ("Políticas do mês", "ICON_DOCUMENT"),
+            "maintenance" => ("Manutenção", "ICON_EQUIPMENT"),
+            "water" => ("Água", "ICON_UTILITIES"),
+            "taxes" => ("Impostos", "ICON_DOCUMENT"),
             _ => ("Conta", "ICON_DOCUMENT")
         };
     }

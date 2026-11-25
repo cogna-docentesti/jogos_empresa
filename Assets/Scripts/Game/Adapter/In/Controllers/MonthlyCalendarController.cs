@@ -15,6 +15,8 @@ namespace Game.Adapter.In.Controllers
         private MonthlySettlementController settlement;
         private EventScreenController events;
         private MonthlyCalendarService calendar;
+        private SystemicCalendarService systemic;
+        private Game.Application.Ports.Out.ISimulationGateway systemicStorage;
         private MonthlyCalendarService.View plan;
         private EventData[] catalog;
         private string sessionId;
@@ -44,6 +46,30 @@ namespace Game.Adapter.In.Controllers
                 sessionId = session.sessionId;
                 month = session.currentRound;
                 catalog ??= Resources.LoadAll<EventData>("Events");
+                var db = DatabaseInitializer.DatabaseService?.Connection;
+                // Already-open legacy calendars finish on their frozen economics. New months use the new engine.
+                var legacy = MonthlyCalendarService.Find(db, sessionId, month);
+                bool legacyMonth = MonthlyCalendarService.HasCalendar(legacy);
+                if (!legacyMonth)
+                {
+                    var config = Resources.Load<SimulationConfigAsset>(Game.Adapter.Out.Simulation.UnitySimulationCatalogProvider.ConfigResourcePath);
+                    if (config == null) throw new InvalidOperationException("Configuração do motor indisponível.");
+                    systemicStorage = new Game.Adapter.Out.Simulation.SqliteSimulationGateway(db,
+                        new Game.Adapter.Out.Simulation.UnitySimulationCatalogProvider(config));
+                    systemic = new SystemicCalendarService(db, systemicStorage);
+                    plan = systemic.Read(sessionId, month) ? systemic.Project() : null;
+                    if (plan == null)
+                    {
+                        view.RenderPreparation(session); view.ShowReview(session, ConfirmOpening, CancelReview);
+                        view.ConfigurePolicies(new Game.Application.UseCases.Simulation.SystemicMonthService(systemicStorage).Planning(sessionId));
+                        return;
+                    }
+                    view.Render(plan, catalog);
+                    if (plan.Pending != null) PresentDecision();
+                    else { UpdateControls(); view.FocusAdvance(); }
+                    return;
+                }
+                systemic = null;
                 calendar = new MonthlyCalendarService(DatabaseInitializer.DatabaseService?.Connection);
                 plan = calendar.Read(sessionId, month);
                 if (plan == null)
@@ -75,7 +101,12 @@ namespace Game.Adapter.In.Controllers
             opening = true;
             try
             {
-                calendar.Open(sessionId, month, catalog);
+                if (systemic != null)
+                {
+                    if (view.ChosenPolicies != null) systemicStorage.SavePolicies(sessionId, month, view.ChosenPolicies);
+                    systemic.Open(sessionId, month);
+                }
+                else calendar.Open(sessionId, month, catalog);
                 view.CloseModal();
                 if (GameManager.Instance.StateMachine.CurrentState == GameState.Round_Event) Load();
                 else settlement.EnterCalendar();
@@ -104,6 +135,21 @@ namespace Game.Adapter.In.Controllers
             if (!CanAct) return;
             if (reloadRequired) { Load(); return; }
             if (plan == null || plan.Pending != null || plan.Moving) return;
+            if (systemic != null)
+            {
+                if (plan.ReadyToClose)
+                {
+                    busy = true; UpdateControls();
+                    try
+                    {
+                        if (!settlement.CompleteSystemicCalendar(systemic))
+                            throw new InvalidOperationException("Fechamento indisponível.");
+                    }
+                    catch (Exception error) { Unavailable(error); }
+                }
+                else StartCoroutine(MoveSystemic());
+                return;
+            }
             if (plan.ReadyToClose)
             {
                 busy = true;
@@ -172,8 +218,13 @@ namespace Game.Adapter.In.Controllers
             try
             {
                 var occurrence = plan.Pending;
-                var data = catalog.Single(e => e.id == occurrence.EventId);
                 var modal = view.ShowEventModal(month, occurrence.Day, out var surface);
+                if (systemic != null)
+                {
+                    events.OpenSystemicDecision(systemic, modal, surface, () => { view.CloseModal(); Load(); });
+                    return;
+                }
+                var data = catalog.Single(e => e.id == occurrence.EventId);
                 events.OpenCalendarDecision(data, month, occurrence.Day, modal, surface, () =>
                 {
                     view.CloseModal();
@@ -196,6 +247,27 @@ namespace Game.Adapter.In.Controllers
             if (state.CurrentState == GameState.Management_Hub)
                 MenuNavigator.Instance.OpenRoot();
             else state.TryChangeState(GameState.Management_Hub);
+        }
+
+        private IEnumerator MoveSystemic()
+        {
+            busy = true; UpdateControls();
+            int origin = plan.Day;
+            while (IsCurrentMonth)
+            {
+                float remaining = StepSeconds;
+                while (remaining > 0 || SharedModalFocus.Active != null)
+                {
+                    yield return null;
+                    if (SharedModalFocus.Active == null) remaining -= Time.unscaledDeltaTime;
+                }
+                try { systemic.Step(systemic.Revision); plan = systemic.Project(); }
+                catch (Exception error) { Unavailable(error); yield break; }
+                view.Render(plan, catalog);
+                if (plan.Pending != null) { PresentDecision(); yield break; }
+                if (plan.ReadyToClose || plan.Day > origin && systemic.IsCheckpoint(plan.Day)) break;
+            }
+            busy = false; UpdateControls(); view.FocusAdvance();
         }
 
         private void UpdateControls()

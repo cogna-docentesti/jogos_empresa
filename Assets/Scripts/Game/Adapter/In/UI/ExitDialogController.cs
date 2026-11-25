@@ -87,8 +87,10 @@ namespace Game.Adapter.In.UI
             {
                 // Both update orders preserve the active modal's ownership of Escape.
                 if (SharedModalFocus.LastCancelFrame == Time.frameCount || SharedModalFocus.Active != null) return;
+                // Esc só fecha o diálogo. Abrir "Sair do jogo" é pelo botão da tela; no Android, o botão Voltar
+                // do sistema (que chega como Esc) continua abrindo o diálogo, como os jogos do sistema fazem.
                 if (IsOpen) Close();
-                else Open();
+                else if (UnityEngine.Application.platform == RuntimePlatform.Android) Open();
             }
         }
 

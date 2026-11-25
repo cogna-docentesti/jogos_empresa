@@ -65,10 +65,10 @@ namespace Game.Adapter.In.UI.Theme
         public const string HexInkCaption = HexInk; // legenda
 
         /// <summary>Texto de apoio: descricoes, subtitulos, rotulo de indicador.</summary>
-        public const string HexMuted = "#65566F";
+        public const string HexMuted = "#4F4259";   // mais escuro: legendas em peso normal ficavam claras demais (era #65566F)
 
         /// <summary>Cinza mais apagado ainda: estados desabilitados.</summary>
-        public const string HexGray = "#74677E";
+        public const string HexGray = "#5E5068";    // idem (era #74677E)
 
         // =====================================================
 

@@ -16,6 +16,8 @@ namespace Game.Adapter.In.Controllers
         private bool confirmed, recording, failed, mandatory;
         private Action completed;
         private SharedModalFocus calendarModal;
+        private SystemicCalendarService systemicCalendar;
+        private int systemicRevision;
         public bool IsAwaitingChoice { get; private set; }
         public EventData CurrentEvent => current;
         public int SelectedOption => selected;
@@ -31,6 +33,7 @@ namespace Game.Adapter.In.Controllers
             completed = null; IsAwaitingChoice = false; current = null; sessionId = null;
             mandatory = confirmed = recording = failed = false;
             selected = -1;
+            systemicCalendar = null;
         }
         private void OnEnable()
         {
@@ -47,6 +50,23 @@ namespace Game.Adapter.In.Controllers
             view ??= GetComponent<EventScreenView>();
             view.MountInCalendar(surface);
             OpenDecision(data, eventMonth, eventDay, onCompleted, required: true);
+        }
+
+        public void OpenSystemicDecision(SystemicCalendarService calendar, SharedModalFocus modal,
+            RectTransform surface, Action onCompleted)
+        {
+            calendarModal = modal;
+            calendarModal.ClosingForNavigation += ReleasePresentation;
+            view ??= GetComponent<EventScreenView>();
+            view.MountInCalendar(surface);
+            systemicCalendar = calendar;
+            systemicRevision = calendar.Revision;
+            sessionId = GameSessionState.Current?.sessionId;
+            month = calendar.Current.Month; day = calendar.Current.Day;
+            mandatory = IsAwaitingChoice = true;
+            confirmed = recording = failed = false; selected = -1;
+            completed = onCompleted;
+            Bind(); ShowDecision(); Render();
         }
 
         public void OpenDecision(EventData data, int eventMonth, int eventDay, Action onCompleted = null, bool required = false)
@@ -100,17 +120,49 @@ namespace Game.Adapter.In.Controllers
 
         private void Render()
         {
+            if (systemicCalendar != null)
+            {
+                view.SystemicDecision(systemicCalendar.Pending, systemicCalendar.Options, selected, Select);
+                calendarModal?.Configure(view.Cards.FirstOrDefault(c => c.Button.interactable)?.Button, null, false);
+                return;
+            }
             view.Decision(current, month, day, 0, 0, selected, !confirmed && !failed,
                 confirmed ? "Esta escolha já foi registrada. Os efeitos pertencem ao fechamento mensal." : "Leia as opções e selecione uma para confirmar.", Select);
             calendarModal?.Configure(view.Cards.FirstOrDefault()?.Button, null, false);
         }
         public void Select(int choice)
         {
+            if (systemicCalendar != null)
+            {
+                var options = systemicCalendar.Options;
+                if (!IsAwaitingChoice || recording || choice < 0 || choice >= options.Count || !options[choice].Enabled) return;
+                selected = choice; view.SelectOption(selected); return;
+            }
             if (!IsAwaitingChoice || confirmed || failed || current?.options == null || choice < 0 || choice >= current.options.Length) return;
             selected = choice; view.SelectOption(selected);
         }
         public void Confirm()
         {
+            if (systemicCalendar != null)
+            {
+                if (!IsAwaitingChoice || recording || selected < 0 || GameSessionState.Current?.sessionId != sessionId) return;
+                recording = true;
+                try
+                {
+                    var pending = systemicCalendar.Pending;
+                    systemicCalendar.Choose(systemicRevision, pending.OccurrenceId, systemicCalendar.Options[selected].Reaction.Id);
+                    Finish();
+                }
+                catch (Exception error)
+                {
+                    Debug.LogException(error);
+                    failed = true;
+                    view.Error("Não foi possível salvar a decisão. Tente novamente.", true);
+                    calendarModal?.Configure(view.ReturnButton, null, false);
+                }
+                finally { recording = false; }
+                return;
+            }
             if (!IsAwaitingChoice || confirmed || recording || failed || selected < 0 || current == null) return;
             recording = true;
             try
@@ -143,6 +195,7 @@ namespace Game.Adapter.In.Controllers
         {
             if (IsAwaitingChoice)
             {
+                if (failed && systemicCalendar != null) { failed = false; selected = -1; Render(); return; }
                 if (failed) Present(current, month, day);
                 return;
             }
@@ -157,6 +210,7 @@ namespace Game.Adapter.In.Controllers
         private void Finish()
         {
             IsAwaitingChoice = false;
+            systemicCalendar = null;
             var callback = completed;
             completed = null;
             DismissDecision();
