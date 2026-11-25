@@ -1,0 +1,77 @@
+{
+  "unity": "6000.3.28f1",
+  "mode": "EditMode",
+  "passed": 295,
+  "failed": 0,
+  "skipped": 0,
+  "suites": {
+    "InitialDecisionsTests": {
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    "MonthlySimulationTests": {
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0
+    },
+    "PersistenceAndLocationTests": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI09FinancialTests": {
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI10EquipmentTests": {
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI11TeamTests": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI12EventTests": {
+      "passed": 86,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI13MonthlyResultTests": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI14QuarterlyResultTests": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI15FinalReportTests": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI16FinalReportTests": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "UI19NavigationTests": {
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "first_run": {
+    "passed": 294,
+    "failed": 1,
+    "skipped": 0,
+    "failure": "PersistenceAndLocationTests.Thaysla_bateria_do_ciclo_trimestral_passa_depois_do_merge",
+    "cause": "O teste legado tentava gerar a DRE a partir de Round_Sales, sem percorrer o calendário.",
+    "fix": "A fixture trimestral e de crédito percorre contas, confirma a trava antes do dia 30 e fecha pelo fluxo de produção."
+  }
+}

@@ -3,12 +3,12 @@
   "project": "Jogos de Empresa Cogna",
   "created_at": "2026-11-19",
   "title": "Feedbacks de interface e novo calendário mensal",
-  "status": "em execução",
+  "status": "concluído",
   "implementation_performed": true,
   "method": "Planejamento inicial por inspeção estática de código, catálogos e documentação. O registro de cada tarefa detalha a validação executada.",
   "historical_backlog": "docs/ui-update/tasks.json",
   "task_count": 28,
-  "planned_task_count": 22,
+  "planned_task_count": 0,
   "deferred_task_count": 1,
   "feedback_count": 47,
   "first_task": "FB-21",
@@ -2213,8 +2213,8 @@
       "area": "Todas as telas",
       "kind": "QA",
       "priority": "P1",
-      "status": "planejada",
-      "implementation_performed": false,
+      "status": "concluída",
+      "implementation_performed": true,
       "depends_on": [
         "FB-01",
         "FB-02",
@@ -2272,7 +2272,10 @@
         "docs/ui-update/feedback-2026-11-19/EXECUCAO.txt"
       ],
       "notes": [
-        "Não repetir testes sem relação com mudanças ou afirmar execução em plataforma indisponível. Registrar execução e limites reais."
+        "Não repetir testes sem relação com mudanças ou afirmar execução em plataforma indisponível. Registrar execução e limites reais.",
+        "QA consolidado em qa/FB-27.json. Os 47 feedbacks foram rastreados, com 46 cobertos pelas tarefas ativas e F-24 adiado em FB-28.",
+        "Na GameScene, a abertura passou pelas oito etapas e a campanha percorreu três meses. Revisão, grade, popup e DRE tiveram entrada verificada nas cinco resoluções. Edit Mode passou com 295 testes após adaptar a bateria legada ao calendário.",
+        "O ensaio atual usou o Editor. As verificações de plataforma e a campanha de falência permanecem com o alcance dos registros anteriores."
       ],
       "specification": "docs/ui-update/feedback-2026-11-19/tasks/FB-27.txt",
       "qa_record": "docs/ui-update/feedback-2026-11-19/qa/FB-27.json",

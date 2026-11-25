@@ -1,0 +1,874 @@
+{
+  "task_id": "FB-27",
+  "date": "2026-11-24",
+  "branch": "dev/new-screens",
+  "baseline": "33d268b3a0570a92fe50932229075833667256b5",
+  "status": "concluída",
+  "implementation_performed": true,
+  "unity": "6000.3.28f1",
+  "scene": "Assets/Scenes/GameScene.unity",
+  "resolutions": [
+    "1280x720",
+    "1366x768",
+    "1600x1000",
+    "1920x1080",
+    "2340x1080"
+  ],
+  "method": "Auditoria dos registros por tarefa, Unity Test Runner em Edit Mode e GameScene em Play Mode. O teste de abertura e a campanha corrente usaram bancos SQLite e cadastros isolados. Na campanha, os cliques passaram pelo EventSystem e as capturas vieram do Game View.",
+  "planning": {
+    "source": "docs/ui-update/feedback-2026-11-19/tasks.json",
+    "traceability_source": "docs/ui-update/feedback-2026-11-19/RASTREABILIDADE.txt",
+    "calendar_contract": "docs/ui-update/feedback-2026-11-19/CONTRATO-CALENDARIO.md",
+    "active_tasks": 27,
+    "documentary_task": "FB-21",
+    "deferred_task": "FB-28",
+    "deferred_feedback": "F-24"
+  },
+  "implementation": {
+    "test_harness": "Assets/Scripts/Game/TESTES/RoundFlowDebugTest.cs",
+    "change": "Adapta o teste trimestral e a fixture de crédito para impedir o fechamento direto, abrir a reserva sem eventos na fixture financeira e liquidar somente após Avançar pelas contas até o dia 30. Preserva as verificações de crédito, trimestre e compatibilidade de saves."
+  },
+  "acceptance_review": [
+    {
+      "criterion": 1,
+      "result": "Todos os 47 feedbacks foram mapeados a seus QAs ou ao adiamento. As 26 dependências têm registros de aceite com todos os critérios numerados e evidências versionadas. Os limites por tarefa ficam nos registros originais."
+    },
+    {
+      "criterion": 2,
+      "result": "Os QAs FB-01/02/06/08/10/12/19 cobrem cabeçalhos, molduras, telas sem rolagem, arte e ações. O QA corrente conferiu ainda as 30 casas e os alvos de entrada na revisão, grade, opções do evento e DRE nas cinco resoluções. Nas 12 novas capturas dessas telas, a inspeção conferiu margens, leitura e posição dos controles."
+    },
+    {
+      "criterion": 3,
+      "result": "O smoke atual gravou uma sessão após cadastro, retorno e D1–D3. A campanha corrente percorreu três meses, verificou débitos gravados, uma entrada por decisão após recarga, quatro escolhas no histórico somente de consulta e três DREs. A última DRE levou ao relatório final com Continuar. FB-11 cobre compra e reabertura do carrinho. FB-26 cobre retry do fechamento e do Continuar, relatório final e falência."
+    },
+    {
+      "criterion": 4,
+      "result": "O relatório registra a entrega documental FB-21, a adaptação da bateria legada, as novas verificações e as evidências reaproveitadas do Editor. UI-20 e FONT-10 foram consultados como registros históricos de plataformas."
+    },
+    {
+      "criterion": 5,
+      "result": "O festival apareceu na agenda e na casa 22 com a reserva aberta. A quebra só abriu suas três opções no dia 7, bloqueando o tabuleiro. FB-24 compara a projeção pública inteira com um plano sem a quebra até imediatamente antes da chegada."
+    },
+    {
+      "criterion": 6,
+      "result": "Edit Mode confirmou caixa, amortização, retomada e conciliação idempotente. A campanha conferiu o caixa persistido contra os recibos e aguardou Continuar em cada DRE. O seletor está idêntico à base 38ffcf17, e os 20 assets de eventos acrescentaram apenas calendarVisibility. A comparação determinística da FB-24 confirmou os IDs e a ordem de incidência."
+    }
+  ],
+  "calendar_review": [
+    {
+      "id": "C-01",
+      "result": "30 casas simultaneamente visíveis e com alvos válidos nas cinco resoluções.",
+      "evidence": [
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt"
+      ]
+    },
+    {
+      "id": "C-02",
+      "result": "Avanço para nas contas, nas ocorrências e no marco final. A evidência anterior cobre a animação e a retomada do movimento a partir da origem.",
+      "evidence": [
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-23.json",
+        "output/ui-update/feedback-2026-11-19/FB-27/editmode.json"
+      ]
+    },
+    {
+      "id": "C-03",
+      "result": "As três opções reais da quebra recebem clique no popup, com Avançar bloqueado até a confirmação. Cada decisão persiste uma única entrada.",
+      "evidence": [
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-25.json"
+      ]
+    },
+    {
+      "id": "C-04",
+      "result": "Os recibos correspondem às diferenças no caixa e ao saldo persistido. Os testes cobrem aluguel, custos operacionais, folha e parcela com amortização.",
+      "evidence": [
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-22.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-26.json",
+        "output/ui-update/feedback-2026-11-19/FB-27/editmode.json"
+      ]
+    },
+    {
+      "id": "C-05",
+      "result": "A quebra ficou oculta até a chegada ao dia 7. A regressão de incidência compara a projeção pública com e sem o imprevisto antes da chegada.",
+      "evidence": [
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-24.json",
+        "output/ui-update/feedback-2026-11-19/FB-27/editmode.json"
+      ]
+    },
+    {
+      "id": "C-06",
+      "result": "Festival anunciado na grade e na agenda do mês antes de avançar, separado do histórico de escolhas.",
+      "evidence": [
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+        "output/ui-update/feedback-2026-11-19/FB-27/calendario-2340x1080.png"
+      ]
+    },
+    {
+      "id": "C-07",
+      "result": "Seletor e campos de incidência preservados. Em verificação complementar, cada fechamento ocorre no dia 30, concilia os débitos feitos durante o mês e entrega a DRE antes de Continuar.",
+      "evidence": [
+        "docs/ui-update/feedback-2026-11-19/qa/FB-24.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-26.json",
+        "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+        "output/ui-update/feedback-2026-11-19/FB-27/editmode.json"
+      ]
+    }
+  ],
+  "edit_mode": {
+    "passed": 295,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "output/ui-update/feedback-2026-11-19/FB-27/editmode.json"
+  },
+  "play_mode": {
+    "opening": "output/ui-update/feedback-2026-11-19/FB-27/abertura.txt",
+    "campaign": "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt",
+    "layout_and_input": "Alvos por raycast para revisão, 30 casas, Avançar, Voltar ao hub, três escolhas e Continuar nas cinco resoluções. Capturas novas concentradas em 1366×768, 1600×1000 e 2340×1080. FB-12 já cobre a loja nas cinco resoluções.",
+    "reused_flow": {
+      "opening_and_revisits": [
+        "docs/ui-update/feedback-2026-11-19/qa/FB-01.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-03.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-05.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-06.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-09.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-10.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-15.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-19.json"
+      ],
+      "equipment_and_staffing": [
+        "docs/ui-update/feedback-2026-11-19/qa/FB-11.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-12.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-13.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-14.json"
+      ],
+      "modals_and_history": [
+        "docs/ui-update/feedback-2026-11-19/qa/FB-02.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-16.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-18.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-25.json"
+      ],
+      "quarterly_report_and_endings": [
+        "docs/ui-update/feedback-2026-11-19/qa/FB-20.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-26.json"
+      ],
+      "rollback_and_retry": [
+        "docs/ui-update/feedback-2026-11-19/qa/FB-22.json",
+        "docs/ui-update/feedback-2026-11-19/qa/FB-26.json"
+      ]
+    }
+  },
+  "feedback_traceability": [
+    {
+      "id": "F-01",
+      "tasks": [
+        "FB-01"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-02",
+      "tasks": [
+        "FB-03"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-03",
+      "tasks": [
+        "FB-03"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-04",
+      "tasks": [
+        "FB-03"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-05",
+      "tasks": [
+        "FB-03"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-06",
+      "tasks": [
+        "FB-05"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-07",
+      "tasks": [
+        "FB-05"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-08",
+      "tasks": [
+        "FB-06"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-09",
+      "tasks": [
+        "FB-06"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-10",
+      "tasks": [
+        "FB-02",
+        "FB-06"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-11",
+      "tasks": [
+        "FB-06"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-12",
+      "tasks": [
+        "FB-04"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-13",
+      "tasks": [
+        "FB-07"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-14",
+      "tasks": [
+        "FB-08"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-15",
+      "tasks": [
+        "FB-08"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-16",
+      "tasks": [
+        "FB-09"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-17",
+      "tasks": [
+        "FB-10"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-18",
+      "tasks": [
+        "FB-10"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-19",
+      "tasks": [
+        "FB-10"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-20",
+      "tasks": [
+        "FB-02",
+        "FB-10"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-21",
+      "tasks": [
+        "FB-02",
+        "FB-12"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-22",
+      "tasks": [
+        "FB-11"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-23",
+      "tasks": [
+        "FB-11"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-24",
+      "tasks": [
+        "FB-28"
+      ],
+      "status": "adiado"
+    },
+    {
+      "id": "F-25",
+      "tasks": [
+        "FB-12"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-26",
+      "tasks": [
+        "FB-02",
+        "FB-12"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-27",
+      "tasks": [
+        "FB-13"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-28",
+      "tasks": [
+        "FB-13"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-29",
+      "tasks": [
+        "FB-14"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-30",
+      "tasks": [
+        "FB-15"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-31",
+      "tasks": [
+        "FB-03",
+        "FB-15"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-32",
+      "tasks": [
+        "FB-16"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-33",
+      "tasks": [
+        "FB-15"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-34",
+      "tasks": [
+        "FB-17"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-35",
+      "tasks": [
+        "FB-18"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-36",
+      "tasks": [
+        "FB-18",
+        "FB-24",
+        "FB-25"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-37",
+      "tasks": [
+        "FB-19"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-38",
+      "tasks": [
+        "FB-19"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-39",
+      "tasks": [
+        "FB-20"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-40",
+      "tasks": [
+        "FB-20"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-41",
+      "tasks": [
+        "FB-20"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-42",
+      "tasks": [
+        "FB-21",
+        "FB-22",
+        "FB-23",
+        "FB-26"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-43",
+      "tasks": [
+        "FB-21",
+        "FB-22",
+        "FB-23",
+        "FB-26"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-44",
+      "tasks": [
+        "FB-23",
+        "FB-24",
+        "FB-25"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-45",
+      "tasks": [
+        "FB-22",
+        "FB-23"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-46",
+      "tasks": [
+        "FB-21",
+        "FB-24"
+      ],
+      "status": "com evidência"
+    },
+    {
+      "id": "F-47",
+      "tasks": [
+        "FB-02",
+        "FB-25"
+      ],
+      "status": "com evidência"
+    }
+  ],
+  "dependency_evidence": {
+    "FB-01": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-01.json",
+      "criteria_reviewed": [
+        1,
+        2
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-01",
+      "tracked_files": 46
+    },
+    "FB-02": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-02.json",
+      "criteria_reviewed": [
+        1,
+        2
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-02",
+      "tracked_files": 41
+    },
+    "FB-03": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-03.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-03",
+      "tracked_files": 22
+    },
+    "FB-04": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-04.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-04",
+      "tracked_files": 7
+    },
+    "FB-05": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-05.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-05",
+      "tracked_files": 8
+    },
+    "FB-06": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-06.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-06",
+      "tracked_files": 15
+    },
+    "FB-07": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-07.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-07",
+      "tracked_files": 10
+    },
+    "FB-08": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-08.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-08",
+      "tracked_files": 15
+    },
+    "FB-09": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-09.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-09",
+      "tracked_files": 15
+    },
+    "FB-10": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-10.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-10",
+      "tracked_files": 22
+    },
+    "FB-11": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-11.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-11",
+      "tracked_files": 20
+    },
+    "FB-12": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-12.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-12",
+      "tracked_files": 44
+    },
+    "FB-13": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-13.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-13",
+      "tracked_files": 12
+    },
+    "FB-14": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-14.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-14",
+      "tracked_files": 11
+    },
+    "FB-15": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-15.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-15",
+      "tracked_files": 14
+    },
+    "FB-16": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-16.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-16",
+      "tracked_files": 14
+    },
+    "FB-17": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-17.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-17",
+      "tracked_files": 11
+    },
+    "FB-18": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-18.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-18",
+      "tracked_files": 7
+    },
+    "FB-19": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-19.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-19",
+      "tracked_files": 17
+    },
+    "FB-20": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-20.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-20",
+      "tracked_files": 8
+    },
+    "FB-21": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-21.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-21",
+      "tracked_files": 2
+    },
+    "FB-22": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-22.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-22",
+      "tracked_files": 2
+    },
+    "FB-23": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-23.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-23",
+      "tracked_files": 13
+    },
+    "FB-24": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-24.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-24",
+      "tracked_files": 2
+    },
+    "FB-25": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-25.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-25",
+      "tracked_files": 11
+    },
+    "FB-26": {
+      "qa": "docs/ui-update/feedback-2026-11-19/qa/FB-26.json",
+      "criteria_reviewed": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tracked_evidence_directory": "output/ui-update/feedback-2026-11-19/FB-26",
+      "tracked_files": 7
+    }
+  },
+  "sequential_execution": "output/ui-update/feedback-2026-11-19/FB-27/sequencia.json",
+  "historical_platform_qa": [
+    "docs/ui-update/qa/UI-20.json",
+    "docs/ui-update/qa/FONT-10.json"
+  ],
+  "evidence": [
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/abertura.txt"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/calendario-1366x768.png",
+      "resolution": "1366x768"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/calendario-1600x1000.png",
+      "resolution": "1600x1000"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/calendario-2340x1080.png",
+      "resolution": "2340x1080"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/decisao-1366x768.png",
+      "resolution": "1366x768"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/decisao-1600x1000.png",
+      "resolution": "1600x1000"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/decisao-2340x1080.png",
+      "resolution": "2340x1080"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/dre-1366x768.png",
+      "resolution": "1366x768"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/dre-1600x1000.png",
+      "resolution": "1600x1000"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/dre-2340x1080.png",
+      "resolution": "2340x1080"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/editmode.json"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/encerramento-1280x720.png",
+      "resolution": "1280x720"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/game-scene.txt"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/historico-decisao.png",
+      "resolution": "1280x720"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/historico-tres-meses.png",
+      "resolution": "1280x720"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/historico-vazio.png",
+      "resolution": "1280x720"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/revisao-1366x768.png",
+      "resolution": "1366x768"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/revisao-1600x1000.png",
+      "resolution": "1600x1000"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/revisao-2340x1080.png",
+      "resolution": "2340x1080"
+    },
+    {
+      "path": "output/ui-update/feedback-2026-11-19/FB-27/sequencia.json"
+    }
+  ],
+  "limitations": [
+    "A matriz de cinco resoluções não foi repetida em todas as telas. A loja e os fluxos anteriores foram aceitos no alcance dos QAs originais. A revisão do estabelecimento FB-19 permanece com quatro resoluções e a inspeção detalhada da DRE trimestral FB-20 com 1280×720.",
+    "O smoke de abertura usa o ensaio existente (ações de botão) e termina em D3. A campanha corrente parte do hub com gestão configurada e reservas fixadas no banco isolado. A seleção aleatória é coberta separadamente. A falência conserva a evidência em Play Mode da FB-26.",
+    "Validação desta tarefa no Unity Editor para Windows 6000.3.28f1, versão instalada. A versão declarada pelo projeto é 6000.3.21f1. Builds de distribuição, encerramento nativo e Android em aparelho ficaram fora desta rodada."
+  ]
+}

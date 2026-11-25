@@ -32,6 +32,7 @@ public class RoundFlowDebugTest : MonoBehaviour
         db.CreateTable<GameSessionEntity>();
         db.CreateTable<RoundResultEntity>();
         db.CreateTable<SessionEventHistoryEntity>();
+        db.CreateTable<MonthlyEventPlanEntity>();
         db.CreateTable<LocationEntity>();
         typeof(DatabaseService).GetProperty("Connection").SetValue(databaseService, db);
 
@@ -66,7 +67,7 @@ public class RoundFlowDebugTest : MonoBehaviour
                 sm.ForceState(GameState.Management_Hub);
                 service.StartRound();
                 check(sm.CurrentState == GameState.Round_Sales, "Inicio valido do mes " + round);
-                var result = service.ProcessCurrentRound();
+                var result = SettleCalendar(service, session, db, check);
                 check(result != null && result.round == round, "Resultado do mes " + round);
                 check(sm.CurrentState == GameState.Round_Summary, "Resumo aguarda leitura no mes " + round);
                 check(service.ContinueAfterSummary(result.roundResultId), "Continuacao explicita no mes " + round);
@@ -209,6 +210,28 @@ public class RoundFlowDebugTest : MonoBehaviour
         return session;
     }
 
+    private static RoundResultEntity SettleCalendar(GameSessionService service, GameSessionEntity session,
+        SQLite4Unity3d.SQLiteConnection db, Action<bool, string> check)
+    {
+        int month = session.currentRound;
+        string sessionId = session.sessionId;
+        check(service.ProcessCurrentRound() == null, "Fechamento direto bloqueado no mes " + month);
+        var calendar = new MonthlyCalendarService(db);
+        // A fixture financeira usa só contas; a incidência e as escolhas têm testes próprios.
+        var plan = calendar.Open(sessionId, month, Array.Empty<EventData>());
+        check(service.BeginEventDecisions(), "Calendario aberto no mes " + month);
+        check(service.ProcessCurrentRound() == null, "Fechamento antes do dia 30 bloqueado no mes " + month);
+        while (!plan.ReadyToClose)
+        {
+            var movement = calendar.BeginAdvance(sessionId, month, plan.Revision);
+            check(movement.Moving && movement.DestinationDay > plan.Day && movement.Pending == null,
+                "Avanco para a proxima conta ou fechamento no mes " + month);
+            plan = calendar.Step(sessionId, month, movement.Revision, movement.DestinationDay);
+        }
+        check(plan.Day == MonthlyCalendarService.Days, "Calendario termina no dia 30 no mes " + month);
+        return service.ProcessCurrentRound();
+    }
+
     private static void RunCreditTests(Action<bool, string> check)
     {
         var lines = Resources.LoadAll<CreditLineData>("CreditLines").Where(line => line.maxAmount > 0f).ToArray();
@@ -233,9 +256,11 @@ public class RoundFlowDebugTest : MonoBehaviour
                 var session = NewSavedSession(service);
                 if (startMonth == 2)
                 {
-                    check(new RoundService().ProcessRound(1) != null, "Credit fixture: settle month one before a month-two loan");
-                    GameManager.Instance.StateMachine.ForceState(GameState.Round_Summary);
-                    check(service.ContinueAfterSummary(repository.GetLastRoundBySessionId(session.sessionId).roundResultId),
+                    GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub);
+                    service.StartRound();
+                    var firstResult = SettleCalendar(service, session, db, check);
+                    check(firstResult != null, "Credit fixture: settle month one before a month-two loan");
+                    check(service.ContinueAfterSummary(firstResult.roundResultId),
                         "Credit fixture: acknowledge month one before contracting");
                 }
                 session.currentRound = startMonth;
@@ -256,7 +281,7 @@ public class RoundFlowDebugTest : MonoBehaviour
                         line.id + ": resumo usa parcela trimestral no mes " + month);
                     GameManager.Instance.StateMachine.ForceState(GameState.Management_Hub);
                     service.StartRound();
-                    var result = service.ProcessCurrentRound();
+                    var result = SettleCalendar(service, session, db, check);
                     check(result != null && Mathf.Abs(result.loanPayment - expectedPayment) < 0.05f,
                         line.id + ": parcela processada no mes " + month);
                     check(Mathf.Abs(session.loanBalance - (openingBalance - principal)) < 0.05f
